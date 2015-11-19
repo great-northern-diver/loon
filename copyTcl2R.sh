@@ -13,3 +13,4 @@ rsync -av --delete Tcl/images R/inst/tcl/loon
 
 rm R/src/*.so
 rsync -av --delete website/html R/inst/website
+rm R/inst/website/html/.gitignore

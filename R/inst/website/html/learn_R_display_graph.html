@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+<ul>
+  <li id="learn_intro"><a href="learn_R_intro.html">intro</a></li>
+  <li id="learn_R_tcltk"><a href="learn_R_tcltk.html">tcltk</a></li>
+  <li id="learn_states"><a href="learn_R_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_R_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_R_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_R_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_R_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_R_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_R").className += " selected";
+var language = "R";
+</script>
+
+<ul>
+  <li id="learn_display_hist"><a id="learn_display_hist_a" href="">histogram</a></li>
+  <li id="learn_display_plot"><a id="learn_display_plot_a" href="">scatterplot</a></li>
+  <li id="learn_display_serialaxes"><a id="learn_display_serialaxes_a" href="">serialaxes</a></li>
+  <li id="learn_display_pairs"><a id="learn_display_pairs_a" href="">scatterplot matrix</a></li>
+  <li id="learn_display_graph"><a id="learn_display_graph_a" href="">graph</a></li>
+  <li id="learn_display_inspectors"><a id="learn_display_inspectors_a" href="">inspectors</a></li>
+</ul> 
+
+
+<script>
+document.getElementById("learn_displays").className += " selected";
+var displays = ["hist", "plot", "serialaxes", "pairs", "graph", "inspectors"];
+
+
+displays.forEach(function(display) {
+  document.getElementById("learn_display_" + display  + "_a").href 
+    = "learn_" + language + "_display_" + display + ".html";
+});
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#graph">Graph</a></li>
+<li><a href="#good-to-know">Good To Know</a></li>
+<li><a href="#navigation-graphs">Navigation Graphs</a><ul>
+<li><a href="#navigators">Navigators</a></li>
+<li><a href="#interaction-with-the-navigators">Interaction with the Navigators</a></li>
+<li><a href="#navigator-state-bindings">Navigator State Bindings</a><ul>
+<li><a href="#substitution">Substitution</a></li>
+</ul></li>
+<li><a href="#contexts">Contexts</a><ul>
+<li><a href="#geodesic-2d">Geodesic 2d</a></li>
+<li><a href="#context-2d">Context 2d</a></li>
+</ul></li>
+<li><a href="#graph-switch-widget">Graph Switch Widget</a><ul>
+<li><a href="#working-with-the-graphswitch">Working with the Graphswitch</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#graph-utilities">Graph Utilities</a></li>
+<li><a href="#navigation-graph-workflows">Navigation Graph Workflows</a><ul>
+<li><a href="#l_navgraph">l_navgraph</a></li>
+<li><a href="#l_ng_ranges">l_ng_ranges</a></li>
+<li><a href="#l_ng_plots">l_ng_plots</a></li>
+<li><a href="#measures">Measures</a><ul>
+<li><a href="#arbitrary-measures">Arbitrary Measures</a></li>
+<li><a href="#closures-of-measures">Closures of Measures</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_display_graph").className += " selected";
+    setLearnUrl("display_graph");
+}
+</script>
+<div class="figure">
+<img src="images/display_graph.png" title="loon graph display" alt="" />
+
+</div>
+<pre><code>nodes &lt;- LETTERS[1:5]
+G &lt;- completegraph(nodes)
+LG &lt;- linegraph(G)
+
+g &lt;- l_graph(LG)
+
+l_navigator_add(g)</code></pre>
+<h1 id="graph">Graph</h1>
+<ul>
+<li><p><code>loon</code>'s Graphs are defined by a list of node names, the from-to list of node names that define the edges and a Boolean value whether the graph is directed or not. This translates into the states <code>nodes</code>, <code>from</code>, <code>to</code>, and <code>isDirected</code>.</p></li>
+<li><p>Get the state names with</p>
+<pre><code>states &lt;- l_info_states(g)
+names(states)</code></pre></li>
+<li><p>Query a state, say <code>background</code>, as follows</p>
+<pre><code>g[&#39;background&#39;]</code></pre></li>
+<li><p>Change a state, say again <code>background</code>, <code>foreground</code>, and <code>colorEdge</code>, as follows</p>
+<pre><code>g[&#39;background&#39;] &lt;- &#39;gray20&#39;
+g[&#39;foreground&#39;] &lt;- &#39;gray90&#39;
+g[&#39;colorEdge&#39;] &lt;- &#39;red&#39;</code></pre>
+<p>alternatively, and more efficient if you modify more than one state, use</p>
+<pre><code>l_configure(g, background=&#39;gray20&#39;, foreground=&#39;gray90&#39;, colorEdge=&#39;red&#39;)</code></pre></li>
+<li><p>When creating a graph display you may specify any state at plot creation</p>
+<pre><code>nodes &lt;- letters[1:3]
+G &lt;- completegraph(nodes)
+LG &lt;- linegraph(G)
+g1 &lt;- l_graph(LG, background=&#39;gray20&#39;, foreground=&#39;gray90&#39;, colorEdge=&#39;red&#39;)</code></pre></li>
+<li><p>details on a state, say <code>background</code>, is easily had with</p>
+<pre><code>states &lt;- l_info_states(g)
+states$background</code></pre>
+<p>and a particular field</p>
+<pre><code>states$background$description</code></pre></li>
+</ul>
+<h1 id="good-to-know">Good To Know</h1>
+<ul>
+<li>The graph is and scatterplot display are closely related and share most of the scatterplot states.
+<div class="todo">
+<pre><code>* This has some undesirable side effects such as that the
+states `itemlabel` and `showItemlabels` are actually for
+nodes...
+* Also the tags are not correct... (i.e. point vs. node)</code></pre>
+</div></li>
+<li><p>The graph has <code>n</code> dimensional states that are associated to nodes and <code>p</code> dimensional states that are associated with edges. To query which states are <code>p</code> dimensional use</p>
+<pre><code>states &lt;- l_info_states(g)
+names(Filter(function(x){x$dimension==&#39;p&#39;}, states))</code></pre></li>
+<li><p>To change the layout of the graph use a graph layout algorithm and set the <code>x</code> and <code>y</code> states of the <code>loon</code> graph accordingly. <code>loon</code> supports straight lines for edges only.</p></li>
+</ul>
+<h1 id="navigation-graphs">Navigation Graphs</h1>
+<p>To turn a graph into a navigation graph you need to add one or more navigators. Navigators have their own set of states such as <code>from</code>, <code>to</code> and <code>proportion</code>, and you can create state bindings for the navigator that call a function when a navigator changes its position on the graph. States and state bindings for navigators provide the facility to implement any graph semantic. However, certain graph semantics (e.g. the default semantic with 2d projection along a geodesic path between spaces) involve lots of logic and control over plots, and hence it makes sense to en encapsulate them. We do this by providing <em>contexts</em>. A context is added to a navigator and will do a specific task if the navigator's position on the graph changes.</p>
+<h2 id="navigators">Navigators</h2>
+<p>We use the example at the beginning of this section:</p>
+<pre><code>nodes &lt;- LETTERS[1:5]
+G &lt;- completegraph(nodes)
+LG &lt;- linegraph(G)
+
+g &lt;- l_graph(LG)</code></pre>
+<p>The following code ads a navigator to the graph <code>g</code></p>
+<pre><code>nav &lt;- l_navigator_add(g, color=&#39;orange&#39;)</code></pre>
+<div class="figure">
+<img src="images/display_graph_navigator1.png" title="loon graph display" alt="" />
+
+</div>
+<p>The navigator with the id stored in the <code>nav</code> has its own states that can be listed as follows</p>
+<pre><code>nstates &lt;- l_info_states(nav)
+names(nstates)</code></pre>
+<p>The position of the navigator on the graph is completely defined by the states <code>from</code>, <code>to</code>, and <code>proportion</code>. The states <code>from</code> and <code>to</code> hold vectors of node names of the graph. The <code>proportion</code> state is a number between and including <code>0</code> and <code>1</code> and defines the how far the navigator is between the last element of <code>from</code> and the first element of <code>to</code>. The <code>to</code> state can also be an empty string <code>''</code> if there is no further node to go to. Hence, the concatenation of <code>from</code> and <code>to</code> define a path on the graph.</p>
+<h2 id="interaction-with-the-navigators">Interaction with the Navigators</h2>
+<p>The position of the navigator on the graph can be controlled programatically as follows:</p>
+<pre><code>l_configure(nav, from=c(&#39;A:B&#39;,&#39;B:C&#39;,&#39;C:D&#39;,&#39;A:D&#39;), to=c(&#39;D:E&#39;,&#39;B:E&#39;),
+    proportion=0.2)</code></pre>
+<div class="figure">
+<img src="images/display_graph_navigator2.png" title="navigator path" alt="" />
+
+</div>
+<p>The elements related to the navigator you see on the plot above are the</p>
+<ul>
+<li><strong>Navigator:</strong> wich is <code>proprtion</code> between the last node in <code>from</code> and the first node in <code>to</code>. If <code>to</code> is empty, then the navigator sits on the last node of <code>from</code>.</li>
+<li><strong>From Path:</strong> highlighted with a bold line with the same color as the navigator show path stored in <code>from</code> and the <code>proportion</code> that has been traversed on the current edge.</li>
+<li><strong>To Path:</strong> highlighted with a thinner line as the from path and with the same color as the navigator.</li>
+<li><strong>Path End:</strong> which looks like the navigator and is located on the last node in <code>to</code>.</li>
+</ul>
+<p>The graph display supports direct interaction with the navigator and navigator path using the mouse and keyboard. To move the navigator with the mouse you must first click on it to select it which will set the <code>activeNavigator</code> graph state to the navigator id and causes the navigator to be highlighted with the navigator outline in the selection color.</p>
+<div class="figure">
+<img src="images/display_graph_navigator_select.png" title="navigator selected" alt="" />
+
+</div>
+<p>In this state the following interactions are possible</p>
+<ul>
+<li>Drag the navigator along the path.</li>
+<li>If arriving at last node on the path you may extend the path by dragging the navigator towards a new connected node. Note that
+<ul>
+<li>the gray circle is the decision boundary to select an adjoining edge.</li>
+<li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" alt="" /></li>
+</ul></li>
+<li>Use the scroll wheel to move the navigator along the path. Pay attention to the <code>scrollProportionIncrement</code> state of the navigator.</li>
+<li>Move the navigator using animation by control double click on a node on the path.</li>
+<li>Extend the path by pressing the shift key while selecting adjoining nodes to the path end.</li>
+<li>Delete the path and move the navigator to a new node by clicking on a new node.</li>
+</ul>
+<p>Note that the selection of a navigator, the highlighting of the adjacent nodes, and the edge selection circle are mouse interaction states and have no equivalent display states. That is, they are all transient and are undone as soon as the Shift and or Mouse press gets released.</p>
+<p>The animation of the navigator can also be done programatically with any of the following commands</p>
+<pre><code>l_navigator_walk_forward(nav)
+l_navigator_walk_backward(nav)
+l_navigator_walk_forward(nav, &#39;C:D&#39;)
+l_navigator_walk_backward(nav, &#39;B:C&#39;)
+l_navigator_walk_path(nav, path=c(&#39;D:E&#39;,&#39;B:E&#39;,&#39;B:D&#39;,&#39;A:D&#39;))</code></pre>
+<ul>
+<li>Note the two navigator states <code>animationPause</code> and <code>animationProportionIncrement</code> to control the animation speed.</li>
+<li>You can stop the animation when clicking somewhere, or by scrolling.</li>
+</ul>
+<h2 id="navigator-state-bindings">Navigator State Bindings</h2>
+<p>Navigators support <a
+href="learn_R_bind.html#state-bindings">state bindings.</a> You can use state bindings to implement your custom navigation graph semantic.</p>
+<p>We use the following graph and navigator for our example:</p>
+<pre><code>nodes &lt;- LETTERS[1:5]
+G &lt;- completegraph(nodes)
+LG &lt;- linegraph(G)
+
+g &lt;- l_graph(LG)
+
+nav  &lt;- l_navigator_add(g)</code></pre>
+<p>To add a state binding use</p>
+<pre><code>my_semantic &lt;- function(widget, navigator) {
+    navi &lt;- navigator
+    class(navi) &lt;- c(&quot;loon&quot;, &quot;l_navigator&quot;)
+    attr(navi, &quot;widget&quot;) &lt;- widget
+    cat(paste0(&#39;do stuff: &#39;, widget, &#39;, &#39;, navigator, &#39;: &#39;,
+        tail(navi[&#39;from&#39;],n=1),&#39;-&#39;,
+        round(navi[&#39;proportion&#39;],2),&#39;-&#39;,
+        navi[&#39;to&#39;][1],&#39;\n&#39;))
+}
+        
+l_bind_state(nav, event=c(&#39;from&#39;, &#39;to&#39;, &#39;proportion&#39;),
+    function(W,nav) my_semantic(W,nav))</code></pre>
+<h3 id="substitution">Substitution</h3>
+<p>The current substitutions for navigator state bindings are</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>W</code></td>
+<td align="left">widget path name</td>
+</tr>
+<tr class="even">
+<td align="center"><code>nav</code></td>
+<td align="left">navigator id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>e</code></td>
+<td align="left">events (states changed)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>b</code></td>
+<td align="left">binding id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>O</code></td>
+<td align="left">canvas path, useful for debugging</td>
+</tr>
+</tbody>
+</table>
+<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code.</p>
+<h2 id="contexts">Contexts</h2>
+<p>Contexts implement standard graph semantics. Common to all contexts is that they sign up to the navigators state changes and will evaluate its (i.e. the context's) <code>command</code> state. The contexts add substitution in the command evaluation that are meaningful for the particular context. Currently the following contexts are implemented:</p>
+<ul>
+<li><p><strong>Context2d:</strong> maps all locations on the graph that represent 2d spaces to <code>xvars</code> and <code>yvars</code> minimizing the occurrences of variable names in <code>xvars</code> and <code>yvars</code>. For example, if a navigator gets moved from node <code>A:B</code> on the edge towards the node <code>D:A</code> then <code>xvars</code> will be <code>A</code> and <code>yvars</code> will be <code>(B, D)</code>. The order of the variable names in the node names is only important if the navigator jumps to a new node or the context gets initialized. In that case the node gets split into the two variables and the first gets mapped onto <code>xvars</code> and the second to <code>yvars</code>. After initialization the context2d will try to keep the variables in the same <code>xvars</code> or <code>yvars</code> if possible. For example, moving the navigator form not <code>A:B</code> to node <code>B:C</code> with <code>xvars=(A,C)</code> and <code>yvars=B</code>, once the navigator arrives at <code>B:C</code> then <code>xvars=C</code> and <code>yvars=B</code> even though the navigator is on <code>B:C</code>.</p></li>
+<li><p><strong>Geodesic2d:</strong> every location on the graph with an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share. The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
+</ul>
+<h3 id="geodesic-2d">Geodesic 2d</h3>
+<p>The following code adds a geodesic2d context to a navigator:</p>
+<pre><code>G &lt;- completegraph(names(iris[,-5]))
+LG &lt;- linegraph(G)
+
+g &lt;- l_graph(LG)
+nav &lt;- l_navigator_add(g)
+
+con &lt;- l_context_add_geodesic2d(navigator=nav, data=iris[,-5])</code></pre>
+<ul>
+<li>Note that the navigator can be either a vector of widget path name and navigator id, or the navigator object.</li>
+</ul>
+<p>This will open a new scatterplot showing the projection defined by the navigator location. Opening a new scatterplot is the default behaviour. Every navigator position change will evaluate the command in the <code>command</code> state of the context. The default command state is</p>
+<pre><code>con[&#39;command&#39;]
+
+#&gt; [1] &quot;.l2.plot configure -x %x -y %y -xlabel %xlabel -ylabel %ylabel&quot;</code></pre>
+<p>where <code>.l2.plot</code> is the widget path name of the newly created scatterplot. If the <code>command</code> state is specified at context creation time, no scatterplot will be created. The <code>command</code> state supports substitutions similar to bindings. The substitution table is</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>W</code></td>
+<td align="left">widget path name (i.e. the graph)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>nav</code></td>
+<td align="left">navigator id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>con</code></td>
+<td align="left">context id</td>
+</tr>
+<tr class="even">
+<td align="center"><code>x</code></td>
+<td align="left">x coordinates of projection</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>y</code></td>
+<td align="left">y coordinates of projection</td>
+</tr>
+<tr class="even">
+<td align="center"><code>xlabel</code></td>
+<td align="left">suitable x label for projection</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>ylabel</code></td>
+<td align="left">suitable y label for projection</td>
+</tr>
+<tr class="even">
+<td align="center"><code>from</code></td>
+<td align="left">from state of navigator</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>to</code></td>
+<td align="left">to state of navigator</td>
+</tr>
+<tr class="even">
+<td align="center"><code>p</code></td>
+<td align="left">proportion state of navigator</td>
+</tr>
+</tbody>
+</table>
+<p>Hence, it is easy to use a different scatterplot device, say the basic <code>R</code> plots as follows:</p>
+<pre><code>plot(iris[,1:2], col=iris$Species, pch=16)
+
+str2num &lt;- function(x) {
+    vapply(unlist(strsplit(x, &#39; &#39;)), as.numeric, numeric(1), USE.NAMES=FALSE)
+}
+
+con[&#39;command&#39;] &lt;- function(x,y,xlabel,ylabel) {
+    plot(str2num(x), str2num(y), xlab=xlabel, ylab=ylabel,
+        col=iris$Species, pch=16, xlim=c(-5,5), ylim=c(-5,5))
+}</code></pre>
+<p>Or you can add contour lines of the density estimates</p>
+<pre><code>require(MASS)
+
+con[&#39;command&#39;] &lt;- function(x,y,xlabel,ylabel) {
+    x &lt;- str2num(x)
+    y &lt;- str2num(y)
+
+    fit &lt;- kde2d(x,y)
+
+    plot(x, y, xlab=xlabel, ylab=ylabel,
+        col=iris$Species, pch=16, xlim=c(-5,5), ylim=c(-5,5))
+
+    contour(fit, add=TRUE)
+}</code></pre>
+<p>The context2d has a couple of noteworthy states, use the <code>info states</code> approach to learn more about them:</p>
+<pre><code>names(l_info_states(con))
+
+l_info_states(con)$scaling</code></pre>
+<h3 id="context-2d">Context 2d</h3>
+<p>The context2d substitutions are</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>W</code></td>
+<td align="left">widget path name (i.e. the graph)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>nav</code></td>
+<td align="left">navigator id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>con</code></td>
+<td align="left">context id</td>
+</tr>
+<tr class="even">
+<td align="center"><code>xvars</code></td>
+<td align="left">x variables</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>yvars</code></td>
+<td align="left">y variables</td>
+</tr>
+<tr class="even">
+<td align="center"><code>from</code></td>
+<td align="left">from state of navigator</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>to</code></td>
+<td align="left">to state of navigator</td>
+</tr>
+<tr class="even">
+<td align="center"><code>p</code></td>
+<td align="left">proportion state of navigator</td>
+</tr>
+</tbody>
+</table>
+<p>If the context2d description <a
+href="learn_R_display_graph.html#contexts">above</a> wasn't clear enough use the following code to get a sense of how <code>xvars</code> and <code>yvars</code> change.</p>
+<pre><code>G &lt;- completegraph(c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;))
+LG &lt;- linegraph(G, separator=&#39;-&#39;)
+
+g &lt;- l_graph(LG)
+nav &lt;- l_navigator_add(g)
+
+foo &lt;- function(xvars, yvars, p) {
+    cat(paste0(paste(xvars, collapse=&#39; &#39;), &#39; to &#39;,
+        paste(yvars, collapse=&#39; &#39;), &#39;: &#39;,
+        round(as.numeric(p), 3), &#39;\n&#39;))
+}
+
+con &lt;- l_context_add_context2d(nav, separator=&#39;-&#39;,
+    command=function(xvars,yvars,p)foo(xvars,yvars,p))</code></pre>
+<ul>
+<li>Note that the default separator is <code>:</code> but it can be changed to any string in the <code>linegraph</code> function and as a context2d state.</li>
+</ul>
+<p>The graph can be switched as follows</p>
+<pre><code>LGnot &lt;- complement(LG)
+
+l_configure(g, nodes=LGnot$nodes, from=LGnot$from,
+    to=LGnot$to, isDirected=LGnot$isDirected)</code></pre>
+<ul>
+<li>Note that the navigator jumps to the first node in the graph if the graph changes.</li>
+</ul>
+<h2 id="graph-switch-widget">Graph Switch Widget</h2>
+<p>Sometimes it is useful to easily switch between different graphs. The graph selector widget maintains a list of graphs and updates the <code>activewidget</code> if a graph in its list gets selected.</p>
+<p>For this example we pack a graph selector next to a graph display. More on widget layouts can be read <a
+href="learn_R_layout.html">here</a>.</p>
+<pre><code>tt &lt;- l_toplevel()
+tktitle(tt) &lt;- paste(&quot;Loon graph example with a graph switch&quot;)
+
+g &lt;- l_graph.default(parent=tt)
+
+gs &lt;- l_graphswitch(activewidget=g, parent=tt)
+
+tkpack(g, side=&#39;left&#39;, fill=&#39;both&#39;, expand=TRUE)
+tkpack(gs, side=&#39;left&#39;, fill=&#39;y&#39;)</code></pre>
+<div class="figure">
+<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" alt="" />
+
+</div>
+<p>A graph gets added to the graph switch as follows</p>
+<pre><code>G1 &lt;- completegraph(LETTERS[1:4])
+G2 &lt;- loongraph(nodes=c(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;), from=c(&#39;a&#39;,&#39;a&#39;),
+    to=c(&#39;b&#39;,&#39;c&#39;), isDirected=FALSE)
+G3 &lt;- linegraph(G1)
+G4 &lt;- complement(G3)
+
+idG1 &lt;- l_graphswitch_add(gs, G1, label=&#39;G1&#39;)
+idG2 &lt;- l_graphswitch_add(gs, G2, label=&#39;G2&#39;)
+idG3 &lt;- l_graphswitch_add(gs, G3, label=&#39;G3=linegraph(G1)&#39;)
+idG4 &lt;- l_graphswitch_add(gs, G4, label=&#39;complement(G4)&#39;)
+
+l_graphswitch_set(gs, idG3)</code></pre>
+<div class="figure">
+<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" alt="" />
+
+</div>
+<ul>
+<li>To switch a graph select it in the list. Layout, selection, and active states are not stored in the graph switch, only the graph information.</li>
+</ul>
+<h3 id="working-with-the-graphswitch">Working with the Graphswitch</h3>
+<p>The API of the graph switch is similar to that of the layers, except that graphs are arranged in a flat list and layers are arranged in a tree structure.</p>
+<p>Either graphs of class <code>loongraph</code> or class <code>graph</code> which is defined in the <code>graph</code> <code>R</code> package can be added as follows</p>
+<pre><code>gs &lt;- l_graphswitch()
+
+graphId &lt;- l_graphswitch_add(gs, graph=loongraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;),
+    from=c(&#39;A&#39;,&#39;B&#39;), to=c(&#39;C&#39;,&#39;C&#39;), isDirected=FALSE), label=&#39;loongraph&#39;)
+
+## or
+
+library(graph)
+graphId2 &lt;- l_graphswitch_add(gs, graph=randomEGraph(LETTERS[1:15], edges=50),
+    label=&#39;graph R package graph&#39;)</code></pre>
+<p>The <code>add</code> method returns an id for the added graph.</p>
+<p>Currently the <code>activewidget</code> state of <code>gs</code> is not set to any graph widget. Selecting a graph will throw an error saying that the graphswitch has not activewidget set. To set an activewidget (i.e. a graph widget) use</p>
+<pre><code>g &lt;- l_graph()
+
+gs[&#39;activewidget&#39;] &lt;- g</code></pre>
+<p>Now, to push a graph in <code>gs</code> to the graph widget <code>g</code> you can either mouse select a graph on the graphswitch widget, or do it programmatically as follows</p>
+<pre><code>l_graphswitch_set(gs, id=graphId2)</code></pre>
+<p>We continue by adding a few more graphs in order to introduce the other graphswitch related functions.</p>
+<pre><code>l_graphswitch_add(gs, graph=randomEGraph(LETTERS[1:15], edges=10))
+l_graphswitch_add(gs, graph=randomEGraph(LETTERS[1:15], edges=20))</code></pre>
+<p>To list the ids of all graph in the graphswitch use</p>
+<pre><code>l_graphswitch_ids(gs)</code></pre>
+<p>If you have followed this example the <code>ids</code> method should return a list with ids <code>graph0</code>, <code>graph1</code>, <code>graph2</code>, and <code>graph3</code>, where the order of the ids is how they appear in the graphswitch widget. To move a graph to a different position in the list do as follows</p>
+<pre><code>l_graphswitch_move(gs, id=&#39;graph0&#39;, index=3)</code></pre>
+<p>to move <code>graph0</code> to the second last place. To reorder all graphs us</p>
+<pre><code>l_graphswitch_reorder(gs, ids=c(&#39;graph1&#39;, &#39;graph0&#39;, &#39;graph3&#39;, &#39;graph2&#39;))</code></pre>
+<p>To get the label of a graph use</p>
+<pre><code>l_graphswitch_getLabel(gs, id=&#39;graph1&#39;)</code></pre>
+<p>To relabel a graph use</p>
+<pre><code>l_graphswitch_relabel(gs, id=&#39;graph1&#39;, label=&quot;A special graph&quot;)</code></pre>
+<p>To delete a graph use</p>
+<pre><code>l_graphswitch_delete(gs, id=&#39;graph2&#39;)</code></pre>
+<p>And to get the graph as a <code>loongraph</code> object use</p>
+<pre><code>l_graphswitch_get(gs, id=&#39;graph1&#39;)</code></pre>
+<h1 id="graph-utilities">Graph Utilities</h1>
+<p>The <code>loon</code> <code>R</code> package comes with functions to create graphs. These are fairly basic and we recommend to use the algorithms and data structure from <a
+href="http://www.bioconductor.org/packages/release/bioc/html/graph.html"><code>graph</code> <code>R</code> package</a>. To coerce between <code>loongraph</code> and <code>graph</code> object use the <code>as.loongraph</code> and <code>as.graph</code> functions. Note that the loongraph does not contain graph attributes such as edge weights etc. The <code>plot.loongraph</code> method will plot the graph if the <code>graph</code> package and <code>Rgraphviz</code> package are loaded.</p>
+<p>To create a graph of class <code>loongraph</code> use the following function</p>
+<pre><code>G &lt;- loongraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), from=c(&#39;A&#39;,&#39;A&#39;,&#39;B&#39;), to=c(&#39;B&#39;,&#39;C&#39;,&#39;C&#39;),
+    isDirected=FALSE)</code></pre>
+<p>Or, to create a complete <code>loongraph</code> with the nodes <code>A</code>, <code>B</code>, and <code>C</code> use</p>
+<pre><code>completegraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;))</code></pre>
+<p>To get the linegraph use</p>
+<pre><code>LG &lt;- linegraph(G, sep=&quot;-&quot;)</code></pre>
+<p>and the complement</p>
+<pre><code>complement(LG)</code></pre>
+<p>And, given some node names of a graph, on can get the undirected <code>n</code>-d transition graph as follows</p>
+<pre><code>ndtransitiongraph(nodes=c(&#39;A:B&#39;, &#39;A:F&#39;, &#39;B:C&#39;, &#39;B:F&#39;), n=3, separator=&#39;:&#39;)</code></pre>
+<h1 id="navigation-graph-workflows">Navigation Graph Workflows</h1>
+<p>In the <code>loon</code> <code>R</code> package we provide a couple of convenience functions to create a navigation graph setup with a single function call.</p>
+<h2 id="l_navgraph">l_navgraph</h2>
+<p>The <code>l_navgraph</code> function creates a navigation graph, a graphswitch, a navigator and a <code>geodesic2d</code> context added, and a scatterplot. If the <code>graph</code> argument is not used then a 3d and 4d transition graph and a complete transition graph is added.</p>
+<pre><code>data(olive)
+ng &lt;- l_navgraph(olive[,-c(1,2)], sep=&#39;-&#39;, color=olive$Area)</code></pre>
+<p>the additional arguments <code>...</code> in <code>l_navgraph</code> will get passed on to a configure call for the scatterplot.</p>
+<ul>
+<li>Note that the return value <code>ng</code> is a named list with all handles.</li>
+</ul>
+<div class="figure">
+<img src="images/display_graph_navgraph.png" title="l_navgraph" alt="" />
+
+</div>
+<h2 id="l_ng_ranges">l_ng_ranges</h2>
+<p>The <code>l_ng_ranges</code> produces a graph based on variable pair measures. A min-max slider is provided to filter variable pairs based on their associated measures.</p>
+<pre><code>library(scagnostics)
+
+oliveAcids &lt;- olive[,-c(1,2)]
+scags &lt;- scagnostics(oliveAcids)
+
+nav &lt;- l_ng_ranges(measures=scags, data=oliveAcids, color=olive$Area)</code></pre>
+<p><img src="images/l_ng_ranges_scagnostics.png" title="l_ng_ranges" alt="" /> <img src="images/l_ng_ranges_scagnostics_plot.png" title="l_ng_ranges" alt="" /></p>
+<p>For more information see the examples of <code>l_ng_ranges</code>.</p>
+<h2 id="l_ng_plots">l_ng_plots</h2>
+<p>Uses same formal arguments as <code>l_ng_ranges</code> but creates a scatterplot matrix of measures to select the variable pairs.</p>
+<pre><code>library(scagnostics)
+
+oliveAcids &lt;- olive[,-c(1,2)]
+scags &lt;- scagnostics(oliveAcids)
+
+nav &lt;- l_ng_plots(measures=scags, data=oliveAcids, color=olive$Area)</code></pre>
+<div class="figure">
+<img src="images/l_ng_plots_pairs.png" title="l_ng_plots" alt="" />
+
+</div>
+<h2 id="measures">Measures</h2>
+<p>It is possible to use <code>l_ng_ranges</code> and <code>l_ng_plots</code> with arbitrary 1d and 2d measures.</p>
+<h3 id="arbitrary-measures">Arbitrary Measures</h3>
+<p>The measures can be arbitrary</p>
+<pre><code>n &lt;- 100
+dat &lt;- data.frame(
+    A = rnorm(n), B = rnorm(n), C = rnorm(n),
+    D = rnorm(n), E = rnorm(n)
+)
+
+m2d &lt;- data.frame(
+    cor = with(dat, c(cor(A,B), cor(A,C), cor(B,D), cor(D,E), cor(A,E))),
+    my_measure = c(1, 3, 2, 1, 4),
+    row.names = c(&#39;A:B&#39;, &#39;A:C&#39;, &#39;B:D&#39;, &#39;D:E&#39;, &#39;A:E&#39;)
+)
+
+nav &lt;- l_ng_ranges(measures=m2d, data=dat, separator=&#39;:&#39;)</code></pre>
+<p>It is important that the <code>separator</code> string does not appear in the variable names.</p>
+<h3 id="closures-of-measures">Closures of Measures</h3>
+<p>With the <code>measures1d</code> and <code>measures2d</code> functions it is possible to encapsulate the calculation of the measures. In turn, this makes it possible to recalculate the measures based on a subset of data.</p>
+<pre><code>iqr &lt;- function(x) { diff(quantile(x, probs=c(0.75, 0.25))) }
+kurtosis &lt;- function(x) { mean((x-mean(x))^4)/mean((x-mean(x))^2)^2 - 3 }
+skewness &lt;- function(x) { mean((x-mean(x))^3)/sd(x)^3 }
+
+s_oliveAcids &lt;- scale(oliveAcids)
+
+m1dc &lt;- measures1d(data=s_oliveAcids, separator=&#39;+&#39;,
+                   median = median,
+                   irq = iqr,
+                   kurtosis = kurtosis,
+                   skewness = skewness)
+
+nav &lt;- l_ng_ranges(measures=m1dc, color=Area)</code></pre>
+<p>Or with 2d scagnostics measures</p>
+<pre><code>library(scagnostics)
+oliveAcids &lt;- olive[,-c(1,2)]
+scags2d &lt;- scagnostics2d(oliveAcids)
+
+nav &lt;- l_ng_plots(measures=scags2d, color=olive$Area)</code></pre>
+</body>
+</html>

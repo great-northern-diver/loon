@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+
+<ul>
+  <li id="learn_intro"><a href="learn_Tcl_intro.html">intro</a></li>
+  <li id="learn_Tcl_Tk"><a href="learn_Tcl_Tk.html">tk</a></li>
+  <li id="learn_states"><a href="learn_Tcl_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_Tcl_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_Tcl_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_Tcl_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_Tcl_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_Tcl_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_Tcl").className += " selected";
+var language = "Tcl";
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#query-and-modify">Query and Modify</a></li>
+<li><a href="#state-dimension">State Dimension</a></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_states").className += " selected";
+    setLearnUrl("states");
+}
+</script>
+<h1 id="introduction">Introduction</h1>
+<p>All of <code>loon</code>'s displays have plot states. Plot states specify what is displayed, how it is displayed and if and how the plot is linked with other <code>loon</code> plots. <code>loon</code>'s plot states are derived from <code>Tk</code>'s configurable options. A large part of <code>loon</code>'s framework revolves around modifying states, tracking state changes, and synchronization of plot states between plots.</p>
+<p>Examples of plot states for the scatterplot display are <code>x</code>, <code>y</code>, <code>color</code>, <code>size</code>, <code>selected</code>, <code>xlabel</code>, <code>ylabel</code>, <code>zoomX</code>, <code>zoomY</code>, <code>panX</code>, <code>panY</code>, <code>showScales</code>, <code>showGuides</code>. The scatterplot display has more than 30 states.</p>
+<p>To get a complete list of the plot states for a particular <code>loon</code> widget use the procedure <code>states</code></p>
+<pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
+
+$p info states
+$p info states x
+$p info states {x y xTemp}</code></pre>
+<p>If at all possible, the data structures for each state is either a scalar or a flat list with <code>i</code> elements, <code>i=0,1,...</code>. An exception is the <code>data</code> state which contains a <code>dict</code>.</p>
+<h1 id="query-and-modify">Query and Modify</h1>
+<p>To query a state, say <code>showScales</code>, of the plot <code>p</code> use</p>
+<pre><code>$p cget -showScales</code></pre>
+<p>To modify a single or multiple states use one the <code>configure</code> subcommand</p>
+<pre><code>$p configure -showScales TRUE -showLabels TRUE</code></pre>
+<h1 id="state-dimension">State Dimension</h1>
+<p>The dimension of a state is either explicit, i.e. a number, or abstract, i.e. a letter.</p>
+<ul>
+<li><p>Abstract dimensions take on a value at plot creation time.</p></li>
+<li><p>The value of abstract dimensions can be changed when changing the dominant states for a dimension together. For the dimension <code>n</code>, the dominant states are always the data states <code>x</code> and <code>y</code>, or <code>data</code>.</p>
+<pre><code>  set p [plot -x {1 2 3} -y {1 2 3}]
+  $p cget -n
+  $p configure -x {1 2} -y {1 2}
+  $p cget -n</code></pre></li>
+<li><p>Changing an abstract dimension will assign default values to all non-dominant states of that dimension. The dominant states for the displays are: <code>x</code> for the histogram, <code>x</code> and <code>y</code> for the scatterplot, <code>data</code> for the serialaxes display, and for the graph display <code>nodes</code> is dominant for <code>n</code> dimensional states and <code>from</code> and <code>to</code> are dominant for the <code>p</code> dimensional states.</p></li>
+<li><p>When assigning a single value to a state that has an abstract dimension, that value gets repeated accordingly. For example, for the <code>n</code> dimensional state <code>selected</code></p>
+<pre><code>    set p [plot -x {1 2 3} -y {1 2 3}]
+    $p configure -selected TRUE</code></pre>
+<p>will repeat <code>TRUE</code> <code>n=3</code> times.</p></li>
+<li><p>It is possible to modify a subset of a state with abstract dimension using the corresponding <code>which</code> argument</p>
+<pre><code>    set p [plot -x {1 2 3} -y {1 2 3}]
+    $p configure -size TRUE -which_n {TRUE FALSE TRUE}</code></pre>
+<p>where <code>which_*</code> accepts logical and index sub-setting. In <code>Tcl</code>, indexing starts at 0 <code>which_*</code> also accepts a state name that is of type Boolean and has the same abstract dimension. $p configure -active FALSE -which_n selected</p>
+<p>Note that <code>which_n</code> is equivalent to <code>which</code>.</p>
+<ul>
+<li>Note that when switching between <code>R</code> and <code>Tcl</code>: in <code>R</code> vector indexing starts at 1 and in <code>Tcl</code> at 0. The <code>which...</code> arguments do take this into consideration.</li>
+</ul></li>
+</ul>
+</body>
+</html>

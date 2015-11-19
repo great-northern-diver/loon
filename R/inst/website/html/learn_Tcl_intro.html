@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>learn loon</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+
+<ul>
+  <li id="learn_intro"><a href="learn_Tcl_intro.html">intro</a></li>
+  <li id="learn_Tcl_Tk"><a href="learn_Tcl_Tk.html">tk</a></li>
+  <li id="learn_states"><a href="learn_Tcl_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_Tcl_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_Tcl_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_Tcl_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_Tcl_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_Tcl_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_Tcl").className += " selected";
+var language = "Tcl";
+</script>
+</div>
+<div id="header">
+<h1 class="title">learn loon</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+</ul>
+</div>
+<script>
+document.getElementById("learn_intro").className += " selected";
+</script>
+<h1 id="introduction">Introduction</h1>
+<p><code>loon</code> is written in <code>Tcl</code> and <code>Tk</code>. Users familiar with <code>Tk</code> widgets will feel familiar with the <code>loon</code> API as the <code>loon</code> widgets follow the standard <code>Tk</code> conventions.</p>
+<h1 id="installation">Installation</h1>
+<p>Get package from github</p>
+<pre class="todo"><code>git clone https://github.com/waddella/loon.git</code></pre>
+<p>To compile the package change the working directory to the <code>Tcl</code> subfolder and run</p>
+<pre><code>./configure
+make</code></pre>
+<p>Optionally install the package</p>
+<pre><code>make install</code></pre>
+<p>If you do not install the package you need to add the package path to <code>auto_path</code> variable in the <code>tcl</code> console</p>
+<pre><code>lappend auto_path path_to_foler_containing_pkgIndex.tcl</code></pre>
+<h1 id="getting-started">Getting Started</h1>
+<p>In the <code>Tcl</code> console (e.g. <code>tclsh</code>, <code>wish</code>, <code>tkcon</code>) load the <code>loon</code> package with</p>
+<pre><code>package require loon</code></pre>
+<p>If you need to import images from <code>jpeg</code> and <code>png</code> files you also need to load the <code>Img</code> package</p>
+<pre><code>package require Img</code></pre>
+<p>Optionally, if you want to import all of <code>loon</code>'s commands into the global namespace, run</p>
+<pre><code>namespace import loon *</code></pre>
+<p>If you do not import <code>loon</code>'s procedures into the global namespace then you need to prepend <code>loon::</code> in front of <code>loon</code>'s procedure names (e.g. <code>loon::plot</code> instead of <code>plot</code>).</p>
+<p>An example scatterplot is created with</p>
+<pre><code>plot -x {4 1 5} -y {2 3 1} -color {red orange blue} -size {1.4 5.2 4}</code></pre>
+<p>If you want to use <code>loon</code> interactively via the <code>tcl</code> shell take a look at the <code>tk</code> console <a href="http://tkcon.sourceforge.net/"><code>tkcon</code></a>.</p>
+<p>The User Interface of the scatterplot display is explained in the <a href="UI.html">UI section</a>.</p>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+<ul>
+  <li id="learn_intro"><a href="learn_R_intro.html">intro</a></li>
+  <li id="learn_R_tcltk"><a href="learn_R_tcltk.html">tcltk</a></li>
+  <li id="learn_states"><a href="learn_R_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_R_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_R_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_R_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_R_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_R_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_R").className += " selected";
+var language = "R";
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#add-move-delete-layers">Add, Move &amp; Delete Layers</a></li>
+<li><a href="#query-and-modify-layers">Query and Modify Layers</a></li>
+<li><a href="#maps">Maps</a><ul>
+<li><a href="#maps-library">maps library</a></li>
+<li><a href="#sp-library">sp library</a></li>
+</ul></li>
+<li><a href="#generics">Generics</a></li>
+<li><a href="#countourlines-heatimage-rasterimage">countourLines &amp; heatImage &amp; rasterImage</a></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_layer").className += " selected";
+    setLearnUrl("layer");
+}
+</script>
+<h1 id="introduction">Introduction</h1>
+<p><code>loon</code>'s plots that are based on Cartesian coordinates (i.e. scatterplot, histogram, and graph) allow for layering visual information such as polygons, text, and rectangles among others. Every layer has a unique id, and the layer with the plot model (i.e. scatterplot points, histogram, or graph) is called the model layer and has the id <code>model</code>.</p>
+<p>The implemented layer types are the following</p>
+<ul>
+<li><strong>group</strong>: a layer that has no visual representation or states but can contain other layers</li>
+<li><strong>polygon</strong>: a single polygon</li>
+<li><strong>line</strong>: a single line with multiple segments</li>
+<li><strong>rectangle</strong>: a single rectangle</li>
+<li><strong>oval</strong>: a single oval</li>
+<li><strong>text</strong>: a single string</li>
+</ul>
+<p>and <code>n</code> dimensional state or compound layers</p>
+<ul>
+<li><strong>points</strong>: <code>n</code> points, same <code>n</code> dimensional states as the scatterplot has</li>
+<li><strong>texts</strong>: <code>n</code> strings</li>
+<li><strong>polygons</strong>: <code>n</code> polygons</li>
+<li><strong>rectangles</strong>: <code>n</code> rectangles</li>
+<li><strong>lines</strong>: <code>n</code> lines</li>
+</ul>
+<p>Note that for polygons, rectangles and lines the states <code>x</code> and <code>y</code> have a non-flat data structure , i.e. an <code>R</code> list of vectors</p>
+<pre><code>l_layer_polygons(p, x=list(c(1,2,3), c(4,2,1), c(1,2,3)),
+    y=list(c(2,5,3), c(2,7,4), c(4,8,1)))</code></pre>
+<p>Some important implementation details for working with layers are then</p>
+<ul>
+<li>Currently only the model layer in the sense of selection and moving points with mouse gestures.</li>
+<li>Every layer has a unique id that is assigned by loon.</li>
+<li>Layers are arranged in a tree structure where a <code>group</code> layer can be a parent to children layers (any of the above mentioned layer types). The tree root has id <code>root</code>.</li>
+<li>The layers are rendered in order of a Depth-first traversal of the non-group layers.</li>
+<li>Layers, like the plot models, have states that define its appearance.</li>
+<li>Layer states also support state bindings.</li>
+</ul>
+<p>To get a first impression on the possible operations that can be performed on layers you may query all commands that are available to work with layer</p>
+<pre><code>apropos(&quot;l_layer_&quot;)</code></pre>
+<h1 id="add-move-delete-layers">Add, Move &amp; Delete Layers</h1>
+<p>In this section we layer information onto the following scatterplot</p>
+<pre><code>p &lt;- l_plot(x=0:7, y=0:7, showScales=TRUE, showGuides=TRUE,
+    xlabel=&#39;&#39;, ylabel=&#39;&#39;)</code></pre>
+<div class="figure">
+<img src="images/layer_init.png" alt="" />
+
+</div>
+<p>The <code>layer ids</code> sub-command returns the plot's layer ids</p>
+<pre><code>l_layer_ids(p)
+
+#&gt; [1] &quot;root&quot;  &quot;model&quot;</code></pre>
+<p>The <code>root</code> and <code>model</code> layer exist in all plots. The <code>root</code> layer is the tree root and the <code>model</code> layer represents the visual representation of the data for the specific plot (e.g. histogram, scatterplot or graph).</p>
+<p>The following code layers a polygon</p>
+<pre><code>l_p &lt;- l_layer_polygon(p, x=c(0,1,2,3,3,2.5,1.5,0),
+    y=c(5,4.5,4.5,5,7,7,5.5,5.2),
+    color=&#39;black&#39;, linecolor=&#39;orange&#39;,
+    linewidth=5)</code></pre>
+<div class="figure">
+<img src="images/layer_polygon.png" alt="" />
+
+</div>
+<p>The variable <code>l_p</code> holds the layer id. In <code>R</code> the <code>l_p</code> has in addition a class and widget attribute. You can get the state descriptions as with normal plots</p>
+<pre><code>l_info_states(l_p)</code></pre>
+<p>Other layer types can be layered similarly, e.g.</p>
+<pre><code>l_l &lt;- l_layer_line(p, x=c(0,2.5,5,7.5), y=c(4.5,0,6,3),
+    linewidth=4, color=&#39;red&#39;)</code></pre>
+<div class="figure">
+<img src="images/layer_line.png" alt="" />
+
+</div>
+<p>The layers are arranged in a tree structure and the rendering is according to the Depth-First algorithm of the visual layers in the tree. For example, we can layer a rectangle over the previous layers:</p>
+<pre><code>l_r &lt;- l_layer_rectangle(p, x=c(0.5,6.5), y=c(0.5,6.5),
+    color=&#39;green&#39;, linecolor=&#39;&#39;)</code></pre>
+<div class="figure">
+<img src="images/layer_rectangle.png" alt="" />
+
+</div>
+<p>The rectangle with the layer id saved in the <code>l_r</code> variable over-plots the other layers, i.e. it is rendered last. To get a printout of the tree structure run</p>
+<pre><code>l_layer_printTree(p)
+
+#&gt; layer2
+#&gt; layer1
+#&gt; layer0
+#&gt; model</code></pre>
+<p>Hence the topmost layer, i.e. <code>layer2</code>, is rendered last. Layers can be moved with the <code>l_layer_move</code> function as follows</p>
+<pre><code>l_layer_move(p, layer=l_r, parent=&#39;root&#39;, index=&#39;end&#39;)</code></pre>
+<div class="figure">
+<img src="images/layer_move_1.png" alt="" />
+
+</div>
+<p>Note, that the <code>parent</code> layer, the <code>index</code> specifying the location among the parents children layers, and the <code>label</code> of a layer can also be specified when adding a layer. However <code>parent</code>, <code>index</code> and <code>label</code> are not states of the layer, instead they are information for the layer collection.</p>
+<p>The following code creates a group and moves the polygon layer and line layer into it</p>
+<pre><code>l_g &lt;- l_layer_group(p, parent=&#39;root&#39;, index=&#39;end&#39;)
+l_layer_move(p, layer=l_l, parent=l_g, index=&#39;end&#39;)
+l_layer_move(p, layer=l_p, parent=l_g, index=&#39;end&#39;)
+l_layer_printTree(p)
+
+#&gt; layer3
+#&gt; model
+#&gt; layer2
+#&gt; +layer3
+#&gt;   layer1
+#&gt;   layer0</code></pre>
+<div class="figure">
+<img src="images/layer_group.png" alt="" />
+
+</div>
+<p>To move a layer one position up or down (change place with a sibling) one can also use the <code>l_layer_raise</code> and <code>l_layer_lower</code> function, respectively.</p>
+<p>The visibility of a layer can be changed with the <code>l_layer_hide</code> and <code>l_layer_show</code> function.</p>
+<pre><code>l_layer_hide(p, l_g)</code></pre>
+<div class="figure">
+<img src="images/layer_hide.png" alt="" />
+
+</div>
+<p>and</p>
+<pre><code>l_layer_show(p, l_g)</code></pre>
+<div class="figure">
+<img src="images/layer_show.png" alt="" />
+
+</div>
+<p>The layer with the rectangle can be deleted as follows</p>
+<pre><code>l_layer_delete(p, l_r)</code></pre>
+<div class="figure">
+<img src="images/layer_delete.png" alt="" />
+
+</div>
+<p>If a group layer gets deleted with <code>l_layer_delete</code> then all its children layers get moved into their grandparent group layer. To delete a group layer and all it's children use the <code>l_layer_expunge</code> function.</p>
+<pre><code>l_layer_expunge(p, l_g)</code></pre>
+<div class="figure">
+<img src="images/layer_expunge.png" alt="" />
+
+</div>
+<p>It is also possible zoom and pan such that a particular layer fills the plot region</p>
+<pre><code>l_o &lt;- l_layer_oval(p, x=c(2.5,5), y=c(2.5,5), color=&#39;thistle&#39;, index=&#39;end&#39;)
+l_scaleto_layer(p, l_o)</code></pre>
+<div class="figure">
+<img src="images/layer_scaleto.png" alt="" />
+
+</div>
+<h1 id="query-and-modify-layers">Query and Modify Layers</h1>
+<p>To modify the layer states works as described for plot states <a
+href='learn_R_states.html'>here</a>. We start with the following histogram with a polygon layer:</p>
+<pre><code>h &lt;- l_hist(x=c(1,1,2,1,4,3,2,2,1,4,5,4,3,2,4,3), binwidth=0.85,
+    showScales=TRUE, showLabels=FALSE)
+
+l_p &lt;- l_layer_polygon(h, x=c(2,3,4,4.5,4,3.8,2.2),
+    y=c(0.1,0,1,3,2,4,5), color=&#39;steelblue&#39;, linecolor=&#39;&#39;)
+
+l_scaleto_world(h)</code></pre>
+<div class="figure">
+<img src="images/layer_histogram.png" alt="" />
+
+</div>
+<p>To query the state information use</p>
+<pre><code>l_info_states(l_p)</code></pre>
+<p>A layer state is queried as follows:</p>
+<ul>
+<li><p>If <code>l_p</code> is of class <code>l_layer</code></p>
+<pre><code>l_p[&#39;color&#39;]</code></pre>
+<p>or for multiple state changes</p>
+<pre><code>l_cget(l_p, &#39;color&#39;)</code></pre></li>
+<li><p>Or generally where <code>l_p</code> and <code>h</code> are only expected to be strings without a special class</p>
+<pre><code>l_cget(c(h, l_p), &#39;color&#39;)</code></pre></li>
+</ul>
+<p>A layer state is configured as follows:</p>
+<ul>
+<li><p>If <code>l_p</code> is of class <code>l_layer</code></p>
+<pre><code>l_p[&#39;color&#39;] &lt;- &#39;red&#39;</code></pre>
+<p>or for multiple state changes</p>
+<pre><code>l_configure(l_p, color=&#39;red&#39;, linecolor=&#39;black&#39;)</code></pre></li>
+<li><p>Or generally where <code>l_p</code> is only expected to be a string without a special class</p>
+<pre><code>l_configure(c(h, l_p), linewidth=2)</code></pre></li>
+</ul>
+<div class="figure">
+<img src="images/layer_configure.png" alt="" />
+
+</div>
+<h1 id="maps">Maps</h1>
+<p>The <code>loon</code> <code>R</code> package also supports layering maps of classes defined in the <code>sp</code> and <code>maps</code> <code>R</code> packages. For a general overview of map data in <code>R</code> take a look at the <a
+href="https://cran.r-project.org/web/views/Spatial.html">CRAN Task View: Analysis of Spatial Data</a>.</p>
+<p>If you use the <code>asSingleLayer=FALSE</code> argument <code>loon</code> will create multiple individual polygon and line layers within a group. The default <code>asSingleLayer=TRUE</code> option will return a single polygons or lines layer. The default behavior is recommended as it keeps the displays faster.</p>
+<h2 id="maps-library">maps library</h2>
+<p>We start with maps in the <code>maps</code>. First we create a scatterplot with points located at the coordinates of Canadian citites</p>
+<pre><code>library(maps)
+data(world.cities)
+
+canada.cities &lt;- subset(world.cities,
+    grepl(&quot;canada&quot;, country.etc , ignore.case=TRUE))
+
+p &lt;- with(canada.cities,l_plot(x=long, y=lat, showLabels=FALSE))
+
+g_t &lt;- l_glyph_add_text(p, text=canada.cities$name)
+p[&#39;glyph&#39;] &lt;- g_t
+</code></pre>
+<div class="figure">
+<img src="images/layer_map_cities.png" alt="" />
+
+</div>
+<p>The canada regions are then layered as follows:</p>
+<pre><code>canada.map &lt;- map(&quot;world&quot;,  &quot;Canada&quot;, fill=TRUE, plot=FALSE)
+
+id &lt;- l_layer(p, canada.map,
+    color = ifelse(grepl(&quot;lake&quot;, canada.map$names,
+       ignore.case=TRUE), &quot;lightblue&quot;, &quot;&quot;),
+    asSingleLayer=FALSE)
+
+l_scaleto_layer(p, id)</code></pre>
+<div class="figure">
+<img src="images/layer_map_canada.png" alt="" />
+
+</div>
+<ul>
+<li>Note that if you would like every polygon to be an individual layer, you can use the <code>asSinglelLayer=FALSE</code> argument in the <code>l_layer.map</code> method.</li>
+</ul>
+<h2 id="sp-library">sp library</h2>
+<p>Of the classes currently defined in the <code>sp</code> package for geographical data we currently support to layer of class <code>Polygon</code>, <code>Polygons</code>, <code>SpatialPolygons</code>, and <code>SpatialPolygonsDataFrame</code>. There are a couple of sources that provide map data for <code>R</code> using these classes, see</p>
+<ul>
+<li><a href="http://www.gadm.org">Global Administrative Areas</a></li>
+<li><a href="http://www.naturalearthdata.com">Natural Earth</a></li>
+</ul>
+<p>This example uses data from the <a href="http://www.gadm.org">Global Administrative Areas</a>. We start by layering an outline of Switzerland into a scatterplot with 0 points:</p>
+<pre><code>con &lt;- url(&quot;http://biogeo.ucdavis.edu/data/gadm2/R/CHE_adm0.RData&quot;)
+load(con)
+close(con)
+    
+p &lt;- l_plot()
+g &lt;- l_layer_group(p, label=&quot;Switzerland&quot;)
+m &lt;- l_layer(p, gadm, label=&quot;Switzerland&quot;, parent=g,
+             asSingleLayer=FALSE,
+             color=&quot;&quot;, linecolor=&quot;black&quot;)
+l_scaleto_world(p)</code></pre>
+<div class="figure">
+<img src="images/layer_map_switzerland.png" alt="" />
+
+</div>
+<p>We continue by layering the outlines for the Swiss Cantons:</p>
+<pre><code>l_layer_hide(p, g)
+
+g1 &lt;- l_layer_group(p, label=&quot;Swiss Cantons&quot;)
+
+con &lt;- url(&quot;http://biogeo.ucdavis.edu/data/gadm2/R/CHE_adm1.RData&quot;)
+load(con)
+close(con)
+
+m1 &lt;- l_layer(p, gadm, label=&quot;Swiss Cantons&quot;, parent=g1, index=1,
+              asSingleLayer=FALSE,
+              color=&quot;&quot;, linecolor=&quot;red&quot;)</code></pre>
+<div class="figure">
+<img src="images/layer_map_cantons.png" alt="" />
+
+</div>
+<p>Finally, we label the canton layers accordingly</p>
+<pre><code>cantons &lt;- gadm@data$NAME_1[gadm@plotOrder]
+
+for (i in 1:length(m1)) {
+    sapply(m1[[i]], function(l)l_layer_relabel(p, l, cantons[i]))
+}</code></pre>
+<p><img src="images/layer_map_labels_before.png" alt="" /> <img src="images/layer_map_labels_after.png" alt="" /></p>
+<h1 id="generics">Generics</h1>
+<p><code>l_layer</code> is a generic function and you may add a method to layer a visual representation for an object of a particular class.</p>
+<pre><code>methods(&#39;l_layer&#39;)</code></pre>
+<p>Here a short example for an object of class <code>foo</code></p>
+<pre><code>newFoo &lt;- function(x, y, ...) {
+    r &lt;- list(x=x, y=y, ...)
+    class(r) &lt;- &#39;foo&#39;
+    return(r)
+}</code></pre>
+<p>Then the layer function is</p>
+<pre><code>l_layer.foo &lt;- function(widget, x) {
+    x$widget &lt;- widget
+    id &lt;- do.call(&#39;l_layer_polygon&#39;, x)
+    return(id)
+}</code></pre>
+<p>And finally</p>
+<pre><code>p &lt;- l_plot()
+
+obj &lt;- newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color=&#39;yellow&#39;)
+
+id &lt;- l_layer(p, obj)
+
+l_scaleto_world(p)</code></pre>
+<div class="figure">
+<img src="images/layer_generic.png" alt="" />
+
+</div>
+<h1 id="countourlines-heatimage-rasterimage">countourLines &amp; heatImage &amp; rasterImage</h1>
+<p>We provide the functions <code>l_layer_contourLines</code>, <code>l_layer_heatImage</code>, and <code>l_layer_rasterImage</code> that similar to the <code>R</code> functions <code>contourLines</code>, <code>image</code>, and <code>rasterImage</code>, respectively. See the examples for each function with the <code>examples</code> <code>R</code> function.</p>
+<p>For example:</p>
+<pre><code>kest &lt;- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
+p &lt;- with(iris, l_plot(Sepal.Width,Sepal.Length, color=&#39;black&#39;))
+l_layer_contourLines(p, kest)
+l_layer_heatImage(p, kest) 
+l_scaleto_world(p)  </code></pre>
+<div class="figure">
+<img src="images/layers_heatimage.png" alt="" />
+
+</div>
+<p><code>l_layer_contourLines</code> creates a lines layer, and <code>l_layer_heatImage</code>, and <code>l_layer_rasterImage</code> a rectangles layer.</p>
+</body>
+</html>

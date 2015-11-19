@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>event bindings - loon</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+
+<ul>
+  <li id="learn_intro"><a href="learn_Tcl_intro.html">intro</a></li>
+  <li id="learn_Tcl_Tk"><a href="learn_Tcl_Tk.html">tk</a></li>
+  <li id="learn_states"><a href="learn_Tcl_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_Tcl_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_Tcl_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_Tcl_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_Tcl_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_Tcl_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_Tcl").className += " selected";
+var language = "Tcl";
+</script>
+</div>
+<div id="header">
+<h1 class="title">event bindings - loon</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#event-bindings">Event Bindings</a><ul>
+<li><a href="#state-change-bindings">State Change Bindings</a><ul>
+<li><a href="#substitutions">Substitutions</a></li>
+<li><a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a></li>
+<li><a href="#other-state-bindings">Other State Bindings</a></li>
+</ul></li>
+<li><a href="#item-bindings">Item Bindings</a><ul>
+<li><a href="#substitutions-1">Substitutions</a></li>
+<li><a href="#visual-item-tags">Visual Item Tags</a></li>
+</ul></li>
+<li><a href="#canvas-bindings">Canvas Bindings</a><ul>
+<li><a href="#substitutions-2">Substitutions</a></li>
+</ul></li>
+<li><a href="#content-bindings">Content Bindings</a></li>
+</ul></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_bind").className += " selected";
+    setLearnUrl("bind");
+}
+</script>
+<h1 id="event-bindings">Event Bindings</h1>
+<p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
+<p>For example, a state binding is triggered on particular state changes</p>
+<pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
+
+$p bind state add {selected active xTemp} {puts &quot;%W had events: %e&quot;}</code></pre>
+<p>The above code creates a plot with three points and adds a state binding that evaluates the callback code <code>puts &quot;%W had event %e&quot;</code> if any of the states <code>selected</code>, <code>active</code>, or <code>xTemp</code> get changed of <code>p</code>. The <code>%W</code> and <code>%e</code> get <strong>substituted</strong> with the widget path name and a list of the events that were responsible for the code to be evaluated, respectively.</p>
+<p>There are also a number of other bindings:</p>
+<ul>
+<li>Item bindings evaluate code triggered by a keyboard and mouse gesture with a visual item on the display.</li>
+<li>Canvas bindings evaluate code triggered by a keyboard and mouse gesture on the plot as a whole.</li>
+<li>There are also a number of content bindings that evaluate callback functions when the collection of layers, glyphs, or navigators changes.</li>
+</ul>
+<p>Besides the <code>bind</code> subcommand we also provide the <code>systembind</code> subcommand. <code>bind</code> and <code>systembind</code> can be used interchangeably. <code>systembind</code> is used for <code>loon</code>'s own use and no error catching is performed when evaluating system binding code.</p>
+<h2 id="state-change-bindings">State Change Bindings</h2>
+<p>State bindings get triggered when a widget state changes. For more information on widget states see the <a
+href="learn_Tcl_states.html">states documentation</a>.</p>
+<p>A <code>configure</code> call that changes multiple states will collect which states have changed and only evaluate the event bindings once. For example</p>
+<pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
+
+$p bind state add {selected active xTemp} {puts &quot;%W had events: %e&quot;}
+
+$p configure -selected {T F F} -size {1 4 3}
+
+#% .l0.plot had events: selected size
+
+$p configure -xTemp {1 1 1}
+
+#% .l0.plot had events: xTemp</code></pre>
+<p>A couple of notes:</p>
+<ul>
+<li>The events <code>{selected active xTemp}</code> in the binding creation specify that <em>any</em> of these events trigger the code evaluation. Or in other words, <em>at least one</em> of the <code>selected</code>, <code>active</code>, or <code>xTemp</code> states must be changed to trigger the code evaluation.</li>
+<li>The <code>%e</code> substitution enlists every state that got changed in the particular <code>configure</code> evaluation. For the above example it doesn't matter whether we have added the <code>size</code> state to the events list or not.</li>
+<li>The keyword <code>all</code> for events indicates that every state change should trigger a callback evaluation</li>
+<li>The event <code>destroy</code> is thrown when a plot gets closed (destroyed).</li>
+</ul>
+<p>A state binding gets thrown only if at least one state is really changed. Suppose at least one point is not selected, then</p>
+<pre><code>$p configure -selected 1
+#% .l0.plot had events selected
+$p configure -selected TRUE</code></pre>
+<p>The above code will only throw one event for the fist expression and no event for the second expression, as the <code>selected</code> state does not change (<code>1</code> and <code>TRUE</code> both represent the same logical value).</p>
+<h3 id="substitutions">Substitutions</h3>
+<p>The current substitutions for state bindings are</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">string</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%e</code></td>
+<td align="left">states that got changed</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%b</code></td>
+<td align="left">binding id</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%O</code></td>
+<td align="left">object path, useful for debugging</td>
+</tr>
+</tbody>
+</table>
+<h3 id="list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</h3>
+<p>Assume the following plot and bindings</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+$p bind state all {puts A}
+$p bind state {selected active} {puts B}
+$p bind state {showAxes selected} {puts C}
+$p bind state {zoomX panX selected} {puts D}</code></pre>
+<p>To list the bindings use</p>
+<pre><code>$p bind state ids
+
+#% stateBinding0 stateBinding1 stateBinding2 stateBinding3</code></pre>
+<p>To get the binding events and callback say for <code>stateBinding0</code> use</p>
+<pre><code>$p bind state get stateBinding0
+
+#% all {puts A}</code></pre>
+<p>The order of binding evaluation is as returned by bind state ids for those bindings that are triggered by a particular state change. For example, all bindings are triggered by a <code>selected</code> state change, hence changing the selected state of <code>p</code> would print <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>. The evaluation can be reversed/changed as follows</p>
+<pre><code>$p bind state reorder [lreverse [$p bind state ids]]</code></pre>
+<p>Now a change of the <code>selected</code> state of <code>p</code> would cause to print the letters <code>D</code>,. <code>C</code>, <code>B</code>, <code>A</code>.</p>
+<p>Finally, to delete a binding use</p>
+<pre><code>$p bind state delete stateBinding0</code></pre>
+<h3 id="other-state-bindings">Other State Bindings</h3>
+<p>Next to a <code>loon</code> plot, layers, glyphs, navigators, and contexts support state bindings too. We demonstrate this with a layer state binding, but it will work with all the other types the same.</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+set l [$p layer rectangle -x {1 1} -y {3 3} -color blue]
+$p layer use $l bind state color {puts &quot;layer color has changed&quot;}
+$p layer use $l configure -color green
+
+#% layer color has changed</code></pre>
+<h2 id="item-bindings">Item Bindings</h2>
+<p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes, or labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section.</p>
+<p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
+<p>To get the tags for the items which the mouse is currently over use the <code>currenttags</code> subcommand.</p>
+<p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
+<p>If the point index is needed use</p>
+<pre><code>string range [$p currenttags] 9 end</code></pre>
+<p>if the current item truly is a scatterplot point.</p>
+<p>The item binding API also support <a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a>, but item binding order has currently no effect.</p>
+<h3 id="substitutions-1">Substitutions</h3>
+<p>The current substitutions for item bindings are</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">string</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%b</code></td>
+<td align="left">binding id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%O</code></td>
+<td align="left">canvas path, useful for debugging</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%x</code></td>
+<td align="left">x coordinate</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%y</code></td>
+<td align="left">y coordinate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="visual-item-tags">Visual Item Tags</h3>
+<p>Visual items have tags. It is possible to add user defined tags with the <code>tag</code> state for the relative object (i.e. plot and layer). There are, however, also rags that we use which are listed in the table below.</p>
+<ul>
+<li><strong>Note:</strong> numbers are not valid tags! Tags must start with a alphabetic character.</li>
+</ul>
+<p>It is possible to output all tags interactively when entering a visual item as follows</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3} -xlabel xlab\
+    -ylabel ylab -title &quot;Query Visual Item Tags&quot;]
+
+$p bind item add all &lt;Enter&gt; {puts &quot;[%W currenttags]&quot;}</code></pre>
+<ul>
+<li><code>all</code>, <code>current</code>, and <code>selected</code> are reserved tags used by <code>Tk</code></li>
+</ul>
+<p>The current tagging scheme for the histogram, scatterplot and graph displays are</p>
+<div class="figure">
+<img src="images/item_tags.png" title="Item Tags" alt="" />
+
+</div>
+<!--
+
+**Model Layer**
+
+* **Histogram:** `layer`, layerid (i.e. currently `model`), `bin<id>`
+    * **Bin Handle:** `connect`, `handle_origin`, `handle_binwidth`
+
+* **Scatterplot:** `layer`, layerid (i.e. currently `model`), `point`,
+  `LoonPoint<i>`, `tag` state
+
+* **Graph:** `layer`, layerid (i.e. currently `model`), `edge` or
+  `orbit` or `point` (for nodes), `tag` state
+    * **Navigator:** `layer`, layerid, navigatorid, and as
+        appropriate: `navigator`, `navigatorEdge`,
+        `navigatorProgression`, `navigatorPathEnd`
+
+**Layers**
+
+All layers types (polygon, line, text, points, oval, rectangle) have
+the same tag structure:
+
+* `layer`, layerid, `tag` state
+
+**Decoration**
+
+* **Labels:** `LoonLabels`, and as appropriate: `LoonXlabel`,
+  `LoonYlabel`, `LoonTitle`
+
+* **Scales:** `LoonScalesAndGuides`, and as appropriate: `guides`,
+   `ticks`, `scalelabels`
+   
+* **Boxes:** Clipping boxes east, south, west, north, and the bounding
+  box of plot region: `LoonBorder`
+
+-->
+<h2 id="canvas-bindings">Canvas Bindings</h2>
+<p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>
+<p>As for item bindings the valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>.</p>
+<p>For the first example, we print the size of the plot when it gets resized.</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+
+proc printSize {widget width height} {
+    puts [format &quot;Size of widget %s is %sx%s pixels&quot; $widget $width $height]
+}
+
+$p bind canvas add &lt;Configure&gt; {printSize %W %w %h}</code></pre>
+<p>Or say we want to track the mouse and print out its location</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+
+proc printLocation {widget x y} {
+    puts [format &quot;In widget %s the location of the mouse is at: %s and %s&quot;\
+        $widget $x $y]
+}
+
+$p bind canvas add &lt;Motion&gt; {printLocation %W %x %y}</code></pre>
+<h3 id="substitutions-2">Substitutions</h3>
+<p>The current substitutions for canvas bindings are</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">string</th>
+<th align="left">substituted value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%b</code></td>
+<td align="left">binding id</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%O</code></td>
+<td align="left">canvas path, useful for debugging</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%x</code></td>
+<td align="left">x coordinate</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%y</code></td>
+<td align="left">y coordinate</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%w</code></td>
+<td align="left">plot width in pixel</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%h</code></td>
+<td align="left">plot height in pixel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="content-bindings">Content Bindings</h2>
+<p>There are also layer, glyph and navigator bindings. These bindings get executed if the collection of one of those changes. For example</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+
+$p bind layer add {add delete} {puts &quot;Widget %W had event %e for layer %l&quot;}
+
+$p layer text -x {2 2} -y {1.5 2.5} -text {A B}
+
+#% Widget .l0.plot had event add for layer layer1</code></pre>
+<p>Valid events for the different types are</p>
+<ul>
+<li>layer: <code>all</code>, <code>add</code>, <code>delete</code>, <code>move</code>, <code>relabel</code>, <code>hide</code>, <code>show</code></li>
+<li>glyph: <code>all</code>, <code>add</code>, <code>delete</code>, <code>relabel</code></li>
+<li>navigator: <code>all</code>, <code>add</code>, <code>delete</code>, <code>relabel</code></li>
+</ul>
+</body>
+</html>

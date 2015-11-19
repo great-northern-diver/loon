@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+
+<ul>
+  <li id="learn_intro"><a href="learn_Tcl_intro.html">intro</a></li>
+  <li id="learn_Tcl_Tk"><a href="learn_Tcl_Tk.html">tk</a></li>
+  <li id="learn_states"><a href="learn_Tcl_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_Tcl_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_Tcl_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_Tcl_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_Tcl_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_Tcl_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_Tcl").className += " selected";
+var language = "Tcl";
+</script>
+
+<ul>
+  <li id="learn_display_hist"><a id="learn_display_hist_a" href="">histogram</a></li>
+  <li id="learn_display_plot"><a id="learn_display_plot_a" href="">scatterplot</a></li>
+  <li id="learn_display_serialaxes"><a id="learn_display_serialaxes_a" href="">serialaxes</a></li>
+  <li id="learn_display_pairs"><a id="learn_display_pairs_a" href="">scatterplot matrix</a></li>
+  <li id="learn_display_graph"><a id="learn_display_graph_a" href="">graph</a></li>
+  <li id="learn_display_inspectors"><a id="learn_display_inspectors_a" href="">inspectors</a></li>
+</ul> 
+
+
+<script>
+document.getElementById("learn_displays").className += " selected";
+var displays = ["hist", "plot", "serialaxes", "pairs", "graph", "inspectors"];
+
+
+displays.forEach(function(display) {
+  document.getElementById("learn_display_" + display  + "_a").href 
+    = "learn_" + language + "_display_" + display + ".html";
+});
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#scatterplot">Scatterplot</a></li>
+<li><a href="#good-to-know">Good To Know</a></li>
+<li><a href="#glyphs">Glyphs</a><ul>
+<li><a href="#primitive-glyphs">Primitive Glyphs</a></li>
+<li><a href="#n-dimensional-glyphs">n Dimensional Glyphs</a><ul>
+<li><a href="#text">Text</a></li>
+<li><a href="#serialaxes">Serialaxes</a></li>
+<li><a href="#pointranges">Pointranges</a></li>
+<li><a href="#polygons">Polygons</a></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></li>
+<li><a href="#relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_display_plot").className += " selected";
+    setLearnUrl("display_plot");
+}
+</script>
+<div class="figure">
+<img src="images/display_plot.png" title="loon scatterplot" alt="" />
+
+</div>
+<pre><code>source olive.tcl
+set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]</code></pre>
+<h1 id="scatterplot">Scatterplot</h1>
+<ul>
+<li><p>Get the state names with</p>
+<pre><code>set states [$p info states]
+dict keys $states</code></pre></li>
+<li><p>Query a state, say <code>background</code>, as follows</p>
+<pre><code>$p cget -background</code></pre></li>
+<li><p>Change a state, say again <code>background</code> and <code>foreground</code>, as follows</p>
+<pre><code>$p configure -background gray20 -foreground gray90</code></pre></li>
+<li><p>When creating a plot you may specify any state at plot creation</p>
+<pre><code>set p1 [-x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic\
+     -background gray20 -foreground gray90]</code></pre></li>
+<li><p>details on a state, say <code>background</code>, is easily had with</p>
+<pre><code>set states [$p info states]
+dict get $states background</code></pre>
+<p>and a particular field</p>
+<pre><code>dict get $states background description</code></pre></li>
+</ul>
+<h1 id="good-to-know">Good To Know</h1>
+<ul>
+<li>The scatterplot display supports <a href="learn_Tcl_layer.html">layers</a>.</li>
+</ul>
+<h1 id="glyphs">Glyphs</h1>
+<p>The visual representation of a point can be changed for each point separately with the <code>n</code> dimensional state <code>glyph</code>. The supported glyph types are detailed in the following sections.</p>
+<h2 id="primitive-glyphs">Primitive Glyphs</h2>
+<p>The supported primitives are <code>circle</code>, <code>ocircle</code>, <code>ccircle</code>, <code>square</code>, <code>osquare</code>, <code>csquare</code>, <code>triangle</code>, <code>otriangle</code>, <code>ctriangle</code>, <code>diamond</code>, <code>odiamond</code> and <code>cdiamont</code>.</p>
+<pre><code>source olive.tcl
+set p [plot -x $oleic -y $stearic -color $Area\
+    -xlabel oleic -ylabel stearic]
+
+set glyphmap [dict create\
+    South-Apulia circle\
+    North-Apulia ocircle\
+    Inland-Sardinia square\
+    Coast-Sardinia osquare\
+    East-Liguria triangle\
+    West-Liguria otriangle\
+    Calabria diamond\
+    Sicily odiamond\
+    Umbria odiamond]; ## NOTE
+
+$p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" alt="" />
+
+</div>
+<h2 id="n-dimensional-glyphs">n Dimensional Glyphs</h2>
+<p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
+<p>Glyphs, like plots and layers, have states and support state bindings. You can query and modify the glyph states, or add state bindings to glyphs at run time as shown below.</p>
+<h3 id="text">Text</h3>
+<p>Text glyphs are character strings for each point</p>
+<pre><code>set gt [$p glyph add text -text $Region]
+$p configure -glyph $gt</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
+
+</div>
+<h3 id="serialaxes">Serialaxes</h3>
+<p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
+<pre><code>## $olivedata does not contain Area and Region
+set gs [$p glyph add serialaxes -data $olivedata]
+$p configure -glyph $gs</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
+
+</div>
+<p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
+<pre><code>$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" alt="" />
+
+</div>
+<p>Please also see the <a
+href='learn_Tcl_display_serialaxes.html'>serialaxes display</a> documentation for more information regarding working with serialaxes.</p>
+<h3 id="pointranges">Pointranges</h3>
+<p>If every point has a point range associated you can visualize this information with the pointrage glyph.</p>
+<pre><code>set p1 [plot -x {1 2 3} -y {1 2 3} -color {1 2 3}]
+set gr [$p1 glyph add pointrange -ymin {0 1.5 2.3}\
+    -ymax {1.6 2.4 3.1} -linewidth {1 2 3} -showArea FALSE]
+$p1 configure -glyph $gr</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" alt="" />
+
+</div>
+<h3 id="polygons">Polygons</h3>
+<p>A polygon can be a useful point glyph to visualize arbitrary shapes such as airplanes, animals and shapes that are not available in the primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example of polygon glyphs which we reuse here.</p>
+<p>First we specify the coordinates of the polygons, note that it is your responsibility to center them at <code>0</code> and to specify an appropriate size. A good range for the polygon coordinates is from <code>-1</code> to <code>1</code>.</p>
+<pre><code>x_star &lt;- 
+    c(-0.000864304235090734, 0.292999135695765, 0.949870354364736, 
+      0.474503025064823, 0.586862575626621, -0.000864304235090734, 
+      -0.586430423509075, -0.474070872947277, -0.949438202247191,
+      -0.29256698357822)
+y_star &lt;-
+    c(-1, -0.403630077787381, -0.308556611927398, 0.153846153846154, 
+      0.808556611927398, 0.499567847882455, 0.808556611927398,
+      0.153846153846154, -0.308556611927398, -0.403630077787381)
+x_cross &lt;- 
+    c(-0.258931143762604, -0.258931143762604, -0.950374531835206, 
+      -0.950374531835206, -0.258931143762604, -0.258931143762604,
+      0.259651397291847, 0.259651397291847, 0.948934024776722,
+      0.948934024776722, 0.259651397291847, 0.259651397291847)
+y_cross &lt;-
+    c(-0.950374531835206, -0.258931143762604, -0.258931143762604, 
+      0.259651397291847, 0.259651397291847, 0.948934024776722,
+      0.948934024776722, 0.259651397291847, 0.259651397291847,
+      -0.258931143762604, -0.258931143762604, -0.950374531835206)
+x_hexagon &lt;-
+    c(0.773552290406223, 0, -0.773552290406223, -0.773552290406223, 
+      0, 0.773552290406223)
+y_hexagon &lt;- 
+    c(0.446917314894843, 0.894194756554307, 0.446917314894843,
+      -0.447637568424085, -0.892754249495822, -0.447637568424085)</code></pre>
+<p>Then you can use those polygon coordinates to specify polygon glyphs as follows</p>
+<pre><code>p &lt;- l_plot(1:3, 1:3)
+
+gl &lt;- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
+                          y = list(y_star, y_cross, y_hexagon))
+
+p[&#39;glyph&#39;] &lt;- gl</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" alt="" />
+
+</div>
+<h3 id="images">Images</h3>
+<p><strong>Note that image glyphs work well on Linux and OSX but not Windows!</strong> Also, image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
+<p>We fist start by creating the images and then show how to load images form files.</p>
+<div class="sourceCode"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span class="kw">set</span> img1 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">30</span><span class="ot"> -height</span> <span class="dv">20</span><span class="kw">]</span>
+<span class="dt">$img1</span> put blue<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">20</span>; <span class="dt">$img1</span> put yellow<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">30</span> <span class="dv">11</span>
+<span class="kw">set</span> img2 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">80</span><span class="ot"> -height</span> <span class="dv">80</span><span class="kw">]</span>
+<span class="dt">$img2</span> put red<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">80</span>; <span class="dt">$img2</span> put green<span class="ot"> -to</span> <span class="dv">30</span> <span class="dv">30</span> <span class="dv">60</span> <span class="dv">60</span>
+<span class="kw">set</span> img3 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">60</span><span class="ot"> -height</span> <span class="dv">100</span><span class="kw">]</span>
+<span class="dt">$img3</span> put orange<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">100</span>; <span class="dt">$img3</span> put black<span class="ot"> -to</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">80</span></code></pre></div>
+<p>Note that the images above have different sizes. The <code>loon</code> scatterplot will resize the images (i.e. all glyph types) such that their areas are proportional to their associated point sizes.</p>
+<p>The images are added</p>
+<pre><code>set p [plot -x {1 2 3} -y {3 1 2}\
+    -color {green yellow blue} -size {4 3 7}]
+
+set gi [$p glyph add image -images [list $img1 $img2 $img3]\
+    -label &quot;Abstract Art&quot;]
+
+$p configure -glyph $gi</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_image1.png" title="image glyphs" alt="" />
+
+</div>
+<h3 id="query-and-modify-glyph-states">Query and Modify Glyph States</h3>
+<p>The non-primitive glyphs (or n dimensional glyphs) have states. To demonstrate how to work with glyph states we take the text glyph example from above again:</p>
+<pre><code>source olive.tcl
+set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
+
+set gt [$p glyph add text -text $Region]
+$p configure -glyph $gt</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
+
+</div>
+<p>The procedure to list and get information about them is similar as outlined in the &lt;a href=''learn_Tcl_states.html'&gt;states section</a>. For example get the state names of a glyph with</p>
+<pre><code>set gtstates [$p glyph use $gt info states]
+dict keys $gtstates</code></pre>
+<p>Then to query a state, say <code>text</code>, use</p>
+<p>And to modify a state</p>
+<pre><code>$p glyph use $gt configure -text $Area</code></pre>
+<div class="figure">
+<img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" alt="" />
+
+</div>
+<h3 id="relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</h3>
+<p>Glyph labels are used in the plot and glyph inspector. You can specify the glyph labels when creating the glyphs:</p>
+<pre><code>source olive.tcl
+set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
+
+set gt [$p glyph add text -text $Region -label Region]
+$p configure -glyph $gt</code></pre>
+<p>or you may relabel once the glyphs already exist</p>
+<pre><code>$p glyph relabel $gt &quot;Region String&quot;</code></pre>
+<p>Note, that the <code>label</code> is part of the glyph collection and not the glyph states.</p>
+<p>To get all glyph ids with for a plot</p>
+<pre><code>$p glyph ids</code></pre>
+<p>To delete a glyph use</p>
+<pre><code>$p glyph delete $gt</code></pre>
+<p>When deleting a glyph every point that was displayed as that glyph will be switched to <code>circle</code>.</p>
+</body>
+</html>

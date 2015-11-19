@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+
+<ul>
+  <li id="learn_intro"><a href="learn_Tcl_intro.html">intro</a></li>
+  <li id="learn_Tcl_Tk"><a href="learn_Tcl_Tk.html">tk</a></li>
+  <li id="learn_states"><a href="learn_Tcl_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_Tcl_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_Tcl_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_Tcl_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_Tcl_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_Tcl_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_Tcl").className += " selected";
+var language = "Tcl";
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#loons-standard-linking-model">Loon's Standard Linking Model</a><ul>
+<li><a href="#switching-linkinggroup-and-linkingkey">Switching linkingGroup and linkingKey</a></li>
+</ul></li>
+<li><a href="#custom-linking-with-state-bindings">Custom Linking with State Bindings</a></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_linking").className += " selected";
+    setLearnUrl("linking");
+}
+</script>
+<h1 id="introduction">Introduction</h1>
+<p>In <code>loon</code> terms: linking synchronizes certain <code>n</code> dimensional plot states between linked displays. The user can choose</p>
+<ul>
+<li>which displays should be linked</li>
+<li>which <code>n</code> dimensional states should be synchronized</li>
+<li>the mapping of the elements in the <code>n</code> dimensional states from one display to another display.</li>
+</ul>
+<p>We allow only one-to-one synchronization. For example, selecting a point and have it's <code>k</code> nearest neighbors automatically selected in the same display is not possible. Also, it is not possible with the standard linking mechanism to have one selected point in display A result in selecting multiple points in display B. For cases where the standard model is not sufficient custom linking rules can be implemented with state bindings.</p>
+<h1 id="loons-standard-linking-model">Loon's Standard Linking Model</h1>
+<p>The standard linking model is as follows:</p>
+<p>Data displays, i.e. plots, are linked if their <code>linkingGroup</code> state contains the same string.</p>
+<ul>
+<li>Note, <code>none</code> is a keyword; if <code>linkingGroup</code> equals <code>none</code> then the plot is not linked.</li>
+</ul>
+<p>For example, for</p>
+<pre><code>source iris.tcl
+set p1 [plot -x $SepalWidth -y $PetalWidth -linkingGroup iris]
+set p2 [plot -x $PetalLength -y $PetalWidth -linkingGroup iris]
+set p3 [plot -x $SepalLength -y $PetalLength -linkingGroup none]
+set h [histogram -x $SepalLength -linkingGroup iris]</code></pre>
+<p>the plots <code>p1</code>, <code>p2</code>, and <code>h</code> are linked to each other and <code>p3</code> is not linked to any other display.</p>
+<p>The states of a plot that are linked can be queried with</p>
+<pre><code>$p1 getLinkedStates</code></pre>
+<p>Usually the linked states are <code>color</code>, <code>selected</code>, <code>active</code>, and <code>size</code>, if they exist for the particular plot. Histograms, for example, have no <code>size</code> state. Note that between displays only states with the same state name can be linked. To set the (n-dimensional!) linked states use</p>
+<pre><code>$p1 setLinkedStates {color active}</code></pre>
+<p>By default, the <code>i</code>'th element of an <code>n</code> dimensional state gets synchronized with the <code>i</code>'th element of the same state in another displays, if they two displays are linked and if the <code>i</code> is not out of range for one display. Hence, for the above example <code>n=150</code>, the number of data points, and selecting the <code>i</code>'th point in <code>p1</code> will set the <code>selected</code> state for the <code>i</code>'th point in <code>p2</code> and <code>h</code> to <code>TRUE</code>, for <code>i=1,...,150</code>. If a further display gets created with <code>linkingGroup</code> <code>iris</code> but a different value for <code>n</code>, say <code>n=4</code>, then only the first for elements of that plot get synchronized between that display and <code>p1</code>, <code>p2</code>, and <code>h</code>. For example, for</p>
+<pre><code>set p4 [plot -x {1 2 3 4} -y {1 2 3 4} -linkingGroup iris]</code></pre>
+<p>any change in <code>p4</code> for any of the linked states only the first 4 elements in <code>p1</code>, <code>p2</code>, and <code>h</code> will ever be changed. Or vice versa, only the states of the first for elements in <code>p1</code>, <code>p2</code>, and <code>h</code> will ever have an effect on <code>p4</code>.</p>
+<p>It is possible to change the mapping of which elements should be synchronized between displays. The <code>n</code> dimensional <code>linkingKey</code> state controls which elements get synchronized between the linked displays. That is for two linked displays A and B</p>
+<ul>
+<li><p>element <code>i</code> for the linked states in display A is kept in sync with element <code>j</code> for the linked states in display B only if the <code>i</code>'th element in the <code>linkingKey</code> state of display A contains exactly the same string as the element <code>j</code> in the <code>linkingKey</code> state of display B</p></li>
+<li><p>and, the <code>linkingKey</code> state for a display must contain unique elements</p></li>
+</ul>
+<p>By default, the <code>linkingKey</code> contains an <code>n</code> dimensional vector with <code>0,1,...,n-1</code>.</p>
+<h2 id="switching-linkinggroup-and-linkingkey">Switching linkingGroup and linkingKey</h2>
+<p>Both, the <code>linkingGroup</code> state and the <code>linkingKey</code> state can be changed at run time. Changing the <code>p2</code> in the above example to have <code>linkingGroup</code> contain the <code>iris2</code> string, you can run</p>
+<pre><code>$p2 configure -linkingGroup iris2</code></pre>
+<p>now only <code>p1</code> and <code>h</code> are linked.</p>
+<p>If a plot's, say display A, <code>linkingGroup</code> is changed to a linking group that already has linked members, say display B, C, and D, then one must specify whether the initial synchronization of the linked states should be a <code>push</code>, i.e. A &gt; B, C, D, or a <code>pull</code>, i.e. A &lt; B, C, D. This is done with the <code>sync</code> argument:</p>
+<pre><code>$p2 configure -linkingGroup iris2 -sync pull</code></pre>
+<p>The <code>sync</code> argument must also be used if the <code>linkingKey</code> state gets changed of a plot that has linked displays. For example, to link the points in <code>p4</code> with the last 4 points in the iris data use</p>
+<pre><code>$p4 configure -linkingKey {146 147 148 149} -sync push</code></pre>
+<p>Note that using the default <code>linkingKey</code> results in the fastest linking.</p>
+<h1 id="custom-linking-with-state-bindings">Custom Linking with State Bindings</h1>
+<p>If more flexible linking rules are needed, one can implement state bindings.</p>
+<p>For example, for the following displays <code>pa</code> and <code>pb</code></p>
+<pre><code>set pa [plot -x {1 2 3 4 5 6 7} -y {1 2 3 4 5 6 7} -title A]
+set pb [plot -x {1 2 3 4 5} -y {1 2 3 4 5} -title B]</code></pre>
+<p>Assume the linking:</p>
+<div class="figure">
+<img src="images/linking_custom1.png" title="custom linking" alt="many to one is combined by a logical OR" />
+<p class="caption">many to one is combined by a logical OR</p>
+</div>
+<pre><code>proc any {booleans} {
+    return [expr [join $booleans ||]]
+}
+
+proc pa2pb {pa pb} {
+    set sa [$pa cget -selected]
+    set sb [$pb cget -selected]
+    $pb configure -selected [list\
+        [any [lrange $sa 0 2]]\
+        [lindex $sa 3]\
+        [any [lrange $sa 4 5]]\
+        [lindex $sa 6]\
+        [lindex $sb 4]]
+}
+
+proc pb2pa {pa pb} {
+    set sb [$pb cget -selected]
+    $pa configure -selected [concat\
+        [lrepeat 3 [lindex $sb 0]]\
+        [lindex $sb 1]\
+        [lrepeat 2 [lindex $sb 2]]\
+        [lindex $sb 3]]
+}
+
+$pa bind state selected &quot;pa2pb $pa $pb&quot;
+$pb bind state selected &quot;pb2pa $pa $pb&quot;</code></pre>
+<p>This won't end in an endless loop of evaluating state bindings because after the sequence <code>pa2pb - pb2pa - pa2pb</code> or the <code>pb2pa - pa2pb -  pb2pa</code> the system will be in equilibrium with respect to these functions. Remember that state bindings do not get evaluated if a <code>configure</code> call does not effectively change the state. If, however, the custom linking does not result in an equilibrium after the first change, then you may need to add a further variable, say <code>busy</code>, to avoid multiple iterations -- or an infinite loop--. Assume the linking</p>
+<div class="figure">
+<img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" />
+<p class="caption">directions are indicated by arrows</p>
+</div>
+<pre><code>set pa2 [plot -x {1 2 3 4 5 6 7} -y {1 2 3 4 5 6 7} -title &quot;A 2&quot;]
+set pb2 [plot -x {1 2 3 4 5} -y {1 2 3 4 5} -title &quot;B 2&quot;]
+
+set busy FALSE
+
+proc a2b {pa2 pb2} {
+    if {!$::busy} {
+        set ::busy TRUE
+        $pb2 configure\
+            -selected [expr ![lindex [$pa2 cget -selected] 0]]\
+            -which_n 0
+        set ::busy FALSE
+    }
+}
+
+proc b2a {pa2 pb2} {
+    if {!$::busy} {
+        set ::busy TRUE
+        $pa2 configure\
+            -selected [expr ![lindex [$pb2 cget -selected] 0]]\
+            -which_n 0
+        set ::busy FALSE
+    }
+}
+
+$pa2 bind state selected &quot;a2b $pa2 $pb2&quot;
+$pb2 bind state selected &quot;b2a $pa2 $pb2&quot;</code></pre>
+<ul>
+<li>Note that the points that are not specified in <code>which_n</code> will not be changed in the <code>configure</code> call.</li>
+</ul>
+<p>Without the variable <code>busy</code> this would end in an infinite loop one the <code>selected</code> state gets changed of either display.</p>
+</body>
+</html>

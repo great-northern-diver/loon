@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>loon - user interface gestures</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+</div>
+<div id="header">
+<h1 class="title">loon - user interface gestures</h1>
+</div>
+<script>
+document.getElementById("ui").className += " selected";
+</script>
+<h3 id="introduction">Introduction</h3>
+<p>The graphical user interface of the <code>loon</code> scatterplot display should be fairly easy to learn. We kept the number of mouse gestures and keyboard shortcuts minimal. The <code>CTRL</code> and <code>SHIFT</code> in combination with the left and right mouse button or mouse wheel is all you ever need. In fact, the default gestures for the scatterplot display are summarized by the following figures.</p>
+<p>Zoom and Pan gestures are as follows (serialaxes display does not support zoom and pan)</p>
+<div class="figure">
+<img src="images/gestures_zoom_pan.png" title="Interaction Gestures: Zoom and Pan" alt="Two superimposed mice illustrate a click and drag gesture" />
+<p class="caption">Two superimposed mice illustrate a click and drag gesture</p>
+</div>
+<p>Selection gestures are as follows</p>
+<div class="figure">
+<img src="images/gestures_select.png" title="Interaction Gestures: Selection" alt="Two superimposed mice illustrate a click and drag gesture" />
+<p class="caption">Two superimposed mice illustrate a click and drag gesture</p>
+</div>
+<p>And for the scatterplot one can temporary move points as follows</p>
+<div class="figure">
+<img src="images/gestures_move.png" title="Move points on scatterplot" alt="Move points on scatterplot" />
+<p class="caption">Move points on scatterplot</p>
+</div>
+<h3 id="user-interface-behavior">User Interface Behavior</h3>
+<p>There are a few things which are good to know and are features rather than bugs.</p>
+<h4 id="inspector">Inspector</h4>
+<ul>
+<li><p>Only one <code>loon</code> inspector at a time can be open at a given time. If you would like to deactivate the <code>loon</code> inspector set the <code>useLoonInspector</code> state to <code>FALSE</code> (R-Code)</p>
+<pre><code>p &lt;- l_plot(iris, useLoonInspector=FALSE)
+pi &lt;- l_plot_inspector(activewidget=p)</code></pre></li>
+</ul>
+<h4 id="resizing-points">Resizing Points</h4>
+<ul>
+<li>Points with <code>size</code> less equal <code>1</code> are shown with the same glyph size.</li>
+<li>Absolute resizing will use the minimum size of the selected points to determine the new size for all selected points.</li>
+<li>Relative resizing will add or subtract one size unit for each selected point.</li>
+<li>Decreasing the size of the selected points using the inspector will stop responding to button presses if any of the selected points is less equal than zero.</li>
+</ul>
+<h4 id="layers">Layers</h4>
+<ul>
+<li>Only the model layer is interactive!</li>
+<li>The button toolbar in the layers window <img src="images/layers_buttons.png" alt="Layers Toolbar" /> has the functionality as follows: <img src="images/icons/up.png" alt="up" /> and <img src="images/icons/down.png" alt="down" /> move a layer or drawing one position up or down among the children of its parent. The <img src="images/icons/left.png" alt="left" /> moves the layer or drawing to the grand parent layer and the <img src="images/icons/right.png" alt="right" /> button moves the selected layer or drawing into the layer directly below it if the item below the selected element is a layer. <img src="images/icons/visible.png" alt="visible" /> and <img src="images/icons/visible.png" alt="invisible" /> turn the selected drawing or layer and all its children visible and invisible, respectively. <img src="images/icons/plus.png" alt="plus" /> adds a new layer and <img src="images/icons/minus.png" alt="minus" /> removes the selected element where it is a layer it will delete all its children. Finally, <img src="images/icons/scaleto.png" alt="scaleto" /> scales the plot such that the selected layer is completely shown.</li>
+</ul>
+<h3 id="modifier-keys">Modifier Keys</h3>
+<p>The default modifier keys used in <code>loon</code> are <code>Ctrl</code> and <code>Shift</code>. Sometimes operating systems use some of these modifier keys for system functions and hence wont pass their respective key events to <code>Tk</code>. Also, different operating systems generate different events for the mouse ScrollWheel. If you experience problems with the above mentioned gestures please try each gesture on the eventutil below and let me know which events get generated for a particular gesture:</p>
+<p>In <code>Tcl</code></p>
+<pre><code>::loon::eventsutil</code></pre>
+<p>Or in <code>R</code></p>
+<pre><code>.Tcl(&#39;::loon::eventsutil&#39;)</code></pre>
+<!-- In Ubuntu you might have to
+[change the default `Alt-drag` gesture behaviour](unity_disable_alt_drag.html). However
+we were not successful so far. -->
+</body>
+</html>

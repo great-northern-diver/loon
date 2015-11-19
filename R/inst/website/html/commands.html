@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#layer">Layer</a></li>
+<li><a href="#glyphs">Glyphs</a></li>
+<li><a href="#navigators">Navigators</a><ul>
+<li><a href="#context">Context</a></li>
+</ul></li>
+<li><a href="#bindings">Bindings</a><ul>
+<li><a href="#change-binding">Change Binding</a></li>
+<li><a href="#collection-bindings">Collection Bindings</a><ul>
+<li><a href="#layer-bindings">Layer Bindings</a></li>
+<li><a href="#navigator">Navigator</a><ul>
+<li><a href="#context-1">Context</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#info">Info</a></li>
+<li><a href="#aspect">Aspect</a></li>
+</ul>
+</div>
+<script>
+document.getElementById("commands").className += " selected";
+</script>
+<p>This page in an effort to make the <code>loon</code> syntax concise and in some cases more consistent. For example singular and plural nouns are sometimes used. All code is given in Tcl. The first order subcommands for the scatterplot are</p>
+<pre><code>$p configure
+$p cget
+$p aspect
+$p bind
+$p systembind
+$p destroy
+$p glyph
+$p layer
+$p move
+$p scaleto
+$p getLinkedStates
+$p setLinkedStates
+$p info
+$p isWidget</code></pre>
+<h1 id="layer">Layer</h1>
+<p>Working with plot layers.</p>
+<pre><code>add
+        group
+        polygon
+        rectangle
+        oval
+        text
+        image
+        line
+        points
+
+
+ids
+list
+
+getParent
+getSiblings
+getAncestors
+getChildren 
+getDescendants
+getIndex
+getType
+getLabel
+isVisible
+layerVisibility
+groupVisibility
+hide
+show
+relabel
+bbox
+with/use/target
+move
+delete
+expunge
+promote
+demote
+raise
+lower
+isGroup</code></pre>
+<ul>
+<li><p>is <code>list</code> good? Because list is a data structure.</p></li>
+<li><p><strong>delete</strong> all subcommands where layer is a verb.</p></li>
+<li><p><strong>use</strong> <code>layer ids</code> instead of <code>layer list</code></p></li>
+<li><p><strong>remove</strong> select argument in <code>info</code>, <code>bind change get</code> etc.</p></li>
+</ul>
+<h1 id="glyphs">Glyphs</h1>
+<pre><code>add
+    images
+    text
+    serialaxes
+    pointrange  
+delete 
+list
+
+use/with/target
+
+getLabel 
+getType
+relabel
+</code></pre>
+<ul>
+<li><code>add images</code> plural or singular? Glyphs must be always specified for each of the <span class="math inline"><em>n</em></span> points</li>
+</ul>
+<h1 id="navigators">Navigators</h1>
+<h2 id="context">Context</h2>
+<h1 id="bindings">Bindings</h1>
+<pre><code>bind change
+
+bind canvas
+bind item
+
+bind layer
+bind glyph
+bind navigator
+
+$p navigator use navigator0 bind context
+
+navigator use navigator0 bind change</code></pre>
+<h2 id="change-binding">Change Binding</h2>
+<h2 id="collection-bindings">Collection Bindings</h2>
+<h3 id="layer-bindings">Layer Bindings</h3>
+<h3 id="navigator">Navigator</h3>
+<h4 id="context-1">Context</h4>
+<h1 id="info">Info</h1>
+<pre><code>$p info state
+$p info debug</code></pre>
+<h1 id="aspect">Aspect</h1>
+<pre><code>$p aspect
+$p aspect 1</code></pre>
+</body>
+</html>

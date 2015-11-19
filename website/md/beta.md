@@ -51,7 +51,7 @@ install.packages('PairViz', 'scagnostics', 'kernlab', 'devtools', 'testthat')
 ~~~
 library(devtools)
 
-install_github("https://github.com/waddella/loon", subdir="R")
+install_github("waddella/loon", subdir="R")
 ~~~
 
 You can switch between development version and the version you have

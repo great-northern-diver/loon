@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>loon - interactive data visualization</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+</div>
+<div id="header">
+<h1 class="title">loon - interactive data visualization</h1>
+</div>
+<script>
+document.getElementById("home").className += " selected";
+</script>
+<h1 id="introduction">Introduction</h1>
+<p><code>loon</code> is a toolkit for interactive data visualization and exploration. Currently, <code>loon</code> is embedded in <code>R</code> and <code>Tcl</code>. Please see the <a href="beta.html">beta section</a> for the current state of the software.</p>
+<ul>
+<li><p>For a potentially updated version of this document go the <a href="http://waddella.github.io/loon">github pages</a>.</p></li>
+<li><p>To issue a bug report use the <a href="https://github.com/waddella/loon/issues">github issue tracker</a>.</p></li>
+</ul>
+<!--
+`loon` is a highly interactive statistical visualization toolkit that
+is accessible from any programming environment that has bindings with
+`Tcl` and `Tk` version 8.6. This includes among others `R`, `Python`,
+`Perl` and `Ruby`. `R` users can use the `loon` `R` package which is
+hosted on `CRAN`. -->
+<h1 id="installation">Installation</h1>
+<ul>
+<li><p>For <code>R</code>, see the <a href="beta.html">beta section</a>.</p></li>
+<li><p>For <code>Tcl</code>, see the <a href="https://github.com/waddella/loon">github Readme</a>.</p></li>
+</ul>
+<h1 id="statistical-displays">Statistical Displays</h1>
+<p>Currently we provide a display for histograms, scatterplots, serialaxes plots (i.e. star glyphs or parallel coordinates) and navigation graphs.</p>
+<h1 id="user-interface">User Interface</h1>
+<p>The user interface of <code>loon</code> has two elements: the <em>display</em> and the <em>inspector</em>.</p>
+<div class="figure">
+<img src="images/loon_preview.png" title="loon screenshot with inspector and scatterplot display." alt="loon screenshot. Left: Inspector and Right: Scatterplot display." />
+<p class="caption">loon screenshot. Left: Inspector and Right: Scatterplot display.</p>
+</div>
+<p>The inspector lays out most of the functionality of the display. Displays support further actions via mouse gestures and modifier keys.</p>
+<h1 id="point-glyph-types">Point Glyph Types</h1>
+<p>As seen in the above screenshot, <code>loon</code> supports multiple point styles; points can be individually displayed either as dots, images, star glyphs or text strings.</p>
+<div class="figure">
+<img src="images/point_glyph_types.png" title="loon point types: dot, star glyph, image, text and polygon." alt="" />
+
+</div>
+<h1 id="zoom-and-pan">Zoom and Pan</h1>
+<div class="figure">
+<img src="images/pan_zoom.png" title="Zoom and Pan" alt="" />
+
+</div>
+<p>When zooming and panning, the view area gets shown in relation to all data on the worldview in the inspector.</p>
+<h1 id="linked-displays">Linked Displays</h1>
+<div class="figure">
+<img src="images/linking.jpg" title="Linking" alt="Selecting points in one display will also select them in all linked displays." />
+<p class="caption">Selecting points in one display will also select them in all linked displays.</p>
+</div>
+<p>Multiple displays can be linked such that the linked points share the color, size, selected, and active state.</p>
+<div class="floatleft">
+<div class="figure">
+<img src="images/adhoc_linking.png" title="Adhoc Linking" alt="" />
+
+</div>
+</div>
+<p>Scatterplot displays can be linked ad-hoc with the inspector by changing the <em>Linking Group</em> of the scatterplot displays to be the same. <code>loon</code> will always suggest a linking group that has no display associated to it. The linking group <code>none</code> will keep the display unlinked.</p>
+<p>Displays with different numbers of points can be linked too. The only linking constraint is that a point can be linked with no more than one point on another display.</p>
+<h1 id="selection">Selection</h1>
+<p><code>loon</code> provides multiple powerful selection tools that can be combined.</p>
+<div class="floatleft">
+<div class="figure">
+<img src="images/select_click.png" title="Click Select" alt="" />
+
+</div>
+</div>
+<p><strong>Click Select:</strong> individual points can be selected or deselected by simply clicking with the mouse pointer on them.</p>
+<div style="clear:both;margin-bottom:10px">
+
+</div>
+<div class="floatleft">
+<div class="figure">
+<img src="images/select_sweep.png" title="Sweep Select" alt="" />
+
+</div>
+</div>
+<p><strong>Sweep Select:</strong> a click drag mouse gesture will select all points within a rectangle defined by the position of the mouse pointer when it was clicked and where the mouse pointer currently is.</p>
+<div style="clear:both;margin-bottom:10px">
+
+</div>
+<div class="floatleft">
+<div class="figure">
+<img src="images/select_brush.png" title="Brush Select" alt="" />
+
+</div>
+</div>
+<p><strong>Brush Select:</strong> the brush is a rectangular selection tool that can be dragged on the scatterplot display.</p>
+<div style="clear:both;margin-bottom:10px">
+
+</div>
+<p>Additionally, we provide selection by point color.</p>
+<h1 id="modify">Modify</h1>
+<p>The state of the selected points can be modified with the tools and actions in the <em>Modify</em> panel of the inspector.</p>
+<div class="floatleft" style="margin-right: 20px">
+<div class="figure">
+<img src="images/modify.png" title="Brush Select" alt="" />
+
+</div>
+</div>
+<ul>
+<li>Point color</li>
+<li>Active: whether a points are displayed or not. Reactivate will activate all points.</li>
+<li>Point position: points can be temporarily moved on the scatterplot display. The tools in the <em>move</em> row align, distribute, grid-arrange the selected points. The reset button will change the point positions of the selected points to where they initially were set.</li>
+<li>Point glyph types</li>
+<li>Size: we provide relative and absolute resizing. Relative resizing will change the size of the selected points by +1 or -1. Absoute resizing will take the smalles point size in the selection and set all selected points to +1 or -1 of the smallest size.</li>
+</ul>
+<div style="clear:both;margin-bottom:10px">
+
+</div>
+<h1 id="move-points">Move Points</h1>
+<p>On the scatterplot display selected points can be temporarily moved to a new location.</p>
+<div class="figure">
+<img src="images/move.jpg" title="Interactively Move Points" alt="" />
+
+</div>
+<h1 id="command-line-control">Command Line Control</h1>
+<p>Everything that can be changed on the scatterplot display and inspector (except temporary moving points) can be controlled programmatically, e.g. via the command line.</p>
+<p>The <code>R</code> API is discussed in <a href="learn_R_intro.html">learn R section</a>. It is similar as the <code>tcltk</code> <code>R</code> package API. We add generics. For example, for a plot with handle <code>p</code> once can query a plot state as follows</p>
+<pre><code># Query State
+p[&#39;selected&#39;]
+l_cget(p, &#39;selected&#39;)
+
+# Modify State(s)
+p[&#39;selected&#39;] &lt;- TRUE
+l_configure(p, zoomX=2, zoomY=3, selected=FALSE)</code></pre>
+<p>The <code>Tcl</code> API follows the <code>Tk</code> widget convention and provides a <code>cget</code> and <code>configure</code> widget function to query and modify plot states. The following code demonstrates this where the variable <code>p</code> holds the widget path name:</p>
+<pre><code>$p cget -x
+$p configure -zoomX 2 -zoomY 3 -selected FALSE</code></pre>
+<h1 id="event-bindings">Event Bindings</h1>
+<p><code>loon</code>'s event bindings provide the facility to have custom code (i.e. callbacks) evaluated at specific events such as changes in point color, zoom, selection, moving the mouse over a visual element and window resizing.</p>
+<pre><code>$p bind state {zoom pan} {
+    puts &quot;Zoomed or Panned&quot;
+}</code></pre>
+<p>We provide various binding types. See the learn sections.</p>
+<h1 id="layers">Layers</h1>
+<div style="overflow:auto; width: 100%">
+<div class="floatleft" style="clear: both;">
+<div class="figure">
+<img src="images/layers.png" title="loon Layers" alt="" />
+
+</div>
+</div>
+<p>Lines, polygons, rectangles, and maps can be layered onto plots.</p>
+<p>Layers can can be arranged with <code>loon</code>'s layers inspector.</p>
+</div>
+</body>
+</html>

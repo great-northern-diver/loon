@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="beta"><a href="beta.html">Beta</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+
+<ul>
+  <li id="learn_R"><a href="learn_R_intro.html">R</a></li>
+  <li id="learn_Tcl"><a href="learn_Tcl_intro.html">Tcl</a></li>
+<!--  <li id="learn_Python"><a href="learn_Python_intro.html">Python</a></li> --> 
+</ul> 
+  
+<script>
+document.getElementById("learn").className += " selected";
+
+var setLearnUrl = function(section) {
+    var languages = ["R", "Tcl"]; 
+    for (i in  languages) {
+        document.getElementById("learn_" + languages[i]).
+        firstChild.href = "learn_"+languages[i]+ "_" + section + ".html";
+    }
+}
+
+</script>
+<ul>
+  <li id="learn_intro"><a href="learn_R_intro.html">intro</a></li>
+  <li id="learn_R_tcltk"><a href="learn_R_tcltk.html">tcltk</a></li>
+  <li id="learn_states"><a href="learn_R_states.html">states</a></li>
+  <li id="learn_linking"><a href="learn_R_linking.html">linking</a></li>
+  <li id="learn_layer"><a href="learn_R_layer.html">layer</a></li>
+  <li id="learn_bind"><a href="learn_R_bind.html">bind</a></li>
+  <li id="learn_displays"><a href="learn_R_display_hist.html">displays</a></li>
+  <li id="learn_widgets"><a href="learn_R_layout.html">layout</a></li>
+</ul>
+
+<script>
+document.getElementById("learn_R").className += " selected";
+var language = "R";
+</script>
+
+<ul>
+  <li id="learn_display_hist"><a id="learn_display_hist_a" href="">histogram</a></li>
+  <li id="learn_display_plot"><a id="learn_display_plot_a" href="">scatterplot</a></li>
+  <li id="learn_display_serialaxes"><a id="learn_display_serialaxes_a" href="">serialaxes</a></li>
+  <li id="learn_display_pairs"><a id="learn_display_pairs_a" href="">scatterplot matrix</a></li>
+  <li id="learn_display_graph"><a id="learn_display_graph_a" href="">graph</a></li>
+  <li id="learn_display_inspectors"><a id="learn_display_inspectors_a" href="">inspectors</a></li>
+</ul> 
+
+
+<script>
+document.getElementById("learn_displays").className += " selected";
+var displays = ["hist", "plot", "serialaxes", "pairs", "graph", "inspectors"];
+
+
+displays.forEach(function(display) {
+  document.getElementById("learn_display_" + display  + "_a").href 
+    = "learn_" + language + "_display_" + display + ".html";
+});
+</script>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#histogram">Histogram</a></li>
+<li><a href="#good-to-know">Good To Know</a></li>
+</ul>
+</div>
+<script>
+window.onload = function() {
+    document.getElementById("learn_display_hist").className += " selected";
+    setLearnUrl("display_hist");
+}
+</script>
+<div class="figure">
+<img src="images/display_histogram.png" title="loon histogram" alt="" />
+
+</div>
+<pre><code>data(olive)
+h &lt;- l_hist(x=olive$oleic)</code></pre>
+<h1 id="histogram">Histogram</h1>
+<ul>
+<li><p>Get the state names with</p>
+<pre><code>states &lt;- l_info_states(h)
+names(states)</code></pre></li>
+<li><p>Query a state, say <code>showBinHandle</code>, as follows</p>
+<pre><code>h[&#39;showBinHandle&#39;]</code></pre></li>
+<li><p>Change a state, say again <code>showBinHandle</code>, as follows</p>
+<pre><code>h[&#39;showBinHandle&#39;] &lt;- FALSE</code></pre>
+<p>alternatively, especially if you need to modify more than one state, use</p>
+<pre><code>l_configure(h, showBinHandle=FALSE)</code></pre></li>
+<li><p>When creating a plot you may specify any state at plot creation</p>
+<pre><code>h1 &lt;- l_hist(x=olive$oleic, showBinHandle=FALSE, yshows=&#39;density&#39;,
+    color=olive$Area, showStackedColors=TRUE)</code></pre></li>
+<li><p>details on a state, say <code>showBinHandle</code>, is easily had with</p>
+<pre><code>states &lt;- l_info_states(h)
+states$showBindHandle</code></pre>
+<p>and a particular field</p>
+<pre><code>states$showBindHandle$description</code></pre></li>
+</ul>
+<h1 id="good-to-know">Good To Know</h1>
+<ul>
+<li><p>When changing <code>yshows</code> to <code>frequency</code> or <code>density</code> per command line, you probably have to re-scale the plot as the y ranges of the histogram visualization changes</p>
+<pre><code>l_scaleto_world(h)</code></pre></li>
+</ul>
+<p>When changing <code>yshows</code> via the inspector the rescaling happens automatically.</p>
+<ul>
+<li><p>When changing the bin handles when <code>yshows</code> is <code>density</code> the histogram is re-scaled every time the bin handle changes.</p></li>
+<li><p>The histogram display supports <a href="learn_R_layer.html">layers</a>.</p></li>
+</ul>
+</body>
+</html>
