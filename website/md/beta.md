@@ -16,7 +16,10 @@ title: "beta tester instructions - loon"
         from `Tcl`, so for now you need to use Rstudio.
 * Windows users need to install `Tcl` version 8.6, see the
   [instructions below](#linking-activetcl-with-r-on-windows).
-* Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
+  * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
+	* Do not close `XQuartz` while `R` is still running! Otherwise you
+      will end up crashing the active `R` session (including
+      `RStudio`).
 * If you experience difficulties with `loon` use the
   [Issue tracker on github](https://github.com/waddella/loon/issues).
 * If you have difficulties with exporting images with the `l_export`
@@ -211,7 +214,7 @@ system.file("demo", "l_timeseries.R", package = "loon")
 
 # Good to know
 
-- There is no support for legends
+- There is presently no support for legends
 - Most images showing `loon`'s plots are anti-aliased on this
   webpage. You will probably not see anti-aliased plots on your screen
   because the `canvas` widget is only anti-aliased under `OS X`. Also,

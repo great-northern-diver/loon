@@ -54,7 +54,10 @@ document.getElementById("beta").className += " selected";
 <li>The default Windows <code>R</code> GUI will not accept debug messages from <code>Tcl</code>, so for now you need to use Rstudio.</li>
 </ul></li>
 <li>Windows users need to install <code>Tcl</code> version 8.6, see the <a href="#linking-activetcl-with-r-on-windows">instructions below</a>.</li>
-<li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a></li>
+<li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a>
+<ul>
+<li>Do not close <code>XQuartz</code> while <code>R</code> is still running! Otherwise you will end up crashing the active <code>R</code> session (including <code>RStudio</code>).</li>
+</ul></li>
 <li>If you experience difficulties with <code>loon</code> use the <a href="https://github.com/waddella/loon/issues">Issue tracker on github</a>.</li>
 <li>If you have difficulties with exporting images with the <code>l_export</code> function then yake screenshots:
 <ul>
@@ -146,7 +149,7 @@ tester. Please report typos and bugs to `adrian@waddell.ch`.-->
 <pre><code>system.file(&quot;demo&quot;, &quot;l_timeseries.R&quot;, package = &quot;loon&quot;)</code></pre>
 <h1 id="good-to-know">Good to know</h1>
 <ul>
-<li>There is no support for legends</li>
+<li>There is presently no support for legends</li>
 <li>Most images showing <code>loon</code>'s plots are anti-aliased on this webpage. You will probably not see anti-aliased plots on your screen because the <code>canvas</code> widget is only anti-aliased under <code>OS X</code>. Also, the <code>Tcl</code> version that is included in <code>R</code> under <code>OS X</code> does not have an anti-aliased canvas.</li>
 </ul>
 <h1 id="also-good-to-know">Also good to know</h1>
