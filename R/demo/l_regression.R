@@ -3,9 +3,9 @@ local({
     p1 <- with(faithful, 
                l_plot(x=eruptions, y=waiting,
                       size=10,
-                      xlab="Duration of eruption (minutes)",
-                      ylab="Waiting time to next eruption (minutes)",
-                      main="Old faithful geyser",
+                      xlabel="Duration of eruption (minutes)",
+                      ylabel="Waiting time to next eruption (minutes)",
+                      title="Old faithful geyser",
                       showGuides=TRUE
                )
     )
@@ -105,9 +105,9 @@ local({
     
     p2 <-  l_plot(x=fit$fitted, y=fit$resid,
                   size=10,
-                  xlab="Fitted values",
-                  ylab="Residuals",
-                  main="Old faithful geyser: least squares fit",
+                  xlabel="Fitted values",
+                  ylabel="Residuals",
+                  title="Old faithful geyser: least squares fit",
                   showGuides=TRUE,
                   showScales=TRUE,
                   linkingGroup="Old faithful"
@@ -138,9 +138,9 @@ local({
     
     p3 <-  l_plot(x=quantiles, y=sort(fit$resid),
                   size=10,
-                  xlab="Gaussian quantiles",
-                  ylab="Ordered residuals",
-                  main="Old faithful geyser: qqplot, as in qqtest pkg",
+                  xlabel="Gaussian quantiles",
+                  ylabel="Ordered residuals",
+                  title="Old faithful geyser: qqplot, as in qqtest pkg",
                   showGuides=TRUE,
                   linkingGroup="Old faithful",
                   linkingKey=order(fit$resid)-1   #default linking map is zero based
@@ -239,9 +239,9 @@ local({
                l_plot(x=eruptions, 
                       y=waiting,
                       size=10,
-                      xlab="Duration of eruption (minutes)",
-                      ylab="Waiting time to this eruption (minutes)",
-                      main="Plot used by Azzalini and Bowman, 1990, to define groups",
+                      xlabel="Duration of eruption (minutes)",
+                      ylabel="Waiting time to this eruption (minutes)",
+                      title="Plot used by Azzalini and Bowman, 1990, to define groups",
                       color=groups,
                       showGuides=TRUE,
                       linkingGroup="Old faithful",
