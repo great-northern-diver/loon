@@ -1,16 +1,14 @@
-This is the loon interactive scappterplot package
 
-See the website:
-
-       http://www.
 
 INSTALLATION
 ============
-Run
 
-./configure
-make
-make install
+Append the path to the `pkgIndex.tcl` to the `auto_path`
+variable. Then load `loon` with
+
+~~~
+package require loon
+~~~
 
 
 
