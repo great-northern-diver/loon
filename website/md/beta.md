@@ -38,7 +38,7 @@ source("https://bioconductor.org/biocLite.R")
 biocLite(c('graph', 'Rgraphviz', 'RDRToolbox'))
 install.packages(c('maps', 'sp', 'RColorBrewer', 'rworldmap',
 	'rgl', 'RnavGraphImageData','dplyr'))
-install.packages('PairViz', 'scagnostics', 'kernlab', 'devtools', 'testthat')
+install.packages(c('PairViz', 'scagnostics', 'kernlab', 'devtools', 'testthat'))
 ~~~
 
 * Windows user need to install Tcl and Tk version 8.6 and link it
