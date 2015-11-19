@@ -1,0 +1,93 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+namespace eval ::loon::test {
+
+    namespace import ::tcltest::*
+    
+    test create-model {} -body {
+	set p [::loon::classes::Scatterplot_Model new]
+	return [$p cget -n]
+    } -result {0}
+
+    test init {} -body {
+	$p configure -x {1 2 3} -y {4 5 6}
+	return [$p cget -x]
+    } -result {1 2 3}
+
+    test init-2 {} -body {
+	return [$p cget -y]
+    } -result {4 5 6}
+    
+    test init-3 {} -body {
+	return [$p cget -size]
+    } -result {4 4 4}
+    
+    test configure-glyph {} -body {
+	$p configure -glyph dot
+	return [$p cget -glyph]
+    } -result {dot dot dot}
+    
+    
+    test configure-glyph {} -body {
+	$p configure -title "This is a test"
+	return [$p cget -title]
+    } -result {This is a test}
+   
+    test configure-moreOneDimStates {} -body {
+	$p configure -selectBy brushing -transparent TRUE\
+	    -selectionLogic invert -inspector loon\
+	    -panX 4.2 -panY -54 -xlabel "ABC" -ylabel "ef ghi"\
+	    -title "JKL" -showAxes FALSE -showLabels FALSE	    
+	set out {}
+	foreach state {selectBy transparent selectionLogic\
+			   inspector panX panY xlabel ylabel\
+			   title showAxes showLabels} {
+	    lappend out [$p cget -$state]
+	}
+
+	return $out
+    } -result {brushing TRUE invert loon 4.2 -54 ABC {ef ghi} JKL FALSE FALSE}
+	
+    test configure-which1 {} -body {
+	$p configure -size 6
+	$p configure -size {1 2} -which {2 0}
+	return [$p cget -size]
+    } -result {2 6 1}
+
+    test configure-which1 {} -body {
+	$p configure -selected {0 1 1}
+	$p configure -size 8 -which selected
+	return [$p cget -size]
+    } -result {2 8 8}
+
+
+    test configure-which2 {} -body {
+	$p configure -selected FALSE -size 2
+	$p configure -size {3 5} -which {FALSE TRUE TRUE}
+	return [$p cget -size]
+    } -result {2 3 5}
+
+
+    test configure-which3 {} -body {
+	$p configure -active {1 1 0} -selected FALSE
+	puts "test which3"
+	$p configure -selected TRUE -which active
+
+	return [$p cget -selected]
+    } -result {TRUE TRUE FALSE}
+   
+    
+
+	
+    
+    cleanupTests
+
+}
+
+namespace delete ::example::test

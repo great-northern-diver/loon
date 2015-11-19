@@ -1,0 +1,32 @@
+Package: loon
+Type: Package
+Title: Interactive Statistical Visualization
+Version: 0.9
+Date: 2015-11-19
+Author: Adrian R. Waddell and R. Wayne Oldford
+Maintainer: Adrian Waddell <adrian@waddell.ch>
+URL: http://www.uwaterloon.ca
+Description: Interactive Statistical Viualization Toolkit
+License: GPL-2
+Depends:
+    R (>= 2.10.0),
+    tcltk
+Imports:
+    tools
+Suggests:
+    maps,
+    sp,
+    graph,
+    scagnostics,
+    PairViz,
+    RColorBrewer,
+    RnavGraphImageData,
+    rworldmap,
+    rgl,
+    Rgraphviz,
+    RDRToolbox,
+    kernlab,
+    MASS,
+    dplyr,
+    testthat
+LazyData: yes

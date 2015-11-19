@@ -1,0 +1,47 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+
+namespace eval ::loon::test {
+    
+    namespace import ::tcltest::*
+    
+    # tclsh all.tcl -file Graph_Model.test
+    
+    test init-1 {} -body {
+	set g [::loon::classes::Graph_Model new]
+	
+	$g configure -nodes {A B C D} -from {A A B C} -to {B C D A} -isDirected FALSE
+	return [$g cget -nodes]
+    } -result {A B C D}
+    
+    
+    ## Show Edges Correctly
+    test showEdge-1 {} -body {
+	$g configure -nodes {A B C D} -from {A A A B B C} -to {B C D C D D} -isDirected FALSE
+	return [$g cget -showEdge]
+    } -result {TRUE TRUE TRUE TRUE TRUE TRUE}
+    
+    test showEdge-2 {} -body {
+	$g configure -active {0 1 1 1}
+	return [$g cget -showEdge]
+    } -result {FALSE FALSE FALSE TRUE TRUE TRUE}
+
+    test showEdge-3 {} -body {
+	$g configure -activeEdge {1 1 1 0 0 1}
+	return [$g cget -showEdge]
+    } -result {FALSE FALSE FALSE FALSE FALSE TRUE}
+   
+    test showEdge-4 {} -body {
+	$g configure -active 1
+	return [$g cget -showEdge]
+    } -result {TRUE TRUE TRUE FALSE FALSE TRUE}
+    
+    cleanupTests
+}
+namespace delete ::loon::test

@@ -1,0 +1,172 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+
+namespace eval ::loon::test {
+    
+    namespace import ::tcltest::*
+    
+    # tclsh all.tcl -file Linkable.test
+    
+    test create-class {} -body {
+	::oo::class create ::loon::test::T2 {
+	    
+	    superclass ::loon::classes::Linkable
+	    
+	    constructor {} {
+		
+		next 
+		
+		my New_state x double n ""
+		my New_state y double n ""
+		
+		my New_state selected boolean n FALSE
+		my New_state color color n blue
+		my New_state size double n 4
+				
+		my New_state sequence factor p "" {I II III IV V}		    
+		my New_state direction boolean p 1
+		
+		
+		my SetInitStates n {x y}
+		my SetInitStates p sequence
+		
+		my AddNotLinkableStates {x y}
+		my setLinkedStates {color size selected}
+		
+			    
+	    }
+	   		
+	}
+	
+	set m [::loon::test::T2 create ::m] ;# reference n_m
+	set n [::loon::test::T2 create ::n] ;# n_n = n_m
+	set o [::loon::test::T2 create ::o] ;# n_o < n_m
+	set p [::loon::test::T2 create ::p] ;# n_p > n_m
+	set q [::loon::test::T2 create ::q] ;# custom linkingKey
+	
+	proc ::loon::test::resetModels {} {
+	    foreach model {::m ::n ::o ::p ::q} {$model config -x {} -y {}}	  
+	}
+	
+	## initialize always sync pull and then then push
+	$m config -x {1 2 3} -y {2 1 3} -selected {0 1 0} -linkingGroup A
+	$n config -x {4 3 2} -y {1 -1 1} -linkingGroup A
+	
+	return [lmap s {selected size} {$n cget -$s}]       
+    } -result {{FALSE TRUE FALSE} {4 4 4}}
+    
+    
+    test init-1 {} -body {
+     	$o config -x {9 0} -y {3 4} -linkingGroup A -size 3
+     	return [lmap model [list $m $n $o] {$model cget -size}]
+    } -result {{3 3 4} {3 3 4} {3 3}}
+    
+    test init-2 {} -body {
+    	$p config -x {1 2 3 4} -y {2 1 3 4} -linkingGroup A
+    	return [lmap s {selected size} {$p cget -$s}]
+    } -result {{FALSE TRUE FALSE FALSE} {3 3 4 4}}
+
+    test init-3 {} -body {
+    	$q config -x {1 1 1 1 1} -y {1 1 1 1 1} -linkingGroup A\
+    	    -linkingKey {a 0 b 1 c} 
+    	return [lmap s {selected size} {$q cget -$s}]
+    } -result {{FALSE FALSE FALSE TRUE FALSE} {4 3 4 3 4}}
+    
+    ## push tests
+    
+    test push-1 {} -body {
+    	$m configure -size {9 8 7}
+    	return [lmap model [list $m $n $o $p $q] {$model cget -size}]
+    } -result {{9 8 7} {9 8 7} {9 8} {9 8 7 4} {4 9 4 8 4}}
+    
+    
+    test reset-1 {} -body {
+	::loon::test::resetModels
+	$m cget -color
+    } -result {}
+    
+    test reset-2 {} -body {
+	lmap model [list $m $n $o $p $q] {$model configure -linkingGroup none}
+        return [$m cget -linkingGroup]
+    } -result "none"
+    
+    test push-2 {} -body {
+	$m configure -x {1 2 3} -y {3 2 1} -linkingGroup B
+	$o configure -x {4 4 4} -y {6 7 8} -linkingGroup B
+	$o configure -size 7
+	return [list [$m cget -size] [$o cget -size]]
+    } -result {{7 7 7} {7 7 7}}
+
+    test push-3 {} -body {
+	$m configure -color {red blue green}
+	return [$o cget -color]
+    } -result {{#FFFF00000000} #00000000FFFF #000080800000}
+    
+
+    ## Switching -linkingGroup
+    test switch-1 {} -body {
+	$m configure -linkingGroup A -selected T
+	return [list [$m cget -selected] [$o cget -selected]]
+    } -result {{TRUE TRUE TRUE} {FALSE FALSE FALSE}}
+	
+    test switch-2 {} -body {	
+	$m configure -linkingGroup B
+    } -returnCodes error -result "Changing the -linkingGroup or -linkingKey when the display is linked requires the -sync argument to be either push or pull."
+  
+    test switch-3 {} -body {
+	$o configure -size {3 1 5} -selected {T F F}
+	$m configure -linkingGroup B -sync pull
+	return [list [$m cget -size] [$o cget -size] [$m cget -selected]]
+    } -result {{3 1 5} {3 1 5} {TRUE FALSE FALSE}}
+    
+    test switch-4 {} -body {
+	$m configure -linkingGroup C -size 1 -selected FALSE
+	$o configure -size {3 1 5} -selected {T F F}
+	$m configure -linkingGroup B -sync push
+	return [list [$m cget -size] [$o cget -size] [$o cget -selected]]
+    } -result {{1 1 1} {1 1 1} {FALSE FALSE FALSE}}
+   
+    ## Switching -linkingKey
+    test switch-5 {} -body {
+	$o configure -size {1 2 3}
+	$m configure -linkingKey {2 1 0} -sync pull 
+	return [list [$m cget -size] [$o cget -size]]
+    } -result {{3 2 1} {1 2 3}}
+
+    test switch-6 {} -body {
+	$m configure -linkingKey {0 1 2} -sync pull
+	$o configure -size {1 2 3}
+	$m configure -linkingKey {2 1 0} -sync push 
+	return [list [$m cget -size] [$o cget -size]]
+    } -result {{1 2 3} {3 2 1}}
+   
+    
+    ## Illegal Stuff
+    test illegal-1 {} -body {
+	$m configure -linkingKey {1 2}
+    } -returnCodes error -result "-linkingKey has length 2 but length 3 is expected."
+    
+    test illegal-2 {} -body {
+	$m configure -linkingGroup A
+	$m configure -linkingGroup B
+    } -returnCodes error -result "Changing the -linkingGroup or -linkingKey when the display is linked requires the -sync argument to be either push or pull."
+    
+    test illegal-3 {} -body {
+	$m configure -linkingGroup B -sync push
+	$m configure -linkingKey {3 2 1}
+    } -returnCodes error -result "Changing the -linkingGroup or -linkingKey when the display is linked requires the -sync argument to be either push or pull."
+    
+   test illegal-3 {} -body {
+	$m configure -linkingGroup ""
+    } -returnCodes error -result "-linkingGroup must be a non-empty string."
+    
+
+    cleanupTests
+}
+namespace delete ::loon::test

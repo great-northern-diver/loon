@@ -1,0 +1,222 @@
+<script>
+document.getElementById("home").className += " selected";
+</script>
+
+
+---
+title: "loon - interactive data visualization"
+---
+
+
+# Introduction
+
+`loon` is a toolkit for interactive data visualization and
+exploration. Currently, `loon` is embedded in `R` and `Tcl`. Please
+see the [beta section](beta.html) for the current state of the
+software.
+
+* For a potentially updated version of this document go the
+[github pages](http://waddella.github.io/loon).
+
+* To issue a bug report use the
+[github issue tracker](https://github.com/waddella/loon/issues).
+
+<!--
+`loon` is a highly interactive statistical visualization toolkit that
+is accessible from any programming environment that has bindings with
+`Tcl` and `Tk` version 8.6. This includes among others `R`, `Python`,
+`Perl` and `Ruby`. `R` users can use the `loon` `R` package which is
+hosted on `CRAN`. -->
+
+# Installation
+
+* For `R`, see the [beta section](beta.html).
+
+* For `Tcl`, see the [github Readme](https://github.com/waddella/loon).
+
+# Statistical Displays
+
+Currently we provide a display for histograms, scatterplots,
+serialaxes plots (i.e. star glyphs or parallel coordinates) and
+navigation graphs.
+
+# User Interface
+	
+The user interface of `loon` has two elements: the *display* and the
+*inspector*.
+
+![loon screenshot. Left: Inspector and Right: Scatterplot display.](images/loon_preview.png "loon screenshot with inspector and scatterplot display.")
+
+The inspector lays out most of the functionality of the
+display. Displays support further actions via mouse gestures and
+modifier keys.
+
+
+# Point Glyph Types
+
+As seen in the above screenshot, `loon` supports multiple point
+styles; points can be individually displayed either as dots, images,
+star glyphs or text strings.
+
+![](images/point_glyph_types.png "loon point types: dot, star glyph, image, text and polygon.")
+
+
+# Zoom and Pan
+
+![](images/pan_zoom.png "Zoom and Pan")
+
+When zooming and panning, the view area gets shown in relation to all
+data on the worldview in the inspector.
+
+
+# Linked Displays
+
+![Selecting points in one display will also select them in all linked displays.](images/linking.jpg "Linking")
+
+Multiple displays can be linked such that the linked points share the
+color, size, selected, and active state.
+
+<div class="floatleft">
+![](images/adhoc_linking.png "Adhoc Linking")
+</div>
+
+Scatterplot displays can be linked ad-hoc with the inspector by
+changing the *Linking Group* of the scatterplot displays to be the
+same. `loon` will always suggest a linking group that has no display
+associated to it. The linking group `none` will keep the display
+unlinked.
+
+Displays with different numbers of points can be linked too. The only
+linking constraint is that a point can be linked with no more than one
+point on another display.
+
+# Selection
+
+`loon` provides multiple powerful selection tools that can be combined.
+	
+<div class="floatleft">
+![](images/select_click.png "Click Select")
+</div>
+
+**Click Select:** individual points can be selected or deselected by
+  simply clicking with the mouse pointer on them.
+
+<div style="clear:both;margin-bottom:10px"></div> 
+
+<div class="floatleft">
+![](images/select_sweep.png "Sweep Select")
+</div>
+
+**Sweep Select:** a click drag mouse gesture will select all points
+  within a rectangle defined by the position of the mouse pointer when
+  it was clicked and where the mouse pointer currently is.
+
+<div style="clear:both;margin-bottom:10px"></div>
+
+<div class="floatleft">
+![](images/select_brush.png "Brush Select")
+</div>
+
+**Brush Select:** the brush is a rectangular selection tool that can
+  be dragged on the scatterplot display.
+
+<div style="clear:both;margin-bottom:10px"></div>
+
+Additionally, we provide selection by point color.
+
+
+# Modify
+
+The state of the selected points can be modified with the tools and
+actions in the *Modify* panel of the inspector.
+
+<div class="floatleft" style="margin-right: 20px">
+![](images/modify.png "Brush Select")
+</div>
+
+
+* Point color
+* Active: whether a points are displayed or not. Reactivate will
+  activate all points.
+* Point position: points can be temporarily moved on the scatterplot
+  display. The tools in the *move* row align, distribute, grid-arrange
+  the selected points. The reset button will change the point
+  positions of the selected points to where they initially were set.
+* Point glyph types
+* Size: we provide relative and absolute resizing. Relative resizing
+  will change the size of the selected points by +1 or -1. Absoute
+  resizing will take the smalles point size in the selection and set
+  all selected points to +1 or -1 of the smallest size.
+
+
+<div style="clear:both;margin-bottom:10px"></div>
+
+
+# Move Points
+
+On the scatterplot display selected points can be temporarily moved to
+a new location.
+
+![](images/move.jpg "Interactively Move Points")
+
+
+# Command Line Control
+
+Everything that can be changed on the scatterplot display and
+inspector (except temporary moving points) can be controlled
+programmatically, e.g. via the command line.
+
+The `R` API is discussed in [learn R section](learn_R_intro.html). It
+is similar as the `tcltk` `R` package API. We add generics.  For
+example, for a plot with handle `p` once can query a plot state as
+follows
+
+~~~
+# Query State
+p['selected']
+l_cget(p, 'selected')
+
+# Modify State(s)
+p['selected'] <- TRUE
+l_configure(p, zoomX=2, zoomY=3, selected=FALSE)
+~~~
+
+The `Tcl` API follows the `Tk` widget convention and provides a `cget`
+and `configure` widget function to query and modify plot states. The
+following code demonstrates this where the variable `p` holds the
+widget path name:
+
+~~~
+$p cget -x
+$p configure -zoomX 2 -zoomY 3 -selected FALSE
+~~~
+
+
+
+# Event Bindings
+
+`loon`'s event bindings provide the facility to have custom code
+(i.e. callbacks) evaluated at specific events such as changes in point
+color, zoom, selection, moving the mouse over a visual element and
+window resizing.
+
+~~~
+$p bind state {zoom pan} {
+	puts "Zoomed or Panned"
+}
+~~~
+
+We provide various binding types. See the learn sections.
+
+# Layers
+
+<div style="overflow:auto; width: 100%">
+<div class="floatleft" style="clear: both;">
+![](images/layers.png "loon Layers")
+</div>
+
+Lines, polygons, rectangles, and maps can be layered onto plots.
+
+Layers can can be arranged with `loon`'s layers inspector.
+
+</div>

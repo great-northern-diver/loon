@@ -1,0 +1,23 @@
+
+<ul>
+  <li id="learn_display_hist"><a id="learn_display_hist_a" href="">histogram</a></li>
+  <li id="learn_display_plot"><a id="learn_display_plot_a" href="">scatterplot</a></li>
+  <li id="learn_display_serialaxes"><a id="learn_display_serialaxes_a" href="">serialaxes</a></li>
+  <li id="learn_display_pairs"><a id="learn_display_pairs_a" href="">scatterplot matrix</a></li>
+  <li id="learn_display_graph"><a id="learn_display_graph_a" href="">graph</a></li>
+  <li id="learn_display_inspectors"><a id="learn_display_inspectors_a" href="">inspectors</a></li>
+</ul> 
+
+
+<script>
+document.getElementById("learn_displays").className += " selected";
+var displays = ["hist", "plot", "serialaxes", "pairs", "graph", "inspectors"];
+
+
+displays.forEach(function(display) {
+  document.getElementById("learn_display_" + display  + "_a").href 
+    = "learn_" + language + "_display_" + display + ".html";
+});
+</script>
+
+
