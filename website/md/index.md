@@ -21,9 +21,9 @@ software.
 
 # Installation
 
-* For `R`, see the [beta section](beta.html).
+* For `R` see the [beta section](beta.html).
 
-* For `Tcl`, see the [github Readme](https://github.com/waddella/loon).
+* For `Tcl` see the [github Readme](https://github.com/waddella/loon/Tcl/).
 
 # Statistical Displays
 
@@ -45,17 +45,20 @@ modifier keys.
 
 # Point Glyph Types
 
-`loon` supports multiple point glyph types. That is, points can be
-individually displayed with primitive glyphs or with custom glyphs.
+Points in scatterplot can be displayed with different glyphs. `loon`
+distinguishes between primitive and non-primitive glyphs. The
+primitive glyphs are available in all scatterplots whereas the
+non-primitive ones need to be added to a scatterplot before they can
+be used. [Read more.](learn_R_display_plot.html#glyphs)
 
-![](images/point_glyph_types.png "loon point types: dot, star glyph, image, text and polygon.")
+![](images/point_glyph_types.png "loon point glyph types")
 
 
 # Zoom and Pan
 
 ![](images/pan_zoom.png "Zoom and Pan")
 
-When zooming and panning, the view area gets shown in relation to all
+When zooming and panning the plot region gets shown in relation to all
 data on the worldview in the inspector.
 
 
@@ -63,8 +66,8 @@ data on the worldview in the inspector.
 
 ![Selecting points in one display will also select them in all linked displays.](images/linking.jpg "Linking")
 
-Multiple displays can be linked such that the linked points share the
-color, size, selected, and active state.
+Multiple displays can be linked such that the linked points share
+their color, size, selected and active states.
 
 <div class="floatleft">
 ![](images/adhoc_linking.png "Adhoc Linking")
@@ -73,8 +76,7 @@ color, size, selected, and active state.
 Scatterplot displays can be linked ad-hoc with the inspector by
 changing the *Linking Group* of the scatterplot displays to be the
 same. `loon` will always suggest a linking group that has no display
-associated to it. The linking group `none` will keep the display
-unlinked.
+associated to it. The linking group `none` keeps the display unlinked.
 
 Displays with different numbers of points can be linked too. The only
 linking constraint is that a point can be linked with no more than one
@@ -82,14 +84,14 @@ point on another display.
 
 # Selection
 
-`loon` provides multiple powerful selection tools that can be combined.
+`loon` provides multiple interactive selection tools.
 	
 <div class="floatleft">
 ![](images/select_click.png "Click Select")
 </div>
 
 **Click Select:** individual points can be selected or deselected by
-  simply clicking with the mouse pointer on them.
+  simply clicking with the mouse cursor on them.
 
 <div style="clear:both;margin-bottom:10px"></div> 
 
@@ -97,28 +99,36 @@ point on another display.
 ![](images/select_sweep.png "Sweep Select")
 </div>
 
-**Sweep Select:** a click drag mouse gesture will select all points
-  within a rectangle defined by the position of the mouse pointer when
-  it was clicked and where the mouse pointer currently is.
+**Sweep Select:** a sweep selection selects all points below a
+rectangular area which is defined by a left-click drag gesture. That
+is, the upper left corner of the sweep rectangle is at the location of
+the left-button press, and the lower right corner is at the current
+cursor location while the left button is pressed.
+
 
 <div style="clear:both;margin-bottom:10px"></div>
 
 <div class="floatleft">
+
 ![](images/select_brush.png "Brush Select")
 </div>
-
-**Brush Select:** the brush is a rectangular selection tool that can
-  be dragged on the scatterplot display.
+**Brush Select:** a brush selection also selects all points below a
+rectangular area. However, in contrast to the sweep selection, the
+rectangular brush area has a fixed size and a left-button press moves
+the lower right corner to the current mouse location, and a left-click
+dragging gesture moves the brush area along the mouse pointer.
 
 <div style="clear:both;margin-bottom:10px"></div>
 
-Additionally, we provide selection by point color.
+Additionally, we provide selection by point color and via the command
+line.
 
 
 # Modify
 
 The state of the selected points can be modified with the tools and
-actions in the *Modify* panel of the inspector.
+actions in the *Modify* panel of the inspector. The following *Modify*
+panel is from the scatterplot inspector.
 
 <div class="floatleft" style="margin-right: 20px">
 ![](images/modify.png "Brush Select")
@@ -128,10 +138,10 @@ actions in the *Modify* panel of the inspector.
 * Point color
 * Active: whether a points are displayed or not. Reactivate will
   activate all points.
-* Point position: points can be temporarily moved on the scatterplot
-  display. The tools in the *move* row align, distribute, grid-arrange
-  the selected points. The reset button will change the point
-  positions of the selected points to where they initially were set.
+* Point position: points can be temporarily relocated on the
+  scatterplot display. The tools in the *move* row align, distribute,
+  grid-arrange, jitter and reset the temporary location of the
+  selected points.
 * Point glyph types
 * Size: we provide relative and absolute resizing. Relative resizing
   will change the size of the selected points by +1 or -1. Absoute
