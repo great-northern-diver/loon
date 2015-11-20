@@ -15,18 +15,9 @@ exploration. Currently, `loon` is embedded in `R` and `Tcl`. Please
 see the [beta section](beta.html) for the current state of the
 software.
 
-* For a potentially updated version of this document go the
-[github pages](http://waddella.github.io/loon).
-
 * To issue a bug report use the
 [github issue tracker](https://github.com/waddella/loon/issues).
 
-<!--
-`loon` is a highly interactive statistical visualization toolkit that
-is accessible from any programming environment that has bindings with
-`Tcl` and `Tk` version 8.6. This includes among others `R`, `Python`,
-`Perl` and `Ruby`. `R` users can use the `loon` `R` package which is
-hosted on `CRAN`. -->
 
 # Installation
 
@@ -36,9 +27,9 @@ hosted on `CRAN`. -->
 
 # Statistical Displays
 
-Currently we provide a display for histograms, scatterplots,
-serialaxes plots (i.e. star glyphs or parallel coordinates) and
-navigation graphs.
+Currently we provide an interactive displays for histograms,
+scatterplots, serialaxes plots (i.e. star glyphs or parallel
+coordinates) and navigation graphs.
 
 # User Interface
 	
@@ -54,9 +45,8 @@ modifier keys.
 
 # Point Glyph Types
 
-As seen in the above screenshot, `loon` supports multiple point
-styles; points can be individually displayed either as dots, images,
-star glyphs or text strings.
+`loon` supports multiple point glyph types. That is, points can be
+individually displayed with primitive glyphs or with custom glyphs.
 
 ![](images/point_glyph_types.png "loon point types: dot, star glyph, image, text and polygon.")
 
