@@ -18,6 +18,7 @@ software.
 * To issue a bug report use the
 [github issue tracker](https://github.com/waddella/loon/issues).
 
+* You can fork `loon` [on github](https://github.com/waddella/loon). 
 
 # Installation
 
