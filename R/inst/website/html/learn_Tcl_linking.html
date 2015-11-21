@@ -75,6 +75,7 @@ window.onload = function() {
     setLearnUrl("linking");
 }
 </script>
+
 <h1 id="introduction">Introduction</h1>
 <p>In <code>loon</code> terms: linking synchronizes certain <code>n</code> dimensional plot states between linked displays. The user can choose</p>
 <ul>
@@ -125,8 +126,7 @@ set h [histogram -x $SepalLength -linkingGroup iris]</code></pre>
 set pb [plot -x {1 2 3 4 5} -y {1 2 3 4 5} -title B]</code></pre>
 <p>Assume the linking:</p>
 <div class="figure">
-<img src="images/linking_custom1.png" title="custom linking" alt="many to one is combined by a logical OR" />
-<p class="caption">many to one is combined by a logical OR</p>
+<img src="images/linking_custom1.png" title="custom linking" alt="many to one is combined by a logical OR" /><p class="caption">many to one is combined by a logical OR</p>
 </div>
 <pre><code>proc any {booleans} {
     return [expr [join $booleans ||]]
@@ -156,8 +156,7 @@ $pa bind state selected &quot;pa2pb $pa $pb&quot;
 $pb bind state selected &quot;pb2pa $pa $pb&quot;</code></pre>
 <p>This won't end in an endless loop of evaluating state bindings because after the sequence <code>pa2pb - pb2pa - pa2pb</code> or the <code>pb2pa - pa2pb -  pb2pa</code> the system will be in equilibrium with respect to these functions. Remember that state bindings do not get evaluated if a <code>configure</code> call does not effectively change the state. If, however, the custom linking does not result in an equilibrium after the first change, then you may need to add a further variable, say <code>busy</code>, to avoid multiple iterations -- or an infinite loop--. Assume the linking</p>
 <div class="figure">
-<img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" />
-<p class="caption">directions are indicated by arrows</p>
+<img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" /><p class="caption">directions are indicated by arrows</p>
 </div>
 <pre><code>set pa2 [plot -x {1 2 3 4 5 6 7} -y {1 2 3 4 5 6 7} -title &quot;A 2&quot;]
 set pb2 [plot -x {1 2 3 4 5} -y {1 2 3 4 5} -title &quot;B 2&quot;]

@@ -7,41 +7,23 @@
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
   </style>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -142,9 +124,9 @@ window.onload = function() {
     setLearnUrl("display_plot");
 }
 </script>
-<div class="figure">
-<img src="images/display_plot.png" title="loon scatterplot" alt="" />
 
+<div class="figure">
+<img src="images/display_plot.png" title="loon scatterplot" />
 </div>
 <pre><code>source olive.tcl
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]</code></pre>
@@ -191,8 +173,7 @@ set glyphmap [dict create\
 
 $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" />
 </div>
 <h2 id="n-dimensional-glyphs">n Dimensional Glyphs</h2>
 <p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
@@ -202,8 +183,7 @@ $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
 <pre><code>set gt [$p glyph add text -text $Region]
 $p configure -glyph $gt</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" />
 </div>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
@@ -211,14 +191,12 @@ $p configure -glyph $gt</code></pre>
 set gs [$p glyph add serialaxes -data $olivedata]
 $p configure -glyph $gs</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
-
+<img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" />
 </div>
 <p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
 <pre><code>$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" alt="" />
-
+<img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" />
 </div>
 <p>Please also see the <a
 href='learn_Tcl_display_serialaxes.html'>serialaxes display</a> documentation for more information regarding working with serialaxes.</p>
@@ -229,8 +207,7 @@ set gr [$p1 glyph add pointrange -ymin {0 1.5 2.3}\
     -ymax {1.6 2.4 3.1} -linewidth {1 2 3} -showArea FALSE]
 $p1 configure -glyph $gr</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" />
 </div>
 <h3 id="polygons">Polygons</h3>
 <p>A polygon can be a useful point glyph to visualize arbitrary shapes such as airplanes, animals and shapes that are not available in the primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example of polygon glyphs which we reuse here.</p>
@@ -268,18 +245,17 @@ gl &lt;- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
 
 p[&#39;glyph&#39;] &lt;- gl</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" />
 </div>
 <h3 id="images">Images</h3>
 <p><strong>Note that image glyphs work well on Linux and OSX but not Windows!</strong> Also, image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
 <p>We fist start by creating the images and then show how to load images form files.</p>
-<div class="sourceCode"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span class="kw">set</span> img1 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">30</span><span class="ot"> -height</span> <span class="dv">20</span><span class="kw">]</span>
+<pre class="sourceCode tcl"><code class="sourceCode tcl"><span class="kw">set</span> img1 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">30</span><span class="ot"> -height</span> <span class="dv">20</span><span class="kw">]</span>
 <span class="dt">$img1</span> put blue<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">20</span>; <span class="dt">$img1</span> put yellow<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">30</span> <span class="dv">11</span>
 <span class="kw">set</span> img2 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">80</span><span class="ot"> -height</span> <span class="dv">80</span><span class="kw">]</span>
 <span class="dt">$img2</span> put red<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">80</span> <span class="dv">80</span>; <span class="dt">$img2</span> put green<span class="ot"> -to</span> <span class="dv">30</span> <span class="dv">30</span> <span class="dv">60</span> <span class="dv">60</span>
 <span class="kw">set</span> img3 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">60</span><span class="ot"> -height</span> <span class="dv">100</span><span class="kw">]</span>
-<span class="dt">$img3</span> put orange<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">100</span>; <span class="dt">$img3</span> put black<span class="ot"> -to</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">80</span></code></pre></div>
+<span class="dt">$img3</span> put orange<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">100</span>; <span class="dt">$img3</span> put black<span class="ot"> -to</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">80</span></code></pre>
 <p>Note that the images above have different sizes. The <code>loon</code> scatterplot will resize the images (i.e. all glyph types) such that their areas are proportional to their associated point sizes.</p>
 <p>The images are added</p>
 <pre><code>set p [plot -x {1 2 3} -y {3 1 2}\
@@ -290,8 +266,7 @@ set gi [$p glyph add image -images [list $img1 $img2 $img3]\
 
 $p configure -glyph $gi</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_image1.png" title="image glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_image1.png" title="image glyphs" />
 </div>
 <h3 id="query-and-modify-glyph-states">Query and Modify Glyph States</h3>
 <p>The non-primitive glyphs (or n dimensional glyphs) have states. To demonstrate how to work with glyph states we take the text glyph example from above again:</p>
@@ -301,18 +276,17 @@ set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 set gt [$p glyph add text -text $Region]
 $p configure -glyph $gt</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" />
 </div>
-<p>The procedure to list and get information about them is similar as outlined in the &lt;a href=''learn_Tcl_states.html'&gt;states section</a>. For example get the state names of a glyph with</p>
+<p>The procedure to list and get information about them is similar as outlined in the <a
+href=''learn_Tcl_states.html'>states section</a>. For example get the state names of a glyph with</p>
 <pre><code>set gtstates [$p glyph use $gt info states]
 dict keys $gtstates</code></pre>
 <p>Then to query a state, say <code>text</code>, use</p>
 <p>And to modify a state</p>
 <pre><code>$p glyph use $gt configure -text $Area</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" alt="" />
-
+<img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" />
 </div>
 <h3 id="relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</h3>
 <p>Glyph labels are used in the plot and glyph inspector. You can specify the glyph labels when creating the glyphs:</p>

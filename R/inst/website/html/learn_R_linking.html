@@ -74,6 +74,7 @@ window.onload = function() {
     setLearnUrl("linking");
 }
 </script>
+
 <h1 id="introduction">Introduction</h1>
 <p>In <code>loon</code> terms: linking synchronizes certain <code>n</code> dimensional plot states between linked displays. The user can choose</p>
 <ul>
@@ -123,8 +124,7 @@ h &lt;- l_hist(iris[,1], linkingGroup=&#39;iris&#39;)</code></pre>
 pb &lt;- l_plot(x=1:5, y=1:5, title=&quot;B&quot;)</code></pre>
 <p>Assume the linking:</p>
 <div class="figure">
-<img src="images/linking_custom1.png" title="custom linking" alt="many to one is combined by a logical OR" />
-<p class="caption">many to one is combined by a logical OR</p>
+<img src="images/linking_custom1.png" title="custom linking" alt="many to one is combined by a logical OR" /><p class="caption">many to one is combined by a logical OR</p>
 </div>
 <pre><code>pa2pb &lt;- function() {
     sa &lt;- pa[&#39;selected&#39;]
@@ -141,8 +141,7 @@ l_bind_state(pa, &#39;selected&#39;, pa2pb)
 l_bind_state(pb, &#39;selected&#39;, pb2pa)</code></pre>
 <p>This won't end in an endless loop of evaluating state bindings because after the sequence <code>pa2pb - pb2pa - pa2pb</code> or the <code>pb2pa - pa2pb -  pb2pa</code> the system will be in equilibrium with respect to these functions. Remember that state bindings do not get evaluated if a <code>configure</code> call does not effectively change the state. If, however, the custom linking does not result in an equilibrium after the first change, then you may need to add a further variable, say <code>busy</code>, to avoid multiple iterations -- or an infinite loop--. Assume the linking</p>
 <div class="figure">
-<img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" />
-<p class="caption">directions are indicated by arrows</p>
+<img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" /><p class="caption">directions are indicated by arrows</p>
 </div>
 <pre><code>pa2 &lt;- l_plot(x=1:7, y=1:7, title=&quot;A 2&quot;)
 pb2 &lt;- l_plot(x=1:5, y=1:5, title=&quot;B 2&quot;)

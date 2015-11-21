@@ -52,6 +52,11 @@
 	my variable widgetview
 	return [[info object namespace $widgetview]::my currenttags]
     }
+    
+    method currentindex {} {
+	my variable widgetview
+	return [[info object namespace $widgetview]::my currentindex]
+    }
 
     
     method AddSubstitutions {subst} {

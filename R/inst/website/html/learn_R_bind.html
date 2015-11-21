@@ -88,6 +88,7 @@ window.onload = function() {
     setLearnUrl("bind");
 }
 </script>
+
 <h1 id="event-bindings">Event Bindings</h1>
 <p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
@@ -233,19 +234,16 @@ l[&#39;color&#39;] &lt;- &#39;green&#39;
 <h2 id="item-bindings">Item Bindings</h2>
 <p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes, or labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section.</p>
 <p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
-<p>To get the tags for the items which the mouse is currently over use the <code>l_currenttags</code> function.</p>
+<p>To get the tags for the items which the mouse is currently over use the <code>l_currenttags</code> function. To get the index of an item (if there is an index) use the <code>l_currentindex</code> function.</p>
 <p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
 <pre><code>p &lt;- l_plot(iris[,1:2], color=iris$Species)
 
-current &lt;- &quot;&quot;
-
-printEntered &lt;- function(p) {
-    current &lt;&lt;- l_currenttags(p)[4]
-    cat(paste(&#39;Entered:&#39;, current, &#39;\n&#39;))
+printEntered &lt;- function(W) {
+    cat(paste(&#39;Entered point &#39;, l_currentindex(W), &#39;\n&#39;))
 }
 
-printLeave &lt;- function(p) {
-    cat(paste(&#39;Left:&#39;, current, &#39;\n&#39;))
+printLeave &lt;- function(W) {
+    cat(paste(&#39;Left point &#39;, l_currentindex(W), &#39;\n&#39;))
 }
 
 l_bind_item(p, tags=&#39;model&amp;&amp;point&#39;, event=&#39;&lt;Enter&gt;&#39;,
@@ -253,9 +251,6 @@ l_bind_item(p, tags=&#39;model&amp;&amp;point&#39;, event=&#39;&lt;Enter&gt;&#39
 
 l_bind_item(p, tags=&#39;model&amp;&amp;point&#39;, event=&#39;&lt;Leave&gt;&#39;,
     callback=function(W) {printLeave(W)})</code></pre>
-<p>If the point index is needed use</p>
-<pre><code>as.numeric(substring(l_currenttags(p)[4],10))</code></pre>
-<p>if the current item truly is a scatterplot point.</p>
 <p>The item binding API also support <a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a>, but item binding order has currently no effect.</p>
 <h3 id="substitutions-1">Substitutions</h3>
 <p>The current substitutions for item bindings are</p>
@@ -308,44 +303,8 @@ l_bind_item(p, &#39;all&#39;, &#39;&lt;ButtonPress&gt;&#39;, function(W)printTag
 </ul>
 <p>The current tagging scheme for the histogram, scatterplot and graph displays are</p>
 <div class="figure">
-<img src="images/item_tags.png" title="Item Tags" alt="" />
-
+<img src="images/item_tags.png" title="Item Tags" />
 </div>
-<!--
-
-**Model Layer**
-
-* **Histogram:** `layer`, layerid (i.e. currently `model`), `bin<id>`
-    * **Bin Handle:** `connect`, `handle_origin`, `handle_binwidth`
-
-* **Scatterplot:** `layer`, layerid (i.e. currently `model`), `point`,
-  `LoonPoint<i>`, `tag` state
-
-* **Graph:** `layer`, layerid (i.e. currently `model`), `edge` or
-  `orbit` or `point` (for nodes), `tag` state
-    * **Navigator:** `layer`, layerid, navigatorid, and as
-        appropriate: `navigator`, `navigatorEdge`,
-        `navigatorProgression`, `navigatorPathEnd`
-
-**Layers**
-
-All layers types (polygon, line, text, points, oval, rectangle) have
-the same tag structure:
-
-* `layer`, layerid, `tag` state
-
-**Decoration**
-
-* **Labels:** `LoonLabels`, and as appropriate: `LoonXlabel`,
-  `LoonYlabel`, `LoonTitle`
-
-* **Scales:** `LoonScalesAndGuides`, and as appropriate: `guides`,
-   `ticks`, `scalelabels`
-   
-* **Boxes:** Clipping boxes east, south, west, north, and the bounding
-  box of plot region: `LoonBorder`
-
--->
 <h2 id="canvas-bindings">Canvas Bindings</h2>
 <p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>
 <p>As for item bindings the valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>.</p>
@@ -366,7 +325,8 @@ l_bind_canvas(p, event=&#39;&lt;Configure&gt;&#39;, function(W) {printSize(W)})<
 printLocation &lt;- function(W,x,y) {
     cat(paste(&#39;In widget &#39;, W,
         &#39; the location of the mouse is at: &#39;,
-        x, &#39; and &#39;,y , &#39;\n&#39;, sep=&#39;&#39;))   
+        round(l_toR(x, as.numeric),3), &#39; and &#39;,
+        round(l_toR(y, as.numeric),3), &#39;\n&#39;, sep=&#39;&#39;))   
 }
 
 l_bind_canvas(p, event=&#39;&lt;Motion&gt;&#39;, printLocation)</code></pre>
@@ -419,7 +379,7 @@ l_bind_layer(p, c(&#39;add&#39;, &#39;delete&#39;), function(W,l,e) {
     cat(paste(&#39;Widget&#39;, W, &#39;had event&#39;, e, &#39;for layer&#39;, l, &#39;\n&#39;))
     })
 
-l &lt;- l_layer_text(p, x=c(2,2), y=c(1.5, 2.5), text=c(&#39;A&#39;,&#39;B&#39;))
+l &lt;- l_layer_texts(p, x=c(2,2), y=c(1.5, 2.5), text=c(&#39;A&#39;,&#39;B&#39;))
 
 #&gt; Widget .l0.plot had event add for layer layer1</code></pre>
 <p>Valid events for the different types are</p>

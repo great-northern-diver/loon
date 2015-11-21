@@ -98,4 +98,8 @@ oo::class create loon::classes::withCanvasAndItemBindings {
 	return [lrange [$canvas gettags current] 0 end-1]	
     }
 
+    method currentindex {} {
+	my variable canvas
+	return [string range [lindex [lrange [$canvas gettags current] 0 end-1] 3] 4 end]
+    }
 }

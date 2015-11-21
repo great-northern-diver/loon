@@ -72,6 +72,8 @@ window.onload = function() {
     document.getElementById("learn_Tcl").firstChild.href = "learn_Tcl_Tk.html";
 }
 </script>
+
+
 <h1 id="tk-concepts">Tk Concepts</h1>
 <p>For those new to <code>Tk</code>, it is useful to understand some concepts of <code>Tk</code> as we loosely follow the standard <code>Tk</code> widget behavior. Generally, <a href="http://wiki.tcl.tk/490">widgets</a> are GUI elements like buttons and sliders. The <code>loon</code> scatterplot display and inspector can be considered as megawidgets; a widget that combines several other widgets but behaves like a normal widget itself. Every widget in a <code>Tk</code> session has a unique hierarchical window path name with the root being a dot <code>.</code> and children and parents are separated by a dot. Hence a typical widget path name for a widget <code>button</code> with three ancestors (root, <code>frameA</code> and <code>frameB</code>) is <code>.frameA.frameB.button</code> where the user is free to name all the nodes (except the root) as he/she wishes. When a <code>Tk</code> widget gets created a function with the function name equivalent to the widget path name gets created to query or modify the widget. For example in <code>tkcon</code> run</p>
 <pre><code>package require Tk

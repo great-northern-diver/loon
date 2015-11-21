@@ -88,6 +88,7 @@ window.onload = function() {
     setLearnUrl("bind");
 }
 </script>
+
 <h1 id="event-bindings">Event Bindings</h1>
 <p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
@@ -160,10 +161,10 @@ $p configure -selected TRUE</code></pre>
 <h3 id="list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</h3>
 <p>Assume the following plot and bindings</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
-$p bind state all {puts A}
-$p bind state {selected active} {puts B}
-$p bind state {showAxes selected} {puts C}
-$p bind state {zoomX panX selected} {puts D}</code></pre>
+$p bind state add all {puts A}
+$p bind state add {selected active} {puts B}
+$p bind state add {showAxes selected} {puts C}
+$p bind state add {zoomX panX selected} {puts D}</code></pre>
 <p>To list the bindings use</p>
 <pre><code>$p bind state ids
 
@@ -181,18 +182,19 @@ $p bind state {zoomX panX selected} {puts D}</code></pre>
 <p>Next to a <code>loon</code> plot, layers, glyphs, navigators, and contexts support state bindings too. We demonstrate this with a layer state binding, but it will work with all the other types the same.</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
 set l [$p layer rectangle -x {1 1} -y {3 3} -color blue]
-$p layer use $l bind state color {puts &quot;layer color has changed&quot;}
+$p layer use $l bind state add color {puts &quot;layer color has changed&quot;}
 $p layer use $l configure -color green
 
 #% layer color has changed</code></pre>
 <h2 id="item-bindings">Item Bindings</h2>
 <p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes, or labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section.</p>
 <p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
-<p>To get the tags for the items which the mouse is currently over use the <code>currenttags</code> subcommand.</p>
+<p>To get the tags for the items which the mouse is currently over use the <code>currenttags</code> subcommand. To get the index of an item (if there is an index) use the <code>currentindex</code> subcommand.</p>
 <p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
-<p>If the point index is needed use</p>
-<pre><code>string range [$p currenttags] 9 end</code></pre>
-<p>if the current item truly is a scatterplot point.</p>
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+
+$p bind item add &quot;model&amp;&amp;point&quot; &lt;Enter&gt; {puts &quot;Entered point [%W currentindex]&quot;}
+$p bind item add &quot;model&amp;&amp;point&quot; &lt;Leave&gt; {puts &quot;Left point [%W currentindex]&quot;}</code></pre>
 <p>The item binding API also support <a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a>, but item binding order has currently no effect.</p>
 <h3 id="substitutions-1">Substitutions</h3>
 <p>The current substitutions for item bindings are</p>
@@ -241,44 +243,8 @@ $p bind item add all &lt;Enter&gt; {puts &quot;[%W currenttags]&quot;}</code></p
 </ul>
 <p>The current tagging scheme for the histogram, scatterplot and graph displays are</p>
 <div class="figure">
-<img src="images/item_tags.png" title="Item Tags" alt="" />
-
+<img src="images/item_tags.png" title="Item Tags" />
 </div>
-<!--
-
-**Model Layer**
-
-* **Histogram:** `layer`, layerid (i.e. currently `model`), `bin<id>`
-    * **Bin Handle:** `connect`, `handle_origin`, `handle_binwidth`
-
-* **Scatterplot:** `layer`, layerid (i.e. currently `model`), `point`,
-  `LoonPoint<i>`, `tag` state
-
-* **Graph:** `layer`, layerid (i.e. currently `model`), `edge` or
-  `orbit` or `point` (for nodes), `tag` state
-    * **Navigator:** `layer`, layerid, navigatorid, and as
-        appropriate: `navigator`, `navigatorEdge`,
-        `navigatorProgression`, `navigatorPathEnd`
-
-**Layers**
-
-All layers types (polygon, line, text, points, oval, rectangle) have
-the same tag structure:
-
-* `layer`, layerid, `tag` state
-
-**Decoration**
-
-* **Labels:** `LoonLabels`, and as appropriate: `LoonXlabel`,
-  `LoonYlabel`, `LoonTitle`
-
-* **Scales:** `LoonScalesAndGuides`, and as appropriate: `guides`,
-   `ticks`, `scalelabels`
-   
-* **Boxes:** Clipping boxes east, south, west, north, and the bounding
-  box of plot region: `LoonBorder`
-
--->
 <h2 id="canvas-bindings">Canvas Bindings</h2>
 <p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>
 <p>As for item bindings the valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>.</p>
@@ -345,7 +311,7 @@ $p bind canvas add &lt;Motion&gt; {printLocation %W %x %y}</code></pre>
 
 $p bind layer add {add delete} {puts &quot;Widget %W had event %e for layer %l&quot;}
 
-$p layer text -x {2 2} -y {1.5 2.5} -text {A B}
+$p layer texts -x {2 2} -y {1.5 2.5} -text {A B}
 
 #% Widget .l0.plot had event add for layer layer1</code></pre>
 <p>Valid events for the different types are</p>
