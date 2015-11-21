@@ -306,10 +306,10 @@ l_bind_state(p, c('zoomX', 'panX', 'selected'), function(){cat('D\n')})
 
 ~~~
 set p [plot -x {1 2 3} -y {1 2 3}]
-$p bind state all {puts A}
-$p bind state {selected active} {puts B}
-$p bind state {showAxes selected} {puts C}
-$p bind state {zoomX panX selected} {puts D}
+$p bind state add all {puts A}
+$p bind state add {selected active} {puts B}
+$p bind state add {showAxes selected} {puts C}
+$p bind state add {zoomX panX selected} {puts D}
 ~~~
 
 </Tcl>
@@ -432,7 +432,7 @@ l['color'] <- 'green'
 ~~~
 set p [plot -x {1 2 3} -y {1 2 3}]
 set l [$p layer rectangle -x {1 1} -y {3 3} -color blue]
-$p layer use $l bind state color {puts "layer color has changed"}
+$p layer use $l bind state add color {puts "layer color has changed"}
 $p layer use $l configure -color green
 
 #% layer color has changed
@@ -456,6 +456,8 @@ parenthesized subexpressions (see the
 
 To get the tags for the items which the mouse is currently over use
 the <R>`l_currenttags` function</R><Tcl>`currenttags`
+subcommand</Tcl>. To get the index of an item (if there is an index)
+use the <R>`l_currentindex` function</R><Tcl>`currentindex`
 subcommand</Tcl>.
 
 For example, say we wish to print out the point number in a
@@ -466,15 +468,12 @@ scatterplot on leaving and entering the point
 ~~~
 p <- l_plot(iris[,1:2], color=iris$Species)
 
-current <- ""
-
-printEntered <- function(p) {
-	current <<- l_currenttags(p)[4]
-	cat(paste('Entered:', current, '\n'))
+printEntered <- function(W) {
+	cat(paste('Entered point ', l_currentindex(W), '\n'))
 }
 
-printLeave <- function(p) {
-	cat(paste('Left:', current, '\n'))
+printLeave <- function(W) {
+	cat(paste('Left point ', l_currentindex(W), '\n'))
 }
 
 l_bind_item(p, tags='model&&point', event='<Enter>',
@@ -486,27 +485,17 @@ l_bind_item(p, tags='model&&point', event='<Leave>',
 
 </R>
 
-If the point index is needed use
-
-<R>
-
-~~~
-as.numeric(substring(l_currenttags(p)[4],10))
-~~~
-
-</R>
 
 <Tcl>
 
 ~~~
-string range [$p currenttags] 9 end
+set p [plot -x {1 2 3} -y {1 2 3}]
+
+$p bind item add "model&&point" <Enter> {puts "Entered point [%W currentindex]"}
+$p bind item add "model&&point" <Leave> {puts "Left point [%W currentindex]"}
 ~~~
 
 </Tcl>
-
-if the current item truly is a scatterplot point.
-
-
 
 The item binding API also support
 [List, Reorder \& Delete Bindings][], but item binding order has
@@ -596,43 +585,6 @@ displays are
 ![](images/item_tags.png "Item Tags")
 
 
-<!--
-
-**Model Layer**
-
-* **Histogram:** `layer`, layerid (i.e. currently `model`), `bin<id>`
-	* **Bin Handle:** `connect`, `handle_origin`, `handle_binwidth`
-
-* **Scatterplot:** `layer`, layerid (i.e. currently `model`), `point`,
-  `LoonPoint<i>`, `tag` state
-
-* **Graph:** `layer`, layerid (i.e. currently `model`), `edge` or
-  `orbit` or `point` (for nodes), `tag` state
-	* **Navigator:** `layer`, layerid, navigatorid, and as
-		appropriate: `navigator`, `navigatorEdge`,
-		`navigatorProgression`, `navigatorPathEnd`
-
-
-**Layers**
-
-All layers types (polygon, line, text, points, oval, rectangle) have
-the same tag structure:
-
-* `layer`, layerid, `tag` state
-
-
-**Decoration**
-
-* **Labels:** `LoonLabels`, and as appropriate: `LoonXlabel`,
-  `LoonYlabel`, `LoonTitle`
-
-* **Scales:** `LoonScalesAndGuides`, and as appropriate: `guides`,
-   `ticks`, `scalelabels`
-   
-* **Boxes:** Clipping boxes east, south, west, north, and the bounding
-  box of plot region: `LoonBorder`
-
--->
 
 ## Canvas Bindings
 
@@ -694,7 +646,8 @@ p <- l_plot(iris[,1:2], color=iris$Species)
 printLocation <- function(W,x,y) {
 	cat(paste('In widget ', W,
 		' the location of the mouse is at: ',
-		x, ' and ',y , '\n', sep=''))	
+		round(l_toR(x, as.numeric),3), ' and ',
+		round(l_toR(y, as.numeric),3), '\n', sep=''))	
 }
 
 l_bind_canvas(p, event='<Motion>', printLocation)
@@ -772,7 +725,7 @@ l_bind_layer(p, c('add', 'delete'), function(W,l,e) {
 	cat(paste('Widget', W, 'had event', e, 'for layer', l, '\n'))
 	})
 
-l <- l_layer_text(p, x=c(2,2), y=c(1.5, 2.5), text=c('A','B'))
+l <- l_layer_texts(p, x=c(2,2), y=c(1.5, 2.5), text=c('A','B'))
 
 #> Widget .l0.plot had event add for layer layer1
 ~~~
@@ -787,7 +740,7 @@ set p [plot -x {1 2 3} -y {1 2 3}]
 
 $p bind layer add {add delete} {puts "Widget %W had event %e for layer %l"}
 
-$p layer text -x {2 2} -y {1.5 2.5} -text {A B}
+$p layer texts -x {2 2} -y {1.5 2.5} -text {A B}
 
 #% Widget .l0.plot had event add for layer layer1
 ~~~
