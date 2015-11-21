@@ -10,7 +10,7 @@ title: loon - user interface gestures
 
 The graphical user interface of the `loon` scatterplot display should
 be fairly easy to learn. We kept the number of mouse gestures and
-keyboard shortcuts minimal. The `CTRL` and `SHIFT` in combination with
+keyboard shortcuts minimal. The `Ctrl` and `Shift` in combination with
 the left and right mouse button or mouse wheel is all you ever
 need. In fact, the default gestures for the scatterplot display are
 summarized by the following figures.
@@ -83,9 +83,10 @@ The default modifier keys used in `loon` are `Ctrl` and
 `Shift`. Sometimes operating systems use some of these modifier keys
 for system functions and hence wont pass their respective key events
 to `Tk`. Also, different operating systems generate different events
-for the mouse ScrollWheel. If you experience problems with the above
+for the mouse scroll wheel. If you experience problems with the above
 mentioned gestures please try each gesture on the eventutil below and
-let me know which events get generated for a particular gesture:
+[let me know](mailto:adrian@waddell.ch) which events do no get
+generated on your system:
 
 In `Tcl`
 

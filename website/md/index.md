@@ -162,14 +162,10 @@ a new location.
 
 # Command Line Control
 
-Everything that can be changed on the scatterplot display and
-inspector (except temporary moving points) can be controlled
-programmatically, e.g. via the command line.
-
-The `R` API is discussed in [learn R section](learn_R_intro.html). It
-is similar as the `tcltk` `R` package API. We add generics.  For
-example, for a plot with handle `p` once can query a plot state as
-follows
+Displays can be completely controlled via the command line. The `R`
+API is discussed in [learn R section](learn_R_intro.html). It is
+similar to the `tcltk` package API. For example, in `R` for a plot
+with handle `p` once can query a plot state as follows
 
 ~~~
 # Query State
@@ -191,32 +187,44 @@ $p cget -x
 $p configure -zoomX 2 -zoomY 3 -selected FALSE
 ~~~
 
-
-
 # Event Bindings
 
 `loon`'s event bindings provide the facility to have custom code
-(i.e. callbacks) evaluated at specific events such as changes in point
-color, zoom, selection, moving the mouse over a visual element and
-window resizing.
+(i.e. callbacks) evaluated at specific events. We support a number of
+different event types which, for example, include such changes in
+point color, zoom, selection, moving the mouse cursor over a visual
+element and window resizing.
 
 ~~~
-$p bind state {zoom pan} {
+$p bind state add {zoom pan} {
 	puts "Zoomed or Panned"
 }
 ~~~
 
-We provide various binding types. See the learn sections.
+or in `R`
+
+~~~
+l_bind_state(p, c('zoom', 'pan'), function() {cat('Zoomed or Panned')})
+~~~
+
+We provide various binding types. [Read more](learn_R_bind.html).
 
 # Layers
 
-<div style="overflow:auto; width: 100%">
-<div class="floatleft" style="clear: both;">
-![](images/layers.png "loon Layers")
-</div>
 
-Lines, polygons, rectangles, and maps can be layered onto plots.
+The histogram, scatterplot and graph displays support layering of
+lines, polygons, text, rectangles and more. For example, the following
+picture shows a scatterplot of international airports with map
+information layered underneath the scatterplot points. The data is
+from the [naturalearth project](http://naturalearthdata.com/).
+
+![](images/gallery/naturalearth_world.png)
+
 
 Layers can can be arranged with `loon`'s layers inspector.
+
+![](images/layers.png "loon Layers")
+
+
 
 </div>

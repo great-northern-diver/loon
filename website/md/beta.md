@@ -17,14 +17,13 @@ title: "beta tester instructions - loon"
 * Windows users need to install `Tcl` version 8.6, see the
   [instructions below](#linking-activetcl-with-r-on-windows).
   * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
-	* Do not close `XQuartz` while `R` is still running! Otherwise you
-      will end up crashing the active `R` session (including
-      `RStudio`).
+	* Do not close `XQuartz` while `R` is running! Otherwise you end
+      up crashing the active `R` session (including `RStudio`).
 * If you experience difficulties with `loon` use the
   [Issue tracker on github](https://github.com/waddella/loon/issues).
 * If you have difficulties with exporting images with the `l_export`
   function then yake screenshots:
-	  * On OX press Command + Shift + 4 and then press space and
+	  * On OSX press Command + Shift + 4 and then press space and
 		select the window
 	  * On Linux install a program called [Shutter](http://shutter-project.org/)
 	  * For Windows use [Greenshot](http://getgreenshot.org/)
@@ -57,6 +56,8 @@ library(devtools)
 install_github("waddella/loon", subdir="R")
 ~~~
 
+
+<!--
 You can switch between development version and the version you have
 installed manually
 
@@ -67,12 +68,12 @@ dev_mode(on=TRUE)
 # switch back to stable version of loon 
 dev_mode(on=FALSE)
 ~~~
-
+-->
 
 ## Manually with tar.gz package
 
 In Rstudio, select Packages, Install, Install from: Package Archive
-File (.tar.gz), select the 'loon_0.8.x.x.tar.gz' file and press the
+File (.tar.gz), select the 'loon_0.9.tar.gz' file and press the
 install button.
 
 ![Install loon in Rstudio](images/install_rstudio.png "install loon with Rstudio.")
@@ -89,13 +90,13 @@ R CMD INSTALL loon_0.9.tar.gz
 # Linking ActiveTcl with R on Windows
 
 
-I put a screencast with these instructions
+We put a screencast with these instructions
 [onto youtube here](https://www.youtube.com/watch?v=2PsVBYNftrU).
 
 
-Unfortunately `R` on windows still ships with `Tcl` version 8.5 and
-`loon` requires `Tcl` version 8.6. Hence, you need to install `Tcl`
-version 8.6 and link it with `R`.
+Unfortunately `R` on Windows still ships with `Tcl` version 8.5 and
+`loon` requires `Tcl` version 8.6. Hence, for the near future, you
+need to install `Tcl` version 8.6 and link it with `R`. 
 
 In `R`, enter
 
@@ -103,9 +104,10 @@ In `R`, enter
 .Machine$sizeof.pointer
 ~~~
 
-If the return value is `8` you run a 64 bit build of `R` and if the
-return value is `4` you run a 32 bit build of `R`. Download the
-ActiveTcl version 8.6.x with the same build architecture:
+If the return value is `8` then you run a 64 bit build of `R` and if
+the return value is `4` then you run a 32 bit build of `R`. Download
+the ActiveTcl version 8.6.x with the same build architecture. You can
+also install both.
 
 * If your `R` is a 64 bit build [download Windows (64-bit, x64) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe)
 * If your `R` is a 32 bit build [download Windows (x86) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe)
@@ -171,14 +173,13 @@ for fast image resizing. `loon` will use the compiled `C` code for
 image resizing when available.
 
 The TEA setup of `ImageScale` for Windows does currently not work. If
-you have the experience to fix this then please
-[contact me](mailto:adrian@waddell.ch).
+you know how to change the `makefile.vc` in the
+[win folder](https://github.com/waddella/tclImageScale/tree/master/win)
+so that the `ImageScale` package also compiles under Windows then
+please [contact me](mailto:adrian@waddell.ch).
 
 
 # More Important Notes
-
-<!-- If you are using this version of `loon` you have volunteered to be a beta
-tester. Please report typos and bugs to `adrian@waddell.ch`.-->
 
 We may change the syntax during the beta testing phase without
 maintaining backward compatibility. We try to maintain list with the
@@ -223,7 +224,8 @@ system.file("demo", "l_timeseries.R", package = "loon")
 
 # Also good to know
 
-- currently only the `ps` file format works reliably for image
- exports. I recommend for now to **make screenshots** if you need to
- put a `loon` plot into your report.
+- currently only the `ps` file format works reliably for image exports
+ (although the font mapping is not correct yet). I recommend for now
+ to make screenshots if you need to put a `loon` plot into your
+ report.
 

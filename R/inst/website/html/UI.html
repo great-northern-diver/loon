@@ -32,7 +32,7 @@ Loon: An Interactive Statistical Visualization Toolkit
 document.getElementById("ui").className += " selected";
 </script>
 <h3 id="introduction">Introduction</h3>
-<p>The graphical user interface of the <code>loon</code> scatterplot display should be fairly easy to learn. We kept the number of mouse gestures and keyboard shortcuts minimal. The <code>CTRL</code> and <code>SHIFT</code> in combination with the left and right mouse button or mouse wheel is all you ever need. In fact, the default gestures for the scatterplot display are summarized by the following figures.</p>
+<p>The graphical user interface of the <code>loon</code> scatterplot display should be fairly easy to learn. We kept the number of mouse gestures and keyboard shortcuts minimal. The <code>Ctrl</code> and <code>Shift</code> in combination with the left and right mouse button or mouse wheel is all you ever need. In fact, the default gestures for the scatterplot display are summarized by the following figures.</p>
 <p>Zoom and Pan gestures are as follows (serialaxes display does not support zoom and pan)</p>
 <div class="figure">
 <img src="images/gestures_zoom_pan.png" title="Interaction Gestures: Zoom and Pan" alt="Two superimposed mice illustrate a click and drag gesture" />
@@ -69,7 +69,12 @@ pi &lt;- l_plot_inspector(activewidget=p)</code></pre></li>
 <li>The button toolbar in the layers window <img src="images/layers_buttons.png" alt="Layers Toolbar" /> has the functionality as follows: <img src="images/icons/up.png" alt="up" /> and <img src="images/icons/down.png" alt="down" /> move a layer or drawing one position up or down among the children of its parent. The <img src="images/icons/left.png" alt="left" /> moves the layer or drawing to the grand parent layer and the <img src="images/icons/right.png" alt="right" /> button moves the selected layer or drawing into the layer directly below it if the item below the selected element is a layer. <img src="images/icons/visible.png" alt="visible" /> and <img src="images/icons/visible.png" alt="invisible" /> turn the selected drawing or layer and all its children visible and invisible, respectively. <img src="images/icons/plus.png" alt="plus" /> adds a new layer and <img src="images/icons/minus.png" alt="minus" /> removes the selected element where it is a layer it will delete all its children. Finally, <img src="images/icons/scaleto.png" alt="scaleto" /> scales the plot such that the selected layer is completely shown.</li>
 </ul>
 <h3 id="modifier-keys">Modifier Keys</h3>
-<p>The default modifier keys used in <code>loon</code> are <code>Ctrl</code> and <code>Shift</code>. Sometimes operating systems use some of these modifier keys for system functions and hence wont pass their respective key events to <code>Tk</code>. Also, different operating systems generate different events for the mouse ScrollWheel. If you experience problems with the above mentioned gestures please try each gesture on the eventutil below and let me know which events get generated for a particular gesture:</p>
+<p>The default modifier keys used in <code>loon</code> are <code>Ctrl</code> and <code>Shift</code>. Sometimes operating systems use some of these modifier keys for system functions and hence wont pass their respective key events to <code>Tk</code>. Also, different operating systems generate different events for the mouse scroll wheel. If you experience problems with the above mentioned gestures please try each gesture on the eventutil below and <script type="text/javascript">
+<!--
+h='&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#x61;&#100;&#114;&#x69;&#x61;&#110;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#108;&#x65;&#116;&#32;&#x6d;&#x65;&#32;&#x6b;&#110;&#x6f;&#x77;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#108;&#x65;&#116;&#32;&#x6d;&#x65;&#32;&#x6b;&#110;&#x6f;&#x77;&#32;&#40;&#x61;&#100;&#114;&#x69;&#x61;&#110;&#32;&#x61;&#116;&#32;&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript> which events do no get generated on your system:</p>
 <p>In <code>Tcl</code></p>
 <pre><code>::loon::eventsutil</code></pre>
 <p>Or in <code>R</code></p>

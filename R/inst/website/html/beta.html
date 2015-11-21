@@ -56,12 +56,12 @@ document.getElementById("beta").className += " selected";
 <li>Windows users need to install <code>Tcl</code> version 8.6, see the <a href="#linking-activetcl-with-r-on-windows">instructions below</a>.</li>
 <li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a>
 <ul>
-<li>Do not close <code>XQuartz</code> while <code>R</code> is still running! Otherwise you will end up crashing the active <code>R</code> session (including <code>RStudio</code>).</li>
+<li>Do not close <code>XQuartz</code> while <code>R</code> is running! Otherwise you end up crashing the active <code>R</code> session (including <code>RStudio</code>).</li>
 </ul></li>
 <li>If you experience difficulties with <code>loon</code> use the <a href="https://github.com/waddella/loon/issues">Issue tracker on github</a>.</li>
 <li>If you have difficulties with exporting images with the <code>l_export</code> function then yake screenshots:
 <ul>
-<li>On OX press Command + Shift + 4 and then press space and select the window</li>
+<li>On OSX press Command + Shift + 4 and then press space and select the window</li>
 <li>On Linux install a program called <a href="http://shutter-project.org/">Shutter</a></li>
 <li>For Windows use <a href="http://getgreenshot.org/">Greenshot</a></li>
 </ul></li>
@@ -81,14 +81,20 @@ install.packages(c(&#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;, 
 <pre><code>library(devtools)
 
 install_github(&quot;waddella/loon&quot;, subdir=&quot;R&quot;)</code></pre>
-<p>You can switch between development version and the version you have installed manually</p>
-<pre><code># use development version of loon
+<!--
+You can switch between development version and the version you have
+installed manually
+
+~~~
+# use development version of loon
 dev_mode(on=TRUE)
 
 # switch back to stable version of loon 
-dev_mode(on=FALSE)</code></pre>
+dev_mode(on=FALSE)
+~~~
+-->
 <h2 id="manually-with-tar.gz-package">Manually with tar.gz package</h2>
-<p>In Rstudio, select Packages, Install, Install from: Package Archive File (.tar.gz), select the 'loon_0.8.x.x.tar.gz' file and press the install button.</p>
+<p>In Rstudio, select Packages, Install, Install from: Package Archive File (.tar.gz), select the 'loon_0.9.tar.gz' file and press the install button.</p>
 <div class="figure">
 <img src="images/install_rstudio.png" title="install loon with Rstudio." alt="Install loon in Rstudio" />
 <p class="caption">Install loon in Rstudio</p>
@@ -96,11 +102,11 @@ dev_mode(on=FALSE)</code></pre>
 <p>To install the <code>loon</code> <code>R</code> package as usual the following code in your terminal</p>
 <pre><code>R CMD INSTALL loon_0.9.tar.gz</code></pre>
 <h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
-<p>I put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>.</p>
-<p>Unfortunately <code>R</code> on windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
+<p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>.</p>
+<p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
 <p>In <code>R</code>, enter</p>
 <pre><code>.Machine$sizeof.pointer</code></pre>
-<p>If the return value is <code>8</code> you run a 64 bit build of <code>R</code> and if the return value is <code>4</code> you run a 32 bit build of <code>R</code>. Download the ActiveTcl version 8.6.x with the same build architecture:</p>
+<p>If the return value is <code>8</code> then you run a 64 bit build of <code>R</code> and if the return value is <code>4</code> then you run a 32 bit build of <code>R</code>. Download the ActiveTcl version 8.6.x with the same build architecture. You can also install both.</p>
 <ul>
 <li>If your <code>R</code> is a 64 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe">download Windows (64-bit, x64) Tcl 8.6.x</a></li>
 <li>If your <code>R</code> is a 32 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe">download Windows (x86) Tcl 8.6.x</a></li>
@@ -128,15 +134,13 @@ p &lt;- with(iris, l_plot(x=Sepal.Length, y=Sepal.Width, color=Species))</code><
 <p>If this creates a scatterplot and an inspector loon was correctly installed. Follow the steps in the <a href="UI.html">UI section</a> and the <a href="learn_R_intro.html">Learn section</a> to learn how to use <code>loon</code>.</p>
 <h1 id="fast-image-resizing-for-image-point-glyphs">Fast Image Resizing for Image Point Glyphs</h1>
 <p>On Linux and OS X it is advisable to install the <a href="https://github.com/waddella/tclImageScale">ImageScale Tcl extension</a> for fast image resizing. <code>loon</code> will use the compiled <code>C</code> code for image resizing when available.</p>
-<p>The TEA setup of <code>ImageScale</code> for Windows does currently not work. If you have the experience to fix this then please <script type="text/javascript">
+<p>The TEA setup of <code>ImageScale</code> for Windows does currently not work. If you know how to change the <code>makefile.vc</code> in the <a href="https://github.com/waddella/tclImageScale/tree/master/win">win folder</a> so that the <code>ImageScale</code> package also compiles under Windows then please <script type="text/javascript">
 <!--
 h='&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#x61;&#100;&#114;&#x69;&#x61;&#110;';e=n+a+h;
 document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#x63;&#x6f;&#110;&#116;&#x61;&#x63;&#116;&#32;&#x6d;&#x65;'+'<\/'+'a'+'>');
 // -->
 </script><noscript>&#x63;&#x6f;&#110;&#116;&#x61;&#x63;&#116;&#32;&#x6d;&#x65;&#32;&#40;&#x61;&#100;&#114;&#x69;&#x61;&#110;&#32;&#x61;&#116;&#32;&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript>.</p>
 <h1 id="more-important-notes">More Important Notes</h1>
-<!-- If you are using this version of `loon` you have volunteered to be a beta
-tester. Please report typos and bugs to `adrian@waddell.ch`.-->
 <p>We may change the syntax during the beta testing phase without maintaining backward compatibility. We try to maintain list with the syntax changes on this page.</p>
 <div class="todo">
 <p>Note that features that are highlighted with pastel red are not available in the beta version of <code>loon</code>.</p>
@@ -154,7 +158,7 @@ tester. Please report typos and bugs to `adrian@waddell.ch`.-->
 </ul>
 <h1 id="also-good-to-know">Also good to know</h1>
 <ul>
-<li>currently only the <code>ps</code> file format works reliably for image exports. I recommend for now to <strong>make screenshots</strong> if you need to put a <code>loon</code> plot into your report.</li>
+<li>currently only the <code>ps</code> file format works reliably for image exports (although the font mapping is not correct yet). I recommend for now to make screenshots if you need to put a <code>loon</code> plot into your report.</li>
 </ul>
 </body>
 </html>

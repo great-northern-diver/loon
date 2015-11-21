@@ -134,8 +134,7 @@ document.getElementById("home").className += " selected";
 
 </div>
 <h1 id="command-line-control">Command Line Control</h1>
-<p>Everything that can be changed on the scatterplot display and inspector (except temporary moving points) can be controlled programmatically, e.g. via the command line.</p>
-<p>The <code>R</code> API is discussed in <a href="learn_R_intro.html">learn R section</a>. It is similar as the <code>tcltk</code> <code>R</code> package API. We add generics. For example, for a plot with handle <code>p</code> once can query a plot state as follows</p>
+<p>Displays can be completely controlled via the command line. The <code>R</code> API is discussed in <a href="learn_R_intro.html">learn R section</a>. It is similar to the <code>tcltk</code> package API. For example, in <code>R</code> for a plot with handle <code>p</code> once can query a plot state as follows</p>
 <pre><code># Query State
 p[&#39;selected&#39;]
 l_cget(p, &#39;selected&#39;)
@@ -147,21 +146,24 @@ l_configure(p, zoomX=2, zoomY=3, selected=FALSE)</code></pre>
 <pre><code>$p cget -x
 $p configure -zoomX 2 -zoomY 3 -selected FALSE</code></pre>
 <h1 id="event-bindings">Event Bindings</h1>
-<p><code>loon</code>'s event bindings provide the facility to have custom code (i.e. callbacks) evaluated at specific events such as changes in point color, zoom, selection, moving the mouse over a visual element and window resizing.</p>
-<pre><code>$p bind state {zoom pan} {
+<p><code>loon</code>'s event bindings provide the facility to have custom code (i.e. callbacks) evaluated at specific events. We support a number of different event types which, for example, include such changes in point color, zoom, selection, moving the mouse cursor over a visual element and window resizing.</p>
+<pre><code>$p bind state add {zoom pan} {
     puts &quot;Zoomed or Panned&quot;
 }</code></pre>
-<p>We provide various binding types. See the learn sections.</p>
+<p>or in <code>R</code></p>
+<pre><code>l_bind_state(p, c(&#39;zoom&#39;, &#39;pan&#39;), function() {cat(&#39;Zoomed or Panned&#39;)})</code></pre>
+<p>We provide various binding types. <a href="learn_R_bind.html">Read more</a>.</p>
 <h1 id="layers">Layers</h1>
-<div style="overflow:auto; width: 100%">
-<div class="floatleft" style="clear: both;">
+<p>The histogram, scatterplot and graph displays support layering of lines, polygons, text, rectangles and more. For example, the following picture shows a scatterplot of international airports with map information layered underneath the scatterplot points. The data is from the <a href="http://naturalearthdata.com/">naturalearth project</a>.</p>
+<div class="figure">
+<img src="images/gallery/naturalearth_world.png" alt="" />
+
+</div>
+<p>Layers can can be arranged with <code>loon</code>'s layers inspector.</p>
 <div class="figure">
 <img src="images/layers.png" title="loon Layers" alt="" />
 
 </div>
-</div>
-<p>Lines, polygons, rectangles, and maps can be layered onto plots.</p>
-<p>Layers can can be arranged with <code>loon</code>'s layers inspector.</p>
 </div>
 </body>
 </html>
