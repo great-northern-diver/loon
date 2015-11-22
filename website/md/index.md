@@ -28,7 +28,7 @@ software.
 
 # Statistical Displays
 
-Currently we provide an interactive displays for histograms,
+Currently we provide an interactive display for histograms,
 scatterplots, serialaxes plots (i.e. star glyphs or parallel
 coordinates) and navigation graphs.
 
@@ -222,7 +222,7 @@ from the [naturalearth project](http://naturalearthdata.com/).
 ![](images/gallery/naturalearth_world.png)
 
 
-Layers can can be arranged with `loon`'s layers inspector.
+Layers can be arranged with `loon`'s layers inspector.
 
 ![](images/layers.png "loon Layers")
 
