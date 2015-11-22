@@ -43,7 +43,7 @@ install.packages(c('maps', 'sp', 'RColorBrewer', 'rworldmap',
 install.packages(c('PairViz', 'scagnostics', 'kernlab', 'devtools', 'testthat'))
 ~~~
 
-* Windows user need to install Tcl and Tk version 8.6 and link it
+* Windows users need to install Tcl and Tk version 8.6 and link it
   against your `R`. [Read below](#linking-activetcl-with-r-on-windows).
 * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
 
