@@ -88,7 +88,6 @@ window.onload = function() {
     setLearnUrl("bind");
 }
 </script>
-
 <h1 id="event-bindings">Event Bindings</h1>
 <p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
@@ -303,7 +302,8 @@ l_bind_item(p, &#39;all&#39;, &#39;&lt;ButtonPress&gt;&#39;, function(W)printTag
 </ul>
 <p>The current tagging scheme for the histogram, scatterplot and graph displays are</p>
 <div class="figure">
-<img src="images/item_tags.png" title="Item Tags" />
+<img src="images/item_tags.png" title="Item Tags" alt="" />
+
 </div>
 <h2 id="canvas-bindings">Canvas Bindings</h2>
 <p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>

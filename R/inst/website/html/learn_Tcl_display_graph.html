@@ -108,9 +108,9 @@ window.onload = function() {
     setLearnUrl("display_graph");
 }
 </script>
-
 <div class="figure">
-<img src="images/display_graph.png" title="loon graph display" />
+<img src="images/display_graph.png" title="loon graph display" alt="" />
+
 </div>
 <pre><code>set nodes [list A B C D E]
 set G [completegraph $nodes]
@@ -145,17 +145,12 @@ dict get $states background</code></pre>
 <h1 id="good-to-know">Good To Know</h1>
 <ul>
 <li>The graph is and scatterplot display are closely related and share most of the scatterplot states.
-<div class='todo'>
-    
-<ul>
-<li>This has some undesirable side effects such as that the states <code>itemlabel</code> and <code>showItemlabels</code> are actually for nodes...
-<ul>
-<li>Also the tags are not correct... (i.e. point vs. node)</li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-<ul>
+<div class="todo">
+<pre><code>* This has some undesirable side effects such as that the
+states `itemlabel` and `showItemlabels` are actually for
+nodes...
+* Also the tags are not correct... (i.e. point vs. node)</code></pre>
+</div></li>
 <li><p>The graph has <code>n</code> dimensional states that are associated to nodes and <code>p</code> dimensional states that are associated with edges. To query which states are <code>p</code> dimensional use</p>
 <pre><code>set states [$g info states]
 set pstates [dict filter $states script {k v} {
@@ -178,7 +173,8 @@ set g [graph -nodes [lindex $LG 0] -from [lindex $LG 1]\
 <p>The following code ads a navigator to the graph <code>g</code></p>
 <pre><code>set nav [$g navigator add -color orange]</code></pre>
 <div class="figure">
-<img src="images/display_graph_navigator1.png" title="loon graph display" />
+<img src="images/display_graph_navigator1.png" title="loon graph display" alt="" />
+
 </div>
 <p>The navigator with the id stored in the <code>nav</code> has its own states that can be listed as follows</p>
 <pre><code>set nstates [$g navigator use $nav info states]
@@ -190,7 +186,8 @@ dict keys $nstates</code></pre>
     -from {A:B B:C C:D A:D} -to {D:E B:E}\
     -proportion 0.2</code></pre>
 <div class="figure">
-<img src="images/display_graph_navigator2.png" title="navigator path" />
+<img src="images/display_graph_navigator2.png" title="navigator path" alt="" />
+
 </div>
 <p>The elements related to the navigator you see on the plot above are the</p>
 <ul>
@@ -201,7 +198,8 @@ dict keys $nstates</code></pre>
 </ul>
 <p>The graph display supports direct interaction with the navigator and navigator path using the mouse and keyboard. To move the navigator with the mouse you must first click on it to select it which will set the <code>activeNavigator</code> graph state to the navigator id and causes the navigator to be highlighted with the navigator outline in the selection color.</p>
 <div class="figure">
-<img src="images/display_graph_navigator_select.png" title="navigator selected" />
+<img src="images/display_graph_navigator_select.png" title="navigator selected" alt="" />
+
 </div>
 <p>In this state the following interactions are possible</p>
 <ul>
@@ -209,7 +207,7 @@ dict keys $nstates</code></pre>
 <li>If arriving at last node on the path you may extend the path by dragging the navigator towards a new connected node. Note that
 <ul>
 <li>the gray circle is the decision boundary to select an adjoining edge.</li>
-<li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" /></li>
+<li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" alt="" /></li>
 </ul></li>
 <li>Use the scroll wheel to move the navigator along the path. Pay attention to the <code>scrollProportionIncrement</code> state of the navigator.</li>
 <li>Move the navigator using animation by control double click on a node on the path.</li>
@@ -438,7 +436,8 @@ set gs [graphswitch .example.graphswitch -activewidget $g]
 pack $g -side left -fill both -expand TRUE
 pack $gs -side left -fill y</code></pre>
 <div class="figure">
-<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" />
+<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" alt="" />
+
 </div>
 <p>A graph gets added to the graph switch as follows</p>
 <pre><code>set G1 [completegraph {A B C D}]
@@ -453,7 +452,8 @@ set idG4 [$gs add $G4 &quot;complement(G3)&quot;]
 
 $gs set $idG3</code></pre>
 <div class="figure">
-<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" />
+<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" alt="" />
+
 </div>
 <ul>
 <li>To switch a graph select it in the list. Layout, selection, and active states are not stored in the graph switch, only the graph information.</li>
