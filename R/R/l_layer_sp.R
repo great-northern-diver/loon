@@ -20,7 +20,7 @@ l_layer.SpatialPolygonsDataFrame <- function(widget, x, asSingleLayer=TRUE, ...)
                   NAME=names(xy)) 
     } else {
         sapply(x@polygons[x@plotOrder], function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, asSingleLayer=asSingleLayer, ...)
         })        
     }
 }
@@ -37,7 +37,7 @@ l_layer.SpatialPolygons <- function(widget, x, asSingleLayer=TRUE, ...) {
                   hole=sapply(xy, function(xy_i)xy_i$isHole)) 
     } else {
         sapply(x@polygons[x@plotOrder], function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, asSingleLayer=asSingleLayer, ...)
         })
     }
 }
@@ -55,7 +55,7 @@ l_layer.Polygons <- function(widget, x, asSingleLayer=TRUE, ...) {
                   hole=sapply(xy, function(xy_i)xy_i$isHole)) 
     } else {
         sapply(x@Polygons[x@plotOrder], function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, ...)
         })
     }
 }
@@ -94,7 +94,7 @@ l_layer.SpatialLinesDataFrame <- function(widget, x, asSingleLayer=TRUE, ...) {
                   NAME=names(xy)) 
     } else {
         sapply(x@lines, function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, asSingleLayer=asSingleLayer, ...)
         })        
     }
 }
@@ -111,7 +111,7 @@ l_layer.SpatialLines <- function(widget, x, asSingleLayer=TRUE, ...) {
                   hole=sapply(xy, function(xy_i)xy_i$isHole)) 
     } else {
         sapply(x@lines, function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, asSingleLayer=asSingleLayer, ...)
         })
     }
 }
@@ -129,7 +129,7 @@ l_layer.Lines <- function(widget, x, asSingleLayer=TRUE, ...) {
                   hole=sapply(xy, function(xy_i)xy_i$isHole)) 
     } else {
         sapply(x@Lines, function(m) {
-            l_layer(widget, m, asSingleLayer, ...)
+            l_layer(widget, m, ...)
         })
     }
 }
