@@ -85,6 +85,9 @@ $p info states {x y xTemp}</code></pre>
 <p>When possible then the data structure for each state is either a scalar or a flat list. One exception is the <code>data</code> state which contains a <code>dict</code>.</p>
 <h1 id="query-and-modify">Query and Modify</h1>
 <p>To query a state, say <code>showScales</code>, of the plot <code>p</code> use</p>
+<pre><code>p[&#39;showScales&#39;]
+l_cget(p, &#39;showScales&#39;)</code></pre>
+<p></R></p>
 <pre><code>$p cget -showScales</code></pre>
 <p>To modify a single or multiple states use one the <code>configure</code> subcommand</p>
 <pre><code>$p configure -showScales TRUE -showLabels TRUE</code></pre>

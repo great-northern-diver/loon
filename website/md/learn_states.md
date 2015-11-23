@@ -61,7 +61,7 @@ scalar or a flat <R>vector</R><Tcl>list</Tcl>. One exception is the
 # Query and Modify
 
 To query a state, say `showScales`, of the plot `p` use <R> either the
-accessor method `[` or the `l_cget` function/R>
+accessor method `[` or the `l_cget` function</R>
 
 ~~~	
 p['showScales']
