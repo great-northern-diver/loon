@@ -89,23 +89,23 @@ window.onload = function() {
 }
 </script>
 <h1 id="event-bindings">Event Bindings</h1>
-<p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
+<p>Event bindings provide the functionality of binding code to specific event types. The bound code is called a <em>callback</em>. In <code>loon</code>, we distinguish between four classes of events: state change events, item events, canvas events and content events. Examples of each type of event (in the same order as mentioned before) include: a selected state modification of a plot, moving the mouse cursor over a point glyph, re-sizing the plot window and adding a layer.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
 <pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
 
 $p bind state add {selected active xTemp} {puts &quot;%W had events: %e&quot;}</code></pre>
-<p>The above code creates a plot with three points and adds a state binding that evaluates the callback code <code>puts &quot;%W had event %e&quot;</code> if any of the states <code>selected</code>, <code>active</code>, or <code>xTemp</code> get changed of <code>p</code>. The <code>%W</code> and <code>%e</code> get <strong>substituted</strong> with the widget path name and a list of the events that were responsible for the code to be evaluated, respectively.</p>
+<p>The above code creates a plot with three points and adds a state binding that evaluates the callback code <code>puts &quot;%W had event %e&quot;</code> if any of the states <code>selected</code>, <code>active</code> or <code>xTemp</code> get changed of <code>p</code>. The <code>%W</code> and <code>%e</code> get <strong>substituted</strong> with the widget path name and a list of the events that were responsible for the code to be evaluated, respectively.</p>
 <p>There are also a number of other bindings:</p>
 <ul>
 <li>Item bindings evaluate code triggered by a keyboard and mouse gesture with a visual item on the display.</li>
 <li>Canvas bindings evaluate code triggered by a keyboard and mouse gesture on the plot as a whole.</li>
-<li>There are also a number of content bindings that evaluate callback functions when the collection of layers, glyphs, or navigators changes.</li>
+<li>Content bindings evaluate callbacks when the collection of layers, glyphs or navigators changes.</li>
 </ul>
 <p>Besides the <code>bind</code> subcommand we also provide the <code>systembind</code> subcommand. <code>bind</code> and <code>systembind</code> can be used interchangeably. <code>systembind</code> is used for <code>loon</code>'s own use and no error catching is performed when evaluating system binding code.</p>
 <h2 id="state-change-bindings">State Change Bindings</h2>
-<p>State bindings get triggered when a widget state changes. For more information on widget states see the <a
+<p>State bindings get triggered when widget states change. For more information on widget states see the <a
 href="learn_Tcl_states.html">states documentation</a>.</p>
-<p>A <code>configure</code> call that changes multiple states will collect which states have changed and only evaluate the event bindings once. For example</p>
+<p>A <code>configure</code> call that changes multiple states will collect which states have changed and only evaluate the change bindings once. For example</p>
 <pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
 
 $p bind state add {selected active xTemp} {puts &quot;%W had events: %e&quot;}

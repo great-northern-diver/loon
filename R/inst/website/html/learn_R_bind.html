@@ -89,21 +89,21 @@ window.onload = function() {
 }
 </script>
 <h1 id="event-bindings">Event Bindings</h1>
-<p>Bindings implement the well known observer pattern. They allow custom code to be evaluated after <em>something</em> has changed in a plot or widget. That <em>something</em> might be a state change, a navigator added, a glyph deleted, or a layer moved. The code to be evaluated is called a <em>callback</em>.</p>
+<p>Event bindings provide the functionality of binding code to specific event types. The bound code is called a <em>callback</em>. In <code>loon</code>, we distinguish between four classes of events: state change events, item events, canvas events and content events. Examples of each type of event (in the same order as mentioned before) include: a selected state modification of a plot, moving the mouse cursor over a point glyph, re-sizing the plot window and adding a layer.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
 <pre><code>p &lt;- l_plot(x=1:3, y=3:1)
 
 l_bind_state(p, event=c(&#39;selected&#39;, &#39;active&#39;, &#39;xTemp&#39;),
     callback=function(W,e) {cat(paste(W, &#39;had events:&#39;, e, &#39;\n&#39; ))})</code></pre>
-<p>The above code creates a plot with three points and adds a state binding that evaluates the callback function if any of the states <code>selected</code>, <code>active</code>, or <code>xTemp</code> get changed of <code>p</code>. The arguments <code>W</code> and <code>e</code> contain the widget path name and a vector of the events that were responsible for the code to be evaluated, respectively.</p>
+<p>The above code creates a plot with three points and adds a state binding that evaluates the callback function if any of the states <code>selected</code>, <code>active</code> or <code>xTemp</code> get changed of <code>p</code>. The arguments <code>W</code> and <code>e</code> contain the widget path name and a vector of the events that were responsible for the code to be evaluated, respectively.</p>
 <p>There are also a number of other bindings:</p>
 <ul>
 <li>Item bindings evaluate code triggered by a keyboard and mouse gesture with a visual item on the display.</li>
 <li>Canvas bindings evaluate code triggered by a keyboard and mouse gesture on the plot as a whole.</li>
-<li>There are also a number of content bindings that evaluate callback functions when the collection of layers, glyphs, or navigators changes.</li>
+<li>Content bindings evaluate callbacks when the collection of layers, glyphs or navigators changes.</li>
 </ul>
 <h2 id="r-callbacks">R Callbacks</h2>
-<p>The <code>callback</code> arguments of <code>l_bind_state</code>, <code>l_bind_layer</code>, etc.. take an <code>R</code> function which then is called by the <code>Tcl</code> interpreter if the event of interest happens. The mapping between <code>R</code> function and <code>Tcl</code> interpreter procedure is as follows</p>
+<p>The <code>callback</code> argument of the bind functions expects an <code>R</code> function which is called by the <code>Tcl</code> interpreter if the event of interest happens. The <code>Tcl</code> interpreter can call <code>R</code> functions using their hex-encoded address as follows</p>
 <pre><code>foo &lt;- function(x,y,a,b) {  
     s &lt;&lt;- sum(sapply(c(x,y,a,b), as.numeric)^2)
 }
@@ -111,19 +111,20 @@ l_bind_state(p, event=c(&#39;selected&#39;, &#39;active&#39;, &#39;xTemp&#39;),
 .Tcl.callback(foo)
 
 #&gt; [1] &quot;R_call 0x7fe6965adb78 %x %y %a %b&quot;</code></pre>
-<p>The <code>R_call</code> procedure in <code>Tcl</code> uses the hex-address to access the <code>R</code> function. The <code>x</code>, <code>y</code>, <code>a</code>, and <code>b</code> arguments of <code>foo</code> get translated to <code>%x</code>, <code>%y</code>, <code>%a</code>, and <code>%b</code> which need to be substituted to the arguments that should be sent to the <code>R</code> function <code>foo</code>. Note, that <code>Tcl</code> will always send strings to the arguments of the <code>R</code> function and hence they need to changed to the required type as we did with the <code>as.numeric</code> <code>R</code> function. For example</p>
+<p>The <code>R_call</code> procedure in <code>Tcl</code> uses the hex-address to access the <code>R</code> function. The <code>x</code>, <code>y</code>, <code>a</code> and <code>b</code> arguments of <code>foo</code> get translated to <code>%x</code>, <code>%y</code>, <code>%a</code> and <code>%b</code>. The <code>%</code> arguments are meant to be substituted by <code>Tcl</code> before the <code>R_call</code> evaluation. Note, that <code>Tcl</code> will always send strings to the arguments of the <code>R</code> function and hence they need to changed to the required type as we did with the <code>as.numeric</code> <code>R</code> function. For example</p>
 <pre><code>.Tcl(&#39;R_call 0x7fe6965adb78 1 2 3 4&#39;)
 
 s
 #&gt; 30</code></pre>
-<p>In <code>loon</code> we support a number of substitutions such for example as <code>%W</code>, <code>%e</code>, <code>%b</code>, for widget path name, events, binding id, respectively. Substitutions are optional and hence any combination of the substitution strings and hence argument names of the <code>R</code> function can be used. In other words</p>
+<p>If <code>Tcl</code> submits a <code>Tcl</code> list as an argument then in the <code>R</code> callback this list appears as a string with the list elements separated by a space. We provide the <code>l_toR</code> function to convert a <code>R</code> callback arguments to vectors of a specific types. For example <code>l_toR(e, as.numeric)</code> converts <code>e</code> to an <code>R</code> vector of numbers.</p>
+<p><code>loon</code> supports a number of substitutions such as <code>%W</code>, <code>%e</code> and <code>%b</code> for widget path name, events and binding id, respectively. Substitutions are optional and hence any combination of the substitution strings and hence argument names of the <code>R</code> function can be used. In other words</p>
 <pre><code>l_bind_state(p, &#39;all&#39;, function() {})
 l_bind_state(p, &#39;all&#39;, function(W) {})
 l_bind_state(p, &#39;all&#39;, function(e, W) {})
 l_bind_state(p, &#39;all&#39;, function(e, W, b) {})
 l_bind_state(p, &#39;all&#39;, function(b) {})</code></pre>
-<p>are all valid <code>R</code> functions to be evaluated by <code>loon</code>. This is the same mechanism as for the standard <code>Tk</code> widgets like buttons, slider, etc.</p>
-<p>Also note that the hex number points to the environment of the particular function specified in the <code>callback</code> function. Hence if you re-define an <code>R</code> function with the same name the <code>Tcl</code> interpreter will not use that name. For example</p>
+<p>are all valid <code>R</code> functions to be evaluated by a state binding. This is the same mechanism as for the standard <code>Tk</code> widget bindings.</p>
+<p>Note that the hex-encoded address points to a particular <code>R</code> function and not the function name. Hence if you re-define an <code>R</code> function and assign it to the variable (i.e function name) then the <code>Tcl</code> interpreter will not use that new function. For example</p>
 <pre><code>foo &lt;- function(W) {cat(paste(W, &#39;had some event\n&#39;))}
 p &lt;- l_plot(1:3,1:3)
 l_bind_state(p, &#39;all&#39;, foo)
@@ -133,7 +134,7 @@ foo &lt;- function(W) {cat(paste(&#39;There were some events in widget &#39;, W,
 p[&#39;selected&#39;] &lt;- TRUE
 
 #&gt; .l0.plot had some event</code></pre>
-<p>The easiest way to deal with this to wrap the <code>foo</code> function call into another function</p>
+<p>The easiest way to deal with this to wrap the <code>foo</code> function call into another anonymous function</p>
 <pre><code>foo &lt;- function(W) {cat(paste(W, &#39;had some event\n&#39;))}
 p &lt;- l_plot(1:3,1:3)
 l_bind_state(p, &#39;all&#39;, function(W){foo(W)})
@@ -144,9 +145,9 @@ p[&#39;selected&#39;] &lt;- TRUE
 
 #&gt; There were some events in widget .l0.plot </code></pre>
 <h2 id="state-change-bindings">State Change Bindings</h2>
-<p>State bindings get triggered when a widget state changes. For more information on widget states see the <a
+<p>State bindings get triggered when widget states change. For more information on widget states see the <a
 href="learn_R_states.html">states documentation</a>.</p>
-<p>A <code>configure</code> call that changes multiple states will collect which states have changed and only evaluate the event bindings once. For example</p>
+<p>A <code>configure</code> call that changes multiple states will collect which states have changed and only evaluate the change bindings once. For example</p>
 <pre><code>p &lt;- l_plot(x=1:3, y=3:1)
 
 l_bind_state(p, event=c(&#39;selected&#39;, &#39;active&#39;, &#39;xTemp&#39;),

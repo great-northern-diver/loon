@@ -6,10 +6,21 @@ window.onload = function() {
 </script>
 
 
+---
+title: learn linking - loon
+---
+
+
 # Introduction
 
-In `loon` terms: linking synchronizes certain `n` dimensional plot
-states between linked displays. The user can choose
+All of `loon`'s plots can be linked so that some of their
+n-dimensional states are synchronized. For a linked scatterplot, the
+states the are synchronized by default (i.e. linked states) are the
+color, size, selected and active states. Two or more plots are linked
+if they share the same string in their `linkingGroup` state.
+
+`loon`'s standard linking model is fairly flexible and the user can
+choose
 
 * which displays should be linked
 * which `n` dimensional states should be synchronized
@@ -21,15 +32,16 @@ point and have it's `k` nearest neighbors automatically selected in
 the same display is not possible. Also, it is not possible with the
 standard linking mechanism to have one selected point in display A
 result in selecting multiple points in display B. For cases where the
-standard model is not sufficient custom linking rules can be
-implemented with state bindings.
+standard model is not sufficient it is possible to implement custom
+linking rules with state bindings.
 
 # Loon's Standard Linking Model
 
-The standard linking model is as follows: 
+The standard linking model depends on the two states `linkingGroup`
+and `linkingKey`.
 
-Data displays, i.e. plots, are linked if their `linkingGroup` state
-contains the same string.
+Displays are linked if their `linkingGroup` state contains the same
+string.
 
 * Note, `none` is a keyword; if `linkingGroup` equals `none` then the
   plot is not linked.
@@ -77,7 +89,7 @@ $p1 getLinkedStates
 
 </Tcl>
 
-Usually the linked states are `color`, `selected`, `active`, and
+Usually the linked states are `color`, `selected`, `active` and
 `size`, if they exist for the particular plot. Histograms, for
 example, have no `size` state. Note that between displays only states
 with the same state name can be linked. To set the (n-dimensional!)
@@ -101,13 +113,21 @@ $p1 setLinkedStates {color active}
 
 
 
-By default, the `i`'th element of an `n` dimensional state gets
-synchronized with the `i`'th element of the same state in another
-displays, if they two displays are linked and if the `i` is not out of
-range for one display. Hence, for the above example `n=150`, the
-number of data points, and selecting the `i`'th point in `p1` will set
+If display `A` is linked with display `B` then
+
+* display `A` and `B` share the same linking group (i.e. string in the
+`linkingGroup` state)
+* the intersection of the linked states of `A` and `B` are
+  synchronized
+* for the synchronized states, by default, the `i`'th elements of the
+states in `A` are synchronized with the `i`'th elements of the same
+states in display `B` for all `i` in the intersection of the point
+indices of display `A` and `B`
+
+Hence, for the above example where `n=150` (i.e. the number of data
+points) when selecting the `i`'th point in `p1` then `loon` will set
 the `selected` state for the `i`'th point in `p2` and `h` to `TRUE`,
-for `i=1,...,150`. If a further display gets created with
+for any `i` in `{1,...,150}`. If a further display gets created with
 `linkingGroup` `iris` but a different value for `n`, say `n=4`, then
 only the first for elements of that plot get synchronized between that
 display and `p1`, `p2`, and `h`. For example, for
@@ -124,10 +144,10 @@ set p4 [plot -x {1 2 3 4} -y {1 2 3 4} -linkingGroup iris]
 ~~~
 </Tcl>
 
-any change in `p4` for any of the linked states only the first 4
-elements in `p1`, `p2`, and `h` will ever be changed. Or vice versa,
-only the states of the first for elements in `p1`, `p2`, and `h` will
-ever have an effect on `p4`.
+any change in `p4` for any of the linked states will only affect the
+first 4 elements in `p1`, `p2` and `h`. Or vice versa, only the states
+of the first for elements in `p1`, `p2` and `h` will ever have an
+effect on `p4`.
 
 It is possible to change the mapping of which elements should be
 synchronized between displays. The `n` dimensional `linkingKey` state
@@ -135,12 +155,12 @@ controls which elements get synchronized between the linked
 displays. That is for two linked displays A and B
 
 * element `i` for the linked states in display A is kept in sync with
-  element `j` for the linked states in display B only if the `i`'th
-  element in the `linkingKey` state of display A contains exactly the
-  same string as the element `j` in the `linkingKey` state of display
-  B
+  element `j` for the linked states in display B if there is an `i`
+  and `j` for which the `i`'th element in the `linkingKey` state of
+  display A contains exactly the same string as the element `j` in the
+  `linkingKey` state of display B
 
-* and, the `linkingKey` state for a display must contain unique elements
+* the `linkingKey` state for a display must contain unique elements
 
 By default, the `linkingKey` contains an `n` dimensional vector with
 `0,1,...,n-1`.
@@ -296,8 +316,8 @@ l_bind_state(pb, 'selected', pb2pa)
 </R>
 
 
-This won't end in an endless loop of evaluating state bindings because
-after the sequence `pa2pb - pb2pa - pa2pb` or the `pb2pa - pa2pb - 
+This will not end in an endless loop of evaluating state bindings as
+after the sequence `pa2pb - pb2pa - pa2pb` or the `pb2pa - pa2pb -
 pb2pa` the system will be in equilibrium with respect to these
 functions. Remember that state bindings do not get evaluated if a
 `configure` call does not effectively change the state. If, however,
@@ -380,3 +400,50 @@ changed in the `configure` call.
 
 Without the variable `busy` this would end in an infinite loop one the
 `selected` state gets changed of either display.
+
+<R>
+
+## Encapsulating a custom linking
+
+Note that in the previous two examples the linking functions scope for
+the plot handles. To avoid unintended side effects, for example, by
+overwriting or deleting a plot handle it is advisable to wrap the
+linking functions in another R function.
+
+
+For example, for the first example the following setup would be better
+
+~~~
+myLinking <- function(pa, pb) {
+	pa2pb <- function() {
+		sa <- pa['selected']
+		sb <- pb['selected']
+		pb['selected'] <- c(any(sa[1:3]), sa[4], any(sa[5:6]), sa[7], sb[5])
+	}
+
+	pb2pa <- function() {
+		sb <- pb['selected']
+		pa['selected'] <- c(rep(sb[1],3), sb[2], rep(sb[3],2), sb[4])
+	}
+
+	c(l_bind_state(pa, 'selected', pa2pb),
+	  l_bind_state(pb, 'selected', pb2pa))
+}
+~~~
+
+Now any two plots can be linked with the particular linking rule
+defined in `myLinking` as follows
+
+~~~
+plotA <- l_plot(x=1:7, y=1:7, title="plot A")
+plotB <- l_plot(x=1:5, y=1:5, title="plot B")
+
+myLinking(plotA, plotB)
+~~~
+
+Note that the `myLinking` function call environment does not get
+garbage collected as the bindings refer to the two functions `pa2pb`
+and `pb2pa`. You can read more about environments in
+[Hadley's Advanced R book](http://adv-r.had.co.nz/Environments.html).
+
+</R>

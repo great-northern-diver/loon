@@ -183,6 +183,6 @@ abstract, i.e. a letter.
 
 	Note that `which_n` is equivalent to `which`.
 
-	* Note that when switching between `R` and `Tcl`: in `R` vector
-      indexing starts at 1 and in `Tcl` at 0. The `which...` arguments
-      do take this into consideration.
+* Note that when switching between `R` and `Tcl`: in `R` vector
+  indexing starts at 1 and in `Tcl` at 0. `loon` will honor the
+  indexing origin in `R` and `Tcl` depending on where you use it.

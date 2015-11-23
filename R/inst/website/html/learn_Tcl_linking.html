@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>learn linking - loon</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -60,6 +60,9 @@ document.getElementById("learn_Tcl").className += " selected";
 var language = "Tcl";
 </script>
 </div>
+<div id="header">
+<h1 class="title">learn linking - loon</h1>
+</div>
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
@@ -76,16 +79,17 @@ window.onload = function() {
 }
 </script>
 <h1 id="introduction">Introduction</h1>
-<p>In <code>loon</code> terms: linking synchronizes certain <code>n</code> dimensional plot states between linked displays. The user can choose</p>
+<p>All of <code>loon</code>'s plots can be linked so that some of their n-dimensional states are synchronized. For a linked scatterplot, the states the are synchronized by default (i.e. linked states) are the color, size, selected and active states. Two or more plots are linked if they share the same string in their <code>linkingGroup</code> state.</p>
+<p><code>loon</code>'s standard linking model is fairly flexible and the user can choose</p>
 <ul>
 <li>which displays should be linked</li>
 <li>which <code>n</code> dimensional states should be synchronized</li>
 <li>the mapping of the elements in the <code>n</code> dimensional states from one display to another display.</li>
 </ul>
-<p>We allow only one-to-one synchronization. For example, selecting a point and have it's <code>k</code> nearest neighbors automatically selected in the same display is not possible. Also, it is not possible with the standard linking mechanism to have one selected point in display A result in selecting multiple points in display B. For cases where the standard model is not sufficient custom linking rules can be implemented with state bindings.</p>
+<p>We allow only one-to-one synchronization. For example, selecting a point and have it's <code>k</code> nearest neighbors automatically selected in the same display is not possible. Also, it is not possible with the standard linking mechanism to have one selected point in display A result in selecting multiple points in display B. For cases where the standard model is not sufficient it is possible to implement custom linking rules with state bindings.</p>
 <h1 id="loons-standard-linking-model">Loon's Standard Linking Model</h1>
-<p>The standard linking model is as follows:</p>
-<p>Data displays, i.e. plots, are linked if their <code>linkingGroup</code> state contains the same string.</p>
+<p>The standard linking model depends on the two states <code>linkingGroup</code> and <code>linkingKey</code>.</p>
+<p>Displays are linked if their <code>linkingGroup</code> state contains the same string.</p>
 <ul>
 <li>Note, <code>none</code> is a keyword; if <code>linkingGroup</code> equals <code>none</code> then the plot is not linked.</li>
 </ul>
@@ -98,15 +102,21 @@ set h [histogram -x $SepalLength -linkingGroup iris]</code></pre>
 <p>the plots <code>p1</code>, <code>p2</code>, and <code>h</code> are linked to each other and <code>p3</code> is not linked to any other display.</p>
 <p>The states of a plot that are linked can be queried with</p>
 <pre><code>$p1 getLinkedStates</code></pre>
-<p>Usually the linked states are <code>color</code>, <code>selected</code>, <code>active</code>, and <code>size</code>, if they exist for the particular plot. Histograms, for example, have no <code>size</code> state. Note that between displays only states with the same state name can be linked. To set the (n-dimensional!) linked states use</p>
+<p>Usually the linked states are <code>color</code>, <code>selected</code>, <code>active</code> and <code>size</code>, if they exist for the particular plot. Histograms, for example, have no <code>size</code> state. Note that between displays only states with the same state name can be linked. To set the (n-dimensional!) linked states use</p>
 <pre><code>$p1 setLinkedStates {color active}</code></pre>
-<p>By default, the <code>i</code>'th element of an <code>n</code> dimensional state gets synchronized with the <code>i</code>'th element of the same state in another displays, if they two displays are linked and if the <code>i</code> is not out of range for one display. Hence, for the above example <code>n=150</code>, the number of data points, and selecting the <code>i</code>'th point in <code>p1</code> will set the <code>selected</code> state for the <code>i</code>'th point in <code>p2</code> and <code>h</code> to <code>TRUE</code>, for <code>i=1,...,150</code>. If a further display gets created with <code>linkingGroup</code> <code>iris</code> but a different value for <code>n</code>, say <code>n=4</code>, then only the first for elements of that plot get synchronized between that display and <code>p1</code>, <code>p2</code>, and <code>h</code>. For example, for</p>
+<p>If display <code>A</code> is linked with display <code>B</code> then</p>
+<ul>
+<li>display <code>A</code> and <code>B</code> share the same linking group (i.e. string in the <code>linkingGroup</code> state)</li>
+<li>the intersection of the linked states of <code>A</code> and <code>B</code> are synchronized</li>
+<li>for the synchronized states, by default, the <code>i</code>'th elements of the states in <code>A</code> are synchronized with the <code>i</code>'th elements of the same states in display <code>B</code> for all <code>i</code> in the intersection of the point indices of display <code>A</code> and <code>B</code></li>
+</ul>
+<p>Hence, for the above example where <code>n=150</code> (i.e. the number of data points) when selecting the <code>i</code>'th point in <code>p1</code> then <code>loon</code> will set the <code>selected</code> state for the <code>i</code>'th point in <code>p2</code> and <code>h</code> to <code>TRUE</code>, for any <code>i</code> in <code>{1,...,150}</code>. If a further display gets created with <code>linkingGroup</code> <code>iris</code> but a different value for <code>n</code>, say <code>n=4</code>, then only the first for elements of that plot get synchronized between that display and <code>p1</code>, <code>p2</code>, and <code>h</code>. For example, for</p>
 <pre><code>set p4 [plot -x {1 2 3 4} -y {1 2 3 4} -linkingGroup iris]</code></pre>
-<p>any change in <code>p4</code> for any of the linked states only the first 4 elements in <code>p1</code>, <code>p2</code>, and <code>h</code> will ever be changed. Or vice versa, only the states of the first for elements in <code>p1</code>, <code>p2</code>, and <code>h</code> will ever have an effect on <code>p4</code>.</p>
+<p>any change in <code>p4</code> for any of the linked states will only affect the first 4 elements in <code>p1</code>, <code>p2</code> and <code>h</code>. Or vice versa, only the states of the first for elements in <code>p1</code>, <code>p2</code> and <code>h</code> will ever have an effect on <code>p4</code>.</p>
 <p>It is possible to change the mapping of which elements should be synchronized between displays. The <code>n</code> dimensional <code>linkingKey</code> state controls which elements get synchronized between the linked displays. That is for two linked displays A and B</p>
 <ul>
-<li><p>element <code>i</code> for the linked states in display A is kept in sync with element <code>j</code> for the linked states in display B only if the <code>i</code>'th element in the <code>linkingKey</code> state of display A contains exactly the same string as the element <code>j</code> in the <code>linkingKey</code> state of display B</p></li>
-<li><p>and, the <code>linkingKey</code> state for a display must contain unique elements</p></li>
+<li><p>element <code>i</code> for the linked states in display A is kept in sync with element <code>j</code> for the linked states in display B if there is an <code>i</code> and <code>j</code> for which the <code>i</code>'th element in the <code>linkingKey</code> state of display A contains exactly the same string as the element <code>j</code> in the <code>linkingKey</code> state of display B</p></li>
+<li><p>the <code>linkingKey</code> state for a display must contain unique elements</p></li>
 </ul>
 <p>By default, the <code>linkingKey</code> contains an <code>n</code> dimensional vector with <code>0,1,...,n-1</code>.</p>
 <h2 id="switching-linkinggroup-and-linkingkey">Switching linkingGroup and linkingKey</h2>
@@ -154,7 +164,7 @@ proc pb2pa {pa pb} {
 
 $pa bind state selected &quot;pa2pb $pa $pb&quot;
 $pb bind state selected &quot;pb2pa $pa $pb&quot;</code></pre>
-<p>This won't end in an endless loop of evaluating state bindings because after the sequence <code>pa2pb - pb2pa - pa2pb</code> or the <code>pb2pa - pa2pb -  pb2pa</code> the system will be in equilibrium with respect to these functions. Remember that state bindings do not get evaluated if a <code>configure</code> call does not effectively change the state. If, however, the custom linking does not result in an equilibrium after the first change, then you may need to add a further variable, say <code>busy</code>, to avoid multiple iterations -- or an infinite loop--. Assume the linking</p>
+<p>This will not end in an endless loop of evaluating state bindings as after the sequence <code>pa2pb - pb2pa - pa2pb</code> or the <code>pb2pa - pa2pb - pb2pa</code> the system will be in equilibrium with respect to these functions. Remember that state bindings do not get evaluated if a <code>configure</code> call does not effectively change the state. If, however, the custom linking does not result in an equilibrium after the first change, then you may need to add a further variable, say <code>busy</code>, to avoid multiple iterations -- or an infinite loop--. Assume the linking</p>
 <div class="figure">
 <img src="images/linking_custom2.png" title="custom linking" alt="directions are indicated by arrows" />
 <p class="caption">directions are indicated by arrows</p>

@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>learn layering information - loon</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -60,6 +60,9 @@ document.getElementById("learn_Tcl").className += " selected";
 var language = "Tcl";
 </script>
 </div>
+<div id="header">
+<h1 class="title">learn layering information - loon</h1>
+</div>
 <div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
@@ -74,8 +77,8 @@ window.onload = function() {
 }
 </script>
 <h1 id="introduction">Introduction</h1>
-<p><code>loon</code>'s plots that are based on Cartesian coordinates (i.e. scatterplot, histogram, and graph) allow for layering visual information such as polygons, text, and rectangles among others. Every layer has a unique id, and the layer with the plot model (i.e. scatterplot points, histogram, or graph) is called the model layer and has the id <code>model</code>.</p>
-<p>The implemented layer types are the following</p>
+<p><code>loon</code>'s displays that are based on Cartesian coordinates (i.e. scatterplot, histogram and graph display) allow for layering visual information including polygons, text and rectangles. Every layer has a unique id and the layer with the plot model (i.e. scatterplot points, histogram or graph) is called the model layer and has the id <code>model</code>.</p>
+<p>The available layer types are the following</p>
 <ul>
 <li><strong>group</strong>: a layer that has no visual representation or states but can contain other layers</li>
 <li><strong>polygon</strong>: a single polygon</li>
@@ -86,7 +89,7 @@ window.onload = function() {
 </ul>
 <p>and <code>n</code> dimensional state or compound layers</p>
 <ul>
-<li><strong>points</strong>: <code>n</code> points, same <code>n</code> dimensional states as the scatterplot has</li>
+<li><strong>points</strong>: <code>n</code> circles (with <code>size</code> state)</li>
 <li><strong>texts</strong>: <code>n</code> strings</li>
 <li><strong>polygons</strong>: <code>n</code> polygons</li>
 <li><strong>rectangles</strong>: <code>n</code> rectangles</li>
@@ -99,14 +102,17 @@ window.onload = function() {
     -color {red red blue}\
     -active {T F T}\
     -selected {T T T}</code></pre>
-<p>Some important implementation details for working with layers are then</p>
+<p>Some important implementation details for working with layers are</p>
 <ul>
-<li>Currently only the model layer in the sense of selection and moving points with mouse gestures.</li>
+<li>Currently only the model layer is interactive in the sense of selection and moving elements with mouse gestures.</li>
 <li>Every layer has a unique id that is assigned by loon.</li>
 <li>Layers are arranged in a tree structure where a <code>group</code> layer can be a parent to children layers (any of the above mentioned layer types). The tree root has id <code>root</code>.</li>
 <li>The layers are rendered in order of a Depth-first traversal of the non-group layers.</li>
-<li>Layers, like the plot models, have states that define its appearance.</li>
-<li>Layer states also support state bindings.</li>
+<li>Layers have states that define its appearance.
+<ul>
+<li>Layer states support state bindings.</li>
+</ul></li>
+<li>Sometimes (e.g. for texts layers), <code>n</code> can not be set to 1. Use the singular version instead (e.g. text).</li>
 </ul>
 <h1 id="add-move-delete-layers">Add, Move &amp; Delete Layers</h1>
 <p>In this section we layer information onto the following scatterplot</p>
@@ -178,7 +184,7 @@ $p layer printTree
 <img src="images/layer_group.png" alt="" />
 
 </div>
-<p>To move a layer one position up or down (change place with a sibling) one can also use the <code>layer raise</code> and <code>layer lower</code> sub command, respectively.</p>
+<p>To move a layer one position up or down (i.e. change place with a sibling) one can also use the <code>layer raise</code> and <code>layer lower</code> sub command, respectively.</p>
 <p>The visibility of a layer can be changed with the <code>hide</code> and <code>show</code> sub-command .</p>
 <pre><code>$p layer hide $l_g</code></pre>
 <div class="figure">

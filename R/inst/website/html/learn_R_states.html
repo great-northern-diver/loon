@@ -117,10 +117,8 @@ l_configure(p, showLabels=FALSE)</code></pre>
 <pre><code>    p &lt;- l_plot(iris)
     l_configure(p, size=15, which_n=as.character(iris$Species) == &quot;setosa&quot;)</code></pre>
 <p>where <code>which_*</code> accepts logical and index sub-setting. In <code>R</code> indexing starts at 1. <code>which_*</code> also accepts a state name that is of type Boolean and has the same abstract dimension. l_configure(p, active=FALSE, which_n='selected')</p>
-<p>Note that <code>which_n</code> is equivalent to <code>which</code>.</p>
-<ul>
-<li>Note that when switching between <code>R</code> and <code>Tcl</code>: in <code>R</code> vector indexing starts at 1 and in <code>Tcl</code> at 0. The <code>which...</code> arguments do take this into consideration.</li>
-</ul></li>
+<p>Note that <code>which_n</code> is equivalent to <code>which</code>.</p></li>
+<li><p>Note that when switching between <code>R</code> and <code>Tcl</code>: in <code>R</code> vector indexing starts at 1 and in <code>Tcl</code> at 0. <code>loon</code> will honor the indexing origin in <code>R</code> and <code>Tcl</code> depending on where you use it.</p></li>
 </ul>
 </body>
 </html>

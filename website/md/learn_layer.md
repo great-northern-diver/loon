@@ -6,17 +6,22 @@ window.onload = function() {
 }
 </script>
 
+---
+title: learn layering information - loon
+---
+
+
 
 # Introduction
 
-`loon`'s plots that are based on Cartesian coordinates
-(i.e. scatterplot, histogram, and graph) allow for layering visual
-information such as polygons, text, and rectangles among others. Every
-layer has a unique id, and the layer with the plot model
-(i.e. scatterplot points, histogram, or graph) is called the model
+`loon`'s displays that are based on Cartesian coordinates
+(i.e. scatterplot, histogram and graph display) allow for layering
+visual information including polygons, text and rectangles. Every
+layer has a unique id and the layer with the plot model
+(i.e. scatterplot points, histogram or graph) is called the model
 layer and has the id `model`.
 
-The implemented layer types are the following 
+The available layer types are the following
 
 * **group**: a layer that has no visual representation or states but
   can contain other layers
@@ -28,8 +33,7 @@ The implemented layer types are the following
 
 and `n` dimensional state or compound layers
 
-* **points**: `n` points, same `n` dimensional states as the
-  scatterplot has
+* **points**: `n` circles (with `size` state)
 * **texts**: `n` strings
 * **polygons**: `n` polygons
 * **rectangles**: `n` rectangles
@@ -37,7 +41,8 @@ and `n` dimensional state or compound layers
 
 
 Note that for polygons, rectangles and lines the states `x` and `y`
-have a non-flat data structure <R>, i.e. an `R` list of vectors
+have a non-flat data structure <R>, i.e. an `R` they use a list of
+vectors as follows
 
 ~~~
 l_layer_polygons(p, x=list(c(1,2,3), c(4,2,1), c(1,2,3)),
@@ -56,25 +61,26 @@ $p layer polygons -x {{1 2 3} {4 2 1 3} {1 2 3 4 1}}\
 </Tcl>				
 
 
-Some important implementation details for working with layers are then
+Some important implementation details for working with layers are
 
-* Currently only the model layer in the sense of selection and moving
-  points with mouse gestures.
+* Currently only the model layer is interactive in the sense of
+  selection and moving elements with mouse gestures.
 * Every layer has a unique id that is assigned by loon.
 * Layers are arranged in a tree structure where a `group` layer can be
   a parent to children layers (any of the above mentioned layer
   types). The tree root has id `root`.
 * The layers are rendered in order of a Depth-first traversal of the
   non-group layers.
-* Layers, like the plot models, have states that define its
-  appearance.
-* Layer states also support state bindings.
+* Layers have states that define its appearance.
+	* Layer states support state bindings.
+* Sometimes (e.g. for texts layers), `n` can not be set to 1. Use the
+  singular version instead (e.g. text).
 
 <R>
 
 To get a first impression on the possible operations that can be
-performed on layers you may query all commands that are available to
-work with layer
+performed on layers you may query all commands that are available for
+working with layers
 
 ~~~
 apropos("l_layer_")
@@ -334,8 +340,8 @@ l_layer_printTree(p)
 
 ![](images/layer_group.png)
 
-To move a layer one position up or down (change place with a sibling)
-one can also use the <R>`l_layer_raise` and `l_layer_lower`
+To move a layer one position up or down (i.e. change place with a
+sibling) one can also use the <R>`l_layer_raise` and `l_layer_lower`
 function</R><Tcl>`layer raise` and `layer lower` sub command</Tcl>,
 respectively.
 

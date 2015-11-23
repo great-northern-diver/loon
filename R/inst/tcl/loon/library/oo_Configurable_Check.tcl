@@ -122,7 +122,7 @@
 	
 	foreach x $values {
 	    if {![string is double $x] || $x <= 0} {
-		error "Not all elements in -$var are of type positive double."
+		error "Not all elements in -$var are of type positive double (e.g. $x)."
 	    }
 	}
 	

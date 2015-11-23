@@ -11,14 +11,16 @@ title: event bindings - loon
 
 # Event Bindings
 
-Bindings implement the well known observer pattern. They allow custom
-code to be evaluated after *something* has changed in a plot or
-widget. That *something* might be a state change, a navigator added, a
-glyph deleted, or a layer moved. The code to be evaluated is called a
-*callback*.
+
+Event bindings provide the functionality of binding code to specific
+event types. The bound code is called a *callback*. In `loon`, we
+distinguish between four classes of events: state change events, item
+events, canvas events and content events. Examples of each type of
+event (in the same order as mentioned before) include: a selected
+state modification of a plot, moving the mouse cursor over a point
+glyph, re-sizing the plot window and adding a layer.
 
 For example, a state binding is triggered on particular state changes
-
 
 
 <R>
@@ -45,11 +47,11 @@ $p bind state add {selected active xTemp} {puts "%W had events: %e"}
 
 The above code creates a plot with three points and adds a state
 binding that evaluates the callback <Tcl>code `puts "%W had event
-%e"`</Tcl><R>function</R> if any of the states `selected`, `active`,
-or `xTemp` get changed of `p`. <Tcl>The `%W` and `%e` get
-**substituted** with</Tcl><R>The arguments `W` and `e` contain</R> the
-widget path name and a <Tcl>list</Tcl><R>vector</R> of the events that
-were responsible for the code to be evaluated, respectively.
+%e"`</Tcl><R>function</R> if any of the states `selected`, `active` or
+`xTemp` get changed of `p`. <Tcl>The `%W` and `%e` get **substituted**
+with</Tcl><R>The arguments `W` and `e` contain</R> the widget path
+name and a <Tcl>list</Tcl><R>vector</R> of the events that were
+responsible for the code to be evaluated, respectively.
 
 
 
@@ -59,9 +61,8 @@ There are also a number of other bindings:
   gesture with a visual item on the display.
 * Canvas bindings evaluate code triggered by a keyboard and mouse
   gesture on the plot as a whole.
-* There are also a number of content bindings that evaluate callback
-  functions when the collection of layers, glyphs, or navigators
-  changes.
+* Content bindings evaluate callbacks when the collection of layers,
+  glyphs or navigators changes.
 
 <Tcl> Besides the `bind` subcommand we also provide the `systembind`
 subcommand. `bind` and `systembind` can be used
@@ -74,10 +75,10 @@ error catching is performed when evaluating system binding code.
 
 ## R Callbacks
 
-The `callback` arguments of `l_bind_state`, `l_bind_layer`, etc.. take
-an `R` function which then is called by the `Tcl` interpreter if the
-event of interest happens. The mapping between `R` function and `Tcl`
-interpreter procedure is as follows
+The `callback` argument of the bind functions expects an `R` function
+which is called by the `Tcl` interpreter if the event of interest
+happens. The `Tcl` interpreter can call `R` functions using their
+hex-encoded address as follows
 
 ~~~
 foo <- function(x,y,a,b) {	
@@ -90,11 +91,11 @@ foo <- function(x,y,a,b) {
 ~~~
 
 The `R_call` procedure in `Tcl` uses the hex-address to access the `R`
-function. The `x`, `y`, `a`, and `b` arguments of `foo` get translated
-to `%x`, `%y`, `%a`, and `%b` which need to be substituted to the
-arguments that should be sent to the `R` function `foo`. Note, that
-`Tcl` will always send strings to the arguments of the `R` function
-and hence they need to changed to the required type as we did with the
+function. The `x`, `y`, `a` and `b` arguments of `foo` get translated
+to `%x`, `%y`, `%a` and `%b`. The `%` arguments are meant to be
+substituted by `Tcl` before the `R_call` evaluation. Note, that `Tcl`
+will always send strings to the arguments of the `R` function and
+hence they need to changed to the required type as we did with the
 `as.numeric` `R` function. For example
 
 ~~~
@@ -104,8 +105,15 @@ s
 #> 30
 ~~~
 
-In `loon` we support a number of substitutions such for example as
-`%W`, `%e`, `%b`, for widget path name, events, binding id,
+If `Tcl` submits a `Tcl` list as an argument then in the `R` callback
+this list appears as a string with the list elements separated by a
+space. We provide the `l_toR` function to convert a `R` callback
+arguments to vectors of a specific types. For example `l_toR(e,
+as.numeric)` converts `e` to an `R` vector of numbers.
+
+
+`loon` supports a number of substitutions such as `%W`, `%e` and `%b`
+for widget path name, events and binding id,
 respectively. Substitutions are optional and hence any combination of
 the substitution strings and hence argument names of the `R` function
 can be used. In other words
@@ -118,14 +126,13 @@ l_bind_state(p, 'all', function(e, W, b) {})
 l_bind_state(p, 'all', function(b) {})
 ~~~
 
-are all valid `R` functions to be evaluated by `loon`. This is the
-same mechanism as for the standard `Tk` widgets like buttons, slider,
-etc.
+are all valid `R` functions to be evaluated by a state binding. This
+is the same mechanism as for the standard `Tk` widget bindings.
 
-Also note that the hex number points to the environment of the
-particular function specified in the `callback` function. Hence if you
-re-define an `R` function with the same name the `Tcl` interpreter
-will not use that name. For example
+Note that the hex-encoded address points to a particular `R` function
+and not the function name. Hence if you re-define an `R` function and
+assign it to the variable (i.e function name) then the `Tcl`
+interpreter will not use that new function. For example
 
 ~~~
 foo <- function(W) {cat(paste(W, 'had some event\n'))}
@@ -140,7 +147,7 @@ p['selected'] <- TRUE
 ~~~
 
 The easiest way to deal with this to wrap the `foo` function call into
-another function
+another anonymous function
 
 ~~~
 foo <- function(W) {cat(paste(W, 'had some event\n'))}
@@ -159,13 +166,13 @@ p['selected'] <- TRUE
 
 ## State Change Bindings
 
-State bindings get triggered when a widget state changes. For more
+State bindings get triggered when widget states change. For more
 information on widget states see the <a
 href="learn_<R>R</R><Tcl>Tcl</Tcl>_states.html">states
 documentation</a>.
 
 A `configure` call that changes multiple states will collect which
-states have changed and only evaluate the event bindings once. For
+states have changed and only evaluate the change bindings once. For
 example
 
 <R>
