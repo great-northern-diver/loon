@@ -8,23 +8,24 @@ title: loon - user interface gestures
 
 ### Introduction
 
-The graphical user interface of the `loon` scatterplot display should
-be fairly easy to learn. We kept the number of mouse gestures and
-keyboard shortcuts minimal. The `Ctrl` and `Shift` in combination with
-the left and right mouse button or mouse wheel is all you ever
-need. In fact, the default gestures for the scatterplot display are
-summarized by the following figures.
+The keyboard and mouse gestures for the graphical user interfaces of
+`loon`'s displays should be fairly easy to learn. We kept the number
+of mouse gestures and keyboard shortcuts minimal. The `Ctrl` and
+`Shift` in combination with the left and right mouse button or mouse
+wheel is all you ever need. In fact, the default gestures for the
+scatterplot display are summarized by the following figures.
 
-Zoom and Pan gestures are as follows (serialaxes display does not
+Zoom and Pan gestures are as follows (the serialaxes display does not
 support zoom and pan)
 
 ![Two superimposed mice illustrate a click and drag gesture](images/gestures_zoom_pan.png "Interaction Gestures: Zoom and Pan")
 
-Selection gestures are as follows
+The selection gestures are as follows
 
 ![Two superimposed mice illustrate a click and drag gesture](images/gestures_select.png "Interaction Gestures: Selection")
 
-And for the scatterplot one can temporary move points as follows
+And for the scatterplot display one can temporary move points as
+follows
 
 ![Move points on scatterplot](images/gestures_move.png "Move points on scatterplot")
 

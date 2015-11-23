@@ -27,11 +27,11 @@ provides a thin layer of `R` code to embed `loon` into the `R`
 environment.. `Tcl` is a programming language and `Tk` is a GUI
 toolkit written as an extension for `Tcl`.
 
-Knowledge of `Tcl` and `Tk` are not required to use `loon`. However, a
-basic understanding of `Tcl` and `Tk` helps to appreciate certain API
-design decisions and, it also helps to follow some advanced topics
-such as event bindings and widget layout with geometry
-management. Hence, you may read
+Knowledge of `Tcl` and `Tk` are not required to use `loon` in
+`R`. However, a basic understanding of `Tcl` and `Tk` helps to
+appreciate certain API design decisions and, it also helps to follow
+some advanced topics such as event bindings and widget layout with
+geometry management. Hence, you may read
 [our short overview of `tcltk` `R` package](learn_R_tcltk.html).
 
 If your knowledge of `R` is generally basic, then consider reading the
@@ -174,7 +174,7 @@ p['size'] <- iris$Petal.Length
 ~~~
 </R>
 
-The User Interface of the scatterplot display is explained in the
+The user interfaces of `loon`'s displays are explained in the
 [UI section](UI.html).
 
 
@@ -254,10 +254,7 @@ l_plot(c(1,2,3), c(4,2,4), cex=c(4,1,8), col=c('red','blue','yellow'))
 with(mtcars, l_plot(hp ~ wt))
 ~~~
 
-the `l_plot` function call could be replaced with `plot` for a
-non-interactive equivalent using `R`'s base graphics. Note that `loon`
-will generate warnings if you use some `R` argument names instead of
-`loon`'s state names (e.g. `col` vs `color`, `lwd` vs `linewidth`).
+the `l_plot` function call could be replaced with `plot` for non-interactive equivalents using `R`'s base graphics. Note that `loon` will generate warnings if you use some base `R` graphics argument names instead of `loon`'s state names (e.g. `col` vs `color` or `lwd` vs `linewidth`).
 
 Also, 
 
@@ -274,11 +271,12 @@ version as they represent the plot state names.
   other than `ps` and `pdf` you need the `Img` `Tcl` package to be
   loaded. 
 
-- Note that in `R` consecutive `plot` calls write their output to the
-same device (e.g. window), but consecutive `l_plot` calls will open a
-new window for each call. If an existing `loon` plot should be
-modified use the `l_configure` function with an `x` and/or `y`
-argument should be used.
+- Note that in `R` consecutive `plot` calls write their output to the same device (e.g. window), but in `loon` consecutive `l_plot` calls will open a new window for each call. If an existing `loon` plot should be modified use the `l_configure` function with an `x` and/or `y` argument. For example,
+
+		p <- l_plot(iris[,1:2], color=iris$Species, showScales=TRUE)
+		l_configure(p, x=mtcars$hp, y=mtcars$mpg, color=mtcars$gear,
+			ylabel='Gross horsepower', ylabel='Miles/(US) gallon')
+		l_scaleto_world(p)
 
 </R>
 

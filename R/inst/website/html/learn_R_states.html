@@ -73,9 +73,9 @@ window.onload = function() {
 }
 </script>
 <h1 id="introduction">Introduction</h1>
-<p>All of <code>loon</code>'s displays have plot states. Plot states specify what is displayed, how it is displayed and if and how the plot is linked with other <code>loon</code> plots. <code>loon</code>'s plot states are derived from <code>Tk</code>'s configurable options. A large part of <code>loon</code>'s framework revolves around modifying states, tracking state changes, and synchronization of plot states between plots.</p>
-<p>Examples of plot states for the scatterplot display are <code>x</code>, <code>y</code>, <code>color</code>, <code>size</code>, <code>selected</code>, <code>xlabel</code>, <code>ylabel</code>, <code>zoomX</code>, <code>zoomY</code>, <code>panX</code>, <code>panY</code>, <code>showScales</code>, <code>showGuides</code>. The scatterplot display has more than 30 states.</p>
-<p>To get a complete list of the plot states for a particular <code>loon</code> widget use the function <code>l_info_states</code></p>
+<p>All of <code>loon</code>'s displays have plot states. Plot states specify what is displayed, how it is displayed and if and how the plot is linked with other <code>loon</code> plots. <code>loon</code>'s plot states are derived from <code>Tk</code>'s configurable options. A large part of <code>loon</code>'s framework revolves around modifying states, tracking state changes and the synchronization of plot states between plots.</p>
+<p>For example, the plot states of the scatterplot display include <code>x</code>, <code>y</code>, <code>color</code>, <code>size</code>, <code>selected</code>, <code>xlabel</code>, <code>ylabel</code>, <code>zoomX</code>, <code>zoomY</code>, <code>panX</code>, <code>panY</code>, <code>showScales</code> and <code>showGuides</code>. The scatterplot display has more than 30 states.</p>
+<p>To get a complete list of the plot states for a particular <code>loon</code> widget use the <code>l_info_states</code> function</p>
 <pre><code>p &lt;- l_plot(iris[,1:2])
 
 istates &lt;- l_info_states(p)
@@ -86,9 +86,9 @@ l_info_states(p, &#39;x&#39;)
 istates$x
 
 l_info_states(p, c(&#39;x&#39;, &#39;y&#39;, &#39;xTemp&#39;))</code></pre>
-<p>If at all possible, the data structures for each state is either a scalar or a flat list with <code>i</code> elements, <code>i=0,1,...</code>. An exception is the <code>data</code> state which contains a <code>data.frame</code>.</p>
+<p>When possible then the data structure for each state is either a scalar or a flat vector. One exception is the <code>data</code> state which contains a <code>data.frame</code>.</p>
 <h1 id="query-and-modify">Query and Modify</h1>
-<p>To query a state, say <code>showScales</code>, of the plot <code>p</code> use one of</p>
+<p>To query a state, say <code>showScales</code>, of the plot <code>p</code> use either the accessor method <code>[</code> or the <code>l_cget</code> function/R&gt;</p>
 <pre><code>p[&#39;showScales&#39;]
 l_cget(p, &#39;showScales&#39;)</code></pre>
 <p>To modify a single state, say <code>showLabels</code>, use one of</p>
@@ -96,20 +96,20 @@ l_cget(p, &#39;showScales&#39;)</code></pre>
 l_configure(p, showLabels=FALSE)</code></pre>
 <p>to modify multiple states, say <code>showLabels</code> and <code>showScales</code>, use</p>
 <pre><code>l_configure(p, showScales=FALSE, showLabels=FALSE)</code></pre>
-<p>Note that you should never use the <code>tkconfigure</code> function (defined in the <code>tcltk</code> package) instead of the <code>l_configure</code> function, as they often do not do the same thing!</p>
+<p>Note that you should never use the <code>tkconfigure</code> function (defined in the <code>tcltk</code> package) instead of the <code>l_configure</code> function! One reason is that the <code>l_configure</code> function is customized for <code>loon</code> plots and takes care of some <code>R</code> to <code>Tcl</code> data structure conversions that are otherwise not supported (e.g. <code>data.frame</code> and nested lists).</p>
 <h1 id="state-dimension">State Dimension</h1>
 <p>The dimension of a state is either explicit, i.e. a number, or abstract, i.e. a letter.</p>
 <ul>
 <li><p>Abstract dimensions take on a value at plot creation time.</p></li>
-<li><p>The value of abstract dimensions can be changed when changing the dominant states for a dimension together. For the dimension <code>n</code>, the dominant states are always the data states <code>x</code> and <code>y</code>, or <code>data</code>.</p>
+<li><p>The value of abstract dimensions can be changed when changing the dominant states for a dimension together. The dominant states for the displays are: <code>x</code> for the histogram, <code>x</code> and <code>y</code> for the scatterplot, <code>data</code> for the serialaxes display, and for the graph display <code>nodes</code> is dominant for <code>n</code> dimensional states and <code>from</code> and <code>to</code> are dominant for the <code>p</code> dimensional states.</p>
 <pre><code>  p &lt;- l_plot(iris, color=iris$Species)
   p[&#39;n&#39;]
   data(olive)
   with(olive, l_configure(p, x=oleic, y=stearic, color=Area))
   l_scaleto_world(p)
   p[&#39;n&#39;]</code></pre></li>
-<li><p>Changing an abstract dimension will assign default values to all non-dominant states of that dimension. The dominant states for the displays are: <code>x</code> for the histogram, <code>x</code> and <code>y</code> for the scatterplot, <code>data</code> for the serialaxes display, and for the graph display <code>nodes</code> is dominant for <code>n</code> dimensional states and <code>from</code> and <code>to</code> are dominant for the <code>p</code> dimensional states.</p></li>
-<li><p>When assigning a single value to a state that has an abstract dimension, that value gets repeated accordingly. For example, for the <code>n</code> dimensional state <code>selected</code></p>
+<li><p>Changing an abstract dimension will assign default values to all non-dominant states that have that dimension.</p></li>
+<li><p>When assigning a single value to a state that has an abstract dimension then that value gets repeated accordingly. For example, for the <code>n</code> dimensional state <code>selected</code></p>
 <pre><code>    p &lt;- l_plot(iris)
     p[&#39;selected&#39;] &lt;- TRUE</code></pre>
 <p>will repeat <code>TRUE</code> <code>n=150</code> times.</p></li>

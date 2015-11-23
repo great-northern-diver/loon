@@ -31,24 +31,51 @@ title: "beta tester instructions - loon"
 
 # Installation
 
+## Suggested Packages
+
+
 First try to install the suggested packages so that you can run all
 the demos. Note that these packages are not needed to install `loon`,
-they are just nice to have to run the demos.
+they are just nice to have to run the demos. We split the code to
+install packages into four sections as not all packages are easy to
+install.
+
+First, these packages from CRAN should install without any issues
+
+~~~
+install.packages(c('maps', 'sp', 'RColorBrewer', 'dplyr',
+	'devtools', 'testthat', 'RnavGraphImageData', 'rworldmap'))
+~~~
+
+The following packages on Biocoductor should also install without any
+issues
 
 ~~~
 source("https://bioconductor.org/biocLite.R")
-biocLite(c('graph', 'Rgraphviz', 'RDRToolbox'))
-install.packages(c('maps', 'sp', 'RColorBrewer', 'rworldmap',
-	'rgl', 'RnavGraphImageData','dplyr'))
-install.packages(c('PairViz', 'scagnostics', 'kernlab', 'devtools', 'testthat'))
+biocLite('graph', 'RDRToolbox'), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
 ~~~
 
-* Windows users need to install Tcl and Tk version 8.6 and link it
+The `Rgraphviz` package is sometimes not easy to install
+
+~~~
+biocLite('Rgraphviz', suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
+~~~
+
+The following packages on CRAN have also dependencies that need
+special care. Make sure that you have 
+
+~~~
+install.packages(c('rgl', 'PairViz', 'scagnostics', 'kernlab'))
+~~~
+
+* Windows users need to install `Tcl` and `Tk` version 8.6 and link it
   against your `R`. [Read below](#linking-activetcl-with-r-on-windows).
 * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
 
 
-## With devtools from github
+## Installing the loon package
+
+### Fom github
 
 ~~~
 library(devtools)
@@ -70,7 +97,7 @@ dev_mode(on=FALSE)
 ~~~
 -->
 
-## Manually with tar.gz package
+### From a local file
 
 In Rstudio, select Packages, Install, Install from: Package Archive
 File (.tar.gz), select the 'loon_0.9.tar.gz' file and press the
@@ -182,17 +209,10 @@ please [contact me](mailto:adrian@waddell.ch).
 # More Important Notes
 
 We may change the syntax during the beta testing phase without
-maintaining backward compatibility. We try to maintain list with the
+maintaining backward compatibility. We will maintain a list with the
 syntax changes on this page.
 
-<div class="todo">
-
-Note that features that are highlighted with pastel red are not
-available in the beta version of `loon`.
-
-</div>
-
-Also note that only part of `loon`'s functionality is documented
+Note that only part of `loon`'s functionality is documented
 here. However, most of `loon`'s features are used in the `R` package
 demos. To get a listing of all of `loon`'s demos enter
 
@@ -221,9 +241,6 @@ system.file("demo", "l_timeseries.R", package = "loon")
   because the `canvas` widget is only anti-aliased under `OS X`. Also,
   the `Tcl` version that is included in `R` under `OS X` does not have
   an anti-aliased canvas.
-
-# Also good to know
-
 - currently only the `ps` file format works reliably for image exports
  (although the font mapping is not correct yet). I recommend for now
  to make screenshots if you need to put a `loon` plot into your

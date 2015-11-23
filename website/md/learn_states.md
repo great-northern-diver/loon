@@ -12,18 +12,18 @@ All of `loon`'s displays have plot states. Plot states specify what is
 displayed, how it is displayed and if and how the plot is linked with
 other `loon` plots. `loon`'s plot states are derived from `Tk`'s
 configurable options.  A large part of `loon`'s framework revolves
-around modifying states, tracking state changes, and synchronization
-of plot states between plots.
+around modifying states, tracking state changes and the
+synchronization of plot states between plots.
 
-Examples of plot states for the scatterplot display are `x`, `y`,
-`color`, `size`, `selected`, `xlabel`, `ylabel`, `zoomX`, `zoomY`,
-`panX`, `panY`, `showScales`, `showGuides`. The scatterplot display
-has more than 30 states. 
+For example, the plot states of the scatterplot display include `x`,
+`y`, `color`, `size`, `selected`, `xlabel`, `ylabel`, `zoomX`,
+`zoomY`, `panX`, `panY`, `showScales` and `showGuides`. The
+scatterplot display has more than 30 states.
 
 
 To get a complete list of the plot states for a particular `loon`
-widget use the <R>function `l_info_states`</R> <Tcl>procedure
-`states`</Tcl>
+widget use the <R>`l_info_states` function</R> <Tcl>`info states`
+widget subcommand</Tcl>
 
 <Tcl>
 
@@ -54,15 +54,14 @@ l_info_states(p, c('x', 'y', 'xTemp'))
 
 </R>
 
-If at all possible, the data structures for each state is either a
-scalar or a flat list with `i` elements, `i=0,1,...`. An exception is
-the `data` state which contains a
-<R>`data.frame`</R><Tcl>`dict`</Tcl><Python>**TODO**</Python>.
+When possible then the data structure for each state is either a
+scalar or a flat <R>vector</R><Tcl>list</Tcl>. One exception is the
+`data` state which contains a <R>`data.frame`</R><Tcl>`dict`</Tcl>.
 
 # Query and Modify
 
-To query a state, say `showScales`, of the plot `p` use
-<R> one of
+To query a state, say `showScales`, of the plot `p` use <R> either the
+accessor method `[` or the `l_cget` function/R>
 
 ~~~	
 p['showScales']
@@ -104,9 +103,15 @@ $p configure -showScales TRUE -showLabels TRUE
 </Tcl>
 
 
-<R>Note that you should never use the `tkconfigure` function (defined
-in the `tcltk` package) instead of the `l_configure` function,
-as they often do not do the same thing!</R>
+<R>
+
+Note that you should never use the `tkconfigure` function (defined in
+the `tcltk` package) instead of the `l_configure` function! One reason
+is that the `l_configure` function is customized for `loon` plots and
+takes care of some `R` to `Tcl` data structure conversions that are
+otherwise not supported (e.g. `data.frame` and nested lists).
+
+</R>
 
 
 
@@ -118,9 +123,11 @@ abstract, i.e. a letter.
   * Abstract dimensions take on a value at plot creation time.
 
   * The value of abstract dimensions can be changed when changing the
-	dominant states for a dimension together. For the dimension `n`,
-	the dominant states are always the data states `x` and `y`, or
-	`data`.
+  dominant states for a dimension together. The dominant states for
+  the displays are: `x` for the histogram, `x` and `y` for the
+  scatterplot, `data` for the serialaxes display, and for the graph
+  display `nodes` is dominant for `n` dimensional states and `from`
+  and `to` are dominant for the `p` dimensional states.
 
 <R>
 	      p <- l_plot(iris, color=iris$Species)
@@ -138,16 +145,11 @@ abstract, i.e. a letter.
 </Tcl>
 
   * Changing an abstract dimension will assign default values to all
-    non-dominant states of that dimension. The dominant states for the
-    displays are: `x` for the histogram, `x` and `y` for the
-    scatterplot, `data` for the serialaxes display, and for the graph
-    display `nodes` is dominant for `n` dimensional states and `from`
-    and `to` are dominant for the `p` dimensional states.
-
+    non-dominant states that have that dimension.
   
   * When assigning a single value to a state that has an abstract
-    dimension, that value gets repeated accordingly. For example, for
-    the `n` dimensional state `selected`
+    dimension then that value gets repeated accordingly. For example,
+    for the `n` dimensional state `selected`
 	  
 <R>
 			p <- l_plot(iris)
