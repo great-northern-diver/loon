@@ -8,6 +8,15 @@ if {[llength $argv] eq 0} {
     set todo $argv
 }
 
+if {[set tcl_version] ne "8.6"} {
+    proc lmap {_var list body} {
+        upvar 1 $_var var
+        set res {}
+        foreach var $list {lappend res [uplevel 1 $body]}
+        set res
+    }    
+}
+
 set cmd [list pandoc -c style.css\
              -f markdown+header_attributes+fenced_code_blocks+line_blocks+pipe_tables\
              -s]

@@ -22,7 +22,7 @@ title: "beta tester instructions - loon"
 * If you experience difficulties with `loon` use the
   [Issue tracker on github](https://github.com/waddella/loon/issues).
 * If you have difficulties with exporting images with the `l_export`
-  function then yake screenshots:
+  function then take screenshots:
 	  * On OSX press Command + Shift + 4 and then press space and
 		select the window
 	  * On Linux install a program called [Shutter](http://shutter-project.org/)
@@ -31,57 +31,22 @@ title: "beta tester instructions - loon"
 
 # Installation
 
-## Suggested Packages
-
-
-First try to install the suggested packages so that you can run all
-the demos. Note that these packages are not needed to install `loon`,
-they are just nice to have to run the demos. We split the code to
-install packages into four sections as not all packages are easy to
-install.
-
-First, these packages from CRAN should install without any issues
-
-~~~
-install.packages(c('maps', 'sp', 'RColorBrewer', 'dplyr',
-	'devtools', 'testthat', 'RnavGraphImageData', 'rworldmap'))
-~~~
-
-The following packages on Biocoductor should also install without any
-issues
-
-~~~
-source("https://bioconductor.org/biocLite.R")
-biocLite('graph', 'RDRToolbox'), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
-~~~
-
-The `Rgraphviz` package is sometimes not easy to install
-
-~~~
-biocLite('Rgraphviz', suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
-~~~
-
-The following packages on CRAN have also dependencies that need
-special care. Make sure that you have 
-
-~~~
-install.packages(c('rgl', 'PairViz', 'scagnostics', 'kernlab'))
-~~~
-
 * Windows users need to install `Tcl` and `Tk` version 8.6 and link it
   against your `R`. [Read below](#linking-activetcl-with-r-on-windows).
 * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
 
-
 ## Installing the loon package
 
-### Fom github
+<!-- ### Fom github -->
 
 ~~~
 library(devtools)
 
 install_github("waddella/loon", subdir="R")
 ~~~
+
+`loon` is under active development. You can also **update** the `loon`
+package with the above code.
 
 
 <!--
@@ -97,6 +62,7 @@ dev_mode(on=FALSE)
 ~~~
 -->
 
+<!--
 ### From a local file
 
 In Rstudio, select Packages, Install, Install from: Package Archive
@@ -111,6 +77,43 @@ terminal
 
 ~~~
 R CMD INSTALL loon_0.9.1.tar.gz
+~~~
+
+-->
+
+## Packages used for Demos
+
+The following packages are used in `loon`'s package demos. Note that
+these packages are not needed to install `loon`, they are just nice to
+have to run the demos. We split the code to install packages into four
+sections as not all packages are easy to install.
+
+First, these packages from CRAN should install without any issues
+
+~~~
+install.packages(c('maps', 'sp', 'RColorBrewer', 'dplyr',
+    'RnavGraphImageData', 'rworldmap'))
+~~~
+
+The following packages on Biocoductor should also install without any
+issues
+
+~~~
+source("https://bioconductor.org/biocLite.R")
+biocLite(c('graph', 'RDRToolbox'), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
+~~~
+
+The `Rgraphviz` package is sometimes not easy to install
+
+~~~
+biocLite('Rgraphviz', suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
+~~~
+
+The following packages on CRAN have also dependencies that need
+special care. Make sure that you have 
+
+~~~
+install.packages(c('rgl', 'PairViz', 'scagnostics', 'kernlab'))
 ~~~
 
 

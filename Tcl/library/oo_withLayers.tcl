@@ -677,8 +677,9 @@
     }
 
     method scaleto {what args} {
-	my variable x y selected active
+	my variable x y xTemp yTemp selected active
 	
+        
 	
 	switch -- $what {
 	    plot {
@@ -696,12 +697,23 @@
 		    return 
 		}
 		
-		
+		if {[llength $xTemp] eq 0} {
+                    set tmp_x $x
+                } else {
+                    set tmp_x $xTemp
+                }
+
+		if {[llength $yTemp] eq 0} {
+                    set tmp_y $y
+                } else {
+                    set tmp_y $yTemp
+                }
+
 		set mmx [::loon::listfns::MinMax\
-			     [::loon::listfns::subsetLogical $x $which]]
+			     [::loon::listfns::subsetLogical $tmp_x $which]]
 		
 		set mmy [::loon::listfns::MinMax\
-			     [::loon::listfns::subsetLogical $y $which]]		    
+			     [::loon::listfns::subsetLogical $tmp_y $which]]		    
 		
 		set bbox [list [lindex $mmx 0]\
 			      [lindex $mmy 0]\

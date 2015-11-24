@@ -607,6 +607,7 @@ nav &lt;- l_ng_ranges(measures=m2d, data=dat, separator=&#39;:&#39;)</code></pre
 kurtosis &lt;- function(x) { mean((x-mean(x))^4)/mean((x-mean(x))^2)^2 - 3 }
 skewness &lt;- function(x) { mean((x-mean(x))^3)/sd(x)^3 }
 
+
 s_oliveAcids &lt;- scale(oliveAcids)
 
 m1dc &lt;- measures1d(data=s_oliveAcids, separator=&#39;+&#39;,

@@ -32,11 +32,8 @@ Loon: An Interactive Statistical Visualization Toolkit
 <ul>
 <li><a href="#important">Important</a></li>
 <li><a href="#installation">Installation</a><ul>
-<li><a href="#suggested-packages">Suggested Packages</a></li>
-<li><a href="#installing-the-loon-package">Installing the loon package</a><ul>
-<li><a href="#fom-github">Fom github</a></li>
-<li><a href="#from-a-local-file">From a local file</a></li>
-</ul></li>
+<li><a href="#installing-the-loon-package">Installing the loon package</a></li>
+<li><a href="#packages-used-for-demos">Packages used for Demos</a></li>
 </ul></li>
 <li><a href="#linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</a></li>
 <li><a href="#check-if-your-installation-was-successful">Check if your Installation was Successful</a></li>
@@ -61,7 +58,7 @@ document.getElementById("beta").className += " selected";
 <li>Do not close <code>XQuartz</code> while <code>R</code> is running! Otherwise you end up crashing the active <code>R</code> session (including <code>RStudio</code>).</li>
 </ul></li>
 <li>If you experience difficulties with <code>loon</code> use the <a href="https://github.com/waddella/loon/issues">Issue tracker on github</a>.</li>
-<li>If you have difficulties with exporting images with the <code>l_export</code> function then yake screenshots:
+<li>If you have difficulties with exporting images with the <code>l_export</code> function then take screenshots:
 <ul>
 <li>On OSX press Command + Shift + 4 and then press space and select the window</li>
 <li>On Linux install a program called <a href="http://shutter-project.org/">Shutter</a></li>
@@ -69,27 +66,16 @@ document.getElementById("beta").className += " selected";
 </ul></li>
 </ul>
 <h1 id="installation">Installation</h1>
-<h2 id="suggested-packages">Suggested Packages</h2>
-<p>First try to install the suggested packages so that you can run all the demos. Note that these packages are not needed to install <code>loon</code>, they are just nice to have to run the demos. We split the code to install packages into four sections as not all packages are easy to install.</p>
-<p>First, these packages from CRAN should install without any issues</p>
-<pre><code>install.packages(c(&#39;maps&#39;, &#39;sp&#39;, &#39;RColorBrewer&#39;, &#39;dplyr&#39;,
-    &#39;devtools&#39;, &#39;testthat&#39;, &#39;RnavGraphImageData&#39;, &#39;rworldmap&#39;))</code></pre>
-<p>The following packages on Biocoductor should also install without any issues</p>
-<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
-biocLite(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
-<p>The <code>Rgraphviz</code> package is sometimes not easy to install</p>
-<pre><code>biocLite(&#39;Rgraphviz&#39;, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
-<p>The following packages on CRAN have also dependencies that need special care. Make sure that you have</p>
-<pre><code>install.packages(c(&#39;rgl&#39;, &#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;))</code></pre>
 <ul>
 <li>Windows users need to install <code>Tcl</code> and <code>Tk</code> version 8.6 and link it against your <code>R</code>. <a href="#linking-activetcl-with-r-on-windows">Read below</a>.</li>
 <li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a></li>
 </ul>
 <h2 id="installing-the-loon-package">Installing the loon package</h2>
-<h3 id="fom-github">Fom github</h3>
+<!-- ### Fom github -->
 <pre><code>library(devtools)
 
 install_github(&quot;waddella/loon&quot;, subdir=&quot;R&quot;)</code></pre>
+<p><code>loon</code> is under active development. You can also <strong>update</strong> the <code>loon</code> package with the above code.</p>
 <!--
 You can switch between development version and the version you have
 installed manually
@@ -102,14 +88,36 @@ dev_mode(on=TRUE)
 dev_mode(on=FALSE)
 ~~~
 -->
-<h3 id="from-a-local-file">From a local file</h3>
-<p>In Rstudio, select Packages, Install, Install from: Package Archive File (.tar.gz), select the 'loon_0.9.1.tar.gz' file and press the install button.</p>
-<div class="figure">
-<img src="images/install_rstudio.png" title="install loon with Rstudio." alt="Install loon in Rstudio" />
-<p class="caption">Install loon in Rstudio</p>
-</div>
-<p>To install the <code>loon</code> <code>R</code> package as usual the following code in your terminal</p>
-<pre><code>R CMD INSTALL loon_0.9.1.tar.gz</code></pre>
+<!--
+### From a local file
+
+In Rstudio, select Packages, Install, Install from: Package Archive
+File (.tar.gz), select the 'loon_0.9.1.tar.gz' file and press the
+install button.
+
+![Install loon in Rstudio](images/install_rstudio.png "install loon with Rstudio.")
+
+
+To install the `loon` `R` package as usual the following code in your
+terminal
+
+~~~
+R CMD INSTALL loon_0.9.1.tar.gz
+~~~
+
+-->
+<h2 id="packages-used-for-demos">Packages used for Demos</h2>
+<p>The following packages are used in <code>loon</code>'s package demos. Note that these packages are not needed to install <code>loon</code>, they are just nice to have to run the demos. We split the code to install packages into four sections as not all packages are easy to install.</p>
+<p>First, these packages from CRAN should install without any issues</p>
+<pre><code>install.packages(c(&#39;maps&#39;, &#39;sp&#39;, &#39;RColorBrewer&#39;, &#39;dplyr&#39;,
+    &#39;RnavGraphImageData&#39;, &#39;rworldmap&#39;))</code></pre>
+<p>The following packages on Biocoductor should also install without any issues</p>
+<pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
+<p>The <code>Rgraphviz</code> package is sometimes not easy to install</p>
+<pre><code>biocLite(&#39;Rgraphviz&#39;, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
+<p>The following packages on CRAN have also dependencies that need special care. Make sure that you have</p>
+<pre><code>install.packages(c(&#39;rgl&#39;, &#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;))</code></pre>
 <h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
 <p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>.</p>
 <p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
