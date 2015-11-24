@@ -1,14 +1,23 @@
 
 
 ## this is an interpreted version of the image_scale
-## command. However it is better to install the ImageScale
+## command. The original code comes from
+## http://wiki.tcl.tk/11196
+## However it is better to install the ImageScale
 ## package from https://github.com/waddella/tclImageScale
 if {![catch {package require ImageScale}]} {
     set ::loon::Options(image_scale) "::imagescale::image_scale"
-}   
+} else {
+    set ::loon::Options(image_sizes) {4 8 15 40}
+}
 
 namespace eval loon {
     proc image_scale {src newx newy {dest ""} } {
+
+	if {$newx < 1 || $newy < 1} {
+	    set newx 5
+	    set newy 5
+	}
 	
 	set mx [image width $src]
 	set my [image height $src]
@@ -35,7 +44,7 @@ namespace eval loon {
 	    #
 	    # Do horizontal resize
 	    #
-	    
+
 	    foreach {pr pg pb} [$src get 0 $y] {break}
 	    
 	    set row [list]
@@ -55,7 +64,6 @@ namespace eval loon {
 		}
 		
 		# Now add mixed pixels
-		
 		foreach {r g b} [$src get $x $y] {break}
 		
 		# Calculate ratios to use
@@ -80,8 +88,9 @@ namespace eval loon {
 		    set xtot [expr {$xtot - $newx}]
 		    incr x
 		    foreach {r g b} [$src get $x $y] {break}
+		    
 		}
-		
+
 		# Work out the new pixel colours
 		
 		set tr [expr {int( ($rn*$r + $xr + $rp*$pr) / $mx)}]
