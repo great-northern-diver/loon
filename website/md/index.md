@@ -24,7 +24,7 @@ software.
 
 * For `R` see the [beta section](beta.html).
 
-* For `Tcl` see the [github Readme](https://github.com/waddella/loon/Tcl/).
+* For `Tcl` see the [github Readme](https://github.com/waddella/loon/tree/master/Tcl).
 
 # Statistical Displays
 
