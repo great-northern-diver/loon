@@ -127,6 +127,16 @@ oo::class create loon::classes::SerialaxesGlyphVisual {
 	set linewidth [lindex [set ${glyphObject}::linewidth] $ind]
 
 	if {[set ${glyphObject}::showArea]} {
+	    lappend ids [uplevel #0 [list $canvas create polygon 0 0 0 0 -width $linewidth]]
+	    # Axes 	
+	    if {[set ${glyphObject}::showAxes]} {
+		set axesCol [set ${glyphObject}::axesColor]
+		for {set i 0} {$i < $p} {incr i} {
+		    lappend ids [uplevel #0 [list $canvas create line 0 0 0 0\
+						    -fill $axesCol -width 1]]
+		}	    
+	    }   
+	} else {
 	    ## if showArea then axes are below star
 	    set idaxes {}
 	    # Axes 	
@@ -139,16 +149,6 @@ oo::class create loon::classes::SerialaxesGlyphVisual {
 	    }       
 	    lappend ids [uplevel #0 [list $canvas create line 0 0 0 0 -width $linewidth]]
 	    lappend ids {*}$idaxes
-	} else {
-	    lappend ids [uplevel #0 [list $canvas create polygon 0 0 0 0 -width $linewidth]]
-	    # Axes 	
-	    if {[set ${glyphObject}::showAxes]} {
-		set axesCol [set ${glyphObject}::axesColor]
-		for {set i 0} {$i < $p} {incr i} {
-		    lappend ids [uplevel #0 [list $canvas create line 0 0 0 0\
-						    -fill $axesCol -width 1]]
-		}	    
-	    }   
 	}
 	
 	
@@ -177,11 +177,11 @@ oo::class create loon::classes::SerialaxesGlyphVisual {
 	
 	    ## update glyph
 	    if {[set ${glyphObject}::showArea]} {
+		uplevel #0 [list $canvas coords [lindex $ids $nextid] $coords]
+	    } else {
 		## uses lines, hence need to close shape
 		uplevel #0 [list $canvas coords [lindex $ids $nextid]\
 				[concat $coords {*}[lrange $coords 0 1]]] 
-	    } else {
-		uplevel #0 [list $canvas coords [lindex $ids $nextid] $coords]
 	    }
 	    incr nextid
 	
@@ -258,9 +258,9 @@ oo::class create loon::classes::SerialaxesGlyphVisual {
 	    }
 	    
 	    if {[set ${glyphObject}::showArea]} {
-		uplevel #0 [list $canvas itemconfigure $id -fill $color]
-	    } else { 
 		uplevel #0 [list $canvas itemconfigure $id -fill $color -outline $color]
+	    } else {
+		uplevel #0 [list $canvas itemconfigure $id -fill $color]
 	    }
 	    
 	} else {
