@@ -6,7 +6,11 @@
     ## - shows the points always with the same size
     ## - adds a boundingbox around the data
 
-    
+
+
+    method MakeStateBinding {} {
+	next FALSE
+    }
     
     method LayerUpdateDict {events} {
 	if {[dict exists $events "active"]} {
