@@ -1,6 +1,6 @@
 
 
-INSTALLATION
+Installation
 ============
 
 Append the path to the `pkgIndex.tcl` to the `auto_path`
@@ -11,9 +11,31 @@ package require loon
 ~~~
 
 
-For example, assume that the current working directory is set to the
-folder that contains the `pkgIndex.tcl` file. Then, start `tclsh` or
-better `tkcon` and enter
+## With the load.tcl script
+
+You can start load the `loon` package and the `olive` and `iris` data
+set used in the *learn* section of the
+[web manual](http://waddella.github.io/loon/learn_Tcl_intro.html) by
+running in the terminal
+
+~~~
+tkcon load.tcl
+~~~
+
+then in the `tkcon` console you can start creating plots
+
+
+~~~
+set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic -showScales TRUE]
+~~~
+
+
+## Manually 
+
+
+Assume that the current working directory is set to the folder that
+contains the `pkgIndex.tcl` file. Then, start `tclsh` or better
+`tkcon` and enter
 
 ~~~
 lappend auto_path [pwd]
