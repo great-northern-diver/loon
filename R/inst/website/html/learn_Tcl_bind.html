@@ -120,8 +120,8 @@ $p configure -xTemp {1 1 1}
 <p>A couple of notes:</p>
 <ul>
 <li>The events <code>{selected active xTemp}</code> in the binding creation specify that <em>any</em> of these events trigger the code evaluation. Or in other words, <em>at least one</em> of the <code>selected</code>, <code>active</code>, or <code>xTemp</code> states must be changed to trigger the code evaluation.</li>
-<li>The <code>%e</code> substitution enlists every state that got changed in the particular <code>configure</code> evaluation. For the above example it doesn't matter whether we have added the <code>size</code> state to the events list or not.</li>
-<li>The keyword <code>all</code> for events indicates that every state change should trigger a callback evaluation</li>
+<li>The <code>%e</code> substitution is a list with every state that got changed in the particular <code>configure</code> evaluation.</li>
+<li>The keyword <code>all</code> for events indicates that every state change should trigger a callback evaluation.</li>
 <li>The event <code>destroy</code> is thrown when a plot gets closed (destroyed).</li>
 </ul>
 <p>A state binding gets thrown only if at least one state is really changed. Suppose at least one point is not selected, then</p>
@@ -172,29 +172,30 @@ $p bind state add {zoomX panX selected} {puts D}</code></pre>
 <pre><code>$p bind state get stateBinding0
 
 #% all {puts A}</code></pre>
-<p>The order of binding evaluation is as returned by bind state ids for those bindings that are triggered by a particular state change. For example, all bindings are triggered by a <code>selected</code> state change, hence changing the selected state of <code>p</code> would print <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>. The evaluation can be reversed/changed as follows</p>
+<p>The order of binding evaluation is as returned by bind state ids for those bindings that are triggered by a particular state change. For the above example all bindings are triggered by a <code>selected</code> state change, hence, changing the selected state of <code>p</code> would print <code>A</code>, <code>B</code>, <code>C</code> and <code>D</code>. The evaluation can be reversed/changed as follows</p>
 <pre><code>$p bind state reorder [lreverse [$p bind state ids]]</code></pre>
 <p>Now a change of the <code>selected</code> state of <code>p</code> would cause to print the letters <code>D</code>,. <code>C</code>, <code>B</code>, <code>A</code>.</p>
 <p>Finally, to delete a binding use</p>
 <pre><code>$p bind state delete stateBinding0</code></pre>
 <h3 id="other-state-bindings">Other State Bindings</h3>
-<p>Next to a <code>loon</code> plot, layers, glyphs, navigators, and contexts support state bindings too. We demonstrate this with a layer state binding, but it will work with all the other types the same.</p>
+<p>Next to a <code>loon</code>'s displays the layers, glyphs, navigators and contexts support state bindings too. We now demonstrate this with a layer state binding (note that this it will work with all the other types the same).</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
-set l [$p layer rectangle -x {1 1} -y {3 3} -color blue]
+set l [$p layer rectangle -x {1 3} -y {1 3} -color blue]
 $p layer use $l bind state add color {puts &quot;layer color has changed&quot;}
 $p layer use $l configure -color green
 
 #% layer color has changed</code></pre>
 <h2 id="item-bindings">Item Bindings</h2>
-<p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes, or labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section.</p>
+<p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes and labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section. In addition, displays and layers have a <code>tag</code> state for user specified tags.</p>
+<p>Note that item bindings are <code>Tk</code> canvas bindings with one level of indirection in order to support loon's context specific substitutions instead of the standard <code>Tk</code> substitutions.</p>
 <p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
-<p>To get the tags for the items which the mouse is currently over use the <code>currenttags</code> subcommand. To get the index of an item (if there is an index) use the <code>currentindex</code> subcommand.</p>
+<p>To get the tags for the item that lies below the mouse cursor use the <code>currenttags</code> subcommand. To get the index (in relation to the abstract dimension) of the visual item below the mouse cursor (if there is an index) use the <code>currentindex</code> subcommand.</p>
 <p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
 
 $p bind item add &quot;model&amp;&amp;point&quot; &lt;Enter&gt; {puts &quot;Entered point [%W currentindex]&quot;}
 $p bind item add &quot;model&amp;&amp;point&quot; &lt;Leave&gt; {puts &quot;Left point [%W currentindex]&quot;}</code></pre>
-<p>The item binding API also support <a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a>, but item binding order has currently no effect.</p>
+<p>The item binding API also support <a href="#list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</a>, but the item binding order has currently no effect.</p>
 <h3 id="substitutions-1">Substitutions</h3>
 <p>The current substitutions for item bindings are</p>
 <table>
@@ -228,19 +229,19 @@ $p bind item add &quot;model&amp;&amp;point&quot; &lt;Leave&gt; {puts &quot;Left
 </tbody>
 </table>
 <h3 id="visual-item-tags">Visual Item Tags</h3>
-<p>Visual items have tags. It is possible to add user defined tags with the <code>tag</code> state for the relative object (i.e. plot and layer). There are, however, also rags that we use which are listed in the table below.</p>
+<p>Visual items have tags. It is possible to add user defined tags with the <code>tag</code> state for the relative object (i.e. plot and layer). There are, however, also tags that we use which are listed in the table below.</p>
 <ul>
 <li><strong>Note:</strong> numbers are not valid tags! Tags must start with a alphabetic character.</li>
 </ul>
-<p>It is possible to output all tags interactively when entering a visual item as follows</p>
+<p>It is possible to query the item tags interactively with a mouse button press on an item as follows</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3} -xlabel xlab\
     -ylabel ylab -title &quot;Query Visual Item Tags&quot;]
 
 $p bind item add all &lt;Enter&gt; {puts &quot;[%W currenttags]&quot;}</code></pre>
 <ul>
-<li><code>all</code>, <code>current</code>, and <code>selected</code> are reserved tags used by <code>Tk</code></li>
+<li><code>all</code>, <code>current</code> and <code>selected</code> are reserved tags used by <code>Tk</code></li>
 </ul>
-<p>The current tagging scheme for the histogram, scatterplot and graph displays are</p>
+<p>The current tagging scheme for the histogram, scatterplot and graph displays is</p>
 <div class="figure">
 <img src="images/item_tags.png" title="Item Tags" alt="" />
 
@@ -256,11 +257,11 @@ proc printSize {widget width height} {
 }
 
 $p bind canvas add &lt;Configure&gt; {printSize %W %w %h}</code></pre>
-<p>Or say we want to track the mouse and print out its location</p>
+<p>Or, say, we want to track the mouse and print out its location in data coordinates</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
 
 proc printLocation {widget x y} {
-    puts [format &quot;In widget %s the location of the mouse is at: %s and %s&quot;\
+    puts [format &quot;In widget %s the location of the mouse cursor is at: %s and %s&quot;\
         $widget $x $y]
 }
 
@@ -306,10 +307,10 @@ $p bind canvas add &lt;Motion&gt; {printLocation %W %x %y}</code></pre>
 </tbody>
 </table>
 <h2 id="content-bindings">Content Bindings</h2>
-<p>There are also layer, glyph and navigator bindings. These bindings get executed if the collection of one of those changes. For example</p>
+<p>There are also layer, glyph, navigator and context bindings. These bindings get evaluated if the collection of one of those changes. For example</p>
 <pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
 
-$p bind layer add {add delete} {puts &quot;Widget %W had event %e for layer %l&quot;}
+$p bind layer add {add delete} {puts &quot;Widget %W had event %e for layer: %l&quot;}
 
 $p layer texts -x {2 2} -y {1.5 2.5} -text {A B}
 
@@ -319,6 +320,7 @@ $p layer texts -x {2 2} -y {1.5 2.5} -text {A B}
 <li>layer: <code>all</code>, <code>add</code>, <code>delete</code>, <code>move</code>, <code>relabel</code>, <code>hide</code>, <code>show</code></li>
 <li>glyph: <code>all</code>, <code>add</code>, <code>delete</code>, <code>relabel</code></li>
 <li>navigator: <code>all</code>, <code>add</code>, <code>delete</code>, <code>relabel</code></li>
+<li>context: <code>all</code>, <code>add</code>, <code>delete</code>, <code>relabel</code></li>
 </ul>
 </body>
 </html>

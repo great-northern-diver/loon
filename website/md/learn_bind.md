@@ -29,7 +29,7 @@ For example, a state binding is triggered on particular state changes
 p <- l_plot(x=1:3, y=3:1)
 
 l_bind_state(p, event=c('selected', 'active', 'xTemp'),
-	callback=function(W,e) {cat(paste(W, 'had events:', e, '\n' ))})
+	callback=function(W, e) {cat(paste(W, 'had events:', e, '\n' ))})
 ~~~
 
 </R>
@@ -221,12 +221,11 @@ A couple of notes:
 these events trigger the code evaluation.  Or in other words, *at
 least one* of the `selected`, `active`, or `xTemp` states must be
 changed to trigger the code evaluation.
-- The <Tcl>`%e` substitution</Tcl><R>`e` argument</R> enlists every
-  state that got changed in the particular `configure` evaluation. For
-  the above example it doesn't matter whether we have added the `size`
-  state to the events list or not.
+- The <Tcl>`%e` substitution</Tcl><R>`e` argument</R> is a list with
+  every state that got changed in the particular `configure`
+  evaluation.
 - The keyword `all` for events indicates that every state change
-  should trigger a callback evaluation
+  should trigger a callback evaluation.
 - The event `destroy` is thrown when a plot gets closed (destroyed).
 
 A state binding gets thrown only if at least one state is really
@@ -269,7 +268,6 @@ argument name| substituted value
 `W`| widget path name
 `e` | states that got changed
 `b` | binding id
-`O`| object path, useful for debugging
 
 Remember that these substitutions get passed to the `R` function as a
 `Tcl` object, hence you need to convert them to the desired type
@@ -370,10 +368,10 @@ $p bind state get stateBinding0
 
 The order of binding evaluation is as returned by <Tcl>bind state
 ids</Tcl><R>l_bind_state_ids</R> for those bindings that are triggered
-by a particular state change. For example, all bindings are triggered
-by a `selected` state change, hence changing the selected state of `p`
-would print `A`, `B`, `C`, `D`. The evaluation can be reversed/changed
-as follows
+by a particular state change. For the above example all bindings are
+triggered by a `selected` state change, hence, changing the selected
+state of `p` would print `A`, `B`, `C` and `D`. The evaluation can be
+reversed/changed as follows
 
 <R>
 
@@ -416,15 +414,16 @@ $p bind state delete stateBinding0
 
 ### Other State Bindings
 
-Next to a `loon` plot, layers, glyphs, navigators, and contexts
-support state bindings too. We demonstrate this with a layer state
-binding, but it will work with all the other types the same.
+Next to a `loon`'s displays the layers, glyphs, navigators and
+contexts support state bindings too. We now demonstrate this with a
+layer state binding (note that this it will work with all the other
+types the same).
 
 <R>
 
 ~~~
 p <- l_plot(1:3,1:3)
-l <- l_layer_rectangle(p, x=c(1,1), y=c(3,3), color='blue')
+l <- l_layer_rectangle(p, x=c(1,3), y=c(1,3), color='blue')
 l_bind_state(l, 'color', function(){cat('layer color has changed\n')})
 l['color'] <- 'green'
 
@@ -438,7 +437,7 @@ l['color'] <- 'green'
 
 ~~~
 set p [plot -x {1 2 3} -y {1 2 3}]
-set l [$p layer rectangle -x {1 1} -y {3 3} -color blue]
+set l [$p layer rectangle -x {1 3} -y {1 3} -color blue]
 $p layer use $l bind state add color {puts "layer color has changed"}
 $p layer use $l configure -color green
 
@@ -450,9 +449,14 @@ $p layer use $l configure -color green
 ## Item Bindings
 
 Item bindings are triggered by a mouse/keyboard gesture over a visual
-item in a plot. Visual items include point glyphs, layers, axes, or
+item in a plot. Visual items include point glyphs, layers, axes and
 labels. Every visual item has a set of tags as outlined in the
-[Visual Item Tags][] section.
+[Visual Item Tags][] section. In addition, displays and layers have a
+`tag` state for user specified tags.
+
+Note that item bindings are `Tk` canvas bindings with one level of
+indirection in order to support loon's context specific substitutions
+instead of the standard `Tk` substitutions.
 
 Valid event patterns for mouse/keyboard gestures are taken from the
 [`Tk` bindings](http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7). The
@@ -461,11 +465,11 @@ tag specification for item bindings allow for logical expressions of
 parenthesized subexpressions (see the
 [`Tk` canvas manual](https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16)).
 
-To get the tags for the items which the mouse is currently over use
-the <R>`l_currenttags` function</R><Tcl>`currenttags`
-subcommand</Tcl>. To get the index of an item (if there is an index)
-use the <R>`l_currentindex` function</R><Tcl>`currentindex`
-subcommand</Tcl>.
+To get the tags for the item that lies below the mouse cursor use the
+<R>`l_currenttags` function</R><Tcl>`currenttags` subcommand</Tcl>. To
+get the index (in relation to the abstract dimension) of the visual
+item below the mouse cursor (if there is an index) use the
+<R>`l_currentindex` function</R><Tcl>`currentindex` subcommand</Tcl>.
 
 For example, say we wish to print out the point number in a
 scatterplot on leaving and entering the point
@@ -505,7 +509,7 @@ $p bind item add "model&&point" <Leave> {puts "Left point [%W currentindex]"}
 </Tcl>
 
 The item binding API also support
-[List, Reorder \& Delete Bindings][], but item binding order has
+[List, Reorder \& Delete Bindings][], but the item binding order has
 currently no effect.
 
 
@@ -519,13 +523,12 @@ argument name| substituted value
 :----:|:----
 `W`| widget path name
 `b` | binding id
-`O`| canvas path, useful for debugging
 `x` | x coordinate 
 `y` | y coordinate
 
 Remember that these substitutions get passed to the `R` function as a
 `Tcl` object, hence you need to convert them to the desired type
-before using them in your code.
+before using them in your code (e.g. with `l_toR` or `as.numeric`).
 
 </R>
 
@@ -547,14 +550,14 @@ string| substituted value
 
 Visual items have tags. It is possible to add user defined tags with
 the `tag` state for the relative object (i.e. plot and layer). There
-are, however, also rags that we use which are listed in the table
+are, however, also tags that we use which are listed in the table
 below.
 
 * **Note:** numbers are not valid tags! Tags must start with a
   alphabetic character.
 
-It is possible to output all tags interactively when entering a visual
-item as follows
+It is possible to query the item tags interactively with a mouse
+button press on an item as follows
 
 <R>
 
@@ -582,11 +585,11 @@ $p bind item add all <Enter> {puts "[%W currenttags]"}
 
 </Tcl>
 
-* `all`, `current`, and `selected` are reserved tags used by `Tk`
+* `all`, `current` and `selected` are reserved tags used by `Tk`
 
 
 The current tagging scheme for the histogram, scatterplot and graph
-displays are
+displays is
 
 
 ![](images/item_tags.png "Item Tags")
@@ -616,8 +619,8 @@ p <- l_plot(iris[,1:2], color=iris$Species)
 
 printSize <- function(p) {
 	size <- l_size(p)
-	cat(paste('Size of widget ',p,' is: ',
-		size[1],'x',size[2],'pixels\n',sep=''))	
+	cat(paste('Size of widget ', p, ' is: ',
+		size[1], 'x', size[2], ' pixels\n', sep=''))	
 }
 
 l_bind_canvas(p, event='<Configure>', function(W) {printSize(W)})
@@ -643,7 +646,8 @@ $p bind canvas add <Configure> {printSize %W %w %h}
 
 </Tcl>
 
-Or say we want to track the mouse and print out its location
+Or, say, we want to track the mouse and print out its location in data
+coordinates
 
 <R>
 
@@ -652,7 +656,7 @@ p <- l_plot(iris[,1:2], color=iris$Species)
 
 printLocation <- function(W,x,y) {
 	cat(paste('In widget ', W,
-		' the location of the mouse is at: ',
+		' the location of the mouse cursor is at: ',
 		round(l_toR(x, as.numeric),3), ' and ',
 		round(l_toR(y, as.numeric),3), '\n', sep=''))	
 }
@@ -668,7 +672,7 @@ l_bind_canvas(p, event='<Motion>', printLocation)
 set p [plot -x {1 2 3} -y {1 2 3}]
 
 proc printLocation {widget x y} {
-	puts [format "In widget %s the location of the mouse is at: %s and %s"\
+	puts [format "In widget %s the location of the mouse cursor is at: %s and %s"\
 		$widget $x $y]
 }
 
@@ -689,7 +693,6 @@ argument name| substituted value
 :----:|:----
 `W`| widget path name
 `b` | binding id
-`O`| canvas path, useful for debugging
 `x` | x coordinate 
 `y` | y coordinate
 `w` | plot width in pixel
@@ -697,7 +700,7 @@ argument name| substituted value
 
 Remember that these substitutions get passed to the `R` function as a
 `Tcl` object, hence you need to convert them to the desired type
-before using them in your code.
+before using them in your code (e.g. with `l_toR` or `as.numeric`).
 
 </R>
 
@@ -720,8 +723,8 @@ string| substituted value
 
 ## Content Bindings
 
-There are also layer, glyph and navigator bindings. These bindings
-get executed if the collection of one of those changes. For example
+There are also layer, glyph, navigator and context bindings. These bindings get
+evaluated if the collection of one of those changes. For example
 
 <R>
 
@@ -729,7 +732,7 @@ get executed if the collection of one of those changes. For example
 p <- l_plot(x=1:3, y=1:3)
 
 l_bind_layer(p, c('add', 'delete'), function(W,l,e) {
-	cat(paste('Widget', W, 'had event', e, 'for layer', l, '\n'))
+	cat(paste('Widget', W, 'had event', e, 'for layer:', l, '\n'))
 	})
 
 l <- l_layer_texts(p, x=c(2,2), y=c(1.5, 2.5), text=c('A','B'))
@@ -745,7 +748,7 @@ l <- l_layer_texts(p, x=c(2,2), y=c(1.5, 2.5), text=c('A','B'))
 ~~~
 set p [plot -x {1 2 3} -y {1 2 3}]
 
-$p bind layer add {add delete} {puts "Widget %W had event %e for layer %l"}
+$p bind layer add {add delete} {puts "Widget %W had event %e for layer: %l"}
 
 $p layer texts -x {2 2} -y {1.5 2.5} -text {A B}
 
@@ -760,4 +763,5 @@ Valid events for the different types are
 * layer: `all`, `add`, `delete`, `move`, `relabel`, `hide`, `show`
 * glyph: `all`, `add`, `delete`, `relabel`
 * navigator: `all`, `add`, `delete`, `relabel`
+* context: `all`, `add`, `delete`, `relabel`
 

@@ -36,10 +36,12 @@
 
     }
     
-    method MakeStateBinding {} {
+    method MakeStateBinding {{withGlyphBinding TRUE}} {
 	my variable statebinding
 	set statebinding [${modelns}::my systembind state add all "[self] layerupdate %e"]
-	set glyphBinding [${modelns}::my systembind glyph add all "[self] glyphupdate %g %e"]
+	if {$withGlyphBinding} {
+	    set glyphBinding [${modelns}::my systembind glyph add all "[self] glyphupdate %g %e"]
+	}
     }
     
     

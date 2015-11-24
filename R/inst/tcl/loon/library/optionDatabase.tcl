@@ -56,6 +56,9 @@ namespace eval loon {
     }
 
     set ::loon::Options(image_scale) "::loon::image_scale"
+    ## pre-calculated sizes
+    set ::loon::Options(image_sizes) {1 2 3 4 5 6 7 8 9 10 15 20 40}
+
     
     ## Default foreground and background color
     set Options(background) white

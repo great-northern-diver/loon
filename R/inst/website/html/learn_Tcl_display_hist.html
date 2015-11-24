@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>histogram - loon</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -81,6 +81,9 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
+<div id="header">
+<h1 class="title">histogram - loon</h1>
+</div>
 <div id="TOC">
 <ul>
 <li><a href="#histogram">Histogram</a></li>
@@ -113,7 +116,7 @@ dict keys $states</code></pre></li>
     -yshows density -color $Area -showStackedColors TRUE]</code></pre></li>
 <li><p>details on a state, say <code>showBinHandle</code>, is easily had with</p>
 <pre><code>set states [$h info states]
-dict get $states showBindHandle</code></pre>
+dict get $states showBinHandle</code></pre>
 <p>and a particular field</p>
 <pre><code>dict get $states showBinHandle description</code></pre></li>
 </ul>

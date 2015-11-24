@@ -5,6 +5,11 @@ window.onload = function() {
 }
 </script>
 
+---
+title: histogram - loon
+---
+
+
 ![](images/display_histogram.png "loon histogram")
 
 <R>
@@ -78,17 +83,17 @@ set h [histogram -x $oleic -xlabel oleic]
 
 <R>
 	    states <- l_info_states(h)
-		states$showBindHandle
+		states$showBinHandle
 
 	and a particular field
 	
-		states$showBindHandle$description
+		states$showBinHandle$description
 		
 </R>
 
 <Tcl>
 	    set states [$h info states]
-		dict get $states showBindHandle
+		dict get $states showBinHandle
 
 	and a particular field
 

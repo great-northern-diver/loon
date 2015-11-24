@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>scatterplot - loon</title>
   <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -80,13 +80,16 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
+<div id="header">
+<h1 class="title">scatterplot - loon</h1>
+</div>
 <div id="TOC">
 <ul>
 <li><a href="#scatterplot">Scatterplot</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
 <li><a href="#glyphs">Glyphs</a><ul>
 <li><a href="#primitive-glyphs">Primitive Glyphs</a></li>
-<li><a href="#n-dimensional-glyphs">n Dimensional Glyphs</a><ul>
+<li><a href="#non-primitive-glyph-types">Non-Primitive Glyph Types</a><ul>
 <li><a href="#text">Text</a></li>
 <li><a href="#serialaxes">Serialaxes</a></li>
 <li><a href="#pointranges">Pointranges</a></li>
@@ -141,6 +144,10 @@ states$background</code></pre>
 <p>The visual representation of a point can be changed for each point separately with the <code>n</code> dimensional state <code>glyph</code>. The supported glyph types are detailed in the following sections. The <code>l_glyphs</code> demo demonstrates all the glyph types.</p>
 <h2 id="primitive-glyphs">Primitive Glyphs</h2>
 <p>The supported primitives are <code>circle</code>, <code>ocircle</code>, <code>ccircle</code>, <code>square</code>, <code>osquare</code>, <code>csquare</code>, <code>triangle</code>, <code>otriangle</code>, <code>ctriangle</code>, <code>diamond</code>, <code>odiamond</code> and <code>cdiamont</code>.</p>
+<div class="figure">
+<img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" alt="" />
+
+</div>
 <pre><code>data(olive); attach(olive)
 p &lt;- l_plot(x=oleic, y=stearic, color=Area)
 
@@ -153,14 +160,19 @@ glyphmap &lt;- list(
     &#39;West-Liguria&#39;=&#39;otriangle&#39;,
     &#39;Calabria&#39;=&#39;diamond&#39;,
     &#39;Sicily&#39;=&#39;odiamond&#39;,
-    &#39;Umbria&#39;=&#39;odiamond&#39;) ## NOTE
+    &#39;Umbria&#39;=&#39;cdiamond&#39;)
 
 p[&#39;glyph&#39;] &lt;- unlist(glyphmap[as.character(Area)])</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" alt="" />
 
 </div>
-<h2 id="n-dimensional-glyphs">n Dimensional Glyphs</h2>
+<h2 id="non-primitive-glyph-types">Non-Primitive Glyph Types</h2>
+<p>The non-primitive glyphs are the following</p>
+<div class="figure">
+<img src="images/display_plot_glyphs_nonprimitive.png" title="loon scatterplot non-primitive glyphs" alt="" />
+
+</div>
 <p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
 <p>Glyphs, like plots and layers, have states and support state bindings. You can query and modify the glyph states, or add state bindings to glyphs at run time as shown below.</p>
 <h3 id="text">Text</h3>
@@ -173,14 +185,14 @@ p[&#39;glyph&#39;] &lt;- gt</code></pre>
 </div>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
-<pre><code>gs &lt;- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)])
+<pre><code>gs &lt;- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 p[&#39;glyph&#39;] &lt;- gs</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
 
 </div>
 <p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
-<pre><code>l_configure(gs, axesLayout=&#39;parallel&#39;, showEnclosing=TRUE)</code></pre>
+<pre><code>l_configure(gs, axesLayout=&#39;parallel&#39;, showEnclosing=TRUE, showAxes=TRUE)</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" alt="" />
 
@@ -237,7 +249,7 @@ p[&#39;glyph&#39;] &lt;- gl</code></pre>
 
 </div>
 <h3 id="images">Images</h3>
-<p><strong>Note that image glyphs work well on Linux and OSX but not Windows!</strong> Also, image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
+<p>Image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
 <p>We fist start by creating the images and then show how to load images form files.</p>
 <pre><code>img1 &lt;- as.character(tkimage.create(&#39;photo&#39;, width=30, height=20))
 tcl(img1, &#39;put&#39;, &#39;blue&#39;, &#39;-to&#39;, 0, 0, 30, 20)

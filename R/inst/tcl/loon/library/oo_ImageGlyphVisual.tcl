@@ -8,7 +8,7 @@ oo::class create loon::classes::ImageGlyphVisual {
 	glyphBinding 
 
     constructor {GlyphObject args} {
-	
+
 	## array with names being the area
 	set scaledImages [dict create]
 	array set scaledImageHaloHalfWidths {} 
@@ -23,12 +23,14 @@ oo::class create loon::classes::ImageGlyphVisual {
 	
 	set glyphBinding [${ns}::my systembind state add all\
 			      "[self namespace]::my glyphChanged"]
-	
-	
+
 	## scale images for some sizes
+	puts "scale images..."
 	foreach image [lsort -unique [set $images_var]] {
 	    my AddNewImage $image	
 	}
+	puts "  done"
+	
     }
 
     destroy {
@@ -73,23 +75,27 @@ oo::class create loon::classes::ImageGlyphVisual {
 	set height [image height $image]
 	
 
-	## TODO don't use the full image all the time
-	## use next bigger available image as done in AddImageArea
-	set sizes {1 2 3 4 5 6 7 8 9 10 15 20 40 100}
-	foreach size $sizes\
-	    area [::loon::map_image_size $sizes] {
-		set scale [expr {sqrt(double($area)/($width*$height))}]
-		set image_w [expr {int($scale*$width)}]
-		set image_h [expr {int($scale*$height)}]
-		
-		set scaled_img [image create photo]
-		$::loon::Options(image_scale) $image $image_w $image_h $scaled_img
-		
-		set scaledImageHaloHalfWidths($scaled_img) [expr {$image_w/2.0+2}]
-		set scaledImageHaloHalfHeights($scaled_img) [expr {$image_h/2.0+2}]
-		
-		dict set scaledImages ${image}-${area} $scaled_img
+	set sizes [lsort -unique -real -decreasing $::loon::Options(image_sizes)]
+
+	foreach area [::loon::map_image_size $sizes] {
+	    set scale [expr {sqrt(double($area)/($width*$height))}]
+	    set image_w [expr {int($scale*$width)}]
+	    set image_h [expr {int($scale*$height)}]
+	    
+	    set scaled_img [image create photo]
+	    $::loon::Options(image_scale) $image $image_w $image_h $scaled_img
+	    
+	    set scaledImageHaloHalfWidths($scaled_img) [expr {$image_w/2.0+2}]
+	    set scaledImageHaloHalfHeights($scaled_img) [expr {$image_h/2.0+2}]
+	    
+	    dict set scaledImages ${image}-${area} $scaled_img
+	    
+	    if {$scale < 1} {
+		set image $scaled_img
+		set width $image_w
+		set height $image_h
 	    }
+	}
     }
 
     method RemoveImage {image} {

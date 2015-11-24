@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>scatterplot - loon</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
@@ -118,13 +118,16 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
+<div id="header">
+<h1 class="title">scatterplot - loon</h1>
+</div>
 <div id="TOC">
 <ul>
 <li><a href="#scatterplot">Scatterplot</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
 <li><a href="#glyphs">Glyphs</a><ul>
 <li><a href="#primitive-glyphs">Primitive Glyphs</a></li>
-<li><a href="#n-dimensional-glyphs">n Dimensional Glyphs</a><ul>
+<li><a href="#non-primitive-glyph-types">Non-Primitive Glyph Types</a><ul>
 <li><a href="#text">Text</a></li>
 <li><a href="#serialaxes">Serialaxes</a></li>
 <li><a href="#pointranges">Pointranges</a></li>
@@ -174,6 +177,10 @@ dict get $states background</code></pre>
 <p>The visual representation of a point can be changed for each point separately with the <code>n</code> dimensional state <code>glyph</code>. The supported glyph types are detailed in the following sections.</p>
 <h2 id="primitive-glyphs">Primitive Glyphs</h2>
 <p>The supported primitives are <code>circle</code>, <code>ocircle</code>, <code>ccircle</code>, <code>square</code>, <code>osquare</code>, <code>csquare</code>, <code>triangle</code>, <code>otriangle</code>, <code>ctriangle</code>, <code>diamond</code>, <code>odiamond</code> and <code>cdiamont</code>.</p>
+<div class="figure">
+<img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" alt="" />
+
+</div>
 <pre><code>source olive.tcl
 set p [plot -x $oleic -y $stearic -color $Area\
     -xlabel oleic -ylabel stearic]
@@ -187,14 +194,19 @@ set glyphmap [dict create\
     West-Liguria otriangle\
     Calabria diamond\
     Sicily odiamond\
-    Umbria odiamond]; ## NOTE
+    Umbria cdiamond]
 
 $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" alt="" />
 
 </div>
-<h2 id="n-dimensional-glyphs">n Dimensional Glyphs</h2>
+<h2 id="non-primitive-glyph-types">Non-Primitive Glyph Types</h2>
+<p>The non-primitive glyphs are the following</p>
+<div class="figure">
+<img src="images/display_plot_glyphs_nonprimitive.png" title="loon scatterplot non-primitive glyphs" alt="" />
+
+</div>
 <p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
 <p>Glyphs, like plots and layers, have states and support state bindings. You can query and modify the glyph states, or add state bindings to glyphs at run time as shown below.</p>
 <h3 id="text">Text</h3>
@@ -208,14 +220,15 @@ $p configure -glyph $gt</code></pre>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
 <pre><code>## $olivedata does not contain Area and Region
-set gs [$p glyph add serialaxes -data $olivedata]
+set gs [$p glyph add serialaxes -data $olivedata -showArea FALSE]
 $p configure -glyph $gs</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
 
 </div>
 <p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
-<pre><code>$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE</code></pre>
+<pre><code>$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE \
+    -showAxes TRUE</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" alt="" />
 
@@ -233,46 +246,45 @@ $p1 configure -glyph $gr</code></pre>
 
 </div>
 <h3 id="polygons">Polygons</h3>
-<p>A polygon can be a useful point glyph to visualize arbitrary shapes such as airplanes, animals and shapes that are not available in the primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example of polygon glyphs which we reuse here.</p>
+<p>A polygon can be a useful point glyph to visualize arbitrary shapes such as airplanes, animals and shapes that are not available in the primitive glyph types (e.g. cross).</p>
 <p>First we specify the coordinates of the polygons, note that it is your responsibility to center them at <code>0</code> and to specify an appropriate size. A good range for the polygon coordinates is from <code>-1</code> to <code>1</code>.</p>
-<pre><code>x_star &lt;- 
-    c(-0.000864304235090734, 0.292999135695765, 0.949870354364736, 
-      0.474503025064823, 0.586862575626621, -0.000864304235090734, 
-      -0.586430423509075, -0.474070872947277, -0.949438202247191,
-      -0.29256698357822)
-y_star &lt;-
-    c(-1, -0.403630077787381, -0.308556611927398, 0.153846153846154, 
-      0.808556611927398, 0.499567847882455, 0.808556611927398,
-      0.153846153846154, -0.308556611927398, -0.403630077787381)
-x_cross &lt;- 
-    c(-0.258931143762604, -0.258931143762604, -0.950374531835206, 
-      -0.950374531835206, -0.258931143762604, -0.258931143762604,
-      0.259651397291847, 0.259651397291847, 0.948934024776722,
-      0.948934024776722, 0.259651397291847, 0.259651397291847)
-y_cross &lt;-
-    c(-0.950374531835206, -0.258931143762604, -0.258931143762604, 
-      0.259651397291847, 0.259651397291847, 0.948934024776722,
-      0.948934024776722, 0.259651397291847, 0.259651397291847,
-      -0.258931143762604, -0.258931143762604, -0.950374531835206)
-x_hexagon &lt;-
-    c(0.773552290406223, 0, -0.773552290406223, -0.773552290406223, 
-      0, 0.773552290406223)
-y_hexagon &lt;- 
-    c(0.446917314894843, 0.894194756554307, 0.446917314894843,
-      -0.447637568424085, -0.892754249495822, -0.447637568424085)</code></pre>
+<pre><code>set x_star \
+    [list -0.000864304235090734 0.292999135695765 0.949870354364736 \
+      0.474503025064823 0.586862575626621 -0.000864304235090734 \
+      -0.586430423509075 -0.474070872947277 -0.949438202247191 \
+      -0.29256698357822]
+set y_star \
+    [list -1 -0.403630077787381 -0.308556611927398 0.153846153846154 \
+      0.808556611927398 0.499567847882455 0.808556611927398 \
+      0.153846153846154 -0.308556611927398 -0.403630077787381]
+set x_cross \
+    [list -0.258931143762604 -0.258931143762604 -0.950374531835206 \
+      -0.950374531835206 -0.258931143762604 -0.258931143762604 \
+      0.259651397291847 0.259651397291847 0.948934024776722 \
+      0.948934024776722 0.259651397291847 0.259651397291847]
+set y_cross \
+    [list -0.950374531835206 -0.258931143762604 -0.258931143762604 \
+      0.259651397291847 0.259651397291847 0.948934024776722 \
+      0.948934024776722 0.259651397291847 0.259651397291847 \
+      -0.258931143762604 -0.258931143762604 -0.950374531835206]
+set x_hexagon \
+    [list 0.773552290406223 0 -0.773552290406223 -0.773552290406223 \
+      0 0.773552290406223]
+set y_hexagon \
+    [list 0.446917314894843 0.894194756554307 0.446917314894843 \
+      -0.447637568424085 -0.892754249495822 -0.447637568424085]</code></pre>
 <p>Then you can use those polygon coordinates to specify polygon glyphs as follows</p>
-<pre><code>p &lt;- l_plot(1:3, 1:3)
+<pre><code>set p [plot -x {1 2 3} -y {1 2 3}]
+set gl [$p glyph add polygon -x [list $x_star $x_cross $x_hexagon]\
+-y [list $y_star $y_cross $y_hexagon]]
 
-gl &lt;- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
-                          y = list(y_star, y_cross, y_hexagon))
-
-p[&#39;glyph&#39;] &lt;- gl</code></pre>
+$p configure -glyph $gl</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" alt="" />
 
 </div>
 <h3 id="images">Images</h3>
-<p><strong>Note that image glyphs work well on Linux and OSX but not Windows!</strong> Also, image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
+<p>Image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
 <p>We fist start by creating the images and then show how to load images form files.</p>
 <div class="sourceCode"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span class="kw">set</span> img1 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">30</span><span class="ot"> -height</span> <span class="dv">20</span><span class="kw">]</span>
 <span class="dt">$img1</span> put blue<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">20</span>; <span class="dt">$img1</span> put yellow<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">30</span> <span class="dv">11</span>

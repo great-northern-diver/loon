@@ -5,6 +5,11 @@ window.onload = function() {
 }
 </script>
 
+---
+title: scatterplot - loon
+---
+
+
 [tclman_image]: https://www.tcl.tk/man/tcl/TkCmd/image.htm "Tcl image manual"
 
 ![](images/display_plot.png "loon scatterplot")
@@ -121,6 +126,8 @@ The supported primitives are `circle`, `ocircle`, `ccircle`, `square`,
 `osquare`, `csquare`, `triangle`, `otriangle`, `ctriangle`, `diamond`,
 `odiamond` and `cdiamont`.
 
+![](images/point_glyph_primitive_types.png "primitive point glyph types")
+
 <R>
 
 ~~~
@@ -136,7 +143,7 @@ glyphmap <- list(
 	'West-Liguria'='otriangle',
 	'Calabria'='diamond',
 	'Sicily'='odiamond',
-	'Umbria'='odiamond') ## NOTE
+	'Umbria'='cdiamond')
 
 p['glyph'] <- unlist(glyphmap[as.character(Area)])
 ~~~
@@ -159,7 +166,7 @@ set glyphmap [dict create\
 	West-Liguria otriangle\
 	Calabria diamond\
 	Sicily odiamond\
-	Umbria odiamond]; ## NOTE
+	Umbria cdiamond]
 
 $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]
 ~~~
@@ -168,7 +175,11 @@ $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]
 
 ![](images/display_plot_glyphs_primitive.png "loon scatterplot primitive glyphs")
 
-## n Dimensional Glyphs
+## Non-Primitive Glyph Types
+
+The non-primitive glyphs are the following
+
+![](images/display_plot_glyphs_nonprimitive.png "loon scatterplot non-primitive glyphs")
 
 The non-primitive glyphs require user specified data. Adding a glyph
 type requires to specify the glyph data for each of the `n` points. If
@@ -213,7 +224,7 @@ each point.
 <R>
 
 ~~~
-gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)])
+gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 p['glyph'] <- gs
 ~~~
 
@@ -223,7 +234,7 @@ p['glyph'] <- gs
 
 ~~~
 ## $olivedata does not contain Area and Region
-set gs [$p glyph add serialaxes -data $olivedata]
+set gs [$p glyph add serialaxes -data $olivedata -showArea FALSE]
 $p configure -glyph $gs
 ~~~
 
@@ -238,7 +249,7 @@ Change the glyph appearance as explained in
 <R>
 
 ~~~
-l_configure(gs, axesLayout='parallel', showEnclosing=TRUE)
+l_configure(gs, axesLayout='parallel', showEnclosing=TRUE, showAxes=TRUE)
 ~~~
 
 </R>
@@ -246,7 +257,8 @@ l_configure(gs, axesLayout='parallel', showEnclosing=TRUE)
 <Tcl>
 
 ~~~
-$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE
+$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE \
+	-showAxes TRUE
 ~~~
 
 
@@ -294,12 +306,14 @@ $p1 configure -glyph $gr
 
 A polygon can be a useful point glyph to visualize arbitrary shapes
 such as airplanes, animals and shapes that are not available in the
-primitive glyph types (e.g. cross). The `l_glyphs` demo has an example
-of polygon glyphs which we reuse here.
+primitive glyph types (e.g. cross). <R> The `l_glyphs` demo has an example
+of polygon glyphs which we reuse here. </R>
 
 First we specify the coordinates of the polygons, note that it is your
 responsibility to center them at `0` and to specify an appropriate
 size. A good range for the polygon coordinates is from `-1` to `1`.
+
+<R>
 
 ~~~
 x_star <- 
@@ -329,8 +343,44 @@ y_hexagon <-
       -0.447637568424085, -0.892754249495822, -0.447637568424085)
 ~~~
 
+</R>
+
+<Tcl>
+
+~~~
+set x_star \
+    [list -0.000864304235090734 0.292999135695765 0.949870354364736 \
+      0.474503025064823 0.586862575626621 -0.000864304235090734 \
+      -0.586430423509075 -0.474070872947277 -0.949438202247191 \
+      -0.29256698357822]
+set y_star \
+    [list -1 -0.403630077787381 -0.308556611927398 0.153846153846154 \
+      0.808556611927398 0.499567847882455 0.808556611927398 \
+      0.153846153846154 -0.308556611927398 -0.403630077787381]
+set x_cross \
+    [list -0.258931143762604 -0.258931143762604 -0.950374531835206 \
+      -0.950374531835206 -0.258931143762604 -0.258931143762604 \
+      0.259651397291847 0.259651397291847 0.948934024776722 \
+      0.948934024776722 0.259651397291847 0.259651397291847]
+set y_cross \
+    [list -0.950374531835206 -0.258931143762604 -0.258931143762604 \
+      0.259651397291847 0.259651397291847 0.948934024776722 \
+      0.948934024776722 0.259651397291847 0.259651397291847 \
+      -0.258931143762604 -0.258931143762604 -0.950374531835206]
+set x_hexagon \
+    [list 0.773552290406223 0 -0.773552290406223 -0.773552290406223 \
+      0 0.773552290406223]
+set y_hexagon \
+    [list 0.446917314894843 0.894194756554307 0.446917314894843 \
+      -0.447637568424085 -0.892754249495822 -0.447637568424085]
+~~~
+
+</Tcl>
+
 Then you can use those polygon coordinates to specify polygon glyphs
 as follows
+
+<R>
 
 ~~~
 p <- l_plot(1:3, 1:3)
@@ -341,14 +391,26 @@ gl <- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
 p['glyph'] <- gl
 ~~~
 
+</R>
+
+<Tcl>
+
+~~~
+set p [plot -x {1 2 3} -y {1 2 3}]
+set gl [$p glyph add polygon -x [list $x_star $x_cross $x_hexagon]\
+-y [list $y_star $y_cross $y_hexagon]]
+
+$p configure -glyph $gl
+~~~
+
+</Tcl>
 
 ![](images/display_plot_glyphs_polygon.png "polygon glyphs")
 
 
 ### Images
 
-**Note that image glyphs work well on Linux and OSX but not Windows!**
-  Also, image glyphs rely on a `Tcl` procedure `image_scale` for image
+Image glyphs rely on a `Tcl` procedure `image_scale` for image
   resizing. The `loon` package comes with a `image_scale` procedure
   that is pure `Tcl` code. To improve the image resizing speed it is
   possible to install the

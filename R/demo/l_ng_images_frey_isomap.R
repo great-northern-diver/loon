@@ -21,19 +21,15 @@ local({
     ## Images
     ## sample every third image
     sel <- seq(1,dim(frey)[2],3)
-    if (Sys.info()['sysname'] != "Windows") {
-        frey.imgs <- l_image_import_array(frey[,sel], 28,20,
-                                     img_in_row = FALSE, rotate = 90)
-        l_imageviewer(frey.imgs)
-    }
+    frey.imgs <- l_image_import_array(frey[,sel], 28,20,
+                                      img_in_row = FALSE, rotate = 90)
+    l_imageviewer(frey.imgs)
 
     nav <- l_navgraph(iso.frey[sel,])
 
-    if (Sys.info()['sysname'] != "Windows") {
-        gl <- l_glyph_add_image(nav$plot, images=frey.imgs, label="frey faces")
-        nav$plot['glyph'] <- gl
-    }
-        
+    gl <- l_glyph_add_image(nav$plot, images=frey.imgs, label="frey faces")
+    nav$plot['glyph'] <- gl
+
 })
 
 cat(paste("\n\nThe source code of this demo file is located at:\n",

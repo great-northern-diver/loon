@@ -4,11 +4,9 @@ require(PairViz) || stop('You need the PairViz package installed!')
 
 local({
     data(faces)
-
-    if (Sys.info()['sysname'] != "Windows") {
-        faces.imgs <- l_image_import_array(faces, 64, 64, img_in_row = FALSE)
-        l_imageviewer(faces.imgs)
-    }
+    
+    faces.imgs <- l_image_import_array(faces, 64, 64, img_in_row = FALSE)
+    l_imageviewer(faces.imgs)
     
     group <- rep(1:40, each = 10)
     
@@ -20,12 +18,10 @@ local({
 
     
     nav <- l_navgraph(faces.mds, color=gsub("FF$","",rainbow(40)[group]))
-
-    if (Sys.info()['sysname'] != "Windows") {
-        gl <- l_glyph_add_image(nav$plot, images=faces.imgs, label="olivetti faces")
-        nav$plot['glyph'] <- gl
-    }
-
+    
+    gl <- l_glyph_add_image(nav$plot, images=faces.imgs, label="olivetti faces")
+    nav$plot['glyph'] <- gl
+    
 })
 
 cat(paste("\n\nThe source code of this demo file is located at:\n",
