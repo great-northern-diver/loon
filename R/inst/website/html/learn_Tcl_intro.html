@@ -76,24 +76,20 @@ document.getElementById("learn_intro").className += " selected";
 <h1 id="introduction">Introduction</h1>
 <p><code>loon</code> is written in <code>Tcl</code> and <code>Tk</code>. Users familiar with <code>Tk</code> widgets will feel familiar with the <code>loon</code> API as the <code>loon</code> widgets follow the standard <code>Tk</code> conventions.</p>
 <h1 id="installation">Installation</h1>
-<p>Get package from github</p>
-<pre class="todo"><code>git clone https://github.com/waddella/loon.git</code></pre>
-<p>To compile the package change the working directory to the <code>Tcl</code> subfolder and run</p>
-<pre><code>./configure
-make</code></pre>
-<p>Optionally install the package</p>
-<pre><code>make install</code></pre>
-<p>If you do not install the package you need to add the package path to <code>auto_path</code> variable in the <code>tcl</code> console</p>
-<pre><code>lappend auto_path path_to_foler_containing_pkgIndex.tcl</code></pre>
-<h1 id="getting-started">Getting Started</h1>
-<p>In the <code>Tcl</code> console (e.g. <code>tclsh</code>, <code>wish</code>, <code>tkcon</code>) load the <code>loon</code> package with</p>
-<pre><code>package require loon</code></pre>
+<p>The <code>loon</code> package has no compiled code and hence installation only requires to move the <code>loon</code> package to a place where the <code>Tcl</code> interpreter looks for packages (inspect the <code>auto_path</code> <code>Tcl</code> variable).</p>
+<p>Get the package from github</p>
+<pre><code>git clone https://github.com/waddella/loon.git</code></pre>
+<p>You can use the <code>loon</code> package immediately (without installation): change your working directory as follows</p>
+<pre><code>cd loon/Tcl/</code></pre>
+<p>start <code>tkcon</code> and source the <code>load.tcl</code> file as follows</p>
+<pre><code>tkcon load.tcl</code></pre>
 <p>If you need to import images from <code>jpeg</code> and <code>png</code> files you also need to load the <code>Img</code> package</p>
 <pre><code>package require Img</code></pre>
-<p>Optionally, if you want to import all of <code>loon</code>'s commands into the global namespace, run</p>
-<pre><code>namespace import loon *</code></pre>
-<p>If you do not import <code>loon</code>'s procedures into the global namespace then you need to prepend <code>loon::</code> in front of <code>loon</code>'s procedure names (e.g. <code>loon::plot</code> instead of <code>plot</code>).</p>
-<p>An example scatterplot is created with</p>
+<p>The following line in <code>load.tcl</code></p>
+<pre><code>namespace import loon::*</code></pre>
+<p>imports all of <code>loon</code>'s (exported) commands into the global namespace. If you do not import <code>loon</code>'s procedures into the global namespace then you need to prepend <code>loon::</code> in front of <code>loon</code>'s procedure names (e.g. <code>loon::plot</code> instead of <code>plot</code>).</p>
+<h1 id="getting-started">Getting Started</h1>
+<p>Once the package is loaded (i.e. with the <code>load.tcl</code> script) an example scatterplot is created as follows</p>
 <pre><code>plot -x {4 1 5} -y {2 3 1} -color {red orange blue} -size {1.4 5.2 4}</code></pre>
 <p>If you want to use <code>loon</code> interactively via the <code>tcl</code> shell take a look at the <code>tk</code> console <a href="http://tkcon.sourceforge.net/"><code>tkcon</code></a>.</p>
 <p>The user interfaces of <code>loon</code>'s displays are explained in the <a href="UI.html">UI section</a>.</p>

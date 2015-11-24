@@ -50,32 +50,50 @@ tkinter</a>.  </Python>
 
 # Installation
 <Tcl>
-Get package from github
 
-~~~{.todo}
+The `loon` package has no compiled code and hence installation only
+requires to move the `loon` package to a place where the `Tcl`
+interpreter looks for packages (inspect the `auto_path` `Tcl`
+variable).
+
+Get the package from github
+
+~~~
 git clone https://github.com/waddella/loon.git
 ~~~
 
-To compile the package change the working directory to the `Tcl`
-subfolder and run
+You can use the `loon` package immediately (without installation):
+change your working directory as follows
 
 ~~~
-./configure
-make
+cd loon/Tcl/
 ~~~
 
-Optionally install the package
+start `tkcon` and source the `load.tcl` file as follows
 
 ~~~
-make install
+tkcon load.tcl
 ~~~
 
-If you do not install the package you need to add the package path to
-`auto_path` variable in the `tcl` console
+If you need to import images from `jpeg` and `png` files you also need
+to load the `Img` package
 
 ~~~
-lappend auto_path path_to_foler_containing_pkgIndex.tcl
+package require Img
 ~~~
+
+The following line in `load.tcl`
+
+~~~
+namespace import loon::*
+~~~
+
+imports all of `loon`'s (exported) commands into the global
+namespace. If you do not import `loon`'s procedures into the global
+namespace then you need to prepend `loon::` in front of `loon`'s
+procedure names (e.g. `loon::plot` instead of `plot`).
+
+
 </Tcl>
 
 <R>
@@ -116,33 +134,8 @@ dev_mode(on=FALSE)
 
 <Tcl>
 
-In the `Tcl` console (e.g. `tclsh`, `wish`, `tkcon`) load the `loon`
-package with
-
-~~~
-package require loon
-~~~
-
-If you need to import images from `jpeg` and `png` files you also need
-to load the `Img` package
-
-~~~
-package require Img
-~~~
-
-Optionally, if you want to import all of `loon`'s commands into the
-global namespace, run
-
-~~~
-namespace import loon *
-~~~
-
-If you do not import `loon`'s procedures into the global namespace
-then you need to prepend `loon::` in front of `loon`'s procedure names
-(e.g. `loon::plot` instead of `plot`).
-
-
-An example scatterplot is created with
+Once the package is loaded (i.e. with the `load.tcl` script) an
+example scatterplot is created as follows
 
 ~~~
 plot -x {4 1 5} -y {2 3 1} -color {red orange blue} -size {1.4 5.2 4}
