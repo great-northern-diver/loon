@@ -14,9 +14,10 @@ package require loon
 ## With the load.tcl script
 
 You can start load the `loon` package and the `olive` and `iris` data
-set used in the *learn* section of the
+used in the *learn* section of the
 [web manual](http://waddella.github.io/loon/learn_Tcl_intro.html) by
-running in the terminal
+running the following command in the terminal (make sure to set your
+working directory accordingly)
 
 ~~~
 tkcon load.tcl
