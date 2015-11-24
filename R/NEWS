@@ -1,4 +1,9 @@
 
+## Version 0.9.1
+
+- Bug fix when layering maps (sp classes) with asSingleLayer=TRUE
+- Bug fix in scale_image
+
 ## Version 0.9
 
 - initial beta release for the general public
