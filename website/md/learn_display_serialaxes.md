@@ -6,6 +6,9 @@ window.onload = function() {
 }
 </script>
 
+---
+title: serialaxes display - loon
+---
 
 ![](images/display_serialaxes_star.png "loon serialaxes display showing radial coordinates")
 

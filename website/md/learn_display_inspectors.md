@@ -6,6 +6,11 @@ window.onload = function() {
 }
 </script>
 
+
+---
+title: inspectors - loon
+---
+
 # Inspectors
 
 Here a list of all inspector creator functions

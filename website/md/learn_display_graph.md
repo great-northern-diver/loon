@@ -5,6 +5,9 @@ window.onload = function() {
 }
 </script>
 
+---
+title: graph display - loon
+---
 
 ![](images/display_graph.png "loon graph display")
 
@@ -36,10 +39,12 @@ $g navigator add
 
 # Graph
 
-* `loon`'s Graphs are defined by a list of node names, the from-to
-  list of node names that define the edges and a Boolean value whether
-  the graph is directed or not. This translates into the states
-  `nodes`, `from`, `to`, and `isDirected`.
+* A (mathematical) graph in `loon` is defined by a list of node names,
+  the from-to list of node names that define the edges and a Boolean
+  value whether the graph is directed or not. This translates into the
+  states `nodes`, `from`, `to` and `isDirected`.
+
+* The graph layout is defined with the `x` and `y` states.
 
 * Get the state names with
 
@@ -124,14 +129,8 @@ $g navigator add
 
 # Good To Know
 
-* The graph is and scatterplot display are closely related and share
-most of the scatterplot states.
-<div class='todo'>
-		* This has some undesirable side effects such as that the
-        states `itemlabel` and `showItemlabels` are actually for
-        nodes...
-		* Also the tags are not correct... (i.e. point vs. node)
-</div>
+* The graph and scatterplot display are closely related and share most
+of the scatterplot states.
 * The graph has `n` dimensional states that are associated to nodes
 and `p` dimensional states that are associated with edges. To query
 which states are `p` dimensional use
@@ -158,15 +157,15 @@ which states are `p` dimensional use
 
 To turn a graph into a navigation graph you need to add one or more
 navigators. Navigators have their own set of states such as `from`,
-`to` and `proportion`, and you can create state bindings for the
-navigator that call a function when a navigator changes its position
-on the graph. States and state bindings for navigators provide the
-facility to implement any graph semantic. However, certain graph
-semantics (e.g. the default semantic with 2d projection along a
-geodesic path between spaces) involve lots of logic and control over
-plots, and hence it makes sense to en encapsulate them. We do this by
-providing *contexts*. A context is added to a navigator and will do a
-specific task if the navigator's position on the graph changes.
+`to` and `proportion`. You can create state bindings for the navigator
+that call a function when a navigator changes its position on the
+graph. States and state bindings for navigators provide the facility
+to implement any graph semantic. However, certain graph semantics
+(e.g. the default semantic with 2d projection along a geodesic path
+between spaces) involve lots of logic and control over plots and,
+hence, it makes sense to en encapsulate them. We do this by providing
+*contexts*. A context is added to a navigator and will do a specific
+task if the navigator's position on the graph changes.
 
 ## Navigators
 
@@ -241,15 +240,15 @@ dict keys $nstates
 
 </Tcl>
 
-The position of the navigator on the graph is completely defined by
-the states `from`, `to`, and `proportion`. The states `from` and `to`
-hold <R>vectors</R><Tcl>lists</Tcl> of node names of the graph. The
+The position of the navigator on the graph is defined by the states
+`from`, `to` and `proportion`. The states `from` and `to` hold
+<R>vectors</R><Tcl>lists</Tcl> of node names of the graph. The
 `proportion` state is a number between and including `0` and `1` and
-defines the how far the navigator is between the last element of
-`from` and the first element of `to`. The `to` state can also be <R>an
-empty string `''`</R><Tcl>an empty list</Tcl> if there is no further
-node to go to. Hence, the concatenation of `from` and `to` define a
-path on the graph.
+defines how far the navigator is between the last element of `from`
+and the first element of `to`. The `to` state can also be <R>an empty
+string `''`</R><Tcl>an empty list</Tcl> if there is no further node to
+go to. Hence, the concatenation of `from` and `to` define a path on
+the graph.
 
 ## Interaction with the Navigators
 
@@ -281,19 +280,18 @@ $g navigator use $nav configure\
 ![](images/display_graph_navigator2.png "navigator path")
 
 
-The elements related to the navigator you see on the plot above are
-the
+The elements related to the navigator you see in the plot above are
 
 * **Navigator:** wich is `proprtion` between the last node in `from`
-  and the first node in `to`. If `to` is empty, then the navigator
-  sits on the last node of `from`.
+  and the first node in `to`. If `to` is empty then the navigator sits
+  on the last node of `from`.
 * **From Path:** highlighted with a bold line with the same color as
-  the navigator show path stored in `from` and the `proportion` that
-  has been traversed on the current edge.
+  the navigator shows the path stored in `from` and the `proportion`
+  that has been traversed on the current edge.
 * **To Path:** highlighted with a thinner line as the from path and
 with the same color as the navigator.
-* **Path End:** which looks like the navigator and is located on the
-last node in `to`.
+* **Path End:** which looks like the navigator (but smaller) and is
+located on the last node in `to`.
 
 The graph display supports direct interaction with the navigator and
 navigator path using the mouse and keyboard. To move the navigator
@@ -307,8 +305,9 @@ selection color.
 In this state the following interactions are possible
 
 * Drag the navigator along the path.
-* If arriving at last node on the path you may extend the path by
-dragging the navigator towards a new connected node. Note that
+* When the navigator is at the path end (i.e. `to=''`) then you can
+extend the path by dragging the navigator towards a new connected
+node. Note that
 	 * the gray circle is the decision boundary to select an adjoining edge.
 	 * all the adjoining nodes are highlighted
  ![](images/display_graph_navigator_addtopath.png "add to path")
@@ -319,12 +318,12 @@ dragging the navigator towards a new connected node. Note that
 * Extend the path by pressing the shift key while selecting adjoining
   nodes to the path end.
 * Delete the path and move the navigator to a new node by clicking on
-  a new node.
+  a node.
 
-Note that the selection of a navigator, the highlighting of the
-adjacent nodes, and the edge selection circle are mouse interaction
-states and have no equivalent display states. That is, they are all
-transient and are undone as soon as the Shift and or Mouse press gets
+Note that the highlighting of the adjacent nodes of a navigator and
+the edge selection circle are mouse interaction states and have no
+equivalent display states. That is, they are all transient and are
+undone as soon as the Shift key and/or mouse button press gets
 released.
 
 The animation of the navigator can also be done programatically with
@@ -444,12 +443,11 @@ argument name| substituted value
 `nav` | navigator id
 `e` | events (states changed)
 `b` | binding id
-`O`| canvas path, useful for debugging
 
 
 Remember that these substitutions get passed to the `R` function as a
 `Tcl` object, hence you need to convert them to the desired type
-before using them in your code.
+before using them in your code (e.g. with `l_toR` or `as.numeric`).
 
 </R>
 
@@ -477,22 +475,14 @@ its (i.e. the context's) `command` state. The contexts add
 substitution in the command evaluation that are meaningful for the
 particular context. Currently the following contexts are implemented:
 
-* **Context2d:** maps all locations on the graph that represent 2d
-  spaces to `xvars` and `yvars` minimizing the occurrences of variable
-  names in `xvars` and `yvars`. For example, if a navigator gets moved
-  from node `A:B` on the edge towards the node `D:A` then `xvars` will
-  be `A` and `yvars` will be `(B, D)`. The order of the variable names
-  in the node names is only important if the navigator jumps to a new
-  node or the context gets initialized. In that case the node gets
-  split into the two variables and the first gets mapped onto `xvars`
-  and the second to `yvars`. After initialization the context2d will
-  try to keep the variables in the same `xvars` or `yvars` if
-  possible. For example, moving the navigator form not `A:B` to node
-  `B:C` with `xvars=(A,C)` and `yvars=B`, once the navigator arrives
-  at `B:C` then `xvars=C` and `yvars=B` even though the navigator is
-  on `B:C`.
+* **Context2d** maps every location on a 2d space graph to a list of
+`xvars` and a list of `yvars` such that, while moving the navigator
+along the graph, as few changes as possible take place in `xvars` and
+`yvars`, see the image:
 
-* **Geodesic2d:** every location on the graph with an orthogonal
+	![](images/context2d.png)
+
+* **Geodesic2d** maps every location on the graph as an orthogonal
   projection of the data onto a two-dimensional subspace. The nodes
   then represent the sub-space spanned by a pair of variates and the
   edges either a 3d- or 4d-transition of one scatterplot into another,
@@ -614,12 +604,9 @@ basic `R` plots as follows:
 ~~~
 plot(iris[,1:2], col=iris$Species, pch=16)
 
-str2num <- function(x) {
-	vapply(unlist(strsplit(x, ' ')), as.numeric, numeric(1), USE.NAMES=FALSE)
-}
 
 con['command'] <- function(x,y,xlabel,ylabel) {
-	plot(str2num(x), str2num(y), xlab=xlabel, ylab=ylabel,
+	plot(l_toR(x, as.numeric), l_toR(y, as.numeric), xlab=xlabel, ylab=ylabel,
 		col=iris$Species, pch=16, xlim=c(-5,5), ylim=c(-5,5))
 }
 ~~~
@@ -630,8 +617,8 @@ Or you can add contour lines of the density estimates
 require(MASS)
 
 con['command'] <- function(x,y,xlabel,ylabel) {
-	x <- str2num(x)
-	y <- str2num(y)
+	x <- l_toR(x, as.numeric)
+	y <- l_toR(y, as.numeric)
 
 	fit <- kde2d(x,y)
 
@@ -788,11 +775,11 @@ $g configure {*}[interleave {-nodes -from -to -isDirected} $LGnot]
 
 ## Graph Switch Widget
 
-Sometimes it is useful to easily switch between different graphs. The
-graph selector widget maintains a list of graphs and updates the
-`activewidget` if a graph in its list gets selected.
+Sometimes it is useful to easily switch between different graphs on a
+graph display. The graph switch widget maintains a list of graphs and
+updates the `activewidget` if a graph in its list gets selected.
 
-For this example we pack a graph selector next to a graph
+For this example we pack a graph switch widget next to a graph
 display. More on widget layouts can be read <a
 href="learn_<R>R</R><Tcl></Tcl>_layout.html">here</a>.
 
@@ -800,7 +787,7 @@ href="learn_<R>R</R><Tcl></Tcl>_layout.html">here</a>.
 <R>
 
 ~~~
-tt <- l_toplevel()
+tt <- tktoplevel()
 tktitle(tt) <- paste("Loon graph example with a graph switch")
 
 g <- l_graph.default(parent=tt)
@@ -834,7 +821,7 @@ pack $gs -side left -fill y
 
 
 
-A graph gets added to the graph switch as follows
+Graphs are added to the graph switch as follows
 
 <R>
 
@@ -881,7 +868,7 @@ $gs set $idG3
   active states are not stored in the graph switch, only the graph
   information.
 
-### Working with the Graphswitch
+### Working with the Graph Switch
 
 The API of the graph switch is similar to that of the layers, except
 that graphs are arranged in a flat list and layers are arranged in a
@@ -890,10 +877,10 @@ tree structure.
 
 <Tcl>
 
-For the graphswitch widget graphs are defined by a list with node
-names and a list with `from` node names and a list with `to` node
-names to define the edges, and a logical value whether the edges are
-directed or not.
+For the graph switch widget the graphs are defined as for the graph
+widget with a list of node names and a list with `from` node names and
+a list with `to` node names that define the edges, and a logical value
+whether the edges are directed or not.
 
 ~~~
 set gs [graphswitch]
@@ -931,7 +918,7 @@ The `add` method returns an id for the added graph.
 
 Currently the `activewidget` state of `gs` is not set to any graph
 widget. Selecting a graph will throw an error saying that the
-graphswitch has not activewidget set. To set an activewidget (i.e. a
+graphswitch has no activewidget set. To set an activewidget (i.e. a
 graph widget) use
 
 <R>
@@ -957,7 +944,7 @@ $gs configure -activewidget $g
 
 
 Now, to push a graph in `gs` to the graph widget `g` you can either
-mouse select a graph on the graphswitch widget, or do it
+mouse select a graph on the graphswitch widget or set it
 programmatically as follows
 
 
@@ -1020,10 +1007,10 @@ $gs ids
 </Tcl>
 
 
-If you have followed this example the `ids` method should return a
-list with ids `graph0`, `graph1`, `graph2`, and `graph3`, where the
-order of the ids is how they appear in the graphswitch widget. To move
-a graph to a different position in the list do as follows
+If you have followed this example then the `ids` method should return
+a list with the ids `graph0`, `graph1`, `graph2` and `graph3`, where
+the order of the ids is how they appear in the graphswitch widget. To
+move a graph to a different position in the list do as follows
 
 <R>
 
@@ -1041,7 +1028,7 @@ $gs move graph0 2
 
 </Tcl>
 
-to move `graph0` to the second last place. To reorder all graphs us
+to move `graph0` to the second last place. To reorder all graphs use
 
 
 <R>

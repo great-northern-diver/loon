@@ -30,6 +30,16 @@ follows
 ![Move points on scatterplot](images/gestures_move.png "Move points on scatterplot")
 
 
+Note that on the Macbook the right button press and drag events can be
+configured in *Settings* > *Trackpad* with the *Secondary click*
+setting, see image below. For example, when set to "Click or tab with
+two fingers" then a two-finger-press and motion event while keeping
+the fingers pressed will generate the right-click dragging events
+(e.g. for panning).
+
+![](images/Macbook_Rightclick.png)
+
+
 ### User Interface Behavior
 
 There are a few things which are good to know and are features rather

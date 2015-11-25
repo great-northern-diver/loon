@@ -173,7 +173,7 @@ p[&#39;xTemp&#39;] &lt;- c(1,1,1)
 <pre><code>p[&#39;selected&#39;] &lt;- TRUE
 #&gt; .l0.plot had events selected
 p[&#39;selected&#39;] &lt;- TRUE</code></pre>
-<p>The above code will only throw one event for the fist expression and no event for the second expression, as the <code>selected</code> state does not change .</p>
+<p>The above code will only throw one event for the first expression and no event for the second expression, as the <code>selected</code> state does not change .</p>
 <h3 id="substitutions">Substitutions</h3>
 <p>The current substitutions for state bindings are</p>
 <table>
@@ -198,7 +198,7 @@ p[&#39;selected&#39;] &lt;- TRUE</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code.</p>
+<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
 <h3 id="list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</h3>
 <p>Assume the following plot and bindings</p>
 <pre><code>p &lt;- l_plot(1:3, 1:3)

@@ -410,18 +410,18 @@ $p configure -glyph $gl
 
 ### Images
 
-Image glyphs rely on a `Tcl` procedure `image_scale` for image
+Image glyphs rely on the `Tcl` procedure `image_scale` for image
   resizing. The `loon` package comes with a `image_scale` procedure
-  that is pure `Tcl` code. To improve the image resizing speed it is
-  possible to install the
+  that is pure `Tcl` code (i.e. interpreted). To improve the image
+  resizing speed it is possible to install the
   [ImageScale Tcl extension](https://github.com/waddella/tclImageScale
   "fast image resizing Tcl extension"). `loon` will check when it is
   loaded whether the 'ImageScale' package is installed and will use
   the faster procedure (also in `R`).
 
 
-We fist start by creating the images and then show how to load images
-form files.
+We first start by creating the images manually and then show how to
+load images form files.
 
 <R>
 
@@ -457,7 +457,7 @@ Note that the images above have different sizes. The `loon`
 scatterplot will resize the images (i.e. all glyph types) such that
 their areas are proportional to their associated point sizes.
 
-The images are added 
+The images are added as follows
 
 <R>
 
@@ -497,23 +497,27 @@ $p configure -glyph $gi
 
 Images must be in the standard `tcl` [`image`][tclman_image]
 format. Hence, you may read the [`image` manual][tclman_image] to get
-a deeper understanding of creating, deleting, and querying images in
+a deeper understanding of creating, deleting and querying images in
 `tcl`.
 
 We do, however, provide two functions that simplify importing images
-from a set of files (jpg, png, bmp, etc.), and from an array with
+from a set of files (jpg, png, bmp, etc.) and from an array with
 greyscale image information in its rows or columns,
 i.e. `l_image_import_files` and `l_image_import_array`, respectively.
 
-If the images are stored in files in `jpg`, `png`, or `bmp` format you
+If the images are stored in files in `jpg`, `png` or `bmp` format you
 can use our `l_image_import_files` function. The core `tcl`
-interpreter does not know many image formats, but with `tcl`
+interpreter does not know many image formats but with `tcl`
 [`Img` package](http://wiki.tcl.tk/1404) loaded you can import images
 in the most common formats.
 
+For the following example we use some images that we distribute with
+the `loon` `R` package
+
 ~~~
-paths <- dir('path-to-folder-with-images', '*.png', full.names=TRUE)
-imgs <- l_image_import_files(paths)
+path <- system.file("images", package="loon")
+image_paths <- dir(path, '*.png', full.names=TRUE)
+imgs <- l_image_import_files(image_paths)
 ~~~
 
 The `tcl` interpreter handles the image data internally and makes the
@@ -528,7 +532,16 @@ l_imageviewer(imgs)
 To add the images to a plot widget
 
 ~~~
-l_glyph_add_image(p, images=imgs, label="faces")
+p <- l_plot(1:length(imgs))
+
+gi <- l_glyph_add_image(p, images=imgs, label="flags")
+~~~
+
+and to have the images displayed set the `glyph` plot state to the
+image glyphs
+
+~~~
+p['glyph'] <- gi
 ~~~
 
 To see working examples, take look at one of the following `loon`
@@ -557,6 +570,11 @@ tcl(pic, 'put', 'red', '-to', 10, 15) # one pixel
 ~~~
 
 ![](images/display_plot_glyphs_image3.png "image pixel by pixel")
+
+* **Note** that `l_glyph_add_image` creates copies of the submitted
+  images. Hence, it is not possible to modify the images when the
+  images are already on the canvas as it is the case in the above
+  example.
 
 </R>
 

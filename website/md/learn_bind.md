@@ -251,7 +251,7 @@ p['selected'] <- TRUE
 
 </R>
 
-The above code will only throw one event for the fist expression and
+The above code will only throw one event for the first expression and
 no event for the second expression, as the `selected` state does not
 change <Tcl>(`1` and `TRUE` both represent the same logical
 value)</Tcl>.
@@ -271,7 +271,7 @@ argument name| substituted value
 
 Remember that these substitutions get passed to the `R` function as a
 `Tcl` object, hence you need to convert them to the desired type
-before using them in your code.
+before using them in your code (e.g. with `l_toR` or `as.numeric`).
 
 </R>
 

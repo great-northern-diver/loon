@@ -166,8 +166,9 @@ complement <- function(x, ...) {
     UseMethod("complement")
 }
 
+
 #' @export
-complement.loongraph <- function(x, ...) {
+complement.loongraph <- function(x) {
     nodes <- x$nodes
     from <- x$from
     to <- x$to

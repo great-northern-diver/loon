@@ -9,6 +9,10 @@ window.onload = function() {
 </script>
 
 
+---
+title: scatterplot matrix - loon
+---
+
 ![](images/display_pairs.png "loon scatterplot matrix")
 
 <R>

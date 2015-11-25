@@ -249,8 +249,8 @@ p[&#39;glyph&#39;] &lt;- gl</code></pre>
 
 </div>
 <h3 id="images">Images</h3>
-<p>Image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
-<p>We fist start by creating the images and then show how to load images form files.</p>
+<p>Image glyphs rely on the <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code (i.e. interpreted). To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
+<p>We first start by creating the images manually and then show how to load images form files.</p>
 <pre><code>img1 &lt;- as.character(tkimage.create(&#39;photo&#39;, width=30, height=20))
 tcl(img1, &#39;put&#39;, &#39;blue&#39;, &#39;-to&#39;, 0, 0, 30, 20)
 tcl(img1, &#39;put&#39;, &#39;yellow&#39;, &#39;-to&#39;, 0, 6, 30, 11)
@@ -261,7 +261,7 @@ img3 &lt;- as.character(tkimage.create(&#39;photo&#39;, width=60, height=100))
 tcl(img3, &#39;put&#39;, &#39;orange&#39;, &#39;-to&#39;, 0, 0, 60, 100)
 tcl(img3, &#39;put&#39;, &#39;black&#39;, &#39;-to&#39;, 40, 0, 50, 80)</code></pre>
 <p>Note that the images above have different sizes. The <code>loon</code> scatterplot will resize the images (i.e. all glyph types) such that their areas are proportional to their associated point sizes.</p>
-<p>The images are added</p>
+<p>The images are added as follows</p>
 <pre><code>p &lt;- l_plot(x=c(1,2,3), y=c(3,1,2),
     color=c(&#39;green&#39;,&#39;yellow&#39;,&#39;blue&#39;), size=c(4,3,7))
 
@@ -273,15 +273,21 @@ p[&#39;glyph&#39;] &lt;- gi</code></pre>
 
 </div>
 <h4 id="load-images">Load Images</h4>
-<p>Images must be in the standard <code>tcl</code> <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code></a> format. Hence, you may read the <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code> manual</a> to get a deeper understanding of creating, deleting, and querying images in <code>tcl</code>.</p>
-<p>We do, however, provide two functions that simplify importing images from a set of files (jpg, png, bmp, etc.), and from an array with greyscale image information in its rows or columns, i.e. <code>l_image_import_files</code> and <code>l_image_import_array</code>, respectively.</p>
-<p>If the images are stored in files in <code>jpg</code>, <code>png</code>, or <code>bmp</code> format you can use our <code>l_image_import_files</code> function. The core <code>tcl</code> interpreter does not know many image formats, but with <code>tcl</code> <a href="http://wiki.tcl.tk/1404"><code>Img</code> package</a> loaded you can import images in the most common formats.</p>
-<pre><code>paths &lt;- dir(&#39;path-to-folder-with-images&#39;, &#39;*.png&#39;, full.names=TRUE)
-imgs &lt;- l_image_import_files(paths)</code></pre>
+<p>Images must be in the standard <code>tcl</code> <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code></a> format. Hence, you may read the <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code> manual</a> to get a deeper understanding of creating, deleting and querying images in <code>tcl</code>.</p>
+<p>We do, however, provide two functions that simplify importing images from a set of files (jpg, png, bmp, etc.) and from an array with greyscale image information in its rows or columns, i.e. <code>l_image_import_files</code> and <code>l_image_import_array</code>, respectively.</p>
+<p>If the images are stored in files in <code>jpg</code>, <code>png</code> or <code>bmp</code> format you can use our <code>l_image_import_files</code> function. The core <code>tcl</code> interpreter does not know many image formats but with <code>tcl</code> <a href="http://wiki.tcl.tk/1404"><code>Img</code> package</a> loaded you can import images in the most common formats.</p>
+<p>For the following example we use some images that we distribute with the <code>loon</code> <code>R</code> package</p>
+<pre><code>path &lt;- system.file(&quot;images&quot;, package=&quot;loon&quot;)
+image_paths &lt;- dir(path, &#39;*.png&#39;, full.names=TRUE)
+imgs &lt;- l_image_import_files(image_paths)</code></pre>
 <p>The <code>tcl</code> interpreter handles the image data internally and makes the image objects accessible via handles named <code>image1</code>, <code>image2</code> and so on. The <code>imgs</code> object from above is hence a vector with the image object names. You can see the images in our image viewer as follows</p>
 <pre><code>l_imageviewer(imgs)</code></pre>
 <p>To add the images to a plot widget</p>
-<pre><code>l_glyph_add_image(p, images=imgs, label=&quot;faces&quot;)</code></pre>
+<pre><code>p &lt;- l_plot(1:length(imgs))
+
+gi &lt;- l_glyph_add_image(p, images=imgs, label=&quot;flags&quot;)</code></pre>
+<p>and to have the images displayed set the <code>glyph</code> plot state to the image glyphs</p>
+<pre><code>p[&#39;glyph&#39;] &lt;- gi</code></pre>
 <p>To see working examples, take look at one of the following <code>loon</code> package demos: <code>l_ng_images_faces</code>, <code>l_ng_images_frey_LLE</code>, or <code>l_ng_images_frey_isomap</code>. For example,</p>
 <pre><code>demo(&#39;l_ng_images_faces&#39;)</code></pre>
 <div class="figure">
@@ -300,6 +306,9 @@ tcl(pic, &#39;put&#39;, &#39;red&#39;, &#39;-to&#39;, 10, 15) # one pixel
 <img src="images/display_plot_glyphs_image3.png" title="image pixel by pixel" alt="" />
 
 </div>
+<ul>
+<li><strong>Note</strong> that <code>l_glyph_add_image</code> creates copies of the submitted images. Hence, it is not possible to modify the images when the images are already on the canvas as it is the case in the above example.</li>
+</ul>
 <h3 id="query-and-modify-glyph-states">Query and Modify Glyph States</h3>
 <p>The non-primitive glyphs (or n dimensional glyphs) have states. To demonstrate how to work with glyph states we take the text glyph example from above again:</p>
 <pre><code>data(olive); attach(olive)

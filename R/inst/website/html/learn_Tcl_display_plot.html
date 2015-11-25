@@ -284,8 +284,8 @@ $p configure -glyph $gl</code></pre>
 
 </div>
 <h3 id="images">Images</h3>
-<p>Image glyphs rely on a <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code. To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
-<p>We fist start by creating the images and then show how to load images form files.</p>
+<p>Image glyphs rely on the <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code (i.e. interpreted). To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
+<p>We first start by creating the images manually and then show how to load images form files.</p>
 <div class="sourceCode"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span class="kw">set</span> img1 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">30</span><span class="ot"> -height</span> <span class="dv">20</span><span class="kw">]</span>
 <span class="dt">$img1</span> put blue<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">30</span> <span class="dv">20</span>; <span class="dt">$img1</span> put yellow<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">30</span> <span class="dv">11</span>
 <span class="kw">set</span> img2 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">80</span><span class="ot"> -height</span> <span class="dv">80</span><span class="kw">]</span>
@@ -293,7 +293,7 @@ $p configure -glyph $gl</code></pre>
 <span class="kw">set</span> img3 <span class="kw">[image</span> <span class="ot">create</span> photo<span class="ot"> -width</span> <span class="dv">60</span><span class="ot"> -height</span> <span class="dv">100</span><span class="kw">]</span>
 <span class="dt">$img3</span> put orange<span class="ot"> -to</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">60</span> <span class="dv">100</span>; <span class="dt">$img3</span> put black<span class="ot"> -to</span> <span class="dv">40</span> <span class="dv">0</span> <span class="dv">50</span> <span class="dv">80</span></code></pre></div>
 <p>Note that the images above have different sizes. The <code>loon</code> scatterplot will resize the images (i.e. all glyph types) such that their areas are proportional to their associated point sizes.</p>
-<p>The images are added</p>
+<p>The images are added as follows</p>
 <pre><code>set p [plot -x {1 2 3} -y {3 1 2}\
     -color {green yellow blue} -size {4 3 7}]
 

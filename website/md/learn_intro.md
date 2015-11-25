@@ -93,38 +93,11 @@ namespace. If you do not import `loon`'s procedures into the global
 namespace then you need to prepend `loon::` in front of `loon`'s
 procedure names (e.g. `loon::plot` instead of `plot`).
 
-
 </Tcl>
 
 <R>
 
 See the [beta section](beta.html).
-
-<!--
-
-To install the newest stable version of `loon` from CRAN run the
-following command in an R session
-
-~~~{.todo}
-install.packages("loon")
-~~~
-
-Development versions can be installed and tested from github with the
-`devtools` `R` package as follows
-
-~~~{.todo}
-library(devtools)
-
-install_github("loon")
-
-# use development version of loon
-dev_mode(on=TRUE)
-
-# switch back to stable version of loon
-dev_mode(on=FALSE)
-~~~
-
--->
 
 </R>
 
