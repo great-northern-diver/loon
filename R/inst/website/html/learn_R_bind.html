@@ -112,7 +112,7 @@ l_bind_state(p, event=c(&#39;selected&#39;, &#39;active&#39;, &#39;xTemp&#39;),
 
 #&gt; [1] &quot;R_call 0x7fe6965adb78 %x %y %a %b&quot;</code></pre>
 <p>The <code>R_call</code> procedure in <code>Tcl</code> uses the hex-address to access the <code>R</code> function. The <code>x</code>, <code>y</code>, <code>a</code> and <code>b</code> arguments of <code>foo</code> get translated to <code>%x</code>, <code>%y</code>, <code>%a</code> and <code>%b</code>. The <code>%</code> arguments are meant to be substituted by <code>Tcl</code> before the <code>R_call</code> evaluation. Note, that <code>Tcl</code> will always send strings to the arguments of the <code>R</code> function and hence they need to changed to the required type as we did with the <code>as.numeric</code> <code>R</code> function. For example</p>
-<pre><code>.Tcl(&#39;R_call 0x7fe6965adb78 1 2 3 4&#39;)
+<pre class="notrun"><code>.Tcl(&#39;R_call 0x7fe6965adb78 1 2 3 4&#39;)
 
 s
 #&gt; 30</code></pre>

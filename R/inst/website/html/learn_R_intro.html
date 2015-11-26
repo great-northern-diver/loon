@@ -107,26 +107,30 @@ p[&#39;size&#39;] &lt;- iris$Petal.Length</code></pre>
 <p>The user interfaces of <code>loon</code>'s displays are explained in the <a href="UI.html">UI section</a>.</p>
 <h1 id="package-demos">Package Demos</h1>
 <p>The <code>loon</code> <code>R</code> package comes with many demos that show how to use particular parts of the <code>loon</code> API. See,</p>
-<pre><code>demo(package = &quot;loon&quot;)</code></pre>
+<pre class="notrun"><code>demo(package = &quot;loon&quot;)</code></pre>
+<p>Run a particular demo as follows</p>
+<pre class="notrun"><code>demo(&quot;l_us_and_them_choropleth&quot;)</code></pre>
+<p>To get the location of the source code of a particular demo (e.g. <code>l_us_and_them_choropleth</code>) use</p>
+<pre class="notrun"><code>system.file(&quot;demo&quot;, &quot;l_us_and_them_choropleth.R&quot;, package = &quot;loon&quot;)</code></pre>
 <h1 id="re-creating-object-handles">Re-creating Object Handles</h1>
 <p>It is possible to re-create any <code>loon</code> object handle in an <code>R</code> session. That is, handles for displays, layers, glyphs, navigators and context handles can be created with the widget path name and the appropriate ids. The object handle can then be used with the methods <code>[</code> and <code>[&lt;-</code> to access and modify states. For example, for a display with the widget path name <code>.l1.hist</code> one can create a <code>loon</code> plot handle as follows</p>
-<pre><code>h &lt;- &#39;.l1.hist&#39;
+<pre class="notrun"><code>h &lt;- &#39;.l1.hist&#39;
 class(h) &lt;- &#39;loon&#39;  </code></pre>
 <p>For a layer with the layer id <code>layer23</code> of that display the layer handle can be created as follows</p>
-<pre><code>l &lt;- &#39;layer23&#39;
+<pre class="notrun"><code>l &lt;- &#39;layer23&#39;
 class(l) &lt;- c(&#39;loon&#39;, &#39;l_layer&#39;)
 attr(l, &#39;widget&#39;) &lt;- &#39;.l1.hist&#39; </code></pre>
 <p>For a context with the id <code>context0</code> of a navigator with id <code>navigator1</code> of a graph with widget path name <code>.l4.graph</code>, the context handle is created as follows:</p>
-<pre><code>con &lt;- &#39;context0&#39;
+<pre class="notrun"><code>con &lt;- &#39;context0&#39;
 class(con) &lt;- c(&#39;loon&#39;, &#39;l_context&#39;)
 attr(con, &#39;widget&#39;) &lt;- &#39;.l4.graph&#39;
 attr(con, &#39;navigator&#39;) &lt;- &#39;navigator1&#39; </code></pre>
 <p>and so on. The <code>l_cget</code> and <code>l_configure</code> have <code>target</code> as their first argument which either accepts a <code>loon</code> object handle or a vector with the widget path name and the object ids. The following code blocks have each two lines that do the same</p>
-<pre><code>l_configure(h, color=&#39;red&#39;)
+<pre class="notrun"><code>l_configure(h, color=&#39;red&#39;)
 l_configure(&#39;.l1.hist&#39;, color=&#39;red&#39;)</code></pre>
-<pre><code>l_configure(l, color=&#39;green&#39;)
+<pre class="notrun"><code>l_configure(l, color=&#39;green&#39;)
 l_configure(c(&#39;.l1.hist&#39;, &#39;layer23&#39;), color=&#39;green&#39;)</code></pre>
-<pre><code>l_configure(con, command=&#39;&#39;)
+<pre class="notrun"><code>l_configure(con, command=&#39;&#39;)
 l_configure(c(&#39;.l4.graph&#39;, &#39;navigator1&#39;, &#39;context0&#39;), command=&#39;&#39;)</code></pre>
 <p>The re-creation of object handles is useful when, for example, an object handle is lost or overwritten.</p>
 <h1 id="a-couple-of-notes">A Couple of Notes</h1>
