@@ -166,7 +166,6 @@ complement <- function(x, ...) {
     UseMethod("complement")
 }
 
-
 #' @export
 complement.loongraph <- function(x) {
     nodes <- x$nodes
@@ -204,6 +203,12 @@ complement.loongraph <- function(x) {
     attributes(G) <- attributes(x)
     return(G)
 }
+
+
+## Theoretically if graph would be a dependency
+# setOldClass("loongraph")
+# setGeneric("complement", function(x) {standardGeneric("complement")})
+# setMethod("complement", "loongraph", loon:::complement.loongraph)
 
 
 ##

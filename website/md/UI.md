@@ -35,11 +35,11 @@ follows
 Note that for the MacBook trackpad the right button press and drag
 events can be configured in *Settings* > *Trackpad* with the
 *Secondary click* setting, see image below. For example, when set to
-"Click or tab with two fingers" then a two-finger-press and drag event
-while keeping the fingers pressed will generate the right-click
-dragging events (e.g. for panning). There is also a *Scroll and Zoom*
-tab to specify the zoom event (usually a two-finger vertical swipe
-gesture).
+"Click or tab with two fingers" then a two-finger-press and drag
+movement while keeping the fingers pressed will generate the
+right-click dragging events (e.g. for panning). There is also a
+*Scroll and Zoom* tab to specify the zoom event (usually a two-finger
+vertical swipe gesture).
 
 ![](images/Macbook_Rightclick.png)
 

@@ -285,7 +285,7 @@ $g navigator use $nav bind state add {from to proportion}\
 <img src="images/context2d.png" alt="" />
 
 </div></li>
-<li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share. The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
+<li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share (see <a href="http://link.springer.com/article/10.1007%2Fs00180-011-0228-6">Hurley and Oldford 2011</a>). The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
 </ul>
 <h3 id="geodesic-2d">Geodesic 2d</h3>
 <p>The following code adds a geodesic2d context to a navigator:</p>
@@ -298,11 +298,11 @@ set nav [$g navigator add]
 
 set con [$g navigator use $nav context add geodesic2d\
     -data [dict filter $iris key Se* Pe*]]</code></pre>
-<p>This will open a new scatterplot showing the projection defined by the navigator location. Opening a new scatterplot is the default behaviour. Every navigator position change will evaluate the command in the <code>command</code> state of the context. The default command state is</p>
+<p>This will open a new scatterplot showing the projection defined by the navigator location. Every navigator position change will evaluate the command in the <code>command</code> state of the context. The default command state is</p>
 <pre><code>$g navigator use $nav context use $con cget -command
 
 #% .l2.plot configure -x %x -y %y -xlabel %xlabel -ylabel %ylabel</code></pre>
-<p>where <code>.l2.plot</code> is the widget path name of the newly created scatterplot. If the <code>command</code> state is specified at context creation time, no scatterplot will be created. The <code>command</code> state supports substitutions similar to bindings. The substitution table is</p>
+<p>where <code>.l2.plot</code> is the widget path name of the newly created scatterplot. If the <code>command</code> state is specified at context creation time then no scatterplot will be created. The <code>command</code> state supports substitutions similar to bindings. The substitution table is</p>
 <table>
 <thead>
 <tr class="header">

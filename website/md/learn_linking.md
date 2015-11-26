@@ -15,9 +15,9 @@ title: learn linking - loon
 
 All of `loon`'s plots can be linked so that some of their
 n-dimensional states are synchronized. For a linked scatterplot, the
-states the are synchronized by default (i.e. linked states) are the
-color, size, selected and active states. Two or more plots are linked
-if they share the same string in their `linkingGroup` state.
+states that are synchronized by default (i.e. linked states) are the
+`color`, `size`, `selected` and `active` states. Two or more plots are
+linked if they share the same string in their `linkingGroup` state.
 
 `loon`'s standard linking model is fairly flexible and the user can
 choose

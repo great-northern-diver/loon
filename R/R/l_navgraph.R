@@ -16,7 +16,7 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
     if (is.null(graph)) {
         G <- completegraph(nodes=names(data))
         LG <- linegraph(G, sep=separator)
-        LGnot <- complement(LG)
+        LGnot <- loon::complement(LG)
         
         cmb <- combn(names(data),2)
         CompG <- completegraph(nodes=apply(cmb[,cmb[1,]!=cmb[2,]],2,

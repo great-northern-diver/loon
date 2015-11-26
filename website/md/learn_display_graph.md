@@ -153,6 +153,17 @@ which states are `p` dimensional use
   set the `x` and `y` states of the `loon` graph accordingly. `loon`
   supports straight lines for edges only.
 
+
+<R>
+
+* Both the `loon` and `graph` packages define the method `complement`
+(once for `S3` and once for `S4`). Hence, the `complement` method of
+the package that was loaded last will mask the other `complement`
+method. Therefore it is advisable to specify the method explicitly
+with `loon::complement` or `graph::complement`.
+
+</R>
+
 # Navigation Graphs
 
 To turn a graph into a navigation graph you need to add one or more
@@ -487,8 +498,9 @@ along the graph, as few changes as possible take place in `xvars` and
   then represent the sub-space spanned by a pair of variates and the
   edges either a 3d- or 4d-transition of one scatterplot into another,
   depending on how many variates the two nodes connected by the edge
-  share. The `geodesic2d` context inherits from the `context2d`
-  context.
+  share (see
+  [Hurley and Oldford 2011](http://link.springer.com/article/10.1007%2Fs00180-011-0228-6)). The
+  `geodesic2d` context inherits from the `context2d` context.
 
 
 ### Geodesic 2d
@@ -506,10 +518,6 @@ nav <- l_navigator_add(g)
 
 con <- l_context_add_geodesic2d(navigator=nav, data=iris[,-5])
 ~~~
-
-* Note that the navigator can be either a vector of widget path name
-  and navigator id, or the navigator object.
-  
 
 </R>
 
@@ -531,9 +539,9 @@ set con [$g navigator use $nav context add geodesic2d\
 </Tcl>
 
 This will open a new scatterplot showing the projection defined by the
-navigator location. Opening a new scatterplot is the default
-behaviour. Every navigator position change will evaluate the command
-in the `command` state of the context. The default command state is
+navigator location. Every navigator position change will evaluate the
+command in the `command` state of the context. The default command
+state is
 
 <R>
 
@@ -557,7 +565,7 @@ $g navigator use $nav context use $con cget -command
 
 where `.l2.plot` is the widget path name of the newly created
 scatterplot. If the `command` state is specified at context creation
-time, no scatterplot will be created. The `command` state supports
+time then no scatterplot will be created. The `command` state supports
 substitutions similar to bindings. The substitution table is
 
 <R>
@@ -750,7 +758,7 @@ The graph can be switched as follows
 <R>
 
 ~~~
-LGnot <- complement(LG)
+LGnot <- loon::complement(LG)
 
 l_configure(g, nodes=LGnot$nodes, from=LGnot$from,
 	to=LGnot$to, isDirected=LGnot$isDirected)
@@ -830,7 +838,7 @@ G1 <- completegraph(LETTERS[1:4])
 G2 <- loongraph(nodes=c('a','b','c'), from=c('a','a'),
 	to=c('b','c'), isDirected=FALSE)
 G3 <- linegraph(G1)
-G4 <- complement(G3)
+G4 <- loon::complement(G3)
 
 idG1 <- l_graphswitch_add(gs, G1, label='G1')
 idG2 <- l_graphswitch_add(gs, G2, label='G2')
@@ -896,8 +904,8 @@ and `<index>` are optional.
 
 <R>
 
-Either graphs of class `loongraph` or class `graph` which is defined
-in the `graph` `R` package can be added as follows
+Either graphs of class `loongraph` or class `graph` (defined in the
+`graph` `R` package) can be added as follows
 
 ~~~
 gs <- l_graphswitch()
@@ -1172,7 +1180,7 @@ LG <- linegraph(G, sep="-")
 and the complement
 
 ~~~
-complement(LG)
+loon::complement(LG)
 ~~~
 
 And, given some node names of a graph, on can get the undirected `n`-d

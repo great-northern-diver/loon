@@ -163,6 +163,7 @@ states$background</code></pre>
 <pre><code>states &lt;- l_info_states(g)
 names(Filter(function(x){x$dimension==&#39;p&#39;}, states))</code></pre></li>
 <li><p>To change the layout of the graph use a graph layout algorithm and set the <code>x</code> and <code>y</code> states of the <code>loon</code> graph accordingly. <code>loon</code> supports straight lines for edges only.</p></li>
+<li><p>Both the <code>loon</code> and <code>graph</code> packages define the method <code>complement</code> (once for <code>S3</code> and once for <code>S4</code>). Hence, the <code>complement</code> method of the package that was loaded last will mask the other <code>complement</code> method. Therefore it is advisable to specify the method explicitly with <code>loon::complement</code> or <code>graph::complement</code>.</p></li>
 </ul>
 <h1 id="navigation-graphs">Navigation Graphs</h1>
 <p>To turn a graph into a navigation graph you need to add one or more navigators. Navigators have their own set of states such as <code>from</code>, <code>to</code> and <code>proportion</code>. You can create state bindings for the navigator that call a function when a navigator changes its position on the graph. States and state bindings for navigators provide the facility to implement any graph semantic. However, certain graph semantics (e.g. the default semantic with 2d projection along a geodesic path between spaces) involve lots of logic and control over plots and, hence, it makes sense to en encapsulate them. We do this by providing <em>contexts</em>. A context is added to a navigator and will do a specific task if the navigator's position on the graph changes.</p>
@@ -288,7 +289,7 @@ l_bind_state(nav, event=c(&#39;from&#39;, &#39;to&#39;, &#39;proportion&#39;),
 <img src="images/context2d.png" alt="" />
 
 </div></li>
-<li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share. The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
+<li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share (see <a href="http://link.springer.com/article/10.1007%2Fs00180-011-0228-6">Hurley and Oldford 2011</a>). The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
 </ul>
 <h3 id="geodesic-2d">Geodesic 2d</h3>
 <p>The following code adds a geodesic2d context to a navigator:</p>
@@ -299,14 +300,11 @@ g &lt;- l_graph(LG)
 nav &lt;- l_navigator_add(g)
 
 con &lt;- l_context_add_geodesic2d(navigator=nav, data=iris[,-5])</code></pre>
-<ul>
-<li>Note that the navigator can be either a vector of widget path name and navigator id, or the navigator object.</li>
-</ul>
-<p>This will open a new scatterplot showing the projection defined by the navigator location. Opening a new scatterplot is the default behaviour. Every navigator position change will evaluate the command in the <code>command</code> state of the context. The default command state is</p>
+<p>This will open a new scatterplot showing the projection defined by the navigator location. Every navigator position change will evaluate the command in the <code>command</code> state of the context. The default command state is</p>
 <pre><code>con[&#39;command&#39;]
 
 #&gt; [1] &quot;.l2.plot configure -x %x -y %y -xlabel %xlabel -ylabel %ylabel&quot;</code></pre>
-<p>where <code>.l2.plot</code> is the widget path name of the newly created scatterplot. If the <code>command</code> state is specified at context creation time, no scatterplot will be created. The <code>command</code> state supports substitutions similar to bindings. The substitution table is</p>
+<p>where <code>.l2.plot</code> is the widget path name of the newly created scatterplot. If the <code>command</code> state is specified at context creation time then no scatterplot will be created. The <code>command</code> state supports substitutions similar to bindings. The substitution table is</p>
 <table>
 <thead>
 <tr class="header">
@@ -446,7 +444,7 @@ con &lt;- l_context_add_context2d(nav, separator=&#39;-&#39;,
 <li>Note that the default separator is <code>:</code> but it can be changed to any string in the <code>linegraph</code> function and as a context2d state.</li>
 </ul>
 <p>The graph can be switched as follows</p>
-<pre><code>LGnot &lt;- complement(LG)
+<pre><code>LGnot &lt;- loon::complement(LG)
 
 l_configure(g, nodes=LGnot$nodes, from=LGnot$from,
     to=LGnot$to, isDirected=LGnot$isDirected)</code></pre>
@@ -475,7 +473,7 @@ tkpack(gs, side=&#39;left&#39;, fill=&#39;y&#39;)</code></pre>
 G2 &lt;- loongraph(nodes=c(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;), from=c(&#39;a&#39;,&#39;a&#39;),
     to=c(&#39;b&#39;,&#39;c&#39;), isDirected=FALSE)
 G3 &lt;- linegraph(G1)
-G4 &lt;- complement(G3)
+G4 &lt;- loon::complement(G3)
 
 idG1 &lt;- l_graphswitch_add(gs, G1, label=&#39;G1&#39;)
 idG2 &lt;- l_graphswitch_add(gs, G2, label=&#39;G2&#39;)
@@ -492,7 +490,7 @@ l_graphswitch_set(gs, idG3)</code></pre>
 </ul>
 <h3 id="working-with-the-graph-switch">Working with the Graph Switch</h3>
 <p>The API of the graph switch is similar to that of the layers, except that graphs are arranged in a flat list and layers are arranged in a tree structure.</p>
-<p>Either graphs of class <code>loongraph</code> or class <code>graph</code> which is defined in the <code>graph</code> <code>R</code> package can be added as follows</p>
+<p>Either graphs of class <code>loongraph</code> or class <code>graph</code> (defined in the <code>graph</code> <code>R</code> package) can be added as follows</p>
 <pre><code>gs &lt;- l_graphswitch()
 
 graphId &lt;- l_graphswitch_add(gs, graph=loongraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;),
@@ -538,7 +536,7 @@ href="http://www.bioconductor.org/packages/release/bioc/html/graph.html"><code>g
 <p>To get the linegraph use</p>
 <pre><code>LG &lt;- linegraph(G, sep=&quot;-&quot;)</code></pre>
 <p>and the complement</p>
-<pre><code>complement(LG)</code></pre>
+<pre><code>loon::complement(LG)</code></pre>
 <p>And, given some node names of a graph, on can get the undirected <code>n</code>-d transition graph as follows</p>
 <pre><code>ndtransitiongraph(nodes=c(&#39;A:B&#39;, &#39;A:F&#39;, &#39;B:C&#39;, &#39;B:F&#39;), n=3, separator=&#39;:&#39;)</code></pre>
 <h1 id="navigation-graph-workflows">Navigation Graph Workflows</h1>
