@@ -526,7 +526,7 @@ l_graphswitch_add(gs, graph=randomEGraph(LETTERS[1:15], edges=20))</code></pre>
 <p>And to get the graph as a <code>loongraph</code> object use</p>
 <pre><code>l_graphswitch_get(gs, id=&#39;graph1&#39;)</code></pre>
 <h1 id="graph-utilities">Graph Utilities</h1>
-<p>The <code>loon</code> <code>R</code> package comes with functions to create graphs. These are fairly basic and we recommend to use the algorithms and data structure from <a
+<p>The <code>loon</code> <code>R</code> package comes with functions to create graphs. These are fairly basic. If you have a situation where you need more demanding graph manipulations then we recommend to use the algorithms and data structure from <a
 href="http://www.bioconductor.org/packages/release/bioc/html/graph.html"><code>graph</code> <code>R</code> package</a>. To coerce between <code>loongraph</code> and <code>graph</code> object use the <code>as.loongraph</code> and <code>as.graph</code> functions. Note that the loongraph does not contain graph attributes such as edge weights etc. The <code>plot.loongraph</code> method will plot the graph if the <code>graph</code> package and <code>Rgraphviz</code> package are loaded.</p>
 <p>To create a graph of class <code>loongraph</code> use the following function</p>
 <pre><code>G &lt;- loongraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;), from=c(&#39;A&#39;,&#39;A&#39;,&#39;B&#39;), to=c(&#39;B&#39;,&#39;C&#39;,&#39;C&#39;),
@@ -535,7 +535,7 @@ href="http://www.bioconductor.org/packages/release/bioc/html/graph.html"><code>g
 <pre><code>completegraph(nodes=c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;))</code></pre>
 <p>To get the linegraph use</p>
 <pre><code>LG &lt;- linegraph(G, sep=&quot;-&quot;)</code></pre>
-<p>and the complement</p>
+<p>and the complement (you may specify that the function is from the <code>loon</code> package with the prefix <code>loon::</code> as if you load the <code>graph</code> package after you load the <code>loon</code> package then the <code>complement</code> function is masked by the <code>graph</code> package)</p>
 <pre><code>loon::complement(LG)</code></pre>
 <p>And, given some node names of a graph, on can get the undirected <code>n</code>-d transition graph as follows</p>
 <pre><code>ndtransitiongraph(nodes=c(&#39;A:B&#39;, &#39;A:F&#39;, &#39;B:C&#39;, &#39;B:F&#39;), n=3, separator=&#39;:&#39;)</code></pre>
@@ -547,7 +547,7 @@ href="http://www.bioconductor.org/packages/release/bioc/html/graph.html"><code>g
 ng &lt;- l_navgraph(olive[,-c(1,2)], sep=&#39;-&#39;, color=olive$Area)</code></pre>
 <p>the additional arguments <code>...</code> in <code>l_navgraph</code> will get passed on to a configure call for the scatterplot.</p>
 <ul>
-<li>Note that the return value <code>ng</code> is a named list with all handles.</li>
+<li>Note that the return value <code>ng</code> is a named list with all object handles.</li>
 </ul>
 <div class="figure">
 <img src="images/display_graph_navgraph.png" title="l_navgraph" alt="" />

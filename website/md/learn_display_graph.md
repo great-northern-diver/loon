@@ -1148,8 +1148,9 @@ $gs get graph1
 # Graph Utilities
 
 The `loon` `R` package comes with functions to create graphs. These
-are fairly basic and we recommend to use the algorithms and data
-structure from <a
+are fairly basic. If you have a situation where you need more
+demanding graph manipulations then we recommend to use the algorithms
+and data structure from <a
 href="http://www.bioconductor.org/packages/release/bioc/html/graph.html">`graph`
 `R` package</a>. To coerce between `loongraph` and `graph` object use
 the `as.loongraph` and `as.graph` functions. Note that the loongraph
@@ -1177,7 +1178,10 @@ To get the linegraph use
 LG <- linegraph(G, sep="-")
 ~~~
 
-and the complement
+and the complement (you may specify that the function is from the
+`loon` package with the prefix `loon::` as if you load the `graph`
+package after you load the `loon` package then the `complement`
+function is masked by the `graph` package)
 
 ~~~
 loon::complement(LG)
@@ -1213,7 +1217,8 @@ ng <- l_navgraph(olive[,-c(1,2)], sep='-', color=olive$Area)
 the additional arguments `...` in `l_navgraph` will get passed on to a
 configure call for the scatterplot.
 
-* Note that the return value `ng` is a named list with all handles.
+* Note that the return value `ng` is a named list with all object
+  handles.
 
 ![](images/display_graph_navgraph.png "l_navgraph")
 

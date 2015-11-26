@@ -151,9 +151,23 @@ The user interfaces of `loon`'s displays are explained in the
 The `loon` `R` package comes with many demos that show how to use
 particular parts of the `loon` API. See,
 
-~~~
+~~~{.notrun}
 demo(package = "loon")
 ~~~
+
+Run a particular demo as follows
+
+~~~{.notrun}
+demo("l_us_and_them_choropleth")
+~~~
+
+To get the location of the source code of a particular demo
+(e.g. `l_us_and_them_choropleth`) use
+
+~~~{.notrun}
+system.file("demo", "l_us_and_them_choropleth.R", package = "loon")
+~~~
+
 
 # Re-creating Object Handles
 
@@ -164,7 +178,7 @@ context handles can be created with the widget path name and the
 appropriate ids. The object handle can then be used with the methods
 `[` and `[<-` to access and modify states. For example, for a display with the widget path name `.l1.hist` one can create a `loon` plot handle as follows
 
-~~~
+~~~{.notrun}
 h <- '.l1.hist'
 class(h) <- 'loon'  
 ~~~
@@ -172,7 +186,7 @@ class(h) <- 'loon'
 For a layer with the layer id `layer23` of that display the layer
 handle can be created as follows
 
-~~~
+~~~{.notrun}
 l <- 'layer23'
 class(l) <- c('loon', 'l_layer')
 attr(l, 'widget') <- '.l1.hist' 
@@ -180,7 +194,7 @@ attr(l, 'widget') <- '.l1.hist'
 
 For a context with the id `context0` of a navigator with id `navigator1` of a graph with widget path name `.l4.graph`, the context handle is created as follows:
 
-~~~
+~~~{.notrun}
 con <- 'context0'
 class(con) <- c('loon', 'l_context')
 attr(con, 'widget') <- '.l4.graph'
@@ -189,17 +203,17 @@ attr(con, 'navigator') <- 'navigator1'
 
 and so on. The `l_cget` and `l_configure` have `target` as their first argument which either accepts a `loon` object handle or a vector with the widget path name and the object ids. The following code blocks have each two lines that do the same
 
-~~~
+~~~{.notrun}
 l_configure(h, color='red')
 l_configure('.l1.hist', color='red')
 ~~~
 
-~~~
+~~~{.notrun}
 l_configure(l, color='green')
 l_configure(c('.l1.hist', 'layer23'), color='green')
 ~~~
 
-~~~
+~~~{.notrun}
 l_configure(con, command='')
 l_configure(c('.l4.graph', 'navigator1', 'context0'), command='')
 ~~~

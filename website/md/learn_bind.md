@@ -98,7 +98,7 @@ will always send strings to the arguments of the `R` function and
 hence they need to changed to the required type as we did with the
 `as.numeric` `R` function. For example
 
-~~~
+~~~{.notrun}
 .Tcl('R_call 0x7fe6965adb78 1 2 3 4')
 
 s
