@@ -47,7 +47,7 @@ local({
     l_move_halign(p,'selected')
     l_configure(p, size=40, which='selected')
     l_scaleto_selected(p)
-    l_configure(sa, showEnclosing=TRUE, bboxColor="steelblue", showArea=TRUE)
+    l_configure(sa, showEnclosing=TRUE, bboxColor="steelblue", showArea=FALSE)
     p['selected'] <- FALSE
 
     readline("press the return key to continue: next parallel coordinates")
