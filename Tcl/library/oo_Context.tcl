@@ -22,6 +22,12 @@ oo::class create ::loon::classes::Context {
 	next
 	my New_state separator string 1 ":"
 	my New_state command string 1 ""
+
+	my SetStateDescription separator\
+	    "string used to separate the graph node names into spaces"
+
+	my SetStateDescription command\
+	    "callback that is evaluated at every navigator location change"
 	
     }
 

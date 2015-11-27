@@ -23,15 +23,35 @@ oo::class create ::loon::classes::Serialaxes_Model {
 	
 	my New_state title        string 1 ""
 	my New_state tag          string n ""
-	
-	my New_state bbox double 4 {0 0 1 1}
-	my New_state panX double 1 0
-	my New_state panY double 1 0
-	my New_state zoomX positive_double 1 1
-	my New_state zoomY positive_double 1 1
+
+	# Maybe in the future add zoom and pan support
+	#my New_state bbox double 4 {0 0 1 1}
+	#my New_state panX double 1 0
+	#my New_state panY double 1 0
+	#my New_state zoomX positive_double 1 1
+	#my New_state zoomY positive_double 1 1
 	
 	
 	my setLinkedStates [list active color selected]
+
+	my SetStateDescription showGuides\
+	    "boolean to specify whether to show lines for visual guidance or not"
+	my SetStateDescription showLabels\
+	    "boolean to specify whether to display the axes labels and title or not"
+	my SetStateDescription useLoonInspector\
+	    "boolean to specify whether to report interaction events to the loon inspector or not"
+	my SetStateDescription title\
+	    "plot title"
+	
+	my SetStateDescription color\
+	    "colors of the point glyphs"
+	my SetStateDescription selected\
+	    "selected points are highlighted and can be modified with the inspector"
+	my SetStateDescription active\
+	    "active points get rendered, inactive ones do not"
+	my SetStateDescription tag\
+	    "point glyphs have tags associated that can be used for item bindings"
+	
     }
     
       

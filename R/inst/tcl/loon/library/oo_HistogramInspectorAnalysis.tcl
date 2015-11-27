@@ -12,6 +12,9 @@ oo::class create loon::classes::HistogramInspectorAnalysis {
 	
 	my New_state modifycolor color any\
 	    [::loon::listfns::toHexcolor $::loon::Options(colors)]
+
+	my SetStateDescription modifycolor\
+	    "color boxes shown in the modify color inspector part"
 	
 #	my variable modifycolor
 #	$colorMenuModify configure -color $modifycolor	

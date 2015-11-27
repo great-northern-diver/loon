@@ -45,13 +45,30 @@ oo::class create ::loon::classes::colormenu {
 	my New_state maxNrows positive_integer 1 3
 	my New_state hasAddColor boolean 1 TRUE
 	
-	
 	# get active and background color
 	set b [button ${path}.b]
 	my New_state background color 1 [$b cget -background]
 	my New_state activebackground color 1 [$b cget -activebackground]
 	destroy $b
-	
+
+
+	my SetStateDescription color\
+	    "color list for color boxes"
+	my SetStateDescription command\
+	    "callback evaluated when pressing on a color box"
+	my SetStateDescription boxwidth\
+	    "with of a color box"
+	my SetStateDescription boxborder\
+	    "thickness of a color box"
+	my SetStateDescription maxNrows\
+	    "max. number of rows displayed before adding a slider on the side"
+	my SetStateDescription hasAddColor\
+	    "has two add color boxes (+5 and +)"
+	my SetStateDescription background\
+	    "background color of widget"
+	my SetStateDescription activebackground\
+	    "background color of a color box when mouse enters"
+
     }
     
     method Make {path} {

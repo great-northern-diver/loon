@@ -36,7 +36,20 @@ oo::class create ::loon::classes::Serialaxes {
 	
 	my AddStates axesLabels data sequence	
 
-       
+	my SetStateDescription showAxes\
+	    "boolean to specify whether to display the axes or not"
+	my SetStateDescription showAxesLabels\
+	    "boolean to specify whether to display axes labels and title or not"
+	my SetStateDescription linewidth\
+	    "linewidth of glyphs"
+	my SetStateDescription scaling\
+	    "one of 'variable', 'data', 'observation' or 'none' to specify how the data is scaled. See web-documentation."
+	my SetStateDescription axesLayout\
+	    "either 'radial' for stacked star glyphs or 'parallel' for parallel coordinates plot"
+	my SetStateDescription showArea\
+	    "boolean to specify whether to fill the glyph or not"
+	my SetStateDescription data\
+	    "data set used for glyphs"
     }
     
     method InfoDebug {args} {

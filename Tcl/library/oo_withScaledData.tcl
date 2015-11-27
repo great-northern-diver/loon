@@ -14,6 +14,9 @@ oo::class create ::loon::classes::withScaledData {
 	my New_state scaling factor 1 "variable"\
 	    [list variable none observation variable\
 		 variable01 observation01 data01]
+
+	my SetStateDescription scaling\
+	    "one of 'none', 'observation', 'variable', 'variable01', 'observation01' or 'data01'. See web-documentation"
 	
     }
 

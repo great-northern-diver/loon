@@ -40,6 +40,9 @@ namespace eval loon {
 	lappend ::loon::lgwidgets [self namespace]
 	
 	bind $path <Destroy> "[self namespace]::my destroy"
+
+	my SetStateDescription linkingGroup\
+	    "linking group to display"
 	
     }
     

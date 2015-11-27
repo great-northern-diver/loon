@@ -20,6 +20,9 @@ oo::class create ::loon::classes::Context2d {
 #	my New_state scaling factor 1 ":"
 
 	my New_state interchange4d boolean 1 FALSE
+
+	my SetStateDescription interchange4d\
+	    "if FALSE then a transition on edget from note A:B to C:D will map to A>C and B>D, otherwise from A>D and B>C"
 	
     }
 

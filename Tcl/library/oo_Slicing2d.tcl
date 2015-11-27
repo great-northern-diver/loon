@@ -20,9 +20,14 @@ oo::class create ::loon::classes::Slicing2d {
 	## epsilon is proportion * range of data
 	my New_state proportion positive_double 1 0.1
 
-	my New_state conditioning4d factor 1 "intersection" {intersection union sequential}
-	#my New_state setOperation factor 1 "intersection" {intersection union}
+	my New_state conditioning4d factor 1 "intersection"\
+	    {intersection union sequential}
+	
+	my SetStateDescription proportion\
+	    "proportion of the range of a variable that defines the neighborhood for slicing."
 
+	my SetStateDescription conditioning4d\ "specifies the conditioning method with 4d edge transitions and has to be either 'union', 'intersection' or 'sequential'"
+	
 	
 	
     }

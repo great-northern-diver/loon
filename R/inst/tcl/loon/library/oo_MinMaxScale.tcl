@@ -36,6 +36,20 @@ oo::class create loon::classes::MinMaxScale {
 	#my New_state orient factor 1 horizontal {horizontal vertical}
 	#my New_state showvalues orient boolean 1 TRUE
 	my New_state command string 1 ""
+
+	my SetStateDescription from\
+	    "from value of scale"
+	my SetStateDescription to\
+	    "to value of scale"
+	my SetStateDescription min\
+	    "position of min slider"
+	my SetStateDescription max\
+	    "position of max slider"
+	my SetStateDescription resolution\
+	    "resolution for the scale"
+	my SetStateDescription command\
+	    "callback that is evaluated with any state change"
+	
     }
 
     method EvalConfigure {} {

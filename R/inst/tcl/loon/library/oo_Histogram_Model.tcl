@@ -70,6 +70,42 @@
 	my New_state useLoonInspector boolean 1 TRUE
 
 
+	my SetStateDescription x\
+	    "data used for binning"
+	my SetStateDescription binwidth\
+	    "bin-width used for binning algorithm"
+	my SetStateDescription origin\
+	    "origin used for binning algorithm"
+	my SetStateDescription showBinHandle\
+	    "boolean to specify whether to show the bin-handle or not"
+	my SetStateDescription yshows\
+	    "either 'frequency' (i.e. counts) or density"
+	my SetStateDescription colorStackingOrder\
+	    "if showStackedColors=TRUE then the histograms are stacked according to the colors in this list. 'selected' is a keyword and refers to the selected points. If a color is not in this list then their corresponding histograms get stacked according to their order of appearance in the color state."
+	my SetStateDescription showOutlines\
+	    "boolean to specify whether to show outlines for histogram bars or not"
+	my SetStateDescription showStackedColors\
+	    "boolean to specify whether the color state should be encoded or not"
+	my SetStateDescription colorFill\
+	    "if showStackedColors=FALSE then this is the base color used for the histogram bins"
+	my SetStateDescription colorOutline\
+	    "if showOutlines=TRUE then this color is used as the outline color"
+
+	
+	my SetStateDescription color "colors of the points"
+	my SetStateDescription selected\
+	    "selected points are highlighted and can be modified with the inspector"
+	my SetStateDescription active\
+	    "active points get included in the binning, inactive ones do not"
+
+	my SetStateDescription selectBy\
+	    "sweeping or brushing: interactive selection method"
+	my SetStateDescription selectionLogic\
+	    "select, deselect or invert: logic for selection"
+	my SetStateDescription useLoonInspector\
+	    "boolean to specify whether to report interaction events to the loon inspector or not"
+	
+	
 	my AddLayer model "histogram"\
 	    [::loon::classes::HistogramLayer new [self]] root 0 "Histogram"
 	

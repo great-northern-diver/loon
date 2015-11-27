@@ -23,7 +23,11 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    [::loon::listfns::toHexcolor $::loon::Options(colors)]
 	
 	my variable modifycolor
-	$colorMenuModify configure -color $modifycolor	
+	$colorMenuModify configure -color $modifycolor
+
+	my SetStateDescription modifycolor\
+	    "color boxes shown in the modify color inspector part"
+	
     }
 
 

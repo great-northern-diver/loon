@@ -19,7 +19,7 @@ oo::class create loon::classes::ConditionalScale {
 	my New_state ngroups positive_integer 1 3
 
 	my New_state splitAt double 1 {.3 .7}
-	
+
     }
 
      method Make {} {

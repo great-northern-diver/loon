@@ -69,6 +69,27 @@ oo::class create ::loon::classes::Graph_Model {
 	my New_state orbitAngle double n 0
 	my New_state showOrbit boolean 1 TRUE
 	
+
+
+	my SetStateDescription nodes\
+	    "graph node names"
+	my SetStateDescription from\
+	    "specify edges with from-to node pairs. This is a list of from nodes"
+	my SetStateDescription to\
+	    "specify edges with from-to node pairs. This is a list of to nodes"
+	my SetStateDescription isDirected\
+	    "boolean to specify whether the edges specified with 'from' and 'to' are directed or not"
+	my SetStateDescription activeEdge\
+	    "boolean to specify whether an edge is active or not"
+	my SetStateDescription colorEdge\
+	    "color of the edges"
+	my SetStateDescription orbitDistance\
+	    "distances of the orbiting node names"
+	my SetStateDescription orbitAngle\
+	    "angles of orbiting node names"
+	my SetStateDescription showOrbit\
+	    "show node names"
+	
 	
 	my AddLayer model "graph"\
 	    [::loon::classes::GraphLayer new [self]] root 0 "Graph"

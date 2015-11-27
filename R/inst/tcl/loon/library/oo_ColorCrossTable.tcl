@@ -45,7 +45,28 @@ oo::class create loon::classes::ColorCrossTable {
 	my New_state cellheight positive_integer 1 30
 	
 	my New_state showNumber boolean 1 FALSE
-
+	
+	my SetStateDescription group\
+	    "group used for table columns"
+	my SetStateDescription color\
+	    "color used for table rows"
+	my SetStateDescription selected\
+	    "boolean for specifying that a data point is selected or not"
+	my SetStateDescription title\
+	    "title of plot"
+	my SetStateDescription high\
+	    "color to indicate that cell is 'full'"
+	my SetStateDescription low\
+	    "color to indicate that cell is 'empty'"
+	my SetStateDescription gridcolor\
+	    "color used for drawing grid lines"
+	my SetStateDescription cellwidth\
+	    "cell width in pixels"
+	my SetStateDescription cellheight\
+	    "cell height in pixels"
+	my SetStateDescription showNumber\
+	    "not implemented yet"
+	
 	my UpdateRGB
 	my redraw
     }

@@ -60,7 +60,7 @@
 	    "plot title"
 
 	my SetStateDescription showLabels\
-	    "boolean to specify whether to display axes labels and title or not"
+	    "boolean to specify whether to display the axes labels and title or not"
 	my SetStateDescription showScales\
 	    "boolean to specify whether to display the scales or not"
 	my SetStateDescription swapAxes\
