@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_graph").className += " selected";
     setLearnUrl("display_graph");

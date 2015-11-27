@@ -1,5 +1,5 @@
 
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_inspectors").className += " selected";
     setLearnUrl("display_inspectors");

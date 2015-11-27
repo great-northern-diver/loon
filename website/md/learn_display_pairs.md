@@ -1,7 +1,7 @@
 
 
 
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_pairs").className += " selected";
     setLearnUrl("display_pairs");

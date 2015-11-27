@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_linking").className += " selected";
     setLearnUrl("linking");

@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_plot").className += " selected";
     setLearnUrl("display_plot");

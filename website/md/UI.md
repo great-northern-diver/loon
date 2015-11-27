@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 document.getElementById("ui").className += " selected";
 </script>
 

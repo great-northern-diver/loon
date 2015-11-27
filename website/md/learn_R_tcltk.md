@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_R_tcltk").className += " selected";
     document.getElementById("learn_R").firstChild.href = "learn_R_tcltk.html";

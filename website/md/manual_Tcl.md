@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 document.getElementById("manual").className += " selected";
 document.getElementById("manual_Tcl").className += " selected";
 </script>

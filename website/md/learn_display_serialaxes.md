@@ -1,5 +1,5 @@
 
-<script>
+<script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_serialaxes").className += " selected";
     setLearnUrl("display_serialaxes");

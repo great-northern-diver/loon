@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 document.getElementById("learn_Python_tkinter").className += " selected";
 </script>
 

@@ -1,5 +1,5 @@
 
-<script>
+<script type="text/javascript">
 document.getElementById("beta").className += " selected";
 </script>
 

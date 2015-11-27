@@ -1,10 +1,13 @@
-<script>
+<script type="text/javascript">
 document.getElementById("home").className += " selected";
 </script>
 
 
 ---
 title: "loon - interactive data visualization"
+header-includes:
+	<meta name="description" content="Interactive Statistical Data Visualization Toolkit for R and Tcl"/>
+    <meta name="keywords"    content="data visualization,interactive,R,Tcl,scatterplot,histogram,linking,loon"/>
 ---
 
 
@@ -125,6 +128,8 @@ Additionally, we provide selection by point color and via the command
 line.
 
 
+
+
 # Modify
 
 The state of the selected points can be modified with the tools and
@@ -226,6 +231,3 @@ Layers can be arranged with `loon`'s layers inspector.
 
 ![](images/layers.png "loon Layers")
 
-
-
-</div>

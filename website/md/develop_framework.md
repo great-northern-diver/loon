@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 document.getElementById("develop").className += " selected";
 document.getElementById("develop_framework").className += " selected";
 </script>
