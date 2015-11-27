@@ -22,7 +22,7 @@ oo::class create ::loon::classes::Serialaxes {
 
 	my New_state axesLayout factor 1 radial {"radial" "parallel"}
 	
-	my New_state showArea boolean 1 TRUE
+	my New_state showArea boolean 1 FALSE
 
 	my SetStateInfo data data n ""
 	

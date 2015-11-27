@@ -21,7 +21,11 @@ oo::class create loon::classes::ParallelCoordinatesVisual {
 	
 	set p [llength [set ${model}::sequence]]
 
-	set title [set ${model}::title]
+	if {[set ${model}::showLabels]} {
+	    set title [set ${model}::title]
+	} else {
+	    set title ""
+	}
 	
 	set font "Arial 14"
 	
@@ -50,7 +54,7 @@ oo::class create loon::classes::ParallelCoordinatesVisual {
 		return
 	}
 	
-	foreach state {showGuides showAxes showAxesLabels showArea color} {
+	foreach state {showGuides showAxes showAxesLabels showLabels showArea color} {
 	    set $state [set ${model}::$state] 
 	}
 	
@@ -132,10 +136,21 @@ oo::class create loon::classes::ParallelCoordinatesVisual {
 		    foreach g $glyph x $xAxes {
 			lappend coords $x [expr {-$direction * $g * $axes_length}]
 		    }
-		    
-		    lappend id [$canvas create line $coords\
-				    -fill $col -width $linewidth\
-				    -tag [list layer $visualid parallel item$i $tag]]
+
+
+		    if {$showArea} {
+			lappend coords [lindex $xAxes end] 0\
+			    [lindex $xAxes 0] 0
+			
+			lappend id [$canvas create polygon $coords\
+					-fill $col -outline $col -width $linewidth\
+					-tag [concat layer $visualid parallel item$i $tag]]
+		    } else {
+			
+			lappend id [$canvas create line $coords\
+					-fill $col -width $linewidth\
+					-tag [list layer $visualid parallel item$i $tag]]
+		    }
 		    
 		} else {
 		    lappend id -1
@@ -162,7 +177,7 @@ oo::class create loon::classes::ParallelCoordinatesVisual {
 	
 	$canvas move all $xmargin [expr {$axes_length+$ymargin_top}]
 	
-	if {$showAxesLabels && $title ne ""} {
+	if {$showLabels && $title ne ""} {
 	    $canvas create text\
 		[expr {$width/2.0}] [expr {$ymargin_top/2}]\
 		-text $title -anchor c -font {Arial 18 bold}\
