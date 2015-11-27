@@ -37,15 +37,15 @@ oo::class create loon::classes::SerialaxesAbstractVisual {
 	}
 	
 	if {[set ${model}::showArea]} {
-	    foreach i $id color $colors {
-		if {$i ne "-1"} {
-		    $canvas itemconfigure $i -fill $color
-		}
-	    }
-	} else {
 	    foreach color $colors i $id {
 		if {$i ne "-1"} {
 		    $canvas itemconfigure $i -fill $color -outline $color		    
+		}
+	    }
+	} else {
+	    foreach i $id color $colors {
+		if {$i ne "-1"} {
+		    $canvas itemconfigure $i -fill $color
 		}
 	    }
 	}

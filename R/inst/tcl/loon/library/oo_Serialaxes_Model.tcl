@@ -17,7 +17,7 @@ oo::class create ::loon::classes::Serialaxes_Model {
 
 	my New_state showGuides   boolean 1 TRUE
 	
-	my New_state showLabels     boolean 1 FALSE
+	my New_state showLabels     boolean 1 TRUE
 		
 	my New_state useLoonInspector boolean 1 TRUE
 	

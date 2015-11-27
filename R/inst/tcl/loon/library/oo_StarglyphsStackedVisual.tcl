@@ -68,7 +68,7 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 	
 	## Get widget options from model
 	
-	foreach state {showGuides showAxes showAxesLabels showArea color} {
+	foreach state {showGuides showAxes showAxesLabels showLabels showArea color} {
 	    set $state [set ${model}::$state] 
 	}
 	
@@ -155,14 +155,14 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 			}
 		    }
 		    if {$showArea} {
-			lappend coords {*}[lrange $coords 0 1]
-
-			lappend id [$canvas create line $coords\
-					-fill $col -width $linewidth\
-					-tag [concat layer $visualid radial item$i $tag]]
-		    } else {
 			lappend id [$canvas create polygon $coords\
 					-fill $col -outline $col -width $linewidth\
+					-tag [concat layer $visualid radial item$i $tag]]
+		    } else {
+			lappend coords {*}[lrange $coords 0 1]
+			
+			lappend id [$canvas create line $coords\
+					-fill $col -width $linewidth\
 					-tag [concat layer $visualid radial item$i $tag]]
 		    }
 		} else {
@@ -201,7 +201,7 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 
 	$canvas move all [expr {$width/2.0}] [expr {$height/2.0}]
 	
-	if {$showAxesLabels} {
+	if {$showLabels} {
 	    $canvas create text\
 		[expr {$width/2.0}] 20\
 		-text [set ${model}::title] -anchor c -font {Arial 18 bold}\
