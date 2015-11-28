@@ -26,7 +26,8 @@ oo::class create ::loon::classes::Slicing2d {
 	my SetStateDescription proportion\
 	    "proportion of the range of a variable that defines the neighborhood for slicing."
 
-	my SetStateDescription conditioning4d\ "specifies the conditioning method with 4d edge transitions and has to be either 'union', 'intersection' or 'sequential'"
+	my SetStateDescription conditioning4d\
+            "specifies the conditioning method with 4d edge transitions and has to be either 'union', 'intersection' or 'sequential'"
 	
 	
 	
