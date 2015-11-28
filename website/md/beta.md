@@ -121,30 +121,24 @@ install.packages(c('rgl', 'PairViz', 'scagnostics', 'kernlab'))
 
 
 We put a screencast with these instructions
-[onto youtube here](https://www.youtube.com/watch?v=2PsVBYNftrU).
+[onto youtube here](https://www.youtube.com/watch?v=2PsVBYNftrU). Note
+that you need to install both 32bit and 64 bit Tcl.
 
 
 Unfortunately `R` on Windows still ships with `Tcl` version 8.5 and
 `loon` requires `Tcl` version 8.6. Hence, for the near future, you
 need to install `Tcl` version 8.6 and link it with `R`. 
 
-In `R`, enter
+Download the **32 bit and 64 bit** builds of ActiveTcl
+version 8.6.x. You need to install both.
 
-~~~
-.Machine$sizeof.pointer
-~~~
+* 64 bit build [download Windows (64-bit, x64) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe)
+* 32 bit build [download Windows (x86) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe)
 
-If the return value is `8` then you run a 64 bit build of `R` and if
-the return value is `4` then you run a 32 bit build of `R`. Download
-the ActiveTcl version 8.6.x with the same build architecture. You can
-also install both.
+Install the 64 bit and 32 bit ActiveTcl under `C:\Tcl64` and
+`C:\Tcl32`, respectively . 
 
-* If your `R` is a 64 bit build [download Windows (64-bit, x64) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe)
-* If your `R` is a 32 bit build [download Windows (x86) Tcl 8.6.x](http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe)
-
-Install ActiveTcl under `C:\Tcl64` or `C:\Tcl32`. You can install both versions if you switch between 64 bit and 32 bit `R`.
-
-In the `C:/Tcl64/bin` and/or `C:/Tcl32/bin` folder copy paste the
+In the `C:/Tcl64/bin` and `C:/Tcl32/bin` folders copy paste the
 `tk86.dll` and `tcl86.dll` files (create duplications) and rename them
 to `tk85.dll` and `tcl85.dll`, respectively.
 

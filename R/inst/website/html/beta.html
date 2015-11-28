@@ -119,17 +119,15 @@ biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppres
 <p>The following packages on CRAN have also dependencies that need special care. Make sure that you have</p>
 <pre><code>install.packages(c(&#39;rgl&#39;, &#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;))</code></pre>
 <h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
-<p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>.</p>
+<p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>. Note that you need to install both 32bit and 64 bit Tcl.</p>
 <p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
-<p>In <code>R</code>, enter</p>
-<pre><code>.Machine$sizeof.pointer</code></pre>
-<p>If the return value is <code>8</code> then you run a 64 bit build of <code>R</code> and if the return value is <code>4</code> then you run a 32 bit build of <code>R</code>. Download the ActiveTcl version 8.6.x with the same build architecture. You can also install both.</p>
+<p>Download the <strong>32 bit and 64 bit</strong> builds of ActiveTcl version 8.6.x. You need to install both.</p>
 <ul>
-<li>If your <code>R</code> is a 64 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe">download Windows (64-bit, x64) Tcl 8.6.x</a></li>
-<li>If your <code>R</code> is a 32 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe">download Windows (x86) Tcl 8.6.x</a></li>
+<li>64 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe">download Windows (64-bit, x64) Tcl 8.6.x</a></li>
+<li>32 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe">download Windows (x86) Tcl 8.6.x</a></li>
 </ul>
-<p>Install ActiveTcl under <code>C:\Tcl64</code> or <code>C:\Tcl32</code>. You can install both versions if you switch between 64 bit and 32 bit <code>R</code>.</p>
-<p>In the <code>C:/Tcl64/bin</code> and/or <code>C:/Tcl32/bin</code> folder copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
+<p>Install the 64 bit and 32 bit ActiveTcl under <code>C:\Tcl64</code> and <code>C:\Tcl32</code>, respectively .</p>
+<p>In the <code>C:/Tcl64/bin</code> and <code>C:/Tcl32/bin</code> folders copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
 <p>Create or modify the <code>.Rprofile</code> file at the <code>C:/Users/&lt;your username&gt;/.Rprofile</code> to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
 <pre><code>.First.sys()
 if (.Machine$sizeof.pointer == 8) {
