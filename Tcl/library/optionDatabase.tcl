@@ -38,6 +38,8 @@ namespace eval loon {
     }
 
     set Options(printConfigureDebug) FALSE
+    set Options(printInConfigurationWarning) TRUE
+    set Options(printInConfigurationWarningMsg) "setting loon::Options(printInConfigurationWarningMsg) to FALSE"
     
     ## abbreviations for states (alias)
     set Options(abbreviations) [dict create\

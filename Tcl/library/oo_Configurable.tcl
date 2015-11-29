@@ -51,8 +51,18 @@
 
     method configure {args} {
 
-	if {$inConfiguration} {
-	    ::loon::warning "[self] is already in configuration\n new args: $args"
+	if {$inConfiguration && $::loon::Options(printInConfigurationWarning)} {
+            set argNames {}            
+            foreach {aname aval} $args {
+                if {[llength $aname] eq 1} {
+                    if {[string range $aname 0 0] eq "-"} {
+                        lappend argNames [string range $aname 1 end]
+                    }
+                }
+            }
+	    ::loon::warning\
+                [format "%s is already in configuration\n states intended to configure: %s\n turn this message off with %s"\
+                     [self] [join $argNames ", "] $::loon::Options(printInConfigurationWarningMsg)]
 	}
 
 	set inConfiguration TRUE
@@ -176,7 +186,7 @@
 		set $state $stateValue
 	    }
 	}
-	set inConfiguration FALSE
+	#set inConfiguration FALSE
 	
 	## to use if need to make some state modifications before
 	## change bindings get sent

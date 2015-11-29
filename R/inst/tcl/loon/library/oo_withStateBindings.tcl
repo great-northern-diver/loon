@@ -7,10 +7,13 @@
     variable systemStateBindings userStateBindings
 
     constructor {args} {
+
+        my variable inConfiguration
+
 	set systemStateBindings [::loon::classes::StateBindings new\
 				     "stateSystembinding" FALSE]
 	set userStateBindings [::loon::classes::StateBindings new\
-				   "stateBinding" TRUE]
+				   "stateBinding" TRUE [my varname inConfiguration]]
 	
 	next {*}$args
 	
@@ -59,7 +62,7 @@
 	
 	next
 
-	my variable changedStates confDict
+	my variable changedStates confDict inConfiguration
 	if {[llength $changedStates] > 0} {
 	    ## ApplyConfigure Post withScatterplotBindings
 	    ##   - notify state bindings
@@ -68,7 +71,7 @@
 	    set events $changedStates
 	    
 	    $systemStateBindings notify [self] $events
-	    $userStateBindings notify [self] $events	    
+	    $userStateBindings notify [self] $events
 	}	
     }
 

@@ -95,6 +95,9 @@
                     .Tcl.callback(.ltoplevel),
                     '; return $::loon::last_toplevel}'))
     }
+
+    .Tcl('set ::loon::Options(printInConfigurationWarningMsg) ".Tcl(\'set ::loon::Options(printInConfigurationWarning) FALSE\')"')
+
 }
 
 .ltoplevel <- function() {
