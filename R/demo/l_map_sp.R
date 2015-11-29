@@ -35,7 +35,8 @@ local({
         }
         
     } else {
-        cat('loon demo l_map_sp should be evaluated by hand\n')
+        cat(paste0('loon demo l_map_sp should be evaluated by hand\nFind the demo file at: ',
+                   system.file('demo','l_map_sp.R', package='loon'),'\n'))
     }
     ## l_aspect(p) <- 5/3
     

@@ -13,7 +13,7 @@ local({
     p3 <- with(olive, l_plot(eicosenoic~arachidic,
                              linkingGroup="olive"))
     
-    l_configure(p1, main="Olive Data", size=5)
+    l_configure(p1, title="Olive Data", size=5)
 
     ## Layer Drawings
     l_layer_points(p1, seq(0,500,by=50), seq(100,280,length=11))
