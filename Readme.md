@@ -10,3 +10,5 @@ or with the Terminal.
 Please see the [web documentation](http://waddella.github.io/loon/)
 for more information and installation instructions.
 
+`loon` is joint work of [Adrian Waddell](http://adrian.waddell.ch) and
+[R. Wayne Oldford](http://www.math.uwaterloo.ca/~rwoldfor/).
