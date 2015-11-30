@@ -50,3 +50,18 @@ set p [plot -x {1 2 3 4} -y {3 2 1 4} -color red]
 
 For more information please read the *learn* section in the
 [web manual](http://waddella.github.io/loon/learn_Tcl_intro.html).
+
+
+# Fast Image Resizing for Image Point Glyphs
+
+On Linux and OS X it is advisable to install the
+[ImageScale Tcl extension](https://github.com/waddella/tclImageScale)
+for fast image resizing. `loon` will use the compiled `C` code for
+image resizing when available.
+
+The TEA setup of `ImageScale` for Windows does currently not work. If
+you know how to change the `makefile.vc` in the
+[win folder](https://github.com/waddella/tclImageScale/tree/master/win)
+so that the `ImageScale` package also compiles under Windows then
+please [contact me](mailto:adrian@waddell.ch).
+
