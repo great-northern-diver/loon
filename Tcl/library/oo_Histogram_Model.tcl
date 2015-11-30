@@ -180,6 +180,46 @@
 	set hasColor [dict exist $confDict new_color]
 	set hasYshows [dict exists $confDict new_yshows]
 	
+
+
+	## State Rules Active And Selected
+	if { $hasActive || $hasSelected } {
+	    
+	    if {$hasActive} {
+		set act [dict get $confDict new_active]
+	    } else {
+		my variable active
+		set act $active
+	    } 
+	   
+	    if {$hasSelected} {
+		set sel [dict get $confDict new_selected]
+	    } else {
+		my variable selected
+		set sel $selected
+	    }
+
+	    set needChange FALSE
+	    foreach a $act s $sel {
+		if {$s && !$a} {
+		    set needChange TRUE
+		    break
+		}
+	    }
+	    
+	    set newSelected $sel
+	    set i 0
+	    foreach a $act s $sel {
+		if {$s && !$a} {
+		    lset newSelected $i FALSE
+		}
+		incr i
+	    }
+	    dict set confDict new_selected $newSelected	    
+	}
+	
+
+	## Re-binning
 	
 	## get default binwidth and origin
 	if {$hasX} {
@@ -201,7 +241,7 @@
 	    }
 	    
 	}
-	
+
 
 	if {$hasX || $hasBinwidth || $hasOrigin ||\
 		$hasActive || $hasSelected || $hasColor ||\
