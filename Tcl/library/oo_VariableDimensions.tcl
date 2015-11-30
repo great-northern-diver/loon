@@ -441,19 +441,31 @@
 	    }
 	} else {
 	    ## nWhich > 0
+
+	    set isLogicalSubsetting FALSE
+
 	    if {[::loon::listfns::isBoolean $arg_which]} {
+		if {$nWhich eq 2} {
+		    if {$dim_num eq 2} {
+			set isLogicalSubsetting TRUE
+		    }	    
+		} else {
+		    set isLogicalSubsetting TRUE
+		}		
+	    }
+	    
+	    if {$isLogicalSubsetting} {
 		##set tmp [string toupper [string index [lindex $arg_which 0] 0]] 
 		##if { $tmp eq T || $tmp eq F } {}
+
 		## Logical Subsetting
 		if {$nWhich ne $dim_num} {
 		    error "logical indexing needs -which to have\
                                length $n, not $nWhich."
 		}
-		if {![::loon::listfns::isBoolean $arg_which]} {
-		    error "logical indexing needs -which with elements\
-                               being either TRUE or FALSE."
-		}
+		
 		set which [::loon::listfns::which $arg_which]
+		
 	    } else {
 		## Index Subsetting
 		foreach w $arg_which {
