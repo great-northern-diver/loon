@@ -9,7 +9,7 @@ Here we present some figures that we have created using `loon`.
 # Statistical Graphics
 
 ![](images/gallery/histogram.png "Histogram")
-![](images/gallery/histogram_stacked.png "Histogram with stacked colors")
+![](images/gallery/histogram_Stacked.png "Histogram with stacked colors")
 
 ![](images/gallery/scatterplot.png "Scatterplot")
 
