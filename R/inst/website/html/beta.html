@@ -128,7 +128,7 @@ biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppres
 </ul>
 <p>Install the 64 bit and 32 bit ActiveTcl under <code>C:\Tcl64</code> and <code>C:\Tcl32</code>, respectively .</p>
 <p>In the <code>C:/Tcl64/bin</code> and <code>C:/Tcl32/bin</code> folders copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
-<p>Create or modify the <code>.Rprofile</code> file at the <code>C:/Users/&lt;your username&gt;/.Rprofile</code> to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
+<p>Create or modify the <code>.Rprofile</code> file in your home directory (usually in <code>C:/Users/&lt;your username&gt;/.Rprofile</code> but you can check the home path with <code>path.expand('~')</code> in <code>R</code>) to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
 <pre><code>.First.sys()
 if (.Machine$sizeof.pointer == 8) {
   Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl64/bin&quot;)

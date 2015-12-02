@@ -358,7 +358,6 @@ con &lt;- l_context_add_geodesic2d(navigator=nav, data=iris[,-5])</code></pre>
 <p>Hence, it is easy to use a different scatterplot device, say the basic <code>R</code> plots as follows:</p>
 <pre><code>plot(iris[,1:2], col=iris$Species, pch=16)
 
-
 con[&#39;command&#39;] &lt;- function(x,y,xlabel,ylabel) {
     plot(l_toR(x, as.numeric), l_toR(y, as.numeric), xlab=xlabel, ylab=ylabel,
         col=iris$Species, pch=16, xlim=c(-5,5), ylim=c(-5,5))
@@ -599,7 +598,6 @@ nav &lt;- l_ng_ranges(measures=m2d, data=dat, separator=&#39;:&#39;)</code></pre
 <pre><code>iqr &lt;- function(x) { diff(quantile(x, probs=c(0.75, 0.25))) }
 kurtosis &lt;- function(x) { mean((x-mean(x))^4)/mean((x-mean(x))^2)^2 - 3 }
 skewness &lt;- function(x) { mean((x-mean(x))^3)/sd(x)^3 }
-
 
 s_oliveAcids &lt;- scale(oliveAcids)
 

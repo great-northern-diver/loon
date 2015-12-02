@@ -142,9 +142,11 @@ In the `C:/Tcl64/bin` and `C:/Tcl32/bin` folders copy paste the
 `tk86.dll` and `tcl86.dll` files (create duplications) and rename them
 to `tk85.dll` and `tcl85.dll`, respectively.
 
-Create or modify the `.Rprofile` file at the `C:/Users/<your
-username>/.Rprofile` to include the code below. To create the
-`.Rprofile` use Rstudio and use the menu to create a new Text File.
+Create or modify the `.Rprofile` file in your home directory (usually
+in `C:/Users/<your username>/.Rprofile` but you can check the home
+path with `path.expand('~')` in `R`) to include the code below. To
+create the `.Rprofile` use Rstudio and use the menu to create a new
+Text File.
 
 ~~~
 .First.sys()
