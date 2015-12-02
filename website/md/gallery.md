@@ -45,3 +45,7 @@ demo('l_us_and_them_choropleth')
 ## Naturalearth data
 
 ![](images/gallery/naturalearth_world.png "Naturalearth data")
+
+## Image Data
+
+![](images/gallery/frey_faces.png "Frey Faces and LLE")
