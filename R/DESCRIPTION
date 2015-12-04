@@ -1,8 +1,8 @@
 Package: loon
 Type: Package
 Title: Interactive Statistical Visualization
-Version: 0.9.3
-Date: 2015-11-30
+Version: 1.0.0
+Date: 2015-12-04
 Author: Adrian R. Waddell and R. Wayne Oldford
 Maintainer: Adrian Waddell <adrian@waddell.ch>
 URL: http://www.uwaterloon.ca
