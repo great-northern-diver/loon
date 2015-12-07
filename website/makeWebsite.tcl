@@ -35,7 +35,7 @@ if {"all" in $todo || "learn" in $todo} {
 
 if {"all" in $todo || "beta" in $todo} {
     ## Beta
-    foreach topic {beta commands} {
+    foreach topic {beta linkingActiveTcl commands} {
         exec {*}$cmd --toc --toc-depth=5\
             {*}[lmap file {title no top_navigation nc}\
                     {format "--include-before-body=headers/%s.html" $file}]\

@@ -23,6 +23,14 @@ h1 {
     padding-top: 20px;
 }
 
+h2 {
+    font-size: 120%;
+}
+
+h3 {
+    font-size: 110%;
+}
+
 
 a:link {
     color: #2A4CB2;

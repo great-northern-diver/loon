@@ -7,6 +7,8 @@ document.getElementById("beta").className += " selected";
 title: "beta tester instructions - loon"
 ---
 
+[TclWindows]:linkingActiveTcl.html
+
 # Important
 
 * Use `loon` in [Rstudio](https://www.rstudio.com/) or within a
@@ -15,8 +17,8 @@ title: "beta tester instructions - loon"
 	  * The default Windows `R` GUI will not accept debug messages
         from `Tcl`, so for now you need to use Rstudio.
 * Windows users need to install `Tcl` version 8.6, see the
-  [instructions below](#linking-activetcl-with-r-on-windows).
-  * Mac users need to install [XQuartz](https://cran.r-project.org/bin/macosx/)
+  [instructions here][TclWindows].
+  * Mac users need to install [XQuartz](http://www.xquartz.org)
 	* Do not close `XQuartz` while `R` is running! Otherwise you end
       up crashing the active `R` session (including `RStudio`).
 * If you experience difficulties with `loon` use the
@@ -32,10 +34,8 @@ title: "beta tester instructions - loon"
 # Installation
 
 * Windows users need to first install `Tcl` and `Tk` version 8.6 and
-  link it against your
-  `R`. [Read below](#linking-activetcl-with-r-on-windows).
-* Mac users need to first install
-  [XQuartz](https://cran.r-project.org/bin/macosx/)
+  link it against your `R`. [Read instructions here][TclWindows].
+* Mac users need to first install [XQuartz](http://www.xquartz.org).
 
 ## Installing the loon package
 
@@ -87,14 +87,17 @@ R CMD INSTALL loon_1.0.0.tar.gz
 
 The following packages are used in `loon`'s package demos. Note that
 these packages are not needed to install `loon`, they are just nice to
-have to run the demos. We split the code to install packages into four
-sections as not all packages are easy to install.
+have to run the demos. You can skip this step and
+[check if your `loon` installation was successful.](#check-if-your-installation-was-successful)
+
+
+We split the code to install packages into four sections as not all
+packages are easy to install.
 
 First, these packages from CRAN should install without any issues
 
 ~~~
-install.packages(c('maps', 'sp', 'RColorBrewer', 'dplyr',
-    'RnavGraphImageData', 'rworldmap'))
+install.packages(c('maps','sp','RColorBrewer','RnavGraphImageData','rworldmap'))
 ~~~
 
 The following packages on Biocoductor should also install without any
@@ -115,6 +118,7 @@ The following packages on CRAN have also dependencies that need
 special care. Make sure that you have 
 
 ~~~
+install.packages('dplyr')
 install.packages(c('rgl', 'PairViz', 'scagnostics', 'kernlab'))
 ~~~
 

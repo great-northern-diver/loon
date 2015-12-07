@@ -35,7 +35,6 @@ Loon: An Interactive Statistical Visualization Toolkit
 <li><a href="#installing-the-loon-package">Installing the loon package</a></li>
 <li><a href="#packages-used-for-demos">Packages used for Demos</a></li>
 </ul></li>
-<li><a href="#linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</a></li>
 <li><a href="#check-if-your-installation-was-successful">Check if your Installation was Successful</a></li>
 <li><a href="#fast-image-resizing-for-image-point-glyphs">Fast Image Resizing for Image Point Glyphs</a></li>
 <li><a href="#more-important-notes">More Important Notes</a></li>
@@ -52,8 +51,8 @@ document.getElementById("beta").className += " selected";
 <li>The Rgui app on OSX does not work well with <code>loon</code>.</li>
 <li>The default Windows <code>R</code> GUI will not accept debug messages from <code>Tcl</code>, so for now you need to use Rstudio.</li>
 </ul></li>
-<li>Windows users need to install <code>Tcl</code> version 8.6, see the <a href="#linking-activetcl-with-r-on-windows">instructions below</a>.</li>
-<li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a>
+<li>Windows users need to install <code>Tcl</code> version 8.6, see the <a href="linkingActiveTcl.html">instructions here</a>.</li>
+<li>Mac users need to install <a href="http://www.xquartz.org">XQuartz</a>
 <ul>
 <li>Do not close <code>XQuartz</code> while <code>R</code> is running! Otherwise you end up crashing the active <code>R</code> session (including <code>RStudio</code>).</li>
 </ul></li>
@@ -67,8 +66,8 @@ document.getElementById("beta").className += " selected";
 </ul>
 <h1 id="installation">Installation</h1>
 <ul>
-<li>Windows users need to install <code>Tcl</code> and <code>Tk</code> version 8.6 and link it against your <code>R</code>. <a href="#linking-activetcl-with-r-on-windows">Read below</a>.</li>
-<li>Mac users need to install <a href="https://cran.r-project.org/bin/macosx/">XQuartz</a></li>
+<li>Windows users need to first install <code>Tcl</code> and <code>Tk</code> version 8.6 and link it against your <code>R</code>. <a href="linkingActiveTcl.html">Read instructions here</a>.</li>
+<li>Mac users need to first install <a href="http://www.xquartz.org">XQuartz</a>.</li>
 </ul>
 <h2 id="installing-the-loon-package">Installing the loon package</h2>
 <!-- ### Fom github -->
@@ -92,7 +91,7 @@ dev_mode(on=FALSE)
 ### From a local file
 
 In Rstudio, select Packages, Install, Install from: Package Archive
-File (.tar.gz), select the 'loon_0.9.3.tar.gz' file and press the
+File (.tar.gz), select the 'loon_1.0.0.tar.gz' file and press the
 install button.
 
 ![Install loon in Rstudio](images/install_rstudio.png "install loon with Rstudio.")
@@ -102,45 +101,23 @@ To install the `loon` `R` package as usual the following code in your
 terminal
 
 ~~~
-R CMD INSTALL loon_0.9.3.tar.gz
+R CMD INSTALL loon_1.0.0.tar.gz
 ~~~
 
 -->
 <h2 id="packages-used-for-demos">Packages used for Demos</h2>
-<p>The following packages are used in <code>loon</code>'s package demos. Note that these packages are not needed to install <code>loon</code>, they are just nice to have to run the demos. We split the code to install packages into four sections as not all packages are easy to install.</p>
+<p>The following packages are used in <code>loon</code>'s package demos. Note that these packages are not needed to install <code>loon</code>, they are just nice to have to run the demos. You can skip this step and <a href="#check-if-your-installation-was-successful">check if your <code>loon</code> installation was successful.</a></p>
+<p>We split the code to install packages into four sections as not all packages are easy to install.</p>
 <p>First, these packages from CRAN should install without any issues</p>
-<pre><code>install.packages(c(&#39;maps&#39;, &#39;sp&#39;, &#39;RColorBrewer&#39;, &#39;dplyr&#39;,
-    &#39;RnavGraphImageData&#39;, &#39;rworldmap&#39;))</code></pre>
+<pre><code>install.packages(c(&#39;maps&#39;,&#39;sp&#39;,&#39;RColorBrewer&#39;,&#39;RnavGraphImageData&#39;,&#39;rworldmap&#39;))</code></pre>
 <p>The following packages on Biocoductor should also install without any issues</p>
 <pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
 biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
 <p>The <code>Rgraphviz</code> package is sometimes not easy to install</p>
 <pre><code>biocLite(&#39;Rgraphviz&#39;, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
 <p>The following packages on CRAN have also dependencies that need special care. Make sure that you have</p>
-<pre><code>install.packages(c(&#39;rgl&#39;, &#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;))</code></pre>
-<h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
-<p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>. Note that you need to install both 32bit and 64 bit Tcl.</p>
-<p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
-<p>Download the <strong>32 bit and 64 bit</strong> builds of ActiveTcl version 8.6.x. You need to install both.</p>
-<ul>
-<li>64 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe">download Windows (64-bit, x64) Tcl 8.6.x</a></li>
-<li>32 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe">download Windows (x86) Tcl 8.6.x</a></li>
-</ul>
-<p>Install the 64 bit and 32 bit ActiveTcl under <code>C:\Tcl64</code> and <code>C:\Tcl32</code>, respectively .</p>
-<p>In the <code>C:/Tcl64/bin</code> and <code>C:/Tcl32/bin</code> folders copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
-<p>Create or modify the <code>.Rprofile</code> file at the <code>C:/Users/&lt;your username&gt;/.Rprofile</code> to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
-<pre><code>.First.sys()
-if (.Machine$sizeof.pointer == 8) {
-  Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl64/bin&quot;)
-} else {
-  Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl32/bin&quot;)
-}</code></pre>
-<p>Restart R (i.e. Rstudio) and check if the above steps were successful by entering the following code in <code>R</code></p>
-<pre><code>Sys.getenv(&quot;MY_TCLTK&quot;)</code></pre>
-<p>This should either return <code>C:/Tcl32/bin</code> or <code>C:/Tcl64/bin</code>. If this works enter the following code in <code>R</code></p>
-<pre><code>library(tcltk)
-tcl(&quot;set&quot;, &quot;tcl_version&quot;)</code></pre>
-<p>If this returns <code>8.6</code> you were successful. Otherwise follow the steps in my <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">youtube instructions</a>.</p>
+<pre><code>install.packages(&#39;dplyr&#39;)
+install.packages(c(&#39;rgl&#39;, &#39;PairViz&#39;, &#39;scagnostics&#39;, &#39;kernlab&#39;))</code></pre>
 <h1 id="check-if-your-installation-was-successful">Check if your Installation was Successful</h1>
 <p>In <code>R</code> enter</p>
 <pre><code>library(loon)
