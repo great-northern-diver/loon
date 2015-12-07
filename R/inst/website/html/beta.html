@@ -92,7 +92,7 @@ dev_mode(on=FALSE)
 ### From a local file
 
 In Rstudio, select Packages, Install, Install from: Package Archive
-File (.tar.gz), select the 'loon_1.0.0.tar.gz' file and press the
+File (.tar.gz), select the 'loon_0.9.3.tar.gz' file and press the
 install button.
 
 ![Install loon in Rstudio](images/install_rstudio.png "install loon with Rstudio.")
@@ -102,7 +102,7 @@ To install the `loon` `R` package as usual the following code in your
 terminal
 
 ~~~
-R CMD INSTALL loon_1.0.0.tar.gz
+R CMD INSTALL loon_0.9.3.tar.gz
 ~~~
 
 -->
@@ -128,7 +128,7 @@ biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;), suppressUpdates=TRUE, suppres
 </ul>
 <p>Install the 64 bit and 32 bit ActiveTcl under <code>C:\Tcl64</code> and <code>C:\Tcl32</code>, respectively .</p>
 <p>In the <code>C:/Tcl64/bin</code> and <code>C:/Tcl32/bin</code> folders copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
-<p>Create or modify the <code>.Rprofile</code> file in your home directory (usually in <code>C:/Users/&lt;your username&gt;/.Rprofile</code> but you can check the home path with <code>path.expand('~')</code> in <code>R</code>) to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
+<p>Create or modify the <code>.Rprofile</code> file at the <code>C:/Users/&lt;your username&gt;/.Rprofile</code> to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
 <pre><code>.First.sys()
 if (.Machine$sizeof.pointer == 8) {
   Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl64/bin&quot;)

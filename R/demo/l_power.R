@@ -12,9 +12,9 @@ local({
         lambda_x <- tclVar('1')
         lambda_y <- tclVar('1')
         sx <- tkscale(tt, orient='horizontal',
-                      variable=lambda_x, from=to, to=from, resolution=0.1)
+                      variable=lambda_x, from=from, to=to, resolution=0.1)
         sy <- tkscale(tt, orient='vertical',
-                      variable=lambda_y, from=from, to=to, resolution=0.1)
+                      variable=lambda_y, from=to, to=from, resolution=0.1)
         
         tkgrid(sy, row=0, column=0, sticky="ns")
         tkgrid(p, row=0, column=1, sticky="nswe")
