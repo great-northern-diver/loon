@@ -71,14 +71,16 @@ namespace eval loon {
     #set Options(font) "Lucidia"
     set Options(font) "Helvetica"
 
-    set Options(font-xlabel) TkDefaultFont
-    set Options(font-ylabel) TkDefaultFont
-    set Options(font-title)\
-	[font create {*}[font configure TkDefaultFont]]
+    # "*-Helvetica-Medium-R-Normal-*-12-*"
+    # "*-Helvetica-Bold-R-Normal-*-18-*"
+    set Options(default-font) TkDefaultFont
+    set Options(font-xlabel) $Options(default-font)
+    set Options(font-ylabel) $Options(default-font)
+    set Options(font-title) [font create {*}[font configure TkDefaultFont]]
     font configure $Options(font-title) -weight bold -size 16
     
-    set Options(font-scales) TkDefaultFont
-    set Options(font-text_glyph) TkDefaultFont
+    set Options(font-scales) $Options(default-font)
+    set Options(font-text_glyph) $Options(default-font)
     
     
     
