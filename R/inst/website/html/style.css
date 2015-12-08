@@ -16,9 +16,12 @@ body {
     outline: 1px solid #AAA;
 }
 
-h1 {
+h1 h2 h3 {
     color: #505050;
     font-weight: bold;
+}
+
+h1 {
     font-size: 150%;
     padding-top: 20px;
 }

@@ -20,11 +20,21 @@ namespace eval loon {
 
 	## Get extension
 	set extn [string tolower [file extension $filename]]
+
+	#set export_ps_font CharterBT-Roman
+	set export_ps_font Arial
 	
 	switch -- $extn {
 	    .ps -
 	    .eps {
-		${widget}.canvas postscript -file $filename {*}$args
+		array set ::loon::fontmap\
+		    [list $::loon::Options(font-xlabel) [list $export_ps_font 12]\
+			 $::loon::Options(font-ylabel) [list $export_ps_font 12]\
+			 $::loon::Options(font-title) [list $export_ps_font-Bold 18]\
+			 $::loon::Options(font-scales) [list $export_ps_font 12]\
+			 $::loon::Options(font-text_glyph) [list $export_ps_font 12]]
+		
+		${widget}.canvas postscript -file $filename -fontmap ::loon::fontmap {*}$args
 	    }
 	    .pdf {
 		## get the individual parts of path
@@ -41,8 +51,15 @@ namespace eval loon {
 		    set tmpfile ${name}${i}.ps
 		    incr i
 		}
+
+		array set ::loon::fontmap\
+		    [list $::loon::Options(font-xlabel) [list $export_ps_font 12]\
+			 $::loon::Options(font-ylabel) [list $export_ps_font 12]\
+			 $::loon::Options(font-title) [list $export_ps_font-Bold 18]\
+			 $::loon::Options(font-scales) [list $export_ps_font 12]\
+			 $::loon::Options(font-text_glyph) [list $export_ps_font 12]]
 		
-		${widget}.canvas postscript -file $tmpfile {*}$args		
+		${widget}.canvas postscript -file $tmpfile -fontmap ::loon::fontmap {*}$args		
 		set notOK [catch {exec epstopdf $tmpfile --outfile=${name}.pdf}]
 
 		file delete $tmpfile
