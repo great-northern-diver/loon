@@ -149,8 +149,16 @@ window.onload = function() {
 <img src="images/display_plot.png" title="loon scatterplot" alt="" />
 
 </div>
-<pre><code>source olive.tcl
+<pre><code>namespace import loon::*
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]</code></pre>
+<p>or alternatively</p>
+<pre><code>dict with ::loon::data::olive {
+    set p [loon::plot -x $oleic -y $stearic -color $Area \
+        -xlabel oleic -ylabel stearic]
+}</code></pre>
 <h1 id="scatterplot">Scatterplot</h1>
 <ul>
 <li><p>Get the state names with</p>
@@ -181,7 +189,10 @@ dict get $states background</code></pre>
 <img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" alt="" />
 
 </div>
-<pre><code>source olive.tcl
+<pre><code>package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+        
 set p [plot -x $oleic -y $stearic -color $Area\
     -xlabel oleic -ylabel stearic]
 
@@ -219,8 +230,11 @@ $p configure -glyph $gt</code></pre>
 </div>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
-<pre><code>## $olivedata does not contain Area and Region
-set gs [$p glyph add serialaxes -data $olivedata -showArea FALSE]
+<pre><code>set oliveacids [dict filter $loon::data::olive script {key value} {
+    return -level 0 [expr {$key ni {Area Region}}]
+}]; puts &quot;filter data&quot;
+
+set gs [$p glyph add serialaxes -data $oliveacids -showArea FALSE]
 $p configure -glyph $gs</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
@@ -307,7 +321,10 @@ $p configure -glyph $gi</code></pre>
 </div>
 <h3 id="query-and-modify-glyph-states">Query and Modify Glyph States</h3>
 <p>The non-primitive glyphs (or n dimensional glyphs) have states. To demonstrate how to work with glyph states we take the text glyph example from above again:</p>
-<pre><code>source olive.tcl
+<pre><code>package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region]
@@ -328,7 +345,8 @@ dict keys $gtstates</code></pre>
 </div>
 <h3 id="relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</h3>
 <p>Glyph labels are used in the plot and glyph inspector. You can specify the glyph labels when creating the glyphs:</p>
-<pre><code>source olive.tcl
+<pre><code>dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region -label Region]

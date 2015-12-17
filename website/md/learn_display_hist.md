@@ -21,9 +21,19 @@ h <- l_hist(x=olive$oleic)
 
 <Tcl>
 ~~~
-source olive.tcl
+namespace import loon::*
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+
 set h [histogram -x $oleic -xlabel oleic]
 ~~~
+
+or alternatively
+
+~~~
+set h [loon::histogram -x [dict get $loon::data::olive oleic] -xlabel oleic]
+~~~
+
 </Tcl>
 
 # Histogram

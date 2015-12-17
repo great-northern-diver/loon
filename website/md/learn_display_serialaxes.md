@@ -14,15 +14,19 @@ title: serialaxes display - loon
 
 <R>
 ~~~
-data(olive)
-s <- l_serialaxes(data=olive, color=olive$Area, title="olive data")
+s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
 ~~~
 </R>
 
 <Tcl>
 ~~~
-source olive.tcl
-set s [serialaxes -data $olive -color $Area -title "olive data"]
+namespace import loon::*		
+set Area [dict get $loon::data::olive Area]; puts "create Area variable"
+set oliveacids [dict filter $loon::data::olive script {key value} {
+	expr {$key ni {Area Region}}
+}]; puts "filter data"
+
+set s [serialaxes -data $oliveacids -color $Area -title "olive data"]
 ~~~
 </Tcl>
 
@@ -43,6 +47,7 @@ $s configure -axesLayout parallel
 
 
 # Serialaxes
+
 
 * Get the state names with
 
@@ -74,14 +79,14 @@ $s configure -axesLayout parallel
 	alternatively, and more efficient if you modify more than one
     state, use
 	
-		l_configure(s, sequence=names(olive)[c(2:10)])
+		l_configure(s, sequence=c('stearic', 'linoleic', 'palmitic', 'arachidic'))
 </R>
 
 <Tcl>
-	    $s configure -sequence [lrange [dict keys $olive] 2 end]
+	    $s configure -sequence {stearic linoleic palmitic arachidic}
 </Tcl>
 
-	![](images/display_serialaxes_parallel_nofactors.png "loon serialaxes display")
+	![](images/display_serialaxes_parallel_sequence.png "loon serialaxes display")
 	
 
 

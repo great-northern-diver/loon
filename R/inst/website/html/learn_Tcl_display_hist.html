@@ -100,8 +100,13 @@ window.onload = function() {
 <img src="images/display_histogram.png" title="loon histogram" alt="" />
 
 </div>
-<pre><code>source olive.tcl
+<pre><code>namespace import loon::*
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+
 set h [histogram -x $oleic -xlabel oleic]</code></pre>
+<p>or alternatively</p>
+<pre><code>set h [loon::histogram -x [dict get $loon::data::olive oleic] -xlabel oleic]</code></pre>
 <h1 id="histogram">Histogram</h1>
 <ul>
 <li><p>Get the state names with</p>

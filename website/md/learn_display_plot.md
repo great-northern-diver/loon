@@ -23,9 +23,22 @@ p <- l_plot(x=oleic, y=stearic, color=Area)
 
 <Tcl>
 ~~~
-source olive.tcl
+namespace import loon::*
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 ~~~
+
+or alternatively
+
+~~~
+dict with ::loon::data::olive {
+	set p [loon::plot -x $oleic -y $stearic -color $Area \
+		-xlabel oleic -ylabel stearic]
+}
+~~~
+
 </Tcl>
 
 
@@ -153,7 +166,10 @@ p['glyph'] <- unlist(glyphmap[as.character(Area)])
 <Tcl>
 
 ~~~
-source olive.tcl
+package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+		
 set p [plot -x $oleic -y $stearic -color $Area\
 	-xlabel oleic -ylabel stearic]
 
@@ -233,8 +249,11 @@ p['glyph'] <- gs
 <Tcl>
 
 ~~~
-## $olivedata does not contain Area and Region
-set gs [$p glyph add serialaxes -data $olivedata -showArea FALSE]
+set oliveacids [dict filter $loon::data::olive script {key value} {
+    return -level 0 [expr {$key ni {Area Region}}]
+}]; puts "filter data"
+
+set gs [$p glyph add serialaxes -data $oliveacids -showArea FALSE]
 $p configure -glyph $gs
 ~~~
 
@@ -600,7 +619,10 @@ p['glyph'] <- gt
 <Tcl>
 
 ~~~
-source olive.tcl
+package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region]
@@ -697,7 +719,8 @@ p['glyph'] <- gt
 <Tcl>
 
 ~~~
-source olive.tcl
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region -label Region]

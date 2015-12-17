@@ -14,7 +14,7 @@ Here we present some figures that we have created using `loon`.
 ![](images/gallery/scatterplot.png "Scatterplot")
 
 
-![](images/display_serialaxes_parallel_nofactors.png "Parallel Coordinates")
+![](images/display_serialaxes_parallel.png "Parallel Coordinates")
 ![](images/display_serialaxes_star.png "Stacked Star Glyphs")
 
 
