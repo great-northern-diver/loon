@@ -1,12 +1,21 @@
 
-lappend auto_path [file dirname [pwd]]
-
 package require loon
 package require Img
 
 namespace import loon::*
 
-source [file join data olive.tcl]; puts "loading olive data"
+## set up data
+set olive $::loon::data::olive
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+# create oliveAcids data
+set oliveAcids [dict filter $loon::data::olive script {key value} {
+    return -level 0 [expr {$key ni {Area Region}}]
+}]; puts "filter data"
+
+
+puts "this demo is meant to be run with tkcon: press return to start"; gets stdin
+
 
 set p [plot -x $arachidic -y $oleic -color $Area]
 
@@ -55,7 +64,7 @@ puts  "press the return key to continue: next configure stars"; gets stdin
 
 $p glyph with $sa configure -showEnclosing FALSE -linewidth 2
 
-$p glyph with $sa configure -transparent FALSE
+$p glyph with $sa configure -showArea TRUE
 
 
 puts "press the return key to continue: next stack all Umbria glyphs"; gets stdin
@@ -70,7 +79,7 @@ $p configure -size 40 -which selected
 $p scaleto selected
 
 $p glyph with $sa configure -showEnclosing TRUE -bboxColor steelblue\
-    -transparent TRUE
+    -showArea FALSE
 
 $p configure -selected FALSE
 
@@ -124,3 +133,6 @@ for {set i 0} {$i < [llength $Area]} {incr i} {
 set g
 
 $p configure -glyph $g
+
+
+puts "end of demo"
