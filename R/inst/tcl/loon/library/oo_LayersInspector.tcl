@@ -115,8 +115,8 @@ oo::class create loon::classes::LayersInspector {
 	    [button ${label}.set -text "set"\
 		 -command [list [self namespace]::my setLabel]]
 	
-	bind $label.entry <Key-Return> [list [self] setLabel]
-	bind $label.entry <KP_Enter> [list [self] setLabel]
+	bind $label.entry <Key-Return> [list [self namespace]::my setLabel]
+	bind $label.entry <KP_Enter> [list [self namespace]::my setLabel]
 	
 	pack $label -side top -fill x
 	pack $label_label -side left -padx {3 0} -pady {3 0}
