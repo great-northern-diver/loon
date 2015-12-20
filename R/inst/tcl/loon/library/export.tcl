@@ -22,7 +22,7 @@ namespace eval loon {
 	set extn [string tolower [file extension $filename]]
 
 	#set export_ps_font CharterBT-Roman
-	set export_ps_font Arial
+	set export_ps_font $::loon::Options(export_ps_font)
 	
 	switch -- $extn {
 	    .ps -

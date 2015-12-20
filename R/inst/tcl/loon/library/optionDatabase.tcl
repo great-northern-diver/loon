@@ -82,6 +82,7 @@ namespace eval loon {
     set Options(font-scales) $Options(default-font)
     set Options(font-text_glyph) $Options(default-font)
     
+    set Options(export_ps_font) Helvetica
     
     
     
