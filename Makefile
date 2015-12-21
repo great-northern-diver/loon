@@ -31,7 +31,7 @@ R:
 	R -e "library(roxygen2); roxygen2::roxygenise()" && \
 	cd ../ && \
 	R CMD build R --no-build-vignettes && \
-	$(RINSTCMD) loon_1.0.0.tar.gz
+	$(RINSTCMD) loon_1.0.1.tar.gz
 
 Roxygen:
 	cd R && \

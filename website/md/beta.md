@@ -68,7 +68,7 @@ dev_mode(on=FALSE)
 ### From a local file
 
 In Rstudio, select Packages, Install, Install from: Package Archive
-File (.tar.gz), select the 'loon_1.0.0.tar.gz' file and press the
+File (.tar.gz), select the 'loon_1.0.1.tar.gz' file and press the
 install button.
 
 ![Install loon in Rstudio](images/install_rstudio.png "install loon with Rstudio.")

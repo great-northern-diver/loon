@@ -55,8 +55,19 @@ exec sed -i $pattern website/md/beta.md
 # Change in Makefile
 exec sed -i $pattern Makefile
 
+
+# Change in makePkgIndex.tcl
+exec cd Tcl
+exec sed -i $pattern makePkgIndex.tcl
+exec ./makePkgIndex.tcl
+exec cd ..
+
 puts "\n\n DIFF on affected files\n ===================== \n\n"
 
-set diff [exec git diff --unified=0 Makefile R/DESCRIPTION website/md/beta.md]
+set diff [exec git diff --unified=0 Makefile R/DESCRIPTION\
+	      website/md/beta.md Tcl/makePkgIndex.tcl]
 puts [exec egrep {^(\+|-)} << $diff]
 puts "\n\n"
+
+
+
