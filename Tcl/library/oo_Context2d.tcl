@@ -140,25 +140,34 @@ oo::class create ::loon::classes::Context2d {
 	    }
 	    4 {
 		my variable interchange4d
-		if {[lindex $fromVars 0] in $curYvars} {
-		    set xvars [lindex $fromVars 1]
-		    set yvars [lindex $fromVars 0]
-		    if {$interchange4d} {
-			lappend xvars [lindex $toVars 0]
-			lappend yvars [lindex $toVars 1]
+
+		## Assume A:B > C:D
+		set A [lindex $fromVars 0]
+		set B [lindex $fromVars 1]
+		set C [lindex $toVars 0]
+		set D [lindex $toVars 1]
+		
+		set curx_0 [lindex $curXvars 0]
+		
+		if {!$interchange4d} {
+		    if {$B eq $curx_0} {
+			# (B,A) > (D,C)
+			set xvars [list $B $D]
+			set yvars [list $A $C]
 		    } else {
-			lappend xvars [lindex $toVars 1]
-			lappend yvars [lindex $toVars 0]
+			# default (A,B) > (C,D) 
+			set xvars [list $A $C]
+			set yvars [list $B $D]
 		    }
 		} else {
-		    set xvars [lindex $fromVars 0]
-		    set yvars [lindex $fromVars 1]
-		    if {$interchange4d} {
-			lappend xvars [lindex $toVars 1]
-			lappend yvars [lindex $toVars 0]
+		    if {$B eq $curx_0} {
+			# (B,A) > (C,D)
+			set xvars [list $B $C]
+			set yvars [list $A $D]
 		    } else {
-			lappend xvars [lindex $toVars 0]
-			lappend yvars [lindex $toVars 1]
+			# (A,B) > (D, C)
+			set xvars [list $A $D]
+			set yvars [list $B $C]
 		    }
 		}
 	    }
