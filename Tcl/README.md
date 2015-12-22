@@ -1,51 +1,48 @@
 
-
 Installation
 ============
 
-Append the path to the `pkgIndex.tcl` to the `auto_path`
-variable. Then load `loon` with
+In order to use the `loon` package the `tcl` interpreter needs to find
+`loons`'s `pkgIndex.tcl`. `Tcl` searches for packages in all the paths
+listed in the `auto_path` variable. So, if you start `tclsh`, `wish`
+or `tkcon` you can look at the `auto_path` variable with
+
+~~~
+puts $auto_path
+~~~
+
+From now on, I will only mention `tkcon`, but note that you can also
+use `tclsh` or `wish` instead.
+
+There are different approaches to have the `tcl` interpreter find
+`loon`'s `pkgIndex.tcl` file.
+
+* Manually add the path to `loon`'s `pkgIndex.tcl` file to the
+`auto_path` variable. In `tkcon` enter
+
+		lappend auto_path "path-to-parent-directory-of-pkgIndex.tcl"
+
+* Copy the `loon` folder to a path that is listed in the `auto_path`
+variable.
+
+* Add the path to `loon`'s `pkgIndex.tcl` file to the `TCLLIBPATH`
+  environment variable, e.g. (form the bash)
+
+		export TCLLIBPATH=$TCLLIBPATH:/Users/arwaddel/Desktop/loon/Tcl
+
+Then to load `loon` enter the following in `tkcon`
 
 ~~~
 package require loon
 ~~~
 
-
-## With the load.tcl script
-
-You can start load the `loon` package and the `olive` and `iris` data
-used in the *learn* section of the
-[web manual](http://waddella.github.io/loon/learn_Tcl_intro.html) by
-running the following command in the terminal (make sure to set your
-working directory accordingly)
+And create a scatterplot with
 
 ~~~
-tkcon load.tcl
-~~~
-
-then in the `tkcon` console you can start creating plots
-
-
-~~~
-set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic -showScales TRUE]
-~~~
-
-
-## Manually 
-
-
-Assume that the current working directory is set to the folder that
-contains the `pkgIndex.tcl` file. Then, start `tclsh` or better
-`tkcon` and enter
-
-~~~
-lappend auto_path [pwd]
-
-package require loon
-
-namespace import loon::*
-
-set p [plot -x {1 2 3 4} -y {3 2 1 4} -color red]
+dict with ::loon::data::olive {
+    set p [loon::plot -x $oleic -y $stearic -color $Area \
+        -xlabel oleic -ylabel stearic]
+}
 ~~~
 
 For more information please read the *learn* section in the
