@@ -2,10 +2,10 @@
 Installation
 ============
 
-In order to use the `loon` package the `tcl` interpreter needs to find
-`loons`'s `pkgIndex.tcl`. `Tcl` searches for packages in all the paths
-listed in the `auto_path` variable. So, if you start `tclsh`, `wish`
-or `tkcon` you can look at the `auto_path` variable with
+In order to use the `loon` package the `Tcl` interpreter needs to find
+`loons`'s `pkgIndex.tcl` file. `Tcl` searches for packages in all the
+paths listed in the `auto_path` `Tcl` variable. If you start `tclsh`,
+`wish` or `tkcon` you can look at the `auto_path` variable with
 
 ~~~
 puts $auto_path
@@ -14,13 +14,17 @@ puts $auto_path
 From now on, I will only mention `tkcon`, but note that you can also
 use `tclsh` or `wish` instead.
 
-There are different approaches to have the `tcl` interpreter find
-`loon`'s `pkgIndex.tcl` file.
+Here are three different approaches to have the `Tcl` interpreter find
+`loon`'s `pkgIndex.tcl` file:
 
 * Manually add the path to `loon`'s `pkgIndex.tcl` file to the
 `auto_path` variable. In `tkcon` enter
 
 		lappend auto_path "path-to-parent-directory-of-pkgIndex.tcl"
+
+	this approach requires you to be repeated every time you start a
+    new `tkcon` instance. The next two approaches do not require to be
+    repeated when starting a new `Tcl` interpreter.
 
 * Copy the `loon` folder to a path that is listed in the `auto_path`
 variable.
@@ -30,7 +34,7 @@ variable.
 
 		export TCLLIBPATH=$TCLLIBPATH:/Users/arwaddel/Desktop/loon/Tcl
 
-Then to load `loon` enter the following in `tkcon`
+Then, to load `loon` enter the following in `tkcon`
 
 ~~~
 package require loon
