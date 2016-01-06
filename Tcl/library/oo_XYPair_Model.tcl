@@ -368,9 +368,14 @@
 		    set yvals $yTemp
 		}
 		
-		
 		set xcoords [::loon::listfns::subset $xvals $sel]
 		set ycoords [::loon::listfns::subset $yvals $sel]
+
+
+		
+		if {$n_sel eq 1} {
+		    return
+		}
 		
 		set xmm [::loon::listfns::MinMax $xcoords]
 		set ymm [::loon::listfns::MinMax $ycoords]
@@ -398,9 +403,19 @@
 		if {$swap} {
 		    set ny [expr {int(ceil(sqrt($nsel)))}]
 		    set nx [expr {int(ceil(double($nsel)/$ny))}]
-		    
-		    set xstep [expr {($xmax-$xmin)/double($nx-1)}]
-		    set ystep [expr {($ymax-$ymin)/double($ny-1)}]
+
+		    if {$nx > 1} {
+			set xstep [expr {($xmax-$xmin)/double($nx-1)}]
+		    } else {
+			set xstep 0
+			set xmin [expr {[expr {([lindex $xmm 0] + [lindex $xmm 1])/2.0}]}]
+		    }
+		    if {$ny > 1} {
+			set ystep [expr {($ymax-$ymin)/double($ny-1)}]
+		    } else {
+			set ystep 0
+			set ymin [expr {[expr {([lindex $ymm 0] + [lindex $ymm 1])/2.0}]}]
+		    }
 		    
 		    set rankX [lsort -real -indices $xcoords]
 		    
@@ -419,9 +434,19 @@
 		} else {
 		    set nx [expr {int(ceil(sqrt($nsel)))}]
 		    set ny [expr {int(ceil(double($nsel)/$nx))}]
-		    
-		    set xstep [expr {($xmax-$xmin)/double($nx-1)}]
-		    set ystep [expr {($ymax-$ymin)/double($ny-1)}]
+
+		    if {$nx > 1} {
+			set xstep [expr {($xmax-$xmin)/double($nx-1)}]
+		    } else {
+			set xstep 0
+			set xmin [expr {[expr {([lindex $xmm 0] + [lindex $xmm 1])/2.0}]}]
+		    }
+		    if {$ny > 1} {
+			set ystep [expr {($ymax-$ymin)/double($ny-1)}]
+		    } else {
+			set ystep 0
+			set ymin [expr {[expr {([lindex $ymm 0] + [lindex $ymm 1])/2.0}]}]
+		    }
 		    
 		    set rankY [lsort -real -indices $ycoords]
 		    
