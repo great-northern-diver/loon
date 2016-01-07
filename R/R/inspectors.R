@@ -33,8 +33,14 @@ loonInspectorFactory <- function(factory_tclcmd, factory_path, factory_window_ti
 #' @examples 
 #' i <- l_loon_inspector()
 l_loon_inspector <- function(parent=NULL, ...) {
-    loonInspectorFactory("::loon::loon_inspector", "looninspector",
-                         "Loon inspector", parent, ...)
+    currentInspector <- as.character(tcl('set', 'loon::loonInspector'))
+    if(currentInspector == "") {
+        loonInspectorFactory("::loon::loon_inspector", "looninspector",
+                             "Loon inspector", parent, ...)
+    } else {
+        class(currentInspector) <- "loon"
+        currentInspector
+    }
 }
 
 
