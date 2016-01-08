@@ -166,6 +166,16 @@
 		    incr i
 		    
 		    set arg_state [lindex $args $i]
+
+		    ## for states of type color, if the argument values
+		    ## are not valid color names then the color mapping needs
+		    ## to happen now, otherwise the previous color gets
+		    ## overwritten
+		    if {[my info stateType $state] eq "color"} {
+			if {![::loon::listfns::isColor $arg_state]} {
+			    set arg_state [::loon::listfns::mapColor $arg_state]
+			}
+		    }
 		    
 		    if {[llength $arg_state] eq 1} {
 			foreach w $which {
