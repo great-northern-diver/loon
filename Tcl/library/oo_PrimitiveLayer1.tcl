@@ -14,6 +14,8 @@
 
 	my New_state tag string any ""
 
+	my New_state itemlabel string any "item label"
+	
 	my SetStateDescription x\
 	    "x coordinates"
 

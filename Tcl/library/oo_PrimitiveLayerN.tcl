@@ -23,6 +23,8 @@
 	my New_state tag string n ""
 	my New_state active boolean n TRUE
 
+	my New_state itemlabel string n ""
+	
 	my SetStateDescription x\
 	    "x coordinates"
 	
@@ -47,6 +49,12 @@
 	    
 	    return [::loon::listfns::ljoin\
 			[lrepeat $length [string range $type 0 end-1]]\
+			[::loon::listfns::lseq 0 [expr {$length-1}]]]
+	    
+	} elseif {$state eq "itemlabel"} {
+	    if {$length eq 0} {return ""}
+	    return [::loon::listfns::ljoin\
+			[lrepeat $length "line item"]\
 			[::loon::listfns::lseq 0 [expr {$length-1}]]]
 	    
 	} else {
