@@ -19,6 +19,10 @@ vignette: |
 library(loon)
 ```
 
+# Introduction
+
 # All pairs
 
 A `l_pairs` can show the same information as a `pairs` plot but with two important display differences.
+
+
