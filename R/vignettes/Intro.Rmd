@@ -1,0 +1,26 @@
+---
+title: "Introduction to whatever"
+author: "Adrian Waddell and R.W. Oldford"
+date: '`r Sys.Date()`'
+output:
+  html_vignette:
+    toc: yes
+  pdf_document:
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
+    toc: yes
+  word_document: default
+vignette: |
+  %\VignetteEngine{knitr::rmarkdown} %\VignetteIndexEntry{Introduction to zenplots}
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(loon)
+```
+
+# All pairs
+
+A `zenplot` can show the same information as a `pairs` plot but with two important display differences.
+
+First, the matrix organization of the `pairs` layout is replaced by the ``zig-zag'' layout of `zenplot`.  Second, the number of plots produced is about half that of a `pairs` plot allowing each plot in a `zenplot` to be given more visual space.
