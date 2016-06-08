@@ -28,5 +28,8 @@ Suggests:
     kernlab,
     MASS,
     dplyr,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 LazyData: yes
+VignetteBuilder: knitr
