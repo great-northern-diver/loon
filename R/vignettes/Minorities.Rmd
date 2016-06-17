@@ -1,0 +1,404 @@
+---
+title: "Minorities"
+author: "R.W. Oldford"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Illustrates:
+
+1. linked histograms and scatterplots
+2. interactive maps as scatterplots
+3. plots with multiple layers including nested group layers
+
+# Visible minorities in Canadian cities
+
+```{r setup, warning=FALSE, message=FALSE, error=FALSE}
+library(loon)
+```
+
+Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities'' within 33 Canadian cities.  All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).
+
+## The data
+
+The data are part of the `loon` package and can be accessed through the `data(...)` command.
+
+```{r minority}
+data(minority)
+```
+
+The data are arranged as a `data.frame` of  `nrow(minority) =`  `r nrow(minority)`  Canadian cities with `ncol(minority) =`  `r ncol(minority)` measurements on each.  The first `r ncol(minority) - 4` variates are Statistics Canada census numbers of people according to a declared ``visible minority`` together with the population of that `city`.  The possibilities are
+
+```{r}
+names(minority)[1:14]
+```
+
+For example, here are the counts for three Canadian cities (3 rows of `minority`) from across Canada:
+
+```{r minorityTables, echo=FALSE, fig.align="center"}
+subset <- t(minority[c("Victoria", "Ottawa", "St. John\'s"),][,1:(length(names(minority))-4)])
+knitr::kable(subset)
+```
+
+The remaining variates provide the geographic location of each city.  The latitude and longitude of the cities were determined in two ways.  First, the data in `canada.cities` from the `maps` package was used.  This produced the `minority` variates `lat' and `long'.  The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates  `googleLat` and `googleLong`.
+
+To see if they agree we plot them against one another. 
+
+```{r, echo=FALSE, fig.align = "center", fig.width=6.5, fig.height=3.25}
+parOptions <- par(mfrow=c(1,2))
+cols <- rep("steelblue", 33)
+cols[6] <- "red"
+cols <- adjustcolor(cols, 0.7)
+with(minority,
+     { 
+       plot(lat, googleLat, pch=19, col=cols, asp=1)
+       abline(a=0,b=1, col=adjustcolor("black", 0.5))
+       text(lat[6], googleLat[6], labels=c(row.names(minority)[6]), pos=4 )
+       plot(long, googleLong, pch=19, col=cols, asp=1)
+       abline(a=0,b=1, col=adjustcolor("black", 0.5))
+       text(long[6], googleLong[6], labels=c(row.names(minority)[6]), pos=1)
+     }
+     )
+
+par(parOptions)
+
+```
+
+Note the disagreement over the location of the city of Quebec.
+A check against a map reveals 
+
+```{r, echo=FALSE, message=FALSE, fig.align = "center", fig.width=7, fig.height=5}
+library(maps)
+parOptions <- par(mfrow=c(1,2))
+
+cols <- rep("steelblue", 33)
+cols[6] <- "red"
+cols <- adjustcolor(cols, 0.7)
+
+with(minority,
+     { map("world", "Canada", plot=TRUE, fill=FALSE)
+       points(long, lat, pch=19, col=cols)
+       points(long[6], lat[6], pch=19, col="red")
+       title(main="maps source")
+       text(long[6], lat[6], labels=c(row.names(minority)[6]), pos=3, offset=0.75 )
+       map("world", "Canada", plot=TRUE, fill=FALSE)
+       points(googleLong, googleLat, pch=19, col=cols)
+       title(main="Google source")
+       text(googleLong[6], googleLat[6], labels=c(row.names(minority)[6]), pos=1)
+     }
+     )
+
+par(parOptions)
+```
+
+The Google values are wrong.  It seems that the geocoded Google values picked up the *province* of Quebec and not to the *city* of Quebec!  Something to be wary of when searching any database \ldots
+
+### Populations
+
+We first look at the populations of the various cities:
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+with (minority,   ## Using with makes for easier reading
+      { l_hist(Total.population, linkingGroup = "minority")
+        l_plot(Total.population, Visible.minority.population,
+               linkingGroup = "minority",   
+               ## Same linking group connects to histogram
+               showGuides = TRUE,
+               itemlabel=rownames(minority),
+               showItemlabels=TRUE)
+      }
+      )
+```
+
+Note how skew is the distribution of the `Total.population`.  Three Canadian cities (Toronto, Montreal, and Vancouver) are much larger than the rest.
+
+Also, not surprisingly, we see that the largest visible minority populations are associated with the most populated cities.  The city names can be identified (by their `itemlabel` by having the mouse hover over any point in the scatterplot.
+
+### Minority percentages.
+
+It will be more interesting, then, to look at the percentage of each visible minority and to transform the total populations (say by a logarithmic transform).
+
+```{r minorityPercent}
+
+#  Reduce the minority data to percents and log the total populations
+#
+
+minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"],
+                         log(minority[,c(11,13)],10))
+
+#  Take the opportunity to shorten the Statistics Canada 
+#  names of the minorities as well:
+names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",  
+                            "% Filipino", "% Japanese",
+                            "% Korean",  "% Latino", "% Multiple",
+                            "% S. Asian",  "% SE Asian",  "% Other",
+                            "% Minority", "% W Asian",
+                            "Log_10 Total pop", "Log_10 Minority pop")
+
+```
+
+We begin by looking at the percentage of each city that is a ``visible minority'':
+
+```{r percentVisible, eval=FALSE}
+# The proportion of the city population that is a "visible minority"
+l_hist(minorityPercent[,"% Minority"],
+       title = paste("% Minority in 33 Canadian cities"),
+       xlabel="percent of population",
+       linkingGroup="minority",
+       yshows="density",
+       showScales=TRUE
+)
+```
+
+It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
+
+```{r getTop3}
+# Now show the same for the three minority groups
+# having largest percentages (in decreasing order):
+groups <- names(minorityPercent)[-c(12, 14, 15)]
+largest3 <- names(sort(apply(minorityPercent[,groups ],
+                             2, max),
+                       decreasing = TRUE)
+                  )[1:3]
+```
+
+and plot histograms of them
+
+```{r histTop3, eval=FALSE}
+# And now plot them
+for (x in largest3) {
+  l_hist(minorityPercent[,x],
+         title = x,
+         xlabel="percent of population",
+         linkingGroup="minority",
+         showScales=TRUE
+         )
+}
+
+```
+
+
+## Interactive maps
+
+Given we are dealing with cities in Canada, it would be nice to see where these cities appear on a map.  It may be, for example, that the distribution of visual minorities across the country depends on where the city is located.
+
+Loon has a facility for layering various geometric objects on top of a scatterplot.
+These include polygons which are used to represent maps.
+
+We begin with another scatterplot of the cities, now located by their longitude and latitude.  We then use the `maps` package's database for the coordinates of the polygons that make up the map of Canada.  These are layered on top of the scatterplot.
+
+```{r locations, eval=FALSE}
+
+p_map <- with(minority,
+              l_plot(long,lat,
+                     xlabel="longitude", ylabel="latitude",
+                     linkingGroup="minority",
+                     itemlabel=rownames(minority),
+                     showItemlabels=TRUE)
+     )
+
+# Add the map of Canada
+library(maps)
+landcol <- "grey95"
+canada <- l_layer(p_map, 
+                  map("world", "Canada", plot=FALSE, fill=TRUE), 
+                  label = "Canada",
+                  color = landcol,
+                  index="end")
+# Rescale the plot to the size of the map
+l_scaleto_layer(p_map, canada)
+```
+
+Note the map may be zoomed in on using scrolling and panned over directly on the map.  Alternatively, the world view in the loon inspector may be used in the same way -- dragging the scaled box around can be especially convenient.
+
+The map (and any layer) can be hidden or revealed, raised or lowered, by using the ``Layers'' tab in the loon inspector.
+
+The above map is sufficient for the analysis so the next subsection can be skipped.  However,  by providing a more detailed map (with lakes) a number of features involving the layering facilities in loon can be illustrated.
+
+### Multiple layers - adding lakes
+
+Here we illustrate loon's capacity for building and manipulating layers by adding the lakes to the map of Canada.  While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).
+
+```{r GreatLakes, eval=FALSE}
+
+lakecol <- "steelblue"
+
+# Get the coordinates from the lakes database in the maps package.
+# All lakes are recorded by name, so you will need to know which
+# are in Canada.  You either know the names, or you might have to
+# use trial and error, plotting the lakes and seeing which are inside
+# and which are outside the country.  If the database changes,
+# the indices below will need updating.
+#  
+# First, we'll deal with the Great Lakes:
+great.lakes <-  map("lakes", 
+                    plot=FALSE, 
+                    fill=TRUE)$names[c(7,8,27)]
+
+
+# We can layer these directly
+great.lakes.layer <-  l_layer(p_map,
+                              map("lakes", great.lakes, 
+                                  plot=FALSE, fill=TRUE), 
+                              label = "Great Lakes Water",
+                              color = lakecol,
+                              index="end"    # Add the layer at the end so we know
+                                             # where it is
+                              )
+
+# Move the lake layer up to be above the land map
+l_layer_raise(p_map, great.lakes.layer)
+```
+
+We can also add the islands back in.  This is a good example of grouping different layers together into a single ``group layer''.
+
+```{r GreatLakesIslands, eval=FALSE}
+# 
+# Great Lakes islands
+#
+# Unnamed islands are identified by a number added to the lake name
+# in which they appear
+
+uscolor <- "grey50"
+great.lakes.islands.US <- map("lakes", 
+                              plot=FALSE, 
+                              fill=TRUE)$names[c(9, 29,31, 45:52,54,55, 59,61:63)]
+
+great.lakes.islands.CA <- map("lakes", 
+                              plot=FALSE, 
+                              fill=TRUE)$names[c(10, 28,30, 53,56:58,60, 64:66)]
+
+
+# Now for the islands
+great.lakes.islands.US.layer <-l_layer(p_map,
+                                       map("lakes", great.lakes.islands.US, 
+                                           plot=FALSE, fill=TRUE), 
+                                       label = "Great Lakes Islands (US)",
+                                       color= uscolor,
+                                       index="end"
+                                       )
+
+great.lakes.islands.CA.layer <-l_layer(p_map,
+                                       map("lakes", great.lakes.islands.CA,
+                                           plot=FALSE, fill=TRUE), 
+                                       label = "Great Lakes Islands (CA)",
+                                       color = landcol,
+                                       index="end"
+                                       )
+
+# We can put the two sets of islands into a group; first create the group
+great.lakes.islands.group <- l_layer_group(p_map, 
+                                          label="Great Lakes Islands", 
+                                          index="end")
+# Because it is immediately below the two sets of islands
+# (as seen in the "Layers" inspector)
+# we drop the islands into the group by demoting them
+l_layer_demote(p_map, great.lakes.islands.CA.layer)
+l_layer_demote(p_map, great.lakes.islands.US.layer)
+
+# Move the group layer up (twice now - once above the land, once above the lakes)
+for (i in 1:2) l_layer_raise(p_map, great.lakes.islands.group)
+```
+
+
+And we can nest groups as well.  Here we put the Great Lakes and its islands together into a single group.
+
+```{r groupLayer, eval=FALSE}
+#
+# Create a group layer for the great lakes
+# 
+# First create the group layer
+great.lakes.group <- l_layer_group(p_map, label="Great Lakes", index="end")
+# Move the group up to be next to the great.lakes.layer
+l_layer_raise(p_map, great.lakes.group)
+# Demoting the great.lakes.layer puts it inside the group
+l_layer_demote(p_map, great.lakes.layer)
+# Now the islands are above the group and can be demoted
+# to become part of it.
+l_layer_demote(p_map, great.lakes.islands.group)
+```
+
+
+For completion we add the remaining lakes and islands.
+
+```{r boundaryLakes, eval=FALSE}
+
+# Now the same for the boundary lakes.
+other.boundary.lakes <- map("lakes", plot=FALSE, fill=TRUE)$names[c(33,80)]
+other.boundary.lakes.islands <- map("lakes", 
+                                    plot=FALSE, 
+                                    fill=TRUE)$names[c(81)] 
+
+# Create the islands first this time.
+other.boundary.lakes.layer <-  l_layer(p_map,
+                                       map("lakes", 
+                                           other.boundary.lakes, 
+                                           plot=FALSE, fill=TRUE),
+                                       label = "Other Boundary Lakes Water",
+                                       color = lakecol,
+                                       index="end"
+                                       )
+
+other.boundary.lakes.islands.layer <-  l_layer(p_map,
+                                               map("lakes", 
+                                                   other.boundary.lakes.islands,
+                                                   plot=FALSE, fill=TRUE),
+                                               label = "Other Boundary Lakes Islands",
+                                               color = uscolor,
+                                               index="end"
+                                               )
+
+# Now the layer
+boundary.lakes.group <- l_layer_group(p_map, label="Boundary Lakes", index="end")
+# Pack the group and move the group layer up  FAIL (one of these was placed at the beginning rather than the end of the list of layers!!!)
+l_layer_demote(p_map, other.boundary.lakes.islands.layer)
+l_layer_demote(p_map, other.boundary.lakes.layer)
+l_layer_raise(p_map, boundary.lakes.group)
+```
+
+And finally, all of the large interior lakes and their islands
+
+```{r interiorLakes, eval=FALSE}
+
+
+interior.lakes <- map("lakes", 
+                      plot=FALSE, fill=TRUE)$names[c(22, 25, 
+                                                     41, 68:73, 82, 85)]
+
+interior.lakes.islands <- map("lakes", 
+                              plot=FALSE, fill=TRUE)$names[c(23:24, 26, 
+                                                             42, 74, 83:84)]
+
+# Create the interior islands first
+interior.lakes.islands.layer <- l_layer(p_map,
+                                        map("lakes",
+                                            interior.lakes.islands,
+                                            plot=FALSE, fill=TRUE),
+                                        label = "Interior lakes islands",
+                                        color = landcol,
+                                        index="end"
+                                        )
+
+interior.lakes.layer <- l_layer(p_map,
+                                map("lakes", 
+                                    interior.lakes, 
+                                    plot=FALSE, fill=TRUE),
+                                label = "Interior lakes",
+                                color = lakecol,
+                                index="end"
+                                )
+# Now the layer
+interior.lakes.group <- l_layer_group(p_map, label="Interior Lakes", index="end")
+# Pack the group and move the group layer up  FAIL (one of these was placed at the beginning rather than the end of the list of layers!!!)
+l_layer_demote(p_map, interior.lakes.islands.layer)
+l_layer_demote(p_map, interior.lakes.layer)
+l_layer_raise(p_map, interior.lakes.group)
+```
