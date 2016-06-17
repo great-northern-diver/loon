@@ -337,6 +337,15 @@ other.boundary.lakes.islands <- map("lakes",
                                     plot=FALSE, 
                                     fill=TRUE)$names[c(81)] 
 
+# Because we know we are going to group these, we can create the group
+# first.
+# 
+
+boundary.lakes.group <- l_layer_group(p_map, label="Boundary Lakes", index="end")
+
+# We now add the layers directly to that group using the "parent" 
+# argument at creation time.
+# 
 # Create the islands first this time.
 other.boundary.lakes.layer <-  l_layer(p_map,
                                        map("lakes", 
@@ -344,6 +353,7 @@ other.boundary.lakes.layer <-  l_layer(p_map,
                                            plot=FALSE, fill=TRUE),
                                        label = "Other Boundary Lakes Water",
                                        color = lakecol,
+                                       parent = boundary.lakes.group,
                                        index="end"
                                        )
 
@@ -353,14 +363,11 @@ other.boundary.lakes.islands.layer <-  l_layer(p_map,
                                                    plot=FALSE, fill=TRUE),
                                                label = "Other Boundary Lakes Islands",
                                                color = uscolor,
+                                               parent = boundary.lakes.group,
                                                index="end"
                                                )
 
-# Now the layer
-boundary.lakes.group <- l_layer_group(p_map, label="Boundary Lakes", index="end")
-# Pack the group and move the group layer up  FAIL (one of these was placed at the beginning rather than the end of the list of layers!!!)
-l_layer_demote(p_map, other.boundary.lakes.islands.layer)
-l_layer_demote(p_map, other.boundary.lakes.layer)
+# Move the group layer up
 l_layer_raise(p_map, boundary.lakes.group)
 ```
 
@@ -376,7 +383,8 @@ interior.lakes <- map("lakes",
 interior.lakes.islands <- map("lakes", 
                               plot=FALSE, fill=TRUE)$names[c(23:24, 26, 
                                                              42, 74, 83:84)]
-
+# First the group layer
+interior.lakes.group <- l_layer_group(p_map, label="Interior Lakes", index="end")
 # Create the interior islands first
 interior.lakes.islands.layer <- l_layer(p_map,
                                         map("lakes",
@@ -384,6 +392,7 @@ interior.lakes.islands.layer <- l_layer(p_map,
                                             plot=FALSE, fill=TRUE),
                                         label = "Interior lakes islands",
                                         color = landcol,
+                                        parent = interior.lakes.group,
                                         index="end"
                                         )
 
@@ -393,12 +402,10 @@ interior.lakes.layer <- l_layer(p_map,
                                     plot=FALSE, fill=TRUE),
                                 label = "Interior lakes",
                                 color = lakecol,
+                                parent = interior.lakes.group,
                                 index="end"
                                 )
-# Now the layer
-interior.lakes.group <- l_layer_group(p_map, label="Interior Lakes", index="end")
-# Pack the group and move the group layer up  FAIL (one of these was placed at the beginning rather than the end of the list of layers!!!)
-l_layer_demote(p_map, interior.lakes.islands.layer)
-l_layer_demote(p_map, interior.lakes.layer)
+
+# And move the group layer up  
 l_layer_raise(p_map, interior.lakes.group)
 ```
