@@ -101,90 +101,31 @@ par(parOptions)
 
 The Google values are wrong.  It seems that the geocoded Google values picked up the *province* of Quebec and not to the *city* of Quebec!  Something to be wary of when searching any database \ldots
 
+## Interactive exploration of the data
+
+We now use the `loon` package to explore this data with some interactive tools.
+
+We begin by looking at the distribution of population across these cities.
+
 ### Populations
 
-We first look at the populations of the various cities:
+We first look at the populations of the different cities:
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
-with (minority,   ## Using with makes for easier reading
-      { l_hist(Total.population, linkingGroup = "minority")
-        l_plot(Total.population, Visible.minority.population,
-               linkingGroup = "minority",   
-               ## Same linking group connects to histogram
-               showGuides = TRUE,
-               itemlabel=rownames(minority),
-               showItemlabels=TRUE)
-      }
-      )
+with (minority,   ## Using the "with" function makes for easier reading
+      l_hist(Total.population)
+     )
 ```
 
-Note how skew is the distribution of the `Total.population`.  Three Canadian cities (Toronto, Montreal, and Vancouver) are much larger than the rest.
+The distribution of the `Total.population` is skewed with a heavy right tail. Most Canadian cities have a relatively small population.  A few cities, one in particular, has a relatively large population.
+
+Note, that this histogram has very little in the way of annotation.  This can be changed interactively by making various selections in the loon inspector.  Try a few of these out and observe the results in the histogram.  You may also make some selections in the histogram itself.  Holding the shift key down while making a selection results in a ``sticky'' selection that allows multiple items to be selected.
+
+**Exercise:** Select the two histogram bars corresponding to the cities with the largest population.
+
+Since this is spatial data it would be interesting to locate the cities on a map of Canada.  We again use the data from the `maps` package but now we will create an interactive map as well.
 
 Also, not surprisingly, we see that the largest visible minority populations are associated with the most populated cities.  The city names can be identified (by their `itemlabel` by having the mouse hover over any point in the scatterplot.
-
-### Minority percentages.
-
-It will be more interesting, then, to look at the percentage of each visible minority and to transform the total populations (say by a logarithmic transform).
-
-```{r minorityPercent}
-
-#  Reduce the minority data to percents and log the total populations
-#
-
-minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"],
-                         log(minority[,c(11,13)],10))
-
-#  Take the opportunity to shorten the Statistics Canada 
-#  names of the minorities as well:
-names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",  
-                            "% Filipino", "% Japanese",
-                            "% Korean",  "% Latino", "% Multiple",
-                            "% S. Asian",  "% SE Asian",  "% Other",
-                            "% Minority", "% W Asian",
-                            "Log_10 Total pop", "Log_10 Minority pop")
-
-```
-
-We begin by looking at the percentage of each city that is a ``visible minority'':
-
-```{r percentVisible, eval=FALSE}
-# The proportion of the city population that is a "visible minority"
-l_hist(minorityPercent[,"% Minority"],
-       title = paste("% Minority in 33 Canadian cities"),
-       xlabel="percent of population",
-       linkingGroup="minority",
-       yshows="density",
-       showScales=TRUE
-)
-```
-
-It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
-
-```{r getTop3}
-# Now show the same for the three minority groups
-# having largest percentages (in decreasing order):
-groups <- names(minorityPercent)[-c(12, 14, 15)]
-largest3 <- names(sort(apply(minorityPercent[,groups ],
-                             2, max),
-                       decreasing = TRUE)
-                  )[1:3]
-```
-
-and plot histograms of them
-
-```{r histTop3, eval=FALSE}
-# And now plot them
-for (x in largest3) {
-  l_hist(minorityPercent[,x],
-         title = x,
-         xlabel="percent of population",
-         linkingGroup="minority",
-         showScales=TRUE
-         )
-}
-
-```
-
 
 ## Interactive maps
 
@@ -215,6 +156,12 @@ canada <- l_layer(p_map,
                   index="end")
 # Rescale the plot to the size of the map
 l_scaleto_layer(p_map, canada)
+
+# Could also add the text of the city names to the map
+# as glyphs
+l_glyph_add_text(p_map,
+                 text=row.names(minority),
+                 label="city names")
 ```
 
 Note the map may be zoomed in on using scrolling and panned over directly on the map.  Alternatively, the world view in the loon inspector may be used in the same way -- dragging the scaled box around can be especially convenient.
@@ -378,11 +325,11 @@ And finally, all of the large interior lakes and their islands
 
 interior.lakes <- map("lakes", 
                       plot=FALSE, fill=TRUE)$names[c(22, 25, 
-                                                     41, 68:73, 82, 85)]
+                                                     68:73, 82, 85)]
 
 interior.lakes.islands <- map("lakes", 
                               plot=FALSE, fill=TRUE)$names[c(23:24, 26, 
-                                                             42, 74, 83:84)]
+                                                             74, 83:84)]
 # First the group layer
 interior.lakes.group <- l_layer_group(p_map, label="Interior Lakes", index="end")
 # Create the interior islands first
@@ -408,4 +355,149 @@ interior.lakes.layer <- l_layer(p_map,
 
 # And move the group layer up  
 l_layer_raise(p_map, interior.lakes.group)
+```
+
+
+
+### Minority percentages.
+
+It will be more interesting, then, to look at the percentage of each visible minority and to transform the total populations (say by a logarithmic transform).
+
+```{r minorityPercent}
+
+#  Reduce the minority data to percents and log the total populations
+#
+
+minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"],
+                         log(minority[,c(11,13)],10))
+
+#  Take the opportunity to shorten the Statistics Canada 
+#  names of the minorities as well:
+names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",  
+                            "% Filipino", "% Japanese",
+                            "% Korean",  "% Latino", "% Multiple",
+                            "% S. Asian",  "% SE Asian",  "% Other",
+                            "% Minority", "% W Asian",
+                            "Log_10 Total pop", "Log_10 Minority pop")
+
+```
+
+We begin by looking at the percentage of each city that is a ``visible minority'':
+
+```{r percentVisible, eval=FALSE}
+# The proportion of the city population that is a "visible minority"
+l_hist(minorityPercent[,"% Minority"],
+       title = paste("% Minority in 33 Canadian cities"),
+       xlabel="percent of population",
+       linkingGroup="minority",
+       yshows="frequency",
+       showBinHandle=FALSE,
+       showGuides=TRUE,
+       showScales=TRUE
+)
+```
+
+As can be seen, as can be seen, for most of these Canadian cities the visible minority population is less than 20\% of the whole population.
+
+It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
+
+```{r getTop3}
+# Now show the same for the three minority groups
+# having largest percentages (in decreasing order):
+groups <- names(minorityPercent)[-c(12, 14, 15)]
+largest3 <- names(sort(apply(minorityPercent[,groups ],
+                             2, max),
+                       decreasing = TRUE)
+                  )[1:3]
+```
+
+and plot histograms of them
+
+```{r histTop3, eval=FALSE}
+# And now plot them
+for (x in largest3) {
+  l_hist(minorityPercent[,x],
+         title = x,
+         xlabel="percent of population",
+         linkingGroup="minority",
+         showScales=TRUE
+         )
+}
+
+```
+
+
+
+## Serial axes
+
+Some sense of the relative
+
+```{r serialAxes, eval=FALSE}
+# Back to the raw data and just rename variables
+library(dplyr)
+d_minority_star <- minority %>%
+  select("SE.Asian"=Southeast.Asian,
+         Chinese = Chinese,
+         Japanese = Japanese,
+         "S.Asian" = South.Asian,
+         Other = Visible.minority.not.included.elsewhere,
+         Black = Black,
+         "Multiple" = Multiple.visible.minority,
+         Filipino = Filipino,
+         Arab = Arab,
+         Korean = Korean,
+         "Latino" = Latin.American)
+
+# Get axes sequence
+library(PairViz)
+set.seed(1564) # otherwise axes sequence differs
+CorrelationMatrix <- cor(d_minority_star)
+VarDistance <- dist(t(d_minority_star))
+# use minus the distance to produce the greatest
+# distinction between axes
+o <- order_tsp(-VarDistance)
+
+# west to east color mapping
+library(scales)
+west_east_cols <- (col_numeric(c("firebrick", "orange", "sienna",
+                                 "darkgreen", "steelblue", "purple"),
+                               domain = NULL))(minority$long)
+
+s <- l_serialaxes(data=d_minority_star, linkingGroup = "minority",
+                  sequence=names(d_minority_star)[o],
+                  showGuides=FALSE,
+                  linewidth=5,
+                  scaling = "variable",
+                  color=west_east_cols, showArea=FALSE,
+                  itemlabel=rownames(minority), showItemlabels=TRUE)
+```
+
+
+```{r starsGrid, eval=FALSE}
+## Produce grid of star glyphs
+p_stars <- with(minority,
+                l_plot(rank(long), rank(long),
+                       title = "", color = west_east_cols,
+                       showScales = FALSE, showLabels=FALSE, size=3,
+                       linkingGroup = "minority",
+                       itemlabel=rownames(minority), showItemlabels=TRUE))
+
+gstars <-l_glyph_add_serialaxes(p_stars , data=d_minority_star,
+                                sequence = names(d_minority_star)[o],
+                                scaling = 'variable',
+                                showArea=TRUE)
+p_stars['glyph'] <- gstars
+
+l_move_grid(p_stars, which='all')
+## swapAxes neccessary to arrange west-east in the grid (columns)
+p_stars['swapAxes'] <- TRUE
+l_zoom(p_stars, .9)
+#
+```
+
+```{r changingScaling, eval=FALSE}
+gstars['scaling'] <- 'observation'
+s['scaling'] <- 'observation'
+gstars['scaling'] <- 'variable'
+s['scaling'] <- 'variable'
 ```
