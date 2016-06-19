@@ -534,11 +534,114 @@ In contrast, the focus we would like to have here is to compare the variate valu
 
 ### Serial axes
 
-Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially.  
+Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially.  This allows all of the axes (or a great many of them) to appear in the same plot.  Each city, rather than appearing as a point now appears as a series of connected line segments,  where each segment connects the values of a city on neighbouring axes. 
+Serial axes in parallel are called parallel coordinate plots and are constructed with the `l_serialaxes(...)` function.  
+
+```{r serialAxesOverlaid, eval=FALSE}
+# Now construct the serial axes display so that 
+# the cities are laid over top of one another.
+# 
+s <- l_serialaxes(data=minority_star, 
+                  axesLayout="parallel",
+                  linkingGroup = "minority",
+                  sequence=names(minority_star),
+                  showGuides=FALSE,
+                  linewidth=5,
+                  scaling = "variable",
+                  showArea=FALSE,
+                  itemlabel=rownames(minority), 
+                  showItemlabels=TRUE)
+```
+
+This plot shows all variates at once for each city; each city is a ``curve'' of connected line segments.  As with all other plots in `loon` the serial axes plot is interactive.  Placing the mouse over any curve will reveal the city.  Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.
+
+In axis is scaled from 0 to 1.  In this case, the scaling is done within each variable.  That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis;  the city with the smallest population for that visible minority becomes 0, the lowest point on the axis. 
+
+For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two). 
+
+For this data, a more interesting serial axes layout is the `radial` layout.  Select this in the loon inspector or from the command line execute
+
+```{r changeToRadial, eval=FALSE}
+s["axesLayout"] <- "radial"
+```
+
+Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes.
+Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distibution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape.  Montreal and Vancouver are also large and distinctive, as selecting them will reveal. 
+
+These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using `long`.  
+First create a new scatterplot, then add serial axes as alternative glyphs for the points.  To emphasize shape the glyphs are drawn filled in with `showArea=TRUE`.
+
+```{r starsGrid, eval=FALSE}
+# Produce grid of star glyphs
+p_stars <- with(minority,
+                l_plot(rank(long), rank(long),
+                       title = "", color = west_east_cols,
+                       showScales = FALSE, 
+                       showLabels=FALSE, size=3,
+                       linkingGroup = "minority",
+                       itemlabel=rownames(minority), showItemlabels=TRUE))
+
+gstars <-l_glyph_add_serialaxes(p_stars,
+                                axesLayout = "radial",
+                                data=minority_star,
+                                sequence = names(minority_star)[o],
+                                scaling = 'variable',
+                                showArea=TRUE)
+p_stars['glyph'] <- gstars
+```
+
+Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.  The points could also be moved (temporarily)
+to a grid.
+
+```{r moveToGrid, eval=FALSE}
+# 
+l_move_grid(p_stars, which='all')
+# swapAxes neccessary to arrange west-east in the grid (columns)
+p_stars['swapAxes'] <- TRUE
+l_zoom(p_stars, .9)
+#
+```
+
+Optionally we could choose to add a continuous color change emphasizing the west to east directionality.  There is a `col_numeric` function in the `scales` package that will effect a continuous change in color along a spectrum.
+
+```{r westEastCols, eval=FALSE}
+library(scales)
+west_east_cols <- (col_numeric(c("firebrick", 
+                                 "orange", "sienna",
+                                 "darkgreen", "steelblue",
+                                 "purple"),
+                               domain = NULL)
+                   )(minority$long)
+
+s['color'] <- west_east_cols
+```
+
+
+
+
+
+```{r starMap, eval=FALSE}
+# Add some glyphs to the map,
+# scale values within variates
+so <- l_glyph_add_serialaxes(p_map, data=minority_star,
+                             sequence = names(minority_star)[o],
+                             scaling = 'variable',
+                             showArea=TRUE,
+                             label="stars")
+p_map['glyph'] <- so
+```
+
+
+```{r changingScaling, eval=FALSE}
+gstars['scaling'] <- 'observation'
+s['scaling'] <- 'observation'
+gstars['scaling'] <- 'variable'
+s['scaling'] <- 'variable'
+```
 
 Could just take them in order first, then do PairViz ordering.
 
-```{r serialAxesPrep, eval=FALSE}
+```{r PairViz, eval=FALSE}
 # Axis ordering methods can be found
 # in the pairwise coordinate visualization package
 # called PairViz
@@ -573,20 +676,10 @@ VarDistance <- dist(t(minority_star))
 # 
 o <- order_tsp(-VarDistance)
 
-# We color the cities to give some indication of their
-# west to east ordering by color using col_numeric
-# from the scales package
-library(scales)
-west_east_cols <- (col_numeric(c("firebrick", 
-                                 "orange", "sienna",
-                                 "darkgreen", "steelblue",
-                                 "purple"),
-                               domain = NULL)
-                   )(minority$long)
 
 ```
 
-```{r serialAxesOverlaid, eval=FALSE}
+```{r PairVizOverlaid, eval=FALSE}
 # Now construct the serial axes display so that 
 # the cities are laid over top of one another.
 # 
@@ -601,15 +694,7 @@ s <- l_serialaxes(data=minority_star,
 ```
 
 
-```{r starsGrid, eval=FALSE}
-# Produce grid of star glyphs
-p_stars <- with(minority,
-                l_plot(rank(long), rank(long),
-                       title = "", color = west_east_cols,
-                       showScales = FALSE, 
-                       showLabels=FALSE, size=3,
-                       linkingGroup = "minority",
-                       itemlabel=rownames(minority), showItemlabels=TRUE))
+```{r PairsVizGrid, eval=FALSE}
 
 gstars <-l_glyph_add_serialaxes(p_stars,
                                 data=minority_star,
@@ -627,7 +712,7 @@ l_zoom(p_stars, .9)
 ```
 
 
-```{r starMap, eval=FALSE}
+```{r PairVizstarMap, eval=FALSE}
 # Add some glyphs to the map,
 # scale values within variates
 so <- l_glyph_add_serialaxes(p_map, data=minority_star,
@@ -636,12 +721,4 @@ so <- l_glyph_add_serialaxes(p_map, data=minority_star,
                              showArea=TRUE,
                              label="stars")
 p_map['glyph'] <- so
-```
-
-
-```{r changingScaling, eval=FALSE}
-gstars['scaling'] <- 'observation'
-s['scaling'] <- 'observation'
-gstars['scaling'] <- 'variable'
-s['scaling'] <- 'variable'
 ```
