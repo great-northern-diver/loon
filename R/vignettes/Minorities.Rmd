@@ -1,5 +1,5 @@
 ---
-title: "Minorities"
+title: "Visible minorities in Canadian cities"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -13,21 +13,22 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ### Illustrates:
-
-1. linked histograms and scatterplots
-2. interactive maps as scatterplots
-3. plots with multiple layers including nested group layers
-
-# Visible minorities in Canadian cities
 
 ```{r setup, warning=FALSE, message=FALSE, error=FALSE}
 library(loon)
 ```
 
-Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities'' within 33 Canadian cities.  All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).
+1. linked histograms and scatterplots
+2. interactive maps as scatterplots
+3. plots with multiple layers including nested group layers'
+4. serial axes plots
+5. serial axes glyphs
 
-## The data
+# The `minority` data
+
+Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities'' within 33 Canadian cities.  All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).
 
 The data are part of the `loon` package and can be accessed through the `data(...)` command.
 
@@ -101,40 +102,131 @@ par(parOptions)
 
 The Google values are wrong.  It seems that the geocoded Google values picked up the *province* of Quebec and not to the *city* of Quebec!  Something to be wary of when searching any database \ldots
 
-## Interactive exploration of the data
+# Interactive exploration with `loon`
 
 We now use the `loon` package to explore this data with some interactive tools.
 
 We begin by looking at the distribution of population across these cities.
 
-### Populations
+## Populations
 
 We first look at the populations of the different cities:
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
-with (minority,   ## Using the "with" function makes for easier reading
-      l_hist(Total.population)
-     )
+ hTotPop <- with (minority,   ## Using the "with" function
+                              ## makes for easier reading
+                  l_hist(Total.population,
+                         title = "33 Canadian cities"
+                          ) 
+                  )
+                  ## Save the histogram structure 
+                  ## to work with later from the 
+                  ## command line
 ```
 
 The distribution of the `Total.population` is skewed with a heavy right tail. Most Canadian cities have a relatively small population.  A few cities, one in particular, has a relatively large population.
 
 Note, that this histogram has very little in the way of annotation.  This can be changed interactively by making various selections in the loon inspector.  Try a few of these out and observe the results in the histogram.  You may also make some selections in the histogram itself.  Holding the shift key down while making a selection results in a ``sticky'' selection that allows multiple items to be selected.
 
-**Exercise:** Select the two histogram bars corresponding to the cities with the largest population.
+**Exercise:** Check the show `stacked colors` box in order to see the bar colours.  Select the two histogram bars corresponding to the three most populous cities.  Change the colour of these cities to some different colour selected from the `Modify` section.  Select the `none` button to unhighlight the bars and reveal the modified colour.
 
-Since this is spatial data it would be interesting to locate the cities on a map of Canada.  We again use the data from the `maps` package but now we will create an interactive map as well.
+## Percentages
+Given that population totals vary so much, it might be more meaningful to look at each visible minority as its percentage of the city's population.
 
-Also, not surprisingly, we see that the largest visible minority populations are associated with the most populated cities.  The city names can be identified (by their `itemlabel` by having the mouse hover over any point in the scatterplot.
+```{r minorityPercent}
+
+#  Reduce the minority data to percents of the total population
+#  in each city.
+#
+
+minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"])
+
+#  Take the opportunity to shorten the Statistics Canada 
+#  names of the minorities as well:
+names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",  
+                            "% Filipino", "% Japanese",
+                            "% Korean",  "% Latino", "% Multiple",
+                            "% S. Asian",  "% SE Asian",  "% Other",
+                            "% Minority", "% W Asian")
+
+```
+
+We begin by looking at the total visibility minority percentage.  Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the `linkingGroup` is specified to be the string  `"minority"`.  This could have been any string -- it merely identifies that this histogram will have its display linked with any other plot in the same
+`linkingGroup` .
+
+```{r percentVisible, eval=FALSE}
+# The proportion of the city population that is a "visible minority"
+l_hist(minorityPercent[,"% Minority"],
+       title = paste("% Minority in 33 Canadian cities"),
+       xlabel="percent of population",
+       linkingGroup="minority",
+       yshows="frequency",
+       showBinHandle=FALSE,
+       showGuides=TRUE,
+       showScales=TRUE
+)
+```
+
+As can be seen, the visible minority population most of these cities  is less than 20\% of its total population.
+But for two cities nearly half of the population is from some visible minority.  
+
+One might hypothesize that these two cities are the largest two.  To test this we add the first histogram to the 'linkingGroup' of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as
+
+```{r link, eval=FALSE}
+l_configure(hTotPop, linkingGroup = "minority", sync = "push")
+```
+
+In either case the displays must be synchronized (`sync`) within the group.  Here we choose to `push` the linked elements of the total population histogram `hTotPop` out to the other members of the group.
+Checking the show `stacked colors` in both histograms will reveal their shared colours.  Alternatively, use selection on each histogram.
+
+As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities.  And conversely, the two cities having the largest visible miinorities are not the two largest cities.  However, selecting the largest of either will show through the linked displays that it is also the largest of the other.  Less than 20\% of the second largest city are visible minority.
+
+### Largest visible minorities
+It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
+
+```{r getTop3}
+# Now show the same for the three minority groups
+# having largest percentages (in decreasing order):
+groups <- names(minorityPercent)[-c(12, 14, 15)]
+largest3 <- names(sort(apply(minorityPercent[,groups ],
+                             2, max),
+                       decreasing = TRUE)
+                  )[1:3]
+```
+
+and plot histograms of them
+
+```{r histTop3, eval=FALSE}
+# And now plot them
+for (x in largest3) {
+  l_hist(minorityPercent[,x],
+         title = x,
+         xlabel="percent of population",
+         linkingGroup="minority",
+         showScales=TRUE,
+         showGuides=TRUE,
+         showStackedColors =TRUE
+         )
+}
+
+```
+
+In decreasing order the largest three visible minorities ``Chinese'', ``South Asian'', and ``Black''. 
+
+Looking at the ``\% Chinese'' histogram one city has nearly 20\% of its population being ``Chinese''.  It is the third largest city in the country.   
+In contrast, the city with the greatest proportion of its population being ``South Asian'' (more than 15 \%) is one of the smallest of the 33 Canadian cities.
+Finally, the city having the largest percentage of ``Black'' inhabitants is the largest one.
+
+Other relationships can be uncovered by selecting bars from different histograms.  It's worth exploring to better understand the data.
+
+Better still is to link these histograms with the cities' geographic locations on a map of Canada.
+
 
 ## Interactive maps
 
-Given we are dealing with cities in Canada, it would be nice to see where these cities appear on a map.  It may be, for example, that the distribution of visual minorities across the country depends on where the city is located.
+We again use the data from the `maps` package but now create an interactive map by using Loon's facility for layering various geometric objects (including map polygons) on top of a scatterplot.
 
-Loon has a facility for layering various geometric objects on top of a scatterplot.
-These include polygons which are used to represent maps.
-
-We begin with another scatterplot of the cities, now located by their longitude and latitude.  We then use the `maps` package's database for the coordinates of the polygons that make up the map of Canada.  These are layered on top of the scatterplot.
+The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the `maps` package) are *layered* on top of the scatterplot.
 
 ```{r locations, eval=FALSE}
 
@@ -150,7 +242,8 @@ p_map <- with(minority,
 library(maps)
 landcol <- "grey95"
 canada <- l_layer(p_map, 
-                  map("world", "Canada", plot=FALSE, fill=TRUE), 
+                  map("world", "Canada", 
+                      plot=FALSE, fill=TRUE), 
                   label = "Canada",
                   color = landcol,
                   index="end")
@@ -164,13 +257,20 @@ l_glyph_add_text(p_map,
                  label="city names")
 ```
 
-Note the map may be zoomed in on using scrolling and panned over directly on the map.  Alternatively, the world view in the loon inspector may be used in the same way -- dragging the scaled box around can be especially convenient.
+The map is now ready to be used in analysis.  It is part of the same linking group as the histograms so selecting bars in any histogram will highlight the corresponding cities on the map.  These may be **identified** by holding the mouse over any point in the map (provided `glyphs: itemlabels` is checked).
 
-The map (and any layer) can be hidden or revealed, raised or lowered, by using the ``Layers'' tab in the loon inspector.
+Alternatively, the filled circle `glyph` for any city in the map can be replaced by the name of the city (since the last `R` statement above added these to the map).  To **change the glyph**, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select `city names` from the glyph menu (next to a `set` button). Clicking on the `set` button will change the glyph of all selected cities to a text string of their name.  The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.
 
-The above map is sufficient for the analysis so the next subsection can be skipped.  However,  by providing a more detailed map (with lakes) a number of features involving the layering facilities in loon can be illustrated.
+Note the map may be **zoomed** in on using scrolling and **panned**  over directly on the map.  Alternatively, the **world view** in the loon inspector may be used in the same way -- dragging the scaled box around can be especially convenient.  To get the map back to its original position and scale, click on the `scale to world` button in the `Plot` section of the loon inspector.
 
-### Multiple layers - adding lakes
+The map can be hidden (or removed).  It is a **layer** of the scatterplot.  Clicking on the `Layers` tab will provide access to this functionality. Clicking on the `Analysis` tab will return the inspector to the plot interactions typically used in an exploratory analysis.
+
+While the above map is sufficient for the analysis it is sometimed of interest to have much more complex maps (or layers of any sort).  In the next subsection a more detailed map (with lakes) is constructed using many layers.  It provides an introduction to the layering facilities in loon.  It can be skipped, or every `R` section can be evaluated in order to get a more sophisticated map.
+
+The analysis can proceed with or without the next subsection.
+
+
+### More sophisticated maps - multiple layers
 
 Here we illustrate loon's capacity for building and manipulating layers by adding the lakes to the map of Canada.  While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).
 
@@ -217,16 +317,22 @@ We can also add the islands back in.  This is a good example of grouping differe
 uscolor <- "grey50"
 great.lakes.islands.US <- map("lakes", 
                               plot=FALSE, 
-                              fill=TRUE)$names[c(9, 29,31, 45:52,54,55, 59,61:63)]
+                              fill=TRUE)$names[c(9, 29,31, 
+                                                 45:52,54,
+                                                 55, 59,
+                                                 61:63)]
 
 great.lakes.islands.CA <- map("lakes", 
                               plot=FALSE, 
-                              fill=TRUE)$names[c(10, 28,30, 53,56:58,60, 64:66)]
+                              fill=TRUE)$names[c(10, 28,30, 
+                                                 53,56:58,
+                                                 60, 64:66)]
 
 
 # Now for the islands
 great.lakes.islands.US.layer <-l_layer(p_map,
-                                       map("lakes", great.lakes.islands.US, 
+                                       map("lakes", 
+                                           great.lakes.islands.US, 
                                            plot=FALSE, fill=TRUE), 
                                        label = "Great Lakes Islands (US)",
                                        color= uscolor,
@@ -234,7 +340,8 @@ great.lakes.islands.US.layer <-l_layer(p_map,
                                        )
 
 great.lakes.islands.CA.layer <-l_layer(p_map,
-                                       map("lakes", great.lakes.islands.CA,
+                                       map("lakes", 
+                                           great.lakes.islands.CA,
                                            plot=FALSE, fill=TRUE), 
                                        label = "Great Lakes Islands (CA)",
                                        color = landcol,
@@ -263,11 +370,16 @@ And we can nest groups as well.  Here we put the Great Lakes and its islands tog
 # Create a group layer for the great lakes
 # 
 # First create the group layer
-great.lakes.group <- l_layer_group(p_map, label="Great Lakes", index="end")
+great.lakes.group <- l_layer_group(p_map, 
+                                   label="Great Lakes", 
+                                   index="end")
+
 # Move the group up to be next to the great.lakes.layer
 l_layer_raise(p_map, great.lakes.group)
+
 # Demoting the great.lakes.layer puts it inside the group
 l_layer_demote(p_map, great.lakes.layer)
+
 # Now the islands are above the group and can be demoted
 # to become part of it.
 l_layer_demote(p_map, great.lakes.islands.group)
@@ -279,7 +391,10 @@ For completion we add the remaining lakes and islands.
 ```{r boundaryLakes, eval=FALSE}
 
 # Now the same for the boundary lakes.
-other.boundary.lakes <- map("lakes", plot=FALSE, fill=TRUE)$names[c(33,80)]
+other.boundary.lakes <- map("lakes", 
+                            plot=FALSE, 
+                            fill=TRUE)$names[c(33,80)]
+
 other.boundary.lakes.islands <- map("lakes", 
                                     plot=FALSE, 
                                     fill=TRUE)$names[c(81)] 
@@ -287,8 +402,9 @@ other.boundary.lakes.islands <- map("lakes",
 # Because we know we are going to group these, we can create the group
 # first.
 # 
-
-boundary.lakes.group <- l_layer_group(p_map, label="Boundary Lakes", index="end")
+boundary.lakes.group <- l_layer_group(p_map, 
+                                      label="Boundary Lakes", 
+                                      index="end")
 
 # We now add the layers directly to that group using the "parent" 
 # argument at creation time.
@@ -307,7 +423,8 @@ other.boundary.lakes.layer <-  l_layer(p_map,
 other.boundary.lakes.islands.layer <-  l_layer(p_map,
                                                map("lakes", 
                                                    other.boundary.lakes.islands,
-                                                   plot=FALSE, fill=TRUE),
+                                                   plot=FALSE, 
+                                                   fill=TRUE),
                                                label = "Other Boundary Lakes Islands",
                                                color = uscolor,
                                                parent = boundary.lakes.group,
@@ -324,12 +441,16 @@ And finally, all of the large interior lakes and their islands
 
 
 interior.lakes <- map("lakes", 
-                      plot=FALSE, fill=TRUE)$names[c(22, 25, 
-                                                     68:73, 82, 85)]
+                      plot=FALSE, 
+                      fill=TRUE)$names[c(22, 25, 
+                                         68:73, 
+                                         82, 85)]
 
 interior.lakes.islands <- map("lakes", 
-                              plot=FALSE, fill=TRUE)$names[c(23:24, 26, 
-                                                             74, 83:84)]
+                              plot=FALSE, 
+                              fill=TRUE)$names[c(23:24, 
+                                                 26, 74, 
+                                                 83:84)]
 # First the group layer
 interior.lakes.group <- l_layer_group(p_map, label="Interior Lakes", index="end")
 # Create the interior islands first
@@ -357,85 +478,18 @@ interior.lakes.layer <- l_layer(p_map,
 l_layer_raise(p_map, interior.lakes.group)
 ```
 
+Now we have a more detailed map.
 
+## Minority distributions within city
 
-### Minority percentages.
+There are several different visible minorities in the data set.  It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.
 
-It will be more interesting, then, to look at the percentage of each visible minority and to transform the total populations (say by a logarithmic transform).
+To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.  We'll use some functionality from the `dplyr` package to effect this.  It's not necessary, it just provides a simple syntax to select the variables we want and rename them in the process.
 
-```{r minorityPercent}
-
-#  Reduce the minority data to percents and log the total populations
-#
-
-minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"],
-                         log(minority[,c(11,13)],10))
-
-#  Take the opportunity to shorten the Statistics Canada 
-#  names of the minorities as well:
-names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",  
-                            "% Filipino", "% Japanese",
-                            "% Korean",  "% Latino", "% Multiple",
-                            "% S. Asian",  "% SE Asian",  "% Other",
-                            "% Minority", "% W Asian",
-                            "Log_10 Total pop", "Log_10 Minority pop")
-
-```
-
-We begin by looking at the percentage of each city that is a ``visible minority'':
-
-```{r percentVisible, eval=FALSE}
-# The proportion of the city population that is a "visible minority"
-l_hist(minorityPercent[,"% Minority"],
-       title = paste("% Minority in 33 Canadian cities"),
-       xlabel="percent of population",
-       linkingGroup="minority",
-       yshows="frequency",
-       showBinHandle=FALSE,
-       showGuides=TRUE,
-       showScales=TRUE
-)
-```
-
-As can be seen, as can be seen, for most of these Canadian cities the visible minority population is less than 20\% of the whole population.
-
-It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
-
-```{r getTop3}
-# Now show the same for the three minority groups
-# having largest percentages (in decreasing order):
-groups <- names(minorityPercent)[-c(12, 14, 15)]
-largest3 <- names(sort(apply(minorityPercent[,groups ],
-                             2, max),
-                       decreasing = TRUE)
-                  )[1:3]
-```
-
-and plot histograms of them
-
-```{r histTop3, eval=FALSE}
-# And now plot them
-for (x in largest3) {
-  l_hist(minorityPercent[,x],
-         title = x,
-         xlabel="percent of population",
-         linkingGroup="minority",
-         showScales=TRUE
-         )
-}
-
-```
-
-
-
-## Serial axes
-
-Some sense of the relative
-
-```{r serialAxes, eval=FALSE}
+```{r selectMinorities}
 # Back to the raw data and just rename variables
 library(dplyr)
-d_minority_star <- minority %>%
+minority_star <- minority %>%
   select("SE.Asian"=Southeast.Asian,
          Chinese = Chinese,
          Japanese = Japanese,
@@ -447,24 +501,97 @@ d_minority_star <- minority %>%
          Arab = Arab,
          Korean = Korean,
          "Latino" = Latin.American)
+```
 
-# Get axes sequence
+As the following few rows of this dataset show:
+
+```{r selectMinoritiesTable}
+# A look at this data
+knitr::kable(head(minority_star))
+```
+
+each city here has values for each of its `r ncol(minority_star)` visible minority populations.
+
+### Pairs plot
+
+It would be nice to be able to see all of these values at once to compare the cities.  One possibility would be a scatterplot matrix such as that provided by the `pairs(...)` function in `R`.  
+
+In `loon` there is an analogous function `l_pairs(...)` that produces an interactive scatterplot matrix.  
+
+```{r pairsPlot, eval=FALSE}
+# Loon's scatterplot matrix
+# 
+l_pairs(minority_star, linkingGroup="minority")
+```
+
+Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)
+
+While a scatterplot matrix shows all pairs of plots and so reveals some of the multidimensional structure of the data, it does not seem to be the most useful visual representation for the purposes here.  
+
+In a scatterplot matrix the focus is on the points (cities) within each pair of variates.  The matrix arrangement and dynamic linking provides some means of connecting the cities across the variates.  
+
+In contrast, the focus we would like to have here is to compare the variate values within each city.  To that end, the Cartesian coordinate system and matrix arrangement of a scatterplot matrix is not well-suited.
+
+### Serial axes
+
+Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially.  
+
+
+```{r serialAxesPrep, eval=FALSE}
+# Axis ordering methods can be found
+# in the pairwise coordinate visualization package
+# called PairViz
 library(PairViz)
-set.seed(1564) # otherwise axes sequence differs
-CorrelationMatrix <- cor(d_minority_star)
-VarDistance <- dist(t(d_minority_star))
-# use minus the distance to produce the greatest
+
+# Some of the methods will require some random
+# search or random tie breaking.  To make sure that
+# the vignette always produces the same sequence
+# we will set the seed for any random number generation
+# 
+set.seed(1564) 
+
+#
+# Each variate is now treated as a position in the
+# space of the cities.  We calculate the distances
+# between the variates.
+# 
+VarDistance <- dist(t(minority_star))
+
+# We will use these distances in a travelling
+# salesman problem that chooses an order to have
+# minimal distances.
+# Here we will choose instead to prefer to have 
+# variates appear beside each other if they are
+# far away in the space.
+# Large distances should indicate the greatest differences
+# in coordinate values.
+# 
+# So we use minus the distance in the travelling
+# salesman problem to try to produce the greatest
 # distinction between axes
+# 
 o <- order_tsp(-VarDistance)
 
-# west to east color mapping
+# We color the cities to give some indication of their
+# west to east ordering by color using col_numeric
+# from the scales package
 library(scales)
-west_east_cols <- (col_numeric(c("firebrick", "orange", "sienna",
-                                 "darkgreen", "steelblue", "purple"),
-                               domain = NULL))(minority$long)
+west_east_cols <- (col_numeric(c("firebrick", 
+                                 "orange", "sienna",
+                                 "darkgreen", "steelblue",
+                                 "purple"),
+                               domain = NULL)
+                   )(minority$long)
 
-s <- l_serialaxes(data=d_minority_star, linkingGroup = "minority",
-                  sequence=names(d_minority_star)[o],
+```
+
+```{r serialAxesOverlaid, eval=FALSE}
+# Now construct the serial axes display so that 
+# the cities are laid over top of one another.
+# 
+s <- l_serialaxes(data=minority_star, 
+                  linkingGroup = "minority",
+                  sequence=names(minority_star)[o],
                   showGuides=FALSE,
                   linewidth=5,
                   scaling = "variable",
@@ -474,26 +601,42 @@ s <- l_serialaxes(data=d_minority_star, linkingGroup = "minority",
 
 
 ```{r starsGrid, eval=FALSE}
-## Produce grid of star glyphs
+# Produce grid of star glyphs
 p_stars <- with(minority,
                 l_plot(rank(long), rank(long),
                        title = "", color = west_east_cols,
-                       showScales = FALSE, showLabels=FALSE, size=3,
+                       showScales = FALSE, 
+                       showLabels=FALSE, size=3,
                        linkingGroup = "minority",
                        itemlabel=rownames(minority), showItemlabels=TRUE))
 
-gstars <-l_glyph_add_serialaxes(p_stars , data=d_minority_star,
-                                sequence = names(d_minority_star)[o],
+gstars <-l_glyph_add_serialaxes(p_stars,
+                                data=minority_star,
+                                sequence = names(minority_star)[o],
                                 scaling = 'variable',
                                 showArea=TRUE)
 p_stars['glyph'] <- gstars
 
+# 
 l_move_grid(p_stars, which='all')
-## swapAxes neccessary to arrange west-east in the grid (columns)
+# swapAxes neccessary to arrange west-east in the grid (columns)
 p_stars['swapAxes'] <- TRUE
 l_zoom(p_stars, .9)
 #
 ```
+
+
+```{r starMap, eval=FALSE}
+# Add some glyphs to the map,
+# scale values within variates
+so <- l_glyph_add_serialaxes(p_map, data=minority_star,
+                             sequence = names(minority_star)[o],
+                             scaling = 'variable',
+                             showArea=TRUE,
+                             label="stars")
+p_map['glyph'] <- so
+```
+
 
 ```{r changingScaling, eval=FALSE}
 gstars['scaling'] <- 'observation'
