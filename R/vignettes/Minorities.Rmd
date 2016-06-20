@@ -575,22 +575,26 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 # Produce grid of star glyphs
 p_stars <- with(minority,
                 l_plot(rank(long), rank(long),
-                       title = "", color = west_east_cols,
+                       title = "", 
                        showScales = FALSE, 
                        showLabels=FALSE, size=3,
                        linkingGroup = "minority",
-                       itemlabel=rownames(minority), showItemlabels=TRUE))
+                       itemlabel=rownames(minority), 
+                       showItemlabels=TRUE))
 
 gstars <-l_glyph_add_serialaxes(p_stars,
                                 axesLayout = "radial",
                                 data=minority_star,
-                                sequence = names(minority_star)[o],
+                                sequence = names(minority_star),
                                 scaling = 'variable',
                                 showArea=TRUE)
 p_stars['glyph'] <- gstars
 ```
 
-Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.  The points could also be moved (temporarily)
+Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.  
+
+
+The points could also be moved (temporarily)
 to a grid.
 
 ```{r moveToGrid, eval=FALSE}
@@ -613,31 +617,51 @@ west_east_cols <- (col_numeric(c("firebrick",
                                domain = NULL)
                    )(minority$long)
 
+# Just need to color the glyphs on one of the plots
+# since they are all linked.
 s['color'] <- west_east_cols
 ```
 
-
-
-
+Adding the glyphs to the map gives a precise geographic location for each city.
 
 ```{r starMap, eval=FALSE}
 # Add some glyphs to the map,
 # scale values within variates
 so <- l_glyph_add_serialaxes(p_map, data=minority_star,
-                             sequence = names(minority_star)[o],
+                             sequence = names(minority_star),
                              scaling = 'variable',
                              showArea=TRUE,
                              label="stars")
 p_map['glyph'] <- so
 ```
 
+Unfortunately the three large cities dominate in each of these displays.  All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.  
 
-```{r changingScaling, eval=FALSE}
-gstars['scaling'] <- 'observation'
-s['scaling'] <- 'observation'
-gstars['scaling'] <- 'variable'
-s['scaling'] <- 'variable'
+A better choice woule be to scale each city by its largest visible minority population.  That way the differences in population size between cities will not dominate.  Instead, the differences in visible minority populations within cities will be emphasized.  Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.
+
+```{r observationScale, eval=FALSE}
+s["scaling"] <- "observation"
+gstars["scaling"] <- "observation"
+so["scaling"] <- "observation"
+
+# Double the size of the glyphs on the map.
+p_map["size"] <- 2 * p_map["size"] 
+
 ```
+
+Looking over the map a number of interesting observations can be made.  For example, regional similarities are easily seen.  From the west, Victoria and Vancouver have a very similar visible minority distribution with a large Chinese percentage and then South Asian.  
+
+The other two cities in British Columbia are strikingly different.  The visible minority population in Abbotsford-Mission is almost entirely South Asian; the other visible minorities are nearly zero by comparison.  The glyph for Kelowna shows an unusually high proportion of Japanese in comparison to the other three cities to its west.
+
+Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina.  The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg's relatively large Filipino population. The proboscis of Winnipeg's mosquito shaped glyph draws attention to its unusually large Filipino population.
+
+Note that this analysis is easily done using only three loon windows showing simultaneously. The first is the serial axes plot, which makes it easy to read off the contributions of each visible minority whenever any glyph is selected elsewhere.  The second is the map of Canada, preferably zoomed in to magnify a small rectangular region. Placing the mouse over any glyph reveals the city.  And third, the loon inspector.  This is particularly handy if it is focused on the map for then the small rectangle in its `World View` may be dragged across the country to focus the Canada map on any small region.
+
+Continuing west to east, at the western head of Lake Superior (western most Great Lake) the province of Ontario begins and the glyph for Thunder Bay shows it to have an unusually large (relative) population of Japanese compared to other cities.
+
+Other similarities and is recorded as the largest of  if it weren't for the fact of Winnipeg's rather unusually large Filipino population.
+
+### Ordering the axes
 
 Could just take them in order first, then do PairViz ordering.
 
