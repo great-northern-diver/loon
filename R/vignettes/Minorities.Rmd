@@ -486,7 +486,7 @@ There are several different visible minorities in the data set.  It might be of 
 
 To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.  We'll use some functionality from the `dplyr` package to effect this.  It's not necessary, it just provides a simple syntax to select the variables we want and rename them in the process.
 
-```{r selectMinorities}
+```{r selectMinorities, message=FALSE}
 # Back to the raw data and just rename variables
 library(dplyr)
 minority_star <- minority %>%
@@ -659,90 +659,155 @@ Note that this analysis is easily done using only three loon windows showing sim
 
 Continuing west to east, at the western head of Lake Superior (western most Great Lake) the province of Ontario begins and the glyph for Thunder Bay shows it to have an unusually large (relative) population of Japanese compared to other cities.
 
-Other similarities and is recorded as the largest of  if it weren't for the fact of Winnipeg's rather unusually large Filipino population.
+As we move southeast into southern Ontario, some new glyph shapes and hence visible minority patterns emerge.  For example, most southern Ontario cities are characterized by relatively high South Asian populations.  Compared to the prairie provinces of Alberta, Saskatchewan, and Manitoba, Ontario cities (and cities east of Ontario) have a relatively large black minority.  In southern Ontario, Windsor and London have an unusual large Arab population compared to their neighbours.  London and St. Catharines have unusally large Latino populations.  As with western cities, most Ontario cities have relatively large Chinese populations.
+
+This could be contrasted with cities in Quebec, for example, which have relatively low South Asian and Chinese populations.  Saguenay is unusual in Quebec in having a relatively large Chines population.   Instead, the unusually large populations in Quebec cities are the relatively large Arab and Latino populations. 
+
+The maritime provinces of New Brunswick and Nova Scotia are unusual in having much larger black populations than other visible minorities though Saint John also has a relatively large Chines population.  Moncton and Halifax look more alike.  St. John's in Newfoundland resembles the Toronto in its configuration of  visible minorities.
+
+### Manually moving points
+
+An interesting exercise would be to move those glyphs which most resemble each other closer together.  This is best effected in the plot without the map where we had already placed the glyphs on a grid.
+
+First make sure we put them on a grid to start:
+
+```{r moveGrid, eval=FALSE}
+l_move_grid(p_stars, which='all')
+```
+
+Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph.  Many points can be selected at once moved by additionally holding the shift key down.  In loon the shift key always indicates multiple items.  In this way we can visually cluster the cities according to glyph shape.
+
+**Exercise:** Try it. Visually cluster the glyphs.  Which cities are most alike?  Do the clusters correspond to spatial map regions?  Can the glyphs be ordered in some way?  Does this match any spatial map ordering?
 
 ### Ordering the axes
 
-Could just take them in order first, then do PairViz ordering.
+Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes.  This attention to pairwise ordering is the raison d'etre of the pairwise visualization package `PairViz`.  It offers a number of ways to construvt a pairwise ordering.  We consider a few of them here.
 
-```{r PairViz, eval=FALSE}
+```{r PairViz, message=FALSE}
 # Axis ordering methods can be found
 # in the pairwise coordinate visualization package
 # called PairViz
 library(PairViz)
+```
 
-# Some of the methods will require some random
-# search or random tie breaking.  To make sure that
-# the vignette always produces the same sequence
-# we will set the seed for any random number generation
-# 
-set.seed(1564) 
+Perhaps the first thing to consider would be some measure of each pair of visible minorities.  For example,  suppose we consider the values for each  visible minority proportion over all $33$ cities as a single $33$-dimensional vector.  The distance between these vectors will give a measure of how alike the relative population of visible minorities are across all $33$ cities.
 
-#
+We can calculate the matrix of distances as 
+
+```{r distances}
+# First transform minority_star to within city percentages.
+minority_star_percent <- 100*minority_star/minority[,"Total.population"]
+
 # Each variate is now treated as a position in the
 # space of the cities.  We calculate the distances
 # between the variates.
 # 
-VarDistance <- dist(t(minority_star))
+VarDistance <- dist(t(minority_star_percent))
+```
 
+Now these distances can be used to try to find a possibly better ordering of the minorities in a serial axes plot.  We will use a solution to a travelling salesman problem (with unintended irony) to order the visible minorities by finding the shortest (or longest) distances between the minorities (and not the cities).
+
+```{r}
 # We will use these distances in a travelling
 # salesman problem that chooses an order to have
-# minimal distances.
-# Here we will choose instead to prefer to have 
-# variates appear beside each other if they are
-# far away in the space.
-# Large distances should indicate the greatest differences
-# in coordinate values.
+# minimal distances. 
+# The appropriate function from PairViz is order_tsp(...)
 # 
-# So we use minus the distance in the travelling
-# salesman problem to try to produce the greatest
-# distinction between axes
+# Placing minorities that are close to each other
+# (in the above distance) beside each other should
+# result in somewhat more convex shaped glyphs.
 # 
-o <- order_tsp(-VarDistance)
+o_near <- order_tsp(VarDistance)
+# The order of minorities:
+names(minority_star_percent)[o_near]
 
 
+# Alternatively, placing distant variates beside each
+# other should produce less convex shaped glyphs.
+# 
+o_far <- order_tsp(-VarDistance)
+# The order of minorities:
+names(minority_star_percent)[o_far]
 ```
+
+We will try both of these orderings and add them to existing plots.
 
 ```{r PairVizOverlaid, eval=FALSE}
 # Now construct the serial axes display so that 
 # the cities are laid over top of one another.
 # 
-s <- l_serialaxes(data=minority_star, 
-                  linkingGroup = "minority",
-                  sequence=names(minority_star), #[o],
-                  showGuides=FALSE,
-                  linewidth=5,
-                  scaling = "variable",
-                  color=west_east_cols, showArea=FALSE,
-                  itemlabel=rownames(minority), showItemlabels=TRUE)
+s_close <- l_serialaxes(data=minority_star, 
+                        linkingGroup = "minority",
+                        sequence=names(minority_star)[o_near],
+                        showGuides=FALSE,
+                        linewidth=5,
+                        scaling = "observation",
+                        showArea=FALSE,
+                        title="Nearest minority order",
+                        itemlabel=rownames(minority), 
+                        showItemlabels=TRUE)
+
+s_far <- l_serialaxes(data=minority_star, 
+                      linkingGroup = "minority",
+                      sequence=names(minority_star)[o_far],
+                      showGuides=FALSE,
+                      linewidth=5,
+                      scaling = "observation",
+                      showArea=FALSE,
+                      title="Farthest minority order",
+                      itemlabel=rownames(minority), 
+                      showItemlabels=TRUE)
 ```
 
+Add the glyphs to the grid plot.
 
 ```{r PairsVizGrid, eval=FALSE}
 
-gstars <-l_glyph_add_serialaxes(p_stars,
+gstars_near <-l_glyph_add_serialaxes(p_stars,
                                 data=minority_star,
-                                sequence = names(minority_star)[o],
-                                scaling = 'variable',
+                                sequence = names(minority_star)[o_near],
+                                scaling = 'observation',
+                                label = "Nearest",
                                 showArea=TRUE)
-p_stars['glyph'] <- gstars
+p_stars['glyph'] <- gstars_near
 
-# 
-l_move_grid(p_stars, which='all')
-# swapAxes neccessary to arrange west-east in the grid (columns)
-p_stars['swapAxes'] <- TRUE
-l_zoom(p_stars, .9)
-#
+gstars_far <-l_glyph_add_serialaxes(p_stars,
+                                data=minority_star,
+                                sequence = names(minority_star)[o_far],
+                                scaling = 'observation',
+                                label = "Farthest",
+                                showArea=TRUE)
+p_stars['glyph'] <- gstars_far
+
 ```
 
+And now on the map:
 
 ```{r PairVizstarMap, eval=FALSE}
-# Add some glyphs to the map,
-# scale values within variates
-so <- l_glyph_add_serialaxes(p_map, data=minority_star,
-                             sequence = names(minority_star)[o],
-                             scaling = 'variable',
-                             showArea=TRUE,
-                             label="stars")
-p_map['glyph'] <- so
+# Add  glyphs to the map
+so_near <- l_glyph_add_serialaxes(p_map, data=minority_star,
+                                  sequence = names(minority_star)[o_near],
+                                  scaling = 'observation',
+                                  showArea=TRUE,
+                                  label="Nearest")
+p_map['glyph'] <- so_near
+
+so_far <- l_glyph_add_serialaxes(p_map, data=minority_star,
+                                 sequence = names(minority_star)[o_far],
+                                 scaling = 'observation',
+                                 showArea=TRUE,
+                                 label="Farthest")
+p_map['glyph'] <- so_near
 ```
+
+
+**Exercise:** Try switching to any of these alternatives and see whether your clustering choices change.  Which is easier? Convex or non-convex?
+
+The `PairViz` package also offers a couple of means of ensuring all variates appear as a pair.  This is usually more helpful for serial axes that are parallel than radial.  These include the following
+
+```{r Eulerians}
+o_greedy <- eulerian(VarDistance)
+o_balanced <- weighted_hpaths(VarDistance, matrix=FALSE)
+```
+
+**Exercise:**  Try these and determine the difference between them.
