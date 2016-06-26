@@ -1,8 +1,43 @@
-
+##
 ## Helper functions to create simple graphs
+##
 
-
+#' @title Create a graph object of class loongraph
+#'   
+#' @description The loongraph class provides a simple alternative to the graph 
+#'   class to create common graphs that are useful for use as navigation graphs.
+#'   
+#'   
+#' @details loongraph objects can be converted to graph objects (i.e. objects of
+#'   class graph which is defined in the graph package) with the as.graph
+#'   function.
+#'   
 #' @export
+#' 
+#' @param nodes a character vector with node names, each element defines a node
+#' @param from a character vector with node names, each element defines an edge
+#' @param to  a character vector with node names, each element defines an edge
+#' @param isDirected boolean scalar, defines whether from and to define directed
+#'   edges
+#'   
+#'   
+#' @return An object of class loongraph (S3)
+#'   
+#' @seealso \code{\link{completegraph}}, \code{\link{linegraph}}, 
+#'   \code{\link{complement}}
+#'   
+#'   
+#' @examples 
+#' 
+#' g <- loongraph(nodes = c("A", "B", "C", "D"),
+#'                from = c("A", "A", "B", "B", "C"),
+#'                to   = c("B", "C", "C", "D", "D"))
+#' \dontrun {
+#' p <- l_graph(g)
+#' }
+#' 
+#' lg <- linegraph(g)
+#' 
 loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALSE) {
 
     if (length(nodes) != length(unique(nodes)))
@@ -28,7 +63,20 @@ loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALS
 }
 
 
+#' @title Convert a graph-object to a loongraph object
+#' 
+#' @description The graph R package provides 
+#' 
+#' @param graph object of class graph (defined in the graph library)
+#' 
 #' @export
+#' 
+#' 
+#' 
+#' @examples 
+#' library(graph)
+#' 
+#' 
 as.loongraph <- function(graph) {
     if (!is(graph, "graph")) {
         stop("graph argument is not of class graph.")
@@ -102,7 +150,15 @@ linegraph <- function(x, ...) {
     UseMethod("linegraph")
 }
 
+#' @title Create a linegraph of a graph
+#'   
+#'   
+#'   
+#' @details TODO: linegraph.loongraph needs the code part for directed graphs
+#' (i.e. isDirected=TRUE)
+#' 
 #' @export
+#' 
 linegraph.loongraph <- function(x, separator=":") {
     nodes <- x$nodes
     from <- x$from
@@ -163,7 +219,7 @@ linegraph.loongraph <- function(x, separator=":") {
 
 #' @export
 complement <- function(x, ...) {
-    UseMethod("complement")
+    UseMethod("complement", ...)
 }
 
 #' @export
@@ -211,7 +267,10 @@ complement.loongraph <- function(x) {
 # setMethod("complement", "loongraph", loon:::complement.loongraph)
 
 
-##
+#' Create a graph product
+#' 
+#' 
+#' TODO: graphproduct is incomplete
 graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator=':') {
 
     stop("not implemented yet.")
