@@ -297,7 +297,7 @@ linegraph.loongraph <- function(x, separator=":") {
 
 #' @export
 complement <- function(x, ...) {
-    UseMethod("complement", ...)
+    UseMethod("complement")
 }
 
 #' @export
