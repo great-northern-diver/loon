@@ -1,7 +1,7 @@
 
 #' @export
 l_layer <- function(widget, x, ...) {
-    UseMethod("l_layer", x, ...)
+    UseMethod("l_layer", x)
 }
 
 #' @export
