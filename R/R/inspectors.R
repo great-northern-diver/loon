@@ -29,7 +29,13 @@ loonInspectorFactory <- function(factory_tclcmd, factory_path, factory_window_ti
 
 #' Create a loon linspector
 #' 
+#' The loon inspector is a singleton wiget that provids an overview to view and
+#' modify the active plot.
+#' 
 #' @export
+#' 
+#' @details See \code{l_help("learn_R_display_inspectors")}.
+#' 
 #' @examples 
 #' i <- l_loon_inspector()
 l_loon_inspector <- function(parent=NULL, ...) {

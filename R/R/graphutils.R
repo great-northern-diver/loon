@@ -12,6 +12,8 @@
 #'   class graph which is defined in the graph package) with the as.graph 
 #'   function.
 #'   
+#'   For more information see \code{l_help("learn_R_display_graph.html#graph-utilities")}.
+#'   
 #' @export
 #' 
 #' @param nodes a character vector with node names, each element defines a node
@@ -30,10 +32,14 @@
 #'   
 #' @examples 
 #' 
-#' g <- loongraph(nodes = c("A", "B", "C", "D"),
-#'                from = c("A", "A", "B", "B", "C"),
-#'                to   = c("B", "C", "C", "D", "D"))
+#' g <- loongraph(
+#'   nodes = c("A", "B", "C", "D"),
+#'   from = c("A", "A", "B", "B", "C"),
+#'   to   = c("B", "C", "C", "D", "D")
+#' )
+#' 
 #' \dontrun{
+#' # create a loon graph plot
 #' p <- l_graph(g)
 #' }
 #' 
@@ -72,6 +78,8 @@ loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALS
 #'   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
 #'   more information about the graph R package.
 #'   
+#'   For more information see \code{l_help("learn_R_display_graph.html#graph-utilities")}.
+#'   
 #' @export
 #'   
 #' @param graph object of class graph (defined in the graph library)
@@ -105,6 +113,7 @@ as.loongraph <- function(graph) {
 #' @details See 
 #'   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
 #'   more information about the graph R package.
+#' 
 #'   
 #' @export
 #' 
@@ -178,6 +187,8 @@ plot.loongraph <- function(x, ...) {
 #' @details Note that this function masks the completegraph function of the
 #'   graph package. Hence it is a good idead to specify the package namespace
 #'   with ::, i.e. loon::completegraph and graph::completegraph.
+#'   
+#'   For more information see \code{l_help("learn_R_display_graph.html#graph-utilities")}.
 #'   
 #' @export
 #' 
