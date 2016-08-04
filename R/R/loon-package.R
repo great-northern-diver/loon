@@ -29,4 +29,4 @@
 #' @name loon
 #' @import tcltk
 #'   
-NULL
+"_PACKAGE"
