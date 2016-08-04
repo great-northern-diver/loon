@@ -29,4 +29,5 @@ Suggests:
     MASS,
     dplyr,
     testthat
-LazyData: yes
+LazyData: true
+RoxygenNote: 5.0.1

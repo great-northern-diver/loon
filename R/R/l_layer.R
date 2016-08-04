@@ -1,4 +1,7 @@
-
+#' @title layer something
+#' 
+#' @description function to layer an abitrary shape
+#' 
 #' @export
 l_layer <- function(widget, x, ...) {
     UseMethod("l_layer", x, ...)
@@ -27,6 +30,7 @@ l_layer_ids <- function(widget) {
     return(as.character(tcl(widget, 'layer', 'ids')))
 }
 
+#' @title layer a group node
 #' 
 #' @templateVar type group
 #' @template title_layer

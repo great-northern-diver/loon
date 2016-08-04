@@ -33,12 +33,11 @@
 #' g <- loongraph(nodes = c("A", "B", "C", "D"),
 #'                from = c("A", "A", "B", "B", "C"),
 #'                to   = c("B", "C", "C", "D", "D"))
-#' \dontrun {
+#' \dontrun{
 #' p <- l_graph(g)
 #' }
 #' 
 #' lg <- linegraph(g)
-#' 
 loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALSE) {
 
     if (length(nodes) != length(unique(nodes)))
@@ -211,27 +210,23 @@ completegraph <- function(nodes, isDirected=FALSE) {
 }
 
 
-#' @title 
+#' @title Create a linegraph
 #' 
-#' @description 
+#' @description A line graph is TODO
 #' 
 #' @export
 #' 
 #' 
 #' @param x 
 #' 
-#' @return 
-#' 
-#' @examples 
+#' @return loongraph object
 linegraph <- function(x, ...) {
     UseMethod("linegraph")
 }
 
 
 #' @title Create a linegraph of a graph
-#'   
-#'   
-#'   
+#'    
 #' @details TODO: linegraph.loongraph needs the code part for directed graphs
 #' (i.e. isDirected=TRUE)
 #' 

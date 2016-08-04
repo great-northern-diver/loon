@@ -35,6 +35,11 @@
     ## Load Tcl package
     libdir <- file.path(find.package(package = pkgname), "tcl")
     
+    ## sometimes there are issues with devtools and testthat
+    if (!dir.exists(libdir))
+        libdir <- sub("tcl$", "inst/tcl", libdir)
+    # cat(paste0("libdir = ", libdir, "\n"))
+    
     tcl('lappend','auto_path',libdir)
      
 
