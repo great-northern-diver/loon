@@ -27,14 +27,21 @@ loonInspectorFactory <- function(factory_tclcmd, factory_path, factory_window_ti
 }
 
 
-#' Create a loon linspector
+#' @title Create a loon linspector
 #' 
-#' The loon inspector is a singleton wiget that provids an overview to view and
-#' modify the active plot.
+#' @description The loon inspector is a singleton widget that provids an
+#'   overview to view and modify the active plot.
+#' 
+#' @template param_parent
+#' @template param_dots_state_args
+#' 
+#' @templateVar page learn_R_display_inspectors
+#' @templateVar section graph-utilities
+#' @template see_l_help_page
+#' 
+#' @template return_widget_handle
 #' 
 #' @export
-#' 
-#' @details See \code{l_help("learn_R_display_inspectors")}.
 #' 
 #' @examples 
 #' i <- l_loon_inspector()
@@ -50,8 +57,11 @@ l_loon_inspector <- function(parent=NULL, ...) {
 }
 
 
-#' Worldview Inspector
+#' @templateVar type Worldview
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_worldview()
 l_worldview <- function(parent=NULL, ...) {
@@ -59,7 +69,9 @@ l_worldview <- function(parent=NULL, ...) {
                          "Worldview inspector", parent, ...)
 }
 
-#' Layers inspector
+#' @templateVar type Layers
+#' @template man_inspector
+#' 
 #' @export
 #' @examples 
 #' i <- l_layers_inspector()
@@ -68,8 +80,10 @@ l_layers_inspector <- function(parent=NULL, ...) {
                          "Layers inspector", parent, ...)
 }
 
-#' Glyphs inspector
+#' @templateVar type Glyphs
+#' @template man_inspector
 #' @export
+#' 
 #' @examples 
 #' i <- l_glyphs_inspector()
 l_glyphs_inspector <- function(parent=NULL, ...) {
@@ -77,8 +91,11 @@ l_glyphs_inspector <- function(parent=NULL, ...) {
                          "Glyph inspector", parent, ...)
 }
 
-#' Serialaxes Glyphs inspector
+#' @templateVar type Serialaxes Glyph
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_glyphs_inspector_serialaxes()
 l_glyphs_inspector_serialaxes <- function(parent=NULL, ...) {
@@ -86,7 +103,9 @@ l_glyphs_inspector_serialaxes <- function(parent=NULL, ...) {
                          "Serialaxes glyph inspector", parent, ...)
 }
 
-#' Pointrange Glyph inspector
+#' @templateVar type Pointrange Glyph
+#' @template man_inspector
+#' 
 #' @export
 #' @examples 
 #' i <- l_glyphs_inspector_pointrange()
@@ -96,7 +115,9 @@ l_glyphs_inspector_pointrange <- function(parent=NULL, ...) {
 }
 
 
-#' Text Glyph inspector
+#' @templateVar type Text Glyph
+#' @template man_inspector
+#' 
 #' @export
 #' @examples 
 #' i <- l_glyphs_inspector_text()
@@ -105,7 +126,10 @@ l_glyphs_inspector_text <- function(parent=NULL, ...) {
                          "Text glyph inspector", parent, ...)
 }
 
-#' Image Glyph inspector
+
+#' @templateVar type Image Glyph
+#' @template man_inspector
+#' 
 #' @export
 #' @examples 
 #' i <- l_glyphs_inspector_image()
@@ -115,17 +139,11 @@ l_glyphs_inspector_image <- function(parent=NULL, ...) {
 }
 
 
-#' @title Create a Scatterplot inspector
-#'
-#'
-#' @description
-#'
-#' The loon plot inspector is a singelton and displays the correct
-#' inspector for the active plot widget that has "loon" as an element
-#' of -inspector.
-#'
-#'
+#' @templateVar type Scatterplot
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_plot_inspector()
 l_plot_inspector <- function(parent=NULL, ...) {
@@ -133,8 +151,12 @@ l_plot_inspector <- function(parent=NULL, ...) {
                          "Scatterplot inspector", parent, ...)
 }
 
-#' Scatterplot Analysis Inspector
+
+#' @templateVar type Scatterplot Analysis
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_plot_inspector_analysis()
 l_plot_inspector_analysis <- function(parent=NULL, ...) {
@@ -143,8 +165,11 @@ l_plot_inspector_analysis <- function(parent=NULL, ...) {
 }
 
 
-#' Histogram Inspector
+#' @templateVar type Histogram
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_hist_inspector()
 l_hist_inspector <- function(parent=NULL, ...) {
@@ -152,8 +177,12 @@ l_hist_inspector <- function(parent=NULL, ...) {
                          "Histogram inspector", parent, ...)
 }
 
-#' Histogram Analysis Inspector
+
+#' @templateVar type Histogram Analysis
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_hist_inspector_analysis()
 l_hist_inspector_analysis <- function(parent=NULL, ...) {
@@ -162,9 +191,11 @@ l_hist_inspector_analysis <- function(parent=NULL, ...) {
 }
 
 
-
-#' Serialaxes inspector
+#' @templateVar type Serialaxes Analysis
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_serialaxes_inspector()
 l_serialaxes_inspector <- function(parent=NULL, ...) {
@@ -172,8 +203,12 @@ l_serialaxes_inspector <- function(parent=NULL, ...) {
                          "Serialaxes inspector", parent, ...)
 }
 
-#' Graph inspector
+
+#' @templateVar type Graph
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_graph_inspector()
 l_graph_inspector <- function(parent=NULL, ...) {
@@ -181,8 +216,11 @@ l_graph_inspector <- function(parent=NULL, ...) {
                          "Graph inspector", parent, ...)
 }
 
-#' Graph Analysis Inspector
+#' @templateVar type Graph Analysis
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_graph_inspector_analysis()
 l_graph_inspector_analysis <- function(parent=NULL, ...) {
@@ -190,8 +228,11 @@ l_graph_inspector_analysis <- function(parent=NULL, ...) {
                          "Graph analysis inspector", parent, ...)
 }
 
-#' Graph Navigator Inspector
+#' @templateVar type Graph Navigator
+#' @template man_inspector
+#' 
 #' @export
+#' 
 #' @examples 
 #' i <- l_graph_inspector_navigators()
 l_graph_inspector_navigators <- function(parent=NULL, ...) {
