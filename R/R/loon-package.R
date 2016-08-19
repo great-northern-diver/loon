@@ -1,4 +1,4 @@
-#' loon
+#' loon: A Toolkit for Interactive Data Visualization and Exploration
 #' 
 #' Loon is a toolkit for highly interactive data visualization. Interactions 
 #' with plots are provided with mouse and keyboard gestures as well as via 

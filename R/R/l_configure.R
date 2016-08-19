@@ -1,3 +1,5 @@
+#' @title Modify states
+#' @aliases "[<-.loon"
 #' @export
 l_configure <- function(target, ...) {
 

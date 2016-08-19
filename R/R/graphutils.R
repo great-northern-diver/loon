@@ -115,17 +115,20 @@ as.loongraph <- function(graph) {
 #'   bioconductor) provides a more powerful alternative to create and work with 
 #'   graphs. Also, many other graph theoretic algorithms such as the complement 
 #'   function and some graph layout and visualization methods are implemented 
-#'   for the graph objects in the RBGL and Rgraphviz R packages.
-#' 
-#' @param loongraph object of class loongraph  
-#' 
+#'   for the graph objects in the RBGL and Rgraphviz R packages. For more 
+#'   information on packages that are useful to work with graphs see the
+#'   \emph{gRaphical Models in R} CRAN Task View at
+#'   \url{https://cran.r-project.org/web/views/gR.html}.
+#'   
+#' @param loongraph object of class loongraph
+#'   
 #' @details See 
 #'   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
 #'   more information about the graph R package.
-#' 
+#'   
 #' @template return_loongraph
-#'
-#' @export 
+#'   
+#' @export
 #' 
 #' @examples 
 #' library(graph)
@@ -227,32 +230,38 @@ completegraph <- function(nodes, isDirected=FALSE) {
 }
 
 
-#' @title Create a linegraph
-#' 
-#' @description A line graph is TODO
-#' 
-#' @param x graph of class graph or loongraph
-#' @param ... arguments passed on to method
-#' 
-#' @return graph object
-#' 
-#' @export
+#'@title Create a linegraph
+#'  
+#'  
+#'@description The line graph of G, here denoted L(G), is the graph whose nodes 
+#'  correspond to the edges of G and whose edges correspond to nodes of G such 
+#'  that nodes of L(G) are joined if and only if the corresponding edges of G 
+#'  are adjacent in G.
+#'  
+#'@param x graph of class graph or loongraph
+#'@param ... arguments passed on to method
+#'  
+#'@return graph object
+#'  
+#'@export
 linegraph <- function(x, ...) {
     UseMethod("linegraph")
 }
 
 
 #' @title Create a linegraph of a graph
-#' 
+#'   
+#' @describeIn linegraph
+#'   
 #' @param x loongraph object
-#' @param separator one character - node names in x get concatenated with this
+#' @param separator one character - node names in x get concatenated with this 
 #'   character
-#'    
-#' @details TODO: linegraph.loongraph needs the code part for directed graphs
-#' (i.e. isDirected=TRUE)
-#' 
+#'   
+#' @details linegraph.loongraph needs the code part for directed graphs (i.e.
+#'   isDirected=TRUE)
+#'   
 #' @template return_loongraph
-#' 
+#'   
 #' @export
 #' 
 #' @examples 
@@ -316,7 +325,7 @@ linegraph.loongraph <- function(x, separator=":") {
     return(G)
 }
 
-#' @title Create Complement Graph of a Graph
+#' @title Create the Complement Graph of a Graph
 #' 
 #' @description Creates a complement graph of a graph
 #' 
@@ -331,14 +340,16 @@ complement <- function(x, ...) {
 }
 
 
-#' @title Create Complement Graph of a Graph
-#' 
+#' @title Create the Complement Graph of a loon Graph
+#'   
 #' @description Creates a complement graph of a graph
-#' 
+#'   
+#' @details This method is currently only implemented for undirected graphs.
+#'   
 #' @param x loongraph object
-#' 
+#'   
 #' @template return_loongraph
-#' 
+#'   
 #' @export
 complement.loongraph <- function(x) {
     nodes <- x$nodes
@@ -384,10 +395,9 @@ complement.loongraph <- function(x) {
 # setMethod("complement", "loongraph", loon:::complement.loongraph)
 
 
-#' Create a graph product
-#' 
-#' 
-#' TODO: graphproduct is incomplete
+# Create a graph product
+# 
+# TODO: graphproduct is incomplete
 graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator=':') {
 
     stop("not implemented yet.")

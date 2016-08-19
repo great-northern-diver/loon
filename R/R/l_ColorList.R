@@ -1,5 +1,42 @@
-#' Similar to col_numeric and col_factor from the scales package
+#' @title Loon's color Mapping
+#'   
+#' @description Used to map nominal data to colors that can be well 
+#'   differentiated visually (e.g. to highlight the different groups)
+#'   
+#'   
+#'   
+#'   
+#'   
+#' @details This is the function that loon uses to map values to colors. Hence, 
+#'   if all values already represent colors they do not get mapped to the 
+#'   sequence of colors from the hcl color wheel as outlined below.
+#'   
+#'   loon currently uses its own mapping algorithm based on the hcl color wheel.
+#'   For loon, it is desirable to have the first m colors of a color sample of 
+#'   size m + 1 to be the same as the colors in a color sample of size m, for 
+#'   all positive natural numbers m. Hence, loon's color mapping provides a 
+#'   sequence of colors.
+#'   
+#'   For other mappings see the \code{\link[scales]{col_numeric}} and 
+#'   \code{\link[scales]{col_factor}} functions from the scales package.
+#'   
+#'   
+#' @return A function that takes a vector with values and maps them to
+#'   hexencoded colors (vector of strings). If all the values that get passed to
+#'   the function are valid color names in Tcl then those colors get returned
+#'   hexencoded.
+#'   
+#' @seealso \code{\link{l_getColorList}} , \code{\link{l_setColorList}}
+#'   
 #' @export
+#' 
+#' @examples 
+#' 
+#' pal <- col_loon()
+#' pal(letters[1:4]) 
+#' pal(c('a','a','b','c'))
+#' pal(c('green', 'yellow'))
+#' 
 col_loon <- function() {
     function(x) {
         if (!as.numeric(tcl('::loon::listfns::isColor', x))) {

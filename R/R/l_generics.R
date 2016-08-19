@@ -1,9 +1,11 @@
 
+# aliased in l_cget
 #' @export
 "[.loon" <- function(target, state) {
     l_cget(target, state)
 }
 
+# aliased in l_configure
 #' @export
 "[<-.loon" <- function(target, state, value) {
     args <- list(target, value)
@@ -13,7 +15,7 @@
 
 
 
-#' experimental
+# aliassed to l_layer
 #' @export
 print.l_layer <- function(x) {
     cat(paste0('loon layer "', l_layer_getLabel(attr(x, 'widget'), x),

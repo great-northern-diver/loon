@@ -4,3 +4,5 @@
 #' @param ... state arguments
 #' 
 #' @return widget handle
+#' 
+#' @seealso \code{\link{l_create_handle}}

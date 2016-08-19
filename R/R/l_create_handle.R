@@ -1,8 +1,19 @@
-
-#' Create a plot handle
+#' @title Create a loon object handle
 #' 
-#' @param target loon object specification
+#' @description This function can be used to create the loon object handles from
+#'   a vector of the widget path name and the object ids (in the order of the 
+#'   parent-child relationships).
+#'   
+#'   
+#' @details loon's plot handles are useful to query and modify plot states 
+#'   via the command line.
+#'   
+#' @templateVar page learn_R_intro
+#' @templateVar section re-creating-object-handles
+#' @template see_l_help
 #' 
+#' @param target loon object specification (e.g. \code{".l0.plot"})
+#'   
 #' @export
 #' 
 #' @examples 

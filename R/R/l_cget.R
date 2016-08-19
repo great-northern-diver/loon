@@ -1,6 +1,6 @@
-
+#' @title Query states
+#' @aliases "[.loon"
 #' @export
-
 l_cget <- function(target, state) {
 
     obj_eval <- .loonobject(target, as.character)

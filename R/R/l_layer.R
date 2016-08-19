@@ -1,17 +1,96 @@
-#' @title layer something
-#' 
-#' @description function to layer an abitrary shape
-#' 
+#' @title Loon layers
+#'   
+#' @description Loon supports layering of visuals and groups of visuals. The 
+#'   \code{l_layer} function is a generic method.
+#'   
+#' @aliases print.l_layer
+#'   
+#' @details loon's displays that use the main graphics model (i.e. histogram, 
+#'   scatterplot and graph displays) support layering of visual information. The
+#'   following table lists the layer types and functions for layering on a 
+#'   display.
+#'   
+#'   \tabular{lll}{ \strong{Type} \tab \strong{Description} \tab \strong{Creator
+#'   Function}\cr group \tab a group can be a parent of other layers \tab 
+#'   \code{\link{l_layer_group}}\cr polygon \tab one polygon \tab 
+#'   \code{\link{l_layer_polygon}}\cr text \tab one text string \tab 
+#'   \code{\link{l_layer_text}}\cr line \tab one line (i.e. connected line 
+#'   segments) \tab \code{\link{l_layer_line}}\cr rectangle \tab one rectangle 
+#'   \tab \code{\link{l_layer_rectangle}}\cr oval \tab one oval \tab 
+#'   \code{\link{l_layer_oval}}\cr points \tab n points (filled) circle \tab 
+#'   \code{\link{l_layer_points}}\cr texts \tab n text strings \tab 
+#'   \code{\link{l_layer_text}}\cr polygons \tab n polygons \tab 
+#'   \code{\link{l_layer_polygons}}\cr rectangles \tab n rectangles \tab 
+#'   \code{\link{l_layer_rectangles}}\cr lines \tab n sets of connected line 
+#'   segments \tab \code{\link{l_layer_lines}}\cr }
+#'   
+#'   Every layer within a display has a unique id. The visuals of the data in a 
+#'   display present the default layer of that display and has the layer id 
+#'   \code{'model'}. For example, the \code{'model'} layer of a scatterplot 
+#'   display visualizes the scatterplot glyphs.
+#'   
+#'   Layers are arranged in a tree structure with the tree root having the layer
+#'   id \code{'root'}. The rendering order of the layers is according to a 
+#'   depth-first traversal of the layer tree. This tree also maintains a label 
+#'   and a visibility flag for each layer. The layer tree, layer ids, layer 
+#'   labels and the visibility of each layer are visualized in the layers 
+#'   inspector. If a layer is set to be invisible then it is not rendered on the
+#'   display. If a group layer is set to be invisible then all its children are 
+#'   not rendered; however, the visibility flag of the children layers remain 
+#'   unchanged.
+#'   
+#'   All layers have states that can be queried and modified using the same 
+#'   functions as the ones used for displays (i.e. \code{\link{l_cget}}, 
+#'   \code{\link{l_configure}}, \code{\link{'['}} and \code{\link{'[<-'}}). The 
+#'   last group of layer types in the above table have n-dimensional states, 
+#'   where the actual value of n can be different for every layer in a display.
+#'   
+#'   The difference between the model layer and the other layers is that the 
+#'   model layer has a \emph{selected} state, responds to selection gestures and
+#'   supports linking.
+#'   
+#'   
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template param_widget
+#' @param x object that should be layered
+#' @param ... additional arguments, oftern state definition for the basic
+#'   layering function
+#'   
+#' @template return_layerid
+#'   
 #' @export
 l_layer <- function(widget, x, ...) {
     UseMethod("l_layer", x, ...)
 }
 
-#' @export
+
+#' @title Layer Method for Kernel Density Estimation
+#'   
+#' @description layer a line that represents a kernel density estimate.
+#'  
+#'
+#' @inheritParams l_layer   
+#' @param x object from \code{\link{density}} of class \code{"density"} 
+#' 
+#' @template return_layerid
+#'   
+#' @export l_layer.density
+#'   
+#' @seealso \code{\link{density}}, \code{\link{l_layer}}
+#'   
+#' @examples  
+#' d <- density(faithful$eruptions, bw = "sj")
+#' h <- l_hist(x = faithful$eruptions, yshows="density")
+#' l <- l_layer.density(h, d, color="steelblue", linewidth=3)
 l_layer.density <- function(widget, x, ...) {
     l_layer_line(widget, x$x, x$y, ...)
 }
 
+
+
+# helper function to add a layer
 l_layer_add <- function(widget, type, ...) {
     structure(as.character(tcl(widget, "layer" , type, ...)),
               widget=as.vector(widget), class=c("loon","l_layer"))
@@ -21,7 +100,7 @@ l_layer_add <- function(widget, type, ...) {
 
 #' @title List ids of layers in Plot
 #'
-#' @inheritParams l_widget
+#' @inheritParams l_layer
 #'
 #' @export
 l_layer_ids <- function(widget) {
@@ -31,28 +110,27 @@ l_layer_ids <- function(widget) {
 }
 
 #' @title layer a group node
-#' 
+#'   
 #' @templateVar type group
 #' @template title_layer
-#'
-#' @description
-#' A group layer can contain other layers. If the group layer is
-#' invisible, then so are all its children.
-#'
-#' @template layerid
-#'
+#'   
+#' @description A group layer can contain other layers. If the group layer is 
+#'   invisible, then so are all its children.
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
 #' @inheritParams l_widget
 #' @param label label used in the layers inspector
 #' @param parent group layer
 #' @param index of the newly added layer in its parent group
-#'
+#'   
 #' @template return_layerid
-#' 
+#'   
 #' @export
-#'
-#' @template examples_layer
 #' 
-
+#' @template examples_layer
+#'   
 l_layer_group <- function(widget, label="group", parent="root", index=0) {
 
     l_throwErrorIfNotLoonWidget(widget)
@@ -66,6 +144,11 @@ l_layer_group <- function(widget, label="group", parent="root", index=0) {
 #' @template title_layer
 #' 
 #' @inheritParams l_layer_group
+#' 
+#' 
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
 #' 
 #' @export
 l_layer_polygon <- function(widget, x, y,

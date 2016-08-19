@@ -1,4 +1,4 @@
-#' Inspector Factory
+# Inspector Factory
 loonInspectorFactory <- function(factory_tclcmd, factory_path, factory_window_title="loon widget", parent=NULL, ...) {
 
     new.toplevel <- FALSE

@@ -11,17 +11,15 @@ l_plot.map <-  function(x, ...) {
     p
 }    
 
-#' @title Add a Map as Drawings to Loon plot
-#'
-#'
-#' @description
-#'
-#' The maps library provides some map data in polygon which can be
-#' added as drawings to Loon plots. This function adds map objects
-#' with class map from the maps library as background drawings.
-#' 
+#' @title Add a Map of class map as Drawings to Loon plot
+#'   
+#'   
+#' @description The maps library provides some map data in polygon which can be 
+#'   added as drawings to Loon plots. This function adds map objects with class
+#'   map from the maps library as background drawings.
+#'   
 #' @export l_layer.map
-#' 
+#'   
 #' @examples 
 #' 
 #' canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)

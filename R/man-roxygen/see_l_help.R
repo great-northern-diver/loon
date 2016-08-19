@@ -1,3 +1,3 @@
-#' @details For more information run: l_help("<%=page%>#<%=section%>")
+#' @details For more information run: \code{l_help("<%=page%>.html#<%=section%>")}
 
 
