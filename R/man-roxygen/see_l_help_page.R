@@ -1,2 +1,2 @@
-#' @details For more information run: \code{l_help("<%=page%>")}
+#' @details For more information run: \code{l_help("<%=page%>")}.
 

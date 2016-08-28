@@ -1,11 +1,11 @@
 
 .onAttach <- function(libname, pkgname) {
     
-    packageStartupMessage("\nloon Version ",
-                          utils::packageDescription(pkg = pkgname,
-                                                    lib.loc = libname,
-                                                    field="Version"),
-                          ", for documentation run l_help()")
+#    packageStartupMessage("\nloon Version ",
+#                          utils::packageDescription(pkg = pkgname,
+#                                                    lib.loc = libname,
+#                                                    field="Version"),
+#                          ", for documentation run l_help()")
 }
 
 
