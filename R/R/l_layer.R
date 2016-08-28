@@ -10,20 +10,19 @@
 #'   following table lists the layer types and functions for layering on a 
 #'   display.
 #'   
-#'   \tabular{lll}{
-#'   \strong{Type} \tab \strong{Description} \tab \strong{Creator Function}\cr
-#'   group \tab a group can be a parent of other layers \tab \code{\link{l_layer_group}}\cr
-#'   polygon \tab one polygon \tab \code{\link{l_layer_polygon}}\cr
-#'   text \tab one text string \tab \code{\link{l_layer_text}}\cr
-#'   line \tab one line (i.e. connected line segments) \tab \code{\link{l_layer_line}}\cr
-#'   rectangle \tab one rectangle \tab \code{\link{l_layer_rectangle}}\cr
-#'   oval \tab one oval \tab \code{\link{l_layer_oval}}\cr
-#'   points \tab n points (filled) circle \tab \code{\link{l_layer_points}}\cr
-#'   texts \tab n text strings \tab \code{\link{l_layer_text}}\cr
-#'   polygons \tab n polygons \tab \code{\link{l_layer_polygons}}\cr
-#'   rectangles \tab n rectangles \tab \code{\link{l_layer_rectangles}}\cr
-#'   lines \tab n sets of connected line segments \tab \code{\link{l_layer_lines}}\cr 
-#'   }
+#'   \tabular{lll}{ \strong{Type} \tab \strong{Description} \tab \strong{Creator
+#'   Function}\cr group \tab a group can be a parent of other layers \tab
+#'   \code{\link{l_layer_group}}\cr polygon \tab one polygon \tab
+#'   \code{\link{l_layer_polygon}}\cr text \tab one text string \tab
+#'   \code{\link{l_layer_text}}\cr line \tab one line (i.e. connected line
+#'   segments) \tab \code{\link{l_layer_line}}\cr rectangle \tab one rectangle
+#'   \tab \code{\link{l_layer_rectangle}}\cr oval \tab one oval \tab
+#'   \code{\link{l_layer_oval}}\cr points \tab n points (filled) circle \tab
+#'   \code{\link{l_layer_points}}\cr texts \tab n text strings \tab
+#'   \code{\link{l_layer_text}}\cr polygons \tab n polygons \tab
+#'   \code{\link{l_layer_polygons}}\cr rectangles \tab n rectangles \tab
+#'   \code{\link{l_layer_rectangles}}\cr lines \tab n sets of connected line
+#'   segments \tab \code{\link{l_layer_lines}}\cr }
 #'   
 #'   Every layer within a display has a unique id. The visuals of the data in a 
 #'   display present the default layer of that display and has the layer id 
@@ -31,11 +30,9 @@
 #'   display visualizes the scatterplot glyphs. Functions useful to query layers
 #'   are
 #'   
-#'   \tabular{ll}{
-#'   \strong{Function} \tab \strong{Description}\cr
-#'   \code{\link{l_layer_ids}} \tab List layer ids\cr
-#'   \code{\link{l_layer_getType}} \tab Get layer type
-#'   }
+#'   \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr 
+#'   \code{\link{l_layer_ids}} \tab List layer ids\cr 
+#'   \code{\link{l_layer_getType}} \tab Get layer type }
 #'   
 #'   Layers are arranged in a tree structure with the tree root having the layer
 #'   id \code{'root'}. The rendering order of the layers is according to a 
@@ -47,28 +44,30 @@
 #'   not rendered; however, the visibility flag of the children layers remain 
 #'   unchanged. Relevant functions are:
 #'   
-#'   \tabular{ll}{
-#'   \strong{Function} \tab \strong{Description}\cr
-#'   \code{\link{l_layer_getParent}} \tab Get parent layer id of a layer\cr
-#'   \code{\link{l_layer_getChildren}} \tab Get children of a group layer\cr
-#'   \code{\link{l_layer_index}} \tab Get the order index of a layer among its siblings\cr
-#'   \code{\link{l_layer_printTree}} \tab Print out the layer tree\cr
-#'   \code{\link{l_layer_move}} \tab Move a layer\cr
-#'   \code{\link{l_layer_lower}} \tab Switch the layer place with its sibling to the right\cr
-#'   \code{\link{l_layer_raise}} \tab Switch the layer place with its sibling to the left\cr
-#'   \code{\link{l_layer_demote}} \tab Moves the layer up to be a left sibling of its parent\cr
-#'   \code{\link{l_layer_promote}} \tab Moves the layer to be a child of its right group layer sibling \cr
-#'   \code{\link{l_layer_hide}} \tab Set the layers visibility flag to \code{FALSE}\cr
-#'   \code{\link{l_layer_show}} \tab Set the layers visibility flag to \code{TRUE}\cr
-#'   \code{\link{l_layer_isVisible}} \tab Return visibility flag of layer\cr
-#'   \code{\link{l_layer_layerVisibility}} \tab Returns logical value for whether layer is actually seen\cr
-#'   \code{\link{l_layer_groupVisibility}} \tab Returns \code{all}, \code{part} or \code{none} for expressing which part of the layers children are visible. \cr
-#'   \code{\link{l_layer_delete}} \tab Delete a layer. If the layer is a group move all its children layers to the layers parent. \cr
-#'   \code{\link{l_layer_expunge}} \tab Delete layer and all its children layer.\cr
-#'   \code{\link{l_layer_getLabel}} \tab Get layer label.\cr
-#'   \code{\link{l_layer_relabel}} \tab Change layer label.\cr
-#'   \code{\link{l_layer_bbox}} \tab Get the bounding box of a layer.
-#'   }
+#'   \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr 
+#'   \code{\link{l_layer_getParent}} \tab Get parent layer id of a layer\cr 
+#'   \code{\link{l_layer_getChildren}} \tab Get children of a group layer\cr 
+#'   \code{\link{l_layer_index}} \tab Get the order index of a layer among its
+#'   siblings\cr \code{\link{l_layer_printTree}} \tab Print out the layer
+#'   tree\cr \code{\link{l_layer_move}} \tab Move a layer\cr 
+#'   \code{\link{l_layer_lower}} \tab Switch the layer place with its sibling to
+#'   the right\cr \code{\link{l_layer_raise}} \tab Switch the layer place with
+#'   its sibling to the left\cr \code{\link{l_layer_demote}} \tab Moves the
+#'   layer up to be a left sibling of its parent\cr 
+#'   \code{\link{l_layer_promote}} \tab Moves the layer to be a child of its
+#'   right group layer sibling \cr \code{\link{l_layer_hide}} \tab Set the
+#'   layers visibility flag to \code{FALSE}\cr \code{\link{l_layer_show}} \tab
+#'   Set the layers visibility flag to \code{TRUE}\cr 
+#'   \code{\link{l_layer_isVisible}} \tab Return visibility flag of layer\cr 
+#'   \code{\link{l_layer_layerVisibility}} \tab Returns logical value for
+#'   whether layer is actually seen\cr \code{\link{l_layer_groupVisibility}}
+#'   \tab Returns \code{all}, \code{part} or \code{none} for expressing which
+#'   part of the layers children are visible. \cr \code{\link{l_layer_delete}}
+#'   \tab Delete a layer. If the layer is a group move all its children layers
+#'   to the layers parent. \cr \code{\link{l_layer_expunge}} \tab Delete layer
+#'   and all its children layer.\cr \code{\link{l_layer_getLabel}} \tab Get
+#'   layer label.\cr \code{\link{l_layer_relabel}} \tab Change layer label.\cr 
+#'   \code{\link{l_layer_bbox}} \tab Get the bounding box of a layer. }
 #'   
 #'   All layers have states that can be queried and modified using the same 
 #'   functions as the ones used for displays (i.e. \code{\link{l_cget}}, 
@@ -89,8 +88,9 @@
 #' @param ... additional arguments, often state definition for the basic 
 #'   layering function
 #'   
-#' @seealso \code{\link{l_info_states}}
-#'      
+#' @seealso \code{\link{l_info_states}}, \code{\link{l_scaleto_layer}},
+#'   \code{\link{l_scaleto_world}}
+#'   
 #' @template return_layerid
 #'   
 #' @export
@@ -199,15 +199,16 @@ l_layer_group <- function(widget, label="group", parent="root", index=0) {
 #' @inheritParams l_layer_group
 #' @param x x coordinates
 #' @param y y coordinates
-#' @param color fill color of polygon
-#' @param linecolor outline color of polygon
+#' @param color fill color
+#' @param linecolor outline color
 #' @param linewidth linewidth of outline
 #' @param ... additional state initialization arguments, see 
-#'   \code{\link{l_info_states}} for more info on the states of a polygon 
-#'   object.
+#'   \code{\link{l_info_states}}
 #'   
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
+#' 
+#' @template return_layerid
 #'   
 #' @template seealso_layers
 #'   
@@ -233,16 +234,17 @@ l_layer_polygon <- function(widget, x, y,
 #' @inheritParams l_layer_group
 #' @param x list with vectors with x coordinates
 #' @param y list with vectors with y coordinates
-#' @param color vector with polygon fill colors
-#' @param linecolor vector with polygon outline colors
-#' @param linewidth vector with line widths of polygons
+#' @param color vector with fill colors
+#' @param linecolor vector with outline colors
+#' @param linewidth vector with line widths
 #' @param ... additional state initialization arguments, see 
-#'   \code{\link{l_info_states}} for more info on the states of a polygon 
-#'   object.
+#'   \code{\link{l_info_states}}
 #'
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'   
+#' @template return_layerid
+#' 
 #' @template seealso_layers
 #' 
 #' @export
@@ -275,12 +277,65 @@ l_layer_polygons <- function(widget, x, y,
 }
 
 
+#' @templateVar type rectangle
+#' @template title_layer
+#' 
+#' @inheritParams l_layer_polygon
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
+#' 
+#' @export
+#' 
+#' @examples
+#' p <- l_plot()
+#' l <- l_layer_rectangle(p, x=c(2,3), y=c(1,10), color='steelblue')
+#' l_scaleto_layer(l)
+l_layer_rectangle <- function(widget, x, y,
+                              color="gray80", linecolor="black", linewidth=1,
+                              label="rectangle", parent="root", index=0, ...) {
+    l_throwErrorIfNotLoonWidget(widget)
+    
+    l_layer_add(widget, 'rectangle',
+                x=x, y=y, color=color,
+                linecolor=linecolor,
+                linewidth=linewidth,
+                label=label, parent=parent, index=index, ...)
+}
+
+
 #' @templateVar type rectangles
 #' @template title_layer
 #' 
-#' @inheritParams l_layer_group
+#' @inheritParams l_layer_polygons
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
 #' 
 #' @export
+#' 
+#' @examples 
+#' 
+#' p <- l_plot()
+#' 
+#' l <- l_layer_rectangles(
+#'      p,
+#'      x = list(c(0,1), c(1,2), c(2,3), c(5,6)),
+#'      y = list(c(0,1), c(1,2), c(0,1), c(3,4)),
+#'      color = c('red', 'blue', 'green', 'orange'),
+#'      linecolor = "black"
+#' )
+#' l_scaleto_world(p)
+#' 
+#' l_info_states(l)
 l_layer_rectangles <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="rectangles", parent="root", index=0,...) {
@@ -294,12 +349,82 @@ l_layer_rectangles <- function(widget, x, y,
                 label=label, parent=parent, index=index, ...)
 }
 
+
+
+#' @templateVar type line
+#' @template title_layer
+#'   
+#' @inheritParams l_layer_polygon
+#' @param x the coordinates of line. Alternatively, a single plotting structure,
+#'   function or any \emph{R} object with a plot method can be provided as x and
+#'   y are passed on to \code{\link{xy.coords}}
+#' @param y the y coordinates of the line, optional if x is an appropriate 
+#'   structure.
+#' @param color color of line
+#' @param dash dash pattern of line, see 
+#'   \url{https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M26}
+#'   
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
+#'   
+#' @export
+#' 
+#' 
+#' @examples 
+#' 
+#' p <- l_plot()
+#' l <- l_layer_line(p, x=c(1,2,3,4), y=c(1,3,2,4), color='red', linewidth=2)
+#' l_scaleto_world(p)
+#' 
+#' # object
+#' p <- l_plot()
+#' l <- l_layer_line(p, x=nhtemp)
+#' l_scaleto_layer(l)
+#' 
+l_layer_line <- function(widget, x, y=NULL, color="black",
+                         linewidth=1, dash="",
+                         label="line", parent="root", index=0, ...) {
+    
+    l_throwErrorIfNotLoonWidget(widget)
+    
+    xy <- try(xy.coords(x, y))
+    
+    l_layer_add(widget, 'line',
+                x=xy$x, y=xy$y, color=color,
+                linewidth=linewidth, dash=dash,
+                label=label, parent=parent, index=index, ...)
+}
+
+
 #' @templateVar type lines
 #' @template title_layer
 #' 
-#' @inheritParams l_layer_group
+#' @inheritParams l_layer_polygons
+#' @param color color of lines
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
 #' 
 #' @export
+#' 
+#' @examples
+#' s <- Filter(function(df)nrow(df) > 1, split(UsAndThem, UsAndThem$Country))
+#' sUaT <- Map(function(country){country[order(country$Year),]} , s)
+#' xcoords <- Map(function(x)x$Year, sUaT)
+#' ycoords <- Map(function(x)x$LifeExpectancy, sUaT)
+#' region <- sapply(sUaT, function(x)as.character(x$Geographic.Region[1]))
+#' 
+#' p <- l_plot(showItemlabels=TRUE)
+#' l <- l_layer_lines(p, xcoords, ycoords, itemlabel=names(sUaT), color=region)
+#' l_scaleto_layer(l)
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,
                           label="lines", parent="root", index=0,...) {
@@ -315,31 +440,26 @@ l_layer_lines <- function(widget, x, y,
 
 
 
-#' @templateVar type rectangle
-#' @template title_layer
-#' 
-#' @inheritParams l_layer_group
-#' 
-#' @export
-l_layer_rectangle <- function(widget, x, y,
-                              color="gray80", linecolor="black", linewidth=1,
-                              label="rectangle", parent="root", index=0, ...) {
-    l_throwErrorIfNotLoonWidget(widget)
-    
-    l_layer_add(widget, 'rectangle',
-                x=x, y=y, color=color,
-                linecolor=linecolor,
-                linewidth=linewidth,
-                label=label, parent=parent, index=index, ...)
-}
 
 
 #' @templateVar type oval
 #' @template title_layer
 #' 
-#' @inheritParams l_layer_group
+#' @inheritParams l_layer_polygon
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
 #' 
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l <- l_layer_oval(p, c(1,5), c(2,12), color='steelblue')
+#' l_configure(p, panX=0, panY=0, deltaX=20, deltaY=20)
 l_layer_oval <- function(widget, x, y,
                          color="gray80", linecolor="black", linewidth=1,
                          label="oval", parent="root", index=0, ...) {
@@ -354,33 +474,24 @@ l_layer_oval <- function(widget, x, y,
 
 
 
-#' @templateVar type line
-#' @template title_layer
-#' 
-#' @inheritParams l_layer_group
-#' 
-#' @export
-l_layer_line <- function(widget, x, y=NULL, color="black",
-                         linewidth=1, dash="",
-                         label="line", parent="root", index=0, ...) {
-    
-    l_throwErrorIfNotLoonWidget(widget)
-
-    xy <- try(xy.coords(x, y))
-
-    l_layer_add(widget, 'line',
-                x=xy$x, y=xy$y, color=color,
-                linewidth=linewidth, dash=dash,
-                label=label, parent=parent, index=index, ...)
-}
-
 
 #' @templateVar type points
 #' @template title_layer
 #' 
-#' @inheritParams l_layer_group
+#' @description Scatter points layer
 #' 
+#' @inheritParams l_layer_line
+#' @param color color of points
+#' @param size size point, as for scatterplot model layer
+#' 
+#' @templateVar page learn_R_layer 
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
+#' 
+#' @template seealso_layers
 #' @export
+#' 
 l_layer_points <- function(widget, x, y=NULL, color="gray60", size=6,
                            label="points", parent="root", index=0, ...) {
     
@@ -396,10 +507,31 @@ l_layer_points <- function(widget, x, y=NULL, color="gray60", size=6,
 
 #' @templateVar type text
 #' @template title_layer
-#' 
-#' @inheritParams l_layer_group
+#'   
+#' @description layer a single character string
+#'   
+#' @inheritParams l_layer_polygon
+#' @param x coordinate
+#' @param y coordinate
+#' @param text character string
+#' @param color color of text
+#' @param size size of the font
+#' @param angle roation of text
+#'   
+#' @details As a side effect of \code{Tcl}'s text-based design, it is best to
+#'   use \code{l_layer_text} if one would like to layer a single character
+#'   strint (and not \code{\link{l_layer_texts}} with \code{n=1}).
+#'   
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
 #' 
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l <- l_layer_text(p, 0, 0, "Hello World")
 l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="text", parent="root", index=0, ...) {
     
@@ -413,20 +545,36 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #' @templateVar type texts
 #' @template title_layer
 #' 
-#' @inheritParams l_layer_group
+#' @inheritParams l_layer_line
+#' @param size font size
+#' @param angle text rotation
+#' @param text vector with text strings
+#' 
+#' 
+#' @templateVar page learn_R_layer 
+#' @template see_l_help_page
+#'   
+#' @template return_layerid
 #' 
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l <- l_layer_texts(p, x=1:3, y=3:1, text=c("This is", "a", "test"), size=20)
+#' l_scaleto_world(p)
+#' 
 l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="texts", parent="root", index=0, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
+    
+    xy <- try(xy.coords(x, y))
+    
     l_layer_add(widget, 'texts',
-                x=x, y=y, text=text, color=color,
+                x=xy$x, y=xy$y, text=text, color=color,
                 size=size, angle=angle,
                 label=label, parent=parent, index=index, ...)
 }
-
-
 
 
 #' @title Delete a layer

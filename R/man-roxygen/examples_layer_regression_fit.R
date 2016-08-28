@@ -37,5 +37,5 @@
 #'     parent = gLayer, index='end'
 #' )
 #' 
-#' l_info_states(p)
+#' l_info_states(piLayer)
 

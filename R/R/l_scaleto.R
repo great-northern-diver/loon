@@ -1,5 +1,4 @@
 
-#' @export
 l_scaleto <- function(widget, ...) {
     l_throwErrorIfNotLoonWidget(widget)
     tcl(widget, 'scaleto', ...)
@@ -27,7 +26,11 @@ l_scaleto_active <- function(widget) {
 }
 
 #' @export
-l_scaleto_layer <- function(widget, layer) {
-    l_scaleto(widget, "layer", layer)
+l_scaleto_layer <- function(target, layer) {
+    if (is(target, "l_layer")) {
+        layer <- target
+        target <- attr(layer, "widget")
+    }
+    l_scaleto(target, "layer", layer)
 }
 
