@@ -682,11 +682,11 @@ l_layer_expunge <- function(widget, layer) {
 #' 
 #' @template return_layer_cmd
 #' 
-#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_printTree}}
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_printTree}},
+#'   \code{\link{l_layer_index}}
 #' @export
 #' 
 #' @examples 
-#' 
 #' p <- l_plot()
 #' 
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
@@ -714,11 +714,11 @@ l_layer_move <- function(widget, layer, parent, index="0") {
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #'
-#' @details Note that layer visibility is not a state of the layer itself,
-#'   instead is information that is part of the layer collection (i.e. its
-#'   parent widget).
+#' @template descr_layer_visibility
 #' 
-#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+#'   \code{\link{l_layer_isVisible}}, \code{\link{l_layer_layerVisibility}},
+#'   \code{\link{l_layer_groupVisibility}}
 #' 
 #' @export
 #' 
@@ -739,11 +739,11 @@ l_layer_hide <- function(widget, layer) {
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
-#' @details Note that layer visibility is not a state of the layer itself,
-#'   instead is information that is part of the layer collection (i.e. its
-#'   parent widget).
+#' @template descr_layer_visibility
 #' 
-#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_hide}}
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_hide}}, 
+#'   \code{\link{l_layer_isVisible}}, \code{\link{l_layer_layerVisibility}},
+#'   \code{\link{l_layer_groupVisibility}}
 #' @export
 #' 
 #' @examples 
@@ -759,16 +759,12 @@ l_layer_show <- function(widget, layer) {
 
 #' @title Change layer label
 #' 
-#' @description Layer labels are useful to identify layer in the layer 
-#'   inspector. The layer label can be initially set at layer creation with the
-#'   label argument.
+#' @template descr_layer_labels
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
-#' @details Note that the layer label is not a state of the layer itself,
-#'   instead is information that is part of the layer collection (i.e. its
-#'   parent widget).
+#' @template details_layer_label
 #' 
 #' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getLabel}}
 #' @export
@@ -906,10 +902,24 @@ layer_get <- function(widget, layer, what, convert=as.character){
 
 #' @title Get the bounding box of a layer.
 #' 
+#' @description The bounding box of a layer returns the coordinates of the
+#'   smallest rectangle that encloses all the elements of the layer.
 #' 
 #' @inheritParams l_layer_delete
 #' 
+#' @return Numeric vector of length 4 with (xmin, ymin, xmax, ymax) of the
+#'   bounding box
+#' 
 #' @export
+#' 
+#' @examples 
+#' p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
+#' l_layer_bbox(p, layer='model')
+#' 
+#' l <- l_layer_rectangle(p, x=0:1, y=30:31)
+#' l_layer_bbox(p, l)
+#' 
+#' l_layer_bbox(p, 'root')
 l_layer_bbox <- function(widget, layer="root") {
     layer_get(widget, layer, 'bbox', as.numeric)
 }
@@ -917,32 +927,70 @@ l_layer_bbox <- function(widget, layer="root") {
 
 #' @title Get layer label.
 #' 
+#' @template descr_layer_labels
 #' 
 #' @inheritParams l_layer_delete
 #' 
+#' @template details_layer_label
+#' 
+#' @return Named vector of length 1 with layer label as value and layer id as
+#'   name.
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_relabel}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1, label="a rectangle")
+#' l_layer_getLabel(p, 'model')
+#' l_layer_getLabel(p, l1)
 l_layer_getLabel <- function(widget, layer) {
     sapply(layer, FUN=function(l){
         paste(layer_get(widget, layer, 'getLabel'), collapse=' ')
     })
 }
 
+
+
 #' @title Get children of a group layer
 #' 
+#' @description Returns the ids of a group layer's children.
 #' 
 #' @inheritParams l_layer_delete
 #' 
+#' @return Character vector with ids of the childrens. To create layer handles
+#'   (i.e. objects of class \code{'l_layer'}) use the
+#'   \code{\link{l_create_handle}} function.
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getParent}}
 #' @export
+#' 
+#' @examples
+#' p <- l_plot()
+#' 
+#' g <- l_layer_group(p)
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g)
+#' l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle', parent=g)
+#' 
+#' l_layer_getChildren(p, g)
 l_layer_getChildren <- function(widget, layer='root') {
     layer_get(widget, layer, 'getChildren')
 }
 
+
 #' @title Get parent layer id of a layer
+#' 
+#' @description The toplevel parent is the \code{'root'} layer.
 #' 
 #' @inheritParams l_layer_delete
 #' 
-#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}
 #' @export
+#' 
+#' @examples 
+#' p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
+#' 
+#' l_layer_getParent(p, 'model')
 l_layer_getParent <- function(widget, layer) {
     layer_get(widget, layer, 'getParent')
 }
@@ -950,32 +998,96 @@ l_layer_getParent <- function(widget, layer) {
 
 #' @title Print the layer tree
 #' 
-#' @inheritParams l_layer_delete
+#' @description Prints the layer tree (i.e. the layer ids) to the prompt. Group 
+#'   layers are prefixed with a \code{'+'}. The \code{'root'} layer is not
+#'   listed.
 #' 
+#' @template param_widget
+#' 
+#' @return empty string
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}, \code{\link{l_layer_getParent}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l_layer_rectangle(p, x=0:1, y=0:1)
+#' g <- l_layer_group(p)
+#' l_layer_oval(p, x=0:1, y=0:1, parent=g)
+#' l_layer_line(p, x=0:1, y=0:1, parent=g)
+#' l_layer_printTree(p)
 l_layer_printTree <- function(widget) {
-
     l_throwErrorIfNotLoonWidget(widget)
     tcl(widget, 'layer', 'printTree')
     invisible("")
 }
 
 #' @title Return visibility flag of layer
+#'
+#' @description Hidden or invisible layers are not rendered. This function
+#'   queries whether a layer is visible/rendered or not.
 #' 
+#' @inheritParams l_layer_delete
+#'
+#' @return \code{TRUE} or \code{FALSE} depending whether the layer is visible or
+#'   not.
+#' 
+#' @template descr_layer_visibility
+#'   
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+#'   \code{\link{l_layer_hide}}, \code{\link{l_layer_layerVisibility}},
+#'   \code{\link{l_layer_groupVisibility}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1)
+#' l_layer_isVisible(p, l)
+#' l_layer_hide(p, l)
+#' l_layer_isVisible(p, l)
 l_layer_isVisible <- function(widget, layer) {
-    layer_get(widget, layer, 'isVisible', as.logical)
+    layer_get(widget, layer, 'isVisible', function(x)as.logical(as.character(x)))
 }
 
 #' @title Get layer type
 #' 
+#' @description To see the manual page of \code{\link{l_layer}} for all the
+#'   primitive layer types.
+#' 
+#' @inheritParams l_layer_delete
+#' 
+#' @templateVar page learn_R_layer
+#' @template see_l_help_page
+#' 
+#' @return One of: \code{'group'}, \code{'polygon'}, \code{'text'},
+#'   \code{'line'}, \code{'rectangle'}, \code{'oval'}, \code{'points'},
+#'   \code{'texts'}, \code{'polygons'}, \code{'rectangles'}, \code{'lines'} and 
+#'   \code{'scatterplot'}, \code{'histogram'}, \code{'serialaxes'} and
+#'   \code{'graph'}.
+#'
+#' @seealso \code{\link{l_layer}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1)
+#' l_layer_getType(p, l)
+#' l_layer_getType(p, 'model')
 l_layer_getType <- function(widget, layer) {
     layer_get(widget, layer, 'getType')
 }
 
 #' @title Get the order index of a layer among its siblings
 #' 
+#' @description The index determines the rendering order of the children layers
+#'   of a parent. The layer with index=0 is rendered first.
+#' 
+#' @inheritParams l_layer_delete
+#' 
+#' @details Note that the index for layers is 0 based.
+#' 
+#' @return numeric value
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_move}}
 #' @export
 l_layer_index <- function(widget, layer) {
     layer_get(widget, layer, 'index', as.numeric)
@@ -983,15 +1095,61 @@ l_layer_index <- function(widget, layer) {
 
 #' @title Returns logical value for whether layer is actually seen
 #' 
+#' @description Although the visibility flag for a layer might be set to
+#'   \code{TRUE} it won't be rendered as on of its ancestor group layer is set
+#'   to be invisible. The \code{l_layer_visibility} returns \code{TRUE} if the
+#'   layer and all its ancestor layers have their visibility flag set to true
+#'   and the layer is actually rendered.
+#' 
+#' @inheritParams l_layer_delete
+#' 
+#' @template descr_layer_visibility
+#' 
+#' @return \code{TRUE} if the layer and all its ancestor layers have their 
+#'   visibility flag set to true and the layer is actually rendered, otherwise
+#'   \code{FALSE}.
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+#'   \code{\link{l_layer_hide}}, \code{\link{l_layer_isVisible}},
+#'   \code{\link{l_layer_groupVisibility}}
+#' 
 #' @export
 l_layer_layerVisibility <- function(widget, layer) {
     layer_get(widget, layer, 'layerVisibility', as.numeric)
 }
 
-#' @title Returns all, part or none for expressing which part of the layers
-#'   children are visible.
-#'   
+#' @title Queries visibility status of decendants
+#' 
+#' @description Query whether all, part or none of the group layers descendants
+#'   are visible.
+#' 
+#' @inheritParams l_layer_delete
+#' 
+#' @return \code{'all'}, \code{'part'} or \code{'none'} depending on the
+#'   visibility status of the descendants.
+#' 
+#' @template descr_layer_visibility
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+#'   \code{\link{l_layer_hide}}, \code{\link{l_layer_isVisible}},
+#'   \code{\link{l_layer_layerVisibility}}
 #' @export
+#' 
+#' @examples
+#' 
+#' p <- l_plot()
+#' 
+#' g <- l_layer_group(p)
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g)
+#' l2 <- l_layer_oval(p, x=0:1, y=0:1, parent=g)
+#' 
+#' l_layer_groupVisibility(p, g)
+#' l_layer_hide(p, l2)
+#' l_layer_groupVisibility(p, g)
+#' l_layer_hide(p, l1)
+#' l_layer_groupVisibility(p, g)
+#' l_layer_hide(p, g)
+#' l_layer_groupVisibility(p, g)
 l_layer_groupVisibility <- function(widget, layer) {
     layer_get(widget, layer, 'groupVisibility')
 }
