@@ -232,12 +232,16 @@
 	    dict set tree $layer visible FALSE
 	    my NotifyLayerBindings $layer hide
 	}
+
+	return 0
     }
     method Show {layer} {
 	if {![my IsVisible $layer]} {
 	    dict set tree $layer visible TRUE
 	    my NotifyLayerBindings $layer show
-	}	
+	}
+
+	return 0
     }
 
     method IsVisible {layer} {
@@ -463,7 +467,7 @@
 	    my NotifyLayerBindings $layer move
 	}
 	
-	return
+	return 0
     }
     
     method ProcessLayerIndex {index parent} {
@@ -528,7 +532,7 @@
 	
 	set grandparent [my GetParent $parent]
 	my MoveLayer $layer $grandparent $index
-	return
+	return 0
     }
 
     method DemoteLayer {layer {index 0}} {
@@ -542,7 +546,7 @@
 	}
 	
 	my MoveLayer $layer $next $index
-	return
+	return 0
     }
     
     method RaiseLayer {layer} {
@@ -561,7 +565,7 @@
 	    incr index -1
 	    my MoveLayer $layer $parent $index
 	}	
-	return 
+	return 0
     }
 
     method LowerLayer {layer} {
@@ -580,7 +584,7 @@
 	    incr index
 	    my MoveLayer $layer $parent $index
 	}
-	return
+	return 0
     }
 
     method DeleteLayer {layer} {
@@ -610,7 +614,7 @@
 	
 	my NotifyLayerBindings $layer delete
 
-	return
+	return 0
     }
     
     method ExpungeLayer {layer} {
@@ -625,7 +629,7 @@
 	    my DeleteLayer $l
 	}
 	
-	return
+	return 0
     }
 
     method BboxLayer {layer} {
@@ -735,6 +739,8 @@
 	}
 	
 	my ApplyScaltoChanges $what $bbox
+
+	return 0
     }
 
     method ApplyScaltoChanges {what bbox {xyRangeFactor 1.2}} {
@@ -762,6 +768,8 @@
 	set tpanY [expr {[lindex $bbox 1] - $dxyRangeFactor*$seeYdir}]
 	
 	my configure -zoomX $tzoomX -zoomY $tzoomY -panX $tpanX -panY $tpanY
+
+	return 0
     }
 
 
