@@ -706,13 +706,17 @@ l_layer_move <- function(widget, layer, parent, index="0") {
     layer_cmd(widget, layer, 'move', parent, index)
 }
 
-#' @title Set the layers visibility flag to \code{FALSE}
+#' @title Hide a Layer
 #' 
-#' @description An invisible layer is not rendered. If a group layer is set to
-#'   be invisible then all its descendants are not rendered either.
+#' @description A hidden layer is not rendered. If a group layer is set to
+#'   be hidden then all its descendants are not rendered either.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
+#'
+#' @details Note that layer visibility is not a state of the layer itself,
+#'   instead is information that is part of the layer collection (i.e. its
+#'   parent widget).
 #' 
 #' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}
 #' 
@@ -727,75 +731,162 @@ l_layer_hide <- function(widget, layer) {
     layer_cmd(widget, layer, 'hide')
 }
 
-#' @title Show or un-hide a layer
+#' @title Show or unhide a Layer
 #' 
+#' @description Hidden or invisible layers are not rendered. This function 
+#'   unhides invisible layer so that they are rendered again. 
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
+#' @details Note that layer visibility is not a state of the layer itself,
+#'   instead is information that is part of the layer collection (i.e. its
+#'   parent widget).
 #' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_hide}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' 
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
+#' l_layer_hide(p, l)
+#' 
+#' l_layer_show(p, l)
 l_layer_show <- function(widget, layer) {
     layer_cmd(widget, layer, 'show')
 }
 
 #' @title Change layer label
 #' 
+#' @description Layer labels are useful to identify layer in the layer 
+#'   inspector. The layer label can be initially set at layer creation with the
+#'   label argument.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
+#' @details Note that the layer label is not a state of the layer itself,
+#'   instead is information that is part of the layer collection (i.e. its
+#'   parent widget).
 #' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getLabel}}
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' 
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1, label="A rectangle")
+#' l_layer_getLabel(p, l)
+#' 
+#' l_layer_relabel(p, l, label="A relabelled rectangle")
+#' l_layer_getLabel(p, l)
 l_layer_relabel <- function(widget, layer, label) {
     layer_cmd(widget, layer, 'relabel', label)
 }
 
 #' @title Switch the layer place with its sibling to the left
 #' 
+#' @description Change the layers position within its parent layer group by 
+#'   decreasing the \code{index} of the layer by one if possible. This means 
+#'   that the raised layer will be rendered after (or on top) of its sibling
+#'   layer to the left.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
-#' 
-#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_lower}}, \code{\link{l_layer_move}} 
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' 
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1)
+#' l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle')
+#' 
+#' l_aspect(p) <- 1
+#' 
+#' l_layer_raise(p, l1)
 l_layer_raise <- function(widget, layer) {
     layer_cmd(widget, layer, 'raise') 
 }
 
 #' @title Switch the layer place with its sibling to the right
 #'
+#' @description Change the layers position within its parent layer group by 
+#'   increasing the \code{index} of the layer by one if possible. This means 
+#'   that the raised layer will be rendered before (or on below) of its sibling
+#'   layer to the right.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
-#'
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_raise}}, \code{\link{l_layer_move}} 
+#' 
 #' @export
+#' @examples 
+#' p <- l_plot()
+#' 
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1)
+#' l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle')
+#' 
+#' l_aspect(p) <- 1
+#' 
+#' l_layer_lower(p, l2)
 l_layer_lower <- function(widget, layer) {
     layer_cmd(widget, layer, 'lower') 
 }
 
-#' @title Moves the layer to be a child of its right group layer sibling
+
+
+#' @title Moves the layer up to be a left sibling of its parent
 #' 
+#' @description Moves the layer down the layer tree (towards the root layer) if
+#'   the parent layer is not the root layer.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
-#' 
-#' 
+#'  
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' 
+#' g1 <- l_layer_group(p)
+#' g2 <- l_layer_group(p, parent=g1)
+#' l1 <- l_layer_oval(p, x=0:1, y=0:1, parent=g2)
+#' 
+#' l_layer_printTree(p)
+#' l_layer_promote(p, l1)
+#' l_layer_printTree(p)
+#' l_layer_promote(p, l1)
+#' l_layer_printTree(p)
 l_layer_promote <- function(widget, layer) {
     layer_cmd(widget, layer, 'promote')
 }
 
-#' @title Moves the layer up to be a left sibling of its parent
+#' @title Moves the layer to be a child of its right group layer sibling
 #' 
+#' @description Moves the layer up the layer tree (away from the root layer) if
+#'   there is a sibling group layer to the right of the layer.
 #' 
 #' @inheritParams l_layer_delete
 #' @template return_layer_cmd
 #' 
 #' 
 #' @export
+#' @examples 
+#' p <- l_plot()
+#' 
+#' g1 <- l_layer_group(p)
+#' g2 <- l_layer_group(p, parent=g1)
+#' l1 <- l_layer_oval(p, x=0:1, y=0:1)
+#'
+#' l_layer_printTree(p) 
+#' l_layer_demote(p, l1)
+#' l_layer_printTree(p)
+#' l_layer_demote(p, l1)
+#' l_layer_printTree(p)
 l_layer_demote <- function(widget, layer) {
     layer_cmd(widget, layer, 'demote')
 }
