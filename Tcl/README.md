@@ -2,10 +2,11 @@
 Installation
 ============
 
-In order to use the `loon` package the `Tcl` interpreter needs to find
-`loons`'s `pkgIndex.tcl` file. `Tcl` searches for packages in all the
-paths listed in the `auto_path` `Tcl` variable. If you start `tclsh`,
-`wish` or `tkcon` you can look at the `auto_path` variable with
+`Loon` requires `Tcl` and `Tk` version `8.6`. In order to use the
+`loon` package the `Tcl` interpreter needs to find `loons`'s
+`pkgIndex.tcl` file. `Tcl` searches for packages in all the paths
+listed in the `auto_path` `Tcl` variable. If you start `tclsh`, `wish`
+or `tkcon` you can look at the `auto_path` variable with
 
 ~~~
 puts $auto_path
