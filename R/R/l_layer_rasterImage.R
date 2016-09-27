@@ -1,10 +1,23 @@
 
 #' Layer a Raster Image
 #' 
+#' @description This function is very similar to the 
+#'   \code{\link[graphics]{rasterImage}} function. It works with every loon plot
+#'   which is based on the cartesian coordinate system.
+#'
+#' 
+#' @inheritParams l_layer_heatImage
+#' @inheritParams graphics::rasterImage
+#' 
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
+#' 
+#' @return layer id of group or rectangles layer
+#' 
 #' @export
 #' 
 #' @examples 
-#'
 #' plot(1,1, xlim = c(0,1), ylim=c(0,1))
 #' mat <- matrix(c(0,0,0,0, 1,1), ncol=2)
 #' rasterImage(mat, 0,0,1,1, interpolate = FALSE)

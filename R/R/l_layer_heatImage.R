@@ -1,9 +1,27 @@
-#' Display a Heat Image
+#' @title Display a Heat Image
+#' 
+#' @description This function is very similar to the 
+#'   \code{\link[graphics]{image}} function. It works with every loon plot which
+#'   is based on the cartesian coordinate system.
+#'
+#' @inheritParams graphics::image
+#' @template param_widget
+#' @param asSingleLayer if \code{TRUE} a lines layer is used for the line,
+#'   otherwise if \code{FALSE} a group with nested line layers for each line is
+#'   created
+#' @template param_parent
+#' @template param_index
+#' @param ... argumnets forwarded to \code{\link{l_layer_line}}
+#' 
+#' @return layer id of group or rectangles layer
+#' 
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
 #' 
 #' @export
 #' 
 #' @examples 
-#' 
 #' library(MASS)
 #' kest <- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
 #' image(kest)
