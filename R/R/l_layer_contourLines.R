@@ -1,4 +1,24 @@
-#' Layer Contour Lines
+#' @title Layer Contour Lines
+#' 
+#' @description This function is a wrapper around 
+#'   \code{\link[grDevices]{contourLines}} that adds the countourlines to a loon
+#'   plot which is based on the cartesian coordinate system.
+#'
+#' @inheritParams grDevices::contourLines
+#' @template param_widget
+#' @param asSingleLayer if \code{TRUE} a lines layer is used for the line,
+#'   otherwise if \code{FALSE} a group with nested line layers for each line is
+#'   created
+#' @template param_parent
+#' @template param_index
+#' @param ... argumnets forwarded to \code{\link{l_layer_line}}
+#' 
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
+#' 
+#' @return layer id of group or lines layer
+#' 
 #' @export
 #' 
 #' @examples 

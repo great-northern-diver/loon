@@ -1,6 +1,17 @@
-
-#' Create an plot with a map layered
+#' @title Create an plot with a map layered
+#' 
+#' @description Creates a scatterplot widget and layers the map in front.
+#' 
+#' @param x object of class map (defined in the maps library)
+#' @param ... arguments forwarded to \code{\link{l_layer.map}}
+#' 
+#' @return Scatterplot widget plot handle
+#' 
 #' @export l_plot.map
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_maps}},
+#'   \code{\link[maps]{map}}
+#' 
 #' @examples 
 #' p <- l_plot(map('world', fill=TRUE, plot=FALSE))
 l_plot.map <-  function(x, ...) {
@@ -13,15 +24,26 @@ l_plot.map <-  function(x, ...) {
 
 #' @title Add a Map of class map as Drawings to Loon plot
 #'   
-#'   
 #' @description The maps library provides some map data in polygon which can be 
-#'   added as drawings to Loon plots. This function adds map objects with class
-#'   map from the maps library as background drawings.
+#'   added as drawings (currently with polygons) to Loon plots. This function
+#'   adds map objects with class map from the maps library as background
+#'   drawings.
+#' 
+#' @template param_widget
+#' @param map object of class \code{\link[maps]{map}} as defined in the maps library
+#' @inheritParams l_layer_polygon
+#' @template param_parent
+#' @template param_index
+#' @param asSingleLayer if \code{TRUE} then all the polygons get placed in a
+#'   n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each
+#'   polygon gets its own layer.
 #'   
+#' @return If \code{asSingleLayer=TRUE} then returns layer id of polygons layer,
+#'   otherwise group layer that contains polygon children layers.
+#' 
 #' @export l_layer.map
 #'   
 #' @examples 
-#' 
 #' canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
 #' p <- l_plot()
 #' l_map <- l_layer(p, canada, asSingleLayer=TRUE)

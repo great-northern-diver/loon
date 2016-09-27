@@ -219,7 +219,7 @@ l_layer_group <- function(widget, label="group", parent="root", index=0) {
 #' @inheritParams l_layer_group
 #' @param x x coordinates
 #' @param y y coordinates
-#' @param color fill color
+#' @template param_color
 #' @param linecolor outline color
 #' @param linewidth linewidth of outline
 #' @param ... additional state initialization arguments, see 
@@ -254,7 +254,8 @@ l_layer_polygon <- function(widget, x, y,
 #' @inheritParams l_layer_group
 #' @param x list with vectors with x coordinates
 #' @param y list with vectors with y coordinates
-#' @param color vector with fill colors
+#' @param color vector with fill colors, if empty string \code{""}, then the
+#'   fill is transparant
 #' @param linecolor vector with outline colors
 #' @param linewidth vector with line widths
 #' @param ... additional state initialization arguments, see 
@@ -677,8 +678,7 @@ l_layer_expunge <- function(widget, layer) {
 #' @inheritParams l_layer_delete
 #' @param parent if parent layer is not specified it is set to the current
 #'   parent layer of the layer
-#' @param index position among its siblings. valid values are 0, 1, 2, ...,
-#'   'end'
+#' @template param_index
 #' 
 #' @template return_layer_cmd
 #' 
