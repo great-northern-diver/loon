@@ -95,9 +95,29 @@
 #'   
 #' @export
 #' 
-#' @template examples_layer
+#' @examples 
+#' # l_layer is a generic method
+#' newFoo <- function(x, y, ...) {
+#'   r <- list(x=x, y=y, ...)
+#'   class(r) <- 'foo'
+#'   return(r)
+#' }
+#' 
+#' l_layer.foo <- function(widget, x) {
+#'     x$widget <- widget
+#'     id <- do.call('l_layer_polygon', x)
+#'     return(id)
+#' }
+#' 
+#' p <- l_plot()
+#' 
+#' obj <- newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color='yellow')
+#' 
+#' id <- l_layer(p, obj)
+#' 
+#' l_scaleto_world(p)
 l_layer <- function(widget, x, ...) {
-    UseMethod("l_layer", x, ...)
+    UseMethod("l_layer", x)
 }
 
 
@@ -142,7 +162,7 @@ l_layer_add <- function(widget, type, ...) {
 #' 
 #' @details 
 #' 
-#' @templateVar page learn_R_layer.html
+#' @templateVar page learn_R_layer
 #' @templateVar section add-move-delete-layers
 #' @template see_l_help
 #' 
@@ -520,13 +540,14 @@ l_layer_points <- function(widget, x, y=NULL, color="gray60", size=6,
 #'   
 #' @details As a side effect of \code{Tcl}'s text-based design, it is best to
 #'   use \code{l_layer_text} if one would like to layer a single character
-#'   strint (and not \code{\link{l_layer_texts}} with \code{n=1}).
+#'   string (and not \code{\link{l_layer_texts}} with \code{n=1}).
 #'   
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'   
 #' @template return_layerid
 #' 
+#' @template seealso_layers
 #' @export
 #' 
 #' @examples 
@@ -556,13 +577,13 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #'   
 #' @template return_layerid
 #' 
+#' @template seealso_layers
 #' @export
 #' 
 #' @examples 
 #' p <- l_plot()
 #' l <- l_layer_texts(p, x=1:3, y=3:1, text=c("This is", "a", "test"), size=20)
 #' l_scaleto_world(p)
-#' 
 l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="texts", parent="root", index=0, ...) {
 
@@ -577,169 +598,303 @@ l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 }
 
 
+
+layer_cmd <- function(widget, layer, cmd, ...) {
+    
+    if (is(widget, "l_layer")) {
+        layer <- as.vector(widget)
+        widget <- attr(widget, "widget")
+    } 
+    
+    l_throwErrorIfNotLoonWidget(widget)
+
+    invisible(as.numeric(
+        tcl(widget, 'layer', cmd, layer, ...)
+    ))
+}
+
+
+
 #' @title Delete a layer
 #' 
+#' @description All but the \code{'model'} and the \code{'root'} layer can be 
+#'   dynamically deleted. If a group layer gets deleted with
+#'   \code{l_layer_delete} then all its children layers get moved into their
+#'   grandparent group layer.
+#' 
+#' @param widget widget path or layer object of class \code{'l_layer'}
+#' @param layer layer id. If the widget argument is of class \code{'l_layer'}
+#'   then the layer argument is not used
+#' 
+#' @template return_layer_cmd
+#' 
+#' @template seealso_layers
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' l1 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='red')
+#' l_layer_delete(l1)
+#' 
+#' l2 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='yellow')
+#' l_layer_delete(p,l2)
 l_layer_delete <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'delete', layer)
+    layer_cmd(widget, layer, 'delete')
 }
 
 #' @title Delete a layer and all its descendants
-#'  
+#' 
+#' @description Delete a group layer and all it's descendants. Note that the
+#'   \code{'model'} layer cannot be deleted.
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_delete}}
 #' @export
+#' 
+#' @examples 
+#' 
+#' p <- l_plot()
+#' g <- l_layer_group(p)
+#' l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g, color="", linecolor="orange", linewidth=2)
+#' l2 <- l_layer_line(p, x=c(0,.5,1), y=c(0,1,0), parent=g, color="blue")
+#' 
+#' l_layer_expunge(p, g)
+#' 
+#' # or l_layer_expunge(g)
 l_layer_expunge <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'expunge', layer)
+    layer_cmd(widget, layer, 'expunge')
 }
 
 #' @title Move a layer
-#'
-#' @inheritParams l_layer_group
 #' 
+#' @description The postition of a layer in the layer tree determines the 
+#'   rendering order. That is, the non-group layers are rendered in order of a 
+#'   Depth-first traversal of the layer tree. The toplevel group layer is called
+#'   \code{'root'}.
+#' 
+#' @inheritParams l_layer_delete
+#' @param parent if parent layer is not specified it is set to the current
+#'   parent layer of the layer
+#' @param index position among its siblings. valid values are 0, 1, 2, ...,
+#'   'end'
+#' 
+#' @template return_layer_cmd
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_printTree}}
 #' @export
-l_layer_move <- function(widget, layer, parent="root", index="0") {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'move', layer, parent, index)
-    invisible()
+#' 
+#' @examples 
+#' 
+#' p <- l_plot()
+#' 
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
+#' g <- l_layer_group(p)
+#' l_layer_printTree(p)
+#' 
+#' l_layer_move(l, parent=g)
+#' l_layer_printTree(p)
+#' 
+#' l_layer_move(p, 'model', parent=g)
+#' l_layer_printTree(p)
+l_layer_move <- function(widget, layer, parent, index="0") {
+    
+    if(missing(parent))
+        parent <- l_layer_getParent(widget, layer)
+    
+    layer_cmd(widget, layer, 'move', parent, index)
 }
 
-#' @title Set the layers visibility flag to \code{TRUE}
+#' @title Set the layers visibility flag to \code{FALSE}
+#' 
+#' @description An invisible layer is not rendered. If a group layer is set to
+#'   be invisible then all its descendants are not rendered either.
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer_show}}
 #' 
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot()
+#' 
+#' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
+#' l_layer_hide(p, l)
 l_layer_hide <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'hide', layer)
-    invisible()
+    layer_cmd(widget, layer, 'hide')
 }
 
 #' @title Show or un-hide a layer
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' 
 #' @export
 l_layer_show <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'show', layer)
-    invisible()
+    layer_cmd(widget, layer, 'show')
 }
 
 #' @title Change layer label
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' 
 #' @export
 l_layer_relabel <- function(widget, layer, label) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'relabel', layer, label)
-    invisible()
+    layer_cmd(widget, layer, 'relabel', label)
 }
 
 #' @title Switch the layer place with its sibling to the left
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' 
+#' 
 #' @export
 l_layer_raise <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'raise', layer)
-    invisible()
+    layer_cmd(widget, layer, 'raise') 
 }
 
 #' @title Switch the layer place with its sibling to the right
+#'
 #' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#'
 #' @export
 l_layer_lower <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'lower', layer)
-    invisible()
+    layer_cmd(widget, layer, 'lower') 
 }
 
 #' @title Moves the layer to be a child of its right group layer sibling
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' 
 #' @export
 l_layer_promote <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'promote', layer)
-    invisible()
+    layer_cmd(widget, layer, 'promote')
 }
 
 #' @title Moves the layer up to be a left sibling of its parent
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' @template return_layer_cmd
+#' 
+#' 
 #' @export
 l_layer_demote <- function(widget, layer) {
+    layer_cmd(widget, layer, 'demote')
+}
+
+
+layer_get <- function(widget, layer, what, convert=as.character){
+
+    if (is(widget, "l_layer")) {
+        layer <- as.vector(widget)
+        widget <- attr(widget, "widget")
+    }
+    
     l_throwErrorIfNotLoonWidget(widget)
-    tcl(widget, 'layer', 'demote', layer)
-    invisible()
+    
+    convert(tcl(widget, 'layer', what, layer))
 }
 
 #' @title Get the bounding box of a layer.
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' 
 #' @export
 l_layer_bbox <- function(widget, layer="root") {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.numeric(tcl(widget, 'layer', 'bbox', layer))
+    layer_get(widget, layer, 'bbox', as.numeric)
 }
 
 
 #' @title Get layer label.
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' 
 #' @export
 l_layer_getLabel <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    return(sapply(layer, FUN=function(l){paste(as.character(tcl(widget, 'layer', 'getLabel', l)), collapse=' ')}))
+    sapply(layer, FUN=function(l){
+        paste(layer_get(widget, layer, 'getLabel'), collapse=' ')
+    })
 }
 
 #' @title Get children of a group layer
 #' 
+#' 
+#' @inheritParams l_layer_delete
+#' 
 #' @export
-l_layer_getChildren <- function(widget, parent='root') {
-    l_throwErrorIfNotLoonWidget(widget)    
-    as.character(tcl(widget,'layer','getChildren', parent))
+l_layer_getChildren <- function(widget, layer='root') {
+    layer_get(widget, layer, 'getChildren')
 }
 
 #' @title Get parent layer id of a layer
 #' 
+#' @inheritParams l_layer_delete
+#' 
+#' 
 #' @export
 l_layer_getParent <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)    
-    as.character(tcl(widget,'layer','getParent', parent))
+    layer_get(widget, layer, 'getParent')
 }
 
 
 #' @title Print the layer tree
 #' 
+#' @inheritParams l_layer_delete
+#' 
 #' @export
 l_layer_printTree <- function(widget) {
+
     l_throwErrorIfNotLoonWidget(widget)
     tcl(widget, 'layer', 'printTree')
-    invisible()
+    invisible("")
 }
 
 #' @title Return visibility flag of layer
 #' 
 #' @export
 l_layer_isVisible <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.logical(as.character(tcl(widget, 'layer', 'isVisible', layer)))
+    layer_get(widget, layer, 'isVisible', as.logical)
 }
 
 #' @title Get layer type
 #' 
 #' @export
 l_layer_getType <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.character(tcl(widget, 'layer', 'getType', layer))
+    layer_get(widget, layer, 'getType')
 }
 
 #' @title Get the order index of a layer among its siblings
 #' 
 #' @export
 l_layer_index <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.numeric(tcl(widget, 'layer', 'index', layer))
+    layer_get(widget, layer, 'index', as.numeric)
 }
 
 #' @title Returns logical value for whether layer is actually seen
 #' 
 #' @export
 l_layer_layerVisibility <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.numeric(tcl(widget, 'layer', 'layerVisibility', layer))
+    layer_get(widget, layer, 'layerVisibility', as.numeric)
 }
 
 #' @title Returns all, part or none for expressing which part of the layers
@@ -747,9 +902,5 @@ l_layer_layerVisibility <- function(widget, layer) {
 #'   
 #' @export
 l_layer_groupVisibility <- function(widget, layer) {
-    l_throwErrorIfNotLoonWidget(widget)
-    as.character(tcl(widget, 'layer', 'groupVisibility', layer))
+    layer_get(widget, layer, 'groupVisibility')
 }
-
-
-
