@@ -537,7 +537,7 @@ l_layer_points <- function(widget, x, y=NULL, color="gray60", size=6,
 #' @param text character string
 #' @param color color of text
 #' @param size size of the font
-#' @param angle roation of text
+#' @param angle rotation of text
 #'   
 #' @details As a side effect of \code{Tcl}'s text-based design, it is best to
 #'   use \code{l_layer_text} if one would like to layer a single character

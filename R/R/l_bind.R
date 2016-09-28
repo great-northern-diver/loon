@@ -17,46 +17,107 @@ callbackFunctions$general <- list()
     paste(widget,id, sep="_")
 }
 
-#' @export
 l_bind <- function(widget, ...) {
     l_throwErrorIfNotLoonWidget(widget)
     as.character(tcl(widget, "bind", ...))
 }
 
-####
 
+
+#### Canvas Bindings
+
+#' @title Create a Canvas Binding
+#' 
+#' @description Canvas bindings are triggered by a mouse/keyboard gesture over
+#'   the plot as a whole.
+#' 
+#' @template param_widget
+#' @param event event patterns as defined for Tk canvas widget
+#'   \url{http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7}.
+#' @template param_callback
+#' 
+#' @template details_bind_canvas
+#' 
+#' 
+#' @return canvas binding id
+#' 
+#' @seealso \code{\link{l_bind_canvas_ids}}, \code{\link{l_bind_canvas_get}},
+#'   \code{\link{l_bind_canvas_delete}}, \code{\link{l_bind_canvas_reorder}}
+#'
 #' @export
+#' 
+#' @template examples_bind_canvas
 l_bind_canvas <- function(widget, event, callback) {    
     id <- l_bind(widget, "canvas", "add", event, callback)
     callbackFunctions$canvas[[.cbid(widget,id)]] <- callback
-    return(id)
+    id
 }
 
+
+#' @title List all Canvas Binding
+#' 
+#' @description List all user added canvas bindings
+#' 
+#' @inheritParams l_bind_canvas
+#' 
+#' @template details_bind_canvas
+#' 
+#' @return vector with canvas binding ids
+#' 
 #' @export
 l_bind_canvas_ids <- function(widget) {
     l_bind(widget, "canvas", "get")
 }
 
 
+#' @title Get the Tcl code of a binding
+#' 
+#' @description This function returns the callback Tcl code that the Tcl
+#'   interpreter evaluates when the event occures which the callback is bound
+#'   to.
+#' 
+#' @inheritParams l_bind_canvas
+#' @param id canvas binding id
+#' 
+#' @return charter string with Tcl code
+#' 
 #' @export
 l_bind_canvas_get <- function(widget, id) {
     l_bind(widget, "canvas", "get", id)
 }
 
 
+#' @title Delete a Canvas Binding
+#' 
+#' @description Remove a Canvas Binding
+#' 
+#' @inheritParams l_bind_canvas_get
+#' 
+#' @return 0 if success, otherwise the function throws an error
+#' 
+#' 
 #' @export
 l_bind_canvas_delete <- function(widget, id) {
     l_bind(widget, "canvas", "delete", id)
     callbackFunctions$canvas[[.cbid(widget,id)]] <- NULL
+    0
 }
 
+#' @title Reorder the Canvas Binding Evaluation Sequence
+#' 
+#' @description The order bindings defines how the get evaluated once an event
+#'   matches the event patterns.
+#' 
+#' @return vector
+#' 
+#'  
 #' @export
 l_bind_canvas_reorder <- function(widget, ids) {
     warning('canvas binding order has currently no effect.')    
     l_bind(widget, "canvas", "reorder", ids)
 }
 
-####
+#### Layer Bindings
 
 #' @export
 l_bind_layer <- function(widget, event, callback) {
@@ -135,7 +196,7 @@ l_bind_state_reorder <- function(target, ids) {
 
 }
 
-####
+#### Item Bindings
 
 #' @export
 l_bind_item <- function(widget, tags, event, callback) {
@@ -166,7 +227,7 @@ l_bind_item_reorder <- function(widget, ids) {
     l_bind(widget, "item", "reorder", ids)
 }
 
-####
+#### Glyph Bindings
 
 #' @export
 l_bind_glyph <- function(widget, event, callback) {
@@ -198,7 +259,7 @@ l_bind_glyph_reorder <- function(widget, ids) {
     l_bind(widget, "glyph", "reorder", ids)
 }
 
-####
+#### Navigator Bindings
 
 #' @export
 l_bind_navigator <- function(widget, event, callback) {
@@ -229,7 +290,7 @@ l_bind_navigator_reorder <- function(widget, ids) {
     l_bind(widget, "navigator", "reorder", ids)
 }
 
-####
+#### Context Bindings
 
 #' @export
 l_bind_context <- function(widget, event, callback) {
