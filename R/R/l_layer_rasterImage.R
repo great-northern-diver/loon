@@ -1,5 +1,5 @@
 
-#' Layer a Raster Image
+#' @title Layer a Raster Image
 #' 
 #' @description This function is very similar to the 
 #'   \code{\link[graphics]{rasterImage}} function. It works with every loon plot
