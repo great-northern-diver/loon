@@ -47,6 +47,8 @@ For example, here are the counts for three Canadian cities (3 rows of `minority`
 ```{r minorityTables, echo=FALSE, fig.align="center"}
 subset <- t(minority[c("Victoria", "Ottawa", "St. John\'s"),][,1:(length(names(minority))-4)])
 knitr::kable(subset)
+library(pander)
+pander(Titanic)
 ```
 
 The remaining variates provide the geographic location of each city.  The latitude and longitude of the cities were determined in two ways.  First, the data in `canada.cities` from the `maps` package was used.  This produced the `minority` variates `lat' and `long'.  The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates  `googleLat` and `googleLong`.
