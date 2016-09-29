@@ -38,7 +38,6 @@ l_bind <- function(widget, ...) {
 #' 
 #' @template details_bind_canvas
 #' 
-#' 
 #' @return canvas binding id
 #' 
 #' @seealso \code{\link{l_bind_canvas_ids}}, \code{\link{l_bind_canvas_get}},
@@ -54,47 +53,28 @@ l_bind_canvas <- function(widget, event, callback) {
 }
 
 
-#' @title List all Canvas Binding
-#' 
-#' @description List all user added canvas bindings
-#' 
-#' @inheritParams l_bind_canvas
-#' 
-#' @template details_bind_canvas
-#' 
-#' @return vector with canvas binding ids
+#' @templateVar type canvas
+#' @template templ_bind_ids
 #' 
 #' @export
+#' 
+#' @template examples_bind_canvas
 l_bind_canvas_ids <- function(widget) {
     l_bind(widget, "canvas", "get")
 }
 
 
-#' @title Get the Tcl code of a binding
-#' 
-#' @description This function returns the callback Tcl code that the Tcl
-#'   interpreter evaluates when the event occures which the callback is bound
-#'   to.
-#' 
-#' @inheritParams l_bind_canvas
-#' @param id canvas binding id
-#' 
-#' @return charter string with Tcl code
-#' 
+#' @templateVar type canvas
+#' @template templ_bind_get
+#'   
 #' @export
 l_bind_canvas_get <- function(widget, id) {
     l_bind(widget, "canvas", "get", id)
 }
 
 
-#' @title Delete a Canvas Binding
-#' 
-#' @description Remove a Canvas Binding
-#' 
-#' @inheritParams l_bind_canvas_get
-#' 
-#' @return 0 if success, otherwise the function throws an error
-#' 
+#' @templateVar type canvas
+#' @template templ_bind_delete
 #' 
 #' @export
 l_bind_canvas_delete <- function(widget, id) {
@@ -103,13 +83,8 @@ l_bind_canvas_delete <- function(widget, id) {
     0
 }
 
-#' @title Reorder the Canvas Binding Evaluation Sequence
-#' 
-#' @description The order bindings defines how the get evaluated once an event
-#'   matches the event patterns.
-#' 
-#' @return vector
-#' 
+#' @templateVar type canvas
+#' @template templ_bind_reorder
 #'  
 #' @export
 l_bind_canvas_reorder <- function(widget, ids) {
@@ -126,23 +101,32 @@ l_bind_layer <- function(widget, event, callback) {
     return(id)
 }
 
+#' @templateVar type layer
+#' @template templ_bind_ids
 #' @export
 l_bind_layer_ids <- function(widget) {
     l_bind(widget, "layer", "ids")
 }
 
-
+#' @templateVar type layer
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_layer_get <- function(widget, id) {
     l_bind(widget, "layer", "get", id)
 }
 
+#' @templateVar type layer
+#' @template templ_bind_delete
 #' @export
 l_bind_layer_delete <- function(widget, id) {
     l_bind(widget, "layer", "delete", id)
     callbackFunctions$layer[[.cbid(widget,id)]] <- NULL    
 }
 
+#' @templateVar type layer
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_layer_reorder <- function(widget, ids) {
     l_bind(widget, "layer", "reorder", ids)
@@ -163,6 +147,9 @@ l_bind_state <- function(target, event, callback) {
     return(id)
 }
 
+#' @templateVar type state change
+#' @template templ_bind_ids
+#' 
 #' @export
 l_bind_state_ids <- function(target) {
     
@@ -170,6 +157,9 @@ l_bind_state_ids <- function(target) {
     
 }
 
+#' @templateVar type state change
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_state_get <- function(target, id) {
     
@@ -177,7 +167,9 @@ l_bind_state_get <- function(target, id) {
     
 }
 
-
+#' @templateVar type state change
+#' @template templ_bind_delete
+#' 
 #' @export
 l_bind_state_delete <- function(target, id) {
 
@@ -189,6 +181,9 @@ l_bind_state_delete <- function(target, id) {
     
 }
 
+#' @templateVar type state change
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_state_reorder <- function(target, ids) {
 
@@ -205,22 +200,34 @@ l_bind_item <- function(widget, tags, event, callback) {
     return(id)
 }
 
+#' @templateVar type item
+#' @template templ_bind_ids
+#' 
 #' @export
 l_bind_item_ids <- function(widget) {
     l_bind(widget, "item", "ids")
 }
 
+#' @templateVar type item
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_item_get <- function(widget, id) {
     l_bind(widget, "item", "get", id)
 }
 
+#' @templateVar type item
+#' @template templ_bind_delete
+#' 
 #' @export
 l_bind_item_delete <- function(widget, id) {
     l_bind(widget, "item", "delete", id)
     callbackFunctions$item[[.cbid(widget,id)]] <- NULL
 }
 
+#' @templateVar type item
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_item_reorder <- function(widget, ids) {
     warning('item binding order has currently no effect.')
@@ -236,24 +243,35 @@ l_bind_glyph <- function(widget, event, callback) {
     return(id)
 }
 
-
+#' @templateVar type glyph
+#' @template templ_bind_ids
+#' 
 #' @export
 l_bind_glyph_ids <- function(widget) {
     l_bind(widget, "glyph", "ids")
 }
 
 
+#' @templateVar type glyph
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_glyph_get <- function(widget, id) {
     l_bind(widget, "glyph", "get", id)
 }
 
+#' @templateVar type glyph
+#' @template templ_bind_delete
+#' 
 #' @export
 l_bind_glyph_delete <- function(widget, id) {
     l_bind(widget, "glyph", "delete", id)
     callbackFunctions$glyph[[.cbid(widget,id)]] <- NULL
 }
 
+#' @templateVar type glyph
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_glyph_reorder <- function(widget, ids) {
     l_bind(widget, "glyph", "reorder", ids)
@@ -268,23 +286,35 @@ l_bind_navigator <- function(widget, event, callback) {
     return(id)
 }
 
+#' @templateVar type navigator
+#' @template templ_bind_ids
+#' 
 #' @export
 l_bind_navigator_ids <- function(widget) {
     l_bind(widget, "navigator", "ids")
 }
 
 
+#' @templateVar type navigator
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_navigator_get <- function(widget, id) {
     l_bind(widget, "navigator", "get", id)
 }
 
+#' @templateVar type navigator
+#' @template templ_bind_delete
+#' 
 #' @export
 l_bind_navigator_delete <- function(widget, id) {
     l_bind(widget, "navigator", "delete", id)
     callbackFunctions$navigator[[.cbid(widget,id)]] <- NULL    
 }
 
+#' @templateVar type navigator
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_navigator_reorder <- function(widget, ids) {
     l_bind(widget, "navigator", "reorder", ids)
@@ -299,23 +329,34 @@ l_bind_context <- function(widget, event, callback) {
     return(id)
 }
 
+#' @templateVar type context
+#' @template templ_bind_ids
+#' 
 #' @export
 l_bind_context_ids <- function(widget) {
     l_bind(widget, "context", "ids")
 }
 
-
+#' @templateVar type context
+#' @template templ_bind_get
+#'
 #' @export
 l_bind_context_get <- function(widget, id) {
     l_bind(widget, "context", "get", id)
 }
 
+#' @templateVar type context
+#' @template templ_bind_delete
+#' 
 #' @export
 l_bind_context_delete <- function(widget, id) {
     l_bind(widget, "context", "delete", id)
     callbackFunctions$context[[.cbid(widget,id)]] <- NULL    
 }
 
+#' @templateVar type context
+#' @template templ_bind_reorder
+#' 
 #' @export
 l_bind_context_reorder <- function(widget, ids) {
     l_bind(widget, "context", "reorder", ids)

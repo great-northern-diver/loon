@@ -9,3 +9,8 @@
 #' }
 #' 
 #' l_bind_canvas(p, event='<Configure>', function(W) {printSize(W)})
+#' 
+#' id <- l_bind_canvas_ids(p)
+#' id
+#' 
+#' l_bind_canvas_get(p, id)
