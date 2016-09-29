@@ -1,3 +1,7 @@
+# dev-python branch
+
+On this branch we make efforts towards integrating `loon` with
+Python. For more information see the Python folder.
 
 # loon
 
