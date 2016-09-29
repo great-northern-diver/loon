@@ -25,18 +25,21 @@ Tcl:
 	echo "Make Tcl Package\n-----------"  && \
 	cd Tcl && ./makePkgIndex.tcl && cd ..
 
-R:
-	./copyTcl2R.sh && \
-	cd R && \
-	R -e "library(roxygen2); roxygen2::roxygenise()" && \
-	cd ../ && \
-	R CMD build R --no-build-vignettes && \
-	$(RINSTCMD) loon_1.0.1.tar.gz
+R: copyTcl2R rdoc rbuild rinst
 
-Roxygen:
+copyTcl2R:
+	./copyTcl2R.sh
+
+rdoc:
 	cd R && \
-	R -e "library(roxygen2); roxygen2::roxygenise()" && \
+	R -e "library(devtools); devtools::document(roclets=c('rd', 'namespace'))" && \
 	cd ../
+
+rbuild:
+	R CMD build R --no-build-vignettes
+
+rinst:
+	$(RINSTCMD) loon_1.0.1.tar.gz
 
 website:
 	cd website && \
