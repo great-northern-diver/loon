@@ -230,7 +230,7 @@ l[&#39;color&#39;] &lt;- &#39;green&#39;
 <h2 id="item-bindings">Item Bindings</h2>
 <p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes and labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section. In addition, displays and layers have a <code>tag</code> state for user specified tags.</p>
 <p>Note that item bindings are <code>Tk</code> canvas bindings with one level of indirection in order to support loon's context specific substitutions instead of the standard <code>Tk</code> substitutions.</p>
-<p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
+<p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
 <p>To get the tags for the item that lies below the mouse cursor use the <code>l_currenttags</code> function. To get the index (in relation to the abstract dimension) of the visual item below the mouse cursor (if there is an index) use the <code>l_currentindex</code> function.</p>
 <p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
 <pre><code>p &lt;- l_plot(iris[,1:2], color=iris$Species)
@@ -296,7 +296,7 @@ l_bind_item(p, &#39;all&#39;, &#39;&lt;ButtonPress&gt;&#39;, function(W)printTag
 </ul>
 <p>The current tagging scheme for the histogram, scatterplot and graph displays is</p>
 <div class="figure">
-<img src="images/item_tags.png" title="Item Tags" alt="" />
+<img src="images/item_tags.png" title="Item Tags" />
 
 </div>
 <h2 id="canvas-bindings">Canvas Bindings</h2>

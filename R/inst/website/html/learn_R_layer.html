@@ -108,7 +108,7 @@ window.onload = function() {
 <li>Currently only the model layer is interactive in the sense of selection and moving elements with mouse gestures.</li>
 <li>Every layer has a unique id that is assigned by loon.</li>
 <li>Layers are arranged in a tree structure where a <code>group</code> layer can be a parent to children layers (any of the above mentioned layer types). The tree root has id <code>root</code>.</li>
-<li>The layers are rendered in order of a Depth-first traversal of the non-group layers.</li>
+<li>The non-group layers are rendered in order of a Depth-first traversal of the layer tree.</li>
 <li>Layers have states that define its appearance.
 <ul>
 <li>Layer states support state bindings.</li>
@@ -122,7 +122,7 @@ window.onload = function() {
 <pre><code>p &lt;- l_plot(x=0:7, y=0:7, showScales=TRUE, showGuides=TRUE,
     xlabel=&#39;&#39;, ylabel=&#39;&#39;)</code></pre>
 <div class="figure">
-<img src="images/layer_init.png" alt="" />
+<img src="images/layer_init.png" />
 
 </div>
 <p>The <code>layer ids</code> sub-command returns the plot's layer ids</p>
@@ -136,7 +136,7 @@ window.onload = function() {
     color=&#39;black&#39;, linecolor=&#39;orange&#39;,
     linewidth=5)</code></pre>
 <div class="figure">
-<img src="images/layer_polygon.png" alt="" />
+<img src="images/layer_polygon.png" />
 
 </div>
 <p>The variable <code>l_p</code> holds the layer id. In <code>R</code> the <code>l_p</code> has in addition a class and widget attribute. You can get the state descriptions as with normal plots</p>
@@ -145,14 +145,14 @@ window.onload = function() {
 <pre><code>l_l &lt;- l_layer_line(p, x=c(0,2.5,5,7.5), y=c(4.5,0,6,3),
     linewidth=4, color=&#39;red&#39;)</code></pre>
 <div class="figure">
-<img src="images/layer_line.png" alt="" />
+<img src="images/layer_line.png" />
 
 </div>
 <p>The layers are arranged in a tree structure and the rendering is according to the Depth-First algorithm of the visual layers in the tree. For example, we can layer a rectangle over the previous layers:</p>
 <pre><code>l_r &lt;- l_layer_rectangle(p, x=c(0.5,6.5), y=c(0.5,6.5),
     color=&#39;green&#39;, linecolor=&#39;&#39;)</code></pre>
 <div class="figure">
-<img src="images/layer_rectangle.png" alt="" />
+<img src="images/layer_rectangle.png" />
 
 </div>
 <p>The rectangle with the layer id saved in the <code>l_r</code> variable over-plots the other layers, i.e. it is rendered last. To get a printout of the tree structure run</p>
@@ -165,7 +165,7 @@ window.onload = function() {
 <p>Hence the topmost layer, i.e. <code>layer2</code>, is rendered last. Layers can be moved with the <code>l_layer_move</code> function as follows</p>
 <pre><code>l_layer_move(p, layer=l_r, parent=&#39;root&#39;, index=&#39;end&#39;)</code></pre>
 <div class="figure">
-<img src="images/layer_move_1.png" alt="" />
+<img src="images/layer_move_1.png" />
 
 </div>
 <p>Note, that the <code>parent</code> layer, the <code>index</code> specifying the location among the parents children layers, and the <code>label</code> of a layer can also be specified when adding a layer. However <code>parent</code>, <code>index</code> and <code>label</code> are not states of the layer, instead they are information for the layer collection.</p>
@@ -182,39 +182,39 @@ l_layer_printTree(p)
 #&gt;   layer1
 #&gt;   layer0</code></pre>
 <div class="figure">
-<img src="images/layer_group.png" alt="" />
+<img src="images/layer_group.png" />
 
 </div>
 <p>To move a layer one position up or down (i.e. change place with a sibling) one can also use the <code>l_layer_raise</code> and <code>l_layer_lower</code> function, respectively.</p>
 <p>The visibility of a layer can be changed with the <code>l_layer_hide</code> and <code>l_layer_show</code> function.</p>
 <pre><code>l_layer_hide(p, l_g)</code></pre>
 <div class="figure">
-<img src="images/layer_hide.png" alt="" />
+<img src="images/layer_hide.png" />
 
 </div>
 <p>and</p>
 <pre><code>l_layer_show(p, l_g)</code></pre>
 <div class="figure">
-<img src="images/layer_show.png" alt="" />
+<img src="images/layer_show.png" />
 
 </div>
 <p>The layer with the rectangle can be deleted as follows</p>
 <pre><code>l_layer_delete(p, l_r)</code></pre>
 <div class="figure">
-<img src="images/layer_delete.png" alt="" />
+<img src="images/layer_delete.png" />
 
 </div>
 <p>If a group layer gets deleted with <code>l_layer_delete</code> then all its children layers get moved into their grandparent group layer. To delete a group layer and all it's children use the <code>l_layer_expunge</code> function.</p>
 <pre><code>l_layer_expunge(p, l_g)</code></pre>
 <div class="figure">
-<img src="images/layer_expunge.png" alt="" />
+<img src="images/layer_expunge.png" />
 
 </div>
 <p>It is also possible zoom and pan such that a particular layer fills the plot region</p>
 <pre><code>l_o &lt;- l_layer_oval(p, x=c(2.5,5), y=c(2.5,5), color=&#39;thistle&#39;, index=&#39;end&#39;)
 l_scaleto_layer(p, l_o)</code></pre>
 <div class="figure">
-<img src="images/layer_scaleto.png" alt="" />
+<img src="images/layer_scaleto.png" />
 
 </div>
 <h1 id="query-and-modify-layers">Query and Modify Layers</h1>
@@ -228,7 +228,7 @@ l_p &lt;- l_layer_polygon(h, x=c(2,3,4,4.5,4,3.8,2.2),
 
 l_scaleto_world(h)</code></pre>
 <div class="figure">
-<img src="images/layer_histogram.png" alt="" />
+<img src="images/layer_histogram.png" />
 
 </div>
 <p>To query the state information use</p>
@@ -252,7 +252,7 @@ l_scaleto_world(h)</code></pre>
 <pre><code>l_configure(c(h, l_p), linewidth=2)</code></pre></li>
 </ul>
 <div class="figure">
-<img src="images/layer_configure.png" alt="" />
+<img src="images/layer_configure.png" />
 
 </div>
 <h1 id="maps">Maps</h1>
@@ -273,7 +273,7 @@ g_t &lt;- l_glyph_add_text(p, text=canada.cities$name)
 p[&#39;glyph&#39;] &lt;- g_t
 </code></pre>
 <div class="figure">
-<img src="images/layer_map_cities.png" alt="" />
+<img src="images/layer_map_cities.png" />
 
 </div>
 <p>The canada regions are then layered as follows:</p>
@@ -286,7 +286,7 @@ id &lt;- l_layer(p, canada.map,
 
 l_scaleto_layer(p, id)</code></pre>
 <div class="figure">
-<img src="images/layer_map_canada.png" alt="" />
+<img src="images/layer_map_canada.png" />
 
 </div>
 <ul>
@@ -310,7 +310,7 @@ m &lt;- l_layer(p, gadm, label=&quot;Switzerland&quot;, parent=g,
              color=&quot;&quot;, linecolor=&quot;black&quot;)
 l_scaleto_world(p)</code></pre>
 <div class="figure">
-<img src="images/layer_map_switzerland.png" alt="" />
+<img src="images/layer_map_switzerland.png" />
 
 </div>
 <p>We continue by layering the outlines for the Swiss Cantons:</p>
@@ -326,7 +326,7 @@ m1 &lt;- l_layer(p, gadm, label=&quot;Swiss Cantons&quot;, parent=g1, index=1,
               asSingleLayer=FALSE,
               color=&quot;&quot;, linecolor=&quot;red&quot;)</code></pre>
 <div class="figure">
-<img src="images/layer_map_cantons.png" alt="" />
+<img src="images/layer_map_cantons.png" />
 
 </div>
 <p>Finally, we label the canton layers accordingly</p>
@@ -335,7 +335,7 @@ m1 &lt;- l_layer(p, gadm, label=&quot;Swiss Cantons&quot;, parent=g1, index=1,
 for (i in 1:length(m1)) {
     sapply(m1[[i]], function(l)l_layer_relabel(p, l, cantons[i]))
 }</code></pre>
-<p><img src="images/layer_map_labels_before.png" alt="" /> <img src="images/layer_map_labels_after.png" alt="" /></p>
+<p><img src="images/layer_map_labels_before.png" /> <img src="images/layer_map_labels_after.png" /></p>
 <h1 id="generics">Generics</h1>
 <p><code>l_layer</code> is a generic function and you may add a method to layer a visual representation for an object of a particular class.</p>
 <pre><code>methods(&#39;l_layer&#39;)</code></pre>
@@ -360,7 +360,7 @@ id &lt;- l_layer(p, obj)
 
 l_scaleto_world(p)</code></pre>
 <div class="figure">
-<img src="images/layer_generic.png" alt="" />
+<img src="images/layer_generic.png" />
 
 </div>
 <h1 id="countourlines-heatimage-rasterimage">countourLines &amp; heatImage &amp; rasterImage</h1>
@@ -372,7 +372,7 @@ l_layer_contourLines(p, kest)
 l_layer_heatImage(p, kest) 
 l_scaleto_world(p)  </code></pre>
 <div class="figure">
-<img src="images/layers_heatimage.png" alt="" />
+<img src="images/layers_heatimage.png" />
 
 </div>
 <p><code>l_layer_contourLines</code> creates a lines layer, and <code>l_layer_heatImage</code>, and <code>l_layer_rasterImage</code> a rectangles layer.</p>

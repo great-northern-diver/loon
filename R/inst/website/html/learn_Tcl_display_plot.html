@@ -146,11 +146,19 @@ window.onload = function() {
 }
 </script>
 <div class="figure">
-<img src="images/display_plot.png" title="loon scatterplot" alt="" />
+<img src="images/display_plot.png" title="loon scatterplot" />
 
 </div>
-<pre><code>source olive.tcl
+<pre><code>namespace import loon::*
+# extract variables
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]</code></pre>
+<p>or alternatively</p>
+<pre><code>dict with ::loon::data::olive {
+    set p [loon::plot -x $oleic -y $stearic -color $Area \
+        -xlabel oleic -ylabel stearic]
+}</code></pre>
 <h1 id="scatterplot">Scatterplot</h1>
 <ul>
 <li><p>Get the state names with</p>
@@ -178,10 +186,13 @@ dict get $states background</code></pre>
 <h2 id="primitive-glyphs">Primitive Glyphs</h2>
 <p>The supported primitives are <code>circle</code>, <code>ocircle</code>, <code>ccircle</code>, <code>square</code>, <code>osquare</code>, <code>csquare</code>, <code>triangle</code>, <code>otriangle</code>, <code>ctriangle</code>, <code>diamond</code>, <code>odiamond</code> and <code>cdiamont</code>.</p>
 <div class="figure">
-<img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" alt="" />
+<img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" />
 
 </div>
-<pre><code>source olive.tcl
+<pre><code>package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+        
 set p [plot -x $oleic -y $stearic -color $Area\
     -xlabel oleic -ylabel stearic]
 
@@ -198,13 +209,13 @@ set glyphmap [dict create\
 
 $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" alt="" />
+<img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" />
 
 </div>
 <h2 id="non-primitive-glyph-types">Non-Primitive Glyph Types</h2>
 <p>The non-primitive glyphs are the following</p>
 <div class="figure">
-<img src="images/display_plot_glyphs_nonprimitive.png" title="loon scatterplot non-primitive glyphs" alt="" />
+<img src="images/display_plot_glyphs_nonprimitive.png" title="loon scatterplot non-primitive glyphs" />
 
 </div>
 <p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
@@ -214,23 +225,26 @@ $p configure -glyph [lmap a $Area {dict get $glyphmap $a}]</code></pre>
 <pre><code>set gt [$p glyph add text -text $Region]
 $p configure -glyph $gt</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" />
 
 </div>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
-<pre><code>## $olivedata does not contain Area and Region
-set gs [$p glyph add serialaxes -data $olivedata -showArea FALSE]
+<pre><code>set oliveacids [dict filter $loon::data::olive script {key value} {
+    return -level 0 [expr {$key ni {Area Region}}]
+}]; puts &quot;filter data&quot;
+
+set gs [$p glyph add serialaxes -data $oliveacids -showArea FALSE]
 $p configure -glyph $gs</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" alt="" />
+<img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" />
 
 </div>
 <p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
 <pre><code>$p glyph use $gs configure -axesLayout parallel -showEnclosing TRUE \
     -showAxes TRUE</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" alt="" />
+<img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" />
 
 </div>
 <p>Please also see the <a
@@ -242,7 +256,7 @@ set gr [$p1 glyph add pointrange -ymin {0 1.5 2.3}\
     -ymax {1.6 2.4 3.1} -linewidth {1 2 3} -showArea FALSE]
 $p1 configure -glyph $gr</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" alt="" />
+<img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" />
 
 </div>
 <h3 id="polygons">Polygons</h3>
@@ -280,7 +294,7 @@ set gl [$p glyph add polygon -x [list $x_star $x_cross $x_hexagon]\
 
 $p configure -glyph $gl</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" alt="" />
+<img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" />
 
 </div>
 <h3 id="images">Images</h3>
@@ -302,18 +316,21 @@ set gi [$p glyph add image -images [list $img1 $img2 $img3]\
 
 $p configure -glyph $gi</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_image1.png" title="image glyphs" alt="" />
+<img src="images/display_plot_glyphs_image1.png" title="image glyphs" />
 
 </div>
 <h3 id="query-and-modify-glyph-states">Query and Modify Glyph States</h3>
 <p>The non-primitive glyphs (or n dimensional glyphs) have states. To demonstrate how to work with glyph states we take the text glyph example from above again:</p>
-<pre><code>source olive.tcl
+<pre><code>package require loon
+namespace import loon::*
+dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region]
 $p configure -glyph $gt</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text.png" title="text glyphs" alt="" />
+<img src="images/display_plot_glyphs_text.png" title="text glyphs" />
 
 </div>
 <p>The procedure to list and get information about them is similar as outlined in the &lt;a href=''learn_Tcl_states.html'&gt;states section</a>. For example get the state names of a glyph with</p>
@@ -323,12 +340,13 @@ dict keys $gtstates</code></pre>
 <p>And to modify a state</p>
 <pre><code>$p glyph use $gt configure -text $Area</code></pre>
 <div class="figure">
-<img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" alt="" />
+<img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" />
 
 </div>
 <h3 id="relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</h3>
 <p>Glyph labels are used in the plot and glyph inspector. You can specify the glyph labels when creating the glyphs:</p>
-<pre><code>source olive.tcl
+<pre><code>dict for {name value} $loon::data::olive {set $name $value}
+
 set p [plot -x $oleic -y $stearic -color $Area -xlabel oleic -ylabel stearic]
 
 set gt [$p glyph add text -text $Region -label Region]

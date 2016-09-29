@@ -107,7 +107,7 @@ window.onload = function() {
 <li>Currently only the model layer is interactive in the sense of selection and moving elements with mouse gestures.</li>
 <li>Every layer has a unique id that is assigned by loon.</li>
 <li>Layers are arranged in a tree structure where a <code>group</code> layer can be a parent to children layers (any of the above mentioned layer types). The tree root has id <code>root</code>.</li>
-<li>The layers are rendered in order of a Depth-first traversal of the non-group layers.</li>
+<li>The non-group layers are rendered in order of a Depth-first traversal of the layer tree.</li>
 <li>Layers have states that define its appearance.
 <ul>
 <li>Layer states support state bindings.</li>
@@ -119,7 +119,7 @@ window.onload = function() {
 <pre><code>set p [plot -x {0 1 2 3 4 5 6 7} -y {0 1 2 3 4 5 6 7}\
     -showScales TRUE -showGuides TRUE]</code></pre>
 <div class="figure">
-<img src="images/layer_init.png" alt="" />
+<img src="images/layer_init.png" />
 
 </div>
 <p>The <code>layer ids</code> sub-command returns the plot's layer ids</p>
@@ -133,7 +133,7 @@ window.onload = function() {
     -color black -linecolor orange\
     -linewidth 5]</code></pre>
 <div class="figure">
-<img src="images/layer_polygon.png" alt="" />
+<img src="images/layer_polygon.png" />
 
 </div>
 <p>The variable <code>l_p</code> holds the layer id. You can get the state descriptions similar as with normal plots</p>
@@ -144,14 +144,14 @@ window.onload = function() {
     -linewidth 4\
     -color red]</code></pre>
 <div class="figure">
-<img src="images/layer_line.png" alt="" />
+<img src="images/layer_line.png" />
 
 </div>
 <p>The layers are arranged in a tree structure and the rendering is according to the Depth-First algorithm of the visual layers in the tree. For example, we can layer a rectangle over the previous layers:</p>
 <pre><code>set l_r [$p layer rectangle\
     -x {0.5 6.5} -y {0.5 6.5} -color green -linecolor &#39;&#39;]</code></pre>
 <div class="figure">
-<img src="images/layer_rectangle.png" alt="" />
+<img src="images/layer_rectangle.png" />
 
 </div>
 <p>The rectangle with the layer id saved in the <code>l_r</code> variable over-plots the other layers, i.e. it is rendered last. To get a printout of the tree structure run</p>
@@ -164,7 +164,7 @@ window.onload = function() {
 <p>Hence the topmost layer, i.e. <code>layer2</code>, is rendered last. Layers can be moved with the <code>layer move</code> function as follows</p>
 <pre><code>$p layer move $l_r root end</code></pre>
 <div class="figure">
-<img src="images/layer_move_1.png" alt="" />
+<img src="images/layer_move_1.png" />
 
 </div>
 <p>Note, that the <code>parent</code> layer, the <code>index</code> specifying the location among the parents children layers, and the <code>label</code> of a layer can also be specified when adding a layer. However <code>parent</code>, <code>index</code> and <code>label</code> are not states of the layer, instead they are information for the layer collection.</p>
@@ -181,39 +181,39 @@ $p layer printTree
 #%   layer1
 #%   layer0</code></pre>
 <div class="figure">
-<img src="images/layer_group.png" alt="" />
+<img src="images/layer_group.png" />
 
 </div>
 <p>To move a layer one position up or down (i.e. change place with a sibling) one can also use the <code>layer raise</code> and <code>layer lower</code> sub command, respectively.</p>
 <p>The visibility of a layer can be changed with the <code>hide</code> and <code>show</code> sub-command .</p>
 <pre><code>$p layer hide $l_g</code></pre>
 <div class="figure">
-<img src="images/layer_hide.png" alt="" />
+<img src="images/layer_hide.png" />
 
 </div>
 <p>and</p>
 <pre><code>$p layer show $l_g</code></pre>
 <div class="figure">
-<img src="images/layer_show.png" alt="" />
+<img src="images/layer_show.png" />
 
 </div>
 <p>The layer with the rectangle can be deleted as follows</p>
 <pre><code>$p layer delete $l_r</code></pre>
 <div class="figure">
-<img src="images/layer_delete.png" alt="" />
+<img src="images/layer_delete.png" />
 
 </div>
 <p>If a group layer gets deleted with <code>layer delete</code> then all its children layers get moved into their grandparent group layer. To delete a group layer and all it's children use the <code>layer expunge</code> subcommand.</p>
 <pre><code>$p layer expunge $l_g</code></pre>
 <div class="figure">
-<img src="images/layer_expunge.png" alt="" />
+<img src="images/layer_expunge.png" />
 
 </div>
 <p>It is also possible zoom and pan such that a particular layer fills the plot region</p>
 <pre><code>set l_o [$p layer oval -x {2.5 5} -y {2.5 5} -color thistle -index end]
 $p scaleto layer $l_o</code></pre>
 <div class="figure">
-<img src="images/layer_scaleto.png" alt="" />
+<img src="images/layer_scaleto.png" />
 
 </div>
 <h1 id="query-and-modify-layers">Query and Modify Layers</h1>
@@ -228,7 +228,7 @@ set l_p [$h layer polygon -x {2 3 4 4.5 4 3.8 2.2}\
 
 $h scaleto world</code></pre>
 <div class="figure">
-<img src="images/layer_histogram.png" alt="" />
+<img src="images/layer_histogram.png" />
 
 </div>
 <p>To query the state information use</p>
@@ -238,7 +238,7 @@ $h scaleto world</code></pre>
 <p>A layer state is configured as follows:</p>
 <pre><code>$h layer use $l_p configure -color red -linecolor black -linewidth 2</code></pre>
 <div class="figure">
-<img src="images/layer_configure.png" alt="" />
+<img src="images/layer_configure.png" />
 
 </div>
 </body>

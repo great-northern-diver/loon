@@ -120,7 +120,7 @@ window.onload = function() {
 }
 </script>
 <div class="figure">
-<img src="images/display_graph.png" title="loon graph display" alt="" />
+<img src="images/display_graph.png" title="loon graph display" />
 
 </div>
 <pre><code>nodes &lt;- LETTERS[1:5]
@@ -177,7 +177,7 @@ g &lt;- l_graph(LG)</code></pre>
 <p>The following code ads a navigator to the graph <code>g</code></p>
 <pre><code>nav &lt;- l_navigator_add(g, color=&#39;orange&#39;)</code></pre>
 <div class="figure">
-<img src="images/display_graph_navigator1.png" title="loon graph display" alt="" />
+<img src="images/display_graph_navigator1.png" title="loon graph display" />
 
 </div>
 <p>The navigator with the id stored in the <code>nav</code> has its own states that can be listed as follows</p>
@@ -189,7 +189,7 @@ names(nstates)</code></pre>
 <pre><code>l_configure(nav, from=c(&#39;A:B&#39;,&#39;B:C&#39;,&#39;C:D&#39;,&#39;A:D&#39;), to=c(&#39;D:E&#39;,&#39;B:E&#39;),
     proportion=0.2)</code></pre>
 <div class="figure">
-<img src="images/display_graph_navigator2.png" title="navigator path" alt="" />
+<img src="images/display_graph_navigator2.png" title="navigator path" />
 
 </div>
 <p>The elements related to the navigator you see in the plot above are</p>
@@ -201,7 +201,7 @@ names(nstates)</code></pre>
 </ul>
 <p>The graph display supports direct interaction with the navigator and navigator path using the mouse and keyboard. To move the navigator with the mouse you must first click on it to select it which will set the <code>activeNavigator</code> graph state to the navigator id and causes the navigator to be highlighted with the navigator outline in the selection color.</p>
 <div class="figure">
-<img src="images/display_graph_navigator_select.png" title="navigator selected" alt="" />
+<img src="images/display_graph_navigator_select.png" title="navigator selected" />
 
 </div>
 <p>In this state the following interactions are possible</p>
@@ -210,7 +210,7 @@ names(nstates)</code></pre>
 <li>When the navigator is at the path end (i.e. <code>to=''</code>) then you can extend the path by dragging the navigator towards a new connected node. Note that
 <ul>
 <li>the gray circle is the decision boundary to select an adjoining edge.</li>
-<li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" alt="" /></li>
+<li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" /></li>
 </ul></li>
 <li>Use the scroll wheel to move the navigator along the path. Pay attention to the <code>scrollProportionIncrement</code> state of the navigator.</li>
 <li>Move the navigator using animation by control double click on a node on the path.</li>
@@ -286,7 +286,7 @@ l_bind_state(nav, event=c(&#39;from&#39;, &#39;to&#39;, &#39;proportion&#39;),
 <ul>
 <li><p><strong>Context2d</strong> maps every location on a 2d space graph to a list of <code>xvars</code> and a list of <code>yvars</code> such that, while moving the navigator along the graph, as few changes as possible take place in <code>xvars</code> and <code>yvars</code>, see the image:</p>
 <div class="figure">
-<img src="images/context2d.png" alt="" />
+<img src="images/context2d.png" />
 
 </div></li>
 <li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share (see <a href="http://link.springer.com/article/10.1007%2Fs00180-011-0228-6">Hurley and Oldford 2011</a>). The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
@@ -465,7 +465,7 @@ gs &lt;- l_graphswitch(activewidget=g, parent=tt)
 tkpack(g, side=&#39;left&#39;, fill=&#39;both&#39;, expand=TRUE)
 tkpack(gs, side=&#39;left&#39;, fill=&#39;y&#39;)</code></pre>
 <div class="figure">
-<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" alt="" />
+<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" />
 
 </div>
 <p>Graphs are added to the graph switch as follows</p>
@@ -482,7 +482,7 @@ idG4 &lt;- l_graphswitch_add(gs, G4, label=&#39;complement(G4)&#39;)
 
 l_graphswitch_set(gs, idG3)</code></pre>
 <div class="figure">
-<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" alt="" />
+<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" />
 
 </div>
 <ul>
@@ -550,7 +550,7 @@ ng &lt;- l_navgraph(olive[,-c(1,2)], sep=&#39;-&#39;, color=olive$Area)</code></
 <li>Note that the return value <code>ng</code> is a named list with all object handles.</li>
 </ul>
 <div class="figure">
-<img src="images/display_graph_navgraph.png" title="l_navgraph" alt="" />
+<img src="images/display_graph_navgraph.png" title="l_navgraph" />
 
 </div>
 <h2 id="l_ng_ranges">l_ng_ranges</h2>
@@ -561,7 +561,7 @@ oliveAcids &lt;- olive[,-c(1,2)]
 scags &lt;- scagnostics(oliveAcids)
 
 nav &lt;- l_ng_ranges(measures=scags, data=oliveAcids, color=olive$Area)</code></pre>
-<p><img src="images/l_ng_ranges_scagnostics.png" title="l_ng_ranges" alt="" /> <img src="images/l_ng_ranges_scagnostics_plot.png" title="l_ng_ranges" alt="" /></p>
+<p><img src="images/l_ng_ranges_scagnostics.png" title="l_ng_ranges" /> <img src="images/l_ng_ranges_scagnostics_plot.png" title="l_ng_ranges" /></p>
 <p>For more information see the examples of <code>l_ng_ranges</code>.</p>
 <h2 id="l_ng_plots">l_ng_plots</h2>
 <p>Uses same formal arguments as <code>l_ng_ranges</code> but creates a scatterplot matrix of measures to select the variable pairs.</p>
@@ -572,7 +572,7 @@ scags &lt;- scagnostics(oliveAcids)
 
 nav &lt;- l_ng_plots(measures=scags, data=oliveAcids, color=olive$Area)</code></pre>
 <div class="figure">
-<img src="images/l_ng_plots_pairs.png" title="l_ng_plots" alt="" />
+<img src="images/l_ng_plots_pairs.png" title="l_ng_plots" />
 
 </div>
 <h2 id="measures">Measures</h2>

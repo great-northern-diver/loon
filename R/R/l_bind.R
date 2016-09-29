@@ -33,7 +33,7 @@ l_bind <- function(widget, ...) {
 #' 
 #' @template param_widget
 #' @param event event patterns as defined for Tk canvas widget
-#'   \url{http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7}.
+#'   \url{http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.
 #' @template param_callback
 #' 
 #' @template details_bind_canvas
