@@ -8,7 +8,6 @@
 *.o
 *.so
 *.tar.gz
-R/man/
 Tcl/Makefile
 Tcl/config.log
 Tcl/config.status
