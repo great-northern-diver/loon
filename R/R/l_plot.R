@@ -26,10 +26,18 @@
 #' @return widget path name if was successful, otherwise NULL
 #'
 #' @examples
+#' # ordinary use
+#' p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
+#' 
+#' # link another plot with the previous plot
+#' p['linkingGroup'] <- "iris"
+#' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris"))
 #'
-#' tt <- l_toplevel()
-#' p1 <- loon_plot(parent=tt, x=c(1,2,3), y=c(3,2,1))
-#' p2 <- loon_plot(c(4,3,1), (6,8,4), tt)
+#' # Use with other tk widgets
+#' library(tcltk)
+#' tt <- tktoplevel()
+#' p1 <- l_plot(parent=tt, x=c(1,2,3), y=c(3,2,1))
+#' p2 <- l_plot(parent=tt, x=c(4,3,1), y=c(6,8,4))
 #'
 #' tkgrid(p1, row=0, column=0, sticky="nesw")
 #' tkgrid(p2, row=0, column=1, sticky="nesw")
@@ -38,8 +46,6 @@
 #' tkgrid.rowconfigure(tt, 0, weight=1)
 #'
 #' tktitle(tt) <- "Loon plots with custom layout"
-
-
 l_plot <- function(x, y, ...) {
     UseMethod("l_plot")
 }
