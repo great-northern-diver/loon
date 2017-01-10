@@ -4,12 +4,12 @@
 \alias{l_glyph_add.default}
 \title{Default method for adding non-primitive and loon-native glyphs}
 \usage{
-\method{l_glyph_add}{default}(widget, x, ...)
+\method{l_glyph_add}{default}(widget, type, ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{x}{loon-native non-primitive glyph type, one of \code{'text'}, 
+\item{type}{loon-native non-primitive glyph type, one of \code{'text'}, 
 \code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or
 \code{'pointrange'}}
 
@@ -17,8 +17,5 @@
 }
 \description{
 
-}
-\seealso{
-\code{\link{l_glyph_add}}
 }
 

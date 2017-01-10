@@ -14,7 +14,8 @@ l_glyph_add(widget, x, ...)
 \item{...}{arguments passed on to method}
 }
 \value{
-Every non-primitive glyphs has an id (character).
+String with glyph id. Every set of non-primitive glyphs has an id
+  (character).
 }
 \description{
 Generic method for adding user-defined glyphs. See details for
@@ -57,13 +58,26 @@ The non-primitive glyph types and their creator functions are:
   Polygon \tab \code{\link{l_glyph_add_polygon}}
 }
 
-When adding non-primitive glyphs to a display, the number of gplyphs needs to
+When adding non-primitive glyphs to a display, the number of glyphs needs to
 match the dimension \code{n} of the plot. In other words, a glyph needs to be
-defined for each observations.
+defined for each observations. See in the examples.
+
+Currently loon does not support compound glyphs. However, it is possible to
+cunstruct an arbitrary glyph using any system and save it as a png and then
+re-import them as as image glyphs using \code{\link{l_glyph_add_image}}.
 
 For more information run: \code{l_help("learn_R_display_plot.html#glyphs")}
 }
 \examples{
+# Simple Example with Text Glyphs
+p <- with(olive, l_plot(stearic, eicosenoic, color=Region))
+g <- l_glyph_add_text(p, text=olive$Area, label="Area")
+p['glyph'] <- g
+
+\dontrun{
+demo("l_glyphs", package="loon")
+}
+
 # create a plot that demonstrates the primitive glyphs and the text glyphs
 p <- l_plot(x=1:15, y=rep(0,15), size=10, showLabels=FALSE)
 text_glyph <- l_glyph_add_text(p, text=letters [1:15])
@@ -76,6 +90,6 @@ p['glyph'] <- c(
 )
 }
 \seealso{
-\code{\link{l_glyph_add_text}}
+\code{\link{l_glyph_add_text}}, \code{\link{make_glyphs}}
 }
 
