@@ -90,7 +90,7 @@ l_glyph_getType <- function(widget, id) {
 #'   more information about non-primitive and primitive glyphs.
 #' 
 #' @template param_widget
-#' @param x object used for method dispatch
+#' @param type object used for method dispatch
 #' @param ... arguments passed on to method
 #' 
 #' @details The scatterplot and graph displays both have the n-dimensional state
@@ -169,8 +169,8 @@ l_glyph_getType <- function(widget, id) {
 #'     'diamond', 'odiamond', 'cdiamond',
 #'     rep(text_glyph, 3)
 #' )
-l_glyph_add <- function(widget, x, ...) {
-    UseMethod("l_glyph_add", x)
+l_glyph_add <- function(widget, type, ...) {
+    UseMethod("l_glyph_add", type)
 }
 
 

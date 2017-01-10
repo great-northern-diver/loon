@@ -1,12 +1,12 @@
 Package: loon
 Type: Package
-Title: Interactive Statistical Visualization
+Title: Interactive Statistical Data Visualization
 Version: 1.0.1
 Date: 2015-12-21
 Author: Adrian R. Waddell and R. Wayne Oldford
 Maintainer: Adrian Waddell <adrian@waddell.ch>
 URL: http://waddella.github.io/loon/
-Description: Interactive Statistical Viualization Toolkit
+Description: Loon is a toolkit for interactive data visualization and exploration.
 License: GPL-2
 Depends:
     R (>= 2.10.0),

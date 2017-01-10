@@ -37,14 +37,14 @@ l_currenttags <- function(widget) {
 #' @title Get layer-relative index of the item below the mouse cursor
 #' 
 #' @description Checks if there is a visual item below the mouse cursor and if
-#'   there is, it returns the index of the visual item’s position in the
+#'   there is, it returns the index of the visual item's position in the
 #'   corresponding variable dimension of its layer.
 #' 
 #' @template param_widget
 #' @details
 #' For more details see \code{l_help("learn_R_bind.html#item-bindings")}
 #' 
-#' @return index of the visual item’s position in the corresponding variable
+#' @return index of the visual item's position in the corresponding variable
 #'   dimension of its layer
 #' 
 #' @seealso \code{\link{l_bind_items}}, \code{\link{l_currenttags}}
