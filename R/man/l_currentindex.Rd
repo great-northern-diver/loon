@@ -10,12 +10,12 @@ l_currentindex(widget)
 \item{widget}{widget path as a string or as an object handle}
 }
 \value{
-index of the visual item’s position in the corresponding variable
+index of the visual item's position in the corresponding variable
   dimension of its layer
 }
 \description{
 Checks if there is a visual item below the mouse cursor and if
-  there is, it returns the index of the visual item’s position in the
+  there is, it returns the index of the visual item's position in the
   corresponding variable dimension of its layer.
 }
 \details{

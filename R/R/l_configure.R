@@ -1,6 +1,25 @@
-#' @title Modify states
+#' @title Modify one or multiple plot states
+#'   
+#' @description All of loon's displays have plot states. Plot states specify 
+#'   what is displayed, how it is displayed and if and how the plot is linked 
+#'   with other loon plots. Layers, glyphs, navigators and contexts have states 
+#'   too (also refered to as plot states). This function modifies one or 
+#'   multiple plot states.
+#'   
+#' @template param_target
+#' @param ... state=value pairs
+#'   
+#'   
+#' @seealso \code{\link{l_cget}}, \code{\link{l_info_states}},
+#'   \code{\link{l_create_handle}}
+#'   
 #' @aliases "[<-.loon"
 #' @export
+#' 
+#' @examples 
+#' p <- l_plot(iris, color = iris$Species)
+#' l_configure(p, color='red')
+#' p['size'] <- ifelse(iris$Species == "versicolor", 2, 8)
 l_configure <- function(target, ...) {
 
     obj_eval <- .loonobject(target)

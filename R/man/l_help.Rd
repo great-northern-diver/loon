@@ -4,10 +4,12 @@
 \alias{l_help}
 \title{Open a browser with loon's local documentation webpage}
 \usage{
-l_help(page = "index", ...)
+l_help(page = "index", viewer = TRUE, ...)
 }
 \arguments{
 \item{page}{relative path to a page, the .html part may be omitted}
+
+\item{viewer}{blooean, open help page in RStuidio viewer pane if possible}
 
 \item{...}{arguments forwarded to browseURL, e.g. to specify a browser}
 }

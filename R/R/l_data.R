@@ -1,6 +1,5 @@
-
+#' @title Convert an R data.frame to a Tcl dictionary
 #' @export
-
 l_data <- function(data) {
 
     ## Create a dict

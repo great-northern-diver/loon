@@ -1,15 +1,12 @@
-#' @title Loon's color Mapping
+#' @title Create a palette with loon's color mapping
 #'   
 #' @description Used to map nominal data to colors that can be well 
 #'   differentiated visually (e.g. to highlight the different groups)
 #'   
-#'   
-#'   
-#'   
-#'   
-#' @details This is the function that loon uses to map values to colors. Hence, 
-#'   if all values already represent colors they do not get mapped to the 
-#'   sequence of colors from the hcl color wheel as outlined below.
+#' @details This is the function that loon uses by default to map values to
+#'   colors. Hence, if all values already represent colors they do not get
+#'   mapped to the sequence of colors from the hcl color wheel as outlined
+#'   below.
 #'   
 #'   loon currently uses its own mapping algorithm based on the hcl color wheel.
 #'   For loon, it is desirable to have the first m colors of a color sample of 
@@ -21,10 +18,11 @@
 #'   \code{\link[scales]{col_factor}} functions from the scales package.
 #'   
 #'   
-#' @return A function that takes a vector with values and maps them to
-#'   hexencoded colors (vector of strings). If all the values that get passed to
-#'   the function are valid color names in Tcl then those colors get returned
-#'   hexencoded.
+#' @return A function that takes a vector with values and maps them to a vector 
+#'   of hexencoded colors (strings). If all the values that get passed to the 
+#'   function are valid color names in Tcl then those colors get returned 
+#'   hexencoded. Otherwise, if there is one or more elements that is not a valid
+#'   color name it uses the loons default color mapping algorithm.
 #'   
 #' @seealso \code{\link{l_getColorList}} , \code{\link{l_setColorList}}
 #'   
@@ -32,12 +30,12 @@
 #' 
 #' @examples 
 #' 
-#' pal <- col_loon()
+#' pal <- color_loon()
 #' pal(letters[1:4]) 
 #' pal(c('a','a','b','c'))
 #' pal(c('green', 'yellow'))
 #' 
-col_loon <- function() {
+color_loon <- function() {
     function(x) {
         if (!as.numeric(tcl('::loon::listfns::isColor', x))) {
             x <- tcl('::loon::listfns::mapColor', x)  
@@ -47,18 +45,27 @@ col_loon <- function() {
 }
 
 
+#' @title Modify the colors used for mapping nominal values to distinct colors
+#'   
+#' @description When assigning values to a color state of a plot widget then, if
+#'   all the values are valid (Tcl) color names, these colors get assigned
+#'   to
+#'   
+#' @param colors vecor with valid color names or hex-encoded colors
+#'   
+#' @return NULL
+#'   
 #' @export
 l_setColorList <- function(colors) {
     tcl('::loon::setColorList', 'custom', colors)
     invisible()   
 }
 
+
 #' @export
 l_getColorList <- function() {
     as.character(tcl('::loon::getColorList'))
 }
-
-
 
 
 #' ColorBrewer

@@ -7,6 +7,7 @@
 #'   with this page.
 #'   
 #' @param page relative path to a page, the .html part may be omitted
+#' @param viewer blooean, open help page in RStuidio viewer pane if possible
 #' @param ... arguments forwarded to browseURL, e.g. to specify a browser
 #' 
 #' @export
@@ -20,12 +21,24 @@
 #' # jump to a section
 #' l_help("learn_R_bind.html#list-reorder-delete-bindings")
 #' }
-l_help <- function(page="index", ...) {
+l_help <- function(page="index", viewer=TRUE, ...) {
     
     if(!grepl(".html#", page, fixed = TRUE)) {
         if(tools::file_ext(page) == "")
             page <- paste0(page, ".html")
     }
+    site <- file.path(find.package(package = 'loon'), "website", "html", page)
     
-    browseURL(file.path(find.package(package = 'loon'), "website", "html", page), ...)
+    fviewer <- getOption("viewer")
+    if (viewer && !is.null(fviewer)) {
+        tdir <- tempdir()
+        ltdir <- file.path(tdir, 'loon_help')
+        if(!dir.exists(ltdir)) {
+            dir.create(ltdir)
+            file.copy(dirname(site), ltdir, recursive = TRUE)
+        }
+        fviewer(file.path(ltdir, 'html', page))
+    } else {
+        browseURL(site, ...)
+    }
 }

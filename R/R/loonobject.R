@@ -5,10 +5,7 @@
 #' loon plot widget such as a: the widget itself, layer, glyph,
 #' navigator, or context.
 #'
-#' @param target either an object of class loon or a vector that
-#' specifies the widget, layer, glyph, navigator or context
-#' completely. The widget is specified by the widget path name, the
-#' remaining objects by their ids.
+#' @template param_target
 #'
 #' @return a closure that will evaualte tcl code for the particular
 #' object.

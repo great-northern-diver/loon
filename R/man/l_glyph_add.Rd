@@ -4,12 +4,12 @@
 \alias{l_glyph_add}
 \title{Add non-primitive glyphs to a scatterplot or graph display}
 \usage{
-l_glyph_add(widget, x, ...)
+l_glyph_add(widget, type, ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{x}{object used for method dispatch}
+\item{type}{object used for method dispatch}
 
 \item{...}{arguments passed on to method}
 }
