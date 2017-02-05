@@ -2,31 +2,53 @@
 % Please edit documentation in R/l_plot.R
 \name{l_plot}
 \alias{l_plot}
-\title{Create a 2d Scatterplot Widget}
+\title{Create an interactive loon plot widget}
 \usage{
 l_plot(x, y, ...)
 }
 \arguments{
-\item{x}{coordinates}
+\item{x}{the coordinates of points in the plot. Alternatively, a
+      single plotting structure, function or \emph{any \R object with a
+        \code{plot} method} can be provided.}
 
-\item{y}{coordinates}
+\item{y}{the y coordinates of points in the plot, \emph{optional}
+    if \code{x} is an appropriate structure.}
 
-\item{parent}{parent widget path of the scatterplot widget}
+\item{...}{named arguments to modify plot states}
 }
 \value{
-widget path name if was successful, otherwise NULL
+widget handle
 }
 \description{
-Create a scatterplot widget. It the parent widget gets specified,
-the plot widget needs to be placed using some geometry manager like
-\code{\link{tkpack}} or \code{\link{tkplace}} in order to be
-displayed.
+\code{l_plot} is a generic function for creating interactive 
+  visualization environments for \R objects.
 }
 \details{
-This function is like \code{loon_plot} except it requires a parent
-widget and need to be packed manually. This is useful when placing
-more than one scatterplot in a window, or writing a custom Tk GUI
-with a scatterplot.
+\ifelse{html}{
+\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website 
+  which can be accessed via the <code>l_help()</code> function call. </div>
+}}{
+To get started with loon it is recommended to read loons website 
+  which can be accessed via the \code{l_help()} function call.
+}
+
+  
+  \if{html}{ The general direct manipulation and interaction gestures are
+  outlined in the following figures.
+  
+  Zooming and Panning
+  
+  \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"} 
+  
+  Selecting Points/Objects
+  
+  \figure{gestures_select.png}{options: alt="Select gestures"}
+  
+  Moving Points on the Scatterplot Display
+  
+  \figure{gestures_move.png}{options: alt="Move gestures"}
+  
+  }
 }
 \examples{
 # ordinary use
@@ -49,5 +71,8 @@ tkgrid.columnconfigure(tt, 1, weight=1)
 tkgrid.rowconfigure(tt, 0, weight=1)
 
 tktitle(tt) <- "Loon plots with custom layout"
+}
+\seealso{
+\code{\link{l_info_states}}
 }
 
