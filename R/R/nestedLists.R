@@ -1,8 +1,16 @@
 
-#' Convert an R list to a nested tcl list
-#' @export
-#' @examples 
+#' @title Convert an R list to a nested tcl list
+#'   
+#' @description This is a helper function to create a nested Tcl list from an R
+#'   list (i.e. a list of vectors).
+#'   
+#' @param x a list of vectors
 #' 
+#' @return a string that represents the tcl nested list
+#' 
+#' @export
+#' 
+#' @examples 
 #' x <- list(c(1,3,4), c(4,3,2,1), c(4,3,2,5,6))
 #' l_Rlist2nestedTclList(x)
 l_Rlist2nestedTclList <- function(x) {
