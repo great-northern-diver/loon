@@ -1,25 +1,60 @@
 
-#' Select 2d spaces in scatterplot matrix
-#' 
+#' @title 2d navigation graph setup with with dynamic node fitering using a 
+#'   scatterplot matrix
+#'   
+#' @description Generic function to create a navigation graph environment where 
+#'   user can filter graph nodes by selecting 2d spaces based on 2d measures 
+#'   displayed in a scatterplot matrix.
+#'   
+#' @param measures object with measures are stored
+#' @param ... argument passed on to methods
+#'   
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_plots
+#' @template see_l_help
+#'   
 #' @export
 #' 
+#' @seealso \code{\link{l_ng_plots.default}}, \code{\link{l_ng_plots.measures}},
+#'   \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}},
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}},
+#'   \code{\link{l_ng_ranges}}
+#'   
 l_ng_plots <- function(measures, ...) {
     UseMethod("l_ng_plots")
 }
 
-#' Select 2d spaces in scatterplot matrix
-#' 
-#' @export
-#'
+#' @title Select 2d spaces with variable associated measures displayed in 
+#'   scatterplot matrix
+#'   
+#' @description Measures object is a matrix or data.frame with measures 
+#'   (columns) for variable pairs (rows) and rownames of the two variates 
+#'   separated by separator
+#'   
+#' @param measures matrix or data.frame with measures (columns) for variable 
+#'   pairs (rows) and rownames of the two variates separated by separator
 #' @param data data frame for scatterplot
-#' @param matrix with measures (columns) for variable pairs (rows) and
-#'  rownames of the two variates separated by separatorl 
-#' @param separator a string that separates the variable pair string
-#'  into the individual variables
+#' @param separator a string that separates the variable pair string into the 
+#'   individual variables
+#' @param ... arguments passed on to configure the scatterplot
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_plots
+#' @template see_l_help
+#'   
 #' 
+#' @template return_l_ng
+#'   
+#'   
+#' @seealso \code{\link{l_ng_plots}}, \code{\link{l_ng_plots.measures}}, 
+#'   \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
+#'   
+#' @export
 #' 
 #' @examples 
-#' 
 #' n <- 100
 #' dat <- data.frame(
 #'    A = rnorm(n), B = rnorm(n), C = rnorm(n),
@@ -220,7 +255,32 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
 
 
 
-#' Select 2d spaces in scatterplot matrix
+#' @title 2d Navigation Graph Setup with dynamic node fitering using a 
+#'   scatterplot matrix
+#'   
+#' @description Measures object is of class measures. When using measure objects
+#'   then the measures can be dynamically re-calculated for a subset of the 
+#'   data.
+#'   
+#' @param measures object of class measures, see \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}.
+#' @param ... arguments passed on to configure the scatterplot
+#'   
+#'   
+#' @details Note that we provide the \code{\link{scagnostics2d}} function to 
+#'   create a measures object for the scagnostics measures.
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_plots
+#' @template see_l_help
+#' 
+#'   
+#' @template return_l_ng
+#' 
+#'     
+#' @seealso \code{\link{measures1d}}, \code{\link{measures2d}}, 
+#'   \code{\link{scagnostics2d}}, \code{\link{l_ng_plots}},
+#'   \code{\link{l_ng_ranges}}
 #' 
 #' @export
 #' 
@@ -373,8 +433,27 @@ l_ng_plots.measures <- function(measures, ...) {
 }
 
 
-#' Select 2d spaces in scatterplot matrix
-#' 
+#' @title 2d Navigation Graph Setup with dynamic node fitering based on 
+#'   scagnostic measures and by using a scatterplot matrix
+#'   
+#' @description This method is useful when working with objects from the 
+#'   \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R 
+#'   package. In order to dynamically re-calcultate the scagnostic measures for 
+#'   a subset of the data use the \code{\link{scagnostics2d}} measures creature 
+#'   function.
+#'   
+#' @inheritParams l_ng_plots.scagnostics
+#' @param measures objects from the \code{\link[scagnostics]{scagnostics}} 
+#'   function from the scagnostics \R package
+#'   
+#' @template return_l_ng
+#'   
+#'   
+#' @seealso \code{\link{l_ng_plots}}, \code{\link{l_ng_plots.default}}, 
+#'   \code{\link{l_ng_plots.measures}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
+#'   
 #' @export
 #' 
 #' @examples 

@@ -2,11 +2,28 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots}
 \alias{l_ng_plots}
-\title{Select 2d spaces in scatterplot matrix}
+\title{2d navigation graph setup with with dynamic node fitering using a 
+  scatterplot matrix}
 \usage{
 l_ng_plots(measures, ...)
 }
+\arguments{
+\item{measures}{object with measures are stored}
+
+\item{...}{argument passed on to methods}
+}
 \description{
-Select 2d spaces in scatterplot matrix
+Generic function to create a navigation graph environment where 
+  user can filter graph nodes by selecting 2d spaces based on 2d measures 
+  displayed in a scatterplot matrix.
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
+}
+\seealso{
+\code{\link{l_ng_plots.default}}, \code{\link{l_ng_plots.measures}},
+  \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}},
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}},
+  \code{\link{l_ng_ranges}}
 }
 

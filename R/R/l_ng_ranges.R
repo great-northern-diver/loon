@@ -1,17 +1,49 @@
-
-#' Navgraph with slider for top fraction of measures
+#' @title 2d navigation graph setup with with dynamic node fitering using a 
+#'   slider
+#'   
+#' @description Generic function to create a navigation graph environment where 
+#'   user can filter graph nodes using as slider to select 2d spaces based on 2d
+#'   measures.
+#'   
+#' @inheritParams l_ng_plots
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#' 
+#' @seealso \code{\link{l_ng_ranges.default}}, \code{\link{l_ng_ranges.measures}},
+#'   \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}},
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}},
+#'   \code{\link{l_ng_ranges}}
+#' 
 #' @export
 l_ng_ranges <- function(measures, ...) {
     UseMethod("l_ng_ranges")
 }
 
 
-#' Navigation graph based on Measures
+#' @title Select 2d spaces with variable associated measures using a slider
+#'   
+#' @description Measures object is a matrix or data.frame with measures 
+#'   (columns) for variable pairs (rows) and rownames of the two variates 
+#'   separated by separator   
+#'   
+#' @inheritParams l_ng_plots.default
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#' 
+#' @template return_l_ng
+#'         
+#' @seealso \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.measures}}, 
+#'   \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
 #' 
 #' @export
 #' 
 #' @examples 
-#' 
 #' # Simple example with generated data
 #' n <- 100
 #' dat <- data.frame(
@@ -289,11 +321,31 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 }
 
 
-#' Navigation Graphs based on Scagnostics Measures
+#' @title 2d Navigation Graph Setup with dynamic node fitering based on 
+#'   scagnostic measures and using a slider
+#'   
+#' @description This method is useful when working with objects from the 
+#'   \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R 
+#'   package. In order to dynamically re-calcultate the scagnostic measures for 
+#'   a subset of the data use the \code{\link{scagnostics2d}} measures creature 
+#'   function.
+#'   
+#' @inheritParams l_ng_plots.scagnostics
+#' 
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#'         
+#' @template return_l_ng
+#' 
+#' @seealso \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.default}}, 
+#'   \code{\link{l_ng_ranges.measures}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
+#' 
 #' @export
 #' 
 #' @examples 
-#' 
 #' library(scagnostics)
 #' s <- scagnostics(oliveAcids)
 #' ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
@@ -319,16 +371,32 @@ l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     l_ng_ranges.default(measures, data, separator, ...)
 }
 
-#' Navgraph with measures and sliders
+
+
+#' @title 2d Navigation Graph Setup with dynamic node fitering using a slider
+#'   
+#' @description Measures object is of class measures. When using measure objects
+#'   then the measures can be dynamically re-calculated for a subset of the 
+#'   data.
+#'   
+#' @inheritParams l_ng_plots.measures
+#'   
+#' @details Note that we provide the \code{\link{scagnostics2d}} function to 
+#'   create a measures object for the scagnostics measures.
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#'   
+#' @seealso \code{\link{measures1d}}, \code{\link{measures2d}}, 
+#'   \code{\link{scagnostics2d}}, \code{\link{l_ng_ranges}},
+#'   \code{\link{l_ng_plots}}
+#' 
+#' @template return_l_ng
 #'
 #' @export
-#' 
-#' @param measures measure closure of class measures
-#' @param ... arguments get passed to scatterplot
 #'
 #' @examples 
-#' 
-#' 
 #' # 2d measures
 #' s <- scagnostics2d(oliveAcids)
 #' nav <- l_ng_ranges(s, color=olive$Area)

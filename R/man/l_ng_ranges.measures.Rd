@@ -2,21 +2,33 @@
 % Please edit documentation in R/l_ng_ranges.R
 \name{l_ng_ranges.measures}
 \alias{l_ng_ranges.measures}
-\title{Navgraph with measures and sliders}
+\title{2d Navigation Graph Setup with dynamic node fitering using a slider}
 \usage{
 \method{l_ng_ranges}{measures}(measures, ...)
 }
 \arguments{
-\item{measures}{measure closure of class measures}
+\item{measures}{object of class measures, see \code{\link{measures1d}}, 
+\code{\link{measures2d}}.}
 
-\item{...}{arguments get passed to scatterplot}
+\item{...}{arguments passed on to configure the scatterplot}
+}
+\value{
+named list with plots-, graph-, plot-, navigator-, and context 
+  handle. The list also contains the environment of the the function call in 
+  \code{env}.
 }
 \description{
-Navgraph with measures and sliders
+Measures object is of class measures. When using measure objects
+  then the measures can be dynamically re-calculated for a subset of the 
+  data.
+}
+\details{
+Note that we provide the \code{\link{scagnostics2d}} function to 
+  create a measures object for the scagnostics measures.
+
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")}
 }
 \examples{
-
-
 # 2d measures
 s <- scagnostics2d(oliveAcids)
 nav <- l_ng_ranges(s, color=olive$Area)
@@ -31,5 +43,10 @@ m1d <- measures1d(sapply(iris[,-5], scale01),
 m1d()
 
 nav <- l_ng_ranges(m1d, color=iris$Species)
+}
+\seealso{
+\code{\link{measures1d}}, \code{\link{measures2d}}, 
+  \code{\link{scagnostics2d}}, \code{\link{l_ng_ranges}},
+  \code{\link{l_ng_plots}}
 }
 

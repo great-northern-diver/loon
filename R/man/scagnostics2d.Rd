@@ -2,14 +2,29 @@
 % Please edit documentation in R/scagnostics2d.R
 \name{scagnostics2d}
 \alias{scagnostics2d}
-\title{Created 2d scagnostics measure closure}
+\title{Closure of Two Dimensional Scagnostic Measures}
 \usage{
 scagnostics2d(data, scagnostics = c("Clumpy", "Monotonic", "Convex",
   "Stringy", "Skinny", "Outlying", "Sparse", "Striated", "Skewed"),
   separator = ":")
 }
+\arguments{
+\item{data}{a data.frame with the data used to calculate the measures}
+
+\item{scagnostics}{vector with valid scanostics meausure names, i.e "Clumpy",
+"Monotonic", "Convex", "Stringy", "Skinny", "Outlying", "Sparse", 
+"Striated", "Skewed". Also the prefix "Not" can be added to each measure
+which equals 1-measure.}
+}
+\value{
+a measures object
+}
 \description{
-We have added Not... to all the scagnostics measures.
+Function creates a 2d measures object that can be used with 
+  \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#measures")}
 }
 \examples{
 m <- scagnostics2d(oliveAcids, separator='**')
@@ -19,5 +34,9 @@ m(olive$palmitoleic > 80)
 m('data')
 m('grid')
 m('measures')
+}
+\seealso{
+\code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}}, 
+  \code{\link{measures2d}}
 }
 

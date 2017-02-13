@@ -2,12 +2,25 @@
 % Please edit documentation in R/measures.R
 \name{measures2d}
 \alias{measures2d}
-\title{Two Dimensional Measures}
+\title{Closure of Two Dimensional Measures}
 \usage{
 measures2d(data, ...)
 }
+\arguments{
+\item{data}{a data.frame with the data used to calculate the measures}
+
+\item{...}{named arguments, name is the function name and argument is the 
+function to calculate the measure for each variable.}
+}
+\value{
+a measures object
+}
 \description{
-Two Dimensional Measures
+Function creates a 2d measures object that can be used with 
+  \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#measures")}
 }
 \examples{
 m <- measures2d(oliveAcids, separator='*', cov=cov, cor=cor)
@@ -17,5 +30,9 @@ m(keep=olive$palmitic>1360)
 m('data')
 m('grid')
 m('measures')
+}
+\seealso{
+\code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}},
+  \code{\link{measures2d}}
 }
 

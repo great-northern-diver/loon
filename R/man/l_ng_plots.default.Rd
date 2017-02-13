@@ -2,24 +2,36 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots.default}
 \alias{l_ng_plots.default}
-\title{Select 2d spaces in scatterplot matrix}
+\title{Select 2d spaces with variable associated measures displayed in 
+  scatterplot matrix}
 \usage{
 \method{l_ng_plots}{default}(measures, data, separator = ":", ...)
 }
 \arguments{
+\item{measures}{matrix or data.frame with measures (columns) for variable 
+pairs (rows) and rownames of the two variates separated by separator}
+
 \item{data}{data frame for scatterplot}
 
-\item{separator}{a string that separates the variable pair string
-into the individual variables}
+\item{separator}{a string that separates the variable pair string into the 
+individual variables}
 
-\item{matrix}{with measures (columns) for variable pairs (rows) and
-rownames of the two variates separated by separatorl}
+\item{...}{arguments passed on to configure the scatterplot}
+}
+\value{
+named list with plots-, graph-, plot-, navigator-, and context 
+  handle. The list also contains the environment of the the function call in 
+  \code{env}.
 }
 \description{
-Select 2d spaces in scatterplot matrix
+Measures object is a matrix or data.frame with measures 
+  (columns) for variable pairs (rows) and rownames of the two variates 
+  separated by separator
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
 }
 \examples{
-
 n <- 100
 dat <- data.frame(
    A = rnorm(n), B = rnorm(n), C = rnorm(n),
@@ -60,5 +72,11 @@ q1 <- function(x)as.vector(quantile(x, probs=0.25))
 # be carful that the vector names are correct
 nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
 
+}
+\seealso{
+\code{\link{l_ng_plots}}, \code{\link{l_ng_plots.measures}}, 
+  \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}}, 
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+  \code{\link{l_ng_ranges}}
 }
 

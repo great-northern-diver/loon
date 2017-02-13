@@ -2,15 +2,35 @@
 % Please edit documentation in R/l_ng_ranges.R
 \name{l_ng_ranges.default}
 \alias{l_ng_ranges.default}
-\title{Navigation graph based on Measures}
+\title{Select 2d spaces with variable associated measures using a slider}
 \usage{
 \method{l_ng_ranges}{default}(measures, data, separator = ":", ...)
 }
+\arguments{
+\item{measures}{matrix or data.frame with measures (columns) for variable 
+pairs (rows) and rownames of the two variates separated by separator}
+
+\item{data}{data frame for scatterplot}
+
+\item{separator}{a string that separates the variable pair string into the 
+individual variables}
+
+\item{...}{arguments passed on to configure the scatterplot}
+}
+\value{
+named list with plots-, graph-, plot-, navigator-, and context 
+  handle. The list also contains the environment of the the function call in 
+  \code{env}.
+}
 \description{
-Navigation graph based on Measures
+Measures object is a matrix or data.frame with measures 
+  (columns) for variable pairs (rows) and rownames of the two variates 
+  separated by separator
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")}
 }
 \examples{
-
 # Simple example with generated data
 n <- 100
 dat <- data.frame(
@@ -44,5 +64,11 @@ nav <- l_ng_ranges(m1d, dat )
 nav <- l_ng_ranges(sapply(dat, sd), dat)
 
 
+}
+\seealso{
+\code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.measures}}, 
+  \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}}, 
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+  \code{\link{l_ng_ranges}}
 }
 

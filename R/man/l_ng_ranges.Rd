@@ -2,11 +2,28 @@
 % Please edit documentation in R/l_ng_ranges.R
 \name{l_ng_ranges}
 \alias{l_ng_ranges}
-\title{Navgraph with slider for top fraction of measures}
+\title{2d navigation graph setup with with dynamic node fitering using a 
+  slider}
 \usage{
 l_ng_ranges(measures, ...)
 }
+\arguments{
+\item{measures}{object with measures are stored}
+
+\item{...}{argument passed on to methods}
+}
 \description{
-Navgraph with slider for top fraction of measures
+Generic function to create a navigation graph environment where 
+  user can filter graph nodes using as slider to select 2d spaces based on 2d
+  measures.
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")}
+}
+\seealso{
+\code{\link{l_ng_ranges.default}}, \code{\link{l_ng_ranges.measures}},
+  \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}},
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}},
+  \code{\link{l_ng_ranges}}
 }
 

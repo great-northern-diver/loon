@@ -2,12 +2,32 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots.measures}
 \alias{l_ng_plots.measures}
-\title{Select 2d spaces in scatterplot matrix}
+\title{2d Navigation Graph Setup with dynamic node fitering using a 
+  scatterplot matrix}
 \usage{
 \method{l_ng_plots}{measures}(measures, ...)
 }
+\arguments{
+\item{measures}{object of class measures, see \code{\link{measures1d}}, 
+\code{\link{measures2d}}.}
+
+\item{...}{arguments passed on to configure the scatterplot}
+}
+\value{
+named list with plots-, graph-, plot-, navigator-, and context 
+  handle. The list also contains the environment of the the function call in 
+  \code{env}.
+}
 \description{
-Select 2d spaces in scatterplot matrix
+Measures object is of class measures. When using measure objects
+  then the measures can be dynamically re-calculated for a subset of the 
+  data.
+}
+\details{
+Note that we provide the \code{\link{scagnostics2d}} function to 
+  create a measures object for the scagnostics measures.
+
+For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
 }
 \examples{
 # 2d measures
@@ -31,5 +51,10 @@ nav <- l_ng_plots(measures1d(oliveAcids, sd))
 
 # with two measures
 nav <- l_ng_plots(measures1d(oliveAcids, sd=sd, mean=mean))
+}
+\seealso{
+\code{\link{measures1d}}, \code{\link{measures2d}}, 
+  \code{\link{scagnostics2d}}, \code{\link{l_ng_plots}},
+  \code{\link{l_ng_ranges}}
 }
 

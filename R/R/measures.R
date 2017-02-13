@@ -1,5 +1,24 @@
 
-#' One Dimensional Measures
+#' @title Closure of One Dimensional Measures
+#'   
+#' @description Function creates a 1d measures object that can be used with 
+#'   \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+#'   
+#' @param data a data.frame with the data used to calculate the measures
+#' @param ... named arguments, name is the function name and argument is the 
+#'   function to calculate the measure for each variable.
+#'   
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section measures
+#' @template see_l_help
+#'   
+#' @return a measures object
+#'   
+#' @seealso \code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}},
+#'   \code{\link{measures2d}}
+#'   
+#'   
 #' @export
 #' 
 #' @examples
@@ -64,14 +83,41 @@ measures1d <- function(data, ...) {
     )
 }
 
+
+#' @title Print function names from measure1d object
+#'   
+#' @description Prints the function names of a measure1d object using
+#'   \code{print.default}.
+#'   
+#' @param x measures1d object
+#' @param ... arguments passed on to print.default
+#'   
 #' @export
 print.measures1d <- function(x, ...) {
-    cat(paste("1d measure closure with measures:",
-              paste(x('measures'), collapse = ', '), "\n"))
+    print.default(paste("1d measure closure with measures:",
+              paste(x('measures'), collapse = ', '), "\n"), ...)
 }   
 
 
-#' Two Dimensional Measures
+
+#' @title Closure of Two Dimensional Measures
+#'   
+#' @description Function creates a 2d measures object that can be used with 
+#'   \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+#' 
+#' 
+#' @inheritParams measures1d
+#'   
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section measures
+#' @template see_l_help
+#'   
+#' @return a measures object
+#'   
+#' @seealso \code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}},
+#'   \code{\link{measures2d}}
+#'   
 #' @export
 #' 
 #' @examples 
@@ -144,6 +190,14 @@ measures2d <- function(data, ...) {
     )
 }
 
+#' @title Print function names from measure2d object
+#'   
+#' @description Prints the function names of a measure2d object using
+#'   \code{print.default}.
+#' 
+#' @inheritParams print.measures1d  
+#' @param x measures2d object
+#' 
 #' @export
 print.measures2d <- function(x, ...) {
     cat(paste("2d measure closure with measures:",

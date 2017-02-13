@@ -1,7 +1,25 @@
 
-#' Created 2d scagnostics measure closure
-#' 
-#' We have added Not... to all the scagnostics measures.
+#' @title Closure of Two Dimensional Scagnostic Measures
+#'   
+#' @description Function creates a 2d measures object that can be used with 
+#'   \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+#'   
+#'   
+#' @inheritParams measures1d
+#' @param scagnostics vector with valid scanostics meausure names, i.e "Clumpy",
+#'   "Monotonic", "Convex", "Stringy", "Skinny", "Outlying", "Sparse", 
+#'   "Striated", "Skewed". Also the prefix "Not" can be added to each measure
+#'   which equals 1-measure.
+#'   
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section measures
+#' @template see_l_help
+#'   
+#' @return a measures object
+#'   
+#' @seealso \code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}}, 
+#'   \code{\link{measures2d}}
 #' 
 #' @export
 #' 

@@ -2,12 +2,25 @@
 % Please edit documentation in R/measures.R
 \name{measures1d}
 \alias{measures1d}
-\title{One Dimensional Measures}
+\title{Closure of One Dimensional Measures}
 \usage{
 measures1d(data, ...)
 }
+\arguments{
+\item{data}{a data.frame with the data used to calculate the measures}
+
+\item{...}{named arguments, name is the function name and argument is the 
+function to calculate the measure for each variable.}
+}
+\value{
+a measures object
+}
 \description{
-One Dimensional Measures
+Function creates a 1d measures object that can be used with 
+  \code{\link{l_ng_plots}} and \code{\link{l_ng_ranges}}.
+}
+\details{
+For more information run: \code{l_help("learn_R_display_graph.html#measures")}
 }
 \examples{
 m1 <- measures1d(oliveAcids, mean=mean, median=median,
@@ -19,5 +32,9 @@ m1()
 m1(olive$palmitoleic>100)
 m1('data')
 m1('measures')
+}
+\seealso{
+\code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}},
+  \code{\link{measures2d}}
 }
 
