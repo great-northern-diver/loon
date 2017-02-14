@@ -2,7 +2,6 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer}
 \alias{l_layer}
-\alias{print.l_layer}
 \title{Loon layers}
 \usage{
 l_layer(widget, x, ...)

@@ -6,7 +6,14 @@
 \usage{
 l_zoom(widget, factor = 1.1)
 }
+\arguments{
+\item{widget}{widget path as a string or as an object handle}
+
+\item{factor}{a zoom factor}
+}
 \description{
-Zoom from and towards the center
+This function changes the plot states \code{panX}, \code{panY}, 
+  \code{zoomX}, and \code{zoomY} to zoom towards or away from the center of
+  the current view.
 }
 

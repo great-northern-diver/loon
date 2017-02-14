@@ -23,7 +23,7 @@ l_graph <- function(nodes, ...) {
 #' @title Create a graph display based on a graph object
 #'   
 #' @description Graph objects are defined in the graph \R package.
-#'   
+#' 
 #' @param nodes a graph object created with the functions in the \code{graph} \R
 #'   package.
 #' @param ... arguments to modify the graph display state

@@ -6,4 +6,16 @@
 \usage{
 l_data(data)
 }
+\arguments{
+\item{data}{a data.frame object}
+}
+\value{
+a string that represents with data.frame with a Tcl dictionary data
+  structure.
+}
+\description{
+This is a helper function to convert an \R data.frame object to 
+  a Tcl data frame object. This function is useful when changing a data state
+  with \code{\link{l_configure}}.
+}
 

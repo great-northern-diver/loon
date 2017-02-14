@@ -2,7 +2,7 @@
 % Please edit documentation in R/nestedLists.R
 \name{l_Rlist2nestedTclList}
 \alias{l_Rlist2nestedTclList}
-\title{Convert an R list to a nested tcl list}
+\title{Convert an R list to a nested Tcl list}
 \usage{
 l_Rlist2nestedTclList(x)
 }
@@ -19,5 +19,8 @@ This is a helper function to create a nested Tcl list from an R
 \examples{
 x <- list(c(1,3,4), c(4,3,2,1), c(4,3,2,5,6))
 l_Rlist2nestedTclList(x)
+}
+\seealso{
+\code{\link{l_nesteTclList2Rlist}}
 }
 

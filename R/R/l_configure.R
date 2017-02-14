@@ -1,5 +1,7 @@
 #' @title Modify one or multiple plot states
-#'   
+#' 
+#' @aliases [<-.loon
+#' 
 #' @description All of loon's displays have plot states. Plot states specify 
 #'   what is displayed, how it is displayed and if and how the plot is linked 
 #'   with other loon plots. Layers, glyphs, navigators and contexts have states 

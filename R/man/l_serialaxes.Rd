@@ -15,6 +15,9 @@ l_serialaxes(data, sequence, scaling = "variable", axesLayout = "radial",
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
 how the data is scaled. See Details for more information}
 }
+\value{
+plot handle object
+}
 \description{
 The seerialaxes widget displays multivariate data either as a
   stacked star glyph plot, or as a parallel coordinate plot.

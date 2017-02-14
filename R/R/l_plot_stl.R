@@ -1,10 +1,8 @@
 
 
-#' Visualize stl objects with loon
-#' 
-#' @export
-#' 
-l_plot.stl <- function() {
-    
-    
-}
+# Visualize stl objects with loon
+#
+# #TODO 
+#l_plot.stl <- function() {
+#    
+#}

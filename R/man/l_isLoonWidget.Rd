@@ -7,6 +7,14 @@
 l_isLoonWidget(widget)
 }
 \arguments{
-\item{widget}{widget path name as a string}
+\item{widget}{widget path as a string or as an object handle}
+}
+\value{
+boolean, TRUE if the argument is a valid loon widget path, FALSE 
+  otherwise
+}
+\description{
+This function can be useful to check whether a loon widget is
+  has been closed by the user.
 }
 

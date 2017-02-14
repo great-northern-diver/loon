@@ -21,6 +21,9 @@
 #' none \tab do not scale
 #' }
 #' 
+#' 
+#' @return plot handle object
+#' 
 #' @export
 #' 
 #' @examples 

@@ -3,8 +3,6 @@
 #' @description Loon supports layering of visuals and groups of visuals. The 
 #'   \code{l_layer} function is a generic method.
 #'   
-#' @aliases print.l_layer
-#'   
 #' @details loon's displays that use the main graphics model (i.e. histogram, 
 #'   scatterplot and graph displays) support layering of visual information. The
 #'   following table lists the layer types and functions for layering on a 

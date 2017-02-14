@@ -1,5 +1,5 @@
 
-#' @title Convert an R list to a nested tcl list
+#' @title Convert an R list to a nested Tcl list
 #'   
 #' @description This is a helper function to create a nested Tcl list from an R
 #'   list (i.e. a list of vectors).
@@ -7,6 +7,8 @@
 #' @param x a list of vectors
 #' 
 #' @return a string that represents the tcl nested list
+#' 
+#' @seealso \code{\link{l_nesteTclList2Rlist}}
 #' 
 #' @export
 #' 
@@ -19,15 +21,29 @@ l_Rlist2nestedTclList <- function(x) {
     #    tcl('lappend', tcl_x , x_el)        
     #}
     #return(paste0('{',tclvalue(tcl_x),'}'))
-           paste(
-               vapply(x, function(x_el) {
-                   paste0('{',paste(x_el, collapse = ' '),'}')
-               }, character(1)), collapse = ' ')
+    paste(
+        vapply(x, function(x_el) {
+            paste0('{',paste(x_el, collapse = ' '),'}')
+        }, character(1)),
+        collapse = ' '
+    )
 }
 
 
-#' Convert a nested tcl list to a R list
+#' @title Convert a nested Tcl list to an R list
+#'   
+#'   
+#' @param tclobj a tcl object as returned by \code{\link[tcltk]{tcl}} and 
+#'   \code{\link[tcltk]{.Tcl}}
+#' @param transform a function to transfrom the string output to another data
+#'   type
+#'  
+#' @return a nested \R list 
+#' 
+#' @seealso \code{\link{l_Rlist2nestedTclList}}
+#' 
 #' @export
+#' 
 #' @examples 
 #' 
 #' tclobj <- .Tcl('set a {{1 2 3} {2 3 4 4} {3 5 3 3}}')

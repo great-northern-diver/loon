@@ -2,16 +2,26 @@
 % Please edit documentation in R/nestedLists.R
 \name{l_nesteTclList2Rlist}
 \alias{l_nesteTclList2Rlist}
-\title{Convert a nested tcl list to a R list}
+\title{Convert a nested Tcl list to an R list}
 \usage{
 l_nesteTclList2Rlist(tclobj, transform = function(x) {     as.numeric(x) })
 }
-\description{
-Convert a nested tcl list to a R list
+\arguments{
+\item{tclobj}{a tcl object as returned by \code{\link[tcltk]{tcl}} and 
+\code{\link[tcltk]{.Tcl}}}
+
+\item{transform}{a function to transfrom the string output to another data
+type}
+}
+\value{
+a nested \R list
 }
 \examples{
 
 tclobj <- .Tcl('set a {{1 2 3} {2 3 4 4} {3 5 3 3}}')
 l_nesteTclList2Rlist(tclobj)
+}
+\seealso{
+\code{\link{l_Rlist2nestedTclList}}
 }
 
