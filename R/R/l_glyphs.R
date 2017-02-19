@@ -183,13 +183,14 @@ l_glyph_add <- function(widget, type, ...) {
 #' @param type loon-native non-primitive glyph type, one of \code{'text'}, 
 #'   \code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or
 #'   \code{'pointrange'}
+#' @param label label of a glyph (currently shown only in the glyph inspector)
 #' @param ... state arguments
 #'   
 #' @export
 #' 
-l_glyph_add.default <- function(widget, type, ...) {
+l_glyph_add.default <- function(widget, type, label="", ...) {
     ## as.vector strips attributes
-    structure(l_glyph(widget, "add", type, ...),
+    structure(l_glyph(widget, "add", type, label=label, ...),
               widget=as.vector(widget), class = c("loon","l_glyph"))
 }
 
@@ -201,7 +202,6 @@ l_glyph_add.default <- function(widget, type, ...) {
 #' @inheritParams l_glyph_add.default
 #' @param text the text strings for each observartion. If the object is a factor
 #'   then the labels get extracted with \code{\link{as.character}}.
-#' @param label label of a glyph (currently shown only in the glyph inspector)
 #'  
 #' @export
 #' 

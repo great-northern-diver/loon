@@ -1,12 +1,26 @@
 
 
 #' @title Make arbitrary glyphs with R graphic devices
-#' 
-#' 
-#' 
+#'   
+#' @description Loon's primitive glyph types are limited in terms of compound 
+#'   shapes. With this function you can create each point glyph as a png and 
+#'   re-import it as a tk img object to be used as point glyphs in loon. See the
+#'   examples.
+#'   
+#' @param data list where each element contains a data object used for the 
+#'   \code{draw_fun}
+#' @param draw_fun function that draws a glyph using \R base graphics or the 
+#'   grid (including ggplot2 and lattice) engine
+#' @param width width of each glyph in pixel
+#' @param height height of each glyph in pixel
+#' @param ... additional arguments passed on to the \code{\link{png}} function
+#'   
+#' @return vector with tk img object references
+#'   
 #' @export
 #' 
 #' @examples 
+#' \dontrun{
 #' data(minority)
 #' p <- l_plot(minority$long, minority$lat)
 #' 
@@ -40,6 +54,7 @@
 #'     grid.rect(0, 0, height = unit(x, "npc"), just = c("left", "bottom"),
 #'               gp=gpar(col=NA, fill="steelblue"))
 #' })
+#' }
 make_glyphs <- function(data, draw_fun, width=50, height=50, ...) {
     tmp <- tempdir()
     files <- Map(function(data_i, i) {

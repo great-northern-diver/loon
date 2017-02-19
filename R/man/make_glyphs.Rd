@@ -6,7 +6,30 @@
 \usage{
 make_glyphs(data, draw_fun, width = 50, height = 50, ...)
 }
+\arguments{
+\item{data}{list where each element contains a data object used for the 
+\code{draw_fun}}
+
+\item{draw_fun}{function that draws a glyph using \R base graphics or the 
+grid (including ggplot2 and lattice) engine}
+
+\item{width}{width of each glyph in pixel}
+
+\item{height}{height of each glyph in pixel}
+
+\item{...}{additional arguments passed on to the \code{\link{png}} function}
+}
+\value{
+vector with tk img object references
+}
+\description{
+Loon's primitive glyph types are limited in terms of compound 
+  shapes. With this function you can create each point glyph as a png and 
+  re-import it as a tk img object to be used as point glyphs in loon. See the
+  examples.
+}
 \examples{
+\dontrun{
 data(minority)
 p <- l_plot(minority$long, minority$lat)
 
@@ -40,5 +63,6 @@ li <- make_glyphs(runif(6), function(x) {
     grid.rect(0, 0, height = unit(x, "npc"), just = c("left", "bottom"),
               gp=gpar(col=NA, fill="steelblue"))
 })
+}
 }
 
