@@ -23,11 +23,15 @@
 #' p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
 #' img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
 #' imgs <- setNames(l_image_import_files(img_paths),
-#'                 tools::file_path_sans_ext(basename(img_paths)))
-#' }
+#'                  tools::file_path_sans_ext(basename(img_paths)))
+#' i <- pmatch(gsub("^[[:alpha:]]+-","", olive$Area), names(imgs), duplicates.ok = TRUE)
 #' 
+#' g <- l_glyph_add_image(p, imgs[i], label="Flags")
+#' p['glyph'] <- g
+#' }
 #'
 l_glyph_add_image <- function(widget, images, label="", ...) {
     return(l_glyph_add.default(widget, "image",
                        images=images, label=label, ...))
 }
+

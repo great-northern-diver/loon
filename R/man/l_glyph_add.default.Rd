@@ -4,7 +4,7 @@
 \alias{l_glyph_add.default}
 \title{Default method for adding non-primitive and loon-native glyphs}
 \usage{
-\method{l_glyph_add}{default}(widget, type, ...)
+\method{l_glyph_add}{default}(widget, type, label = "", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
@@ -12,6 +12,8 @@
 \item{type}{loon-native non-primitive glyph type, one of \code{'text'}, 
 \code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or
 \code{'pointrange'}}
+
+\item{label}{label of a glyph (currently shown only in the glyph inspector)}
 
 \item{...}{state arguments}
 }

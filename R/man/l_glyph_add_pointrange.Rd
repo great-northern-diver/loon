@@ -15,6 +15,8 @@ l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1, label = "", ...)
 
 \item{linewidth}{line with in pixel.}
 
+\item{label}{label of a glyph (currently shown only in the glyph inspector)}
+
 \item{...}{state arguments}
 }
 \description{

@@ -17,6 +17,8 @@ scatterplot point.}
 
 \item{showArea}{boolean, show a filled polygon or just the outline}
 
+\item{label}{label of a glyph (currently shown only in the glyph inspector)}
+
 \item{...}{state arguments}
 }
 \description{

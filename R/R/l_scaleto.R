@@ -5,6 +5,7 @@ l_scaleto <- function(widget, ...) {
     invisible()
 }
 
+
 #' @export
 l_scaleto_world <- function(widget) {
     l_scaleto(widget, "world")

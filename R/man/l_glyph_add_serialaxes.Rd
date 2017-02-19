@@ -29,6 +29,8 @@ unit circle or rectangle with height 1 if scaling=none)}
 
 \item{bboxColor}{color of bounding box/circle}
 
+\item{label}{label of a glyph (currently shown only in the glyph inspector)}
+
 \item{...}{state arguments}
 }
 \description{

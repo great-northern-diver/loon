@@ -1,10 +1,8 @@
 #' @title Import Greyscale Images as Tcl images from an Array
 #'   
-#' @description
-#' 
-#' Import image grayscale data (0-255) with each image saved as a row or column
-#' of an array.
-#' 
+#' @description Import image grayscale data (0-255) with each image saved as a
+#'   row or column of an array.
+#'   
 #' @param array of 0-255 grayscale value data.
 #' @param width of images in pixels.
 #' @param height of images in pixels.
@@ -13,7 +11,7 @@
 #' @param rotate the image: one of 0, 90, 180, or 270 degrees.
 #'   
 #' @details Images in tcl are managed by the tcl interpreter and made accessible
-#'   to the user via a handle, i.e. a function name of the form image1, image2,
+#'   to the user via a handle, i.e. a function name of the form image1, image2, 
 #'   etc.
 #'   
 #' @templateVar page learn_R_display_plot

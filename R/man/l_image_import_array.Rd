@@ -24,12 +24,12 @@ l_image_import_array(array, width, height, img_in_row = TRUE,
 vector of image object names
 }
 \description{
-Import image grayscale data (0-255) with each image saved as a row or column
-of an array.
+Import image grayscale data (0-255) with each image saved as a
+  row or column of an array.
 }
 \details{
 Images in tcl are managed by the tcl interpreter and made accessible
-  to the user via a handle, i.e. a function name of the form image1, image2,
+  to the user via a handle, i.e. a function name of the form image1, image2, 
   etc.
 
 For more information run: \code{l_help("learn_R_display_plot.html#images")}
