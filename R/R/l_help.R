@@ -14,7 +14,7 @@
 #' 
 #' @examples 
 #' 
-#' \donotrun{
+#' \dontrun{
 #' l_help()
 #' l_help("learn_R_display_hist")
 #' l_help("learn_R_bind")

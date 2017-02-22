@@ -60,6 +60,8 @@ l_navigator_add <- function(widget, from="", to="", proportion=0, color='orange'
 
 #' @title Delete a Navigator
 #' 
+#' @description Removes a navigator from a graph widget
+#' 
 #' @inheritParams l_navigator_add
 #' @param id navigator handle or navigator id
 #' 
@@ -72,6 +74,7 @@ l_navigator_delete <- function(widget, id) {
 
 #' @title List Navigators
 #' 
+#' @description Lists all navigatora that belong to a graph
 #' 
 #' @inheritParams l_navigator_delete
 #' 
@@ -84,7 +87,9 @@ l_navigator_ids <- function(widget) {
 
 
 #' @title Have the Navigator Walk a Path on the Graph
-#'   
+#'  
+#' @description Animate a navigator by having it walk on a path on the graph
+#'  
 #' @param navigator navigator handle
 #' @param path vector with node names of the host graph that form a valid path
 #'   on that graph
@@ -108,6 +113,8 @@ l_navigator_walk_path <- function(navigator, path) {
 
 #' @title Have the Navigator Walk Forward on the Current Path
 #'   
+#' @description Animate a navigator by having it walk on a path on the graph
+#' 
 #' @inheritParams l_navigator_walk_path
 #' @param to node name that is part of the active path forward where the
 #'   navigator should stop.
@@ -139,6 +146,8 @@ l_navigator_walk_forward <- function(navigator, to='') {
 
 
 #' @title Have the Navigator Walk Backward on the Current Path
+#' 
+#' @description Animate a navigator by having it walk on a path on the graph
 #' 
 #' @inheritParams l_navigator_walk_forward
 #' @param to node name that is part of the active path backward where the 
@@ -173,6 +182,8 @@ l_navigator_walk_backward <- function(navigator, to='') {
 
 #' @title Modify the Label of a Navigator
 #' 
+#' @description Change the navigator label
+#' 
 #' @param widget graph widget handle
 #' @param id navigator id
 #' @param label new label of navigator
@@ -186,6 +197,8 @@ l_navigator_relabel <- function(widget, id, label) {
 }
 
 #' @title Query the Label of a Navigator
+#' 
+#' @description Returns the label of a navigator
 #' 
 #' @inheritParams l_navigator_relabel
 #' 

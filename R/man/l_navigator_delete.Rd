@@ -11,6 +11,9 @@ l_navigator_delete(widget, id)
 
 \item{id}{navigator handle or navigator id}
 }
+\description{
+Removes a navigator from a graph widget
+}
 \seealso{
 \code{\link{l_navigator_add}}
 }

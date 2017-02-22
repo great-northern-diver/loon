@@ -12,6 +12,9 @@ l_navigator_walk_backward(navigator, to = "")
 \item{to}{node name that is part of the active path backward where the 
 navigator should stop.}
 }
+\description{
+Animate a navigator by having it walk on a path on the graph
+}
 \details{
 Note that navigators have the states \code{animationPause} and 
   \code{animationProportionIncrement} to control the animation speed. 

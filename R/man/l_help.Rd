@@ -20,7 +20,7 @@ The loon R package comes with a copy of loon's official webpage
 }
 \examples{
 
-\\donotrun{
+\dontrun{
 l_help()
 l_help("learn_R_display_hist")
 l_help("learn_R_bind")

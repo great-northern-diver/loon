@@ -12,6 +12,9 @@ l_navigator_walk_path(navigator, path)
 \item{path}{vector with node names of the host graph that form a valid path
 on that graph}
 }
+\description{
+Animate a navigator by having it walk on a path on the graph
+}
 \seealso{
 \code{\link{l_navigator_add}}
 }

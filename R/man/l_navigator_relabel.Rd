@@ -13,6 +13,9 @@ l_navigator_relabel(widget, id, label)
 
 \item{label}{new label of navigator}
 }
+\description{
+Change the navigator label
+}
 \seealso{
 \code{\link{l_navigator_add}}
 }
