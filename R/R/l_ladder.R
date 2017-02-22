@@ -1,6 +1,5 @@
 
-#' @export
-
+# TODO
 l_ladder <- function(from=-5, to=5, alphaX=0, alphaY=0) {
     tt <- l_toplevel()
 
@@ -10,8 +9,8 @@ l_ladder <- function(from=-5, to=5, alphaX=0, alphaY=0) {
     return(plot)
 }
 
-#' @export
 
+# TODO
 l_ladder_widget <- function(parent, from=-5, to=5, alphaX=0, alphaY=0) {
 
     child <- l_subwin(parent, 'ladder')

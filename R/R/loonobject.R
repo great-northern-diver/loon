@@ -1,16 +1,16 @@
 
-#' Create closure to evaluate code for a loon object
-#'
-#' Returns a closure that evaluates code for a partiular part of a
-#' loon plot widget such as a: the widget itself, layer, glyph,
-#' navigator, or context.
-#'
-#' @template param_target
-#'
-#' @return a closure that will evaualte tcl code for the particular
-#' object.
-#' 
-#' @export .loonobject
+# Create closure to evaluate code for a loon object
+#
+# Returns a closure that evaluates code for a partiular part of a
+# loon plot widget such as a: the widget itself, layer, glyph,
+# navigator, or context.
+#
+# @template param_target
+#
+# @return a closure that will evaualte tcl code for the particular
+# object.
+# 
+# # @export .loonobject
 .loonobject <- function(target, convert=as.character) {
 
     ## first check for loon objects

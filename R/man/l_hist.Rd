@@ -22,18 +22,22 @@ l_hist(x, origin = min(x), binwidth = NULL, parent = NULL, ...)
 widget handle
 }
 \description{
-Create an interactive histogram display that can be linked with
+Create an interactive histogram display that can be linked with 
   loon's other displays
 }
 \details{
 Note that when changing the \code{yshows} state form 
-  \code{'frequency'} to \code{'density'} you might have to run 
-  \code{\link{l_scale_world}}.
+  \code{'frequency'} to \code{'density'} you might have to use 
+  \code{\link{l_scale_world}} to show the complete histogram in the plotting
+  region.
 
 For more information run: \code{l_help("learn_R_display_hist")}
 }
 \examples{
 h <- l_hist(iris$Sepal.Length, color=iris$Species)
 
+}
+\seealso{
+\code{\link{l_plot}}
 }
 

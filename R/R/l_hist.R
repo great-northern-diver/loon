@@ -1,7 +1,7 @@
 
 #' @title Create an Interactive Histogram
 #'   
-#' @description Create an interactive histogram display that can be linked with
+#' @description Create an interactive histogram display that can be linked with 
 #'   loon's other displays
 #'   
 #' @param x vector with numerical data to perform the binning on
@@ -12,13 +12,16 @@
 #' @param ... named arguments to modify the histogram plot states
 #'   
 #' @details Note that when changing the \code{yshows} state form 
-#'   \code{'frequency'} to \code{'density'} you might have to run 
-#'   \code{\link{l_scale_world}}.
+#'   \code{'frequency'} to \code{'density'} you might have to use 
+#'   \code{\link{l_scale_world}} to show the complete histogram in the plotting
+#'   region.
 #'   
 #' @templateVar page  learn_R_display_hist
 #' @template see_l_help_page
 #'   
 #' @template return_widget_handle
+#'   
+#' @seealso \code{\link{l_plot}}
 #'   
 #' @export
 #' 
