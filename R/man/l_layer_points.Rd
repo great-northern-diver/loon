@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_points}
 \alias{l_layer_points}
-\title{Layer points onto plot}
+\title{Layer a points}
 \usage{
 l_layer_points(widget, x, y = NULL, color = "gray60", size = 6,
   label = "points", parent = "root", index = 0, ...)
@@ -34,6 +34,10 @@ structure.}
 layer object handle, layer id
 }
 \description{
+Loon's displays that are based on Cartesian coordinates (i.e.
+  scatterplot, histogram and graph display) allow for layering visual
+  information including polygons, text and rectangles.
+
 Scatter points layer
 }
 \details{

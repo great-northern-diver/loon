@@ -97,15 +97,14 @@ loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALS
 #' 
 #' loon_graph <- as.loongraph(graph_graph)
 as.loongraph <- function(graph) {
-    if (!is(graph, "graph")) {
-        stop("graph argument is not of class graph.")
-    }
+    if (!is(graph, "graph")) stop("graph argument is not of class graph.")
+    requireNamespace("graph", quietly = TRUE) || stop("graph package is required for this function.")
     
     nodes <- nodes(graph)
-    ft <- edgeMatrix(graph)
+    ft <- graph::edgeMatrix(graph)
     
     loongraph(nodes=nodes, from=nodes[ft[1,]], to=nodes[ft[2,]],
-              isDirected=isDirected(graph))    
+              isDirected=graph::isDirected(graph))    
 }
 
 
@@ -180,7 +179,7 @@ as.graph <- function(loongraph) {
 #' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 #' plot(g)
 plot.loongraph <- function(x, ...) {
-    plot(as.graph(x), ...)
+    graphics::plot(as.graph(x), ...)
 }
 
 
@@ -221,7 +220,7 @@ completegraph <- function(nodes, isDirected=FALSE) {
         from <- as.vector(co[,1])
         to <- co[,2]
     } else {
-        co <- combn(nodes, 2)
+        co <- utils::combn(nodes, 2)
         from <- co[1,]
         to <- co[2,]
     }
@@ -256,6 +255,7 @@ linegraph <- function(x, ...) {
 #' @param x loongraph object
 #' @param separator one character - node names in x get concatenated with this 
 #'   character
+#' @template param_dots_method_not_used
 #'   
 #' @details linegraph.loongraph needs the code part for directed graphs (i.e.
 #'   isDirected=TRUE)
@@ -268,7 +268,7 @@ linegraph <- function(x, ...) {
 #' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 #' 
 #' linegraph(g)
-linegraph.loongraph <- function(x, separator=":") {
+linegraph.loongraph <- function(x, separator=":", ...) {
     nodes <- x$nodes
     from <- x$from
     to <- x$to
@@ -330,13 +330,12 @@ linegraph.loongraph <- function(x, separator=":") {
 #' @description Creates a complement graph of a graph
 #' 
 #' @param x graph or loongraph object
-#' @param ... arguments passed on to method
 #' 
 #' @return graph object
 #' 
 #' @export
-complement <- function(x, ...) {
-    UseMethod("complement")
+complement <- function(x) {
+    UseMethod("complement", x)
 }
 
 
@@ -419,6 +418,8 @@ graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator='
 
 
 #' @title Make each space in a node apprear only once
+#' 
+#' @description Reduce a graph to have unique node names
 #' 
 #' @details Note this is a string based operation. Node names must not contain
 #'   the separator character!

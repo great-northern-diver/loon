@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_rectangles}
 \alias{l_layer_rectangles}
-\title{Layer rectangles onto plot}
+\title{Layer a rectangles}
 \usage{
 l_layer_rectangles(widget, x, y, color = "gray80", linecolor = "black",
   linewidth = 1, label = "rectangles", parent = "root", index = 0, ...)
@@ -32,6 +32,11 @@ fill is transparant}
 }
 \value{
 layer object handle, layer id
+}
+\description{
+Loon's displays that are based on Cartesian coordinates (i.e.
+  scatterplot, histogram and graph display) allow for layering visual
+  information including polygons, text and rectangles.
 }
 \details{
 For more information run: \code{l_help("learn_R_layer")}

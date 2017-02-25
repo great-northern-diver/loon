@@ -88,7 +88,7 @@ loon's displays that use the main graphics model (i.e. histogram,
   
   All layers have states that can be queried and modified using the same 
   functions as the ones used for displays (i.e. \code{\link{l_cget}}, 
-  \code{\link{l_configure}}, \code{\link{'['}} and \code{\link{'[<-'}}). The 
+  \code{\link{l_configure}}, \code{`[`} and \code{`[<-`}). The 
   last group of layer types in the above table have n-dimensional states, 
   where the actual value of n can be different for every layer in a display.
   

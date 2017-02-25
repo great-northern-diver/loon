@@ -203,13 +203,13 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
         if (tclvalue(tclvalueFilter) == "value") {
             spaces <- node_spaces[y >= scale_min & y <= scale_max]
         } else {
-            quan <- quantile(y, probs=c(scale_min, scale_max))
+            quan <- stats::quantile(y, probs=c(scale_min, scale_max))
             spaces <- node_spaces[y >= quan[1] & y <= quan[2]]
         }
         
         if (dim == 1) {
             if(length(spaces) >= 2)
-                nodes <- apply(combn(spaces, 2), 2, function(col)paste(col, collapse=separator))
+                nodes <- apply(utils::combn(spaces, 2), 2, function(col)paste(col, collapse=separator))
             else
                 nodes <- ""
         } else {
@@ -353,7 +353,8 @@ l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     
     force(data)
     
-    grid <- scagnosticsGrid(measures)
+    requireNamespace("scagnostics", quietly = TRUE) || stop("the scagnostics package is required for this method.")
+    grid <- scagnostics::scagnosticsGrid(measures)
     
     measures <- t(unclass(measures))
     

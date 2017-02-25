@@ -71,7 +71,7 @@ l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
         stop("dimensions of 'x', 'y' and 'z' do not match")
     
     
-    lines <- contourLines(x=x,y=y,z=z,nlevels=nlevels, levels=levels)
+    lines <- grDevices::contourLines(x=x,y=y,z=z,nlevels=nlevels, levels=levels)
     levels <- vapply(lines, function(x)x$level, numeric(1))
     xcoords <- sapply(lines, FUN=function(x)x$x)
     ycoords <- sapply(lines, FUN=function(x)x$y)
@@ -86,7 +86,7 @@ l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
         ids <- Map(function(l, x, y) {
             l_layer_line(widget, x=x, y=y, label=l, parent=id, ...)
         }, levels, xcoords, ycoords)
-        attr(id, ids=ids)
+        attr(id, "ids") <- ids
     }
     attr(id, "levels") <- levels
     return(id)

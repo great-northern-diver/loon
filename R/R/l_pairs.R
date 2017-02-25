@@ -57,7 +57,7 @@ l_pairs <- function(data, parent=NULL, ...) {
     args[['parent']] <- child
     
     nvar <- dim(data)[2]
-    pair <- combn(nvar, 2)
+    pair <- utils::combn(nvar, 2)
     varnames <- names(data)
 
     ## combn returns the variable combinations for the scatterplot

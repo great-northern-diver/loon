@@ -11,7 +11,7 @@
 #' 
 #' @return vector with item tags of visual
 #' 
-#' @seealso \code{\link{l_bind_items}}, \code{\link{l_currentindex}}
+#' @seealso \code{\link{l_bind_item}}, \code{\link{l_currentindex}}
 #' 
 #' @export
 #' 
@@ -47,7 +47,7 @@ l_currenttags <- function(widget) {
 #' @return index of the visual item's position in the corresponding variable
 #'   dimension of its layer
 #' 
-#' @seealso \code{\link{l_bind_items}}, \code{\link{l_currenttags}}
+#' @seealso \code{\link{l_bind_item}}, \code{\link{l_currenttags}}
 #' 
 #' @export
 #' 

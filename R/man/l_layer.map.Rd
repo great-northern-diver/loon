@@ -4,14 +4,15 @@
 \alias{l_layer.map}
 \title{Add a Map of class map as Drawings to Loon plot}
 \usage{
-\method{l_layer}{map}(widget, map, color = "", linecolor = "black",
+\method{l_layer}{map}(widget, x, color = "", linecolor = "black",
   linewidth = 1, label, parent = "root", index = 0,
-  asSingleLayer = TRUE)
+  asSingleLayer = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{map}{object of class \code{\link[maps]{map}} as defined in the maps library}
+\item{x}{a map object of class \code{\link[maps]{map}} as defined in the
+\code{maps} \R package}
 
 \item{color}{fill color, if empty string \code{""}, then the fill is transparant}
 
@@ -26,9 +27,11 @@
 \item{index}{position among its siblings. valid values are 0, 1, 2, ...,
 'end'}
 
-\item{asSingleLayer}{if \code{TRUE} then all the polygons get placed in a
-n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each
+\item{asSingleLayer}{if \code{TRUE} then all the polygons get placed in a 
+n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each 
 polygon gets its own layer.}
+
+\item{...}{additional arguments are not used for this methiod}
 }
 \value{
 If \code{asSingleLayer=TRUE} then returns layer id of polygons layer,
@@ -36,8 +39,8 @@ If \code{asSingleLayer=TRUE} then returns layer id of polygons layer,
 }
 \description{
 The maps library provides some map data in polygon which can be 
-  added as drawings (currently with polygons) to Loon plots. This function
-  adds map objects with class map from the maps library as background
+  added as drawings (currently with polygons) to Loon plots. This function 
+  adds map objects with class map from the maps library as background 
   drawings.
 }
 \examples{

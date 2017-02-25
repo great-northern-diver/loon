@@ -10,6 +10,7 @@
 #' @param viewer blooean, open help page in RStuidio viewer pane if possible
 #' @param ... arguments forwarded to browseURL, e.g. to specify a browser
 #' 
+#' @importFrom utils browseURL
 #' @export
 #' 
 #' @examples 

@@ -6,7 +6,7 @@
 \title{Data to re-create Hans Rosling's fameous "Us and Them" animation}
 \format{A data frame with 9855 rows and 8 variables}
 \source{
-\url{https://www.gapminder.org/}
+\url{http://www.gapminder.org/}
 }
 \usage{
 UsAndThem

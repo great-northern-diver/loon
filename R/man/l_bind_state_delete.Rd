@@ -2,12 +2,12 @@
 % Please edit documentation in R/l_bind.R
 \name{l_bind_state_delete}
 \alias{l_bind_state_delete}
-\title{Delete a state change binding}
+\title{Delete a state binding}
 \usage{
 l_bind_state_delete(target, id)
 }
 \arguments{
-\item{id}{state change binding id}
+\item{id}{state binding id}
 
 \item{widget}{widget path as a string or as an object handle}
 }
@@ -15,14 +15,14 @@ l_bind_state_delete(target, id)
 0 if success, otherwise the function throws an error
 }
 \description{
-Remove a state change binding
+Remove a state binding
 }
 \details{
 Bindings, callbacks, and binding substitutions are described in detail in
 loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 }
 \seealso{
-\code{\link{l_bind_state change}}, \code{\link{l_bind_state change_ids}},
-  \code{\link{l_bind_state change_get}}, \code{\link{l_bind_state change_reorder}}
+\code{\link{l_bind_state}}, \code{\link{l_bind_state_ids}},
+  \code{\link{l_bind_state_get}}, \code{\link{l_bind_state_reorder}}
 }
 

@@ -4,10 +4,12 @@
 \alias{print.l_layer}
 \title{Print a summary of a loon layer object}
 \usage{
-\method{print}{l_layer}(x)
+\method{print}{l_layer}(x, ...)
 }
 \arguments{
 \item{x}{an \code{l_layer} object}
+
+\item{...}{additional arguments are not used for this methiod}
 }
 \description{
 Prints the layer label and layer type

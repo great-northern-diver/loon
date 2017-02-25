@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_glyphs.R
 \name{l_glyph_add.default}
 \alias{l_glyph_add.default}
-\title{Default method for adding non-primitive and loon-native glyphs}
+\title{Default method for adding non-primitive glyphs}
 \usage{
 \method{l_glyph_add}{default}(widget, type, label = "", ...)
 }
@@ -10,7 +10,7 @@
 \item{widget}{widget path as a string or as an object handle}
 
 \item{type}{loon-native non-primitive glyph type, one of \code{'text'}, 
-\code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or
+\code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or 
 \code{'pointrange'}}
 
 \item{label}{label of a glyph (currently shown only in the glyph inspector)}
@@ -18,6 +18,7 @@
 \item{...}{state arguments}
 }
 \description{
-
+Generic function to write new glyph types using loon's primitive
+  glyphs
 }
 

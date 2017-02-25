@@ -146,7 +146,7 @@ measures2d <- function(data, ...) {
     
     n <- dim(data)[1]
     p <- dim(data)[2]
-    pairs <- t(combn(p, 2))
+    pairs <- t(utils::combn(p, 2))
     colnames(pairs) <- c('x','y')
     
     rownames(pairs) <- apply(pairs, 1, function(pair) {

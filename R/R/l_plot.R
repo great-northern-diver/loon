@@ -91,7 +91,7 @@ l_plot <- function(x, y, ...) {
 #'   individual point selection. See the documentation for \code{\link{l_plot}} 
 #'   for more details about the interaction gestures.
 #'   
-#'   
+#' @export
 #' @export l_plot.default
 #' 
 #' @examples 
@@ -118,12 +118,8 @@ l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
         ylabel <- if (!missing(y)) 
             gsub("\"", "", deparse(substitute(y)))
         
-        xy <- try(xy.coords(x, y, xlabel, ylabel))
-        if (is(xy,'try-error')) {
-            if(new.toplevel) tkdestroy(parent)
-            return
-        }
-        
+        xy <- xy.coords(x, y, xlabel, ylabel)
+
         ## xlab and ylab will be overwritten in they
         ## are defined in ...
         if (is.null(xy$xlab))

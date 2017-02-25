@@ -1,5 +1,5 @@
 
-#' @title Convenience Function to internally work with glyphs
+# Convenience Function to internally work with glyphs
 l_glyph <- function(widget, ...) {
     l_throwErrorIfNotLoonWidget(widget)
     as.character(tcl(widget, "glyph", ...))
@@ -58,7 +58,9 @@ l_glyph_ids <- function(widget) {
 }
 
 
-#' @title Get glyph label
+#' @title Get Glyph Label
+#' 
+#' @description Returns the label of a glyph
 #' 
 #' @inheritParams l_glyph_relabel
 #' 
@@ -174,14 +176,14 @@ l_glyph_add <- function(widget, type, ...) {
 }
 
 
-#' @title Default method for adding non-primitive and loon-native glyphs
-#'
-#' @description 
-#' 
-#' 
+#' @title Default method for adding non-primitive glyphs
+#'   
+#' @description Generic function to write new glyph types using loon's primitive
+#'   glyphs
+#'   
 #' @template param_widget
 #' @param type loon-native non-primitive glyph type, one of \code{'text'}, 
-#'   \code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or
+#'   \code{'serialaxes'}, \code{'image'}, \code{'[polygon'}, or 
 #'   \code{'pointrange'}
 #' @param label label of a glyph (currently shown only in the glyph inspector)
 #' @param ... state arguments

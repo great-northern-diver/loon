@@ -196,7 +196,7 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
         sel <- W['selected']
         if (dim == 1) {
             if(sum(sel) >= 2)
-                nodes <- apply(combn(node_spaces[sel], 2), 2,
+                nodes <- apply(utils::combn(node_spaces[sel], 2), 2,
                                function(col)paste(col, collapse=separator))
             else
                 nodes <- ""
@@ -350,7 +350,7 @@ l_ng_plots.measures <- function(measures, ...) {
         if(isSplom) {
             ## Update measures in scatterplot
             nvar <- dim(envir$measures)[2]
-            pair <- combn(nvar, 2)
+            pair <- utils::combn(nvar, 2)
             for (i in 1:dim(pair)[2]) {
                 ix <- pair[2,i]; iy <- pair[1,i]
                 l_configure(objs$plots[[i]], x=envir$measures[,ix], y=envir$measures[,iy])
@@ -466,7 +466,8 @@ l_ng_plots.scagnostics <- function(measures, data, separator=":", ...) {
 
     force(data)
     
-    grid <- scagnosticsGrid(measures)
+    requireNamespace("scagnostics", quietly = TRUE) || stop("scagnostics package is required for this method") 
+    grid <- scagnostics::scagnosticsGrid(measures)
     
     measures <- t(unclass(measures))
     

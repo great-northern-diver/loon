@@ -52,7 +52,7 @@ l_layer_rasterImage <-  function (widget, image, xleft, ybottom, xright, ytop,
     if(angle != 0) stop("only angle=0 is supported.")
     if(interpolate) warning("interpolation is not supported, interpolate=FALSE used.")
     
-    image <- if (inherits(image, "nativeRaster")) image else as.raster(image)
+    image <- if (inherits(image, "nativeRaster")) image else grDevices::as.raster(image)
     
     x <- seq(xleft, xright, length.out = dim(image)[2]+1)
     y <- seq(ytop, ybottom, length.out = dim(image)[1]+1)

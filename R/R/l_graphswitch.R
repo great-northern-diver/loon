@@ -94,7 +94,7 @@ l_graphswitch_add <- function(widget, graph, ...) {
 #' @param index position of graph in the graph list
 #' @param isDirected boolean to indicate whether the from-to-list defines
 #'   directed or undirected edges
-#'   
+#' @template param_dots_method_not_used
 #' 
 #' @template return_l_graphswitch_add 
 #'       
@@ -103,7 +103,7 @@ l_graphswitch_add <- function(widget, graph, ...) {
 #'  
 #' @export
 l_graphswitch_add.default <- function(widget, graph, from, to, isDirected,
-                                      label="", index="end") {
+                                      label="", index="end", ...) {
     nodes <- graph
     #print("add graph to switch")
     #print(paste( widget, 'add', label, nodes, from, to, isDirected, pos))
@@ -127,13 +127,14 @@ l_graphswitch_add.default <- function(widget, graph, from, to, isDirected,
 #'   
 #' @inheritParams l_graphswitch_add.default
 #' @param graph a loongraph object
+#' @template param_dots_method_not_used
 #' 
 #' @template return_l_graphswitch_add
 #' 
 #' @seealso \code{\link{l_graphswitch}}
 #' 
 #' @export
-l_graphswitch_add.loongraph <- function(widget, graph, label="", index='end') {
+l_graphswitch_add.loongraph <- function(widget, graph, label="", index='end', ...) {
     l_graphswitch_add.default(widget, graph$nodes, label=label, 
                               graph$from, graph$to, graph$isDirected, .index4R(index))    
 }
@@ -146,13 +147,14 @@ l_graphswitch_add.loongraph <- function(widget, graph, label="", index='end') {
 #' @inheritParams l_graphswitch_add.default
 #' @param nodes a graph object created with the functions in the \code{graph} \R
 #'   package.
+#' @template param_dots_method_not_used
 #' 
 #' @template return_l_graphswitch_add
 #' 
 #' @seealso \code{\link{l_graphswitch}}
 #' 
 #' @export
-l_graphswitch_add.graph <- function(widget, graph, label="", index='end') {
+l_graphswitch_add.graph <- function(widget, graph, label="", index='end', ...) {
     l_graphswitch_add.loongraph(widget, as.loongraph(graph), label, .index4R(index))
 }
 

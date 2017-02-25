@@ -20,11 +20,12 @@
 #' @description Prints the layer label and layer type
 #' 
 #' @param x an \code{l_layer} object
+#' @template param_dots_method_not_used
 #' 
 #' @seealso \code{\link{l_layer}}
 #' 
 #' @export
-print.l_layer <- function(x) {
+print.l_layer <- function(x, ...) {
     cat(paste0('loon layer "', l_layer_getLabel(attr(x, 'widget'), x),
               '" of type ', l_layer_getType(attr(x, 'widget'), x),
               ' of plot ',

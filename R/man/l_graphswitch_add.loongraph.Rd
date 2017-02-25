@@ -5,7 +5,7 @@
 \title{Add a graph to the graphswitch widget using a loongraph object}
 \usage{
 \method{l_graphswitch_add}{loongraph}(widget, graph, label = "",
-  index = "end")
+  index = "end", ...)
 }
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}
@@ -15,6 +15,8 @@
 \item{label}{string with label for graph}
 
 \item{index}{position of graph in the graph list}
+
+\item{...}{additional arguments are not used for this methiod}
 }
 \value{
 id for graph in the graphswitch widget

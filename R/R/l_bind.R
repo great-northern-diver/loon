@@ -187,7 +187,7 @@ l_bind_state <- function(target, event, callback) {
     return(id)
 }
 
-#' @templateVar type state change
+#' @templateVar type state
 #' @template templ_bind_ids
 #' 
 #' @export
@@ -197,7 +197,7 @@ l_bind_state_ids <- function(target) {
     
 }
 
-#' @templateVar type state change
+#' @templateVar type state
 #' @template templ_bind_get
 #'
 #' @export
@@ -207,7 +207,7 @@ l_bind_state_get <- function(target, id) {
     
 }
 
-#' @templateVar type state change
+#' @templateVar type state
 #' @template templ_bind_delete
 #' 
 #' @export
@@ -221,7 +221,7 @@ l_bind_state_delete <- function(target, id) {
     0
 }
 
-#' @templateVar type state change
+#' @templateVar type state
 #' @template templ_bind_reorder
 #' 
 #' @export

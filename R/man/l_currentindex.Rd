@@ -39,6 +39,6 @@ l_bind_item(p, tags='model&&point', event='<Leave>',
             callback=function(W) {printLeave(W)})
 }
 \seealso{
-\code{\link{l_bind_items}}, \code{\link{l_currenttags}}
+\code{\link{l_bind_item}}, \code{\link{l_currenttags}}
 }
 

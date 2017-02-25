@@ -5,7 +5,7 @@
 \title{Add a graph that is defined by node names and a from-to edges list}
 \usage{
 \method{l_graphswitch_add}{default}(widget, graph, from, to, isDirected,
-  label = "", index = "end")
+  label = "", index = "end", ...)
 }
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}
@@ -20,6 +20,8 @@ directed or undirected edges}
 \item{label}{string with label for graph}
 
 \item{index}{position of graph in the graph list}
+
+\item{...}{additional arguments are not used for this methiod}
 }
 \value{
 id for graph in the graphswitch widget

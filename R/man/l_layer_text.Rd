@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_text}
 \alias{l_layer_text}
-\title{Layer text onto plot}
+\title{Layer a text}
 \usage{
 l_layer_text(widget, x, y, text, color = "gray60", size = 6, angle = 0,
   label = "text", parent = "root", index = 0, ...)
@@ -35,6 +35,10 @@ l_layer_text(widget, x, y, text, color = "gray60", size = 6, angle = 0,
 layer object handle, layer id
 }
 \description{
+Loon's displays that are based on Cartesian coordinates (i.e.
+  scatterplot, histogram and graph display) allow for layering visual
+  information including polygons, text and rectangles.
+
 layer a single character string
 }
 \details{

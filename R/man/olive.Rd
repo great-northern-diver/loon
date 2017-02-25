@@ -22,7 +22,7 @@ This data set records the percentage composition of 8 fatty
 }
 \references{
 Forina, M., Armanino, C., Lanteri, S., and Tiscornia, E. (1983)
-  “Classification of Olive Oils from their Fatty Acid Composition”, in Food
+  "Classification of Olive Oils from their Fatty Acid Composition", in Food
   Research and Data Analysis (Martens, H., Russwurm, H., eds.), p. 189,
   Applied Science Publ., Barking.
 }

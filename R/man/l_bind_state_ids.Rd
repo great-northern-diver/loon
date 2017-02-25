@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_bind.R
 \name{l_bind_state_ids}
 \alias{l_bind_state_ids}
-\title{List state change binding ids}
+\title{List state binding ids}
 \usage{
 l_bind_state_ids(target)
 }
@@ -10,17 +10,17 @@ l_bind_state_ids(target)
 \item{widget}{widget path as a string or as an object handle}
 }
 \value{
-vector with state change binding ids
+vector with state binding ids
 }
 \description{
-List all user added state change binding ids
+List all user added state binding ids
 }
 \details{
 Bindings, callbacks, and binding substitutions are described in detail in
 loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 }
 \seealso{
-\code{\link{l_bind_state change}}, \code{\link{l_bind_state change_get}},
-  \code{\link{l_bind_state change_delete}}, \code{\link{l_bind_state change_reorder}}
+\code{\link{l_bind_state}}, \code{\link{l_bind_state_get}},
+  \code{\link{l_bind_state_delete}}, \code{\link{l_bind_state_reorder}}
 }
 

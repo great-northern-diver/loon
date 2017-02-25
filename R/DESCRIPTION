@@ -10,9 +10,14 @@ Description: Loon is a toolkit for interactive data visualization and exploratio
 License: GPL-2
 Depends:
     R (>= 2.10.0),
+    methods,
     tcltk
 Imports:
-    tools
+    tools,
+    graphics,
+    grDevices,
+    utils,
+    stats
 Suggests:
     maps,
     sp,
@@ -28,6 +33,7 @@ Suggests:
     kernlab,
     MASS,
     dplyr,
-    testthat
+    testthat,
+    knitr
 LazyData: true
 RoxygenNote: 5.0.1

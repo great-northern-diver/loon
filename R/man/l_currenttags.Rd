@@ -29,6 +29,6 @@ p <- l_plot(x=1:3, y=1:3, title='Query Visual Item Tags')
 l_bind_item(p, 'all', '<ButtonPress>', function(W)printTags(W))
 }
 \seealso{
-\code{\link{l_bind_items}}, \code{\link{l_currentindex}}
+\code{\link{l_bind_item}}, \code{\link{l_currentindex}}
 }
 

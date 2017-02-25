@@ -2,12 +2,12 @@
 % Please edit documentation in R/l_bind.R
 \name{l_bind_state_get}
 \alias{l_bind_state_get}
-\title{Get the event pattern and callback Tcl code of a state change binding}
+\title{Get the event pattern and callback Tcl code of a state binding}
 \usage{
 l_bind_state_get(target, id)
 }
 \arguments{
-\item{id}{state change binding id}
+\item{id}{state binding id}
 
 \item{widget}{widget path as a string or as an object handle}
 }
@@ -25,7 +25,7 @@ Bindings, callbacks, and binding substitutions are described in detail in
 loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 }
 \seealso{
-\code{\link{l_bind_state change}}, \code{\link{l_bind_state change_ids}},
-  \code{\link{l_bind_state change_delete}}, \code{\link{l_bind_state change_reorder}}
+\code{\link{l_bind_state}}, \code{\link{l_bind_state_ids}},
+  \code{\link{l_bind_state_delete}}, \code{\link{l_bind_state_reorder}}
 }
 

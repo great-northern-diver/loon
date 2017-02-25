@@ -2,30 +2,30 @@
 % Please edit documentation in R/l_bind.R
 \name{l_bind_state_reorder}
 \alias{l_bind_state_reorder}
-\title{Reorder the state change binding evaluation sequence}
+\title{Reorder the state binding evaluation sequence}
 \usage{
 l_bind_state_reorder(target, ids)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{id}{new state change binding id evaluation order, this must be a 
+\item{id}{new state binding id evaluation order, this must be a 
 rearrangement of the elements returned by the
-\code{\link{l_bind_state change_ids}} function.}
+\code{\link{l_bind_state_ids}} function.}
 }
 \value{
 vector with binding id evaluation order (same as the \code{id} argument)
 }
 \description{
-The order the state change bindings defines how they get evaluated 
-  once an event matches event patterns of multiple state change bindings.
+The order the state bindings defines how they get evaluated 
+  once an event matches event patterns of multiple state bindings.
 }
 \details{
 Bindings, callbacks, and binding substitutions are described in detail in
 loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 }
 \seealso{
-\code{\link{l_bind_state change}}, \code{\link{l_bind_state change_ids}},
-  \code{\link{l_bind_state change_get}}, \code{\link{l_bind_state change_delete}}
+\code{\link{l_bind_state}}, \code{\link{l_bind_state_ids}},
+  \code{\link{l_bind_state_get}}, \code{\link{l_bind_state_delete}}
 }
 

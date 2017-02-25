@@ -4,7 +4,8 @@
 \alias{l_graphswitch_add.graph}
 \title{Add a graph to the graphswitch widget using a graph object}
 \usage{
-\method{l_graphswitch_add}{graph}(widget, graph, label = "", index = "end")
+\method{l_graphswitch_add}{graph}(widget, graph, label = "", index = "end",
+  ...)
 }
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}
@@ -12,6 +13,8 @@
 \item{label}{string with label for graph}
 
 \item{index}{position of graph in the graph list}
+
+\item{...}{additional arguments are not used for this methiod}
 
 \item{nodes}{a graph object created with the functions in the \code{graph} \R
 package.}

@@ -14,6 +14,9 @@ graphreduce(graph, separator)
 \value{
 graph object of class loongraph
 }
+\description{
+Reduce a graph to have unique node names
+}
 \details{
 Note this is a string based operation. Node names must not contain
   the separator character!

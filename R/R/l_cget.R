@@ -63,7 +63,7 @@ l_cget <- function(target, state) {
     } else if (state %in% c("n","p")) {
         environment(obj_eval)$convert <- function(x) {as.numeric(as.character(x))}
     } else if (type == "nested_double") {
-        environment(obj_eval)$convert <- l_nesteTclList2Rlist
+        environment(obj_eval)$convert <- l_nestedTclList2Rlist
     } else {
         dim <- obj_eval('info', 'stateDimension', state)
         if (dim == "1") {

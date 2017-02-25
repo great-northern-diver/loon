@@ -5,9 +5,8 @@
 #'   Geographic.Region information between 1962 and 2013 for 198 countries.
 #'   
 #' @format A data frame with 9855 rows and 8 variables
-#' @source \url{https://www.gapminder.org/}
+#' @source \url{http://www.gapminder.org/}
 "UsAndThem"
-
 
 
 #' @title Fatty Acid Composition of Italian Olive Oils
@@ -26,7 +25,7 @@
 #' @format A data frame containing 572 cases and 10 variates.
 #'   
 #' @references Forina, M., Armanino, C., Lanteri, S., and Tiscornia, E. (1983)
-#'   “Classification of Olive Oils from their Fatty Acid Composition”, in Food
+#'   "Classification of Olive Oils from their Fatty Acid Composition", in Food
 #'   Research and Data Analysis (Martens, H., Russwurm, H., eds.), p. 189,
 #'   Applied Science Publ., Barking.
 #'   

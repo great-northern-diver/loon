@@ -7,7 +7,7 @@
 \usage{
 linegraph(x, ...)
 
-\method{linegraph}{loongraph}(x, separator = ":")
+\method{linegraph}{loongraph}(x, separator = ":", ...)
 }
 \arguments{
 \item{x}{graph of class graph or loongraph}
@@ -18,6 +18,8 @@ linegraph(x, ...)
 character}
 
 \item{x}{loongraph object}
+
+\item{...}{additional arguments are not used for this methiod}
 }
 \value{
 graph object

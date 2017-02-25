@@ -13,7 +13,7 @@
 #'   
 #' @details Note that when changing the \code{yshows} state form 
 #'   \code{'frequency'} to \code{'density'} you might have to use 
-#'   \code{\link{l_scale_world}} to show the complete histogram in the plotting
+#'   \code{\link{l_scaleto_world}} to show the complete histogram in the plotting
 #'   region.
 #'   
 #' @templateVar page  learn_R_display_hist

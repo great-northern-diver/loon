@@ -107,13 +107,20 @@ loon_palette <- function(n) {
 
 
 
-#' @title Convert 12 digit color representations to 6 digit color
-#'   representations
-#'   
-#' @details Function throws a warning if the conversion looses information. The
-#'   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
-#'   12 digit hexadecimal color representation.
-#'   
+# @title Convert 12 digit color representations to 6 digit color
+#   representations
+# 
+# @description 
+# 
+# @param x a vector with 12digit hexcolors
+#    
+# @details Function throws a warning if the conversion looses information. The
+#   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
+#   12 digit hexadecimal color representation.
+#       
+# @examples 
+# x <- l_hexcolor(c("red", "blue", "green", "orange"))
+# hex12tohex6(x)
 hex12tohex6 <- function(x) {
     # convert to hex6
     col1 <- paste0( "#", substr(x, 2, 3), substr(x, 6, 7), substr(x, 10, 11))
@@ -142,7 +149,7 @@ hex12tohex6 <- function(x) {
 #'   
 #'   \enumerate{
 #'   
-#'   \item if all values already represent valid Tk colors (see
+#'   \item if all values already represent valid Tk colors (see 
 #'   \code{\link{tkcolors}}) then those colors are taken
 #'   
 #'   \item if the number of distinct values are less than number of values in 
@@ -217,9 +224,9 @@ hex12tohex6 <- function(x) {
 #'   
 #' @return NULL
 #'   
-#' @seealso \code{\link{loon_color}}, \code{\link{l_getColorList}}, 
+#' @seealso \code{\link{l_setColorList}}, \code{\link{l_getColorList}}, 
 #'   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
-#'   \code{\link{l_setColorList_ggplot2}}, \code{\link{l_setColorList_baseR}}
+#'   \code{\link{l_setColorList_baseR}}
 #'   
 #' @export
 #' 
@@ -242,7 +249,8 @@ hex12tohex6 <- function(x) {
 #' # you can also perform the color mapping yourself, for example with
 #' # the col_numeric function provided in the scales package
 #' library(scales)
-#' p_custom <- with(olive, l_plot(stearic ~ oleic, color = col_numeric("Greens", domain = NULL)(palmitic)))
+#' p_custom <- with(olive, l_plot(stearic ~ oleic,
+#'      color = col_numeric("Greens", domain = NULL)(palmitic)))
 #' }
 #' 
 l_setColorList <- function(colors) {

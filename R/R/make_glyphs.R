@@ -61,11 +61,11 @@ make_glyphs <- function(data, draw_fun, width=50, height=50, ...) {
         
         file <- file.path(tmp, paste0("img", i, ".png"))
         
-        png(file, width=width, height = height, ...)
+        grDevices::png(file, width=width, height = height, ...)
  
         draw_fun(data_i)
         
-        dev.off()
+        grDevices::dev.off()
         
         file
     }, data, 1:length(data))

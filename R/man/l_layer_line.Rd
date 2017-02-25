@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_line}
 \alias{l_layer_line}
-\title{Layer line onto plot}
+\title{Layer a line}
 \usage{
 l_layer_line(widget, x, y = NULL, color = "black", linewidth = 1,
   dash = "", label = "line", parent = "root", index = 0, ...)
@@ -35,6 +35,11 @@ structure.}
 }
 \value{
 layer object handle, layer id
+}
+\description{
+Loon's displays that are based on Cartesian coordinates (i.e.
+  scatterplot, histogram and graph display) allow for layering visual
+  information including polygons, text and rectangles.
 }
 \details{
 For more information run: \code{l_help("learn_R_layer")}

@@ -26,7 +26,7 @@ There are two commonly used mapping schemes of data values to
   
   \enumerate{
   
-  \item if all values already represent valid Tk colors (see
+  \item if all values already represent valid Tk colors (see 
   \code{\link{tkcolors}}) then those colors are taken
   
   \item if the number of distinct values are less than number of values in 
@@ -116,13 +116,14 @@ l_setColorList(cols)
 # you can also perform the color mapping yourself, for example with
 # the col_numeric function provided in the scales package
 library(scales)
-p_custom <- with(olive, l_plot(stearic ~ oleic, color = col_numeric("Greens", domain = NULL)(palmitic)))
+p_custom <- with(olive, l_plot(stearic ~ oleic,
+     color = col_numeric("Greens", domain = NULL)(palmitic)))
 }
 
 }
 \seealso{
-\code{\link{loon_color}}, \code{\link{l_getColorList}}, 
+\code{\link{l_setColorList}}, \code{\link{l_getColorList}}, 
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
-  \code{\link{l_setColorList_ggplot2}}, \code{\link{l_setColorList_baseR}}
+  \code{\link{l_setColorList_baseR}}
 }
 

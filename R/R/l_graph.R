@@ -16,8 +16,9 @@
 #'   \code{l_graph.default}
 #'   
 #' @export
+#' 
 l_graph <- function(nodes, ...) {
-    UseMethod("l_graph")
+    UseMethod("l_graph", nodes)
 }
 
 #' @title Create a graph display based on a graph object
@@ -37,6 +38,7 @@ l_graph <- function(nodes, ...) {
 #' @seealso \code{\link{l_graph}}, \code{\link{l_info_states}},
 #'   \code{\link{l_graph.loongraph}}
 #'   
+#' @export 
 #' @export l_graph.graph
 l_graph.graph <- function(nodes, ...) {
     l_graph.loongraph(as.loongraph(nodes), ...)
@@ -60,7 +62,8 @@ l_graph.graph <- function(nodes, ...) {
 #'   
 #' @seealso \code{\link{loongraph}}, \code{\link{l_graph}}, 
 #'   \code{\link{l_info_states}}, \code{\link{l_graph.graph}}
-#'   
+#' 
+#' @export
 #' @export l_graph.loongraph
 l_graph.loongraph <- function(nodes,...) {
     graph <- nodes
@@ -89,7 +92,7 @@ l_graph.loongraph <- function(nodes,...) {
 #' @seealso \code{\link{loongraph}}, \code{\link{l_graph}}, 
 #'   \code{\link{l_info_states}}, \code{\link{l_graph.graph}}
 #'   
-#'   
+#' @export
 #' @export l_graph.default
 l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 

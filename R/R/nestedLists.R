@@ -8,7 +8,7 @@
 #' 
 #' @return a string that represents the tcl nested list
 #' 
-#' @seealso \code{\link{l_nesteTclList2Rlist}}
+#' @seealso \code{\link{l_nestedTclList2Rlist}}
 #' 
 #' @export
 #' 
@@ -30,8 +30,9 @@ l_Rlist2nestedTclList <- function(x) {
 }
 
 
-#' @title Convert a nested Tcl list to an R list
+#' @title Convert a Nested Tcl List to an R List
 #'   
+#' @description Helper function to work with \R and Tcl
 #'   
 #' @param tclobj a tcl object as returned by \code{\link[tcltk]{tcl}} and 
 #'   \code{\link[tcltk]{.Tcl}}
@@ -47,8 +48,8 @@ l_Rlist2nestedTclList <- function(x) {
 #' @examples 
 #' 
 #' tclobj <- .Tcl('set a {{1 2 3} {2 3 4 4} {3 5 3 3}}')
-#' l_nesteTclList2Rlist(tclobj)
-l_nesteTclList2Rlist <- function(tclobj, transform=function(x) {as.numeric(x)}) {
+#' l_nestedTclList2Rlist(tclobj)
+l_nestedTclList2Rlist <- function(tclobj, transform=function(x) {as.numeric(x)}) {
 
     n <- as.numeric(tcl('llength', tclobj))
     x <- vector(mode = 'list', length = n)

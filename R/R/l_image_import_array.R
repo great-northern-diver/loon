@@ -73,7 +73,7 @@ l_image_import_array <- function(array, width, height,
                                              palette = '256/256/+256')
                         tcl(im,'put',
                             paste(rbind('{',
-                                        matrix(grey((inv + sign * img_data/255)[ii]),
+                                        matrix(grDevices::grey((inv + sign * img_data/255)[ii]),
                                                ncol = img_h, byrow = byrow),'}'),
                                   collapse = ' ')
                             )

@@ -4,12 +4,10 @@
 \alias{complement}
 \title{Create the Complement Graph of a Graph}
 \usage{
-complement(x, ...)
+complement(x)
 }
 \arguments{
 \item{x}{graph or loongraph object}
-
-\item{...}{arguments passed on to method}
 }
 \value{
 graph object

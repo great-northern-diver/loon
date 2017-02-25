@@ -69,7 +69,7 @@
 #'   
 #'   All layers have states that can be queried and modified using the same 
 #'   functions as the ones used for displays (i.e. \code{\link{l_cget}}, 
-#'   \code{\link{l_configure}}, \code{\link{'['}} and \code{\link{'[<-'}}). The 
+#'   \code{\link{l_configure}}, \code{`[`} and \code{`[<-`}). The 
 #'   last group of layer types in the above table have n-dimensional states, 
 #'   where the actual value of n can be different for every layer in a display.
 #'   
@@ -128,10 +128,11 @@ l_layer <- function(widget, x, ...) {
 #' 
 #' @template return_layerid
 #'   
-#' @export l_layer.density
-#'   
 #' @seealso \code{\link[stats]{density}}, \code{\link{l_layer}}
-#'   
+#' 
+#' @export
+#' @export l_layer.density
+#' 
 #' @examples  
 #' d <- density(faithful$eruptions, bw = "sj")
 #' h <- l_hist(x = faithful$eruptions, yshows="density")
@@ -391,6 +392,7 @@ l_layer_rectangles <- function(widget, x, y,
 #' @template seealso_layers
 #'   
 #' @export
+#' @importFrom grDevices xy.coords
 #' 
 #' 
 #' @examples 

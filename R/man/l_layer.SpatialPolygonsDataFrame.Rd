@@ -35,7 +35,7 @@ l_scaleto_world(p)
 }
 \references{
 Applied Spatial Data Analysis with R by Bivand, Roger S. and
-  Pebesma, Edzer and Gómez-Rubio and Virgilio
+  Pebesma, Edzer and Gomez-Rubio and Virgilio
   \url{http://www.springer.com/us/book/9781461476177}
 }
 \seealso{

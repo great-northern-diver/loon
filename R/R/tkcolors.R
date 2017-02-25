@@ -50,8 +50,10 @@
 #' for (i in 1:nrow(df_diff)) {
 #'     y <- unit(1, "npc") - unit(i*1.2, "lines")
 #'     grid.text(rownames(df_diff)[i], x=x_col, y=y, just='left')
-#'     grid.rect(x=x_R, y=y, width=unit(3, "line"), height=unit(1, "line"), gp=gpar(fill=df_diff[i,1]))
-#'     grid.rect(x=x_Tcl, y=y, width=unit(3, "line"), height=unit(1, "line"), gp=gpar(fill=df_diff[i,2]))
+#'     grid.rect(x=x_R, y=y, width=unit(3, "line"),
+#'               height=unit(1, "line"), gp=gpar(fill=df_diff[i,1]))
+#'     grid.rect(x=x_Tcl, y=y, width=unit(3, "line"),
+#'               height=unit(1, "line"), gp=gpar(fill=df_diff[i,2]))
 #' }
 tkcolors <- function() {
     

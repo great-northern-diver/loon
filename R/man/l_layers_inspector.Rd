@@ -14,6 +14,10 @@ l_layers_inspector(parent = NULL, ...)
 \value{
 widget handle
 }
+\description{
+Inpectors provide graphical user interfaces to oversee and
+  modify plot states
+}
 \examples{
 i <- l_layers_inspector()
 }

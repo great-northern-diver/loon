@@ -28,5 +28,6 @@
 #' @docType package
 #' @name loon
 #' @import tcltk
-#'   
+#' @import methods
+#' 
 "_PACKAGE"
