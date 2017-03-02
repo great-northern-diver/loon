@@ -2,7 +2,6 @@
 #' 
 #' @description Remove a <%=type%> binding
 #' 
-#' @param widget widget path as a string or as an object handle
 #' @param id <%=type%> binding id
 #' 
 #' @details 

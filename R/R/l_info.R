@@ -5,7 +5,7 @@
 #'   loon object that has plot states includin plots, layers, navigators,
 #'   contexts.
 #'   
-#' @template param_widget
+#' @template param_target
 #' @param states vector with names of states. \code{'all'} is treated as a 
 #'   keyword and results in returning information on all plot states
 #'   

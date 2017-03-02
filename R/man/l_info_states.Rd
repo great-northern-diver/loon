@@ -7,10 +7,13 @@
 l_info_states(target, states = "all")
 }
 \arguments{
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
+
 \item{states}{vector with names of states. \code{'all'} is treated as a 
 keyword and results in returning information on all plot states}
-
-\item{widget}{widget path as a string or as an object handle}
 }
 \value{
 a named nested list with one element per state. The list elements are

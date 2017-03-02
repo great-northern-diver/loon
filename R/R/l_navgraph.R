@@ -5,7 +5,7 @@
 #'   geodesic2d context added, and a scatterplot.
 #' 
 #' @param data a data.frame with numeric variables only
-#' @param separator string the separates variable names in 2d graph nodes
+#' @template param_separator
 #' @param graph optional, graph or loongraph object with navigation graph. If 
 #'   the graph argument is not used then a 3d and 4d transition graph and a 
 #'   complete transition graph is added.

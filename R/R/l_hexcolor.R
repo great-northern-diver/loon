@@ -3,11 +3,11 @@
 #'   
 #' @description Color names in loon will be mapped to colors according to the Tk
 #'   color specifications and are normalized to a 12 digit hexadecimal color 
-#'   representation. This function maps Tk color names to 
+#'   representation.
 #'   
-#'   
-#'   Colors in color states in loon are normalized usto a 12 digit hexadecimal 
-#'   color representatio
+#' @param color a vector with color names
+#' 
+#' @return a character vector with the 12 digit hexadecimal color strings.
 #'   
 #'   
 #' @export
@@ -18,6 +18,6 @@
 #' p['color']
 #' 
 #' l_hexcolor('red')
-l_hexcolor <- function(colors) {
-    as.character(tcl('::loon::listfns::toHexcolor', colors))
+l_hexcolor <- function(color) {
+    as.character(tcl('::loon::listfns::toHexcolor', color))
 }

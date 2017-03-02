@@ -10,7 +10,7 @@
 #'   "Monotonic", "Convex", "Stringy", "Skinny", "Outlying", "Sparse", 
 #'   "Striated", "Skewed". Also the prefix "Not" can be added to each measure
 #'   which equals 1-measure.
-#'   
+#' @template param_separator
 #'   
 #' @templateVar page  learn_R_display_graph
 #' @templateVar section measures

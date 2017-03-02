@@ -762,9 +762,11 @@ l_layer_show <- function(widget, layer) {
 #' @template descr_layer_labels
 #' 
 #' @inheritParams l_layer_delete
-#' @template return_layer_cmd
+#' @param label new label of layer
 #' 
 #' @template details_layer_label
+#' 
+#' @template return_layer_cmd
 #' 
 #' @seealso \code{\link{l_layer}}, \code{\link{l_layer_getLabel}}
 #' @export

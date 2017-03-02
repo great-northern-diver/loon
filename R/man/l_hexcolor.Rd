@@ -4,16 +4,18 @@
 \alias{l_hexcolor}
 \title{Convert color names to their 12 digit hexadecimal color representation}
 \usage{
-l_hexcolor(colors)
+l_hexcolor(color)
+}
+\arguments{
+\item{color}{a vector with color names}
+}
+\value{
+a character vector with the 12 digit hexadecimal color strings.
 }
 \description{
 Color names in loon will be mapped to colors according to the Tk
   color specifications and are normalized to a 12 digit hexadecimal color 
-  representation. This function maps Tk color names to 
-  
-  
-  Colors in color states in loon are normalized usto a 12 digit hexadecimal 
-  color representatio
+  representation.
 }
 \examples{
 p <- l_plot(1:2)

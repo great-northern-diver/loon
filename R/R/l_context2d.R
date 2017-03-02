@@ -56,6 +56,7 @@ l_context_ids <- function(navigator) {
 #'   This function relabels a context.
 #'   
 #' @inheritParams l_context_delete
+#' @param label context label shown
 #'   
 #' @templateVar page  learn_R_display_graph
 #' @templateVar section contexts

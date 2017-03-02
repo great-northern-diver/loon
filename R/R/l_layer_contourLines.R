@@ -5,6 +5,7 @@
 #'   plot which is based on the cartesian coordinate system.
 #'
 #' @inheritParams grDevices::contourLines
+#' @param y see description for the \code{x} argument
 #' @template param_widget
 #' @param asSingleLayer if \code{TRUE} a lines layer is used for the line,
 #'   otherwise if \code{FALSE} a group with nested line layers for each line is

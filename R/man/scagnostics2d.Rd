@@ -15,6 +15,8 @@ scagnostics2d(data, scagnostics = c("Clumpy", "Monotonic", "Convex",
 "Monotonic", "Convex", "Stringy", "Skinny", "Outlying", "Sparse", 
 "Striated", "Skewed". Also the prefix "Not" can be added to each measure
 which equals 1-measure.}
+
+\item{separator}{string the separates variable names in 2d graph nodes}
 }
 \value{
 a measures object

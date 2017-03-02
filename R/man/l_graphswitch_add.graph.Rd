@@ -10,14 +10,14 @@
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}
 
+\item{graph}{a graph object created with the functions in the \code{graph} \R
+package.}
+
 \item{label}{string with label for graph}
 
 \item{index}{position of graph in the graph list}
 
 \item{...}{additional arguments are not used for this methiod}
-
-\item{nodes}{a graph object created with the functions in the \code{graph} \R
-package.}
 }
 \value{
 id for graph in the graphswitch widget

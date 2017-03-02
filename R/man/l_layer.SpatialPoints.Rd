@@ -7,6 +7,10 @@
 \method{l_layer}{SpatialPoints}(widget, x, asMainLayer = FALSE, ...)
 }
 \arguments{
+\item{widget}{widget widget path as a string or as an object handle}
+
+\item{x}{an object defined in the class \code{\link[sp]{sp}}}
+
 \item{asMainLayer}{if \code{TRUE} and the widget is a scatterplot widget,
 then points can be chosen to be added to the \code{'model'} layer}
 

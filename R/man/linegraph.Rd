@@ -2,47 +2,22 @@
 % Please edit documentation in R/graphutils.R
 \name{linegraph}
 \alias{linegraph}
-\alias{linegraph.loongraph}
 \title{Create a linegraph}
 \usage{
 linegraph(x, ...)
-
-\method{linegraph}{loongraph}(x, separator = ":", ...)
 }
 \arguments{
 \item{x}{graph of class graph or loongraph}
 
 \item{...}{arguments passed on to method}
-
-\item{separator}{one character - node names in x get concatenated with this 
-character}
-
-\item{x}{loongraph object}
-
-\item{...}{additional arguments are not used for this methiod}
 }
 \value{
 graph object
-
-graph object of class loongraph
 }
 \description{
 The line graph of G, here denoted L(G), is the graph whose nodes 
- correspond to the edges of G and whose edges correspond to nodes of G such 
- that nodes of L(G) are joined if and only if the corresponding edges of G 
- are adjacent in G.
-}
-\details{
-linegraph.loongraph needs the code part for directed graphs (i.e.
-  isDirected=TRUE)
-}
-\section{Methods (by class)}{
-\itemize{
-\item \code{loongraph}: 
-}}
-\examples{
-g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-
-linegraph(g)
+  correspond to the edges of G and whose edges correspond to nodes of G such 
+  that nodes of L(G) are joined if and only if the corresponding edges of G 
+  are adjacent in G.
 }
 

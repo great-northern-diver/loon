@@ -2,7 +2,6 @@
 #' 
 #' @description List all user added <%=type%> binding ids
 #' 
-#' @param widget widget path as a string or as an object handle
 #' 
 #' @details 
 #' Bindings, callbacks, and binding substitutions are described in detail in

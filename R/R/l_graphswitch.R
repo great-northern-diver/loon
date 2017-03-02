@@ -90,17 +90,19 @@ l_graphswitch_add <- function(widget, graph, ...) {
 #'   
 #' @inheritParams l_graph.default
 #' @param widget graphswitch widget handle (or widget path)
+#' @param graph a vector with the node names, i.e. this argument gets passed on
+#'   as the nodes argument to creat a \code{\link{loongraph}} like object
 #' @param label string with label for graph
 #' @param index position of graph in the graph list
-#' @param isDirected boolean to indicate whether the from-to-list defines
+#' @param isDirected boolean to indicate whether the from-to-list defines 
 #'   directed or undirected edges
 #' @template param_dots_method_not_used
-#' 
-#' @template return_l_graphswitch_add 
-#'       
+#'   
+#' @template return_l_graphswitch_add
+#'   
 #' @seealso \code{\link{l_graphswitch}}
-#'  
-#'  
+#'   
+#'   
 #' @export
 l_graphswitch_add.default <- function(widget, graph, from, to, isDirected,
                                       label="", index="end", ...) {
@@ -145,7 +147,7 @@ l_graphswitch_add.loongraph <- function(widget, graph, label="", index='end', ..
 #' @description Graph objects are defined in the graph \R package.
 #'   
 #' @inheritParams l_graphswitch_add.default
-#' @param nodes a graph object created with the functions in the \code{graph} \R
+#' @param graph a graph object created with the functions in the \code{graph} \R
 #'   package.
 #' @template param_dots_method_not_used
 #' 
@@ -267,6 +269,8 @@ l_graphswitch_set <- function(widget, id) {
 #'   
 #' @description Graphs can be extracted from the graphswitch widget as loongraph
 #'   objects.
+#'   
+#' @inheritParams l_graphswitch_delete
 #'   
 #' @seealso \code{\link{l_graphswitch}}, \code{\link{loongraph}}
 #'   

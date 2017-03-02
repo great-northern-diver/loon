@@ -4,7 +4,6 @@
 #' Creates a binding that evaluates a callback for particular changes in the
 #' collection of <%=type%>s of a display.
 #' 
-#' @param widget widget path as a string or as an object handle
 #' @param callback callback function is an R function which is called by the Tcl
 #'   interpreter if the event of interest happens. Note that in loon the 
 #'   callback functions support different optional arguments depending on the

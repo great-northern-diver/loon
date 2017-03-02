@@ -14,6 +14,14 @@ l_serialaxes(data, sequence, scaling = "variable", axesLayout = "radial",
 
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
 how the data is scaled. See Details for more information}
+
+\item{axesLayout}{either \code{"serial"} or \code{"parallel"}}
+
+\item{showAxes}{boolean to indicate whether axes should be shown or not}
+
+\item{parent}{parent widget path}
+
+\item{...}{state arguments, see \code{\link{l_info_states}}.}
 }
 \value{
 plot handle object

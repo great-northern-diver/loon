@@ -9,7 +9,7 @@ l_bind_glyph_reorder(widget, ids)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{id}{new glyph binding id evaluation order, this must be a 
+\item{ids}{new glyph binding id evaluation order, this must be a 
 rearrangement of the elements returned by the
 \code{\link{l_bind_glyph_ids}} function.}
 }

@@ -1,24 +1,29 @@
 #' @title Display a Heat Image
-#' 
+#'   
 #' @description This function is very similar to the 
 #'   \code{\link[graphics]{image}} function. It works with every loon plot which
 #'   is based on the cartesian coordinate system.
-#'
+#'   
 #' @inheritParams graphics::image
+#' @param x locations of grid lines at which the values in z are measured. These
+#'   must be finite, non-missing and in (strictly) ascending order. By default,
+#'   equally spaced values from 0 to 1 are used. If x is a list, its components
+#'   x$x and x$y are used for x and y, respectively. If the list has component z
+#'   this is used for z.
+#' @param y see description for the \code{x} argument above
+#' @param xlim range for the plotted x values, defaulting to the range of x
+#' @param ylim range for the plotted y values, defaulting to the range of y
 #' @template param_widget
-#' @param asSingleLayer if \code{TRUE} a lines layer is used for the line,
-#'   otherwise if \code{FALSE} a group with nested line layers for each line is
-#'   created
 #' @template param_parent
 #' @template param_index
 #' @param ... argumnets forwarded to \code{\link{l_layer_line}}
-#' 
+#'   
 #' @return layer id of group or rectangles layer
-#' 
+#'   
 #' @templateVar page learn_R_layer
 #' @templateVar section countourlines-heatimage-rasterimage
 #' @template see_l_help
-#' 
+#'   
 #' @export
 #' 
 #' @examples 

@@ -278,8 +278,12 @@ l_getColorList <- function() {
 #' @templateVar type ColorBrewer
 #' @template man_setColorList
 #'   
+#'   
+#' @param palette one of the following RColorBrewer palette name: Set1, Set2,
+#'   Set3, Pasetl1, Pastel2, Paired, Dark2, or Accent
+#'   
 #' @details Only the following palettes in ColorBrewer are available: Set1, 
-#'   Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples
+#'   Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples 
 #'   below.
 #'   
 #' @export

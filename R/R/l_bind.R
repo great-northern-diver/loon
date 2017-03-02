@@ -64,6 +64,8 @@ l_bind_canvas <- function(widget, event, callback) {
 #' @templateVar type canvas
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 #' 
 #' @template examples_bind_canvas
@@ -74,7 +76,9 @@ l_bind_canvas_ids <- function(widget) {
 
 #' @templateVar type canvas
 #' @template templ_bind_get
-#'   
+#' 
+#' @template param_widget
+#' 
 #' @export
 #' 
 #' @template examples_bind_canvas
@@ -86,6 +90,8 @@ l_bind_canvas_get <- function(widget, id) {
 #' @templateVar type canvas
 #' @template templ_bind_delete
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_canvas_delete <- function(widget, id) {
     l_bind(widget, "canvas", "delete", id)
@@ -95,6 +101,8 @@ l_bind_canvas_delete <- function(widget, id) {
 
 #' @templateVar type canvas
 #' @template templ_bind_reorder
+#'  
+#' @template param_widget
 #'  
 #' @export
 l_bind_canvas_reorder <- function(widget, ids) {
@@ -107,6 +115,8 @@ l_bind_canvas_reorder <- function(widget, ids) {
 
 #' @templateVar type layer
 #' @template templ_bind_collection
+#'
+#' @template param_widget
 #'
 #' @param event a vector with one or more of the following evnets: \code{'add'},
 #'   \code{'delete'}, \code{'move'}, \code{'hide'}, \code{'show'},
@@ -122,6 +132,8 @@ l_bind_layer <- function(widget, event, callback) {
 #' @templateVar type layer
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_layer_ids <- function(widget) {
     l_bind(widget, "layer", "ids")
@@ -129,6 +141,8 @@ l_bind_layer_ids <- function(widget) {
 
 #' @templateVar type layer
 #' @template templ_bind_get
+#' 
+#' @template param_widget
 #'
 #' @export
 l_bind_layer_get <- function(widget, id) {
@@ -137,6 +151,8 @@ l_bind_layer_get <- function(widget, id) {
 
 #' @templateVar type layer
 #' @template templ_bind_delete
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_layer_delete <- function(widget, id) {
@@ -147,6 +163,8 @@ l_bind_layer_delete <- function(widget, id) {
 
 #' @templateVar type layer
 #' @template templ_bind_reorder
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_layer_reorder <- function(widget, ids) {
@@ -161,6 +179,7 @@ l_bind_layer_reorder <- function(widget, ids) {
 #'   states change, as specified at binding creation.
 #' 
 #' @inheritParams l_bind_canvas
+#' @template param_target
 #' @param event vector with state names
 #' 
 #' @details 
@@ -190,6 +209,8 @@ l_bind_state <- function(target, event, callback) {
 #' @templateVar type state
 #' @template templ_bind_ids
 #' 
+#' @template param_target
+#' 
 #' @export
 l_bind_state_ids <- function(target) {
     
@@ -199,6 +220,8 @@ l_bind_state_ids <- function(target) {
 
 #' @templateVar type state
 #' @template templ_bind_get
+#' 
+#' @template param_target
 #'
 #' @export
 l_bind_state_get <- function(target, id) {
@@ -209,6 +232,8 @@ l_bind_state_get <- function(target, id) {
 
 #' @templateVar type state
 #' @template templ_bind_delete
+#' 
+#' @template param_target
 #' 
 #' @export
 l_bind_state_delete <- function(target, id) {
@@ -223,6 +248,8 @@ l_bind_state_delete <- function(target, id) {
 
 #' @templateVar type state
 #' @template templ_bind_reorder
+#' 
+#' @template param_target
 #' 
 #' @export
 l_bind_state_reorder <- function(target, ids) {
@@ -272,6 +299,8 @@ l_bind_item <- function(widget, tags, event, callback) {
 #' @templateVar type item
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_item_ids <- function(widget) {
     l_bind(widget, "item", "ids")
@@ -280,6 +309,8 @@ l_bind_item_ids <- function(widget) {
 #' @templateVar type item
 #' @template templ_bind_get
 #'
+#' @template param_widget
+#'
 #' @export
 l_bind_item_get <- function(widget, id) {
     l_bind(widget, "item", "get", id)
@@ -287,6 +318,8 @@ l_bind_item_get <- function(widget, id) {
 
 #' @templateVar type item
 #' @template templ_bind_delete
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_item_delete <- function(widget, id) {
@@ -297,6 +330,8 @@ l_bind_item_delete <- function(widget, id) {
 
 #' @templateVar type item
 #' @template templ_bind_reorder
+#' 
+#' @template param_widget
 #' 
 #' @description Reordering item bindings has currently no effect. Item bindings 
 #'   are evaluated in the order in which they have been added.
@@ -312,6 +347,8 @@ l_bind_item_reorder <- function(widget, ids) {
 #' @templateVar type glyph
 #' @template templ_bind_collection
 #' 
+#' @template param_widget
+#' 
 #' @param event a vector with one or more of the following evnets: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
 #'   
@@ -325,6 +362,8 @@ l_bind_glyph <- function(widget, event, callback) {
 #' @templateVar type glyph
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_glyph_ids <- function(widget) {
     l_bind(widget, "glyph", "ids")
@@ -334,6 +373,8 @@ l_bind_glyph_ids <- function(widget) {
 #' @templateVar type glyph
 #' @template templ_bind_get
 #'
+#' @template param_widget
+#' 
 #' @export
 l_bind_glyph_get <- function(widget, id) {
     l_bind(widget, "glyph", "get", id)
@@ -341,6 +382,8 @@ l_bind_glyph_get <- function(widget, id) {
 
 #' @templateVar type glyph
 #' @template templ_bind_delete
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_glyph_delete <- function(widget, id) {
@@ -352,6 +395,8 @@ l_bind_glyph_delete <- function(widget, id) {
 #' @templateVar type glyph
 #' @template templ_bind_reorder
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_glyph_reorder <- function(widget, ids) {
     l_bind(widget, "glyph", "reorder", ids)
@@ -362,6 +407,7 @@ l_bind_glyph_reorder <- function(widget, ids) {
 #' @templateVar type navigator
 #' @template templ_bind_collection
 #' 
+#' @template param_widget
 #' @param event a vector with one or more of the following evnets: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
 #' 
@@ -375,6 +421,8 @@ l_bind_navigator <- function(widget, event, callback) {
 #' @templateVar type navigator
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_navigator_ids <- function(widget) {
     l_bind(widget, "navigator", "ids")
@@ -384,6 +432,8 @@ l_bind_navigator_ids <- function(widget) {
 #' @templateVar type navigator
 #' @template templ_bind_get
 #'
+#' @template param_widget
+#' 
 #' @export
 l_bind_navigator_get <- function(widget, id) {
     l_bind(widget, "navigator", "get", id)
@@ -391,6 +441,8 @@ l_bind_navigator_get <- function(widget, id) {
 
 #' @templateVar type navigator
 #' @template templ_bind_delete
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_navigator_delete <- function(widget, id) {
@@ -402,6 +454,8 @@ l_bind_navigator_delete <- function(widget, id) {
 #' @templateVar type navigator
 #' @template templ_bind_reorder
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_navigator_reorder <- function(widget, ids) {
     l_bind(widget, "navigator", "reorder", ids)
@@ -411,6 +465,8 @@ l_bind_navigator_reorder <- function(widget, ids) {
 
 #' @templateVar type context
 #' @template templ_bind_collection
+#' 
+#' @template param_widget
 #' 
 #' @param event a vector with one or more of the following evnets: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
@@ -425,6 +481,8 @@ l_bind_context <- function(widget, event, callback) {
 #' @templateVar type context
 #' @template templ_bind_ids
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_context_ids <- function(widget) {
     l_bind(widget, "context", "ids")
@@ -433,6 +491,8 @@ l_bind_context_ids <- function(widget) {
 #' @templateVar type context
 #' @template templ_bind_get
 #'
+#' @template param_widget
+#'
 #' @export
 l_bind_context_get <- function(widget, id) {
     l_bind(widget, "context", "get", id)
@@ -440,6 +500,8 @@ l_bind_context_get <- function(widget, id) {
 
 #' @templateVar type context
 #' @template templ_bind_delete
+#' 
+#' @template param_widget
 #' 
 #' @export
 l_bind_context_delete <- function(widget, id) {
@@ -451,8 +513,9 @@ l_bind_context_delete <- function(widget, id) {
 #' @templateVar type context
 #' @template templ_bind_reorder
 #' 
+#' @template param_widget
+#' 
 #' @export
 l_bind_context_reorder <- function(widget, ids) {
     l_bind(widget, "context", "reorder", ids)
 }
-

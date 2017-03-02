@@ -7,9 +7,12 @@
 l_scaleto_layer(target, layer)
 }
 \arguments{
-\item{layer}{layer id}
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
 
-\item{widget}{widget path as a string or as an object handle}
+\item{layer}{layer id}
 }
 \description{
 The function modifies the \code{zoomX}, \code{zoomY}, 

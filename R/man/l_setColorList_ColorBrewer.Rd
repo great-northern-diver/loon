@@ -7,13 +7,17 @@
 l_setColorList_ColorBrewer(palette = c("Set1", "Set2", "Set3", "Pasetl1",
   "Pastel2", "Paired", "Dark2", "Accent"))
 }
+\arguments{
+\item{palette}{one of the following RColorBrewer palette name: Set1, Set2,
+Set3, Pasetl1, Pastel2, Paired, Dark2, or Accent}
+}
 \description{
 Loon's color list is used to map nominal values to colors. See
   the documentation for \code{\link{l_setColorList}}.
 }
 \details{
 Only the following palettes in ColorBrewer are available: Set1, 
-  Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples
+  Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples 
   below.
 }
 \examples{

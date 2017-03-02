@@ -9,7 +9,7 @@ l_bind_context_reorder(widget, ids)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{id}{new context binding id evaluation order, this must be a 
+\item{ids}{new context binding id evaluation order, this must be a 
 rearrangement of the elements returned by the
 \code{\link{l_bind_context_ids}} function.}
 }

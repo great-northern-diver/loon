@@ -6,6 +6,11 @@
 \usage{
 l_graphswitch_get(widget, id)
 }
+\arguments{
+\item{widget}{graphswitch widget handle (or widget path)}
+
+\item{id}{of the graph}
+}
 \description{
 Graphs can be extracted from the graphswitch widget as loongraph
   objects.

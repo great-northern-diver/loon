@@ -10,6 +10,8 @@ l_context_relabel(navigator, id, label)
 \item{navigator}{navigator hanlde}
 
 \item{id}{context id}
+
+\item{label}{context label shown}
 }
 \description{
 Context labels are eventually used in the context inspector.

@@ -8,7 +8,10 @@
 #' @param sequence vector with variable names that defines the axes sequence
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
 #'   how the data is scaled. See Details for more information
-#'   
+#' @param axesLayout either \code{"serial"} or \code{"parallel"}
+#' @param showAxes boolean to indicate whether axes should be shown or not
+#' @template param_parent
+#' @template param_dots_state_args
 #'   
 #' @details The \code{scaling} state defines how the data is scaled. The axes
 #'   display 0 at one end and 1 at the other. For the following explanation

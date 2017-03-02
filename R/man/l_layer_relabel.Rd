@@ -11,6 +11,8 @@ l_layer_relabel(widget, layer, label)
 
 \item{layer}{layer id. If the widget argument is of class \code{'l_layer'}
 then the layer argument is not used}
+
+\item{label}{new label of layer}
 }
 \value{
 0 if success otherwise the function throws an error

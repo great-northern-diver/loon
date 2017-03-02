@@ -7,6 +7,10 @@
 \method{l_layer}{Polygon}(widget, x, ...)
 }
 \arguments{
+\item{widget}{widget widget path as a string or as an object handle}
+
+\item{x}{an object defined in the class \code{\link[sp]{sp}}}
+
 \item{...}{arguments forwarded to the relative \code{\link{l_layer}} function}
 }
 \value{

@@ -7,6 +7,11 @@
 l_bind_state(target, event, callback)
 }
 \arguments{
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
+
 \item{event}{vector with state names}
 
 \item{callback}{callback function is an R function which is called by the Tcl

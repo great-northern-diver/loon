@@ -222,27 +222,27 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
 
 ## Helper Functions
 
-#' Create a list of polygons or lines
-#'
-#' @examples  
-#' library(sp)
-#' library(rworldmap)
-#' world <- getMap(resolution = "coarse")
-#' class(world)
-#' isS4(world)
-#' xy <- spAsList(world)
-#'
-#' names(xy)
-#' # because tree has same depth for every leaf unlist is ok
-#' uxy <- spunlist(xy)
-#' unlist(xy, recursive=FALSE)
-#' 
-#' names(uxy)
-#' 
-#' # but here, unlist would be wrong
-#' a <- list(list(x=1:2, y=1:2), list(list(x=1:3, y=1:3), list(x=1:4, y=1:4)))
-#' spunlist(a)
-#' unlist(a, recursive=FALSE)
+# Create a list of polygons or lines
+#
+# @examples  
+# library(sp)
+# library(rworldmap)
+# world <- getMap(resolution = "coarse")
+# class(world)
+# isS4(world)
+# xy <- spAsList(world)
+#
+# names(xy)
+# # because tree has same depth for every leaf unlist is ok
+# uxy <- spunlist(xy)
+# unlist(xy, recursive=FALSE)
+# 
+# names(uxy)
+# 
+# # but here, unlist would be wrong
+# a <- list(list(x=1:2, y=1:2), list(list(x=1:3, y=1:3), list(x=1:4, y=1:4)))
+# spunlist(a)
+# unlist(a, recursive=FALSE)
 spAsList <- function(x) {
     UseMethod("spAsList")   
 }
@@ -313,7 +313,7 @@ spAsList.Line <- function(x) {
 }
 
 
-#' Create a flat list of polygon specifications
+# Create a flat list of polygon specifications
 spunlist <- function(x) {
     isLeaf <- function(x) {
         length(x) <= 3 && !is.null(names(x)) && all(names(x)[1:2] == c('x','y')) 

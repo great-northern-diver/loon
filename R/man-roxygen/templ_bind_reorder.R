@@ -3,8 +3,7 @@
 #' @description The order the <%=type%> bindings defines how they get evaluated 
 #'   once an event matches event patterns of multiple <%=type%> bindings.
 #' 
-#' @param widget widget path as a string or as an object handle
-#' @param id new <%=type%> binding id evaluation order, this must be a 
+#' @param ids new <%=type%> binding id evaluation order, this must be a 
 #'   rearrangement of the elements returned by the
 #'   \code{\link{l_bind_<%=type%>_ids}} function.
 #' 

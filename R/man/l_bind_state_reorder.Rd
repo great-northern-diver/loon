@@ -7,9 +7,12 @@
 l_bind_state_reorder(target, ids)
 }
 \arguments{
-\item{widget}{widget path as a string or as an object handle}
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
 
-\item{id}{new state binding id evaluation order, this must be a 
+\item{ids}{new state binding id evaluation order, this must be a 
 rearrangement of the elements returned by the
 \code{\link{l_bind_state_ids}} function.}
 }

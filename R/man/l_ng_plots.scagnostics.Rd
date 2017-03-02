@@ -10,6 +10,13 @@
 \arguments{
 \item{measures}{objects from the \code{\link[scagnostics]{scagnostics}} 
 function from the scagnostics \R package}
+
+\item{data}{data frame for scatterplot}
+
+\item{separator}{a string that separates the variable pair string into the 
+individual variables}
+
+\item{...}{arguments passed on to configure the scatterplot}
 }
 \value{
 named list with plots-, graph-, plot-, navigator-, and context 

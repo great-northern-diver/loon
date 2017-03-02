@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{object of class loongraph}
+
+\item{...}{arguments forwarded to method}
 }
 \description{
 This function converts the loongraph object to one of class 

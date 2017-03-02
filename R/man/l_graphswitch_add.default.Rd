@@ -10,11 +10,14 @@
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}
 
+\item{graph}{a vector with the node names, i.e. this argument gets passed on
+as the nodes argument to creat a \code{\link{loongraph}} like object}
+
 \item{from}{vector with node names of the from-to pairs for edges}
 
 \item{to}{vector with node names of the from-to pairs for edges}
 
-\item{isDirected}{boolean to indicate whether the from-to-list defines
+\item{isDirected}{boolean to indicate whether the from-to-list defines 
 directed or undirected edges}
 
 \item{label}{string with label for graph}

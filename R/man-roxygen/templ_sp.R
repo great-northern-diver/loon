@@ -1,7 +1,8 @@
 #' @description Methods to plot map data defined in the \code{\link[sp]{sp}}
 #'   package
 #' 
-#' @template param_widget
+#' @param widget widget widget path as a string or as an object handle
+#' @param x an object defined in the class \code{\link[sp]{sp}}
 #' @param ... arguments forwarded to the relative \code{\link{l_layer}} function
 #' 
 #' @details Note that currently loon does neither support holes and ring

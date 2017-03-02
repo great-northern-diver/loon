@@ -7,7 +7,10 @@
 l_bind_state_ids(target)
 }
 \arguments{
-\item{widget}{widget path as a string or as an object handle}
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
 }
 \value{
 vector with state binding ids

@@ -8,6 +8,10 @@
   ...)
 }
 \arguments{
+\item{widget}{widget widget path as a string or as an object handle}
+
+\item{x}{an object defined in the class \code{\link[sp]{sp}}}
+
 \item{asSingleLayer}{If \code{TRUE} then prefer a single layer over groups
 with nested 1-dimensinal layers}
 

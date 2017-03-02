@@ -19,6 +19,8 @@ l_layer_contourLines(widget, x = seq(0, 1, length.out = nrow(z)), y = seq(0,
     and \code{y}, respectively. If the list has component \code{z} this
     is used for \code{z}.}
 
+\item{y}{see description for the \code{x} argument}
+
 \item{z}{a matrix containing the values to be plotted (\code{NA}s are
     allowed).  Note that \code{x} can be used instead of \code{z} for
     convenience.}

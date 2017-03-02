@@ -4,7 +4,6 @@
 #'   callback code that the Tcl interpreter evaluates after a event occurs that
 #'   machtches the event pattern.
 #' 
-#' @param widget widget path as a string or as an object handle
 #' @param id <%=type%> binding id
 #'
 #' @details 

@@ -7,9 +7,12 @@
 l_bind_state_get(target, id)
 }
 \arguments{
-\item{id}{state binding id}
+\item{target}{either an object of class loon or a vector that specifies the
+widget, layer, glyph, navigator or context completely. The widget is
+specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
+objects by their ids.}
 
-\item{widget}{widget path as a string or as an object handle}
+\item{id}{state binding id}
 }
 \value{
 Character vector of length two. First element is the event pattern,

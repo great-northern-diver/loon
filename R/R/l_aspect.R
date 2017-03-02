@@ -55,12 +55,13 @@ l_aspect <- function(widget) {
 #' @template description_aspect_ratio
 #'   
 #' @template param_widget
-#' @param aspect aspect ratio, optional, if omitted then the \code{x} and
+#' @param aspect aspect ratio, optional, if omitted then the \code{x} and 
 #'   \code{y} arguments have to be specified.
-#' @param {x,y} optional, if the \code{aspect} argument is missing then \code{x}
-#'   and \code{y} can be specified and the aspect ratio is calculted usding 
+#' @param x optional, if the \code{aspect} argument is missing then \code{x} and
+#'   \code{y} can be specified and the aspect ratio is calculted usding 
 #'   \code{y/x}.
-#'   
+#' @param y see description for \code{x} argument above
+#'     
 #' @export
 #' 
 #' @examples 

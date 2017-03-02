@@ -21,6 +21,10 @@ l_glyph_add_serialaxes(widget, data, sequence, linewidth = 1,
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
 how the data is scaled. See Details for more information}
 
+\item{axesLayout}{either \code{"serial"} or \code{"parallel"}}
+
+\item{showAxes}{boolean to indicate whether axes should be shown or not}
+
 \item{axesColor}{color of axes}
 
 \item{showEnclosing}{boolean, circle (axesLayout=radial) or sqaure

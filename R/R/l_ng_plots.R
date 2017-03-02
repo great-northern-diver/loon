@@ -443,6 +443,7 @@ l_ng_plots.measures <- function(measures, ...) {
 #'   function.
 #'   
 #' @inheritParams l_ng_plots.scagnostics
+#' @inheritParams l_ng_plots.default 
 #' @param measures objects from the \code{\link[scagnostics]{scagnostics}} 
 #'   function from the scagnostics \R package
 #'   

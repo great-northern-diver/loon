@@ -172,7 +172,8 @@ as.graph <- function(loongraph) {
 #'   graph and the plots it with its respective plot method.
 #'   
 #' @param x object of class loongraph
-#'   
+#' @param ... arguments forwarded to method
+#' 
 #' @export
 #' 
 #' @examples 
@@ -229,20 +230,19 @@ completegraph <- function(nodes, isDirected=FALSE) {
 }
 
 
-#'@title Create a linegraph
-#'  
-#'  
-#'@description The line graph of G, here denoted L(G), is the graph whose nodes 
-#'  correspond to the edges of G and whose edges correspond to nodes of G such 
-#'  that nodes of L(G) are joined if and only if the corresponding edges of G 
-#'  are adjacent in G.
-#'  
-#'@param x graph of class graph or loongraph
-#'@param ... arguments passed on to method
-#'  
-#'@return graph object
-#'  
-#'@export
+#' @title Create a linegraph
+#' 
+#' @description The line graph of G, here denoted L(G), is the graph whose nodes 
+#'   correspond to the edges of G and whose edges correspond to nodes of G such 
+#'   that nodes of L(G) are joined if and only if the corresponding edges of G 
+#'   are adjacent in G.
+#'   
+#' @param x graph of class graph or loongraph
+#' @param ... arguments passed on to method
+#'   
+#' @return graph object
+#'   
+#' @export
 linegraph <- function(x, ...) {
     UseMethod("linegraph")
 }
@@ -250,7 +250,7 @@ linegraph <- function(x, ...) {
 
 #' @title Create a linegraph of a graph
 #'   
-#' @describeIn linegraph
+#' @description Create a lingraph of a loongraph
 #'   
 #' @param x loongraph object
 #' @param separator one character - node names in x get concatenated with this 

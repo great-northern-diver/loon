@@ -63,7 +63,7 @@ l_scaleto_active <- function(widget) {
 #'   \code{panX}, and \code{panY} so that all elements of a particular layer are
 #'   displayed.
 #'   
-#' @template param_widget
+#' @template param_target
 #' @param layer layer id
 #' 
 #' @seealso \code{\link{l_layer_ids}}
