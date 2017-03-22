@@ -443,8 +443,8 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 #' ycoords <- Map(function(x)x$LifeExpectancy, sUaT)
 #' region <- sapply(sUaT, function(x)as.character(x$Geographic.Region[1]))
 #' 
-#' p <- l_plot(showItemlabels=TRUE)
-#' l <- l_layer_lines(p, xcoords, ycoords, itemlabel=names(sUaT), color=region)
+#' p <- l_plot(showItemLabels=TRUE)
+#' l <- l_layer_lines(p, xcoords, ycoords, itemLabel=names(sUaT), color=region)
 #' l_scaleto_layer(l)
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,

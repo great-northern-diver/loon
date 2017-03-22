@@ -11,7 +11,7 @@ local({
     npairs <- dim(scdata)[1]
     variablePairs <- rownames(scdata)
     
-    ps <- l_pairs(scdata, itemlabel=variablePairs)
+    ps <- l_pairs(scdata, itemLabel=variablePairs)
 
     ## Scatterplot two variates
     p <- with(olive, l_plot(oleic~stearic, color=Area))

@@ -46,7 +46,7 @@ local({
                                    xlabel="body weight",
                                    ylabel="brain weight",
                                    title="Brain and Body Weights for 62 Species of Land Mammals",
-                                   itemlabel=rownames(MASS::mammals),
-                                   showItemlabels=TRUE))
+                                   itemLabel=rownames(MASS::mammals),
+                                   showItemLabels=TRUE))
     
 })

@@ -1,14 +1,14 @@
 
 
-::oo::class create ::loon::classes::Itemlabel_Controller {
+::oo::class create ::loon::classes::ItemLabel_Controller {
 
-    variable showItemlabels_var itemlabel_var
+    variable showItemLabels_var itemLabel_var
 
     superclass ::loon::classes::Canvas_Controller
 
     constructor {view} {
 	
-	foreach state {showItemlabels itemlabel} {
+	foreach state {showItemLabels itemLabel} {
 	    set ${state}_var ""
 	}
 	
@@ -21,7 +21,7 @@
 	
 	next
 
-	$canvas bind "layer" "<Enter>" "+[self namespace]::my PendingItemlabel"
+	$canvas bind "layer" "<Enter>" "+[self namespace]::my PendingItemLabel"
 	$canvas bind "layer" "<Leave>" "+::loon::loonlabel_cancel"
 
 	bind $canvas <Leave> "+::loon::loonlabel_cancel"
@@ -34,7 +34,7 @@
 	my variable model
 	
 	set ns [info object namespace $Model] 
-	foreach state {showItemlabels itemlabel} {
+	foreach state {showItemLabels itemLabel} {
 	    set ${state}_var [uplevel #0 ${ns}::my varname $state]
 	}       	
 	
@@ -42,17 +42,17 @@
     }
 
 
-    method PendingItemlabel {} {
+    method PendingItemLabel {} {
 	my variable model canvas
-	if {$model ne "" && [set $showItemlabels_var]} {
+	if {$model ne "" && [set $showItemLabels_var]} {
 	    set tags [$canvas gettags current]
 	    set layer [lindex $tags 1]
 	    set i [string range [lindex $tags 3] 4 end]
 
 	    if {$layer eq "model"} {
-		set label [lindex [set $itemlabel_var] $i]
+		set label [lindex [set $itemLabel_var] $i]
 	    } else {
-		set label [lindex [set [$model layer getObject $layer]::itemlabel] $i]
+		set label [lindex [set [$model layer getObject $layer]::itemLabel] $i]
 	    }
 	    
 	    ::loon::loonlabel_pending canvas $canvas $label

@@ -38,7 +38,7 @@ oo::class create ::loon::classes::Serialaxes_View {
 	    error "currently serialaxes cant switch the model"
 	}
 
-	## Itemlabel Controller
+	## ItemLabel Controller
 	$controller setModel $Model
 
 	

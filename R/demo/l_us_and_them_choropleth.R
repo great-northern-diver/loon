@@ -37,8 +37,8 @@ local({
     ## plot of life expectancy versus fertility
     p <- with(dat, l_plot(LifeExpectancy ~ Fertility, color=Region.Color,
                           size=scale01(Population)*120+2,
-                          itemlabel=as.character(dat$Country),
-                          showItemlabels=TRUE,
+                          itemLabel=as.character(dat$Country),
+                          showItemLabels=TRUE,
                           background='gray20',
                           foreground='gray95',
                           guidesBackground = 'gray20',

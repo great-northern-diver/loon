@@ -2,7 +2,7 @@
 oo::class create ::loon::classes::Serialaxes_Model {
     
     superclass ::loon::classes::Serialaxes\
-	::loon::classes::withItemlabels\
+	::loon::classes::withItemLabels\
 	::loon::classes::Linkable
 	
     

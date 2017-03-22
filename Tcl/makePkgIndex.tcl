@@ -33,7 +33,7 @@ oo_VariableDimensions.tcl\
 oo_Linkable.tcl\
 oo_withLayers.tcl\
 oo_LabelledCollection.tcl\
-oo_withItemlabels.tcl\
+oo_withItemLabels.tcl\
 oo_withGlyphs.tcl\
 oo_Plot_Model.tcl\
 oo_XYPair_Model.tcl\
@@ -126,7 +126,7 @@ oo_Canvas_Controller.tcl\
 oo_Resize_Controller.tcl\
 oo_ZoomPan_Controller.tcl\
 oo_ButtonPressMotion_Controller.tcl\
-oo_Itemlabel_Controller.tcl\
+oo_ItemLabel_Controller.tcl\
 oo_SweepBrush_Controller.tcl\
 oo_TempMove_Controller.tcl\
 oo_Scatterplot_Controller.tcl\

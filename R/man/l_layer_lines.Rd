@@ -45,8 +45,8 @@ xcoords <- Map(function(x)x$Year, sUaT)
 ycoords <- Map(function(x)x$LifeExpectancy, sUaT)
 region <- sapply(sUaT, function(x)as.character(x$Geographic.Region[1]))
 
-p <- l_plot(showItemlabels=TRUE)
-l <- l_layer_lines(p, xcoords, ycoords, itemlabel=names(sUaT), color=region)
+p <- l_plot(showItemLabels=TRUE)
+l <- l_layer_lines(p, xcoords, ycoords, itemLabel=names(sUaT), color=region)
 l_scaleto_layer(l)
 }
 \seealso{

@@ -48,7 +48,8 @@ namespace eval loon {
 				    main title\
 				    cex size\
 				    col color\
-				    lwd linewidth]
+				    lwd linewidth\
+				    itemlabel itemLabel]
 
 
     if {[winfo screenheight .] > 750} {

@@ -176,7 +176,7 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
         tmp_sel <- c(1, rep(0, dim(measures)[1]-1)) ## select first point
         if(dim(measures)[2] == 2) {
             spmatrix <- l_plot(x = as.data.frame(measures),
-                               itemlabel = rownames(measures),
+                               itemLabel = rownames(measures),
                                selected = tmp_sel,
                                title = "measures")
             W <- spmatrix
@@ -185,7 +185,7 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
                                 selected = tmp_sel,
                                 linkingGroup=paste0(g,"_measures"))
             lapply(spmatrix, function(plot) {
-                l_configure(plot, itemlabel=rownames(measures), showItemlabels=TRUE)
+                l_configure(plot, itemLabel=rownames(measures), showItemLabels=TRUE)
             })
             W <- spmatrix[[1]]
         }

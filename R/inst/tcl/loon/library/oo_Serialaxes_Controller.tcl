@@ -2,7 +2,7 @@
 
 ::oo::class create ::loon::classes::Serialaxes_Controller {
     
-    superclass ::loon::classes::Itemlabel_Controller
+    superclass ::loon::classes::ItemLabel_Controller
 
     variable sweep modelVisual
     

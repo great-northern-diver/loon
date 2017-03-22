@@ -28,11 +28,11 @@ local({
     
     p1 <- l_plot(y=LifeExpectancy, x=Fertility,
                  color=region_cols, size=pop_size,
-                 itemlabel=country,
+                 itemLabel=country,
                  linkingGroup="world")
     
     p2 <- l_plot(y=LifeExpectancy, x=Income,
-                 itemlabel=country,
+                 itemLabel=country,
                  linkingGroup="world")
     
     h <- l_hist(x=Income/1000, linkingGroup="world")
@@ -72,7 +72,7 @@ local({
     
     sa <- l_serialaxes(data=dat5, linkingGroup="world",
                        scaling="data", axesLayout="parallel",
-                       title='Income', itemlabel=rownames(dat5))
+                       title='Income', itemLabel=rownames(dat5))
     
     sa['linewidth'] <- 2
     
