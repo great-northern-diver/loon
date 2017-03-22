@@ -11,9 +11,6 @@ l_bind_layer_delete(widget, id)
 
 \item{id}{layer binding id}
 }
-\value{
-0 if success, otherwise the function throws an error
-}
 \description{
 Remove a layer binding
 }

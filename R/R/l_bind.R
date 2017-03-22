@@ -96,7 +96,7 @@ l_bind_canvas_get <- function(widget, id) {
 l_bind_canvas_delete <- function(widget, id) {
     l_bind(widget, "canvas", "delete", id)
     callbackFunctions$canvas[[.cbid(widget,id)]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type canvas
@@ -158,7 +158,7 @@ l_bind_layer_get <- function(widget, id) {
 l_bind_layer_delete <- function(widget, id) {
     l_bind(widget, "layer", "delete", id)
     callbackFunctions$layer[[.cbid(widget,id)]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type layer
@@ -243,7 +243,7 @@ l_bind_state_delete <- function(target, id) {
     obj_eval('bind', 'state', 'delete', id)
 
     callbackFunctions$state[[paste(c(environment(obj_eval)$specifier,id), collapse='.')]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type state
@@ -325,7 +325,7 @@ l_bind_item_get <- function(widget, id) {
 l_bind_item_delete <- function(widget, id) {
     l_bind(widget, "item", "delete", id)
     callbackFunctions$item[[.cbid(widget,id)]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type item
@@ -389,7 +389,7 @@ l_bind_glyph_get <- function(widget, id) {
 l_bind_glyph_delete <- function(widget, id) {
     l_bind(widget, "glyph", "delete", id)
     callbackFunctions$glyph[[.cbid(widget,id)]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type glyph
@@ -448,7 +448,7 @@ l_bind_navigator_get <- function(widget, id) {
 l_bind_navigator_delete <- function(widget, id) {
     l_bind(widget, "navigator", "delete", id)
     callbackFunctions$navigator[[.cbid(widget,id)]] <- NULL 
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type navigator
@@ -507,7 +507,7 @@ l_bind_context_get <- function(widget, id) {
 l_bind_context_delete <- function(widget, id) {
     l_bind(widget, "context", "delete", id)
     callbackFunctions$context[[.cbid(widget,id)]] <- NULL
-    0
+    invisible(NULL)
 }
 
 #' @templateVar type context

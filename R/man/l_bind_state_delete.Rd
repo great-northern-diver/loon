@@ -14,9 +14,6 @@ objects by their ids.}
 
 \item{id}{state binding id}
 }
-\value{
-0 if success, otherwise the function throws an error
-}
 \description{
 Remove a state binding
 }

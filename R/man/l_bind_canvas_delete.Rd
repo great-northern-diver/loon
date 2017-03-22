@@ -11,9 +11,6 @@ l_bind_canvas_delete(widget, id)
 
 \item{id}{canvas binding id}
 }
-\value{
-0 if success, otherwise the function throws an error
-}
 \description{
 Remove a canvas binding
 }

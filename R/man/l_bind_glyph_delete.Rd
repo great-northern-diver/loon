@@ -11,9 +11,6 @@ l_bind_glyph_delete(widget, id)
 
 \item{id}{glyph binding id}
 }
-\value{
-0 if success, otherwise the function throws an error
-}
 \description{
 Remove a glyph binding
 }

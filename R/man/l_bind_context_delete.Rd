@@ -11,9 +11,6 @@ l_bind_context_delete(widget, id)
 
 \item{id}{context binding id}
 }
-\value{
-0 if success, otherwise the function throws an error
-}
 \description{
 Remove a context binding
 }
