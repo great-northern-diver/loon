@@ -33,4 +33,3 @@ l_layer_expunge(p, g)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_delete}}
 }
-

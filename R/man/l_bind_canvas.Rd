@@ -54,4 +54,3 @@ l_bind_canvas_get(p, id)
 \code{\link{l_bind_canvas_ids}}, \code{\link{l_bind_canvas_get}},
   \code{\link{l_bind_canvas_delete}}, \code{\link{l_bind_canvas_reorder}}
 }
-

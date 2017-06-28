@@ -24,4 +24,3 @@ i <- l_graph_inspector_navigators()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

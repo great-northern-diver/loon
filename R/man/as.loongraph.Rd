@@ -29,4 +29,3 @@ graph_graph  = randomEGraph(LETTERS[1:15], edges=100)
 
 loon_graph <- as.loongraph(graph_graph)
 }
-

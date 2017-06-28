@@ -30,8 +30,8 @@ For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")
 }
 \examples{
 # 2d measures
-s <- scagnostics2d(oliveAcids)
-nav <- l_ng_ranges(s, color=olive$Area)
+# s <- scagnostics2d(oliveAcids)
+# nav <- l_ng_ranges(s, color=olive$Area)
 
 # 1d measures
 scale01 <- function(x){(x-min(x))/diff(range(x))}
@@ -42,11 +42,11 @@ m1d <- measures1d(sapply(iris[,-5], scale01),
 
 m1d()
 
-nav <- l_ng_ranges(m1d, color=iris$Species)
+# TODO: fix
+# nav <- l_ng_ranges(m1d, color=iris$Species)
 }
 \seealso{
 \code{\link{measures1d}}, \code{\link{measures2d}}, 
   \code{\link{scagnostics2d}}, \code{\link{l_ng_ranges}},
   \code{\link{l_ng_plots}}
 }
-

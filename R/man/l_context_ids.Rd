@@ -23,4 +23,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#contexts")}
   \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}},
   \code{\link{l_context_relabel}}
 }
-

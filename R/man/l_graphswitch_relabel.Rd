@@ -20,4 +20,3 @@ The graphs in the graphswitch widgets have labels. Use this
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

@@ -16,4 +16,3 @@ This is the \code{\link{olive}} data set minus the \code{Region}
 \code{\link{olive}}
 }
 \keyword{datasets}
-

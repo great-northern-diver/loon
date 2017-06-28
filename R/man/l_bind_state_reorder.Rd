@@ -31,4 +31,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_state}}, \code{\link{l_bind_state_ids}},
   \code{\link{l_bind_state_get}}, \code{\link{l_bind_state_delete}}
 }
-

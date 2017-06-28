@@ -26,4 +26,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
   \code{\link{measures2d}}, \code{\link{scagnostics2d}},
   \code{\link{l_ng_ranges}}
 }
-

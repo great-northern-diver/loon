@@ -16,4 +16,3 @@ The color mapping list is used by loon to convert nominal values
 \seealso{
 \code{\link{l_setColorList}}
 }
-

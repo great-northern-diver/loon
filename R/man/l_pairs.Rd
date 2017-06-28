@@ -26,4 +26,3 @@ p <- l_pairs(iris[,-5], color=iris$Species)
 \seealso{
 \code{\link{l_plot}}
 }
-

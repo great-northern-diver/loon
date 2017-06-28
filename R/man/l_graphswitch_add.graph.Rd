@@ -28,4 +28,3 @@ Graph objects are defined in the graph \R package.
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

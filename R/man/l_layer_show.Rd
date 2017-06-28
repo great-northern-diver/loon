@@ -44,4 +44,3 @@ l_layer_show(p, l)
   \code{\link{l_layer_isVisible}}, \code{\link{l_layer_layerVisibility}},
   \code{\link{l_layer_groupVisibility}}
 }
-

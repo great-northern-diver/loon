@@ -28,4 +28,3 @@ l_layer_printTree(p)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}, \code{\link{l_layer_getParent}}
 }
-

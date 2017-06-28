@@ -29,4 +29,3 @@ Contexts are in more detail explained in the webmanual accessible with
   \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}}, 
   \code{\link{l_context_relabel}}
 }
-

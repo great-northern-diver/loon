@@ -24,4 +24,3 @@ p['color']
 
 l_hexcolor('red')
 }
-

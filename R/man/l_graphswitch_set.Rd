@@ -19,4 +19,3 @@ The \code{activewidget} state holds the widget handle of a graph
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

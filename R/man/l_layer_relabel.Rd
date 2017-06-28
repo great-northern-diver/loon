@@ -39,4 +39,3 @@ l_layer_getLabel(p, l)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getLabel}}
 }
-

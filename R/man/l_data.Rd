@@ -18,4 +18,3 @@ This is a helper function to convert an \R data.frame object to
   a Tcl data frame object. This function is useful when changing a data state
   with \code{\link{l_configure}}.
 }
-

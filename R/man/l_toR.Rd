@@ -20,4 +20,3 @@ Return values from \code{\link{.Tcl}} and \code{\link{tcl}} are
   of class \code{tclObj} and often need to be mapped to a different data 
   structure in \R. This function is a helper class to do this mapping.
 }
-

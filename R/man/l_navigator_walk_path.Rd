@@ -18,4 +18,3 @@ Animate a navigator by having it walk on a path on the graph
 \seealso{
 \code{\link{l_navigator_add}}
 }
-

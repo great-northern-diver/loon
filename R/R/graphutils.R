@@ -177,10 +177,14 @@ as.graph <- function(loongraph) {
 #' @export
 #' 
 #' @examples 
+#' library(Rgraphviz)
 #' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 #' plot(g)
 plot.loongraph <- function(x, ...) {
-    graphics::plot(as.graph(x), ...)
+    
+    requireNamespace("Rgraphviz") || stop("Rgraphviz library required")
+    
+    Rgraphviz::plot(as.graph(x), ...)
 }
 
 

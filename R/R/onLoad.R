@@ -56,13 +56,13 @@
     sysname <- Sys.info()[1]
     
     suppressWarnings(didLoad <- tclRequire('Img'))
-    if (sysname == "Darwin" && identical(didLoad,FALSE)) {        
-        addTclPath("/System/Library/Tcl")
-        suppressWarnings(didLoad <- tclRequire('Img'))
-        .withCorrectTclImg <<- FALSE
-    }
+    # if (sysname == "Darwin" && identical(didLoad, FALSE)) {        
+    #     addTclPath("/System/Library/Tcl")
+    #     suppressWarnings(didLoad <- tclRequire('Img'))
+    #     .withCorrectTclImg <<- FALSE
+    # }
     
-    if(identical(didLoad,FALSE)) {
+    if(identical(didLoad, FALSE)) {
        # warning(
        #     paste("Can not load the tcl Img extension.",
        #           "Hence you can not use the\n'l_image_import_files'",

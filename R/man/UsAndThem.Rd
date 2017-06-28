@@ -17,4 +17,3 @@ This data was sourced from \url{https://www.gapminder.org/} and
   Geographic.Region information between 1962 and 2013 for 198 countries.
 }
 \keyword{datasets}
-

@@ -44,4 +44,3 @@ l_configure(p1, linkingGroup="iris", sync="push")
 l_configure(p2, linkingGroup="iris", sync="push")
 p1['selected'] <- iris$Species == "setosa" 
 }
-

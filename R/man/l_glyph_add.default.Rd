@@ -21,4 +21,3 @@
 Generic function to write new glyph types using loon's primitive
   glyphs
 }
-

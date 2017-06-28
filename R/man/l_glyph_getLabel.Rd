@@ -18,4 +18,3 @@ Returns the label of a glyph
 \code{\link{l_glyph_add}}, \code{\link{l_glyph_ids}},
   \code{\link{l_glyph_relabel}}
 }
-

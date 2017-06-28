@@ -25,4 +25,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 \code{\link{l_graph}}, \code{\link{l_info_states}},
   \code{\link{l_graph.loongraph}}
 }
-

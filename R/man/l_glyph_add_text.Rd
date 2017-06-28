@@ -27,4 +27,3 @@ p['glyph'] <- g
 \seealso{
 \code{\link{l_glyph_add}}
 }
-

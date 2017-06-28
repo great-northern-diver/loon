@@ -15,4 +15,3 @@
 Prints the function names of a measure2d object using
   \code{print.default}.
 }
-

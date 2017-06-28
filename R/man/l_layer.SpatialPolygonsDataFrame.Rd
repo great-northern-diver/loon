@@ -45,4 +45,3 @@ Applied Spatial Data Analysis with R by Bivand, Roger S. and
 \seealso{
 \code{\link[sp]{sp}}, \code{\link{l_layer}}
 }
-

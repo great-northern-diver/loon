@@ -23,4 +23,3 @@ l_layer_getParent(p, 'model')
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}
 }
-

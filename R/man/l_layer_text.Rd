@@ -55,4 +55,3 @@ l <- l_layer_text(p, 0, 0, "Hello World")
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
 }
-

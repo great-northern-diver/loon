@@ -36,4 +36,3 @@ This default method uses the loongraph display states as
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

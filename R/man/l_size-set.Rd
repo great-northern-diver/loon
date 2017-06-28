@@ -24,4 +24,3 @@ l_size(p) <- c(500, 500)
 \seealso{
 \code{\link{l_resize}}, \code{\link{l_size}}
 }
-

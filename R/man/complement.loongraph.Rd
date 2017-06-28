@@ -18,4 +18,3 @@ Creates a complement graph of a graph
 \details{
 This method is currently only implemented for undirected graphs.
 }
-

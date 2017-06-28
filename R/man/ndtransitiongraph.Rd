@@ -28,4 +28,3 @@ For more information run: \code{l_help("learn_R_display_graph.html.html#graph-ut
 \examples{
 g <- ndtransitiongraph(nodes=c('A:B', 'A:F', 'B:C', 'B:F'), n=3, separator=':')
 }
-

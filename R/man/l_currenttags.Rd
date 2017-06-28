@@ -31,4 +31,3 @@ l_bind_item(p, 'all', '<ButtonPress>', function(W)printTags(W))
 \seealso{
 \code{\link{l_bind_item}}, \code{\link{l_currentindex}}
 }
-

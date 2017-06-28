@@ -17,4 +17,3 @@ Remove a a graph from the graphswitch widget
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

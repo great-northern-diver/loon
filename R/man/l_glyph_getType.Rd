@@ -17,4 +17,3 @@ Query the type of a glyph
 \seealso{
 \code{\link{l_glyph_add}}
 }
-

@@ -14,4 +14,3 @@ Every graph in the graphswitch widget has an id. This function
   returns these ids preserving the oder of how the graphs are listed in the
   graphswitch.
 }
-

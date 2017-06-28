@@ -24,4 +24,3 @@ i <- l_glyphs_inspector()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

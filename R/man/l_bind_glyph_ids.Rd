@@ -23,4 +23,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_glyph}}, \code{\link{l_bind_glyph_get}},
   \code{\link{l_bind_glyph_delete}}, \code{\link{l_bind_glyph_reorder}}
 }
-

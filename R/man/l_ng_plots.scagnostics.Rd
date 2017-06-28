@@ -43,4 +43,3 @@ l_ng_plots(scags, oliveAcids, color=olive$Area)
   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
   \code{\link{l_ng_ranges}}
 }
-

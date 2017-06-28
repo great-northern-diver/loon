@@ -24,4 +24,3 @@ i <- l_worldview()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

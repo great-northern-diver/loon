@@ -17,4 +17,3 @@ otherwise an error is thrown.
 Helper function to ensure that a widget path is associated with a
 loon widget.
 }
-

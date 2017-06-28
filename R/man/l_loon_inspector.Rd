@@ -24,4 +24,3 @@ For more information run: \code{l_help("learn_R_display_inspectors")}
 \examples{
 i <- l_loon_inspector()
 }
-

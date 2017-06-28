@@ -29,4 +29,3 @@ p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 l_aspect(p)
 l_setAspect(p, x = 1, y = 2) 
 }
-

@@ -4,7 +4,7 @@
 \alias{l_graph}
 \title{Generic funtction to create an interactive graph display}
 \usage{
-l_graph(nodes, ...)
+l_graph(nodes = NULL, ...)
 }
 \arguments{
 \item{nodes}{object for method dispatch}
@@ -25,4 +25,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 \code{\link{l_graph.graph}}, \code{\link{l_graph.loongraph}},
   \code{l_graph.default}
 }
-

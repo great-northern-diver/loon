@@ -34,4 +34,3 @@ library(Rgraphviz)
 plot(graphreduce(LLG))
 }
 }
-

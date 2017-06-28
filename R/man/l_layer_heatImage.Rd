@@ -92,4 +92,3 @@ l_scaleto_world(p1)
 
 image(z = z <- cos(r^2)*exp(-r/6), col  = gray((0:32)/32))
 }
-

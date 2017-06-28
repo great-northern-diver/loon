@@ -35,4 +35,3 @@ p <- l_plot(iris)
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
   \code{\link{l_setColorList_baseR}}
 }
-

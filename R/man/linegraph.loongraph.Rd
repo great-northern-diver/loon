@@ -29,4 +29,3 @@ g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 
 linegraph(g)
 }
-

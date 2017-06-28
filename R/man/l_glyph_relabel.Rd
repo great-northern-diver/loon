@@ -27,4 +27,3 @@ l_glyph_relabel(p, g, "Species")
 \code{\link{l_glyph_add}}, \code{\link{l_glyph_ids}},
   \code{\link{l_glyph_getLabel}}
 }
-

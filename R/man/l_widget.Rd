@@ -15,4 +15,3 @@ widget path name as a string
 \description{
 Dummy function to be used in the Roxygen documentation
 }
-

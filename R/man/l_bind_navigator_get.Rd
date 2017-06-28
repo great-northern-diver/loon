@@ -28,4 +28,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_navigator}}, \code{\link{l_bind_navigator_ids}},
   \code{\link{l_bind_navigator_delete}}, \code{\link{l_bind_navigator_reorder}}
 }
-

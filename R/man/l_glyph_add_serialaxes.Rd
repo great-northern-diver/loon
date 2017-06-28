@@ -46,4 +46,3 @@ p <- with(olive, l_plot(oleic, stearic, color=Area))
 gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 p['glyph'] <- gs
 }
-

@@ -15,4 +15,3 @@ graph object
 \description{
 Creates a complement graph of a graph
 }
-

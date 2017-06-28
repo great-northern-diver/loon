@@ -46,4 +46,3 @@ For more information run: \code{l_help("learn_R_layer")}
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
 }
-

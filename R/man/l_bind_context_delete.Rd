@@ -22,4 +22,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_context}}, \code{\link{l_bind_context_ids}},
   \code{\link{l_bind_context_get}}, \code{\link{l_bind_context_reorder}}
 }
-

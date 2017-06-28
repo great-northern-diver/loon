@@ -50,4 +50,3 @@ lg <- linegraph(g)
 \code{\link{completegraph}}, \code{\link{linegraph}}, 
   \code{\link{complement}}, \code{\link{as.graph}}
 }
-

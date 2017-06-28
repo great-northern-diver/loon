@@ -68,4 +68,3 @@ grid.text("note the fist i colors are shared for each n" , y=unit(1,"npc")+unit(
 \code{\link{l_setColorList}}, \code{\link{l_getColorList}}, 
   \code{\link{loon_palette}}
 }
-

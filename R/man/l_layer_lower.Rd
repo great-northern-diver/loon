@@ -34,4 +34,3 @@ l_layer_lower(p, l2)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_raise}}, \code{\link{l_layer_move}}
 }
-

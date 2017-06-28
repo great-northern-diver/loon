@@ -57,11 +57,12 @@ m1d <- data.frame(
      row.names = names(dat)
 )
 
-nav <- l_ng_ranges(m1d, dat ) 
+# TODO: fix
+# nav <- l_ng_ranges(m1d, dat ) 
 
 # With a single measure
 
-nav <- l_ng_ranges(sapply(dat, sd), dat)
+# nav <- l_ng_ranges(sapply(dat, sd), dat)
 
 
 }
@@ -71,4 +72,3 @@ nav <- l_ng_ranges(sapply(dat, sd), dat)
   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
   \code{\link{l_ng_ranges}}
 }
-

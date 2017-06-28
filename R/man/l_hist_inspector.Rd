@@ -24,4 +24,3 @@ i <- l_hist_inspector()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

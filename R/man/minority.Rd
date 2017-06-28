@@ -26,4 +26,3 @@ This data contains information about the visible minority
   added them to the data set.
 }
 \keyword{datasets}
-

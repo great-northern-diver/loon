@@ -17,4 +17,3 @@ Prints the layer label and layer type
 \seealso{
 \code{\link{l_layer}}
 }
-

@@ -59,4 +59,3 @@ Moving the points temporarily saves the new point coordinates to the
   \code{\link{l_move_grid}}, \code{\link{l_move_jitter}},
   \code{\link{l_move_reset}}
 }
-

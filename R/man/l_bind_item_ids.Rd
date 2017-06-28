@@ -23,4 +23,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_item}}, \code{\link{l_bind_item_get}},
   \code{\link{l_bind_item_delete}}, \code{\link{l_bind_item_reorder}}
 }
-

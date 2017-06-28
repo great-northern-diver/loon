@@ -69,4 +69,3 @@ gl['showArea'] <- FALSE
 \seealso{
 \code{\link{l_glyph_add}}
 }
-

@@ -16,4 +16,3 @@ This function changes the plot states \code{panX}, \code{panY},
   \code{zoomX}, and \code{zoomY} to zoom towards or away from the center of
   the current view.
 }
-

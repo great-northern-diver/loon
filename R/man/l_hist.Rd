@@ -40,4 +40,3 @@ h <- l_hist(iris$Sepal.Length, color=iris$Species)
 \seealso{
 \code{\link{l_plot}}
 }
-

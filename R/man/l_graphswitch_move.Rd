@@ -20,4 +20,3 @@ Change the postion in of a graph in the graphswitch widget.
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

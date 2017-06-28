@@ -22,4 +22,3 @@ The function modifies the \code{zoomX}, \code{zoomY},
 \seealso{
 \code{\link{l_layer_ids}}
 }
-

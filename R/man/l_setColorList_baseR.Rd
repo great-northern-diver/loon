@@ -15,4 +15,3 @@ Loon's color list is used to map nominal values to colors. See
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
   \code{\link{l_setColorList_baseR}}
 }
-

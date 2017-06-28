@@ -24,4 +24,3 @@ i <- l_serialaxes_inspector()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

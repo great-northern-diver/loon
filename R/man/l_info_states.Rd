@@ -38,4 +38,3 @@ l_info_states(l)
 h <- l_hist(iris$Sepal.Length, linkingGroup="iris")
 l_info_states(h)
 }
-

@@ -124,4 +124,3 @@ l_scaleto_world(p)
 \code{\link{l_info_states}}, \code{\link{l_scaleto_layer}},
   \code{\link{l_scaleto_world}}
 }
-

@@ -38,4 +38,3 @@ con['conditioning4d'] <- "union"
 con['conditioning4d'] <- "intersection"
 
 }
-

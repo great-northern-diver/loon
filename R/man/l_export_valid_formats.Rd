@@ -19,4 +19,3 @@ The supported image formats are dependent on the system
   depend on the Img extension, it is possible to export any Tk widget as an 
   image including inspectors.
 }
-

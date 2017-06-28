@@ -17,7 +17,7 @@
 #'   
 #' @export
 #' 
-l_graph <- function(nodes, ...) {
+l_graph <- function(nodes = NULL, ...) {
     UseMethod("l_graph", nodes)
 }
 

@@ -13,4 +13,3 @@ l_scaleto_active(widget)
 The function modifies the \code{zoomX}, \code{zoomY}, 
   \code{panX}, and \code{panY} so that all active data points are displayed.
 }
-

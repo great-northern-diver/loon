@@ -26,4 +26,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph-switch-
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

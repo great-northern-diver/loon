@@ -32,4 +32,3 @@ l_layer_delete(p,l2)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
 }
-

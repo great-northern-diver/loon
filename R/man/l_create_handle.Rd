@@ -48,4 +48,3 @@ con <- l_context_add_context2d(nav)
 con_new <- l_create_handle(c(as.vector(g), as.vector(nav), as.vector(con)))
 con_new['separator']
 }
-

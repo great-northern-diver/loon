@@ -41,4 +41,3 @@ For more information run: \code{l_help("learn_R_display_plot.html#images")}
 demo("l_ng_images_frey_LLE")
 }
 }
-

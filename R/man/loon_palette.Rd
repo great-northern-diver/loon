@@ -25,4 +25,3 @@ loon_palette(12)
 \seealso{
 \code{\link{l_setColorList}}
 }
-

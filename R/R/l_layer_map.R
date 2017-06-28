@@ -14,11 +14,12 @@
 #'   \code{\link[maps]{map}}
 #' 
 #' @examples 
+#' library(maps)
 #' p <- l_plot(map('world', fill=TRUE, plot=FALSE))
 l_plot.map <-  function(x, ...) {
 
     p <- l_plot.default()
-    l_layer.map(p, map=x, label="Map",  ...)
+    l_layer.map(p, x, label="Map",  ...)
     l_scaleto_world(p)
     p
 }    
@@ -48,6 +49,7 @@ l_plot.map <-  function(x, ...) {
 #' @export l_layer.map
 #'   
 #' @examples 
+#' library(maps)
 #' canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
 #' p <- l_plot()
 #' l_map <- l_layer(p, canada, asSingleLayer=TRUE)

@@ -24,4 +24,3 @@ The graph display represents a graph with the \code{nodes},
 \seealso{
 \code{\link{l_graph}}, \code{\link{loongraph}}
 }
-

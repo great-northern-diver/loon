@@ -25,4 +25,3 @@ Note that the index for layers is 0 based.
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_move}}
 }
-

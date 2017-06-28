@@ -30,4 +30,3 @@ l <- l_layer.density(h, d, color="steelblue", linewidth=3)
 \seealso{
 \code{\link[stats]{density}}, \code{\link{l_layer}}
 }
-

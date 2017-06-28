@@ -37,4 +37,3 @@ m1('measures')
 \code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}},
   \code{\link{measures2d}}
 }
-

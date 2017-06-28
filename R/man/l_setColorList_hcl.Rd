@@ -31,4 +31,3 @@ Samples equally distant colors from the hcl color wheel. See the
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
   \code{\link{l_setColorList_baseR}}
 }
-

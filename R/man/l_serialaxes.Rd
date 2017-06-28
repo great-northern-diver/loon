@@ -48,4 +48,3 @@ s['axesLayout'] <- 'parallel'
 states <- l_info_states(s)
 names(states)
 }
-

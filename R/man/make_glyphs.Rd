@@ -65,4 +65,3 @@ li <- make_glyphs(runif(6), function(x) {
 })
 }
 }
-

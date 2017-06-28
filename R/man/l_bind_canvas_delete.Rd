@@ -22,4 +22,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_canvas}}, \code{\link{l_bind_canvas_ids}},
   \code{\link{l_bind_canvas_get}}, \code{\link{l_bind_canvas_reorder}}
 }
-

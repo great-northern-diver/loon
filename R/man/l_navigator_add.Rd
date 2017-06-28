@@ -46,4 +46,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#navigators")}
   \code{\link{l_navigator_walk_backward}}, \code{\link{l_navigator_relabel}},
   \code{\link{l_navigator_getLabel}}
 }
-

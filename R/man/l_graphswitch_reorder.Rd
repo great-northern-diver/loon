@@ -18,4 +18,3 @@ Define a new graph order in the graph list.
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

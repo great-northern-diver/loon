@@ -35,4 +35,3 @@ l_layer_getLabel(p, l1)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_relabel}}
 }
-

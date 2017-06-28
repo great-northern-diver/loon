@@ -48,4 +48,3 @@ l_configure(p, panX=0, panY=0, deltaX=20, deltaY=20)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
 }
-

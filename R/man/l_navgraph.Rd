@@ -33,4 +33,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#l_navgraph")}
 ng <- l_navgraph(oliveAcids, color=olive$Area)
 ng2 <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
 }
-

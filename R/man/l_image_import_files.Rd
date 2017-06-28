@@ -22,4 +22,3 @@ For more information run: \code{l_help("learn_R_display_plot.html#load-images")}
 \seealso{
 \code{\link{l_image_import_array}}, \code{\link{l_imageviewer}}
 }
-

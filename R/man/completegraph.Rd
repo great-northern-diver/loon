@@ -32,4 +32,3 @@ For more information run: \code{l_help("learn_R_display_graph.html.html#graph-ut
 \examples{
 g <- loon::completegraph(letters[1:5])
 }
-

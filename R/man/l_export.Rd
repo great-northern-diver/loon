@@ -38,4 +38,3 @@ Note that the \code{CTRL-T} key combination opens a dialog to export
 \seealso{
 \code{\link{l_export_valid_formats}}
 }
-

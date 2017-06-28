@@ -63,4 +63,3 @@ Loon's standard linking model is based on two states,
   an associated linking key. Data points between linked plots are linked if 
   they share the same linking key.
 }
-

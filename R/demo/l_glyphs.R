@@ -11,22 +11,27 @@ local({
     p['glyph'] <- gt
     
     ## Images
-    readline("press the return key to continue: next are image glyphs")
-
-    path <- file.path(find.package(package = "loon"), "images")
-    files <- list.files(path, full.names=TRUE)
-    imgs <- l_image_import_files(files)
-    names(imgs) <- gsub("\\.png$", "", basename(names(imgs)))
-    area <-  gsub("^.*-", "", as.character(olive$Area))
-    areaimages <- imgs[match(area, names(imgs))]
-    gi <- l_glyph_add_image(p, images=areaimages)
-    p['glyph'] <- gi
-
-    readline("press the return key to continue: next reuse single image")
-
-    l_configure(c(p,gi), images=areaimages[1])
-    ## or also just
-    ## l_configure(gi, images=areaimages[1])
+    
+    if (loon:::.withTclImg) {
+        
+        readline("press the return key to continue: next are image glyphs")
+        
+        path <- file.path(find.package(package = "loon"), "images")
+        files <- list.files(path, full.names=TRUE)
+        imgs <- l_image_import_files(files)
+        names(imgs) <- gsub("\\.png$", "", basename(names(imgs)))
+        area <-  gsub("^.*-", "", as.character(olive$Area))
+        areaimages <- imgs[match(area, names(imgs))]
+        gi <- l_glyph_add_image(p, images=areaimages)
+        p['glyph'] <- gi
+        
+        
+        readline("press the return key to continue: next reuse single image")
+        
+        l_configure(c(p,gi), images=areaimages[1])
+        ## or also just
+        ## l_configure(gi, images=areaimages[1])
+    }
 
     
     ## Serialaxes
@@ -128,9 +133,16 @@ local({
     ## Mix glyphs
     readline("press the return key to continue: mix between different glyphs")
 
-    g <- sample(c('circle', 'square', 'triangle', 'diamond',
-                'ocircle', 'osquare', 'otriangle', 'odiamond', gt, gi, sa, gl_pol),
-                dim(olive)[1], replace=TRUE)
+    g <- sample(
+        c(
+            'circle', 'square', 'triangle', 'diamond',
+            'ocircle', 'osquare', 'otriangle', 'odiamond',
+            gt, 
+            if (loon:::.withTclImg) gi else NULL,
+            sa, gl_pol
+        ),
+        dim(olive)[1], replace=TRUE
+    )
     p['glyph'] <- g
 
     ## Pointrange Glyphs

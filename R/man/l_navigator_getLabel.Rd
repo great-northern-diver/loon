@@ -17,4 +17,3 @@ Returns the label of a navigator
 \seealso{
 \code{\link{l_navigator_add}}
 }
-

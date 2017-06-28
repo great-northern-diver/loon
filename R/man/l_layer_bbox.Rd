@@ -29,4 +29,3 @@ l_layer_bbox(p, l)
 
 l_layer_bbox(p, 'root')
 }
-

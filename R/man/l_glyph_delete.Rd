@@ -17,4 +17,3 @@ Delete a glyph from the plot.
 \seealso{
 \code{\link{l_glyph_add}}
 }
-

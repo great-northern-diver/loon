@@ -84,4 +84,3 @@ l_info_states(piLayer)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
 }
-

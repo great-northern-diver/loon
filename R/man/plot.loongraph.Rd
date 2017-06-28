@@ -16,7 +16,7 @@ This function converts the loongraph object to one of class
   graph and the plots it with its respective plot method.
 }
 \examples{
+library(Rgraphviz)
 g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 plot(g)
 }
-

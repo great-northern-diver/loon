@@ -28,4 +28,3 @@ Loongraphs can be created with the \code{\link{loongraph}}
 \seealso{
 \code{\link{l_graphswitch}}
 }
-

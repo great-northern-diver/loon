@@ -20,4 +20,3 @@ The line graph of G, here denoted L(G), is the graph whose nodes
   that nodes of L(G) are joined if and only if the corresponding edges of G 
   are adjacent in G.
 }
-

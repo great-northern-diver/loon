@@ -32,4 +32,3 @@ l_layer_getChildren(p, g)
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getParent}}
 }
-

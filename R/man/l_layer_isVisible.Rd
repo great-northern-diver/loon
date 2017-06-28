@@ -44,4 +44,3 @@ l_layer_isVisible(p, l)
   \code{\link{l_layer_hide}}, \code{\link{l_layer_layerVisibility}},
   \code{\link{l_layer_groupVisibility}}
 }
-

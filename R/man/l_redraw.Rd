@@ -22,4 +22,3 @@ Note that this function is intended for debugging. If you find that
 p <- l_plot(iris)
 l_redraw(p)
 }
-

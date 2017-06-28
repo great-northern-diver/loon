@@ -44,6 +44,7 @@ The maps library provides some map data in polygon which can be
   drawings.
 }
 \examples{
+library(maps)
 canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
 p <- l_plot()
 l_map <- l_layer(p, canada, asSingleLayer=TRUE)
@@ -53,4 +54,3 @@ l_map['active'] <- FALSE
 l_map['active'] <- TRUE
 l_map['tag']
 }
-

@@ -47,8 +47,8 @@
 #' p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 #' 
 #' # link another plot with the previous plot
-#' p['linkingGroup'] <- "iris"
-#' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris"))
+#' p['linkingGroup'] <- "iris_data"
+#' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris_data"))
 #' 
 #' # Use with other tk widgets
 #' library(tcltk)

@@ -14,4 +14,3 @@ The function modifies the \code{zoomX}, \code{zoomY},
   \code{panX}, and \code{panY} so that all selected data points are
   displayed.
 }
-

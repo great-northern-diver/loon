@@ -72,4 +72,3 @@ l_layer_rasterImage(p, image, 200, 300, 200 + 10, 300 + 10,
    interpolate = FALSE)
 l_scaleto_world(p)
 }
-

@@ -35,4 +35,3 @@ l_layer_getType(p, 'model')
 \seealso{
 \code{\link{l_layer}}
 }
-

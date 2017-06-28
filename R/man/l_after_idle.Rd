@@ -17,4 +17,3 @@ It is possible for an observer to call the configure method of
   recommended to use the l_after_idle function that evaluates some code once 
   the processor is idle.
 }
-

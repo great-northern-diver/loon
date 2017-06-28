@@ -40,4 +40,3 @@ p['glyph'] <- g
 \code{\link{l_glyph_add}}, \code{\link{l_image_import_array}},
   \code{\link{l_image_import_files}}, \code{\link{make_glyphs}}
 }
-

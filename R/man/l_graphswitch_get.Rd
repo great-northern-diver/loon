@@ -18,4 +18,3 @@ Graphs can be extracted from the graphswitch widget as loongraph
 \seealso{
 \code{\link{l_graphswitch}}, \code{\link{loongraph}}
 }
-

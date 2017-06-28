@@ -33,4 +33,3 @@ loon's documentation webpage, i.e. run \code{l_help("learn_R_bind")}
 \code{\link{l_bind_layer_ids}}, \code{\link{l_bind_layer_get}},
   \code{\link{l_bind_layer_delete}}, \code{\link{l_bind_layer_reorder}}
 }
-

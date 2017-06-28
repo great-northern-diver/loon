@@ -41,4 +41,3 @@ Visibile layers are rendered, invisible ones are not. If any
   \code{\link{l_layer_hide}}, \code{\link{l_layer_isVisible}},
   \code{\link{l_layer_groupVisibility}}
 }
-

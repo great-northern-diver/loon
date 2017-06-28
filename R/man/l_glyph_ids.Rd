@@ -15,4 +15,3 @@ List all the non-primitive glyph ids attached to display.
 \seealso{
 \code{\link{l_glyph_add}}
 }
-

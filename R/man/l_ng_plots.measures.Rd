@@ -57,4 +57,3 @@ nav <- l_ng_plots(measures1d(oliveAcids, sd=sd, mean=mean))
   \code{\link{scagnostics2d}}, \code{\link{l_ng_plots}},
   \code{\link{l_ng_ranges}}
 }
-

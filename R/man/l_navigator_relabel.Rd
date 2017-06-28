@@ -19,4 +19,3 @@ Change the navigator label
 \seealso{
 \code{\link{l_navigator_add}}
 }
-

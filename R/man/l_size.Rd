@@ -18,4 +18,3 @@ Get the width and height of a plot in pixels
 \seealso{
 \code{\link{l_resize}}, \code{\link{l_size<-}}
 }
-

@@ -20,4 +20,3 @@ This function is similar to \code{.Tk.subwin} except that does
   subwidgets. Instead it creates a widget path (parent).looni, where i is the
   smallest integer for which no widget exists yet.
 }
-

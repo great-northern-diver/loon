@@ -61,4 +61,3 @@ for (i in 1:nrow(df_diff)) {
               height=unit(1, "line"), gp=gpar(fill=df_diff[i,2]))
 }
 }
-

@@ -73,4 +73,3 @@ layers <- sapply(split(cbind(iris, color=p2['color']), iris$Species), function(d
 
 
 }
-

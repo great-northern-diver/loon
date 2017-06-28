@@ -24,4 +24,3 @@ Note that navigators have the states \code{animationPause} and
 \seealso{
 \code{\link{l_navigator_add}}
 }
-

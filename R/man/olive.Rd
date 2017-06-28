@@ -27,4 +27,3 @@ Forina, M., Armanino, C., Lanteri, S., and Tiscornia, E. (1983)
   Applied Science Publ., Barking.
 }
 \keyword{datasets}
-

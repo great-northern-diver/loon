@@ -21,4 +21,3 @@ Loon's standard linking model is based on three levels, the
 \seealso{
 \code{\link{l_setLinkedStates}}
 }
-

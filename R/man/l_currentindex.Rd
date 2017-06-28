@@ -41,4 +41,3 @@ l_bind_item(p, tags='model&&point', event='<Leave>',
 \seealso{
 \code{\link{l_bind_item}}, \code{\link{l_currenttags}}
 }
-

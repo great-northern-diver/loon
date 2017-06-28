@@ -18,10 +18,10 @@ Scatterplot widget plot handle
 Creates a scatterplot widget and layers the map in front.
 }
 \examples{
+library(maps)
 p <- l_plot(map('world', fill=TRUE, plot=FALSE))
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer.map}},
   \code{\link[maps]{map}}
 }
-

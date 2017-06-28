@@ -44,4 +44,3 @@ l_layer_printTree(p)
 \code{\link{l_layer}}, \code{\link{l_layer_printTree}},
   \code{\link{l_layer_index}}
 }
-

@@ -27,4 +27,3 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph-switch-
   \code{\link{l_graphswitch_reorder}}, \code{\link{l_graphswitch_set}},
   \code{\link{l_graphswitch_get}}
 }
-

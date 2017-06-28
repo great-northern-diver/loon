@@ -4,6 +4,7 @@
 \name{loon}
 \alias{loon}
 \alias{loon-package}
+\alias{loon-package}
 \title{loon: A Toolkit for Interactive Data Visualization and Exploration}
 \description{
 Loon is a toolkit for highly interactive data visualization. Interactions 
@@ -31,4 +32,10 @@ teaching, and creating new graphical user interfaces.
 To get started using loon read the package vigniettes or visit the loon
 website at \url{http://waddella.github.io/loon/learn_R_intro.html}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{http://waddella.github.io/loon/}
+}
 
+}

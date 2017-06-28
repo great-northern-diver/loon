@@ -17,4 +17,3 @@ Removes a navigator from a graph widget
 \seealso{
 \code{\link{l_navigator_add}}
 }
-

@@ -28,4 +28,3 @@ l_help("learn_R_bind")
 l_help("learn_R_bind.html#list-reorder-delete-bindings")
 }
 }
-

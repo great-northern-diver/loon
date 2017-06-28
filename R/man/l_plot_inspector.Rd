@@ -24,4 +24,3 @@ i <- l_plot_inspector()
 \seealso{
 \code{\link{l_create_handle}}
 }
-

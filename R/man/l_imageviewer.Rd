@@ -33,4 +33,3 @@ tcl(img3, 'put', 'green', '-to', 40, 80, 350, 95)
 
 l_imageviewer(c(tclvalue(img2), tclvalue(img3)))
 }
-

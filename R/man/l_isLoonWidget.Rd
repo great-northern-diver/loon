@@ -17,4 +17,3 @@ boolean, TRUE if the argument is a valid loon widget path, FALSE
 This function can be useful to check whether a loon widget is
   has been closed by the user.
 }
-
