@@ -42,8 +42,7 @@ m1d <- measures1d(sapply(iris[,-5], scale01),
 
 m1d()
 
-# TODO: fix
-# nav <- l_ng_ranges(m1d, color=iris$Species)
+nav <- l_ng_ranges(m1d, color=iris$Species)
 }
 \seealso{
 \code{\link{measures1d}}, \code{\link{measures2d}}, 

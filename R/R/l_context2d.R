@@ -207,7 +207,7 @@ l_context_add_slicing2d <- function(navigator, ...) {
         args$data <- l_data(args$data)
     }
     
-    con <- do.call('l_context_add', args)
+    con <- do.call(`l_context_add`, args)
 
     attr(con, 'plot_xy')  <- structure(con['plot_xy'], class='loon')
     attr(con, 'plot_uv')  <- structure(con['plot_uv'], class='loon')

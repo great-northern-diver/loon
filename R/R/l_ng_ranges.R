@@ -70,12 +70,7 @@ l_ng_ranges <- function(measures, ...) {
 #'      row.names = names(dat)
 #' )
 #' 
-#' # TODO: fix
-#' # nav <- l_ng_ranges(m1d, dat ) 
-#' 
-#' # With a single measure
-#' 
-#' # nav <- l_ng_ranges(sapply(dat, sd), dat)
+#' nav <- l_ng_ranges(m1d, dat) 
 #' 
 #' 
 l_ng_ranges.default <- function(measures, data, separator=':', ...) {
@@ -115,6 +110,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     ## -----------
     ## Create Graph, Navigator, Context, and Controls
     tt <- l_toplevel()
+
     tcl('wm', 'title', tt, 'Navgraph based on measures with a top fraction slider')
     
     controlFrame <- tcl('frame', l_subwin(tt, 'controls'))
@@ -129,14 +125,14 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     } else {
         l_configure(p, x=data[,1], y=data[,2])
     }
-
+    
     tcl('pack', controlFrame, side='right', fill='y', padx=2, pady=2)
     tcl('pack', g, side='right', fill='both', expand=TRUE)
 
-    
     tcl('grid', 'propagate', controlFrame, 0)
     tcl(controlFrame, 'configure', width=200)
     
+
     labelMeasure <- tcl('label', l_subwin(controlFrame, 'mlabel'), text='Measures:') 
     listbox <- tcl('tk::listbox', l_subwin(controlFrame,'listbox'), selectmode='single')
     scrollListbox <- tcl('tk::scrollbar', l_subwin(controlFrame,'lvscroll'),
@@ -155,6 +151,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
                   variable=tclvalueTransitionDim, value='34d')
     tcl('pack', rb_3d, rb_4d, rb_34d, side='left')
     
+
     frameFilterRadiobuttons <- tcl('frame', l_subwin(controlFrame,'filterSpec'))
     tclvalueFilter <- tclVar('value')
     rb_value <- tcl('radiobutton', l_subwin(frameFilterRadiobuttons, 'value'), text='value',
@@ -162,7 +159,6 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     rb_percentile <- tcl('radiobutton', l_subwin(frameFilterRadiobuttons, 'percentile'), text='percentile',
                  variable=tclvalueFilter, value='percentile')
     tcl('pack', rb_value, rb_percentile, side='left')
-    
         
     tcl('grid', labelMeasure, row=0, column=0, columnspan=2, sticky='w')
     tcl('grid', listbox, row=1, column=0, sticky='nsew')
@@ -179,17 +175,19 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     
     tcl('grid', 'columnconfigure', controlFrame, 0, weight=1)
     tcl('grid', 'columnconfigure', controlFrame, 1, weight=0)
-
+    
     ## Now Create Listbox Labels
     sapply(colnames(measures), function(measure) tcl(listbox, 'insert' , 'end', measure))
     ## -----updateScale
+    
+    i_last_select <- 0
     
     ## Now write function to update graph
     updateGraph <- function() {
         
         i_measure <- as.character(tcl(listbox, 'curselection'))
         if (length(i_measure) == 0) {
-            tcl(listbox, 'selection', 'set', i_last_select)   
+              tcl(listbox, 'selection', 'set', i_last_select)   
         } else {
             i_last_select <<- as.numeric(i_measure)[1]              
         }
@@ -241,14 +239,13 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     }
     
     
-    
     updateScale <- function() {
         
         if (tclvalue(tclvalueFilter) == "value") {
         
             i_measure <- as.character(tcl(listbox, 'curselection'))
             if (length(i_measure) == 0) {
-                tcl(listbox, 'selection', 'set', i_last_select)   
+                  tcl(listbox, 'selection', 'set', i_last_select)   
             } else {
                 i_last_select <<- as.numeric(i_measure)[1]               
             }
@@ -285,31 +282,39 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
             tkconfigure(scale, from=0, to=1, min=0.8, max=1, resolution=0.01)
         }
         
-        updateGraph()
+        # updateGraph()
     }
+
+    
+    tcl('bind', listbox, '<<ListboxSelect>>', function(...) {
+        
+        sel <- as.character(tcl(listbox, 'curselection'))
+        if (length(sel) != 0 && !identical(i_last_select, sel)) {
+            updateScale()
+        }
+    })
     
     
-    
-    tcl('bind', listbox, '<<ListboxSelect>>', function(...)updateScale())
     sapply(c(rb_value, rb_percentile), function(rb) {
-        tcl(rb, 'configure', command=function(...)updateScale())        
+        tcl(rb, 'configure', command=function(...) updateScale())        
     })
+
     
-    tcl(scale, 'configure', command=function(...)updateGraph())
+    tcl(scale, 'configure', command=function(...) updateGraph())
+    
     sapply(c(rb_3d, rb_4d, rb_34d), function(rb) {
-        tcl(rb, 'configure', command=function(...)updateScale())        
+        tcl(rb, 'configure', command=function(...) updateScale())        
     })
+
     
     callbackFunctions$general[[paste0(g,'.updateGraph')]] <- updateGraph
     callbackFunctions$general[[paste0(g,'.updateScale')]] <- updateScale
     
-    
-    
-    
     tcl(listbox, 'selection', 'set', 0)
-    i_last_select <- 0
+
     
     updateScale()
+    
     l_scaleto_world(p)
     
     return(list(
@@ -347,9 +352,9 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 #' @export
 #' 
 #' @examples 
-#' # library(scagnostics)
-#' # s <- scagnostics(oliveAcids)
-#' # ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
+#' library(scagnostics)
+#' s <- scagnostics(oliveAcids)
+#' ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
 l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     
     force(data)
@@ -412,8 +417,7 @@ l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
 #' 
 #' m1d()
 #' 
-#' # TODO: fix
-#' # nav <- l_ng_ranges(m1d, color=iris$Species)
+#' nav <- l_ng_ranges(m1d, color=iris$Species)
 l_ng_ranges.measures <- function(measures, ...) {
     
     separator <- measures('separator')

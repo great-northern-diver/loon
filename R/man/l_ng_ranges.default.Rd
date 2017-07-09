@@ -57,12 +57,7 @@ m1d <- data.frame(
      row.names = names(dat)
 )
 
-# TODO: fix
-# nav <- l_ng_ranges(m1d, dat ) 
-
-# With a single measure
-
-# nav <- l_ng_ranges(sapply(dat, sd), dat)
+nav <- l_ng_ranges(m1d, dat) 
 
 
 }
