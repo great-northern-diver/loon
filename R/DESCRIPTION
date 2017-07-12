@@ -31,6 +31,7 @@ Suggests:
     Rgraphviz,
     RDRToolbox,
     kernlab,
+    scales,
     MASS,
     dplyr,
     testthat,
