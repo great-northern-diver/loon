@@ -97,7 +97,7 @@ procedure names (e.g. `loon::plot` instead of `plot`).
 
 <R>
 
-See the [beta section](beta.html).
+See the [installation section](install.html).
 
 </R>
 

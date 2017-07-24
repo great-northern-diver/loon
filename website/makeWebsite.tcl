@@ -33,9 +33,9 @@ if {"all" in $todo || "learn" in $todo} {
 #    exec perl keepSections.pl Python        
 }
 
-if {"all" in $todo || "beta" in $todo} {
-    ## Beta
-    foreach topic {beta linkingActiveTcl commands} {
+if {"all" in $todo || "install" in $todo} {
+    ## Install
+    foreach topic {install linkingActiveTcl commands} {
         exec {*}$cmd --toc --toc-depth=5\
             {*}[lmap file {title no top_navigation nc}\
                     {format "--include-before-body=headers/%s.html" $file}]\
