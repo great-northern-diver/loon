@@ -117,6 +117,14 @@ biocLite(c('graph', 'RDRToolbox', 'Rgraphviz'),
 The following packages on [CRAN][CRAN] have dependencies that might need
 need special care
 
+* On Ubuntu install the following packages first (from bash)
+
+    ~~~
+	sudo apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev\
+	    libssl-dev libcurl4-gnutls-dev libtk-img libxml2-dev
+	~~~
+
+
 ~~~
 install.packages(c('dplyr', 'rgl', 'PairViz', 'scagnostics', 'kernlab',
     'testthat', 'knitr', 'rmarkdown'))
