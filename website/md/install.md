@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-document.getElementById("beta").className += " selected";
+document.getElementById("install").className += " selected";
 </script>
 
 ---
