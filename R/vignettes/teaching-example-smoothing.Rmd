@@ -1,0 +1,352 @@
+---
+title: "Smoothers and Bone Mineral Density"
+author: "R.W. Oldford"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Smoothers and Bone Mineral Density}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Illustrates:
+
+```{r setup, warning=FALSE, message=FALSE, error=FALSE}
+library(loon)
+```
+
+1. linked scatterplots
+2. panning and zooming
+3. creating new interactions through bindings
+
+## The data: Bone mineral density
+
+The data consists of measurements of spinal bone mineral density.  Several such measurements were  taken from 261 North American adolescents over a few years.  The entire dataset is called `bone` and can be found in the `R` package `ElemStatLearn`.
+
+```{r loadElemStatLearn, eval=FALSE}
+library("ElemStatLearn")
+summary(bone)
+```
+
+As can be seen, there are four variates.  The `idnum` uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261) and `gender` identifies their sex. The response variate of interest is `spnbmd` which is a ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate `age` is the average of the adolescent's age in years on those two visits. 
+
+In this vignette we investigate the fit of smoothing splines to this data.  
+
+## The scatterplot
+
+To begin, execute the following code:
+
+```{r scatterplot, eval=FALSE}
+# The plot
+x <- bone$age
+y <- bone$spnbmd
+#  A scatterplot
+p <- l_plot(x, y,
+            color="darkgrey",
+            xlabel="age", ylabel="spnbmd",
+            showGuides = TRUE, showScales = TRUE,
+            itemLabel = paste0("IDnum = ", bone$idnum, "\n", 
+                               bone$gender, "\n", 
+                               "Age: ", bone$age),
+            showItemLabels = TRUE,
+            linkingGroup="Bone density",
+            title = "Spinal bone mineral density (spnbmd)")
+```
+
+Two windows will have appeared once the above code has been executed.  One is the plot `p`, the other the **inspector** of the plot `p`. 
+
+The plot is interactive.  Hovering the mouse over a point in the plot, for example, will pop up the `itemLabel` for that point.  Scrolling on mouse wheel (or equivalent) over the plot **zooms** in (or out) on the plot; note that the zoom is centred at the mouse position.  For **horizontal zooming** only, hold the "control" key down while scrolling;  for **vertical zooming** only hold the "alt" (or `cmd` on a Mac) key while scrolling.
+
+Zoom in anywhere on the plot.  Notice that the **inspector** displays a miniature version of the whole plot as its **World View** at the top of its display.  The plot is bounded in the World View by a grey rectangle and the region of the plot that is displayed is shown as a brighter region bounded by a black rectangle.  This bright display region can be grabbed by clicking (and holding depressed) the left (or primary) mouse button.  Moving the mouse around while keeping the left button depressed moves the bright region in the inspector which in turn cause the display in the plot to update accordingly.  In this way, the inspector World View can be used to **pan** the entire display.  Alternatively, **panning** may also be effected by right (or secondary) button clicking on the interior of the plot, holding that mouse button down and moving the mouse.  In the inspector the region moves with the mouse, in the plot the background does.
+
+Panning and zooming can occur either on the inspector plot or on the plot itself.  In either case, the panning or zooming is constrained to the horizontal when the control key is held at the same time and to the verticle when the `alt` or `cmd` key is held.
+
+To get the displayed scatterplot back to its original scale, in the inspector click on `scale to: plot`.  Alternatively the same effect can be hand programmatically as
+`l_scaleto_plot(p)`.  (To scale to all layers in the plot use `l_scaleto_world(p)`.)
+
+See `help(l_plot)` for more details and examples.
+
+In the inspector window, immediately below the World View there are several **tabs**, the first of which is the **Analysis tab**.  The first subsection of the analysis tab contains plot attributes.  The values here were determined when the plot `p` was created according to the values of the arguments given to `l_plot(...)`.  These can be changed in the inspector by toggling the check boxes.
+
+The complete set of arguments that could have been used at the time of creation can be had by querying the plot `p` as `names(l_info_states)`.  The values can also be accessed and changed programmatically for axample as in
+
+```{r changeVals, eval=FALSE}
+p["showItemLabels"]
+p["showGuides"]
+p["swapAxes"] <- TRUE
+p["swapAxes"] <- FALSE
+```
+
+The vertical variate, `spnbmd`, measured the  *change* in spinal bone mineral density.  Anything above zero indicates an increase, anything below a decrease; the magnitude is the rate of change in density.  It might be of interest, then, to add a horizontal line to the plot at zero.  This is accomplished by **layering a line** on the plot `p` as follows:
+
+```{r addAxis, eval=FALSE}
+axis <- l_layer_line(p,
+                     x=extendrange(x, f=0.5), y=c(0,0),
+                     label="axis", linewidth=2,
+                     color = "black",
+                     dash=c(10,10),
+                     index="end")   # last argument places axis behind other layers
+
+```
+
+This "axis" can be turned on and off via the inspector or programmatically.  On the inspector, click on the **Layers** tab.  The layers appear in a list ordered from top to bottom in the inspector in the order in which they are displayed in the plot.  The `axis` appears below the Scatterplot and hence is dispayed behind the points. 
+
+Selecting the axis, the up and down buttons at the bottom of the list allow the axis to be placed above or below the Scatterplot.  The axis (or Scatterplot) can be moved up or down in the display.  Either can be made (temporarily) invisible by clicking on the icon showing a cartoon eye with a stroke through it and made visible again by clicking on the cartoon eye.  Try it.
+
+The axis (or any other layer, e.g. the Scatterplot), could be removed entirely with the minus sign.  Don't do this right now; click on the "Analysis" tab instead.
+
+## Histogram
+
+A histogram can be constructed in the same way for *numeric* values.  Even so, one can be used to construct a simple barplot for the factor `gender`:
+
+```{r histogram, eval=FALSE}
+h <- l_hist(as.numeric(bone$gender), # note as.numeric(...)
+            binwidth = 1, showBinHandle = FALSE,
+            showStackedColors = TRUE,
+            xlabel = "gender",
+            linkingGroup="Bone density",
+            title = "Gender (female=1; male=2)"
+            )
+```
+
+Note that the inspector now shows the histogram in the World View and that the plot section of the Analysis now has options peculiar to a histogram.
+
+The histogram and the scatterplot both have the same `linkingGroup` "Bone density" and the inspector shows that the 2 plots are **linked**.  Selecting the left most bar of the histogram highlights all of the females in both plots.  Switching back and forth between the two bars while observing the scatterplot shows that the pattern for males seems to be shifted slightly to the right of those for the females.
+
+Similarly,  selecting any point in the scatterplot causes a corresponding slice of the bar in which it appears in the histogram to be highlighted.  
+
+**Multiple selections** can made by holding the **shift key** while selecting.  Alternatively, clicking on the background, holding the mouse button down while **sweeping**  out a rectangle will highlight all data objects which intersect with the rectangle.
+
+Once selected, the display of the points can be **modified** by clicking on any of the colour patches to change their colour, or the glyph symbols to change the shape of points, the `-` and `+` signs to change size, and the `deactivate` (and `reactivate`) to remove the points from (or return them to) the display. 
+
+Try selecting the points in the scatterplot and making various modifications.  Note that because the displays are linked the changes are effected (where sensible) in both displays.  Note that once the points have been coloured it is also possible to select points by colour from the inspector.
+
+Note that with **shift sweeping** (sweeping while the shift key pressed), multiple selections can be made.  Couple this with `dynamic` selection that `deselect`s or `invert`s and very complex patterns of selected points can be constructed.
+
+To return the displays to their original configuration, from the inspector reactivate all of the points, then select `all` from the `Select` part of the `Analysis` panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour `+` will pop up a colour picker).  To return to the original colour execute `p["color"] <- "darkgrey"`.
+
+## Panning and brushing
+
+A second scatterplot could display other variates.  For example, plotting the age versus the patient ID number gives:
+
+```{r second plot, eval=FALSE}
+p2 <- l_plot(bone$idnum, bone$age,
+             xlabel="idnum", ylabel="age",
+             linkingGroup="Bone density",
+             title = "ID numbers and age")
+```
+
+Ideally this plot would look like fairly uniform scatter.  Assuming that `idnum` was assigned with recruitment there are some patterns.  In the middle of the `idnum` range, for example, there appears to be a preponderance of older ages followed immediately by a preponderance of younger ages. 
+
+We might investigate how the change in `idnum` from low to high manifests itself in the relationship between bone mineral density and age by **brushing** the points in `p2` and observing the effect in `p`.  To do this, click on `p2` so that the inspector has `p2` as its focus (appears in the inspector World View). In the inspector `Select` panel (on the `Analysis` tab) select `by: brushing`.  A rectangle will appear in `p2`; this is the **brush**.  
+
+Since we are interested in observing the relationship between bone density and age **conditional** on `idnum`, we need to shape the brush to be a long, relatively thin, vertical brush.  The brush is reshaped by selecting the box in its lower-right corner and moving it until you get the shape desired.  The brush will maintain that shape (unique to `p2`) until it is again changed.
+
+Now clicking anywhere in `p2` will have the brush follow the mouse (while the mouse button is depressed) and highlight all points located within the rectangle.  For example beginning at the lower left corner of the scatterplot and moving the mouse left to right horizontally, a tall narrow brush should select points with the same (or nearly the same) `idnum` and the relationship between bone density and age as the `idnum` increases can be seen in the original scatterplot `p`.  
+
+To have a **sticky brush**, or have the brush accumulate the selections brushed, simply use the shift key as before.  Again the nature of the brushing can be changed by selecting different `dynamic` modes.  To **turn off brushing** select `sweeping` in the `Select` panel of the inspector for `p2`.
+
+**Zooming** and **panning** in `p2` also reveals some interesting structure.  Horizontally zoom on `p2` until each `idnum` is well separated. Then horizontally pan across the `idnum`s (most easily done from the inspector World View). 
+
+It becomes easy to see that each subject (`idnum`) appears one, two, or three times.  Because each value is the *change* in bone density (and so must be calculated on the basis of two visits) this means that each person had two, three, or four visits.  Checking the `scales` and `guides` boxes of the plot panel in the inspector and panning reveals also that for every `idnum`, the difference in `age` are is at most 2 and does not appear to span more than 3 years.  Together, this suggests that the data may have been collected in a single time period of about 3 years.  Moreover, the bulk of those `idnums` which have three entries occur early in the order of `idnum`, possibly meaning early in the recruitment.
+
+## Adding a (dynamically changing) smooth
+
+To summarize the relationship, a smooth curve could be added to any scatterplot.  Here, we will add a smoothing spline fitted to bone mineral density as a function of time (i.e. to the data of `p`).
+
+```{r smooth, eval=FALSE}
+library(splines)
+# Fit a smoothing spline
+fitsmooth <- smooth.spline(x, y, df=5)
+xOrder <- order(x)
+smooth <- l_layer_line(p,
+                       x=x[xOrder],
+                       y=predict(fitsmooth,x=x[xOrder])$y,
+                       label="smooth fit", linewidth=4,
+                       color = "blue")
+```
+
+The smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.
+
+Of course this is the aggregate behaviour, over both sexes.  It might be interesting to see how this changes for males and for females.  We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate.  To that end we introduce a **dynamic update** to the smooth.
+
+```{r update smooth, eval=FALSE}
+
+## Define the updata function
+updateSmooth <- function(myPlot, minpts, df, color="blue") {
+  ## Get the values for x and y from the plot
+  ##
+  ## For x
+  xnew <- myPlot['xTemp']
+  if (length(xnew) == 0) {xnew <- myPlot['x']}
+  
+  ## For y
+  ynew <- myPlot['yTemp']
+  if (length(ynew) == 0) {ynew <- myPlot['y']}
+  
+  ## Now **only** use the active selected points to construct the smooth
+  sel <- myPlot['selected'] & myPlot['active']
+  xnew <- xnew[sel]
+  ynew <- ynew[sel]
+  Nsel <- sum(sel)
+  
+  if (Nsel > 3 & diff(range(xnew)) > 0) {
+    ## Find the range of the selected x values
+    xrng <- extendrange(xnew)
+    xvals.temp <- seq(from=min(xrng),
+                      to=max(xrng), 
+                      length.out=100)
+    
+    ## Redo our smooth **only** if we have enough points
+    if ((Nsel > minpts) & (minpts > (df + 1))){
+      fit.temp <- smooth.spline(xnew, ynew, df=df)
+      ypred.temp <- predict(fit.temp,x=xvals.temp)$y
+      ## update the smooth
+      if (smooth %in% l_layer_ids(myPlot)) {
+        ## reconfigure the smooth with new data
+        l_configure(smooth, x=xvals.temp, y=ypred.temp)
+      } else {
+        ## If the smooth has been deleted, then we recreate it 
+        ## (N.B. in the global environment)
+        smooth <<-  l_layer_line(myPlot,
+                                 x=xvals.temp, 
+                                 y=ypred.temp,
+                                 label="smooth fit", 
+                                 linewidth=4,
+                                 color = color)
+      } 
+    }
+  }
+  ## Update the tcl language's event handler
+  tcl('update', 'idletasks')
+}
+```
+
+Now, we would like to have this update called whenever any interesting change in state occurs.  There are numerous such possible states (see `names(l_info_states(p))` or `l_help("learn_R_bind")` ).  Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of `p` contained in its `selected` state.  This means that the function is called if any point in `p` is selected or deselected.  
+
+Note also that the smooth is based on the **temporary** `x` and `y` values. Points in a **scatterplot may be moved** by selecting them with the control button depressed (as well as shift for multiple selection).  Alternatively, **selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered** by selecting the corresponding `move` button from the `Modify` panel of the inspector.  **All points can be returned to their original position by
+
+```{r bindSmooth, eval=FALSE}
+# Here we "bind" the anonymous to the named state changes of p
+l_bind_state(p, c("selected"),
+             function() {updateSmooth(p, 10, 5, "blue")}
+)
+```
+
+Now go to the histogram and select first the female bar, then the make bar, and watch how the smoothing spline adapts to the sex.  Clearly, females have greater changes in spinal bone mineral density at a younger age than do males.  No doubt this is a consequence of the different ages at which girls and boys sexually mature.
+
+Brushing any set of points, from any of the linked plots will now cause the smooth function to automatically recalculate and redisplay.  In this way one might pursue, for example how the smooth changes over subsets of `idnum` values.
+
+Note that the points must be both active and selected.  We could, for example,  focus on how the smooth changes *only for any subset of females* by first deactivating all males and then brushing the subset of the females.
+
+Note that the states that are bound can be seen as `l_bind_state_ids(p)` and deleted using `l_bind_state_delete(p, "stateBinding0")`.
+
+## A smooth as a running linear fit
+
+Linear smoothers can be thought of as the connected predicted values of locally fitted linear models having weights which are maximal at the point $x$ where the prediction is being made and which drop off to zero for $x$ values far away from it.
+
+To illustrate this we add a straight line to the scatterplot that is fitted to the data via weighted least squares using Gaussian weights.  For any collection of $x$ values, the prediction will be made at their median.
+
+The Gaussian weight function will be centred at the median:
+
+```{r Gaussian weights, eval=FALSE}
+GaussWt <- function(x) {
+  # Get an estimated standard deviation
+  h <- diff(range(x))/4
+  # Centre at median
+  xloc <- median(x)
+  # Gaussian density
+  dnorm(x, mean=xloc, sd=h)
+}
+```
+
+Use these weights to fit a line to the data.
+
+
+```{r locally fitted line, eval = FALSE}
+# Fit a local line using some Gaussian weights.
+# Prediction will be at the median of x, fit by
+### weights that decrease with x's
+# distance from the median.
+fitwls <- lm(y ~ x, weights=GaussWt(x))
+linewls <- l_layer_line(p, 
+                        x=x,
+                        y=predict(fitwls,
+                                  newdata=data.frame(x=x)),
+                        label="Fitted line",
+                        linewidth=4,
+                        color = "blue")
+```
+
+Clicking on the `Layers` tab in the inspector shows the scatterplot, the axis, the smooth fit, and the Gaussian weight straight line.  Select the last of these and render it invisible by clicking on that button, or, by programmatically by executing the following.
+
+```{r hide layer, eval=FALSE}
+l_layer_hide(p, smooth)
+```
+
+Now make the fitted line update to fit only the selected points.
+
+```{r update line, eval=FALSE}
+updateLocalLine <- function(myPlot, minpts, df, volor="blue") {
+  ## Get the values for x and y from the plot
+  ## For x
+  xnew <- myPlot['xTemp']
+  if (length(xnew) == 0) {xnew <- myPlot['x']}
+  
+  ## For y
+  ynew <- myPlot['yTemp']
+  if (length(ynew) == 0) {ynew <- myPlot['y']}
+
+  ## Now **only** use the active selected points to construct the smooth
+  sel <- myPlot['selected'] & myPlot['active']
+  xnew <- xnew[sel]
+  ynew <- ynew[sel]
+  Nsel <- sum(sel)
+  if (Nsel > 3 & diff(range(xnew)) > 0) {
+    xrng <- extendrange(xnew)
+    xvals.temp <- seq(from=min(xrng),
+                      to=max(xrng), 
+                      length.out=100)
+    ## Redo line if more than two points.
+    if (Nsel> 2) {
+      fit.wls <-  lm(ynew ~ xnew, weights=GaussWt(xnew))
+      ywls.temp <- predict(fit.wls,
+                           newdata=data.frame(xnew=xvals.temp))
+      ## update the fit
+      if (linewls %in% l_layer_ids(myPlot)) {
+        l_configure(linewls, x=xvals.temp, y=ywls.temp)
+      } else {
+        ## If it's been deleted, we recreate it (in the global environment).
+        linewls <<- l_layer_line(myPlot,
+                                 x=xvals.temp,
+                                 y=predict(fitwls,
+                                           newdata=data.frame(x=xvals.temp)
+                                 ),
+                                 label="GaussWt at median line", 
+                                 linewidth=4,
+                                 color="blue"
+        )
+      }
+    }
+  
+  }
+  ## Update the tcl language's event handler
+  tcl('update', 'idletasks')
+}
+```
+
+And now bind this update function to change in `p` of  either the `select` or the `active` states.  
+
+```{r bindLine, eval=FALSE}
+# Here we "bind" the anonymous to the named state changes of p
+l_bind_state(p, c("active","selected"),
+             function() {updateLocalLine(p, 10, 5, "blue")}
+)
+```
+
+Selecting the male or female sex in the histograms will show the weighted least squares line for that sex.  Brushing a tall thin vertical brush on `p2` will show how the fitted line changes (or not) as the similar `idnum`s change.  But most interestingly, and the object of this lesson, is to brush `p2` with a short very wide brush so that the `age` can be kept roughly constant.  As `age` increases or decreases, the line segment changes its fit: both in height and in slope.  The smooth seen earlier is essentially the connected midpoints of these line segments.

@@ -35,6 +35,8 @@ Suggests:
     MASS,
     dplyr,
     testthat,
-    knitr
+    knitr,
+    rmarkdown
 LazyData: true
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
