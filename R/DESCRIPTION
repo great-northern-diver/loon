@@ -8,7 +8,7 @@ Authors@R: c(
     person("R. Wayne", "Oldford", , "rwoldford@uwaterloo.ca", role = "aut")
     )
 URL: http://waddella.github.io/loon/
-Description: A toolkit for interactive data visualization and exploration.
+Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2
 Depends:
     R (>= 3.4.0),

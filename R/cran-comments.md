@@ -19,4 +19,4 @@ Sometimes R CMD check fails with the ERROR:
 
 Error in MASS::isoMDS(d = D, k = 5) : object 'VR_mds_init_data' not found
 
-This error seems to dissapear when I re-install MASS with `install.packages('MASS')`.
+This error seems to disappear when I re-install MASS with `install.packages('MASS')`.
