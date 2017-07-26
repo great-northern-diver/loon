@@ -1,9 +1,3 @@
-
-# About the dev-manual branch
-
-We are currently working on the documentation for the loon R package in order to
-submit `loon` to CRAN.
-
 # loon
 
 `loon` is a toolkit for interactive data visualization and
