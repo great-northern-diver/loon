@@ -1,0 +1,2467 @@
+Hmm ... looks like a package
+
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017/01/01> patch level 3
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./Rd2.tex
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/R/share/texmf/tex/latex/Rd.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+No file Rd2.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [1{/var/lib/texmf/fonts
+/map/pdftex/updmap/pdftex.map}]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [2]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [3]
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd)
+Overfull \hbox (14.24408pt too wide) in paragraph at lines 195--195
+ [] \T1/zi4/m/n/9 grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "na
+tive", pch=15, gp=gpar(col=cols))[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [4]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [5]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [8]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 714--716
+[][][]\T1/zi4/m/n/10 l_bind_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_bind_context_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_de
+lete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [16]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [22]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [23]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [24]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [25]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26]
+Overfull \hbox (53.34094pt too wide) in paragraph at lines 1437--1439
+[][][]\T1/zi4/m/n/10 l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_naviga
+tor_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][
+][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
+Overfull \hbox (18.34094pt too wide) in paragraph at lines 1467--1469
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1504--1506
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28]
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1536--1538
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 1573--1575
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_delete[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (42.86096pt too wide) in paragraph at lines 1616--1619
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_b
+ind_state_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_get[][][]\T
+1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_delete[][][]\T1/ptm/m/n/10 , [][
+]\T1/zi4/m/n/10 l_bind_state_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [31]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
+Overfull \hbox (80.36096pt too wide) in paragraph at lines 1882--1886
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geodesic2d[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+Overfull \hbox (75.36096pt too wide) in paragraph at lines 1922--1926
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_context2d[][]
+[]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.84094pt too wide) in paragraph at lines 2002--2006
+[][][]\T1/zi4/m/n/10 l_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geo
+desic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\
+T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2034--2038
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.84094pt too wide) in paragraph at lines 2064--2069
+[][][]\T1/zi4/m/n/10 l_context_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_
+geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][]
+[]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2099--2103
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [40]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [41]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [42]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [45]
+Underfull \vbox (badness 10000) has occurred while \output is active [46]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (14.02971pt too wide) in paragraph at lines 2587--2589
+[]\T1/ptm/m/n/10 Tk im-age ref-er-ences, see the [][]\T1/zi4/m/n/10 l_image_imp
+ort_array[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/m/n/10 l_image_import_files[][][
+]
+
+Overfull \hbox (20.25635pt too wide) in paragraph at lines 2609--2609
+ []\T1/zi4/m/n/9 img_paths <- list.files(file.path(find.package(package = \TS1/
+zi4/m/n/9 '\T1/zi4/m/n/9 loon\TS1/zi4/m/n/9 '\T1/zi4/m/n/9 ), "images"), full.n
+ames = TRUE)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49] [50]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [51]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [61]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 3422--3427
+[][]\T1/zi4/m/n/10 l_graphswitch_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_graphswitch_move[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_r
+eorder[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_set[][][]\T1/ptm/
+m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [65]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [66]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [67]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [68]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [69]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [70]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [71]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78] [79]
+Overfull \hbox (73.00049pt too wide) in alignment at lines 4263--4263
+ [] [] 
+[80] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [82]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [83]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [84]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [85]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [86]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [87]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [88]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [89]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [91]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [93]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5087--5088
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [96]
+Overfull \hbox (11.25635pt too wide) in paragraph at lines 5237--5237
+ []\T1/zi4/m/n/9 l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g, color="", l
+inecolor="orange", linewidth=2)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [97]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [98]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (25.91081pt too wide) in paragraph at lines 5396--5401
+[]\T1/ptm/m/n/10 One of: \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 group\TS1/zi4/m/n/10 '
+\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 polygon\TS1/zi4/m/n/10 '\T1/pt
+m/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 text\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 
+, \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 line\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi
+4/m/n/10 '\T1/zi4/m/n/10 rectangle\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/
+n/10 '\T1/zi4/m/n/10 oval\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1
+/zi4/m/n/10 points\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/
+n/10 texts\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 pol
+ygons\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ,
+[99] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [100]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5493--5499
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+[101] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [102]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5608--5609
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [103]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5661--5667
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 5678--5681
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [104] [105]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [106]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5827--5833
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (7.86096pt too wide) in paragraph at lines 5845--5848
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_hide[][][]\T1/ptm/m/n/10 ,
+ [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m
+/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [107]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5886--5892
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [108] [109]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [110]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [111]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [112]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [113]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [114] [115]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [116]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [119]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (30.9pt too wide) in paragraph at lines 6599--6600
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+[120] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [121]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [122]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [123]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [124]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 6841--6847
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 6858--6861
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_h
+ide[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [125]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [126]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [127]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [128]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [129]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [130]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [131]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [132]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [133]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [134]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [135]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [136]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 7589--7594
+[][][]\T1/zi4/m/n/10 l_navigator_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_pat
+h[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_forward[][][]\T1/pt
+m/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [137]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [138]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [139]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [140]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [141]
+Overfull \hbox (20.36096pt too wide) in paragraph at lines 7846--7850
+[][][]\T1/zi4/m/n/10 l_ng_plots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_ng_plots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagn
+ostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 
+, [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (49.88098pt too wide) in paragraph at lines 7892--7896
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagnostics[]
+[][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T
+1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[
+][][]\T1/ptm/m/n/10 ,
+[142] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [143] [144]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (29.88098pt too wide) in paragraph at lines 8053--8057
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.measures[][][]
+\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1/zi
+4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[][][
+]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [145]
+Overfull \hbox (35.36096pt too wide) in paragraph at lines 8096--8100
+[][][]\T1/zi4/m/n/10 l_ng_ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/
+10 l_ng_ranges.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.sc
+agnostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [146]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [147]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [148]
+Overfull \hbox (44.88098pt too wide) in paragraph at lines 8286--8290
+[][][]\T1/zi4/m/n/10 l_ng_ranges[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_
+ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.measures[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1
+/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [149]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [150]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [151]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [152]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [153]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [154]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [155]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [156]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [157]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [158]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [159]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [160]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [161]
+Overfull \hbox (82.86096pt too wide) in paragraph at lines 9017--9020
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+getColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_ColorBrewe
+r[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_hcl[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[162] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9053--9055
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9064--9067
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9072--9074
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+[163]
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9097--9100
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9119--9121
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9150--9153
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[164] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [165]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [166]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [167]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [168]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [169]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [170]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [171pdfTeX warning (ext
+4): destination with the same identifier (name{Rfn.loon.Rdash.package}) has bee
+n already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.9574 \end{Description}
+                        ]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [172]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [173] [174]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [175]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [176]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [177]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [178]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [179]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [180]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [181]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [182]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+No file Rd2.ind.
+[183] (/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.png} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scales} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkplace} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkpack} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scagnostics} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn..Tcl} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.raster} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rasterImage} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.xy.coords} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.terrain.colors} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.topo.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.heat.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rainbow} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.image} has been referenced but does not exist, 
+replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.contourLines} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.map} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.sp} has been referenced but does not exist, rep
+laced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.density} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.character} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.factor} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.numeric} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/sha
+re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dis
+t/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
+w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (183 pages, 404420 bytes).
+Transcript written on Rd2.log.
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017/01/01> patch level 3
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./Rd2.tex
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/R/share/texmf/tex/latex/Rd.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+updmap/pdftex.map}] [2] [3] [4] [5])
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [8]
+Overfull \hbox (14.24408pt too wide) in paragraph at lines 195--195
+ [] \T1/zi4/m/n/9 grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "na
+tive", pch=15, gp=gpar(col=cols))[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [16]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 714--716
+[][][]\T1/zi4/m/n/10 l_bind_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_bind_context_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_de
+lete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [22]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [23]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [24]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [25]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [31]
+Overfull \hbox (53.34094pt too wide) in paragraph at lines 1437--1439
+[][][]\T1/zi4/m/n/10 l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_naviga
+tor_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][
+][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32]
+Overfull \hbox (18.34094pt too wide) in paragraph at lines 1467--1469
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1504--1506
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1536--1538
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 1573--1575
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_delete[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (42.86096pt too wide) in paragraph at lines 1616--1619
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_b
+ind_state_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_get[][][]\T
+1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_delete[][][]\T1/ptm/m/n/10 , [][
+]\T1/zi4/m/n/10 l_bind_state_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
+Overfull \hbox (80.36096pt too wide) in paragraph at lines 1882--1886
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geodesic2d[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [40]
+Overfull \hbox (75.36096pt too wide) in paragraph at lines 1922--1926
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_context2d[][]
+[]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [41]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.84094pt too wide) in paragraph at lines 2002--2006
+[][][]\T1/zi4/m/n/10 l_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geo
+desic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\
+T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [42]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2034--2038
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.84094pt too wide) in paragraph at lines 2064--2069
+[][][]\T1/zi4/m/n/10 l_context_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_
+geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][]
+[]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2099--2103
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Underfull \vbox (badness 10000) has occurred while \output is active [51]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (14.02971pt too wide) in paragraph at lines 2587--2589
+[]\T1/ptm/m/n/10 Tk im-age ref-er-ences, see the [][]\T1/zi4/m/n/10 l_image_imp
+ort_array[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/m/n/10 l_image_import_files[][][
+]
+
+Overfull \hbox (20.25635pt too wide) in paragraph at lines 2609--2609
+ []\T1/zi4/m/n/9 img_paths <- list.files(file.path(find.package(package = \TS1/
+zi4/m/n/9 '\T1/zi4/m/n/9 loon\TS1/zi4/m/n/9 '\T1/zi4/m/n/9 ), "images"), full.n
+ames = TRUE)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [61]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [65]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [66]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [67]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [68]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 3422--3427
+[][]\T1/zi4/m/n/10 l_graphswitch_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_graphswitch_move[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_r
+eorder[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_set[][][]\T1/ptm/
+m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [69]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [70]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [71]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [82]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [83] [84]
+Overfull \hbox (73.00049pt too wide) in alignment at lines 4263--4263
+ [] [] 
+[85] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [86]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [87]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [88]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [89]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [91]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [96]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [97]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [98]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5087--5088
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [99]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [100]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [101]
+Overfull \hbox (11.25635pt too wide) in paragraph at lines 5237--5237
+ []\T1/zi4/m/n/9 l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g, color="", l
+inecolor="orange", linewidth=2)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [102]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [103]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (25.91081pt too wide) in paragraph at lines 5396--5401
+[]\T1/ptm/m/n/10 One of: \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 group\TS1/zi4/m/n/10 '
+\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 polygon\TS1/zi4/m/n/10 '\T1/pt
+m/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 text\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 
+, \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 line\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi
+4/m/n/10 '\T1/zi4/m/n/10 rectangle\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/
+n/10 '\T1/zi4/m/n/10 oval\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1
+/zi4/m/n/10 points\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/
+n/10 texts\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 pol
+ygons\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ,
+[104] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [105]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5493--5499
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+[106] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [107]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5608--5609
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [108]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5661--5667
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 5678--5681
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [109] [110]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [111]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5827--5833
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (7.86096pt too wide) in paragraph at lines 5845--5848
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_hide[][][]\T1/ptm/m/n/10 ,
+ [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m
+/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [112]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5886--5892
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [113] [114]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [115]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [116]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [119] [120]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [121]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [122]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [123]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [124]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (30.9pt too wide) in paragraph at lines 6599--6600
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+[125] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [126]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [127]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [128]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [129]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 6841--6847
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 6858--6861
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_h
+ide[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [130]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [131]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [132]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [133]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [134]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [135]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [136]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [137]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [138]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [139]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [140]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [141]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 7589--7594
+[][][]\T1/zi4/m/n/10 l_navigator_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_pat
+h[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_forward[][][]\T1/pt
+m/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [142]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [143]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [144]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [145]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [146]
+Overfull \hbox (20.36096pt too wide) in paragraph at lines 7846--7850
+[][][]\T1/zi4/m/n/10 l_ng_plots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_ng_plots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagn
+ostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 
+, [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (49.88098pt too wide) in paragraph at lines 7892--7896
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagnostics[]
+[][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T
+1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[
+][][]\T1/ptm/m/n/10 ,
+[147] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [148] [149]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (29.88098pt too wide) in paragraph at lines 8053--8057
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.measures[][][]
+\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1/zi
+4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[][][
+]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [150]
+Overfull \hbox (35.36096pt too wide) in paragraph at lines 8096--8100
+[][][]\T1/zi4/m/n/10 l_ng_ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/
+10 l_ng_ranges.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.sc
+agnostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [151]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [152]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [153]
+Overfull \hbox (44.88098pt too wide) in paragraph at lines 8286--8290
+[][][]\T1/zi4/m/n/10 l_ng_ranges[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_
+ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.measures[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1
+/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [154]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [155]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [156]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [157]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [158]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [159]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [160]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [161]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [162]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [163]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [164]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [165]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [166]
+Overfull \hbox (82.86096pt too wide) in paragraph at lines 9017--9020
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+getColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_ColorBrewe
+r[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_hcl[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[167] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9053--9055
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9064--9067
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9072--9074
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+[168]
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9097--9100
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9119--9121
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9150--9153
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[169] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [170]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [171]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [172]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [173]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [174]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [175]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [176pdfTeX warning (ext
+4): destination with the same identifier (name{Rfn.loon.Rdash.package}) has bee
+n already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.9574 \end{Description}
+                        ]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [177]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [178] [179]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [180]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [181]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [182]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [183]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [184]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [185]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [186]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [187]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+No file Rd2.ind.
+[188] (/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux) )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.png} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scales} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkplace} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkpack} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scagnostics} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn..Tcl} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.raster} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rasterImage} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.xy.coords} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.terrain.colors} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.topo.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.heat.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rainbow} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.image} has been referenced but does not exist, 
+replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.contourLines} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.map} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.sp} has been referenced but does not exist, rep
+laced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.density} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.character} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.factor} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.numeric} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/sha
+re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dis
+t/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
+w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (188 pages, 428761 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (950 entries accepted, 2 rejected).
+Sorting entries............done (12651 comparisons).
+Generating output file Rd2.ind....done (585 lines written, 49 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017/01/01> patch level 3
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./Rd2.tex
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/R/share/texmf/tex/latex/Rd.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+updmap/pdftex.map}] [2] [3] [4] [5])
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [8]
+Overfull \hbox (14.24408pt too wide) in paragraph at lines 195--195
+ [] \T1/zi4/m/n/9 grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "na
+tive", pch=15, gp=gpar(col=cols))[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [16]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 714--716
+[][][]\T1/zi4/m/n/10 l_bind_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_bind_context_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_de
+lete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [22]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [23]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [24]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [25]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [31]
+Overfull \hbox (53.34094pt too wide) in paragraph at lines 1437--1439
+[][][]\T1/zi4/m/n/10 l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_naviga
+tor_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][
+][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32]
+Overfull \hbox (18.34094pt too wide) in paragraph at lines 1467--1469
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1504--1506
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1536--1538
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 1573--1575
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_delete[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (42.86096pt too wide) in paragraph at lines 1616--1619
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_b
+ind_state_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_get[][][]\T
+1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_delete[][][]\T1/ptm/m/n/10 , [][
+]\T1/zi4/m/n/10 l_bind_state_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
+Overfull \hbox (80.36096pt too wide) in paragraph at lines 1882--1886
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geodesic2d[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [40]
+Overfull \hbox (75.36096pt too wide) in paragraph at lines 1922--1926
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_context2d[][]
+[]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [41]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.84094pt too wide) in paragraph at lines 2002--2006
+[][][]\T1/zi4/m/n/10 l_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geo
+desic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\
+T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [42]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2034--2038
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.84094pt too wide) in paragraph at lines 2064--2069
+[][][]\T1/zi4/m/n/10 l_context_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_
+geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][]
+[]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2099--2103
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Underfull \vbox (badness 10000) has occurred while \output is active [51]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (14.02971pt too wide) in paragraph at lines 2587--2589
+[]\T1/ptm/m/n/10 Tk im-age ref-er-ences, see the [][]\T1/zi4/m/n/10 l_image_imp
+ort_array[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/m/n/10 l_image_import_files[][][
+]
+
+Overfull \hbox (20.25635pt too wide) in paragraph at lines 2609--2609
+ []\T1/zi4/m/n/9 img_paths <- list.files(file.path(find.package(package = \TS1/
+zi4/m/n/9 '\T1/zi4/m/n/9 loon\TS1/zi4/m/n/9 '\T1/zi4/m/n/9 ), "images"), full.n
+ames = TRUE)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [61]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [65]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [66]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [67]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [68]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 3422--3427
+[][]\T1/zi4/m/n/10 l_graphswitch_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_graphswitch_move[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_r
+eorder[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_set[][][]\T1/ptm/
+m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [69]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [70]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [71]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [82]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [83] [84]
+Overfull \hbox (73.00049pt too wide) in alignment at lines 4263--4263
+ [] [] 
+[85] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [86]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [87]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [88]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [89]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [91]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [96]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [97]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [98]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5087--5088
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [99]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [100]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [101]
+Overfull \hbox (11.25635pt too wide) in paragraph at lines 5237--5237
+ []\T1/zi4/m/n/9 l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g, color="", l
+inecolor="orange", linewidth=2)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [102]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [103]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (25.91081pt too wide) in paragraph at lines 5396--5401
+[]\T1/ptm/m/n/10 One of: \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 group\TS1/zi4/m/n/10 '
+\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 polygon\TS1/zi4/m/n/10 '\T1/pt
+m/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 text\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 
+, \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 line\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi
+4/m/n/10 '\T1/zi4/m/n/10 rectangle\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/
+n/10 '\T1/zi4/m/n/10 oval\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1
+/zi4/m/n/10 points\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/
+n/10 texts\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 pol
+ygons\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ,
+[104] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [105]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5493--5499
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+[106] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [107]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5608--5609
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [108]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5661--5667
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 5678--5681
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [109] [110]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [111]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5827--5833
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (7.86096pt too wide) in paragraph at lines 5845--5848
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_hide[][][]\T1/ptm/m/n/10 ,
+ [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m
+/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [112]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5886--5892
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [113] [114]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [115]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [116]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [119] [120]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [121]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [122]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [123]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [124]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (30.9pt too wide) in paragraph at lines 6599--6600
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+[125] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [126]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [127]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [128]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [129]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 6841--6847
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 6858--6861
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_h
+ide[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [130]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [131]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [132]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [133]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [134]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [135]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [136]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [137]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [138]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [139]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [140]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [141]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 7589--7594
+[][][]\T1/zi4/m/n/10 l_navigator_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_pat
+h[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_forward[][][]\T1/pt
+m/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [142]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [143]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [144]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [145]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [146]
+Overfull \hbox (20.36096pt too wide) in paragraph at lines 7846--7850
+[][][]\T1/zi4/m/n/10 l_ng_plots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_ng_plots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagn
+ostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 
+, [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (49.88098pt too wide) in paragraph at lines 7892--7896
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagnostics[]
+[][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T
+1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[
+][][]\T1/ptm/m/n/10 ,
+[147] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [148] [149]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (29.88098pt too wide) in paragraph at lines 8053--8057
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.measures[][][]
+\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1/zi
+4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[][][
+]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [150]
+Overfull \hbox (35.36096pt too wide) in paragraph at lines 8096--8100
+[][][]\T1/zi4/m/n/10 l_ng_ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/
+10 l_ng_ranges.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.sc
+agnostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [151]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [152]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [153]
+Overfull \hbox (44.88098pt too wide) in paragraph at lines 8286--8290
+[][][]\T1/zi4/m/n/10 l_ng_ranges[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_
+ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.measures[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1
+/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [154]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [155]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [156]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [157]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [158]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [159]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [160]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [161]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [162]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [163]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [164]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [165]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [166]
+Overfull \hbox (82.86096pt too wide) in paragraph at lines 9017--9020
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+getColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_ColorBrewe
+r[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_hcl[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[167] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9053--9055
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9064--9067
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9072--9074
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+[168]
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9097--9100
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9119--9121
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9150--9153
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[169] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [170]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [171]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [172]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [173]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [174]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [175]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [176pdfTeX warning (ext
+4): destination with the same identifier (name{Rfn.loon.Rdash.package}) has bee
+n already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.9574 \end{Description}
+                        ]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [177]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [178] [179]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [180]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [181]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [182]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [183]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [184]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [185]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [186]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [187]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.ind [188]
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 10.
+
+[189] [190] [191] [192]) (/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.png} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scales} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkplace} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkpack} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scagnostics} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn..Tcl} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.raster} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rasterImage} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.xy.coords} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.terrain.colors} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.topo.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.heat.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rainbow} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.image} has been referenced but does not exist, 
+replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.contourLines} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.map} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.sp} has been referenced but does not exist, rep
+laced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.density} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.character} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.factor} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.numeric} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/sha
+re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dis
+t/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (192 pages, 463028 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.15 [TeX Live 2016] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (950 entries accepted, 2 rejected).
+Sorting entries............done (12651 comparisons).
+Generating output file Rd2.ind....done (585 lines written, 49 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+LaTeX2e <2017/01/01> patch level 3
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(./Rd2.tex
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo))
+(/usr/share/R/share/texmf/tex/latex/Rd.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/zi4.sty
+`inconsolata-zi4' v1.112, 2017/01/04 Text macros for Inconsolata (msharpe)
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex)))))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+
+Package hyperref Warning: Option `hyperindex' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+
+Package hyperref Warning: Option `pagebackref' has already been used,
+(hyperref)                setting the option has no effect on input line 366.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu))
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def))
+Writing index file Rd2.idx
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.out)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.toc [1{/var/lib/texmf/fonts/map/pdftex/
+updmap/pdftex.map}] [2] [3] [4] [5])
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [7]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [8]
+Overfull \hbox (14.24408pt too wide) in paragraph at lines 195--195
+ [] \T1/zi4/m/n/9 grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "na
+tive", pch=15, gp=gpar(col=cols))[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [10]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [11]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [12]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [13]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [14]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [15]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [16]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [17]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 714--716
+[][][]\T1/zi4/m/n/10 l_bind_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_bind_context_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_de
+lete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_context_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [18]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [19]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [20]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [22]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [23]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [24]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [25]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [26]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [27]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [28]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [29]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [30]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [31]
+Overfull \hbox (53.34094pt too wide) in paragraph at lines 1437--1439
+[][][]\T1/zi4/m/n/10 l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_naviga
+tor_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][
+][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [32]
+Overfull \hbox (18.34094pt too wide) in paragraph at lines 1467--1469
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1504--1506
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [33]
+Overfull \hbox (33.34094pt too wide) in paragraph at lines 1536--1538
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_reorder[][][] 
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [34]
+Overfull \hbox (13.34094pt too wide) in paragraph at lines 1573--1575
+[][][]\T1/zi4/m/n/10 l_bind_navigator[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_bind_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_
+get[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_navigator_delete[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (42.86096pt too wide) in paragraph at lines 1616--1619
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_b
+ind_state_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_get[][][]\T
+1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_bind_state_delete[][][]\T1/ptm/m/n/10 , [][
+]\T1/zi4/m/n/10 l_bind_state_reorder[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [35]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [36]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [37]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [38]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [39]
+Overfull \hbox (80.36096pt too wide) in paragraph at lines 1882--1886
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geodesic2d[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [40]
+Overfull \hbox (75.36096pt too wide) in paragraph at lines 1922--1926
+[][][]\T1/zi4/m/n/10 l_info_states[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_context2d[][]
+[]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [41]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (35.84094pt too wide) in paragraph at lines 2002--2006
+[][][]\T1/zi4/m/n/10 l_context_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_c
+ontext_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_geo
+desic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][][]\
+T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [42]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2034--2038
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (50.84094pt too wide) in paragraph at lines 2064--2069
+[][][]\T1/zi4/m/n/10 l_context_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 
+l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_
+geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[][]
+[]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [43]
+Overfull \hbox (60.84094pt too wide) in paragraph at lines 2099--2103
+[][][]\T1/zi4/m/n/10 l_context_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_context_add_context2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_ad
+d_geodesic2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_context_add_slicing2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [44]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [45]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [46]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [47]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [48]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [49]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [50]
+Underfull \vbox (badness 10000) has occurred while \output is active [51]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [52]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (14.02971pt too wide) in paragraph at lines 2587--2589
+[]\T1/ptm/m/n/10 Tk im-age ref-er-ences, see the [][]\T1/zi4/m/n/10 l_image_imp
+ort_array[][][] \T1/ptm/m/n/10 and [][]\T1/zi4/m/n/10 l_image_import_files[][][
+]
+
+Overfull \hbox (20.25635pt too wide) in paragraph at lines 2609--2609
+ []\T1/zi4/m/n/9 img_paths <- list.files(file.path(find.package(package = \TS1/
+zi4/m/n/9 '\T1/zi4/m/n/9 loon\TS1/zi4/m/n/9 '\T1/zi4/m/n/9 ), "images"), full.n
+ames = TRUE)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [53]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [54] [55]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [56]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [57]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [58]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [59]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [60]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [61]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [62]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [63]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [64]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [65]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [66]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [67]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [68]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 3422--3427
+[][]\T1/zi4/m/n/10 l_graphswitch_getLabel[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n
+/10 l_graphswitch_move[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_r
+eorder[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_graphswitch_set[][][]\T1/ptm/
+m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [69]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [70]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [71]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [72]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [73]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [74]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [75]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [76]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [77]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [78]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [79]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [80]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [81]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [82]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [83] [84]
+Overfull \hbox (73.00049pt too wide) in alignment at lines 4263--4263
+ [] [] 
+[85] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [86]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [87]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [88]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [89]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [90]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [91]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [92]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [93]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [94]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [95]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [96]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [97]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [98]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5087--5088
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [99]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [100]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [101]
+Overfull \hbox (11.25635pt too wide) in paragraph at lines 5237--5237
+ []\T1/zi4/m/n/9 l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g, color="", l
+inecolor="orange", linewidth=2)[] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [102]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [103]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (25.91081pt too wide) in paragraph at lines 5396--5401
+[]\T1/ptm/m/n/10 One of: \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 group\TS1/zi4/m/n/10 '
+\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 polygon\TS1/zi4/m/n/10 '\T1/pt
+m/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 text\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 
+, \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 line\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi
+4/m/n/10 '\T1/zi4/m/n/10 rectangle\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/
+n/10 '\T1/zi4/m/n/10 oval\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1
+/zi4/m/n/10 points\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/
+n/10 texts\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 , \TS1/zi4/m/n/10 '\T1/zi4/m/n/10 pol
+ygons\TS1/zi4/m/n/10 '\T1/ptm/m/n/10 ,
+[104] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [105]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5493--5499
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+[106] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [107]
+Overfull \hbox (30.9pt too wide) in paragraph at lines 5608--5609
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [108]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5661--5667
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 5678--5681
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [109] [110]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [111]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5827--5833
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (7.86096pt too wide) in paragraph at lines 5845--5848
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_s
+how[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_hide[][][]\T1/ptm/m/n/10 ,
+ [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m
+/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [112]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 5886--5892
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [113] [114]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [115]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [116]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [117]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [118]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [119] [120]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [121]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [122]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [123]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [124]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (30.9pt too wide) in paragraph at lines 6599--6600
+[]\T1/ptm/m/n/10 For more in-for-ma-tion run: \T1/zi4/m/n/10 l_help("learn_R_la
+yer.html#countourlines-heatimage-rasterimage") 
+[125] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [126]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [127]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [128]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [129]
+Overfull \hbox (43.83704pt too wide) in paragraph at lines 6841--6847
+\T1/ptm/m/n/10 and the ac-tual vis-i-bil-ity (i.e. are all the an-ces-ters vis-
+i-bile too) can be checked with [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][
+]\T1/ptm/m/n/10 . 
+
+Overfull \hbox (32.86096pt too wide) in paragraph at lines 6858--6861
+[][][]\T1/zi4/m/n/10 l_layer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_h
+ide[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_layer_isVisible[][][]\T1/ptm/m/n
+/10 , [][]\T1/zi4/m/n/10 l_layer_layerVisibility[][][]\T1/ptm/m/n/10 , [][]\T1/
+zi4/m/n/10 l_layer_groupVisibility[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [130]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [131]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [132]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [133]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [134]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [135]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [136]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [137]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [138]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [139]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [140]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [141]
+Overfull \hbox (10.84094pt too wide) in paragraph at lines 7589--7594
+[][][]\T1/zi4/m/n/10 l_navigator_delete[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_navigator_ids[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_pat
+h[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_navigator_walk_forward[][][]\T1/pt
+m/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [142]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [143]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [144]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [145]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [146]
+Overfull \hbox (20.36096pt too wide) in paragraph at lines 7846--7850
+[][][]\T1/zi4/m/n/10 l_ng_plots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/1
+0 l_ng_plots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagn
+ostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 
+, [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (49.88098pt too wide) in paragraph at lines 7892--7896
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.scagnostics[]
+[][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T
+1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[
+][][]\T1/ptm/m/n/10 ,
+[147] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [148] [149]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (29.88098pt too wide) in paragraph at lines 8053--8057
+[][][]\T1/zi4/m/n/10 l_ng_plots[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_p
+lots.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_plots.measures[][][]
+\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1/zi
+4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[][][
+]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [150]
+Overfull \hbox (35.36096pt too wide) in paragraph at lines 8096--8100
+[][][]\T1/zi4/m/n/10 l_ng_ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/
+10 l_ng_ranges.measures[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.sc
+agnostics[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [151]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [152]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [153]
+Overfull \hbox (44.88098pt too wide) in paragraph at lines 8286--8290
+[][][]\T1/zi4/m/n/10 l_ng_ranges[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_
+ranges.default[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_ng_ranges.measures[][
+][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 measures1d[][][]\T1/ptm/m/n/10 , [][]\T1
+/zi4/m/n/10 measures2d[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 scagnostics2d[]
+[][]\T1/ptm/m/n/10 ,
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [154]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [155]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [156]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [157]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [158]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [159]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [160]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [161]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [162]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [163]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [164]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [165]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [166]
+Overfull \hbox (82.86096pt too wide) in paragraph at lines 9017--9020
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+getColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_ColorBrewe
+r[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_hcl[][][]\T1/ptm/m/n/
+10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[167] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9053--9055
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9064--9067
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9072--9074
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+[168]
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9097--9100
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+Overfull \hbox (7.89764pt too wide) in paragraph at lines 9119--9121
+[]\T1/ptm/m/n/10 Loon's color list is used to map nom-i-nal val-ues to col-ors.
+ See the doc-u-men-ta-tion for [][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m
+/n/10 . 
+
+Overfull \hbox (8.34094pt too wide) in paragraph at lines 9150--9153
+[][][]\T1/zi4/m/n/10 l_setColorList[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_
+setColorList_ColorBrewer[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorLis
+t_hcl[][][]\T1/ptm/m/n/10 , [][]\T1/zi4/m/n/10 l_setColorList_baseR[][][] 
+[169] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [170]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [171]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [172]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [173]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [174]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [175]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [176pdfTeX warning (ext
+4): destination with the same identifier (name{Rfn.loon.Rdash.package}) has bee
+n already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.9574 \end{Description}
+                        ]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [177]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [178] [179]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [180]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [181]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [182]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [183]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [184]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [185]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [186]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def) [187]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def)
+(/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.ind [188]
+
+LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
+(Font)              using `T1/zi4/m/n' instead on input line 10.
+
+[189] [190] [191] [192]) (/tmp/RtmppDeE9J/Rd2pdf78771a499204/Rd2.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ )
+(see the transcript file for additional information)pdfTeX warning (dest): name
+{Rfn.png} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.hcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scales} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkplace} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tkpack} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.scagnostics} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn..Tcl} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.tcl} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.raster} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rasterImage} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.xy.coords} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.terrain.colors} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.topo.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.heat.colors} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.rainbow} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.image} has been referenced but does not exist, 
+replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.contourLines} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.map} has been referenced but does not exist, re
+placed by a fixed one
+
+pdfTeX warning (dest): name{Rfn.sp} has been referenced but does not exist, rep
+laced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.density} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.as.character} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.factor} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Rfn.col.Rul.numeric} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}{/usr/sha
+re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-dis
+t/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (192 pages, 463957 bytes).
+Transcript written on Rd2.log.
+Saving output to ‘loon-manual.pdf’ ...
+Done
+You may want to clean up by 'rm -rf /tmp/RtmppDeE9J/Rd2pdf78771a499204'

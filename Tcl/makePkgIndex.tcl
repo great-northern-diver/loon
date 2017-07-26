@@ -13,8 +13,8 @@ set fp [open "pkgIndex.tcl" w+]
 #    puts \"Img package is missing. Can not load png and jpeg images.\"
 #\}"
 
-puts  $fp "package ifneeded loon 1.0.1 \""
-puts  $fp "   package provide loon 1.0.1 "
+puts  $fp "package ifneeded loon 1.1.0\""
+puts  $fp "   package provide loon 1.1.0 "
 puts  $fp "   package require Tcl 8.6 "
 puts  $fp "   package require Tk 8.6 "
 ## Objects need to be loaded according to inheritance
@@ -177,7 +177,7 @@ oo_ColorCrossTable.tcl\
 ]
 
 ## Environment Variables 
-puts $fp "   \[list set ::env(LOON_VERSION) 0.1\]"
+puts $fp "   \[list set ::env(LOON_VERSION) 1.1.0\]"
 puts $fp "   \[list set ::env(LOON_LIBRARY) \[file dirname \[info script\]\]\]"
 
 ## Init File

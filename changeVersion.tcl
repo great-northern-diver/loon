@@ -50,7 +50,7 @@ set pattern [format "s/loon_\%s\\.tar\\.gz/loon_%s\\.tar\\.gz/g"\
 		 [regsub -all -- \\. $newVersion \\.]]
 
 # Change in website beta
-exec sed -i $pattern website/md/beta.md
+# exec sed -i $pattern website/md/beta.md
 
 # Change in Makefile
 exec sed -i $pattern Makefile
@@ -65,7 +65,7 @@ exec cd ..
 puts "\n\n DIFF on affected files\n ===================== \n\n"
 
 set diff [exec git diff --unified=0 Makefile R/DESCRIPTION\
-	      website/md/beta.md Tcl/makePkgIndex.tcl]
+	      Tcl/makePkgIndex.tcl]
 puts [exec egrep {^(\+|-)} << $diff]
 puts "\n\n"
 

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="R.W. Oldford" />
+
+<meta name="date" content="2017-07-26" />
+
+<title>Visible minorities in Canadian cities</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Visible minorities in Canadian cities</h1>
+<h4 class="author"><em>R.W. Oldford</em></h4>
+<h4 class="date"><em>2017-07-26</em></h4>
+
+
+
+<div id="illustrates" class="section level3">
+<h3>Illustrates:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(loon)</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>linked histograms and scatterplots</li>
+<li>interactive maps as scatterplots</li>
+<li>plots with multiple layers including nested group layers’</li>
+<li>serial axes plots</li>
+<li>serial axes glyphs</li>
+</ol>
+</div>
+<div id="the-minority-data" class="section level1">
+<h1>The <code>minority</code> data</h1>
+<p>Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities’’ within 33 Canadian cities. All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).</p>
+<p>The data are part of the <code>loon</code> package and can be accessed through the <code>data(...)</code> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(minority)</code></pre></div>
+<p>The data are arranged as a <code>data.frame</code> of <code>nrow(minority) =</code> 33 Canadian cities with <code>ncol(minority) =</code> 18 measurements on each. The first 14 variates are Statistics Canada census numbers of people according to a declared <code>visible minority</code> together with the population of that <code>city</code>. The possibilities are</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(minority)[<span class="dv">1</span>:<span class="dv">14</span>]</code></pre></div>
+<pre><code>##  [1] &quot;Arab&quot;                                   
+##  [2] &quot;Black&quot;                                  
+##  [3] &quot;Chinese&quot;                                
+##  [4] &quot;Filipino&quot;                               
+##  [5] &quot;Japanese&quot;                               
+##  [6] &quot;Korean&quot;                                 
+##  [7] &quot;Latin.American&quot;                         
+##  [8] &quot;Multiple.visible.minority&quot;              
+##  [9] &quot;South.Asian&quot;                            
+## [10] &quot;Southeast.Asian&quot;                        
+## [11] &quot;Total.population&quot;                       
+## [12] &quot;Visible.minority.not.included.elsewhere&quot;
+## [13] &quot;Visible.minority.population&quot;            
+## [14] &quot;West.Asian&quot;</code></pre>
+<p>For example, here are the counts for three Canadian cities (3 rows of <code>minority</code>) from across Canada:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Victoria</th>
+<th align="right">Ottawa-Gatineau</th>
+<th align="right">St. John’s</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arab</td>
+<td align="right">500</td>
+<td align="right">28195</td>
+<td align="right">190</td>
+</tr>
+<tr class="even">
+<td>Black</td>
+<td align="right">2360</td>
+<td align="right">45060</td>
+<td align="right">620</td>
+</tr>
+<tr class="odd">
+<td>Chinese</td>
+<td align="right">12330</td>
+<td align="right">32445</td>
+<td align="right">990</td>
+</tr>
+<tr class="even">
+<td>Filipino</td>
+<td align="right">2760</td>
+<td align="right">7330</td>
+<td align="right">155</td>
+</tr>
+<tr class="odd">
+<td>Japanese</td>
+<td align="right">2280</td>
+<td align="right">1800</td>
+<td align="right">65</td>
+</tr>
+<tr class="even">
+<td>Korean</td>
+<td align="right">1235</td>
+<td align="right">2280</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td>Latin.American</td>
+<td align="right">1845</td>
+<td align="right">10630</td>
+<td align="right">320</td>
+</tr>
+<tr class="even">
+<td>Multiple.visible.minority</td>
+<td align="right">930</td>
+<td align="right">4540</td>
+<td align="right">25</td>
+</tr>
+<tr class="odd">
+<td>South.Asian</td>
+<td align="right">7210</td>
+<td align="right">27130</td>
+<td align="right">890</td>
+</tr>
+<tr class="even">
+<td>Southeast.Asian</td>
+<td align="right">1585</td>
+<td align="right">11670</td>
+<td align="right">55</td>
+</tr>
+<tr class="odd">
+<td>Total.population</td>
+<td align="right">325060</td>
+<td align="right">1117120</td>
+<td align="right">179270</td>
+</tr>
+<tr class="even">
+<td>Visible.minority.not.included.elsewhere</td>
+<td align="right">260</td>
+<td align="right">1720</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td>Visible.minority.population</td>
+<td align="right">33870</td>
+<td align="right">179295</td>
+<td align="right">3460</td>
+</tr>
+<tr class="even">
+<td>West.Asian</td>
+<td align="right">575</td>
+<td align="right">6490</td>
+<td align="right">65</td>
+</tr>
+</tbody>
+</table>
+<p>The remaining variates provide the geographic location of each city. The latitude and longitude of the cities were determined in two ways. First, the data in <code>canada.cities</code> from the <code>maps</code> package was used. This produced the <code>minority</code> variates <code>lat' and</code>long’. The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates <code>googleLat</code> and <code>googleLong</code>.</p>
+<p>To see if they agree we plot them against one another.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>Note the disagreement over the location of the city of Quebec. A check against a map reveals</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAIAAAD17khjAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAgAElEQVR4nOzdeTxU+/sA8GPfZWaMGfu+KwrZVdYWFKVEqSglouW23Bahbstt0V5u3USlaNFCmyJUVJaKQkgIYawZ+8z5/XG+3/nN1zJJSo3n/UevmTPP+ZzPmTznOXOWz+FAURQBAAAAAHvhHOkOAAAAAGD4QYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAABWUBS9ceOGs7OzpKQkHx+fkpKSnZ1dVFRUT0/PSHVp6tSpHBwc/Pz8I9UB8FvgQFF0pPsAAAC/qObmZjc3t3v37vX9SEtLKykpiUQi/fxeTZ069f79+3x8fB0dHT9/6eB3wT3SHQAAgF8UjUabM2fOw4cPEQQRFBScOnWqpqZmY2PjjRs3qqqq3r175+jo+OTJE15e3pHuKQD9gEP0w8PR0VFPT2/evHmvX7+2srIaM2aMvr7+33//TafTL126ZGJiIiwsrKGhceLECcYhExRFL1++bG5uTiKRBAQEVFVV/fz8KioqGG3a2dnp6em5u7vn5+c7ODjgcDg9Pb1t27Z1d3czL/ru3bvW1tZkMllYWHjs2LGbNm2qq6tj0dWvxre3twcFBZmYmIiKisrLy0+bNu3+/fvMATIyMhwcHAYGBowp8fHxHBwcHBwcZ86cwaYYGBhwcHDIyMi0tLQsXLhQVFT08+fPCILU19f7+vrq6uoKCQmpq6uvXLmy19LfvXvn6uqqrKwsJiY2efLkkydPwkEmMFIuXLiAVXdlZeWsrKxr167t3Lnz+PHjhYWFlpaWCIK8fPkyKSmJEf/V3BlkzOfPnxcuXCgjI6OmphYSElJUVKSnp6enp3f9+vWBuvqtiQPbgVEBBcNBWVkZQRAcDicsLMz89dra2vb6wi9evIjNsm/fvr7/Haqqqi0tLViAtLQ0giBycnIyMjLMMXZ2djQaDYuJjIzs24iamlpTU1O//fxqfF1dnZqaWt+YTZs2MRrBOqavr8+Ycvv2bSzs9OnT2BR9fX0EQaSlpR0dHbGPqquri4uLyWRyr5alpKQoFAo2V0JCQt/TinPnzqXT6cP2XwXAoE2cOBH7I7xz506vj/Lz8+fNmzdv3ryoqChsymByZzAxZWVlsrKyzJ9Onz69V37Z29sjCMLHx4e9/dbEge3AKAEFfnhgBR5BkClTpkRFRbm7uzP+LrEp8+fPx946ODigKNrd3S0kJIQgiIaGxsWLF5OTk11cXLCA+Ph4rE0sfxAEIRKJ//zzz/nz5xlLuXLlChYjJyeHBSQkJKSnp69btw4L2LdvX7/9/Gr88uXLsSlz5sxJSkqKjo6WlJREEISDgyM7O5u5Y4NJbE5OTl5e3oULF65fv76pqWnOnDlY2NatW58+fRocHIy9XbFiBYqiHR0dioqKCIKoqKg8e/astLSU0ZkbN24M//8ZACy1tLRwcnIiCEIikQZTWgaTO4OJ8fLywmLmzZt37do1Hx8fxsak3wI/hMSB7cAoAQV+eGCll5+fH9sF7uzsHDNmDPOU9vZ2ERERBEF0dHRQFK2oqJg9e/bs2bMZ5Zxx+OvQoUPYFEaBf/ToETalsLCQg4MDQRBra2sURVtbW7EAfX39z58/oyhKp9NXr17t5+fH+FXB7KvxVCoV26KNHTuWcZAgLS0Nm8vLy4u5Y4NJbIRpf4VCoWBTnJ2dsSl0Ol1bWxtBECUlJeZGYmNjsYDu7m7sCiZLS8vv/A8C4Fvl5+djf5BmZmbM0yMiIk4zwdJzMLkzmJimpiYuLi4EQQwMDBgxbm5uLAr8tyYObAdGD7jIbjjJy8tjdZ2Xl1dcXLy5uZkxhZ+fH4/Hf/nyBUVRBEFkZGSuXr3a09OTkZERFhb2+vVrxmW66P+eahIXF58yZQr2Wk1NTU9PLycnp6ioCEEQAQEBAoFQX1+flZUlLS1tYWHh4OCwYsUKdXX1frv31fji4mI6nY4giKurK5bhCIKYm5uTyeTPnz+/f//+W78QAQEBxtHF4uJi7IW1tTX2goODIzk5ubm5GVtrRvs7duw4cOAA9ppKpSIIUlBQ8K2LBuA7Me6Cwyoug7+/P/ZniZk3b56VldVgcmcwMUVFRTQarVfM4sWLL1++PFA/vzVxYDswesBFdsOJm7v3DlPfKQwXL14kkUgWFhZr166NjIxsb2/vN4xEImG/2jHYgbKqqioURTk5OaOjo7Ez9DQa7fHjx3/88YeGhoalpWV5eXnfpr4az7jED1sKg5SUFIIgZWVlX/8K/hcOh2N0ntE4DodjBBCJRBUVFRUVFQ4OjqqqKmxibm7u8//Cfm3U1tYyfnYA8HNgf/YIghQUFKBfu8JrMLkzmBhGljGWjiAIdkR9IN+aOLAdGD2gwI+MwsLCRYsWNTQ0KCsrHz58+NWrV3fv3u03sqamhnnjUlNTg/z3+lUEQezs7EpLSxMSEpYsWcJImLS0NMZpvF5YxzOu5sOudGXA3jJOGWCYe9Xrwn4G5l0Txu3C9fX1/QYzlp6bm9v3WFOvqxcB+NHwePy4ceMQBKmtrWUcN0YQpLW1FUXR9vZ25hI1mNwZTIy4uDg2kXEou298L0NIHNgOjBJQ4EdGSkoKdiBu9+7dAQEBurq62dnZ/UZSKJSUlBTsdVFRUU5ODoIgGhoaCIK8fPly69atwcHBqqqqZ8+erampuXXrFpFIRBAkIyOjb1Nfjcf2oBEEuXbtGiNvnz17hu1TYwtFEISPjw9BkMrKSmwVBlpcLyoqKtiLxMRE7AWKou7u7jo6OlZWVijThYrYOmLevXuXkZGRmZn51fYBGHZBQUHYCz8/v1evXjGmd3V1+fr6NjY2MqYMJncGE8PIgps3bzJiYmJiWHTyWxMHtgOjyHeewwcY7I9SW1ubxRR5eXnGlLNnz2Lfv6Oj49OnTy9cuEAgELApYWFhWDxjT5lEIkVERFy6dElVVRWbcvv2bRRFnz17hr21tbVNSkoqKCi4ffs2dv/JuHHj+nZyMPHe3t5YzPz589PS0mJjY7HjchwcHC9evMBi7OzssJglS5Zcu3btzz//ZJyJ6Ht7DHMHsCuDEATZsmXL06dPN2zYgL319vZGUbS9vR07FKmiovL8+fOKiorz589jd8ssXrx4mP6jAPgGdDqdcX8XDw+Ps7NzUFCQv78/9isTq4Lz5s3DggeTO1+NodPpkyZNwmKWLl0aHx+/Zs0axua634vsvjVxYDswekCBHx7fWuA/fvwoKCjIvKeFXUeKIEhwcDAWzzhkx8PDwxw5a9Ys7Kadnp6eWbNmIf2JiIjo28nBxNfU1DB2sZlt3ryZ0U7f0TYYO/WsEzsvL4/5qCZGTk6urq4OC7h27VrfqxbU1NQ+ffr0nf9BAAxNfX09NqZNLzIyMkeOHEGYCvxgcmcwMRkZGb02Dozj9gPdB/9NiQPbgdEDCvzw+NYCj6Loo0ePJk6cKCgoqKOjExoa2tnZaWhoqK2tPWnSpM7OTpTpLpTbt2+bmZmJiIjo6uru2LGjp6eH0WZ7e/vJkyeNjY3JZDIPD4+0tLSdnR3jjpS+BhNPpVI3b95saGgoLCwsIyMzderUBw8eMAfQ6fSIiAhtbW1BQcHx48fv2bMnOTlZW1tbW1v76tWrWEy/iY2iaFVV1ZIlSzQ1NQUEBNTV1QMDAxmjW2AyMzMdHBxkZGQEBQU1NTW3bt3KSHsARkRPT8+FCxdsbW0JBAIPD4+8vHxAQACFQikrKzMyMtqyZQsj8qu5M8iYN2/eTJ8+XVxcXFZWdvny5Yzf3AMVePQbEwe2A6MEPGzm1yUjI1NZWamvrw9nngAYzVJTU7Hj9teuXWOMiAXAV8FFdgAA8Ktoa2uTkpISFxfX0tJqaGhAEKSjo+PgwYPYp4aGhiPaO/CbgQIPAAC/CkFBQQ8Pj/r6+vz8fFlZWVNTUwUFhZs3byIIEhwc3GuMegBYgwIPAAC/kL///vvSpUtWVlZiYmJZWVn8/PxTp05NSEhg3LMHwCDBOXgAAACADcEveAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BAUeAAAAIANQYEHAAAA2BD3SHcAgK+oqal5+vRpWlpaSUnJhAkTjI2NTUxMxowZgyBIa2trZGSkqKgogUAgEAh4PP7Ro0c5OTnYjLy8vEJCQry8vCoqKpqamhoaGiIiIiO6KgCAr4B8H0YcKIqOdB/AaBccHBwfH894KyQkZG9v7+TkpKOjExsbO2/evHHjxrm5uampqWVnZz979iwrK0teXt7ExERLSysoKKi7u3vy5MkNDQ0NDQ0UCqWjo+PAgQPc3NxdXV1UKrWzs/P9+/cFBQUFBQV4PF5DQ0NTU1NTU9PNzU1MTIyx0K6uLgqFUldXV1NTo62tLS0tPRLfBADsD/L9p4Ff8GDEXLhw4erVq7y8vK2trTk5OXQ6XVZW9u+//yYQCAkJCU5OThwcHA4ODi4uLsnJyT09PY6OjrNnz0YQpKen5/Xr1+np6enp6Xg8vqysTE9Pb/fu3awXh6JoSUmJv7//kSNHEASJjY0VFRVlJHlbW5u4uLi4uHhPT4+CgsL169f5+fl/xrcAwOgA+f7zwS948LMlJiba2dmJiIj09PS0t7cfPHhQSEioo6Ojvb29paVl/vz5Ojo6WOSbN29u37598+bNrKwsOp0+bdq0O3fu9G2wqqoKRdHB7INTKJQ1a9bg8XhxcXEikUgikYhEori4uISEBB6Px2JaW1u9vb1LS0ufPHnCy8s7jCsOwCgE+T6CoMCDYUaj0ZKSkh4/fqympmZkZKSurs7BwcEccOPGjSVLlmzbts3Nza2zs1NRUfGrbVZVVb1//15NTU1KSuqHdfz/paenT506FUVROTk5OTk5GRkZGRkZd3d3FRWVn7B0AH4jkO+/MriKHgybjo6OwMBAaWnprVu3cnFxPXjwwMHBAY/HT506dfv27Xfu3KFQKAiCVFRU8PDwJCcnv379Wl5efjAtS0lJTZ48+edkO4IgJiYmzc3Nb9++nTVrVmZm5tmzZ5OTk7HOAwAwkO+/PvgFD4aip6fny5cvvSa2t7f7+PikpqYGBgYGBAQQiUQEQerq6p7/14sXL3A4HJ1OFxQULCoqotFoysrKvr6+a9as4eT8VfY1a2pqbt26FRcX9/TpU0tLS2dnZycnJ3Fx8ZHuFwAjBvL9NwUFHnyDwsLCxMTExMTElJQU1ilqbW195cqVXhPpdHpFRQWCIA0NDZ8+faqsrKyqqmpoaNi/f/+IX+FSWloaFxcXFxf39u3bqVOnOjs7T5s2TVhYeGR7BcAIgnz/3UGBB1/R0NDw4MEDLM85ODhsbGxsbW2tra2xHfbf3Zs3b+Li4m7cuFFdXe3k5OTs7GxlZcXHxzfS/QJgZEC+sxMo8OArVq1aFRsb293d3d3d3draiiBIVFSUm5sbhUKRlJQc6d4N0du3b2NiYmJjY7u6upydnZ2dnU1NTX+dw4YAjBTId3YCBR4MFpVKHTt2bGlpKYFAaGhoEBQUzM/Pl5WVHel+fYP3799jeZ6Xl0cmk83MzKSkpCoqKqqqqhobG1+9eiUoKDjSfQTglwD5zgagwIP/QFHU3NxcSEhITk5OXl5eXl5eQUEBu2mEm5sbQRA6nZ6amkogEBYtWpSbm/vu3TtVVVUEQSj/VVdXV1tbW1dXh71ubm6+fPnyr3Nay9XV9erVq/z8/NLS0lJSUnJych8/fkxPTxcQEFiwYIGfn9/YsWNHuo8A/CSQ76Mh36HAg//IycnZuHFjYmIigiDLly9va2srLS0tLy/n4uIKDw+3tbXFwt69e2dtbf3582dNTc3GxkYKhSIsLNza2trT04MFCAkJGRgYqKio1NXVdXV1FRUVYX9j/Pz82dnZLE53dXV1JSUlXb9+PSUlJS8vj4eHZ3hXsLa2loODg0gktrW1RUdHHz9+vL293dfXd/HixdhI1wCMHpDvowEU+NGuqKgoMjIyNjYWRdG5c+fOnDmTRqMZGRkxTlDdv39/xYoVkydPPnDgAB6Pr6+vf/jwIYFAePfuXWFhYXFxcVZWlqioqImJiYmJiZycXElJyc2bN588eUKj0RAE4ebmNjExmT59uoODA2PIKoaOjo6XL1+mpqampaVlZGTo6OhgQ0nPmzfP0NBwypQpwzvWRFFR0cmTJ6OioiwsLFauXGljY9NrUA4A2Bvk+zC2/+uDAj96VVRUvH///uLFixEREUFBQSEhIQNFtra2btmy5erVq4cPH54zZw6CICUlJTNnziwtLW1ra5OQkNDX15eUlMzPz8/IyGD8RY0dO3batGm2trY4HK6pqYlKpdbU1Hz+/JmTk1NfX//Jkyepqak5OTna2toWFhaWlpbGxsbV1dVPnjw5depUbm6ukJDQ4sWLjx079v1rSqfTExISjh8//urVKy8vrxUrVsjJyX1/swD8RiDfRyEo8KPXhQsXPD09sZ10BEHs7OxiY2NZHLxKT09funSpmprasWPHGANBNzY2VlZWlpeXV1VV8fLyHj16tN+/KDExMUFBwQ8fPrx9+1ZQUNDIyMjCwsLCwkJJSSkvLy8jIyMjIyMrK0tKSsrIyMjY2NjY2FhHRwc7FzgE9fX1vLy8IiIiFArl7Nmzp06dIpFIfn5+rq6ubHxLDAAsQL6PQlDgR6+CgoLx48fHxsYaGBjk5eUVFhYuXryY9TUynZ2du3btOnbs2Jw5c1asWDF+/PheASiKdnR0CAgI9Dt7cXFxRUUFFxdXTk4OluQtLS1GRkZYkhsZGTE/z/F77N27d/fu3ZaWlk+ePHF2dl65cqW+vv6wtAzAbwryfTRCwWiFne5yd3cvLi7+phnr6uqCg4NVVVXxeDwOh8PhcE5OTthH69ev5+LiEhYWVlVV1dfX19fXX7lyZVZWFvapn58fLy+vmpraypUrIyMjCwoK6HT6MK8ViqIompWVJSws7O7uXl9f/yPaB+C3A/k+CkGBZ1vYCbCGhob29vZeH2VkZEhKSjLvd+Px+FWrVn3rImpraxsaGqZNm7Zs2TIajVZQUCAgIFBXV/fly5f3799nZmY+f/58x44dioqKEyZMOH78eGZmppeXF4FA2LRp0+fPn4dpRf9fRUWFu7u7pKTkmDFjvLy8srOzh30RAPyaIN8h3/uCAs+2sB12ERERPj4+Q0ND5o/odHpwcDAXF5evr+/BgwfPnj0bFxeXl5c3tAU9ePAAe0zkrVu3LCwsDh482CuARqMlJibOmzdPTExs4cKF58+f9/f3JxAI/v7+ZWVlQ1y9/lRVVenp6SEIIiYm1tjYOIwtA/CLg3wfxpbZBhR4thUTE2NsbEwkEk1MTLy8vPoGXLp0iUgkxsfH0+n0hoaG5ubm71mct7f3mjVrSkpKiETiy5cv+42hUChhYWHa2tpqamrr1q1bsmQJgUBYsmTJ+/fvh7bQwsLCgwcPRkVFxcfHb9iwQVJS0sLC4ty5c1Qq9TtWBYDfD+Q76AsKPJsrKysLCwsb6OBVeno6mUzGjtqJiYm1tbUNbSl0Ol1WVtbX1zc8PHzdunViYmKsz4elp6d7e3vjcDhlZWUEQTQ1NYew0C9fvhw9epREIi1YsMDe3n7Tpk1D3nAAwB4g3wEzuIr+d1VTU4PD4Xh5eb+nkZ6enm3bth09elRWVnbbtm0qKiq8vLyioqICAgL8/PxiYmKDHBcCRdHdu3dTKBQqldrY2NjY2JiWliYiIhIaGurj48PFxdXvXF++fCkoKBAUFCSRSKwfwBwXF/fw4UNsUMz6+nrsX25ubgKBMHny5MjIyKGsPAC/D8h3yPchgAL/OyksLExNTU1NTU1JSWlra2ttbZ0+ffrly5eHnPZUKnXjxo21tbUdHR3t7e0tLS2dnZ1fvnxpa2v78uULlUrl4eHx9/c/ePDgt7a8evXqsrKy5ubm+vr6w4cPT548eWg9xNy/f//ixYsvXrx4//49gUCYMWPGhg0btLS0vqdNAH5xkO+Q798JCvxv49SpU76+vkQiMSQkxNbWVkVFpbu7e+7cuby8vNHR0QPtNX8rFEWfPHkSGRkZFxdnZGS0cOHCWbNmDXSfK6asrExeXh573dzcHBMTExkZWVpaunbtWjc3N09Pz+Tk5Dlz5hw9epRxeJC13Nzcmpqafj9qaGh4//798ePHDxw44O7u/q1rB8DvAvIdgXz/blDgfxsoiiYmJu7cuZOTk/PkyZOvXr2yt7cXEhJydHQcM2aMlpbWp0+fqqqqGhoaLly4gD336VtFRkaGhoYKCQl5enp6eHgM5vHPTU1NMjIyhYWF7969O3fu3J07d2xsbBYuXGhiYsLNzV1SUnL48OE3b97k5+dLS0ubmprq6urq6uqamZmxGGEjJCTk0qVLxcXF2OjWCIJwcnIqKioqKChwcHA0NTWJiYndunWL9WYIgN8a5Dvk+/eDAj9iOjo6CgsLJSQkSCQS40kPX7Vt27adO3cqKCh8/PgxIiJi8eLFVCo1JCRESEhIRkZGSkoqLS3tyZMnZ86cUVNTY57x6tWr3NzcxsbGLHarb968uXTpUh8fH19fXxkZmcH0JywsbO3atWQyWVpaevHixZMmTYqJiTl79mxHRweCIN3d3a2trZycnAICAry8vHx8fIKCgtzc3MHBwfPnz2fdckdHR35+fl5eXl5eXm5ubl5eXlNTk7a29tixY3V0dGbMmIFdsAPAbwHynXXLkO8/xAhd3Deq1dfX79y5k0wma2trS0pK8vDwSElJ3bp1azDz5uXlXb9+/dmzZzw8PFxcXBUVFb0COjs7d+zYQSQSFy5cWFhYyJi+YsUKPj4+AoGgoKAwf/78Q4cOZWRk9PT09Jq9vLzcz88Pj8c7OjreunWrbwBDd3f3mzdv9PT0fHx8cnNznzx5MmvWLAKBEBgYWFBQgMX0HXNjyNrb2y9duoQNlikrKxsVFTVcLQPwQ0G+DwHk+7CAAv9Tffz4cfXq1QQCwcvL6927d9jE7u7uBw8eyMjINDU1fbWFI0eOcHBwCAoK6uvrT5w4sbq6ut+w5ubmHTt24HC4p0+fYlPOnz+vpaWFomhhYWFkZKSvr++4ceNkZWW3b9/ed/QJKpW6ZcsWBEGio6N7fWRlZbV3796Ojo7bt28LCwvz8fEFBgZSKBQ8Hv/PP/+0trYyIgsKCkgk0uC+mK8oKioSFBTk5ORctWrV69evh6VNAH40yPehgXwfLlDgf57Nmzfz8PBwcnI6ODgsXbpUVlZWRkZGSUlJRkYGh8NxcnJij2b6qsePH6uqqrq6uoaFhYWGhs6bNy8uLu7x48eZmZnFxcXMmwBdXd379+8z5pKSklq3bh3zXvabN2/8/Py4uLiCg4N7LSUiIkJKSkpWVnbhwoVnzpzBbjnNy8vz8PDg4uJSVFScOXNmYGBgT09PZ2dnUFDQsmXLsBlpNFpPT8/Nmzf19fV1dXVZ/Cb4Jk+fPp00aRIXF9fNmzeHpUEAfijI9+8B+T4soMD/WIWFhXV1ddjr7Ozs2NjY8+fPh4eHh4eHZ2ZmJiYmhoaGhoeH19XVNTQ0DP5JDG1tbQcOHAgMDBQTE+Pj47O3t7e0tNTX11dSUsLhcNu3b8fCzp8/Lysry3i2RF1dnYaGhqam5ocPHxhNvXr1ioeHZ8uWLf0u6P3796dPn16wYIGsrCwej5eVlVVXV1dUVHz06NHEiRMjIyOxMHV1debzPuLi4iYmJtOnT0cQJCYm5tu/tt4qKiqWLFlCJpOPHTvW1dX1/Q0C8CNAvkO+/1LgIrsfpbq62traGhueYufOnW5ubgiC0On03Nzcx48fp6SkpKWl4XA4S0vL58+fU6nUS5cuGRkZfetSXr9+PWbMGCKR+Pbt25aWFmlpaRwON378+MWLF6Mo2tzcfO/ePQRBCgoKsOcib9++fdeuXbNmzeLg4CguLi4uLubj41NRUbG0tNy7dy/rZX369IlEIvHw8LCIaW9vDw0NdXBwOHr06MuXL48ePYqlPSYvL+/ixYu7d+/+6nrdvXs3JSUFG3+jqqrq4sWLy5cv37hxo6io6KC+FwB+Lsh3yPdfEPdId4BtSUhIGBsb5+fnW1hYLFy4UFRUNDw8PC0tjUwmW1paurq6Hjt2jJOTc9myZdXV1W5ubrKysixaezJviGUAACAASURBVPXqFYVC0dfXx+FwzNN1dXURBNm/f//69estLS0zMjI0NTVjYmISExOFhYUVFBSw4akZI2OEhIS4uromJCTIy8urqKiQyeSoqCgqlaqlpZWdna2hoSEoKDhQH/q9zra9vT07O7uiouLTp0/Yv6ampmpqaikpKREREVOnTsXCOjs7//rrr71791pbWw/m29uxY4eBgQE/P39jYyORSHz16tUgr/IFYERAvkO+/4pG+AgCW6PT6UFBQVZWVvv27btw4YK8vHyvZyY2NDQYGRnJysq+ePGCdVN2dnZEIlFZWZlxqQ6z7u5uFxcXBEFMTU2fPXs2yO6dPXtWQkJCU1Nz6dKlzs7Oenp6goKCCgoK06ZNS0tLY47s6Ojw8vKaPXt2TExMr/GrL126hCDIpEmT1q1bd+jQocuXLzs4OKipqU2fPn3RokWZmZnv3r1LTU3V1NREEERCQiIlJeWrHaNSqUJCQvAACfB7gXyHfP/VQIEfNh8+fHjz5k1ZWVm/F8fSaLRx48b98ccfpaWlKIrm5uYGBwfr6OhISUn5+/t//PiRdeOZmZlSUlIbNmyQkJB4+PDhsHR43759Li4upqam8vLyfHx84uLiWlpaqqqqvLy8vR4PlZOTw8vLO2fOHHt7ezExscuXLzN/euDAAXl5eeYt0Z07d7CzdIzRLfT09M6ePTvQXTSNjY1VVVUlJSWZmZlpaWlHjhwxNjYelnUE4AeBfGdMgXz/ZUGBH7qOjo4nT57s37/f2dkZG/lBR0cHO7JkamraN764uHjVqlVEIlFSUlJeXn7NmjVPnz6l0WiDXNyZM2eIROKECRNkZGQGP9fg1dbW5ubm3r17Nykpqe+nz549k5WV3bp16/Llyzdv3tzr0/Pnz5PJ5PT0dMaUrq6uAwcO4PH42bNn992Lp1Kp27dvZxweHDNmDJlMVlJSmjBhgpmZmY2NzcWLF4d9BQH4HpDvDJDvvwso8N+mtbX16tWra9euNTExERISMjAwWLVqVXR0NHZraVtb26xZs4yMjPreacrQ2dn58ePHwV9Ay6ympmbJkiUcHBzJyclDXoUhq62tnT59urm5+ePHj5mnl5eXHz9+XFlZWU5ObpBNhYWFcXNzk8lkZ2fnTZs2RUREZGRkNDY2/oBeAzB0kO+Q7781uIp+sOh0elRU1NatW8eOHWtpaWlqampoaNjrEhUKhaKpqXn48OEf+lyE7OxsBQUFPB4/5BaampoyMzP7TpeXlx/koNYoimZnZ9+6dev27dufPn2aMWOGo6OjnZ0dixGne+nq6iouLs7Pzy8sLCwoKCgoKCgsLCSRSP7+/l5eXoNvB4AfAfKdGeT772qEdzB+EykpKdjRpL5Xxxw/fpxCoTDeKisrL1iwAHsdFRUlICBgaWl55MgRxt2xA/ny5cvVq1djY2MHf9VMv3p6erKzs1n8pEBRFLtDZtKkSTb/i0wmr1y5sr6+vt+52traFi5caGZmFh4eLi0traGhYWtre+PGjeEa2gJF0fT0dFdXV3Fx8Y0bN371GwPgB4F8RyHf2QIU+K8oLi6ePXu2oqJiTExM3+Ns27dvRxAkJycHe9ve3j5hwoTr169jbzs6OpKSkvbs2ePi4nL69GkWS+nq6rK1tbWwsLCyslJRUWHdpczMzBs3bvQ7guOrV68mTJjQa5CsR48eYc+TZkz5999/8Xi8k5NTRkYG8+wNDQ2rVq0ikUhXr15lnt7S0oLtd6urq0tKShobG+/btw9F0Tlz5pw7dw5F0fLy8u7u7n57m5iYuHv3bsbbpqam4uLi5ubmfoN7enri4uLGjx9PJBIfPXrE+nsAYNhBvqOQ72wECvyAmpqa1q9fLy4uvnv37n4vBz1y5Iiampqmpia2D37//n0VFRVXV9e6urqurq49e/bs2LHjy5cvg1nWsmXLHBwcenp66uvryWQy67toVq9ejcfj5eTknJycmK9lbW9vX758uY2NjaGhoYmJiZOTk4+PT1BQkKqqKh6PFxYWNjMzCw0NxYJbW1sPHz7Mx8e3devW/Px85s3BkiVLZGVlp02bpq+vLyMjw8/Pjx3s4eXlPXXqFAcHh7i4+IwZM44ePTpu3DgRERE/Pz8dHZ358+e7urpaWloeP36cOZ937drFzc1tbm6urKwsICAgKiqqqqoqJCSkoKDg4OBw6NAhLKyysjIkJERGRsbCwuLixYsdHR2D+d4AGC6Q75Dv7AcKfP9oNJqJicmiRYt63cmKomh9fT2dTt+/fz/2DEdnZ2c5OTlJSUklJaU7d+6gKJqVlTVu3DhHR8cFCxaQyeQjR45UVFQUFhYOdKHNwYMHx48fz9g0REdH6+vrs+hbVVUVgUCwtLREEISLi+v48eMoimZnZ/Pz8/v4+Lx///7ly5fa2tqioqK7du0KCQnZuHHjs2fPqFRqUlISPz8/8/MhVq9ebWNjo6amxs/PLyEhYWBg4OLiYm5uvnv37vj4+OfPn5eVlbW1tV27dm3u3LnCwsKmpqYBAQGRkZEHDx5csWLF9OnTMzIygoKCFBQUAgMDo6Oj4+PjXV1dcTicvr6+vr7+hAkTxMTE/Pz80tLSioqKGLe60mi04uLiyMhIEomUmJg4e/ZsAoHg5+eXm5s71P8xAIYO8h3ynS1Bge/fuXPn9PX1sRRta2tLSUk5duwYtl9vZGQkJyenra2NPbrx/fv3Z8+erays7O7urqioGD9+vIiICIIg2tra586de/369YwZMyQlJWVlZXV0dKKjo/uewdq7d6+8vDzjnpO8vDx1dXXW3Xv27Nn69evl5OSMjY01NTU9PT1fvHghISHBx8dHIpFcXFzGjRuHIEhiYmKvGWVlZQc6XVddXf38+fMrV64EBATg8fiAgICWlhbsIzU1NWlpaS0tLQ4ODgRBODk5165dy6J7NTU1mZmZmZmZWVlZJSUlAx3Na2hoQBBk/Pjx4eHh2PausLAQ22gC8DNBvkO+syUo8P3Lzc2VkJDw9/c3NTUVEhLS19c3Nzd3cnL68uWLvb29p6dnQ0MDhUJZt26dqKiopaUliqKdnZ3Gxsbbt2/PzMx8/PjxnTt3SkpKmNu8d++ehYWFqqrqv//+2+sJCtevX+fj48OO1KWkpOBwuAMHDjBiqqqq7t27d/LkScbtsD4+PgiC2NnZnT59GnsOhLq6up2dnaenJ5VKPX78uJKSEoIgtra2vdZLT08vOzu77/piD6divK2urnZ2dg4ICMDe1tTUrF69mp+f38bG5sGDB5mZmbW1td/z9TIwHoNBo9E2b97My8uLjaoNwM8E+Q75zpagwA8oLS1tx44dSUlJnz59kpGRefTokYODg4CAwIwZMwoLC2/evCktLe3u7s7Hx4elUHFxsYaGhqioqKOj40D7sCiKpqamTpkyxdbWlvk8386dO5WUlBgnxh4+fIggyO7duyMiIqSlpcXFxa2trZnP1XV1dc2dO9fFxcXDwwM7MiYlJYWdPFu3bh32AMeYmBgXFxfmHxCdnZ1aWlr93lPr7e2NIMiNGzcYU+rq6ohEIvbUSExFRcXy5cvFxcWDg4MHumqGhZaWlufPn//777/r1q3766+/eg3mFRMTw8vLq66u3uumWwB+Dsh3yHf2AwX+63Jzc/X19Zubmzs6OrA/05UrV0pLS9++fXvp0qWrVq1CUbSjo+PYsWPq6uo8PDyzZ8+OjY3FDuj1q6enx93d3cDAYM2aNYcOHYqLi7t586aKisr8+fOxs1a1tbVr1qxZtGiRs7PzlStXsLlWr169a9euvq2VlpZOmDCBg4PDyspKQEAA29N3cXGxsbGZNGmSvr5+UFAQFnnx4kUhIaFPnz71aqGysvL69evm5ubMz5ZGUXTv3r3Ozs69gktKSuzs7MTFxV++fFlSUtLQ0NBrtGoMlUrNzMyMjIzcsGHDjBkzFBQUsB9GixYt2rt3r7+/P5FInDJlyrlz5xgnI4fx9hsAhgzynRnk+28NBroZirCwsNDQUA4ODikpqadPn44ZM+b169erV69+8+YNdp5JWVn55MmTtra2WHx3dzcnJycXFxejBRqNdvPmzdLS0vLy8rKysvLy8vLy8vr6eldX19jY2H4Xim0j1q5diyAIiqKtra3Yyb/CwsKIiAhhYWEeHh5RUVEuLi5hYeHbt2/Hx8cLCwt7e3v7+vpKS0tjcy1durS6uhqPxxcWFhIIBA8PDyUlpXnz5ikqKubm5uro6Dx8+JBxGW1paamhoSGFQunVEz09vfLychwOh6JoU1NTe3t7R0cHDofj5+cXEBDA4XBNTU1VVVUaGhpaWlra/6WoqMjJyclopKurKyEh4dy5c2lpaY6Ojp6enlOmTGEOAOAXAfkO+f67GsGdC7bx/Pnz1atXy8nJaWpqbt26lXGbLIqiN2/eVFJS4uHhwa59Za21tXWgQSfy8/MlJCSwnd+3b99aWFhISEgUFxf3G4zdrbt9+/ZeZ/6ampoUFBTi4+M3bdoUGhp65syZHTt2kEiku3fvoihKo9FcXV3//PNPRvyZM2fc3NwG8QWgdDq9oaGhsrISe4DE+/fvB797Xltbe/jwYWVl5b5nEAH4BUG+Q77/LuAX/DCYMWNGamoqnU63sLAYO3aslpbWuHHjJkyY0NTURCKRYmNj3d3dg4KCGINNtra2UiiUrVu3sngYMzMURT08PHR0dDZv3pyTk4Nd2vPy5UsZGZmjR4/2jafRaOrq6jQaLT09nUKhUCiU2traurq65OTkrq6uW7duIQjS09OzdevWuLi4GzduYM92RBCEQqGMGzfu9u3b+vr6CIL4+vpKSEiEhIQMz9c0sPLychMTkzNnzkybNu1HLwuA7wT5/p0g338aKPDDA0XRsrKyt/+FXXfa2tpKJpNTU1PXr1/Py8tbW1v78OFDGo2moqKycOHCP//8k4eHp1c7XV1dHz9+LCkpKSkp+fDhQ8l/KSoqZmRkiIqK9vT0bNq0KTo6mp+f/8WLF+Li4v32x8vLKyoqSpwJiUTi5OSUl5f/448/EARxd3d/8ODBy5cvFRUVmWeMjIw8ffr0kydPEATJz8+fNGnS8+fPe8UMLzqdjt1Ee/r0aey2HAB+cZDvQwb5/jNBgf9RKisrCQQCPz9/Y2NjbGzsxYsXCwsL586d6+HhYWxsjMV0dnY+e/YMu3oFU11dLSMjo/y/lJSUhISEmBvPzs6WkZGRkJAYaOl0Op31+a2cnJyTJ09eu3bNw8NjzZo1jJTOy8tzc3PLy8vD3h48ePDWrVtJSUnfebaso6PDxcUlNja271MlysrKFBUVURRVUlJ69+4dHx/f9ywIgBEB+c4M8v0XAQX+x4qMjFy+fLmTk5Onp6e9vT0PDw+NRsvJyXn06NGjR48yMjK0tbXNzMxUVFSUlJSUlZXl5eW5ubl/XH86OzvLy8sZj5D6+PHjkSNHLly4YGVlNX78eARBSkpKysrK7t+/jwXQ6fTJkycrKioKCQlhV9/QaLSWlhYEQb58+VJWVubg4HD69OleS+nu7q7/r4aGhvr6+qqqqqCgoICAgMOHD/cKzsvLs7e337Jli7Gx8YQJE37cugPwo0G+Q77/UqDA96+pqSkjIyMjI+PVq1fYOJQGBgZDOKBUW1uLPUpy165dL1++xJ4DISkpaW1tbW1tPXnyZFFR0R/Q/f51dnZaWFhUVlZWVlZiUy5duuTj47Np0yYcDldeXo5NnDJlir29PWOujx8/njhxQl5eHvsBwcXFhfVZWFg4NTU1KirK2tqakd4UCqW+vr6trY1AIODxeAITeXn5AwcONDU1MXepubmZTqdPmDAhKyvrJ30LAPQB+c6YC/KdnUCB/w8ajfbu3bv09HQszz99+mRgYGBiYqKrq5uVlXX79u2mpqYZM2Y4ODjY2toO8mIZRsvBwcGXLl2aNGmStbW1lZUVmUz+cSvCQnd3NzaSxowZMxgTCwoK8vLy5syZM4QG3759GxMTw5zVeDyeSCSOGTOm3/i2trbOzk7mKWPGjIFbZcDPB/k+hAYh3387UOD/Q1dXt6Ghwdra2tjY2MTEREdHh/k2VgRBSkpKsJtN09PTw8LCsOtOsftQubm5RUREBAQEGHeU/pq6urra29sHykZMQUHBnTt3RERETExMtLW14SoYwJYg3zGQ7+wNCvx/XLp0KTg4ODMzExtNYiCdnZ0TJkzg5eXFNgfYEaeenp4vX75wcXHFxcWZm5v/rC5/RXd3N41G4+fnz8nJuXLlypMnTzIzMxcvXnzixIm+wa2trbGxsWfPni0tLXV2dqZSqU+ePGlpaZkyZcqUKVOsrKwYp/EAYAOQ75DvowEU+P/n6+vb0NAQExMztNkfP37s5uZ27ty5qVOnDm/HvgmdTk9NTRUREVmzZs2zZ8/weDz2vEsBAQFpaelnz54RicRes4SHh//555+TJk3y9vaeOnUq46qf8vLy5OTkpKSkpKQkDg6OKVOmzJw508XFZaBF37t3r7q6GvdfeDxeRkbmB64qAN8B8h3yne1Bgf9/bW1tJBLp6dOn2LMXhyA9Pd3Z2fn48eOzZ88erl41NzcnJSU9fPgQexbkli1bFixYwOLK24qKCjk5OT09PS4urtDQUE5Ozrt372IDX7S0tBQWFlpYWLi4uHh5eSEIQqPRoqKiHj16lJaWlpeXx+LXTFFR0aJFi/j5+ZOSkvp+mp+fHxAQUFNTo6+v39jY2NjYWFVVVVxc/OzZMxMTE0YYnU6/c+fOP//8o6GhsWXLljFjxiQnJxcVFSEIgsPheHh4NDQ0VFVVex0sBeBHgHyHfGd/P3vovF/YyZMnzc3NsWdCD1leXp6srOy///47LF1qaWkREBAYN27c/v37X716lZaWZm1trays/ObNm37jr1+/Hh4eLiEhcf/+/X4DPn78KC0tPX36dOzt58+f+fn5fXx8li9fXllZyaInUVFRysrKfZ8a2dLSsm7dOgkJiSNHjjCeqdXd3T116lQ/Pz9GWG1t7e7duxUUFIyNjc+ePevj40Mmk0+dOjVnzhwTExMfHx9XV1cnJydlZWVBQUEDAwNvb+9Dhw4lJSU1NjYO8rsC4JtAvrPoCeQ7e4AC/x/19fUkEmmgRBq8xsZGLy8vHh6eT58+/fPPP/Hx8d/Z4OXLl8lk8vPnz7G32KMjSktL+w1evXo1Dw8PNzd3XFxcvwHZ2dlcXFyMJ1+1trYKCgp+tQ9paWlEIjE3N5d5Ip1OP3/+vLS0tLe3d68Ngb+/v729PZb/T58+9fDwwOFwS5cuzcrKYsS8fv1aW1vb29vbw8ODed4vX76kp6eHh4evXLnSwsJCXFy8sLDwqz0E4JtAvrMA+c42oMD/h6+vL/YgyCGrq6vbvn07kUj08PAIDg6Wk5ObOnWqhITEo0ePvrWpSZMmycnJLVq0KDIysry8PCEhgUgkPnjwAEXRZcuWbdiwgcW8paWlPj4+4uLifTcK3d3dc+fOnT59emJiIvbgCjqdzsXFxeJp1iiKfvjwQUpKCls681LMzc0NDQ0ZWyKGY8eOaWlpVVZWhoeH6+npqaurh4WF9btjnpaWJi0tjcfjk5KSBlr6yZMnJ0yY0NnZyaKHAHwryPeBQL6zEyjwKIqir1+/JpPJDQ0NQ5u9oqIiMDCQQCCsXLlyz5498vLy06ZNwzIhJSUFh8P1PdKFodFo9+/f7/UgpsrKSmFh4Xfv3p08eXLu3LkSEhIqKioODg44HG7//v0kEqlv8uTn5wcGBjJP9/LyOnr0aK8wV1dXBweH9vZ2Hh6eWbNmYRNFRUWbmpoGWrXm5mZtbe0TJ070mr5ixYrVq1fTaLRe0+/duycpKfnhwwc9PT1eXt6zZ8+yPgQ6Z84cb29vMpkcHR09UIyzs/O6detYNALAN4F8H2jVIN/ZDBR4FEXRpKQkIpE4hLNxxcXFy5YtIxAI69atO3jwoIKCgr29fXp6OiMgPT1dUVGRSqUmJSWdP39+//79a9asCQwM/PjxI4qiHR0dioqKY8eOvXfvHnOzampqL168wF7T6fTc3NywsDAxMTE8Hn/o0KG+3fD09NTX15eTk8MuzCkoKJCQkHB2dmaOodPp8+fP19DQePr0qaam5rJly7DpMjIyjCN4vXR1dVlbW69fv77X9O7ubgkJib6/GBobGwkEwpMnT1AUDQoKQhCEl5fXx8fn8+fPA32BJSUlBAIhJSWFTCY/fPiwq6vr8ePH+/btCw8PP3PmTGxs7M2bN2NiYgQEBAY6ywjAt4J873ftIN/Zzw8cBvk3cvr0aU9Pz28a5OHt27d79+5NSEjw9vbevn17WFiYqqpqdHQ080WkCILs27dPXFxcXV1dRkZGRUVFQkJCVlaWQqEYGBj4+/uvX79+ypQp8fHxgYGB8vLyf//9t66uLoIgCxYsuHDhgqGhIYIgHBwcOjo6Ojo6KSkpkydPDggI6NUTCoVy5cqVkpKSt2/fent7jxs37tWrV7t27ep1hy4HB0d0dHRcXBy2Xx8aGopNJxAIVVVV2P0tW7ZsKSgowC5qFRQULC8vHzNmzJ49e3otMTk5WUlJSUFBodd0YWHhrq4uLS2turq6EydOPH/+/NOnT48fPy4uLiaRSP1+jUpKSp6enpcvX75y5YqTkxOdTldTUzMzMysqKsLuNu7s7GxtbTU1NW1tbR38/w4ALEC+Q76PFiO9hzHy7t+/r6KiQqVSBz/L33//LSkpuXv37pMnTyorK9vY2GC7sb3U1dXx8PC4urpmZ2f3+ujevXsIgkhJSc2cObOqqqq7u/v48eNkMnnJkiU1NTUlJSUkEqnXqbLExERdXd2+S+nq6nJzc9PV1c3Pz29sbIyOjk5LS2PR+YaGBuzBzzdv3kRRdMOGDVu2bME+ioiI4OHhOXLkSGxsbERExJkzZ/r9Wry9vQ8ePNhv49bW1vHx8ZcvX8bhcFFRUX2P6fVCpVL19PSOHz+OomhNTU19fT2KoiEhIebm5tra2lJSUvz8/Pz8/DgcLiQk5MuXL6xbA+CrIN8h30eP0V7gsScfXL9+ffCzREdHy8rKVlRUxMTE4HC41NRUFsF1dXV9J3Z0dIwbN05cXLzXiajm5uZly5a5urqiKGpmZpaQkNCrqxoaGgMl8z///EMkEiMjIwe5Fi4uLidPnkRR9MWLF+rq6ozpGzdutLOzYzFjZ2cngUAY6ChfQEAAdlAxLS3N1NR03LhxeXl5LFo7evTo9OnTX7x4sXv3buzMZU9Pz/r160VFRZOTkz99+tTW1oai6IcPH9zd3SUlJU+cONHV1TXIdQSgF8h3yPdRZbQX+OjoaENDw8GfjUtOTpaQkMDurqFSqUJCQu/evfvWhZaWli5durSmpqbvRy0tLXg8/tOnTydPnpw/f36vT48cOeLm5jZQs7m5uVpaWosXL25tbWXdge7ubmFhYewiIzqdrqCggK0RjUabNGnSQHvrmISEhIkTJw706ebNm3fu3ImiaGtr6/79+xEE6XW6sRdPT8/NmzcnJydzcXGJiYktXrw4ICCARCKJi4sHBQX1Cs7KyjIzM7O2tma9dgAMBPId8n1UGdUFvqurS0VFZfC3teTm5jLfBrNp0yYrKyvW95wMgb+/f1BQUH19PQ6Ha2lpYf6IsTkYaN62traAgAB1dfVXr16xWASdTufm5mZczbtu3bqFCxfGxsZu3LjRxMSE9XG2hIQECQmJgT4NCwubOXPm/v37yWTynDlzAgMDX79+zaI1HR2dQ4cOGRkZWVhYUCiUoKAgPj6+oqKigbo9adKkAwcOsGgQgIFAvmNvId9Hj1Fd4B8+fMjLy7tx48acnJzBxE+cODEqKgp7fe3aNQUFhX6PyH2nd+/eSUpKdnZ22tnZnT9/vtenvr6+ISEhrFs4f/48kUg8derUQAFUKlVUVJRxm1BBQYGNjY2ysrKTk1O/JxeZ+fj4bNu2baBP29raDAwMEAQxNzfHTrCx5unpKSUlFRUVxfhRxWKujx8/SklJ8fDwiIqKqqmpDTT6BwD9gnzH3kK+jx6jusCjKPr69evNmzcrKSmpq6tv376dxd9QZWUlHo9n7L+rqqra29sXFBT8iF5ZW1vPnj1bSkqq70hbubm50tLSX/0ZUVhYqKenN3fu3ObmZhRF6XT6oUOHVq5caWNjIycnx8/Pr6+vj/1cePfu3fz580kkUmBg4GCG6TA0NGQxTgWKohUVFWQyWUNDQ05OLjk5mXVrdXV1Xz3A2EtqaiqRSFy2bNmiRYvu3r37TfOCUQ7yHfJ9VBntBZ7h+fPnAQEBCgoKA126eezYMXd3d8ZbCoUSGhpKIpGcnZ2HPGLGQOLj47W0tD58+NDvp5MnT46Njf1qI+3t7T4+PpMmTaLT6TQaTVJScs2aNffu3fvw4QPjoNz+/fv5+PhCQkKwrEtJSSGRSDExMSya3b59e987ZXt5+vQpiUQ6fPgwHo/Pz8//ale/iYODw9ixY3V0dHh4eEJDQyMiIiIjI7H7jAEYJMh3FPJ9FIAC/z8WLVq0evVqxtumpqYbN274+/traGiIi4v3Gr4RRdGQkBAEQczMzFxdXd3c3Hx8fFasWDFcT54YSGxs7OTJkwcTSaPRjI2NV61atX79ellZ2dDQ0F4BR48e5eDgwO6fwbx580ZGRubIkSMDtZmdnS0tLX3t2rWOjg4Wiz5y5Ii6urqcnNyw/+jZsmULgiD+/v6ioqIIgnByclpZWZHJZHl5eU9Pz7Nnz7I4ZwkAM8h3yHf2BgX+f1AoFElJyYiIiG3btpmYmIiIiNja2u7duzcrK6vfS1GqqqoSExPv3bv3119/qampIQhiYGBw6dKlH9rJN2/eqKmpDTK4oKDA29t7z549t27dYh7bsru7Ozg4WFJS8s6dO71m+fjxo7q6OotTehcuXLCyshIXF/fz8+s7NnVnZ+fhw4dJJJK3t7ewsDCFQhlkFHBn0gAAIABJREFUVwdJW1t79uzZ2H/Hly9fFi9ejF2fXFBQcOzYMQEBAeYfXgCwAPmOQr6zNSjwvV27dm3ixImbNm16+PBhe3s76+Dm5uYzZ86Ym5uTyeS1a9f2ev7SD3Lq1Cns3tnvERoaamZmVl1dPdAili9fzmL25ubmV69eBQcHq6mpaWpq7t69G7tTNjY2VkVFhZeX183NbdWqVTw8PF8d++JbhYWF9fv/0tLSYmdnp6enl5ubW1JSArfPgsGAfEch39kXB4qiIzGAHjuorq5WVVUlEolHjhyZNm0aN/dPGvf35cuX8+bNMzU1PXDgwEBDQn7VoUOHPnz4cOTIkX4/PXHixNu3b48fP97vp83NzRISElxcXF1dXTQaDZsoIiLy+vXrefPmEQgEEokkIyNDIpE0NDRsbW2H1sNvdf/+/S1btnR2dra0tJSXl0dGRnp6ev6cRYPRAPId8v33M9J7GL+3O3fuaGlpWVlZDfLGm+FCpVI3btwoISERHh7ed5eZRqN9dX82ISHBzMwsKyur30E/YmJixo0b1+uuXGYnTpzQ0dFhETCC/Pz8HB0dAwMDvby87t69C7v2YLhAvg+h8z8a5DsLo+gXfF1dHZFIHPZme3p6zpw5ExISMn78eGFhYQRBurq6qFRq30gikfjnn3+OHTt2uBadl5e3YsUKOp0eHh7O3OydO3eCg4OTk5OFhIQGmreyslJbW5uXl7ekpERERKRvgK+vb1FRUUJCAh8fX78t+Pr6VldXX79+nZOT8/vXZbj8+++/Bw4c8PT0jImJWbx48ZUrVwoKCpycnFxdXa2trXl5eUe6g+AngXxnBvk+Oo2WAk+lUuXk5Hbu3Onr6/sj2m9paXn48CF2/IqHhwfL/F5yc3P37t07derU0NBQOTm5YVkunU4/c+bM1q1bvb29t23bJigoiE339fXV1dVdsWLFQDOiKCovL3/58mVTU9N+A2g0mpubGwcHx+XLl/tN6e7ubltbW0FBQXNzc3V1dU1NTWFhYS4uLmlp6aGtS1xc3Jo1a1RUVIKDg3s9Gmvwpk+frq6ufvny5adPnyopKSEIUllZee3atV27dgkJCZWUlAytWfB7gXzvBfJ9lBrZAwg/0+XLlxEEWbFixY8+htPT05Oenr5z587Jkyerqqqam5u7uLi4urq6urra29tzcnLy8/OzuGZ1CKqrq+fPn6+kpMR6IGhmOTk5KioqrGM6OjqsrKx8fX0HCmhqajp37tymTZucnZ2xm2TExMT279//DV1n0tnZaW9vb2Zmht1TO7RGVq9ezcnJyTwgBpVKXbp0qYqKypMnT3bu3NnrkR6AXUG+M4N8H53Y8xd8S0tLVFRUbW2tgYGBk5MTgiDNzc2urq58fHycnJwtLS3Xrl3D4/GMeAqFkpmZqaurKykpOeSF5ufnP3r06OHDhykpKXJycjY2NtbW1ioqKrW1tTU1NXQ6nTlYS0tLW1t7yMvq1/3791euXGlkZBQWFvbVi3EOHDhw9+7dO3fusDiKZWpq+vHjx+rq6lu3bjk6OrJuMCAggEqlrlq1yt3dfebMmR4eHoKCgjgcTlBQsN+Dfvv37y8oKCASieL/RSAQioqKwsLCrl27Nnv2bE1NzdOnTzN+owzSw4cPCwsL/fz8GFPOnTvn5eW1d+/e6OhoYWHhioqKgoICfn7+b2oW/Mog3yHfGVMg3//HSO9hDLOioqKAgAAcDocgCA8Pz86dO5uamsLCwhQVFVetWtXT00Oj0dasWTNx4kTGCFYFBQViYmJycnI7duwY8nLd3d3FxcW9vb2jo6P7fWzUz0GlUt3d3VnsgzNUVVU5OTnp6Oikp6cPFHPp0iUuLq68vLzBPH3LwsICQRBjY+O6ujonJyctLS1FRUUcDsfLy8vNzY3D4eTl5TU1NfX19W1sbJycnBQUFBAEmTJlypo1azw9PadPn25kZKSoqCglJdXT09PW1rZgwQJjY+Nhua12w4YNY8aMiYiIQFF05syZ8PgKtgH5DvneF+Q7A/v8gn/06NHhw4efP3+up6eXl5enoqKiqqp68+bNjo4OR0fHgIAAY2NjLBJF0RUrVnz48CE+Pp6Pj2/JkiUqKipkMjktLe3cuXNYTHV19aVLl65evaqmpubm5mZtbc3Dw8Ni6c+fP585c+azZ8+w80A/2fnz5+vr64lEorS09P379zk4OHbt2tUrJjExMSsry8PDQ1ZWljExNjZ29erVc+fO/euvv3pdodPT02Nvb29gYLB3795BdqO5uZmPjw/bWTY1Na2oqDAzMzMzMzM2NlZUVGxtbW1ra2tra2tqaqJSqc3NzY8ePcrJyVm4cOHLly+pVCqKoocOHVJTU6NSqc+fPzc1Nd2xY8eFCxeioqImTZr0Pd8PdvtvS0tLXFxcTU3NhQsXSkpKxowZ8z1tgpEF+Q75PhDI9/83gjsXEhIS69ate/nyJfb277//Xrly5VfniouL8/Pza2trw962tbWdPn167NixY8eO/fvvvxcvXiwlJRUREeHn5zd27NjCwkJGJLOenh5XV9fZs2f39PSYmZmlpqYWFxfj8fhXr16lpKTMmDEDj8d7eXndu3fv8OHDpqamRCLRx8fn0aNHjEcu9nXs2LHx48f3u7gf586dO2vXrtXW1g4MDHR3d584caKAgEB4eHjfyL179yooKIiLizs7OzOe4BQZGfnXX395eHgoKirev3+fOf7UqVNcXFx//PHH3bt3Bxqvm4Xx48dfvXo1MjJy2bJlWlpaoqKiNjY227dvT0xMZB624tixYwiCcHFx4XC4bdu2tba2FhYWamtri4qKYg/emDlzpr29fVVV1bd2gFlXV9emTZsIBAI3N7ejo6OHh0dZWdn3NAiGAPL9+0G+DwbkO8NIFnguLq4tW7aoqakpKytv3rw5JiYGO6gyEBqNtn37dllZWWdnZ0NDw4KCgs2bN0tISDg5OSUmJp49e5ZIJBoaGn769MnR0dHW1rapqYlFa52dnba2tkuWLNHV1b1+/Xpra6ugoKCOjo6amtq///7bK2/Lysr27dtnYGBAJpNXrVqVlpbW71EsDw8PLy+vIX0ZrJSXlw80PtT48eM5OTltbGyOHTuGouj58+cRBGFsQxkePHggLy8/b968jo6O9evXKykpYY9txvaUMzIy7t+/r6ioqK2traCg4OjoiKJoV1dXampqSEjI5MmThYWFTUxM/vzzz/j4+IEe3tyLoaFhRkYG4219ff3t27c3bdokLCzc69kVhYWFR48exZ6ChaKolJSUk5PT+/fvURTNyMjw9PS0sbGRkpL6nlHDamtrLSwsxMTElJSU9uzZwzyEJ/hpIN8HCfId8n24jGSB5+bmxh6D+H/snWdAE1nbhk8aJHQChNClFwEpoigq2BELIiqKawERe1kb9t5Q7Lg20LWjCFYUO+iKgiAIUkREpPca0kgy34/ZN1+WJj0hnOsXOTPnzD3AnWfmtOfz58+bNm3S1dU1MTHZuXNns3/akpKSMWPGjBo1qqio6MuXLxgMRk5ObvXq1d+/f09KSnJwcAAASEtLq6urGxoaenl5tWXqbF1dnZOT05IlS5hMZlpamr29fUhISOtbLWZlZe3bt8/CwkJLS2vdunVxcXGCR2k0mqWlpbGxsYuLy8qVK0+cOPHo0aPU1NTfboHZEnQ63c/Pj0Qi2dvbN/triY+Pt7e3P3HihKmp6fr169ls9sqVK5umhXB1dd27d++PHz/Qj7du3VJRUQkJCdmzZ4+SkhKa5bq+vj46Onrw4MHbtm1rVP3Zs2dEIlFCQkJBQQG18YsXL1pPG7Vx48Zp06Y1LX/48KGBgYGLi0tLBvb09AQA3Lt3D0GQVatWqaur6+rqhoSEqKmpff78uZUr/pbS0tLg4GBXV1cikThmzJiQkJDOtAZpL9DvvwX6Hfq9axGJAM8nNjZ27dq1urq6WlpaixYtCgsLQ5/K09LSNDQ0duzYgfaYJSUlBQYGos+A69evJ5PJ0tLShoaGKSkpGRkZFy5c6AHxqampO3bsMDY21tPT27x5c1JSElrOZrNTU1MfPnx4/PjxFStWoMs0iURidHR0u9qvqqo6fPiwpqbm7Nmzi4qKzp8/r6Ki4u/v39L5UVFRJBKpuLgY/chkMtHNtphM5po1a/r168d/ZEZJSkrS09Pbvn07i8VCS/Ly8jQ0NJYuXdr06ykhIUFVVTUwMBDNOkWj0VRVVdXU1Ph33RQmk2ltbR0UFNT0ED87RdM0lPv27QMAeHh4oB8vXLgAADh27Bh6iEwm89V2gO/fvzs5OSkqKqqrq7u4uDTbsQnpPqDfWwH6HYF+7wZEK8DzycjIOHHihLOzs6ys7IgRI+bMmQMAaDqOcu/ePSUlJRMTkylTprTeQdd9JCYmoq8jpqamO3fuXLly5e3btxt16B0+fLj1XA6CZGVlrVy5kkwmz507F32GLSgoeP/+fX5+/sCBA+3s7Nzd3T09PX19fdeuXbt58+ZDhw6dPHlSR0eHn9e5sLAQnSlz+/ZtKysrIpGIPiA3ory83NLSkp9T8s8//zQ3N/fy8mpWlZ+fH9+HR48enTlz5t27d6lUatPuQT6bN29uKZP0q1evqFTq2bNnBQsTEhIwGIypqSl/CJBGo7169YrJZJ48eZJCoVy7du3z588XL15sZSZws5SWliYnJ4eEhEhLS+/cubNddSFdBfR7s0C/Q793HyIa4PnQ6fTIyMg1a9aYmJj0799f8BCPxzM1NSUQCIcOHWrLuo7u5uPHj3/++aempqampuaAAQMePnzIP5SVlaWqqtrshJ3y8vKPHz/euHFjz5498+fPHzJkCLrDZUFBAfK/5I9kMplCody6dau+vv7ly5ehoaHXr18/f/58QEDA/v37/fz8Vq5cuWbNGhcXl8rKSgRBrl+/DgDw9vZuaGi4evXqrl27dHV1x48f3zTV448fP+Tk5M6fP0+j0WRkZAYNGqShoYEO1zWCwWAYGxs/fvyYwWBoaGigz/IPHz6kUCgxMTFNz6+oqJg0adKiRYua/V05ODg4OTk1mstTWFhIJpO/fv3a6OQrV64AAIhEopSUVP/+/efMmUOhUF68eNHGqUALFy4EAEhISEyYMMHb2/vOnTttqQXpcqDfEeh3AaDfewBRD/CCNOpK4nA4e/fu7eGsD22Bx+M9ePDA0tJy8ODBz58/RwvRWaZRUVHBwcFbtmzx8PCwtbVVUFBQUFAYOHCgh4fHli1bgoODo6Oj0QUksbGx06ZNU1VV3b1798ePH2fPno3H48PCwj5//oy6uhGrV68GAKSlpSEIUlhY+NdffyUkJPCPstnsc+fOaWlpTZkyJSkpqaio6OLFi5MmTZKTkxs/fvyTJ0+4XO6HDx94PJ6Pj8+OHTuava+zZ896e3sHBgZOmTKFX/jgwQN9ff1GZ1ZVVQ0YMGDmzJmvX79utikajTZkyBAzM7NG5c32yPF4vMrKysrKytraWjc3NxcXl+joaHQeULONN4LJZP79998DBgzo379/UFBQh8dHIZ0E+h36vVE59Ht305sCfO+Cy+WGhIQYGxuPGTOGx+OdPHlSTU3NwcFh/vz5e/bsuXnzZmxsbLO7OkRGRo4cObJfv35Hjx69cuXKmDFj0K2hnZ2dqVSqnZ2dtbV1U8+z2ext27a19JDL5XLDwsIcHBxsbW3JZLKSktKsWbNCQkIEB+p4PN6ePXs0NTUbzSTiExcXp6GhQaFQ0AUtKOhs5EZnTp06dfXq1S39ZtLS0tChykePHrV0Tku4u7vjcLiKioro6GgymXzlypW213358uXEiROpVOrOnTuFuDlJnwX6Hfq9pXNaAvq9k8AA3408fvz41q1bBAKh7YtlY2JicDjc7t27/fz81NTUHB0d3dzc5OXlT5w4wePx0tPT0U0x37592y4lT58+VVVVDQ0NDQwMtLKy0tfX379/P391LIIgNTU1rq6uw4YNa2UFKoPBkJGREeyKpNPpoaGhOBwOvcGSkpLc3Nz09HQqldrSg3NOTg6BQNiyZUuz0549PDzWrl3btPzXr19Tp06dOHFicnKymZkZ+p6UkpKiqqoquA11W0hPT/f19VVXV29XLUjngX5vCvQ79Hu3AgN8dxEXF0elUqdPn+7j49PKdhl8vnz5UlNTw+Pxxo4dq6CgsGrVqoSEBF9fX0NDQ8HOt1+/fpmYmDRd2dI6ycnJSkpK6AZPCIJ8+vTJ0tLSyckJnaabnp5ubGy8fPny3641amTjr1+/4vF4V1dXJpNZUVGhqKiIx+Nnz57d+sSWffv2WVtbN3sInbXUqPD27dsUCuXQoUP+/v7a2topKSmZmZkvXryor6+PiYmhUCiCC3DbiLy8/LVr1/7666/2VoR0GOh3QaDfEej37gcG+G6Bw+HY2Nhcv3697VW2bNkybNiwpKQkdH/Hr1+/9u/f/48//qitrW10ZmlpqZ2dnZ6e3pQpUzZt2nT9+vWUlJTWf5PLli1D560sXrw4KysLQRA3NzddXd1FixbV1NTo6upevHixA7fJ4/GoVOrPnz8RBCkvLyeTySQSSUFBgb96p6VaCgoK6GLcpocEb4TL5Xp7exsZGcXHx6MlR44ccXJywuFw6urqsrKyY8eO3bdv36BBg9qr3Nvb28HBgUQiHT58+PLly3V1dd2dcwwC/S4I9DsC/d79CHMvegKBwGAw8Hi8sAR0H2/evBk1apSqqqqsrKy8vLy8vLysrKysrKyMjAz/I5fLzcnJyc3NzcvLy8vLW7NmDYlECg8Pj4qKKisr09fXP3369Pz585ttn8vl/vjx4+vXr+np6SkpKUlJSXl5eaamplZWVgMGDJCXl6/4H2VlZRUVFdnZ2QiCcLncwsJCPB7/4MEDFxcXDw+PSZMmPX/+XE5O7syZMx270z/++MPR0XHRokUAgIULF96+fXvGjBmXL19uvZajo+O2bdvGjh3b+mnZ2dnDhw//9u0bP9/2hQsX4uLixo0bt3r16sWLF58+ffrOnTsrVqw4e/ask5NTu5RHRES4u7t7eXm9efMmNzeXQqEEBARMnz69XY1A2g70O/R766dBv3c5Ymg2UWDkyJF1dXV1dXU0Gq22tra6urrRx4KCAhwOp6Oj4+DgoK2tTSKRPD09x40b9+bNGwBAdHQ0iURC8zU1Cw6HMzIyMjIy4pfU19d//fo1KSkpKSmpvr5eSUlJSUnJ0tJSSUlJRUWFTCZra2tjsdhNmzadP38eTaTx7t277du3L168OD4+vsN3OmbMmIiICNTwXl5eISEhf/75529rzZo16+DBg781fH5+vr6+Pt/tAICUlBQLC4uZM2dSKJSwsDA/P7/Ro0dv2LDB39+/vYYfOXJkWlqanp5eXl4eHo9H85KdO3fu1KlTZmZm7WoK0seBfm8d6HehIcTeAzHususAlZWVw4cPnzhx4oMHD6ytrYcOHRoQENAdF/r69WtDQ0NOTo6MjExtbe2SJUuOHz/e4dYqKyu1tLQiIiIQBHF3d1+/fn1banE4HCsrq99uHhkaGjphwgTBEicnpxcvXjQ6jclktrSct10wmUxbW9sOdABC2gL0uyDQ702Bfu9yYIAXIRgMxunTpwcPHtyvX7/Ro0c7ODh037W4XO6yZctsbW3Xrl27ZcuWzjQVExOjqqq6Z88eS0vLpttit8T9+/eNjIxaP6eiokJNTe3GjRunT5+eM2eOvr6+iopKs2uNDh8+PGfOnHZLFyA8PNzU1FROTu758+et708O6RjQ742Afm8E9HuXAwO8yFFZWUkmkz98+KCoqMifB9tNrFixQkpKqqX9p9rOqVOnJCUlBdfLtg6Hw3Fycjp48OBvzwwPDx8wYMCiRYsuXbqUlpbW0hZmZ86csbCwaIfiJtTU1Ny8eXPJkiVmZmYKCgrogN+CBQs60yZEEOj3ZoF+FwT6vWuBAV7kmDZtGg6HW7BggYqKyt9//91NV/n06ZODgwM6Kubm5tb5BpvuHJ6RkeHu7k6j0RqV83i89evXjxkzpqsenJ88eUKlUtGMk13C1q1bvby8hg0bdvz48dTU1Pz8/K5quS8D/d4s0O/tBfq97cAAL3IUFRVpamqSSCRfX982br/cATgczrJlyzAYzIgRI9ARtS4HTRU1fvx4wQ0py8rKJkyYMHTo0NaX1rSd+Ph4FRWV9qajaB0tLS15eXkCgaCsrGxmZqampiZOnhcW0O/NAv3eLqDf2wUM8KJIZWXliBEjnj171t0XEtzcqsupra11cXEBAMyaNQt9eH/79q2WltbGjRu76u+enZ2trq5+//79LmmNT1ZWVn5+PrpSNjIyctmyZcOHD4f/q50E+r0loN/bCPR7e4EBHtJl3Lt3b8yYMePGjQsICED360DfGwAAK1as2L9/P5VKffLkSVddrry83NjYODAwsL0VNTQ0lixZ0pYsFDwez9raGgCgra3d3eOjYg/0u5gB/S76wAAP6TKSk5OJROKlS5dmz56trKy8ZcuW4uLiuro6IyMjOTm5YcOGvX//vquuRafTHRwc/Pz82lXr/fv3aPoKd3d3e3v71j2MJrEePXo0AKDLXxr6INDvYgb0u+gDAzykK9m4caOnpyeCINnZ2cuXL1dUVJSSkgIAHD16NDo6ulGG7w7D5XLd3d09PT3bmxe8vLxcSUnJzc0NTaWlra29Z88e/r6YjWAymZqamuvWrYuKiurjSSe7BOh38QP6XcSBAR7ye1JTU799+1ZSUlJdXd36mTQajUwmv3//nsVi7d69u6qqqrq6OisrC00/9ePHjy7R8+XLFxKJVFVV1a5aGzZsGDx4sLu7+7Bhw9Bvinv37klJSWloaCgqKjbN5/HkyRNzc/Pp06d3iWYI9HtvAfpdbMAKY/c8SG8CQZB58+YZGxurqqoqKCiMGzcuKiqq2TO5XO7atWv19fUjIiKuXr166tSpqKionz9/Dho06Pr16wAAPT29LpFkaWnp5ua2f//+dtWqqqoqKSnJysricrn19fUAgKlTpz59+nT79u0YDGbJkiWNzv/27RsAYPHixV2iGQLpFUC/d4lmUUGIDxfwib4XkZycvHnz5n79+qH/NkOHDn38+LFgjxmdTnd1dXV2ds7PzyeTyerq6kuWLDE3N+dyuU+fPpWRkdmzZ08X6ikrK6NSqXFxcW2vUlpaqqqq2nT5bGRkpIWFBf9eeDyej4/PwIEDlZWVd+3a1WWK+zzQ770I6HfxAAZ4SDvg8Xjv37/38fFBc4JZWVndvn2by+VWVFQMHTp03rx5bDb7xIkTnp6eCQkJioqKVlZW6IhXenr6woULu0pGRUXFlStXxowZY2Fh0a5/IS8vLx0dnZMnT9bX1wuWDxw48N69e+jPNBqNQCBERUW1Jas3pO1Av/c6oN97OzBdLKQjpKenb9iwISIiAgBgZGSEwWDc3NwOHDiAwWAGDRp0+PBhJyenCRMmODg40Gg0MzOzefPmdeAq165dw2AwioqKCgoKWlpaEhIS9+/fDwsLi4uLGzt2rL6+Po1G8/f3F0w/9Vs+ffo0bNiww4cPr169ml/44MGDvXv3okmybWxsdHR0oqKidHV1O6AZ0hLQ770X6PfeihAfLuATfW/n5cuXtra2AADBnaq0tLTQbSwvX75saGjo5+dnbGy8atWq9v6tGQwGFoudM2eOi4vL0KFDFRUV8Xj8nDlzwsLCGj2Pt5fhw4cHBwcLlvB4PCsrKy0tLVVV1e/fv9vY2Lx8+bIzl4A0Bfq9twP93uuAAR7SWT5+/Lhw4UJ5eflLly4hCCItLd1ox83a2lpXV9fhw4eXlJS0vdlt27YNHz6c//HmzZsAgC5ZWRsbG6uhodEoVUZNTQ2Hwzl79qyysrK1tXXb02RB2gj0u3gA/d6LgAEe0gXk5uaqqKikp6ez2Ww8Ht90uSqPxzt06JC2tnZLi1AbcfXqVT09vdLSUsHC2bNnL1iwgMFgNE1o0V48PT0JBEJ4eLjgvtkoAQEBXZjHAsIH+l1sgH7vLcAAD+kCpkyZsn//fgRBSktLlZWVWzrt9u3bSkpK165da721uro6SUnJd+/eNSqvrq6OiIgIDg7W09NLSUnpjODi4uLAwEBNTc1+/fqFhIS0dwMNSAeAfhcboN97CzDAQzrL1atXBwwYgKZqyMzMNDAwaOXkL1++6Onp+fn5tZ47cuPGjWPGjGn075GTkxMWFubr64vBYFRUVIKCgvbv3+/r69sZ8W/fvrW1tXV2du6+RF4QFOh38QD6vRcBZ9FDOkV5ebmlpeWjR4/Q2Tfx8fFLliyJj49vpUpZWdm0adOcnZ23bt3a0jlcLnfy5Mn9+vUbPXp0wv+QkJCwtbW1tbV1cHBQVFRct26dhIREbW1tbGxsZ24hMjLS3d39n3/+QfNMQLoJ6HcxAPq9dwHNBvkP1dXVXC5XSUmpjecvX758/vz5qNsBAHl5eS3VLSsrU1ZWRh/Gly9ffv/+/VaaxeFwN2/edHNzy8/Pt7W1Xblypa2trZqamuA50dHRpaWlNjY2z58/HzduXBsFN+XatWv29vb9+/fvcAsQSC8F+l3MEWLvAeyyE0H8/f0JBIKzs3NwcHCz2aN9fX1Xrlw5ZsyYGTNmODo6Ghsb8xMzsFgsc3Pz0NDQprWuXr0qISGxYMECdDeJEydO2NnZffnypaXpM4WFhbdv3/7tVtgIgsTExFCp1J8/f7b9HhvBYrFmzJgxatQoNOUlpJuAfhdBoN/FG7gXPeQ/TJ8+3cjIKDIy0sfHR0tLy8XF5e+//66qqkKP1tbW3rp1i0qlysrKWltbb926NTY2lkgkokePHDmiq6s7ffr0Rm0yGIyTJ09euXIlPz9//vz5HA6HTCarqal5enoqKyvr6el9//69UZVPnz4dO3YsMTHxt4KHDBmyfv36WbNmvXnzpmO3LCEhcevWLW1tbW9v745Q/nPIAAAgAElEQVS1AIH0UqDfxRwhPlzAJ3rRhMfjPX36dMyYMYqKis7Ozu7u7vLy8hMnTvz777/Xrl07b968ZmtlZmaqqKjk5uaWlpZ++fIFnYODIAiNRhs9evQff/zB4XDodPqECRPGjx8fHR2NHs3LyxsyZMjEiRM7KXjJkiW6urqrV69udn5sbGzs/fv3GxoaPnz48ObNm6YnuLq6vn79WkdHpzMyIK0D/S6aQL+LMTDAQ1rE1NQUh8NZW1sfPHjwzJkzbm5u2tra+fn5zZ48Y8YMSUlJIpGorKxMJpMvXLiAIEhtbe3w4cO9vb35c2iZTObJkydNTU379+8/Y8YMJSWlNWvW5OTkCDbF5XLT09MZDMamTZvOnDnTxj2iq6qqhg8fjn6zNDoUGRmJx+PV1NTs7OxIJFJTz7u4uAwcOFBJSaktF4J0DOh3EQf6XfyAAR7SIu/evaPRaM+fP/f09FRQUIiJiWnl5F+/fn3//h0dn7t+/fq0adOqqqrs7e2XLl3a7FP2mzdvzp071+yo25o1a5SVlfv375+SkuLo6Dhw4MDKysq2CN6yZYuenl6zQ2tBQUGSkpJ//PHH5MmTKRTKhw8fBI8GBAQAAIhEYluuAukY0O8iDvS7+AEDPKRNBAQELFq0qI0nl5aWKigo2NrattSH1jpTp0718PCwsbEJCwvj8XgRERFt3EjSycmp2Sd6lH379llZWdXU1Dx9+lRVVfXz58/8QwkJCQQCQUJCovXVupDOAP3ei4B+Fw9ggIf8HhaLFRQUpKys3PaMivb29n5+fs0e+q17GQzGhAkTpKWlm52g2wo0Gm3s2LEzZ85sKTvFihUrRo4cyWQyw8PDKRTKmTNn0P9AdKVQQkJCuy4HaRfQ770F6HexAQZ4SIvU1dXdvn179uzZioqKDg4OJ06caHvdRns+c7nctWvXOjo6ampq4nA4Kyur1qtzOBz+apx2UVNTM3ToUA0NjUuXLjV9POdyuTNnzpw+fTqXy01KSho9erSpqWlERISPj4+iomKjdBSQrgX6XcSBfhc/YICHtMiSJUtIJNLZs2f5qSE7TEhIiJ2d3atXr3JyctatW7dq1arOtHbz5s2nT5822xlIo9GsrKwGDBgwZMgQS0vLZ8+eNTqByWSOGjVq2bJl6MdHjx6ZmJhISkqeO3euM5IgvwX6XcSBfhc/YICHtMj79+8xGMzdu3c72Q6Px7OwsIiMjEQQpKKigkwmowmkW6eoqCg2NrZZVz9+/NjGxmbSpEnNVqTT6XPnzjUxMQkODjY2Nh43btzr168FT6ipqbG2tt6zZw/6kc1mnzlzZteuXW2c2gPpGNDvIg70u/gBAzykGaKioqKjozU0NG7cuNH51u7duzdo0CAOhxMXF+fp6dns5J26urp9+/YJlowdO1ZDQ0NDQ2Pp0qXPnj1r1AdYX1+/YMGCZhe5oly5ciUrK4vNZl+4cKF///7m5ubnzp3jb6RVXFysr6+Pru1B0dbWNjU17Vg/IaQtQL+LLNDv4goM8JBmMDAwUFJS6qperDdv3igpKZHJZHNz8zVr1pSUlDQ6gU6njxw5EovFpqamoiVhYWEWFhYNDQ2ZmZmHDx9Gs02MHTvW1dU1MjKyrKxsyJAhU6ZMUVVVDQoK+q0AHo/36tUrNzc3JSWltWvXZmVlIQjy/ft3dXX1Fy9eoOfcv3//xo0bYj+rVohAv4ss0O/iCgzwkMbcvXtXR0enqS07w6tXrwoLC5s9xOVyJ0yYMHfu3IULF/Ln9RgYGPCtiFJcXHznzp3g4GBra2tJSclNmzbxeLxv374ZGhpu2LChjUbNycnx8/NTUVGZOHFiZGTk3r17N23a1Mlbg7QR6HfRBPpdjIEBHvIfioqKFBQU3N3d2zJs1iUwGAw5Obn8/HwPD4+9e/eihU5OTvfu3WupSnZ2Nv/niooKJyenKVOm1NTUtPGKdDod/eIgEonLly9HEOTixYuCbUK6A+h3EQT6XbyB+eAh/4HBYCgrK48cOXLbtm329vY9c1EvL6+ioqKcnJzExEQSiQQAuHTpUkRERFhYWFuqNzQ0rFmz5vXr1+/fvyeTyW2/7vv376WkpKysrIYNG0YgEKKiojokH9ImoN9FEOh3MUeIDxfwiV4EOXny5OjRozuwHVVn+PDhA4FAENxOsqamRkFBodn8lc1SX19PJBINDQ2Dg4Pbe/VPnz4BADAYTEpKSnvrQtoO9LsIAv0u3sB0sZD/h8vlHjt27PDhwxgMpieva29vX1RUJPgCIScnN3To0BcvXrSxBSKReO/evREjRuTm5rb36gMHDvTy8kIQBIuFdoD0IaDf21u31yH+dwhpOw8ePNDU1LSxsen5SyspKQl+5PF4iYmJbVeCxWKdnZ3Nzc3Pnz9/4sQJJpPZrqsHBgZOnz5dU1OzXbUgkF4N9Hu7avVGYICH/D+BgYErV64UtgoAAPjnn38oFIqhoWG7aq1Zs+bly5dv3741NjYOCgricDhlZWWFhYW/rSglJRUaGionJ9dRvRBI7wP6vaN6ew0wwEP+JSUlJTMzc9q0acIWAgAAd+/enTFjRgcq9u/fPzw8PDQ09Pbt22QyGd03o8vlQSC9Hej3vgCc0Qr5l8DAwMWLFxMIBOHKQBBk8eLFz549o1Kpzs7Otra2HWhk0KBBL168KC4ufvjwYXx8fJeLhEB6O9DvfQH4Bg8BAICqqqrQ0FBfX19hCwFMJlNaWvrFixdUKjUuLq4zTVGp1NLSUgqFgn6k0Wi3bt3icrldIRMC6cVAv/cRYICHAADAixcvRowYoaqqKmwhgEQiHT9+3MjIyNTUtLq6upOt1dbW8kfaXr9+7enpmZKS0uyZzs7OgYGBiPC2hYBAegzo9z7id2F20WMwmNmzZ2MwGAUFBXSdxvz584cOHSpESX2WqqoqUXC7IBQKJT8/v5ON1NXV6erqoj9//vzZwcHBysqq6WkcDodGo61evdrOzm7w4MGdvCikWaDfRQfo9z7id2EG+BcvXpSWlgIAqqurEQR59epVWFgYNLxQoNFoMjIywlbxH1RUVD5//tzh6gUFBYcOHQoNDZ0zZw5aYmhoOGHChGZPTklJef/+vaysrKWlZYevCGkd6HfRAfq9j/hdmAHe0dFR8KOkpGR4eLiwxPRxhGt4Ho/H4/EabWJqYmKye/duLpeLw+Ha22Btba2JiQmbzd63b9+wYcPQQr7zmxIbG6usrIzBYI4ePbpt27b2Xg7SFqDfRQfo9z7idxEag3d3d8/IyLhz506zRwsKCng8Xg9L6jvQaDRZWVlhXf3YsWN79+5tVGhnZ0cgEJKTkzvQoJycXEZGxvnz5/fu3VtcXNz6yfHx8cePHz948GBUVNRff/3FYrE6cEVIe4F+FyLQ733E7yIU4GVkZEJCQlatWpWTk9Po0OPHj01MTOzs7N69eycMaeKPEJ/o6+rq9uzZM27cuEblqampLBarw8t4NDQ0FixYoKqqSqPRWj/z69ev6urqHh4eZmZm6LLajl0R0i6g34UI9Hsf8bsIBXgAgLW19aZNmzw9PTkcDr/wyZMnvr6+r1+/9vPz8/DweP36tRAViitCNDyRSAwJCXFwcBAsZDAYjo6OBgYGGhoanWlcVla2afxoxLdv36SkpNAXmiVLlvz111+duSKk7UC/Cwvo977id+HluWkeHo83ceLELVu2oB9pNJqVldXjx4/RjxEREYaGhnQ6XXgCxZOpU6e2ko+557l69erEiRM7305YWJiGhgaHw2nlHFNT0ytXrqA/s9nsgQMHHjlypPOXhrQF6HehAP2O/iz2fhe5AI8gSGlpqaamJjrJVltbe+HChYLZDD08PPhfB5CuYuzYsU+ePBG2iv/H0dExPDy8S5rCYrGFhYUtHWUymSQSicVi8UuuXbuGx+PLysq65OqQ3wL93vNAv/NLxNvvohjgEQR5+fIliUSysLB4+/Zto0NFRUUUCiU5OVkowsSVPXv2LFy4UNgq/iUzM5NKpbLZ7M43deDAATk5OW9v75Y8n5eXh8fj6+rq0I+xsbFYLBaLxW7durXzV4e0Eej3Hgb6Hf0o9n4X0QCPIMjnz58bGhqaPXTx4kV7e3sul9vDksSY8vJyMpkcHx8fFRWVmJgo+ArV82zatGnDhg2dbycoKAgAoKioSCQSiURiWlpaoxM4HM6YMWO2bdvGL+HxeHV1deXl5erq6jExMZ3XAGkj0O89CfQ7itj7XXQDfCvweLwhQ4bcunVL2ELECi8vLwkJCXNzc01NzYCAAGHJ4HK5ampqKSkpnW8qNTX18ePHmZmZbDZ7586dS5cu5R+i0WiTJk1ycHCwtbVtOmLH5XIdHBzOnj3beQ2QzgP93h1AvwtqEFe/98oAjyDI06dPzczM4EN9F7J3714cDldWVvby5Us7OzshKnF1dV2+fHnXtllYWKioqFhZWYkgSH19vZOTk7e397Fjx/jTbQQ5fvw4kUj08vJ6/fp118qAdAzo9y4H+p2PGPu9twZ4BEHs7Ozu378vbBXiw6VLl0aMGIEgSENDg4qKSk5OjrCU1NTUmJiYBAcHd2GbLBZLX1/f0tLy9evXo0ePXrBgQSvR4uLFiytXrsThcImJiV2oAdIZoN+7Fuh3PmLs914c4MPDw21sbIQ7eiRO1NbW/vz5E/154cKFx44dE6KY9PR0CoUSGxvbVQ0uW7ZMV1f3wIEDWCx27ty5v30XXLdunYODQ+vrbSA9CfR71wL9Loi4+r0XB3gej2dhYREZGSlsIWLIkydPHBwchKvh4cOHWlpaRUVFnW/q5s2bGAzm1atXHA4nKCioLTY+derUsGHDbGxsPn361HkBkM4D/d59QL+Lq997cYBHEOTGjRtDhgwRtgoxhMVikcnkgoIC4crYvXv3sGHDOr9+5uHDh5cuXWpvLR6Pd+XKFQqFEhIS0kkBkC4B+r2bgH5HxNTvGKQ3Z7zncrlmZmYXL14cMWKEsLWIG/Pnz7ezs1uxYoUQNSAI4ubmpqure/z4caEIYDAYhoaGERERAwYMEIoAiCDQ790H9DsQR7+L1l707QWHw/n5+e3fv1/YQsQQd3f3sLCwHrvcqlWrXrx40agQg8EEBAQ8fPiwx2Q04ubNm2w228fHR1gCIIJAv3cf0O9AHP3euwM8AGDu3LmZmZkfPnwQthBxw8zM7NevXz12OW9vbzMzs6bl6urqv83/2H2MHz++UdZqiHCBfu8moN+BOPq91wd4AoGwfv16f39/YQsRN37+/Kmrq5uUlHTw4MERI0aoqqouX748MTGxmy5nZWXVbCIpKSkpPB5fU1PTTddtHU1NzaioqNzc3Pj4eKEIgDQC+r2bgH4H4uj3Xh/gAQA+Pj7x8fGfP38WthCxIjc3982bNzNnziwpKdm6dWtMTAyVSp02bZqdnd358+dra2t7TImampoQH+qNjIz++uuvmTNnMhgMYWmACAL93h1Av6OIm9+FPMmviwgICPDw8BC2CrGitrY2Ozu7USGXy42MjJw+fbqqqmpCQkJXXYvH461Zs+bLly/NHnV0dIyKiuqqa3UMJSWlkpIS4WqA8IF+73Kg3wURG7+Lwxs8AGDJkiVv3749f/68sIWID7Kysrq6uo0KsVjs+PHjQ0NDz58/P3HixJSUlC65FgaDSUtLs7Oz43K5TY9SqVQhPtH7+PioqqqqqqqSyWRhaYA0Avq9y4F+RxEzv4tJgJeWlo6Ojj537py7u3t1dbWw5Yg/rq6up06dcnZ2Tk9P75IGnz17dujQoaKioqaHqFRqs+U9AxaLdXFxSU1NFbPZN70a6PceBvq9lyImAR4AYGho+OHDBwqFMmjQoG/fvglbjvgzY8aMw4cPjxs37vv3751vbe/evbdv3x44cKCjo2NGRobgIRUVlZKSks5fomMsXbr06dOnp06dEpYASLNAv/cw0O+9EmGPEXQ9586dMzMzo9FowhbSJwgODtbW1m46etcusrOzFRQU1NTUDAwMJCUlf/36xT/E4XDMzc0fPHjQaaUdx8rKyt/fv66uTogaIC0B/d6TQL/3LsQwwCMIsmDBAm9vb2Gr6CucPXu2X79+796963ALdXV1Ojo66BPnlClTGhoa+IfOnz/v5OTUFTI7TmpqqpycHIVCYTAYwlUCaRbo954E+r0XIZ4BnkajaWpqHjx4UNhC+goPHjzQ1NT09fWtqqrqQPUPHz5gMBgpKSkLCwvBdGG1tbVqampdOH23w3z9+tXIyMjZ2bmwsFDYWiCNgX7vYaDfewviMwYviLS09JQpU1gslrCF9BWmTJmSmpoqISHRv3//O3futLe6vb39mTNn7t69Gx8fj8Fg+OWHDh0aN26cjY1Nl4rtCP37909NTTU2Nl65cqWwtUAaA/3ew0C/9xZ6d7KZVti+fbukpOS2bduELaRv8fHjR19fX21t7TNnzvB74TpGbm6ujY1NUlKSpqZmV8nrJJWVlf369auoqCAQCMLWAvkP0O9CAfpdxBHPN3gAgISEhL+//7Nnz4QtpG9hb2+fkJDg4OBgZ2f36NGjzjS1ZcuW5cuXi47bAQB0Op1IJIrH+hkxA/pdKEC/izi9WHrrEAiE+vr6/v37C1tIn4NAIGzevLm6unrmzJkUCoVMJg8fPtzJyWnEiBHKysptbOTevXtRUVHnzp3rVqnt5f3793JycmfPnqVSqba2tp18ZYF0IdDvwgL6XZQRzzd4FosVHR1tZWUlUs+DfYqysrJ169a9e/fu/Pnz2traly5dMjAwGDBgwOrVqyMiIlqpyOPxdu7cuXr16nv37snIyPSY4LZQVVVlbW398eNHd3d3AwODGzduCFsRBADodxEA+l1EEfYsv27Bx8dHUlJy586dwhbSd6mtrRWcH4sgSENDQ2xsrL+/Px6Pb2mNaVVV1cSJEx0dHYuLi3tEZkd49+6dqalpdHS0pqbmhQsXSktLha2orwP9LnSg30UTMQzwRUVFWCxWRUXl06dPwtYCaQyXy8XhcFwut+mhlJQUQ0PD1atXC66LFU3YbDaCIFlZWbq6ulJSUjNmzMjJyRG2qD4K9LsoA/0uXMSti766ulpPT+/GjRt4PN7W1lbYciCNqaurk5aWxmIb/+NVVlYOGzZsx44dJ06cEP1ZLeisWn19/ezs7PLycj09PVNT0/fv3wtbV58D+l3EgX4XLuIW4DkcztChQwsLCydOnCi4whIiIjQ0NDS75kRBQUFGRmbw4ME9L6mTZGRk3Lt3z9PT09raWtha+hzQ7yIO9Ltw6fUBnslkCn5UVlZ++fKlsrLyo0ePrl+/LixVjWBzePXMBmGrEAmUlJTodDqdTm9UjsVip02bFhoaKhRVHQNBkFOnTg0ZMkRfX3/p0qVSUlLCViT+9Aq/Q/hAvwuX3h3gv3z5QiKRdHR08vPzeTwem80GACAIMmnSpIsXL/r6+tbX1wtXYX5F/YUX6QtOv/Y9/zbgwZeE7DJETHcWaiMYDEZbW/vXr19ND82YMaMXGb6iosLV1TUoKIjH41VVVbm4uCQnJwtblJgj+n5nsDlPE3NPRKQcCE+8+DI9Pb9KuHqEDvS7cOndAZ5KpSorKy9fvtzFxcXMzGzjxo0AgEePHikpKS1btmz9+vXS0tIAgAsXLiQkJPS8vPyKer9rH9PzqwyocvqqcmW1zFMRX//JKO55JSKFrKxss1/EDg4OpaWlXZKMsruJjo62trauqKig0WjTp09/8uRJQECAl5eXsHWJOSLudwabc/552oO4nOKqejqTnZFfdTA8MSq1sOeViBTQ70Kkdwd4VVVVHo/n4uLy48ePwsJCZ2dnAICWltakSZO4XK6fnx8AIDExccWKFR8+fOh5edGphcpyRFkSAWAwAABJAlZDSeqf9OIGLq/nxYgOGEzzGyRjsdgpU6Y8ffq05yW1HS6Xu2vXLldXV2lp6V+/fh07duzmzZuKiopqampVVVV79+4tLu7rD3Ddh4j7/cO3kvT8Koo8SQKPw2Kx0kSClpL0hRdptL49PAf9LkR6d4AHAJiamh44cGD9+vUAgCFDhgAArK2tSSQSi8V6+PAhm812dXVFEKSmpqbnteVX0GSI/5lggsdiMwqqS2sYPS+mV2Bubp6eni5sFa2xYMGCAwcOcDicQYMGJScnT506FS1//PhxaWlpWlragAEDrl69KlyRYowo+z2nrE5WSlKwBIfDkiTwueW0nhfTK2if3ysrwdevoKAA8HruBam3+73XB3h7e3sSieTj40MgEOTl5dFCb29vWVnZjRs3Ojs7FxcXczgcf3///Pz8HtaGxWJ5TR5dEQTBwum+LWBoaJiZmSlsFa2hqKhIoVBu37595coVMpnML1+4cGFGRsatW7eePXt25MiRU6dOCVGkGCPKfufykKbGxmIwXF6fnnbTCm31e00NOHwYWFoCNzcwdChYvRpkZHS/OgB6v997fYDftm1bUVGRiYmJsrJyeXk5Wujs7GxlZeXh4dHQ0DBnzhwKhfLo0aOe38ZSR0WmUe8cm8Prr02myJN6WIlIgcFg6HT669ev+dkpLl++jHa3GhkZifiY3KFDh759+zZx4sRG5RYWFug/mJWVlZeXV05OjhDE9QFE2e9qilJ01n/8jiAIg8VRU+wF0627j876HUHAvn3g5k1gZQVMTIClJUhMBPv2gZKS7lYOer/fe32AV1BQ2Lp1q7KycmlpaVBQEL/85MmTX758SUhIuHv3LpPJrKio6Hlto8w1tJRkqmhMLo+HIEg9k5NfQRtrqYnD9uk3eBkZGV9fXzc3Nx8fn0+fPgEAvLy8Hjx4AADQ1tYuLy9vuqhGdJCSkkJncrWCgoKCULqI+wKi7HcHY6qOimwtgw0QBADA4fEKq+hTB+sqyxJ7Xozo0Fm/p6aCu3eBlhbgd3wqKoK0NNDqFvddRW/3e68P8ACAkpISIpE4efJkWVlZfqGOjs6LFy98fHzU1NTwePyqVat6XpiyHNFnjKmDiZoMUUICjzPWkN85c6CNXlszLIkrnp6eVCpVV1eXTqevXLmSx+MBACQlJQEAWCxWV1c3KytL2Bo7hby8fHV1tbBViC0i63dFGcl5Tkbm2uSskrqfJXXSkgTPYYZTB/XreSUiRWf9npsLBP7Q/yIjA3Jzu0txOxFlv4tDgJ82bZqJicm1a9eabog4c+ZMAICFhUVlZeXo0aPRwvj4eAajh6a5kWUkZw0z2DzNett0G9+xZoZq8u2qnl9B+5RV+iWnorqe1U0Kex5PT8/09PTbt2+vWbMmISHh2rVrgkdFv5f+t8jJyYnsE70YIMp+pypI+Yw2DV7meNx76GY369GWGnhcO75jq+vZGQXV2SW1LA63+0T2MJ31u6Qk4Db5bXC5QFKyubOFgCj7vfkFDL2O6urqgQMHMhiMzMxMwR6VmpoaHR2dmpoaLBZrYGDw7du3r1+/Dho06NOnTyKeOprB5tz9kP38S76UJB7t3l842mSUhYawdXUNfn5+HA7n6NGjCQkJDQ0N9vb2/EMbN25UVFTcvHmzEOV1Bh6PN3r06CFDhhw4cEDYWsQW8fM7i8ONiM8Ni80mEnA8HmKqqTh2gKa1rpj09nXK72VlwNoamJsDwS1vMzPBqVNg/PjuVN0mRNzv4vAGDwBQUFC4d+9edXX1iRMnBMvl5eV3795NIpGkpaXpdHpdXZ2Hh4ekpKSpqamwpLaRsI/ZMd+KdSkyqvIkqoJUPxWZK1GZn7PLhK2ra1i2bNnff//NZDJtbW0F3Q4AMDIyEvGJ9K2DIIi6uvrFixfr6uqErUVsET+/P4jLiUzK1aPIapCltZRlKmmsY4+SvxWKaMdve+mU31VUwIkTID0dVFQAJhPU1oLMTODuDv7XQyNcRNzvYhLgAQAWFhZnz549cuRIZWWlYPnq1avt7OwGDx4sIyMTEBCQlpaGwWA4HI6wdLaFOkbD08Q8ZVkiAP/OK8HhsMpyxPgf5cIV1lVkZWXh8fhms1D09i56HA63adOmhoYGdCNVSDchTn6vZbDvx/1UlSfx8+VI4LEqcsSP33piongP0Fm/T58OHj0CLi5AXx84OICAALB3LxCNHHQi7nfxCfAAgHnz5k2ePPnz58+Nyi9fviwhIbFkyZLAwMCgoKCHDx9KSEgIRWEbqapnEXDYRtmxiARcJY3ZUpXeBZ1Ol5WVFZwFDQB4+fJleHh4XV1dbx82wmKxBAJB6Puiiz1i4/fyWqYkHtfU72V10O//w9ISbNsGzp0DBw6AyZMBDtddWtuPKPtdrAI8AEBTU/Pjx4+NCvX09AYOHOjv729qarpw4cJhw4YJRVvbkZLEc5tsZ8vhIlKSIvHQ2nkmT54cGRm5Y8cO/rdzcnLyuHHjnjx5EhgYuGjRIuHK6wwsFmvOnDmHDx/29/dPTU0VthwxRzz8TiTguE2CHIeHkAgiFMY6A/S7sBC3AL9x40Zvb++m5dOmTSsqKtLX1y8rK8vOzhbxDYSVZYmDjVTrGAJ9PghSVc/sr0VuuVIvw8DAIDAw0MPDA52Aamlp+eXLF29v78TExFmzZglbXcfZuHGjgYGBl5cXlUqVk5MTthwxRzz8TlWQstRRYrD+M1e8pp5lpK4gLEldDvS7UBCTWfS/hcFgmJmZAQCKi4uZTKa1tXXTnr0up4rGissqLatlyJEkTDUV27VGrqiKfv1tZlZxrZQEnofwaugNI8zU/hhhKIEXk4d6lBUrVpSUlKBZIz99+pSbmxsUFCTi+SdaIjk5+eDBg3FxcXfu3MHhcBQKRV1dXdii+ihC8XsNnR3/o6yijiktSTDVVNBTbcfXfVZRzc7bnxSkJaUkCDyAVNezBuqreI00JkqIQ6dddHT02bNnExIScnNz5eXlV6xYsXHjxpSUlA77PSsry9DQMDEx0crKqjsEt4Ve4fe+EuABAGPHjs3IyMjPzz9y5AiarKJbSSnjzb0AACAASURBVP5V4X8vSUFagkjAc3i8Shpz2mC9qYP6Ydq8ET2Tzfn0o6ywsl6SgNOnyptrKba9bm+BxWLp6Og8f/7c0tJSRUVl7Nixz58/Lysr6113+vHjxwMHDnz+/Hnt2rVTpkwZPnx4SUmJkZFRRk/tmA1pSg/7PS2van9Ygpy0JBGP5fCQ6nr2jCF6kwfqtP0/ubqe/U9GUXEVXZKAM6DKDTJUFYMtLxEE2b59+4EDBxwcHMaPH08mk9evX48giL6+PpoPsGN+F26A70V+F4fHwzZy/fp1Nze3pUuX9oDb6SzOk8+5WsoyEvh/B0HkSIT7cTlG6vJt72YnSuCHm6p1m0aRoLKysqysLCcnR09Pj06nJyQk4ERp+sxvKS8vnzVr1s+fPzdu3BgaGkogEMaPH+/l5RUaGnrw4EFhq+vT9KTfGWzOo4RfmkqykoR//a4gJRH28ac+Vb6/lmIbG1GQlphkq9NtGoXD/fv39+/fv3fv3i1btmCx2KKiopUrV54+ffrw4cM1NTXQ792NuI3Bt4Kqqqq1tTW6+1VBQUG3bm71o7gmq7iGH90BABgMRlFaMi2/Cxa2csQonbyEhMTOnTsXL168d+9eHR2dJ0+enDx5sre8vjc0NLi7u1tbW3/79m3x4sWSkpL+/v4cDodKpVpaWrq5uQlbYJ+mZ/1em1lYzY/u4P/9XtX5xlkcbi/tZ+VyuX/++efw4cO3bt2K/iFQv+/du3fgwIE8Hm/x4sUnT54kkUjXr1/n11qwYMGkSZP4Hy9fvmxraystLW1ubn758mXB9svKyqZNm6akpGRkZLRr1y7BxZAt1eJwONu3bzc2NpaVlXV0dIyNjW377fRGv/ehAA8AmD59+v79+2VkZAwMDBptkdG1MBq4eEzj3y0Oj6H/N7lcu0AAiP9RdiIiZe7J1wfCE+9+yK6hi+LKy3ahpKS0Y8eOqKioq1ev5uXlOTs7L1myZOTIkXv27GEyO7VGKCsrC4PBJCUldZXUpixfvpxMJvv7++PxeABAXFzcqVOnrl+/TqFQmu6iCul5es7vbE7TLWnxOAyN0XGHIggS+70k4OEXr9Nv9oclhvyTVdXb9qvOzs7+9evXsmXL+I/sfL8nJCTg8fjU1NTWZ9idPHnS19d3woQJd+7ccXJy8vb2Pnv2LP/o7NmzNTU1L126NGnSpN27d2/YsOG3tXx9fU+fPr1q1aqQkBAikejs7FxUVNTG2+mNfu8rXfSZmZk4HM7JySk2NlZLSysgIKChoYHBYJBI3ZK5VVFaktlkbw0Wm6sk1/G8UpGfc2/H/KDIkwzV5OhM9puvBTlldUvGmckQm9k+oheBIMi1a9dKSkrk5OQmT55sYmLy+fNnf3//O3fuhIeHGxkZCVtg85w+fTo2Nvb9+/d8b588eXLHjh0aGhpsNruqqiouLm7QoEHCFdln6WG/K0hLshoa75fO4nCVOpFH7mliXuiHHxQ5koGaPKuB809GcV4FbfE4MzmSSK/pFwRdNtZ0G0FjY+P3799bWFgkJCS0Up1Go+3evXv79u07duwAAEycOJHNZh84cGDp0qXoCePGjUMTsbu6uuLx+JMnT27dupVIJLZU69u3b3///fedO3emT58OAHB0dFRVVY2IiPDx8fntvfRSv4voc0eXExwcbGBgoKCgsHTp0sDAQARB9uzZo6enhyBIenp6TExM115OT1XORldF8A2b1cCrqmfZ6ql0rMEaOvv6u++aZGkiAQcwGCwWqyRLzCquien9e12ho3R79uyprKw8duyYr6/vuXPn4uPj6XT6/Pnz0dxTosbLly/3798fHh4uIyODljQ0NERGRqLddLdu3XJwcLhz545QNfZpet7v1rrKtQJ+Z3N4VXUsm074/ca77xpkaUkCDgCAwWDIMpLZJXXvM0R6vV8jWCwW+F/iuEaoq6s7ODi0PgCfmppaVVU1ZsyY8v8xatSo/Px8ft8emlsIZd68eWw2Oz09vZVaHz9+xGKxrq6uaBUZGZlfv355eHj89kZ6r9/7yhu8v7+/hITEwYMH7e3tMzMzHzx4wOPxiouLsVisgoJCv379EhMT29JOdkntj5JaBoujpihlpatMaCFVFA6L8RxhGPYhO+ZbCZGAbeDyTDXJ85wM1RSlOqY/r5xGIuCw/51VKyNJyC1v3wbIWUU1ueU0BAAtJRlDNTmhj3YLjtIJijE1NT116tTkyZNv3bo1Z84cIpEYFBT0xx9/oEcXLFhQXl7++PFj9OPly5cDAwMzMjJ0dXXXrVvn5eXFbwcdpYuOjlZSUvL09Ny2bRv+fztctlSLw+Hs3r37zp07hYWFNjY2hw8fHjx4sKDg2NjYP/74IzQ0VF9fn1/+5s0bExMTKpVaVlb24cOH0NBQ/ncBpOfpKr9nFtbklNZyeIgGWdpCm4xtYVo7DovxHG4YGvMjLquUSMBxuDwjdYVZw/Q1lX6TSrwlCirriQQc9r/2lCES8ivasV0aAkByTkVOaR2bw9VUkrHVV+7hRbboSsVv376ZmJg0PZqRkTFkyJCm5fwJBzk5OQAABweHRifk5eWh3xVUKpVfqKGhAQAoLS1FR+KbrZWXl6esrCy4Y66y8m/S+fR2v/eVAA8A0NTU1NTU1NPT8/f3z8/PP378+JUrVyZPnvzkyZPKykoEQVqPdlweL+zjz0fxOfIkCRwOW8/imGkqzhluqKrQfKefsizRd5zZeCut8jqmDJHQT0WmM0taMRjQVB4GA0CbJ9+wONyQd1mvvxagXfo0Jsexv5rncEOiUHfLQkfpDh061PTuJk6cqK2t/ebNmzlz5rTSwsmTJ9evX+/n57dnz56nT596e3szmUx+J97s2bM9PT0vXboUHR29e/fumpqa48ePt17L19c3PDx8//79/fr1O3XqlLOzc0JCQl5e3rt372JiYmJiYtTU1I4dOzZ8+HBBGQ8ePEDfDEJCQiZPniyabu9TdNLvbA435P2PV8kFsiQ8BoOpZ3Js9JTnOhrJSzXfQ64iR1w63my8tVZpDUOWSNCnypGEuoSdyeZce/s9JqNYTkoCi8HUM/Pff1OY72SkItctgxTNYmRkpKCgcPXqVf5LMwDg6dOn9vb2X79+/f79O3/UXJDS0lL0zV5FRQUAkJeXp6mp2egcNIW84PB5fn4+AEBbWxtN+tJsLSqVWllZyePx+N3subm5BAJBTe0/i5XodPqnT5/Ew+99KMBbW1tLSUnNnj0bAKCpqXn06NFt27YFBATU1dXV1NQ8e/bM2dm5srKSTG5+GVvs99LIpDxdFTk0/4u8lERued3dDz+WOfdv6ZsCA0A/imw/imznxauTpeksDg8Bgq8QNCZHS7mt/1jPk/JjvpXoqPwrRkkGifteqigt6TZYt/PyOkxLo3QAAAwGY2pq+vXr11aqd2aUzsLCIi0tDZ1Gq6GhsWbNmuDgYCaTmZqaqqqqeuzYMQAAk8msqakxNTW1tbUdOnTo4sWLr1y5gn7vCIIgyMOHD1++fAkAuHnz5s6dOzv/m4F0kk76Pepr4bu0Yh2Vf/2lKC2ZkV/1IO7nPCfjlq6IwWD0VeX027O/TUtokqUZbI5gKAIA0JgN2m32+5vUovisUv73gyyJkFdedy/2p+9Ys87LayPoPPPFixdfunQJ3XAQQZDAwMCVK1ficDgbGxu02wyLxVZUVKBVampqPnz4gO4ubG5uTiAQIiIiFi9ejB49ceJETEzM7du30Y+3bt3iz12/evWqvLy8qakpnU5vWuuff/6Rk5PLyclpaGiwtbVVVlam0+lMJjMlJYVCofAHEVgsFp1OZ7FYAwYMEA+/96EAb2VlZWdnZ2BgsHnz5tWrV2OxWEVFxf3791+7dg19sSsrK1u4cGFpaamCQjM7RH7NrVSSkQQC8VWOJPExs3T6UH1V+W5/KFaUlpw93CD840+KPEkCj0UQpKqeracqO9RYtS3VEQRJya1UlhUYDMNglGUl0/Kqptj1E+J+Gq2M0gEAJCQkGhpaW3cgON6GlowaNerixYstjdIdOXIkPT1dQkKiqqpKTU1typQpsrKyAIDPnz8fOHBg9+7dN2/eTE9Pf/v2LdqTLykpyWAwFBQUWu/KS0hIkJWVNTY2/vHjR3p6+o8fPz58+GBnZ4cXjYRXfZNO+j05t1JZ7j//lmQZYmRS/oyh+j3wai4nJTHX0ej2+x8UeRKRgOMhoIrG0leVczCh/r4yAACA1LxKssx/9MuTJKJTi2YNM+jJaXo+Pj5xcXELFy68e/fumDFjFBQU1NTUnj59iiDI/v37UYMMGDDg6NGjRkZGJBJp7969FAoFrUuhUNasWbN+/fq6ujpLS8uYmJh9+/YdPHiQ/0L17t27ZcuWubi4vH37NiAg4NChQzIyMjIyMk1reXh4pKWlbdy4kc1mp6SkjBw5UkdHJzw8HIvFnjx50traGm1QUlJSSkpKSkqqpW8klF7kd5ET1H1ISEhcuXLl+/fvs2fPvnv37q1bt7S1tQEAZ86c2bp1a3Jy8vbt2+XU9O98/EVryJWWxJtqKg41VuWvfqExm1kJQ8BhaMyGHgjwAAAXa20lGcl/MkoSf5abaSoOMyGPt9KSbZtX2Rxeyq+KRnvlYrHYtPwqBpsjxHn4QhylS0tLExytBwCgyTAwGMyRI0fmzZs3bNiwNs5RuH//Ptpfd/PmzZqamtDQ0F27dq1cuRLtVwAAVFVVKSq2dcMTSJfQFr+T5JWfJRfSGoqliXgjNXlrPRX+3zs+q8xQ7b/v4hiAx2LqGA090/fubK2tIkd6l1YU973UXIds2V9tvJVW261KZzX5vsJg8DhMPZPTkwEei8UGBQW5ubldvHjx9OnTxcXFOjo6fn5+srKyW7dulZWVXbly5aVLl5YsWTJ9+nQ9Pb0VK1YQCAT+lnCHDh2iUCiXL1/++fOnjo7OqVOn0M45IpHo4OBw4cKF9evX//HHHxoaGidOnFi1alVLtW7cuLFp06apU6e6uLhs2bLl/v37ZWVlWCyWxWL5+PhMnz5dXP3eh7aq5XP+/PlDhw7R6fSQkJCRI0ciCGJra/v9+/cVO0/EFOP6G+jk5vzQNTSpqGPpUmT/GGFooqGAwWCCXqWnF1RLC3obQbJLaSe8hyp3YjFMB6CzOMQmE+5aB0GQg/eS6hlsnIDneTweSYKwaZq1cN/gqVTqqFGjwsLC+IX8UboRI0ZcuHBh0aJFjSbZTZgwAYfDPX78+PXr16NHj25plM7Q0DA8PJzfiZeSkmJpaRkXF5eYmLh48eKcnBwdnf9sHFZYWOjk5JSVlbVhw4anT59KS0u/evWqvLy86ShdI8zNzYODgwcPHmxtbT1o0KAtW7YMHDgwKSlJVVX18+fPT58+ffPmTVRUVOd/XZAO0JLf1+4KiC4mGfXTKCzIJ6tp1dHZVEXp4SbUMQM0KfKk44+SS2oYgntVIQjyo7j20oqRPTxthc3hNk0e/VtOP0nJq6gXlIrqD17uJNzJAXx2797t6Ojo5OTU3RdKTEycOnVqdnZ2o0n7hYWFs2bNqq2tdXZ2fvLkCep3Kanfz4PuRX7vK8vkBFm0aNGYMWMaGhrQNzkMBrNz504tXcPYckkZLDv5c1wdC8kprWOwOcm/yneHxge/zmCwOTa6yhW1DMFVW5X1LKf+aj0c3QEAUpL4dkV3AAAGgzHXUiyvE9goA0HK61hmWorC3e8aHaULDw+/dOnS/3QhgYGBdnZ2Pj4+rYzSoT/zR+n4DZ44cWLmzJn8x9Zbt27xD6GjdMbGxpGRkTgcLjIyslEtNTW1mzdvIghy+fLl8+fPGxsbe3l5DRo06OrVq63cwpcvX2g0GroE9ubNm+fOnQsKCrKxsSkuLo6JiZk7d+73798PHTrU+d8VpGM063dN7X6RSfnSGHb61y/1XCyN0UDAYQsr61+mFPx5+X12Sa21nnJpDf3/338QpLyOOcWuX89PSpVokiq+LQzUVymtYfD+px9BkLJappu9nohEdwDAzp07eyC683i8I0eOLFu2rOmSPHV19devX48fP/7WrVuo3xcuXPjbN97e5Xfcrl27hK2hp8FgMCUlJdHR0Xfu3FmxYoWEhISxsfH1+89VTexMDfoVV9Hw0mQSASchgcdisTJEQmkNg83hjbbQkJYkRKUVNnARZgO3vI5po6fi4WAg3FnobacfRbaGwU78Wc5DAJ3FLatlOphQ3QbrEnDYdevWYTAYwUUgPYm1tXVBQcGuXbvi4uJKSkoyMjKqq6tfv35dUVGxYsUKR0dHAMDjx4+fPXtmYmJSUFCwfPlyLpeLLnuTlpauq6s7cOCAhIQEjUa7du3atm3b5s2b5+DgUFlZefr06crKyuzsbARBgoKCAgICZs2atX//fg6HM2XKlMOHD6O1Lly4sHv3brSWurp6cnJyZmbm9evXTUxMIiMj6+rqzp071+wwLcqePXuGDx+OflWpqKhgMJiCgoKsrKwzZ87Ex8dramo+fvy4sLCQzWabmJiI4Cid2NOs36+FPdEYPMnMQKekhokhECUl8Hg8HmAwRAJORZ5UUct0t9flIeBDZgmHy6OzOeV1rKEmVHd7PQK+d7wUaSrLSEngo9OK2A1cOptTVsMcbakx1a4fXth+70kePXo0c+ZMJpN59OhR/h5HlZWVLBaLSCQCALBY7NixYw0NDT09PceNGxcXF1dZWYlO8WuJXuZ3pK8SFhY2efLk1atXox9DX3wcsebCmguvZh19PmrzLbeDETOPPnc/8mxB4OttN2NnHXvBauAiCFJaQ4/NLIlOLcwoqOIJVX/HyCysfvEl78WXvIyCKh7v3ztwdnY2NDRksVhCFPb48WNXV9d+/foRiURjY+NNmzbt378fAHDq1CkEQdLS0kaMGCElJWVubn7u3Lng4OANGzagFblc7pEjR8zMzEgkkomJyZkzZ9D7ysvLc3BwSE1NnTBhgry8vJmZ2dy5c/X09B4/fsyvZWRkhMfjcTickpJSUlIS2iCDwfjzzz+1tLSwWKysrCyJRHry5EkrykeNGnX+/Pmm5RcvXiSTyUePHi0tLb1+/bq8vPzz58+79pcGaTuN/H7v1ccRay6uufBqZsCzUZtvon6fHvBs3qlX22/Gzj7+gsZgIwiSX0F7l14UnVr4vbCa75deREUd83N2WWxmSX4FjV8oCn7vAW7cuMH3O0pBQcHatWsVFRV1dXW/fPkiePLPnz/t7OwGDx4sLS0tTn7vi2PwfCoqKgwMDNasWfPr1689R04tP/uqtrxAQlELIFyEy8XhAMDgcFwGnkNnS8irl7zF8bprL2h09mY3Nf5b7ty5U1NTc+DAAf7CklaoYzQk/iyvqGPKkST6aytSFbpRdntH6arqWR++lZTWMEgSOMP/zpkqKCiwsbGJiIgYOHAgACAnJ+f48eM3b9709PTcsGFDTEzMypUrz549O23aNH5rLBZrw4YNjx8/njJlSks7mZ87d+7vv/92cnJq2inHYrHYbDY6Sz8jI2PUqFG5ubnCf6Lvwwj6fV/A6WV/vaguL5RQ1MIgHB6Pi8diAMDguCw8l94gIa9eEo3ldVeuh17kdwRBCirpZbUMKUm8joqsSHVY1jMbPv0oK61hEAk4Y3UFY43/72aDfkfp0wEeAPB/7d15fBNlwgfwZyaTO2mONm16QVsopaVAuaFCFRBFFlB0dVVW95B3d9V3QbzW410PXF7d5VVRXNFVFxSvBVQQVEAtIsotZwstvZumV5o2V3POzPP+EagVKiL0gOH3/fgHTZPJk9pff5PMzPNET7DkOO7Tz7c++u6eMrtTpJRlZYQwLEMUrGDgeJYhbRH5dEuT7OynlfmZotdf9tDGfxLHcUOGDLnrrruOHz9+5t/IYlvbxn3VVc1epVzGC6K7Pfz7qYOnDE3utaGeQYnd9dSa74xahUrBiaLoag9Pykm8/fJBnIwVRXHatGnTpk176KGHioqKnnnmmc2bN995553z58/vuP5t//79+fn5Tz31VJeTb3TJZrONGDHiscceKygoOPO61A8++KBMJrswF5S8pHTkfdMXXz309q7y+laRijJWThkiI5QSJlYRZghRscJoQ1vPnZxyseTd1R76cHfVV0X1KoVMEMWsJNPVeanD02J7bahnUNXsXbOjorLJo1bIBJG6/eHpI/rdlJ8hY5H3713q7yfmz58/bty4OXPm/OX5t1hLVrJZV+f0MQzLMETGMka9tr9F1+IJTs9JvHni7L4ebM/KyMi49dZb77777oKCgi5P6mkP8Rv2Vbe1h+JPXhZo1CpWFJakxeszumNyj/PBC+LHe6uTzZqO6QL1KvmO0sZBiYaJ2YkvvPBCKBSaMWPGddddt3v37nvuuefll1+OifnBmEeOHJmfn3/48OGzfMa2trYHH3zwd7/7XcfFOWfg8XgGDhz4c18UdLuOvD/w7JskfpDVpK13+ijDsAxhGDZWr0w2Wxra2u+4esj4QWc1w8TF6yfzTil975vyYltbmkVHGIYQ0uoLLVl/8H/njjv7+XZ6iCDSD3dVNnsCnf8WfX7QlpGgH5eZgLx3uDhOGOlR48aN27V7T2VAX1lyOMGoFl02nYJyMlbOsS2eYG2Ld3ha7KwxaX09zB63evXqCRMmLFiwICMj4/HHH49OBtnZ8XpXRaNH2Wk6axnLGnXKYls3LHp9nmpbfEfrWqPtHgwG/X4/YRiDRllS7youLn766adffPHFGTNmXHHFFZWVlX/5y19OSXtUfn7+2b+vqq2t3bJlC8MwZ7MczujRo998881FixZdgue0XmjGjRu3e/eeyqC+qrQoyaQhHnusiho0CpZlWjxBo1bx5xlDJd/u5CzybnO27yxtMuuU5GT9KzjWrFfuK3f0+mBPZWvxHa5xajrnnTAmvepYHfL+Ayh4QgixJFhjY2N1Ol1hYaGr1cmF3IOSjIlGrVIuW/CLYX+4KkerlP5HHWazeeHChQcPHly3bp3X6500adKkSZPWrFkjCCfWwfQFIl1N9SM7n0Wvu0soIshOTurpcDi2bt26bdu26sqKymrbbbfd9vTTT//jH/+4+eab77nnnh9bMPSll15auXJlx1QVP2n48OFbtmx5/vnna2pqfvLOjY2Nqampb7zxRmPjxbQamFRZrImxsbF6rbawsLDN2SIG3IOSjLmpZoNG8d/X5I4ecI5LwF1cfjLvrb7g6UfclZzM6Qv2+mBP1Xkan+/zXlVRVlmDvHd2qR+Dj6KE/P2jA55AmA+HOY6LHpeKCGKMWvHQ9SP6eMG1PsLz/IYNG55//vm6urr58+dPmzbtWL3ng0OtMXIqCALP8zzPU0pDlBsWzz72h+t/eos9qckduH/ljvQEPSEMIcTj8Rw5csQXElyV+0daxGuvvfapp5767rvvotfGRLlcLqfTmZGRQQh55JFH1q9fv2nTpuhkZ2eDUjpr1qzRo0ef5U56ZWXlZZdPWfXRFk6ts8SospKMp+8tQe+glD7z0UFvIMxHvs+7IFKdSv7QnLw+X2KxT5ye9/JG73sHWg1ysXPeI0SWYZQ9c3cf572hzf/gW7vS408cOziR92DEXX14RBx/geR9wmWTPv7iG6VWb4lRJ5vPcV3B84SCP2HLobrV35RbzZroEo0ipQ1t/psvGzht+KlTpF1q9u7d+9xzzx08eFAXYzSNuUGmMcqIEP2zSFlZiNHUb142bvjgZcuW9e0poyu3lu4ua47TK6N/oEMR4WhV/fF1z27duCZ6Pu2oUaM67kwpHTNmzP79+/V6fWpqql6v37hx4+rVq//0pz+d5d/35cuXr1y58ttvvz3LV33DHQu16aNETWyMTheKCDNG9bthfMa5vVI4f58frvvP9vJEsyb6v5tS2tDmvzF/wNV5qX09tD52at7VMTKGRvPOMEyIVTd++59RAyx9m3dK6WtfHDtc7ew4ghDhheKqhuPrlxZ+/N4Fkfff/Vk7YGxEGavXaQMR4ZaJA2eMPNudiW6Egj9BEOmGfdVrd1ZqlHJCiD8YuTF/wMzR/ft2orcLTW2L74OdlUW1rUqFLMKLA60xV+WlZlpUt956azAYXLNmjcFg+Omt9Iz2EL9uT9Wm/bUquUwQ6eAU09Gta/sZ2L17906YMOH0z+KeeeaZ5cuXKxSKyy67bMmSJRzHjRo16tChQ9ELXc6svr4+Jydnz549gwYNOv27lFK73d4xey7P8/Vt/t8sWa8S/Y7mxhkzZhBCeIH+79yx5/2i4RwJIt2wr2bNzgqdUk4IbQ/xN4zPmDW6Pz5W6exoXdvitd8ZtEq1guMF0dUenj4idebwhLlz5/Z53t3+8JodFduPNagVnCBSf5iXVW9P04sXQt7trf7f/t86FQ06mhqieQ+EhSW3jz/vF/2zoeB/wOEJ2Fp8hJB+cfq4mN6eg/aiwAtiid3l9AZjNIrMREN09QtBEBYuXLh169aNGzeeMsF7L2tyB5rdAY2SU4mB3JzBDz/88Nq1a3fs2NHlfrcgCJs2bXr11Ve3b9+ek5OTlpb2zjvvnH63trY2Qkjn1SOCweDo0aMfffTRm266qfUkp9MZ/ceGDRt4nt+2bVv0ztdff30kbrCDjdfKicfjGTx4cHp6OiFk0c1jeuRHAGet2R2wOX2UktQ4Xe8sGXXRaWsP7T7e7PAEdCp5VpIxJ9VELpi8U0qrHb4ml1+rkuuY0MhhORdK3i1DHIxZK2f6PO8oeOg2L7zwwpIlS9atWxedXKJvPfHEE6WlpV9++eUnn3ySlZXV5Wm0HZqamgYNGrRr164uV6afPHnyzTfffMqsIPv37580aVIwGDR3EhsbazabP/roo8zMzIkTJwaDwf79+z/55JOmYVcNHHNlZnrqV199ZTab8/PzCQoeLnLI+4/lPXbU7AHD8wdm9O/zvEv/5HDoNQsWLMjKypo1a9Yrr7wSXU6xV/n95O67SWEh6Q+N5AAAGp1JREFU8XrFpCS7zVbcv/+jjz76z3/+s6mp6bPPPjvDQ202W2JiYpdpP3DgQFFR0dy5c0+5feTIkc3NzVptF+fO5ObmlpeXl5aWfvDBBwzD3HnnnaUepUKpUiqVJpOpD6cwA+hGfZz3Tvx+/8svv2y1Wi+QvJe06xVq9YWQdxQ8dKfp06dv2rRp9uzZBw4c6NVrQNvaSE4OOXlRCtvW9hoh2xlmxB139OvXLzExMSUlJTs7e/Lkyffcc8/pkfvwww87T1rZ2cGDBxctWqTTdTGzR5dpJ4TMmzeP5/nLLrssLi7u8ssvX7p06a3/NT/AqViZLC4ujjl5Fue5v1iAC0Of5f2Hli5dGgwGJ0+efMeFkfeb//QgL1PJOXlH3vvqk3IUPHSz4cOHb9++febMmRzH/c///E+X9xFEcU+5o9Tuag/x8QZ1flbC+V5GsnAhOe2S00mlpR+9/vrEiROXLVvW1NTU3Nx87733TpgwYfLkyafcc8OGDffddx8hpKWlhVJqsXx/JXR0vdqoyspKv9+fm5v7k8NZsmTJ3r17LRbLs88+Swgp3f9tfuqgqiaNN0zMRl2TO3DVJX91BkhD3+S9k1deeeWvf/3rggULnnvuuVWrVl0IeS/fVzgyaWB1s649xJtNplZfKMz/9PQ4PaL31rWBS0l9fX1sbGx1dfXp34rwwqtbin//z633rtzx4Fs757++fe7SL/aWN5/Ds0R44asi+9KNhysyhlBCTv/vXwMHrl27tuP+c+bM+eCDD07fztq1a/V6vcvluuaaa+69994fe7rZs2ef4bsdqqurlUrl3Llz7XY7pZTn+ehsG++v+zT/ut8/937h9qP13kD4HF4vwIWpd/IuiuLe8ublm4uf/nD/y5uKdpQ0PP3MMwzDDBs2LHqHqVOnXjh5f2PNZxN/NX/x219+8l2N0xv82a+2O+AdPPSIxMTEu+6667HHHnvzzTdP+dbusuY9Zc0du/BKuUyjlH9+qC4nxaT5OTMGUkrf2nY8OpsmF+l6Nr32+vrbZ87s+NJoNLpcrtPvlj/lmlFTr3vuX+9s+2ZHx0xepygrK9u4ceOCBQt+cmBWq3Xv3r1Dhw6NfikIwu23315fX7/okft5nv+vX7zQ5QeAABevXsg7IWT1jsrNB22xepVCxjq9oU93FpdsP/LAAw8sXLiQEGK32w8dOjTzLPI+ceqMUVNmP//aO19t/7bn8v7s4/fxPD//9cV9mHdc9Ak95YEHHtiyZcu8efPefvvtzreXN7oNWmXnW+QcW97grm3x/aztF9W2bj/WkGhUK+Uyh7XrSSQUV1yhVH7/XAaDwe12d76DLxh5a9vxB9/aFZM3c1dbTM6su6vdNBKJnL6pF1980Ww207M4lqZUKjvSTghRKBSvvPLKzJkzp0yZsn//frQ7SFJP572yyfPJdzXJZo1aIZPJmOqK4w0VR/Om/ep38x+2Wq2EkDfffPPGG288c97bQ/w7X5fd/9ZO/Yhrd7bGDJn939UuQcJ5xzt46Cl6vX79+vWbN2/++9///utf/7rj9lBEOH32IJmMCUW63pX+MTUOn04lj85jtW7MlaP2fnnKHWxy+ci//rXzLacHfvWOin0VjvQEXYPos9udOXljapIGJWTkxqlpZmZmVlbWL37xi6lTp7pcrnfffffGG29k2XPcJ/7DH/5wbg8EuCj0dN6rm706lTx6zlpVVVVlZWVeXp7GYKpq8gxONhJCVq1atWLFis4P6SLv35bvqXCkW/QNgs9ub8nJG1ObNCg+I9ci0bzjHTz0oLFjxz788MM1NTUej6fjxniDJnhqtmkgxMf/zJlGREqjv742m+0zb+jpW+5zmr9fBKw9O3tuSsq4ceM6P+SUj+ya3IHCI/Y4vYoQxmg0Op1OjiWD+ifnFswsLy+3Wq07d+7csGEDIeS1114bPXr0Rx99ZLVaGxoaftY4AS4RPZp3QaTRtrXZbMeOHRswYEBycjLDEF6khJDdu3cLgnDmvDs8wS+P2C16JWFIR94z+ycPlW7e8Q4eehbHcXl5ef3791+zZs2VV15JCBk/KH7NjgolJ4segaOUOjzBK4elJJp+9IJRSkiLJ9jmC5n1yji9ihBSbGstsrXWOn2kscVRbzebzb6x1zx71RzmWNEfrWK/GVPuX7p0emrqKRNNG43G6DRVUW2+kPLkellqtTovL6+kpISw3A233J6fKj9y5Eh5efl7773H8/xLL72k1WqTkpIWLVq0Zs2ar7/+uvM6FgAQ1S1594f4o3VtTm/QoFFkp5gMGkV1s7fY1trQ6m9oammw28xmc+agrBAv+EORRKOaELJy5crf/va3Z8670xtUymXR9ag65V12wy2/kWreUfDQ41avXn3nnXfW19dHv7QaNU/ePGbjdzUHKh0yGRsKC3PGpZ9hJYYmV2DdnqpvjjUq5EwoIk4ZmqxVyj/dXxurVwqhoD8iqOOS9VrtoWqnSKnc1P/wxMG6BPPq1asPHz58yqYyMjL+9a9/Rf/d0OYvrXe1ByP+EK9RcpRSQRAGDhxYUlb5+eZPb5808vjx44sXL05LS9u6dWtLS4vNZtNqtR9++OFtt922cePGX/7ylz304wK4qJ1n3kvtrvV7q8sb3QpOFhHEjHi91aT54rDdrFNGQoFAhGot/fRa9eFqp0iojGFqWtozLN6fzLvbH65r8flDfJgXFJysc96/2PzpbRLNO6aqhd7wt7/9rbCwcMOGDR2TRQii2OwOtgcjFoPaoFH82AMDYf6lz4rszvaYk/dxuAP1bf7cfuaSY0cbmprluli1yUoIlbFsSpzOrFW0+sLaUFP5l6s+/vjjU7bm9/sTEhKaHY7NhxvX7qzQKTmHLxSOCJYYNRv27P/uu/wJE/xUkRSpfufFp9LS0m666aaXXnopNzd39+7dTqfziiuuIISo1er333//nA/OAUjeOefdF4z8c1Ox0xNQKU68+fSH+eLa1iGppqry4w1NTXJdrNqUSAnlZGyiQRNnULnaw8pAc1XhWz+W95aWlm9KW/5dWKJWylp9oXBETDRpadB1Iu9EmRiufvfFRZLM+0U5aLjoPPLIIxkZGVdffXXHwTkZyyaaNAMTDWdIOyHkYJWzrN4d0+k+nIwVRHr4aIndbg/622N0apVCplEqks3aBINazskSjOqipvCcufNO35pGoxkwYMC7m/ds2FeVHq+PN2rSLHpCaUOrt9zeqtIZPTx3+ZDkJ+b/tqysbN68eZs3b168eHFtbW1eXp7P5zt27Fh+fv4bb7xxkaYdoHecc96P1bVVNLo72p0QEuFFTsaUlFXZ7fag32+I5l0htxrVSbFaBSeLN6iPNodm3nLH6VuL5v0/n+9Z9fXx9Hh9kkmbbolhCK1rcZfXtah0Ro/AFeQkPTn/N1LNOz6ih97Asuxrr7325z//edq0aZs3bzYajWf5QIcnoPrhxbKUEJYhgTAfiUQYhom1JPiCAiW0Y6Yon88XavdmDjt1+qqoqVOnbjtclZiexTCMKIrN9TZndbXRkqTUGoxB240jzOOzzZyMJYSdO3dudErq3Nzc7OzsvLy8Tz/9NDEx8Zx/CACXiHPOuycQkf9wxV6RUpYw/ogQzXtcvNUd4KPH0aN8Pl+o3TNwSEGXG5w6dWrhgcqEtCyWZURRbG44kXeFgosJ+n6ZZ56QEyvhvF+sOyZw0WEYZtmyZcnJye+///7ZP0rOsaL4g6NISk4mUBrw+/V6/TXXXMPJOEqIIFKVnCWEUEqLi4vNcRZFV+tFEkKmT5/eEFQ5HU3l5eU7duxoaGgYO3rU6KFZckb4/L3lv7tj3rjr73z1k+++PtrQcRmPy+USBMFqtV7saQfoNeeWd71KHvnhrK5KTsZTGgj4TuSd4wglIhUVMhk5mfe4OItC/qN5r2lsaXU0n5J3hVLzxbvLbr3h2hHTbnrny4MHqlp44cTzSinveAcPvYdhmFGjRtlstrN/SGai0eMvN2kVHefHqpWycNDPyZW5mYO8Xi8VxFCY1yhYhg+53aG6ujpKiEZvTE/Qd7nBgoKCx99eXO4yWeJi09LSEhIS5HI5IZQyzNDptyviB6anJJQ6Qvttx/eUNd86MWP1qjcWL178t7/97YEHHuiGHwHAJeMc8p6dYhyQaGg9cbo7IYQoODYcDMpYee7QAV6vl0bEUERQywkrhtzucF1dHaVEE2NKT+h6fdiCgoLH391xvKIi/gd5JyJhcgrm6AblpyTE7qrybS0pyk2L/dWE9P+89bqU8o6Ch16VkpJSWFjY+RaPP/zlEXt1s5cXaZJZk5tiDguCjGX7WXRxetVAa8x1Y9PX76mOjVHKOTYcEctq6su+WJWc0q9UraOiQFgZDXkDcpXD5iKioFBpE/oPvqUg0xLT9VW2SqXy8YX/9cHOSqtRTU7uNBwtr21vqh068WqLXsVxHCFEp5IftzXfev9atubbHTt2ZGZm9vRPBkB6Ts+7wxP8/JCtxuETRZocq81ONkVEkSEkNU7XL06nVytmj+7/8d6ayiaPQs5GeNHW0Fy8bll6zohSjZYKEYblxLA/IFe31LURgVeoNdb0wXPGZ/zY6jVKpfKhu37z2YHazn8QSiqq2xsqh1x5U5JRHe17k05ZXNV4y4cfsFVfSynvKHjoVcnJyXa7veNLhyeworC0xuGL0cgppYerW97edtxq1Mo5pj0UuW5MuijSiiaPxaCK8KJJKyeR5pJ1z3+z8T8pKSmBMB+9Ulal4LYfbSiytXoDEUuMalxm/LD+sWcYw+Tc5I+3bCtq0yXHx7Is2+BorS3ee9WM2QLLcTKWECKKYnl5eU1NdfyA0SuXPWrSXZSXwAL0uVPybm9tf/CtXXExKp2Ko4R8eaTuP99WJBrVSoXMF+CnDEtWK2SVjZ5DNa2Z1ph+Fl24pWbT//11z9bPU1JSXO1hhycQo5abdcpdZc2Ha1rd/nCsTjk2Mz4vPe4MY7hyWMonhTuOOjT9ki2EsPXNzppjh66d/YvWAJHLOfJ93msSMvKWL3kgsftWuutzKHjoVSkpKXV1dR1ffnGors7ZHqtXEkIaXX5vkNcq5RFBSI3VhwTlu9vLYrSK1FidWiEjDDla27Jv7Ysrlj2TkpJCCFEruJTYE/M8TxmaPGVo8lmOQcGx141IOFjZlDtqVOnxsk9efm7N60s3lPERXiCEOByOoqIig8FQUHB5oyccjPTROo8AF79T8r7loM0So4peFNPkDngDEa2Siwhiil5r1Igb9lVrlVy/OF1WUkwgLG49bDuwbvmqf/8rmnejVmHUnjgDf1J24qTssz1ArlFyN4y07Ct3DBxkraqq/vTjV99+8alvGmTecDv5Qd4LHD7eF+K7+UfQp1Dw0KtSU1M7B76q2RujlhNCRErrnO0cy4RE4g/zRo0yLAiEEEGgLMMQQhQsqa88evn1d4ydkH/+w5g2bdo0QlavXv33exasWLFiRN7wHQ1Fe4srSo8Vy+XynJychIQEkdIIHzTplD+9OQDoSue8U0ptznb9yby3eAKCSIORSHsootcoRIFSSgSRyFiWECJnaX1F8eBr5o0aO+H8h3HVtGlXTSOrV69eev+CFStWjB6Zd7iwZP+x5rJjRR15J4RE3OGYM17Fd9HBWfTQq7RarVwu75g/khdp9Dh4VZNXECkvUlGkIqU1Tq/TG+ZkrMsfJoRSSg8cOBBnNgma2IZWf7eMxO12z507d86cOdOnTyeEDEs11DS1jRg56oorrkhISKCUNrsDN0zIUJ082QcAfq4f5J05Ma8apbSyyeML8oJIZQxDCalr9bV4gxzLeANhQRRP5D3WbDbE2Fvbu2Ukp+R9cKLO1uQceTLvhBBXeyg/KyHhZ86Qf4FDwUNv6/jUThDFMC+W2t0Hq1pavEFCqCiKvEhlDKOWy/zhiEBpjEpBCFNSUiIIQk5ODqGku2ZeNBgM//jHP4LBYPTLbza8bfSUuiNcQ5u/0eWvavZeOSxl5uj+3fRsAJeojrwzhDAMU9bgOVTjdHpDhBBRpLxIWYZRyzl/mBco1avkMvb7vDPdN9XqKXnftm6V0Vfp4jmHO+D0huqcvsxEw035A7rnyS4Y+Igeelv0vJsBWdmLVu87VOMUvz/GzUSzLFIaEUSOYUIRwRKjttvtDQ0NEydOFCkJ8aLV2G272NnZ2Zs3byaEuN3upUuXfvXVV0n9B9Q6vBGBJps1CcYuFsPYuXPnE088cdddd1177bXdNQwACYvmPTtnyN8/OriztEns1NiUEEIopSTCiyzLhiJCnF5lt9dH804JCYTEJPOPrknzc52ed1Ni//JGTygsWE3qwclG2Wkz1l3seUfBQ2+zWCzNzc3LNxUfqWnTqxTeYEQUKGEooYQyDEsIQ0g4IhKGsIQRIsGjxcXjxo8nLFfn9P1+SpZa0W2/tOnp6QcPHqysrPz3v/89a9as7OxsQsjQM56BP3jw4Hnz5uXl5XXXGACkLZr3t7Yd31HaqFVx3kCEEEJOfhZHCcOwJMSLhFCDRiny4eLi4vEn8t7+m8mDdCp5d42ky7xbu9qP73Cx5x0FD72tsbFRa7auO9ogkzHeYEQUKWEIIQxhKEMJZYggiJQhNORrP/KpjdGljZvh8NO8BOX149LHZMZ340iysrKefPLJgoKCYDC4f//+s3mIyWS68cYbu3EMANLW2NhoirO+sbeaZZj2EE8oJQxDKcMwNHpYXuBFwghiqL1qx4Z2os2YMNsRIHkJquvGpo1D3s8PCh56W22D44hL5Q97KaWUEOb7aaUZwlBCKcMyMpYdk2WdNeceuZwbkjs0xItaZY/8rv7xj39MSkqy2Wz9+v3o+pUAcM7qHO7dTnUo4hGjeWeiu/OUkOj+PGFkLEuYidnWa66/T85xuUOHBcO8tvveuHd2qeUdBQ+9KhyJyAdMrHMLLMMI9GS3Rw/LRc+nZ1hKiIJjZ+UPGT3wxP47J+vBs0FnzZrVcxsHuJSFwhHFwEmtAcowDKHf78tThmFO7NxThjBKuez6y/OGpJqi3+2hdo+6pPKOs+ihV+0uqrRkjrKatUq57PsFoRimY9ZYhhKdSp5gUEfE7jpfHgD6xs4jFea0IXEx6pOXm9Lo3jxz8gQ7whCdSm6JUbeHIn05UInCO3joDZSQZlfA1R765mCpXMawDGNQKwLRSaNoNO6UJQylhGFpklnTHuSN0ppxAuDSQQlpcvld7eGdh8uie/IGjcIf4imJflBHo6knhLAMSTRp2kN8N55MBx1Q8NDjmlyBdXuqvilpUHAye2NYqTeHeTEuRuX0BSmlvEApoTLCsDKGF6iSEeQsm5NiGmDtenkoALiQncx7o4Jj7Y0hpT4uFBHMelWLNyhSKgg0euY8yzICT5WMoJTLUmJ1GfFdL/8I5wMf0UPP8of4t7aVHqtrS4+PidNy7voykZHXtnhVcllKrI5hGAUnYxhGJDTCiywfMuq1KXG6X102QMFhCjmAi0wg3JF3fZyWc9mPi6ystsWnlssSTRqWYRRyGcMwokh4XmAioVijPk6vunZsmqr7Ln+FDviZQs86XOMsq3dbTRpCiM1mS4iPT0nQVzV5Gt1+s1bZz6JvdvnloZbyvV/edN3s8ePHx+lVOakmeU+eVQcAPeSUvFsTEvpbDWUN7rrW9lidkpg0Ld6gIthaXfzdNVML8vJGxMWoRmVY8Pl8D0HBQ89q8QRVyhPvxW0224gRI4w6ZYTX9YvTxcaoXI6Gb1e9OChB8+WbL8fFnWnNRwC48Dk8wY734tG8GzSKNIsuwxqTaNK2NNS9vvKZ7H6WTcuR996AgoeepVTIopPRtrW1MQxjNBoJISxLRqYZPln5/Pr165cvXz5z5sw+HiUAdAclJxNEkfww74RhchL1n76JvPc2FDz0rEyrwd0eNmkVGo0mFAqFw2FOLne6fPf98fbcAcmHDh0ym819PUYA6B6ZiQaPP2LWKTvn3dHmvf9PyHsf6L7FegB+xMf7atburIjVqSrLj7NyRZhydbvWL7nvN1dddVVfDw0AutmGfTVrdlbGahUVFWUy5L1PoeChN5TYXQeqWiptjStefalgWNoLix/V63FVDIA0ldpdB6pbKm2N/35lWcGwdOS9r6DgoVe5XK4Th+UAQOqQ976FggcAAJAgXG0MAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAEoeABAAAkCAUPAAAgQSh4AAAACULBAwAASBAKHgAAQIJQ8AAAABKEggcAAJAgFDwAAIAE/T96JDxHBvhqegAAAABJRU5ErkJggg==" style="display: block; margin: auto;" /></p>
+<p>The Google values are wrong. It seems that the geocoded Google values picked up the <em>province</em> of Quebec and not to the <em>city</em> of Quebec! Something to be wary of when searching any database </p>
+</div>
+<div id="interactive-exploration-with-loon" class="section level1">
+<h1>Interactive exploration with <code>loon</code></h1>
+<p>We now use the <code>loon</code> package to explore this data with some interactive tools.</p>
+<p>We begin by looking at the distribution of population across these cities.</p>
+<div id="populations" class="section level2">
+<h2>Populations</h2>
+<p>We first look at the populations of the different cities:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> hTotPop &lt;-<span class="st"> </span><span class="kw">with</span> (minority,   ## Using the &quot;with&quot; function
+                              ## makes for easier reading
+                  <span class="kw">l_hist</span>(Total.population,
+                         <span class="dt">title =</span> <span class="st">&quot;33 Canadian cities&quot;</span>
+                          ) 
+                  )
+                  ## Save the histogram structure 
+                  ## to work with later from the 
+                  ## command line</code></pre></div>
+<p>The distribution of the <code>Total.population</code> is skewed with a heavy right tail. Most Canadian cities have a relatively small population. A few cities, one in particular, has a relatively large population.</p>
+<p>Note, that this histogram has very little in the way of annotation. This can be changed interactively by making various selections in the loon inspector. Try a few of these out and observe the results in the histogram. You may also make some selections in the histogram itself. Holding the shift key down while making a selection results in a ``sticky’’ selection that allows multiple items to be selected.</p>
+<p><strong>Exercise:</strong> Check the show <code>stacked colors</code> box in order to see the bar colours. Select the two histogram bars corresponding to the three most populous cities. Change the colour of these cities to some different colour selected from the <code>Modify</code> section. Select the <code>none</code> button to unhighlight the bars and reveal the modified colour.</p>
+</div>
+<div id="percentages" class="section level2">
+<h2>Percentages</h2>
+<p>Given that population totals vary so much, it might be more meaningful to look at each visible minority as its percentage of the city’s population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  Reduce the minority data to percents of the total population</span>
+<span class="co">#  in each city.</span>
+<span class="co">#</span>
+
+minorityPercent &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">100</span>*minority[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">10</span>,<span class="dv">12</span>:<span class="dv">14</span>)]/minority[,<span class="st">&quot;Total.population&quot;</span>])
+
+<span class="co">#  Take the opportunity to shorten the Statistics Canada </span>
+<span class="co">#  names of the minorities as well:</span>
+<span class="kw">names</span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;% Arabic&quot;</span>,  <span class="st">&quot;% Black&quot;</span>, <span class="st">&quot;% Chinese&quot;</span>,  
+                            <span class="st">&quot;% Filipino&quot;</span>, <span class="st">&quot;% Japanese&quot;</span>,
+                            <span class="st">&quot;% Korean&quot;</span>,  <span class="st">&quot;% Latino&quot;</span>, <span class="st">&quot;% Multiple&quot;</span>,
+                            <span class="st">&quot;% S. Asian&quot;</span>,  <span class="st">&quot;% SE Asian&quot;</span>,  <span class="st">&quot;% Other&quot;</span>,
+                            <span class="st">&quot;% Minority&quot;</span>, <span class="st">&quot;% W Asian&quot;</span>)</code></pre></div>
+<p>We begin by looking at the total visibility minority percentage. Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the <code>linkingGroup</code> is specified to be the string <code>&quot;minority&quot;</code>. This could have been any string – it merely identifies that this histogram will have its display linked with any other plot in the same <code>linkingGroup</code> .</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The proportion of the city population that is a &quot;visible minority&quot;</span>
+<span class="kw">l_hist</span>(minorityPercent[,<span class="st">&quot;% Minority&quot;</span>],
+       <span class="dt">title =</span> <span class="kw">paste</span>(<span class="st">&quot;% Minority in 33 Canadian cities&quot;</span>),
+       <span class="dt">xlabel=</span><span class="st">&quot;percent of population&quot;</span>,
+       <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+       <span class="dt">yshows=</span><span class="st">&quot;frequency&quot;</span>,
+       <span class="dt">showBinHandle=</span><span class="ot">FALSE</span>,
+       <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+       <span class="dt">showScales=</span><span class="ot">TRUE</span>
+)</code></pre></div>
+<p>As can be seen, the visible minority population most of these cities is less than 20% of its total population. But for two cities nearly half of the population is from some visible minority.</p>
+<p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the ‘linkingGroup’ of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_configure</span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>, <span class="dt">sync =</span> <span class="st">&quot;push&quot;</span>)</code></pre></div>
+<p>In either case the displays must be synchronized (<code>sync</code>) within the group. Here we choose to <code>push</code> the linked elements of the total population histogram <code>hTotPop</code> out to the other members of the group. Checking the show <code>stacked colors</code> in both histograms will reveal their shared colours. Alternatively, use selection on each histogram.</p>
+<p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible miinorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
+<div id="largest-visible-minorities" class="section level3">
+<h3>Largest visible minorities</h3>
+<p>It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now show the same for the three minority groups</span>
+<span class="co"># having largest percentages (in decreasing order):</span>
+groups &lt;-<span class="st"> </span><span class="kw">names</span>(minorityPercent)[-<span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]
+largest3 &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">sort</span>(<span class="kw">apply</span>(minorityPercent[,groups ],
+                             <span class="dv">2</span>, max),
+                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+                  )[<span class="dv">1</span>:<span class="dv">3</span>]</code></pre></div>
+<p>and plot histograms of them</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And now plot them</span>
+for (x in largest3) {
+  <span class="kw">l_hist</span>(minorityPercent[,x],
+         <span class="dt">title =</span> x,
+         <span class="dt">xlabel=</span><span class="st">&quot;percent of population&quot;</span>,
+         <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+         <span class="dt">showScales=</span><span class="ot">TRUE</span>,
+         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span>
+         )
+}</code></pre></div>
+<p>In decreasing order the largest three visible minorities <code>Chinese'',</code>South Asian’‘, and ``Black’’.</p>
+<p>Looking at the <code>\% Chinese'' histogram one city has nearly 20\% of its population being</code>Chinese’‘. It is the third largest city in the country.<br />
+In contrast, the city with the greatest proportion of its population being <code>South Asian'' (more than 15 \%) is one of the smallest of the 33 Canadian cities. Finally, the city having the largest percentage of</code>Black’’ inhabitants is the largest one.</p>
+<p>Other relationships can be uncovered by selecting bars from different histograms. It’s worth exploring to better understand the data.</p>
+<p>Better still is to link these histograms with the cities’ geographic locations on a map of Canada.</p>
+</div>
+</div>
+<div id="interactive-maps" class="section level2">
+<h2>Interactive maps</h2>
+<p>We again use the data from the <code>maps</code> package but now create an interactive map by using Loon’s facility for layering various geometric objects (including map polygons) on top of a scatterplot.</p>
+<p>The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the <code>maps</code> package) are <em>layered</em> on top of the scatterplot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_map &lt;-<span class="st"> </span><span class="kw">with</span>(minority,
+              <span class="kw">l_plot</span>(long,lat,
+                     <span class="dt">xlabel=</span><span class="st">&quot;longitude&quot;</span>, <span class="dt">ylabel=</span><span class="st">&quot;latitude&quot;</span>,
+                     <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+                     <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority),
+                     <span class="dt">showLabels=</span><span class="ot">TRUE</span>)
+     )
+
+<span class="co"># Add the map of Canada</span>
+<span class="kw">library</span>(maps)
+landcol &lt;-<span class="st"> &quot;grey95&quot;</span>
+canada &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map, 
+                  <span class="kw">map</span>(<span class="st">&quot;world&quot;</span>, <span class="st">&quot;Canada&quot;</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                  <span class="dt">label =</span> <span class="st">&quot;Canada&quot;</span>,
+                  <span class="dt">color =</span> landcol,
+                  <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Rescale the plot to the size of the map</span>
+<span class="kw">l_scaleto_layer</span>(p_map, canada)
+
+<span class="co"># Could also add the text of the city names to the map</span>
+<span class="co"># as glyphs</span>
+<span class="kw">l_glyph_add_text</span>(p_map,
+                 <span class="dt">text=</span><span class="kw">row.names</span>(minority),
+                 <span class="dt">label=</span><span class="st">&quot;city names&quot;</span>)</code></pre></div>
+<p>The map is now ready to be used in analysis. It is part of the same linking group as the histograms so selecting bars in any histogram will highlight the corresponding cities on the map. These may be <strong>identified</strong> by holding the mouse over any point in the map (provided <code>glyphs: itemlabels</code> is checked).</p>
+<p>Alternatively, the filled circle <code>glyph</code> for any city in the map can be replaced by the name of the city (since the last <code>R</code> statement above added these to the map). To <strong>change the glyph</strong>, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select <code>city names</code> from the glyph menu (next to a <code>set</code> button). Clicking on the <code>set</code> button will change the glyph of all selected cities to a text string of their name. The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.</p>
+<p>Note the map may be <strong>zoomed</strong> in on using scrolling and <strong>panned</strong> over directly on the map. Alternatively, the <strong>world view</strong> in the loon inspector may be used in the same way – dragging the scaled box around can be especially convenient. To get the map back to its original position and scale, click on the <code>scale to world</code> button in the <code>Plot</code> section of the loon inspector.</p>
+<p>The map can be hidden (or removed). It is a <strong>layer</strong> of the scatterplot. Clicking on the <code>Layers</code> tab will provide access to this functionality. Clicking on the <code>Analysis</code> tab will return the inspector to the plot interactions typically used in an exploratory analysis.</p>
+<p>While the above map is sufficient for the analysis it is sometimed of interest to have much more complex maps (or layers of any sort). In the next subsection a more detailed map (with lakes) is constructed using many layers. It provides an introduction to the layering facilities in loon. It can be skipped, or every <code>R</code> section can be evaluated in order to get a more sophisticated map.</p>
+<p>The analysis can proceed with or without the next subsection.</p>
+<div id="more-sophisticated-maps---multiple-layers" class="section level3">
+<h3>More sophisticated maps - multiple layers</h3>
+<p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lakecol &lt;-<span class="st"> &quot;steelblue&quot;</span>
+
+<span class="co"># Get the coordinates from the lakes database in the maps package.</span>
+<span class="co"># All lakes are recorded by name, so you will need to know which</span>
+<span class="co"># are in Canada.  You either know the names, or you might have to</span>
+<span class="co"># use trial and error, plotting the lakes and seeing which are inside</span>
+<span class="co"># and which are outside the country.  If the database changes,</span>
+<span class="co"># the indices below will need updating.</span>
+<span class="co">#  </span>
+<span class="co"># First, we'll deal with the Great Lakes:</span>
+great.lakes &lt;-<span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                    <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]
+
+
+<span class="co"># We can layer these directly</span>
+great.lakes.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                              <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, great.lakes, 
+                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                              <span class="dt">label =</span> <span class="st">&quot;Great Lakes Water&quot;</span>,
+                              <span class="dt">color =</span> lakecol,
+                              <span class="dt">index=</span><span class="st">&quot;end&quot;</span>    <span class="co"># Add the layer at the end so we know</span>
+                                             <span class="co"># where it is</span>
+                              )
+
+<span class="co"># Move the lake layer up to be above the land map</span>
+<span class="kw">l_layer_raise</span>(p_map, great.lakes.layer)</code></pre></div>
+<p>We can also add the islands back in. This is a good example of grouping different layers together into a single ``group layer’’.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="co"># Great Lakes islands</span>
+<span class="co">#</span>
+<span class="co"># Unnamed islands are identified by a number added to the lake name</span>
+<span class="co"># in which they appear</span>
+
+uscolor &lt;-<span class="st"> &quot;grey50&quot;</span>
+great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, 
+                                                 <span class="dv">45</span>:<span class="dv">52</span>,<span class="dv">54</span>,
+                                                 <span class="dv">55</span>, <span class="dv">59</span>,
+                                                 <span class="dv">61</span>:<span class="dv">63</span>)]
+
+great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, 
+                                                 <span class="dv">53</span>,<span class="dv">56</span>:<span class="dv">58</span>,
+                                                 <span class="dv">60</span>, <span class="dv">64</span>:<span class="dv">66</span>)]
+
+
+<span class="co"># Now for the islands</span>
+great.lakes.islands.US.layer &lt;-<span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           great.lakes.islands.US, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">&quot;Great Lakes Islands (US)&quot;</span>,
+                                       <span class="dt">color=</span> uscolor,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+great.lakes.islands.CA.layer &lt;-<span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           great.lakes.islands.CA,
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">&quot;Great Lakes Islands (CA)&quot;</span>,
+                                       <span class="dt">color =</span> landcol,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+<span class="co"># We can put the two sets of islands into a group; first create the group</span>
+great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                          <span class="dt">label=</span><span class="st">&quot;Great Lakes Islands&quot;</span>, 
+                                          <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Because it is immediately below the two sets of islands</span>
+<span class="co"># (as seen in the &quot;Layers&quot; inspector)</span>
+<span class="co"># we drop the islands into the group by demoting them</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.CA.layer)
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.US.layer)
+
+<span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span>
+for (i in <span class="dv">1</span>:<span class="dv">2</span>) <span class="kw">l_layer_raise</span>(p_map, great.lakes.islands.group)</code></pre></div>
+<p>And we can nest groups as well. Here we put the Great Lakes and its islands together into a single group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+<span class="co"># Create a group layer for the great lakes</span>
+<span class="co"># </span>
+<span class="co"># First create the group layer</span>
+great.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                   <span class="dt">label=</span><span class="st">&quot;Great Lakes&quot;</span>, 
+                                   <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+
+<span class="co"># Move the group up to be next to the great.lakes.layer</span>
+<span class="kw">l_layer_raise</span>(p_map, great.lakes.group)
+
+<span class="co"># Demoting the great.lakes.layer puts it inside the group</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.layer)
+
+<span class="co"># Now the islands are above the group and can be demoted</span>
+<span class="co"># to become part of it.</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.group)</code></pre></div>
+<p>For completion we add the remaining lakes and islands.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now the same for the boundary lakes.</span>
+other.boundary.lakes &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                            <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                            <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">33</span>,<span class="dv">80</span>)]
+
+other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">81</span>)] 
+
+<span class="co"># Because we know we are going to group these, we can create the group</span>
+<span class="co"># first.</span>
+<span class="co"># </span>
+boundary.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                      <span class="dt">label=</span><span class="st">&quot;Boundary Lakes&quot;</span>, 
+                                      <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+
+<span class="co"># We now add the layers directly to that group using the &quot;parent&quot; </span>
+<span class="co"># argument at creation time.</span>
+<span class="co"># </span>
+<span class="co"># Create the islands first this time.</span>
+other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           other.boundary.lakes, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                       <span class="dt">label =</span> <span class="st">&quot;Other Boundary Lakes Water&quot;</span>,
+                                       <span class="dt">color =</span> lakecol,
+                                       <span class="dt">parent =</span> boundary.lakes.group,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                                               <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                                   other.boundary.lakes.islands,
+                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                               <span class="dt">label =</span> <span class="st">&quot;Other Boundary Lakes Islands&quot;</span>,
+                                               <span class="dt">color =</span> uscolor,
+                                               <span class="dt">parent =</span> boundary.lakes.group,
+                                               <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                               )
+
+<span class="co"># Move the group layer up</span>
+<span class="kw">l_layer_raise</span>(p_map, boundary.lakes.group)</code></pre></div>
+<p>And finally, all of the large interior lakes and their islands</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">interior.lakes &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                      <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, 
+                                         <span class="dv">68</span>:<span class="dv">73</span>, 
+                                         <span class="dv">82</span>, <span class="dv">85</span>)]
+
+interior.lakes.islands &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)$names[<span class="kw">c</span>(<span class="dv">23</span>:<span class="dv">24</span>, 
+                                                 <span class="dv">26</span>, <span class="dv">74</span>, 
+                                                 <span class="dv">83</span>:<span class="dv">84</span>)]
+<span class="co"># First the group layer</span>
+interior.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, <span class="dt">label=</span><span class="st">&quot;Interior Lakes&quot;</span>, <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Create the interior islands first</span>
+interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map,
+                                        <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>,
+                                            interior.lakes.islands,
+                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                        <span class="dt">label =</span> <span class="st">&quot;Interior lakes islands&quot;</span>,
+                                        <span class="dt">color =</span> landcol,
+                                        <span class="dt">parent =</span> interior.lakes.group,
+                                        <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                        )
+
+interior.lakes.layer &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map,
+                                <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                    interior.lakes, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                <span class="dt">label =</span> <span class="st">&quot;Interior lakes&quot;</span>,
+                                <span class="dt">color =</span> lakecol,
+                                <span class="dt">parent =</span> interior.lakes.group,
+                                <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                )
+
+<span class="co"># And move the group layer up  </span>
+<span class="kw">l_layer_raise</span>(p_map, interior.lakes.group)</code></pre></div>
+<p>Now we have a more detailed map.</p>
+</div>
+</div>
+<div id="minority-distributions-within-city" class="section level2">
+<h2>Minority distributions within city</h2>
+<p>There are several different visible minorities in the data set. It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.</p>
+<p>To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada. We’ll use some functionality from the <code>dplyr</code> package to effect this. It’s not necessary, it just provides a simple syntax to select the variables we want and rename them in the process.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Back to the raw data and just rename variables</span>
+<span class="kw">library</span>(dplyr)
+minority_star &lt;-<span class="st"> </span>minority %&gt;%
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">SE.Asian=</span>Southeast.Asian,
+         <span class="dt">Chinese =</span> Chinese,
+         <span class="dt">Japanese =</span> Japanese,
+         <span class="dt">S.Asian =</span> South.Asian,
+         <span class="dt">Other =</span> Visible.minority.not.included.elsewhere,
+         <span class="dt">Black =</span> Black,
+         <span class="dt">Multiple =</span> Multiple.visible.minority,
+         <span class="dt">Filipino =</span> Filipino,
+         <span class="dt">Arab =</span> Arab,
+         <span class="dt">Korean =</span> Korean,
+         <span class="dt">Latino =</span> Latin.American)</code></pre></div>
+<p>As the following few rows of this dataset show:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">SE.Asian</th>
+<th align="right">Chinese</th>
+<th align="right">Japanese</th>
+<th align="right">S.Asian</th>
+<th align="right">Other</th>
+<th align="right">Black</th>
+<th align="right">Multiple</th>
+<th align="right">Filipino</th>
+<th align="right">Arab</th>
+<th align="right">Korean</th>
+<th align="right">Latino</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>St. John’s</td>
+<td align="right">55</td>
+<td align="right">990</td>
+<td align="right">65</td>
+<td align="right">890</td>
+<td align="right">40</td>
+<td align="right">620</td>
+<td align="right">25</td>
+<td align="right">155</td>
+<td align="right">190</td>
+<td align="right">45</td>
+<td align="right">320</td>
+</tr>
+<tr class="even">
+<td>Halifax</td>
+<td align="right">655</td>
+<td align="right">3100</td>
+<td align="right">410</td>
+<td align="right">2900</td>
+<td align="right">180</td>
+<td align="right">13270</td>
+<td align="right">780</td>
+<td align="right">530</td>
+<td align="right">3840</td>
+<td align="right">620</td>
+<td align="right">690</td>
+</tr>
+<tr class="odd">
+<td>Moncton</td>
+<td align="right">65</td>
+<td align="right">295</td>
+<td align="right">10</td>
+<td align="right">350</td>
+<td align="right">10</td>
+<td align="right">1035</td>
+<td align="right">175</td>
+<td align="right">100</td>
+<td align="right">165</td>
+<td align="right">65</td>
+<td align="right">95</td>
+</tr>
+<tr class="even">
+<td>Saint John</td>
+<td align="right">60</td>
+<td align="right">975</td>
+<td align="right">10</td>
+<td align="right">485</td>
+<td align="right">30</td>
+<td align="right">1250</td>
+<td align="right">60</td>
+<td align="right">205</td>
+<td align="right">125</td>
+<td align="right">120</td>
+<td align="right">210</td>
+</tr>
+<tr class="odd">
+<td>Saguenay</td>
+<td align="right">55</td>
+<td align="right">295</td>
+<td align="right">0</td>
+<td align="right">45</td>
+<td align="right">10</td>
+<td align="right">330</td>
+<td align="right">10</td>
+<td align="right">50</td>
+<td align="right">195</td>
+<td align="right">15</td>
+<td align="right">280</td>
+</tr>
+<tr class="even">
+<td>Quebec</td>
+<td align="right">1615</td>
+<td align="right">1855</td>
+<td align="right">170</td>
+<td align="right">535</td>
+<td align="right">225</td>
+<td align="right">5080</td>
+<td align="right">235</td>
+<td align="right">120</td>
+<td align="right">2800</td>
+<td align="right">165</td>
+<td align="right">3150</td>
+</tr>
+</tbody>
+</table>
+<p>each city here has values for each of its 11 visible minority populations.</p>
+<div id="pairs-plot" class="section level3">
+<h3>Pairs plot</h3>
+<p>It would be nice to be able to see all of these values at once to compare the cities. One possibility would be a scatterplot matrix such as that provided by the <code>pairs(...)</code> function in <code>R</code>.</p>
+<p>In <code>loon</code> there is an analogous function <code>l_pairs(...)</code> that produces an interactive scatterplot matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loon's scatterplot matrix</span>
+<span class="co"># </span>
+<span class="kw">l_pairs</span>(minority_star, <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>)</code></pre></div>
+<p>Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)</p>
+<p>While a scatterplot matrix shows all pairs of plots and so reveals some of the multidimensional structure of the data, it does not seem to be the most useful visual representation for the purposes here.</p>
+<p>In a scatterplot matrix the focus is on the points (cities) within each pair of variates. The matrix arrangement and dynamic linking provides some means of connecting the cities across the variates.</p>
+<p>In contrast, the focus we would like to have here is to compare the variate values within each city. To that end, the Cartesian coordinate system and matrix arrangement of a scatterplot matrix is not well-suited.</p>
+</div>
+<div id="serial-axes" class="section level3">
+<h3>Serial axes</h3>
+<p>Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially. This allows all of the axes (or a great many of them) to appear in the same plot. Each city, rather than appearing as a point now appears as a series of connected line segments, where each segment connects the values of a city on neighbouring axes. Serial axes in parallel are called parallel coordinate plots and are constructed with the <code>l_serialaxes(...)</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                  <span class="dt">axesLayout=</span><span class="st">&quot;parallel&quot;</span>,
+                  <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                  <span class="dt">sequence=</span><span class="kw">names</span>(minority_star),
+                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                  <span class="dt">linewidth=</span><span class="dv">5</span>,
+                  <span class="dt">scaling =</span> <span class="st">&quot;variable&quot;</span>,
+                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                  <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>This plot shows all variates at once for each city; each city is a `<code>curve'' of connected line segments.  As with all other plots in</code>loon` the serial axes plot is interactive. Placing the mouse over any curve will reveal the city. Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.</p>
+<p>In axis is scaled from 0 to 1. In this case, the scaling is done within each variable. That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis; the city with the smallest population for that visible minority becomes 0, the lowest point on the axis.</p>
+<p>For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two).</p>
+<p>For this data, a more interesting serial axes layout is the <code>radial</code> layout. Select this in the loon inspector or from the command line execute</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">&quot;axesLayout&quot;</span>] &lt;-<span class="st"> &quot;radial&quot;</span></code></pre></div>
+<p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distibution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
+<p>These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using <code>long</code>.<br />
+First create a new scatterplot, then add serial axes as alternative glyphs for the points. To emphasize shape the glyphs are drawn filled in with <code>showArea=TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Produce grid of star glyphs</span>
+p_stars &lt;-<span class="st"> </span><span class="kw">with</span>(minority,
+                <span class="kw">l_plot</span>(<span class="kw">rank</span>(long), <span class="kw">rank</span>(long),
+                       <span class="dt">title =</span> <span class="st">&quot;&quot;</span>, 
+                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">xlabel =</span> <span class="st">&quot;&quot;</span>,
+                       <span class="dt">ylabel =</span> <span class="st">&quot;&quot;</span>,
+                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,
+                       <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                       <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))
+
+gstars &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">axesLayout =</span> <span class="st">&quot;radial&quot;</span>,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star),
+                                <span class="dt">scaling =</span> <span class="st">'variable'</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars</code></pre></div>
+<p>Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.</p>
+<p>The points could also be moved (temporarily) to a grid.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="kw">l_move_grid</span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)
+<span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span>
+p_stars[<span class="st">'swapAxes'</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw">l_zoom</span>(p_stars, .<span class="dv">9</span>)
+<span class="co">#</span></code></pre></div>
+<p>Optionally we could choose to add a continuous color change emphasizing the west to east directionality. There is a <code>col_numeric</code> function in the <code>scales</code> package that will effect a continuous change in color along a spectrum.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)
+west_east_cols &lt;-<span class="st"> </span>(<span class="kw">col_numeric</span>(<span class="kw">c</span>(<span class="st">&quot;firebrick&quot;</span>, 
+                                 <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;sienna&quot;</span>,
+                                 <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;steelblue&quot;</span>,
+                                 <span class="st">&quot;purple&quot;</span>),
+                               <span class="dt">domain =</span> <span class="ot">NULL</span>)
+                   )(minority$long)
+
+<span class="co"># Just need to color the glyphs on one of the plots</span>
+<span class="co"># since they are all linked.</span>
+s[<span class="st">'color'</span>] &lt;-<span class="st"> </span>west_east_cols</code></pre></div>
+<p>Adding the glyphs to the map gives a precise geographic location for each city.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some glyphs to the map,</span>
+<span class="co"># scale values within variates</span>
+so &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                             <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star),
+                             <span class="dt">scaling =</span> <span class="st">'variable'</span>,
+                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                             <span class="dt">label=</span><span class="st">&quot;stars&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so</code></pre></div>
+<p>Unfortunately the three large cities dominate in each of these displays. All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.</p>
+<p>A better choice woule be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+gstars[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+so[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+
+<span class="co"># Double the size of the glyphs on the map.</span>
+p_map[<span class="st">&quot;size&quot;</span>] &lt;-<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span>p_map[<span class="st">&quot;size&quot;</span>] </code></pre></div>
+<p>Looking over the map a number of interesting observations can be made. For example, regional similarities are easily seen. From the west, Victoria and Vancouver have a very similar visible minority distribution with a large Chinese percentage and then South Asian.</p>
+<p>The other two cities in British Columbia are strikingly different. The visible minority population in Abbotsford-Mission is almost entirely South Asian; the other visible minorities are nearly zero by comparison. The glyph for Kelowna shows an unusually high proportion of Japanese in comparison to the other three cities to its west.</p>
+<p>Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina. The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg’s relatively large Filipino population. The proboscis of Winnipeg’s mosquito shaped glyph draws attention to its unusually large Filipino population.</p>
+<p>Note that this analysis is easily done using only three loon windows showing simultaneously. The first is the serial axes plot, which makes it easy to read off the contributions of each visible minority whenever any glyph is selected elsewhere. The second is the map of Canada, preferably zoomed in to magnify a small rectangular region. Placing the mouse over any glyph reveals the city. And third, the loon inspector. This is particularly handy if it is focused on the map for then the small rectangle in its <code>World View</code> may be dragged across the country to focus the Canada map on any small region.</p>
+<p>Continuing west to east, at the western head of Lake Superior (western most Great Lake) the province of Ontario begins and the glyph for Thunder Bay shows it to have an unusually large (relative) population of Japanese compared to other cities.</p>
+<p>As we move southeast into southern Ontario, some new glyph shapes and hence visible minority patterns emerge. For example, most southern Ontario cities are characterized by relatively high South Asian populations. Compared to the prairie provinces of Alberta, Saskatchewan, and Manitoba, Ontario cities (and cities east of Ontario) have a relatively large black minority. In southern Ontario, Windsor and London have an unusual large Arab population compared to their neighbours. London and St. Catharines have unusally large Latino populations. As with western cities, most Ontario cities have relatively large Chinese populations.</p>
+<p>This could be contrasted with cities in Quebec, for example, which have relatively low South Asian and Chinese populations. Saguenay is unusual in Quebec in having a relatively large Chines population. Instead, the unusually large populations in Quebec cities are the relatively large Arab and Latino populations.</p>
+<p>The maritime provinces of New Brunswick and Nova Scotia are unusual in having much larger black populations than other visible minorities though Saint John also has a relatively large Chines population. Moncton and Halifax look more alike. St. John’s in Newfoundland resembles the Toronto in its configuration of visible minorities.</p>
+</div>
+<div id="manually-moving-points" class="section level3">
+<h3>Manually moving points</h3>
+<p>An interesting exercise would be to move those glyphs which most resemble each other closer together. This is best effected in the plot without the map where we had already placed the glyphs on a grid.</p>
+<p>First make sure we put them on a grid to start:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_move_grid</span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)</code></pre></div>
+<p>Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph. Many points can be selected at once moved by additionally holding the shift key down. In loon the shift key always indicates multiple items. In this way we can visually cluster the cities according to glyph shape.</p>
+<p><strong>Exercise:</strong> Try it. Visually cluster the glyphs. Which cities are most alike? Do the clusters correspond to spatial map regions? Can the glyphs be ordered in some way? Does this match any spatial map ordering?</p>
+</div>
+<div id="ordering-the-axes" class="section level3">
+<h3>Ordering the axes</h3>
+<p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construvt a pairwise ordering. We consider a few of them here.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Axis ordering methods can be found</span>
+<span class="co"># in the pairwise coordinate visualization package</span>
+<span class="co"># called PairViz</span>
+<span class="kw">library</span>(PairViz)</code></pre></div>
+<p>Perhaps the first thing to consider would be some measure of each pair of visible minorities. For example, suppose we consider the values for each visible minority proportion over all <span class="math inline">\(33\)</span> cities as a single <span class="math inline">\(33\)</span>-dimensional vector. The distance between these vectors will give a measure of how alike the relative population of visible minorities are across all <span class="math inline">\(33\)</span> cities.</p>
+<p>We can calculate the matrix of distances as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First transform minority_star to within city percentages.</span>
+minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span>*minority_star/minority[,<span class="st">&quot;Total.population&quot;</span>]
+
+<span class="co"># Each variate is now treated as a position in the</span>
+<span class="co"># space of the cities.  We calculate the distances</span>
+<span class="co"># between the variates.</span>
+<span class="co"># </span>
+VarDistance &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(minority_star_percent))</code></pre></div>
+<p>Now these distances can be used to try to find a possibly better ordering of the minorities in a serial axes plot. We will use a solution to a travelling salesman problem (with unintended irony) to order the visible minorities by finding the shortest (or longest) distances between the minorities (and not the cities).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will use these distances in a travelling</span>
+<span class="co"># salesman problem that chooses an order to have</span>
+<span class="co"># minimal distances. </span>
+<span class="co"># The appropriate function from PairViz is order_tsp(...)</span>
+<span class="co"># </span>
+<span class="co"># Placing minorities that are close to each other</span>
+<span class="co"># (in the above distance) beside each other should</span>
+<span class="co"># result in somewhat more convex shaped glyphs.</span>
+<span class="co"># </span>
+o_near &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw">names</span>(minority_star_percent)[o_near]</code></pre></div>
+<pre><code>##  [1] &quot;Japanese&quot; &quot;Korean&quot;   &quot;Multiple&quot; &quot;SE.Asian&quot; &quot;Latino&quot;   &quot;Filipino&quot;
+##  [7] &quot;Chinese&quot;  &quot;S.Asian&quot;  &quot;Black&quot;    &quot;Arab&quot;     &quot;Other&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
+<span class="co"># other should produce less convex shaped glyphs.</span>
+<span class="co"># </span>
+o_far &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(-VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw">names</span>(minority_star_percent)[o_far]</code></pre></div>
+<pre><code>##  [1] &quot;S.Asian&quot;  &quot;Other&quot;    &quot;Chinese&quot;  &quot;Latino&quot;   &quot;Korean&quot;   &quot;Black&quot;   
+##  [7] &quot;Japanese&quot; &quot;SE.Asian&quot; &quot;Filipino&quot; &quot;Arab&quot;     &quot;Multiple&quot;</code></pre>
+<p>We will try both of these orderings and add them to existing plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s_close &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                        <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                        <span class="dt">sequence=</span><span class="kw">names</span>(minority_star)[o_near],
+                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                        <span class="dt">linewidth=</span><span class="dv">5</span>,
+                        <span class="dt">scaling =</span> <span class="st">&quot;observation&quot;</span>,
+                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                        <span class="dt">title=</span><span class="st">&quot;Nearest minority order&quot;</span>,
+                        <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)
+
+s_far &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                      <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                      <span class="dt">sequence=</span><span class="kw">names</span>(minority_star)[o_far],
+                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                      <span class="dt">linewidth=</span><span class="dv">5</span>,
+                      <span class="dt">scaling =</span> <span class="st">&quot;observation&quot;</span>,
+                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                      <span class="dt">title=</span><span class="st">&quot;Farthest minority order&quot;</span>,
+                      <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>Add the glyphs to the grid plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gstars_near &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_near],
+                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                <span class="dt">label =</span> <span class="st">&quot;Nearest&quot;</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_near
+
+gstars_far &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_far],
+                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                <span class="dt">label =</span> <span class="st">&quot;Farthest&quot;</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_far</code></pre></div>
+<p>And now on the map:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add  glyphs to the map</span>
+so_near &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                                  <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_near],
+                                  <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                  <span class="dt">label=</span><span class="st">&quot;Nearest&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near
+
+so_far &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                                 <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_far],
+                                 <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                 <span class="dt">label=</span><span class="st">&quot;Farthest&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near</code></pre></div>
+<p><strong>Exercise:</strong> Try switching to any of these alternatives and see whether your clustering choices change. Which is easier? Convex or non-convex?</p>
+<p>The <code>PairViz</code> package also offers a couple of means of ensuring all variates appear as a pair. This is usually more helpful for serial axes that are parallel than radial. These include the following</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">o_greedy &lt;-<span class="st"> </span><span class="kw">eulerian</span>(VarDistance)
+o_balanced &lt;-<span class="st"> </span><span class="kw">weighted_hpaths</span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><strong>Exercise:</strong> Try these and determine the difference between them.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

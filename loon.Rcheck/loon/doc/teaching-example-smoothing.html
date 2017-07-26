@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="R.W. Oldford" />
+
+<meta name="date" content="2017-07-26" />
+
+<title>Smoothers and Bone Mineral Density</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Smoothers and Bone Mineral Density</h1>
+<h4 class="author"><em>R.W. Oldford</em></h4>
+<h4 class="date"><em>2017-07-26</em></h4>
+
+
+
+<div id="illustrates" class="section level3">
+<h3>Illustrates:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(loon)</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>linked scatterplots</li>
+<li>panning and zooming</li>
+<li>creating new interactions through bindings</li>
+</ol>
+</div>
+<div id="the-data-bone-mineral-density" class="section level2">
+<h2>The data: Bone mineral density</h2>
+<p>The data consists of measurements of spinal bone mineral density. Several such measurements were taken from 261 North American adolescents over a few years. The entire dataset is called <code>bone</code> and can be found in the <code>R</code> package <code>ElemStatLearn</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ElemStatLearn&quot;</span>)
+<span class="kw">summary</span>(bone)</code></pre></div>
+<p>As can be seen, there are four variates. The <code>idnum</code> uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261) and <code>gender</code> identifies their sex. The response variate of interest is <code>spnbmd</code> which is a ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate <code>age</code> is the average of the adolescent’s age in years on those two visits.</p>
+<p>In this vignette we investigate the fit of smoothing splines to this data.</p>
+</div>
+<div id="the-scatterplot" class="section level2">
+<h2>The scatterplot</h2>
+<p>To begin, execute the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The plot</span>
+x &lt;-<span class="st"> </span>bone$age
+y &lt;-<span class="st"> </span>bone$spnbmd
+<span class="co">#  A scatterplot</span>
+p &lt;-<span class="st"> </span><span class="kw">l_plot</span>(x, y,
+            <span class="dt">color=</span><span class="st">&quot;darkgrey&quot;</span>,
+            <span class="dt">xlabel=</span><span class="st">&quot;age&quot;</span>, <span class="dt">ylabel=</span><span class="st">&quot;spnbmd&quot;</span>,
+            <span class="dt">showGuides =</span> <span class="ot">TRUE</span>, <span class="dt">showScales =</span> <span class="ot">TRUE</span>,
+            <span class="dt">itemLabel =</span> <span class="kw">paste0</span>(<span class="st">&quot;IDnum = &quot;</span>, bone$idnum, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, 
+                               bone$gender, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, 
+                               <span class="st">&quot;Age: &quot;</span>, bone$age),
+            <span class="dt">showItemLabels =</span> <span class="ot">TRUE</span>,
+            <span class="dt">linkingGroup=</span><span class="st">&quot;Bone density&quot;</span>,
+            <span class="dt">title =</span> <span class="st">&quot;Spinal bone mineral density (spnbmd)&quot;</span>)</code></pre></div>
+<p>Two windows will have appeared once the above code has been executed. One is the plot <code>p</code>, the other the <strong>inspector</strong> of the plot <code>p</code>.</p>
+<p>The plot is interactive. Hovering the mouse over a point in the plot, for example, will pop up the <code>itemLabel</code> for that point. Scrolling on mouse wheel (or equivalent) over the plot <strong>zooms</strong> in (or out) on the plot; note that the zoom is centred at the mouse position. For <strong>horizontal zooming</strong> only, hold the “control” key down while scrolling; for <strong>vertical zooming</strong> only hold the “alt” (or <code>cmd</code> on a Mac) key while scrolling.</p>
+<p>Zoom in anywhere on the plot. Notice that the <strong>inspector</strong> displays a miniature version of the whole plot as its <strong>World View</strong> at the top of its display. The plot is bounded in the World View by a grey rectangle and the region of the plot that is displayed is shown as a brighter region bounded by a black rectangle. This bright display region can be grabbed by clicking (and holding depressed) the left (or primary) mouse button. Moving the mouse around while keeping the left button depressed moves the bright region in the inspector which in turn cause the display in the plot to update accordingly. In this way, the inspector World View can be used to <strong>pan</strong> the entire display. Alternatively, <strong>panning</strong> may also be effected by right (or secondary) button clicking on the interior of the plot, holding that mouse button down and moving the mouse. In the inspector the region moves with the mouse, in the plot the background does.</p>
+<p>Panning and zooming can occur either on the inspector plot or on the plot itself. In either case, the panning or zooming is constrained to the horizontal when the control key is held at the same time and to the verticle when the <code>alt</code> or <code>cmd</code> key is held.</p>
+<p>To get the displayed scatterplot back to its original scale, in the inspector click on <code>scale to: plot</code>. Alternatively the same effect can be hand programmatically as <code>l_scaleto_plot(p)</code>. (To scale to all layers in the plot use <code>l_scaleto_world(p)</code>.)</p>
+<p>See <code>help(l_plot)</code> for more details and examples.</p>
+<p>In the inspector window, immediately below the World View there are several <strong>tabs</strong>, the first of which is the <strong>Analysis tab</strong>. The first subsection of the analysis tab contains plot attributes. The values here were determined when the plot <code>p</code> was created according to the values of the arguments given to <code>l_plot(...)</code>. These can be changed in the inspector by toggling the check boxes.</p>
+<p>The complete set of arguments that could have been used at the time of creation can be had by querying the plot <code>p</code> as <code>names(l_info_states)</code>. The values can also be accessed and changed programmatically for axample as in</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p[<span class="st">&quot;showItemLabels&quot;</span>]
+p[<span class="st">&quot;showGuides&quot;</span>]
+p[<span class="st">&quot;swapAxes&quot;</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+p[<span class="st">&quot;swapAxes&quot;</span>] &lt;-<span class="st"> </span><span class="ot">FALSE</span></code></pre></div>
+<p>The vertical variate, <code>spnbmd</code>, measured the <em>change</em> in spinal bone mineral density. Anything above zero indicates an increase, anything below a decrease; the magnitude is the rate of change in density. It might be of interest, then, to add a horizontal line to the plot at zero. This is accomplished by <strong>layering a line</strong> on the plot <code>p</code> as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">axis &lt;-<span class="st"> </span><span class="kw">l_layer_line</span>(p,
+                     <span class="dt">x=</span><span class="kw">extendrange</span>(x, <span class="dt">f=</span><span class="fl">0.5</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),
+                     <span class="dt">label=</span><span class="st">&quot;axis&quot;</span>, <span class="dt">linewidth=</span><span class="dv">2</span>,
+                     <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,
+                     <span class="dt">dash=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">10</span>),
+                     <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)   <span class="co"># last argument places axis behind other layers</span></code></pre></div>
+<p>This “axis” can be turned on and off via the inspector or programmatically. On the inspector, click on the <strong>Layers</strong> tab. The layers appear in a list ordered from top to bottom in the inspector in the order in which they are displayed in the plot. The <code>axis</code> appears below the Scatterplot and hence is dispayed behind the points.</p>
+<p>Selecting the axis, the up and down buttons at the bottom of the list allow the axis to be placed above or below the Scatterplot. The axis (or Scatterplot) can be moved up or down in the display. Either can be made (temporarily) invisible by clicking on the icon showing a cartoon eye with a stroke through it and made visible again by clicking on the cartoon eye. Try it.</p>
+<p>The axis (or any other layer, e.g. the Scatterplot), could be removed entirely with the minus sign. Don’t do this right now; click on the “Analysis” tab instead.</p>
+</div>
+<div id="histogram" class="section level2">
+<h2>Histogram</h2>
+<p>A histogram can be constructed in the same way for <em>numeric</em> values. Even so, one can be used to construct a simple barplot for the factor <code>gender</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">l_hist</span>(<span class="kw">as.numeric</span>(bone$gender), <span class="co"># note as.numeric(...)</span>
+            <span class="dt">binwidth =</span> <span class="dv">1</span>, <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,
+            <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>,
+            <span class="dt">xlabel =</span> <span class="st">&quot;gender&quot;</span>,
+            <span class="dt">linkingGroup=</span><span class="st">&quot;Bone density&quot;</span>,
+            <span class="dt">title =</span> <span class="st">&quot;Gender (female=1; male=2)&quot;</span>
+            )</code></pre></div>
+<p>Note that the inspector now shows the histogram in the World View and that the plot section of the Analysis now has options peculiar to a histogram.</p>
+<p>The histogram and the scatterplot both have the same <code>linkingGroup</code> “Bone density” and the inspector shows that the 2 plots are <strong>linked</strong>. Selecting the left most bar of the histogram highlights all of the females in both plots. Switching back and forth between the two bars while observing the scatterplot shows that the pattern for males seems to be shifted slightly to the right of those for the females.</p>
+<p>Similarly, selecting any point in the scatterplot causes a corresponding slice of the bar in which it appears in the histogram to be highlighted.</p>
+<p><strong>Multiple selections</strong> can made by holding the <strong>shift key</strong> while selecting. Alternatively, clicking on the background, holding the mouse button down while <strong>sweeping</strong> out a rectangle will highlight all data objects which intersect with the rectangle.</p>
+<p>Once selected, the display of the points can be <strong>modified</strong> by clicking on any of the colour patches to change their colour, or the glyph symbols to change the shape of points, the <code>-</code> and <code>+</code> signs to change size, and the <code>deactivate</code> (and <code>reactivate</code>) to remove the points from (or return them to) the display.</p>
+<p>Try selecting the points in the scatterplot and making various modifications. Note that because the displays are linked the changes are effected (where sensible) in both displays. Note that once the points have been coloured it is also possible to select points by colour from the inspector.</p>
+<p>Note that with <strong>shift sweeping</strong> (sweeping while the shift key pressed), multiple selections can be made. Couple this with <code>dynamic</code> selection that <code>deselect</code>s or <code>invert</code>s and very complex patterns of selected points can be constructed.</p>
+<p>To return the displays to their original configuration, from the inspector reactivate all of the points, then select <code>all</code> from the <code>Select</code> part of the <code>Analysis</code> panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour <code>+</code> will pop up a colour picker). To return to the original colour execute <code>p[&quot;color&quot;] &lt;- &quot;darkgrey&quot;</code>.</p>
+</div>
+<div id="panning-and-brushing" class="section level2">
+<h2>Panning and brushing</h2>
+<p>A second scatterplot could display other variates. For example, plotting the age versus the patient ID number gives:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span><span class="kw">l_plot</span>(bone$idnum, bone$age,
+             <span class="dt">xlabel=</span><span class="st">&quot;idnum&quot;</span>, <span class="dt">ylabel=</span><span class="st">&quot;age&quot;</span>,
+             <span class="dt">linkingGroup=</span><span class="st">&quot;Bone density&quot;</span>,
+             <span class="dt">title =</span> <span class="st">&quot;ID numbers and age&quot;</span>)</code></pre></div>
+<p>Ideally this plot would look like fairly uniform scatter. Assuming that <code>idnum</code> was assigned with recruitment there are some patterns. In the middle of the <code>idnum</code> range, for example, there appears to be a preponderance of older ages followed immediately by a preponderance of younger ages.</p>
+<p>We might investigate how the change in <code>idnum</code> from low to high manifests itself in the relationship between bone mineral density and age by <strong>brushing</strong> the points in <code>p2</code> and observing the effect in <code>p</code>. To do this, click on <code>p2</code> so that the inspector has <code>p2</code> as its focus (appears in the inspector World View). In the inspector <code>Select</code> panel (on the <code>Analysis</code> tab) select <code>by: brushing</code>. A rectangle will appear in <code>p2</code>; this is the <strong>brush</strong>.</p>
+<p>Since we are interested in observing the relationship between bone density and age <strong>conditional</strong> on <code>idnum</code>, we need to shape the brush to be a long, relatively thin, vertical brush. The brush is reshaped by selecting the box in its lower-right corner and moving it until you get the shape desired. The brush will maintain that shape (unique to <code>p2</code>) until it is again changed.</p>
+<p>Now clicking anywhere in <code>p2</code> will have the brush follow the mouse (while the mouse button is depressed) and highlight all points located within the rectangle. For example beginning at the lower left corner of the scatterplot and moving the mouse left to right horizontally, a tall narrow brush should select points with the same (or nearly the same) <code>idnum</code> and the relationship between bone density and age as the <code>idnum</code> increases can be seen in the original scatterplot <code>p</code>.</p>
+<p>To have a <strong>sticky brush</strong>, or have the brush accumulate the selections brushed, simply use the shift key as before. Again the nature of the brushing can be changed by selecting different <code>dynamic</code> modes. To <strong>turn off brushing</strong> select <code>sweeping</code> in the <code>Select</code> panel of the inspector for <code>p2</code>.</p>
+<p><strong>Zooming</strong> and <strong>panning</strong> in <code>p2</code> also reveals some interesting structure. Horizontally zoom on <code>p2</code> until each <code>idnum</code> is well separated. Then horizontally pan across the <code>idnum</code>s (most easily done from the inspector World View).</p>
+<p>It becomes easy to see that each subject (<code>idnum</code>) appears one, two, or three times. Because each value is the <em>change</em> in bone density (and so must be calculated on the basis of two visits) this means that each person had two, three, or four visits. Checking the <code>scales</code> and <code>guides</code> boxes of the plot panel in the inspector and panning reveals also that for every <code>idnum</code>, the difference in <code>age</code> are is at most 2 and does not appear to span more than 3 years. Together, this suggests that the data may have been collected in a single time period of about 3 years. Moreover, the bulk of those <code>idnums</code> which have three entries occur early in the order of <code>idnum</code>, possibly meaning early in the recruitment.</p>
+</div>
+<div id="adding-a-dynamically-changing-smooth" class="section level2">
+<h2>Adding a (dynamically changing) smooth</h2>
+<p>To summarize the relationship, a smooth curve could be added to any scatterplot. Here, we will add a smoothing spline fitted to bone mineral density as a function of time (i.e. to the data of <code>p</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(splines)
+<span class="co"># Fit a smoothing spline</span>
+fitsmooth &lt;-<span class="st"> </span><span class="kw">smooth.spline</span>(x, y, <span class="dt">df=</span><span class="dv">5</span>)
+xOrder &lt;-<span class="st"> </span><span class="kw">order</span>(x)
+smooth &lt;-<span class="st"> </span><span class="kw">l_layer_line</span>(p,
+                       <span class="dt">x=</span>x[xOrder],
+                       <span class="dt">y=</span><span class="kw">predict</span>(fitsmooth,<span class="dt">x=</span>x[xOrder])$y,
+                       <span class="dt">label=</span><span class="st">&quot;smooth fit&quot;</span>, <span class="dt">linewidth=</span><span class="dv">4</span>,
+                       <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p>The smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
+<p>Of course this is the aggregate behaviour, over both sexes. It might be interesting to see how this changes for males and for females. We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate. To that end we introduce a <strong>dynamic update</strong> to the smooth.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Define the updata function
+updateSmooth &lt;-<span class="st"> </span>function(myPlot, minpts, df, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) {
+  ## Get the values for x and y from the plot
+  ##
+  ## For x
+  xnew &lt;-<span class="st"> </span>myPlot[<span class="st">'xTemp'</span>]
+  if (<span class="kw">length</span>(xnew) ==<span class="st"> </span><span class="dv">0</span>) {xnew &lt;-<span class="st"> </span>myPlot[<span class="st">'x'</span>]}
+  
+  ## For y
+  ynew &lt;-<span class="st"> </span>myPlot[<span class="st">'yTemp'</span>]
+  if (<span class="kw">length</span>(ynew) ==<span class="st"> </span><span class="dv">0</span>) {ynew &lt;-<span class="st"> </span>myPlot[<span class="st">'y'</span>]}
+  
+  ## Now **only** use the active selected points to construct the smooth
+  sel &lt;-<span class="st"> </span>myPlot[<span class="st">'selected'</span>] &amp;<span class="st"> </span>myPlot[<span class="st">'active'</span>]
+  xnew &lt;-<span class="st"> </span>xnew[sel]
+  ynew &lt;-<span class="st"> </span>ynew[sel]
+  Nsel &lt;-<span class="st"> </span><span class="kw">sum</span>(sel)
+  
+  if (Nsel &gt;<span class="st"> </span><span class="dv">3</span> &amp;<span class="st"> </span><span class="kw">diff</span>(<span class="kw">range</span>(xnew)) &gt;<span class="st"> </span><span class="dv">0</span>) {
+    ## Find the range of the selected x values
+    xrng &lt;-<span class="st"> </span><span class="kw">extendrange</span>(xnew)
+    xvals.temp &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(xrng),
+                      <span class="dt">to=</span><span class="kw">max</span>(xrng), 
+                      <span class="dt">length.out=</span><span class="dv">100</span>)
+    
+    ## Redo our smooth **only** if we have enough points
+    if ((Nsel &gt;<span class="st"> </span>minpts) &amp;<span class="st"> </span>(minpts &gt;<span class="st"> </span>(df +<span class="st"> </span><span class="dv">1</span>))){
+      fit.temp &lt;-<span class="st"> </span><span class="kw">smooth.spline</span>(xnew, ynew, <span class="dt">df=</span>df)
+      ypred.temp &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.temp,<span class="dt">x=</span>xvals.temp)$y
+      ## update the smooth
+      if (smooth %in%<span class="st"> </span><span class="kw">l_layer_ids</span>(myPlot)) {
+        ## reconfigure the smooth with new data
+        <span class="kw">l_configure</span>(smooth, <span class="dt">x=</span>xvals.temp, <span class="dt">y=</span>ypred.temp)
+      } else {
+        ## If the smooth has been deleted, then we recreate it 
+        ## (N.B. in the global environment)
+        smooth &lt;&lt;-<span class="st">  </span><span class="kw">l_layer_line</span>(myPlot,
+                                 <span class="dt">x=</span>xvals.temp, 
+                                 <span class="dt">y=</span>ypred.temp,
+                                 <span class="dt">label=</span><span class="st">&quot;smooth fit&quot;</span>, 
+                                 <span class="dt">linewidth=</span><span class="dv">4</span>,
+                                 <span class="dt">color =</span> color)
+      } 
+    }
+  }
+  ## Update the tcl language's event handler
+  <span class="kw">tcl</span>(<span class="st">'update'</span>, <span class="st">'idletasks'</span>)
+}</code></pre></div>
+<p>Now, we would like to have this update called whenever any interesting change in state occurs. There are numerous such possible states (see <code>names(l_info_states(p))</code> or <code>l_help(&quot;learn_R_bind&quot;)</code> ). Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of <code>p</code> contained in its <code>selected</code> state. This means that the function is called if any point in <code>p</code> is selected or deselected.</p>
+<p>Note also that the smooth is based on the <strong>temporary</strong> <code>x</code> and <code>y</code> values. Points in a <strong>scatterplot may be moved</strong> by selecting them with the control button depressed (as well as shift for multiple selection). Alternatively, <strong>selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered</strong> by selecting the corresponding <code>move</code> button from the <code>Modify</code> panel of the inspector. **All points can be returned to their original position by</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here we &quot;bind&quot; the anonymous to the named state changes of p</span>
+<span class="kw">l_bind_state</span>(p, <span class="kw">c</span>(<span class="st">&quot;selected&quot;</span>),
+             function() {<span class="kw">updateSmooth</span>(p, <span class="dv">10</span>, <span class="dv">5</span>, <span class="st">&quot;blue&quot;</span>)}
+)</code></pre></div>
+<p>Now go to the histogram and select first the female bar, then the make bar, and watch how the smoothing spline adapts to the sex. Clearly, females have greater changes in spinal bone mineral density at a younger age than do males. No doubt this is a consequence of the different ages at which girls and boys sexually mature.</p>
+<p>Brushing any set of points, from any of the linked plots will now cause the smooth function to automatically recalculate and redisplay. In this way one might pursue, for example how the smooth changes over subsets of <code>idnum</code> values.</p>
+<p>Note that the points must be both active and selected. We could, for example, focus on how the smooth changes <em>only for any subset of females</em> by first deactivating all males and then brushing the subset of the females.</p>
+<p>Note that the states that are bound can be seen as <code>l_bind_state_ids(p)</code> and deleted using <code>l_bind_state_delete(p, &quot;stateBinding0&quot;)</code>.</p>
+</div>
+<div id="a-smooth-as-a-running-linear-fit" class="section level2">
+<h2>A smooth as a running linear fit</h2>
+<p>Linear smoothers can be thought of as the connected predicted values of locally fitted linear models having weights which are maximal at the point <span class="math inline">\(x\)</span> where the prediction is being made and which drop off to zero for <span class="math inline">\(x\)</span> values far away from it.</p>
+<p>To illustrate this we add a straight line to the scatterplot that is fitted to the data via weighted least squares using Gaussian weights. For any collection of <span class="math inline">\(x\)</span> values, the prediction will be made at their median.</p>
+<p>The Gaussian weight function will be centred at the median:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GaussWt &lt;-<span class="st"> </span>function(x) {
+  <span class="co"># Get an estimated standard deviation</span>
+  h &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">range</span>(x))/<span class="dv">4</span>
+  <span class="co"># Centre at median</span>
+  xloc &lt;-<span class="st"> </span><span class="kw">median</span>(x)
+  <span class="co"># Gaussian density</span>
+  <span class="kw">dnorm</span>(x, <span class="dt">mean=</span>xloc, <span class="dt">sd=</span>h)
+}</code></pre></div>
+<p>Use these weights to fit a line to the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a local line using some Gaussian weights.</span>
+<span class="co"># Prediction will be at the median of x, fit by</span>
+### weights that decrease with x's
+<span class="co"># distance from the median.</span>
+fitwls &lt;-<span class="st"> </span><span class="kw">lm</span>(y ~<span class="st"> </span>x, <span class="dt">weights=</span><span class="kw">GaussWt</span>(x))
+linewls &lt;-<span class="st"> </span><span class="kw">l_layer_line</span>(p, 
+                        <span class="dt">x=</span>x,
+                        <span class="dt">y=</span><span class="kw">predict</span>(fitwls,
+                                  <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>x)),
+                        <span class="dt">label=</span><span class="st">&quot;Fitted line&quot;</span>,
+                        <span class="dt">linewidth=</span><span class="dv">4</span>,
+                        <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p>Clicking on the <code>Layers</code> tab in the inspector shows the scatterplot, the axis, the smooth fit, and the Gaussian weight straight line. Select the last of these and render it invisible by clicking on that button, or, by programmatically by executing the following.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_layer_hide</span>(p, smooth)</code></pre></div>
+<p>Now make the fitted line update to fit only the selected points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">updateLocalLine &lt;-<span class="st"> </span>function(myPlot, minpts, df, <span class="dt">volor=</span><span class="st">&quot;blue&quot;</span>) {
+  ## Get the values for x and y from the plot
+  ## For x
+  xnew &lt;-<span class="st"> </span>myPlot[<span class="st">'xTemp'</span>]
+  if (<span class="kw">length</span>(xnew) ==<span class="st"> </span><span class="dv">0</span>) {xnew &lt;-<span class="st"> </span>myPlot[<span class="st">'x'</span>]}
+  
+  ## For y
+  ynew &lt;-<span class="st"> </span>myPlot[<span class="st">'yTemp'</span>]
+  if (<span class="kw">length</span>(ynew) ==<span class="st"> </span><span class="dv">0</span>) {ynew &lt;-<span class="st"> </span>myPlot[<span class="st">'y'</span>]}
+
+  ## Now **only** use the active selected points to construct the smooth
+  sel &lt;-<span class="st"> </span>myPlot[<span class="st">'selected'</span>] &amp;<span class="st"> </span>myPlot[<span class="st">'active'</span>]
+  xnew &lt;-<span class="st"> </span>xnew[sel]
+  ynew &lt;-<span class="st"> </span>ynew[sel]
+  Nsel &lt;-<span class="st"> </span><span class="kw">sum</span>(sel)
+  if (Nsel &gt;<span class="st"> </span><span class="dv">3</span> &amp;<span class="st"> </span><span class="kw">diff</span>(<span class="kw">range</span>(xnew)) &gt;<span class="st"> </span><span class="dv">0</span>) {
+    xrng &lt;-<span class="st"> </span><span class="kw">extendrange</span>(xnew)
+    xvals.temp &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(xrng),
+                      <span class="dt">to=</span><span class="kw">max</span>(xrng), 
+                      <span class="dt">length.out=</span><span class="dv">100</span>)
+    ## Redo line if more than two points.
+    if (Nsel&gt;<span class="st"> </span><span class="dv">2</span>) {
+      fit.wls &lt;-<span class="st">  </span><span class="kw">lm</span>(ynew ~<span class="st"> </span>xnew, <span class="dt">weights=</span><span class="kw">GaussWt</span>(xnew))
+      ywls.temp &lt;-<span class="st"> </span><span class="kw">predict</span>(fit.wls,
+                           <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">xnew=</span>xvals.temp))
+      ## update the fit
+      if (linewls %in%<span class="st"> </span><span class="kw">l_layer_ids</span>(myPlot)) {
+        <span class="kw">l_configure</span>(linewls, <span class="dt">x=</span>xvals.temp, <span class="dt">y=</span>ywls.temp)
+      } else {
+        ## If it's been deleted, we recreate it (in the global environment).
+        linewls &lt;&lt;-<span class="st"> </span><span class="kw">l_layer_line</span>(myPlot,
+                                 <span class="dt">x=</span>xvals.temp,
+                                 <span class="dt">y=</span><span class="kw">predict</span>(fitwls,
+                                           <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>xvals.temp)
+                                 ),
+                                 <span class="dt">label=</span><span class="st">&quot;GaussWt at median line&quot;</span>, 
+                                 <span class="dt">linewidth=</span><span class="dv">4</span>,
+                                 <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>
+        )
+      }
+    }
+  
+  }
+  ## Update the tcl language's event handler
+  <span class="kw">tcl</span>(<span class="st">'update'</span>, <span class="st">'idletasks'</span>)
+}</code></pre></div>
+<p>And now bind this update function to change in <code>p</code> of either the <code>select</code> or the <code>active</code> states.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here we &quot;bind&quot; the anonymous to the named state changes of p</span>
+<span class="kw">l_bind_state</span>(p, <span class="kw">c</span>(<span class="st">&quot;active&quot;</span>,<span class="st">&quot;selected&quot;</span>),
+             function() {<span class="kw">updateLocalLine</span>(p, <span class="dv">10</span>, <span class="dv">5</span>, <span class="st">&quot;blue&quot;</span>)}
+)</code></pre></div>
+<p>Selecting the male or female sex in the histograms will show the weighted least squares line for that sex. Brushing a tall thin vertical brush on <code>p2</code> will show how the fitted line changes (or not) as the similar <code>idnum</code>s change. But most interestingly, and the object of this lesson, is to brush <code>p2</code> with a short very wide brush so that the <code>age</code> can be kept roughly constant. As <code>age</code> increases or decreases, the line segment changes its fit: both in height and in slope. The smooth seen earlier is essentially the connected midpoints of these line segments.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

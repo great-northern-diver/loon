@@ -11,6 +11,5 @@ cp Tcl/pkgIndex.tcl R/inst/tcl/loon
 rsync -av --delete Tcl/library R/inst/tcl/loon
 rsync -av --delete Tcl/images R/inst/tcl/loon
 
-rm R/src/*.so
-rsync -av --delete website/html R/inst/website
-rm R/inst/website/html/.gitignore
+# rsync -av --delete website/html R/inst/website
+# rm R/inst/website/html/.gitignore

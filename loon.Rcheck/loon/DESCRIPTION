@@ -1,0 +1,26 @@
+Package: loon
+Type: Package
+Title: Interactive Statistical Data Visualization
+Version: 1.1.0
+Date: 2017-07-26
+Authors@R: c(
+    person("Adrian", "Waddell", , "adrian@waddell.ch", role = c("aut", "cre")),
+    person("R. Wayne", "Oldford", , "rwoldford@uwaterloo.ca", role = "aut")
+    )
+URL: http://waddella.github.io/loon/
+Description: A toolkit for interactive data visualization and exploration.
+License: GPL-2
+Depends: R (>= 3.4.0), methods, tcltk
+Imports: tools, graphics, grDevices, utils, stats
+Suggests: maps, sp, graph, scagnostics, PairViz, RColorBrewer,
+        RnavGraphImageData, rworldmap, rgl, Rgraphviz, RDRToolbox,
+        kernlab, scales, MASS, dplyr, testthat, knitr, rmarkdown
+LazyData: true
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2017-07-26 17:51:22 UTC; adrian
+Author: Adrian Waddell [aut, cre],
+  R. Wayne Oldford [aut]
+Maintainer: Adrian Waddell <adrian@waddell.ch>
+Built: R 3.4.1; ; 2017-07-26 17:53:55 UTC; unix
