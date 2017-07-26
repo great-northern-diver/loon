@@ -44,7 +44,8 @@ rinst:
 website:
 	cd website && \
 	tclsh makeWebsite.tcl &&  \
-	cd ..
+	cd .. && \
+	rsync -av --delete website/html/ ./doc/
 
 debug:
 	tclsh8.6 debug.tcl
