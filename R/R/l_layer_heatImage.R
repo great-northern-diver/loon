@@ -1,9 +1,32 @@
-#' Display a Heat Image
-#' 
+#' @title Display a Heat Image
+#'   
+#' @description This function is very similar to the 
+#'   \code{\link[graphics]{image}} function. It works with every loon plot which
+#'   is based on the cartesian coordinate system.
+#'   
+#' @inheritParams graphics::image
+#' @param x locations of grid lines at which the values in z are measured. These
+#'   must be finite, non-missing and in (strictly) ascending order. By default,
+#'   equally spaced values from 0 to 1 are used. If x is a list, its components
+#'   x$x and x$y are used for x and y, respectively. If the list has component z
+#'   this is used for z.
+#' @param y see description for the \code{x} argument above
+#' @param xlim range for the plotted x values, defaulting to the range of x
+#' @param ylim range for the plotted y values, defaulting to the range of y
+#' @template param_widget
+#' @template param_parent
+#' @template param_index
+#' @param ... argumnets forwarded to \code{\link{l_layer_line}}
+#'   
+#' @return layer id of group or rectangles layer
+#'   
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
+#'   
 #' @export
 #' 
 #' @examples 
-#' 
 #' library(MASS)
 #' kest <- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
 #' image(kest)
@@ -29,7 +52,7 @@ l_layer_heatImage <-function (widget,
                               zlim = range(z[is.finite(z)]), 
                               xlim = range(x),
                               ylim = range(y),
-                              col = heat.colors(12), 
+                              col = grDevices::heat.colors(12), 
                               breaks, 
                               oldstyle = FALSE,
                               useRaster,
@@ -106,8 +129,8 @@ l_layer_heatImage <-function (widget,
     }
     
     ## need plot set up before we do this
-    if (length(x) <= 1) x <- par("usr")[1L:2]
-    if (length(y) <= 1) y <- par("usr")[3:4]
+    if (length(x) <= 1) x <- graphics::par("usr")[1L:2]
+    if (length(y) <= 1) y <- graphics::par("usr")[3:4]
     if (length(x) != nrow(z)+1 || length(y) != ncol(z)+1)
         stop("dimensions of z are not length(x)(-1) times length(y)(-1)")
     
@@ -124,7 +147,7 @@ l_layer_heatImage <-function (widget,
         if (useRaster && check_irregular(x, y)) useRaster <- FALSE
         if (useRaster) {
             useRaster <- FALSE
-            ras <- dev.capabilities("rasterImage")$rasterImage
+            ras <- grDevices::dev.capabilities("rasterImage")$rasterImage
             if(identical(ras, "yes")) useRaster <- TRUE
             if(identical(ras, "non-missing")) useRaster <- all(!is.na(zi))
         }
@@ -137,17 +160,17 @@ l_layer_heatImage <-function (widget,
         # this should be mostly equivalent to RGBpar3 with bg = R_TRANWHITE
         if (!is.character(col)) {
             col <- as.integer(col)
-            if (any(!is.na(col) & col < 0L)).External.graphics(C_image, x, y, zi, col)
+            # if (any(!is.na(col) & col < 0L)).External.graphics(C_image, x, y, zi, col)
             stop("integer colors must be non-negative")
             col[col < 1L] <- NA_integer_
-            p <- palette()
+            p <- grDevices::palette()
             col <- p[((col - 1L) %% length(p)) + 1L]
         }
         zc <- col[zi + 1L]
         dim(zc) <- dim(z)
         zc <- t(zc)[ncol(zc):1L,, drop = FALSE]
         
-        id <- l_layer_rasterImage(widget, as.raster(zc), min(x), min(y), max(x), max(y))
+        id <- l_layer_rasterImage(widget, grDevices::as.raster(zc), min(x), min(y), max(x), max(y))
         
     } else {
         ## by column

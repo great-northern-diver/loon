@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="title">
+Loon: An Interactive Statistical Visualization Toolkit
+</div>
+<div id="nav">
+<ul>
+  <li id="home"><a href="index.html">Home</a></li>
+  <li id="install"><a href="install.html">Install</a></li>
+  <li id="ui"><a href="UI.html">UI</a></li>
+  <li id="learn"><a href="learn_R_intro.html">Learn</a></li>
+  <li id="gallery"><a href="gallery.html">Gallery</a></li>
+  <!-- <li id="videos"><a href="videos.html">Videos</a></li>  -->
+  <!-- <li id="commands"><a href="commands.html">Commands</a></li>  -->
+  <!-- <li id="manual"><a href="manual_Tcl.html">Manual</a></li>  -->
+  <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
+</ul>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</a></li>
+</ul>
+</div>
+<h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
+<p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>. Note that you need to install both 32bit and 64 bit Tcl.</p>
+<p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
+<p>Download the <strong>32 bit and 64 bit</strong> builds of ActiveTcl version 8.6.x. You need to install both.</p>
+<ul>
+<li>64 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe">download Windows (64-bit, x64) Tcl 8.6.x</a></li>
+<li>32 bit build <a href="http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-ix86-threaded.exe">download Windows (x86) Tcl 8.6.x</a></li>
+</ul>
+<p>Install the 64 bit and 32 bit ActiveTcl under <code>C:\Tcl64</code> and <code>C:\Tcl32</code>, respectively .</p>
+<p>In the <code>C:/Tcl64/bin</code> and <code>C:/Tcl32/bin</code> folders copy paste the <code>tk86.dll</code> and <code>tcl86.dll</code> files (create duplications) and rename them to <code>tk85.dll</code> and <code>tcl85.dll</code>, respectively.</p>
+<p>Create or modify the <code>.Rprofile</code> file in your home directory (usually in <code>C:/Users/&lt;your username&gt;/.Rprofile</code> but you can check the home path with <code>path.expand('~')</code> in <code>R</code>) to include the code below. To create the <code>.Rprofile</code> use Rstudio and use the menu to create a new Text File.</p>
+<pre><code>.First.sys()
+if (.Machine$sizeof.pointer == 8) {
+  Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl64/bin&quot;)
+} else {
+  Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl32/bin&quot;)
+}</code></pre>
+<p>Restart R (i.e. Rstudio) and check if the above steps were successful by entering the following code in <code>R</code></p>
+<pre><code>Sys.getenv(&quot;MY_TCLTK&quot;)</code></pre>
+<p>This should either return <code>C:/Tcl32/bin</code> or <code>C:/Tcl64/bin</code>. If this works enter the following code in <code>R</code></p>
+<pre><code>library(tcltk)
+tcl(&quot;set&quot;, &quot;tcl_version&quot;)</code></pre>
+<p>If this returns <code>8.6</code> you were successful. Otherwise follow the steps in my <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">youtube instructions</a>. Note that you need to install both 32bit and 64 bit Tcl.</p>
+</body>
+</html>

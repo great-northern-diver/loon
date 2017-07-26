@@ -1,6 +1,25 @@
-
+#' @title Query a Plot State
+#' 
+#' @aliases [.loon
+#'  
+#' @description All of loon's displays have plot states. Plot states specify 
+#'   what is displayed, how it is displayed and if and how the plot is linked 
+#'   with other loon plots. Layers, glyphs, navigators and contexts have states 
+#'   too (also refered to as plot states). This function queries a single plot 
+#'   state.
+#'   
+#' @template param_target
+#' @param state state name
+#'   
+#' @seealso \code{\link{l_configure}}, \code{\link{l_info_states}},
+#'   \code{\link{l_create_handle}}
+#'   
 #' @export
-
+#' 
+#' @examples 
+#' p <- l_plot(iris, color = iris$Species)
+#' l_cget(p, "color")
+#' p['selected']
 l_cget <- function(target, state) {
 
     obj_eval <- .loonobject(target, as.character)
@@ -44,7 +63,7 @@ l_cget <- function(target, state) {
     } else if (state %in% c("n","p")) {
         environment(obj_eval)$convert <- function(x) {as.numeric(as.character(x))}
     } else if (type == "nested_double") {
-        environment(obj_eval)$convert <- l_nesteTclList2Rlist
+        environment(obj_eval)$convert <- l_nestedTclList2Rlist
     } else {
         dim <- obj_eval('info', 'stateDimension', state)
         if (dim == "1") {

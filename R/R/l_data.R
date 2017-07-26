@@ -1,6 +1,15 @@
-
+#' @title Convert an R data.frame to a Tcl dictionary
+#'   
+#' @description This is a helper function to convert an \R data.frame object to 
+#'   a Tcl data frame object. This function is useful when changing a data state
+#'   with \code{\link{l_configure}}.
+#'   
+#' @param data a data.frame object
+#'   
+#' @return a string that represents with data.frame with a Tcl dictionary data
+#'   structure.
+#' 
 #' @export
-
 l_data <- function(data) {
 
     ## Create a dict

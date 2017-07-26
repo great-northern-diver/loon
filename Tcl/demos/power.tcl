@@ -70,6 +70,6 @@ proc power {x y {from -5} {to 5} args} {
 dict with ::loon::data::mammals {
    power $body $brain -5 5\
    -xlabel "body" -ylabel "brain" -title "mammal brain vs body weight"\
-   -itemlabel $name -showItemlabels TRUE -size 6
+   -itemLabel $name -showItemLabels TRUE -size 6
 }
 

@@ -1,5 +1,32 @@
 
 
+#' @title Export a loon plot as an image
+#'   
+#' @description The supported image formats are dependent on the system 
+#'   environment. Plots can always be exported to the Postscript format. 
+#'   Exporting displays as .pdfs is only possible when the command line tool 
+#'   epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or 
+#'   gif requires the Img Tcl extension. When choosing one of the formats that 
+#'   depend on the Img extension, it is possible to export any Tk widget as an 
+#'   image including inspectors.
+#'   
+#' @template param_widget
+#' @param filename path of output file
+#' @param width image width in pixels
+#' @param height image height in pixels
+#'   
+#'   
+#' @details Note that the \code{CTRL-T} key combination opens a dialog to export
+#'   he graphic.
+#'   
+#'   The native export format is to \code{ps} as this is what the Tk canvas 
+#'   offers. If the the \code{l_export} fails with other formats then please
+#'   resort to a screen capture method for the moment.
+#'   
+#' @return path to the exported file
+#'   
+#' @seealso \code{\link{l_export_valid_formats}}
+#'   
 #' @export
 l_export <- function(widget, filename, width, height) {
 
@@ -24,6 +51,20 @@ l_export <- function(widget, filename, width, height) {
     fname
 }
 
+#' @title Return a list of the available image formats when exporting a loon 
+#'   plot
+#'   
+#'   
+#' @description The supported image formats are dependent on the system 
+#'   environment. Plots can always be exported to the Postscript format. 
+#'   Exporting displays as .pdfs is only possible when the command line tool 
+#'   epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or 
+#'   gif requires the Img Tcl extension. When choosing one of the formats that 
+#'   depend on the Img extension, it is possible to export any Tk widget as an 
+#'   image including inspectors.
+#'   
+#' @return a vector with the image formats available for exporting a loon plot.
+#'   
 #' @export
 l_export_valid_formats <- function() {
     valid_extensions <- c("ps", "eps")

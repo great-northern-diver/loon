@@ -1,21 +1,16 @@
 #' @title Create a child widget path
-#'
-#' @description
-#'
-#' Given a widget path name 'parent' create a child path name.
-#' 
-#' @details
-#'
-#' This function is similar to \code{.Tk.subwin} except that does not
-#' the environment of the "tkwin" object to keep track of numbering
-#' the subwidgets. Instead it creates a widget path (parent).looni,
-#' where i is the smallest integer for which no widget exists yet.
-#'
-#'
+#'   
+#' @description This function is similar to \code{.Tk.subwin} except that does
+#'   not the environment of the "tkwin" object to keep track of numbering the
+#'   subwidgets. Instead it creates a widget path (parent).looni, where i is the
+#'   smallest integer for which no widget exists yet.
+#'   
 #' @param parent parent widget path
+#' @param name child name
 #
-#' @return widget path name of the subwin as a string
-
+#' @return widget path name as a string
+#' 
+#' @export
 l_subwin <- function(parent, name="w") {
     if(is(parent,"tkwin")) {
         parent <- .Tk.ID(parent)

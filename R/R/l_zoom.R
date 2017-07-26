@@ -1,5 +1,13 @@
 
-#' Zoom from and towards the center
+#' @title Zoom from and towards the center
+#'   
+#' @description This function changes the plot states \code{panX}, \code{panY}, 
+#'   \code{zoomX}, and \code{zoomY} to zoom towards or away from the center of
+#'   the current view.
+#'   
+#' @template param_widget
+#' @param factor a zoom factor
+#'   
 #' @export
 l_zoom <- function(widget, factor=1.1) {
     zoomX <- widget['zoomX']

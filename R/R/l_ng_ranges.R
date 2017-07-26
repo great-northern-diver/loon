@@ -1,17 +1,49 @@
-
-#' Navgraph with slider for top fraction of measures
+#' @title 2d navigation graph setup with with dynamic node fitering using a 
+#'   slider
+#'   
+#' @description Generic function to create a navigation graph environment where 
+#'   user can filter graph nodes using as slider to select 2d spaces based on 2d
+#'   measures.
+#'   
+#' @inheritParams l_ng_plots
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#' 
+#' @seealso \code{\link{l_ng_ranges.default}}, \code{\link{l_ng_ranges.measures}},
+#'   \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}},
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}},
+#'   \code{\link{l_ng_ranges}}
+#' 
 #' @export
 l_ng_ranges <- function(measures, ...) {
     UseMethod("l_ng_ranges")
 }
 
 
-#' Navigation graph based on Measures
+#' @title Select 2d spaces with variable associated measures using a slider
+#'   
+#' @description Measures object is a matrix or data.frame with measures 
+#'   (columns) for variable pairs (rows) and rownames of the two variates 
+#'   separated by separator   
+#'   
+#' @inheritParams l_ng_plots.default
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#' 
+#' @template return_l_ng
+#'         
+#' @seealso \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.measures}}, 
+#'   \code{\link{l_ng_ranges.scagnostics}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
 #' 
 #' @export
 #' 
 #' @examples 
-#' 
 #' # Simple example with generated data
 #' n <- 100
 #' dat <- data.frame(
@@ -38,11 +70,7 @@ l_ng_ranges <- function(measures, ...) {
 #'      row.names = names(dat)
 #' )
 #' 
-#' nav <- l_ng_ranges(m1d, dat ) 
-#' 
-#' # With a single measure
-#' 
-#' nav <- l_ng_ranges(sapply(dat, sd), dat)
+#' nav <- l_ng_ranges(m1d, dat) 
 #' 
 #' 
 l_ng_ranges.default <- function(measures, data, separator=':', ...) {
@@ -82,6 +110,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     ## -----------
     ## Create Graph, Navigator, Context, and Controls
     tt <- l_toplevel()
+
     tcl('wm', 'title', tt, 'Navgraph based on measures with a top fraction slider')
     
     controlFrame <- tcl('frame', l_subwin(tt, 'controls'))
@@ -96,14 +125,14 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     } else {
         l_configure(p, x=data[,1], y=data[,2])
     }
-
+    
     tcl('pack', controlFrame, side='right', fill='y', padx=2, pady=2)
     tcl('pack', g, side='right', fill='both', expand=TRUE)
 
-    
     tcl('grid', 'propagate', controlFrame, 0)
     tcl(controlFrame, 'configure', width=200)
     
+
     labelMeasure <- tcl('label', l_subwin(controlFrame, 'mlabel'), text='Measures:') 
     listbox <- tcl('tk::listbox', l_subwin(controlFrame,'listbox'), selectmode='single')
     scrollListbox <- tcl('tk::scrollbar', l_subwin(controlFrame,'lvscroll'),
@@ -122,6 +151,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
                   variable=tclvalueTransitionDim, value='34d')
     tcl('pack', rb_3d, rb_4d, rb_34d, side='left')
     
+
     frameFilterRadiobuttons <- tcl('frame', l_subwin(controlFrame,'filterSpec'))
     tclvalueFilter <- tclVar('value')
     rb_value <- tcl('radiobutton', l_subwin(frameFilterRadiobuttons, 'value'), text='value',
@@ -129,7 +159,6 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     rb_percentile <- tcl('radiobutton', l_subwin(frameFilterRadiobuttons, 'percentile'), text='percentile',
                  variable=tclvalueFilter, value='percentile')
     tcl('pack', rb_value, rb_percentile, side='left')
-    
         
     tcl('grid', labelMeasure, row=0, column=0, columnspan=2, sticky='w')
     tcl('grid', listbox, row=1, column=0, sticky='nsew')
@@ -146,17 +175,19 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     
     tcl('grid', 'columnconfigure', controlFrame, 0, weight=1)
     tcl('grid', 'columnconfigure', controlFrame, 1, weight=0)
-
+    
     ## Now Create Listbox Labels
     sapply(colnames(measures), function(measure) tcl(listbox, 'insert' , 'end', measure))
     ## -----updateScale
+    
+    i_last_select <- 0
     
     ## Now write function to update graph
     updateGraph <- function() {
         
         i_measure <- as.character(tcl(listbox, 'curselection'))
         if (length(i_measure) == 0) {
-            tcl(listbox, 'selection', 'set', i_last_select)   
+              tcl(listbox, 'selection', 'set', i_last_select)   
         } else {
             i_last_select <<- as.numeric(i_measure)[1]              
         }
@@ -171,13 +202,13 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
         if (tclvalue(tclvalueFilter) == "value") {
             spaces <- node_spaces[y >= scale_min & y <= scale_max]
         } else {
-            quan <- quantile(y, probs=c(scale_min, scale_max))
+            quan <- stats::quantile(y, probs=c(scale_min, scale_max))
             spaces <- node_spaces[y >= quan[1] & y <= quan[2]]
         }
         
         if (dim == 1) {
             if(length(spaces) >= 2)
-                nodes <- apply(combn(spaces, 2), 2, function(col)paste(col, collapse=separator))
+                nodes <- apply(utils::combn(spaces, 2), 2, function(col)paste(col, collapse=separator))
             else
                 nodes <- ""
         } else {
@@ -208,14 +239,13 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     }
     
     
-    
     updateScale <- function() {
         
         if (tclvalue(tclvalueFilter) == "value") {
         
             i_measure <- as.character(tcl(listbox, 'curselection'))
             if (length(i_measure) == 0) {
-                tcl(listbox, 'selection', 'set', i_last_select)   
+                  tcl(listbox, 'selection', 'set', i_last_select)   
             } else {
                 i_last_select <<- as.numeric(i_measure)[1]               
             }
@@ -252,31 +282,39 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
             tkconfigure(scale, from=0, to=1, min=0.8, max=1, resolution=0.01)
         }
         
-        updateGraph()
+        # updateGraph()
     }
+
+    
+    tcl('bind', listbox, '<<ListboxSelect>>', function(...) {
+        
+        sel <- as.character(tcl(listbox, 'curselection'))
+        if (length(sel) != 0 && !identical(i_last_select, sel)) {
+            updateScale()
+        }
+    })
     
     
-    
-    tcl('bind', listbox, '<<ListboxSelect>>', function(...)updateScale())
     sapply(c(rb_value, rb_percentile), function(rb) {
-        tcl(rb, 'configure', command=function(...)updateScale())        
+        tcl(rb, 'configure', command=function(...) updateScale())        
     })
+
     
-    tcl(scale, 'configure', command=function(...)updateGraph())
+    tcl(scale, 'configure', command=function(...) updateGraph())
+    
     sapply(c(rb_3d, rb_4d, rb_34d), function(rb) {
-        tcl(rb, 'configure', command=function(...)updateScale())        
+        tcl(rb, 'configure', command=function(...) updateScale())        
     })
+
     
     callbackFunctions$general[[paste0(g,'.updateGraph')]] <- updateGraph
     callbackFunctions$general[[paste0(g,'.updateScale')]] <- updateScale
     
-    
-    
-    
     tcl(listbox, 'selection', 'set', 0)
-    i_last_select <- 0
+
     
     updateScale()
+    
     l_scaleto_world(p)
     
     return(list(
@@ -289,11 +327,31 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 }
 
 
-#' Navigation Graphs based on Scagnostics Measures
+#' @title 2d Navigation Graph Setup with dynamic node fitering based on 
+#'   scagnostic measures and using a slider
+#'   
+#' @description This method is useful when working with objects from the 
+#'   \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R 
+#'   package. In order to dynamically re-calcultate the scagnostic measures for 
+#'   a subset of the data use the \code{\link{scagnostics2d}} measures creature 
+#'   function.
+#'   
+#' @inheritParams l_ng_plots.scagnostics
+#' 
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#'         
+#' @template return_l_ng
+#' 
+#' @seealso \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.default}}, 
+#'   \code{\link{l_ng_ranges.measures}}, \code{\link{measures1d}}, 
+#'   \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+#'   \code{\link{l_ng_ranges}}
+#' 
 #' @export
 #' 
 #' @examples 
-#' 
 #' library(scagnostics)
 #' s <- scagnostics(oliveAcids)
 #' ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
@@ -301,7 +359,8 @@ l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     
     force(data)
     
-    grid <- scagnosticsGrid(measures)
+    requireNamespace("scagnostics", quietly = TRUE) || stop("the scagnostics package is required for this method.")
+    grid <- scagnostics::scagnosticsGrid(measures)
     
     measures <- t(unclass(measures))
     
@@ -319,19 +378,35 @@ l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     l_ng_ranges.default(measures, data, separator, ...)
 }
 
-#' Navgraph with measures and sliders
+
+
+#' @title 2d Navigation Graph Setup with dynamic node fitering using a slider
+#'   
+#' @description Measures object is of class measures. When using measure objects
+#'   then the measures can be dynamically re-calculated for a subset of the 
+#'   data.
+#'   
+#' @inheritParams l_ng_plots.measures
+#'   
+#' @details Note that we provide the \code{\link{scagnostics2d}} function to 
+#'   create a measures object for the scagnostics measures.
+#'   
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_ng_ranges
+#' @template see_l_help
+#'   
+#' @seealso \code{\link{measures1d}}, \code{\link{measures2d}}, 
+#'   \code{\link{scagnostics2d}}, \code{\link{l_ng_ranges}},
+#'   \code{\link{l_ng_plots}}
+#' 
+#' @template return_l_ng
 #'
 #' @export
-#' 
-#' @param measures measure closure of class measures
-#' @param ... arguments get passed to scatterplot
 #'
 #' @examples 
-#' 
-#' 
 #' # 2d measures
-#' s <- scagnostics2d(oliveAcids)
-#' nav <- l_ng_ranges(s, color=olive$Area)
+#' # s <- scagnostics2d(oliveAcids)
+#' # nav <- l_ng_ranges(s, color=olive$Area)
 #' 
 #' # 1d measures
 #' scale01 <- function(x){(x-min(x))/diff(range(x))}

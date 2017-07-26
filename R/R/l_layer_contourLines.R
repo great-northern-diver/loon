@@ -1,4 +1,25 @@
-#' Layer Contour Lines
+#' @title Layer Contour Lines
+#' 
+#' @description This function is a wrapper around 
+#'   \code{\link[grDevices]{contourLines}} that adds the countourlines to a loon
+#'   plot which is based on the cartesian coordinate system.
+#'
+#' @inheritParams grDevices::contourLines
+#' @param y see description for the \code{x} argument
+#' @template param_widget
+#' @param asSingleLayer if \code{TRUE} a lines layer is used for the line,
+#'   otherwise if \code{FALSE} a group with nested line layers for each line is
+#'   created
+#' @template param_parent
+#' @template param_index
+#' @param ... argumnets forwarded to \code{\link{l_layer_line}}
+#' 
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
+#' 
+#' @return layer id of group or lines layer
+#' 
 #' @export
 #' 
 #' @examples 
@@ -51,7 +72,7 @@ l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
         stop("dimensions of 'x', 'y' and 'z' do not match")
     
     
-    lines <- contourLines(x=x,y=y,z=z,nlevels=nlevels, levels=levels)
+    lines <- grDevices::contourLines(x=x,y=y,z=z,nlevels=nlevels, levels=levels)
     levels <- vapply(lines, function(x)x$level, numeric(1))
     xcoords <- sapply(lines, FUN=function(x)x$x)
     ycoords <- sapply(lines, FUN=function(x)x$y)
@@ -66,7 +87,7 @@ l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
         ids <- Map(function(l, x, y) {
             l_layer_line(widget, x=x, y=y, label=l, parent=id, ...)
         }, levels, xcoords, ycoords)
-        attr(id, ids=ids)
+        attr(id, "ids") <- ids
     }
     attr(id, "levels") <- levels
     return(id)

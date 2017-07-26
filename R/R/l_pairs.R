@@ -1,5 +1,21 @@
 
+#' @title Scatterplot Matrix in Loon
+#'   
+#' @description Function creates a scatterplot matrix using loon's scatterplot 
+#'   widgets
+#'   
+#' @param data a data.frame with numerical data to create the scatterplot matrix
+#' @template param_parent
+#' @param ... named arguments to modify the scatterplot states
+#' 
+#' @return a list with scatterplot handles
+#' 
+#' @seealso \code{\link{l_plot}}
+#' 
 #' @export
+#' 
+#' @examples
+#' p <- l_pairs(iris[,-5], color=iris$Species)
 l_pairs <- function(data, parent=NULL, ...) {
 
     args <- list(...)
@@ -41,7 +57,7 @@ l_pairs <- function(data, parent=NULL, ...) {
     args[['parent']] <- child
     
     nvar <- dim(data)[2]
-    pair <- combn(nvar, 2)
+    pair <- utils::combn(nvar, 2)
     varnames <- names(data)
 
     ## combn returns the variable combinations for the scatterplot

@@ -25,7 +25,7 @@ software.
 
 # Installation
 
-* For `R` see the [beta section](beta.html).
+* For `R` see the [installation section](install.html).
 
 * For `Tcl` see the [github Readme](https://github.com/waddella/loon/tree/master/Tcl).
 

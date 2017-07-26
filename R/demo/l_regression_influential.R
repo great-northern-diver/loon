@@ -7,7 +7,7 @@ local({
     p <- with(swiss, l_plot(Fertility~Infant.Mortality,
                             title='swiss data (least-squares)',
                             linkingGroup='swiss',
-                            itemlabel=rownames(swiss)))
+                            itemLabel=rownames(swiss)))
     
     ## layer fit
     xrng <- range(swiss$Infant.Mortality)
@@ -20,7 +20,7 @@ local({
                  ylabel="Residuals",
                  title="Residuals vs. fitted values",
                  linkingGroup='swiss',
-                 itemlabel=rownames(swiss))
+                 itemLabel=rownames(swiss))
     
     l_layer_line(pr, x=c(-25,100), y=c(0,0),
                  linewidth=3, color="gray80",
@@ -32,7 +32,7 @@ local({
                    ylabel="Externally studentized residuals",
                    xlabel="hat values",
                    linkingGroup="swiss",
-                   itemlabel=rownames(swiss))
+                   itemLabel=rownames(swiss))
     
     llev <- l_layer_line(plev, index='end',
                          x=rep(4/plev['n'],2), y=c(-5,5),
@@ -228,8 +228,8 @@ local({
     
 
     p_map <- with(swissCoords, l_plot(longitude,latitude,
-                                      itemlabel=rownames(swissCoords),
-                                      showItemlabels=TRUE,
+                                      itemLabel=rownames(swissCoords),
+                                      showItemLabels=TRUE,
                                       linkingGroup='swiss'))
     
     l <- l_layer(p_map, m, index=1)

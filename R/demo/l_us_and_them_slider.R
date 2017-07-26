@@ -28,7 +28,7 @@ local({
                      size=scale01(Population[sel])*200,
                      title="Us and Them",
                      xlabel="Fertility", ylabel="Life Expectancy",
-                     itemlabel=as.character(Country[sel]),
+                     itemLabel=as.character(Country[sel]),
                      glyph='ccircle',
                      linkingKey=as.character(Country[sel])))
     
@@ -42,7 +42,7 @@ local({
                              color=unlist(colorkey)[match(Geographic.Region[sel],
                                                           names(colorkey))],
                              size=scale01(Population[sel])*200,
-                             itemlabel=as.character(Country[sel]),
+                             itemLabel=as.character(Country[sel]),
                              glyph='ccircle',
                              linkingKey=as.character(Country[sel]),
                              sync='pull'))

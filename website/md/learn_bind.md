@@ -459,7 +459,7 @@ indirection in order to support loon's context specific substitutions
 instead of the standard `Tk` substitutions.
 
 Valid event patterns for mouse/keyboard gestures are taken from the
-[`Tk` bindings](http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7). The
+[`Tk` bindings](http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5). The
 tag specification for item bindings allow for logical expressions of
 [Visual Item Tags][] using the operators `&&`, `||`, `^`,`!`, and
 parenthesized subexpressions (see the

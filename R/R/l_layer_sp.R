@@ -1,15 +1,9 @@
-
-#' Layer polygons in SpatialPolygonDataFrame
-#' @export
+#' @title Layer polygons in SpatialPolygonDataFrame
 #' 
-#' @examples 
-#' library(rworldmap)
-#' world <- getMap(resolution = "coarse")
-#' p <- l_plot()
-#' lmap <- l_layer(p, world, asSingleLayer=TRUE)
-#' l_scaleto_world(p)
-#' attr(lmap,'hole')
-#' attr(lmap,'NAME')
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
+#' @export
 l_layer.SpatialPolygonsDataFrame <- function(widget, x, asSingleLayer=TRUE, ...) {
     if (asSingleLayer) {
         xy <- spunlist(spAsList(x))
@@ -26,7 +20,11 @@ l_layer.SpatialPolygonsDataFrame <- function(widget, x, asSingleLayer=TRUE, ...)
 }
 
 
-
+#' @title Layer polygons in SpatialPolygons object
+#' 
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
 #' @export
 l_layer.SpatialPolygons <- function(widget, x, asSingleLayer=TRUE, ...) {
     if (asSingleLayer) {
@@ -42,6 +40,11 @@ l_layer.SpatialPolygons <- function(widget, x, asSingleLayer=TRUE, ...) {
     }
 }
 
+#' @title Layer polygons in Polygons object
+#' 
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
 #' @export
 l_layer.Polygons <- function(widget, x, asSingleLayer=TRUE, ...) {
     #if(attr(x, "package") != "sp")
@@ -60,6 +63,10 @@ l_layer.Polygons <- function(widget, x, asSingleLayer=TRUE, ...) {
     }
 }
 
+#' @title Layer polygon in Polygon object
+#' 
+#' @template templ_sp
+#' 
 #' @export
 l_layer.Polygon <- function(widget, x, ...) {
     #if(attr(x, "package") != "sp")
@@ -82,8 +89,12 @@ l_layer.Polygon <- function(widget, x, ...) {
 
 
 
-## Lines
 
+#' @title Layer lines in SpatialLinesDataFrame object
+#' 
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
 #' @export
 l_layer.SpatialLinesDataFrame <- function(widget, x, asSingleLayer=TRUE, ...) {
     if (asSingleLayer) {
@@ -101,6 +112,11 @@ l_layer.SpatialLinesDataFrame <- function(widget, x, asSingleLayer=TRUE, ...) {
 
 
 
+#' @title Layer lines in SpatialLines object
+#' 
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
 #' @export
 l_layer.SpatialLines <- function(widget, x, asSingleLayer=TRUE, ...) {
     if (asSingleLayer) {
@@ -116,6 +132,11 @@ l_layer.SpatialLines <- function(widget, x, asSingleLayer=TRUE, ...) {
     }
 }
 
+#' @title Layer lines in Lines object
+#' 
+#' @template templ_sp
+#' @template param_asSingleLayer
+#' 
 #' @export
 l_layer.Lines <- function(widget, x, asSingleLayer=TRUE, ...) {
     #if(attr(x, "package") != "sp")
@@ -134,6 +155,10 @@ l_layer.Lines <- function(widget, x, asSingleLayer=TRUE, ...) {
     }
 }
 
+#' @title Layer line in Line object
+#' 
+#' @template templ_sp
+#' 
 #' @export
 l_layer.Line <- function(widget, x, ...) {
     #if(attr(x, "package") != "sp")
@@ -143,16 +168,17 @@ l_layer.Line <- function(widget, x, ...) {
 }
 
 
-## Points
-#
 
-
-
-#' lines
-#' @export
+#' @title Layer points in SpatialPointsDataFrame object
 #' 
+#' @template templ_sp
+#' 
+#' @param asMainLayer if \code{TRUE} and the widget is a scatterplot widget,
+#'   then points can be chosen to be added to the \code{'model'} layer
+#' 
+#' @export 
 l_layer.SpatialPointsDataFrame <- function(widget, x, asMainLayer=FALSE, ...) {
-    if (asMainLayer) {
+    if (asMainLayer && l_layer_getType(widget, 'model') == 'scatterplot') {
         if(!as.logical(tcl('info', 'object', 'isa', 'typeof',
                            widget, '::loon::classes::Scatterplot_Model'))) {
             stop("widget is not a scatterplot.")
@@ -174,6 +200,11 @@ l_layer.SpatialPointsDataFrame <- function(widget, x, asMainLayer=FALSE, ...) {
     return(layer)
 }
 
+#' @title Layer points in SpatialPoints object
+#' 
+#' @template templ_sp
+#' @inheritParams l_layer.SpatialPointsDataFrame
+#' 
 #' @export
 l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
     if (asMainLayer) {
@@ -189,35 +220,32 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
     return(layer)
 }
 
+## Helper Functions
 
-#' Create a list of polygons or lines
-#'
-#' @examples  
-#' library(sp)
-#' library(rworldmap)
-#' world <- getMap(resolution = "coarse")
-#' class(world)
-#' isS4(world)
-#' xy <- spAsList(world)
-#'
-#' names(xy)
-#' # because tree has same depth for every leaf unlist is ok
-#' uxy <- spunlist(xy)
-#' unlist(xy, recursive=FALSE)
-#' 
-#' names(uxy)
-#' 
-#' # but here, unlist would be wrong
-#' a <- list(list(x=1:2, y=1:2), list(list(x=1:3, y=1:3), list(x=1:4, y=1:4)))
-#' spunlist(a)
-#' unlist(a, recursive=FALSE)
-#'
-#' 
-#' 
+# Create a list of polygons or lines
+#
+# @examples  
+# library(sp)
+# library(rworldmap)
+# world <- getMap(resolution = "coarse")
+# class(world)
+# isS4(world)
+# xy <- spAsList(world)
+#
+# names(xy)
+# # because tree has same depth for every leaf unlist is ok
+# uxy <- spunlist(xy)
+# unlist(xy, recursive=FALSE)
+# 
+# names(uxy)
+# 
+# # but here, unlist would be wrong
+# a <- list(list(x=1:2, y=1:2), list(list(x=1:3, y=1:3), list(x=1:4, y=1:4)))
+# spunlist(a)
+# unlist(a, recursive=FALSE)
 spAsList <- function(x) {
     UseMethod("spAsList")   
 }
-
 
 spAsList.default <- function(x) {
     stop("x is not of class SpatialPolygonsDataFrame,
@@ -255,7 +283,6 @@ spAsList.Polygon <- function(x) {
 
 
 ## Lines
-
 spAsList.SpatialLinesDataFrame <- function(x) {
     o <- lapply(x@lines, function(m) {
         spAsList(m)
@@ -286,7 +313,7 @@ spAsList.Line <- function(x) {
 }
 
 
-#' Create a flat list of polygon specifications
+# Create a flat list of polygon specifications
 spunlist <- function(x) {
     isLeaf <- function(x) {
         length(x) <= 3 && !is.null(names(x)) && all(names(x)[1:2] == c('x','y')) 

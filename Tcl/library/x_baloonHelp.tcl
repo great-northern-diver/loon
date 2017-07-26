@@ -9,7 +9,7 @@ namespace eval loon {
     ::tk::toplevel .loon_ballonhelp -background black\
 	-borderwidth 1 -relief flat
     
-    label .loon_ballonhelp.info 
+    label .loon_ballonhelp.info -justify left
     pack .loon_ballonhelp.info -side top -anchor nw -fill y
     wm overrideredirect .loon_ballonhelp 1
     wm withdraw .loon_ballonhelp

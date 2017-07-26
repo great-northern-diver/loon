@@ -1,29 +1,55 @@
-
-#' Create an plot with a map layered
+#' @title Create an plot with a map layered
+#' 
+#' @description Creates a scatterplot widget and layers the map in front.
+#' 
+#' @param x object of class map (defined in the maps library)
+#' @param ... arguments forwarded to \code{\link{l_layer.map}}
+#' 
+#' @return Scatterplot widget plot handle
+#' 
+#' @export
 #' @export l_plot.map
+#' 
+#' @seealso \code{\link{l_layer}}, \code{\link{l_layer.map}},
+#'   \code{\link[maps]{map}}
+#' 
 #' @examples 
+#' library(maps)
 #' p <- l_plot(map('world', fill=TRUE, plot=FALSE))
 l_plot.map <-  function(x, ...) {
 
     p <- l_plot.default()
-    l_layer.map(p, map=x, label="Map",  ...)
+    l_layer.map(p, x, label="Map",  ...)
     l_scaleto_world(p)
     p
 }    
 
-#' @title Add a Map as Drawings to Loon plot
-#'
-#'
-#' @description
-#'
-#' The maps library provides some map data in polygon which can be
-#' added as drawings to Loon plots. This function adds map objects
-#' with class map from the maps library as background drawings.
-#' 
+#' @title Add a Map of class map as Drawings to Loon plot
+#'   
+#' @description The maps library provides some map data in polygon which can be 
+#'   added as drawings (currently with polygons) to Loon plots. This function 
+#'   adds map objects with class map from the maps library as background 
+#'   drawings.
+#'   
+#' @template param_widget
+#' @param x a map object of class \code{\link[maps]{map}} as defined in the
+#'   \code{maps} \R package
+#' @inheritParams l_layer_polygon
+#' @template param_parent
+#' @template param_index
+#' @param asSingleLayer if \code{TRUE} then all the polygons get placed in a 
+#'   n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each 
+#'   polygon gets its own layer.
+#' @template param_dots_method_not_used
+#'   
+#' @return If \code{asSingleLayer=TRUE} then returns layer id of polygons layer,
+#'   otherwise group layer that contains polygon children layers.
+#'   
+#' @export
 #' @export l_layer.map
-#' 
+#'   
 #' @examples 
-#' 
+#' library(maps)
 #' canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
 #' p <- l_plot()
 #' l_map <- l_layer(p, canada, asSingleLayer=TRUE)
@@ -32,12 +58,13 @@ l_plot.map <-  function(x, ...) {
 #' l_map['active'] <- FALSE
 #' l_map['active'] <- TRUE
 #' l_map['tag']
-l_layer.map <- function(widget, map,
+l_layer.map <- function(widget, x,
                         color="", linecolor="black", linewidth=1,
-                        label, parent="root", index=0, asSingleLayer=TRUE) {
+                        label, parent="root", index=0, asSingleLayer=TRUE, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
-
+    map <- x
+    
     if(!is(map,"map")) {
         stop("map is not an map object from the maps library.")
     }
@@ -52,7 +79,7 @@ l_layer.map <- function(widget, map,
     
     is.color <- function(x) {
         sapply(x, function(X) {
-            tryCatch(is.matrix(col2rgb(X)), 
+            tryCatch(is.matrix(grDevices::col2rgb(X)), 
                      error = function(e) FALSE)
         })
     }

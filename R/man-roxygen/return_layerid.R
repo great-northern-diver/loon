@@ -1,1 +1,1 @@
-#' @return layer id
+#' @return layer object handle, layer id

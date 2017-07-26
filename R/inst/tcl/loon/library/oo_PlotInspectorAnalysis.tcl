@@ -40,9 +40,9 @@ oo::class create loon::classes::PlotInspectorAnalysis {
 	}
     }
 
-    method showItemlabels {var} {
+    method showItemLabels {var} {
 	if {$plotWidget ne ""} {
-	    uplevel #0 [list $plotWidget configure -showItemlabels [set ::$var]]
+	    uplevel #0 [list $plotWidget configure -showItemLabels [set ::$var]]
 	}
     }
 
@@ -310,11 +310,11 @@ oo::class create loon::classes::PlotInspectorAnalysis {
 
 	label ${opt}.glyphsLabel -text "glyphs:"
 	
-	checkbutton ${opt}.itemLabelsCB -text "itemlabels"\
-	    -variable ${opt}.showItemlabelsVar\
+	checkbutton ${opt}.itemLabelsCB -text "itemLabels"\
+	    -variable ${opt}.showItemLabelsVar\
 	    -onvalue 1 -offvalue 0\
-	    -command [list [self namespace]::my showItemlabels\
-			  ${opt}.showItemlabelsVar]
+	    -command [list [self namespace]::my showItemLabels\
+			  ${opt}.showItemLabelsVar]
 
 	
 	## scaleto 
@@ -598,7 +598,7 @@ oo::class create loon::classes::PlotInspectorAnalysis {
 	    my ActivewidgetEvents\
 		swapAxes showLabels showScales showGuides\
 		selectionLogic selectBy linkingGroup\
-		color active showItemlabels
+		color active showItemLabels
 	    
 	    set glyphs [$activewidget glyph ids]
 	    if {[llength $glyphs] eq 0} {
@@ -655,10 +655,10 @@ oo::class create loon::classes::PlotInspectorAnalysis {
 	}
 	
 	
-	if {"showItemlabels" in $args} {
-	    uplevel #0 [list set ${path}.plot.show.showItemlabelsVar\
+	if {"showItemLabels" in $args} {
+	    uplevel #0 [list set ${path}.plot.show.showItemLabelsVar\
 			    [::loon::listfns::booleanAs01\
-				 [$plotWidget cget -showItemlabels]]]
+				 [$plotWidget cget -showItemLabels]]]
 	}
 
 	if {"selectionLogic" in $args} {

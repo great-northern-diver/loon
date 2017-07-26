@@ -1,11 +1,11 @@
 
 .onAttach <- function(libname, pkgname) {
     
-    packageStartupMessage("\nloon Version ",
-                          utils::packageDescription(pkg = pkgname,
-                                                    lib.loc = libname,
-                                                    field="Version"),
-                          ", for documentation run l_help()")
+#    packageStartupMessage("\nloon Version ",
+#                          utils::packageDescription(pkg = pkgname,
+#                                                    lib.loc = libname,
+#                                                    field="Version"),
+#                          ", for documentation run l_help()")
 }
 
 
@@ -35,6 +35,11 @@
     ## Load Tcl package
     libdir <- file.path(find.package(package = pkgname), "tcl")
     
+    ## sometimes there are issues with devtools and testthat
+    if (!dir.exists(libdir))
+        libdir <- sub("tcl$", "inst/tcl", libdir)
+    # cat(paste0("libdir = ", libdir, "\n"))
+    
     tcl('lappend','auto_path',libdir)
      
 
@@ -51,13 +56,13 @@
     sysname <- Sys.info()[1]
     
     suppressWarnings(didLoad <- tclRequire('Img'))
-    if (sysname == "Darwin" && identical(didLoad,FALSE)) {        
-        addTclPath("/System/Library/Tcl")
-        suppressWarnings(didLoad <- tclRequire('Img'))
-        .withCorrectTclImg <<- FALSE
-    }
+    # if (sysname == "Darwin" && identical(didLoad, FALSE)) {        
+    #     addTclPath("/System/Library/Tcl")
+    #     suppressWarnings(didLoad <- tclRequire('Img'))
+    #     .withCorrectTclImg <<- FALSE
+    # }
     
-    if(identical(didLoad,FALSE)) {
+    if(identical(didLoad, FALSE)) {
        # warning(
        #     paste("Can not load the tcl Img extension.",
        #           "Hence you can not use the\n'l_image_import_files'",

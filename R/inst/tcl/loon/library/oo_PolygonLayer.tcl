@@ -20,7 +20,7 @@
 	    "fill color of polygon"
 
 	my SetStateDescription linecolor\
-	    "outline colors of polygon"
+	    "outline color of polygon"
 	
 	my SetStateDescription linewidth\
 	    "linewidth of outline"

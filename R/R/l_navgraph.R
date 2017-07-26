@@ -1,5 +1,24 @@
 
-#' Create a Navgraph
+#' @title Explore a dataset with the canonical 2d navigation graph setting
+#'   
+#' @description Creates a navigation graph, a graphswitch, a navigator and a 
+#'   geodesic2d context added, and a scatterplot.
+#' 
+#' @param data a data.frame with numeric variables only
+#' @template param_separator
+#' @param graph optional, graph or loongraph object with navigation graph. If 
+#'   the graph argument is not used then a 3d and 4d transition graph and a 
+#'   complete transition graph is added.
+#' @param ... arguments passed on to modify the scatterplot plot states
+#' 
+#' @templateVar page  learn_R_display_graph
+#' @templateVar section l_navgraph
+#' @template see_l_help
+#' 
+#' @return named list with \code{graph} handle, \code{plot}, handle,
+#'   \code{graphswitch} handle, \code{navigator} handle, and \code{context}
+#'   handle.
+#'   
 #' @export
 #' 
 #' @examples 
@@ -18,7 +37,7 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
         LG <- linegraph(G, sep=separator)
         LGnot <- loon::complement(LG)
         
-        cmb <- combn(names(data),2)
+        cmb <- utils::combn(names(data),2)
         CompG <- completegraph(nodes=apply(cmb[,cmb[1,]!=cmb[2,]],2,
                                    FUN=function(x)paste(x, collapse=separator)))
         

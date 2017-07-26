@@ -2,7 +2,7 @@
 
     superclass ::loon::classes::Plot_Model\
 	::loon::classes::withGlyphs\
-	::loon::classes::withItemlabels
+	::loon::classes::withItemLabels
 
     variable minX minY maxX maxY
 

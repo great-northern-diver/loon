@@ -1,8 +1,49 @@
-
+##
 ## Helper functions to create simple graphs
+##
 
-
+#' @title Create a graph object of class loongraph
+#'   
+#' @description The loongraph class provides a simple alternative to the graph 
+#'   class to create common graphs that are useful for use as navigation graphs.
+#'   
+#'   
+#' @param nodes a character vector with node names, each element defines a node
+#'   hence the elements need to be unique
+#' @param from a character vector with node names, each element defines an edge
+#' @param to  a character vector with node names, each element defines an edge
+#' @param isDirected boolean scalar, defines whether from and to define directed
+#'   edges
+#'   
+#'   
+#' @details loongraph objects can be converted to graph objects (i.e. objects of
+#' class graph which is defined in the graph package) with the as.graph 
+#' function.
+#' 
+#' @templateVar page learn_R_display_graph.html
+#' @templateVar section graph-utilities
+#' @template see_l_help
+#'
+#' @template return_loongraph 
+#' 
+#' @seealso \code{\link{completegraph}}, \code{\link{linegraph}}, 
+#'   \code{\link{complement}}, \code{\link{as.graph}}
+#'   
 #' @export
+#'      
+#' @examples 
+#' g <- loongraph(
+#'   nodes = c("A", "B", "C", "D"),
+#'   from = c("A", "A", "B", "B", "C"),
+#'   to   = c("B", "C", "C", "D", "D")
+#' )
+#' 
+#' \dontrun{
+#' # create a loon graph plot
+#' p <- l_graph(g)
+#' }
+#' 
+#' lg <- linegraph(g)
 loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALSE) {
 
     if (length(nodes) != length(unique(nodes)))
@@ -28,23 +69,78 @@ loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALS
 }
 
 
+#' @title Convert a graph object to a loongraph object
+#'   
+#' @description Sometimes it is simpler to work with objects of class loongraph
+#'   than to work with object of class graph.
+#' 
+#' @param graph object of class graph (defined in the graph library)
+#' 
+#' 
+#' @details See 
+#'   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
+#'   more information about the graph R package.
+#'   
+#' @templateVar page learn_R_display_graph.html
+#' @templateVar section graph-utilities
+#' @template see_l_help
+#'   
+#'   
+#' @template return_loongraph 
+#' 
+#' 
 #' @export
+#'   
+#' @examples 
+#' library(graph)
+#' graph_graph  = randomEGraph(LETTERS[1:15], edges=100)
+#' 
+#' loon_graph <- as.loongraph(graph_graph)
 as.loongraph <- function(graph) {
-    if (!is(graph, "graph")) {
-        stop("graph argument is not of class graph.")
-    }
+    if (!is(graph, "graph")) stop("graph argument is not of class graph.")
+    requireNamespace("graph", quietly = TRUE) || stop("graph package is required for this function.")
     
     nodes <- nodes(graph)
-    ft <- edgeMatrix(graph)
+    ft <- graph::edgeMatrix(graph)
     
     loongraph(nodes=nodes, from=nodes[ft[1,]], to=nodes[ft[2,]],
-              isDirected=isDirected(graph))    
+              isDirected=graph::isDirected(graph))    
 }
 
+
+#' @title Convert a loongraph object to an object of class graph
+#'   
+#' @description Loon's native graph class is fairly basic. The graph package (on
+#'   bioconductor) provides a more powerful alternative to create and work with 
+#'   graphs. Also, many other graph theoretic algorithms such as the complement 
+#'   function and some graph layout and visualization methods are implemented 
+#'   for the graph objects in the RBGL and Rgraphviz R packages. For more 
+#'   information on packages that are useful to work with graphs see the
+#'   \emph{gRaphical Models in R} CRAN Task View at
+#'   \url{https://CRAN.R-project.org/view=gR}.
+#'   
+#' @param loongraph object of class loongraph
+#'   
+#' @details See 
+#'   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
+#'   more information about the graph R package.
+#'   
+#' @template return_loongraph
+#'   
 #' @export
+#' 
+#' @examples 
+#' library(graph)
+#' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+#' g1 <- as.graph(g) 
 as.graph <- function(loongraph) {
     if (!is(loongraph, "loongraph")) {
         stop("loongraph argument is not of class loongraph.")
+    }
+    
+    if (!requireNamespace("graph", quietly = TRUE)) {
+        stop("graph package needed for this function to work. Please install it from bioconductor.",
+             call. = FALSE)
     }
 
     n <- length(loongraph$nodes)
@@ -70,13 +166,54 @@ as.graph <- function(loongraph) {
 }
 
 
+#' @title Plot a loon graph object with base R graphics
+#'   
+#' @description This function converts the loongraph object to one of class 
+#'   graph and the plots it with its respective plot method.
+#'   
+#' @param x object of class loongraph
+#' @param ... arguments forwarded to method
+#' 
 #' @export
+#' 
+#' @examples 
+#' library(Rgraphviz)
+#' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+#' plot(g)
 plot.loongraph <- function(x, ...) {
-    plot(as.graph(x), ...)
+    
+    requireNamespace("Rgraphviz") || stop("Rgraphviz library required")
+    
+    Rgraphviz::plot(as.graph(x), ...)
 }
 
 
+#' @title Create a complete graph or digraph with a set of nodes
+#'   
+#' @description From Wikipedia: "a complete graph is a simple undirected graph 
+#'   in which every pair of distinct vertices is connected by a unique edge. A 
+#'   complete digraph is a directed graph in which every pair of distinct 
+#'   vertices is connected by a pair of unique edges (one in each direction
+#'   
+#' @inheritParams loongraph
+#' @param isDirected a boolean scalar to indicate wheter the returned object is 
+#'   a complete graph (undirected) or a complete digraph (directed).
+#'   
+#'         
+#' @details Note that this function masks the completegraph function of the
+#'   graph package. Hence it is a good idead to specify the package namespace
+#'   with ::, i.e. loon::completegraph and graph::completegraph.
+#'   
+#' @templateVar page learn_R_display_graph.html
+#' @templateVar section graph-utilities
+#' @template see_l_help
+#'   
+#' @template return_loongraph
+#' 
 #' @export
+#'   
+#' @examples 
+#' g <- loon::completegraph(letters[1:5])
 completegraph <- function(nodes, isDirected=FALSE) {
 
     n <- length(nodes)
@@ -88,7 +225,7 @@ completegraph <- function(nodes, isDirected=FALSE) {
         from <- as.vector(co[,1])
         to <- co[,2]
     } else {
-        co <- combn(nodes, 2)
+        co <- utils::combn(nodes, 2)
         from <- co[1,]
         to <- co[2,]
     }
@@ -97,13 +234,45 @@ completegraph <- function(nodes, isDirected=FALSE) {
 }
 
 
+#' @title Create a linegraph
+#' 
+#' @description The line graph of G, here denoted L(G), is the graph whose nodes 
+#'   correspond to the edges of G and whose edges correspond to nodes of G such 
+#'   that nodes of L(G) are joined if and only if the corresponding edges of G 
+#'   are adjacent in G.
+#'   
+#' @param x graph of class graph or loongraph
+#' @param ... arguments passed on to method
+#'   
+#' @return graph object
+#'   
 #' @export
 linegraph <- function(x, ...) {
     UseMethod("linegraph")
 }
 
+
+#' @title Create a linegraph of a graph
+#'   
+#' @description Create a lingraph of a loongraph
+#'   
+#' @param x loongraph object
+#' @param separator one character - node names in x get concatenated with this 
+#'   character
+#' @template param_dots_method_not_used
+#'   
+#' @details linegraph.loongraph needs the code part for directed graphs (i.e.
+#'   isDirected=TRUE)
+#'   
+#' @template return_loongraph
+#'   
 #' @export
-linegraph.loongraph <- function(x, separator=":") {
+#' 
+#' @examples 
+#' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+#' 
+#' linegraph(g)
+linegraph.loongraph <- function(x, separator=":", ...) {
     nodes <- x$nodes
     from <- x$from
     to <- x$to
@@ -160,12 +329,30 @@ linegraph.loongraph <- function(x, separator=":") {
     return(G)
 }
 
-
+#' @title Create the Complement Graph of a Graph
+#' 
+#' @description Creates a complement graph of a graph
+#' 
+#' @param x graph or loongraph object
+#' 
+#' @return graph object
+#' 
 #' @export
-complement <- function(x, ...) {
-    UseMethod("complement")
+complement <- function(x) {
+    UseMethod("complement", x)
 }
 
+
+#' @title Create the Complement Graph of a loon Graph
+#'   
+#' @description Creates a complement graph of a graph
+#'   
+#' @details This method is currently only implemented for undirected graphs.
+#'   
+#' @param x loongraph object
+#'   
+#' @template return_loongraph
+#'   
 #' @export
 complement.loongraph <- function(x) {
     nodes <- x$nodes
@@ -211,7 +398,9 @@ complement.loongraph <- function(x) {
 # setMethod("complement", "loongraph", loon:::complement.loongraph)
 
 
-##
+# Create a graph product
+# 
+# TODO: graphproduct is incomplete
 graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator=':') {
 
     stop("not implemented yet.")
@@ -232,24 +421,32 @@ graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator='
 
 
 
-#' Make each space in a node apprear only once
-#'
-#' @details Note this is a string based operation.
-#' Node names must not contain the separator character!
-#'
-#' @export
-#'
-#' @examples 
+#' @title Make each space in a node apprear only once
 #' 
+#' @description Reduce a graph to have unique node names
+#' 
+#' @details Note this is a string based operation. Node names must not contain
+#'   the separator character!
+#'   
+#' @param graph graph of class loongraph
+#' @template graph_separator
+#' 
+#' @template return_loongraph
+#'       
+#' @export
+#' 
+#' @examples
 #' G <- completegraph(nodes=LETTERS[1:4])
 #' LG <- linegraph(G)
 #' 
 #' LLG <- linegraph(LG)
-#'
+#' 
 #' graphreduce(LLG)
 #' 
+#' \dontrun{
 #' library(Rgraphviz)  
 #' plot(graphreduce(LLG))
+#' }
 graphreduce <- function(graph, separator) {
 
     if(!is(graph, 'loongraph'))
@@ -297,7 +494,27 @@ graphreduce <- function(graph, separator) {
 }
 
 
+#' @title Create a n-d transition graph
+#' 
+#' @description A n-d transition graph has k-d nodes and all edges that connect
+#'   two nodes that from a n-d subspace
+#' 
+#' @param nodes node names of graph
+#' @param n integer, dimension an edge should represent
+#' @param separator character that separates spaces in node names
+#' 
+#' @templateVar page learn_R_display_graph.html
+#' @templateVar section graph-utilities
+#' @template see_l_help
+#' @details 
+#'   
+#' 
+#' @template return_loongraph
+#' 
 #' @export
+#' 
+#' @examples 
+#' g <- ndtransitiongraph(nodes=c('A:B', 'A:F', 'B:C', 'B:F'), n=3, separator=':')
 ndtransitiongraph <- function(nodes, n, separator=":") {
 
     nnodes <- length(nodes)

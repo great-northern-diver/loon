@@ -1,10 +1,23 @@
 
-#' Layer a Raster Image
+#' @title Layer a Raster Image
+#' 
+#' @description This function is very similar to the 
+#'   \code{\link[graphics]{rasterImage}} function. It works with every loon plot
+#'   which is based on the cartesian coordinate system.
+#'
+#' 
+#' @inheritParams l_layer_heatImage
+#' @inheritParams graphics::rasterImage
+#' 
+#' @templateVar page learn_R_layer
+#' @templateVar section countourlines-heatimage-rasterimage
+#' @template see_l_help
+#' 
+#' @return layer id of group or rectangles layer
 #' 
 #' @export
 #' 
 #' @examples 
-#'
 #' plot(1,1, xlim = c(0,1), ylim=c(0,1))
 #' mat <- matrix(c(0,0,0,0, 1,1), ncol=2)
 #' rasterImage(mat, 0,0,1,1, interpolate = FALSE)
@@ -39,7 +52,7 @@ l_layer_rasterImage <-  function (widget, image, xleft, ybottom, xright, ytop,
     if(angle != 0) stop("only angle=0 is supported.")
     if(interpolate) warning("interpolation is not supported, interpolate=FALSE used.")
     
-    image <- if (inherits(image, "nativeRaster")) image else as.raster(image)
+    image <- if (inherits(image, "nativeRaster")) image else grDevices::as.raster(image)
     
     x <- seq(xleft, xright, length.out = dim(image)[2]+1)
     y <- seq(ytop, ybottom, length.out = dim(image)[1]+1)

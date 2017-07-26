@@ -1,31 +1,27 @@
 
-#' @export
+# TODO
+l_ladder <- function(from=-5, to=5, alphaX=0, alphaY=0, parent=NULL) {
 
-l_ladder <- function(from=-5, to=5, alphaX=0, alphaY=0) {
-    tt <- l_toplevel()
-
-    plot <- l_ladder_widget(tt, from, to, alphaX, alphaY)
-    tkpack(plot, fill="y", expand=TRUE)
+    with_toplevel <- if (is.null(parent)) {
+        parent <- l_toplevel()
+        TRUE
+    } else {
+        FALSE
+    }
     
-    return(plot)
-}
-
-#' @export
-
-l_ladder_widget <- function(parent, from=-5, to=5, alphaX=0, alphaY=0) {
-
     child <- l_subwin(parent, 'ladder')
 
     plot <- try(tcl("::loon::ladder", child))
     
     if(is(plot,'try-error')) {
-        plot <- NULL
-        tkdestroy(tt)
+        if (with_toplevel) tkdestroy(parent)
         stop("ladder widget could not be created.")
     } else {
-        plot <- as.character(plot)        
+        plot <- as.character(plot)
     }
     
+    if (with_toplevel) tkpack(plot, fill="y", expand=TRUE)
+
     tcl(plot, "configure", from=from, to=to, alphaX=alphaX, alphaY=alphaY)
 
     class(plot) <- "loon"

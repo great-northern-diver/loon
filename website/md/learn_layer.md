@@ -69,8 +69,8 @@ Some important implementation details for working with layers are
 * Layers are arranged in a tree structure where a `group` layer can be
   a parent to children layers (any of the above mentioned layer
   types). The tree root has id `root`.
-* The layers are rendered in order of a Depth-first traversal of the
-  non-group layers.
+* The non-group layers are rendered in order of a Depth-first
+  traversal of the layer tree.
 * Layers have states that define its appearance.
 	* Layer states support state bindings.
 * Sometimes (e.g. for texts layers), `n` can not be set to 1. Use the
