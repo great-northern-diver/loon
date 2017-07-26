@@ -5,6 +5,7 @@
     - `showItemlabels` to `showItemLabels`
 * automatically convert nested lists and data.frames
     - unexported `l_nestedTclList2Rlist` and `l_data`
+* remove the local copy of the website and make `l_help` point to the official website.
 
 # loon 1.0.1
 * Bug fix in geodesic2d for 4d transitions
