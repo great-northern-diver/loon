@@ -19,7 +19,7 @@ LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-07-26 17:51:22 UTC; adrian
+Packaged: 2017-07-26 18:22:44 UTC; adrian
 Author: Adrian Waddell [aut, cre],
   R. Wayne Oldford [aut]
 Maintainer: Adrian Waddell <adrian@waddell.ch>

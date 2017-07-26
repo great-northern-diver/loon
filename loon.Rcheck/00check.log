@@ -58,7 +58,7 @@ New submission
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... OK
-  Running ‘demos.R’ [132s/154s]
+  Running ‘demos.R’ [134s/159s]
   Running ‘testthat.R’
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK

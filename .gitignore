@@ -15,3 +15,4 @@ autom4te.cache/
 website/md/generated/
 .Rproj.user
 debug/bugs/known_bugs.html
+loon.Rcheck/

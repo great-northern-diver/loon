@@ -351,7 +351,7 @@ attr(,"class")
 [1] "canvasBinding0"
 > 
 > l_bind_canvas_get(p, id)
-[1] "<Configure>"              "R_call 0x55ec43f65620 %W"
+[1] "<Configure>"              "R_call 0x556fdb484160 %W"
 > 
 > 
 > 
@@ -387,7 +387,7 @@ attr(,"class")
 [1] "canvasBinding0"
 > 
 > l_bind_canvas_get(p, id)
-[1] "<Configure>"              "R_call 0x55ec4409ce20 %W"
+[1] "<Configure>"              "R_call 0x556fdb5bb710 %W"
 > 
 > 
 > 
@@ -423,7 +423,7 @@ attr(,"class")
 [1] "canvasBinding0"
 > 
 > l_bind_canvas_get(p, id)
-[1] "<Configure>"              "R_call 0x55ec441dcfd8 %W"
+[1] "<Configure>"              "R_call 0x556fdb6fb8c8 %W"
 > 
 > 
 > 
@@ -4143,7 +4143,7 @@ attr(,"class")
 [1] "loon"
 
 $env
-<environment: 0x55ec405bc4a0>
+<environment: 0x556fd7ad6030>
 
 > 
 > 
@@ -6991,7 +6991,7 @@ character(0)
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  13.684 0.56 49.192 0 0 
+Time elapsed:  13.036 0.5 57.806 0 0 
 > grDevices::dev.off()
 null device 
           1 

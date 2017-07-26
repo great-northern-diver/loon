@@ -2534,4 +2534,4 @@ For a short introduction type : 	 vignette('rworldmap')
 > 
 > proc.time()
    user  system elapsed 
-131.164   0.472 153.480 
+133.420   0.500 158.609 
