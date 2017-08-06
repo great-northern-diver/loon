@@ -14,9 +14,7 @@ header-includes:
 # Introduction
 
 `loon` is a toolkit for interactive data visualization and
-exploration. Currently, `loon` is embedded in `R` and `Tcl`. Please
-see the [beta section](beta.html) for the current state of the
-software.
+exploration. Currently, `loon` is embedded in `R` and `Tcl`.
 
 * To issue a bug report use the
 [github issue tracker](https://github.com/waddella/loon/issues).
