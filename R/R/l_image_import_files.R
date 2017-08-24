@@ -20,7 +20,11 @@
 l_image_import_files <- function(paths) {
 
     if (!.withTclImg) {
-        stop("The l_image_import_files function requires the Img tcl extension to be loaded")
+        if (any(vapply(paths, function(p) {
+            !(toupper(tools::file_ext(p)) %in% c("PPM", "PGM", "PNG", "GIF"))
+        }, logical(1)))) {
+            stop("All file formats other than png require the IMG Tcl extension.")    
+        }
     }
     
     unique_paths <- unique(paths)
