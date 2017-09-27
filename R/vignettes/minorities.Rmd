@@ -4,7 +4,7 @@ author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visible minorities in Canadian cities}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -47,6 +47,8 @@ For example, here are the counts for three Canadian cities (3 rows of `minority`
 ```{r minorityTables, echo=FALSE, fig.align="center"}
 subset <- t(minority[c("Victoria", "Ottawa", "St. John\'s"),][,1:(length(names(minority))-4)])
 knitr::kable(subset)
+library(pander)
+pander(Titanic)
 ```
 
 The remaining variates provide the geographic location of each city.  The latitude and longitude of the cities were determined in two ways.  First, the data in `canada.cities` from the `maps` package was used.  This produced the `minority` variates `lat' and `long'.  The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates  `googleLat` and `googleLong`.
@@ -234,8 +236,8 @@ p_map <- with(minority,
               l_plot(long,lat,
                      xlabel="longitude", ylabel="latitude",
                      linkingGroup="minority",
-                     itemLabel=rownames(minority),
-                     showLabels=TRUE)
+                     itemlabel=rownames(minority),
+                     showItemlabels=TRUE)
      )
 
 # Add the map of Canada
@@ -490,17 +492,17 @@ To facilitate the displays we will want to have short variate names for the visi
 # Back to the raw data and just rename variables
 library(dplyr)
 minority_star <- minority %>%
-  select(SE.Asian=Southeast.Asian,
+  select("SE.Asian"=Southeast.Asian,
          Chinese = Chinese,
          Japanese = Japanese,
-         S.Asian = South.Asian,
+         "S.Asian" = South.Asian,
          Other = Visible.minority.not.included.elsewhere,
          Black = Black,
-         Multiple = Multiple.visible.minority,
+         "Multiple" = Multiple.visible.minority,
          Filipino = Filipino,
          Arab = Arab,
          Korean = Korean,
-         Latino = Latin.American)
+         "Latino" = Latin.American)
 ```
 
 As the following few rows of this dataset show:
@@ -549,8 +551,8 @@ s <- l_serialaxes(data=minority_star,
                   linewidth=5,
                   scaling = "variable",
                   showArea=FALSE,
-                  itemLabel=rownames(minority), 
-                  showItemLabels=TRUE)
+                  itemlabel=rownames(minority), 
+                  showItemlabels=TRUE)
 ```
 
 This plot shows all variates at once for each city; each city is a ``curve'' of connected line segments.  As with all other plots in `loon` the serial axes plot is interactive.  Placing the mouse over any curve will reveal the city.  Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.
@@ -577,12 +579,10 @@ p_stars <- with(minority,
                 l_plot(rank(long), rank(long),
                        title = "", 
                        showScales = FALSE, 
-                       xlabel = "",
-                       ylabel = "",
                        showLabels=FALSE, size=3,
                        linkingGroup = "minority",
-                       itemLabel=rownames(minority), 
-                       showItemLabels=TRUE))
+                       itemlabel=rownames(minority), 
+                       showItemlabels=TRUE))
 
 gstars <-l_glyph_add_serialaxes(p_stars,
                                 axesLayout = "radial",
@@ -746,8 +746,8 @@ s_close <- l_serialaxes(data=minority_star,
                         scaling = "observation",
                         showArea=FALSE,
                         title="Nearest minority order",
-                        itemLabel=rownames(minority), 
-                        showItemLabels=TRUE)
+                        itemlabel=rownames(minority), 
+                        showItemlabels=TRUE)
 
 s_far <- l_serialaxes(data=minority_star, 
                       linkingGroup = "minority",
@@ -757,8 +757,8 @@ s_far <- l_serialaxes(data=minority_star,
                       scaling = "observation",
                       showArea=FALSE,
                       title="Farthest minority order",
-                      itemLabel=rownames(minority), 
-                      showItemLabels=TRUE)
+                      itemlabel=rownames(minority), 
+                      showItemlabels=TRUE)
 ```
 
 Add the glyphs to the grid plot.
