@@ -99,18 +99,18 @@ namespace eval loon {
     set Options(brush_color_handle) gray
 
     ## Version 1
-#    set Options(colors) [list \#377EB8 \#E41A1C \#4DAF4A \#984EA3\
-#			     \#FF7F00 \#FFFF33 \#A65628 \#F781BF \#999999\
-#			     \#8DD3C7 \#FFFFB3 \#BEBADA \#FB8072 \#80B1D3\
-#			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
-#			     \#CCEBC5 \#FFED6F]
+    set Options(colors) [list \#377EB8 \#E41A1C \#4DAF4A \#984EA3\
+			     \#FF7F00 \#FFFF33 \#A65628 \#F781BF \#999999\
+			     \#8DD3C7 \#FFFFB3 \#BEBADA \#FB8072 \#80B1D3\
+			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
+			     \#CCEBC5 \#FFED6F]
 
     ##  ::loon::hcl::hclColorPaletteDialog 12 72 66 210
     
     ## set Options(colors) [::loon::hcl::hue_pal 12 {15 375} 72 66 210]
     set Options(colors-palette-hcl) {66 70 241}
-    set Options(colors) [::loon::hcl::hue_mem_pal 11\
-			     {*}$Options(colors-palette-hcl)]
+    #set Options(colors) [::loon::hcl::hue_mem_pal 11\
+    #			     {*}$Options(colors-palette-hcl)]
     set Options(colors-palette) hcl
     
     
