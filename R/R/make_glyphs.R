@@ -29,7 +29,7 @@
 #' l_map <- l_layer(p, canada, asSingleLayer=TRUE)
 #' l_scaleto_world(p)
 #' 
-#' img <- make_glyphs(lapply(1:nrow(minority), function(i)minority[i,]), function(m) {
+#' img <- l_make_glyphs(lapply(1:nrow(minority), function(i)minority[i,]), function(m) {
 #'     par(mar=c(1,1,1,1)*.5)
 #'     mat <- as.matrix(m[1,1:10]/max(m[1:10]))
 #'     barplot(height = mat,
@@ -45,8 +45,9 @@
 #' p['glyph'] <- g
 #' 
 #' 
+#' library(grid)
 #' ## with grid
-#' li <- make_glyphs(runif(6), function(x) {
+#' li <- l_make_glyphs(runif(6), function(x) {
 #'     if(any(x>1 | x<0))
 #'         stop("out of range")
 #'     pushViewport(plotViewport(unit(c(1,1,1,1)*0, "points")))
@@ -54,8 +55,15 @@
 #'     grid.rect(0, 0, height = unit(x, "npc"), just = c("left", "bottom"),
 #'               gp=gpar(col=NA, fill="steelblue"))
 #' })
+#' 
+#' l_imageviewer(li)
+#' 
+#' p <- l_plot(1:6)
+#' g <- l_glyph_add_image(p, li, "bars")
+#' p['glyph'] <- g
+#' 
 #' }
-make_glyphs <- function(data, draw_fun, width=50, height=50, ...) {
+l_make_glyphs <- function(data, draw_fun, width=50, height=50, ...) {
     tmp <- tempdir()
     files <- Map(function(data_i, i) {
         

@@ -90,5 +90,5 @@ p['glyph'] <- c(
 )
 }
 \seealso{
-\code{\link{l_glyph_add_text}}, \code{\link{make_glyphs}}
+\code{\link{l_glyph_add_text}}, \code{\link{l_make_glyphs}}
 }
