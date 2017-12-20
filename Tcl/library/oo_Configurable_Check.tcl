@@ -50,6 +50,19 @@
     }
 
     method Check_color {var values dim args} {
+
+
+	## remove alpha part from hex6 string
+	set col {}
+	foreach c $values {
+	    if {[string index $c 0] eq "#" && [string length $c] eq 9} {
+		lappend col [string range $c 0 6]
+	    } else {
+		lappend col $c
+	    }
+	}
+	set values $col
+
 	
 	if {![::loon::listfns::isColor $values]} {
 	    #puts "Warning: Non color arguments for a color state is treated as factor."
