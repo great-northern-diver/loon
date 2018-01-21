@@ -1,5 +1,11 @@
 apt_packages:
   - libtk-img
+  - mesa-common-dev
+  - libglu1-mesa-dev
+  - freeglut3-dev
+  - libssl-dev
+  - libcurl4-gnutls-dev
+  - libxml2-dev
 
 sudo: required
 
@@ -19,4 +25,20 @@ bioc_packages:
  - graph
  - RDRToolbox
  - Rgraphviz
+
+r_packages:
+ - maps
+ - sp
+ - RColorBrewer
+ - RnavGraphImageData
+ - rworldmap
+ - scales
+ - dplyr
+ - rgl
+ - PairViz
+ - scagnostics
+ - kernlab
+ - testthat
+ - knitr
+ - rmarkdown
 
