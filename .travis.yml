@@ -1,14 +1,21 @@
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y libtk-img
+apt_packages:
+  - libtk-img
 
-language: R
+language: r
+before_install:
+  - cd R
 sudo: false
 cache: packages
 
 r:
-- 3.1
-- 3.2
-- oldrel
-- release
-- devel
+ - 3.1
+ - 3.2
+ - oldrel
+ - release
+ - devel
+
+bioc_packages:
+ - graph
+ - RDRToolbox
+ - Rgraphviz
+
