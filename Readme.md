@@ -1,5 +1,7 @@
 # loon
 
+[![Build Status](https://travis-ci.org/waddella/loon.svg?branch=master)](https://travis-ci.org/waddella/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
+
 `loon` is a toolkit for interactive data visualization and
 exploration. Currently, `loon` is embedded in `R` and `Tcl`.
 
