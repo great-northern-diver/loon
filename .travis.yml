@@ -1,6 +1,8 @@
 apt_packages:
   - libtk-img
 
+sudo: required
+
 language: r
 before_install:
   - cd R
