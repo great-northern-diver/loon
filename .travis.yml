@@ -10,16 +10,16 @@ apt_packages:
 
 sudo: required
 
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
+
 language: r
 before_install:
   - cd R
 cache: packages
 
-
-install:
-  - export DISPLAY=':99.0'
-  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  
 r:
  - release
  - devel
@@ -44,4 +44,3 @@ r_packages:
  - testthat
  - knitr
  - rmarkdown
-
