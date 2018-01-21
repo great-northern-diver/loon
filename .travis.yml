@@ -4,7 +4,6 @@ apt_packages:
 language: r
 before_install:
   - cd R
-sudo: false
 cache: packages
 
 r:
