@@ -1,10 +1,12 @@
 
 loonPlotFactory <- function(factory_tclcmd, factory_path, factory_window_title="loon plot", parent=NULL, ...) {
 
-    new.toplevel <- FALSE
-    if(is.null(parent)) {
-        new.toplevel <- TRUE
+
+    new.toplevel <- if(is.null(parent)) {
         parent <- l_toplevel()
+        TRUE
+    } else {
+        FALSE
     }
     
     child <- l_subwin(parent, factory_path)
