@@ -15,7 +15,7 @@ l_serialaxes(data, sequence, scaling = "variable", axesLayout = "radial",
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
 how the data is scaled. See Details for more information}
 
-\item{axesLayout}{either \code{"serial"} or \code{"parallel"}}
+\item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 

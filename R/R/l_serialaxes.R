@@ -8,7 +8,7 @@
 #' @param sequence vector with variable names that defines the axes sequence
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
 #'   how the data is scaled. See Details for more information
-#' @param axesLayout either \code{"serial"} or \code{"parallel"}
+#' @param axesLayout either \code{"radial"} or \code{"parallel"}
 #' @param showAxes boolean to indicate whether axes should be shown or not
 #' @template param_parent
 #' @template param_dots_state_args
