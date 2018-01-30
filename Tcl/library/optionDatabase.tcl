@@ -105,14 +105,13 @@ namespace eval loon {
 #			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
 #			     \#CCEBC5 \#FFED6F]
 
+    set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+    set Options(colors-palette) loon
+    
     ##  ::loon::hcl::hclColorPaletteDialog 12 72 66 210
     
     ## set Options(colors) [::loon::hcl::hue_pal 12 {15 375} 72 66 210]
     set Options(colors-palette-hcl) {66 70 241}
-    set Options(colors) [::loon::hcl::hue_mem_pal 11\
-			     {*}$Options(colors-palette-hcl)]
-    set Options(colors-palette) hcl
-    
     
     set Options(size_0_rect) 3
     
@@ -272,6 +271,10 @@ namespace eval loon {
 	variable Options
 	
 	switch -- [string tolower $type] {
+	    loon {		
+		set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+		set Options(colors-palette) loon
+	    }
 	    hcl {
 		set chroma [lindex $args 0]
 		set luminance [lindex $args 1]
@@ -319,8 +322,9 @@ namespace eval loon {
 			set Options(colors) [list  "#B3E2CD" "#FDCDAC" "#CBD5E8" "#F4CAE4" "#E6F5C9" "#FFF2AE" "#F1E2CC" "#CCCCCC"]
 		    }
 		    paired {
-			set Options(colors) [list "#A6CEE3" "#1F78B4" "#B2DF8A" "#33A02C" "#FB9A99" "#E31A1C" "#FDBF6F" "#FF7F00" "#CAB2D6" "#6A3D9A" "#FFFF99" "#B15928"]
-		    }
+			 # set Options(colors) [list "#A6CEE3" "#1F78B4" "#B2DF8A" "#33A02C" "#FB9A99" "#E31A1C" "#FDBF6F" "#FF7F00" "#CAB2D6" "#6A3D9A" "#FFFF99" "#B15928"]
+			 set Options(colors) [list "#1F78B4" "#33A02C" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+		    }		    
 		    dark2 {
 			set Options(colors) [list "#1B9E77" "#D95F02" "#7570B3" "#E7298A" "#66A61E" "#E6AB02" "#A6761D" "#666666"]
 		    }
