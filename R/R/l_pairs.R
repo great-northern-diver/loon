@@ -23,6 +23,11 @@ l_pairs <- function(data, parent=NULL, ...) {
     if(!is.data.frame(data)) {
         data <- as.data.frame(data)
     }
+    
+    if (is(data, "tbl_df")) {
+        requireNamespace("tibble") || stop("you need the tibble package installed")
+        data <- tibble:::as.data.frame.tbl_df(data)
+    }
 
     if (is.null(args[['linkingGroup']])) {
         args[['linkingGroup']] <- deparse(substitute(data))
