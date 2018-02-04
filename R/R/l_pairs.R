@@ -20,13 +20,8 @@ l_pairs <- function(data, parent=NULL, ...) {
 
     args <- list(...)
     
-    if(!is.data.frame(data)) {
+    if(!identical(class(data), "data.frame")) { # use of identical to deal with tibbles
         data <- as.data.frame(data)
-    }
-    
-    if (is(data, "tbl_df")) {
-        requireNamespace("tibble") || stop("you need the tibble package installed")
-        data <- tibble:::as.data.frame.tbl_df(data)
     }
 
     if (is.null(args[['linkingGroup']])) {
