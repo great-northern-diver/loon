@@ -343,3 +343,13 @@ l_setColorList_baseR <- function() {
     tcl('::loon::setColorList', 'baseR')
     invisible()
 }
+
+
+#' @templateVar type loon defaults
+#' @template man_setColorList
+#' 
+#' @export
+l_setColorList_loon <- function() {
+    tcl('::loon::setColorList', 'loon')
+    invisible()
+}

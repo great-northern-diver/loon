@@ -33,7 +33,7 @@ variable.
 * Add the path to `loon`'s `pkgIndex.tcl` file to the `TCLLIBPATH`
   environment variable, e.g. (form the bash)
 
-		export TCLLIBPATH=$TCLLIBPATH:/Users/arwaddel/Desktop/loon/Tcl
+		export TCLLIBPATH="$TCLLIBPATH /Users/arwaddel/Desktop/loon/Tcl"
 
 Then, to load `loon` enter the following in `tkcon`
 
