@@ -13,7 +13,6 @@
 #' @examples 
 #' 
 #' library(grid)
-#' l_setColorList_baseR()
 #' 
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 #' 
@@ -31,10 +30,115 @@
 #' grid.newpage()
 #' grid.draw(g)
 #' 
+#' grid.ls(g, viewports = TRUE, fullNames = TRUE)
+#' 
+#' ## with primitive layers from l_layers demo
+#' 
+#' p <- with(olive,
+#'           l_plot(x=linoleic, y=oleic,
+#'                  color=Region, title="Olive Data"))
+#'                  
+#' ## Layer a Group
+#' l.g <- l_layer_group(p, label="Drawings", parent="root", index="end")
+#' 
+#' ## Layer Points
+#' l.pts <- l_layer_points(p,
+#'                         x=seq(from=200,to=1600, length.out=20),
+#'                         y=seq(from=6000,to=8000, length.out=20),
+#'                         color="steelblue", size=20:39)
+#' 
+#' ## Polygon
+#' i <- with(olive, chull(linoleic, oleic))
+#' x.hull <- olive$linoleic[i]
+#' y.hull <- olive$oleic[i]
+#' l_layer_polygon(p, x.hull, y.hull, color="thistle",
+#'                 linecolor="black", linewidth=4, parent=l.g)
+#' 
+#' ## Rectangle
+#' l_layer_rectangle(p, x=c(1100, 1300), y=c(7600, 8300), linewidth=2)
+#' 
+#' ## Oval
+#' l_layer_oval(p, x=c(1500, 1750), y=c(7900, 8100),
+#'              color="", linecolor="orange", linewidth=4)
+#' 
+#' ## Line
+#' x <- with(olive, linoleic[Region=="North"])
+#' y <- with(olive, oleic[Region=="North"])
+#' 
+#' fit <- lm(y~x)
+#' xr <- seq(from=min(x), to=max(x), length.out=20)
+#' yp <- predict(fit, data.frame(x=xr), interval="prediction")
+#' 
+#' l.pi <- l_layer_polygon(p, x=c(xr, rev(xr)),
+#'                         y=c(yp[,2],rev(yp[,3])),
+#'                         color="lightgreen",
+#'                         linecolor= "darkgreen", linewidth=2,
+#'                         label="predition interval west liguria")
+#' 
+#' l.fit <- l_layer_line(p, x=xr, y=yp[,1],
+#'                       color="darkgreen", linewidth=8,
+#'                       label="fit west liguria")
+#' 
+#' 
+#' ## Text (size does not work and color is gray)
+#' bbox <- l_layer_bbox(p, "root")
+#' l_layer_texts(p, x=seq(from=bbox[1], to=bbox[3], length.out=length(LETTERS)),
+#'               y=rev(seq(from=bbox[2], to=bbox[4], length.out=length(LETTERS))),
+#'               text=LETTERS, size=seq_along(LETTERS),
+#'               angle=seq_along(LETTERS)/length(LETTERS)*360)
+#' 
+#' # text
+#' l_layer_text(p, x = 750, y = 6500, text = "Hello World")
+#' 
+#' # polygons
+#' l_layer_polygons(p,
+#'   x = list(
+#'     c(500, 500, 600, 750, 650, 550),
+#'     c(500, 500, 750, 750, 625),
+#'     c(1250, 1250, 1400, 1400),
+#'     c(1250, 1250, 1400)
+#'   ),
+#'   y = list(
+#'     c(6500, 6800, 7200, 6800, 6500, 7000),
+#'     c(8200, 8500, 8500, 8200, 8400),
+#'     c(8200, 8500, 8500, 8300),
+#'     c(6500, 7200, 6850)
+#'   ),
+#'   color = c('blue', 'orange', 'yellow', 'red')
+#' )
+#' 
+#' # rectangles
+#' l_layer_rectangles(p,
+#'   x = lapply(1:4, function(x) 500 + x*40 + c(0, 20)),
+#'   y = lapply(1:4, function(y) 6500 + y*100 + c(0, 60))
+#' )
+#' 
+#' # lines
+#' l_layer_lines(p,
+#'   x = replicate(3, c(1250, 1300, 1500), simplify = FALSE),
+#'   y = list(
+#'     c(7500, 8200, 8000),
+#'     c(7200, 8000, 7200),
+#'     c(6800, 6700, 7000)
+#'   ),
+#'   color = "magenta"
+#' )
+#' 
+#' l_scaleto_world(p)
+#' 
+#' p['showScales'] <- TRUE
+#' 
+#' g <- loonGrob(p)
+#' library(grid)
+#' grid.newpage()
+#' grid.draw(g)
+#' 
+#' grid.ls(g, viewports=TRUE, fullNames=TRUE)
+#' 
 #' 
 loonGrob <- function(widget) {
     
-    # check if valid widget path
+    l_isLoonWidget(widget) || stop("widget does not seem to exist")    
 
     xlim <- c(widget['panX'], widget['panX'] + widget['deltaX']/widget['zoomX'])
     ylim <- c(widget['panY'], widget['panY'] + widget['deltaY']/widget['zoomY'])
@@ -96,32 +200,31 @@ loonGrob <- function(widget) {
     )
 }
 
-get_xy_mapping <- function(widget) {
-    
-    x <- if (length(widget['xTemp']) == 0) widget['x'] else widget['xTemp']
-    y <- if (length(widget['yTemp']) == 0) widget['y'] else widget['yTemp']
-    
-    if (widget['swapAxes']) {
-        list(x = y, y = x)
-    } else {
-        list(x = x, y = y)
-    }
-}
 
+
+## Layer to grob====
 getGrob <- function(widget, layerid) {
     UseMethod("getGrob", layerid)
 }
 
 getGrob.group <- function(widget, layerid) {
     gTree(
-       children = do.call(gList, lapply(l_layer_getChildren(widget, layerid), function(l) {
+       children = do.call(gList, lapply(rev(l_layer_getChildren(widget, layerid)), function(l) {
            type <- l_layer_getType(widget, l)
-           getGrob(widget, structure(l, class = type))
+           
+           layer_grob <- getGrob(widget, structure(l, class = type))
+           
+           if (!is.null(layer_grob)) {
+               editGrob(layer_grob, name = l_layer_getLabel(widget, l))
+           } else {
+               NULL
+           }
        })),
        name = l_layer_getLabel(widget, layerid)
     )
 }
 
+# __model grobs----
 getGrob.scatterplot <- function(widget, layerid) {
  
     # implement glyphs
@@ -129,66 +232,17 @@ getGrob.scatterplot <- function(widget, layerid) {
     size <- sqrt(widget['size'] / 4)
     size[size < 0.1] <- 0.1
     
-    xy <- get_xy_mapping(widget)
+    xy <- get_xy_mapping(widget, layerid)
+    col <- get_color_model(widget)
     
     pointsGrob(
         x = xy$x, y = xy$y,
-        gp = gpar(
-            col = get_color(widget),
-            cex = size
-        ),
-        pch = get_pch(widget, layerid),
-        name = l_layer_getLabel(widget, layerid)
+        gp = gpar(col = col, cex = size),
+        pch = get_pch(widget, layerid)
     )
 }
 
 
-get_pch <- function(widget, layerid) {
-  l <- if (layerid == "model") {
-      widget
-  } else {
-      l_create_handle(c(widget, layerid))
-  }
-  
-  glyph <- l['glyph']
-  
-  vapply(glyph, function(x) {
-      switch(
-          x,
-          circle = 16,
-          ocircle = 1,
-          ccircle = 21,
-          square = 15,
-          osquare = 0,
-          csquare = 22,
-          triangle = 17,
-          otriangle = 2,
-          ctriangle = 24,
-          diamond = 18,
-          odiamond = 5,
-          cdiamond = 23,
-          {
-              warning("glype type ", glyph, " will be mapped to circle")
-              16
-          }
-      )
-  }, numeric(1))
-  
-}
-
-get_color <- function(widget) {
-    col <- hex12tohex6(widget['color'])
-    sel <- widget['selected']
-    
-    sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
-    
-    if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
-        sel_color <- hex12tohex6(sel_color)
-    }
-    
-    col[sel] <- sel_color
-    col
-}
 
 
 getGrob.histogram <- function(widget, layerid) {
@@ -199,24 +253,77 @@ getGrob.graph <- function(widget, layerid) {
     NULL
 }
 
+# __primitive grobs----
 getGrob.polygon <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid)
+    s <- layer_states(widget, layerid)
+    
+    polygonGrob(
+        x = xy$x, y = xy$y,
+        gp = gpar(
+            fill = s$color, col = s$linecolor, lwd = s$linewidth
+        )
+    )
 }
 
+
+
 getGrob.line <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid)
+    s <- layer_states(widget, layerid)
+    
+    linesGrob(
+        x = xy$x, y = xy$y,
+        gp = gpar(col = s$color, lwd = s$linewidth)
+    )
 }
 
 getGrob.rectangle <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid, native_unit = FALSE)
+    
+    x <- unit(mean(xy$x), "native")
+    y <- unit(mean(xy$y), "native")
+    
+    width <- unit(diff(range(xy$x)), "native")
+    height <- unit(diff(range(xy$y)), "native")
+    
+    s <- layer_states(widget, layerid)
+    
+    rectGrob(
+        x = x, y = y, width = width, height = height, 
+        gp = gpar(fill = s$color, col = s$linecolor, lwd = s$linewidth)
+    )
 }
 
 getGrob.oval <- function(widget, layerid) {
+    
+    #xy <- get_xy_mapping(widget, layerid)
+    #target <- c(widget, layerid)
+    
+    #s <- layer_states(widget, layerid)
+
+    # warning("no oval grob currently implemented")
     NULL
 }
 
 getGrob.text <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid)
+    s <- layer_states(widget, layerid)
+    
+    # names(s) 
+    # "text"    "color"   "angle"   "size"    "anchor"  "justify"   
+
+   #  browser()
+    textGrob(
+        label = s$text, x = xy$x, y = xy$y,
+        gp = gpar(col = s$color),
+        rot = s$angle,
+        just = s$anchor
+    )
 }
 
 getGrob.points <- function(widget, layerid) {
@@ -224,6 +331,29 @@ getGrob.points <- function(widget, layerid) {
 }
 
 getGrob.texts <- function(widget, layerid) {
+   # layerid <- "layer7"
+   # widget <- p
+   # 
+   # xy <- get_xy_mapping(widget, layerid)
+   # target <- c(widget, layerid)
+   # 
+   # text <- l_cget(target, "text")
+   # color <- as_color(l_cget(target, "color"))
+   # angle <- l_cget(target, "angle")
+   # 
+   # l_configure(target, active = TRUE)
+   # 
+   # names(l_info_states(target))
+   # 
+   # df <- data.frame(
+   #     x = xy$x, y = xy$y, 
+   #     text = text,
+   #     color = color
+   #     
+   # )
+   # 
+   # do.call(gTree, lapply())
+    
     NULL
 }
 
@@ -237,5 +367,120 @@ getGrob.rectangles <- function(widget, layerid) {
 
 getGrob.lines <- function(widget, layerid) {
     NULL
+}
+
+
+# Get Attributes ====
+
+get_pch <- function(widget, layerid) {
+    l <- if (layerid == "model") {
+        widget
+    } else {
+        l_create_handle(c(widget, layerid))
+    }
+    
+    glyph <- l['glyph']
+    
+    vapply(glyph, function(x) {
+        switch(
+            x,
+            circle = 16,
+            ocircle = 1,
+            ccircle = 21,
+            square = 15,
+            osquare = 0,
+            csquare = 22,
+            triangle = 17,
+            otriangle = 2,
+            ctriangle = 24,
+            diamond = 18,
+            odiamond = 5,
+            cdiamond = 23,
+            {
+                warning("glype type ", glyph, " will be mapped to circle")
+                16
+            }
+        )
+    }, numeric(1))
+    
+}
+
+get_color_model <- function(widget, layerid) {
+    
+    col <- as_color(widget['color'])
+    sel <- widget['selected']
+    
+    sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
+    
+    if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
+        sel_color <- hex12tohex6(sel_color)
+    }
+    
+    col[sel] <- sel_color
+    col
+}
+
+as_color <- function(color) {
+    col <- suppressWarnings(hex12tohex6(color))
+    col[color == ""] <- NA
+    col
+}
+
+
+
+
+get_xy_mapping <- function(widget, layerid, native_unit = TRUE) {
+    
+    type <- class(layerid)
+    if (is.null(type) || type == "character") type <- l_layer_getType(widget, layerid)
+    
+    xy <- if (type == "scatterplot") {
+        list(
+            x = if (length(widget['xTemp']) == 0) widget['x'] else widget['xTemp'],
+            y = if (length(widget['yTemp']) == 0) widget['y'] else widget['yTemp']
+        )
+    } else if (type %in% c('polygon', 'line', 'rectangle', 'oval', 'text',
+                           'points', 'texts', 'polygons', 'rectangles', 'lines')) {
+        list(
+            x = l_cget(c(widget, layerid), "x"),
+            y = l_cget(c(widget, layerid), "y")
+        )
+    } else {
+        stop("unknown layer type ", type)
+    }
+    
+    if (widget['swapAxes']) {
+        names(xy) <- c("y", "x")
+    } 
+    
+    if (native_unit) {
+        xy <- list(x = unit(xy$x, "native"), y = unit(xy$y, "native"))
+    }
+    
+    xy
+}
+
+#' @export
+layer_states <- function(widget, layerid, omit = c("x", "y", "tag", "itemLabel", "dash")) {
+    
+    target <- l_create_handle(c(widget, layerid))
+    states_info <- l_info_states(target)
+    state_names <- setdiff(names(states_info), omit)
+    
+    
+    states <- sapply(state_names, function(state) l_cget(target, state), USE.NAMES = TRUE, simplify = FALSE)
+    
+    n <- vapply(states, length, numeric(1))
+    
+    if (any(n != n[1])) stop("dimension missmatch: ", layerid )
+    
+    is_color <- vapply(states_info[state_names], function(s) s$type %in% c("color", "colorOrTransparent"), logical(1))
+    
+    if (any(is_color)) {
+        for (state_name in state_names[is_color]) {
+            states[[state_name]] <- as_color(states[[state_name]])            
+        }
+    }
+    as.data.frame(states, stringsAsFactors = FALSE)
 }
 
