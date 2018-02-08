@@ -327,46 +327,114 @@ getGrob.text <- function(widget, layerid) {
 }
 
 getGrob.points <- function(widget, layerid) {
-    NULL
+   
+    xy <- get_xy_mapping(widget, layerid) 
+    s <- layer_states(widget, layerid)
+    
+    s$size <- sqrt(s$size / 4)
+    s$size[s$size < 0.1] <- 0.1
+    
+    s$x <- xy$x
+    s$y <- xy$y
+    
+    s <- subset(s, s$active)
+    
+    pointsGrob(
+        x = s$x, y = s$y,
+        gp = gpar(col = s$color, cex = s$size),
+        pch = 16
+    )
 }
 
 getGrob.texts <- function(widget, layerid) {
-   # layerid <- "layer7"
-   # widget <- p
-   # 
-   # xy <- get_xy_mapping(widget, layerid)
-   # target <- c(widget, layerid)
-   # 
-   # text <- l_cget(target, "text")
-   # color <- as_color(l_cget(target, "color"))
-   # angle <- l_cget(target, "angle")
-   # 
-   # l_configure(target, active = TRUE)
-   # 
-   # names(l_info_states(target))
-   # 
-   # df <- data.frame(
-   #     x = xy$x, y = xy$y, 
-   #     text = text,
-   #     color = color
-   #     
-   # )
-   # 
-   # do.call(gTree, lapply())
     
-    NULL
+    xy <- get_xy_mapping(widget, layerid) 
+    s <- layer_states(widget, layerid)
+    
+    s$x <- xy$x
+    s$y <- xy$y
+    
+    gTree(
+        children = do.call(
+            gList, 
+            lapply(split(s, 1:nrow(s)), function(si) {
+                textGrob(
+                    label = si$text, x = si$x, y = si$y,
+                    gp = gpar(col = si$color),
+                    rot = si$angle,
+                    just = si$anchor
+                )
+            }))
+    )
 }
 
 getGrob.polygons <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid) 
+    s <- layer_states(widget, layerid)
+    
+    states <- split(s, 1:nrow(s))
+    
+    gTree(
+        children = do.call(
+            gList, 
+            lapply(seq_along(states), function(i) {
+                polygonGrob(
+                    x = xy$x[[i]], y = xy$y[[i]],
+                    gp = gpar(
+                        fill = states[[i]]$color, col = states[[i]]$linecolor, lwd = states[[i]]$linewidth
+                    )
+                )
+            }))
+    )
 }
 
 getGrob.rectangles <- function(widget, layerid) {
-    NULL
+    
+    xy <- get_xy_mapping(widget, layerid) 
+    s <- layer_states(widget, layerid)
+    
+    s <- layer_states(widget, layerid)
+    
+    states <- split(s, 1:nrow(s))
+    
+    gTree(
+        children = do.call(
+            gList, 
+            lapply(seq_along(states), function(i) {
+                
+                x <- unit(mean(xy$x[[i]]), "native")
+                y <- unit(mean(xy$y[[i]]), "native")
+                width <- unit(diff(range(xy$x[[i]])), "native")
+                height <- unit(diff(range(xy$y[[i]])), "native")
+                
+                rectGrob(
+                    x = x, y = y, width = width, height = height, 
+                    gp = gpar(fill = states[[i]]$color, col = states[[i]]$linecolor, lwd = states[[i]]$linewidth)
+                )
+            }))
+    )
+    
+
 }
 
 getGrob.lines <- function(widget, layerid) {
-    NULL
+    xy <- get_xy_mapping(widget, layerid) 
+    s <- layer_states(widget, layerid)
+    
+    
+    states <- split(s, 1:nrow(s))
+    
+    gTree(
+        children = do.call(
+            gList, 
+            lapply(seq_along(states), function(i) {
+                linesGrob(
+                    x = xy$x[[i]], y = xy$y[[i]],
+                    gp = gpar(col = states[[i]]$color, lwd = states[[i]]$linewidth)
+                )
+            }))
+    )
 }
 
 
@@ -454,7 +522,13 @@ get_xy_mapping <- function(widget, layerid, native_unit = TRUE) {
     } 
     
     if (native_unit) {
-        xy <- list(x = unit(xy$x, "native"), y = unit(xy$y, "native"))
+        xy <- if (type %in% c('polygons', 'rectangles', 'lines')) {
+            list(x = lapply(xy$x, function(xi)unit(xi, "native")),
+                 y = lapply(xy$y, function(yi)unit(yi, "native")))
+        } else {
+            list(x = unit(xy$x, "native"), y = unit(xy$y, "native"))   
+        }
+
     }
     
     xy
