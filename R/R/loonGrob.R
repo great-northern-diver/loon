@@ -203,16 +203,19 @@ loonGrob <- function(widget) {
 
 
 ## Layer to grob====
-getGrob <- function(widget, layerid) {
+getGrob <- function(widget, layerid, s) {
     UseMethod("getGrob", layerid)
 }
 
-getGrob.group <- function(widget, layerid) {
+getGrob.group <- function(widget, layerid, s = NULL) {
     gTree(
        children = do.call(gList, lapply(rev(l_layer_getChildren(widget, layerid)), function(l) {
-           type <- l_layer_getType(widget, l)
            
-           layer_grob <- getGrob(widget, structure(l, class = type))
+           type <- l_layer_getType(widget, l)
+           target <-  l_create_handle(if (l == "model") widget else c(widget, l))
+           states <- get_layer_states(target, widget, layerid, type)
+           
+           layer_grob <- getGrob(widget, structure(l, class = type), states)
            
            if (!is.null(layer_grob)) {
                editGrob(layer_grob, name = l_layer_getLabel(widget, l))
@@ -225,80 +228,69 @@ getGrob.group <- function(widget, layerid) {
 }
 
 # __model grobs----
-getGrob.scatterplot <- function(widget, layerid) {
+getGrob.scatterplot <- function(widget, layerid, s) {
  
-    # implement glyphs
-    
-    size <- sqrt(widget['size'] / 4)
-    size[size < 0.1] <- 0.1
-    
-    xy <- get_xy_mapping(widget, layerid)
-    col <- get_color_model(widget)
+    s$size <- as_r_point_size(s$size)
+    s$color <- get_model_color(widget)
+    s$glyph <- glyph_to_pch(s$glyph)
     
     pointsGrob(
-        x = xy$x, y = xy$y,
-        gp = gpar(col = col, cex = size),
-        pch = get_pch(widget, layerid)
+        x = s$x, y = s$y,
+        gp = gpar(col = s$col, cex = s$size),
+        pch = s$glyph
     )
+    
 }
 
 
 
 
-getGrob.histogram <- function(widget, layerid) {
+getGrob.histogram <- function(widget, layerid, s) {
     NULL
 }
 
-getGrob.graph <- function(widget, layerid) {
+getGrob.graph <- function(widget, layerid, s) {
     NULL
 }
 
 # __primitive grobs----
-getGrob.polygon <- function(widget, layerid) {
-    
-    xy <- get_xy_mapping(widget, layerid)
-    s <- layer_states(widget, layerid)
+getGrob.polygon <- function(widget, layerid, s) {
     
     polygonGrob(
-        x = xy$x, y = xy$y,
+        x = s$x, y = s$y,
         gp = gpar(
             fill = s$color, col = s$linecolor, lwd = s$linewidth
         )
     )
+    
 }
 
 
 
-getGrob.line <- function(widget, layerid) {
-    
-    xy <- get_xy_mapping(widget, layerid)
-    s <- layer_states(widget, layerid)
-    
+getGrob.line <- function(widget, layerid, s) {
+
     linesGrob(
-        x = xy$x, y = xy$y,
+        x = s$x, y = s$y,
         gp = gpar(col = s$color, lwd = s$linewidth)
     )
 }
 
-getGrob.rectangle <- function(widget, layerid) {
+getGrob.rectangle <- function(widget, layerid, s) {
     
-    xy <- get_xy_mapping(widget, layerid, native_unit = FALSE)
+    x <- unit(mean(s$x), "native")
+    y <- unit(mean(s$y), "native")
     
-    x <- unit(mean(xy$x), "native")
-    y <- unit(mean(xy$y), "native")
-    
-    width <- unit(diff(range(xy$x)), "native")
-    height <- unit(diff(range(xy$y)), "native")
-    
-    s <- layer_states(widget, layerid)
+    width <- unit(diff(range(s$x)), "native")
+    height <- unit(diff(range(s$y)), "native")
     
     rectGrob(
         x = x, y = y, width = width, height = height, 
         gp = gpar(fill = s$color, col = s$linecolor, lwd = s$linewidth)
     )
+    
 }
 
-getGrob.oval <- function(widget, layerid) {
+getGrob.oval <- function(widget, layerid, s) {
     
     #xy <- get_xy_mapping(widget, layerid)
     #target <- c(widget, layerid)
@@ -309,108 +301,80 @@ getGrob.oval <- function(widget, layerid) {
     NULL
 }
 
-getGrob.text <- function(widget, layerid) {
+getGrob.text <- function(widget, layerid, s) {
     
-    xy <- get_xy_mapping(widget, layerid)
-    s <- layer_states(widget, layerid)
-    
-    # names(s) 
-    # "text"    "color"   "angle"   "size"    "anchor"  "justify"   
-
-   #  browser()
     textGrob(
-        label = s$text, x = xy$x, y = xy$y,
+        label = s$text, x = s$x, y = s$y,
         gp = gpar(col = s$color),
         rot = s$angle,
         just = s$anchor
     )
+    
 }
 
-getGrob.points <- function(widget, layerid) {
+getGrob.points <- function(widget, layerid, s) {
    
-    xy <- get_xy_mapping(widget, layerid) 
-    s <- layer_states(widget, layerid)
+
+    s$size <- as_r_point_size(s$size)
+    s$glyph <- glyph_to_pch(s$glyph)
     
-    s$size <- sqrt(s$size / 4)
-    s$size[s$size < 0.1] <- 0.1
-    
-    s$x <- xy$x
-    s$y <- xy$y
-    
-    s <- subset(s, s$active)
+    active <- s$active
     
     pointsGrob(
-        x = s$x, y = s$y,
-        gp = gpar(col = s$color, cex = s$size),
-        pch = 16
+        x = s$x[active], y = s$y[active],
+        gp = gpar(col = s$color[active], cex = s$size[active]),
+        pch = s$glyph[active]
     )
+    
 }
 
-getGrob.texts <- function(widget, layerid) {
-    
-    xy <- get_xy_mapping(widget, layerid) 
-    s <- layer_states(widget, layerid)
-    
-    s$x <- xy$x
-    s$y <- xy$y
+getGrob.texts <- function(widget, layerid, s) {
     
     gTree(
         children = do.call(
             gList, 
-            lapply(split(s, 1:nrow(s)), function(si) {
+            lapply(seq_along(s$x), function(i) {
                 textGrob(
-                    label = si$text, x = si$x, y = si$y,
-                    gp = gpar(col = si$color),
-                    rot = si$angle,
-                    just = si$anchor
+                    label = s$text[i], x = s$x[i], y = s$y[i],
+                    gp = gpar(col = s$color[i]),
+                    rot = s$angle[i],
+                    just = s$anchor[i]
                 )
             }))
     )
 }
 
-getGrob.polygons <- function(widget, layerid) {
-    
-    xy <- get_xy_mapping(widget, layerid) 
-    s <- layer_states(widget, layerid)
-    
-    states <- split(s, 1:nrow(s))
+getGrob.polygons <- function(widget, layerid, s) {
     
     gTree(
         children = do.call(
             gList, 
-            lapply(seq_along(states), function(i) {
+            lapply(seq_along(s$x), function(i) {
                 polygonGrob(
-                    x = xy$x[[i]], y = xy$y[[i]],
+                    x = s$x[[i]], y = s$y[[i]],
                     gp = gpar(
-                        fill = states[[i]]$color, col = states[[i]]$linecolor, lwd = states[[i]]$linewidth
+                        fill = s$color[i], col = s$linecolor[i], lwd = s$linewidth[i]
                     )
                 )
             }))
     )
 }
 
-getGrob.rectangles <- function(widget, layerid) {
-    
-    xy <- get_xy_mapping(widget, layerid) 
-    s <- layer_states(widget, layerid)
-    
-    s <- layer_states(widget, layerid)
-    
-    states <- split(s, 1:nrow(s))
+getGrob.rectangles <- function(widget, layerid, s) {
     
     gTree(
         children = do.call(
             gList, 
-            lapply(seq_along(states), function(i) {
+            lapply(seq_along(states$x), function(i) {
                 
-                x <- unit(mean(xy$x[[i]]), "native")
-                y <- unit(mean(xy$y[[i]]), "native")
-                width <- unit(diff(range(xy$x[[i]])), "native")
-                height <- unit(diff(range(xy$y[[i]])), "native")
+                x <- unit(mean(s$x[[i]]), "native")
+                y <- unit(mean(s$y[[i]]), "native")
+                width <- unit(diff(range(s$x[[i]])), "native")
+                height <- unit(diff(range(s$y[[i]])), "native")
                 
                 rectGrob(
                     x = x, y = y, width = width, height = height, 
-                    gp = gpar(fill = states[[i]]$color, col = states[[i]]$linecolor, lwd = states[[i]]$linewidth)
+                    gp = gpar(fill = s$color[i], col = s$linecolor[i], lwd = s$linewidth[i])
                 )
             }))
     )
@@ -418,20 +382,15 @@ getGrob.rectangles <- function(widget, layerid) {
 
 }
 
-getGrob.lines <- function(widget, layerid) {
-    xy <- get_xy_mapping(widget, layerid) 
-    s <- layer_states(widget, layerid)
-    
-    
-    states <- split(s, 1:nrow(s))
-    
+getGrob.lines <- function(widget, layerid, s) {
+
     gTree(
         children = do.call(
             gList, 
-            lapply(seq_along(states), function(i) {
+            lapply(seq_along(states$x), function(i) {
                 linesGrob(
-                    x = xy$x[[i]], y = xy$y[[i]],
-                    gp = gpar(col = states[[i]]$color, lwd = states[[i]]$linewidth)
+                    x = s$x[[i]], y = s$y[[i]],
+                    gp = gpar(col = s$color[i], lwd = s$linewidth[i])
                 )
             }))
     )
@@ -440,15 +399,8 @@ getGrob.lines <- function(widget, layerid) {
 
 # Get Attributes ====
 
-get_pch <- function(widget, layerid) {
-    l <- if (layerid == "model") {
-        widget
-    } else {
-        l_create_handle(c(widget, layerid))
-    }
-    
-    glyph <- l['glyph']
-    
+glyph_to_pch <- function(glyph) {
+
     vapply(glyph, function(x) {
         switch(
             x,
@@ -473,9 +425,22 @@ get_pch <- function(widget, layerid) {
     
 }
 
-get_color_model <- function(widget, layerid) {
+as_r_point_size <- function(s) {
+ 
+    if (is.null(s)) {
+        NULL
+    } else {
+        size <- sqrt(s / 4)
+        size[size < 0.1] <- 0.1   
+        
+        size
+    }
+}
+
+# Model layers have selected state
+get_model_color <- function(widget) {
     
-    col <- as_color(widget['color'])
+    col <- as_hex6color(widget['color'])
     sel <- widget['selected']
     
     sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
@@ -488,7 +453,7 @@ get_color_model <- function(widget, layerid) {
     col
 }
 
-as_color <- function(color) {
+as_hex6color <- function(color) {
     col <- suppressWarnings(hex12tohex6(color))
     col[color == ""] <- NA
     col
@@ -497,10 +462,7 @@ as_color <- function(color) {
 
 
 
-get_xy_mapping <- function(widget, layerid, native_unit = TRUE) {
-    
-    type <- class(layerid)
-    if (is.null(type) || type == "character") type <- l_layer_getType(widget, layerid)
+xy_coords <- function(widget, layerid, type, native_unit = TRUE) {
     
     xy <- if (type == "scatterplot") {
         list(
@@ -510,8 +472,8 @@ get_xy_mapping <- function(widget, layerid, native_unit = TRUE) {
     } else if (type %in% c('polygon', 'line', 'rectangle', 'oval', 'text',
                            'points', 'texts', 'polygons', 'rectangles', 'lines')) {
         list(
-            x = l_cget(c(widget, layerid), "x"),
-            y = l_cget(c(widget, layerid), "y")
+            x = l_cget(target, "x"),
+            y = l_cget(target, "y")
         )
     } else {
         stop("unknown layer type ", type)
@@ -534,27 +496,40 @@ get_xy_mapping <- function(widget, layerid, native_unit = TRUE) {
     xy
 }
 
+
+
+cartesian_model_widget_states <- c(
+    "x", "y", "swapAxes",
+    "tag", "itemLabel",
+    "useLoonInspector", "selectionLogic",  "linkingGroup",
+    "zoomX", "zoomY", "panY", "panX", "deltaX", "deltaY",
+    "linkingKey", "linkingKey",  "showItemLabels",  "selectBy",
+    "background", "foreground", "guidesBackground", "guidelines",
+    "minimumMargins", "labelMargins", "scalesMargins", "xTemp", "yTemp" 
+)
+
+
 #' @export
-layer_states <- function(widget, layerid, omit = c("x", "y", "tag", "itemLabel", "dash")) {
+get_layer_states <- function(target, widget, layerid, type, omit = NULL) {
     
-    target <- l_create_handle(c(widget, layerid))
     states_info <- l_info_states(target)
-    state_names <- setdiff(names(states_info), omit)
+    state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
     
+    states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
     
-    states <- sapply(state_names, function(state) l_cget(target, state), USE.NAMES = TRUE, simplify = FALSE)
+    # Add Coordinates
+    if (all(c('x', 'y') %in% state_names)) {
+        states <- c(xy_coords(widget, layerid, type), states)        
+    }
     
-    n <- vapply(states, length, numeric(1))
-    
-    if (any(n != n[1])) stop("dimension missmatch: ", layerid )
-    
+    # Deal with color
     is_color <- vapply(states_info[state_names], function(s) s$type %in% c("color", "colorOrTransparent"), logical(1))
-    
     if (any(is_color)) {
         for (state_name in state_names[is_color]) {
-            states[[state_name]] <- as_color(states[[state_name]])            
+            states[[state_name]] <- as_hex6color(states[[state_name]])            
         }
     }
-    as.data.frame(states, stringsAsFactors = FALSE)
+    
+    states
 }
 

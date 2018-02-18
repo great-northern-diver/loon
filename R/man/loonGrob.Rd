@@ -35,6 +35,7 @@ g <- loonGrob(widget)
 grid.newpage()
 grid.draw(g)
 
+grid.ls(g, viewports = TRUE, fullNames = TRUE)
 
 ## with primitive layers from l_layers demo
 
@@ -139,6 +140,5 @@ grid.draw(g)
 
 grid.ls(g, viewports=TRUE, fullNames=TRUE)
 
-getg
 
 }
