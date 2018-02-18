@@ -212,8 +212,13 @@ getGrob.group <- function(widget, layerid, s = NULL) {
        children = do.call(gList, lapply(rev(l_layer_getChildren(widget, layerid)), function(l) {
            
            type <- l_layer_getType(widget, l)
-           target <-  l_create_handle(if (l == "model") widget else c(widget, l))
-           states <- get_layer_states(target, widget, layerid, type)
+           
+           states <- if (type == "group") {
+               NULL
+           } else {
+               target <-  l_create_handle(if (l == "model") widget else c(widget, l))
+               get_layer_states(target, widget, layerid, type)
+           }
            
            layer_grob <- getGrob(widget, structure(l, class = type), states)
            
@@ -277,11 +282,14 @@ getGrob.line <- function(widget, layerid, s) {
 
 getGrob.rectangle <- function(widget, layerid, s) {
     
-    x <- unit(mean(s$x), "native")
-    y <- unit(mean(s$y), "native")
+    xcoords <- as.numeric(s$x)
+    ycoords <- as.numeric(s$y)
     
-    width <- unit(diff(range(s$x)), "native")
-    height <- unit(diff(range(s$y)), "native")
+    x <- unit(mean(xcoords), "native")
+    y <- unit(mean(ycoords), "native")
+    
+    width <- unit(diff(range(xcoords)), "native")
+    height <- unit(diff(range(ycoords)), "native")
     
     rectGrob(
         x = x, y = y, width = width, height = height, 
@@ -314,16 +322,14 @@ getGrob.text <- function(widget, layerid, s) {
 
 getGrob.points <- function(widget, layerid, s) {
    
-
     s$size <- as_r_point_size(s$size)
-    s$glyph <- glyph_to_pch(s$glyph)
     
     active <- s$active
     
     pointsGrob(
         x = s$x[active], y = s$y[active],
         gp = gpar(col = s$color[active], cex = s$size[active]),
-        pch = s$glyph[active]
+        pch = 16
     )
     
 }
@@ -365,12 +371,16 @@ getGrob.rectangles <- function(widget, layerid, s) {
     gTree(
         children = do.call(
             gList, 
-            lapply(seq_along(states$x), function(i) {
+            lapply(seq_along(s$x), function(i) {
                 
-                x <- unit(mean(s$x[[i]]), "native")
-                y <- unit(mean(s$y[[i]]), "native")
-                width <- unit(diff(range(s$x[[i]])), "native")
-                height <- unit(diff(range(s$y[[i]])), "native")
+                xcoords <- as.numeric(s$x[[i]])
+                ycoords <- as.numeric(s$y[[i]])
+                
+                x <- unit(mean(xcoords), "native")
+                y <- unit(mean(ycoords), "native")
+                
+                width <- unit(diff(range(xcoords)), "native")
+                height <- unit(diff(range(ycoords)), "native")
                 
                 rectGrob(
                     x = x, y = y, width = width, height = height, 
@@ -387,7 +397,7 @@ getGrob.lines <- function(widget, layerid, s) {
     gTree(
         children = do.call(
             gList, 
-            lapply(seq_along(states$x), function(i) {
+            lapply(seq_along(s$x), function(i) {
                 linesGrob(
                     x = s$x[[i]], y = s$y[[i]],
                     gp = gpar(col = s$color[i], lwd = s$linewidth[i])
@@ -462,7 +472,7 @@ as_hex6color <- function(color) {
 
 
 
-xy_coords <- function(widget, layerid, type, native_unit = TRUE) {
+xy_coords <- function(target, widget, layerid, type, native_unit = TRUE) {
     
     xy <- if (type == "scatterplot") {
         list(
@@ -518,10 +528,10 @@ get_layer_states <- function(target, widget, layerid, type, omit = NULL) {
     states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
     
     # Add Coordinates
-    if (all(c('x', 'y') %in% state_names)) {
-        states <- c(xy_coords(widget, layerid, type), states)        
+    if (type != "group") {
+        states <- c(xy_coords(target, widget, layerid, type), states)                
     }
-    
+
     # Deal with color
     is_color <- vapply(states_info[state_names], function(s) s$type %in% c("color", "colorOrTransparent"), logical(1))
     if (any(is_color)) {
