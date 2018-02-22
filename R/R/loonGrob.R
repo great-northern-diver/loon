@@ -135,6 +135,16 @@
 #' 
 #' grid.ls(g, viewports=TRUE, fullNames=TRUE)
 #' 
+#' \dontrun{
+#' demo("l_glyph_sizes", ask = FALSE)
+#'   
+#' p <- l_create_handle(".l0.plot")
+#' 
+#' m <- 6  
+#' g <- loonGrob(p)
+#' grid.newpage()
+#' grid.draw(g)
+#' }
 #' 
 loonGrob <- function(widget) {
     
@@ -427,7 +437,7 @@ glyph_to_pch <- function(glyph) {
             odiamond = 5,
             cdiamond = 23,
             {
-                warning("glype type ", glyph, " will be mapped to circle")
+                # warning("glype type ", glyph, " will be mapped to circle")
                 16
             }
         )
@@ -435,12 +445,14 @@ glyph_to_pch <- function(glyph) {
     
 }
 
+
+# see optionDatabase.tcl
 as_r_point_size <- function(s) {
  
     if (is.null(s)) {
         NULL
     } else {
-        size <- sqrt(s / 4)
+        size <- sqrt(s / .GlobalEnv$m)
         size[size < 0.1] <- 0.1   
         
         size
