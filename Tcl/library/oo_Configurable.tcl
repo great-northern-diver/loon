@@ -90,7 +90,7 @@
 		set option [string replace $key 0 0]
 		if {$option ni $configurableOptions} {
 		    if {[dict exists $::loon::Options(abbreviations) $option]} {
-			puts [format "warning: please do not use state abbrevations,\
+			puts [format "warning: please do not use state abbreviations,\
                                i.e. use \"%s\" instead of \"%s\"."\
 				  [dict get $::loon::Options(abbreviations) $option]\
 				  $option]
