@@ -44,13 +44,14 @@ The maps library provides some map data in polygon which can be
   drawings.
 }
 \examples{
-library(maps)
-canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
-p <- l_plot()
-l_map <- l_layer(p, canada, asSingleLayer=TRUE)
-l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE), "lightblue", "")
-l_scaleto_layer(p, l_map)
-l_map['active'] <- FALSE
-l_map['active'] <- TRUE
-l_map['tag']
+if (requireNamespace("maps", quietly = TRUE)) {
+  canada <- maps::map("world",  "Canada", fill=TRUE, plot=FALSE)
+  p <- l_plot()
+  l_map <- l_layer(p, canada, asSingleLayer=TRUE)
+  l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE), "lightblue", "")
+  l_scaleto_layer(p, l_map)
+  l_map['active'] <- FALSE
+  l_map['active'] <- TRUE
+  l_map['tag'] 
+}
 }

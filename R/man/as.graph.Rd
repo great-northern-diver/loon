@@ -28,7 +28,8 @@ See
   more information about the graph R package.
 }
 \examples{
-library(graph)
-g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-g1 <- as.graph(g) 
+if (requireNamespace("graph", quietly = TRUE)) {
+  g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+  g1 <- as.graph(g) 
+}
 }

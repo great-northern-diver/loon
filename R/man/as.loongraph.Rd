@@ -24,8 +24,8 @@ See
 For more information run: \code{l_help("learn_R_display_graph.html.html#graph-utilities")}
 }
 \examples{
-library(graph)
-graph_graph  = randomEGraph(LETTERS[1:15], edges=100)
-
-loon_graph <- as.loongraph(graph_graph)
+if (requireNamespace("graph", quietly = TRUE)) {
+  graph_graph  = graph::randomEGraph(LETTERS[1:15], edges=100)
+  loon_graph <- as.loongraph(graph_graph)
+}
 }

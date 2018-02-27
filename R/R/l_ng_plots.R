@@ -444,7 +444,6 @@ l_ng_plots.measures <- function(measures, ...) {
 #'   a subset of the data use the \code{\link{scagnostics2d}} measures creature 
 #'   function.
 #'   
-#' @inheritParams l_ng_plots.scagnostics
 #' @inheritParams l_ng_plots.default 
 #' @param measures objects from the \code{\link[scagnostics]{scagnostics}} 
 #'   function from the scagnostics \R package
@@ -461,7 +460,8 @@ l_ng_plots.measures <- function(measures, ...) {
 #' 
 #' @examples 
 #' 
-#' if (requireNamespace("scagnostics", quietly = TRUE)) {
+#' \dontrun{
+#' library(scagnostics)
 #'   scags <- scagnostics::scagnostics(oliveAcids)
 #'   l_ng_plots(scags, oliveAcids, color=olive$Area)
 #' }

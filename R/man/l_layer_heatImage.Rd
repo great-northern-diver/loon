@@ -73,15 +73,17 @@ This function is very similar to the
 For more information run: \code{l_help("learn_R_layer.html#countourlines-heatimage-rasterimage")}
 }
 \examples{
-library(MASS)
-kest <- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
-image(kest)
-contour(kest, add=TRUE)
 
-p <- l_plot()
-lcl <- l_layer_contourLines(p, kest, label='contour lines')
-limg <- l_layer_heatImage(p, kest, label='heatmap') 
-l_scaleto_world(p)
+if (requireNamespace("MASS", quietly = TRUE)) {
+  kest <- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
+  image(kest)
+  contour(kest, add=TRUE)
+  
+  p <- l_plot()
+  lcl <- l_layer_contourLines(p, kest, label='contour lines')
+  limg <- l_layer_heatImage(p, kest, label='heatmap') 
+  l_scaleto_world(p)
+}
 
 # from examples(image)
 x <- y <- seq(-4*pi, 4*pi, len = 27)

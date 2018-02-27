@@ -55,13 +55,17 @@
 #'   grid::pushViewport(grid::plotViewport())
 #'   grid::grid.rect()
 #'   n <- 2^(1:5)
-#'   grid::pushViewport(grid::dataViewport(xscale=c(0, max(n)+1), yscale=c(0, length(n)+1)))
+#'   grid::pushViewport(grid::dataViewport(xscale=c(0, max(n)+1),
+#'                      yscale=c(0, length(n)+1)))
 #'   grid::grid.yaxis(at=c(1:length(n)), label=paste("n =", n))
 #'   for (i in rev(seq_along(n))) {
 #'    cols <- pal(1:n[i])
-#'    grid::grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "native", pch=15, gp=grid::gpar(col=cols))
+#'    grid::grid.points(x = 1:n[i], y = rep(i, n[i]),
+#'                      default.units = "native", pch=15,
+#'                      gp=grid::gpar(col=cols))
 #'   }
-#'   grid::grid.text("note the fist i colors are shared for each n" , y=grid::unit(1,"npc") + grid::unit(1, "line"))
+#'   grid::grid.text("note the fist i colors are shared for each n",
+#'                   y = grid::unit(1,"npc") + grid::unit(1, "line"))
 #' }
 #' 
 color_loon <- function() {

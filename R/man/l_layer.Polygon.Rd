@@ -25,13 +25,15 @@ Note that currently loon does neither support holes and ring
   directions.
 }
 \examples{
-library(sp)
-library(rworldmap)
 
-world <- getMap(resolution = "coarse")
-p <- l_plot()
-lmap <- l_layer(p, world, asSingleLayer=TRUE)
-l_scaleto_world(p)
+if (requireNamespace("rworldmap", quietly = TRUE)) {
+    world <- rworldmap::getMap(resolution = "coarse") 
+    p <- l_plot()
+    lmap <- l_layer(p, world, asSingleLayer=TRUE)
+    l_scaleto_world(p)
+    attr(lmap,'hole')
+    attr(lmap,'NAME')
+}
 }
 \references{
 Applied Spatial Data Analysis with R by Bivand, Roger S. and

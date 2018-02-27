@@ -44,9 +44,12 @@
 #'   x_R <- grid::unit(6, "lines")
 #'   x_Tcl <- grid::unit(10, "lines")
 #'   
-#'   grid::grid.text('color', x=x_col, y=grid::unit(1, "npc"), just='left', gp=grid::gpar(fontface='bold'))
-#'   grid::grid.text('R', x=x_R, y=grid::unit(1, "npc"), just='center', gp=grid::gpar(fontface='bold'))
-#'   grid::grid.text('Tcl', x=x_Tcl, y=grid::unit(1, "npc"), just='center', gp=grid::gpar(fontface='bold'))
+#'   grid::grid.text('color', x=x_col, y=grid::unit(1, "npc"),
+#'                   just='left', gp=grid::gpar(fontface='bold'))
+#'   grid::grid.text('R', x=x_R, y=grid::unit(1, "npc"), just='center',
+#'                    gp=grid::gpar(fontface='bold'))
+#'   grid::grid.text('Tcl', x=x_Tcl, y=grid::unit(1, "npc"), just='center',
+#'                    gp=grid::gpar(fontface='bold'))
 #'   for (i in 1:nrow(df_diff)) {
 #'       y <- grid::unit(1, "npc") - grid::unit(i*1.2, "lines")
 #'       grid::grid.text(rownames(df_diff)[i], x=x_col, y=y, just='left')

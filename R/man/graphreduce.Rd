@@ -29,8 +29,8 @@ LLG <- linegraph(LG)
 
 graphreduce(LLG)
 
-\dontrun{
-library(Rgraphviz)  
-plot(graphreduce(LLG))
+if (requireNamespace("Rgraphviz", quietly = TRUE)) {
+  plot(graphreduce(LLG))
 }
+
 }

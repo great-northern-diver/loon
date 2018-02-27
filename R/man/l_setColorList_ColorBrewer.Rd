@@ -23,8 +23,9 @@ Only the following palettes in ColorBrewer are available: Set1,
 \examples{
 
 \dontrun{
-library(RColorBrewer)
-display.brewer.all()
+if (requireNamespace("RColorBrewer", quietly = TRUE)) {
+  RColorBrewer::display.brewer.all()
+}
 }
 
 l_setColorList_ColorBrewer("Set1")

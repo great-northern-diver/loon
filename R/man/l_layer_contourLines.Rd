@@ -60,16 +60,17 @@ y <- 10*1:ncol(volcano)
 lcl <- l_layer_contourLines(p, x, y, volcano)
 l_scaleto_world(p)
 
-library(MASS)
-p1 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
-lcl <- with(iris, l_layer_contourLines(p1, MASS::kde2d(Sepal.Width,Sepal.Length)))
-
-p2 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
-layers <- sapply(split(cbind(iris, color=p2['color']), iris$Species), function(dat) {
-     kest <- with(dat, MASS::kde2d(Sepal.Width,Sepal.Length))
-     l_layer_contourLines(p2, kest, color=as.character(dat$color[1]), linewidth=2,
-          label=paste0(as.character(dat$Species[1]), " contours"))
-})
-
+if (requireNamespace("MASS", quietly = TRUE)) {
+  
+  p1 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
+  lcl <- with(iris, l_layer_contourLines(p1, MASS::kde2d(Sepal.Width,Sepal.Length)))
+  
+  p2 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
+  layers <- sapply(split(cbind(iris, color=p2['color']), iris$Species), function(dat) {
+       kest <- with(dat, MASS::kde2d(Sepal.Width,Sepal.Length))
+       l_layer_contourLines(p2, kest, color=as.character(dat$color[1]), linewidth=2,
+            label=paste0(as.character(dat$Species[1]), " contours"))
+  })
+}
 
 }
