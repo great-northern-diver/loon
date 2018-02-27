@@ -484,23 +484,20 @@ Now we have a more detailed map.
 
 There are several different visible minorities in the data set.  It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.
 
-To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.  We'll use some functionality from the `dplyr` package to effect this.  It's not necessary, it just provides a simple syntax to select the variables we want and rename them in the process.
+To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.
 
 ```{r selectMinorities, message=FALSE}
 # Back to the raw data and just rename variables
-library(dplyr)
-minority_star <- minority %>%
-  select(SE.Asian=Southeast.Asian,
-         Chinese = Chinese,
-         Japanese = Japanese,
-         S.Asian = South.Asian,
-         Other = Visible.minority.not.included.elsewhere,
-         Black = Black,
-         Multiple = Multiple.visible.minority,
-         Filipino = Filipino,
-         Arab = Arab,
-         Korean = Korean,
-         Latino = Latin.American)
+minority_star <- minority[, c(
+    "Southeast.Asian", "Chinese", "Japanese", "South.Asian", 
+    "Visible.minority.not.included.elsewhere",
+     "Black", "Multiple.visible.minority", "Filipino",
+    "Arab", "Korean", "Latin.American")]
+
+names(minority_star) <- c(
+    "SE.Asian", "Chinese", "Japanese", "S.Asian", "Other",
+    "Black", "Multiple", "Filipino", "Arab", "Korean", "Latino"
+)
 ```
 
 As the following few rows of this dataset show:

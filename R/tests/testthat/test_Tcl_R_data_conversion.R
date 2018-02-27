@@ -1,6 +1,4 @@
 
-library(loon)
-
 context('R and Tcl data conversion')
 
 test_that("nested double", {

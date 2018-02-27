@@ -1,8 +1,8 @@
 Package: loon
 Type: Package
 Title: Interactive Statistical Data Visualization
-Version: 1.1.0
-Date: 2017-07-26
+Version: 1.1.1
+Date: 2018-02-22
 Authors@R: c(
     person("Adrian", "Waddell", , "adrian@waddell.ch", role = c("aut", "cre")),
     person("R. Wayne", "Oldford", , "rwoldford@uwaterloo.ca", role = "aut")
@@ -35,7 +35,6 @@ Suggests:
     kernlab,
     scales,
     MASS,
-    dplyr,
     testthat,
     knitr,
     rmarkdown

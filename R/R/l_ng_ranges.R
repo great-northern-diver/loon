@@ -352,9 +352,12 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 #' @export
 #' 
 #' @examples 
-#' library(scagnostics)
-#' s <- scagnostics(oliveAcids)
-#' ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
+#' \dontrun{
+#' if (requireNamespace("scagnostics", quietly = TRUE)) {
+#'   s <- scahnostics::scagnostics(oliveAcids)
+#'   ng <- l_ng_ranges(s, oliveAcids, color=olive$Area) 
+#' } 
+#' }
 l_ng_ranges.scagnostics <- function(measures, data, separator=":", ...) {
     
     force(data)

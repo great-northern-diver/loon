@@ -50,18 +50,20 @@
 #' pal(c('green', 'yellow'))
 #' 
 #' # show color choices for different n's
-#' library(grid)
-#' grid.newpage()
-#' pushViewport(plotViewport())
-#' grid.rect()
-#' n <- 2^(1:5)
-#' pushViewport(dataViewport(xscale=c(0, max(n)+1), yscale=c(0, length(n)+1)))
-#' grid.yaxis(at=c(1:length(n)), label=paste("n =", n))
-#' for (i in rev(seq_along(n))) {
-#'  cols <- pal(1:n[i])
-#'  grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "native", pch=15, gp=gpar(col=cols))
+#' if (requireNamespace("grid", quietly = TRUE)) {
+#'   grid::grid.newpage()
+#'   grid::pushViewport(grid::plotViewport())
+#'   grid::grid.rect()
+#'   n <- 2^(1:5)
+#'   grid::pushViewport(grid::dataViewport(xscale=c(0, max(n)+1), yscale=c(0, length(n)+1)))
+#'   grid::grid.yaxis(at=c(1:length(n)), label=paste("n =", n))
+#'   for (i in rev(seq_along(n))) {
+#'    cols <- pal(1:n[i])
+#'    grid::grid.points(x = 1:n[i], y = rep(i, n[i]), default.units = "native", pch=15, gp=grid::gpar(col=cols))
+#'   }
+#'   grid::grid.text("note the fist i colors are shared for each n" , y=grid::unit(1,"npc") + grid::unit(1, "line"))
 #' }
-#' grid.text("note the fist i colors are shared for each n" , y=unit(1,"npc")+unit(1, "line"))
+#' 
 color_loon <- function() {
     function(x) {
         
@@ -248,9 +250,10 @@ hex12tohex6 <- function(x) {
 #' \dontrun{
 #' # you can also perform the color mapping yourself, for example with
 #' # the col_numeric function provided in the scales package
-#' library(scales)
-#' p_custom <- with(olive, l_plot(stearic ~ oleic,
-#'      color = col_numeric("Greens", domain = NULL)(palmitic)))
+#' if (requireNamespace("scales", quietly = TRUE)) {
+#'   p_custom <- with(olive, l_plot(stearic ~ oleic,
+#'        color = scales::col_numeric("Greens", domain = NULL)(palmitic)))
+#'   }
 #' }
 #' 
 l_setColorList <- function(colors) {
@@ -291,8 +294,9 @@ l_getColorList <- function() {
 #' @examples 
 #' 
 #' \dontrun{
-#' library(RColorBrewer)
-#' display.brewer.all()
+#' if (requireNamespace("RColorBrewer", quietly = TRUE)) {
+#'   RColorBrewer::display.brewer.all()
+#' }
 #' }
 #' 
 #' l_setColorList_ColorBrewer("Set1")

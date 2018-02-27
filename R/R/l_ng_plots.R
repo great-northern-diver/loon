@@ -461,10 +461,10 @@ l_ng_plots.measures <- function(measures, ...) {
 #' 
 #' @examples 
 #' 
-#' library(scagnostics)
-#' scags <- scagnostics(oliveAcids)
-#' 
-#' l_ng_plots(scags, oliveAcids, color=olive$Area)
+#' if (requireNamespace("scagnostics", quietly = TRUE)) {
+#'   scags <- scagnostics::scagnostics(oliveAcids)
+#'   l_ng_plots(scags, oliveAcids, color=olive$Area)
+#' }
 l_ng_plots.scagnostics <- function(measures, data, separator=":", ...) {
 
     force(data)

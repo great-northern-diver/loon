@@ -92,15 +92,15 @@ loongraph <- function(nodes, from=character(0), to=character(0), isDirected=FALS
 #' @export
 #'   
 #' @examples 
-#' library(graph)
-#' graph_graph  = randomEGraph(LETTERS[1:15], edges=100)
-#' 
-#' loon_graph <- as.loongraph(graph_graph)
+#' if (requireNamespace("graph", quietly = TRUE)) {
+#'   graph_graph  = graph::randomEGraph(LETTERS[1:15], edges=100)
+#'   loon_graph <- as.loongraph(graph_graph)
+#' }
 as.loongraph <- function(graph) {
     if (!is(graph, "graph")) stop("graph argument is not of class graph.")
     requireNamespace("graph", quietly = TRUE) || stop("graph package is required for this function.")
     
-    nodes <- nodes(graph)
+    nodes <- graph::nodes(graph)
     ft <- graph::edgeMatrix(graph)
     
     loongraph(nodes=nodes, from=nodes[ft[1,]], to=nodes[ft[2,]],
@@ -130,9 +130,10 @@ as.loongraph <- function(graph) {
 #' @export
 #' 
 #' @examples 
-#' library(graph)
-#' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-#' g1 <- as.graph(g) 
+#' if (requireNamespace("graph", quietly = TRUE)) {
+#'   g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+#'   g1 <- as.graph(g) 
+#' }
 as.graph <- function(loongraph) {
     if (!is(loongraph, "loongraph")) {
         stop("loongraph argument is not of class loongraph.")
@@ -177,12 +178,13 @@ as.graph <- function(loongraph) {
 #' @export
 #' 
 #' @examples 
-#' library(Rgraphviz)
-#' g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-#' plot(g)
+#' if (requireNamespace("Rgraphviz", quietly = TRUE)) {
+#'   g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
+#'   plot(g)
+#' }
 plot.loongraph <- function(x, ...) {
     
-    requireNamespace("Rgraphviz") || stop("Rgraphviz library required")
+    requireNamespace("Rgraphviz", quietly = TRUE) || stop("Rgraphviz library required")
     
     Rgraphviz::plot(as.graph(x), ...)
 }
@@ -443,10 +445,10 @@ graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator='
 #' 
 #' graphreduce(LLG)
 #' 
-#' \dontrun{
-#' library(Rgraphviz)  
-#' plot(graphreduce(LLG))
+#' if (requireNamespace("Rgraphviz", quietly = TRUE)) {
+#'   plot(graphreduce(LLG))
 #' }
+#' 
 graphreduce <- function(graph, separator) {
 
     if(!is(graph, 'loongraph'))

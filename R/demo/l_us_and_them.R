@@ -1,10 +1,7 @@
 
 ## Gapminder Data
-library(dplyr)
-
 local({
     data(UsAndThem)
-    head(UsAndThem)
     
     colorkey = list('America'='#E5FF2F',
                     'Europe & Central Asia'='#FF982F',
@@ -44,7 +41,7 @@ local({
     # split data by country and arrange them by year
     sdat <- split(UsAndThem, UsAndThem$Country)
     sdat2 <- lapply(sdat, function(dat) {
-        arrange(dat, Year)
+        dat[order(dat$Year), ]
     })
     
     # How many observations per year per country
