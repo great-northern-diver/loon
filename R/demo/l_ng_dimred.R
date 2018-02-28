@@ -1,10 +1,4 @@
 
-
-require(MASS) || stop("MASS library required")
-require(kernlab)  || stop("kernlab library required")
-require(RDRToolbox)  || stop("RDRToolbox library required")
-require(RColorBrewer) || stop("RColorBrewer library required")
-
 if (requireNamespace("MASS", quietly = TRUE) && 
     requireNamespace("kernlab", quietly = TRUE) && 
     requireNamespace("RDRToolbox", quietly = TRUE) && 
