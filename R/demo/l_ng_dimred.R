@@ -85,7 +85,7 @@ if (requireNamespace("MASS", quietly = TRUE) &&
                                             command = paste0(p, " configure -x %x -y %y -xlabel %xlabel -ylabel %ylabel"))
             l_configure(p, color=olive$Area)
             list(nav, con, p)    
-        }, allData, brewer.pal(7, "Set2"), c('pca', 'lda', 'lmds', 'nlmds', 'kpca', 'isomap', 'lle'))
+        }, allData, RColorBrewer::brewer.pal(7, "Set2"), c('pca', 'lda', 'lmds', 'nlmds', 'kpca', 'isomap', 'lle'))
         
         plots <- lapply(objs, function(x) x[[3]]) 
         
