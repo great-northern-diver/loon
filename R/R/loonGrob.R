@@ -21,7 +21,7 @@
 #' grid.newpage()
 #' grid.draw(g)
 #' 
-#' widget['title'] <- "Iris Data"
+#' widget['title'] <- "Anderson's Iris Data"
 #' 
 #' grid.edit("Scatterplot", gp=gpar(alpha = 0.6))
 #' 
