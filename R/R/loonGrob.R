@@ -14,9 +14,9 @@
 #' 
 #' library(grid)
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
-#' loonGrob <- loon2grid(widget)
-#' grid.ls(loonGrob, viewports=TRUE, fullNames=TRUE)
-#' grid.newpage(); grid.draw(loonGrob)
+#' lgrob <- loonGrob(widget)
+#' grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
+#' grid.newpage(); grid.draw(lgrob)
 #' 
 #' widget['title'] <- "Iris Data"
 #' grid.edit("Scatterplot model", gp=gpar(alpha = 0.6))
@@ -25,18 +25,18 @@
 #' p <- demo("l_glyph_sizes", ask = FALSE)$value
 #' 
 #' m <- 6  
-#' loonGrob <- loon2grid(p)
+#' lgrob <- loonGrob(p)
 #' grid.newpage()
-#' grid.draw(loonGrob)
+#' grid.draw(lgrob)
 #' }
 #' 
 
-loon2grid <- function(widget, ...) {
-    UseMethod("loon2grid")
+loonGrob <- function(widget, ...) {
+    UseMethod("loonGrob")
 }
 
 #' @export
-loon2grid.default <- function(widget, margins = NULL, border = NULL, ...) {
+loonGrob.default <- function(widget, margins = NULL, border = NULL, ...) {
     
     l_isLoonWidget(widget) || stop("widget does not seem to exist") 
     

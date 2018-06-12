@@ -6,11 +6,11 @@
 #' 
 #' @import grid
 #' 
-#' @seealso \code{\link{loon2grid.l_graph}}, \code{\link{loon2grid.l_navgraph}}
+#' @seealso \code{\link{loonGrob.l_graph}}, \code{\link{loonGrob.l_navgraph}}
 #' 
 #' @export
 
-loon2grid.l_navigator <- function(widget){
+loonGrob.l_navigator <- function(widget){
     
     color <- as_hex6color(widget['color'])
     label <- widget['label']

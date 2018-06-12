@@ -12,11 +12,11 @@
 #' p <- l_pairs(iris[,-5], color=iris$Species)
 #' 
 #' library(grid)
-#' loonGrob <- loon2grid(p)
+#' lgrob <- loonGrob(p)
 #' grid.newpage()
-#' grid.draw(loonGrob)
+#' grid.draw(lgrob)
 
-loon2grid.l_pairs <- function(widget){
+loonGrob.l_pairs <- function(widget){
     
     len_pairs <- length(widget)
     names <- c( sapply(widget, function(l){
@@ -36,14 +36,14 @@ loon2grid.l_pairs <- function(widget){
     }
     grobId <- c(1:len_pairs, textGrobId - 0.5)
     lenGrobs <- len_pairs + len_names
-    loonGrobObject <- lapply(1:lenGrobs, function(i){
+    lgrobObject <- lapply(1:lenGrobs, function(i){
         if(i <= len_pairs){
-            loon2grid(widget[[i]], margins = rep(0.1, 4), border = NA)
+            loonGrob(widget[[i]], margins = rep(0.1, 4), border = NA)
         }else{
             textGrob(names[i - len_pairs], gp = gpar(fontsize = 9))
         }
     })
-    loonGrobObject <- loonGrobObject[order(grobId)]
+    lgrobObject <- lgrobObject[order(grobId)]
     # layout matrix
     layout_matrix <- matrix(rep(NA, len_names^2), nrow = len_names)
     seq_len <- seq(lenGrobs)
@@ -60,7 +60,7 @@ loon2grid.l_pairs <- function(widget){
     gTree(
         children = gList(
             rectGrob(gp  = gpar(fill = "#EBEBEB", col = NA)),
-            gridExtra::arrangeGrob(grobs = loonGrobObject, layout_matrix = layout_matrix)
+            gridExtra::arrangeGrob(grobs = lgrobObject, layout_matrix = layout_matrix)
         )
     )
 }

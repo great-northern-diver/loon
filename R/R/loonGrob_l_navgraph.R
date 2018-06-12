@@ -8,7 +8,7 @@
 #' 
 #' @export
 #' 
-#' @seealso \code{\link{loon2grid.l_graph}}
+#' @seealso \code{\link{loonGrob.l_graph}}
 #' 
 #' @examples 
 #' 
@@ -16,13 +16,13 @@
 #' ng <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
 #' 
 #' library(grid)
-#' ## loon2grid(ng) will just return navigator grob
-#' navGrob <- loon2grid(ng)
+#' ## loonGrob(ng) will just return navigator grob
+#' navGrob <- loonGrob(ng)
 #' grid.newpage()
 #' grid.draw(navGrob)
 #' 
-#' ## loon2grid(ng$plot) will return scatterplot grob
-#' scatterGrob <- loon2grid(ng$plot)
+#' ## loonGrob(ng$plot) will return scatterplot grob
+#' scatterGrob <- loonGrob(ng$plot)
 #' grid.newpage()
 #' grid.draw(scatterGrob)
 #' 
@@ -31,18 +31,18 @@
 #' nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
 #' 
 #' library(grid)
-#' ## loon2grid(nav) will just return the navigator grob
-#' navGrob <- loon2grid(nav)
+#' ## loonGrob(nav) will just return the navigator grob
+#' navGrob <- loonGrob(nav)
 #' grid.newpage()
 #' grid.draw(navGrob)
 #' 
-#' ## loon2grid(nav$plots) will return histogram grob or pairs Grob
-#' histGrob <- loon2grid(nav$plots)
+#' ## loonGrob(nav$plots) will return histogram grob or pairs Grob
+#' histGrob <- loonGrob(nav$plots)
 #' grid.newpage()
 #' grid.draw(histGrob)
 #' 
-#' ## loon2grid(nav$plot) will return scatterplot grob
-#' scatterGrob <- loon2grid(nav$plot)
+#' ## loonGrob(nav$plot) will return scatterplot grob
+#' scatterGrob <- loonGrob(nav$plot)
 #' grid.newpage()
 #' grid.draw(scatterGrob)
 #' ########################### l_ng_ranges ###########################
@@ -61,22 +61,22 @@
 #' nav <- l_ng_ranges(measures=m2d, data=dat)
 #' 
 #' library(grid)
-#' ## loon2grid(nav) will just return the navigator grob
-#' navGrob <- loon2grid(nav)
+#' ## loonGrob(nav) will just return the navigator grob
+#' navGrob <- loonGrob(nav)
 #' grid.newpage()
 #' grid.draw(navGrob)
 #' 
-#' ## loon2grid(nav$plot) will return scatterplot grob
-#' scatterGrob <- loon2grid(nav$plot)
+#' ## loonGrob(nav$plot) will return scatterplot grob
+#' scatterGrob <- loonGrob(nav$plot)
 #' grid.newpage()
 #' grid.draw(scatterGrob)  
 
 
-loon2grid.l_navgraph <- function(widget){
+loonGrob.l_navgraph <- function(widget){
   
   graph <-  widget$graph
   navigator <- widget$navigator
   
-  loon2grid.l_graph(graph, navigators = navigator)
+  loonGrob.l_graph(graph, navigators = navigator)
 }
 

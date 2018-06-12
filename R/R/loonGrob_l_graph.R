@@ -26,12 +26,12 @@
 #' con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
 #' 
 #' library(grid)
-#' loonGrob <- loon2grid(g, navigators =  list(nav0, nav1, nav2))
-#' grid.newpage(); grid.draw(loonGrob)
+#' lgrob <- loonGrob(g, navigators =  list(nav0, nav1, nav2))
+#' grid.newpage(); grid.draw(lgrob)
 
-loon2grid.l_graph <- function(widget, navigators = NULL){
+loonGrob.l_graph <- function(widget, navigators = NULL){
   
-  graphGrob <- loon2grid.default(widget)
+  graphGrob <- loonGrob.default(widget)
   if(is.null(navigators)){
     graphGrob
   }else{
