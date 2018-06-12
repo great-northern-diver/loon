@@ -34,9 +34,12 @@ This method is useful when working with objects from the
 For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")}
 }
 \examples{
-library(scagnostics)
-s <- scagnostics(oliveAcids)
-ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
+\dontrun{
+if (requireNamespace("scagnostics", quietly = TRUE)) {
+  s <- scahnostics::scagnostics(oliveAcids)
+  ng <- l_ng_ranges(s, oliveAcids, color=olive$Area) 
+} 
+}
 }
 \seealso{
 \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.default}}, 

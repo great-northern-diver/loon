@@ -51,7 +51,6 @@
 #' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris_data"))
 #' 
 #' # Use with other tk widgets
-#' library(tcltk)
 #' tt <- tktoplevel()
 #' p1 <- l_plot(parent=tt, x=c(1,2,3), y=c(3,2,1))
 #' p2 <- l_plot(parent=tt, x=c(4,3,1), y=c(6,8,4))

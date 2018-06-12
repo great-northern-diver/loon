@@ -29,6 +29,7 @@ Function creates a 2d measures object that can be used with
 For more information run: \code{l_help("learn_R_display_graph.html#measures")}
 }
 \examples{
+\dontrun{
 m <- scagnostics2d(oliveAcids, separator='**')
 m
 m()
@@ -36,6 +37,7 @@ m(olive$palmitoleic > 80)
 m('data')
 m('grid')
 m('measures')
+}
 }
 \seealso{
 \code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}}, 

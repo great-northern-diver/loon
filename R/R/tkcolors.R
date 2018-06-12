@@ -36,24 +36,28 @@
 #' 
 #' df_diff <- df[df$R_col != df$Tcl_col,]
 #' 
-#' library(grid)
-#' grid.newpage()
-#' pushViewport(plotViewport())
-#' 
-#' x_col <- unit(0, "npc")
-#' x_R <- unit(6, "lines")
-#' x_Tcl <- unit(10, "lines")
-#' 
-#' grid.text('color', x=x_col, y=unit(1, "npc"), just='left', gp=gpar(fontface='bold'))
-#' grid.text('R', x=x_R, y=unit(1, "npc"), just='center', gp=gpar(fontface='bold'))
-#' grid.text('Tcl', x=x_Tcl, y=unit(1, "npc"), just='center', gp=gpar(fontface='bold'))
-#' for (i in 1:nrow(df_diff)) {
-#'     y <- unit(1, "npc") - unit(i*1.2, "lines")
-#'     grid.text(rownames(df_diff)[i], x=x_col, y=y, just='left')
-#'     grid.rect(x=x_R, y=y, width=unit(3, "line"),
-#'               height=unit(1, "line"), gp=gpar(fill=df_diff[i,1]))
-#'     grid.rect(x=x_Tcl, y=y, width=unit(3, "line"),
-#'               height=unit(1, "line"), gp=gpar(fill=df_diff[i,2]))
+#' if (requireNamespace("grid", quietly = TRUE)) {
+#'   grid::grid.newpage()
+#'   grid::pushViewport(grid::plotViewport())
+#'   
+#'   x_col <- grid::unit(0, "npc")
+#'   x_R <- grid::unit(6, "lines")
+#'   x_Tcl <- grid::unit(10, "lines")
+#'   
+#'   grid::grid.text('color', x=x_col, y=grid::unit(1, "npc"),
+#'                   just='left', gp=grid::gpar(fontface='bold'))
+#'   grid::grid.text('R', x=x_R, y=grid::unit(1, "npc"), just='center',
+#'                    gp=grid::gpar(fontface='bold'))
+#'   grid::grid.text('Tcl', x=x_Tcl, y=grid::unit(1, "npc"), just='center',
+#'                    gp=grid::gpar(fontface='bold'))
+#'   for (i in 1:nrow(df_diff)) {
+#'       y <- grid::unit(1, "npc") - grid::unit(i*1.2, "lines")
+#'       grid::grid.text(rownames(df_diff)[i], x=x_col, y=y, just='left')
+#'       grid::grid.rect(x=x_R, y=y, width=grid::unit(3, "line"),
+#'                 height=grid::unit(1, "line"), gp=grid::gpar(fill=df_diff[i,1]))
+#'       grid::grid.rect(x=x_Tcl, y=y, width=grid::unit(3, "line"),
+#'                 height=grid::unit(1, "line"), gp=grid::gpar(fill=df_diff[i,2]))
+#'   }
 #' }
 tkcolors <- function() {
     

@@ -115,9 +115,10 @@ l_setColorList(cols)
 \dontrun{
 # you can also perform the color mapping yourself, for example with
 # the col_numeric function provided in the scales package
-library(scales)
-p_custom <- with(olive, l_plot(stearic ~ oleic,
-     color = col_numeric("Greens", domain = NULL)(palmitic)))
+if (requireNamespace("scales", quietly = TRUE)) {
+  p_custom <- with(olive, l_plot(stearic ~ oleic,
+       color = scales::col_numeric("Greens", domain = NULL)(palmitic)))
+  }
 }
 
 }

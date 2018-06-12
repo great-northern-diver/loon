@@ -224,7 +224,6 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
 
 # Create a list of polygons or lines
 #
-# @examples  
 # library(sp)
 # library(rworldmap)
 # world <- getMap(resolution = "coarse")

@@ -32,10 +32,11 @@ This method is useful when working with objects from the
 }
 \examples{
 
+\dontrun{
 library(scagnostics)
-scags <- scagnostics(oliveAcids)
-
-l_ng_plots(scags, oliveAcids, color=olive$Area)
+  scags <- scagnostics::scagnostics(oliveAcids)
+  l_ng_plots(scags, oliveAcids, color=olive$Area)
+}
 }
 \seealso{
 \code{\link{l_ng_plots}}, \code{\link{l_ng_plots.default}}, 

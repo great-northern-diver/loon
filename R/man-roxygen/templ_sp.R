@@ -18,13 +18,12 @@
 #' @seealso \code{\link[sp]{sp}}, \code{\link{l_layer}}
 #'
 #' @examples
-#' library(sp)
-#' library(rworldmap)
 #' 
-#' world <- getMap(resolution = "coarse")
-#' p <- l_plot()
-#' lmap <- l_layer(p, world, asSingleLayer=TRUE)
-#' l_scaleto_world(p)
- 
-# attr(lmap,'hole')
-# attr(lmap,'NAME')
+#' if (requireNamespace("rworldmap", quietly = TRUE)) {
+#'     world <- rworldmap::getMap(resolution = "coarse") 
+#'     p <- l_plot()
+#'     lmap <- l_layer(p, world, asSingleLayer=TRUE)
+#'     l_scaleto_world(p)
+#'     attr(lmap,'hole')
+#'     attr(lmap,'NAME')
+#' }

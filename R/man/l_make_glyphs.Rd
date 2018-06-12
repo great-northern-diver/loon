@@ -30,46 +30,49 @@ Loon's primitive glyph types are limited in terms of compound
 }
 \examples{
 \dontrun{
-data(minority)
-p <- l_plot(minority$long, minority$lat)
+if (requireNamespace("maps", quietly = TRUE)) {
+  data(minority)
+  p <- l_plot(minority$long, minority$lat)
+  
+  canada <- maps::map("world",  "Canada", fill=TRUE, plot=FALSE)
+  l_map <- l_layer(p, canada, asSingleLayer=TRUE)
+  l_scaleto_world(p)
+  
+  img <- l_make_glyphs(lapply(1:nrow(minority), function(i)minority[i,]), function(m) {
+      par(mar=c(1,1,1,1)*.5)
+      mat <- as.matrix(m[1,1:10]/max(m[1:10]))
+      barplot(height = mat,
+              beside = FALSE,
+              ylim = c(0,1),
+              axes= FALSE,
+              axisnames=FALSE)
+  }, width=120, height=120)
+  
+  l_imageviewer(img)
+  
+  g <- l_glyph_add_image(p, img, "barplot")
+  p['glyph'] <- g
 
-library(maps)
-canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
-l_map <- l_layer(p, canada, asSingleLayer=TRUE)
-l_scaleto_world(p)
+}
 
-img <- l_make_glyphs(lapply(1:nrow(minority), function(i)minority[i,]), function(m) {
-    par(mar=c(1,1,1,1)*.5)
-    mat <- as.matrix(m[1,1:10]/max(m[1:10]))
-    barplot(height = mat,
-            beside = FALSE,
-            ylim = c(0,1),
-            axes= FALSE,
-            axisnames=FALSE)
-}, width=120, height=120)
-
-l_imageviewer(img)
-
-g <- l_glyph_add_image(p, img, "barplot")
-p['glyph'] <- g
-
-
-library(grid)
 ## with grid
-li <- l_make_glyphs(runif(6), function(x) {
-    if(any(x>1 | x<0))
-        stop("out of range")
-    pushViewport(plotViewport(unit(c(1,1,1,1)*0, "points")))
-    grid.rect(gp=gpar(fill=NA))
-    grid.rect(0, 0, height = unit(x, "npc"), just = c("left", "bottom"),
-              gp=gpar(col=NA, fill="steelblue"))
-})
-
-l_imageviewer(li)
-
-p <- l_plot(1:6)
-g <- l_glyph_add_image(p, li, "bars")
-p['glyph'] <- g
+if (requireNamespace("grid", quietly = TRUE)) {
+  
+  li <- l_make_glyphs(runif(6), function(x) {
+      if(any(x>1 | x<0))
+          stop("out of range")
+      grid::pushViewport(grid::plotViewport(grid::unit(c(1,1,1,1)*0, "points")))
+      grid::grid.rect(gp=grid::gpar(fill=NA))
+      grid::grid.rect(0, 0, height = grid::unit(x, "npc"), just = c("left", "bottom"),
+                gp=grid::gpar(col=NA, fill="steelblue"))
+  })
+  
+  l_imageviewer(li)
+  
+  p <- l_plot(1:6)
+  g <- l_glyph_add_image(p, li, "bars")
+  p['glyph'] <- g
+}
 
 }
 }

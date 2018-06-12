@@ -14,8 +14,9 @@
 #'   \code{\link[maps]{map}}
 #' 
 #' @examples 
-#' library(maps)
-#' p <- l_plot(map('world', fill=TRUE, plot=FALSE))
+#' if (requireNamespace("maps", quietly = TRUE)) {
+#'    p <- l_plot(maps::map('world', fill=TRUE, plot=FALSE))
+#' }
 l_plot.map <-  function(x, ...) {
 
     p <- l_plot.default()
@@ -49,15 +50,16 @@ l_plot.map <-  function(x, ...) {
 #' @export l_layer.map
 #'   
 #' @examples 
-#' library(maps)
-#' canada <- map("world",  "Canada", fill=TRUE, plot=FALSE)
-#' p <- l_plot()
-#' l_map <- l_layer(p, canada, asSingleLayer=TRUE)
-#' l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE), "lightblue", "")
-#' l_scaleto_layer(p, l_map)
-#' l_map['active'] <- FALSE
-#' l_map['active'] <- TRUE
-#' l_map['tag']
+#' if (requireNamespace("maps", quietly = TRUE)) {
+#'   canada <- maps::map("world",  "Canada", fill=TRUE, plot=FALSE)
+#'   p <- l_plot()
+#'   l_map <- l_layer(p, canada, asSingleLayer=TRUE)
+#'   l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE), "lightblue", "")
+#'   l_scaleto_layer(p, l_map)
+#'   l_map['active'] <- FALSE
+#'   l_map['active'] <- TRUE
+#'   l_map['tag'] 
+#' }
 l_layer.map <- function(widget, x,
                         color="", linecolor="black", linewidth=1,
                         label, parent="root", index=0, asSingleLayer=TRUE, ...) {

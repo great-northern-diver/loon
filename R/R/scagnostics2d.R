@@ -24,6 +24,7 @@
 #' @export
 #' 
 #' @examples 
+#' \dontrun{
 #' m <- scagnostics2d(oliveAcids, separator='**')
 #' m
 #' m()
@@ -31,6 +32,7 @@
 #' m('data')
 #' m('grid')
 #' m('measures')
+#' }
 scagnostics2d <- function(data, scagnostics=c(
                           "Clumpy",
                           "Monotonic",
