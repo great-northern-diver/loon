@@ -22,9 +22,7 @@
 #' grid.edit("Scatterplot model", gp=gpar(alpha = 0.6))
 #' 
 #' \dontrun{
-#' demo("l_glyph_sizes", ask = FALSE)
-#'   
-#' p <- l_create_handle(".l0.plot")
+#' p <- demo("l_glyph_sizes", ask = FALSE)$value
 #' 
 #' m <- 6  
 #' loonGrob <- loon2grid(p)
