@@ -1,12 +1,9 @@
-
 loonPlotFactory <- function(factory_tclcmd, factory_path, factory_window_title="loon plot", parent=NULL, ...) {
 
-
-    new.toplevel <- if(is.null(parent)) {
+    new.toplevel <- FALSE
+    if(is.null(parent)) {
+        new.toplevel <- TRUE
         parent <- l_toplevel()
-        TRUE
-    } else {
-        FALSE
     }
     
     child <- l_subwin(parent, factory_path)
@@ -35,6 +32,8 @@ loonPlotFactory <- function(factory_tclcmd, factory_path, factory_window_title="
     }
     
     plot <- as.character(plot)
+    
     class(plot) <- "loon"
+    
     return(plot)
 }

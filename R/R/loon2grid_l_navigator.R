@@ -1,0 +1,34 @@
+#' Create a navigator grob
+#' 
+#' @param widget navigator object of class inheriting from "l_navigator"
+#' 
+#' @return a grid grob
+#' 
+#' @import grid
+#' 
+#' @seealso \code{\link{loon2grid.l_graph}}, \code{\link{loon2grid.l_navgraph}}
+#' 
+#' @export
+
+loon2grid.l_navigator <- function(widget){
+    
+    color <- as_hex6color(widget['color'])
+    label <- widget['label']
+    
+    vp <- vpStack(
+        plotViewport(margins = c(4.1, 5.1, 2.1, 2.1), name = "plotViewport"),
+        dataViewport(xscale = c(0,1), yscale = c(0,1), name = "dataViewport")
+    )
+    
+    gList(
+        pointsGrob(x = unit(0.5, "npc"), y = unit(0.5, "npc"),
+                   gp = gpar(fill = color, cex = 3.5),  
+                   pch = 21, vp = vp
+        ),
+        if(length(label) != 0) {
+            textGrob(x = unit(0.5, "npc"), y = unit(0.5, "npc"),
+                     paste(label, collapse = " "),  
+                     gp = gpar(fill = "black", fontsize = 9), vp = vp)
+        } else NULL
+    )
+}

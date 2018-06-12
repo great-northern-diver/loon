@@ -34,8 +34,10 @@
 #' s['axesLayout'] <- 'parallel'
 #' states <- l_info_states(s)
 #' names(states)
+
+
 l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial', 
-                         showAxes=TRUE, parent=NULL, ... ) {
+                         showAxes=TRUE, parent=NULL, ... ){
     
 
     if (!missing(data) && missing(sequence)) {
@@ -49,4 +51,5 @@ l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial'
                     scaling=scaling,
                     axesLayout=axesLayout,
                     ...)
+
 }

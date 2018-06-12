@@ -41,7 +41,8 @@
 #'             label=paste0(as.character(dat$Species[1]), " contours"))
 #'   })
 #' }
-#' 
+
+
 l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
                               y = seq(0, 1, length.out = ncol(z)),
                               z,

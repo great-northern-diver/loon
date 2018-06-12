@@ -16,6 +16,9 @@
 #' 
 #' @examples
 #' p <- l_pairs(iris[,-5], color=iris$Species)
+
+
+
 l_pairs <- function(data, parent=NULL, ...) {
 
     args <- list(...)
@@ -183,6 +186,40 @@ l_pairs <- function(data, parent=NULL, ...) {
     callbackFunctions$state[[paste(child,"synchronize", sep="_")]] <- synchronizeBindings
     callbackFunctions$state[[paste(child,"undo", sep="_")]] <- undoStateChanges
     
-    
-    return(plots)
+    structure(
+        plots,
+        class = c("l_pairs", "loon")
+    )
 }
+
+
+#' @export
+l_cget.loon_pairs <- function(target, state) {
+    
+    values <- lapply(target$plots, l_cget, state)
+    
+    values
+    
+}
+
+
+#' @export
+l_configure.loon_pairs <- function(target, ...) {
+    args <- list(...)
+    
+    if (is.null(names(args)) || any("" %in% names(args)))
+        stop("configuration needs key=value pairs")
+    
+    for (state in names(args)) {
+        
+        switch(
+            state,
+            linkingGroup = lapply(target$plots, l_configure, linkingGroup=linkingGroup, sync = pull),
+            selected = stop("not implementedc yet"),
+            stop("state ", state, " not known")
+        )
+    }
+    
+    target
+}
+

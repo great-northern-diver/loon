@@ -67,8 +67,9 @@ l_graph.graph <- function(nodes, ...) {
 #' @export l_graph.loongraph
 l_graph.loongraph <- function(nodes,...) {
     graph <- nodes
-    l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
-                    isDirected=graph$isDirected, ...)
+    structure(l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
+                              isDirected=graph$isDirected, ...), 
+              class = c("l_graph", "loon"))
 }
 
 
