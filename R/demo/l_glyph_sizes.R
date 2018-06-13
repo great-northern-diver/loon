@@ -1,5 +1,5 @@
 
-if (loon:::.withTclImg && requireNamespace("RnavGraphImageData", quietly = TRUE)) {
+if (requireNamespace("RnavGraphImageData", quietly = TRUE)) {
     local({
         # Plot glyphsizes for different glyphs
         sizes <- c(0:10) # seq(15,25,by=5)
