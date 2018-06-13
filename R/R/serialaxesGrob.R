@@ -1,4 +1,5 @@
-serialaxesGrob <- function(widget){
+
+loonGrob.l_serialaxes <- function(widget){
     
     sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
     

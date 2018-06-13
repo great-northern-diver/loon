@@ -4,7 +4,7 @@
 #' 
 #' @return a grid grob 
 #' 
-#' @import grid gridExtra
+#' @import grid
 #' 
 #' @export
 #' 
