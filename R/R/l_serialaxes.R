@@ -44,12 +44,16 @@ l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial'
         sequence <- names(data)
     }
     
-    loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
+    plot <- loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
                     data=l_data(data),
                     sequence=sequence,
                     showAxes=showAxes,
                     scaling=scaling,
                     axesLayout=axesLayout,
                     ...)
+    
+    class(plot) <- c("l_serialaxes", class(plot))
+    
+    plot
 
 }

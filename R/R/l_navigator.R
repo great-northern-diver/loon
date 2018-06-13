@@ -58,8 +58,9 @@ l_navigator_add <- function(widget, from="", to="", proportion=0, color='orange'
 
     structure(l_navigator(widget, "add", from=from, to=to,
                           proportion=proportion, color=color, ...),
-              class=c("loon", "l_navigator"),
-              widget=as.vector(widget))
+              widget = as.vector(widget),
+              class = c("l_navigator", "loon")
+    )
 }
 
 #' @title Delete a Navigator

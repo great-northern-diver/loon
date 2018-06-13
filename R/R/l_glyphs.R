@@ -172,7 +172,9 @@ l_glyph_getType <- function(widget, id) {
 #'     rep(text_glyph, 3)
 #' )
 l_glyph_add <- function(widget, type, ...) {
-    UseMethod("l_glyph_add", type)
+    g <- UseMethod("l_glyph_add", type)
+    class(g) <- c(paste0("l_glyph_", type), "l_glyph", "loon")
+    g
 }
 
 
@@ -192,8 +194,7 @@ l_glyph_add <- function(widget, type, ...) {
 #' 
 l_glyph_add.default <- function(widget, type, label="", ...) {
     ## as.vector strips attributes
-    structure(l_glyph(widget, "add", type, label=label, ...),
-              widget=as.vector(widget), class = c("loon","l_glyph"))
+    l_glyph(widget, "add", type, label=label, ..., widget=as.vector(widget))
 }
 
 
@@ -218,8 +219,7 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
     if (is.factor(text))
         text <- as.character(text)
     
-    return(l_glyph_add.default(widget, "text",
-                       text=text, label=label, ...))
+    l_glyph_add.default(widget, "text", text=text, label=label, ...)
 }
 
 
@@ -242,9 +242,9 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
 #' g <- l_glyph_add_pointrange(p, ymin=(1:3)-(1:3)/5, ymax=(1:3)+(1:3)/5)
 #' p['glyph'] <- g
 l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, label="", ...) {
-    return(l_glyph_add.default(widget, "pointrange",
-                       ymin=ymin, ymax=ymax, linewidth=linewidth,
-                       label=label, ...))
+    l_glyph_add.default(widget, "pointrange",
+                        ymin=ymin, ymax=ymax, linewidth=linewidth,
+                        label=label, ...)
 }
 
 
@@ -311,8 +311,8 @@ l_glyph_add_polygon <- function(widget, x, y, showArea=TRUE, label="", ...) {
     if (is.list(y))
         y <- l_Rlist2nestedTclList(y)
     
-    return(l_glyph_add.default(widget, "polygon",
-                       x=x, y=y, showArea=showArea, label=label, ...))
+    l_glyph_add.default(widget, "polygon",
+                        x=x, y=y, showArea=showArea, label=label, ...)
 }
 
 
@@ -353,17 +353,17 @@ l_glyph_add_serialaxes <- function(widget,
         sequence <- names(data)
     }
     
-    return(l_glyph_add.default(widget, "serialaxes",
-                       data=l_data(data),
-                       sequence=sequence,
-                       linewidth=linewidth,
-                       scaling=scaling,
-                       axesLayout=axesLayout,
-                       showAxes=showAxes,
-                       axesColor=axesColor,
-                       showEnclosing=showEnclosing,
-                       bboxColor=bboxColor,
-                       label=label ,...))
+    l_glyph_add.default(widget, "serialaxes",
+                        data = l_data(data),
+                        sequence=sequence,
+                        linewidth=linewidth,
+                        scaling=scaling,
+                        axesLayout=axesLayout,
+                        showAxes=showAxes,
+                        axesColor=axesColor,
+                        showEnclosing=showEnclosing,
+                        bboxColor=bboxColor,
+                        label=label ,...)
 }
 
 

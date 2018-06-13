@@ -130,6 +130,8 @@ l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
                                 x=xy$x, y=xy$y,
                                 xlabel=xy$xlab, ylabel=xy$ylab,
                                 ...)
+        
+        class(plot) <- c("l_plot", class(plot))
     }
 
     return(plot)

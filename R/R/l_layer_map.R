@@ -171,5 +171,6 @@ l_layer.map <- function(widget, x,
             }
         }
     }
+    
     return(id)    
 }

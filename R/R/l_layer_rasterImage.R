@@ -72,7 +72,7 @@ l_layer_rasterImage <-  function (widget, image, xleft, ybottom, xright, ytop,
     
     color <- substr(as.vector(image),1,7)
     
-    id <- l_layer_rectangles(widget, x=xcoords, y=ycoords, color=color, linecolor="",
-                             parent = parent, index=index)
+    l_layer_rectangles(widget, x=xcoords, y=ycoords, color=color, linecolor="",
+                       parent = parent, index=index)
     
 }
