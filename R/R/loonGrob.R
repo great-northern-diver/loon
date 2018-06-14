@@ -61,13 +61,16 @@ loonGrob.default <- function(target, ...) {
 #' @export
 loonGrob.l_plot <- function(target,  name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    cartesian2dGrob(target, loonGrob(rl), name = name, gp = gp, vp = vp)
+    layers_grob <- loonGrob(rl)
+    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
 }
 
 #' @export
 loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    cartesian2dGrob(target, loonGrob(rl), name = name, gp = gp, vp = vp)
+    layers_grob <- loonGrob(rl)
+    
+    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
 }
 
 #' @export
@@ -183,15 +186,17 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
 }
 
 
-
-loonGrob.l_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
-
+#' @export
+loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
+    
+    widget <- attr(target, "widget")
+    
     l_children_layers <- lapply(rev(l_layer_getChildren(target)), function(layerid) {
-        l_create_handle(c(target, layerid))
+        l_create_handle(c(widget, layerid))
     })
     
-    l_visible_children_layer <- Filter(function(x) {
-        l_layer_isVisible(target, x)
+    l_visible_children_layer <- Filter(function(layerid) {
+        l_layer_isVisible(widget, layerid)
     }, l_children_layers)
     
     l_children_grobs <- lapply(l_visible_children_layer, loonGrob)
@@ -205,7 +210,8 @@ loonGrob.l_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
 
 # __primitive grobs----
-loonGrob.l_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -222,8 +228,8 @@ loonGrob.l_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }
 }
 
-
-loonGrob.l_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -237,7 +243,8 @@ loonGrob.l_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }
 }
 
-loonGrob.l_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -262,7 +269,8 @@ loonGrob.l_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
 }
 
-loonGrob.l_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -288,7 +296,8 @@ loonGrob.l_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }
 }
 
-loonGrob.l_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -304,7 +313,8 @@ loonGrob.l_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }     
 }
 
-loonGrob.l_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -322,7 +332,8 @@ loonGrob.l_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }    
 }
 
-loonGrob.l_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -351,7 +362,8 @@ loonGrob.l_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }    
 }
 
-loonGrob.l_polygons <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -379,7 +391,8 @@ loonGrob.l_polygons <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }    
 }
 
-loonGrob.l_rectangles <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -414,7 +427,8 @@ loonGrob.l_rectangles <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }    
 }
 
-loonGrob.l_lines <- function(target, name = NULL, gp = NULL, vp = NULL) {
+#' @export
+loonGrob.l_layer_lines <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
@@ -505,13 +519,20 @@ as_hex6color <- function(color) {
 
 
 
-xy_coords <- function(target, widget, layerid, type, native_unit = TRUE) {
+xy_coords <- function(target, native_unit = TRUE) {
   
-  xy <- if (type %in% c("scatterplot","graph") ) {
-    list(
-      x = if (length(widget['xTemp']) == 0) widget['x'] else widget['xTemp'],
-      y = if (length(widget['yTemp']) == 0) widget['y'] else widget['yTemp']
-    )
+
+  if (!is(target, "l_layer")) target <- l_create_handle(c(target, "model"))
+  
+  type <- l_layer_getType(attr(target, "widget"), target)
+  
+  xy <- if (type %in% c("scatterplot", "graph") ) {
+      
+      widget <- l_create_handle(attr(target, "widget"))
+      list(
+          x = if (length(widget['xTemp']) == 0) widget['x'] else widget['xTemp'],
+          y = if (length(widget['yTemp']) == 0) widget['y'] else widget['yTemp']
+      )
   } else if (type %in% c('polygon', 'line', 'rectangle', 'text', 'oval',
                          'points', 'texts', 'polygons', 'rectangles', 'lines')) {
     list(
@@ -551,21 +572,24 @@ cartesian_model_widget_states <- c(
   "zoomX", "zoomY", "panY", "panX", "deltaX", "deltaY",
   "linkingKey", "linkingKey",  "showItemLabels",  "selectBy",
   "background", "foreground", "guidesBackground", "guidelines",
-  "minimumMargins", "labelMargins", "scalesMargins", "xTemp", "yTemp" 
+  "minimumMargins", "labelMargins", "scalesMargins", "xTemp", "yTemp",
+  "showScales",  "title", "showLabels", "showGuides",  "xlabel", "ylabel"  
 )
 
 
-#' @export
-get_layer_states <- function(target, widget, layerid, type, omit = NULL) {
-  
+
+# target is either a widget or layer
+get_layer_states <- function(target, omit = NULL) {
+    
+    
   states_info <- l_info_states(target)
   state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
   
   states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
   
   # Add Coordinates
-  if (type != "group") {
-    states <- c(xy_coords(target, widget, layerid, type), states)                
+  if (!is(target, "l_layer_group")) {
+    states <- c(xy_coords(target), states)                
   }
   
   # Deal with color
@@ -582,10 +606,31 @@ get_layer_states <- function(target, widget, layerid, type, omit = NULL) {
 }
 
 
+# only works for scatterplot and serialaxes
 get_model_display_order <- function(widget) {
-    # thesis p 130
-    # need to peel of the item number and add 1
-    #.Tcl('.l3.plot.canvas find withtag "model&&point"')
-    #.Tcl('.l3.plot.canvas gettags 35')
-    seq_len(l_cget(widget, "n"))
+    
+    n <- l_cget(widget, "n")
+    
+    if (n == 0) {
+        numeric(0)
+    } else {
+        can <- paste0(widget, ".canvas")
+        id <- as.numeric(tcl(can, "find", "withtag", paste("layer", "model", sep = "&&")))
+        
+        i <- vapply(id, function(id_i) {
+            tags <- as.character(tcl(can, "gettags", id_i))
+        
+            if (length(tags) >= 4) {
+                as.numeric(sub("^item", "", tags[4]))
+            } else {
+                NA_integer_
+            }
+        }, numeric(1))
+        
+        if (any(is.na(i))) {
+            seq_len(n)
+        } else {
+            i + 1
+        }
+    }
 }

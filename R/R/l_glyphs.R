@@ -82,7 +82,27 @@ l_glyph_getLabel <- function(widget, id) {
 #' 
 #' @export
 l_glyph_getType <- function(widget, id) {
-    l_glyph(widget, "getType", id)
+    
+    if (id %in% primitiveGlyphs()) {
+        "primitive_glyph"
+    } else {
+        l_glyph(widget, "getType", id)   
+    }
+}
+
+primitiveGlyphs <- function() {
+    c("circle",
+    "ocircle" ,
+    "ccircle",
+    "square" ,
+    "osquare",
+    "csquare",
+    "triangle",
+    "otriangle",
+    "ctriangle",
+    "diamond",
+    "odiamond",
+    "cdiamond")
 }
 
 

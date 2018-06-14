@@ -46,20 +46,32 @@
 l_create_handle <- function(target) {
     
     ## first check for loon objects
-    if (is(target,'l_layer') || is(target,'l_glyph') || is(target, 'l_navigator')) {
-        loon_obj <- target
-        hasRecognized <- TRUE
-    } else if (is(target, 'l_context')) {
+    if (is(target,'loon')) {
         loon_obj <- target
         hasRecognized <- TRUE
     } else { 
         ## strip attributes
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)
         
-        widget <- as.vector(specifier[1])
+        widget <- specifier[1]
+      
+        cat(paste("widget", widget, "\n"))
+        
+        if (!l_isLoonWidget(widget)) stop(widget, " is not a valid loon widget")
         
         loon_obj <- if (length(specifier) == 1) {
-            widget
+            
+            cl <- as.character(tcl("info", "object", "class", widget))
+            
+            wcl <- switch(
+                cl,
+                "::loon::classes::Scatterplot_Widget" = "l_plot",
+                "::loon::classes::Histogram_Widget" = "l_hist",
+                "::loon::classes::Serialaxes_Widget" = "l_serialaxes",
+                "::loon::classes::Graph_Widget" = "l_graph",
+                character(0)
+            )
+            structure(widget, class = c(wcl, "loon"))
         } else if (length(specifier) == 2) {
             
             spec_2 <- specifier[2]
