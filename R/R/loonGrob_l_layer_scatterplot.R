@@ -32,15 +32,99 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
     } 
 }
 
-loonGlyphGrob <- function(widget, x, glyph_info) {
+loonGlyphGrob <- function(widget, x, glyph_info, 
+                          name = NULL, gp = NULL, vp = NULL) {
     UseMethod("loonGlyphGrob", x)
 }
 
-loonGlyphGrob.default <- function(widget, x, glyph_info) {
-    grob()
+loonGlyphGrob.default <- function(widget, x, glyph_info, 
+                                  name = NULL, gp = NULL, vp = NULL) {
+    grob(name = name, gp = gp, vp = vp)
 }
 
 
-loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
-    
+loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info,
+                                          name = NULL, gp = NULL, vp = NULL) {
+    glyph <- glyph_info$glyph
+    if (glyph %in% l_primitiveGlyphs()) {
+        if (is.null(gp)) gp <- gpar()
+        cex <- as_r_point_size(glyph_info$size)
+        col <- glyph_info$color
+        pch <- glyph_to_pch(glyph)
+        # is there a fill colour?
+        filled <- (pch %in% 21:24)
+        if (filled) {
+            glist(
+                pointsGrob(x = glyph_info$x,
+                           y = glyph_info$y,
+                           gp = gpar(fill = col, 
+                                     col = col, 
+                                     pch = pch, 
+                                     cex = cex)
+                           #unit(1, "char"),  default.units = "native",
+                           ),
+                name = name, 
+                gp = gp, 
+                vp = vp
+            )
+        } else {
+            glist(
+                pointsGrob(x = glyph_info$x,
+                           y = glyph_info$y,
+                           gp = gpar(col = col, 
+                                     pch = pch, 
+                                     cex = cex)
+                           #unit(1, "char"),  default.units = "native",
+                ),
+                name = name, 
+                gp = gp, 
+                vp = vp
+            )
+        }
+        # switch(
+        #     glyph,
+        #     circle = {
+        #         pointsGrob(x = glyph_info$x,
+        #                    y = glyph_info$y,
+        #                    pch = 1, size = unit(1, "char"),
+        #                    default.units = "native", name = name,
+        #                    gp = gpar(), vp = NULL)
+        #         
+        #     },
+        #     ocircle = {
+        #         
+        #     },
+        #     ccircle = {
+        #         
+        #     },
+        #     square = {
+        #         
+        #     },
+        #     osquare = {
+        #         
+        #     },
+        #     csquare = {
+        #         
+        #     },
+        #     triangle = {
+        #         
+        #     },
+        #     otriangle = {
+        #         
+        #     },
+        #     ctriangle = {
+        #         
+        #     },
+        #     diamond = {
+        #         
+        #     },
+        #     odiamond = {
+        #         
+        #     },
+        #     cdiamond = {
+        #         
+        #     },
+        #     stop(glyph, "is not a primitive glyph in loon.")
+        # )
+    }
 }
