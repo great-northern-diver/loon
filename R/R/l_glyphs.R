@@ -172,9 +172,7 @@ l_glyph_getType <- function(widget, id) {
 #'     rep(text_glyph, 3)
 #' )
 l_glyph_add <- function(widget, type, ...) {
-    g <- UseMethod("l_glyph_add", type)
-    class(g) <- c(paste0("l_glyph_", type), "l_glyph", "loon")
-    g
+    UseMethod("l_glyph_add", type)
 }
 
 
@@ -194,7 +192,12 @@ l_glyph_add <- function(widget, type, ...) {
 #' 
 l_glyph_add.default <- function(widget, type, label="", ...) {
     ## as.vector strips attributes
-    l_glyph(widget, "add", type, label=label, ..., widget=as.vector(widget))
+    structure(
+        l_glyph(widget, "add", type, label=label, ...),
+        widget = as.vector(widget),
+        class = c(paste0("l_glyph_", type), "l_glyph", "loon")
+    )
+
 }
 
 

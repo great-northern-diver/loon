@@ -56,7 +56,7 @@ l_create_handle <- function(target) {
         ## strip attributes
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)
         
-        widget <- structure(as.vector(specifier[1]), class='loon')
+        widget <- as.vector(specifier[1])
         
         loon_obj <- if (length(specifier) == 1) {
             widget
@@ -72,8 +72,9 @@ l_create_handle <- function(target) {
                 structure("root", widget=as.vector(widget), class=c("l_layer_group", "l_layer", "loon"))
             } else if (spec_2_short == "glyph") {
                 structure(as.vector(specifier[2]),
-                          widget=widget,
-                          class=c('l_glyph', 'loon'))
+                          widget= widget,
+                          class=c(paste0("l_glyph_", l_glyph_getType(widget, spec_2)), 'l_glyph', 'loon'))
+                
             } else if (spec_2_short == "navig") {
                 structure(as.vector(specifier[2]),
                           widget=widget,
