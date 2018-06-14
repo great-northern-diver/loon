@@ -47,7 +47,6 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info,
                                           name = NULL, gp = NULL, vp = NULL) {
     glyph <- glyph_info$glyph
     if (glyph %in% l_primitiveGlyphs()) {
-        if (is.null(gp)) gp <- gpar()
         cex <- as_r_point_size(glyph_info$size)
         col <- glyph_info$color
         pch <- glyph_to_pch(glyph)
