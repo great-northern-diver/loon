@@ -30,24 +30,20 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
 #' grid.newpage(); grid.draw(lgrob)
 #' 
-#' widget['title'] <- "Iris Data"
-#' grid.edit("Scatterplot model", gp=gpar(alpha = 0.6))
-#' 
-#' 
-#' p <- demo("l_layers", ask = FALSE)$value
-#' 
-#' 
-#' 
 #' \dontrun{
+#' demo("l_layers", ask = FALSE)$value
+#'  
+#' p <- l_create_handle(".l3.plot")
+#' lgrob <- loonGrob(p)
+#' grid.newpage(); grid.draw(lgrob)
+#' 
 #' p <- demo("l_glyph_sizes", ask = FALSE)$value
 #' 
-#' m <- 6  
 #' lgrob <- loonGrob(p)
 #' grid.newpage()
 #' grid.draw(lgrob)
 #' }
 #' 
-
 loonGrob <- function(target, ...) {
     UseMethod("loonGrob")
 }
