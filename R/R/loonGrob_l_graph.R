@@ -130,10 +130,7 @@ navigatorLinesScatterGrob <- function(graph, navigator){
                                        gp = gpar(col = NA, col = color, lwd = 3),
                                        vp = vp )
     )
-    states <- get_layer_states(target = graph, 
-                               widget = graph, 
-                               layerid = "root", 
-                               type = l_layer_getType(graph, "model"))
+    states <- get_layer_states(target = graph)
     gList(
       fromLinesGrob,
       toLinesGrob,

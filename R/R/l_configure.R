@@ -72,5 +72,5 @@ l_configure.loon <- function(target, ...) {
     
     do.call('obj_eval', args)
     
-    invisible(environment(obj_eval)$loon_obj)
+    invisible(target)
 }

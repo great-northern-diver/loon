@@ -54,8 +54,6 @@ l_create_handle <- function(target) {
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)
         
         widget <- specifier[1]
-      
-        cat(paste("widget", widget, "\n"))
         
         if (!l_isLoonWidget(widget)) stop(widget, " is not a valid loon widget")
         

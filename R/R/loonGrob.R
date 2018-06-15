@@ -493,19 +493,16 @@ as_r_point_size <- function(s) {
 }
 
 # Model layers have selected state
-get_model_color <- function(widget) {
+get_display_color <- function(color, selected) {
   
-  col <- as_hex6color(widget['color'])
-  sel <- widget['selected']
-  
-  sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
+  sel_color <- as.character(l_getOption("select-color"))
   
   if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
     sel_color <- loon:::hex12tohex6(sel_color)
   }
   
-  col[sel] <- sel_color
-  col
+  color[selected] <- sel_color
+  color
 }
 
 as_hex6color <- function(color) {
@@ -519,16 +516,17 @@ as_hex6color <- function(color) {
 
 
 
-xy_coords <- function(target, native_unit = TRUE) {
+xy_coords_layer <- function(layer, native_unit = TRUE) {
   
-
-  if (!is(target, "l_layer")) target <- l_create_handle(c(target, "model"))
+  if (!is(layer, "l_layer")) stop("layer argument needs to be an l_layer")
   
-  type <- l_layer_getType(attr(target, "widget"), target)
+  widget <- l_create_handle(attr(layer, "widget"))
+    
+  type <- l_layer_getType(attr(layer, "widget"), layer)
   
   xy <- if (type %in% c("scatterplot", "graph") ) {
       
-      widget <- l_create_handle(attr(target, "widget"))
+
       list(
           x = if (length(widget['xTemp']) == 0) widget['x'] else widget['xTemp'],
           y = if (length(widget['yTemp']) == 0) widget['y'] else widget['yTemp']
@@ -536,12 +534,12 @@ xy_coords <- function(target, native_unit = TRUE) {
   } else if (type %in% c('polygon', 'line', 'rectangle', 'text', 'oval',
                          'points', 'texts', 'polygons', 'rectangles', 'lines')) {
     list(
-      x = l_cget(target, "x"),
-      y = l_cget(target, "y")
+      x = l_cget(layer, "x"),
+      y = l_cget(layer, "y")
     )
   } else if(type == "histogram"){
     list(
-      x = l_cget(target, "x"), 
+      x = l_cget(layer, "x"), 
       y = NA
     )
   } else {
@@ -577,32 +575,60 @@ cartesian_model_widget_states <- c(
 )
 
 
-
-# target is either a widget or layer
+#' get layer states
+#' 
+#' @noRd
+#' @examples 
+#' 
+#' \dontrun{
+#' p <- l_plot(x = c(0,1), y = c(0,1))
+#' l <- l_layer_rectangle(p, x = c(0,1), y = c(0,1))
+#' 
+#' loon:::get_layer_states(p)
+#' loon:::get_layer_states(as.vector(p))
+#' 
+#' loon:::get_layer_states(l)
+#' loon:::get_layer_states(c(as.vector(p), as.vector(l)))
+#' }
+#' 
 get_layer_states <- function(target, omit = NULL) {
     
+    if (!is(target, "loon")) {
+        target <- l_create_handle(target)
+    } 
     
-  states_info <- l_info_states(target)
-  state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
-  
-  states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
-  
-  # Add Coordinates
-  if (!is(target, "l_layer_group")) {
-    states <- c(xy_coords(target), states)                
-  }
-  
-  # Deal with color
-  is_color <- vapply(states_info[state_names], function(s) s$type %in% c("color", "colorOrTransparent"), 
-                     logical(1))
-  if (any(is_color)) {
-    for (state_name in state_names[is_color]) {
-      states[[state_name]] <- as_hex6color(states[[state_name]])            
+    if (is(target, "l_layer")) {
+        layer <- target
+        widget <- l_create_handle(attr(target, "widget"))
+        obj_states <- target
+    } else {
+        widget <- target
+        layer <- l_create_handle(c(as.vector(widget), "model"))
+        obj_states <- widget
     }
     
-  }
-  
-  states
+    states_info <- l_info_states(obj_states)
+    state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
+    
+    states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
+    
+    # Add Coordinates
+    if (!is(layer, "l_layer_group")) {
+        states <- c(xy_coords_layer(layer), states)
+    }
+    
+    
+    # Deal with color
+    is_color <- vapply(states_info[state_names], function(s) s$type %in% c("color", "colorOrTransparent"), 
+                       logical(1))
+    if (any(is_color)) {
+        for (state_name in state_names[is_color]) {
+            states[[state_name]] <- as_hex6color(states[[state_name]])            
+        }
+        
+    }
+    
+    states
 }
 
 
