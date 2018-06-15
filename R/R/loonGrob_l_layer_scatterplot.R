@@ -41,7 +41,8 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                     y = states$y[display_order][active],
                     glyph = states$glyph[display_order][active],
                     color = get_display_color(states$color[display_order][active], selected),
-                    size = states$size[display_order][active]
+                    size = states$size[display_order][active],
+                    index = seq_along(states$x)[display_order][active]
                     )
 
         pch <- glyph_to_pch(s_a$glyph)
@@ -68,7 +69,8 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                     y = s_a$y[i],
                     glyph = s_a$glyph[i],
                     color = s_a$color[i],
-                    size = s_a$size[i]
+                    size = s_a$size[i],
+                    index = s_a$index[i]
                 )
                 
                 type <- l_glyph_getType(widget, case_i$glyph)
@@ -122,3 +124,92 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
     }
 }
 
+#' image glyph
+#' 
+#' @noRd
+#' 
+#' @examples 
+#' p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
+#' img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
+#' imgs <- setNames(l_image_import_files(img_paths),
+#'                  tools::file_path_sans_ext(basename(img_paths)))
+#' i <- pmatch(gsub("^[[:alpha:]]+-","", olive$Area), names(imgs), duplicates.ok = TRUE)
+#' 
+#' g <- l_glyph_add_image(p, imgs[i], label="Flags")
+#' 
+#' p['glyph'] <- c(g, rep('circle', p['n']-1))
+#' p['selected'] <- c(TRUE, rep(FALSE, p['n']-1))
+#' 
+#' gr <- loonGrob(p) 
+#' 
+#' library(grid)
+#' grid.newpage(); grid.draw(gr)
+#' 
+#' \dontrun{
+#' p['glyph'] <- g
+#' gr <- loonGrob(p) 
+#' grid.newpage(); grid.draw(gr)
+#' 
+#' g2 <- removeGrob(gr, "image_glyph_border", global=TRUE)
+#' grid.newpage(); grid.draw(g2)
+#' }
+loonGlyphGrob.image <-  function(widget, x, glyph_info) {
+    
+    gh <- l_create_handle(c(widget, glyph_info$glyph))
+    
+    tcl_img_i <- gh['images'][glyph_info$index]
+    size_i <- glyph_info$size
+    
+    
+    # get the scaled_image
+    height <- as.numeric(tcl("image", "height", tcl_img_i))
+    width <- as.numeric(tcl("image", "width", tcl_img_i))
+    
+    area <- as.numeric(tcl("::loon::map_image_size", size_i))
+    
+    scale <- sqrt(area/(width*height))
+    
+    image_w <- floor(scale*width)
+    image_h <- floor(scale*height)
+    
+    scaled_img <- as.character(tkimage.create("photo"))
+    tcl(tcl("set", "::loon::Options(image_scale)"),  tcl_img_i,  image_w, image_h,  scaled_img)
+    
+    r_img <- tcl_img_2_r_raster(scaled_img)
+    
+    tcl("image", "delete", scaled_img)
+    
+    
+    
+    width_p = unit(image_w/40, "cm")
+    height_p = unit(image_h/40, "cm")
+    
+    gTree(
+        children = gList(
+            rectGrob(x = glyph_info$x, y = glyph_info$y, just = "centre",
+                     width = width_p+unit(2, "mm"), height = height_p+unit(2, "mm"),
+                     gp = gpar(
+                         fill = glyph_info$color,
+                         col = NA
+                     ),
+                     name = "image_glyph_border"),
+            rasterGrob(r_img, x = glyph_info$x, y = glyph_info$y, just = "centre",
+                       width = width_p, height = height_p)
+        )
+    )
+
+}
+
+tcl_img_2_r_raster <- function(img) {
+    if (!(img %in% as.character(tcl("image", "names"))))
+        stop("image does not exist")
+    
+    height <- as.numeric(tcl("image", "height", img))
+    width <- as.numeric(tcl("image", "width", img))
+    
+    img_data <- unlist(strsplit(toupper(as.character(tcl(img, 'data'))), " "))
+    img_mat <- matrix(img_data, nrow = height, byrow = TRUE)
+    
+    as.raster(img_mat)
+    
+}
