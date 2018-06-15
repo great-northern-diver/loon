@@ -38,7 +38,9 @@ l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial'
                          showAxes=TRUE, parent=NULL, ... ) {
     
 
-    if (!missing(data) && missing(sequence)) {
+    data <- as.data.frame(data)
+    
+    if (missing(sequence)) {
         sequence <- names(data)
     }
     
