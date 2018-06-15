@@ -10,14 +10,28 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
         grob(name = name, gp = gp, vp = vp)
     } else {
         
-        order <- get_model_display_order(widget)
+        display_order <- get_model_display_order(widget)
         
-        sdf <- as.data.frame(states)[order, ]
-        s_a <- sdf[sdf$active, ]
+        active <- states$active[display_order]
+        s_a <- list(x = states$x[display_order][active],
+                    y = states$y[display_order][active],
+                    glyph = states$glyph[display_order][active],
+                    color = states$color[display_order][active],
+                    size = states$size[display_order][active]
+                    )
+        # should remove "selected" as well
+        #sdf <- as.data.frame(states)[display_order, ]
+        #s_a <- sdf[sdf$active, ]
         
         children_grobs <- lapply(seq_len(nrow(s_a)), function(i) {
             
-            case_i <- s_a[i,]
+            case_i <- list(
+                           x = s_a$x[i],
+                           y = s_a$y[i],
+                           glyph = s_a$glyph[i],
+                           color = s_a$color[i],
+                           size = s_a$size[i]
+            )
             
             type <- l_glyph_getType(widget, case_i$glyph)
             
