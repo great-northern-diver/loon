@@ -1,3 +1,4 @@
+#' @export
 loonGrob.l_layer_histogram <- function(target, layerid, states) {
     active <- states$active
     swapAxes <- target['swapAxes']
