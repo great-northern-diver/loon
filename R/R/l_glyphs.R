@@ -83,26 +83,61 @@ l_glyph_getLabel <- function(widget, id) {
 #' @export
 l_glyph_getType <- function(widget, id) {
     
-    if (id %in% primitiveGlyphs()) {
+    if (id %in% l_primitiveGlyphs()) {
         "primitive_glyph"
     } else {
         l_glyph(widget, "getType", id)   
     }
 }
-
-primitiveGlyphs <- function() {
+#' @title The primitive glyphs available to a scatterplot or graph display
+#' 
+#' @description Returns a vector of the available primitive glyphs.
+#' 
+#' 
+#' @details The scatterplot and graph displays both have the n-dimensional state
+#'   \code{'glyph'} that assigns each data point or graph node a glyph (i.e. a 
+#' visual representation). 
+#' 
+#' Loon distinguishes between primitive and non-primitive glyphs: the primitive 
+#' glyphs are always available for use whereas the non-primitive glyphs need to
+#' be first specified and added to a plot before they can be used.
+#' 
+#' The primitive glyphs are:
+#' 
+#' \ifelse{html}{\figure{point_glyph_primitive_types.png}{options: alt="Primitive Glyphs"}}{
+#' \tabular{l}{
+#'   \code{'circle'}, \code{'ocircle'}, \code{'ccircle'}\cr
+#'   \code{'square'}, \code{'osquare'}, \code{'csquare'}\cr
+#'   \code{'triangle'}, \code{'otriangle'}, \code{'ctriangle'}\cr
+#'   \code{'diamond'}, \code{'odiamond'}, \code{'cdiamond'}
+#' }
+#' 
+#' Note that the letter \code{'o'} stands for outline only, and the letter 
+#' \code{'c'} stands for contrast and adds an outline with the
+#' \code{'foreground'} color (black by default).
+#' }
+#' 
+#' @templateVar page learn_R_display_plot
+#' @templateVar section glyphs
+#' @template see_l_help
+#' 
+#' 
+#' @return A character vector of the names of all primitive glyphs in loon.
+#' 
+#' @export
+l_primitiveGlyphs <- function() {
     c("circle",
-    "ocircle" ,
-    "ccircle",
-    "square" ,
-    "osquare",
-    "csquare",
-    "triangle",
-    "otriangle",
-    "ctriangle",
-    "diamond",
-    "odiamond",
-    "cdiamond")
+      "ocircle" ,
+      "ccircle",
+      "square" ,
+      "osquare",
+      "csquare",
+      "triangle",
+      "otriangle",
+      "ctriangle",
+      "diamond",
+      "odiamond",
+      "cdiamond")
 }
 
 
