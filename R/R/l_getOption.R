@@ -14,3 +14,12 @@ l_getOption <- function(option) {
 l_getOptionNames <- function() {
     as.character(.Tcl('array names ::loon::Options'))
 }
+
+l_setOption <- function(option, value) {
+    if (!(option %in%  l_getOptionNames())) 
+        stop("option ", option, " is not valid")
+    
+    tcl("set", paste0("::loon::Options(", option, ")"), value)
+    
+    value
+}

@@ -213,3 +213,20 @@ tcl_img_2_r_raster <- function(img) {
     as.raster(img_mat)
     
 }
+
+
+loonGlyphGrob.text <-  function(widget, x, glyph_info) {
+    
+}
+
+loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
+    
+}
+
+loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
+    
+}
+
+loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
+    
+}
