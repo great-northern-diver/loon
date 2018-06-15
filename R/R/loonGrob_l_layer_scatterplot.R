@@ -21,9 +21,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
             
             type <- l_glyph_getType(widget, case_i$glyph)
             
-            loonGlyphGrob(widget, structure(NULL, class=type), case_i) #,
-                          #name = name, gp = gp, vp = vp)  # should we pass these down too?  Might not have to
-            
+            loonGlyphGrob(widget, structure(NULL, class=type), case_i) 
         })
         
         
@@ -34,19 +32,16 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
     } 
 }
 
-loonGlyphGrob <- function(widget, x, glyph_info, 
-                          name = NULL, gp = NULL, vp = NULL) {
+loonGlyphGrob <- function(widget, x, glyph_info) {
     UseMethod("loonGlyphGrob", x)
 }
 
-loonGlyphGrob.default <- function(widget, x, glyph_info, 
-                                  name = NULL, gp = NULL, vp = NULL) {
-    grob(name = name, gp = gp, vp = vp)
+loonGlyphGrob.default <- function(widget, x, glyph_info) {
+    grob()
 }
 
 
-loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info,
-                                          name = NULL, gp = NULL, vp = NULL) {
+loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
     glyph <- glyph_info$glyph
     
     browser()
@@ -58,7 +53,6 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info,
         # is there a fill colour?
         filled <- (pch %in% 21:24)
         if (filled) {
-            glist(
                 pointsGrob(x = glyph_info$x,
                            y = glyph_info$y,
                            gp = gpar(fill = col, 
@@ -66,24 +60,15 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info,
                                      pch = pch, 
                                      cex = cex)
                            #unit(1, "char"),  default.units = "native",
-                           ),
-                name = name, 
-                gp = gp, 
-                vp = vp
-            )
+                           )
         } else {
-            glist(
                 pointsGrob(x = glyph_info$x,
                            y = glyph_info$y,
                            gp = gpar(col = col, 
                                      pch = pch, 
                                      cex = cex)
                            #unit(1, "char"),  default.units = "native",
-                ),
-                name = name, 
-                gp = gp, 
-                vp = vp
-            )
+                )
         }
         # switch(
         #     glyph,
