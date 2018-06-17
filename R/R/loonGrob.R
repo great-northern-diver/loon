@@ -501,11 +501,13 @@ get_display_color <- function(color, selected) {
 }
 
 as_hex6color <- function(color) {
-  if(length(color)){
-    col <- suppressWarnings(loon:::hex12tohex6(color))
+  if(!is.na(color)){
+    col <- suppressWarnings(loon:::hex12tohex6(l_hexcolor(color)))
     col[color == ""] <- NA
-  }else {col <- NA}
-  col
+    col
+  } else {
+    NA
+  }
 }
 
 
