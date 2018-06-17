@@ -57,22 +57,24 @@ loonGrob.default <- function(target, ...) {
 #' @export
 loonGrob.l_plot <- function(target,  name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    layers_grob <- loonGrob(rl, name = "l_plot")
-    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
+    layers_grob <- loonGrob(rl, name = "l_plot_layers")
+    gTree(cartesian2dGrob(target, layers_grob, name = "l_plot"),
+          name= name, gp = gp, vp = vp)
 }
 
 #' @export
 loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    layers_grob <- loonGrob(rl, name = "l_hist")
-    
-    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
+    layers_grob <- loonGrob(rl, name = "l_hist_layers")
+    gTree(cartesian2dGrob(target, layers_grob, name = "l_hist"),
+          name= name, gp = gp, vp = vp)
 }
 
 #' @export
 loonGrob.l_graph <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    cartesian2dGrob(target, loonGrob(rl, name = "l_graph"), name = name, gp = gp, vp = vp)
+    gTree(cartesian2dGrob(target, loonGrob(rl, name = "l_graph_layers"), name = "l_graph"),
+          name = name, gp = gp, vp = vp)
 }
 
 cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = NULL, vp = NULL) {
