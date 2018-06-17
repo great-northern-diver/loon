@@ -131,9 +131,9 @@ l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
                                 xlabel=xy$xlab, ylabel=xy$ylab,
                                 ...)
         
-        class(plot) <- c("l_plot", class(plot))
     }
-
+    
+    class(plot) <- c("l_plot", class(plot))
     return(plot)
 }
 
