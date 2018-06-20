@@ -151,6 +151,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                gp = gpar(fontfamily = xlabelFont$family, 
                                          fontsize = xlabelFont$size,
                                          fontface = xlabelFont$face
+
                                          ), 
                                name = "x label")
         ylabelGrob <- textGrob(widget['ylabel'], 
