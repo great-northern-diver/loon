@@ -593,8 +593,8 @@ as_r_point_size <- function(s) {
   if (is.null(s)) {
     NULL
   } else {
-    # trial and error to choose 7
-    size <- sqrt(s / 20)
+    # trial and error to choose scale for size
+    size <- sqrt(s / 12)
     size[size < 0.1] <- 0.1   
     
     size
