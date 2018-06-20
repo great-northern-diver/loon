@@ -136,7 +136,11 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     border <- as_hex6color(widget['foreground'])
     
+<<<<<<< HEAD
     xylab_loc <- if (showScales) c(-3.5, -7.5) else c(-1, -1)
+=======
+    xylab_loc <- if (showScales) c(-3, -4.2) else c(-1, -1)
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
     
     # Fonts
     xlabelFont <- get_font_info_from_tk(l_getOption("font-xlabel"))
@@ -150,7 +154,11 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                y = unit(xylab_loc[1], "lines"), 
                                gp = gpar(fontfamily = xlabelFont$family, 
                                          fontsize = xlabelFont$size,
+<<<<<<< HEAD
                                          fontface = xlabelFont$face
+=======
+                                         fontface = xlabelFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                          ), 
                                name = "x label")
         ylabelGrob <- textGrob(widget['ylabel'], 
@@ -158,7 +166,11 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                rot = 90, 
                                gp = gpar(fontfamily = ylabelFont$family, 
                                          fontsize = ylabelFont$size,
+<<<<<<< HEAD
                                          fontface = ylabelFont$face
+=======
+                                         fontface = ylabelFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                          ),
                                name = "y label")
     } else {
@@ -167,14 +179,22 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                rot = 90,  
                                gp = gpar(fontfamily = xlabelFont$family, 
                                          fontsize = xlabelFont$size,
+<<<<<<< HEAD
                                          fontface = xlabelFont$face
+=======
+                                         fontface = xlabelFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                ), 
                                name = "x label")
         ylabelGrob <- textGrob(widget['ylabel'], 
                                y = unit(xylab_loc[1], "lines"), 
                                gp = gpar(fontfamily = ylabelFont$family, 
                                          fontsize = ylabelFont$size,
+<<<<<<< HEAD
                                          fontface = ylabelFont$face
+=======
+                                         fontface = ylabelFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                ),
                                name = "y label")
     }
@@ -194,7 +214,11 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                          y = unit(1, "npc") + unit(.8, "lines"),
                                          gp = gpar(fontfamily = titleFont$family, 
                                                    fontsize = titleFont$size,
+<<<<<<< HEAD
                                                    fontface = titleFont$face
+=======
+                                                   fontface = titleFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                          ),
                                          vjust = .5)
                             } else NULL )
@@ -230,13 +254,21 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                             xaxisGrob(
                                 gp = gpar(fontfamily = scalesFont$family, 
                                           fontsize = scalesFont$size,
+<<<<<<< HEAD
                                           fontface = scalesFont$face
+=======
+                                          fontface = scalesFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                 ),
                                 name = "x axis"),
                             yaxisGrob(
                                 gp = gpar(fontfamily = scalesFont$family, 
                                           fontsize = scalesFont$size,
+<<<<<<< HEAD
                                           fontface = scalesFont$face
+=======
+                                          fontface = scalesFont$style
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
                                 ),
                                 name = "y axis")
                         )  
@@ -685,6 +717,7 @@ get_font_info_from_tk <- function(tkFont) {
     fontSize <- fontInfo[fontInfo[,1] == "-size", 2]
     if (fontSize <= 0) fontSize <- 8 
     
+<<<<<<< HEAD
     fontFace <- fontInfo[fontInfo[,1] == "-weight", 2]
     if (!fontFace %in% c("plain",
                          "bold", 
@@ -694,6 +727,12 @@ get_font_info_from_tk <- function(tkFont) {
         ) fontFace <- "plain"
     
     list(family = fontFamily, face = fontFace, size = fontSize)
+=======
+    fontStyle <- fontInfo[fontInfo[,1] == "-weight", 2]
+    if (fontSize <= 0) fontSize <- 8 
+    
+    list(family = fontFamily, style = fontStyle, size = fontSize)
+>>>>>>> f23cf8c581510184505a422f432cfa75ae9c7162
 }
 
 as_hex6color <- function(color) {
