@@ -123,20 +123,60 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     title <- widget['title']
     
+    # Figure out margins
+    minimumMargins <- widget['minimumMargins']
+    margins <- c(0, 0, 0, 0)
+    if (showLabels) {margins <- margins + widget['labelMargins'] }
+    if (showScales) {margins <- margins + widget['scalesMargins'] }
+    margins <- apply(cbind(margins, minimumMargins), 1, max)
+    if(title == "") margins[3] <- minimumMargins[3]
+    # loon pixel margin to grid margin
+    margins <- pixels_2_lines (margins)
     
-    margins <- if (showScales) c(4.1, 5.1, 2.1, 2.1) else rep(2.1, 4)
-    if (title != "" && showLabels) margins[3] <- 3.1
     
     border <- as_hex6color(widget['foreground'])
     
-    xylab_dist <- if (showScales) c(-3, -4.2) else c(-1, -1)
+    xylab_loc <- if (showScales) c(-3.5, -7.5) else c(-1, -1)
+    
+    # Fonts
+    xlabelFont <- get_font_info_from_tk(l_getOption("font-xlabel"))
+    ylabelFont <- get_font_info_from_tk(l_getOption("font-ylabel"))
+    titleFont <- get_font_info_from_tk(l_getOption("font-title"))
+    scalesFont <- get_font_info_from_tk(l_getOption("font-scales"))
+    
     
     if (!swapAxes) {
-        xlabelGrob <- textGrob(widget['xlabel'], y = unit(xylab_dist[1], "lines"), name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], x = unit(xylab_dist[2], "lines"), rot = 90, name = "y label")
+        xlabelGrob <- textGrob(widget['xlabel'], 
+                               y = unit(xylab_loc[1], "lines"), 
+                               gp = gpar(fontfamily = xlabelFont$family, 
+                                         fontsize = xlabelFont$size,
+                                         fontface = xlabelFont$face
+                                         ), 
+                               name = "x label")
+        ylabelGrob <- textGrob(widget['ylabel'], 
+                               x = unit(xylab_loc[2], "lines"), 
+                               rot = 90, 
+                               gp = gpar(fontfamily = ylabelFont$family, 
+                                         fontsize = ylabelFont$size,
+                                         fontface = ylabelFont$face
+                                         ),
+                               name = "y label")
     } else {
-        xlabelGrob <- textGrob(widget['xlabel'], x = unit(xylab_dist[2], "lines"), rot = 90, name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], y = unit(xylab_dist[1], "lines"), name = "y label")
+        xlabelGrob <- textGrob(widget['xlabel'], 
+                               x = unit(xylab_loc[2], "lines"), 
+                               rot = 90,  
+                               gp = gpar(fontfamily = xlabelFont$family, 
+                                         fontsize = xlabelFont$size,
+                                         fontface = xlabelFont$face
+                               ), 
+                               name = "x label")
+        ylabelGrob <- textGrob(widget['ylabel'], 
+                               y = unit(xylab_loc[1], "lines"), 
+                               gp = gpar(fontfamily = ylabelFont$family, 
+                                         fontsize = ylabelFont$size,
+                                         fontface = ylabelFont$face
+                               ),
+                               name = "y label")
     }
     
     
@@ -149,8 +189,14 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                             xlabelGrob,
                             ylabelGrob,
                             if (title != "") {
-                                textGrob(title, name = "title", y = unit(1, "npc") + unit(.8, "lines"),
-                                         gp = gpar(fontsize = 18, fontface="bold"), vjust = .5)
+                                textGrob(title, 
+                                         name = "title", 
+                                         y = unit(1, "npc") + unit(.8, "lines"),
+                                         gp = gpar(fontfamily = titleFont$family, 
+                                                   fontsize = titleFont$size,
+                                                   fontface = titleFont$face
+                                         ),
+                                         vjust = .5)
                             } else NULL )
                     } else NULL,
                     if (showGuides){
@@ -181,8 +227,18 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                  name = "bbox") },
                     if (showScales) {
                         gList(
-                            xaxisGrob( name = "x axis"),
-                            yaxisGrob( name = "y axis")
+                            xaxisGrob(
+                                gp = gpar(fontfamily = scalesFont$family, 
+                                          fontsize = scalesFont$size,
+                                          fontface = scalesFont$face
+                                ),
+                                name = "x axis"),
+                            yaxisGrob(
+                                gp = gpar(fontfamily = scalesFont$family, 
+                                          fontsize = scalesFont$size,
+                                          fontface = scalesFont$face
+                                ),
+                                name = "y axis")
                         )  
                     } else NULL,
                     clipGrob(name = "clip"),
@@ -589,16 +645,20 @@ glyph_to_pch <- function(glyph) {
 
 # see optionDatabase.tcl
 as_r_point_size <- function(s) {
-  
-  if (is.null(s)) {
-    NULL
-  } else {
-    # trial and error to choose scale for size
-    size <- sqrt(s / 12)
-    size[size < 0.1] <- 0.1   
     
-    size
-  }
+    if (is.null(s)) {
+        NULL
+    } else {
+        # trial and error to choose scale for size
+        size <- sqrt(s / 12)
+        size[size < 0.1] <- 0.1   
+        
+        size
+    }
+}
+
+pixels_2_lines <- function(x) {
+    x / 20
 }
 
 # Model layers have selected state
@@ -612,6 +672,28 @@ get_display_color <- function(color, selected) {
   
   color[selected] <- sel_color
   color
+}
+
+get_font_info_from_tk <- function(tkFont) {
+    #try()
+    fontInfo <- as.character(.Tcl(paste("font actual", tkFont)))
+    fontInfo <- matrix(fontInfo, ncol = 2, byrow = TRUE)
+    
+    fontFamily <- fontInfo[fontInfo[,1] == "-family", 2]
+    if (!fontFamily %in% c("Helvetica", "Courier", "TimesRoman")) fontFamily <- "Helvetica"
+    
+    fontSize <- fontInfo[fontInfo[,1] == "-size", 2]
+    if (fontSize <= 0) fontSize <- 8 
+    
+    fontFace <- fontInfo[fontInfo[,1] == "-weight", 2]
+    if (!fontFace %in% c("plain",
+                         "bold", 
+                         "italic", 
+                         "oblique", 
+                         "bold-italic")
+        ) fontFace <- "plain"
+    
+    list(family = fontFamily, face = fontFace, size = fontSize)
 }
 
 as_hex6color <- function(color) {
