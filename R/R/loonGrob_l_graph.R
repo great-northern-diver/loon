@@ -25,9 +25,9 @@
 #' l_configure(nav2, label = 2)
 #' con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
 #' 
-#' library(grid)
-#' lgrob <- loonGrob(g, navigators =  list(nav0, nav1, nav2))
-#' grid.newpage(); grid.draw(lgrob)
+#' # library(grid)
+#' # lgrob <- loonGrob(g, navigators =  list(nav0, nav1, nav2))
+#' # grid.newpage(); grid.draw(lgrob)
 
 loonGrob.l_graph <- function(widget, navigators = NULL){
   
