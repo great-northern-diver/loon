@@ -7,7 +7,7 @@
 #
 # @template param_target
 #
-# @return a closure that will evaualte tcl code for the particular
+# @return a closure that will evaluate tcl code for the particular
 # object.
 # 
 # # @export .loonobject
@@ -17,7 +17,7 @@
     if (is(target,'l_layer') || is(target,'l_glyph') || is(target, 'l_navigator')) {
         loon_obj <- target
         specifier <- c(attr(target, 'widget'), as.vector(target))
-        type <- substring(class(target)[2], 3)
+        type <- substring(class(target)[1], 3)
         hasRecognized <- TRUE
     } else if (is(target, 'l_context')) {
         loon_obj <- target
