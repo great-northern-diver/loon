@@ -14,17 +14,26 @@
 .loonobject <- function(target, convert=as.character) {
 
     ## first check for loon objects
-    if (is(target,'l_layer') || is(target,'l_glyph') || is(target, 'l_navigator')) {
+    if (is(target,'l_layer') || is(target,'l_glyph')){
         loon_obj <- target
         specifier <- c(attr(target, 'widget'), as.vector(target))
-        type <- substring(class(target)[1], 3)
+        type <-  substring(class(target)[2], 3)
         hasRecognized <- TRUE
+        
+    } else if (is(target, 'l_navigator')) {
+        loon_obj <- target
+        specifier <- c(attr(target, 'widget'), as.vector(target))
+        type <-  substring(class(target)[1], 3)
+        hasRecognized <- TRUE
+        
     } else if (is(target, 'l_context')) {
         loon_obj <- target
-        specifier <- c(attr(target, 'widget'), attr(target, 'navigator'),
+        specifier <- c(attr(target, 'widget'), 
+                       attr(target, 'navigator'),
                        as.vector(target))
         type <- "context"
         hasRecognized <- TRUE
+        
     } else { 
         ## strip attributes
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)

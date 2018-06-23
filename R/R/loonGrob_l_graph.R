@@ -16,8 +16,10 @@
 #' nav0 <- l_navigator_add(g)
 #' l_configure(nav0, label = 0)
 #' con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris[,-5])
-#' nav1 <- l_navigator_add(g, from = "Sepal.Length:Petal.Width", 
-#'   to = "Petal.Length:Petal.Width", proportion = 0.3)
+#' nav1 <- l_navigator_add(g, 
+#'                         from = "Sepal.Length:Petal.Width", 
+#'                         to = "Petal.Length:Petal.Width", 
+#'                         proportion = 0.3)
 #' l_configure(nav1, label = 1)
 #' con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris[,-5])
 #' nav2 <- l_navigator_add(g, from = "Sepal.Length:Petal.Length", 
