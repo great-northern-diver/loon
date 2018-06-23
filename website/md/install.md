@@ -61,7 +61,7 @@ You can also install the latest development release directly from
 GitHub with the following R code
 
 ~~~
-devtools::install_github("waddella/loon", subdir="R")
+devtools::install_github("rwoldford/loon", subdir="R")
 ~~~
 
 
