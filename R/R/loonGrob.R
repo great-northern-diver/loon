@@ -667,7 +667,6 @@ as_r_text_size <- function(size){
     size
 }
 
-#' @export
 pixels_2_lines <- function(x) {
     x / 20
 }
