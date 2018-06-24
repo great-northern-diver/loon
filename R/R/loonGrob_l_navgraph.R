@@ -75,8 +75,7 @@
 loonGrob.l_navgraph <- function(widget){
   
   graph <-  widget$graph
-  navigator <- widget$navigator
   
-  loonGrob.l_graph(graph, navigators = navigator)
+  loonGrob(graph)
 }
 
