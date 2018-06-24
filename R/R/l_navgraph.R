@@ -69,7 +69,7 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
     context <- l_context_add_geodesic2d(navigator, data=data, separator=separator)  
 
     plot <- strsplit(context['command'], " ", fixed = TRUE)[[1]][1]
-    class(plot) <- "loon"
+    class(plot) <- c("l_plot", "loon")
 
     args <- list(...)
     if (length(args)>0) {
