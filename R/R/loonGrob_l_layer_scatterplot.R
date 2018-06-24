@@ -62,6 +62,10 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  cex = as_r_point_size(s_a$size))
             )
         } else {
+            
+            scaleInfo <- get_glyph_scale_info(widget)
+            names_scaleInfo <- names(scaleInfo)
+            
             children_grobs <- lapply(seq_len(length(s_a$x)), function(i) {
                 
                 case_i <- list(
@@ -72,6 +76,8 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                     size = s_a$size[i],
                     index = s_a$index[i]
                 )
+                
+                case_i$scaleInfo <- scaleInfo[[which(grepl(case_i$glyph, names_scaleInfo) == TRUE)]]
                 
                 type <- l_glyph_getType(widget, case_i$glyph)
                 
@@ -265,38 +271,53 @@ loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
     color <- glyph_info$color
     size <- glyph_info$size
     
-    x <- as.numeric(
-        glyph_info$x) + gh['x'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
-    y <- as.numeric(
-        glyph_info$y) - gh['y'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
+    poly_x <- gh['x'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
+    poly_y <- - gh['y'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
     
-    if(showArea){
-        polygonGrob(x = x, 
-                    y = y,
-                    gp = gpar(
-                        fill = color, 
-                        col =  color, 
-                        lwd = linewidth
-                    ), 
-                    default.units = "native"
-        )
-    } else {
-        polylineGrob(x = c(x, x[1]), 
-                     y = c(y, y[1]),
-                     gp = gpar(
-                         fill = color, 
-                         col =  color, 
-                         lwd = linewidth
-                     ), 
-                     default.units = "native"
-        )
-    }
+    x <- glyph_info$x
+    y <- glyph_info$y
+    
+    gTree(
+        vp = viewport(x = x, y = y),
+        children = 
+            gList(
+                
+                if(showArea){
+                    polygonGrob(x = poly_x, 
+                                y = poly_y,
+                                gp = gpar(
+                                    fill = color, 
+                                    col =  color, 
+                                    lwd = linewidth
+                                ), 
+                                vp = viewport(x = 0, y = 0, 
+                                              width = 2 * as_r_polygonGlyph_size(size), 
+                                              height = 2 * as_r_polygonGlyph_size(size)),
+                                default.units = "mm"
+                    )
+                } else {
+                    polylineGrob(x = c(poly_x, poly_x[1]), 
+                                 y = c(poly_y, poly_y[1]),
+                                 gp = gpar(
+                                     fill = color, 
+                                     col =  color, 
+                                     lwd = linewidth
+                                 ), 
+                                 vp = viewport(x = 0, y = 0, 
+                                               width = 2 * as_r_polygonGlyph_size(size), 
+                                               height = 2 * as_r_polygonGlyph_size(size)),
+                                 default.units = "mm"
+                    )
+                }
+                
+            )
+    )
 }
 
 as_r_polygonGlyph_size <- function(size){
     if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- size/60
+        size <- size
         size[size < 0.01] <- 0.01 
         size
     }
@@ -325,26 +346,16 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     size <- glyph_info$size
     # parallel or radial
     axesLayout <- gh['axesLayout']
-    dat <- sapply( gh['data'], as.numeric)  # convert to numeric if not
-    dimension <- dim(dat)[2]
-    apply2min <- apply(dat, 2, "min")
-    apply2max <- apply(dat, 2, "max")
-    apply1min <- apply(dat, 1, "min")
-    apply1max <- apply(dat, 1, "max")
-    scaledData <- switch(scaling, 
-                         "variable" = t(
-                             (t(dat) - apply2min)/ 
-                                 (apply2max  - apply2min) 
-                                        ), 
-                         "observation" = (dat - apply1min ) / (apply1max - apply1min ), 
-                         "data" = (dat - min(dat))/ (max(dat) - min(dat)), 
-                         "none" = NULL)
-
+    
+    scaledData <- glyph_info$scaleInfo
+    dimension <- dim(scaledData)[2]
+    
     scaleX <- diff(c(widget['panX'], widget['panX'] + widget['deltaX']/widget['zoomX'])) * as_r_serialaxesGlyph_size(size)
     scaleY <- diff(c(widget['panY'], widget['panY'] + widget['deltaY']/widget['zoomY'])) * as_r_serialaxesGlyph_size(size)
     # position
     xpos <- as.numeric(glyph_info$x)
     ypos <- as.numeric(glyph_info$y)
+    
     if(axesLayout == "parallel"){
         xaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
         yaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
@@ -418,6 +429,63 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
         
     }
 }
+
+get_glyph_scale_info <- function(widget){
+    
+    unique_glyph <- unique(widget['glyph'])
+    
+    name <- sapply(unique_glyph, function(l) l_glyph_getType(widget, l) )
+    
+    scaleInfo <- lapply(seq_len(length(unique_glyph)), function(i){
+        
+        if(name[i] == "primitive_glyph") NULL # points glyph 
+        else {
+            
+            gh <- l_create_handle(c(widget, unique_glyph[i]))
+            
+            if(name[i] == "serialaxes" ) {
+                scaling <- gh['scaling']
+                sequence <- gh['sequence']
+                dat <- sapply( gh['data'], as.numeric)  # convert to numeric if not
+                dat <- dat[, sequence]
+                switch(scaling, 
+                       "variable" = {
+                           minV <- apply(dat, 2, "min")
+                           maxV <- apply(dat, 2, "max")
+                           t(
+                               (t(dat) - minV) / (maxV  - minV) 
+                           )
+                       },
+                       "observation" = {
+                           minO <- apply(dat, 1, "min")
+                           maxO <- apply(dat, 1, "max")
+                           (dat - minO) / (maxO - minO)
+                       }, 
+                       "data" = {
+                           minD <- min(dat)
+                           maxD <- max(dat)
+                           (dat - minD)/ (maxD - minD)
+                       }, 
+                       "none" = NULL)
+            } else if (name[i] == "polygon") {
+                # to be general 
+                NULL
+            } else if (name[i] == "text") {
+                # to be general  
+                NULL
+            } else if (name[i] == "pointrange") {
+                # to be general  
+                NULL
+            } else if (name[i] == "image") {
+                # to be general  
+                NULL
+            } else NULL 
+        }
+    })
+    names(scaleInfo) <- paste(name, unique_glyph)
+    scaleInfo
+}
+
 
 as_r_serialaxesGlyph_size <- function(size){
     if (is.numeric(size)) {
