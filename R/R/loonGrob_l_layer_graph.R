@@ -1,8 +1,15 @@
-loonGrob.l_layer_graph  <- function(target, layerid, states) {
-    active <- states$active
-    if(l_layer_isVisible(target, layerid) && 
-       length(states$x[active])!=0 && 
-       length(states$y[active])!=0  ){
+loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
+    
+    widget <- l_create_handle(attr(target, "widget"))
+    states <- get_layer_states(widget)
+    
+    if (!any(states$active)) {
+        grob(name = name, gp = gp, vp = vp)
+    } else {
+        active <- states$active
+        
+        selected <- states$selected[active]
+        
         activeNode <- states$nodes[active]
         activeX <- states$x[active]
         activeY <- states$y[active]
@@ -35,13 +42,21 @@ loonGrob.l_layer_graph  <- function(target, layerid, states) {
                     gList(polylineGrobObject, 
                           textsGrobObject)
                 }else{polylineGrobObject}
-            }))
-        states$col <- states$color
-        scatterGrobObject <- scatterGrob(states)
-        gTree(children = 
-                  gList(
-                      linesTextsGrobObject,
-                      scatterGrobObject)
+            }
+            )
         )
     }
+    
+    states$col <- states$color
+    scatterGrobObject <- scatterGrob(states, name, gp, vp)
+    gTree(children = 
+              gList(
+                  linesTextsGrobObject,
+                  scatterGrobObject)
+    )
+}
+
+
+scatterGrob <- function(states, name, gp, vp){
+    NULL
 }

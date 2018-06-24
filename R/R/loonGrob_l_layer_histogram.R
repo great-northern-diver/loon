@@ -1,108 +1,181 @@
-loonGrob.l_layer_histogram <- function(target, layerid, states) {
-    active <- states$active
-    swapAxes <- target['swapAxes']
-    activeX <- if (swapAxes) as.numeric( states$y )[active]  else as.numeric( states$x )[active] 
-    if(l_layer_isVisible(target, layerid) & length(activeX)!=0  ){
+#' histogram
+#' 
+#' @export
+#' 
+#' @examples 
+#' 
+#' h <- l_hist(iris$Sepal.Length, color=iris$Species)
+#' 
+#' g <- loonGrob(h)
+#' 
+#' library(grid)
+#' grid.newpage(); grid.draw(g)
+#' 
+#' h['showStackedColors'] <- TRUE
+#' 
+#' g <- loonGrob(h)
+#' 
+#' grid.newpage(); grid.draw(g)
+#' 
+#' h['colorStackingOrder'] <- c("selected", unique(h['color']))
+#' 
+#' g <- loonGrob(h)
+#' grid.newpage(); grid.draw(g)
+#' 
+#' 
+#' h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
+#' 
+#' g <- loonGrob(h)
+#' grid.newpage(); grid.draw(g)
+#' 
+loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL) {
+
+    widget <- l_create_handle(attr(target, "widget"))
+    
+    # get binning data from Tcl
+    # this returns a nested list with one list per bin
+    #
+    # the list elements per bin have
+    #  count (is count if yshows is frequency and density if yshows is density )
+    #  points
+    #  x0
+    #  x1
+    
+    yshows <- widget['yshows']
+    swapAxes <- widget['swapAxes']
+    
+    bins <- getBinData(widget)
+    
+    sel_color <- l_getOption("select-color")
+    
+    showStackedColors <- widget['showStackedColors']
+    showOutlines <- widget['showOutlines']
+    colorOutline <- if(showOutlines) as_hex6color(widget["colorOutline"]) else NA
+    
+    colorStackingOrder <- widget['colorStackingOrder']
+    if(length(colorStackingOrder) == 1) {
+        if(colorStackingOrder == "selected") colorStackingOrder <- c("selected", unique(widget['color']))
+    }
+    
+    b_bins <- lapply(bins, function(bin) {
         
-        n <- length(activeX) 
-        activeSelected <- states$selected[active]
-        activeColor <- states$color[active]
-        sel_color <- as.character(.Tcl("set loon::Options(select-color)"))
-        binId <- list()
-        minActivex <- min(activeX)
-        maxActivex <- max(activeX)
-        i <- 1
-        binwidth <- states$binwidth
-        binX <- c()
-        while(minActivex + (i-1) * binwidth <= maxActivex){
-            left <- minActivex + (i - 1) * binwidth
-            right <- minActivex + i * binwidth
-            binId[[i]] <- which( (activeX <right & activeX >= left ) == TRUE)
-            binX <- c(binX, left, right)
-            i <- i + 1
-        } 
+        w <- bin$x1 - bin$x0
+        x <- bin$x0 + w/2
+        y0 <- 0
         
-        binHeight <- if(states$yshows == "frequency") {sapply(binId, "length") 
-        }else {sapply(binId, "length") / (n * binwidth)}
-        
-        
-        binX <- unique(binX)
-        
-        gTree(children = do.call (
-            gList,
-            lapply(1:length(binHeight) , function(i){
-                if(binHeight[i] != 0){
-                    if(!swapAxes){
-                        x <- unit(mean(c(binX[i], binX[i + 1])), "native")
-                        y <- unit(mean(c(0, binHeight[i])), "native")
-                        
-                        width <- unit(binwidth, "native")
-                        height <- unit(binHeight[i], "native")
-                    }else{
-                        y <- unit(mean(c(binX[i], binX[i + 1])), "native")
-                        x <- unit(mean(c(0, binHeight[i])), "native")
-                        
-                        height <- unit(binwidth, "native")
-                        width <- unit(binHeight[i], "native")
-                    }
+        nam <- names(bin$count[-1])
+
+        if (showStackedColors) {
+            first <- intersect(colorStackingOrder, nam)
+            rest <- setdiff(nam, c("all", first))
+            bnames <- c(first, rest)
+            
+            if (swapAxes) {
+                Map(function(height, col) {
+                    if (col == "selected") col <- sel_color
                     
-                    isSelected  <- activeSelected[binId[[i]]]
+                    col <- as_hex6color(col)
                     
-                    if(states$showStackedColors){
-                        
-                        if(any(isSelected)){
-                            binSelected <- length(which(isSelected == TRUE))
-                            oldColorBinHeight <- table(activeColor[binId[[i]]][which(isSelected == FALSE)])
-                            colorBinHeight <- if(states$yshows == "frequency") {c(binSelected, oldColorBinHeight)
-                            }else{c(binSelected, oldColorBinHeight) / (n * binwidth)}
-                            names(colorBinHeight) <- c(sel_color, names(oldColorBinHeight))
-                        }else{colorBinHeight <- if(states$yshows == "frequency") { table(activeColor[binId[[i]]])
-                        }else{table(activeColor[binId[[i]]]) / (n * binwidth)} }
-                        
-                        cumsumColorBinHeight <- c(0, cumsum(colorBinHeight))
-                        do.call(gList, 
-                                lapply(1:length(colorBinHeight), function(i){
-                                    if(!swapAxes){
-                                        y <- unit(mean(c(cumsumColorBinHeight[i], 
-                                                         cumsumColorBinHeight[i+1])), "native")
-                                        height <- unit(colorBinHeight[i], "native")
-                                    }else{
-                                        x <- unit(mean(c(cumsumColorBinHeight[i], 
-                                                         cumsumColorBinHeight[i+1])), "native")
-                                        width <- unit(colorBinHeight[i], "native")
-                                    }
-                                    rectGrob(
-                                        x = x, y = y, width = width, height = height, 
-                                        gp = gpar(fill = names(colorBinHeight)[i], 
-                                                  col = if(states$showOutlines) states$colorOutline else NA)) 
-                                }))
-                    }else{
-                        rectGrobObject <- rectGrob(
-                            x = x, y = y, width = width, height = height, 
-                            gp = gpar(fill = states$colorFill, 
-                                      col = if(states$showOutlines) states$colorOutline else NA))
-                        if(any(isSelected)){
-                            binSelected <- if(states$yshows == "frequency") {length(which(isSelected == TRUE))
-                            }else{length(which(isSelected == TRUE)) / (n * binwidth)}
-                            if(!swapAxes){
-                                y <- unit(mean(c(0, binSelected)), "native")
-                                height <- unit(binSelected, "native") 
-                            }else{
-                                x <- unit(mean(c(0, binSelected)), "native")
-                                width<- unit(binSelected, "native")
-                            }
-                            
-                            gList(
-                                rectGrobObject,
-                                rectGrob(
-                                    x = x, y = y, width = width, height = height, 
-                                    gp = gpar(fill = sel_color, 
-                                              col = if(states$showOutlines) states$colorOutline else NA))
-                            )
-                        }else{rectGrobObject}
-                    }
-                }
-            }))
+                    g <- rectGrob(x = y0, y = x, width = height, height = w,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("left", "center"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, bin$count[bnames], bnames)
+                
+            } else {
+                Map(function(height, col) {
+                    if (col == "selected") col <- sel_color
+                    
+                    col <- as_hex6color(col)
+                    
+                    g <- rectGrob(x = x, y = y0, width = w, height = height,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("center", "bottom"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, bin$count[bnames], bnames)
+            }
+        } else {
+            newCount <- list()
+            if("selected" %in% nam) {
+               newCount$selected <- bin$count$selected
+               newCount$unselected <- bin$count$all - bin$count$selected
+            } else newCount$unselected <- bin$count$all
+            bnames <- names(newCount)
+            
+            if(swapAxes) {
+                Map(function(height, col) {
+                    col <- if (col == "selected") sel_color else "thistle"
+                    g <- rectGrob(x = y0, y = x, width = height, height = w,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("left", "center"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, newCount[bnames], bnames)
+            } else {
+                Map(function(height, col) {
+                    col <- if (col == "selected") sel_color else "thistle"
+                    g <- rectGrob(x = x, y = y0, width = w, height = height,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("center", "bottom"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, newCount[bnames], bnames)
+            }
+        }  
+    })
+    
+    gTree(
+        children = do.call(gList, unlist(unname(b_bins),  recursive = FALSE)),
+        name = name, gp = gp, vp = vp
+    )
+    
+}
+
+
+tcl_obj_varname <- function(widget, varname = NULL) {
+    x <- tcl("info", "object", "namespace", widget)
+
+    if (!is.null(varname)) {
+        x <- paste(x, varname, sep="::")
+    }
+    x
+}
+
+dict_get <- function(d, keys) {
+    .Tcl(paste0("dict get $", d, " ", paste(keys, collapse = " ")))
+}
+
+dict_with <- function(d, expr) {
+    as.character(.Tcl(paste("dict with", paste(d, collapse = " "), paste("{", expr, "}"))))
+}
+
+getBinData <- function(widget) {
+    
+    loon:::l_throwErrorIfNotLoonWidget(widget)
+    
+    tclbins <- tcl_obj_varname(widget, "bins")
+    
+    ## see oo_Histogram_Model.tcl
+    sapply(dict_with(tclbins, "dict keys $bin"), function(binid) {
+        
+        keys_count <- dict_with(c(tclbins, "bin", binid), "dict keys $count")
+        keys_points <- dict_with(c(tclbins, "bin", binid), "dict keys $points")
+        
+        list(
+            count = sapply(keys_count, function(x) {
+                as.numeric(dict_get(tclbins, c("bin", binid, "count", x)))
+            }, USE.NAMES = TRUE, simplify = FALSE),
+            points = sapply(keys_points, function(x) {
+                as.numeric(dict_get(tclbins, c("bin", binid, "points", x)))
+            }, USE.NAMES = TRUE, simplify = FALSE),
+            x0 = as.numeric(dict_get(tclbins, c("bin", binid, "x0"))),
+            x1 = as.numeric(dict_get(tclbins, c("bin", binid, "x1")))
         )
-    } else NULL 
+    }, USE.NAMES = TRUE, simplify = FALSE)
 }

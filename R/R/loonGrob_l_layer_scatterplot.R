@@ -217,16 +217,213 @@ tcl_img_2_r_raster <- function(img) {
 
 loonGlyphGrob.text <-  function(widget, x, glyph_info) {
     
+    gh <- l_create_handle(c(widget, glyph_info$glyph))
+    
+    textGrob(label = gh['text'][glyph_info$index], 
+             x = glyph_info$x, 
+             y = glyph_info$y,
+             gp=gpar(fontsize = as_r_text_size(glyph_info$size), 
+                     col = glyph_info$color ))
 }
 
 loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
+    
+    gh <- l_create_handle(c(widget, glyph_info$glyph))
+    
+    showArea <- gh['showArea']
+    
+    gTree(
+        children =  gList(
+            {if (showArea) {
+                pch <- 21
+            } else {
+                pch <- 19
+            }
+            pointsGrob(x = glyph_info$x, y = glyph_info$y,
+                           gp = gpar(col = glyph_info$color, 
+                                     cex = as_r_point_size(glyph_info$size)
+                           ),
+                           pch = pch
+                           )}, 
+            linesGrob(x = rep(glyph_info$x, 2), 
+                      y = unit(c(gh['ymin'][glyph_info$index], 
+                                 gh['ymax'][glyph_info$index]), 
+                               "native"), 
+                      gp = gpar(col = glyph_info$color, 
+                                lwd =  gh['linewidth'][glyph_info$index]))
+        )
+    )
     
 }
 
 loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
     
+    gh <- l_create_handle(c(widget, glyph_info$glyph))
+    
+    showArea <- gh['showArea'][glyph_info$index]
+    linewidth <- gh['linewidth'][glyph_info$index]
+    color <- glyph_info$color
+    size <- glyph_info$size
+    
+    x <- as.numeric(
+        glyph_info$x) + gh['x'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
+    y <- as.numeric(
+        glyph_info$y) - gh['y'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
+    
+    if(showArea){
+        polygonGrob(x = x, 
+                    y = y,
+                    gp = gpar(
+                        fill = color, 
+                        col =  color, 
+                        lwd = linewidth
+                    ), 
+                    default.units = "native"
+        )
+    } else {
+        polylineGrob(x = c(x, x[1]), 
+                     y = c(y, y[1]),
+                     gp = gpar(
+                         fill = color, 
+                         col =  color, 
+                         lwd = linewidth
+                     ), 
+                     default.units = "native"
+        )
+    }
+}
+
+as_r_polygonGlyph_size <- function(size){
+    if (is.numeric(size)) {
+        # trial and error to choose scale for size
+        size <- size/60
+        size[size < 0.01] <- 0.01 
+        size
+    }
+    size
 }
 
 loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     
+    gh <- l_create_handle(c(widget, glyph_info$glyph))
+    
+    # show axes or not
+    showAxes <- gh['showAxes']
+    showEnclosing <- gh['showEnclosing']
+    showArea <- gh['showArea']
+    # scaling way
+    scaling <- gh['scaling']
+    # line width
+    linewidth <- gh['linewidth'][glyph_info$index]
+    # bbox color
+    bboxColor <- as_hex6color(gh['bboxColor'])
+    # axes color
+    axesColor <- as_hex6color(gh['axesColor'])
+    # each element color
+    color <- glyph_info$color
+    # size
+    size <- glyph_info$size
+    # parallel or radial
+    axesLayout <- gh['axesLayout']
+    dat <- sapply( gh['data'], as.numeric)  # convert to numeric if not
+    dimension <- dim(dat)[2]
+    apply2min <- apply(dat, 2, "min")
+    apply2max <- apply(dat, 2, "max")
+    apply1min <- apply(dat, 1, "min")
+    apply1max <- apply(dat, 1, "max")
+    scaledData <- switch(scaling, 
+                         "variable" = t(
+                             (t(dat) - apply2min)/ 
+                                 (apply2max  - apply2min) 
+                                        ), 
+                         "observation" = (dat - apply1min ) / (apply1max - apply1min ), 
+                         "data" = (dat - min(dat))/ (max(dat) - min(dat)), 
+                         "none" = NULL)
+
+    scaleX <- diff(c(widget['panX'], widget['panX'] + widget['deltaX']/widget['zoomX'])) * as_r_serialaxesGlyph_size(size)
+    scaleY <- diff(c(widget['panY'], widget['panY'] + widget['deltaY']/widget['zoomY'])) * as_r_serialaxesGlyph_size(size)
+    # position
+    xpos <- as.numeric(glyph_info$x)
+    ypos <- as.numeric(glyph_info$y)
+    if(axesLayout == "parallel"){
+        xaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
+        yaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
+        x <- xpos + xaxis
+        y <- ypos + yaxis
+        
+        gTree ( children = gList(
+            if(showEnclosing) {
+                polylineGrob(x= (c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX + xpos,
+                             y= (c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY + ypos, 
+                             id=rep(1:4, 2),
+                             gp=gpar(col = bboxColor), 
+                             default.units = "native") 
+            } else NULL ,
+            if(showAxes) {
+                polylineGrob(x = rep(x, each = 2), 
+                             y = rep(c(ypos - 0.5 * scaleY, 
+                                             ypos + 0.5 * scaleY), dimension),
+                             id = rep(1:dimension, each = 2), 
+                             gp = gpar(col = axesColor), 
+                             default.units = "native")
+            } else NULL ,
+            if(showArea) {
+                polygonGrob(x = c(x, rev(x)), 
+                            y = c(y, rep(ypos - 0.5 * scaleY, dimension)), 
+                            gp = gpar(fill = color, col = NA), 
+                            default.units = "native")
+            } else {
+                linesGrob(x = x, 
+                          y = y, 
+                          gp = gpar(col = color), 
+                          default.units = "native")}
+        )
+        )
+    } else {
+        angle <- seq(0, 2*pi, length.out = dimension + 1)[1:dimension]
+        radialxais <- scaleX * scaledData[glyph_info$index,] * cos(angle)
+        radialyais <- scaleY * scaledData[glyph_info$index,] * sin(angle)
+        
+        x <- xpos + radialxais
+        y <- ypos + radialyais
+        
+        gTree ( children = gList( 
+            if(showArea) {
+                polygonGrob(x = c(x, x[1]), 
+                            y = c(y, y[1]), 
+                            gp = gpar(fill = color, col = NA), 
+                            default.units = "native")
+            } else {
+                linesGrob(x = c(x, x[1]), 
+                          y = c(y, y[1]), 
+                          gp = gpar(col = color), 
+                          default.units = "native")
+            },
+            if(showEnclosing) {
+                polygonGrob(xpos + scaleX * cos(seq(0, 2*pi, length=101)), 
+                            ypos + scaleY * sin(seq(0, 2*pi, length=101)), 
+                            gp = gpar(fill = NA, col = bboxColor), 
+                            default.units = "native" )
+            } else NULL ,
+            if(showAxes) {
+                
+                polylineGrob( x = c(rep(xpos, dimension) ,xpos + scaleX * cos(angle)), 
+                              y = c(rep(ypos, dimension) ,ypos + scaleY * sin(angle)),
+                              id = rep(1:dimension, 2),
+                              gp = gpar(col =  axesColor), 
+                              default.units = "native")
+            } else NULL
+        ) 
+        )
+        
+    }
+}
+
+as_r_serialaxesGlyph_size <- function(size){
+    if (is.numeric(size)) {
+        # trial and error to choose scale for size
+        size <- sqrt(size) /30
+        size[size == 0] <- 0.01
+    }
+    size
 }

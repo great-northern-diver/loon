@@ -19,3 +19,4 @@ state names
 States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 and modified with \code{\link{l_configure}}.
 }
+

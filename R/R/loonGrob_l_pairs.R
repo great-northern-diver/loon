@@ -16,7 +16,7 @@
 #' grid.newpage()
 #' grid.draw(lgrob)
 
-loonGrob.l_pairs <- function(widget){
+loonGrob.l_pairs <- function(widget, name = name, gp = gp, vp = vp){
     
     len_pairs <- length(widget)
     names <- c( sapply(widget, function(l){
@@ -38,7 +38,10 @@ loonGrob.l_pairs <- function(widget){
     lenGrobs <- len_pairs + len_names
     lgrobObject <- lapply(1:lenGrobs, function(i){
         if(i <= len_pairs){
-            loonGrob(widget[[i]], margins = rep(0.1, 4), border = NA)
+            widgeti <- widget[[i]]
+            widgeti['foreground'] <- "white"
+            widgeti['minimumMargins'] <- rep(2,4)
+            loonGrob(widgeti)
         }else{
             textGrob(names[i - len_pairs], gp = gpar(fontsize = 9))
         }

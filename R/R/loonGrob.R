@@ -1,4 +1,22 @@
 
+#' Create and optionally draw a grid grob from a loon widget handle
+#' 
+#' Grid grobs are useful to create publication quality graphics.
+#' 
+#' @template param_target
+#' 
+#' @return a grid grob
+#' 
+#' @import grid
+#' 
+#' @export
+#' 
+#' @examples 
+#' 
+#' library(grid)
+#' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
+#' grid.newpage()
+#' grid.loon(widget)
 #' @export
 grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL) {
 
@@ -14,7 +32,7 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' 
 #' Grid grobs are useful to create publication quality graphics.
 #' 
-#' @template param_widget
+#' @template param_target
 #' 
 #' @return a grid grob
 #' 
@@ -24,16 +42,17 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' 
 #' @examples 
 #' 
-#' library(grid)
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
+#' 
 #' lgrob <- loonGrob(widget)
+#' 
+#' library(grid)
 #' grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
 #' grid.newpage(); grid.draw(lgrob)
 #' 
 #' \dontrun{
-#' demo("l_layers", ask = FALSE)$value
+#' p <- demo("l_layers", ask = FALSE)$value
 #'  
-#' p <- l_create_handle(".l3.plot")
 #' lgrob <- loonGrob(p)
 #' grid.newpage(); grid.draw(lgrob)
 #' 
@@ -57,22 +76,28 @@ loonGrob.default <- function(target, ...) {
 #' @export
 loonGrob.l_plot <- function(target,  name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    layers_grob <- loonGrob(rl, name = "l_plot")
-    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
+    layers_grob <- loonGrob(rl, name = "l_plot_layers")
+    
+    gTree(children = gList(cartesian2dGrob(target, layers_grob, name = "l_plot")),
+          name = name, gp = gp, vp = vp)
 }
 
 #' @export
 loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    layers_grob <- loonGrob(rl, name = "l_hist")
+    layers_grob <- loonGrob(rl, name = "l_hist_layers")
     
-    cartesian2dGrob(target, layers_grob, name = name, gp = gp, vp = vp)
+    gTree(children = gList(cartesian2dGrob(target, layers_grob, name = "l_hist")),
+          name = name, gp = gp, vp = vp)
 }
 
 #' @export
 loonGrob.l_graph <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
-    cartesian2dGrob(target, loonGrob(rl, name = "l_graph"), name = name, gp = gp, vp = vp)
+    interiorGrob <- loonGrob(rl, name = "l_graph_layers")  
+
+    gTree(children = gList(cartesian2dGrob(target, interiorGrob, name = "l_graph")),
+          name = name, gp = gp, vp = vp)
 }
 
 cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = NULL, vp = NULL) {
@@ -100,20 +125,61 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     title <- widget['title']
     
+    # Figure out margins
+    minimumMargins <- widget['minimumMargins']
+    margins <- c(0, 0, 0, 0)
+    if (showLabels) {margins <- margins + widget['labelMargins'] }
+    if (showScales) {margins <- margins + widget['scalesMargins'] }
+    margins <- apply(cbind(margins, minimumMargins), 1, max)
+    if(title == "") margins[3] <- minimumMargins[3]
+    # loon pixel margin to grid margin
+    margins <- pixels_2_lines (margins)
     
-    margins <- if (showScales) c(4.1, 5.1, 2.1, 2.1) else rep(2.1, 4)
-    if (title != "" && showLabels) margins[3] <- 3.1
     
     border <- as_hex6color(widget['foreground'])
     
-    xylab_dist <- if (showScales) c(-3, -4.2) else c(-1, -1)
+    xylab_loc <- if (showScales) c(-3.5, -6.5) else c(-1, -1)
+    
+    # Fonts
+    xlabelFont <- get_font_info_from_tk(l_getOption("font-xlabel"))
+    ylabelFont <- get_font_info_from_tk(l_getOption("font-ylabel"))
+    titleFont <- get_font_info_from_tk(l_getOption("font-title"))
+    scalesFont <- get_font_info_from_tk(l_getOption("font-scales"))
+    
     
     if (!swapAxes) {
-        xlabelGrob <- textGrob(widget['xlabel'], y = unit(xylab_dist[1], "lines"), name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], x = unit(xylab_dist[2], "lines"), rot = 90, name = "y label")
+        xlabelGrob <- textGrob(widget['xlabel'], 
+                               y = unit(xylab_loc[1], "lines"), 
+                               gp = gpar(fontfamily = xlabelFont$family, 
+                                         fontsize = xlabelFont$size,
+                                         fontface = xlabelFont$face
+
+                                         ), 
+                               name = "x label")
+        ylabelGrob <- textGrob(widget['ylabel'], 
+                               x = unit(xylab_loc[2], "lines"), 
+                               rot = 90, 
+                               gp = gpar(fontfamily = ylabelFont$family, 
+                                         fontsize = ylabelFont$size,
+                                         fontface = ylabelFont$face
+                                         ),
+                               name = "y label")
     } else {
-        xlabelGrob <- textGrob(widget['xlabel'], x = unit(xylab_dist[2], "lines"), rot = 90, name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], y = unit(xylab_dist[1], "lines"), name = "y label")
+        xlabelGrob <- textGrob(widget['xlabel'], 
+                               x = unit(xylab_loc[2], "lines"), 
+                               rot = 90,  
+                               gp = gpar(fontfamily = xlabelFont$family, 
+                                         fontsize = xlabelFont$size,
+                                         fontface = xlabelFont$face
+                               ), 
+                               name = "x label")
+        ylabelGrob <- textGrob(widget['ylabel'], 
+                               y = unit(xylab_loc[1], "lines"), 
+                               gp = gpar(fontfamily = ylabelFont$family, 
+                                         fontsize = ylabelFont$size,
+                                         fontface = ylabelFont$face
+                               ),
+                               name = "y label")
     }
     
     
@@ -126,8 +192,14 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                             xlabelGrob,
                             ylabelGrob,
                             if (title != "") {
-                                textGrob(title, name = "title", y = unit(1, "npc") + unit(.8, "lines"),
-                                         gp = gpar(fontsize = 18, fontface="bold"), vjust = .5)
+                                textGrob(title, 
+                                         name = "title", 
+                                         y = unit(1, "npc") + unit(.8, "lines"),
+                                         gp = gpar(fontfamily = titleFont$family, 
+                                                   fontsize = titleFont$size,
+                                                   fontface = titleFont$face
+                                         ),
+                                         vjust = .5)
                             } else NULL )
                     } else NULL,
                     if (showGuides){
@@ -137,7 +209,6 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         len.yaxis <- length(yaxis)
                         gTree(children = gList(
                             rectGrob(gp = gpar(col = border, 
-                                               name = "guidesBackground",
                                                fill = as_hex6color(widget['guidesBackground']) )),
                             do.call(
                                 gList, 
@@ -145,24 +216,32 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                     if(i <=  len.xaxis ){
                                         linesGrob(x = unit(rep(xaxis[i],2 ), "native"), 
                                                   y =  unit(c(0.003,0.997), "npc"),
-                                                  name = "guidelines",
                                                   gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
                                     }else {
                                         linesGrob(x = unit(c(0.003,0.997), "npc") ,
-                                                  y =  unit(rep(yaxis[i - len.xaxis],2 ), "native"),
-                                                  name = "guidelines", 
+                                                  y =  unit(rep(yaxis[i - len.xaxis],2 ), "native"), 
                                                   gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
                                     }
                                 }))),
                             name = "guide")
                     } else {
-                        rectGrob(gp = gpar(col = border, 
+                        rectGrob(gp = gpar(col = NA, 
                                            fill = as_hex6color(widget['background'])),
                                  name = "bbox") },
                     if (showScales) {
                         gList(
-                            xaxisGrob( name = "x axis"),
-                            yaxisGrob( name = "y axis")
+                            xaxisGrob(
+                                gp = gpar(fontfamily = scalesFont$family, 
+                                          fontsize = scalesFont$size,
+                                          fontface = scalesFont$face
+                                ),
+                                name = "x axis"),
+                            yaxisGrob(
+                                gp = gpar(fontfamily = scalesFont$family, 
+                                          fontsize = scalesFont$size,
+                                          fontface = scalesFont$face
+                                ),
+                                name = "y axis")
                         )  
                     } else NULL,
                     clipGrob(name = "clip"),
@@ -170,7 +249,6 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                     # draw boundary
                     polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
                                  y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
-                                 name = "polyline",
                                  id=rep(1:4, 2),
                                  gp=gpar(col = border, lwd=1)) 
                 ),
@@ -201,10 +279,11 @@ loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     l_children_grobs <- lapply(l_visible_children_layer, loonGrob)
     
-    gTree(
-        children = do.call(gList, l_children_grobs),
-        name = name, gp = gp, vp = vp
-    )
+    gTree(children = gList(
+        gTree(
+            children = do.call(gList, l_children_grobs), 
+            name = paste0("l_layer_group: ", l_layer_getLabel(widget, target)))),
+        name = name, gp = gp, vp = vp)
 }
 
 
@@ -216,13 +295,18 @@ loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) 
     states <- get_layer_states(target)
     
     if(length(states$x)!=0  & length(states$y)!=0){
-        polygonGrob(
-            x = states$x, y = states$y,
-            name = "polygon",
-            gp = gpar(
-                fill = states$color, col = states$linecolor, lwd = states$linewidth
-            )
-        )
+        gTree(
+            children = gList(
+                polygonGrob(
+                    x = states$x, y = states$y,
+                    gp = gpar(fill = states$color, 
+                              col = states$linecolor, 
+                              lwd = states$linewidth
+                    ),
+                    name = "l_layer_polygon"
+                )
+            ),
+            name = name, gp = gp, vp = vp)
     } else {
         grob(name = name, gp = gp, vp = vp)
     }
@@ -234,11 +318,17 @@ loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
     states <- get_layer_states(target)
     
     if(length(states$x)!=0  & length(states$y)!=0) {
-        linesGrob(
-            x = states$x, y = states$y,
-            name = "lines",
-            gp = gpar(col = states$color, lwd = states$linewidth)
+        gTree(
+            children = gList(
+                linesGrob(
+                    x = states$x, y = states$y,
+                    gp = gpar(col = states$color, lwd = states$linewidth),
+                    name = "l_layer_line"
+                )
+            ),
+            name = name, gp = gp, vp = vp
         )
+        
     } else {
         grob(name = name, gp = gp, vp = vp)
     }
@@ -259,11 +349,18 @@ loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL
         width <- unit(diff(range(xcoords)), "native")
         height <- unit(diff(range(ycoords)), "native")
         
-        # TODO wrap in gTree with name, vp, gp
-        rectGrob(
-            x = x, y = y, width = width, height = height, 
-            name = "rectangle",
-            gp = gpar(fill = states$color, col = states$linecolor, lwd = states$linewidth)
+        gTree(
+            children = gList(
+                rectGrob(
+                    x = x, y = y, 
+                    width = width, height = height, 
+                    gp = gpar(fill = states$color, 
+                              col = states$linecolor, 
+                              lwd = states$linewidth),
+                    name = "l_layer_rectangle"
+            ),
+            name = name, gp = gp, vp = vp
+            )
         )
     } else {
         grob(name = name, gp = gp, vp = vp)
@@ -291,10 +388,16 @@ loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
         x <- unit( mean(xcoords) + xRadius * cos(angle), "native")
         y <- unit( mean(ycoords) + yRadius * sin(angle), "native")
         
-        polygonGrob(x, y, 
-                    name = "polygon",
-                    gp = gpar(fill = states$color, col = states$linecolor,
-                              lwd = states$linewidth) )
+        gTree(
+            children = gList(
+                polygonGrob(x, y, 
+                            gp = gpar(fill = states$color, 
+                                      col = states$linecolor,
+                                      lwd = states$linewidth),
+                            name = "l_layer_oval")
+                ),
+            name = name, gp = gp, vp = vp )
+            
     } else {
         grob(name = name, gp = gp, vp = vp)
     }
@@ -306,13 +409,19 @@ loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
     states <- get_layer_states(target)
     
     if(length(states$x)!=0  & length(states$y)!=0) {
-        textGrob(
-            label = states$text, x = states$x, y = states$y,
-            name = "text",
-            rot = states$angle,
-            just = states$anchor, 
-            gp=gpar(fontsize= states$size, col=states$color)
-        )
+        gTree(
+            children = gList(
+                textGrob(
+                    label = states$text, x = states$x, y = states$y,
+                    rot = states$angle,
+                    just = states$anchor, 
+                    gp=gpar(fontsize= as_r_text_size(states$size), 
+                            col=states$color),
+                    name = "l_layer_text"
+                )
+            ),
+            name = name, gp = gp, vp = vp
+            )
     } else {
         grob(name = name, gp = gp, vp = vp)
     }     
@@ -324,15 +433,26 @@ loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
     states <- get_layer_states(target)
     
     active <- states$active
+    x <- states$x[active]
+    y <- states$y[active]
     
-    if(length(states$x[active])!=0  & length(states$y[active]) !=0 ){
-        states$size <- as_r_point_size(states$size)
-        pointsGrob(
-            x = states$x[active], y = states$y[active],
-            name = "points",
-            gp = gpar(col = states$color[active], cex = states$size[active]),
-            pch = 16
-        )  
+    if(length(x)!=0  && length(y) !=0 ){
+        size  <- as_r_point_size(states$size[active])
+        color <- states$color[active]
+        
+        gTree(
+            children = gList(
+                pointsGrob(
+                    x = x, y = y,
+                    gp = gpar(col = color, 
+                              cex = size),
+                    pch = 16,
+                    name = "l_layer_points"
+                )  
+            ),
+            name = name, gp = gp, vp = vp
+        )
+    
     } else {
         grob(name = name, gp = gp, vp = vp)
     }    
@@ -343,26 +463,35 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
-    
     active <- states$active
-    if(length(states$x[active])!=0  && 
-       length(states$y[active]) !=0 ){
+    x <- states$x[active]
+    y <- states$y[active]
+    
+    if(length(x)!=0  && length(y) !=0 ){
+        text  <- states$text[active]
+        size  <- as_r_text_size(states$size[active])
+        angle  <- states$angle[active]
+        anchor  <- states$anchor[active]
+        rotation  <- states$rot[active]
+        justification  <- states$just[active]
+        color <- states$color[active]
+        textGrobs <- lapply(seq_along(x), 
+                            function(i) {
+                                textGrob(
+                                    label = text[i],
+                                    x = x[i], 
+                                    y = y[i],
+                                    rot = angle[i],
+                                    just = anchor[i],
+                                    gp=gpar(fontsize= size[i], col=color[i])
+                                )
+                            }
+        )
+        
         gTree(
-            children = do.call(
-                gList, 
-                lapply(seq_along(states$x), function(i) {
-                    if(active[i]){
-                        textGrob(
-                            label = states$text[i], 
-                            x = states$x[i], 
-                            y = states$y[i],
-                            name = "text",
-                            rot = states$angle[i],
-                            just = states$anchor[i],
-                            gp=gpar(fontsize= states$size[i], col=states$color[i])
-                        ) 
-                    }
-                })),
+            children = gList(
+                gTree(children = do.call(gList, textGrobs),
+                      name = "l_layer_texts")),
             name = name, gp = gp, vp = vp
         )   
     } else {
@@ -376,28 +505,37 @@ loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL)
     states <- get_layer_states(target)
     
     active <- states$active
+    x <- states$x[active]
+    y <- states$y[active]
     
-    if(length(states$x[active])!=0  & length(states$y[active])!=0  ){
+    if(length(x)!=0  && length(y) !=0 ){
+        linewidth  <- states$linewidth[active]
+        linecolor <- states$linecolor[active]
+        fill <- states$color[active]
+        polygonGrobs <- lapply(seq_along(x), 
+                               function(i) {
+                                   polygonGrob(
+                                       x = x[[i]], y = y[[i]],
+                                       gp = gpar(
+                                           fill = fill[i], 
+                                           col = linecolor[i], 
+                                           lwd = linewidth[i]
+                                       )
+                                   )
+                               }
+        )
+        
         gTree(
-            children = do.call(
-                gList, 
-                lapply(seq_along(states$x), function(i) {
-                    if(active[i]){
-                        polygonGrob(
-                            x = states$x[[i]], y = states$y[[i]],
-                            name = "polygon",
-                            gp = gpar(
-                                fill = states$color[i], 
-                                col = states$linecolor[i], 
-                                lwd = states$linewidth[i]
-                            )
-                        ) 
-                    }else NULL
-                }))
-        )  
+            children = gList(
+                gTree(children = do.call(gList, polygonGrobs),
+                      name = "l_layer_polygons"
+                      )
+                ),
+            name = name, gp = gp, vp = vp
+        )
     } else {
         grob(name = name, gp = gp, vp = vp)
-    }    
+    }
 }
 
 #' @export
@@ -405,32 +543,43 @@ loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NUL
     
     states <- get_layer_states(target)
     
-    
     active <- states$active
-    if(length(states$x[active])!=0  & length(states$y[active])!=0 ){
+    x <- states$x[active]
+    y <- states$y[active]
+    
+    if(length(x)!=0  && length(y) !=0 ){
+        linewidth  <- states$linewidth[active]
+        linecolor <- states$linecolor[active]
+        fill <- states$color[active]
+        rectGrobs <- lapply(seq_along(x), 
+                            function(i) {
+                                xcoords <- as.numeric(x[[i]])
+                                ycoords <- as.numeric(y[[i]])
+                                
+                                xloc <- unit(mean(xcoords), "native")
+                                yloc <- unit(mean(ycoords), "native")
+                                
+                                width <- unit(diff(range(xcoords)), "native")
+                                height <- unit(diff(range(ycoords)), "native")
+                                
+                                rectGrob(
+                                    x = xloc, y = yloc, 
+                                    width = width, 
+                                    height = height, 
+                                    gp = gpar(fill = fill[i], 
+                                              col = linecolor[i], 
+                                              lwd = linewidth[i])
+                                )
+                            }
+        )
         
         gTree(
-            children = do.call(
-                gList, 
-                lapply(seq_along(states$x), function(i) {
-                    if(active[i]){
-                        xcoords <- as.numeric(states$x[[i]])
-                        ycoords <- as.numeric(states$y[[i]])
-                        
-                        x <- unit(mean(xcoords), "native")
-                        y <- unit(mean(ycoords), "native")
-                        
-                        width <- unit(diff(range(xcoords)), "native")
-                        height <- unit(diff(range(ycoords)), "native")
-                        
-                        rectGrob(
-                            x = x, y = y, width = width, height = height, 
-                            name = "rectangle",
-                            gp = gpar(fill = states$color[i], col = states$linecolor[i], 
-                                      lwd = states$linewidth[i])
-                        ) 
-                    }else NULL
-                }))
+            children = gList(
+                gTree(children = do.call(gList, rectGrobs),
+                      name = "l_layer_rectangles"
+                )
+            ),
+            name = name, gp = gp, vp = vp
         )
     } else {
         grob(name = name, gp = gp, vp = vp)
@@ -442,22 +591,31 @@ loonGrob.l_layer_lines <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
     
-    
     active <- states$active
-    if(length(states$x[active])!=0  & length(states$y[active])!=0 ){
+    x <- states$x[active]
+    y <- states$y[active]
+    
+    if(length(x)!=0  && length(y) !=0 ){
+        linewidth  <- states$linewidth[active]
+        linecolor <- states$color[active]
+        lineGrobs <- lapply(seq_along(x), 
+                            function(i) {
+                                linesGrob(
+                                    x = x[[i]], 
+                                    y = y[[i]],
+                                    gp = gpar(col = linecolor[i], 
+                                              lwd = linewidth[i])
+                                )
+                            }
+        )
+        
         gTree(
-            children = do.call(
-                gList, 
-                lapply(seq_along(states$x), function(i) {
-                    if(active[i]){
-                        linesGrob(
-                            x = states$x[[i]], y = states$y[[i]],
-                            name = "lines",
-                            gp = gpar(col = states$color[i], 
-                                      lwd = states$linewidth[i])
-                        )
-                    }else NULL
-                }))
+            children = gList(
+                gTree(children = do.call(gList, lineGrobs),
+                      name = "l_layer_lines"
+                )
+            ),
+            name = name, gp = gp, vp = vp
         )
     } else {
         grob(name = name, gp = gp, vp = vp)
@@ -490,17 +648,27 @@ glyph_to_pch <- function(glyph) {
 
 
 # see optionDatabase.tcl
-as_r_point_size <- function(s) {
-  
-  if (is.null(s)) {
-    NULL
-  } else {
-    # trial and error to choose 7
-    size <- sqrt(s / 7)
-    size[size < 0.1] <- 0.1   
+as_r_point_size <- function(size) {
     
+    if (is.numeric(size)) {
+        # trial and error to choose scale for size
+        size <- sqrt(size / 12)
+        size[size < 0.1] <- 0.1   
+    }
     size
-  }
+}
+
+as_r_text_size <- function(size){
+    if (is.numeric(size)) {
+        # trial and error to choose scale for size
+        size <- 1.5*size
+        size[size < 0.1] <- 0.1
+    }
+    size
+}
+
+pixels_2_lines <- function(x) {
+    x / 20
 }
 
 # Model layers have selected state
@@ -516,12 +684,40 @@ get_display_color <- function(color, selected) {
   color
 }
 
+get_font_info_from_tk <- function(tkFont) {
+  #try()
+  fontInfo <- as.character(.Tcl(paste("font actual", tkFont)))
+  fontInfo <- matrix(fontInfo, ncol = 2, byrow = TRUE)
+  
+  fontFamily <- fontInfo[fontInfo[,1] == "-family", 2]
+  if (!fontFamily %in% c("sans", "mono", "serif", "symbol")) fontFamily <- "sans"
+  
+  fontSize <- fontInfo[fontInfo[,1] == "-size", 2]
+  if (fontSize <= 0) fontSize <- 8 
+  
+  fontFace <- fontInfo[fontInfo[,1] == "-weight", 2]
+  if (!fontFace %in% c("plain",
+                       "bold", 
+                       "italic", 
+                       "oblique", 
+                       "bold-italic")
+  ) fontFace <- "plain"
+  
+  list(family = fontFamily, face = fontFace, size = fontSize)
+}
+
 as_hex6color <- function(color) {
-  if(length(color)){
-    col <- suppressWarnings(loon:::hex12tohex6(color))
+    
+  if(length(color) > 0){
+    col <- vapply(color, function(x) {
+        if (x == "") "" else l_hexcolor(x)
+    }, character(1))
+    col <- suppressWarnings(loon:::hex12tohex6(col))
     col[color == ""] <- NA
-  }else {col <- NA}
-  col
+    col
+  } else {
+    NA
+  }
 }
 
 

@@ -14,16 +14,16 @@
 #' LG <- linegraph(G)
 #' g <- l_graph(LG)
 #' nav0 <- l_navigator_add(g)
-#' l_configure(nav0, label = 0)
-#' con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris[,-5])
+#' # l_configure(nav0, label = 0)
+#' # con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris[,-5])
 #' nav1 <- l_navigator_add(g, from = "Sepal.Length:Petal.Width", 
 #'   to = "Petal.Length:Petal.Width", proportion = 0.3)
-#' l_configure(nav1, label = 1)
-#' con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris[,-5])
+#' # l_configure(nav1, label = 1)
+#' # con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris[,-5])
 #' nav2 <- l_navigator_add(g, from = "Sepal.Length:Petal.Length", 
 #'   to = "Sepal.Width:Petal.Length", proportion = 0.5)
-#' l_configure(nav2, label = 2)
-#' con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
+#' # l_configure(nav2, label = 2)
+#' # con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
 #' 
 #' library(grid)
 #' lgrob <- loonGrob(g, navigators =  list(nav0, nav1, nav2))

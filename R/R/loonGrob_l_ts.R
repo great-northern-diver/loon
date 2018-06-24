@@ -20,19 +20,10 @@
 #' grid.draw(lgrob)
 
 
-loonGrob.l_ts <- function(widget){
-  
-  lenGrobs <- length(widget)
-  
-  margins <- c(2.1, 5.1, 0.1, 1.1)
-  
-  lgrobObject <- lapply(1:lenGrobs, function(i){
-    if(i == 1) {
-      margins[3] <- 3.1
-    } else if(i == 4) {
-      margins[1] <- 4.1
-    }
-    loonGrob(widget[[i]], margins = margins)
+loonGrob.l_ts <- function(widget, name = name, gp = gp, vp = vp){
+
+  lgrobObject <- lapply(seq_len(length(widget)), function(i){
+    loonGrob(widget[[i]])
   })
   
   gridExtra::arrangeGrob(grobs = lgrobObject, nrow=4, 
