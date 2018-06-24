@@ -14,7 +14,7 @@
 #'   \item if all values already represent valid Tk colors (see
 #'   \code{\link{tkcolors}}) then those colors are taken
 #'   
-#'   \item if the number of distinct values are less than the number of values in 
+#'   \item if the number of distinct values is less than the number of values in 
 #'   loon's color mapping list then they get mapped according to the color list,
 #'   see \code{\link{l_setColorList}} and \code{\link{l_getColorList}}.
 #'   
@@ -337,7 +337,10 @@ l_setColorList_hcl <- function(chroma=56, luminance=51, hue_start=231) {
     invisible()
 }
 
-# 
+#' @templateVar type ggplot2
+#' @template man_setColorList
+#' 
+#' @export
 l_setColorList_ggplot2 <- function() {
     tcl('::loon::setColorList', 'ggplot2')
     invisible()
