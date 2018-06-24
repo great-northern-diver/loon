@@ -118,7 +118,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     g <- l_graph(parent=tt)
     nav <- l_navigator_add(g)
     g2d <- l_context_add_geodesic2d(navigator = nav, data=data, separator=separator)
-    p <- structure(unlist(strsplit(g2d['command'],' ', fixed=TRUE))[1], class='loon')
+    p <- structure(unlist(strsplit(g2d['command'],' ', fixed=TRUE))[1], class=c ('l_plot', 'loon'))
     
     args <- list(...)
     if (length(args) > 0) {
