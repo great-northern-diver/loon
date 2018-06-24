@@ -306,7 +306,7 @@ l_getColorList <- function() {
 #' l_setColorList_ColorBrewer("Set1")
 #' p <- l_plot(iris)
 l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
-                                                    "Pasetl1", "Pastel2", "Paired",
+                                                    "Pastel1", "Pastel2", "Paired",
                                                     "Dark2", "Accent")) {
     palette <- match.arg(palette)
     tcl('::loon::setColorList', 'ColorBrewer', palette)
