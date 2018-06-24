@@ -27,7 +27,7 @@ loonGrob.l_ts <- function(widget, name = name, gp = gp, vp = vp){
   })
   
   gridExtra::arrangeGrob(grobs = lgrobObject, nrow=4, 
-                         heights = c(1.3,1,1,1.3), name = "loon_ts")
+                         heights = c(1.3,1,1,1), name = "loon_ts")
 
 }
 
