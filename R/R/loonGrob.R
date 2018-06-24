@@ -243,12 +243,12 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         )  
                     } else NULL,
                     clipGrob(name = "clip"),
-                    interiorPlotGrob,
-                    # draw boundary
-                    polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
-                                 y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
-                                 id=rep(1:4, 2),
-                                 gp=gpar(col = border, lwd=1)) 
+                    interiorPlotGrob #,
+                    # # draw boundary
+                    # polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
+                    #              y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
+                    #              id=rep(1:4, 2),
+                    #              gp=gpar(col = border, lwd=1)) 
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
