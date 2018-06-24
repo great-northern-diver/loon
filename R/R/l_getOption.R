@@ -1,5 +1,5 @@
 
-
+#' @export
 l_getOption <- function(option) {
     
     if(length(option) != 1) stop("only one option can be queried at a time")
@@ -11,10 +11,12 @@ l_getOption <- function(option) {
     
 }
 
+#'@export
 l_getOptionNames <- function() {
     as.character(.Tcl('array names ::loon::Options'))
 }
 
+#'@export
 l_setOption <- function(option, value) {
     if (!(option %in%  l_getOptionNames())) 
         stop("option ", option, " is not valid")
