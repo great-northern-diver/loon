@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="R.W. Oldford" />
+
+<meta name="date" content="2018-06-22" />
+
+<title>Visible minorities in Canadian cities</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Visible minorities in Canadian cities</h1>
+<h4 class="author"><em>R.W. Oldford</em></h4>
+<h4 class="date"><em>2018-06-22</em></h4>
+
+
+
+<div id="illustrates" class="section level3">
+<h3>Illustrates:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(loon)</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>linked histograms and scatterplots</li>
+<li>interactive maps as scatterplots</li>
+<li>plots with multiple layers including nested group layers’</li>
+<li>serial axes plots</li>
+<li>serial axes glyphs</li>
+</ol>
+</div>
+<div id="the-minority-data" class="section level1">
+<h1>The <code>minority</code> data</h1>
+<p>Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities’’ within 33 Canadian cities. All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).</p>
+<p>The data are part of the <code>loon</code> package and can be accessed through the <code>data(...)</code> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(minority)</code></pre></div>
+<p>The data are arranged as a <code>data.frame</code> of <code>nrow(minority) =</code> 33 Canadian cities with <code>ncol(minority) =</code> 18 measurements on each. The first 14 variates are Statistics Canada census numbers of people according to a declared <code>visible minority</code> together with the population of that <code>city</code>. The possibilities are</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(minority)[<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>]</code></pre></div>
+<pre><code>##  [1] &quot;Arab&quot;                                   
+##  [2] &quot;Black&quot;                                  
+##  [3] &quot;Chinese&quot;                                
+##  [4] &quot;Filipino&quot;                               
+##  [5] &quot;Japanese&quot;                               
+##  [6] &quot;Korean&quot;                                 
+##  [7] &quot;Latin.American&quot;                         
+##  [8] &quot;Multiple.visible.minority&quot;              
+##  [9] &quot;South.Asian&quot;                            
+## [10] &quot;Southeast.Asian&quot;                        
+## [11] &quot;Total.population&quot;                       
+## [12] &quot;Visible.minority.not.included.elsewhere&quot;
+## [13] &quot;Visible.minority.population&quot;            
+## [14] &quot;West.Asian&quot;</code></pre>
+<p>For example, here are the counts for three Canadian cities (3 rows of <code>minority</code>) from across Canada:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Victoria</th>
+<th align="right">Ottawa-Gatineau</th>
+<th align="right">St. John’s</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arab</td>
+<td align="right">500</td>
+<td align="right">28195</td>
+<td align="right">190</td>
+</tr>
+<tr class="even">
+<td>Black</td>
+<td align="right">2360</td>
+<td align="right">45060</td>
+<td align="right">620</td>
+</tr>
+<tr class="odd">
+<td>Chinese</td>
+<td align="right">12330</td>
+<td align="right">32445</td>
+<td align="right">990</td>
+</tr>
+<tr class="even">
+<td>Filipino</td>
+<td align="right">2760</td>
+<td align="right">7330</td>
+<td align="right">155</td>
+</tr>
+<tr class="odd">
+<td>Japanese</td>
+<td align="right">2280</td>
+<td align="right">1800</td>
+<td align="right">65</td>
+</tr>
+<tr class="even">
+<td>Korean</td>
+<td align="right">1235</td>
+<td align="right">2280</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td>Latin.American</td>
+<td align="right">1845</td>
+<td align="right">10630</td>
+<td align="right">320</td>
+</tr>
+<tr class="even">
+<td>Multiple.visible.minority</td>
+<td align="right">930</td>
+<td align="right">4540</td>
+<td align="right">25</td>
+</tr>
+<tr class="odd">
+<td>South.Asian</td>
+<td align="right">7210</td>
+<td align="right">27130</td>
+<td align="right">890</td>
+</tr>
+<tr class="even">
+<td>Southeast.Asian</td>
+<td align="right">1585</td>
+<td align="right">11670</td>
+<td align="right">55</td>
+</tr>
+<tr class="odd">
+<td>Total.population</td>
+<td align="right">325060</td>
+<td align="right">1117120</td>
+<td align="right">179270</td>
+</tr>
+<tr class="even">
+<td>Visible.minority.not.included.elsewhere</td>
+<td align="right">260</td>
+<td align="right">1720</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td>Visible.minority.population</td>
+<td align="right">33870</td>
+<td align="right">179295</td>
+<td align="right">3460</td>
+</tr>
+<tr class="even">
+<td>West.Asian</td>
+<td align="right">575</td>
+<td align="right">6490</td>
+<td align="right">65</td>
+</tr>
+</tbody>
+</table>
+<p>The remaining variates provide the geographic location of each city. The latitude and longitude of the cities were determined in two ways. First, the data in <code>canada.cities</code> from the <code>maps</code> package was used. This produced the <code>minority</code> variates <code>lat' and</code>long’. The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates <code>googleLat</code> and <code>googleLong</code>.</p>
+<p>To see if they agree we plot them against one another.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>Note the disagreement over the location of the city of Quebec. A check against a map reveals</p>
+<p><img src="data:image/png;base64,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ZF4ns571tUYXpN+0gl61Q9LNsF43nbw+DWLC9bzJpWd9jdOOLzfnq45XL7s3Z+dGG9wxp8msZ32tw5rrK0FQIFSfBFEZ9bzJoWd9rcPON8KfN5j5bCeznvUZtA2ShJ5YOopAZj2rNGg/R7q5wtpmDDo9e3u+gkG300bw3TSzj+rx8HI7Qs/rlpdZ9KzLoN1D4P5h3PX5dMQ/VxObUc/rV6/y6FmVQYevvE6+zgDCoaBnVQ0pv6mNtc0oUNCzqpYUglZ1URmhoGddbXnu37Sp65pyQkDPyhqznXRieI9Ifj2ra83qLigzufXMXT4Ak8CggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0sCggDQwKCANDApIA4MC0vw/PKwAWXCBR8wAAAAASUVORK5CYII=" style="display: block; margin: auto;" /></p>
+<p>The Google values are wrong. It seems that the geocoded Google values picked up the <em>province</em> of Quebec and not to the <em>city</em> of Quebec! Something to be wary of when searching any database </p>
+</div>
+<div id="interactive-exploration-with-loon" class="section level1">
+<h1>Interactive exploration with <code>loon</code></h1>
+<p>We now use the <code>loon</code> package to explore this data with some interactive tools.</p>
+<p>We begin by looking at the distribution of population across these cities.</p>
+<div id="populations" class="section level2">
+<h2>Populations</h2>
+<p>We first look at the populations of the different cities:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> hTotPop &lt;-<span class="st"> </span><span class="kw">with</span> (minority,   ## Using the &quot;with&quot; function
+                              ## makes for easier reading
+                  <span class="kw">l_hist</span>(Total.population,
+                         <span class="dt">title =</span> <span class="st">&quot;33 Canadian cities&quot;</span>
+                          ) 
+                  )
+                  ## Save the histogram structure 
+                  ## to work with later from the 
+                  ## command line</code></pre></div>
+<p>The distribution of the <code>Total.population</code> is skewed with a heavy right tail. Most Canadian cities have a relatively small population. A few cities, one in particular, has a relatively large population.</p>
+<p>Note, that this histogram has very little in the way of annotation. This can be changed interactively by making various selections in the loon inspector. Try a few of these out and observe the results in the histogram. You may also make some selections in the histogram itself. Holding the shift key down while making a selection results in a ``sticky’’ selection that allows multiple items to be selected.</p>
+<p><strong>Exercise:</strong> Check the show <code>stacked colors</code> box in order to see the bar colours. Select the two histogram bars corresponding to the three most populous cities. Change the colour of these cities to some different colour selected from the <code>Modify</code> section. Select the <code>none</code> button to unhighlight the bars and reveal the modified colour.</p>
+</div>
+<div id="percentages" class="section level2">
+<h2>Percentages</h2>
+<p>Given that population totals vary so much, it might be more meaningful to look at each visible minority as its percentage of the city’s population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  Reduce the minority data to percents of the total population</span>
+<span class="co">#  in each city.</span>
+<span class="co">#</span>
+
+minorityPercent &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">&quot;Total.population&quot;</span>])
+
+<span class="co">#  Take the opportunity to shorten the Statistics Canada </span>
+<span class="co">#  names of the minorities as well:</span>
+<span class="kw">names</span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;% Arabic&quot;</span>,  <span class="st">&quot;% Black&quot;</span>, <span class="st">&quot;% Chinese&quot;</span>,  
+                            <span class="st">&quot;% Filipino&quot;</span>, <span class="st">&quot;% Japanese&quot;</span>,
+                            <span class="st">&quot;% Korean&quot;</span>,  <span class="st">&quot;% Latino&quot;</span>, <span class="st">&quot;% Multiple&quot;</span>,
+                            <span class="st">&quot;% S. Asian&quot;</span>,  <span class="st">&quot;% SE Asian&quot;</span>,  <span class="st">&quot;% Other&quot;</span>,
+                            <span class="st">&quot;% Minority&quot;</span>, <span class="st">&quot;% W Asian&quot;</span>)</code></pre></div>
+<p>We begin by looking at the total visibility minority percentage. Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the <code>linkingGroup</code> is specified to be the string <code>&quot;minority&quot;</code>. This could have been any string – it merely identifies that this histogram will have its display linked with any other plot in the same <code>linkingGroup</code> .</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The proportion of the city population that is a &quot;visible minority&quot;</span>
+<span class="kw">l_hist</span>(minorityPercent[,<span class="st">&quot;% Minority&quot;</span>],
+       <span class="dt">title =</span> <span class="kw">paste</span>(<span class="st">&quot;% Minority in 33 Canadian cities&quot;</span>),
+       <span class="dt">xlabel=</span><span class="st">&quot;percent of population&quot;</span>,
+       <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+       <span class="dt">yshows=</span><span class="st">&quot;frequency&quot;</span>,
+       <span class="dt">showBinHandle=</span><span class="ot">FALSE</span>,
+       <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+       <span class="dt">showScales=</span><span class="ot">TRUE</span>
+)</code></pre></div>
+<p>As can be seen, the visible minority population most of these cities is less than 20% of its total population. But for two cities nearly half of the population is from some visible minority.</p>
+<p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the ‘linkingGroup’ of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_configure</span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>, <span class="dt">sync =</span> <span class="st">&quot;push&quot;</span>)</code></pre></div>
+<p>In either case the displays must be synchronized (<code>sync</code>) within the group. Here we choose to <code>push</code> the linked elements of the total population histogram <code>hTotPop</code> out to the other members of the group. Checking the show <code>stacked colors</code> in both histograms will reveal their shared colours. Alternatively, use selection on each histogram.</p>
+<p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible miinorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
+<div id="largest-visible-minorities" class="section level3">
+<h3>Largest visible minorities</h3>
+<p>It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now show the same for the three minority groups</span>
+<span class="co"># having largest percentages (in decreasing order):</span>
+groups &lt;-<span class="st"> </span><span class="kw">names</span>(minorityPercent)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]
+largest3 &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">sort</span>(<span class="kw">apply</span>(minorityPercent[,groups ],
+                             <span class="dv">2</span>, max),
+                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+                  )[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<p>and plot histograms of them</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And now plot them</span>
+<span class="cf">for</span> (x <span class="cf">in</span> largest3) {
+  <span class="kw">l_hist</span>(minorityPercent[,x],
+         <span class="dt">title =</span> x,
+         <span class="dt">xlabel=</span><span class="st">&quot;percent of population&quot;</span>,
+         <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+         <span class="dt">showScales=</span><span class="ot">TRUE</span>,
+         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span>
+         )
+}</code></pre></div>
+<p>In decreasing order the largest three visible minorities <code>Chinese'',</code>South Asian’‘, and ``Black’’.</p>
+<p>Looking at the <code>\% Chinese'' histogram one city has nearly 20\% of its population being</code>Chinese’‘. It is the third largest city in the country.<br />
+In contrast, the city with the greatest proportion of its population being <code>South Asian'' (more than 15 \%) is one of the smallest of the 33 Canadian cities. Finally, the city having the largest percentage of</code>Black’’ inhabitants is the largest one.</p>
+<p>Other relationships can be uncovered by selecting bars from different histograms. It’s worth exploring to better understand the data.</p>
+<p>Better still is to link these histograms with the cities’ geographic locations on a map of Canada.</p>
+</div>
+</div>
+<div id="interactive-maps" class="section level2">
+<h2>Interactive maps</h2>
+<p>We again use the data from the <code>maps</code> package but now create an interactive map by using Loon’s facility for layering various geometric objects (including map polygons) on top of a scatterplot.</p>
+<p>The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the <code>maps</code> package) are <em>layered</em> on top of the scatterplot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_map &lt;-<span class="st"> </span><span class="kw">with</span>(minority,
+              <span class="kw">l_plot</span>(long,lat,
+                     <span class="dt">xlabel=</span><span class="st">&quot;longitude&quot;</span>, <span class="dt">ylabel=</span><span class="st">&quot;latitude&quot;</span>,
+                     <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
+                     <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority),
+                     <span class="dt">showLabels=</span><span class="ot">TRUE</span>)
+     )
+
+<span class="co"># Add the map of Canada</span>
+<span class="kw">library</span>(maps)
+landcol &lt;-<span class="st"> &quot;grey95&quot;</span>
+canada &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map, 
+                  <span class="kw">map</span>(<span class="st">&quot;world&quot;</span>, <span class="st">&quot;Canada&quot;</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                  <span class="dt">label =</span> <span class="st">&quot;Canada&quot;</span>,
+                  <span class="dt">color =</span> landcol,
+                  <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Rescale the plot to the size of the map</span>
+<span class="kw">l_scaleto_layer</span>(p_map, canada)
+
+<span class="co"># Could also add the text of the city names to the map</span>
+<span class="co"># as glyphs</span>
+<span class="kw">l_glyph_add_text</span>(p_map,
+                 <span class="dt">text=</span><span class="kw">row.names</span>(minority),
+                 <span class="dt">label=</span><span class="st">&quot;city names&quot;</span>)</code></pre></div>
+<p>The map is now ready to be used in analysis. It is part of the same linking group as the histograms so selecting bars in any histogram will highlight the corresponding cities on the map. These may be <strong>identified</strong> by holding the mouse over any point in the map (provided <code>glyphs: itemlabels</code> is checked).</p>
+<p>Alternatively, the filled circle <code>glyph</code> for any city in the map can be replaced by the name of the city (since the last <code>R</code> statement above added these to the map). To <strong>change the glyph</strong>, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select <code>city names</code> from the glyph menu (next to a <code>set</code> button). Clicking on the <code>set</code> button will change the glyph of all selected cities to a text string of their name. The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.</p>
+<p>Note the map may be <strong>zoomed</strong> in on using scrolling and <strong>panned</strong> over directly on the map. Alternatively, the <strong>world view</strong> in the loon inspector may be used in the same way – dragging the scaled box around can be especially convenient. To get the map back to its original position and scale, click on the <code>scale to world</code> button in the <code>Plot</code> section of the loon inspector.</p>
+<p>The map can be hidden (or removed). It is a <strong>layer</strong> of the scatterplot. Clicking on the <code>Layers</code> tab will provide access to this functionality. Clicking on the <code>Analysis</code> tab will return the inspector to the plot interactions typically used in an exploratory analysis.</p>
+<p>While the above map is sufficient for the analysis it is sometimed of interest to have much more complex maps (or layers of any sort). In the next subsection a more detailed map (with lakes) is constructed using many layers. It provides an introduction to the layering facilities in loon. It can be skipped, or every <code>R</code> section can be evaluated in order to get a more sophisticated map.</p>
+<p>The analysis can proceed with or without the next subsection.</p>
+<div id="more-sophisticated-maps---multiple-layers" class="section level3">
+<h3>More sophisticated maps - multiple layers</h3>
+<p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lakecol &lt;-<span class="st"> &quot;steelblue&quot;</span>
+
+<span class="co"># Get the coordinates from the lakes database in the maps package.</span>
+<span class="co"># All lakes are recorded by name, so you will need to know which</span>
+<span class="co"># are in Canada.  You either know the names, or you might have to</span>
+<span class="co"># use trial and error, plotting the lakes and seeing which are inside</span>
+<span class="co"># and which are outside the country.  If the database changes,</span>
+<span class="co"># the indices below will need updating.</span>
+<span class="co">#  </span>
+<span class="co"># First, we'll deal with the Great Lakes:</span>
+great.lakes &lt;-<span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]
+
+
+<span class="co"># We can layer these directly</span>
+great.lakes.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                              <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, great.lakes, 
+                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                              <span class="dt">label =</span> <span class="st">&quot;Great Lakes Water&quot;</span>,
+                              <span class="dt">color =</span> lakecol,
+                              <span class="dt">index=</span><span class="st">&quot;end&quot;</span>    <span class="co"># Add the layer at the end so we know</span>
+                                             <span class="co"># where it is</span>
+                              )
+
+<span class="co"># Move the lake layer up to be above the land map</span>
+<span class="kw">l_layer_raise</span>(p_map, great.lakes.layer)</code></pre></div>
+<p>We can also add the islands back in. This is a good example of grouping different layers together into a single ``group layer’’.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="co"># Great Lakes islands</span>
+<span class="co">#</span>
+<span class="co"># Unnamed islands are identified by a number added to the lake name</span>
+<span class="co"># in which they appear</span>
+
+uscolor &lt;-<span class="st"> &quot;grey50&quot;</span>
+great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, 
+                                                 <span class="dv">45</span><span class="op">:</span><span class="dv">52</span>,<span class="dv">54</span>,
+                                                 <span class="dv">55</span>, <span class="dv">59</span>,
+                                                 <span class="dv">61</span><span class="op">:</span><span class="dv">63</span>)]
+
+great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, 
+                                                 <span class="dv">53</span>,<span class="dv">56</span><span class="op">:</span><span class="dv">58</span>,
+                                                 <span class="dv">60</span>, <span class="dv">64</span><span class="op">:</span><span class="dv">66</span>)]
+
+
+<span class="co"># Now for the islands</span>
+great.lakes.islands.US.layer &lt;-<span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           great.lakes.islands.US, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">&quot;Great Lakes Islands (US)&quot;</span>,
+                                       <span class="dt">color=</span> uscolor,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+great.lakes.islands.CA.layer &lt;-<span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           great.lakes.islands.CA,
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">&quot;Great Lakes Islands (CA)&quot;</span>,
+                                       <span class="dt">color =</span> landcol,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+<span class="co"># We can put the two sets of islands into a group; first create the group</span>
+great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                          <span class="dt">label=</span><span class="st">&quot;Great Lakes Islands&quot;</span>, 
+                                          <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Because it is immediately below the two sets of islands</span>
+<span class="co"># (as seen in the &quot;Layers&quot; inspector)</span>
+<span class="co"># we drop the islands into the group by demoting them</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.CA.layer)
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.US.layer)
+
+<span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="kw">l_layer_raise</span>(p_map, great.lakes.islands.group)</code></pre></div>
+<p>And we can nest groups as well. Here we put the Great Lakes and its islands together into a single group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+<span class="co"># Create a group layer for the great lakes</span>
+<span class="co"># </span>
+<span class="co"># First create the group layer</span>
+great.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                   <span class="dt">label=</span><span class="st">&quot;Great Lakes&quot;</span>, 
+                                   <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+
+<span class="co"># Move the group up to be next to the great.lakes.layer</span>
+<span class="kw">l_layer_raise</span>(p_map, great.lakes.group)
+
+<span class="co"># Demoting the great.lakes.layer puts it inside the group</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.layer)
+
+<span class="co"># Now the islands are above the group and can be demoted</span>
+<span class="co"># to become part of it.</span>
+<span class="kw">l_layer_demote</span>(p_map, great.lakes.islands.group)</code></pre></div>
+<p>For completion we add the remaining lakes and islands.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now the same for the boundary lakes.</span>
+other.boundary.lakes &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                            <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                            <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">33</span>,<span class="dv">80</span>)]
+
+other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">81</span>)] 
+
+<span class="co"># Because we know we are going to group these, we can create the group</span>
+<span class="co"># first.</span>
+<span class="co"># </span>
+boundary.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, 
+                                      <span class="dt">label=</span><span class="st">&quot;Boundary Lakes&quot;</span>, 
+                                      <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+
+<span class="co"># We now add the layers directly to that group using the &quot;parent&quot; </span>
+<span class="co"># argument at creation time.</span>
+<span class="co"># </span>
+<span class="co"># Create the islands first this time.</span>
+other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                                       <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                           other.boundary.lakes, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                       <span class="dt">label =</span> <span class="st">&quot;Other Boundary Lakes Water&quot;</span>,
+                                       <span class="dt">color =</span> lakecol,
+                                       <span class="dt">parent =</span> boundary.lakes.group,
+                                       <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                       )
+
+other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw">l_layer</span>(p_map,
+                                               <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                                   other.boundary.lakes.islands,
+                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                               <span class="dt">label =</span> <span class="st">&quot;Other Boundary Lakes Islands&quot;</span>,
+                                               <span class="dt">color =</span> uscolor,
+                                               <span class="dt">parent =</span> boundary.lakes.group,
+                                               <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                               )
+
+<span class="co"># Move the group layer up</span>
+<span class="kw">l_layer_raise</span>(p_map, boundary.lakes.group)</code></pre></div>
+<p>And finally, all of the large interior lakes and their islands</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">interior.lakes &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                      <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, 
+                                         <span class="dv">68</span><span class="op">:</span><span class="dv">73</span>, 
+                                         <span class="dv">82</span>, <span class="dv">85</span>)]
+
+interior.lakes.islands &lt;-<span class="st"> </span><span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw">c</span>(<span class="dv">23</span><span class="op">:</span><span class="dv">24</span>, 
+                                                 <span class="dv">26</span>, <span class="dv">74</span>, 
+                                                 <span class="dv">83</span><span class="op">:</span><span class="dv">84</span>)]
+<span class="co"># First the group layer</span>
+interior.lakes.group &lt;-<span class="st"> </span><span class="kw">l_layer_group</span>(p_map, <span class="dt">label=</span><span class="st">&quot;Interior Lakes&quot;</span>, <span class="dt">index=</span><span class="st">&quot;end&quot;</span>)
+<span class="co"># Create the interior islands first</span>
+interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map,
+                                        <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>,
+                                            interior.lakes.islands,
+                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                        <span class="dt">label =</span> <span class="st">&quot;Interior lakes islands&quot;</span>,
+                                        <span class="dt">color =</span> landcol,
+                                        <span class="dt">parent =</span> interior.lakes.group,
+                                        <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                        )
+
+interior.lakes.layer &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map,
+                                <span class="kw">map</span>(<span class="st">&quot;lakes&quot;</span>, 
+                                    interior.lakes, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                <span class="dt">label =</span> <span class="st">&quot;Interior lakes&quot;</span>,
+                                <span class="dt">color =</span> lakecol,
+                                <span class="dt">parent =</span> interior.lakes.group,
+                                <span class="dt">index=</span><span class="st">&quot;end&quot;</span>
+                                )
+
+<span class="co"># And move the group layer up  </span>
+<span class="kw">l_layer_raise</span>(p_map, interior.lakes.group)</code></pre></div>
+<p>Now we have a more detailed map.</p>
+</div>
+</div>
+<div id="minority-distributions-within-city" class="section level2">
+<h2>Minority distributions within city</h2>
+<p>There are several different visible minorities in the data set. It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.</p>
+<p>To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Back to the raw data and just rename variables</span>
+minority_star &lt;-<span class="st"> </span>minority[, <span class="kw">c</span>(
+    <span class="st">&quot;Southeast.Asian&quot;</span>, <span class="st">&quot;Chinese&quot;</span>, <span class="st">&quot;Japanese&quot;</span>, <span class="st">&quot;South.Asian&quot;</span>, 
+    <span class="st">&quot;Visible.minority.not.included.elsewhere&quot;</span>,
+     <span class="st">&quot;Black&quot;</span>, <span class="st">&quot;Multiple.visible.minority&quot;</span>, <span class="st">&quot;Filipino&quot;</span>,
+    <span class="st">&quot;Arab&quot;</span>, <span class="st">&quot;Korean&quot;</span>, <span class="st">&quot;Latin.American&quot;</span>)]
+
+<span class="kw">names</span>(minority_star) &lt;-<span class="st"> </span><span class="kw">c</span>(
+    <span class="st">&quot;SE.Asian&quot;</span>, <span class="st">&quot;Chinese&quot;</span>, <span class="st">&quot;Japanese&quot;</span>, <span class="st">&quot;S.Asian&quot;</span>, <span class="st">&quot;Other&quot;</span>,
+    <span class="st">&quot;Black&quot;</span>, <span class="st">&quot;Multiple&quot;</span>, <span class="st">&quot;Filipino&quot;</span>, <span class="st">&quot;Arab&quot;</span>, <span class="st">&quot;Korean&quot;</span>, <span class="st">&quot;Latino&quot;</span>
+)</code></pre></div>
+<p>As the following few rows of this dataset show:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">SE.Asian</th>
+<th align="right">Chinese</th>
+<th align="right">Japanese</th>
+<th align="right">S.Asian</th>
+<th align="right">Other</th>
+<th align="right">Black</th>
+<th align="right">Multiple</th>
+<th align="right">Filipino</th>
+<th align="right">Arab</th>
+<th align="right">Korean</th>
+<th align="right">Latino</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>St. John’s</td>
+<td align="right">55</td>
+<td align="right">990</td>
+<td align="right">65</td>
+<td align="right">890</td>
+<td align="right">40</td>
+<td align="right">620</td>
+<td align="right">25</td>
+<td align="right">155</td>
+<td align="right">190</td>
+<td align="right">45</td>
+<td align="right">320</td>
+</tr>
+<tr class="even">
+<td>Halifax</td>
+<td align="right">655</td>
+<td align="right">3100</td>
+<td align="right">410</td>
+<td align="right">2900</td>
+<td align="right">180</td>
+<td align="right">13270</td>
+<td align="right">780</td>
+<td align="right">530</td>
+<td align="right">3840</td>
+<td align="right">620</td>
+<td align="right">690</td>
+</tr>
+<tr class="odd">
+<td>Moncton</td>
+<td align="right">65</td>
+<td align="right">295</td>
+<td align="right">10</td>
+<td align="right">350</td>
+<td align="right">10</td>
+<td align="right">1035</td>
+<td align="right">175</td>
+<td align="right">100</td>
+<td align="right">165</td>
+<td align="right">65</td>
+<td align="right">95</td>
+</tr>
+<tr class="even">
+<td>Saint John</td>
+<td align="right">60</td>
+<td align="right">975</td>
+<td align="right">10</td>
+<td align="right">485</td>
+<td align="right">30</td>
+<td align="right">1250</td>
+<td align="right">60</td>
+<td align="right">205</td>
+<td align="right">125</td>
+<td align="right">120</td>
+<td align="right">210</td>
+</tr>
+<tr class="odd">
+<td>Saguenay</td>
+<td align="right">55</td>
+<td align="right">295</td>
+<td align="right">0</td>
+<td align="right">45</td>
+<td align="right">10</td>
+<td align="right">330</td>
+<td align="right">10</td>
+<td align="right">50</td>
+<td align="right">195</td>
+<td align="right">15</td>
+<td align="right">280</td>
+</tr>
+<tr class="even">
+<td>Quebec</td>
+<td align="right">1615</td>
+<td align="right">1855</td>
+<td align="right">170</td>
+<td align="right">535</td>
+<td align="right">225</td>
+<td align="right">5080</td>
+<td align="right">235</td>
+<td align="right">120</td>
+<td align="right">2800</td>
+<td align="right">165</td>
+<td align="right">3150</td>
+</tr>
+</tbody>
+</table>
+<p>each city here has values for each of its 11 visible minority populations.</p>
+<div id="pairs-plot" class="section level3">
+<h3>Pairs plot</h3>
+<p>It would be nice to be able to see all of these values at once to compare the cities. One possibility would be a scatterplot matrix such as that provided by the <code>pairs(...)</code> function in <code>R</code>.</p>
+<p>In <code>loon</code> there is an analogous function <code>l_pairs(...)</code> that produces an interactive scatterplot matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loon's scatterplot matrix</span>
+<span class="co"># </span>
+<span class="kw">l_pairs</span>(minority_star, <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>)</code></pre></div>
+<p>Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)</p>
+<p>While a scatterplot matrix shows all pairs of plots and so reveals some of the multidimensional structure of the data, it does not seem to be the most useful visual representation for the purposes here.</p>
+<p>In a scatterplot matrix the focus is on the points (cities) within each pair of variates. The matrix arrangement and dynamic linking provides some means of connecting the cities across the variates.</p>
+<p>In contrast, the focus we would like to have here is to compare the variate values within each city. To that end, the Cartesian coordinate system and matrix arrangement of a scatterplot matrix is not well-suited.</p>
+</div>
+<div id="serial-axes" class="section level3">
+<h3>Serial axes</h3>
+<p>Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially. This allows all of the axes (or a great many of them) to appear in the same plot. Each city, rather than appearing as a point now appears as a series of connected line segments, where each segment connects the values of a city on neighbouring axes. Serial axes in parallel are called parallel coordinate plots and are constructed with the <code>l_serialaxes(...)</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                  <span class="dt">axesLayout=</span><span class="st">&quot;parallel&quot;</span>,
+                  <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                  <span class="dt">sequence=</span><span class="kw">names</span>(minority_star),
+                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                  <span class="dt">linewidth=</span><span class="dv">5</span>,
+                  <span class="dt">scaling =</span> <span class="st">&quot;variable&quot;</span>,
+                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                  <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>This plot shows all variates at once for each city; each city is a `<code>curve'' of connected line segments.  As with all other plots in</code>loon` the serial axes plot is interactive. Placing the mouse over any curve will reveal the city. Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.</p>
+<p>In axis is scaled from 0 to 1. In this case, the scaling is done within each variable. That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis; the city with the smallest population for that visible minority becomes 0, the lowest point on the axis.</p>
+<p>For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two).</p>
+<p>For this data, a more interesting serial axes layout is the <code>radial</code> layout. Select this in the loon inspector or from the command line execute</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">&quot;axesLayout&quot;</span>] &lt;-<span class="st"> &quot;radial&quot;</span></code></pre></div>
+<p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distibution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
+<p>These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using <code>long</code>.<br />
+First create a new scatterplot, then add serial axes as alternative glyphs for the points. To emphasize shape the glyphs are drawn filled in with <code>showArea=TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Produce grid of star glyphs</span>
+p_stars &lt;-<span class="st"> </span><span class="kw">with</span>(minority,
+                <span class="kw">l_plot</span>(<span class="kw">rank</span>(long), <span class="kw">rank</span>(long),
+                       <span class="dt">title =</span> <span class="st">&quot;&quot;</span>, 
+                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">xlabel =</span> <span class="st">&quot;&quot;</span>,
+                       <span class="dt">ylabel =</span> <span class="st">&quot;&quot;</span>,
+                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,
+                       <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                       <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))
+
+gstars &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">axesLayout =</span> <span class="st">&quot;radial&quot;</span>,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star),
+                                <span class="dt">scaling =</span> <span class="st">'variable'</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars</code></pre></div>
+<p>Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.</p>
+<p>The points could also be moved (temporarily) to a grid.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="kw">l_move_grid</span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)
+<span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span>
+p_stars[<span class="st">'swapAxes'</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw">l_zoom</span>(p_stars, .<span class="dv">9</span>)
+<span class="co">#</span></code></pre></div>
+<p>Optionally we could choose to add a continuous color change emphasizing the west to east directionality. There is a <code>col_numeric</code> function in the <code>scales</code> package that will effect a continuous change in color along a spectrum.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)
+west_east_cols &lt;-<span class="st"> </span>(<span class="kw">col_numeric</span>(<span class="kw">c</span>(<span class="st">&quot;firebrick&quot;</span>, 
+                                 <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;sienna&quot;</span>,
+                                 <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;steelblue&quot;</span>,
+                                 <span class="st">&quot;purple&quot;</span>),
+                               <span class="dt">domain =</span> <span class="ot">NULL</span>)
+                   )(minority<span class="op">$</span>long)
+
+<span class="co"># Just need to color the glyphs on one of the plots</span>
+<span class="co"># since they are all linked.</span>
+s[<span class="st">'color'</span>] &lt;-<span class="st"> </span>west_east_cols</code></pre></div>
+<p>Adding the glyphs to the map gives a precise geographic location for each city.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some glyphs to the map,</span>
+<span class="co"># scale values within variates</span>
+so &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                             <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star),
+                             <span class="dt">scaling =</span> <span class="st">'variable'</span>,
+                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                             <span class="dt">label=</span><span class="st">&quot;stars&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so</code></pre></div>
+<p>Unfortunately the three large cities dominate in each of these displays. All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.</p>
+<p>A better choice woule be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+gstars[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+so[<span class="st">&quot;scaling&quot;</span>] &lt;-<span class="st"> &quot;observation&quot;</span>
+
+<span class="co"># Double the size of the glyphs on the map.</span>
+p_map[<span class="st">&quot;size&quot;</span>] &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_map[<span class="st">&quot;size&quot;</span>] </code></pre></div>
+<p>Looking over the map a number of interesting observations can be made. For example, regional similarities are easily seen. From the west, Victoria and Vancouver have a very similar visible minority distribution with a large Chinese percentage and then South Asian.</p>
+<p>The other two cities in British Columbia are strikingly different. The visible minority population in Abbotsford-Mission is almost entirely South Asian; the other visible minorities are nearly zero by comparison. The glyph for Kelowna shows an unusually high proportion of Japanese in comparison to the other three cities to its west.</p>
+<p>Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina. The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg’s relatively large Filipino population. The proboscis of Winnipeg’s mosquito shaped glyph draws attention to its unusually large Filipino population.</p>
+<p>Note that this analysis is easily done using only three loon windows showing simultaneously. The first is the serial axes plot, which makes it easy to read off the contributions of each visible minority whenever any glyph is selected elsewhere. The second is the map of Canada, preferably zoomed in to magnify a small rectangular region. Placing the mouse over any glyph reveals the city. And third, the loon inspector. This is particularly handy if it is focused on the map for then the small rectangle in its <code>World View</code> may be dragged across the country to focus the Canada map on any small region.</p>
+<p>Continuing west to east, at the western head of Lake Superior (western most Great Lake) the province of Ontario begins and the glyph for Thunder Bay shows it to have an unusually large (relative) population of Japanese compared to other cities.</p>
+<p>As we move southeast into southern Ontario, some new glyph shapes and hence visible minority patterns emerge. For example, most southern Ontario cities are characterized by relatively high South Asian populations. Compared to the prairie provinces of Alberta, Saskatchewan, and Manitoba, Ontario cities (and cities east of Ontario) have a relatively large black minority. In southern Ontario, Windsor and London have an unusual large Arab population compared to their neighbours. London and St. Catharines have unusally large Latino populations. As with western cities, most Ontario cities have relatively large Chinese populations.</p>
+<p>This could be contrasted with cities in Quebec, for example, which have relatively low South Asian and Chinese populations. Saguenay is unusual in Quebec in having a relatively large Chines population. Instead, the unusually large populations in Quebec cities are the relatively large Arab and Latino populations.</p>
+<p>The maritime provinces of New Brunswick and Nova Scotia are unusual in having much larger black populations than other visible minorities though Saint John also has a relatively large Chines population. Moncton and Halifax look more alike. St. John’s in Newfoundland resembles the Toronto in its configuration of visible minorities.</p>
+</div>
+<div id="manually-moving-points" class="section level3">
+<h3>Manually moving points</h3>
+<p>An interesting exercise would be to move those glyphs which most resemble each other closer together. This is best effected in the plot without the map where we had already placed the glyphs on a grid.</p>
+<p>First make sure we put them on a grid to start:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_move_grid</span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)</code></pre></div>
+<p>Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph. Many points can be selected at once moved by additionally holding the shift key down. In loon the shift key always indicates multiple items. In this way we can visually cluster the cities according to glyph shape.</p>
+<p><strong>Exercise:</strong> Try it. Visually cluster the glyphs. Which cities are most alike? Do the clusters correspond to spatial map regions? Can the glyphs be ordered in some way? Does this match any spatial map ordering?</p>
+</div>
+<div id="ordering-the-axes" class="section level3">
+<h3>Ordering the axes</h3>
+<p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construvt a pairwise ordering. We consider a few of them here.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Axis ordering methods can be found</span>
+<span class="co"># in the pairwise coordinate visualization package</span>
+<span class="co"># called PairViz</span>
+<span class="kw">library</span>(PairViz)</code></pre></div>
+<p>Perhaps the first thing to consider would be some measure of each pair of visible minorities. For example, suppose we consider the values for each visible minority proportion over all <span class="math inline">\(33\)</span> cities as a single <span class="math inline">\(33\)</span>-dimensional vector. The distance between these vectors will give a measure of how alike the relative population of visible minorities are across all <span class="math inline">\(33\)</span> cities.</p>
+<p>We can calculate the matrix of distances as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First transform minority_star to within city percentages.</span>
+minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">*</span>minority_star<span class="op">/</span>minority[,<span class="st">&quot;Total.population&quot;</span>]
+
+<span class="co"># Each variate is now treated as a position in the</span>
+<span class="co"># space of the cities.  We calculate the distances</span>
+<span class="co"># between the variates.</span>
+<span class="co"># </span>
+VarDistance &lt;-<span class="st"> </span><span class="kw">dist</span>(<span class="kw">t</span>(minority_star_percent))</code></pre></div>
+<p>Now these distances can be used to try to find a possibly better ordering of the minorities in a serial axes plot. We will use a solution to a travelling salesman problem (with unintended irony) to order the visible minorities by finding the shortest (or longest) distances between the minorities (and not the cities).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will use these distances in a travelling</span>
+<span class="co"># salesman problem that chooses an order to have</span>
+<span class="co"># minimal distances. </span>
+<span class="co"># The appropriate function from PairViz is order_tsp(...)</span>
+<span class="co"># </span>
+<span class="co"># Placing minorities that are close to each other</span>
+<span class="co"># (in the above distance) beside each other should</span>
+<span class="co"># result in somewhat more convex shaped glyphs.</span>
+<span class="co"># </span>
+o_near &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw">names</span>(minority_star_percent)[o_near]</code></pre></div>
+<pre><code>##  [1] &quot;Multiple&quot; &quot;Korean&quot;   &quot;Japanese&quot; &quot;Other&quot;    &quot;Arab&quot;     &quot;Latino&quot;  
+##  [7] &quot;SE.Asian&quot; &quot;Black&quot;    &quot;S.Asian&quot;  &quot;Chinese&quot;  &quot;Filipino&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
+<span class="co"># other should produce less convex shaped glyphs.</span>
+<span class="co"># </span>
+o_far &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(<span class="op">-</span>VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw">names</span>(minority_star_percent)[o_far]</code></pre></div>
+<pre><code>##  [1] &quot;Japanese&quot; &quot;S.Asian&quot;  &quot;Other&quot;    &quot;Chinese&quot;  &quot;SE.Asian&quot; &quot;Black&quot;   
+##  [7] &quot;Korean&quot;   &quot;Latino&quot;   &quot;Multiple&quot; &quot;Filipino&quot; &quot;Arab&quot;</code></pre>
+<p>We will try both of these orderings and add them to existing plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s_close &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                        <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                        <span class="dt">sequence=</span><span class="kw">names</span>(minority_star)[o_near],
+                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                        <span class="dt">linewidth=</span><span class="dv">5</span>,
+                        <span class="dt">scaling =</span> <span class="st">&quot;observation&quot;</span>,
+                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                        <span class="dt">title=</span><span class="st">&quot;Nearest minority order&quot;</span>,
+                        <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)
+
+s_far &lt;-<span class="st"> </span><span class="kw">l_serialaxes</span>(<span class="dt">data=</span>minority_star, 
+                      <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                      <span class="dt">sequence=</span><span class="kw">names</span>(minority_star)[o_far],
+                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                      <span class="dt">linewidth=</span><span class="dv">5</span>,
+                      <span class="dt">scaling =</span> <span class="st">&quot;observation&quot;</span>,
+                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                      <span class="dt">title=</span><span class="st">&quot;Farthest minority order&quot;</span>,
+                      <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority), 
+                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>Add the glyphs to the grid plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gstars_near &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_near],
+                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                <span class="dt">label =</span> <span class="st">&quot;Nearest&quot;</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_near
+
+gstars_far &lt;-<span class="kw">l_glyph_add_serialaxes</span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_far],
+                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                <span class="dt">label =</span> <span class="st">&quot;Farthest&quot;</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_far</code></pre></div>
+<p>And now on the map:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add  glyphs to the map</span>
+so_near &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                                  <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_near],
+                                  <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                  <span class="dt">label=</span><span class="st">&quot;Nearest&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near
+
+so_far &lt;-<span class="st"> </span><span class="kw">l_glyph_add_serialaxes</span>(p_map, <span class="dt">data=</span>minority_star,
+                                 <span class="dt">sequence =</span> <span class="kw">names</span>(minority_star)[o_far],
+                                 <span class="dt">scaling =</span> <span class="st">'observation'</span>,
+                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                 <span class="dt">label=</span><span class="st">&quot;Farthest&quot;</span>)
+p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near</code></pre></div>
+<p><strong>Exercise:</strong> Try switching to any of these alternatives and see whether your clustering choices change. Which is easier? Convex or non-convex?</p>
+<p>The <code>PairViz</code> package also offers a couple of means of ensuring all variates appear as a pair. This is usually more helpful for serial axes that are parallel than radial. These include the following</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">o_greedy &lt;-<span class="st"> </span><span class="kw">eulerian</span>(VarDistance)
+o_balanced &lt;-<span class="st"> </span><span class="kw">weighted_hpaths</span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p><strong>Exercise:</strong> Try these and determine the difference between them.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
