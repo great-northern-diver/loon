@@ -277,47 +277,31 @@ loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
     x <- glyph_info$x
     y <- glyph_info$y
     
-    gTree(
-        vp = viewport(x = x, y = y),
-        children = 
-            gList(
-                
-                if(showArea){
-                    polygonGrob(x = poly_x, 
-                                y = poly_y,
-                                gp = gpar(
-                                    fill = color, 
-                                    col =  color, 
-                                    lwd = linewidth
-                                ), 
-                                vp = viewport(x = 0, y = 0, 
-                                              width = 2 * as_r_polygonGlyph_size(size), 
-                                              height = 2 * as_r_polygonGlyph_size(size)),
-                                default.units = "mm"
+    if(showArea){
+        polygonGrob(x = x + unit(poly_x, "mm"),  
+                    y = y + unit(poly_y, "mm"),
+                    gp = gpar(
+                        fill = color, 
+                        col =  color, 
+                        lwd = linewidth
                     )
-                } else {
-                    polylineGrob(x = c(poly_x, poly_x[1]), 
-                                 y = c(poly_y, poly_y[1]),
-                                 gp = gpar(
-                                     fill = color, 
-                                     col =  color, 
-                                     lwd = linewidth
-                                 ), 
-                                 vp = viewport(x = 0, y = 0, 
-                                               width = 2 * as_r_polygonGlyph_size(size), 
-                                               height = 2 * as_r_polygonGlyph_size(size)),
-                                 default.units = "mm"
-                    )
-                }
-                
-            )
-    )
+        )
+    } else {
+        polylineGrob(x = x + unit(c(poly_x, poly_x[1]), "mm"), 
+                     y = y + unit(c(poly_y, poly_y[1]), "mm"),
+                     gp = gpar(
+                         fill = color, 
+                         col =  color, 
+                         lwd = linewidth
+                     )
+        )
+    }
 }
 
 as_r_polygonGlyph_size <- function(size){
     if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- size
+        size <- size/1.25
         size[size < 0.01] <- 0.01 
         size
     }
@@ -350,83 +334,70 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     scaledData <- glyph_info$scaleInfo
     dimension <- dim(scaledData)[2]
     
-    scaleX <- diff(c(widget['panX'], widget['panX'] + widget['deltaX']/widget['zoomX'])) * as_r_serialaxesGlyph_size(size)
-    scaleY <- diff(c(widget['panY'], widget['panY'] + widget['deltaY']/widget['zoomY'])) * as_r_serialaxesGlyph_size(size)
     # position
-    xpos <- as.numeric(glyph_info$x)
-    ypos <- as.numeric(glyph_info$y)
+    xpos <- glyph_info$x
+    ypos <- glyph_info$y
     
     if(axesLayout == "parallel"){
+        scaleX <- as_r_serialaxesGlyph_size(size, "x", "parallel")
+        scaleY <- as_r_serialaxesGlyph_size(size, "y", "parallel")
+        
         xaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
         yaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
-        x <- xpos + xaxis
-        y <- ypos + yaxis
         
-        gTree ( children = gList(
+        gTree (children = gList(
             if(showEnclosing) {
-                polylineGrob(x= (c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX + xpos,
-                             y= (c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY + ypos, 
+                polylineGrob(x= unit((c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX, "mm") + xpos,
+                             y= unit((c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY, "mm") + ypos, 
                              id=rep(1:4, 2),
-                             gp=gpar(col = bboxColor), 
-                             default.units = "native") 
-            } else NULL ,
+                             gp=gpar(col = bboxColor)) 
+            },
             if(showAxes) {
-                polylineGrob(x = rep(x, each = 2), 
-                             y = rep(c(ypos - 0.5 * scaleY, 
-                                             ypos + 0.5 * scaleY), dimension),
+                polylineGrob(x = rep(xpos + unit(xaxis, "mm"), each = 2), 
+                             y = rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), dimension) + ypos,
                              id = rep(1:dimension, each = 2), 
-                             gp = gpar(col = axesColor), 
-                             default.units = "native")
-            } else NULL ,
+                             gp = gpar(col = axesColor))
+            },
             if(showArea) {
-                polygonGrob(x = c(x, rev(x)), 
-                            y = c(y, rep(ypos - 0.5 * scaleY, dimension)), 
-                            gp = gpar(fill = color, col = NA), 
-                            default.units = "native")
+                polygonGrob(x = unit(c(xaxis, rev(xaxis)), "mm") + xpos,
+                            y = unit(c(yaxis, rep(-0.5 * scaleY, dimension)), "mm") + ypos, 
+                            gp = gpar(fill = color, col = NA))
             } else {
-                linesGrob(x = x, 
-                          y = y, 
-                          gp = gpar(col = color), 
-                          default.units = "native")}
-        )
+                linesGrob(x = xpos + unit(xaxis, "mm"), 
+                          y = ypos + unit(yaxis, "mm"), 
+                          gp = gpar(col = color))})
         )
     } else {
+        scaleX <- as_r_serialaxesGlyph_size(size, "x", "radial")
+        scaleY <- as_r_serialaxesGlyph_size(size, "y", "radial")
+        
         angle <- seq(0, 2*pi, length.out = dimension + 1)[1:dimension]
         radialxais <- scaleX * scaledData[glyph_info$index,] * cos(angle)
         radialyais <- scaleY * scaledData[glyph_info$index,] * sin(angle)
         
-        x <- xpos + radialxais
-        y <- ypos + radialyais
-        
-        gTree ( children = gList( 
+        gTree(children = gList( 
             if(showArea) {
-                polygonGrob(x = c(x, x[1]), 
-                            y = c(y, y[1]), 
-                            gp = gpar(fill = color, col = NA), 
-                            default.units = "native")
+                polygonGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
+                            y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
+                            gp = gpar(fill = color, col = NA))
             } else {
-                linesGrob(x = c(x, x[1]), 
-                          y = c(y, y[1]), 
-                          gp = gpar(col = color), 
-                          default.units = "native")
+                linesGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
+                          y = ypos + unit(c(radialyais, radialyais[1]), "mm"), 
+                          gp = gpar(col = color))
             },
             if(showEnclosing) {
-                polygonGrob(xpos + scaleX * cos(seq(0, 2*pi, length=101)), 
-                            ypos + scaleY * sin(seq(0, 2*pi, length=101)), 
-                            gp = gpar(fill = NA, col = bboxColor), 
-                            default.units = "native" )
-            } else NULL ,
+                polygonGrob(xpos + unit(scaleX * cos(seq(0, 2*pi, length=101)), "mm"), 
+                            ypos + unit(scaleY * sin(seq(0, 2*pi, length=101)), "mm"), 
+                            gp = gpar(fill = NA, col = bboxColor))
+            },
             if(showAxes) {
                 
-                polylineGrob( x = c(rep(xpos, dimension) ,xpos + scaleX * cos(angle)), 
-                              y = c(rep(ypos, dimension) ,ypos + scaleY * sin(angle)),
-                              id = rep(1:dimension, 2),
-                              gp = gpar(col =  axesColor), 
-                              default.units = "native")
-            } else NULL
-        ) 
+                polylineGrob(x = unit(c(rep(0, dimension) ,scaleX * cos(angle)), "mm") + xpos, 
+                             y = unit(c(rep(0, dimension) ,scaleY * sin(angle)), "mm") + ypos, 
+                             id = rep(1:dimension, 2),
+                             gp = gpar(col =  axesColor))
+            }) 
         )
-        
     }
 }
 
@@ -487,10 +458,18 @@ get_glyph_scale_info <- function(widget){
 }
 
 
-as_r_serialaxesGlyph_size <- function(size){
+as_r_serialaxesGlyph_size <- function(size, coord, axesLayout){
     if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- sqrt(size) /30
+        if (axesLayout == "radial") {
+            size <- sqrt(size) * 5
+        } else if (axesLayout == "parallel"){
+            if (coord == "x") {
+                size <- sqrt(size) * 6.4
+            } else if (coord == "y"){
+                size <- sqrt(size) * 3.2
+            } else size <- NA
+        } else size <- NA
         size[size == 0] <- 0.01
     }
     size
