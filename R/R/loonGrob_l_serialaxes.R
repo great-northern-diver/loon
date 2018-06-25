@@ -169,8 +169,13 @@ loonGrob.l_serialaxes <- function(widget, name = NULL, gp = NULL, vp = NULL){
         
     } else if (widget['axesLayout'] == "radial") {
         
-        xlim <- ylim <- c(-0.2, 1.2) 
+        xlim <- ylim <- c(-0.2, 1.2)
         angle <- seq(0, 2*pi, length.out = len.xaxis + 1)[1:len.xaxis]
+        
+        xpos <- unit(0.5, "native")
+        ypos <- unit(0.5, "native")
+        # arbitrary choice
+        scaling <- 2
         if( is.null(scaledActiveData) ) radialGrob <- grob(name = name, gp = gp)
         else {
             
@@ -178,19 +183,19 @@ loonGrob.l_serialaxes <- function(widget, name = NULL, gp = NULL, vp = NULL){
                 children = do.call(
                     gList,
                     lapply(seq_len(n), function(i){
-                        radialxais <- 0.5 + 0.5 * scaledActiveData[i,] * cos(angle)
-                        radialyais <- 0.5 + 0.5 * scaledActiveData[i,] * sin(angle)
+                        radialxais <- scaling * scaledActiveData[i,] * cos(angle)
+                        radialyais <- scaling * scaledActiveData[i,] * sin(angle)
                         if(showArea){
                             polygonGrob(
-                                x = unit(  c(radialxais, radialxais[1]), "native"), 
-                                y = unit(  c(radialyais, radialyais[1]), "native"),
+                                x = unit(c(radialxais, radialxais[1]), "in") + xpos, 
+                                y = unit(c(radialyais, radialyais[1]), "in") + ypos,
                                 gp = gpar(fill = activeColor[i], 
                                           col = NA)
                             )
                         } else {
                             linesGrob(
-                                x = unit( c(radialxais,  radialxais[1]), "native"), 
-                                y = unit( c(radialyais,  radialyais[1]), "native"),
+                                x = unit(c(radialxais, radialxais[1]), "in") + xpos, 
+                                y = unit(c(radialyais, radialyais[1]), "in") + ypos,
                                 gp = gpar(col = activeColor[i],
                                           lwd = activeLinewidth[i])
                             )
@@ -206,16 +211,18 @@ loonGrob.l_serialaxes <- function(widget, name = NULL, gp = NULL, vp = NULL){
                 if (showGuides) {
                     gTree(children = gList(
                         rectGrob(gp = gpar(col = NA, fill = "#EBEBEB" )),
-                        polygonGrob(unit( 0.5 + 0.5 * cos(seq(0, 2*pi, length=101)), "native"), 
-                                    unit( 0.5 + 0.5 * sin(seq(0, 2*pi, length=101)), "native"), 
+                        polygonGrob(unit(scaling * cos(seq(0, 2*pi, length=101)), "in") + xpos, 
+                                    unit(scaling * sin(seq(0, 2*pi, length=101)), "in") + ypos, 
                                     gp = gpar(fill = NA, col = "white",
-                                              lwd = 2) ),
+                                              lwd = 2)
+                                    ),
                         if(showAxes){
                             
-                            polylineGrob( x = unit( c(rep(0.5, len.xaxis) ,0.5 + 0.5 * cos(angle)), "native" ), 
-                                          y = unit( c(rep(0.5, len.xaxis) ,0.5 + 0.5 * sin(angle)), "native" ),
+                            polylineGrob( x = unit(c(rep(0, len.xaxis) ,scaling * cos(angle)), "in") + xpos, 
+                                          y = unit(c(rep(0, len.xaxis) ,scaling * sin(angle)), "in") + ypos,
                                           id = rep(1:len.xaxis, 2),
-                                          gp = gpar(col =  "white", lwd = 2))
+                                          gp = gpar(col =  "white", lwd = 2)
+                                          )
                         }
                     ),
                     name = "guide")
@@ -223,8 +230,8 @@ loonGrob.l_serialaxes <- function(widget, name = NULL, gp = NULL, vp = NULL){
                 } else {
                     if(showAxes){
                         
-                        polylineGrob( x = unit( c(rep(0.5, len.xaxis) ,0.5 + 0.5 * cos(angle)), "native" ), 
-                                      y = unit( c(rep(0.5, len.xaxis) ,0.5 + 0.5 * sin(angle)), "native" ),
+                        polylineGrob( x = unit(c(rep(0, len.xaxis) ,scaling * cos(angle)), "in") + xpos, 
+                                      y = unit(c(rep(0, len.xaxis) ,scaling * sin(angle)), "in") + ypos,
                                       id = rep(1:len.xaxis, 2),
                                       gp = gpar(col =  "black", lwd = 2), name = "guide")
                         
@@ -244,8 +251,8 @@ loonGrob.l_serialaxes <- function(widget, name = NULL, gp = NULL, vp = NULL){
                         children =    do.call(
                             gList, 
                             lapply(1:(len.xaxis), function(i) {
-                                textGrob(seqName[i], x = unit( 0.5 +  0.545 * cos(angle[i]), "native"), 
-                                         y = unit( 0.5 + 0.545 * sin(angle[i] ), "native"),
+                                textGrob(seqName[i], x = unit((scaling + 0.5) * cos(angle[i]), "in") + xpos, 
+                                         y = unit((scaling + 0.5) * sin(angle[i]), "in") + ypos,
                                          gp = gpar(fontsize = 9), vjust = .5)
                             })), 
                         name = "axes labels"
