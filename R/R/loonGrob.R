@@ -208,7 +208,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         yaxis <- grid.pretty(ylim)
                         len.yaxis <- length(yaxis)
                         gTree(children = gList(
-                            rectGrob(gp = gpar(col = border, 
+                            rectGrob(gp = gpar(col = NA, 
                                                fill = as_hex6color(widget['guidesBackground']) )),
                             do.call(
                                 gList, 
