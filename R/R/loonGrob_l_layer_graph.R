@@ -227,8 +227,13 @@ navPointsGrob <- function(activeNavigator, states, navigator, name, gp, vp){
     fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == T)})
     toId <- sapply(1:length(to), function(i){which(node %in% to[i] == T)})
     
+    sel_color <- as.character(l_getOption("select-color"))
+    if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
+        sel_color <- loon:::hex12tohex6(sel_color)
+    }
+    
     pointsGp <- if(length(activeNavigator) != 0) {
-        if(activeNavigator == navigator) gpar(fill = color, cex = 3.5, lwd = 4, col = "magenta") 
+        if(activeNavigator == navigator) gpar(fill = color, cex = 3.5, lwd = 4, col = sel_color) 
         else gpar(fill = color, cex = 3.5)
     } else gpar(fill = color, cex = 3.5)
     
