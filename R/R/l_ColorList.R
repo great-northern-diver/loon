@@ -120,7 +120,7 @@ loon_palette <- function(n) {
 # 
 # @param x a vector with 12digit hexcolors
 #    
-# @details Function throws a warning if the conversion looses information. The
+# @details Function throws a warning if the conversion loses information. The
 #   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
 #   12 digit hexadecimal color representation.
 #       
@@ -137,6 +137,33 @@ hex12tohex6 <- function(x) {
     }
     col1
 }
+
+
+#' @title Convert color representations having an alpha transparency level to 6 digit color
+#'   representations
+#' 
+#' @description 
+#' 
+#' @param x a vector of colors (potentially) containing an alpha level
+#'    
+#' @details Colors in the standard tk used bt loon do not allow for alpha transparency.
+#' This function allows loon to use color palettes (e.g. \code{\link{l_setColorList}}) that
+#' produce colors with alpha transparency by simply using only the rgb.
+#'       
+#' @examples 
+#' x <- l_colRemoveAlpha(rainbow(6))
+#' # Also works with ordinary color string representations
+#' # since it just extracts the rgb values from the colors.
+#' x <- l_colRemoveAlpha(c("red", "blue", "green", "orange"))
+#' x
+#' 
+#' @export
+l_colRemoveAlpha <- function (col) {
+    if(missing(col)) stop("Please provide a vector of colours.")
+    rgb(t(col2rgb(col)), maxColorValue = 255)
+}
+
+
 
 #' @title Use custom colors for mapping nominal values to distinct colors
 #'   
@@ -287,10 +314,10 @@ l_getColorList <- function() {
 #'   
 #'   
 #' @param palette one of the following RColorBrewer palette name: Set1, Set2,
-#'   Set3, Pasetl1, Pastel2, Paired, Dark2, or Accent
+#'   Set3, Pastel1, Pastel2, Paired, Dark2, or Accent
 #'   
 #' @details Only the following palettes in ColorBrewer are available: Set1, 
-#'   Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples 
+#'   Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples 
 #'   below.
 #'   
 #' @export
@@ -306,8 +333,8 @@ l_getColorList <- function() {
 #' l_setColorList_ColorBrewer("Set1")
 #' p <- l_plot(iris)
 l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
-                                                    "Pastel1", "Pastel2", "Paired",
-                                                    "Dark2", "Accent")) {
+                                                 "Pastel1", "Pastel2", "Paired",
+                                                 "Dark2", "Accent")) {
     palette <- match.arg(palette)
     tcl('::loon::setColorList', 'ColorBrewer', palette)
     invisible()    
