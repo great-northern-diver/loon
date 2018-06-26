@@ -157,7 +157,7 @@ dict_with <- function(d, expr) {
 
 getBinData <- function(widget) {
     
-    loon:::l_throwErrorIfNotLoonWidget(widget)
+    l_throwErrorIfNotLoonWidget(widget)
     
     tclbins <- tcl_obj_varname(widget, "bins")
     

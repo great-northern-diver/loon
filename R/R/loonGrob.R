@@ -678,7 +678,7 @@ get_display_color <- function(color, selected) {
   sel_color <- as.character(l_getOption("select-color"))
   
   if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
-    sel_color <- loon:::hex12tohex6(sel_color)
+    sel_color <- hex12tohex6(sel_color)
   }
   
   color[selected] <- sel_color
