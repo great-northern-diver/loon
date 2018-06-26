@@ -8,6 +8,8 @@
 #' @return a grid grob
 #' 
 #' @import grid
+#' @import grDevices
+#' @import stats
 #' 
 #' @export
 #' 
@@ -816,7 +818,9 @@ get_layer_states <- function(target, omit = NULL) {
     states_info <- l_info_states(obj_states)
     state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
     
-    states <- setNames(lapply(state_names, function(state) l_cget(target, state)), state_names)
+    states <- setNames(lapply(state_names, 
+                              function(state) l_cget(target, state)), 
+                       state_names)
     
     # Add Coordinates
     if (!is(layer, "l_layer_group")) {
