@@ -42,9 +42,11 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' 
 #' @examples 
 #' 
-#' library(grid)
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
+#' 
 #' lgrob <- loonGrob(widget)
+#' 
+#' library(grid)
 #' grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
 #' grid.newpage(); grid.draw(lgrob)
 #' 
@@ -61,12 +63,12 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' grid.draw(lgrob)
 #' }
 #' 
-loonGrob <- function(target, ...) {
+loonGrob <- function(target, name = NULL, gp = NULL, vp = NULL) {
     UseMethod("loonGrob")
 }
 
 #' @export
-loonGrob.default <- function(target, ...) {
+loonGrob.default <- function(target, name = NULL, gp = NULL, vp = NULL) {
     stop("loonGrob.default no valid inheritance")
 }
     
@@ -93,7 +95,6 @@ loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
 loonGrob.l_graph <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
     interiorGrob <- loonGrob(rl, name = "l_graph_layers")  
-    
     gTree(children = gList(cartesian2dGrob(target, interiorGrob, name = "l_graph")),
           name = name, gp = gp, vp = vp)
 }
@@ -136,7 +137,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     border <- as_hex6color(widget['foreground'])
     
-    xylab_loc <- if (showScales) c(-3.5, -7.5) else c(-1, -1)
+    xylab_loc <- if (showScales) c(-3.5, -6.5) else c(-1, -1)
     
     # Fonts
     xlabelFont <- get_font_info_from_tk(l_getOption("font-xlabel"))
@@ -206,7 +207,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         yaxis <- grid.pretty(ylim)
                         len.yaxis <- length(yaxis)
                         gTree(children = gList(
-                            rectGrob(gp = gpar(col = border, 
+                            rectGrob(gp = gpar(col = NA, 
                                                fill = as_hex6color(widget['guidesBackground']) )),
                             do.call(
                                 gList, 
@@ -223,7 +224,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                 }))),
                             name = "guide")
                     } else {
-                        rectGrob(gp = gpar(col = border, 
+                        rectGrob(gp = gpar(col = NA, 
                                            fill = as_hex6color(widget['background'])),
                                  name = "bbox") },
                     if (showScales) {
@@ -243,12 +244,12 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         )  
                     } else NULL,
                     clipGrob(name = "clip"),
-                    interiorPlotGrob #,
-                    # # draw boundary
-                    # polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
-                    #              y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
-                    #              id=rep(1:4, 2),
-                    #              gp=gpar(col = border, lwd=1)) 
+                    interiorPlotGrob,
+                    # draw boundary
+                    polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
+                                 y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
+                                 id=rep(1:4, 2),
+                                 gp=gpar(col = border, lwd=1)) 
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
@@ -412,8 +413,9 @@ loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
                 textGrob(
                     label = states$text, x = states$x, y = states$y,
                     rot = states$angle,
-                    just = states$anchor, 
-                    gp=gpar(fontsize= states$size, col=states$color),
+                    just = states$anchor,
+                    gp=gpar(fontsize= as_r_text_size(states$size), 
+                            col=states$color),
                     name = "l_layer_text"
                 )
             ),
@@ -466,7 +468,7 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     if(length(x)!=0  && length(y) !=0 ){
         text  <- states$text[active]
-        size  <- states$size[active]
+        size  <- as_r_text_size(states$size[active])
         angle  <- states$angle[active]
         anchor  <- states$anchor[active]
         rotation  <- states$rot[active]
@@ -645,17 +647,23 @@ glyph_to_pch <- function(glyph) {
 
 
 # see optionDatabase.tcl
-as_r_point_size <- function(s) {
+as_r_point_size <- function(size) {
     
-    if (is.null(s)) {
-        NULL
-    } else {
+    if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- sqrt(s / 12)
+        size <- sqrt(size / 12)
         size[size < 0.1] <- 0.1   
-        
-        size
     }
+    size
+}
+
+as_r_text_size <- function(size){
+    if (is.numeric(size)) {
+        # trial and error to choose scale for size
+        size <- 1.5*size
+        size[size < 0.1] <- 0.1
+    }
+    size
 }
 
 pixels_2_lines <- function(x) {
@@ -676,25 +684,25 @@ get_display_color <- function(color, selected) {
 }
 
 get_font_info_from_tk <- function(tkFont) {
-    #try()
-    fontInfo <- as.character(.Tcl(paste("font actual", tkFont)))
-    fontInfo <- matrix(fontInfo, ncol = 2, byrow = TRUE)
     
-    fontFamily <- fontInfo[fontInfo[,1] == "-family", 2]
-    if (!fontFamily %in% c("Helvetica", "Courier", "TimesRoman")) fontFamily <- "Helvetica"
-    
-    fontSize <- fontInfo[fontInfo[,1] == "-size", 2]
-    if (fontSize <= 0) fontSize <- 8 
-    
-    fontFace <- fontInfo[fontInfo[,1] == "-weight", 2]
-    if (!fontFace %in% c("plain",
-                         "bold", 
-                         "italic", 
-                         "oblique", 
-                         "bold-italic")
-        ) fontFace <- "plain"
-    
-    list(family = fontFamily, face = fontFace, size = fontSize)
+  fontInfo <- as.character(.Tcl(paste("font actual", tkFont)))
+  fontInfo <- matrix(fontInfo, ncol = 2, byrow = TRUE)
+  
+  fontFamily <- fontInfo[fontInfo[,1] == "-family", 2]
+  if (!fontFamily %in% c("sans", "mono", "serif", "symbol")) fontFamily <- "sans"
+  
+  fontSize <- fontInfo[fontInfo[,1] == "-size", 2]
+  if (fontSize <= 0) fontSize <- 8 
+  
+  fontFace <- fontInfo[fontInfo[,1] == "-weight", 2]
+  if (!fontFace %in% c("plain",
+                       "bold", 
+                       "italic", 
+                       "oblique", 
+                       "bold-italic")
+  ) fontFace <- "plain"
+  
+  list(family = fontFamily, face = fontFace, size = fontSize)
 }
 
 as_hex6color <- function(color) {

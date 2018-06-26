@@ -5,7 +5,7 @@
 #'
 #' @inheritParams graphics::plot
 #' @param timeSeries It can be a \code{stl} object or \code{decomposed.ts} object
-#' @param pointsColour points colour
+#' @param pointsCol points colour
 #' @param size points size
 #' @param ylabel a length four vector, corresponding y label of original time seires, trend, seasonality
 #' and remainder
@@ -14,7 +14,7 @@
 #' @param title an overall title of loon plot
 #' @param tk_title provides an alternate interface to Tk's \code{wm title}
 #' @param linkingGroup link groups
-#' @param linesColour line colour
+#' @param linesCol line colour
 #' @param linewidth line width
 #'
 #'
@@ -23,9 +23,9 @@
 #'
 #'
 
-l_plotForts <- function(timeSeries, pointsColour, size, ylabel, xlabel,
+l_plotForts <- function(timeSeries, pointsCol, size, ylabel, xlabel,
                         title, tk_title, linkingGroup,
-                        linesColour, linewidth){
+                        linesCol, linewidth){
     
     if(class(timeSeries) == "decomposed.ts"){
         data <- timeSeries$x
@@ -86,31 +86,31 @@ l_plotForts <- function(timeSeries, pointsColour, size, ylabel, xlabel,
     tt <- tktoplevel()
     tktitle(tt) <- tk_title
     
-    p1 <- l_plot(parent = tt, x = xy.raw$x, y= xy.raw$y, color = pointsColour, size = size,
+    p1 <- l_plot(parent = tt, x = xy.raw$x, y= xy.raw$y, color = pointsCol, size = size,
                  ylabel = ylabel[1], xlabel = xlabel[1], title = title,
                  linkingGroup = linkingGroup, showScales=TRUE, showGuides=TRUE, showLabels=TRUE)
     
-    l1 <- l_layer_line(p1, x = xy.raw$x, y= xy.raw$y,  color= linesColour,
+    l1 <- l_layer_line(p1, x = xy.raw$x, y= xy.raw$y,  color= linesCol,
                        linewidth= linewidth, index="end")
     
-    p2 <- l_plot(parent = tt, x = xy.trend$x, y = xy.trend$y, color = pointsColour, size = size,
+    p2 <- l_plot(parent = tt, x = xy.trend$x, y = xy.trend$y, color = pointsCol, size = size,
                  ylabel = ylabel[2], xlabel = xlabel[2],
                  linkingGroup = linkingGroup, showScales=TRUE, showGuides=TRUE, showLabels=TRUE)
     
-    l2 <- l_layer_line(p2, x= xy.trend$x, y= xy.trend$y, color=linesColour,
+    l2 <- l_layer_line(p2, x= xy.trend$x, y= xy.trend$y, color=linesCol,
                        linewidth = linewidth,index="end")
     
-    p3 <- l_plot(parent = tt, x = xy.seasonal$x, y = xy.seasonal$y, color = pointsColour, size=size,
+    p3 <- l_plot(parent = tt, x = xy.seasonal$x, y = xy.seasonal$y, color = pointsCol, size=size,
                  ylabel = ylabel[3], xlabel = xlabel[3],
                  linkingGroup = linkingGroup, showScales=TRUE, showGuides=TRUE, showLabels=TRUE)
     
-    l3 <- l_layer_line(p3, x = xy.seasonal$x, y = xy.seasonal$y, color = linesColour,
+    l3 <- l_layer_line(p3, x = xy.seasonal$x, y = xy.seasonal$y, color = linesCol,
                        linewidth = linewidth , index="end")
     
-    p4 <- l_plot(parent = tt, x = xy.remainder$x, y = xy.remainder$y,color = pointsColour, size=size,
+    p4 <- l_plot(parent = tt, x = xy.remainder$x, y = xy.remainder$y,color = pointsCol, size=size,
                  ylabel = ylabel[4], xlabel=xlabel[4],
                  linkingGroup = linkingGroup, showScales=TRUE, showGuides=TRUE, showLabels=TRUE)
-    l4 <- l_layer_line(p4, x = xy.remainder$x, y = xy.remainder$y, color = linesColour,
+    l4 <- l_layer_line(p4, x = xy.remainder$x, y = xy.remainder$y, color = linesCol,
                        linewidth = linewidth, index="end")
     
     

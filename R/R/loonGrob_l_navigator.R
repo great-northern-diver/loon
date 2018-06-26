@@ -10,8 +10,9 @@
 #' 
 #' @export
 
-loonGrob.l_navigator <- function(widget){
+loonGrob.l_navigator <- function(target, name = NULL, gp = NULL, vp = NULL){
     
+    widget <- target
     color <- as_hex6color(widget['color'])
     label <- widget['label']
     

@@ -12,7 +12,7 @@
 # 
 # # @export .loonobject
 .loonobject <- function(target, convert=as.character) {
-
+    
     ## first check for loon objects
     if (is(target,'l_layer') || is(target,'l_glyph')){
         loon_obj <- target
@@ -37,7 +37,7 @@
     } else { 
         ## strip attributes
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)
-
+        
         type <- switch(length(specifier),
                        '1'= "widget",
                        '2'= {
@@ -47,7 +47,7 @@
                                   navig="navigator",
                                   stop(paste0("Invalid target specifier: ",
                                               target))
-                                  )
+                           )
                        },
                        '3' = {
                            if(substr(specifier[2], 1, 5) != "navig" ||
@@ -57,19 +57,19 @@
                            "context"
                        },
                        stop(paste0("Invalid target specifier: ", target))
-                       )
-
+        )
+        
         loon_obj <- switch(type,
                            widget=structure(specifier, class="loon"),
                            context=structure(specifier[3],
-                               widget=specifier[1],
-                               navigator=specifier[2],
-                               class="loon"),
+                                             widget=specifier[1],
+                                             navigator=specifier[2],
+                                             class="loon"),
                            structure(specifier[2], widget=specifier[1],
                                      class=c("loon", paste0("l_", type)))
-                           )
+        )
     }
-
+    
     widget <- specifier[1]
     l_throwErrorIfNotLoonWidget(widget)
     
@@ -79,7 +79,7 @@
                    glyph=c(widget, 'glyph', 'use', specifier[2]),
                    navigator=c(widget, 'navigator', 'use', specifier[2]),
                    context=c(widget, 'navigator', 'use', specifier[2],
-                       'context', 'use', specifier[3]))
+                             'context', 'use', specifier[3]))
     
     function(...) {
         convert(do.call('tcl', append(call, list(...))))
