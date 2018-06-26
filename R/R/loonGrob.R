@@ -711,7 +711,7 @@ as_hex6color <- function(color) {
     col <- vapply(color, function(x) {
         if (x == "") "" else l_hexcolor(x)
     }, character(1))
-    col <- suppressWarnings(loon:::hex12tohex6(col))
+    col <- suppressWarnings(hex12tohex6(col))
     col[color == ""] <- NA
     col
   } else {

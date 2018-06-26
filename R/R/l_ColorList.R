@@ -113,20 +113,22 @@ loon_palette <- function(n) {
 
 
 
-# @title Convert 12 digit color representations to 6 digit color
-#   representations
-# 
-# @description 
-# 
-# @param x a vector with 12digit hexcolors
-#    
-# @details Function throws a warning if the conversion loses information. The
-#   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
-#   12 digit hexadecimal color representation.
-#       
-# @examples 
-# x <- l_hexcolor(c("red", "blue", "green", "orange"))
-# hex12tohex6(x)
+#' @title Convert 12 digit color representations to 6 digit color
+#'   representations
+#' 
+#' @description 
+#' 
+#' @param x a vector with 12 digit hexcolors
+#'    
+#' @details Function throws a warning if the conversion loses information. The
+#'   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
+#'   12 digit hexadecimal color representation.
+#'       
+#' @examples 
+#' x <- l_hexcolor(c("red", "blue", "green", "orange"))
+#' hex12tohex6(x)
+#' 
+#' @export
 hex12tohex6 <- function(x) {
     # convert to hex6
     col1 <- paste0( "#", substr(x, 2, 3), substr(x, 6, 7), substr(x, 10, 11))
