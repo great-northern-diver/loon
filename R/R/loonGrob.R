@@ -63,12 +63,12 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' grid.draw(lgrob)
 #' }
 #' 
-loonGrob <- function(target, name = NULL, gp = NULL, vp = NULL, ...) {
+loonGrob <- function(target, name = NULL, gp = NULL, vp = NULL) {
     UseMethod("loonGrob")
 }
 
 #' @export
-loonGrob.default <- function(target, name = NULL, gp = NULL, vp = NULL, ...) {
+loonGrob.default <- function(target, name = NULL, gp = NULL, vp = NULL) {
     stop("loonGrob.default no valid inheritance")
 }
     
