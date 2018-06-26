@@ -8,6 +8,7 @@
 #' 
 #' g <- loonGrob(h)
 #' 
+#' library(grid)
 #' grid.newpage(); grid.draw(g)
 #' 
 #' h['showStackedColors'] <- TRUE
@@ -39,57 +40,94 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
     #  points
     #  x0
     #  x1
-
+    
     yshows <- widget['yshows']
-
+    swapAxes <- widget['swapAxes']
     
     bins <- getBinData(widget)
     
     sel_color <- l_getOption("select-color")
     
     showStackedColors <- widget['showStackedColors']
-    
+    showOutlines <- widget['showOutlines']
+    colorOutline <- if(showOutlines) as_hex6color(widget["colorOutline"]) else NA
     
     colorStackingOrder <- widget['colorStackingOrder']
-    
+    if(length(colorStackingOrder) == 1) {
+        if(colorStackingOrder == "selected") colorStackingOrder <- c("selected", unique(widget['color']))
+    }
     
     b_bins <- lapply(bins, function(bin) {
-       
+        
         w <- bin$x1 - bin$x0
         x <- bin$x0 + w/2
-        
         y0 <- 0
         
+        nam <- names(bin$count[-1])
+
         if (showStackedColors) {
-            
-            nam <- names(bin$count[-1])
             first <- intersect(colorStackingOrder, nam)
             rest <- setdiff(nam, c("all", first))
-            
             bnames <- c(first, rest)
             
-            Map(function(height, col) {
-                if (col == "selected") col <- sel_color
+            if (swapAxes) {
+                Map(function(height, col) {
+                    if (col == "selected") col <- sel_color
+                    
+                    col <- as_hex6color(col)
+                    
+                    g <- rectGrob(x = y0, y = x, width = height, height = w,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("left", "center"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, bin$count[bnames], bnames)
                 
-                col <- as_hex6color(col)
-                
-                g <- rectGrob(x = x, y = y0, width = w, height = height,
-                              gp = gpar(fill = col), 
-                              just = c("center", "bottom"),
-                              default.units = "native")
-                y0 <<- y0 + height
-                g
-            }, bin$count[bnames], bnames)
+            } else {
+                Map(function(height, col) {
+                    if (col == "selected") col <- sel_color
+                    
+                    col <- as_hex6color(col)
+                    
+                    g <- rectGrob(x = x, y = y0, width = w, height = height,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("center", "bottom"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, bin$count[bnames], bnames)
+            }
         } else {
-            list(
-                rectGrob(x = x, y = y0, width = w, height = bin$count$all,
-                         gp = gpar(fill = "thistle"), 
-                         just = c("center", "bottom"),
-                         default.units = "native")
-            )
-        }
-
-        
+            newCount <- list()
+            if("selected" %in% nam) {
+               newCount$selected <- bin$count$selected
+               newCount$unselected <- bin$count$all - bin$count$selected
+            } else newCount$unselected <- bin$count$all
+            bnames <- names(newCount)
+            
+            if(swapAxes) {
+                Map(function(height, col) {
+                    col <- if (col == "selected") sel_color else "thistle"
+                    g <- rectGrob(x = y0, y = x, width = height, height = w,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("left", "center"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, newCount[bnames], bnames)
+            } else {
+                Map(function(height, col) {
+                    col <- if (col == "selected") sel_color else "thistle"
+                    g <- rectGrob(x = x, y = y0, width = w, height = height,
+                                  gp = gpar(fill = col, col = colorOutline), 
+                                  just = c("center", "bottom"),
+                                  default.units = "native")
+                    y0 <<- y0 + height
+                    g
+                }, newCount[bnames], bnames)
+            }
+        }  
     })
     
     gTree(

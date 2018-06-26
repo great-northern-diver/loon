@@ -16,8 +16,9 @@
 #' grid.newpage()
 #' grid.draw(lgrob)
 
-loonGrob.l_pairs <- function(widget){
+loonGrob.l_pairs <- function(target, name = NULL, gp = NULL, vp = NULL){
     
+    widget <- target
     len_pairs <- length(widget)
     names <- c( sapply(widget, function(l){
         l['ylabel']
@@ -38,7 +39,10 @@ loonGrob.l_pairs <- function(widget){
     lenGrobs <- len_pairs + len_names
     lgrobObject <- lapply(1:lenGrobs, function(i){
         if(i <= len_pairs){
-            loonGrob(widget[[i]], margins = rep(0.1, 4), border = NA)
+            widgeti <- widget[[i]]
+            widgeti['foreground'] <- "white"
+            widgeti['minimumMargins'] <- rep(2,4)
+            loonGrob(widgeti)
         }else{
             textGrob(names[i - len_pairs], gp = gpar(fontsize = 9))
         }
@@ -57,10 +61,14 @@ loonGrob.l_pairs <- function(widget){
     # NA NA 10 11 12
     # NA NA NA 13 14
     # NA NA NA NA 15
+    backgroundCol <- "#EBEBEB"   # TODO grab this from the canvas or widget background
     gTree(
         children = gList(
-            rectGrob(gp  = gpar(fill = "#EBEBEB", col = NA)),
-            gridExtra::arrangeGrob(grobs = lgrobObject, layout_matrix = layout_matrix)
-        )
+            rectGrob(gp  = gpar(fill = backgroundCol, col = NA)),
+            gridExtra::arrangeGrob(grobs = lgrobObject, 
+                                   layout_matrix = layout_matrix,
+                                   name = "l_pairs")
+        ),
+        name = name, gp = gp, vp = vp
     )
 }
