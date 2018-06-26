@@ -4,7 +4,8 @@
 #' objects of class \code{stl} 
 #'
 #' @inheritParams graphics::plot
-#' @param foo \code{stl} object
+#' @param x  an \code{stl} object
+#' @param y  NULL, ignored
 #' @param ylabel the graphical parameter ylabel labelling the y axis of the plot. Here, it is a length four vector of original 
 #' time seires, trend, seasonality and remainder. If \code{NULL}, ylabel is created based on the information provided.
 #' @param xlabel the graphical parameter xlabel labelling the x axis of the plot. Here, it is a length four vector of original 
@@ -27,10 +28,11 @@
 
 
 
-l_plot.stl <- function(stl, ylabel = NULL, xlabel = NULL, tk_title = NULL, title = NULL, 
+l_plot.stl <- function(x, y = NULL, ylabel = NULL, xlabel = NULL, tk_title = NULL, title = NULL, 
                        linkingGroup = "ts", linewidth = 1, linesColour = "firebrick", 
                        size = 1, pointsColour = "steelblue", ...){
-    l_plotForts(stl, pointsColour, size, ylabel, xlabel, title, tk_title, 
+    if (!is.null(y)) warning("value of y argument is ignored")
+    l_plotForts(x, pointsColour, size, ylabel, xlabel, title, tk_title, 
                 linkingGroup,linesColour, linewidth)
     
 }

@@ -4,7 +4,7 @@
 #' objects of class \code{decomposed.ts} 
 #'
 #' @inheritParams graphics::plot
-#' @param decompose \code{decomposed.ts} object
+#' @param x \code{decomposed.ts} object
 #' @param ylabel the graphical parameter ylabel labelling the y axis of the plot. Here, it is a length four vector of original 
 #' time seires, trend, seasonality and remainder. If \code{NULL}, ylabel is created based on the information provided.
 #' @param xlabel the graphical parameter xlabel labelling the x axis of the plot. Here, it is a length four vector of original 
@@ -27,12 +27,13 @@
 #' names(l_info_states(p$p1)) # extract loon information
 
 
-l_plot.decomposed.ts <- function(decompose, ylabel = NULL, xlabel = NULL, 
+l_plot.decomposed.ts <- function(x, y = NULL, ylabel = NULL, xlabel = NULL, 
                                  tk_title = NULL, title = NULL, linkingGroup = "ts", 
                                  linewidth = 1, linesColour = "firebrick",
                                  size = 1, pointsColour = "steelblue", ...){
     
-    l_plotForts(decompose, pointsColour, size, 
+    if (!is.null(y)) warning("value of y argument is ignored")
+    l_plotForts(x, pointsColour, size, 
                 ylabel, xlabel, title, tk_title, 
-                linkingGroup, linesColour, linewidth)
+                linkingGroup, linesColour, linewidth, ...)
 }
