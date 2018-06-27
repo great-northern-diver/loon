@@ -12,6 +12,8 @@
 #' @export
 l_data <- function(data) {
 
+    if (!is.data.frame(data)) stop("data is expected to be a data.frame")
+    
     ## Create a dict
     dict <- ""
     for (n in names(data)) {

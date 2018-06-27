@@ -19,7 +19,8 @@ Imports:
     graphics,
     grDevices,
     utils,
-    stats
+    stats,
+    gridExtra
 Suggests:
     maps,
     sp,

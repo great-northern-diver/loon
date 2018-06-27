@@ -105,5 +105,7 @@ local({
                  y=rev(seq(from=bbox[2], to=bbox[4], length.out=length(LETTERS))),
                  text=LETTERS, size=seq_along(LETTERS),
                  angle=seq_along(LETTERS)/length(LETTERS)*360)
+    
+    p
 
 })

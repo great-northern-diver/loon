@@ -21,6 +21,11 @@
 #' l_cget(p, "color")
 #' p['selected']
 l_cget <- function(target, state) {
+    UseMethod("l_cget", target)
+}
+
+#' @export
+l_cget.loon <- function(target, state) {
 
     obj_eval <- .loonobject(target, as.character)
 
