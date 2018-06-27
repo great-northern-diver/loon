@@ -194,9 +194,15 @@ l_pairs <- function(data, parent=NULL, ...) {
 
 
 #' @export
-l_cget.loon_pairs <- function(target, state) {
+l_cget.l_pairs <- function(target, state) {
     
-    values <- lapply(target$plots, l_cget, state)
+    plotNames <- attr(target, 'names')
+    plots <- lapply(plotNames, 
+                    function(plotName) {
+                        target[[plotName]]
+                        
+                    })
+    values <- lapply(plots, l_cget, state)
     
     values
     
@@ -204,18 +210,26 @@ l_cget.loon_pairs <- function(target, state) {
 
 
 #' @export
-l_configure.loon_pairs <- function(target, ...) {
-    args <- list(...)
+l_configure.l_pairs <- function(target, ...) {
     
-    if (is.null(names(args)) || any("" %in% names(args)))
+    args <- list(...)
+    states <- names(args)
+    if (is.null(states) || any("" %in% states))
         stop("configuration needs key=value pairs")
     
-    for (state in names(args)) {
+    plotNames <- attr(target, 'names')
+    plots <- lapply(plotNames, 
+                    function(plotName) {
+                        target[[plotName]]
+        
+    })
+    for (state in states) {
         
         switch(
             state,
-            linkingGroup = lapply(target$plots, l_configure, linkingGroup=linkingGroup, sync = pull),
-            selected = stop("not implementedc yet"),
+            linkingGroup = lapply(plots, l_configure, 
+                                  linkingGroup = args$linkingGroup, sync = "pull"),
+            selected = stop("not implemented yet"),
             stop("state ", state, " not known")
         )
     }
