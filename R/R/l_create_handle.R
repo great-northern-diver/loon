@@ -46,59 +46,69 @@
 l_create_handle <- function(target) {
     
     ## first check for loon objects
-    if (is(target,'l_layer') || is(target,'l_glyph') || is(target, 'l_navigator')) {
-        loon_obj <- target
-        hasRecognized <- TRUE
-    } else if (is(target, 'l_context')) {
+    if (is(target,'loon')) {
         loon_obj <- target
         hasRecognized <- TRUE
     } else { 
         ## strip attributes
         specifier <- vapply(target, as.vector, character(1), USE.NAMES=FALSE)
         
-        widget <- structure(as.vector(specifier[1]), class='loon')
+        widget <- specifier[1]
         
-        loon_obj <- switch(length(specifier),
-                           '1'= {
-                               widget
-                           },
-                           '2'= {
-                               switch(substr(specifier[2], 1, 5),
-                                      layer= {
-                                          structure(as.vector(specifier[2]),
-                                                    widget=widget,
-                                                    class=c('loon', 'l_layer'))
-                                      },
-                                      glyph={
-                                          structure(as.vector(specifier[2]),
-                                                    widget=widget,
-                                                    class=c('loon', 'l_glyph'))
-                                      },
-                                      navig={
-                                          structure(as.vector(specifier[2]),
-                                                    widget=widget,
-                                                    class=c('loon', 'l_navigator'))
-                                      },
-                                      stop(paste0("Invalid target specifier: ",
-                                                  target))
-                           )
-                       },
-                       '3' = {
-                           if(substr(specifier[2], 1, 5) != "navig" ||
-                              substr(specifier[3], 1, 5) != "conte") {
-                               stop(paste0("Invalid target specifier: ", target))
-                           } else {
-                               navigator <- structure(as.vector(specifier[2]),
-                                                      widget=widget,
-                                                      class=c('loon', 'l_navigator'))
-                               structure(as.vector(specifier[3]),
-                                         navigator=navigator,
-                                         widget=widget,
-                                         class=c('loon', 'l_context'))
-                           }
-                       },
-                       stop(paste0("Invalid target specifier: ", target))
-        )
+        if (!l_isLoonWidget(widget)) stop(widget, " is not a valid loon widget")
+        
+        loon_obj <- if (length(specifier) == 1) {
+            
+            cl <- as.character(tcl("info", "object", "class", widget))
+            
+            wcl <- switch(
+                cl,
+                "::loon::classes::Scatterplot_Widget" = "l_plot",
+                "::loon::classes::Histogram_Widget" = "l_hist",
+                "::loon::classes::Serialaxes_Widget" = "l_serialaxes",
+                "::loon::classes::Graph_Widget" = "l_graph",
+                character(0)
+            )
+            structure(widget, class = c(wcl, "loon"))
+        } else if (length(specifier) == 2) {
+            
+            spec_2 <- specifier[2]
+            spec_2_short <- substr(spec_2, 1, 5)
+            if ( spec_2_short == "layer" || spec_2 == "model") {
+                structure(as.vector(spec_2),
+                          widget = widget,
+                          class = c(paste0("l_layer_", l_layer_getType(widget, specifier[2])), 'l_layer', 'loon'))
+            } else if (spec_2 == "root") {
+                structure("root", widget=as.vector(widget), class=c("l_layer_group", "l_layer", "loon"))
+            } else if (spec_2_short == "glyph") {
+                structure(as.vector(specifier[2]),
+                          widget= widget,
+                          class=c(paste0("l_glyph_", l_glyph_getType(widget, spec_2)), 'l_glyph', 'loon'))
+                
+            } else if (spec_2_short == "navig") {
+                structure(as.vector(specifier[2]),
+                          widget=widget,
+                          class=c('l_navigator', 'loon'))
+            } else {
+                stop(paste0("Invalid target specifier: ", target))  
+            }
+        } else if (length(specifier) == 3) {
+            if(substr(specifier[2], 1, 5) != "navig" ||
+               substr(specifier[3], 1, 5) != "conte") {
+                stop(paste0("Invalid target specifier: ", target))
+            } else {
+                navigator <- structure(as.vector(specifier[2]),
+                                       widget=widget,
+                                       class=c('l_navigator', 'loon'))
+                structure(as.vector(specifier[3]),
+                          navigator=navigator,
+                          widget=widget,
+                          class=c('l_context', 'loon'))
+            }
+        } else {
+            stop(paste0("Invalid target specifier: ", target))
+        }
     }
+    
     loon_obj
 }

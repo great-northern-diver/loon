@@ -1,10 +1,10 @@
-#' @title l_plot method for seasonally decomposed by loess time series objects (i.e. via stl)
+#' @title l_plot method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)
 #'
-#' @description a generic function for creating a decomposed time series plot based on 
-#' objects of class \code{stl} 
+#' @description a generic function for creating a decomposed time seires plot based on 
+#' objects of class \code{decomposed.ts} 
 #'
 #' @inheritParams l_plot
-#' @param x  an \code{stl} object
+#' @param x a \code{decomposed.ts} object
 #' @param y  NULL, ignored
 #' @param pcolor points colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
 #' @param size points size of all time series. Default value is 1.
@@ -23,14 +23,16 @@
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
 #' @param ... keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.
 #' 
+#' 
+#' 
 #' @return A structure of class \code{"l_ts"} containing four loon plots each representing a part of the decomposition
 #' by name: "original", "trend", "seasonal", and "remainder".
 #'
 #' @export
 #' 
 #' @examples
-#' co2_stl <- stl(co2, "per")
-#' p <- l_plot(co2_stl, title = "Atmospheric carbon dioxide over Mauna Loa")
+#' decompose <- decompose(co2)
+#' p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
 #' # names of plots in the display
 #' names(p)
 #' # names of states associated with the seasonality plot
@@ -39,21 +41,22 @@
 #' p$seasonal['color'] <- "steelblue"
 
 
-
-l_plot.stl <- function(x, y = NULL,
-                       pcolor = NULL, size = 1,
-                       lcolor = NULL, linewidth = 1, 
-                       xlabels = NULL,  ylabels = NULL, 
-                       title = NULL, tk_title = NULL, 
-                       linkingGroup = NULL,
-                       showScales = TRUE,
-                       showGuides = TRUE, 
-                       showLabels = TRUE,
-                       ...){
+l_plot.decomposed.ts <- function(x, y = NULL,
+                                 pcolor = NULL, size = 1,
+                                 lcolor = NULL, linewidth = 1, 
+                                 xlabels = NULL,  ylabels = NULL, 
+                                 title = NULL, tk_title = NULL, 
+                                 linkingGroup = NULL,
+                                 showScales = TRUE,
+                                 showGuides = TRUE, 
+                                 showLabels = TRUE,
+                                 ...
+                                  ){
+    
     if (!is.null(y)) warning("value of y argument is ignored")
     if (is.null(lcolor)) lcolor <- l_getOption("foreground")
     if (is.null(pcolor)) pcolor <- l_getOption("foreground")
-    l_plotForts(x,
+    l_plotForts(x, 
                 pcolor = pcolor, size = size,
                 lcolor = lcolor, linewidth = linewidth, 
                 xlabels = xlabels,  ylabels = ylabels, 
@@ -62,6 +65,6 @@ l_plot.stl <- function(x, y = NULL,
                 showScales = showScales,
                 showGuides = showGuides, 
                 showLabels = showLabels,
-                ... )
-    
+                ... 
+                 )
 }

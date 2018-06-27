@@ -41,7 +41,8 @@
 #'             label=paste0(as.character(dat$Species[1]), " contours"))
 #'   })
 #' }
-#' 
+
+
 l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
                               y = seq(0, 1, length.out = ncol(z)),
                               z,
@@ -79,12 +80,12 @@ l_layer_contourLines <- function (widget, x = seq(0, 1, length.out = nrow(z)),
     ycoords <- sapply(lines, FUN=function(x)x$y)
 
     if(length(levels) != length(xcoords) && length(levels) != length(ycoords))
-        stop("can not parse output of contourLines correct.")
+        stop("cannot parse output of contourLines correct.")
     
     if(asSingleLayer) {
         id <- l_layer_lines(widget, x=xcoords, y=ycoords, parent=parent, index=index, tag=levels, ...)
     } else {
-        id <- l_layer_group(widget, label="countour lines", parent=parent, index=index)
+        id <- l_layer_group(widget, label="contour lines", parent=parent, index=index)
         ids <- Map(function(l, x, y) {
             l_layer_line(widget, x=x, y=y, label=l, parent=id, ...)
         }, levels, xcoords, ycoords)

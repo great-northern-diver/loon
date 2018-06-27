@@ -23,7 +23,11 @@
 #' l_configure(p, color='red')
 #' p['size'] <- ifelse(iris$Species == "versicolor", 2, 8)
 l_configure <- function(target, ...) {
+    UseMethod("l_configure", target)
+}
 
+#' @export
+l_configure.loon <- function(target, ...) {
     obj_eval <- .loonobject(target)
     
     args <- list('configure', ...)
@@ -68,5 +72,5 @@ l_configure <- function(target, ...) {
     
     do.call('obj_eval', args)
     
-    invisible(environment(obj_eval)$loon_obj)
+    invisible(target)
 }
