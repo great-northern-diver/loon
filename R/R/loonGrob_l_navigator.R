@@ -1,12 +1,5 @@
-#' Create a navigator grob
-#' 
-#' @param widget navigator object of class inheriting from "l_navigator"
-#' 
-#' @return a grid grob
-#' 
-#' @import grid
-#' 
-#' @seealso \code{\link{loonGrob.l_graph}}, \code{\link{loonGrob.l_navgraph}}
+
+#' @rdname loonGrob
 #' 
 #' @export
 

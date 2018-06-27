@@ -4,7 +4,7 @@
 #' @description All of loon's displays access a set of common options.  
 #' This function accesses and returns the current value of the named option.
 #'   
-#' @param option  the name of the option being queried.
+#' @param option the name of the option being queried.
 #'   
 #' @return the value of the named option.
 #'   
@@ -80,6 +80,9 @@ l_userOptions <- function() {
 #' @description All of loon's displays access a set of common options.  
 #' This function accesses and returns the default value for the named option.
 #'   
+#' @param option the name of the user changeable loon display option 
+#' whose default value is to be determined.
+#' 
 #' @return the default value for the named option
 #' 
 #' @seealso \code{\link{l_getOptionNames}}, \code{\link{l_getOption}},

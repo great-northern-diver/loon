@@ -1,38 +1,67 @@
-#' @title Loon methods for STL objects
+#' @title l_plot method for seasonally decomposed by loess time series objects (i.e. via stl)
 #'
-#' @description a generic function for creating a decomposed time seires plot based on 
+#' @description a generic function for creating a decomposed time series plot based on 
 #' objects of class \code{stl} 
 #'
-#' @inheritParams graphics::plot
+#' @inheritParams l_plot
 #' @param x  an \code{stl} object
 #' @param y  NULL, ignored
-#' @param ylabel the graphical parameter ylabel labelling the y axis of the plot. Here, it is a length four vector of original 
-#' time seires, trend, seasonality and remainder. If \code{NULL}, ylabel is created based on the information provided.
-#' @param xlabel the graphical parameter xlabel labelling the x axis of the plot. Here, it is a length four vector of original 
-#' time seires, trend, seasonality and remainder. If \code{NULL}, xlabel is created as "Times".
-#' @param tk_title provides an alternate interface to Tk's \code{wm title}. If \code{NULL}, \code{stl} will be created.
-#' @param title an overall title of loon plot. If \code{NULL}, the default title would be "Seasonal Trend Analysis".
-#' @param linkingGroup link groups
-#' @param linewidth lines width of original time seires, trend, seasonality and remainder with default value 1.
-#' @param linesColour lines colour of original time seires, trend, seasonality and remainder with default colour "firebrick".
-#' @param size points size of original time seires, trend, seasonality and remainder with default value 1.
-#' @param pointsColour points colour of original time seires, trend, seasonality and remainder with default colour "steelblue".
-#' @param ... named arguments to modify plot states
+#' @param pcolor points colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
+#' @param size points size of all time series. Default value is 1.
+#' @param lcolor line colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
+#' @param linewidth line width of all time series (incl. original and decomposed components. Default is 1.
+#' @param xlabels the labels for the x axes: a length four character vector for each of the original 
+#' time series, trend, seasonality and remainder. If \code{NULL}, xlabels is created as "time".
+#' @param ylabels the labels for the vertical axes: a length four character vector for each of the original 
+#' time series, trend, seasonality and remainder. If \code{NULL}, ylabels is created based on the information provided.
+#' @param title an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".
+#' @param tk_title provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.
+#' @param linkingGroup name of linking group.  
+#'        If NULL, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
+#' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
+#' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
+#' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
+#' @param ... keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.
 #' 
+#' @return A structure of class \code{"l_ts"} containing four loon plots each representing a part of the decomposition
+#' by name: "original", "trend", "seasonal", and "remainder".
+#'
 #' @export
 #' 
 #' @examples
-#' foo <- stl(co2, "per")
-#' p <- l_plot(foo, title = "Atmospheric carbon dioxide over Mauna Loa")
-#' names(l_info_states(p$p1))
+#' co2_stl <- stl(co2, "per")
+#' p <- l_plot(co2_stl, title = "Atmospheric carbon dioxide over Mauna Loa")
+#' # names of plots in the display
+#' names(p)
+#' # names of states associated with the seasonality plot
+#' names(p$seasonal)
+#' # which can be set
+#' p$seasonal['color'] <- "steelblue"
 
 
 
-l_plot.stl <- function(x, y = NULL, ylabel = NULL, xlabel = NULL, tk_title = NULL, title = NULL, 
-                       linkingGroup = "ts", linewidth = 1, linesColour = "firebrick", 
-                       size = 1, pointsColour = "steelblue", ...){
+l_plot.stl <- function(x, y = NULL,
+                       pcolor = NULL, size = 1,
+                       lcolor = NULL, linewidth = 1, 
+                       xlabels = NULL,  ylabels = NULL, 
+                       title = NULL, tk_title = NULL, 
+                       linkingGroup = NULL,
+                       showScales = TRUE,
+                       showGuides = TRUE, 
+                       showLabels = TRUE,
+                       ...){
     if (!is.null(y)) warning("value of y argument is ignored")
-    l_plotForts(x, pointsColour, size, ylabel, xlabel, title, tk_title, 
-                linkingGroup,linesColour, linewidth)
+    if (is.null(lcolor)) lcolor <- l_getOption("foreground")
+    if (is.null(pcolor)) pcolor <- l_getOption("foreground")
+    l_plotForts(x,
+                pcolor = pcolor, size = size,
+                lcolor = lcolor, linewidth = linewidth, 
+                xlabels = xlabels,  ylabels = ylabels, 
+                title = title, tk_title = tk_title, 
+                linkingGroup = linkingGroup,
+                showScales = showScales,
+                showGuides = showGuides, 
+                showLabels = showLabels,
+                ... )
     
 }

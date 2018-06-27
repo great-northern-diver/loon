@@ -1,10 +1,10 @@
 
-#' Create a grob of a scatterplot layer
-#' 
-#' 
-#' @export
+
+#' @rdname loonGrob
 #' 
 #' @examples 
+#' 
+#' ## l_plot scatterplot examples
 #' 
 #' p <- l_plot(x = c(0,1), y = c(0,1))
 #' l_layer_rectangle(p, x = c(0,1), y = c(0,1))
@@ -21,6 +21,7 @@
 #' g <- loonGrob(p)
 #' grid.newpage(); grid.draw(g)
 #' 
+#' @export
 loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
 

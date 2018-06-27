@@ -5,13 +5,19 @@
 #' 
 #' @template param_target
 #' 
+#' @template param_gridname
+#' 
+#' @template param_gridgp
+#' 
+#' @param draw a logical value indicating whether graphics output should be produced.
+#'  
+#' @template param_gridvp
+#'  
 #' @return a grid grob
 #' 
 #' @import grid
 #' @import grDevices
 #' @import stats
-#' 
-#' @export
 #' 
 #' @examples 
 #' 
@@ -19,6 +25,7 @@
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 #' grid.newpage()
 #' grid.loon(widget)
+#' 
 #' @export
 grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL) {
 
@@ -36,6 +43,12 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' 
 #' @template param_target
 #' 
+#' @template param_gridname
+#' 
+#' @template param_gridgp
+#'  
+#' @template param_gridvp
+#'  
 #' @return a grid grob
 #' 
 #' @import grid
@@ -69,6 +82,7 @@ loonGrob <- function(target, name = NULL, gp = NULL, vp = NULL) {
     UseMethod("loonGrob")
 }
 
+
 #' @export
 loonGrob.default <- function(target, name = NULL, gp = NULL, vp = NULL) {
     stop("loonGrob.default no valid inheritance")
@@ -84,6 +98,7 @@ loonGrob.l_plot <- function(target,  name = NULL, gp = NULL, vp = NULL) {
           name = name, gp = gp, vp = vp)
 }
 
+
 #' @export
 loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
     rl <- l_create_handle(c(target, "root"))
@@ -92,6 +107,7 @@ loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {
     gTree(children = gList(cartesian2dGrob(target, layers_grob, name = "l_hist")),
           name = name, gp = gp, vp = vp)
 }
+
 
 #' @export
 loonGrob.l_graph <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -265,6 +281,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
 }
 
 
+
 #' @export
 loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
@@ -290,6 +307,8 @@ loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
 
 # __primitive grobs----
+
+
 #' @export
 loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
@@ -313,6 +332,7 @@ loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) 
     }
 }
 
+
 #' @export
 loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
@@ -334,6 +354,7 @@ loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
         grob(name = name, gp = gp, vp = vp)
     }
 }
+
 
 #' @export
 loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -368,6 +389,7 @@ loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL
     }
     
 }
+
 
 #' @export
 loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -404,6 +426,7 @@ loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }
 }
 
+
 #' @export
 loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
@@ -427,6 +450,8 @@ loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
         grob(name = name, gp = gp, vp = vp)
     }     
 }
+
+
 
 #' @export
 loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -458,6 +483,7 @@ loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
         grob(name = name, gp = gp, vp = vp)
     }    
 }
+
 
 #' @export
 loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -500,6 +526,7 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }    
 }
 
+
 #' @export
 loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
@@ -538,6 +565,7 @@ loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL)
         grob(name = name, gp = gp, vp = vp)
     }
 }
+
 
 #' @export
 loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -586,6 +614,7 @@ loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NUL
         grob(name = name, gp = gp, vp = vp)
     }    
 }
+
 
 #' @export
 loonGrob.l_layer_lines <- function(target, name = NULL, gp = NULL, vp = NULL) {

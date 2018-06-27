@@ -1,20 +1,18 @@
-#' Create a loon pairs grob
-#' 
-#' @param widget \code{l_pairs} object of class inheriting from "l_pairs"
-#' 
-#' @return a grid grob 
-#' 
-#' @import grid
-#' 
-#' @export
+
+#' @rdname loonGrob
 #' 
 #' @examples 
+#' 
+#' ## l_pairs (scatterplot matrix) examples
+#' 
 #' p <- l_pairs(iris[,-5], color=iris$Species)
 #' 
 #' library(grid)
 #' lgrob <- loonGrob(p)
 #' grid.newpage()
 #' grid.draw(lgrob)
+#' 
+#' @export
 
 loonGrob.l_pairs <- function(target, name = NULL, gp = NULL, vp = NULL){
     

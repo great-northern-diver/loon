@@ -113,10 +113,13 @@ loon_palette <- function(n) {
 
 
 
-#' @title Convert 12 digit color representations to 6 digit color
-#'   representations
+#' @title Convert 12 hexadecimal digit color representations to 6 hexidecimal digit 
+#' color representations
 #' 
-#' @description 
+#' @description Tk colors must be in 6 hexadecimal format with two hexadecimal
+#' digits for each of the red, green, and blue components.  Twelve hexadecimal digit
+#' colors have 4 hexadecimal digits for each.  This function converts the 12 digit format to the 6 
+#' provided the color is preserved.
 #' 
 #' @param x a vector with 12 digit hexcolors
 #'    
@@ -144,13 +147,11 @@ hex12tohex6 <- function(x) {
 #' @title Convert color representations having an alpha transparency level to 6 digit color
 #'   representations
 #' 
-#' @description 
-#' 
-#' @param x a vector of colors (potentially) containing an alpha level
-#'    
-#' @details Colors in the standard tk used bt loon do not allow for alpha transparency.
+#' @description Colors in the standard tk used by loon do not allow for alpha transparency.
 #' This function allows loon to use color palettes (e.g. \code{\link{l_setColorList}}) that
 #' produce colors with alpha transparency by simply using only the rgb.
+#' 
+#' @param col a vector of colors (potentially) containing an alpha level
 #'       
 #' @examples 
 #' x <- l_colRemoveAlpha(rainbow(6))

@@ -17,8 +17,6 @@
 #' @examples
 #' p <- l_pairs(iris[,-5], color=iris$Species)
 
-
-
 l_pairs <- function(data, parent=NULL, ...) {
 
     args <- list(...)
@@ -193,10 +191,13 @@ l_pairs <- function(data, parent=NULL, ...) {
 }
 
 
+#'@export
+names.l_pairs <- function(x) {attr(x, "names")}
+
 #' @export
 l_cget.l_pairs <- function(target, state) {
     
-    plotNames <- attr(target, 'names')
+    plotNames <- names(target)
     plots <- lapply(plotNames, 
                     function(plotName) {
                         target[[plotName]]
@@ -217,7 +218,7 @@ l_configure.l_pairs <- function(target, ...) {
     if (is.null(states) || any("" %in% states))
         stop("configuration needs key=value pairs")
     
-    plotNames <- attr(target, 'names')
+    plotNames <- names(target)
     plots <- lapply(plotNames, 
                     function(plotName) {
                         target[[plotName]]

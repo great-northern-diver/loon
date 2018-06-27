@@ -1,10 +1,9 @@
-#' Create a grob of graph layer
-#' 
-#' @import grid
-#' 
-#' @export
+
+#' @rdname loonGrob
 #' 
 #' @examples 
+#' 
+#' ## graph examples
 #' 
 #' G <- completegraph(names(iris[,-5]))
 #' LG <- linegraph(G)
@@ -27,6 +26,8 @@
 #' library(grid)
 #' lgrob <- loonGrob(g)
 #' grid.newpage(); grid.draw(lgrob)
+#' 
+#' @export
 
 loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
     

@@ -1,16 +1,9 @@
-#' Create a graph navigator grob
-#' 
-#' @param widget \code{l_navgraph}, \code{l_ng_plots} or \code{l_ng_ranges} object of class inheriting from "l_navgraph"
-#' 
-#' @return a grid grob of the graph
-#' 
-#' @import grid
-#' 
-#' @export
-#' 
-#' @seealso \code{\link{loonGrob.l_graph}}
+
+#' @rdname loonGrob
 #' 
 #' @examples 
+#' 
+#' ## navgraph examples
 #' 
 #' ng <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
 #' 
@@ -19,6 +12,7 @@
 #' grid.newpage()
 #' grid.draw(navGrob)
 #' 
+#' @export
 loonGrob.l_navgraph <- function(target, name = NULL, gp = NULL, vp = NULL){
     
     widget <- target

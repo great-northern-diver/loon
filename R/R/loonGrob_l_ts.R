@@ -1,15 +1,11 @@
-#' Create a time series grob
+
+#' @rdname loonGrob
 #' 
-#' @param widget an object of class inheriting from "l_ts"
-#' 
-#' @return a grid grob
-#' 
-#' @import grid
-#' 
-#' @export
 #' 
 #' @examples
 #'  
+#' ## Time series decomposition examples
+#' 
 #' decompose <- decompose(co2) 
 #' # or decompose <- stl(co2, "per")
 #' p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
@@ -18,6 +14,8 @@
 #' lgrob <- loonGrob(p)
 #' grid.newpage()
 #' grid.draw(lgrob)
+#' 
+#' @export
 
 
 loonGrob.l_ts <- function(target, name = NULL, gp = NULL, vp = NULL){

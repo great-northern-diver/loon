@@ -1,16 +1,17 @@
-#' Create a grob of serialaxes layer
-#' 
-#' @import grid
-#' 
-#' @export
+
+#' @rdname loonGrob
 #' 
 #' @examples 
+#' 
+#' ## Serial axes (radial and parallel coordinate) examples
 #' 
 #' s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
 #' s['axesLayout'] <- 'parallel'
 #' 
 #' library(grid)
 #' grid.newpage(); grid.loon(s)
+#' 
+#' @export
 
 loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
     
