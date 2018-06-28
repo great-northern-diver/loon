@@ -39,8 +39,9 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
         grob(name = name, gp = gp, vp = vp)
     } else {
         
-        edgesAndTextGrob <- edgesAndTextGrob(states, name = "edges")
+        edgesGrob <- edgesGrob(states, name = "edges")
         nodeGlyphGrob <- nodeGlyphGrob(states, name = "nodes")
+        labelGrob <- labelGrob(states, name = "labels")
         # add navigators
         nav_ids <- l_navigator_ids(widget)
         
@@ -48,8 +49,9 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
             # No navigator, just return the graph
             gTree(children = 
                       gList(
-                          edgesAndTextGrob,
-                          nodeGlyphGrob), 
+                          edgesGrob,
+                          nodeGlyphGrob,
+                          labelGrob), 
                   name = name, gp = gp, vp = vp
             )
         } else {
@@ -57,24 +59,25 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
             activeNavigator <- widget["activeNavigator"]
             gTree(
                 children = gList(
-                    edgesAndTextGrob,
+                    edgesGrob,
                     do.call(gList, 
                             lapply(nav_ids, 
                                    function(nav_id){
                                        navPathGrob(states, 
                                                    navigator = l_create_handle(c(widget, nav_id)),
-                                                   name = "navigation path edges")
+                                                   name = paste0("navigation path edges", nav_id))
                                    })
                     ),
                     nodeGlyphGrob,
+                    labelGrob,
                     do.call(gList, 
                             lapply(nav_ids, 
                                    function(nav_id){
                                        navPointsGrob(activeNavigator, 
                                                      states, 
                                                      navigator = l_create_handle(c(widget, nav_id)),
-                                                     name = "navigation path nodes")
-                            })
+                                                     name = paste0("navigation points edges", nav_id))
+                                   })
                     )
                 ), 
                 name = name, gp = gp, vp = vp
@@ -83,7 +86,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
     }
 }
 
-edgesAndTextGrob <- function(states = NULL, name = NULL){
+edgesGrob <- function(states = NULL, name = NULL){
     active <- states$active
     activeNode <- states$nodes[active]
     activeX <- states$x[active]
@@ -97,47 +100,58 @@ edgesAndTextGrob <- function(states = NULL, name = NULL){
                              nodeFrom <- activeNode[i]
                              nodeFrom_EdgeId <- which (states$from[isActiveEdge] == nodeFrom)
                              
-                             grobs <- list(
-                                 if (length(nodeFrom_EdgeId) != 0){
-                                     nodeTo <- states$to[isActiveEdge][nodeFrom_EdgeId]
-                                     nodeTo_CoordId <- which (activeNode %in% nodeTo == TRUE)
-                                     numNodesTo <- length(nodeTo_CoordId)
-                                     cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId]
-                                     x <- unit(c(rep(activeX[i], numNodesTo), 
-                                                 activeX[nodeTo_CoordId]), 
-                                               "native")
-                                     y <- unit(c(rep(activeY[i], numNodesTo), 
-                                                 activeY[nodeTo_CoordId]), 
-                                               "native")
-                                     polylineGrob(x, y,
-                                                  id=rep(1:numNodesTo, 2),
-                                                  gp=gpar(col= cols, lwd=1),
-                                                  name = "edge lines")
-                                 } else {
-                                     grob(name = "edge lines (none)")
-                                 }
-                             )
-                             
-                             if (states$showOrbit){
-                                 activeAngle <- states$orbitAngle[active]
-                                 orbitDistance <- states$orbitDistance
-                                 orbitGrobObject <- textGrob(label = activeNode[i], 
-                                                             x = unit(activeX[i], "native") + 
-                                                                 unit(orbitDistance * cos(activeAngle[i]),
-                                                                      "mm" ), 
-                                                             y = unit(activeY[i], "native") + 
-                                                                 unit(orbitDistance * sin(activeAngle[i]),
-                                                                      "mm" ), 
-                                                             gp=gpar(fontsize= 8, # TODO find this somewhere
-                                                                     col= l_getOption("foreground")))
-                                 grobs <- list(grobs, orbitGrobObject)
+                             if (length(nodeFrom_EdgeId) != 0){
+                                 nodeTo <- states$to[isActiveEdge][nodeFrom_EdgeId]
+                                 nodeTo_CoordId <- which (activeNode %in% nodeTo == TRUE)
+                                 numNodesTo <- length(nodeTo_CoordId)
+                                 cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId]
+                                 x <- unit(c(rep(activeX[i], numNodesTo), 
+                                             activeX[nodeTo_CoordId]), 
+                                           "native")
+                                 y <- unit(c(rep(activeY[i], numNodesTo), 
+                                             activeY[nodeTo_CoordId]), 
+                                           "native")
+                                 polylineGrob(x, y,
+                                              id=rep(1:numNodesTo, 2),
+                                              gp=gpar(col= cols, lwd=1))
+                             } else {
+                                 grob()
                              }
-                             grobs
-                             }
-                         )
+                         }
+                  )
                   
               ), 
           name = name)
+}
+
+labelGrob <- function(states = NULL, name = NULL){
+    
+    active <- states$active
+    activeNode <- states$nodes[active]
+    activeX <- states$x[active]
+    activeY <- states$y[active]
+    activeAngle <- states$orbitAngle[active]
+    orbitDistance <- states$orbitDistance
+    
+    gTree(children = if (states$showOrbit) {
+        do.call(
+            gList,
+            lapply(seq_len(length(activeNode)), 
+                   function(i) {
+                       textGrob(label = activeNode[i], 
+                                x = unit(activeX[i], "native") + 
+                                    unit(orbitDistance * cos(activeAngle[i]),
+                                         "mm" ), 
+                                y = unit(activeY[i], "native") + 
+                                    unit(orbitDistance * sin(activeAngle[i]),
+                                         "mm" ), 
+                                gp=gpar(fontsize= 8, # TODO find this somewhere
+                                        col= l_getOption("foreground")))   
+                   }) 
+        )
+    } else { gList(grob()) }, 
+    name = name
+    )
 }
 
 nodeGlyphGrob <- function(states = NULL, name = NULL){
@@ -197,12 +211,12 @@ navPathGrob <- function(states, navigator, name = NULL){
     
     if(length(from) == 0 || length(to) == 0) { 
         grob(name = name) 
-        } else {
+    } else {
         
         fromLinesGrob <- 
             if(length(from) < 2) {
                 grob(name = name)
-                } else {
+            } else {
                 do.call(gList,
                         lapply(1:(length(from) - 1), 
                                function(i){
@@ -220,7 +234,7 @@ navPathGrob <- function(states, navigator, name = NULL){
         toLinesGrob <-  
             if(length(to) < 2){ 
                 grob(name = name)
-                } else {
+            } else {
                 do.call(gList, 
                         lapply(1:(length(to) - 1), 
                                function(i){
@@ -272,50 +286,50 @@ navPointsGrob <- function(activeNavigator,
     
     sel_color <- as.character(l_getOption("select-color"))
     if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
-        sel_color <- hex12tohex6(sel_color)
+        sel_color <- loon:::hex12tohex6(sel_color)
     }
     
-    pointsGp <- if(length(activeNavigator) != 0) {
+    circleGp <- if(length(activeNavigator) != 0) {
         if(activeNavigator == navigator) {
-            gpar(fill = color, cex = 3.5, lwd = 4, col = sel_color) # TODO line width?
+            gpar(fill = color, lwd = 4, col = sel_color) # TODO line width?
         } else {
-                gpar(fill = color, cex = 3.5)
-            }
-    } else {gpar(fill = color, cex = 3.5)}
+            gpar(fill = color)
+        }
+    } else {gpar(fill = color)}
+    
+    fromRadius <- unit(5.5, "mm")
     
     if(length(from) == 0){
         
         xx <- unit(0.1, "npc") 
         yy <- unit(0.9, "npc")
         
-        gTree(children = gList(pointsGrob(xx, yy, 
-                                          gp = pointsGp,   
-                                          ##probably should be a circle instead of a point
-                                          pch = 21),
+        gTree(children = gList(circleGrob(xx, yy, r = fromRadius,
+                                          gp = circleGp),
                                if(length(label) != 0) {
                                    textGrob(paste(label, collapse = " "), 
                                             xx, yy, 
                                             gp = gpar(fill = "black", fontsize = 9)) # font size?
-                               } else {grob()}
+                               }
         ),
         name = name
         )
- 
+        
     } else if(length(from) == 1 & length(to) == 0) {
         
         xx <- unit(x[fromId], "native")
         yy <- unit(y[fromId], "native")
         
         gTree(children = gList(
-            pointsGrob(x = xx, 
+            circleGrob(x = xx, 
                        y = yy, 
-                       gp = pointsGp,  
-                       pch = 21
+                       r = fromRadius,
+                       gp = circleGp
             ),       
             if(length(label) != 0) {
                 textGrob(paste(label, collapse = " "), xx, yy, 
                          gp = gpar(fill = "black", fontsize = 9))
-            } else {grob()}
+            }
             
         ),
         name = name)
@@ -325,22 +339,25 @@ navPointsGrob <- function(activeNavigator,
         xx <- unit( (1 - prop) * x[fromId[length(fromId)]] + prop * x[toId[1]], "native")
         yy <- unit( (1 - prop) * y[fromId[length(fromId)]] + prop * y[toId[1]], "native")
         
+        toRadius <- unit(1, "mm")
+        
         gTree(children = gList(
             # 'to' dot
-            pointsGrob(unit(x[toId[length(toId)]], "native"), 
+            circleGrob(unit(x[toId[length(toId)]], "native"), 
                        unit(y[toId[length(toId)]], "native"), 
-                       gp = gpar(fill = color, cex = 0.6), pch = 21
+                       r = toRadius,
+                       gp = gpar(fill = color)
             ),
             # 'from' navigator
-            pointsGrob(xx, yy,
-                       gp = pointsGp, 
-                       pch = 21
+            circleGrob(xx, yy,
+                       r = fromRadius,
+                       gp = circleGp
             ),
             # 'text' on the navigator
             if(length(label) != 0) {
                 textGrob(paste(label, collapse = " "), xx, yy, 
                          gp = gpar(fill = "black", fontsize = 9))
-            } else {grob()}
+            }
         ),
         name = name)
     }
