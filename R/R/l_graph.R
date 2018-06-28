@@ -71,7 +71,7 @@ l_graph.loongraph <- function(nodes,...) {
     plot <- l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
                               isDirected=graph$isDirected, ...)
     
-    class(plot) <- c("l_graph", class(plot))
+    class(plot) <- unique(c("l_graph", class(plot)))
     
     plot
 }
@@ -104,7 +104,7 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
     plot <- loonPlotFactory('::loon::graph', 'graph', 'loon graph', parent,
                     nodes=nodes, from=from, to=to, ...)
     
-    class(plot) <- c("l_graph", class(plot))
+    class(plot) <- unique(c("l_graph", class(plot)))
     
     plot
     
