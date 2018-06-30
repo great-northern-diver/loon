@@ -231,7 +231,7 @@ l_configure.l_pairs <- function(target, ...) {
             linkingGroup = lapply(plots, l_configure, 
                                   linkingGroup = args$linkingGroup, sync = "pull"),
             selected = stop("not implemented yet"),
-            stop("state ", state, " not known")
+            stop("state ", state, " not implemented")
         )
     }
     
