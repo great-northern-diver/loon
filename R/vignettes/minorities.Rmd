@@ -139,7 +139,7 @@ Given that population totals vary so much, it might be more meaningful to look a
 #  in each city.
 #
 
-minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"])
+minorityPercent <- data.frame(100*minority[,c(1:10,12:14)]/minority[,"Total.population"])
 
 #  Take the opportunity to shorten the Statistics Canada 
 #  names of the minorities as well:
@@ -156,14 +156,14 @@ We begin by looking at the total visibility minority percentage.  Again a histog
 
 ```{r percentVisible, eval=FALSE}
 # The proportion of the city population that is a "visible minority"
-l_hist(minorityPercent[,"% Minority"],
-       title = paste("% Minority in 33 Canadian cities"),
-       xlabel="percent of population",
-       linkingGroup="minority",
-       yshows="frequency",
-       showBinHandle=FALSE,
-       showGuides=TRUE,
-       showScales=TRUE
+l_hist(minorityPercent$"% Minority",
+       title = "% Minority in 33 Canadian cities",
+       xlabel = "percent of population",
+       linkingGroup = "minority",
+       yshows = "frequency",
+       showBinHandle = FALSE,
+       showGuides = TRUE,
+       showScales = TRUE
 )
 ```
 
@@ -231,16 +231,16 @@ The map construction begins with a scatterplot of the cities located by their lo
 ```{r locations, eval=FALSE}
 
 p_map <- with(minority,
-              l_plot(long,lat,
-                     xlabel="longitude", ylabel="latitude",
-                     linkingGroup="minority",
-                     itemLabel=rownames(minority),
-                     showLabels=TRUE)
+              l_plot(long, lat,
+                     xlabel = "longitude", ylabel = "latitude",
+                     linkingGroup = "minority",
+                     itemLabel = rownames(minority),
+                     showLabels = TRUE)
      )
 
 # Add the map of Canada
 library(maps)
-landcol <- "grey95"
+landcol <- "cornsilk"
 canada <- l_layer(p_map, 
                   map("world", "Canada", 
                       plot=FALSE, fill=TRUE), 
