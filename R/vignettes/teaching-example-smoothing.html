@@ -12,7 +12,7 @@
 
 <meta name="author" content="R.W. Oldford" />
 
-<meta name="date" content="2018-06-26" />
+<meta name="date" content="2018-07-02" />
 
 <title>Smoothers and Bone Mineral Density</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Smoothers and Bone Mineral Density</h1>
 <h4 class="author"><em>R.W. Oldford</em></h4>
-<h4 class="date"><em>2018-06-26</em></h4>
+<h4 class="date"><em>2018-07-02</em></h4>
 
 
 
@@ -179,7 +179,7 @@ smooth &lt;-<span class="st"> </span><span class="kw">l_layer_line</span>(p,
                        <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <p>The smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
 <p>Of course this is the aggregate behaviour, over both sexes. It might be interesting to see how this changes for males and for females. We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate. To that end we introduce a <strong>dynamic update</strong> to the smooth.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Define the updata function
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Define the update function
 updateSmooth &lt;-<span class="st"> </span><span class="cf">function</span>(myPlot, minpts, df, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) {
   ## Get the values for x and y from the plot
   ##

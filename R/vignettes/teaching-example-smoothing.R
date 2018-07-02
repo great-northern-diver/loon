@@ -67,7 +67,7 @@ library(loon)
 
 ## ----update smooth, eval=FALSE-------------------------------------------
 #  
-#  ## Define the updata function
+#  ## Define the update function
 #  updateSmooth <- function(myPlot, minpts, df, color="blue") {
 #    ## Get the values for x and y from the plot
 #    ##
