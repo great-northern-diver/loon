@@ -1,12 +1,12 @@
 
 ## The suported point glyph primitives are: circle, square, triangle,
-## and rhombus. These glyphs are available for every scatterplot.
+## and square. These glyphs are available for every scatterplot.
 ##
 ## So a call
 ##
-## p['glyph'] <- "rhombus"
+## p['glyph'] <- "square"
 ##
-## will change every point glyph to a rhombus.
+## will change every point glyph to a square.
 ##
 ## Generally glyphs can not be linked among scatterplots, as nothing
 ## guarantees that a particular (image, text, boxplot, etc...) glyph
