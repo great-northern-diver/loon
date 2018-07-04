@@ -12,7 +12,7 @@
 
 <meta name="author" content="R.W. Oldford" />
 
-<meta name="date" content="2018-06-26" />
+<meta name="date" content="2018-07-02" />
 
 <title>Visible minorities in Canadian cities</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Visible minorities in Canadian cities</h1>
 <h4 class="author"><em>R.W. Oldford</em></h4>
-<h4 class="date"><em>2018-06-26</em></h4>
+<h4 class="date"><em>2018-07-02</em></h4>
 
 
 
@@ -237,7 +237,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#  in each city.</span>
 <span class="co">#</span>
 
-minorityPercent &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">&quot;Total.population&quot;</span>])
+minorityPercent &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">&quot;Total.population&quot;</span>])
 
 <span class="co">#  Take the opportunity to shorten the Statistics Canada </span>
 <span class="co">#  names of the minorities as well:</span>
@@ -248,14 +248,14 @@ minorityPercent &lt;-<span class="st"> </span><span class="kw">cbind</span>(<spa
                             <span class="st">&quot;% Minority&quot;</span>, <span class="st">&quot;% W Asian&quot;</span>)</code></pre></div>
 <p>We begin by looking at the total visibility minority percentage. Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the <code>linkingGroup</code> is specified to be the string <code>&quot;minority&quot;</code>. This could have been any string – it merely identifies that this histogram will have its display linked with any other plot in the same <code>linkingGroup</code> .</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The proportion of the city population that is a &quot;visible minority&quot;</span>
-<span class="kw">l_hist</span>(minorityPercent[,<span class="st">&quot;% Minority&quot;</span>],
-       <span class="dt">title =</span> <span class="kw">paste</span>(<span class="st">&quot;% Minority in 33 Canadian cities&quot;</span>),
-       <span class="dt">xlabel=</span><span class="st">&quot;percent of population&quot;</span>,
-       <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
-       <span class="dt">yshows=</span><span class="st">&quot;frequency&quot;</span>,
-       <span class="dt">showBinHandle=</span><span class="ot">FALSE</span>,
-       <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
-       <span class="dt">showScales=</span><span class="ot">TRUE</span>
+<span class="kw">l_hist</span>(minorityPercent<span class="op">$</span><span class="st">&quot;% Minority&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;% Minority in 33 Canadian cities&quot;</span>,
+       <span class="dt">xlabel =</span> <span class="st">&quot;percent of population&quot;</span>,
+       <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+       <span class="dt">yshows =</span> <span class="st">&quot;frequency&quot;</span>,
+       <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,
+       <span class="dt">showGuides =</span> <span class="ot">TRUE</span>,
+       <span class="dt">showScales =</span> <span class="ot">TRUE</span>
 )</code></pre></div>
 <p>As can be seen, the visible minority population most of these cities is less than 20% of its total population. But for two cities nearly half of the population is from some visible minority.</p>
 <p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the ‘linkingGroup’ of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
@@ -296,16 +296,16 @@ In contrast, the city with the greatest proportion of its population being <code
 <p>We again use the data from the <code>maps</code> package but now create an interactive map by using Loon’s facility for layering various geometric objects (including map polygons) on top of a scatterplot.</p>
 <p>The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the <code>maps</code> package) are <em>layered</em> on top of the scatterplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_map &lt;-<span class="st"> </span><span class="kw">with</span>(minority,
-              <span class="kw">l_plot</span>(long,lat,
-                     <span class="dt">xlabel=</span><span class="st">&quot;longitude&quot;</span>, <span class="dt">ylabel=</span><span class="st">&quot;latitude&quot;</span>,
-                     <span class="dt">linkingGroup=</span><span class="st">&quot;minority&quot;</span>,
-                     <span class="dt">itemLabel=</span><span class="kw">rownames</span>(minority),
-                     <span class="dt">showLabels=</span><span class="ot">TRUE</span>)
+              <span class="kw">l_plot</span>(long, lat,
+                     <span class="dt">xlabel =</span> <span class="st">&quot;longitude&quot;</span>, <span class="dt">ylabel =</span> <span class="st">&quot;latitude&quot;</span>,
+                     <span class="dt">linkingGroup =</span> <span class="st">&quot;minority&quot;</span>,
+                     <span class="dt">itemLabel =</span> <span class="kw">rownames</span>(minority),
+                     <span class="dt">showLabels =</span> <span class="ot">TRUE</span>)
      )
 
 <span class="co"># Add the map of Canada</span>
 <span class="kw">library</span>(maps)
-landcol &lt;-<span class="st"> &quot;grey95&quot;</span>
+landcol &lt;-<span class="st"> &quot;cornsilk&quot;</span>
 canada &lt;-<span class="st"> </span><span class="kw">l_layer</span>(p_map, 
                   <span class="kw">map</span>(<span class="st">&quot;world&quot;</span>, <span class="st">&quot;Canada&quot;</span>, 
                       <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
@@ -771,16 +771,16 @@ VarDistance &lt;-<span class="st"> </span><span class="kw">dist</span>(<span cla
 o_near &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw">names</span>(minority_star_percent)[o_near]</code></pre></div>
-<pre><code>##  [1] &quot;Korean&quot;   &quot;Japanese&quot; &quot;Other&quot;    &quot;Multiple&quot; &quot;SE.Asian&quot; &quot;Latino&quot;  
-##  [7] &quot;Arab&quot;     &quot;Black&quot;    &quot;S.Asian&quot;  &quot;Chinese&quot;  &quot;Filipino&quot;</code></pre>
+<pre><code>##  [1] &quot;Korean&quot;   &quot;Japanese&quot; &quot;Other&quot;    &quot;Multiple&quot; &quot;Arab&quot;     &quot;Latino&quot;  
+##  [7] &quot;SE.Asian&quot; &quot;Black&quot;    &quot;S.Asian&quot;  &quot;Chinese&quot;  &quot;Filipino&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
 <span class="co"># other should produce less convex shaped glyphs.</span>
 <span class="co"># </span>
 o_far &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(<span class="op">-</span>VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw">names</span>(minority_star_percent)[o_far]</code></pre></div>
-<pre><code>##  [1] &quot;S.Asian&quot;  &quot;Other&quot;    &quot;Chinese&quot;  &quot;SE.Asian&quot; &quot;Black&quot;    &quot;Korean&quot;  
-##  [7] &quot;Latino&quot;   &quot;Multiple&quot; &quot;Filipino&quot; &quot;Arab&quot;     &quot;Japanese&quot;</code></pre>
+<pre><code>##  [1] &quot;S.Asian&quot;  &quot;Other&quot;    &quot;Chinese&quot;  &quot;Latino&quot;   &quot;Korean&quot;   &quot;Black&quot;   
+##  [7] &quot;Japanese&quot; &quot;SE.Asian&quot; &quot;Filipino&quot; &quot;Arab&quot;     &quot;Multiple&quot;</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
 <span class="co"># the cities are laid over top of one another.</span>

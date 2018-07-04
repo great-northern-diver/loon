@@ -73,7 +73,7 @@ par(parOptions)
 #  in each city.
 #
 
-minorityPercent <- cbind(100*minority[,c(1:10,12:14)]/minority[,"Total.population"])
+minorityPercent <- data.frame(100*minority[,c(1:10,12:14)]/minority[,"Total.population"])
 
 #  Take the opportunity to shorten the Statistics Canada 
 #  names of the minorities as well:
@@ -86,14 +86,14 @@ names(minorityPercent) <- c("% Arabic",  "% Black", "% Chinese",
 
 ## ----percentVisible, eval=FALSE------------------------------------------
 #  # The proportion of the city population that is a "visible minority"
-#  l_hist(minorityPercent[,"% Minority"],
-#         title = paste("% Minority in 33 Canadian cities"),
-#         xlabel="percent of population",
-#         linkingGroup="minority",
-#         yshows="frequency",
-#         showBinHandle=FALSE,
-#         showGuides=TRUE,
-#         showScales=TRUE
+#  l_hist(minorityPercent$"% Minority",
+#         title = "% Minority in 33 Canadian cities",
+#         xlabel = "percent of population",
+#         linkingGroup = "minority",
+#         yshows = "frequency",
+#         showBinHandle = FALSE,
+#         showGuides = TRUE,
+#         showScales = TRUE
 #  )
 
 ## ----link, eval=FALSE----------------------------------------------------
@@ -125,16 +125,16 @@ largest3 <- names(sort(apply(minorityPercent[,groups ],
 ## ----locations, eval=FALSE-----------------------------------------------
 #  
 #  p_map <- with(minority,
-#                l_plot(long,lat,
-#                       xlabel="longitude", ylabel="latitude",
-#                       linkingGroup="minority",
-#                       itemLabel=rownames(minority),
-#                       showLabels=TRUE)
+#                l_plot(long, lat,
+#                       xlabel = "longitude", ylabel = "latitude",
+#                       linkingGroup = "minority",
+#                       itemLabel = rownames(minority),
+#                       showLabels = TRUE)
 #       )
 #  
 #  # Add the map of Canada
 #  library(maps)
-#  landcol <- "grey95"
+#  landcol <- "cornsilk"
 #  canada <- l_layer(p_map,
 #                    map("world", "Canada",
 #                        plot=FALSE, fill=TRUE),
