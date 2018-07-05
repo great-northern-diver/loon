@@ -80,3 +80,15 @@ l_cget.loon <- function(target, state) {
     
     obj_eval('cget', dash_state)    
 }
+
+
+#' @export
+l_cget.character <- function(target, state) {
+    widget <- try(l_create_handle(target), silent = TRUE)
+    if ("try-error" %in% class(widget)) {
+        stop(paste0(state, " is not accessible from", target, "via l_cget"))
+    }
+    else {
+        l_cget(widget, state)
+    }
+}
