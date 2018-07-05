@@ -9,7 +9,10 @@ local({
                l_plot(Height, Volume, linkingGroup="trees",
                       title = "p2"))
 
-    cat("\n\n plots p1 and p2 are linked via the linkingGroup: \"trees\"\n\n")
+    cat(paste("\n\n Plots p1 and p2 are linked via the linkingGroup: \"trees\" \n",
+              "\t Select points and change their, size, color, and shape. \n \n"
+    )
+    )
     
     
     cat(paste("\t Next will be a plot, \"p3\", with random glyphs, colors, and sizes, \n", 
