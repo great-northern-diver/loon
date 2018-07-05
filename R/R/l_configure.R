@@ -74,3 +74,14 @@ l_configure.loon <- function(target, ...) {
     
     invisible(target)
 }
+
+#' @export
+l_configure.character <- function(target, ...) {
+    widget <- try(l_create_handle(target), silent = TRUE)
+    if ("try-error" %in% class(widget)) {
+        stop(paste0(target, " is not configurable via l_configure()"))
+    }
+    else {
+        l_configure(widget, ...)
+    }
+}
