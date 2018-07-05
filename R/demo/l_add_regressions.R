@@ -56,4 +56,10 @@ local({
     
     p <- l_plot(x,y)
     addRegressionLinesGUI(p)
-})
+    cat(paste0("Select points in the scatterplot:",
+                 "\n",
+                 "Add a polynomial regression fit (degree 1 to 8) to the selected points."
+    ))
+                 }
+
+)

@@ -57,5 +57,10 @@ local({
         isbusy <- FALSE
     }
     
+    cat(paste("This demonstrates how a change in the shape of a primitive glyph",
+              "can be forced on a pair of scatterplots. \n",
+              "\t Select points in one plot, change the glyph to",
+              "a different shape; second plot will follow course."))
     
-})
+}
+)
