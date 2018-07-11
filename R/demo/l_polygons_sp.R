@@ -92,7 +92,9 @@ if (requireNamespace("sp", quietly = TRUE)) {
         l_layer_hide(p, x1)
         readline("press the return key to continue: Programmatically show the leftmost polygon (x1)")  
         l_layer_show(p, x1)
-        readline("press the return key to continue: Programmatically raise the middle polygon (x2) above the topmost (x5) ... N.B. requires 3 raises")  
+        readline(paste0("press the return key to continue: Programmatically raise the middle polygon (x2) above the topmost (x5)\n",
+                        "\t... N.B. requires 3 raises"))
+        
         l_layer_raise(p, x2) 
         readline("press the return key to raise the middle polygon (x2) again ... ")
         l_layer_raise(p, x2)
@@ -102,7 +104,7 @@ if (requireNamespace("sp", quietly = TRUE)) {
         l_layer_lower(p, x5)
         
         readline("press the return key to continue: Show all polygons and scale to world")  
-        for (layer in c(group1_layer, poly_layer, group2_layer, points_layer, group_polys_layer, 
+        for (layer in list(group1_layer, poly_layer, group2_layer, points_layer, group_polys_layer, 
                         x1, x2, x3, x4, x5)
         ) {
             l_layer_show(p, layer)
