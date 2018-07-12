@@ -9,6 +9,8 @@
 #' 
 #' @return state names
 #' 
+#' @aliases {names.loon}
+#' 
 #' @export
 #' 
 l_state_names <- function(target) {
@@ -25,6 +27,8 @@ l_state_names <- function(target) {
 #' @param x loon object
 #' 
 #' @return state names
+#' 
+#' @aliases {l_state_names}
 #' 
 #' @export
 names.loon <- function(x) {
