@@ -1,6 +1,7 @@
 
 if (requireNamespace("sp", quietly = TRUE)) {
     local({
+        library(sp)
         # Taken from the introductory vignette of the "sp" package
         Sr1 = Polygon(cbind(c(2,4,4,1,2),c(2,3,5,4,2)))
         Sr2 = Polygon(cbind(c(5,4,2,5),c(2,3,2,2)))
@@ -116,6 +117,10 @@ if (requireNamespace("sp", quietly = TRUE)) {
         l_scaleto_world(p)
     })
 } else {
+    cat(paste0("This demo is about drawing \"sp\" package polygons, etc. in loon. \n",
+               "Please install.packages(\"sp\") before trying this demo. \n",
+               "The demo's code can be found at: \n")
+    )
     cat(paste0(' ',
                system.file('demo','l_polygons_sp.R', package = 'loon'),'\n'))
 }
