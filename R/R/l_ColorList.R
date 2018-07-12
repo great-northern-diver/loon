@@ -124,12 +124,16 @@ loon_palette <- function(n) {
 #' @param x a vector with 12 digit hexcolors
 #'    
 #' @details Function throws a warning if the conversion loses information. The
-#'   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
+#'   \code{l_hexcolor} function converts any Tcl color specification to a
 #'   12 digit hexadecimal color representation.
 #'       
 #' @examples 
-#' x <- l_hexcolor(c("red", "blue", "green", "orange"))
+#' x <- l_hexcolor(c("red", "green", "blue", "orange"))
+#' x
 #' hex12tohex6(x)
+#' 
+#' @seealso 
+#' \code{\link{l_hexcolor}}
 #' 
 #' @export
 hex12tohex6 <- function(x) {
