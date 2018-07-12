@@ -22,7 +22,8 @@ Function throws a warning if the conversion loses information. The
   12 digit hexadecimal color representation.
 }
 \examples{
-x <- l_hexcolor(c("red", "blue", "green", "orange"))
+x <- l_hexcolor(c("red", "green", "blue", "orange"))
+x
 hex12tohex6(x)
 
 }
