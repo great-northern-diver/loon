@@ -124,14 +124,13 @@ loon_palette <- function(n) {
 #' @param x a vector with 12 digit hexcolors
 #'    
 #' @details Function throws a warning if the conversion loses information. The
-#'   \code{l_hexcolor} function converts any Tcl color specification to a
+#'   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
 #'   12 digit hexadecimal color representation.
 #'       
 #' @examples 
 #' x <- l_hexcolor(c("red", "green", "blue", "orange"))
 #' x
 #' hex12tohex6(x)
-#' 
 #' 
 #' @export
 hex12tohex6 <- function(x) {
@@ -148,8 +147,6 @@ hex12tohex6 <- function(x) {
 
 #' @title Convert color representations having an alpha transparency level to 6 digit color
 #'   representations
-#' 
-#' @aliases l_colRemoveAlpha
 #' 
 #' @description Colors in the standard tk used by loon do not allow for alpha transparency.
 #' This function allows loon to use color palettes (e.g. \code{\link{l_setColorList}}) that
@@ -173,8 +170,6 @@ l_colRemoveAlpha <- function (col) {
 
 
 #' @title Use custom colors for mapping nominal values to distinct colors
-#'   
-#' @aliases l_setColorList
 #'   
 #' @description Modify loon's color mapping list to a set of custom colors.
 #'   
@@ -321,7 +316,6 @@ l_getColorList <- function() {
 #' @templateVar type ColorBrewer
 #' @template man_setColorList
 #'   
-#' @aliases l_setColorList_ColorBrewer
 #'   
 #' @param palette one of the following RColorBrewer palette name: Set1, Set2,
 #'   Set3, Pastel1, Pastel2, Paired, Dark2, or Accent
@@ -368,8 +362,6 @@ l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
 #'   documentation for \code{\link[grDevices]{hcl}} for more information.
 #'   
 #'   
-#' @aliases l_setColorList_hcl
-#'   
 #' @export
 l_setColorList_hcl <- function(chroma=56, luminance=51, hue_start=231) {
     tcl('::loon::setColorList', 'hcl', chroma, luminance, hue_start)
@@ -378,8 +370,6 @@ l_setColorList_hcl <- function(chroma=56, luminance=51, hue_start=231) {
 
 #' @templateVar type ggplot2
 #' @template man_setColorList
-#'   
-#' @aliases l_setColorList_ggplot2
 #' 
 #' @export
 l_setColorList_ggplot2 <- function() {
@@ -389,8 +379,6 @@ l_setColorList_ggplot2 <- function() {
 
 #' @templateVar type base R
 #' @template man_setColorList
-#'   
-#' @aliases l_setColorList_baseR
 #' 
 #' @export
 l_setColorList_baseR <- function() {
@@ -401,8 +389,6 @@ l_setColorList_baseR <- function() {
 
 #' @templateVar type loon defaults
 #' @template man_setColorList
-#'   
-#' @aliases l_setColorList_loon
 #' 
 #' @export
 l_setColorList_loon <- function() {
