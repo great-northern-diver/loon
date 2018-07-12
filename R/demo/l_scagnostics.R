@@ -3,7 +3,6 @@
 if (requireNamespace("scagnostics", quietly = TRUE)) {
     
     local({
-        library(scagnostics)
         ## Scatterplot Matrix of scagnostic measures
         data <- oliveAcids
         scags <- scagnostics::scagnostics(data)
