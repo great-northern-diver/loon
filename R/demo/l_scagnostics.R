@@ -5,7 +5,7 @@ if (FALSE && requireNamespace("scagnostics", quietly = TRUE)) {
     local({
         ## Scatterplot Matrix of scagnostic measures
         data <- oliveAcids
-        scags <- scagnistics::scagnostics(data)
+        scags <- scagnostics::scagnostics(data)
         scdata <- as.data.frame(t(unclass(scags)))
         npairs <- dim(scdata)[1]
         variablePairs <- rownames(scdata)
