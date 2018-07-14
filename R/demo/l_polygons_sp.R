@@ -1,6 +1,7 @@
 
 if (requireNamespace("sp", quietly = TRUE)) {
     local({
+        library(sp)
         # Taken from the introductory vignette of the "sp" package
         Sr1 = Polygon(cbind(c(2,4,4,1,2),c(2,3,5,4,2)))
         Sr2 = Polygon(cbind(c(5,4,2,5),c(2,3,2,2)))
