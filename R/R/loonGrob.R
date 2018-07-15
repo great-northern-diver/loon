@@ -19,6 +19,8 @@
 #' @import grDevices
 #' @import stats
 #' 
+#' @seealso \code{\link{loonGrob}}
+#' 
 #' @examples 
 #' 
 #' library(grid)
@@ -52,6 +54,8 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' @return a grid grob
 #' 
 #' @import grid
+#' 
+#' @seealso \code{\link{grid.loon}}
 #' 
 #' @export
 #' 

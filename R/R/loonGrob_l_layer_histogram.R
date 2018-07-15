@@ -3,6 +3,7 @@
 #' 
 #' @examples 
 #' 
+#' \dontrun{
 #' ## histogram examples
 #' 
 #' h <- l_hist(iris$Sepal.Length, color=iris$Species)
@@ -28,6 +29,7 @@
 #' 
 #' g <- loonGrob(h)
 #' grid.newpage(); grid.draw(g)
+#' }
 #' 
 #' @export
 loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL) {

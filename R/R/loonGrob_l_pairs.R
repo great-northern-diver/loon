@@ -3,6 +3,7 @@
 #' 
 #' @examples 
 #' 
+#' \dontrun{
 #' ## l_pairs (scatterplot matrix) examples
 #' 
 #' p <- l_pairs(iris[,-5], color=iris$Species)
@@ -11,6 +12,7 @@
 #' lgrob <- loonGrob(p)
 #' grid.newpage()
 #' grid.draw(lgrob)
+#' }
 #' 
 #' @export
 

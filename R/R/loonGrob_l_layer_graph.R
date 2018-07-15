@@ -3,6 +3,7 @@
 #' 
 #' @examples 
 #' 
+#' \dontrun{
 #' ## graph examples
 #' 
 #' G <- completegraph(names(iris[,-5]))
@@ -26,6 +27,7 @@
 #' library(grid)
 #' lgrob <- loonGrob(g)
 #' grid.newpage(); grid.draw(lgrob)
+#' }
 #' 
 #' @export
 

@@ -4,6 +4,7 @@
 #' 
 #' @examples
 #'  
+#' \dontrun{
 #' ## Time series decomposition examples
 #' 
 #' decompose <- decompose(co2) 
@@ -14,6 +15,7 @@
 #' lgrob <- loonGrob(p)
 #' grid.newpage()
 #' grid.draw(lgrob)
+#' }
 #' 
 #' @export
 
