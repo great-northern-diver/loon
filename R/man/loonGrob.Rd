@@ -80,6 +80,7 @@ grid.draw(lgrob)
 }
 
 
+\dontrun{
 ## graph examples
 
 G <- completegraph(names(iris[,-5]))
@@ -103,8 +104,10 @@ con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
 library(grid)
 lgrob <- loonGrob(g)
 grid.newpage(); grid.draw(lgrob)
+}
 
 
+\dontrun{
 ## histogram examples
 
 h <- l_hist(iris$Sepal.Length, color=iris$Species)
@@ -130,6 +133,7 @@ h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
 
 g <- loonGrob(h)
 grid.newpage(); grid.draw(g)
+}
 
 
 ## l_plot scatterplot examples
@@ -150,6 +154,7 @@ g <- loonGrob(p)
 grid.newpage(); grid.draw(g)
 
 
+\dontrun{
 ## navgraph examples
 
 ng <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
@@ -158,8 +163,10 @@ library(grid)
 navGrob <- loonGrob(ng)
 grid.newpage()
 grid.draw(navGrob)
+}
 
 
+\dontrun{
 ## l_pairs (scatterplot matrix) examples
 
 p <- l_pairs(iris[,-5], color=iris$Species)
@@ -168,6 +175,7 @@ library(grid)
 lgrob <- loonGrob(p)
 grid.newpage()
 grid.draw(lgrob)
+}
 
 
 ## Serial axes (radial and parallel coordinate) examples
@@ -179,6 +187,7 @@ library(grid)
 grid.newpage(); grid.loon(s)
 
  
+\dontrun{
 ## Time series decomposition examples
 
 decompose <- decompose(co2) 
@@ -189,5 +198,9 @@ library(grid)
 lgrob <- loonGrob(p)
 grid.newpage()
 grid.draw(lgrob)
+}
 
+}
+\seealso{
+\code{\link{grid.loon}}
 }

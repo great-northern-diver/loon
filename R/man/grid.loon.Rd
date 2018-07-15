@@ -36,3 +36,6 @@ grid.newpage()
 grid.loon(widget)
 
 }
+\seealso{
+\code{\link{loonGrob}}
+}
