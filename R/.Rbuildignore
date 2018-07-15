@@ -1,4 +1,9 @@
-^.*\.Rproj$
-^\.Rproj\.user$
+loon.Rproj
 man-roxygen
 cran-comments.md
+.DS_Store
+.gitignore
+.Rhistory
+.Rproj.user
+../.DS_Store
+../.gitignore
