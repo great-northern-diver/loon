@@ -7,3 +7,5 @@ cran-comments.md
 .Rproj.user
 ../.DS_Store
 ../.gitignore
+^.*\.Rproj$
+^\.Rproj\.user$
