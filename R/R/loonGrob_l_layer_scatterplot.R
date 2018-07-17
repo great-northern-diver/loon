@@ -63,27 +63,26 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  cex = as_r_point_size(s_a$size))
             )
         } else {
-            
             scaleInfo <- get_glyph_scale_info(widget)
             names_scaleInfo <- names(scaleInfo)
             
-            children_grobs <- lapply(seq_len(length(s_a$x)), function(i) {
-                
-                case_i <- list(
-                    x = s_a$x[i],
-                    y = s_a$y[i],
-                    glyph = s_a$glyph[i],
-                    color = s_a$color[i],
-                    size = s_a$size[i],
-                    index = s_a$index[i]
-                )
-                
-                case_i$scaleInfo <- scaleInfo[[which(grepl(case_i$glyph, names_scaleInfo) == TRUE)]]
-                
-                type <- l_glyph_getType(widget, case_i$glyph)
-                
-                loonGlyphGrob(widget, structure(list(), class=type), case_i) 
-            })
+            children_grobs <- lapply(seq_len(length(s_a$x)), 
+                                     function(i) {
+                                         
+                                         case_i <- list(x = s_a$x[i],
+                                                        y = s_a$y[i],
+                                                        glyph = s_a$glyph[i],
+                                                        color = s_a$color[i],
+                                                        size = s_a$size[i],
+                                                        index = s_a$index[i]
+                                         )
+                                         
+                                         case_i$scaleInfo <- scaleInfo[[which(grepl(case_i$glyph, names_scaleInfo) == TRUE)]]
+                                         
+                                         type <- l_glyph_getType(widget, case_i$glyph)
+                                         
+                                         loonGlyphGrob(widget, structure(list(), class=type), case_i) 
+                                     })
             
             
             gTree(
