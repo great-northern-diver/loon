@@ -37,7 +37,7 @@ loonGrob.l_pairs <- function(target, name = NULL, gp = NULL, vp = NULL){
     }
     grobId <- c(1:len_pairs, textGrobId - 0.5)
     lenGrobs <- len_pairs + len_names
-    lgrobObject <- lapply(1:lenGrobs, function(i){
+    lgrob <- lapply(1:lenGrobs, function(i){
         if(i <= len_pairs){
             widgeti <- widget[[i]]
             widgeti['foreground'] <- "white"
@@ -47,7 +47,7 @@ loonGrob.l_pairs <- function(target, name = NULL, gp = NULL, vp = NULL){
             textGrob(names[i - len_pairs], gp = gpar(fontsize = 9))
         }
     })
-    lgrobObject <- lgrobObject[order(grobId)]
+    lgrob <- lgrob[order(grobId)]
     # layout matrix
     layout_matrix <- matrix(rep(NA, len_names^2), nrow = len_names)
     seq_len <- seq(lenGrobs)
@@ -65,7 +65,7 @@ loonGrob.l_pairs <- function(target, name = NULL, gp = NULL, vp = NULL){
     gTree(
         children = gList(
             rectGrob(gp  = gpar(fill = backgroundCol, col = NA)),
-            gridExtra::arrangeGrob(grobs = lgrobObject, 
+            gridExtra::arrangeGrob(grobs = lgrob, 
                                    layout_matrix = layout_matrix,
                                    name = "l_pairs")
         ),
