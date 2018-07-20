@@ -29,6 +29,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
     states <- get_layer_states(widget)
     
     if (!any(states$active)) {
+        # No active points in scatterplot
         grob(name = name, gp = gp, vp = vp)
     } else {
         
@@ -48,6 +49,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
 
         pch <- glyph_to_pch(s_a$glyph)
         if (!any(is.na(pch)) && !any(pch %in% 21:24)) {
+            # No NAs and no points with borders
             pointsGrob(x = s_a$x,
                        y = s_a$y,
                        pch = pch, 
@@ -55,6 +57,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  cex = as_r_point_size(s_a$size))
             )
         } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
+            # No NAs and ALL points with borders
             pointsGrob(x = s_a$x,
                        y = s_a$y,
                        pch = pch, 
@@ -63,9 +66,12 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  cex = as_r_point_size(s_a$size))
             )
         } else {
+            # possibly some NAs (means some points are text, polygons, images, etc.)
+            # and/or a mix of regular and closed points.
             scaleInfo <- get_glyph_scale_info(widget)
             names_scaleInfo <- names(scaleInfo)
             
+            browser()
             children_grobs <- lapply(seq_len(length(s_a$x)), 
                                      function(i) {
                                          
@@ -77,9 +83,23 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                                         index = s_a$index[i]
                                          )
                                          
-                                         case_i$scaleInfo <- scaleInfo[[which(grepl(case_i$glyph, names_scaleInfo) == TRUE)]]
-                                         
                                          type <- l_glyph_getType(widget, case_i$glyph)
+                                         
+                                         scaleInfoLocation <- (grepl(case_i$glyph, names_scaleInfo) == TRUE)
+                                         
+                                         if (sum(scaleInfoLocation) > 1 &
+                                             case_i$glyph %in% c("circle", "square", "triangle")
+                                         ) { # Then there has been some redundant selection
+                                             scaleInfoLocation <-  scaleInfoLocation &
+                                                 (grepl("ocircle", names_scaleInfo) != TRUE) &
+                                                 (grepl("ccircle", names_scaleInfo) != TRUE) &
+                                                 (grepl("osquare", names_scaleInfo) != TRUE) &
+                                                 (grepl("csquare", names_scaleInfo) != TRUE) &
+                                                 (grepl("otriangle", names_scaleInfo) != TRUE) &
+                                                 (grepl("ctriangle", names_scaleInfo) != TRUE) 
+                                         }
+                                         
+                                         case_i$scaleInfo <- scaleInfo[[which(scaleInfoLocation == TRUE)]]
                                          
                                          loonGlyphGrob(widget, structure(list(), class=type), case_i) 
                                      })
