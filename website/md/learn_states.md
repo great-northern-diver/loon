@@ -44,6 +44,9 @@ p <- l_plot(iris[,1:2])
 
 istates <- l_info_states(p)
 names(istates)
+# or together as
+names(p)
+
 
 l_info_states(p, 'x')
 # or
