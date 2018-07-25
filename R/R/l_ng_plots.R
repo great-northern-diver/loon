@@ -55,6 +55,8 @@ l_ng_plots <- function(measures, ...) {
 #' @export
 #' 
 #' @examples 
+#' 
+#' \dontrun{
 #' n <- 100
 #' dat <- data.frame(
 #'    A = rnorm(n), B = rnorm(n), C = rnorm(n),
@@ -94,6 +96,7 @@ l_ng_plots <- function(measures, ...) {
 #' 
 #' # be carful that the vector names are correct
 #' nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
+#' }
 #' 
 l_ng_plots.default <- function(measures, data, separator=":", ...) {
 
@@ -245,12 +248,14 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
     else
         tmp_plots <- spmatrix
     
-    return(list(plots= tmp_plots,
-                graph=g,
-                plot=p,
-                navigator=nav,
-                context=con,
-                env=environment()))
+    plot <- list(plots= tmp_plots,
+                 graph=g,
+                 plot=p,
+                 navigator=nav,
+                 context=con,
+                 env=environment())
+    class(plot) <- c("l_ng_plots", "l_navgraph", "loon")
+    return(plot)
 }
 
 

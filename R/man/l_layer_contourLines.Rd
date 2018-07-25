@@ -72,5 +72,4 @@ if (requireNamespace("MASS", quietly = TRUE)) {
             label=paste0(as.character(dat$Species[1]), " contours"))
   })
 }
-
 }

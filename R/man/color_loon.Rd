@@ -29,11 +29,11 @@ This is the function that loon uses by default to map values to
   \item if all values already represent valid Tk colors (see
   \code{\link{tkcolors}}) then those colors are taken
   
-  \item if the number of distinct values are less than number of values in 
+  \item if the number of distinct values is less than the number of values in 
   loon's color mapping list then they get mapped according to the color list,
   see \code{\link{l_setColorList}} and \code{\link{l_getColorList}}.
   
-  \item if there are more distinct values as there are colors in loon's color
+  \item if there are more distinct values than there are colors in loon's color
   mapping list then loon's own color mapping algorithm is used. See 
   \code{\link{loon_palette}} and the details section in the documentation of 
   \code{\link{l_setColorList}}.

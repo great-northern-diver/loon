@@ -58,8 +58,6 @@ m1d <- data.frame(
 )
 
 nav <- l_ng_ranges(m1d, dat) 
-
-
 }
 \seealso{
 \code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.measures}}, 

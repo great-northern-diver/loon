@@ -2,6 +2,7 @@
 % Please edit documentation in R/l_state_names.R
 \name{names.loon}
 \alias{names.loon}
+\alias{{l_state_names}}
 \title{Get State Names of Loon Object}
 \usage{
 \method{names}{loon}(x)

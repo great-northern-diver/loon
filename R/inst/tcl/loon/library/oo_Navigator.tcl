@@ -229,7 +229,7 @@
 			if {$i >= 0} {
 			    set nedgestogo [expr {[llength $from] - $i - 1}]
 			} else {
-			    error "could not fine node \"$args\" in -from state."
+			    error "could not find node \"$args\" in -from state."
 			}
 		    }
 		    default {
@@ -251,7 +251,7 @@
 			if {$i >= 0} {
 			    set nedgestogo $i
 			} else {
-			    error "could not fine node \"$args\" in -to state"
+			    error "could not find node \"$args\" in -to state"
 			}
 		    }
 		    default {

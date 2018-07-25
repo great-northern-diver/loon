@@ -14,11 +14,11 @@
 #'   \item if all values already represent valid Tk colors (see
 #'   \code{\link{tkcolors}}) then those colors are taken
 #'   
-#'   \item if the number of distinct values are less than number of values in 
+#'   \item if the number of distinct values is less than the number of values in 
 #'   loon's color mapping list then they get mapped according to the color list,
 #'   see \code{\link{l_setColorList}} and \code{\link{l_getColorList}}.
 #'   
-#'   \item if there are more distinct values as there are colors in loon's color
+#'   \item if there are more distinct values than there are colors in loon's color
 #'   mapping list then loon's own color mapping algorithm is used. See 
 #'   \code{\link{loon_palette}} and the details section in the documentation of 
 #'   \code{\link{l_setColorList}}.
@@ -113,20 +113,26 @@ loon_palette <- function(n) {
 
 
 
-# @title Convert 12 digit color representations to 6 digit color
-#   representations
-# 
-# @description 
-# 
-# @param x a vector with 12digit hexcolors
-#    
-# @details Function throws a warning if the conversion looses information. The
-#   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
-#   12 digit hexadecimal color representation.
-#       
-# @examples 
-# x <- l_hexcolor(c("red", "blue", "green", "orange"))
-# hex12tohex6(x)
+#' @title Convert 12 hexadecimal digit color representations to 6 hexidecimal digit 
+#' color representations
+#' 
+#' @description Tk colors must be in 6 hexadecimal format with two hexadecimal
+#' digits for each of the red, green, and blue components.  Twelve hexadecimal digit
+#' colors have 4 hexadecimal digits for each.  This function converts the 12 digit format to the 6 
+#' provided the color is preserved.
+#' 
+#' @param x a vector with 12 digit hexcolors
+#'    
+#' @details Function throws a warning if the conversion loses information. The
+#'   \code{\link{l_hexcolor}} function converts any Tcl color specification to a
+#'   12 digit hexadecimal color representation.
+#'       
+#' @examples 
+#' x <- l_hexcolor(c("red", "green", "blue", "orange"))
+#' x
+#' hex12tohex6(x)
+#' 
+#' @export
 hex12tohex6 <- function(x) {
     # convert to hex6
     col1 <- paste0( "#", substr(x, 2, 3), substr(x, 6, 7), substr(x, 10, 11))
@@ -137,6 +143,31 @@ hex12tohex6 <- function(x) {
     }
     col1
 }
+
+
+#' @title Convert color representations having an alpha transparency level to 6 digit color
+#'   representations
+#' 
+#' @description Colors in the standard tk used by loon do not allow for alpha transparency.
+#' This function allows loon to use color palettes (e.g. \code{\link{l_setColorList}}) that
+#' produce colors with alpha transparency by simply using only the rgb.
+#' 
+#' @param col a vector of colors (potentially) containing an alpha level
+#'       
+#' @examples 
+#' x <- l_colRemoveAlpha(rainbow(6))
+#' # Also works with ordinary color string representations
+#' # since it just extracts the rgb values from the colors.
+#' x <- l_colRemoveAlpha(c("red", "blue", "green", "orange"))
+#' x
+#' 
+#' @export
+l_colRemoveAlpha <- function (col) {
+    if(missing(col)) stop("Please provide a vector of colours.")
+    rgb(t(col2rgb(col)), maxColorValue = 255)
+}
+
+
 
 #' @title Use custom colors for mapping nominal values to distinct colors
 #'   
@@ -226,7 +257,7 @@ hex12tohex6 <- function(x) {
 #'   R package provide various mappings including mappings for qualitative, 
 #'   diverging and sequential values.
 #'   
-#' @param colors vecor with valid color names or hex-encoded colors
+#' @param colors vector with valid color names or hex-encoded colors
 #'   
 #' @return NULL
 #'   
@@ -287,10 +318,10 @@ l_getColorList <- function() {
 #'   
 #'   
 #' @param palette one of the following RColorBrewer palette name: Set1, Set2,
-#'   Set3, Pasetl1, Pastel2, Paired, Dark2, or Accent
+#'   Set3, Pastel1, Pastel2, Paired, Dark2, or Accent
 #'   
 #' @details Only the following palettes in ColorBrewer are available: Set1, 
-#'   Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples 
+#'   Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples 
 #'   below.
 #'   
 #' @export
@@ -306,8 +337,8 @@ l_getColorList <- function() {
 #' l_setColorList_ColorBrewer("Set1")
 #' p <- l_plot(iris)
 l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
-                                                    "Pasetl1", "Pastel2", "Paired",
-                                                    "Dark2", "Accent")) {
+                                                 "Pastel1", "Pastel2", "Paired",
+                                                 "Dark2", "Accent")) {
     palette <- match.arg(palette)
     tcl('::loon::setColorList', 'ColorBrewer', palette)
     invisible()    
@@ -337,7 +368,10 @@ l_setColorList_hcl <- function(chroma=56, luminance=51, hue_start=231) {
     invisible()
 }
 
-# 
+#' @templateVar type ggplot2
+#' @template man_setColorList
+#' 
+#' @export
 l_setColorList_ggplot2 <- function() {
     tcl('::loon::setColorList', 'ggplot2')
     invisible()

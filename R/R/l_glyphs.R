@@ -82,7 +82,62 @@ l_glyph_getLabel <- function(widget, id) {
 #' 
 #' @export
 l_glyph_getType <- function(widget, id) {
-    l_glyph(widget, "getType", id)
+    
+    if (id %in% l_primitiveGlyphs()) {
+        "primitive_glyph"
+    } else {
+        l_glyph(widget, "getType", id)   
+    }
+}
+#' @title The primitive glyphs available to a scatterplot or graph display
+#' 
+#' @description Returns a vector of the available primitive glyphs.
+#' 
+#' 
+#' @details The scatterplot and graph displays both have the n-dimensional state
+#'   \code{'glyph'} that assigns each data point or graph node a glyph (i.e. a 
+#' visual representation). 
+#' 
+#' Loon distinguishes between primitive and non-primitive glyphs: the primitive 
+#' glyphs are always available for use whereas the non-primitive glyphs need to
+#' be first specified and added to a plot before they can be used.
+#' 
+#' The primitive glyphs are:
+#' 
+#' \ifelse{html}{\figure{point_glyph_primitive_types.png}{options: alt="Primitive Glyphs"}}{
+#' \tabular{l}{
+#'   \code{'circle'}, \code{'ocircle'}, \code{'ccircle'}\cr
+#'   \code{'square'}, \code{'osquare'}, \code{'csquare'}\cr
+#'   \code{'triangle'}, \code{'otriangle'}, \code{'ctriangle'}\cr
+#'   \code{'diamond'}, \code{'odiamond'}, \code{'cdiamond'}
+#' }
+#' 
+#' Note that the letter \code{'o'} stands for outline only, and the letter 
+#' \code{'c'} stands for contrast and adds an outline with the
+#' \code{'foreground'} color (black by default).
+#' }
+#' 
+#' @templateVar page learn_R_display_plot
+#' @templateVar section glyphs
+#' @template see_l_help
+#' 
+#' 
+#' @return A character vector of the names of all primitive glyphs in loon.
+#' 
+#' @export
+l_primitiveGlyphs <- function() {
+    c("circle",
+      "ocircle" ,
+      "ccircle",
+      "square" ,
+      "osquare",
+      "csquare",
+      "triangle",
+      "otriangle",
+      "ctriangle",
+      "diamond",
+      "odiamond",
+      "cdiamond")
 }
 
 
@@ -192,8 +247,12 @@ l_glyph_add <- function(widget, type, ...) {
 #' 
 l_glyph_add.default <- function(widget, type, label="", ...) {
     ## as.vector strips attributes
-    structure(l_glyph(widget, "add", type, label=label, ...),
-              widget=as.vector(widget), class = c("loon","l_glyph"))
+    structure(
+        l_glyph(widget, "add", type, label=label, ...),
+        widget = as.vector(widget),
+        class = c(paste0("l_glyph_", type), "l_glyph", "loon")
+    )
+
 }
 
 
@@ -218,8 +277,7 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
     if (is.factor(text))
         text <- as.character(text)
     
-    return(l_glyph_add.default(widget, "text",
-                       text=text, label=label, ...))
+    l_glyph_add.default(widget, "text", text=text, label=label, ...)
 }
 
 
@@ -242,9 +300,9 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
 #' g <- l_glyph_add_pointrange(p, ymin=(1:3)-(1:3)/5, ymax=(1:3)+(1:3)/5)
 #' p['glyph'] <- g
 l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, label="", ...) {
-    return(l_glyph_add.default(widget, "pointrange",
-                       ymin=ymin, ymax=ymax, linewidth=linewidth,
-                       label=label, ...))
+    l_glyph_add.default(widget, "pointrange",
+                        ymin=ymin, ymax=ymax, linewidth=linewidth,
+                        label=label, ...)
 }
 
 
@@ -311,8 +369,8 @@ l_glyph_add_polygon <- function(widget, x, y, showArea=TRUE, label="", ...) {
     if (is.list(y))
         y <- l_Rlist2nestedTclList(y)
     
-    return(l_glyph_add.default(widget, "polygon",
-                       x=x, y=y, showArea=showArea, label=label, ...))
+    l_glyph_add.default(widget, "polygon",
+                        x=x, y=y, showArea=showArea, label=label, ...)
 }
 
 
@@ -353,17 +411,17 @@ l_glyph_add_serialaxes <- function(widget,
         sequence <- names(data)
     }
     
-    return(l_glyph_add.default(widget, "serialaxes",
-                       data=l_data(data),
-                       sequence=sequence,
-                       linewidth=linewidth,
-                       scaling=scaling,
-                       axesLayout=axesLayout,
-                       showAxes=showAxes,
-                       axesColor=axesColor,
-                       showEnclosing=showEnclosing,
-                       bboxColor=bboxColor,
-                       label=label ,...))
+    l_glyph_add.default(widget, "serialaxes",
+                        data = l_data(data),
+                        sequence=sequence,
+                        linewidth=linewidth,
+                        scaling=scaling,
+                        axesLayout=axesLayout,
+                        showAxes=showAxes,
+                        axesColor=axesColor,
+                        showEnclosing=showEnclosing,
+                        bboxColor=bboxColor,
+                        label=label ,...)
 }
 
 

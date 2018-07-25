@@ -7,7 +7,7 @@
 l_setColorList(colors)
 }
 \arguments{
-\item{colors}{vecor with valid color names or hex-encoded colors}
+\item{colors}{vector with valid color names or hex-encoded colors}
 }
 \description{
 Modify loon's color mapping list to a set of custom colors.

@@ -1,3 +1,4 @@
+varia/*
 *~
 .DS_Store
 ._.DS_Store
@@ -16,3 +17,4 @@ website/md/generated/
 .Rproj.user
 debug/bugs/known_bugs.html
 loon.Rcheck/
+R.Rcheck/

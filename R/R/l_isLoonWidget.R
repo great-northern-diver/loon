@@ -11,12 +11,12 @@
 #'   
 #' @export
 l_isLoonWidget <- function(widget) {
-
-    isLoon <- as.logical(as.character(tcl('::loon::isKnownWidget', widget)))
-
-    if (isLoon) {
-        return(TRUE)
-    } else {
-        return(FALSE)
+    if(is.list(widget)){
+        FALSE
+    }else{
+        isLoon <- as.logical(as.character(tcl('::loon::isKnownWidget', widget)))
+        
+        if (isLoon) TRUE
+        else FALSE
     }
 }

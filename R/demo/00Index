@@ -4,7 +4,7 @@ l_glyph_sizes    size mapping to various glyph types
 l_layers    demonstrate layer types
 l_linking    linking examples
 l_map    layer a map from the map R package
-l_map_sp    layer a map with class sp as defined in the sp R package
+l_polygons_sp    layer polygons with class sp as defined in the sp R package
 l_power    scatterplot and two scales that control the power transformation for each axis
 l_timeseries    seasonal trend decomposition stl
 l_regression    layer fit, confidence, and prediction intervals
