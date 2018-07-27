@@ -174,7 +174,6 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                gp = gpar(fontfamily = xlabelFont$family, 
                                          fontsize = xlabelFont$size,
                                          fontface = xlabelFont$face
-
                                          ), 
                                name = "x label")
         ylabelGrob <- textGrob(widget['ylabel'], 
@@ -206,6 +205,9 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     gTree(
         children = gList(
+            rectGrob(gp = gpar(col = NA, 
+                               fill = as_hex6color(widget['background'])),
+                     name = "bbox") ,
             gTree(
                 children = gList(
                     if (showLabels) {
@@ -245,10 +247,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                     }
                                 }))),
                             name = "guide")
-                    } else {
-                        rectGrob(gp = gpar(col = NA, 
-                                           fill = as_hex6color(widget['background'])),
-                                 name = "bbox") },
+                    },
                     if (showScales) {
                         gList(
                             xaxisGrob(
@@ -435,6 +434,7 @@ loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
 loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
     
     states <- get_layer_states(target)
+    justify <- states$anchor[[1]]
     
     if(length(states$x)!=0  & length(states$y)!=0) {
         gTree(
@@ -442,7 +442,8 @@ loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
                 textGrob(
                     label = states$text, x = states$x, y = states$y,
                     rot = states$angle,
-                    just = states$anchor,
+                    hjust = justify[1],
+                    vjust = justify[2],
                     gp=gpar(fontsize= as_r_text_size(states$size), 
                             col=states$color),
                     name = "l_layer_text"
@@ -503,8 +504,9 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
         size  <- as_r_text_size(states$size[active])
         angle  <- states$angle[active]
         anchor  <- states$anchor[active]
-        rotation  <- states$rot[active]
-        justification  <- states$just[active]
+        justify  <- states$anchor[active]
+        # rotation  <- states$rot[active]
+        # justification  <- states$just[active]
         color <- states$color[active]
         textGrobs <- lapply(seq_along(x), 
                             function(i) {
@@ -513,7 +515,9 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
                                     x = x[i], 
                                     y = y[i],
                                     rot = angle[i],
-                                    just = anchor[i],
+                                    # just = anchor[i],
+                                    hjust = justify[[i]][1],
+                                    vjust = justify[[i]][2],
                                     gp=gpar(fontsize= size[i], col=color[i])
                                 )
                             }
@@ -695,7 +699,7 @@ as_r_point_size <- function(size) {
 as_r_text_size <- function(size){
     if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- 1.5*size
+        size <- 4 * sqrt(size)
         size[size < 0.1] <- 0.1
     }
     size
@@ -851,10 +855,42 @@ get_layer_states <- function(target, omit = NULL) {
     states_info <- l_info_states(obj_states)
     state_names <- setdiff(names(states_info), c(omit, cartesian_model_widget_states))
     
+    # states <- setNames(lapply(state_names, 
+    #                           function(state) l_cget(target, state)), 
+    #                    state_names)
     states <- setNames(lapply(state_names, 
-                              function(state) l_cget(target, state)), 
+                              function(state) {
+                                  l_cget.state <- l_cget(target, state)
+                                  switch(
+                                      state,
+                                      "anchor" = {
+                                          lapply(l_cget.state, function(l){
+                                              switch(l, 
+                                                     "center" = c(0.5, 0.5), 
+                                                     "n" = c(0.5, 1), 
+                                                     "ne" = c(1, 1), 
+                                                     "e" = c(1, 0.5), 
+                                                     "se" = c(1, 0), 
+                                                     "s" = c(0.5, 0), 
+                                                     "sw" = c(0, 0),
+                                                     "w" = c(0, 0.5), 
+                                                     "nw" = c(0, 1))
+                                          })
+                                      },
+                                      "justify" = {
+                                          lapply(l_cget.state, function(l){
+                                              switch(l, 
+                                                     "left" = c(1, 0.5), 
+                                                     "center" = c(0.5, 0.5), 
+                                                     "right" = c(0, 0.5)
+                                              )
+                                          }) 
+                                      },
+                                      l_cget.state
+                                  )
+                              }), 
                        state_names)
-    
+
     # Add Coordinates
     if (!is(layer, "l_layer_group")) {
         states <- c(xy_coords_layer(layer), states)
