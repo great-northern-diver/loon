@@ -18,23 +18,33 @@
 #' 
 #' @export
 
+
+
 loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
     
-    switch(loonGrob_layoutType(target),
-           default = {
-               plots <- l_getPlots(target)
-               grobs <- lapply(plots, function(w){loonGrob(w)})
-               locations <- l_getLocations(target)
-               is_locationNames <- names(locations) %in% c("ncol", "nrow", "layout_matrix", "heights", "widths")
-               if(!all(is_locationNames)) {
-                   locations <- locations[is_locationNames]  
-               } 
-               arrangeGrob.args <- c(grobs = grobs, locations) 
-           },
-           arrangeGrobArgs = {
-               arrangeGrob.args <- l_get_arrangeGrobArgs(target)
-           },
-           stop("target has unknown loonGrob_layout type")
+    arrangeGrob.args <- switch(loonGrob_layoutType(target),
+                               default = {
+                                   plots <- l_getPlots(target)
+                                   grobs <- lapply(plots, function(w){loonGrob(w)})
+                                   locations <- l_getLocations(target)
+                                   is_locationNames <- names(locations) %in% c("ncol", "nrow", "layout_matrix", "heights", "widths")
+                                   if(!all(is_locationNames)) {
+                                       warning(
+                                         paste(c("l_getLocations() returned some named components not in ",
+                                               "{ncol, nrow, layout_matrix, heights, widths}.", "\n",
+                                               "Only {",  
+                                               paste(names(locations)[is_locationNames], collapse=", "),
+                                               "} will be used to determine location."
+                                               )
+                                         ))
+                                   locations <- locations[is_locationNames]
+                                   }
+                                   c(grobs = grobs, locations) 
+                               },
+                               arrangeGrobArgs = {
+                                   l_get_arrangeGrobArgs(target)
+                               },
+                               stop("target has unknown loonGrob_layout type")
     )
     
     
@@ -54,6 +64,7 @@ loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
         gp = gp
     )
 }
+
 
 loonGrob_layoutType <- function(target) {
     UseMethod("loonGrob_layoutType", target)
