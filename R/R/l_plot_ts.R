@@ -225,7 +225,7 @@ l_plot_ts <- function(stlOrDecomposedTS,
     
     structure(
         list(original = p1, trend = p2, seasonal = p3, remainder = p4), 
-        class = c("l_ts", "loon")
+        class = c("l_ts", "l_compound", "loon")
     )
 }
 
