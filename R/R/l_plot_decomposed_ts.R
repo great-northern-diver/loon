@@ -56,7 +56,7 @@ l_plot.decomposed.ts <- function(x, y = NULL,
     if (!is.null(y)) warning("value of y argument is ignored")
     if (is.null(lcolor)) lcolor <- l_getOption("foreground")
     if (is.null(pcolor)) pcolor <- l_getOption("foreground")
-    l_plotForts(x, 
+    l_plot_ts(x, 
                 pcolor = pcolor, size = size,
                 lcolor = lcolor, linewidth = linewidth, 
                 xlabels = xlabels,  ylabels = ylabels, 
