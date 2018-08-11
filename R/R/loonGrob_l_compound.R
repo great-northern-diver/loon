@@ -18,10 +18,7 @@
 #' 
 #' @export
 
-
-
 loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
-    
     arrangeGrob.args <- switch(loonGrob_layoutType(target),
                                default = {
                                    plots <- l_getPlots(target)
@@ -39,7 +36,7 @@ loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
                                          ))
                                    locations <- locations[is_locationNames]
                                    }
-                                   c(grobs = grobs, locations) 
+                                   c(list(grobs = grobs), locations) 
                                },
                                arrangeGrobArgs = {
                                    l_get_arrangeGrobArgs(target)
@@ -49,12 +46,15 @@ loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
     
     
     if (!"name" %in% names(arrangeGrob.args)) {
-        arrangeGrob.args <- c(
-            list(name = class(target)[1]),
-            arrangeGrob.args
+        arrangeGrob.args <- c(name = class(target)[1],
+                              arrangeGrob.args
         )
     }
     
+    # arrangeGrob.args <- c(arrangeGrob.args,       
+    #                       name = name, 
+    #                       vp = vp , 
+    #                       gp = gp)
     gTree( 
         children = gList(
             do.call(gridExtra::arrangeGrob,  arrangeGrob.args)
