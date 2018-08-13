@@ -71,7 +71,6 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
             scaleInfo <- get_glyph_scale_info(widget)
             names_scaleInfo <- names(scaleInfo)
             
-            browser()
             children_grobs <- lapply(seq_len(length(s_a$x)), 
                                      function(i) {
                                          

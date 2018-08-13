@@ -708,8 +708,8 @@ as_r_point_size <- function(size) {
 as_r_text_size <- function(size){
     if (is.numeric(size)) {
         # trial and error to choose scale for size
-        size <- 4 * sqrt(size)
-        size[size < 0.1] <- 0.1
+        size <- 1 + 1.2 * (1 + size)^0.88
+        #size[size < 0.1] <- 0.1
     }
     size
 }
