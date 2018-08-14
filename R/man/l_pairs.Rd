@@ -4,10 +4,19 @@
 \alias{l_pairs}
 \title{Scatterplot Matrix in Loon}
 \usage{
-l_pairs(data, parent = NULL, ...)
+l_pairs(data, showHistoram = FALSE, showSerialAxes = FALSE,
+  hist_height_prop = 1, hist_diag = FALSE, parent = NULL, ...)
 }
 \arguments{
 \item{data}{a data.frame with numerical data to create the scatterplot matrix}
+
+\item{showHistoram}{show histograms of each varible or not. Default is FALSE}
+
+\item{showSerialAxes}{show serialAxes or not. Default is FALSE}
+
+\item{hist_height_prop}{If show histograms, the proportion between the height of histograms and the height of scatterplots}
+
+\item{hist_diag}{If show histograms, display histograms on the diagonal}
 
 \item{parent}{parent widget path}
 
