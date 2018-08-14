@@ -1,8 +1,8 @@
 Package: loon
 Type: Package
 Title: Interactive Statistical Data Visualization
-Version: 1.1.2
-Date: 2018-07-15
+Version: 1.1.3
+Date: 2018-08-15
 Authors@R: c(person(given = "Adrian", family = "Waddell", 
                     email = "adrian@waddell.ch", 
                     role = c("aut", "cre")),
@@ -47,7 +47,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
+Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-VignetteBuilder: 
-    knitr
+VignetteBuilder: knitr
