@@ -79,7 +79,7 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
     navgraph <- list(graph=g, plot=plot, graphswitch=gs,
                      navigator=navigator, context=context)
     
-    class(navgraph) <- c("l_navgraph", "loon")
+    class(navgraph) <- c("l_navgraph", "l_compound", "loon")
     
     navgraph
 }

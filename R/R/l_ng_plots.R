@@ -254,7 +254,7 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
                  navigator=nav,
                  context=con,
                  env=environment())
-    class(plot) <- c("l_ng_plots", "l_navgraph", "loon")
+    class(plot) <- c("l_ng_plots", "l_navgraph", "l_compound", "loon")
     return(plot)
 }
 

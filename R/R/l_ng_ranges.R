@@ -326,7 +326,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
         env=environment()
     )
     
-    class(plot) <- c("l_ng_ranges", "l_navgraph", "loon")
+    class(plot) <- c("l_ng_ranges", "l_navgraph", "l_compound", "loon")
     
     return(plot)
 }

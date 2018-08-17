@@ -117,48 +117,6 @@ l_get_arrangeGrobArgs.l_compound <- function(target){
     stop("l_get_arrangeGrobArgs.l_compound has no valid inheritance; needs to be specialized for each type of l_compound")
 }
 
-#' For the target compound loon plot, determines all the loon plots
-#' in that compound plot.
-#'
-#' @param target the (compound) loon  plot to be laid out.
-#' @return a list of the named arguments and their values to be passed to
-#' `gridExtra::arrangeGrob()`.
-#' 
-#' @export
-l_getPlots <- function(target) {
-    UseMethod("l_getPlots", target)
-}
-
-l_getPlots.default <- function(target) {
-    stop("l_getPlots.default has no valid inheritance; not an l_compound plot")
-}
-
-l_getPlots.l_compound <- function(target){
-    stop("l_getPlots.l_compound has no valid inheritance; needs to be specialized for each type of l_compound")
-}
-
-
-#' For the target compound loon plot, determines location (only and excluding the grobs)
-#' arguments to pass to `gridExtra::arrangeGrob()`
-#'
-#' @param target the (compound) loon  plot whose locations are needed lay it out.
-#' @return a list of an appropriate subset of the named location arguments 
-#' `c("ncol", "nrow", "layout_matrix", "heights", "widths")` and their values 
-#'  to be passed to `gridExtra::arrangeGrob()`.
-#' 
-#' @export
-l_getLocations <- function(target) {
-    UseMethod("l_getLocations", target)
-}
-
-l_getLocations.default <- function(target) {
-    stop("l_getLocations.default has no valid inheritance; not an l_compound plot")
-}
-
-l_getLocations.l_compound <- function(target) {
-        stop("l_getLocations.l_compound  has no valid inheritance; needs to be specialized for each type of l_compound")
-}
-
 
 #' For the target compound loon plot, creates the final grob from
 #' the class of the `target`` and the `arrangeGrob.args`

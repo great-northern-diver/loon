@@ -5,7 +5,6 @@ loonGrob_layoutType.l_pairs <- function(target) {
 }
 
 
-#' @export
 l_get_arrangeGrobArgs.l_pairs <- function(target) {
     widget <- target
     len_widget <- length(widget)
@@ -122,7 +121,6 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     )
 }
 
-#' @export
 l_createCompoundGrob.l_pairs <- function(target, arrangeGrob.args){
     backgroundCol <- "grey94"
     grobTree(
