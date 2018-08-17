@@ -5,14 +5,17 @@
 #'   widgets
 #'   
 #' @param data a data.frame with numerical data to create the scatterplot matrix
-#' @param showHistoram show histograms of each varible or not. Default is FALSE
-#' @param showSerialAxes show serialAxes or not. Default is FALSE
-#' @param hist_height_prop If show histograms, the proportion between the height of histograms and the height of scatterplots
-#' @param hist_diag If show histograms, display histograms on the diagonal
+#' @param showHistograms logical (default FALSE) to show histograms of each variable or not
+#' @param histLocation one "edge" or "diag", when showHistograms = TRUE
+#' @param histHeightProp a positive number giving the height of the histograms as a proportion of the height of the scatterplots
+#' @param histArgs arguments to modify the `l_hist` states
+#' @param showSerialAxes logical (default FALSE) indication of whether to show a serial axes plot 
+#' in the bottom left of the pairs plot (or not)
+#' @param serialAxesArgs additional arguments given to `l_serialaxes()` 
 #' @template param_parent
-#' @param ... named arguments to modify the scatterplot states
+#' @param ... named arguments to modify the `l_plot` states of the scatterplots
 #' 
-#' @return a list with scatterplot handles
+#' @return a list with handles for the plots
 #' 
 #' @seealso \code{\link{l_plot}}
 #' 
@@ -20,9 +23,11 @@
 #' 
 #' @examples
 #' p <- l_pairs(iris[,-5], color=iris$Species)
+#' 
+#' p <- l_pairs(iris[,-5], color=iris$Species, showHistograms = TRUE, showSerialAxes = TRUE)
 
-l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_height_prop = 1, 
-                    hist_diag = FALSE, parent=NULL, ...) {
+l_pairs <- function(data, showHistograms = FALSE, histLocation = c("edge", "diag"), histHeightProp = 1, histArgs = list(),
+                    showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL, ...) {
 
     args <- list(...)
     if(!identical(class(data), "data.frame")) { # use of identical to deal with tibbles
@@ -77,67 +82,41 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
     ## pair is
     ##  1  1  1  2  2  3
     ##  2  3  4  3  4  4
-    cellExpand <- nvar - 1
+    cells <- nvar - 1
     text_adjustValue <- 1
     scatter_adjustValue <- 0
     span <- 1
-    if (showHistoram) {
-        if(hist_diag & hist_height_prop != 1) {
-            warning("hist_height_prop must be 1 when histograms are placed on diagonal")
-        }
-        hist_args <- args
-        hist_args[['showStackedColors']] <- TRUE
-        hist_args[['showOutlines']] <- FALSE
+    histLocation <- match.arg(histLocation)
+    
+    if (showHistograms) {
+        histArgs <- c(args, histArgs)
+        if(is.null(histArgs[['showStackedColors']])) histArgs[['showStackedColors']] <- TRUE
+        if(is.null(histArgs[['showOutlines']])) histArgs[['showOutlines']] <- FALSE
+        if(is.null(histArgs[['yshows']])) histArgs[['yshows']] <- "density"
+        if(is.null(histArgs[['showBinHandle']])) histArgs[['showBinHandle']] <- FALSE
         histograms <- list()
-
-        if(hist_diag) {
-            for(i in 1:nvar){
-                hist_args[['x']] <- as.numeric(data[, i])
-                hist_args[['xlabel']] <- varnames[i]
-                hist_args[['swapAxes']] <- FALSE
-                histograms[[i]] <- do.call(l_hist, hist_args)
-                names(histograms)[i] <- paste('x',i,'y',i, sep='')
-            }
-            # throw errors
-            if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
-                if(new.toplevel) tkdestroy(parent)
-                stop("histogram could not be created.")
-            }
-            sapply(seq_len(nvar), 
-                   function(i) {
-                       h <- histograms[[i]]
-                       tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
-                   }
-            )
-            # grid layout
-            lapply(seq_len(nvar), 
-                   function(i){
-                       tkgrid(histograms[[i]], row = (i -1), column = (i-1), 
-                              rowspan = span, columnspan = span,
-                              sticky="nesw") 
-                   }
-            )
-        } else {
-            span <- ifelse(round(1/hist_height_prop) >= 1, 1, round(1/hist_height_prop))
+        
+        if(histLocation == "edge") {
+            span <- ifelse(round(1/histHeightProp) >= 1, 1, round(1/histHeightProp))
             # The first half are top hists, the second half are right hists
             for(i in 1:(2*nvar)){
                 if (i <= nvar) {
-                    hist_args[['x']] <- as.numeric(data[, i])
-                    hist_args[['xlabel']] <- varnames[i]
+                    histArgs[['x']] <- as.numeric(data[, i])
+                    histArgs[['xlabel']] <- varnames[i]
                     # top level histograms  
-                    hist_args[['swapAxes']] <- FALSE
+                    histArgs[['swapAxes']] <- FALSE
                     ix <- i
                     iy <- 1
                 } else {
-                    hist_args[['x']] <- as.numeric(data[, i - nvar])
-                    hist_args[['xlabel']] <- varnames[i - nvar]
+                    histArgs[['x']] <- as.numeric(data[, i - nvar])
+                    histArgs[['xlabel']] <- varnames[i - nvar]
                     # right level histograms  
-                    hist_args[['swapAxes']] <- TRUE
+                    histArgs[['swapAxes']] <- TRUE
                     ix <- nvar + 1 
                     iy <- i - nvar + 1
                 }
-                histograms[[i]] <- do.call(l_hist, hist_args)
-                names(histograms)[i] <- paste('x',ix,'y',iy, sep='')
+                histograms[[i]] <- do.call(l_hist, histArgs)
+                names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
             }
             # throw errors
             if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
@@ -148,9 +127,9 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
                    function(i) {
                        h <- histograms[[i]]
                        if(i <= nvar){
-                           tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50 * hist_height_prop)
+                           tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50 * histHeightProp)
                        } else {
-                           tkconfigure(paste(h,'.canvas',sep=''), width=50 * hist_height_prop, height=50)
+                           tkconfigure(paste(h,'.canvas',sep=''), width=50 * histHeightProp, height=50)
                        }
                    }
             )
@@ -169,29 +148,60 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
                    }
             )
             
-            cellExpand <- nvar
+            cells <- nvar
             text_adjustValue <- 0
             scatter_adjustValue <- 1
+        } else {
+            if(histHeightProp != 1) warning("histHeightProp must be 1 when histograms are placed on diagonal")
+            for(i in 1:nvar){
+                histArgs[['x']] <- as.numeric(data[, i])
+                histArgs[['xlabel']] <- varnames[i]
+                histArgs[['swapAxes']] <- FALSE
+                histograms[[i]] <- do.call(l_hist, histArgs)
+                xText <- histograms[[i]]['panX'] + histograms[[i]]['deltaX']/(2*histograms[[i]]['zoomX'])
+                yText <- histograms[[i]]['panY'] + histograms[[i]]['deltaY']/(2*histograms[[i]]['zoomY'])
+                layerText <- l_layer_text(histograms[[i]], xText, yText, text = names(data)[i], 
+                                          color = "black", size = 8)
+                names(histograms)[i] <- paste('x',i,'y',i, sep="")
+            }
+            # throw errors
+            if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
+                if(new.toplevel) tkdestroy(parent)
+                stop("histogram could not be created.")
+            }
+            sapply(seq_len(nvar), 
+                   function(i) {
+                       h <- histograms[[i]]
+                       tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
+                   }
+            )
+            # grid layout
+            lapply(seq_len(nvar), 
+                   function(i){
+                       tkgrid(histograms[[i]], row = (i-1), column = (i-1), 
+                              rowspan = span, columnspan = span,
+                              sticky="nesw") 
+                   }
+            )
         }
     }
 
     if (showSerialAxes) {
-        seriel_args <- args
-        seriel_args[['data']] <- data
-        seriel_args[['showScales']] <- NULL
-        seriel_args[['swapAxes']] <- NULL
-        seriel_args[['axesLayout']] <- "parallel"
-        serielAxesSpan <- floor(nvar/2)
-        serialAxes <- do.call(l_serialaxes, seriel_args)
+        serialAxesArgs <- c(args, serialAxesArgs)
+        serialAxesArgs[['data']] <- data
+        serialAxesArgs[['showScales']] <- NULL
+        serialAxesArgs[['swapAxes']] <- NULL
+        serialAxesArgs[['axesLayout']] <- "parallel"
+        serialAxesSpan <- floor(nvar/2)
+        serialAxes <- do.call(l_serialaxes, serialAxesArgs)
         tkconfigure(paste(serialAxes,'.canvas',sep=''), 
-                    width= serielAxesSpan * 50, 
-                    height = serielAxesSpan * 50)
+                    width= serialAxesSpan * 50, 
+                    height = serialAxesSpan * 50)
         tkgrid(serialAxes, 
-               row = (cellExpand - serielAxesSpan) * span + 1, column = 0, 
-               rowspan = serielAxesSpan * span, columnspan = serielAxesSpan * span,
+               row = (cells - serialAxesSpan) * span + 1, column = 0, 
+               rowspan = serialAxesSpan * span, columnspan = serialAxesSpan * span,
                sticky="nesw") 
     }
-    
     scatterplots <- vector(mode="list", dim(pair)[2])
     
     ## create first plot
@@ -202,11 +212,11 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
         args[['xlabel']] <- varnames[ix]
         args[['ylabel']] <- varnames[iy]
         scatterplots[[i]] <- do.call(l_plot, args)
-        # reset names (if showHistogram)
-        if (showHistoram & !hist_diag) {
-            names(scatterplots)[i] <- paste('x',ix,'y',iy + 1, sep='')
+        # reset names (if showHistograms)
+        if (showHistograms & histLocation == "edge") {
+            names(scatterplots)[i] <- paste('x',ix,'y',iy + 1, sep="")
         } else {
-            names(scatterplots)[i] <- paste('x',ix,'y',iy, sep='')  
+            names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")  
         }
     }
     
@@ -221,8 +231,8 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
                tkconfigure(paste(p,'.canvas',sep=''), width=50, height=50)
            }
     )
-    ## grid layout
     
+    ## grid layout
     apply(rbind(unlist(scatterplots), pair - 1), 2, 
           function(obj) {
               tkgrid(obj[1], 
@@ -235,24 +245,26 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
     )
     
     ## Column and Row wheight such that the cells expand
-    for (i in seq(0, cellExpand)) {
+    for (i in seq(0, cells)) {
         tkgrid.columnconfigure(child, i, weight = 1)
         tkgrid.rowconfigure(child, i, weight = 1)
     }
+    
     ## Add Variable Label
-    maxchar <- max(sapply(names(data), nchar))
-    strf <- paste("%-", maxchar,'s', sep='')
-    for (i in 1:nvar) {
-        lab <- as.character(tcl('label', as.character(l_subwin(child,'label')),
-                                text= sprintf(strf, names(data)[i])))
-        tkgrid(lab, row = (i - text_adjustValue - 1) * span + 1, column = (i - 1) * span,
-               rowspan = span, columnspan = span)
+    if (!showHistograms | all(c(showHistograms, histLocation == "edge"))){
+        maxchar <- max(sapply(names(data), nchar))
+        strf <- paste("%-", maxchar,'s', sep='')
+        for (i in 1:nvar) {
+            lab <- as.character(tcl('label', as.character(l_subwin(child,'label')),
+                                    text= sprintf(strf, names(data)[i])))
+            tkgrid(lab, row = (i - text_adjustValue - 1) * span + 1, column = (i - 1) * span,
+                   rowspan = span, columnspan = span)
+        }
     }
     
     if(new.toplevel) {
         tkpack(child, fill="both", expand=TRUE)
     }
-    
     plotsHash <- vector(mode="list", dim(pair)[2])
     for (i in 1:dim(pair)[2]) {
         ix <- pair[2,i]
@@ -263,23 +275,23 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
         
         tmpY <- which(pair[1,] == iy)
         shareY <- tmpY[tmpY != i]
-        plotsHash[[paste("y_",scatterplots[i],sep="")]] <- scatterplots[shareY]
-        if(showHistoram) {
-            plotsHash[[paste("x_",scatterplots[i],sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i]])
-            if(hist_diag) {
-                plotsHash[[paste("swap_hist_",scatterplots[i],sep="")]] <- histograms[pair[1,i]]
+        plotsHash[[paste("scatter_y_",scatterplots[i],sep="")]] <- scatterplots[shareY]
+        if(showHistograms) {
+            plotsHash[[paste("scatter_x_",scatterplots[i],sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i]])
+            if(histLocation == "edge") {
+                plotsHash[[paste("swap_hist_",scatterplots[i],sep="")]] <- histograms[pair[1,i] + nvar] 
             } else {
-                plotsHash[[paste("swap_hist_",scatterplots[i],sep="")]] <- histograms[pair[1,i] + nvar]  
+                plotsHash[[paste("swap_hist_",scatterplots[i],sep="")]] <- histograms[pair[1,i]]
             }
         } else {
-            plotsHash[[paste("x_",scatterplots[i],sep="")]] <- scatterplots[shareX]
+            plotsHash[[paste("scatter_x_",scatterplots[i],sep="")]] <- scatterplots[shareX]
         }
     }
     
     ## Make bindings for scatter synchronizing zoom and pan
     busy <- FALSE
 
-    synchronizeBindings <- function(W) {
+    synchronizeScatterBindings <- function(W) {
         #print(paste(W, ', busy', busy))
         if (!busy) {
             busy <<- TRUE
@@ -288,13 +300,13 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
             panX <- W['panX']; panY <- W['panY']
             deltaX <- W['deltaX']; deltaY <- W['deltaY']
             
-            lapply(plotsHash[[paste("x_",W,sep="")]], function(p) {
+            lapply(plotsHash[[paste("scatter_x_",W,sep="")]], function(p) {
                 l_configure(p, zoomX=zoomX, panX=panX, deltaX=deltaX)
             })
-            lapply(plotsHash[[paste("y_",W,sep="")]], function(p) {
+            lapply(plotsHash[[paste("scatter_y_",W,sep="")]], function(p) {
                 l_configure(p, zoomY=zoomY, panY=panY, deltaY=deltaY)
             })
-            if (showHistoram) {
+            if (showHistograms) {
                 lapply(plotsHash[[paste("swap_hist_",W,sep="")]], function(p) {
                     l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY)
                 }) 
@@ -305,40 +317,117 @@ l_pairs <- function(data, showHistoram = FALSE, showSerialAxes = FALSE, hist_hei
         }
     }
     
-    lapply(scatterplots, function(p) {
-        tcl(p, 'systembind', 'state', 'add',
-            c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-            synchronizeBindings)
-    })
-        
+    lapply(scatterplots, 
+           function(p) {
+               tcl(p, 'systembind', 'state', 'add',
+                   c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
+                   synchronizeScatterBindings)
+           }
+    )
+    
     # forbidden scatter plots
-    lapply(scatterplots, function(p) {
+    lapply(scatterplots,
+           function(p) {
                tcl(p, 'systembind', 'state', 'add',
                    c('showLabels', 'showScales', 'swapAxes'),
-                   undoStateChanges)
-           })
+                   undoScatterStateChanges)
+           }
+    )
 
     plots <- scatterplots
-    if (showHistoram) {
-        # forbidden histogram states (both top and right)
+    if (showHistograms) {
+        # synchronize hist bindings
+        histsHash <- list()
+        namesHist <- names(histograms)
+        namesScatter <- names(scatterplots)
+        
+        scatterLayout <- layout(namesScatter)
+        scatterX <- scatterLayout$x
+        scatterY <- scatterLayout$y
+        
+        if(histLocation == "edge") {
+            for(i in 1:length(histograms)) {
+                nameHist <- namesHist[i]
+                if(i != 1 & i != length(histograms)) {
+                    if(i <= nvar) {
+                        histX <- layout(nameHist)$x
+                        shareX <- which(scatterX %in% histX == TRUE)
+                        histsHash[[paste("hist_x_", histograms[i],sep="")]] <- c(scatterplots[shareX])  
+                    } else {
+                        histY <- layout(nameHist)$y
+                        shareY <- which(scatterY %in% histY == TRUE)
+                        histsHash[[paste("hist_y_", histograms[i],sep="")]] <- c(scatterplots[shareY]) 
+                    }
+                }
+            }
+            
+        } else {
+           for(i in 1:length(histograms)){
+               nameHist <- namesHist[i]
+               histLayout <- layout(nameHist)
+               histX <- histLayout$x
+               histY <- histLayout$y
+               shareX <- which(scatterX %in% histX == TRUE)
+               shareY <- which(scatterY %in% histY == TRUE)
+               if(length(shareX) > 0) {
+                  histsHash[[paste("hist_x_", histograms[i],sep="")]] <- c(scatterplots[shareX]) 
+               }
+               if(length(shareY) > 0) {
+                   histsHash[[paste("hist_y_", histograms[i],sep="")]] <- c(scatterplots[shareY])  
+               }
+           } 
+        }
+        
+        synchronizeHistBindings <- function(W) {
+            #print(paste(W, ', busy', busy))
+            if (!busy) {
+                busy <<- TRUE
+                class(W) <- "loon"
+                zoomX <- W['zoomX']; zoomY <- W['zoomY']
+                panX <- W['panX']; panY <- W['panY']
+                deltaX <- W['deltaX']; deltaY <- W['deltaY']
+                
+                lapply(histsHash[[paste("hist_x_",W,sep="")]], function(h) {
+                    l_configure(h, zoomX=zoomX, panX=panX, deltaX=deltaX)
+                })
+                
+                lapply(histsHash[[paste("hist_y_",W,sep="")]], function(h) {
+                    l_configure(h, zoomY=zoomX, panY=panX, deltaY=deltaX)
+                })
+                busy <<- FALSE
+                tcl('update', 'idletasks')
+                ##assign("busy", FALSE, envir=parent.env(environment()))
+            }
+        }
+        # synchronize
         lapply(histograms, function(h) {
             tcl(h, 'systembind', 'state', 'add',
-                c('showLabels', 'showScales', 'swapAxes'),
-                undoStateChanges)
+                c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
+                synchronizeHistBindings)
         })
-        if(hist_diag) {
-            plots<- c(plots, histograms)
-        } else {
+        # forbidden
+        lapply(histograms, function(h) {
+            tcl(h, 'systembind', 'state', 'add',
+                c('showLabels', 'showScales'),
+                undoHistStateChanges)
+        })
+
+        if(histLocation == "edge") {
             plots<- c(plots, histograms[2:(2*nvar-1)])
+        } else {
+            plots<- c(plots, histograms)
         }
+        
+        callbackFunctions$state[[paste(child,"synchronizeHist", sep="_")]] <- synchronizeHistBindings
+        callbackFunctions$state[[paste(child,"undoHistStateChanges", sep="_")]] <- undoHistStateChanges
     }
     if(showSerialAxes) {
         plots <- c(plots, list(serialAxes = serialAxes))
     }
     
-    ## beware undoStateChanges and synchronizeBindings from garbage collector
-    callbackFunctions$state[[paste(child,"synchronize", sep="_")]] <- synchronizeBindings
-    callbackFunctions$state[[paste(child,"undo", sep="_")]] <- undoStateChanges
+    ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
+    callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings
+    callbackFunctions$state[[paste(child,"undoScatterStateChanges", sep="_")]] <- undoScatterStateChanges
     
     structure(
         plots,
@@ -395,7 +484,32 @@ l_configure.l_pairs <- function(target, ...) {
 }
 
 ## forbidden states
-undoStateChanges <- function(W) {
+undoScatterStateChanges <- function(W) {
     warning("showLabels, showScales, and swapAxes can not be changed for scatterplot matrix.")
-    l_configure(W, showLabels=FALSE, showScales=FALSE, swapAxes=FALSE)
+    l_configure(W, showLabels = FALSE, showScales = FALSE, swapAxes = FALSE)
+}
+
+undoHistStateChanges <- function(W) {
+    warning("showLabels, showScales can not be changed for scatterplot matrix.")
+    l_configure(W, showLabels = FALSE, showScales = FALSE)
+}
+
+# names must follow the pattern xayb, (a,b) is the coords of the corresponding layout
+layout <- function(names){
+    namesSplit <- strsplit(names, split = "")
+    lay_out <- as.data.frame(
+        t(
+            sapply(namesSplit,
+                   function(char){
+                       xpos <- which(char %in% "x" == TRUE)
+                       ypos <- which(char %in% "y" == TRUE)
+                       len_char <- length(char)
+                       c(as.numeric(paste0(char[(xpos + 1) : (ypos - 1)], collapse = "")),
+                         as.numeric(paste0(char[(ypos + 1) : (len_char)], collapse = "")))
+                   }
+            )
+        )
+    )
+    colnames(lay_out) <- c("x", "y")
+    lay_out
 }

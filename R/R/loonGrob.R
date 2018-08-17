@@ -25,7 +25,6 @@
 #' 
 #' library(grid)
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
-#' grid.newpage()
 #' grid.loon(widget)
 #' 
 #' @export

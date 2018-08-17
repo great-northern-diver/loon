@@ -1,3 +1,14 @@
+# Little helper function to convert the data frame 
+# returned by widget['data'] from characters to numeric.
+char2num.data.frame <- function(chardataframe){
+    as.data.frame(
+        sapply(
+            as.data.frame(
+                sapply(chardataframe, as.factor)
+            ), 
+            as.numeric)
+    )
+}
 
 #' @rdname loonGrob
 #' 
@@ -35,14 +46,13 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
     active <- widget['active']
     display_order <- get_model_display_order(widget)
     active_displayOrder <- display_order[active]
-    dat <- sapply( widget['data'], as.numeric)  # convert to numeric if not
+    dat <- char2num.data.frame(widget['data'])   # convert to numeric 
     activeData <- dat[active_displayOrder , seqName] 
     
     if(is.null(activeData)) {
         n <- NULL
         scaledActiveData <- NULL
     } else {
-        activeData <- matrix(activeData, ncol = len.xaxis)
         n <- dim(activeData)[1]
         
         scaledActiveData <- switch(scaling, 
@@ -154,7 +164,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                             gList, 
                             lapply(1:(len.xaxis), function(i) {
                                 textGrob(seqName[i], x = unit(xaxis[i], "native"), y = unit(0, "npc") + unit(1.2, "lines"),
-                                         gp = gpar(fontsize = 9), vjust = .5)
+                                         gp = gpar(fontsize = 9), vjust = 1)
                             })), 
                         name = "axes labels"
                     )
