@@ -2,7 +2,7 @@
 % Please edit documentation in R/loonGrob.R, R/loonGrob_l_compound.R,
 %   R/loonGrob_l_layer_graph.R, R/loonGrob_l_layer_histogram.R,
 %   R/loonGrob_l_layer_scatterplot.R, R/loonGrob_l_navgraph.R,
-%   R/loonGrob_l_navigator.R, R/loonGrob_l_pairs.R, R/loonGrob_l_serialaxes.R
+%   R/loonGrob_l_navigator.R, R/loonGrob_l_serialaxes.R
 \name{loonGrob}
 \alias{loonGrob}
 \alias{loonGrob.l_compound}
@@ -11,7 +11,6 @@
 \alias{loonGrob.l_layer_scatterplot}
 \alias{loonGrob.l_navgraph}
 \alias{loonGrob.l_navigator}
-\alias{loonGrob.l_pairs}
 \alias{loonGrob.l_serialaxes}
 \title{Create a grid grob from a loon widget handle}
 \usage{
@@ -31,8 +30,6 @@ loonGrob(target, name = NULL, gp = NULL, vp = NULL)
 \method{loonGrob}{l_navgraph}(target, name = NULL, gp = NULL, vp = NULL)
 
 \method{loonGrob}{l_navigator}(target, name = NULL, gp = NULL, vp = NULL)
-
-\method{loonGrob}{l_pairs}(target, name = NULL, gp = NULL, vp = NULL)
 
 \method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL, vp = NULL)
 }
@@ -81,13 +78,22 @@ grid.draw(lgrob)
 
  
 \dontrun{
+
+library(grid)
+## l_pairs (scatterplot matrix) examples
+
+p <- l_pairs(iris[,-5], color=iris$Species)
+
+lgrob <- loonGrob(p)
+grid.newpage()
+grid.draw(lgrob)
+
 ## Time series decomposition examples
 
 decompose <- decompose(co2) 
 # or decompose <- stl(co2, "per")
 p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
 
-library(grid)
 lgrob <- loonGrob(p)
 grid.newpage()
 grid.draw(lgrob)
@@ -177,18 +183,6 @@ library(grid)
 navGrob <- loonGrob(ng)
 grid.newpage()
 grid.draw(navGrob)
-}
-
-
-\dontrun{
-## l_pairs (scatterplot matrix) examples
-
-p <- l_pairs(iris[,-5], color=iris$Species)
-
-library(grid)
-lgrob <- loonGrob(p)
-grid.newpage()
-grid.draw(lgrob)
 }
 
 

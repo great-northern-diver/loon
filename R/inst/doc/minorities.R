@@ -33,7 +33,7 @@ with(minority,
 par(parOptions)
 
 
-## ---- echo=FALSE, message=FALSE, fig.align = "center", fig.width=7, fig.height=5----
+## ---- echo=FALSE, message=FALSE, warning = FALSE, error = FALSE, fig.align = "center", fig.width=7, fig.height=5----
 library(maps)
 parOptions <- par(mfrow=c(1,2))
 
@@ -408,7 +408,7 @@ knitr::kable(head(minority_star))
 #  l_zoom(p_stars, .9)
 #  #
 
-## ----westEastCols, eval=FALSE--------------------------------------------
+## ----westEastCols, message=FALSE, warning = FALSE, error = FALSE, eval=FALSE----
 #  library(scales)
 #  west_east_cols <- (col_numeric(c("firebrick",
 #                                   "orange", "sienna",
@@ -443,7 +443,7 @@ knitr::kable(head(minority_star))
 ## ----moveGrid, eval=FALSE------------------------------------------------
 #  l_move_grid(p_stars, which='all')
 
-## ----PairViz, message=FALSE----------------------------------------------
+## ----PairViz, message=FALSE, error = FALSE, warning=FALSE----------------
 # Axis ordering methods can be found
 # in the pairwise coordinate visualization package
 # called PairViz
@@ -542,7 +542,7 @@ names(minority_star_percent)[o_far]
 #                                   label="Farthest")
 #  p_map['glyph'] <- so_near
 
-## ----Eulerians-----------------------------------------------------------
-o_greedy <- eulerian(VarDistance)
-o_balanced <- weighted_hpaths(VarDistance, matrix=FALSE)
+## ----Eulerians, eval = FALSE---------------------------------------------
+#  o_greedy <- eulerian(VarDistance)
+#  o_balanced <- weighted_hpaths(VarDistance, matrix=FALSE)
 
