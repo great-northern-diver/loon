@@ -46,6 +46,7 @@ l_plot_ts <- function(stlOrDecomposedTS,
     
     
     nameOfData <- strsplit(toString(stlOrDecomposedTS$call), ", ")[[1]][2]
+    if (is.na(nameOfData)) nameOfData <- "a time series"
     if (is.null(linkingGroup)) linkingGroup <- paste(nameOfData, class(stlOrDecomposedTS))
     
     if(class(stlOrDecomposedTS) == "decomposed.ts"){
@@ -69,7 +70,6 @@ l_plot_ts <- function(stlOrDecomposedTS,
         xy.trend <- list(x = xy.raw$x[index.trend], y = stlOrDecomposedTS$trend[index.trend])
         xy.remainder <- list(x = xy.raw$x[index.random], y = stlOrDecomposedTS$random[index.random])
         xy.seasonal <- list(x = xy.raw$x, y = stlOrDecomposedTS$seasonal)
-        nameOfData <- NULL
     } else if(class(stlOrDecomposedTS) == "stl"){
         stl <- stlOrDecomposedTS$time.series
         
@@ -227,4 +227,10 @@ l_plot_ts <- function(stlOrDecomposedTS,
         list(original = p1, trend = p2, seasonal = p3, remainder = p4), 
         class = c("l_ts", "l_compound", "loon")
     )
+}
+
+
+#' @export
+l_getPlots.l_pairs <- function(target){
+    target
 }

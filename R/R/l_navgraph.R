@@ -83,3 +83,8 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
     
     navgraph
 }
+
+#' @export
+l_getPlots.l_navgraph <- function(target){
+    list(graph = target$graph, plot = target$plot)
+}

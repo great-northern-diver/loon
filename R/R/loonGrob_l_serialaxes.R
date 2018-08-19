@@ -1,13 +1,23 @@
 # Little helper function to convert the data frame 
 # returned by widget['data'] from characters to numeric.
 char2num.data.frame <- function(chardataframe){
-    as.data.frame(
-        sapply(
-            as.data.frame(
-                sapply(chardataframe, as.factor)
-            ), 
-            as.numeric)
+    
+    dat <- as.data.frame(suppressWarnings(sapply(chardataframe, as.numeric)))
+    NAcolumn <- which(
+        apply(dat, 2, 
+              function(column){
+                  any(is.na(column))
+              }
+        ) == TRUE
     )
+    if(length(NAcolumn) > 0){
+        for(i in 1:length(NAcolumn)){
+            dat[, NAcolumn[i]] <- as.numeric(as.factor(chardataframe[, NAcolumn[i]])) - 1
+        }
+        if(!is.data.frame(dat)) {
+            as.data.frame(dat)
+        } else dat
+    } else dat
 }
 
 #' @rdname loonGrob
@@ -74,7 +84,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                                        maxD <- max(dat)
                                        (activeData - minD)/ (maxD - minD)
                                    }, 
-                                   "none" = NULL)
+                                   "none" = activeData)
     }
     
     
@@ -186,31 +196,31 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
         
         xpos <- unit(0.5, "native")
         ypos <- unit(0.5, "native")
-        # arbitrary choice
-        scaling <- 2
-        if( is.null(scaledActiveData) ) radialGrob <- grob(name = name, gp = gp)
+        radius <- 0.2
+        if(is.null(scaledActiveData)) radialGrob <- grob(name = name, gp = gp)
         else {
-            
             radialGrob <- gTree(
                 children = do.call(
                     gList,
-                    lapply(seq_len(n), function(i){
-                        radialxais <- scaling * scaledActiveData[i,] * cos(angle)
-                        radialyais <- scaling * scaledActiveData[i,] * sin(angle)
-                        if(showArea){
-                            polygonGrob(
-                                x = unit(c(radialxais, radialxais[1]), "in") + xpos, 
-                                y = unit(c(radialyais, radialyais[1]), "in") + ypos,
-                                gp = gpar(fill = activeColor[i], col = NA)
-                            )
-                        } else {
-                            linesGrob(
-                                x = unit(c(radialxais, radialxais[1]), "in") + xpos, 
-                                y = unit(c(radialyais, radialyais[1]), "in") + ypos,
-                                gp = gpar(col = activeColor[i], lwd = activeLinewidth[i])
-                            )
-                        }
-                    })
+                    lapply(seq_len(n), 
+                           function(i){
+                               radialxais <- radius * scaledActiveData[i,] * cos(angle)
+                               radialyais <- radius * scaledActiveData[i,] * sin(angle)
+                               if(showArea){
+                                   polygonGrob(
+                                       x = unit(c(radialxais, radialxais[1]), "npc") + xpos, 
+                                       y = unit(c(radialyais, radialyais[1]), "npc") + ypos,
+                                       gp = gpar(fill = activeColor[i], col = NA)
+                                   )
+                               } else {
+                                   linesGrob(
+                                       x = unit(c(radialxais, radialxais[1]), "npc") + xpos, 
+                                       y = unit(c(radialyais, radialyais[1]), "npc") + ypos,
+                                       gp = gpar(col = activeColor[i], lwd = activeLinewidth[i])
+                                   )
+                               }
+                           }
+                    )
                 ),
                 name = "radialAxes"
             )
@@ -221,17 +231,17 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                 if (showGuides) {
                     gTree(children = gList(
                         rectGrob(gp = gpar(col = NA, fill = "#EBEBEB" )),  # TODO find background colour need info in TCL
-                        polygonGrob(unit(scaling * cos(seq(0, 2*pi, length=101)), "in") + xpos, 
-                                    unit(scaling * sin(seq(0, 2*pi, length=101)), "in") + ypos, 
+                        polygonGrob(unit(radius * cos(seq(0, 2*pi, length=101)), "npc") + xpos, 
+                                    unit(radius * sin(seq(0, 2*pi, length=101)), "npc") + ypos, 
                                     gp = gpar(fill = NA, col = l_getOption("guidelines"), lwd = 2)   # TODO find line width
-                                    ),
+                        ),
                         if(showAxes){
                             
-                            polylineGrob( x = unit(c(rep(0, len.xaxis) ,scaling * cos(angle)), "in") + xpos, 
-                                          y = unit(c(rep(0, len.xaxis) ,scaling * sin(angle)), "in") + ypos,
+                            polylineGrob( x = unit(c(rep(0, len.xaxis) ,radius * cos(angle)), "npc") + xpos, 
+                                          y = unit(c(rep(0, len.xaxis) ,radius * sin(angle)), "npc") + ypos,
                                           id = rep(1:len.xaxis, 2),
                                           gp = gpar(col = "white", lwd = 2)   # TODO Again with width loon should use guide colours
-                                          )
+                            )
                         }
                     ),
                     name = "guides")
@@ -239,8 +249,8 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                 } else {
                     if(showAxes){
                         
-                        polylineGrob( x = unit(c(rep(0, len.xaxis) ,scaling * cos(angle)), "in") + xpos, 
-                                      y = unit(c(rep(0, len.xaxis) ,scaling * sin(angle)), "in") + ypos,
+                        polylineGrob( x = unit(c(rep(0, len.xaxis) ,radius * cos(angle)), "npc") + xpos, 
+                                      y = unit(c(rep(0, len.xaxis) ,radius * sin(angle)), "npc") + ypos,
                                       id = rep(1:len.xaxis, 2),
                                       gp = gpar(col =  "black", lwd = 2), name = "guides")
                         
@@ -249,7 +259,9 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                 
                 if (showLabels & title != "") {
                     
-                    textGrob(title, name = "title", y = unit(1, "npc") - unit(.8, "lines"),
+                    textGrob(title, 
+                             name = "title", 
+                             y = unit(1, "npc") - unit(.8, "lines"),
                              gp = gpar(fontsize = 18, fontface="bold"), vjust = .5)
                     
                 },
@@ -257,13 +269,17 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                 if (showAxesLabels) {
                     
                     gTree(
-                        children =    do.call(
+                        children = do.call(
                             gList, 
-                            lapply(1:(len.xaxis), function(i) {
-                                textGrob(seqName[i], x = unit((scaling + 0.5) * cos(angle[i]), "in") + xpos, 
-                                         y = unit((scaling + 0.5) * sin(angle[i]), "in") + ypos,
-                                         gp = gpar(fontsize = 9), vjust = .5)
-                            })), 
+                            lapply(1:(len.xaxis), 
+                                   function(i) {
+                                       textGrob(seqName[i], 
+                                                x = unit((radius + 0.1) * cos(angle[i]), "npc") + xpos, 
+                                                y = unit((radius + 0.1) * sin(angle[i]), "npc") + ypos,
+                                                gp = gpar(fontsize = 9), vjust = 0.5)
+                                   }
+                            )
+                        ), 
                         name = "axes labels"
                     )
                     

@@ -5,6 +5,7 @@ loonGrob_layoutType.l_pairs <- function(target) {
 }
 
 
+#' @export
 l_get_arrangeGrobArgs.l_pairs <- function(target) {
     widget <- target
     len_widget <- length(widget)

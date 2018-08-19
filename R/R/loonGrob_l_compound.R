@@ -26,7 +26,6 @@
 #' }
 #' 
 #' @export
-
 loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
     arrangeGrob.args <- switch(loonGrob_layoutType(target),
                                locations = {
@@ -109,10 +108,12 @@ l_get_arrangeGrobArgs <- function(target){
     UseMethod("l_get_arrangeGrobArgs", target) 
 }
 
+#' @export
 l_get_arrangeGrobArgs.default <- function(target){
     stop("l_get_arrangeGrobArgs.default has no valid inheritance; not an l_compound plot")
 }
 
+#' @export
 l_get_arrangeGrobArgs.l_compound <- function(target){
     stop("l_get_arrangeGrobArgs.l_compound has no valid inheritance; needs to be specialized for each type of l_compound")
 }
@@ -137,10 +138,12 @@ l_createCompoundGrob <- function(target, arrangeGrob.args) {
     UseMethod("l_createCompoundGrob", target)
 }
 
+#' @export
 l_createCompoundGrob.default <- function(target, arrangeGrob.args){
     stop("l_createCompoundGrob.default has no valid inheritance; not an l_compound plot")
 }
 
+#' @export
 l_createCompoundGrob.l_compound <- function(target, arrangeGrob.args){
     do.call(gridExtra::arrangeGrob,  arrangeGrob.args)
 }

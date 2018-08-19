@@ -467,3 +467,9 @@ layout <- function(names){
     colnames(lay_out) <- c("x", "y")
     lay_out
 }
+
+
+#' @export
+l_getPlots.l_pairs <- function(target){
+   
+}

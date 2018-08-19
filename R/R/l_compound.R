@@ -14,10 +14,12 @@ l_getPlots <- function(target) {
     UseMethod("l_getPlots", target)
 }
 
+#' @export
 l_getPlots.default <- function(target) {
     stop("l_getPlots.default has no valid inheritance; not an l_compound plot")
 }
 
+#' @export
 l_getPlots.l_compound <- function(target){
     stop("l_getPlots.l_compound has no valid inheritance; needs to be specialized for each type of l_compound")
 }
@@ -36,17 +38,16 @@ l_getLocations <- function(target) {
     UseMethod("l_getLocations", target)
 }
 
+#' @export
 l_getLocations.default <- function(target) {
     stop("l_getLocations.default has no valid inheritance; not an l_compound plot")
 }
 
+#' @export
 l_getLocations.l_compound <- function(target) {
     stop("l_getLocations.l_compound  has no valid inheritance; needs to be specialized for each type of l_compound")
 }
 
-
-#'@export
-names.l_pairs <- function(x) {attr(x, "names")}
 
 #' @export
 l_cget.l_compound <- function(target, state) {
