@@ -52,7 +52,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     
     for(i in 1:length(scatter_hist)) {
         nameOfScatter_hist <- names(scatter_hist[i])
-        pos <- layout(nameOfScatter_hist)
+        pos <- xy_layout(nameOfScatter_hist)
         layout_matrix[pos$y, pos$x] <- i
     }
     

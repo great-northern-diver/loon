@@ -341,7 +341,7 @@ l_pairs <- function(data, showHistograms = FALSE, histLocation = c("edge", "diag
         namesHist <- names(histograms)
         namesScatter <- names(scatterplots)
         
-        scatterLayout <- layout(namesScatter)
+        scatterLayout <- xy_layout(namesScatter)
         scatterX <- scatterLayout$x
         scatterY <- scatterLayout$y
         
@@ -350,11 +350,11 @@ l_pairs <- function(data, showHistograms = FALSE, histLocation = c("edge", "diag
                 nameHist <- namesHist[i]
                 if(i != 1 & i != length(histograms)) {
                     if(i <= nvar) {
-                        histX <- layout(nameHist)$x
+                        histX <- xy_layout(nameHist)$x
                         shareX <- which(scatterX %in% histX == TRUE)
                         histsHash[[paste("hist_x_", histograms[i],sep="")]] <- c(scatterplots[shareX])  
                     } else {
-                        histY <- layout(nameHist)$y
+                        histY <- xy_layout(nameHist)$y
                         shareY <- which(scatterY %in% histY == TRUE)
                         histsHash[[paste("hist_y_", histograms[i],sep="")]] <- c(scatterplots[shareY]) 
                     }
@@ -364,7 +364,7 @@ l_pairs <- function(data, showHistograms = FALSE, histLocation = c("edge", "diag
         } else {
            for(i in 1:length(histograms)){
                nameHist <- namesHist[i]
-               histLayout <- layout(nameHist)
+               histLayout <- xy_layout(nameHist)
                histX <- histLayout$x
                histY <- histLayout$y
                shareX <- which(scatterX %in% histX == TRUE)
@@ -449,7 +449,7 @@ undoHistStateChanges <- function(W) {
 }
 
 # names must follow the pattern xayb, (a,b) is the coords of the corresponding layout
-layout <- function(names){
+xy_layout <- function(names){
     namesSplit <- strsplit(names, split = "")
     lay_out <- as.data.frame(
         t(
@@ -466,10 +466,4 @@ layout <- function(names){
     )
     colnames(lay_out) <- c("x", "y")
     lay_out
-}
-
-
-#' @export
-l_getPlots.l_pairs <- function(target){
-   
 }
