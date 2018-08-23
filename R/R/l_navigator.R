@@ -214,3 +214,15 @@ l_navigator_getLabel <- function(widget, id) {
     paste(l_navigator(widget, "getLabel", id), collapse=' ')
 }
 
+
+#' @title Get the sequence of nodes of a navigator's current path
+#'   
+#' @param navigator navigator handle
+#' @returns a vector of node names for the current path of the navigator
+#'   
+#' @seealso \code{\link{l_setPath}}
+#'   
+#' @export
+l_navigator_getPath <- function(navigator) {
+    c(navigator["from"], navigator["to"])
+}
