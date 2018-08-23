@@ -220,8 +220,6 @@ l_navigator_getLabel <- function(widget, id) {
 #' @param navigator navigator handle
 #' @returns a vector of node names for the current path of the navigator
 #'   
-#' @seealso \code{\link{l_setPath}}
-#'   
 #' @export
 l_navigator_getPath <- function(navigator) {
     c(navigator["from"], navigator["to"])
