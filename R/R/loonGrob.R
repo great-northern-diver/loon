@@ -148,10 +148,17 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     # Figure out margins
     minimumMargins <- widget['minimumMargins']
     margins <- c(0, 0, 0, 0)
-    if (showLabels) {margins <- margins + widget['labelMargins'] }
+    if (showLabels) {
+        labelMargins <- widget['labelMargins']
+        if(xlabel == "") labelMargins[1] <- minimumMargins[1] 
+        if(ylabel == "") labelMargins[2] <- minimumMargins[2] 
+        if(title == "") labelMargins[3] <- minimumMargins[3] 
+        margins <- margins + labelMargins
+    }
     if (showScales) {margins <- margins + widget['scalesMargins'] }
-    margins <- apply(cbind(margins, minimumMargins), 1, max)
-    if(title == "") margins[3] <- minimumMargins[3]
+    if(showLabels | showScales) {
+        margins <- apply(cbind(margins, minimumMargins), 1, max)
+    }
     # loon pixel margin to grid margin
     margins <- pixels_2_lines (margins)
     
@@ -266,10 +273,12 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                     clipGrob(name = "clip"),
                     interiorPlotGrob,
                     # draw boundary
-                    polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
-                                 y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
-                                 id=rep(1:4, 2),
-                                 gp=gpar(col = border, lwd=1)) 
+                    if(sum(margins) != 0) {
+                        polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
+                                     y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
+                                     id=rep(1:4, 2),
+                                     gp=gpar(col = border, lwd=1)) 
+                    }
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
