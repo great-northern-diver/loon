@@ -216,7 +216,9 @@ l_navigator_getLabel <- function(widget, id) {
 
 
 #' @title Get the sequence of nodes of a navigator's current path
-#'   
+#' 
+#' @description Determines and returns the current path of the navigator.  
+#' 
 #' @param navigator navigator handle
 #' @return a vector of node names for the current path of the navigator
 #'   
