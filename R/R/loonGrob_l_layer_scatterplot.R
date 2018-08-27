@@ -50,20 +50,22 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
         pch <- glyph_to_pch(s_a$glyph)
         if (!any(is.na(pch)) && !any(pch %in% 21:24)) {
             # No NAs and no points with borders
-            pointsGrob(x = s_a$x,
-                       y = s_a$y,
-                       pch = pch, 
-                       gp = gpar(col = s_a$color,
-                                 cex = as_r_point_size(s_a$size))
+            points <- pointsGrob(name = "points: primitive glyphs without borders",
+                                         x = s_a$x,
+                                         y = s_a$y,
+                                         pch = pch, 
+                                         gp = gpar(col = s_a$color,
+                                                   cex = as_r_point_size(s_a$size))
             )
         } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
             # No NAs and ALL points with borders
-            pointsGrob(x = s_a$x,
-                       y = s_a$y,
-                       pch = pch, 
-                       gp = gpar(fill = s_a$color,
-                                 col = l_getOption("foreground"),
-                                 cex = as_r_point_size(s_a$size))
+            points <- pointsGrob(name = "points: primitive glyphs with borders",
+                                 x = s_a$x,
+                                 y = s_a$y,
+                                 pch = pch, 
+                                 gp = gpar(fill = s_a$color,
+                                           col = l_getOption("foreground"),
+                                           cex = as_r_point_size(s_a$size))
             )
         } else {
             # possibly some NAs (means some points are text, polygons, images, etc.)
@@ -103,13 +105,15 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                          loonGlyphGrob(widget, structure(list(), class=type), case_i) 
                                      })
             
+            points <- gTree(children = do.call('gList', children_grobs),
+                                name = "points: mixed glyphs")
             
-            gTree(
-                children = do.call('gList', children_grobs),
-                name = name, gp = gp, vp = vp
-            )
         }
     } 
+    gTree(children = gList(points),
+          name = if(is.null(name)) "scatterplot" else name, 
+          gp = gp, vp = vp
+    )
 }
 
 loonGlyphGrob <- function(widget, x, glyph_info) {
