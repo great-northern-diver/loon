@@ -3,7 +3,7 @@
 \docType{data}
 \name{UsAndThem}
 \alias{UsAndThem}
-\title{Data to re-create Hans Rosling's fameous "Us and Them" animation}
+\title{Data to re-create Hans Rosling's famous "Us and Them" animation}
 \format{A data frame with 9855 rows and 8 variables}
 \source{
 \url{http://www.gapminder.org/}
