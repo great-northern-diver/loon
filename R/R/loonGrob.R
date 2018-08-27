@@ -144,6 +144,8 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     }
     
     title <- widget['title']
+    xlabel <- widget['xlabel']
+    ylabel <- widget['ylabel']
     
     # Figure out margins
     minimumMargins <- widget['minimumMargins']
@@ -175,14 +177,14 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     
     
     if (!swapAxes) {
-        xlabelGrob <- textGrob(widget['xlabel'], 
+        xlabelGrob <- textGrob(xlabel, 
                                y = unit(xylab_loc[1], "lines"), 
                                gp = gpar(fontfamily = xlabelFont$family, 
                                          fontsize = xlabelFont$size,
                                          fontface = xlabelFont$face
                                          ), 
                                name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], 
+        ylabelGrob <- textGrob(ylabel, 
                                x = unit(xylab_loc[2], "lines"), 
                                rot = 90, 
                                gp = gpar(fontfamily = ylabelFont$family, 
@@ -191,7 +193,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                          ),
                                name = "y label")
     } else {
-        xlabelGrob <- textGrob(widget['xlabel'], 
+        xlabelGrob <- textGrob(xlabel, 
                                x = unit(xylab_loc[2], "lines"), 
                                rot = 90,  
                                gp = gpar(fontfamily = xlabelFont$family, 
@@ -199,7 +201,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                          fontface = xlabelFont$face
                                ), 
                                name = "x label")
-        ylabelGrob <- textGrob(widget['ylabel'], 
+        ylabelGrob <- textGrob(ylabel,
                                y = unit(xylab_loc[1], "lines"), 
                                gp = gpar(fontfamily = ylabelFont$family, 
                                          fontsize = ylabelFont$size,
@@ -213,7 +215,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
         children = gList(
             rectGrob(gp = gpar(col = NA, 
                                fill = as_hex6color(widget['background'])),
-                     name = "bbox") ,
+                     name = "bounding box") ,
             gTree(
                 children = gList(
                     if (showLabels) {
@@ -230,7 +232,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                          ),
                                          vjust = .5)
                             } else NULL )
-                    } else NULL,
+                    } else nullGrob(name = "null: no labels"),
                     if (showGuides){
                         xaxis <- grid.pretty(xlim)
                         len.xaxis <- length(xaxis)
@@ -252,8 +254,8 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                                   gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
                                     }
                                 }))),
-                            name = "guide")
-                    },
+                            name = "guides")
+                    }else nullGrob(name = "null: no guides"),
                     if (showScales) {
                         gList(
                             xaxisGrob(
@@ -269,16 +271,13 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                 ),
                                 name = "y axis")
                         )  
-                    } else NULL,
-                    clipGrob(name = "clip"),
+                    } else nullGrob(name = "null: no scales"),
+                    clipGrob(name = "clipping region"),
                     interiorPlotGrob,
                     # draw boundary
                     if(sum(margins) != 0) {
-                        polylineGrob(x=unit( c(0,0, 1, 0, 0, 1, 1, 1), "npc"),
-                                     y=unit( c(0,0, 0, 1, 1, 0, 1, 1), "npc"),
-                                     id=rep(1:4, 2),
-                                     gp=gpar(col = border, lwd=1)) 
-                    }
+                        rectGrob(name = "boundary rectangle", gp=gpar(col = border, fill = NA, lwd=1))
+                    } else nullGrob(name = "null: no boundary rectangle")
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
