@@ -39,7 +39,7 @@ rbuild:
 	R CMD build R --no-build-vignettes
 
 rinst:
-	$(RINSTCMD) loon_1.1.0.tar.gz
+	$(RINSTCMD) loon_1.2.0.9000.tar.gz
 
 website:
 	cd website && \
