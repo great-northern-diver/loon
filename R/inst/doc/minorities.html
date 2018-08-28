@@ -771,16 +771,16 @@ VarDistance &lt;-<span class="st"> </span><span class="kw">dist</span>(<span cla
 o_near &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw">names</span>(minority_star_percent)[o_near]</code></pre></div>
-<pre><code>##  [1] &quot;Other&quot;    &quot;Multiple&quot; &quot;Japanese&quot; &quot;Korean&quot;   &quot;SE.Asian&quot; &quot;Latino&quot;  
-##  [7] &quot;Arab&quot;     &quot;Filipino&quot; &quot;Black&quot;    &quot;Chinese&quot;  &quot;S.Asian&quot;</code></pre>
+<pre><code>##  [1] &quot;Black&quot;    &quot;Arab&quot;     &quot;Latino&quot;   &quot;SE.Asian&quot; &quot;Multiple&quot; &quot;Other&quot;   
+##  [7] &quot;Japanese&quot; &quot;Korean&quot;   &quot;Filipino&quot; &quot;Chinese&quot;  &quot;S.Asian&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
 <span class="co"># other should produce less convex shaped glyphs.</span>
 <span class="co"># </span>
 o_far &lt;-<span class="st"> </span><span class="kw">order_tsp</span>(<span class="op">-</span>VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw">names</span>(minority_star_percent)[o_far]</code></pre></div>
-<pre><code>##  [1] &quot;Multiple&quot; &quot;Filipino&quot; &quot;Arab&quot;     &quot;Japanese&quot; &quot;S.Asian&quot;  &quot;Other&quot;   
-##  [7] &quot;Chinese&quot;  &quot;SE.Asian&quot; &quot;Black&quot;    &quot;Korean&quot;   &quot;Latino&quot;</code></pre>
+<pre><code>##  [1] &quot;Latino&quot;   &quot;Chinese&quot;  &quot;Multiple&quot; &quot;S.Asian&quot;  &quot;Other&quot;    &quot;Filipino&quot;
+##  [7] &quot;SE.Asian&quot; &quot;Black&quot;    &quot;Japanese&quot; &quot;Arab&quot;     &quot;Korean&quot;</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
 <span class="co"># the cities are laid over top of one another.</span>
