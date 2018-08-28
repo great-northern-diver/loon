@@ -221,6 +221,8 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     len.xaxis <- length(xaxis)
     yaxis <- grid.pretty(ylim)
     len.yaxis <- length(yaxis)
+    # helper function
+    is.odd <- function(x) as.logical(x %% 2)
 
     gTree(
         children = gList(
@@ -256,8 +258,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                 gList,
                                 lapply(1:len.xaxis,
                                        function(i) {
-                                           isOdd <- is.odd(i)
-                                           if(isOdd) {
+                                           if(is.odd(i)) {
                                                linesGrob(x = unit(rep(xaxis[i], 2), "native"),
                                                          y =  unit(c(0, 1), "npc"),
                                                          gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
@@ -273,8 +274,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                 gList,
                                 lapply(1:len.yaxis,
                                        function(i) {
-                                           isOdd <- is.odd(i)
-                                           if(isOdd) {
+                                           if(is.odd(i)) {
                                                linesGrob(x = unit(c(0.003,0.997), "npc") ,
                                                          y =  unit(rep(yaxis[i], 2), "native"),
                                                          gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
@@ -1034,4 +1034,3 @@ getGridTextCoords  <-  function(text, angle, anchor, just){
     adjustedCoords
 }
 
-is.odd <- function(x) as.logical(x %% 2)
