@@ -217,12 +217,11 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                name = "y label")
     }
 
-    xaxis <- grid.pretty(xlim)
-    len.xaxis <- length(xaxis)
-    yaxis <- grid.pretty(ylim)
-    len.yaxis <- length(yaxis)
-    # helper function
-    is.odd <- function(x) as.logical(x %% 2)
+    axis <- loon.pretty(widget)
+    xaxis.major <- axis$xaxis.major
+    xaxis.minor <- axis$xaxis.minor
+    yaxis.major <- axis$yaxis.major
+    yaxis.minor <- axis$yaxis.minor
 
     gTree(
         children = gList(
@@ -256,35 +255,48 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
 
                             do.call(
                                 gList,
-                                lapply(1:len.xaxis,
-                                       function(i) {
-                                           if(is.odd(i)) {
-                                               linesGrob(x = unit(rep(xaxis[i], 2), "native"),
-                                                         y =  unit(c(0, 1), "npc"),
-                                                         gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
-                                           } else {
-                                               linesGrob(x = unit(rep(xaxis[i], 2), "native"),
-                                                         y =  unit(c(0, 1), "npc"),
-                                                         gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
-                                           }
-                                       }
-                                )),
+                                lapply(xaxis.major,
+                                       function(xaxis) {
+                                           linesGrob(x = unit(rep(xaxis,2 ), "native"),
+                                                     y =  unit(c(0, 1), "npc"),
+                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
 
+                                       }
+                                )
+                            ),
                             do.call(
                                 gList,
-                                lapply(1:len.yaxis,
-                                       function(i) {
-                                           if(is.odd(i)) {
-                                               linesGrob(x = unit(c(0.003,0.997), "npc") ,
-                                                         y =  unit(rep(yaxis[i], 2), "native"),
-                                                         gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
-                                           } else {
-                                               linesGrob(x = unit(c(0.003,0.997), "npc") ,
-                                                         y =  unit(rep(yaxis[i], 2), "native"),
-                                                         gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
-                                           }
+                                lapply(xaxis.minor,
+                                       function(xaxis) {
+                                           linesGrob(x = unit(rep(xaxis,2 ), "native"),
+                                                     y =  unit(c(0, 1), "npc"),
+                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+
                                        }
-                                ))
+                                )
+                            ),
+                            do.call(
+                                gList,
+                                lapply(yaxis.major,
+                                       function(yaxis) {
+                                           linesGrob(x = unit(c(0, 1), "npc") ,
+                                                     y =  unit(rep(yaxis,2), "native"),
+                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
+
+                                       }
+                                )
+                            ),
+                            do.call(
+                                gList,
+                                lapply(yaxis.minor,
+                                       function(yaxis) {
+                                           linesGrob(x = unit(c(0, 1), "npc") ,
+                                                     y =  unit(rep(yaxis,2 ), "native"),
+                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+
+                                       }
+                                )
+                            )
                         ),
                         name = "guides")
                     } else {
@@ -1034,3 +1046,85 @@ getGridTextCoords  <-  function(text, angle, anchor, just){
     adjustedCoords
 }
 
+
+loon.pretty <- function(widget, digits = 3) {
+
+    title <- widget['title']
+    xlabel <- widget['xlabel']
+    ylabel <- widget['ylabel']
+    showScales <- widget['showScales']
+    showLabels <- widget['showLabels']
+    swap <- widget['swapAxes']
+    panX <- widget['panX']
+    panY <- widget['panY']
+    deltaX <- widget['deltaX']
+    deltaY <- widget['deltaY']
+    zoomX <- widget['zoomX']
+    zoomY <- widget['zoomY']
+
+    if(swap) {
+        tcl("set", "xfrom", panY)
+        tcl("set", "yfrom", panX)
+        tcl("set", "xto", panY + deltaY/zoomY)
+        tcl("set", "yto", panX + deltaX/zoomX)
+    } else {
+        tcl("set", "xfrom", panX)
+        tcl("set", "yfrom", panY)
+        tcl("set", "xto", panX + deltaX/zoomX)
+        tcl("set", "yto", panY + deltaY/zoomY)
+    }
+
+    # set the number of axes
+    density <- as.numeric(.Tcl('set density $::loon::Options(ticks_density)'))
+    canvasWidth <- as.numeric(tkwinfo("width",widget))
+    canvasHeight <- as.numeric(tkwinfo("height",widget))
+
+    # margins
+    minimumMargins <- widget['minimumMargins']
+    margins <- c(0, 0, 0, 0)
+    if (showLabels) {
+        labelMargins <- widget['labelMargins']
+        if(xlabel == "") labelMargins[1] <- minimumMargins[1]
+        if(ylabel == "") labelMargins[2] <- minimumMargins[2]
+        if(title == "") labelMargins[3] <- minimumMargins[3]
+        margins <- margins + labelMargins
+    }
+    if (showScales) {margins <- margins + widget['scalesMargins'] }
+    if(showLabels | showScales) {
+        margins <- apply(cbind(margins, minimumMargins), 1, max)
+    }
+
+    plotWidth <- canvasWidth - (margins[2] + margins[4])
+    plotHeight <- canvasHeight - (margins[1] + margins[3])
+
+    if(plotWidth < 0) plotWidth <- 0
+    if(plotHeight < 0) plotHeight <- 0
+
+    tcl("set", "m_x", floor(plotWidth/100 * density))
+    tcl("set", "m_y", floor(plotHeight/100 * density))
+
+    xaxis <- round(
+        as.numeric(.Tcl('set xaxis [::loon::scales::extended $xfrom $xto [expr {2*$m_x}]]')),
+        digits = digits
+    )
+    yaxis <- round(
+        as.numeric(.Tcl('set yaxis [::loon::scales::extended $yfrom $yto [expr {2*$m_y}]]')),
+        digits = digits
+    )
+
+    is.even <- function(x) !as.logical(x %% 2)
+
+    len.xaxis <- length(xaxis)
+    len.yaxis <- length(yaxis)
+
+    xaxis.major <- xaxis[is.even(seq_len(len.xaxis))]
+    xaxis.minor <- xaxis[!is.even(seq_len(len.xaxis))]
+
+    yaxis.major <- yaxis[is.even(seq_len(len.yaxis))]
+    yaxis.minor <- yaxis[!is.even(seq_len(len.yaxis))]
+
+    list(xaxis.major = xaxis.major,
+         xaxis.minor = xaxis.minor,
+         yaxis.major = yaxis.major,
+         yaxis.minor = yaxis.minor)
+}
