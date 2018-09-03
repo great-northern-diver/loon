@@ -306,14 +306,14 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                     if (showScales) {
                         gList(
                             xaxisGrob(
-                                at = xaxis[is.odd(seq_len(len.xaxis))],
+                                at = xaxis.major,
                                 gp = gpar(fontfamily = scalesFont$family,
                                           fontsize = scalesFont$size,
                                           fontface = scalesFont$face
                                 ),
                                 name = "x axis"),
                             yaxisGrob(
-                                at = yaxis[is.odd(seq_len(len.yaxis))],
+                                at = yaxis.major,
                                 gp = gpar(fontfamily = scalesFont$family,
                                           fontsize = scalesFont$size,
                                           fontface = scalesFont$face
