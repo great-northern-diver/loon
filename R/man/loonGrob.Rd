@@ -65,7 +65,7 @@ grid.newpage(); grid.draw(lgrob)
 
 \dontrun{
 p <- demo("l_layers", ask = FALSE)$value
- 
+
 lgrob <- loonGrob(p)
 grid.newpage(); grid.draw(lgrob)
 
