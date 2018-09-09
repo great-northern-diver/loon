@@ -11,8 +11,8 @@ l_getLocations(target)
 \item{target}{the (compound) loon  plot whose locations are needed lay it out.}
 }
 \value{
-a list of an appropriate subset of the named location arguments 
-`c("ncol", "nrow", "layout_matrix", "heights", "widths")` and their values 
+a list of an appropriate subset of the named location arguments
+`c("ncol", "nrow", "layout_matrix", "heights", "widths")` and their values
  to be passed to `gridExtra::arrangeGrob()`.
 }
 \description{
