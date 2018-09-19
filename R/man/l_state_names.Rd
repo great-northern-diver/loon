@@ -20,3 +20,9 @@ state names
 States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 and modified with \code{\link{l_configure}}.
 }
+\details{
+In order to access values of a states use \code{\link{l_info_states}}.
+}
+\seealso{
+\code{\link{l_info_states}}, \code{\link{l_cget}}, \code{\link{l_configure}}
+}
