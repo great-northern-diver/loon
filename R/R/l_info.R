@@ -33,8 +33,8 @@ l_info_states <- function(target, states='all') {
 }
 
 
-l_info_states.default <- function(target, states='all') {
-
+#' @export
+l_info_states.loon <- function(target, states='all') {
     obj_eval <- .loonobject(target, function(tclvalue) {
         sapply(as.character(tcl('dict', 'keys', tclvalue)),
                FUN=function(var){
