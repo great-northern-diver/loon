@@ -76,7 +76,7 @@ l_cget.l_compound <- function(target, state) {
 
                     })
     values <- lapply(plots, l_cget, state)
-
+    names(values) <- plotNames
     values
 
 }
@@ -108,4 +108,15 @@ l_configure.l_compound <- function(target, ...) {
     }
 
     target
+}
+
+#' @export
+l_info_states.l_compound <- function(target, states = "all") {
+
+    plots <- l_getPlots(target)
+    plotNames <- names(plots)
+    values <- lapply(plots, l_info_states, states)
+    names(values) <- plotNames
+    values
+
 }
