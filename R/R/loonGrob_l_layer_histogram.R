@@ -60,8 +60,7 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
     if(length(colorStackingOrder) == 1) {
         if(colorStackingOrder == "selected") {
             colorStackingOrder <- c("selected",
-                                    levels(as.factor(widget['color']))
-            )
+                                    levels(as.factor(widget['color'])))
             }
     }
 
