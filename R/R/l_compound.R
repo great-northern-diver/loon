@@ -75,7 +75,14 @@ l_cget.l_compound <- function(target, state) {
                         target[[plotName]]
 
                     })
-    values <- lapply(plots, l_cget, state)
+    values <- lapply(plots,
+                     function(plot, s) {
+                         if(s %in% l_state_names(plot)){
+                             l_cget(plot, s)
+                         } else {
+                             NA
+                         }
+                         }, state)
     names(values) <- plotNames
     values
 
