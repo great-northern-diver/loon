@@ -27,7 +27,7 @@ Samples equally distant colors from the hcl color wheel. See the
   documentation for \code{\link[grDevices]{hcl}} for more information.
 }
 \seealso{
-\code{\link{l_setColorList}}, 
+\code{\link{l_setColorList}}, \code{\link{l_setColorList_loon}},
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
-  \code{\link{l_setColorList_baseR}}
+  \code{\link{l_setColorList_baseR}}, \code{\link{l_setColorList_ggplot2}}
 }

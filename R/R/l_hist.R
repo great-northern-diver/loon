@@ -27,7 +27,10 @@
 #' 
 #' @examples 
 #' h <- l_hist(iris$Sepal.Length, color=iris$Species)
-#' 
+
+
+
+
 l_hist <-  function(x, origin = min(x), binwidth=NULL, parent=NULL, ...) {
     
 
@@ -57,6 +60,8 @@ l_hist <-  function(x, origin = min(x), binwidth=NULL, parent=NULL, ...) {
                                 binwidth=binwidth,
                                 xlabel=xlabel,
                                 ...)
+        
+        class(plot) <- c("l_hist", class(plot))
     }
 
 

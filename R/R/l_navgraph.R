@@ -15,7 +15,7 @@
 #' @templateVar section l_navgraph
 #' @template see_l_help
 #' 
-#' @return named list with \code{graph} handle, \code{plot}, handle,
+#' @return named list with \code{graph} handle, \code{plot} handle,
 #'   \code{graphswitch} handle, \code{navigator} handle, and \code{context}
 #'   handle.
 #'   
@@ -24,6 +24,9 @@
 #' @examples 
 #' ng <- l_navgraph(oliveAcids, color=olive$Area)
 #' ng2 <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
+
+
+
 l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
 
     if(!is.data.frame(data)) {
@@ -66,13 +69,22 @@ l_navgraph <- function(data, separator=":", graph=NULL,  ...) {
     context <- l_context_add_geodesic2d(navigator, data=data, separator=separator)  
 
     plot <- strsplit(context['command'], " ", fixed = TRUE)[[1]][1]
-    class(plot) <- "loon"
+    class(plot) <- c("l_plot", "loon")
 
     args <- list(...)
     if (length(args)>0) {
         l_configure(plot, ...)
     }
     
-    return(list(graph=g, plot=plot, graphswitch=gs,
-                navigator=navigator, context=context))
+    navgraph <- list(graph=g, plot=plot, graphswitch=gs,
+                     navigator=navigator, context=context)
+    
+    class(navgraph) <- c("l_navgraph", "l_compound", "loon")
+    
+    navgraph
+}
+
+#' @export
+l_getPlots.l_navgraph <- function(target){
+    list(graph = target$graph, plot = target$plot)
 }

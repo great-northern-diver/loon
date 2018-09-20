@@ -21,6 +21,11 @@
 #' l_cget(p, "color")
 #' p['selected']
 l_cget <- function(target, state) {
+    UseMethod("l_cget", target)
+}
+
+#' @export
+l_cget.loon <- function(target, state) {
 
     obj_eval <- .loonobject(target, as.character)
 
@@ -74,4 +79,16 @@ l_cget <- function(target, state) {
      }
     
     obj_eval('cget', dash_state)    
+}
+
+
+#' @export
+l_cget.character <- function(target, state) {
+    widget <- try(l_create_handle(target), silent = TRUE)
+    if ("try-error" %in% class(widget)) {
+        stop(paste0(state, " is not accessible from", target, "via l_cget"))
+    }
+    else {
+        l_cget(widget, state)
+    }
 }

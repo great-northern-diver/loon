@@ -32,6 +32,8 @@ Measures object is a matrix or data.frame with measures
 For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
 }
 \examples{
+
+\dontrun{
 n <- 100
 dat <- data.frame(
    A = rnorm(n), B = rnorm(n), C = rnorm(n),
@@ -71,6 +73,7 @@ q1 <- function(x)as.vector(quantile(x, probs=0.25))
 
 # be carful that the vector names are correct
 nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
+}
 
 }
 \seealso{
