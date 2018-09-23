@@ -569,7 +569,7 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
         size  <- as_r_text_size(states$size[active])
         angle  <- states$angle[active]
         anchor  <- states$anchor[active]
-        justify  <- states$anchor[active]
+        justify  <- states$justify[active]
         color <- states$color[active]
         textGrobs <- lapply(seq_along(x),
                             function(i) {
