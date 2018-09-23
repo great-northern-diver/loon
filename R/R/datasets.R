@@ -1,4 +1,4 @@
-#' @title Data to re-create Hans Rosling's fameous "Us and Them" animation
+#' @title Data to re-create Hans Rosling's famous "Us and Them" animation
 #'   
 #' @description This data was sourced from \url{https://www.gapminder.org/} and
 #'   contains Population, Life Expectancy, Fertility, Income, and

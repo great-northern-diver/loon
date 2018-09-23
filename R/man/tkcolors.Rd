@@ -34,7 +34,7 @@ tohex <- function(x) {
 
 df <- data.frame(
     R_col = tohex(colors()),
-    Tcl_col = loon:::hex12tohex6(l_hexcolor(colors())),
+    Tcl_col = hex12tohex6(l_hexcolor(colors())),
     row.names = colors(),
     stringsAsFactors = FALSE
 )

@@ -4,12 +4,12 @@
 \alias{l_setColorList_ColorBrewer}
 \title{Set loon's color mapping list to the colors from ColorBrewer}
 \usage{
-l_setColorList_ColorBrewer(palette = c("Set1", "Set2", "Set3", "Pasetl1",
+l_setColorList_ColorBrewer(palette = c("Set1", "Set2", "Set3", "Pastel1",
   "Pastel2", "Paired", "Dark2", "Accent"))
 }
 \arguments{
 \item{palette}{one of the following RColorBrewer palette name: Set1, Set2,
-Set3, Pasetl1, Pastel2, Paired, Dark2, or Accent}
+Set3, Pastel1, Pastel2, Paired, Dark2, or Accent}
 }
 \description{
 Loon's color list is used to map nominal values to colors. See
@@ -17,7 +17,7 @@ Loon's color list is used to map nominal values to colors. See
 }
 \details{
 Only the following palettes in ColorBrewer are available: Set1, 
-  Set2, Set3, Pasetl1, Pastel2, Paired, Dark2, and Accent. See the examples 
+  Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples 
   below.
 }
 \examples{
@@ -32,7 +32,7 @@ l_setColorList_ColorBrewer("Set1")
 p <- l_plot(iris)
 }
 \seealso{
-\code{\link{l_setColorList}}, 
+\code{\link{l_setColorList}}, \code{\link{l_setColorList_loon}},
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
-  \code{\link{l_setColorList_baseR}}
+  \code{\link{l_setColorList_baseR}}, \code{\link{l_setColorList_ggplot2}}
 }

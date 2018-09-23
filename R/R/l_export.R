@@ -42,7 +42,7 @@ l_export <- function(widget, filename, width, height) {
         fname <- as.character(tcl("::loon::export",
                                   widget, filename, width, height))
     } else {
-        stop(paste0("The file fomat '",
+        stop(paste0("The file format '",
                    file_extension,
                    "' is not supported on your system.\nSupported formats are: ",
                    paste(valid_extensions, collapse=', '), '.'))

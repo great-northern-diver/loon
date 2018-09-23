@@ -2,6 +2,7 @@
 % Please edit documentation in R/l_state_names.R
 \name{l_state_names}
 \alias{l_state_names}
+\alias{{names.loon}}
 \title{Get State Names of Loon Object}
 \usage{
 l_state_names(target)
@@ -18,4 +19,10 @@ state names
 \description{
 States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 and modified with \code{\link{l_configure}}.
+}
+\details{
+In order to access values of a states use \code{\link{l_info_states}}.
+}
+\seealso{
+\code{\link{l_info_states}}, \code{\link{l_cget}}, \code{\link{l_configure}}
 }

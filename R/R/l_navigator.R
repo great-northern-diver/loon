@@ -1,5 +1,5 @@
 
-
+# #' @export
 l_navigator <- function(widget, ...) {
 
     obj_eval <- .loonobject(widget)
@@ -41,6 +41,10 @@ l_navigator <- function(widget, ...) {
 #'   \code{\link{l_navigator_getLabel}}
 #'   
 #' @export
+
+
+
+
 l_navigator_add <- function(widget, from="", to="", proportion=0, color='orange', ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
@@ -54,8 +58,9 @@ l_navigator_add <- function(widget, from="", to="", proportion=0, color='orange'
 
     structure(l_navigator(widget, "add", from=from, to=to,
                           proportion=proportion, color=color, ...),
-              class=c("loon", "l_navigator"),
-              widget=as.vector(widget))
+              widget = as.vector(widget),
+              class = c("l_navigator", "loon")
+    )
 }
 
 #' @title Delete a Navigator
@@ -74,7 +79,7 @@ l_navigator_delete <- function(widget, id) {
 
 #' @title List Navigators
 #' 
-#' @description Lists all navigatora that belong to a graph
+#' @description Lists all navigators that belong to a graph
 #' 
 #' @inheritParams l_navigator_delete
 #' 
@@ -209,3 +214,15 @@ l_navigator_getLabel <- function(widget, id) {
     paste(l_navigator(widget, "getLabel", id), collapse=' ')
 }
 
+
+#' @title Get the sequence of nodes of a navigator's current path
+#' 
+#' @description Determines and returns the current path of the navigator.  
+#' 
+#' @param navigator navigator handle
+#' @return a vector of node names for the current path of the navigator
+#'   
+#' @export
+l_navigator_getPath <- function(navigator) {
+    c(navigator["from"], navigator["to"])
+}

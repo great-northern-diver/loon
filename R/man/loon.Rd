@@ -47,4 +47,9 @@ Authors:
   \item R. Wayne Oldford \email{rwoldford@uwaterloo.ca}
 }
 
+Other contributors:
+\itemize{
+  \item Zehao Xu \email{z267xu@uwaterloo.ca} [contributor]
+}
+
 }

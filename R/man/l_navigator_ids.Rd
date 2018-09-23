@@ -10,7 +10,7 @@ l_navigator_ids(widget)
 \item{widget}{graph widget}
 }
 \description{
-Lists all navigatora that belong to a graph
+Lists all navigators that belong to a graph
 }
 \seealso{
 \code{\link{l_navigator_add}}

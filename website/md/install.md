@@ -61,7 +61,7 @@ You can also install the latest development release directly from
 GitHub with the following R code
 
 ~~~
-devtools::install_github("waddella/loon", subdir="R")
+devtools::install_github("rwoldford/loon", subdir="R")
 ~~~
 
 
@@ -104,7 +104,7 @@ install.packages(c('maps','sp','RColorBrewer',
     'RnavGraphImageData','rworldmap', 'scales'))
 ~~~
 
-The following packages on [Biocoductor](http://www.bioconductor.org/)
+The following packages on [Bioconductor](http://www.bioconductor.org/)
 should also install without any issues
 
 ~~~
@@ -114,8 +114,7 @@ biocLite(c('graph', 'RDRToolbox', 'Rgraphviz'),
 ~~~
 
 
-The following packages on [CRAN][CRAN] have dependencies that might need
-need special care
+The following packages on [CRAN][CRAN] have dependencies that might need special care
 
 * On Ubuntu install the following packages first (from bash)
 

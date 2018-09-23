@@ -13,7 +13,7 @@
 #' @template see_l_help
 #' 
 #' @seealso \code{\link{l_graph.graph}}, \code{\link{l_graph.loongraph}},
-#'   \code{l_graph.default}
+#'   \code{\link{l_graph.default}}
 #'   
 #' @export
 #' 
@@ -67,8 +67,11 @@ l_graph.graph <- function(nodes, ...) {
 #' @export l_graph.loongraph
 l_graph.loongraph <- function(nodes,...) {
     graph <- nodes
-    l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
-                    isDirected=graph$isDirected, ...)
+    
+    plot <- l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
+                              isDirected=graph$isDirected, ...)
+    
+    plot
 }
 
 
@@ -96,8 +99,12 @@ l_graph.loongraph <- function(nodes,...) {
 #' @export l_graph.default
 l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 
-    loonPlotFactory('::loon::graph', 'graph', 'loon graph', parent,
+    plot <- loonPlotFactory('::loon::graph', 'graph', 'loon graph', parent,
                     nodes=nodes, from=from, to=to, ...)
+    
+    class(plot) <- c("l_graph", class(plot))
+    
+    plot
     
 }
 

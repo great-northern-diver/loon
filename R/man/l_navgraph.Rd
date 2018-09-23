@@ -18,7 +18,7 @@ complete transition graph is added.}
 \item{...}{arguments passed on to modify the scatterplot plot states}
 }
 \value{
-named list with \code{graph} handle, \code{plot}, handle,
+named list with \code{graph} handle, \code{plot} handle,
   \code{graphswitch} handle, \code{navigator} handle, and \code{context}
   handle.
 }

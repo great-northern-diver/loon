@@ -96,14 +96,13 @@ window.onload = function() {
     setLearnUrl("display_serialaxes");
 }
 </script>
+
 <div class="figure">
 <img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" />
-
 </div>
 <pre><code>s &lt;- l_serialaxes(data=oliveAcids, color=olive$Area, title=&quot;olive data&quot;)</code></pre>
 <div class="figure">
 <img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" />
-
 </div>
 <pre><code>s[&#39;axesLayout&#39;] &lt;- &#39;parallel&#39;</code></pre>
 <h1 id="serialaxes">Serialaxes</h1>
@@ -119,7 +118,6 @@ names(states)</code></pre></li>
 <pre><code>l_configure(s, sequence=c(&#39;stearic&#39;, &#39;linoleic&#39;, &#39;palmitic&#39;, &#39;arachidic&#39;))</code></pre>
 <div class="figure">
 <img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" />
-
 </div></li>
 <li><p>When creating a plot you may specify any state at plot creation</p>
 <pre><code>s1 &lt;- l_serialaxes(data=olive, color=olive$Area, title=&quot;olive data&quot;,

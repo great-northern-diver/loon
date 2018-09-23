@@ -102,7 +102,11 @@ if (requireNamespace("RnavGraphImageData", quietly = TRUE)) {
         
         l_configure(p, glyph=g_row, color='black', which=i_rowlabels)
         
-    })  
+        
+        cat("Scatterplot shows the effect of size on different glyph types.")
+        
+    }
+    ) 
 } else {
     cat("need the tkimg tcl extension and RnavGraphImageData R package installed to run this demo.\n")
 }

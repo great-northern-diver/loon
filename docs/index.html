@@ -32,6 +32,8 @@ Loon: An Interactive Statistical Visualization Toolkit
 <script type="text/javascript">
 document.getElementById("home").className += " selected";
 </script>
+
+
 <h1 id="introduction">Introduction</h1>
 <p><code>loon</code> is a toolkit for interactive data visualization and exploration. Currently, <code>loon</code> is embedded in <code>R</code> and <code>Tcl</code>.</p>
 <ul>
@@ -48,63 +50,47 @@ document.getElementById("home").className += " selected";
 <h1 id="user-interface">User Interface</h1>
 <p>The user interface of <code>loon</code> has two elements: the <em>display</em> and the <em>inspector</em>.</p>
 <div class="figure">
-<img src="images/loon_preview.png" title="loon screenshot with inspector and scatterplot display." alt="loon screenshot. Left: Inspector and Right: Scatterplot display." />
-<p class="caption">loon screenshot. Left: Inspector and Right: Scatterplot display.</p>
+<img src="images/loon_preview.png" title="loon screenshot with inspector and scatterplot display." alt="loon screenshot. Left: Inspector and Right: Scatterplot display." /><p class="caption">loon screenshot. Left: Inspector and Right: Scatterplot display.</p>
 </div>
 <p>The inspector lays out most of the functionality of the display. Displays support further actions via mouse gestures and modifier keys.</p>
 <h1 id="point-glyph-types">Point Glyph Types</h1>
 <p>Points in scatterplot can be displayed with different glyphs. <code>loon</code> distinguishes between primitive and non-primitive glyphs. The primitive glyphs are available in all scatterplots whereas the non-primitive ones need to be added to a scatterplot before they can be used. <a href="learn_R_display_plot.html#glyphs">Read more.</a></p>
 <div class="figure">
 <img src="images/point_glyph_types.png" title="loon point glyph types" />
-
 </div>
 <h1 id="zoom-and-pan">Zoom and Pan</h1>
 <div class="figure">
 <img src="images/pan_zoom.png" title="Zoom and Pan" />
-
 </div>
 <p>When zooming and panning the plot region gets shown in relation to all data on the worldview in the inspector.</p>
 <h1 id="linked-displays">Linked Displays</h1>
 <div class="figure">
-<img src="images/linking.jpg" title="Linking" alt="Selecting points in one display will also select them in all linked displays." />
-<p class="caption">Selecting points in one display will also select them in all linked displays.</p>
+<img src="images/linking.jpg" title="Linking" alt="Selecting points in one display will also select them in all linked displays." /><p class="caption">Selecting points in one display will also select them in all linked displays.</p>
 </div>
 <p>Multiple displays can be linked such that the linked points share their color, size, selected and active states.</p>
 <div class="floatleft">
-<div class="figure">
 <img src="images/adhoc_linking.png" title="Adhoc Linking" />
-
-</div>
 </div>
 <p>Scatterplot displays can be linked ad-hoc with the inspector by changing the <em>Linking Group</em> of the scatterplot displays to be the same. <code>loon</code> will always suggest a linking group that has no display associated to it. The linking group <code>none</code> keeps the display unlinked.</p>
 <p>Displays with different numbers of points can be linked too. The only linking constraint is that a point can be linked with no more than one point on another display.</p>
 <h1 id="selection">Selection</h1>
 <p><code>loon</code> provides multiple interactive selection tools.</p>
 <div class="floatleft">
-<div class="figure">
 <img src="images/select_click.png" title="Click Select" />
-
-</div>
 </div>
 <p><strong>Click Select:</strong> individual points can be selected or deselected by simply clicking with the mouse cursor on them.</p>
 <div style="clear:both;margin-bottom:10px">
 
 </div>
 <div class="floatleft">
-<div class="figure">
 <img src="images/select_sweep.png" title="Sweep Select" />
-
-</div>
 </div>
 <p><strong>Sweep Select:</strong> a sweep selection selects all points below a rectangular area which is defined by a left-click drag gesture. That is, the upper left corner of the sweep rectangle is at the location of the left-button press, and the lower right corner is at the current cursor location while the left button is pressed.</p>
 <div style="clear:both;margin-bottom:10px">
 
 </div>
 <div class="floatleft">
-<div class="figure">
 <img src="images/select_brush.png" title="Brush Select" />
-
-</div>
 </div>
 <p><strong>Brush Select:</strong> a brush selection also selects all points below a rectangular area. However, in contrast to the sweep selection, the rectangular brush area has a fixed size and a left-button press moves the lower right corner to the current mouse location, and a left-click dragging gesture moves the brush area along the mouse pointer.</p>
 <div style="clear:both;margin-bottom:10px">
@@ -114,10 +100,7 @@ document.getElementById("home").className += " selected";
 <h1 id="modify">Modify</h1>
 <p>The state of the selected points can be modified with the tools and actions in the <em>Modify</em> panel of the inspector. The following <em>Modify</em> panel is from the scatterplot inspector.</p>
 <div class="floatleft" style="margin-right: 20px">
-<div class="figure">
 <img src="images/modify.png" title="Brush Select" />
-
-</div>
 </div>
 <ul>
 <li>Point color</li>
@@ -133,7 +116,6 @@ document.getElementById("home").className += " selected";
 <p>On the scatterplot display selected points can be temporarily moved to a new location.</p>
 <div class="figure">
 <img src="images/move.jpg" title="Interactively Move Points" />
-
 </div>
 <h1 id="command-line-control">Command Line Control</h1>
 <p>Displays can be completely controlled via the command line. The <code>R</code> API is discussed in <a href="learn_R_intro.html">learn R section</a>. It is similar to the <code>tcltk</code> package API. For example, in <code>R</code> for a plot with handle <code>p</code> once can query a plot state as follows</p>
@@ -159,12 +141,10 @@ $p configure -zoomX 2 -zoomY 3 -selected FALSE</code></pre>
 <p>The histogram, scatterplot and graph displays support layering of lines, polygons, text, rectangles and more. For example, the following picture shows a scatterplot of international airports with map information layered underneath the scatterplot points. The data is from the <a href="http://naturalearthdata.com/">naturalearth project</a>.</p>
 <div class="figure">
 <img src="images/gallery/naturalearth_world.png" />
-
 </div>
 <p>Layers can be arranged with <code>loon</code>'s layers inspector.</p>
 <div class="figure">
 <img src="images/layers.png" title="loon Layers" />
-
 </div>
 </body>
 </html>

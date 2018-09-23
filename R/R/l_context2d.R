@@ -101,7 +101,7 @@ l_context_add <- function(navigator, type, ...) {
     structure(obj_eval('context', 'add', type, ...),
               widget=attr(navigator,'widget'),
               navigator=as.vector(navigator),
-              class=c('loon','l_context'))
+              class=c('l_context', 'loon'))
 }
 
 #' @title Create a context2d navigator context

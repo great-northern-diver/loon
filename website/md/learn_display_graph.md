@@ -1310,7 +1310,7 @@ m1dc <- measures1d(data=s_oliveAcids, separator='+',
                    kurtosis = kurtosis,
                    skewness = skewness)
 
-nav <- l_ng_ranges(measures=m1dc, color=Area)
+nav <- l_ng_ranges(measures=m1dc, color=olive$Area)
 ~~~
 
 
