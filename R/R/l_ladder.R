@@ -24,7 +24,7 @@ l_ladder <- function(from=-5, to=5, alphaX=0, alphaY=0, parent=NULL) {
 
     tcl(plot, "configure", from=from, to=to, alphaX=alphaX, alphaY=alphaY)
 
-    class(plot) <- "loon"
+    class(plot) <- c("l_ladder", "loon")
     
-    return(plot)
+    plot
 }

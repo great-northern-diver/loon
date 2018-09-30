@@ -47,9 +47,9 @@ l_graphswitch <- function(activewidget="", parent=NULL, ...) {
         tktitle(parent) <- paste("loon graphswitch", widget)
     }
     
-    class(widget) <- "loon"
+    class(widget) <- c("l_graphswitch", "loon")
 
-    return(widget)
+    widget
 }
 
 
@@ -79,7 +79,7 @@ l_graphswitch_add <- function(widget, graph, ...) {
     if (is.numeric(index)) {
         index <- index - 1
     }
-    return(index)
+    index
 }
 
 

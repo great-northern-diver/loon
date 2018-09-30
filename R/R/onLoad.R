@@ -1,6 +1,6 @@
 
 .onAttach <- function(libname, pkgname) {
-    
+
 #    packageStartupMessage("\nloon Version ",
 #                          utils::packageDescription(pkg = pkgname,
 #                                                    lib.loc = libname,
@@ -29,45 +29,45 @@
         ##      }
         ##")
     }
-    
-    
-    
+
+
+
     ## Load Tcl package
     libdir <- file.path(find.package(package = pkgname), "tcl")
-    
+
     ## sometimes there are issues with devtools and testthat
     if (!dir.exists(libdir))
         libdir <- sub("tcl$", "inst/tcl", libdir)
     # cat(paste0("libdir = ", libdir, "\n"))
-    
+
     tcl('lappend','auto_path',libdir)
-     
+
 
     if (FALSE) {
-        ## image resizing function in C 
+        ## image resizing function in C
         .Tcl(paste('load "',
                    system.file("libs",.Platform$r_arch,
                                paste("ImgscaleTea",.Platform$dynlib.ext,sep=''),
                                package = pkgname, lib.loc = libname),
-                   '"', sep=''))        
+                   '"', sep=''))
     }
-    
+
     ## load Img tk extension
     sysname <- Sys.info()[1]
-    
+
     suppressWarnings(didLoad <- tclRequire('Img'))
-    # if (sysname == "Darwin" && identical(didLoad, FALSE)) {        
+    # if (sysname == "Darwin" && identical(didLoad, FALSE)) {
     #     addTclPath("/System/Library/Tcl")
     #     suppressWarnings(didLoad <- tclRequire('Img'))
     #     .withCorrectTclImg <<- FALSE
     # }
-    
+
     if(identical(didLoad, FALSE)) {
        # warning(
        #     paste("Can not load the tcl Img extension.",
        #           "Hence you can not use the\n'l_image_import_files'",
        #           "R function. Read the package vignette\non",
-       #           "how to set up tcl/tk."))        
+       #           "how to set up tcl/tk."))
     } else {
         .withTclImg <<- TRUE
     }
@@ -81,10 +81,10 @@
                   "\nIn particular, exporting plots in the png, jpg, tiff, and",
                   "bmp formats\nis not possible.")
             )
-        
+
     }
-    
-    
+
+
 
     .Tcl('package require loon')
 
@@ -94,7 +94,7 @@
         ## on windows I still experience issues with the compiled image_scale procedure
 #        .Tcl('set ::loon::Options(image_scale) image_scale')
 #    }
-    
+
     if (Sys.info()['sysname'] == "Windows") {
         .Tcl(paste0('proc ::loon::loon_toplevel {} {',
                     .Tcl.callback(.ltoplevel),
@@ -102,6 +102,9 @@
     }
 
     .Tcl('set ::loon::Options(printInConfigurationWarningMsg) ".Tcl(\'set ::loon::Options(printInConfigurationWarning) FALSE\')"')
+
+    # Will now turn off the message warning
+    .Tcl('set ::loon::Options(printInConfigurationWarning) FALSE')
 
 }
 

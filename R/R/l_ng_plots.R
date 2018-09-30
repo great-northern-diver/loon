@@ -55,6 +55,8 @@ l_ng_plots <- function(measures, ...) {
 #' @export
 #' 
 #' @examples 
+#' 
+#' \dontrun{
 #' n <- 100
 #' dat <- data.frame(
 #'    A = rnorm(n), B = rnorm(n), C = rnorm(n),
@@ -94,6 +96,7 @@ l_ng_plots <- function(measures, ...) {
 #' 
 #' # be carful that the vector names are correct
 #' nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
+#' }
 #' 
 l_ng_plots.default <- function(measures, data, separator=":", ...) {
 
@@ -138,7 +141,7 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
     g <- l_graph()
     nav <- l_navigator_add(g)
     con <- l_context_add_geodesic2d(nav, data=data, separator=separator)
-    p <- structure(unlist(strsplit(con['command'], ' ', fixed=TRUE))[1], class='loon')
+    p <- structure(unlist(strsplit(con['command'], ' ', fixed=TRUE))[1], class=c("l_plot", "loon"))
 
     
     args <- list(...)
@@ -245,12 +248,14 @@ l_ng_plots.default <- function(measures, data, separator=":", ...) {
     else
         tmp_plots <- spmatrix
     
-    return(list(plots= tmp_plots,
-                graph=g,
-                plot=p,
-                navigator=nav,
-                context=con,
-                env=environment()))
+    plot <- list(plots= tmp_plots,
+                 graph=g,
+                 plot=p,
+                 navigator=nav,
+                 context=con,
+                 env=environment())
+    class(plot) <- c("l_ng_plots", "l_navgraph", "l_compound", "loon")
+    return(plot)
 }
 
 
@@ -486,4 +491,10 @@ l_ng_plots.scagnostics <- function(measures, data, separator=":", ...) {
     row.names(measures) <- sub(" * ", separator, row.names(measures), fixed = TRUE)
     
     l_ng_plots.default(measures, data, separator, ...)
+}
+
+
+#' @export
+l_getPlots.l_ng_plots <- function(target){
+    append(target$plots, (list(graph = target$graph, plot = target$plot)))
 }

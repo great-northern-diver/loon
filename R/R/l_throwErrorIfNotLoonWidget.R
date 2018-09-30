@@ -12,7 +12,7 @@
 #' @return TRUE if the string is associated with a loon widget,
 #' otherwise an error is thrown.
 #'
-#' 
+#' @export
 
 l_throwErrorIfNotLoonWidget <- function(widget) {
 

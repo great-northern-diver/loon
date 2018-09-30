@@ -94,6 +94,9 @@ l_plot <- function(x, y, ...) {
 #' @export l_plot.default
 #' 
 #' @examples 
+#' 
+#' # default use as scatterplot
+#' 
 #' p1 <- with(iris, l_plot(Sepal.Length, Sepal.Width, color=Species))
 #' 
 #' p2 <- with(iris, l_plot(Petal.Length ~ Petal.Width, color=Species))
@@ -102,6 +105,7 @@ l_plot <- function(x, y, ...) {
 #' l_configure(p1, linkingGroup="iris", sync="push")
 #' l_configure(p2, linkingGroup="iris", sync="push")
 #' p1['selected'] <- iris$Species == "setosa" 
+#' 
 l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
     
     if(missing(x)) {
@@ -130,8 +134,10 @@ l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
                                 x=xy$x, y=xy$y,
                                 xlabel=xy$xlab, ylabel=xy$ylab,
                                 ...)
+        
     }
-
+    
+    class(plot) <- c("l_plot", class(plot))
     return(plot)
 }
 

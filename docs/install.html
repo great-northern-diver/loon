@@ -80,7 +80,7 @@ document.getElementById("install").className += " selected";
 <p>The <code>loon</code> package is on <a href="https://cran.r-project.org/web/packages/dplyr/index.html">CRAN</a> available. To install the package start your <code>R</code> and run</p>
 <pre class="{r}"><code>install.packages(&#39;loon&#39;)</code></pre>
 <p>You can also install the latest development release directly from GitHub with the following R code</p>
-<pre><code>devtools::install_github(&quot;waddella/loon&quot;, subdir=&quot;R&quot;)</code></pre>
+<pre><code>devtools::install_github(&quot;rwoldford/loon&quot;, subdir=&quot;R&quot;)</code></pre>
 <!--
 ### From a local file
 
@@ -105,11 +105,11 @@ R CMD INSTALL loon_1.0.0.tar.gz
 <p>First, these packages from <a href="http://cran.r-project.org/">CRAN</a> should install without any issues</p>
 <pre><code>install.packages(c(&#39;maps&#39;,&#39;sp&#39;,&#39;RColorBrewer&#39;,
     &#39;RnavGraphImageData&#39;,&#39;rworldmap&#39;, &#39;scales&#39;))</code></pre>
-<p>The following packages on <a href="http://www.bioconductor.org/">Biocoductor</a> should also install without any issues</p>
+<p>The following packages on <a href="http://www.bioconductor.org/">Bioconductor</a> should also install without any issues</p>
 <pre><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
 biocLite(c(&#39;graph&#39;, &#39;RDRToolbox&#39;, &#39;Rgraphviz&#39;),
     suppressUpdates=TRUE, suppressAutoUpdate=TRUE)</code></pre>
-<p>The following packages on <a href="http://cran.r-project.org/">CRAN</a> have dependencies that might need need special care</p>
+<p>The following packages on <a href="http://cran.r-project.org/">CRAN</a> have dependencies that might need special care</p>
 <ul>
 <li><p>On Ubuntu install the following packages first (from bash)</p>
 <pre><code>sudo apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev\

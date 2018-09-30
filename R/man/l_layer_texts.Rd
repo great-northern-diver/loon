@@ -4,8 +4,8 @@
 \alias{l_layer_texts}
 \title{Layer a texts}
 \usage{
-l_layer_texts(widget, x, y, text, color = "gray60", size = 6, angle = 0,
-  label = "texts", parent = "root", index = 0, ...)
+l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
+  angle = 0, label = "texts", parent = "root", index = 0, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}

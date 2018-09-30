@@ -4,17 +4,32 @@
 \alias{l_pairs}
 \title{Scatterplot Matrix in Loon}
 \usage{
-l_pairs(data, parent = NULL, ...)
+l_pairs(data, showHistograms = FALSE, histLocation = c("edge", "diag"),
+  histHeightProp = 1, histArgs = list(), showSerialAxes = FALSE,
+  serialAxesArgs = list(), parent = NULL, ...)
 }
 \arguments{
 \item{data}{a data.frame with numerical data to create the scatterplot matrix}
 
+\item{showHistograms}{logical (default FALSE) to show histograms of each variable or not}
+
+\item{histLocation}{one "edge" or "diag", when showHistograms = TRUE}
+
+\item{histHeightProp}{a positive number giving the height of the histograms as a proportion of the height of the scatterplots}
+
+\item{histArgs}{arguments to modify the `l_hist` states}
+
+\item{showSerialAxes}{logical (default FALSE) indication of whether to show a serial axes plot 
+in the bottom left of the pairs plot (or not)}
+
+\item{serialAxesArgs}{additional arguments given to `l_serialaxes()`}
+
 \item{parent}{parent widget path}
 
-\item{...}{named arguments to modify the scatterplot states}
+\item{...}{named arguments to modify the `l_plot` states of the scatterplots}
 }
 \value{
-a list with scatterplot handles
+a list with handles for the plots
 }
 \description{
 Function creates a scatterplot matrix using loon's scatterplot 
@@ -22,6 +37,8 @@ Function creates a scatterplot matrix using loon's scatterplot
 }
 \examples{
 p <- l_pairs(iris[,-5], color=iris$Species)
+
+p <- l_pairs(iris[,-5], color=iris$Species, showHistograms = TRUE, showSerialAxes = TRUE)
 }
 \seealso{
 \code{\link{l_plot}}

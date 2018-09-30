@@ -78,6 +78,7 @@
 #'   supports linking.
 #'   
 #'   
+#'   
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'   
@@ -147,7 +148,7 @@ l_layer.density <- function(widget, x, ...) {
 # helper function to add a layer
 l_layer_add <- function(widget, type, ...) {
     structure(as.character(tcl(widget, "layer" , type, ...)),
-              widget=as.vector(widget), class=c("loon","l_layer"))
+              widget=as.vector(widget), class=c(paste0("l_layer_", type), "l_layer", "loon"))
 }
 
 

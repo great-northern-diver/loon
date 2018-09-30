@@ -23,5 +23,5 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 }
 \seealso{
 \code{\link{l_graph.graph}}, \code{\link{l_graph.loongraph}},
-  \code{l_graph.default}
+  \code{\link{l_graph.default}}
 }

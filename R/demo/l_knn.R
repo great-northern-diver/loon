@@ -109,16 +109,24 @@ local({
     }  
     
     ## For example,
-    sOiveAcids <- data.frame(scale(oliveAcids))
-    p <- with(sOiveAcids, l_plot(oleic~stearic, color=olive$Area))
-    highlight_knn(p, data=sOiveAcids, k=5)
+    sOliveAcids <- data.frame(scale(oliveAcids))
+    p <- with(sOliveAcids, l_plot(oleic~stearic, color=olive$Area))
+    highlight_knn(p, data=sOliveAcids, k=5)
     
     l_aspect(p) <- 1
     
+    cat(paste("Select points in the plot, the k nearest neighbours",
+              "and their distance from the selected points",
+              "as measured in the space of the chosen variables,",
+              "is shown by showing closer neighbours as larger closed squares -- ",
+              "the larger the closer."
+              
+    )
+    )
     readline("press the return key to continue: next in a navigation graph setting")
 
     nav <- l_navgraph(oliveAcids, color=olive$Area)
-    highlight_knn(nav$plot, sOiveAcids)
+    highlight_knn(nav$plot, sOliveAcids)
     l_aspect(nav$plot) <- 1
     
     

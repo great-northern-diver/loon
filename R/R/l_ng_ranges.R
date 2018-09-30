@@ -71,8 +71,9 @@ l_ng_ranges <- function(measures, ...) {
 #' )
 #' 
 #' nav <- l_ng_ranges(m1d, dat) 
-#' 
-#' 
+
+
+
 l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 
     force(data)
@@ -117,7 +118,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     g <- l_graph(parent=tt)
     nav <- l_navigator_add(g)
     g2d <- l_context_add_geodesic2d(navigator = nav, data=data, separator=separator)
-    p <- structure(unlist(strsplit(g2d['command'],' ', fixed=TRUE))[1], class='loon')
+    p <- structure(unlist(strsplit(g2d['command'],' ', fixed=TRUE))[1], class=c ('l_plot', 'loon'))
     
     args <- list(...)
     if (length(args) > 0) {
@@ -317,13 +318,17 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
     
     l_scaleto_world(p)
     
-    return(list(
+    plot <- list(
         graph=g,
         plot=p,
         navigator=nav,
         context=g2d,
         env=environment()
-    ))
+    )
+    
+    class(plot) <- c("l_ng_ranges", "l_navgraph", "l_compound", "loon")
+    
+    return(plot)
 }
 
 

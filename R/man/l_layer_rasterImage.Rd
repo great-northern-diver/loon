@@ -4,8 +4,9 @@
 \alias{l_layer_rasterImage}
 \title{Layer a Raster Image}
 \usage{
-l_layer_rasterImage(widget, image, xleft, ybottom, xright, ytop, angle = 0,
-  interpolate = FALSE, parent = "root", index = "end", ...)
+l_layer_rasterImage(widget, image, xleft, ybottom, xright, ytop,
+  angle = 0, interpolate = FALSE, parent = "root", index = "end",
+  ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
@@ -54,21 +55,21 @@ p <- l_plot()
 l_layer_rasterImage(p, mat, 0,0,1,1)
 l_scaleto_world(p)
 
-# from examples(rasterImage)
-
-# set up the plot region:
-op <- par(bg = "thistle")
-plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
 image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
-rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
-rasterImage(image, 100, 400, 150, 450)
-rasterImage(image, 200, 300, 200 + 10, 300 + 10,
-           interpolate = FALSE)
-           
 p <- l_plot(showScales=TRUE, background="thistle", useLoonInspector=FALSE)
 l_layer_rasterImage(p, image, 100, 300, 150, 350, interpolate = FALSE)
 l_layer_rasterImage(p, image, 100, 400, 150, 450)
 l_layer_rasterImage(p, image, 200, 300, 200 + 10, 300 + 10,
    interpolate = FALSE)
 l_scaleto_world(p)
+
+# from examples(rasterImage)
+
+# set up the plot region:
+op <- par(bg = "thistle")
+plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
+rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
+rasterImage(image, 100, 400, 150, 450)
+rasterImage(image, 200, 300, 200 + 10, 300 + 10,
+           interpolate = FALSE)
 }

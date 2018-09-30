@@ -17,6 +17,8 @@
 #' if (requireNamespace("maps", quietly = TRUE)) {
 #'    p <- l_plot(maps::map('world', fill=TRUE, plot=FALSE))
 #' }
+
+
 l_plot.map <-  function(x, ...) {
 
     p <- l_plot.default()
@@ -169,5 +171,6 @@ l_layer.map <- function(widget, x,
             }
         }
     }
+    
     return(id)    
 }

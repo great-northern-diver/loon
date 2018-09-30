@@ -35,7 +35,6 @@ For more information run: \code{l_help("learn_R_display_hist")}
 }
 \examples{
 h <- l_hist(iris$Sepal.Length, color=iris$Species)
-
 }
 \seealso{
 \code{\link{l_plot}}

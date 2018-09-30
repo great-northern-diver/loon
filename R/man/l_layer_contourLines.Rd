@@ -4,10 +4,10 @@
 \alias{l_layer_contourLines}
 \title{Layer Contour Lines}
 \usage{
-l_layer_contourLines(widget, x = seq(0, 1, length.out = nrow(z)), y = seq(0,
-  1, length.out = ncol(z)), z, nlevels = 10, levels = pretty(range(z, na.rm
-  = TRUE), nlevels), asSingleLayer = TRUE, parent = "root", index = "end",
-  ...)
+l_layer_contourLines(widget, x = seq(0, 1, length.out = nrow(z)),
+  y = seq(0, 1, length.out = ncol(z)), z, nlevels = 10,
+  levels = pretty(range(z, na.rm = TRUE), nlevels),
+  asSingleLayer = TRUE, parent = "root", index = "end", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
@@ -72,5 +72,4 @@ if (requireNamespace("MASS", quietly = TRUE)) {
             label=paste0(as.character(dat$Species[1]), " contours"))
   })
 }
-
 }

@@ -1,17 +1,13 @@
 ## Test evironments
-* OS X, R 3.4.1
-* Ubuntu 17.04, R 3.4.1
-* Windows 10, R 3.4.1
+
+* local OS X, R 3.5.1
+* local Ubuntu 18.04 R 3.5.1 and R-devel (2018-09-29 r75381)
+* local Windows 10 R 3.5.1
+* Ubuntu 14.04.5 (on travis-ci) R 3.5.1 and R-devel (2018-09-29 r75381)
 
 ## R CMD check results
+
 There were no ERRORs or WARNINGs.
-
-There was one NOTE:
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: ‘Adrian Waddell <adrian@waddell.ch>’
-
-New submission
 
 ## Downstream dependencies
 

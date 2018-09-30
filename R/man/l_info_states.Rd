@@ -12,22 +12,23 @@ widget, layer, glyph, navigator or context completely. The widget is
 specified by the widget path name (e.g. \code{'.l0.plot'}), the remaining
 objects by their ids.}
 
-\item{states}{vector with names of states. \code{'all'} is treated as a 
+\item{states}{vector with names of states. \code{'all'} is treated as a
 keyword and results in returning information on all plot states}
 }
 \value{
 a named nested list with one element per state. The list elements are
-  also named lists with \code{type}, \code{dimension}, \code{defaultvalue}, 
+  also named lists with \code{type}, \code{dimension}, \code{defaultvalue},
   and \code{description} elements containing the respective information.
 }
 \description{
-Loon's built-in object documentation. Can be used with every 
-  loon object that has plot states includin plots, layers, navigators,
-  contexts.
+Loon's built-in object documentation. Can be used with every
+  loon object that has plot states including plots, layers, navigators,
+  contexts.  This is a generic function.
 }
 \examples{
 p <- l_plot(iris, linkingGroup="iris")
 i <- l_info_states(p)
+names(p)
 names(i)
 i$selectBy
 

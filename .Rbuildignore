@@ -1,0 +1,10 @@
+.DS_Store
+.gitignore
+.travis.yml
+R/loon.Rproj
+R/man-roxygen
+R/cran-comments.md
+R/.Rhistory
+R/.Rproj.user
+R/.DS_Store
+R/.gitignore
