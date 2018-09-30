@@ -4,8 +4,8 @@
 \alias{l_serialaxes}
 \title{Create a Serialaxes Widget}
 \usage{
-l_serialaxes(data, sequence, scaling = "variable", axesLayout = "radial",
-  showAxes = TRUE, parent = NULL, ...)
+l_serialaxes(data, sequence, scaling = "variable",
+  axesLayout = "radial", showAxes = TRUE, parent = NULL, ...)
 }
 \arguments{
 \item{data}{a data frame with numerical data only}

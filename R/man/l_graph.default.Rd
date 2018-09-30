@@ -4,8 +4,8 @@
 \alias{l_graph.default}
 \title{Create a graph display based on node names and from-to edges list}
 \usage{
-\method{l_graph}{default}(nodes = "", from = "", to = "", parent = NULL,
-  ...)
+\method{l_graph}{default}(nodes = "", from = "", to = "",
+  parent = NULL, ...)
 }
 \arguments{
 \item{nodes}{vector with nodenames}

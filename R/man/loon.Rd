@@ -4,7 +4,6 @@
 \name{loon}
 \alias{loon}
 \alias{loon-package}
-\alias{loon-package}
 \title{loon: A Toolkit for Interactive Data Visualization and Exploration}
 \description{
 Loon is a toolkit for highly interactive data visualization. Interactions 

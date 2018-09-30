@@ -4,7 +4,8 @@
 \alias{l_layer.SpatialPointsDataFrame}
 \title{Layer points in SpatialPointsDataFrame object}
 \usage{
-\method{l_layer}{SpatialPointsDataFrame}(widget, x, asMainLayer = FALSE, ...)
+\method{l_layer}{SpatialPointsDataFrame}(widget, x, asMainLayer = FALSE,
+  ...)
 }
 \arguments{
 \item{widget}{widget widget path as a string or as an object handle}

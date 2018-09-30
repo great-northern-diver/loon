@@ -5,7 +5,8 @@
 \title{Layer a rectangles}
 \usage{
 l_layer_rectangles(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "rectangles", parent = "root", index = 0, ...)
+  linewidth = 1, label = "rectangles", parent = "root", index = 0,
+  ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
