@@ -97,9 +97,9 @@ window.onload = function() {
     setLearnUrl("display_serialaxes");
 }
 </script>
-
 <div class="figure">
 <img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" />
+
 </div>
 <pre><code>namespace import loon::*        
 set Area [dict get $loon::data::olive Area]; puts &quot;create Area variable&quot;
@@ -110,6 +110,7 @@ set oliveacids [dict filter $loon::data::olive script {key value} {
 set s [serialaxes -data $oliveacids -color $Area -title &quot;olive data&quot;]</code></pre>
 <div class="figure">
 <img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" />
+
 </div>
 <pre><code>$s configure -axesLayout parallel</code></pre>
 <h1 id="serialaxes">Serialaxes</h1>
@@ -123,6 +124,7 @@ dict keys $states</code></pre></li>
 <pre><code>$s configure -sequence {stearic linoleic palmitic arachidic}</code></pre>
 <div class="figure">
 <img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" />
+
 </div></li>
 <li><p>When creating a plot you may specify any state at plot creation</p>
 <pre><code>set s1 [serialaxes -data $olive -color $Area -title &quot;olive data&quot;\

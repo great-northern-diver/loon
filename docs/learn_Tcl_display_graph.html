@@ -111,9 +111,9 @@ window.onload = function() {
     setLearnUrl("display_graph");
 }
 </script>
-
 <div class="figure">
 <img src="images/display_graph.png" title="loon graph display" />
+
 </div>
 <pre><code>set nodes [list A B C D E]
 set G [completegraph $nodes]
@@ -172,6 +172,7 @@ set g [graph -nodes [lindex $LG 0] -from [lindex $LG 1]\
 <pre><code>set nav [$g navigator add -color orange]</code></pre>
 <div class="figure">
 <img src="images/display_graph_navigator1.png" title="loon graph display" />
+
 </div>
 <p>The navigator with the id stored in the <code>nav</code> has its own states that can be listed as follows</p>
 <pre><code>set nstates [$g navigator use $nav info states]
@@ -184,6 +185,7 @@ dict keys $nstates</code></pre>
     -proportion 0.2</code></pre>
 <div class="figure">
 <img src="images/display_graph_navigator2.png" title="navigator path" />
+
 </div>
 <p>The elements related to the navigator you see in the plot above are</p>
 <ul>
@@ -195,6 +197,7 @@ dict keys $nstates</code></pre>
 <p>The graph display supports direct interaction with the navigator and navigator path using the mouse and keyboard. To move the navigator with the mouse you must first click on it to select it which will set the <code>activeNavigator</code> graph state to the navigator id and causes the navigator to be highlighted with the navigator outline in the selection color.</p>
 <div class="figure">
 <img src="images/display_graph_navigator_select.png" title="navigator selected" />
+
 </div>
 <p>In this state the following interactions are possible</p>
 <ul>
@@ -280,6 +283,7 @@ $g navigator use $nav bind state add {from to proportion}\
 <li><p><strong>Context2d</strong> maps every location on a 2d space graph to a list of <code>xvars</code> and a list of <code>yvars</code> such that, while moving the navigator along the graph, as few changes as possible take place in <code>xvars</code> and <code>yvars</code>, see the image:</p>
 <div class="figure">
 <img src="images/context2d.png" />
+
 </div></li>
 <li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share (see <a href="http://link.springer.com/article/10.1007%2Fs00180-011-0228-6">Hurley and Oldford 2011</a>). The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
 </ul>
@@ -435,6 +439,7 @@ pack $g -side left -fill both -expand TRUE
 pack $gs -side left -fill y</code></pre>
 <div class="figure">
 <img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" />
+
 </div>
 <p>Graphs are added to the graph switch as follows</p>
 <pre><code>set G1 [completegraph {A B C D}]
@@ -450,6 +455,7 @@ set idG4 [$gs add $G4 &quot;complement(G3)&quot;]
 $gs set $idG3</code></pre>
 <div class="figure">
 <img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" />
+
 </div>
 <ul>
 <li>To switch a graph select it in the list. Layout, selection, and active states are not stored in the graph switch, only the graph information.</li>

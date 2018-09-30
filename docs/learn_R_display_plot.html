@@ -109,9 +109,9 @@ window.onload = function() {
     setLearnUrl("display_plot");
 }
 </script>
-
 <div class="figure">
 <img src="images/display_plot.png" title="loon scatterplot" />
+
 </div>
 <pre><code>data(olive); attach(olive)
 p &lt;- l_plot(x=oleic, y=stearic, color=Area)</code></pre>
@@ -146,6 +146,7 @@ states$background</code></pre>
 <p>The supported primitives are <code>circle</code>, <code>ocircle</code>, <code>ccircle</code>, <code>square</code>, <code>osquare</code>, <code>csquare</code>, <code>triangle</code>, <code>otriangle</code>, <code>ctriangle</code>, <code>diamond</code>, <code>odiamond</code> and <code>cdiamont</code>.</p>
 <div class="figure">
 <img src="images/point_glyph_primitive_types.png" title="primitive point glyph types" />
+
 </div>
 <pre><code>data(olive); attach(olive)
 p &lt;- l_plot(x=oleic, y=stearic, color=Area)
@@ -164,11 +165,13 @@ glyphmap &lt;- list(
 p[&#39;glyph&#39;] &lt;- unlist(glyphmap[as.character(Area)])</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_primitive.png" title="loon scatterplot primitive glyphs" />
+
 </div>
 <h2 id="non-primitive-glyph-types">Non-Primitive Glyph Types</h2>
 <p>The non-primitive glyphs are the following</p>
 <div class="figure">
 <img src="images/display_plot_glyphs_nonprimitive.png" title="loon scatterplot non-primitive glyphs" />
+
 </div>
 <p>The non-primitive glyphs require user specified data. Adding a glyph type requires to specify the glyph data for each of the <code>n</code> points. If <code>n</code> of the plot changes the glyph will be deleted.</p>
 <p>Glyphs, like plots and layers, have states and support state bindings. You can query and modify the glyph states, or add state bindings to glyphs at run time as shown below.</p>
@@ -178,6 +181,7 @@ p[&#39;glyph&#39;] &lt;- unlist(glyphmap[as.character(Area)])</code></pre>
 p[&#39;glyph&#39;] &lt;- gt</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_text.png" title="text glyphs" />
+
 </div>
 <h3 id="serialaxes">Serialaxes</h3>
 <p>Serialaxes glyph show either a star or a parralel coordinate glyph for each point.</p>
@@ -185,11 +189,13 @@ p[&#39;glyph&#39;] &lt;- gt</code></pre>
 p[&#39;glyph&#39;] &lt;- gs</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes.png" title="serialaxes glyphs: radial axes" />
+
 </div>
 <p>Change the glyph appearance as explained in <a href="#query-and-modify-glyph-states">Query and Modify Glyph States</a></p>
 <pre><code>l_configure(gs, axesLayout=&#39;parallel&#39;, showEnclosing=TRUE, showAxes=TRUE)</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_serialaxes_parallel.png" title="serialaxes glyphs: parallel coordinates" />
+
 </div>
 <p>Please also see the <a
 href='learn_R_display_serialaxes.html'>serialaxes display</a> documentation for more information regarding working with serialaxes.</p>
@@ -201,6 +207,7 @@ gr &lt;- l_glyph_add_pointrange(p1, ymin=c(0,1.5, 2.3),
 p1[&#39;glyph&#39;] &lt;- gr</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_pointrange.png" title="pointrange glyphs" />
+
 </div>
 <h3 id="polygons">Polygons</h3>
 <p>A polygon can be a useful point glyph to visualize arbitrary shapes such as airplanes, animals and shapes that are not available in the primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example of polygon glyphs which we reuse here.</p>
@@ -239,6 +246,7 @@ gl &lt;- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
 p[&#39;glyph&#39;] &lt;- gl</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_polygon.png" title="polygon glyphs" />
+
 </div>
 <h3 id="images">Images</h3>
 <p>Image glyphs rely on the <code>Tcl</code> procedure <code>image_scale</code> for image resizing. The <code>loon</code> package comes with a <code>image_scale</code> procedure that is pure <code>Tcl</code> code (i.e. interpreted). To improve the image resizing speed it is possible to install the <a href="https://github.com/waddella/tclImageScale" title="fast image resizing Tcl extension">ImageScale Tcl extension</a>. <code>loon</code> will check when it is loaded whether the 'ImageScale' package is installed and will use the faster procedure (also in <code>R</code>).</p>
@@ -262,6 +270,7 @@ gi &lt;- l_glyph_add_image(p, images=c(img1,img2,img3), label=&quot;Abstract Art
 p[&#39;glyph&#39;] &lt;- gi</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_image1.png" title="image glyphs" />
+
 </div>
 <h4 id="load-images">Load Images</h4>
 <p>Images must be in the standard <code>tcl</code> <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code></a> format. Hence, you may read the <a href="https://www.tcl.tk/man/tcl/TkCmd/image.htm" title="Tcl image manual"><code>image</code> manual</a> to get a deeper understanding of creating, deleting and querying images in <code>tcl</code>.</p>
@@ -283,6 +292,7 @@ gi &lt;- l_glyph_add_image(p, images=imgs, label=&quot;flags&quot;)</code></pre>
 <pre><code>demo(&#39;l_ng_images_faces&#39;)</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_image2.png" title="image glyphs" />
+
 </div>
 <p>It is possible to <a href="http://wiki.tcl.tk/643">fill pictures pixel by pixel or row by row</a> as follows</p>
 <pre><code>library(tcltk); tt &lt;- tktoplevel(); can &lt;- tkcanvas(tt); tkpack(can)
@@ -294,6 +304,7 @@ tcl(pic, &#39;put&#39;, &#39;red&#39;, &#39;-to&#39;, 10, 15) # one pixel
 .Tcl(paste(pic, &#39;put [list [lrepeat 16 blue] [lrepeat 16 green]] -to 0 17&#39;))</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_image3.png" title="image pixel by pixel" />
+
 </div>
 <ul>
 <li><strong>Note</strong> that <code>l_glyph_add_image</code> creates copies of the submitted images. Hence, it is not possible to modify the images when the images are already on the canvas as it is the case in the above example.</li>
@@ -307,6 +318,7 @@ gt &lt;- l_glyph_add_text(p, text=as.character(Region))
 p[&#39;glyph&#39;] &lt;- gt</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_text.png" title="text glyphs" />
+
 </div>
 <p>The procedure to list and get information about them is similar as outlined in the <a
 href=''learn_R_states.html'>states section</a>. For example get the state names of a glyph with</p>
@@ -320,6 +332,7 @@ names(gtstates)</code></pre>
 <pre><code>l_configure(gt, text=as.character(Area))</code></pre>
 <div class="figure">
 <img src="images/display_plot_glyphs_text_modify.png" title="text glyphs" />
+
 </div>
 <h3 id="relabel-list-and-deleting-glyphs">Relabel, List, and Deleting Glyphs</h3>
 <p>Glyph labels are used in the plot and glyph inspector. You can specify the glyph labels when creating the glyphs:</p>

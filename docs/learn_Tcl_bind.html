@@ -88,7 +88,6 @@ window.onload = function() {
     setLearnUrl("bind");
 }
 </script>
-
 <h1 id="event-bindings">Event Bindings</h1>
 <p>Event bindings provide the functionality of binding code to specific event types. The bound code is called a <em>callback</em>. In <code>loon</code>, we distinguish between four classes of events: state change events, item events, canvas events and content events. Examples of each type of event (in the same order as mentioned before) include: a selected state modification of a plot, moving the mouse cursor over a point glyph, re-sizing the plot window and adding a layer.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
@@ -245,6 +244,7 @@ $p bind item add all &lt;Enter&gt; {puts &quot;[%W currenttags]&quot;}</code></p
 <p>The current tagging scheme for the histogram, scatterplot and graph displays is</p>
 <div class="figure">
 <img src="images/item_tags.png" title="Item Tags" />
+
 </div>
 <h2 id="canvas-bindings">Canvas Bindings</h2>
 <p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>

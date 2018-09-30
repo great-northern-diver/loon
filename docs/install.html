@@ -50,7 +50,6 @@ Loon: An Interactive Statistical Visualization Toolkit
 <script type="text/javascript">
 document.getElementById("install").className += " selected";
 </script>
-
 <p>Note that this page provides installation instructions for R. If you want to install <code>loon</code> for <code>Tcl</code> then follow the instructions <a href="https://github.com/waddella/loon/tree/master/Tcl">here</a>.</p>
 <h1 id="important">Important</h1>
 <ul>
@@ -100,7 +99,6 @@ R CMD INSTALL loon_1.0.0.tar.gz
 ~~~
 
 -->
-
 <h2 id="packages-used-for-examples-and-demos">Packages used for Examples and Demos</h2>
 <p>The following packages are used in <code>loon</code>'s examples and demos. Note that these packages are not needed to install <code>loon</code>, they are just nice to have to run all the examples and demos. You can skip this step and <a href="#check-if-your-installation-was-successful">check if your <code>loon</code> installation was successful.</a></p>
 <p>We split the code to install the suggested packages into four sections as not all the packages are easy to install.</p>
@@ -127,12 +125,7 @@ p &lt;- with(iris, l_plot(x=Sepal.Length, y=Sepal.Width, color=Species))</code><
 <p>If this creates a scatterplot and an inspector loon was correctly installed. Follow the steps in the <a href="UI.html">UI section</a> and the <a href="learn_R_intro.html">Learn section</a> to learn how to use <code>loon</code>.</p>
 <h1 id="fast-image-resizing-for-image-point-glyphs">Fast Image Resizing for Image Point Glyphs</h1>
 <p>On Linux and OS X it is advisable to install the <a href="https://github.com/waddella/tclImageScale">ImageScale Tcl extension</a> for fast image resizing. <code>loon</code> will use the compiled <code>C</code> code for image resizing when available.</p>
-<p>The TEA setup of <code>ImageScale</code> for Windows does currently not work. If you know how to change the <code>makefile.vc</code> in the <a href="https://github.com/waddella/tclImageScale/tree/master/win">win folder</a> so that the <code>ImageScale</code> package also compiles under Windows then please <script type="text/javascript">
-<!--
-h='&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#x61;&#100;&#114;&#x69;&#x61;&#110;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'contact me'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x63;&#x6f;&#110;&#116;&#x61;&#x63;&#116;&#32;&#x6d;&#x65;&#32;&#40;&#x61;&#100;&#114;&#x69;&#x61;&#110;&#32;&#x61;&#116;&#32;&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript>.</p>
+<p>The TEA setup of <code>ImageScale</code> for Windows does currently not work. If you know how to change the <code>makefile.vc</code> in the <a href="https://github.com/waddella/tclImageScale/tree/master/win">win folder</a> so that the <code>ImageScale</code> package also compiles under Windows then please <a href="mailto:adrian@waddell.ch">contact me</a>.</p>
 <h1 id="more-important-notes">More Important Notes</h1>
 <p>Note that only part of <code>loon</code>'s functionality is documented on this webpage. However, most of <code>loon</code>'s features are used in the <code>R</code> documentation manuals, <code>R</code> package demos and <code>R</code> package vignettes.</p>
 <h2 id="manual">Manual</h2>
