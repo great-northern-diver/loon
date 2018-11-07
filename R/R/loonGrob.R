@@ -243,8 +243,8 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                                    fontface = titleFont$face
                                          ),
                                          vjust = .5)
-                            } else nullGrob(name = "null: no title") )
-                    } else nullGrob(name = "null: no labels"),
+                            } else nullGrob(name = "title") )
+                    } else nullGrob(name = "labels"),
                     if (showGuides){
                         gTree(children = gList(
 
@@ -300,7 +300,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         ),
                         name = "guides")
                     } else {
-                        nullGrob(name = "null: no guides")
+                        nullGrob(name = "guides")
                         },
 
                     if (showScales) {
@@ -320,7 +320,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                 ),
                                 name = "y axis")
                         )
-                    } else nullGrob(name = "null: no scales"),
+                    } else nullGrob(name = "scales"),
                     clipGrob(name = "clipping region"),
                     interiorPlotGrob,
                     # draw boundary
@@ -328,12 +328,15 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                         rectGrob(name = "boundary rectangle",
                                  gp=gpar(col = border, fill = NA, lwd=1))
                     } else {
-                        nullGrob(name = "null: no boundary rectangle")
+                        nullGrob(name = "boundary rectangle")
                         }
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
-                    dataViewport(xscale = xlim, yscale = ylim, name = "dataViewport")
+                    dataViewport(xscale = xlim, yscale = ylim,
+                                 name = if (swapAxes)
+                                     "dataViewport: swapAxes" else
+                                         "dataViewport")
                 ),
                 name = "loon plot"
             )
