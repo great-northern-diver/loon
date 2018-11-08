@@ -184,37 +184,48 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
 
 
     if (!swapAxes) {
-        xlabelGrob <- textGrob(xlabel,
+        xlabelGrob <- condGrob(test = showLabels,
+                               grobFun = textGrob,
+                               name = "x label",
+                               label = xlabel,
                                y = unit(xylab_loc[1], "lines"),
                                gp = gpar(fontfamily = xlabelFont$family,
                                          fontsize = xlabelFont$size,
                                          fontface = xlabelFont$face
-                                         ),
-                               name = "x label")
-        ylabelGrob <- textGrob(ylabel,
+                               )
+        )
+        ylabelGrob <- condGrob(test = showLabels,
+                               grobFun = textGrob,
+                               name = "y label",
+                               label = ylabel,
                                x = unit(xylab_loc[2], "lines"),
                                rot = 90,
                                gp = gpar(fontfamily = ylabelFont$family,
                                          fontsize = ylabelFont$size,
                                          fontface = ylabelFont$face
-                                         ),
-                               name = "y label")
+                               )
+        )
     } else {
-        xlabelGrob <- textGrob(xlabel,
+        xlabelGrob <- condGrob(test = showLabels,
+                               grobFun = textGrob,
+                               name = "x label",
+                               label = xlabel,
                                x = unit(xylab_loc[2], "lines"),
                                rot = 90,
                                gp = gpar(fontfamily = xlabelFont$family,
                                          fontsize = xlabelFont$size,
                                          fontface = xlabelFont$face
-                               ),
-                               name = "x label")
-        ylabelGrob <- textGrob(ylabel,
+                               ))
+        ylabelGrob <- condGrob(test = showLabels,
+                               grobFun = textGrob,
+                               name = "y label",
+                               label = ylabel,
                                y = unit(xylab_loc[1], "lines"),
                                gp = gpar(fontfamily = ylabelFont$family,
                                          fontsize = ylabelFont$size,
                                          fontface = ylabelFont$face
-                               ),
-                               name = "y label")
+                               )
+                               )
     }
 
     axis <- loon.pretty(widget)
@@ -223,6 +234,17 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
     yaxis.major <- axis$yaxis.major
     yaxis.minor <- axis$yaxis.minor
 
+
+    titleGrob <- condGrob(test =  showLabels & (title != ""),
+                          grobFun = textGrob,
+                          name = "title",
+                          label = title,
+                          y = unit(1, "npc") + unit(.8, "lines"),
+                          gp = gpar(fontfamily = titleFont$family,
+                                    fontsize = titleFont$size,
+                                    fontface = titleFont$face
+                          ),
+                          vjust = .5)
     gTree(
         children = gList(
             rectGrob(gp = gpar(col = NA,
@@ -230,106 +252,101 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                      name = "bounding box") ,
             gTree(
                 children = gList(
-                    if (showLabels) {
-                        gList(
-                            xlabelGrob,
-                            ylabelGrob,
-                            if (title != "") {
-                                textGrob(title,
-                                         name = "title",
-                                         y = unit(1, "npc") + unit(.8, "lines"),
-                                         gp = gpar(fontfamily = titleFont$family,
-                                                   fontsize = titleFont$size,
-                                                   fontface = titleFont$face
-                                         ),
-                                         vjust = .5)
-                            } else nullGrob(name = "title") )
-                    } else nullGrob(name = "labels"),
-                    if (showGuides){
-                        gTree(children = gList(
-
-                            rectGrob(gp = gpar(col = NA,
-                                               fill = as_hex6color(widget['guidesBackground'])
-                                               )
-                                     ),
-
-                            do.call(
-                                gList,
+                    gTree(children = gList(xlabelGrob,
+                                           ylabelGrob,
+                                           titleGrob),
+                          name = "labels"
+                    ),
+                    gTree(children = gList(
+                        # background
+                        condGrob(test = showGuides,
+                                 grobFun = rectGrob,
+                                 name = "guides background",
+                                 gp = gpar(col = NA,
+                                           fill = as_hex6color(widget['guidesBackground'])
+                                 )),
+                        # x major lines
+                        do.call(gList,
                                 lapply(xaxis.major,
                                        function(xaxis) {
-                                           linesGrob(x = unit(rep(xaxis,2 ), "native"),
-                                                     y =  unit(c(0, 1), "npc"),
-                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
-
-                                       }
-                                )
-                            ),
-                            do.call(
-                                gList,
+                                           condGrob(test =  showGuides,
+                                                    grobFun = linesGrob,
+                                                    name = paste0("guidelines: xaxis (major), x = ", xaxis),
+                                                    x = unit(rep(xaxis, 2), "native"),
+                                                    y =  unit(c(0, 1), "npc"),
+                                                    gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
+                                       })),
+                        # x minor lines
+                        do.call(gList,
                                 lapply(xaxis.minor,
                                        function(xaxis) {
-                                           linesGrob(x = unit(rep(xaxis,2 ), "native"),
-                                                     y =  unit(c(0, 1), "npc"),
-                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+                                           condGrob(test =  showGuides,
+                                                    grobFun = linesGrob,
+                                                    name = paste0("guidelines: xaxis (minor), x = ", xaxis),
+                                                    x = unit(rep(xaxis,2 ), "native"),
+                                                    y =  unit(c(0, 1), "npc"),
+                                                    gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
 
-                                       }
-                                )
-                            ),
-                            do.call(
-                                gList,
+                                       })),
+                        # y major lines
+                        do.call(gList,
                                 lapply(yaxis.major,
                                        function(yaxis) {
-                                           linesGrob(x = unit(c(0, 1), "npc") ,
-                                                     y =  unit(rep(yaxis,2), "native"),
-                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
+                                           condGrob(test =  showGuides,
+                                                    grobFun = linesGrob,
+                                                    name = paste0("guidelines: yaxis (major), y = ", yaxis),
+                                                    x = unit(c(0, 1), "npc") ,
+                                                    y =  unit(rep(yaxis,2), "native"),
+                                                    gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
 
-                                       }
-                                )
-                            ),
-                            do.call(
-                                gList,
-                                lapply(yaxis.minor,
-                                       function(yaxis) {
-                                           linesGrob(x = unit(c(0, 1), "npc") ,
-                                                     y =  unit(rep(yaxis,2 ), "native"),
-                                                     gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+                                       })),
+                        # y minor lines
+                        do.call(
+                            gList,
+                            lapply(yaxis.minor,
+                                   function(yaxis) {
+                                       condGrob(test =  showGuides,
+                                                grobFun = linesGrob,
+                                                name = paste0("guidelines: yaxis (minor), y = ", yaxis),
+                                                x = unit(c(0, 1), "npc") ,
+                                                y =  unit(rep(yaxis,2 ), "native"),
+                                                gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
 
-                                       }
-                                )
+                                   }
                             )
-                        ),
-                        name = "guides")
-                    } else {
-                        nullGrob(name = "guides")
-                        },
-
-                    if (showScales) {
-                        gList(
-                            xaxisGrob(
-                                at = xaxis.major,
-                                gp = gpar(fontfamily = scalesFont$family,
-                                          fontsize = scalesFont$size,
-                                          fontface = scalesFont$face
-                                ),
-                                name = "x axis"),
-                            yaxisGrob(
-                                at = yaxis.major,
-                                gp = gpar(fontfamily = scalesFont$family,
-                                          fontsize = scalesFont$size,
-                                          fontface = scalesFont$face
-                                ),
-                                name = "y axis")
                         )
-                    } else nullGrob(name = "scales"),
+                    ),
+                    name = "guides"),
+
+                    # Axes
+                    gTree(children = gList(condGrob(test =  showScales,
+                                                    grobFun = xaxisGrob,
+                                                    name = "x axis",
+                                                    at = xaxis.major,
+                                                    gp = gpar(fontfamily = scalesFont$family,
+                                                              fontsize = scalesFont$size,
+                                                              fontface = scalesFont$face
+                                                    )),
+                                           condGrob(test =  showScales,
+                                                    grobFun = yaxisGrob,
+                                                    name = "y axis",
+                                                    at = yaxis.major,
+                                                    gp = gpar(fontfamily = scalesFont$family,
+                                                              fontsize = scalesFont$size,
+                                                              fontface = scalesFont$face
+                                                    ))),
+                          name = "axes"),
+
+
+                    # Clipping
                     clipGrob(name = "clipping region"),
+                    # Interior
                     interiorPlotGrob,
                     # draw boundary
-                    if(sum(margins) > 0) {
-                        rectGrob(name = "boundary rectangle",
-                                 gp=gpar(col = border, fill = NA, lwd=1))
-                    } else {
-                        nullGrob(name = "boundary rectangle")
-                        }
+                    condGrob(test =  sum(margins) > 0,
+                             grobFun = rectGrob,
+                             name = "boundary rectangle",
+                             gp=gpar(col = border, fill = NA, lwd=1))
                 ),
                 vp = vpStack(
                     plotViewport(margins = margins, name = "plotViewport"),
@@ -352,13 +369,14 @@ loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
     widget <- attr(target, "widget")
 
-    l_children_layers <- lapply(rev(l_layer_getChildren(target)), function(layerid) {
-        l_create_handle(c(widget, layerid))
-    })
+    l_children_layers <- lapply(rev(l_layer_getChildren(target)),
+                                function(layerid) {
+                                    l_create_handle(c(widget, layerid))
+                                })
 
-    l_visible_children_layer <- Filter(function(layerid) {
-        l_layer_isVisible(widget, layerid)
-    }, l_children_layers)
+    l_visible_children_layer <- Filter(
+        function(layerid) {l_layer_isVisible(widget, layerid)},
+        l_children_layers)
 
     l_children_grobs <- lapply(l_visible_children_layer, loonGrob)
 
@@ -1049,7 +1067,7 @@ getGridTextCoords  <-  function(text, angle, anchor, just){
     adjustedCoords
 }
 
-
+# TODO Export and fully document
 loon.pretty <- function(widget, digits = 3) {
 
     title <- widget['title']
@@ -1130,4 +1148,42 @@ loon.pretty <- function(widget, digits = 3) {
          xaxis.minor = xaxis.minor,
          yaxis.major = yaxis.major,
          yaxis.minor = yaxis.minor)
+}
+
+#' @title Create a named grob or a template grob depending on a test
+#'
+#' @description Creates and returns a grid object using the function
+#' given by `grobFun` when `test` is `TRUE`  Otherwise a simple `grob()`
+#' is produced with the same parameters.  All grob parameters are given in `...`.
+#'
+#' @param test Either `TRUE` or `FALSE` to indicate whether `grobFun` is to be used (default `TRUE`) or not.
+#' @param grobFun The function to be used to create the grob when `test = TRUE` (e.g. `textGrob`, `polygonGrob`, etc.).
+#' @param name The name to be used for the returned grob.
+#' @param ... The arguments to be given to the `grobFun` (or to `grob()` when `test = FALSE`).
+#'
+#' @return A grob as produced by either the `grobFun` given or by `grob()` using the remaining arguments.
+#' If `test = FALSE` then the name is suffixed by ": `grobFun name` arguments".
+#'
+#' @examples
+#' myGrob <- condGrob(test = (runif(1) > 0.5),
+#'                    grobFun = textGrob,
+#'                    name = "my label",
+#'                    label = "Some random text")
+#' myGrob
+#'
+
+condGrob <- function (test = TRUE,
+                      grobFun = grob,
+                      name = "grob name",
+                      ...){
+    if (test){
+        grobFun(name = name, ...)
+    } else {
+        grob(name = paste0(name,
+                           ": ",
+                           deparse(substitute(grobFun)),
+                           " arguments"
+        ),
+        ...)
+    }
 }
