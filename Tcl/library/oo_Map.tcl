@@ -4,7 +4,7 @@ oo::class create loon::classes::Map {
     superclass ::loon::classes::fancyInfo
     
     variable panX panY minX minY zoomX zoomY deltaX deltaY swap\
-	vpx0 vpy0 vpx1 vpy1 plotHeight plotWidth
+	vpx0 vpy0 vpx1 vpy1 plotHeight plotWidth rotate3DX rotate3DY
     
     constructor {} {
 	set panX 0
@@ -22,10 +22,14 @@ oo::class create loon::classes::Map {
 	set vpy1 1
 	set plotWidth 1
 	set plotHeight 1
+    set rotate3DX 0
+    set rotate3DY 0
     }
     
     method setPanX {panx} { set panX $panx }
     method setPanY {pany} { set panY $pany }
+    method setRotate3DX {rotate3Dx} { set rotate3DX $rotate3Dx }
+    method setRotate3DY {rotate3Dy} { set rotate3DY $rotate3Dy }
     method setMinX {minx} { set minX $minx }
     method setMinY {miny} { set minY $miny }
     method setZoomX {zoomx} { set zoomX $zoomx }
@@ -47,6 +51,8 @@ oo::class create loon::classes::Map {
 
     method getPanX {}   { return $panX }
     method getPanY {}   { return $panY }
+    method getRotate3DX {}   { return $rotate3DX }
+    method getRotate3DY {}   { return $rotate3DY }
     method getMinX {}   { return $minX }
     method getMinY {}   { return $minY }
     method getZoomX {}  { return $zoomX }
@@ -62,7 +68,7 @@ oo::class create loon::classes::Map {
 
     method info {} {
 	next panX panY minX minY zoomX zoomY deltaX deltaY swap\
-	    vpx0 vpy0 vpx1 vpy1
+	    vpx0 vpy0 vpx1 vpy1 rotate3DX rotate3DY
     }
 
         
@@ -198,6 +204,18 @@ oo::class create loon::classes::Map {
 	} 
 	
 	return [list $xs $ys]	
+    }
+    
+    method rotate3DUpdate {dx dy} {
+        if {$swap} {
+            set newRotate3DX [expr {$rotate3DX + $dx}]
+            set newRotate3DY [expr {$rotate3DY + $dy}]
+        } else {
+            set newRotate3DX [expr {$rotate3DX + $dy}]
+            set newRotate3DY [expr {$rotate3DY + $dx}]
+        }
+        
+        return [list -rotate3DX $newRotate3DX -rotate3DY $newRotate3DY]
     }
 
     

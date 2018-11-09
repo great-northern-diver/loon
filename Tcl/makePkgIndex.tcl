@@ -174,6 +174,12 @@ oo_HistogramVisual.tcl\
 oo_HistogramWorldviewVisual.tcl\
 oo_HistogramLayer.tcl\
 oo_ColorCrossTable.tcl\
+oo_Rotate3D_Controller.tcl\
+oo_Scatterplot3D_Model.tcl\
+oo_Scatterplot3D_Widget.tcl\
+oo_Scatterplot3D_View.tcl\  
+oo_Scatterplot3D_Controller.tcl\
+oo_Plot3DInspector.tcl\
 ]
 
 ## Environment Variables 

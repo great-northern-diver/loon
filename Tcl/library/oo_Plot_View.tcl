@@ -13,7 +13,7 @@
     variable map mapns path canvas plotModel plotModelStateBinding\
 	canvas_width canvas_height\
 	panX_var panY_var zoomX_var zoomY_var deltaX_var deltaY_var swap_var\
-	background_var
+	background_var rotate3DX_var rotate3DY_var
 	
     
     constructor {Path} {
@@ -26,7 +26,7 @@
 	set canvas_width 650
 	set canvas_height 460
 	
-	foreach state {panX panY zoomX zoomY deltaX deltaY swap} {
+	foreach state {panX panY zoomX zoomY deltaX deltaY swap rotate3DX rotate3DY} {
 	    set ${state}_var ""
 	}
 
@@ -67,7 +67,7 @@
     }
     
     method Make {} {
-
+    
         frame $path -class Loon
 
 	set canvas [::tk::canvas ${path}.canvas\
@@ -100,10 +100,9 @@
 	
 	if {$plotModel ne ""} {
 	    set plotModelStateBinding [$plotModel systembind state add all "[self] plotUpdate %e"]
-	    
 	    set ns [info object namespace $plotModel] 
 	    
-	    foreach state {panX panY zoomX zoomY deltaX deltaY} {
+	    foreach state {panX panY zoomX zoomY deltaX deltaY rotate3DX rotate3DY} {
 		set ${state}_var [uplevel #0 ${ns}::my varname $state]
 		$map set[string toupper $state 0] [set [set ${state}_var]]
 	    }
@@ -193,13 +192,13 @@
 	} else {
 	    set newPanY $oldPanY
 	}
-	
+
 	if {$numHits >= $nevents} {
 	    my updatePan [expr {$oldPanX - $newPanX}]\
 		[expr {$oldPanY - $newPanY}]
 	    return
 	}
-	
+
 
 	set oldZoomX [$map getZoomX]
 	if {[dict exists $events "zoomX"]} {
@@ -235,7 +234,7 @@
     
     ## for speed performance copy elements in a dict
     method plotUpdateDict {events} {
-	
+
 	set needCoordsUpdate FALSE
 	if {[dict exists $events "swapAxes"]} {
 	    $map setSwap [set $swap_var]
@@ -251,6 +250,16 @@
 	    $map setDeltaY [set $deltaY_var]
 	    set needCoordsUpdate TRUE
 	}
+    
+    if {[dict exists $events "rotate3DX"] } {
+        set needCoordsUpdate TRUE
+        $map setRotate3DX [set $rotate3DX_var]
+    }
+    if {[dict exists $events "rotate3DY"]} {
+        set needCoordsUpdate TRUE
+        $map setRotate3DY [set $rotate3DY_var]
+    }
+    
 	
 	if {$needCoordsUpdate} {
 	    my updateCoords
