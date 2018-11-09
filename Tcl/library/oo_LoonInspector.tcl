@@ -2,10 +2,10 @@ oo::class create loon::classes::LoonInspector {
 
     superclass ::loon::classes::Inspector2
     
-    variable plot serialaxes graph histogram packedinspector validWidgetTypes
+    variable plot plot3D serialaxes graph histogram packedinspector validWidgetTypes
 
     constructor {Path} {
-	set validWidgetTypes {Serialaxes_Widget Scatterplot_Widget Graph_Widget Histogram_Widget}
+	set validWidgetTypes {Serialaxes_Widget Scatterplot_Widget Graph_Widget Histogram_Widget Scatterplot3D_Widget}
 	next $Path
     }
     
@@ -14,7 +14,7 @@ oo::class create loon::classes::LoonInspector {
 
 	frame $path -class LoonInspector
 	
-	foreach w {plot histogram graph serialaxes} {
+	foreach w {plot plot3D histogram graph serialaxes} {
 	    set $w [::loon::${w}_inspector ${path}.$w]
 	}
 	pack $plot -side top -anchor nw -fill x -expand TRUE
@@ -27,7 +27,7 @@ oo::class create loon::classes::LoonInspector {
 		       [info object class $widget] ""]
 	
 	if {$class ni $validWidgetTypes} {
-	    error "$widget is not a Histogram, Scatterplot, Serialaxes, or Graph Widget."
+	    error "$widget is not a Histogram, Scatterplot, Scatterplot3D, Serialaxes, or Graph Widget."
 	}
     }
     
@@ -47,6 +47,9 @@ oo::class create loon::classes::LoonInspector {
 		}
 		Scatterplot_Widget {
 		    set type plot
+        }
+        Scatterplot3D_Widget {
+            set type plot3D
 		}
 		Graph_Widget {
 		    set type graph
