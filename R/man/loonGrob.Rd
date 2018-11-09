@@ -16,8 +16,7 @@
 \usage{
 loonGrob(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_compound}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_compound}(target, name = NULL, gp = NULL, vp = NULL)
 
 \method{loonGrob}{l_layer_graph}(target, name = NULL, gp = NULL,
   vp = NULL)
@@ -28,14 +27,11 @@ loonGrob(target, name = NULL, gp = NULL, vp = NULL)
 \method{loonGrob}{l_layer_scatterplot}(target, name = NULL, gp = NULL,
   vp = NULL)
 
-\method{loonGrob}{l_navgraph}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_navgraph}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_navigator}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_navigator}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL, vp = NULL)
 }
 \arguments{
 \item{target}{either an object of class loon or a vector that specifies the
@@ -165,7 +161,7 @@ grid.newpage(); grid.draw(g)
 p <- l_plot(x = c(0,1), y = c(0,1))
 l_layer_rectangle(p, x = c(0,1), y = c(0,1))
 
-g <- loonGrob(p) 
+g <- loonGrob(p)
 
 library(grid)
 grid.newpage(); grid.draw(g)

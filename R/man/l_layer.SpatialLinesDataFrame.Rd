@@ -4,8 +4,7 @@
 \alias{l_layer.SpatialLinesDataFrame}
 \title{Layer lines in SpatialLinesDataFrame object}
 \usage{
-\method{l_layer}{SpatialLinesDataFrame}(widget, x, asSingleLayer = TRUE,
-  ...)
+\method{l_layer}{SpatialLinesDataFrame}(widget, x, asSingleLayer = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget widget path as a string or as an object handle}

@@ -4,8 +4,7 @@
 \alias{l_glyph_add_pointrange}
 \title{Add a Pointrange Glyph}
 \usage{
-l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1, label = "",
-  ...)
+l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1, label = "", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
