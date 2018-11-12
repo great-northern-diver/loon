@@ -4,15 +4,14 @@
     
     superclass ::loon::classes::Canvas_Controller
     
-    variable map
+    variable map updateStep
 
     constructor {view} {
 	
-	#set mouse_x 0
-	#set mouse_y 0
-	
 	set ns [info object namespace $view]
 	set map [set [uplevel #0 ${ns}::my varname map]]
+    
+    set updateStep 1
 
 	next $view
 	
@@ -25,6 +24,8 @@
 	next
 	
 	bind $canvas <ButtonPress-1> {+; focus %W}
+    bind $canvas <Key-plus> "+[self] increaseSpeed"
+    bind $canvas <Key-minus> "+[self] decreaseSpeed"
     bind $canvas <w> "+[self] rotate3D up"
 	bind $canvas <a> "+[self] rotate3D left"
     bind $canvas <s> "+[self] rotate3D down"
@@ -32,25 +33,21 @@
 
     }
     
+    method increaseSpeed {} {
+        incr updateStep
+    }
+    
+    method decreaseSpeed {} {
+        if {$updateStep > 1} {incr updateStep -1 }
+    }
+    
     method rotate3D {direction} {
 	my variable model canvas
     
 	if {$model eq ""} {return}
-
-	
-	## x and y are sometimes substituted wrong...
-	#set wx [winfo pointerx $canvas]
-	#set wy [winfo pointery $canvas]
-	#set rx [winfo rootx $canvas]
-	#set ry [winfo rooty $canvas]
-	
-	#set xn [expr {$wx-$rx}]
-	#set yn [expr {$wy-$ry}]
 	
 	set dx 0
 	set dy 0
-
-    set updateStep 1
 	switch -- $direction {
 	    up {
         set dy $updateStep
@@ -68,9 +65,6 @@
     $model configure {*}[$map rotate3DUpdate $dx $dy]
     puts stdout [$map rotate3DUpdate $dx $dy]
     
-	#set mouse_x $xn
-	#set mouse_y $yn
-	#update idletasks
     }
     
 }

@@ -60,43 +60,29 @@
     
     method project {} {
         my variable x y z originalX originalY originalZ angleX angleY
+        
         set cosAX [expr cos($angleX)]
         set cosAY [expr cos($angleY)]
         set sinAX [expr sin($angleX)]
         set sinAY [expr sin($angleY)]
         
-        set projectionPlaneNormal [list $sinAY $sinAX [expr {$cosAX + $cosAY}] ]
+        # Rotation Matrices
+        set Rx [list [list 1.0 0.0 0.0] [list 0.0 $cosAX [expr {-1 * $sinAX}]] [list 0.0 $sinAX $cosAX]]
+        set Ry [list [list $cosAY 0.0 $sinAY] [list 0.0 1.0 0.0] [list [expr {-1 * $sinAY}] 0.0 $cosAY]]
         
-        if {$sinAY == 0 && $sinAX == 0} {
-            set e1 {-1 0 0}
-            set e2 {0 -1 0}
-        } else {
-            #ax=0 pi 2pi   => sina=0 cosa=1
-            #ax=pi/2 3pi/2 => sina=0 cosa=1
-            # e1: -sinax sinay 0
-            # e2: -sinay*(cosax+cosay) -sinax*(cosax+cosay) sinay^2 + sinax^2
-            set e1 [::loon::listfns::norm [list [expr {-[lindex $projectionPlaneNormal 1]}] [lindex $projectionPlaneNormal 0] 0 ]]
-            set e2 [::loon::listfns::norm [list [expr {-[lindex $projectionPlaneNormal 0]*[lindex $projectionPlaneNormal 2]}] \
-                        [expr {-[lindex $projectionPlaneNormal 1] * [lindex $projectionPlaneNormal 2]}] \
-                        [expr {[lindex $projectionPlaneNormal 0] * [lindex $projectionPlaneNormal 0] + [lindex $projectionPlaneNormal 1] * [lindex $projectionPlaneNormal 1]}]]]
-        }
-        puts stdout "angleX ${angleX} angleY ${angleY}, plane ${projectionPlaneNormal}, e1 ${e1} e2 ${e2} "
-        set xNew {}
-        set yNew {}
-        set zNew {}
+        puts stdout "angleX ${angleX} angleY ${angleY} Rx ${Rx} Ry ${Ry}"
+        
+        set x {}
+        set y {}
+        set z {}
         foreach xe $originalX ye $originalY ze $originalZ {
-            lappend xNew [::loon::listfns::dot [list $xe $ye $ze] $e1]
-            lappend yNew [::loon::listfns::dot [list $xe $ye $ze] $e2]
-            lappend zNew [::loon::listfns::dot [list $xe $ye $ze] [::loon::listfns::norm $projectionPlaneNormal]]
+            set xTemp [::loon::listfns::dot [lindex $Ry 0] [list $xe $ye $ze]]
+            set yTemp [::loon::listfns::dot [lindex $Ry 1] [list $xe $ye $ze]]
+            set zTemp [::loon::listfns::dot [lindex $Ry 2] [list $xe $ye $ze]]
+        
+            lappend x [::loon::listfns::dot [lindex $Rx 0] [list $xTemp $yTemp $zTemp]]
+            lappend y [::loon::listfns::dot [lindex $Rx 1] [list $xTemp $yTemp $zTemp]]
+            lappend z [::loon::listfns::dot [lindex $Rx 2] [list $xTemp $yTemp $zTemp]]
         }
-        set x $xNew
-        set y $yNew
-        set z $zNew
     }
-    
-     
-    
-
-    
-
 }
