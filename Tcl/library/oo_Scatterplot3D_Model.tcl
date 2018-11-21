@@ -4,16 +4,13 @@
 	::loon::classes::withLayers\
 	::loon::classes::withGlyphs
     
-    variable pi originalX originalY originalZ angleX angleY
+    variable originalX originalY originalZ rotationOrigin
 
     constructor {args} {
-    set pi 3.1415926535897931
     set originalX ""
     set originalY ""
     set originalZ ""
-    # angleX is 0 if the projection plane is not rotated along the x axis
-    set angleX 0
-    set angleY 0
+    set rotationOrigin [list 0 0 0]
     
 	next {*}$args
     
@@ -34,55 +31,79 @@
     
     method EvalConfigure {} {
         my variable x y z originalX originalY originalZ confDict rotate3DX rotate3DY
+        
+        set needOrigin FALSE
         if {$originalX == ""} {
             set originalX $x
+            set needOrigin TRUE
         }
         if {$originalY == ""} {
             set originalY $y
+            set needOrigin TRUE
         }
         if {$originalZ == ""} {
             set originalZ $z
+            set needOrigin TRUE
+        }
+        if {$needOrigin && [llength $originalX] > 0} {
+            set xMean [expr {[tcl::mathop::+ {*}$originalX] / [llength $originalX]}]
+            set yMean [expr {[tcl::mathop::+ {*}$originalY] / [llength $originalY]}]
+            set zMean [expr {[tcl::mathop::+ {*}$originalZ] / [llength $originalZ]}]
+            
+            set rotationOrigin [list $xMean $yMean $zMean]
         }
         
-        set needProject FALSE
-        if {[dict exists $confDict has_rotate3DX]} {
-            set angleX [expr {($rotate3DX * $pi / (360))}]
-            set needProject TRUE
+        if {([dict exists $confDict has_rotate3DX] && [dict get $confDict has_rotate3DX]) \
+         || ([dict exists $confDict has_rotate3DY] && [dict get $confDict has_rotate3DY])} {
+            set projected [my project $originalX $originalY $originalZ $rotationOrigin]
+            set x [dict get $projected x]
+            set y [dict get $projected y]
+            set z [dict get $projected z]
+            
+            dict set confDict new_x $x
+            dict set confDict new_y $y
+            dict set confDict new_z $z
         }
-        if {[dict exists $confDict has_rotate3DY]} {
-            set angleY [expr {($rotate3DY * $pi / (360))}]
-            set needProject TRUE
-        }
-        if {$needProject} { my project }
         
         next
     }
     
-    method project {} {
-        my variable x y z originalX originalY originalZ angleX angleY
+    method project {x y z rotationCenter} {
+        my variable rotate3DX rotate3DY
         
-        set cosAX [expr cos($angleX)]
-        set cosAY [expr cos($angleY)]
-        set sinAX [expr sin($angleX)]
-        set sinAY [expr sin($angleY)]
+        set cosAX [expr cos($rotate3DX)]
+        set cosAY [expr cos($rotate3DY)]
+        set sinAX [expr sin($rotate3DX)]
+        set sinAY [expr sin($rotate3DY)]
         
         # Rotation Matrices
         set Rx [list [list 1.0 0.0 0.0] [list 0.0 $cosAX [expr {-1 * $sinAX}]] [list 0.0 $sinAX $cosAX]]
         set Ry [list [list $cosAY 0.0 $sinAY] [list 0.0 1.0 0.0] [list [expr {-1 * $sinAY}] 0.0 $cosAY]]
         
-        puts stdout "angleX ${angleX} angleY ${angleY} Rx ${Rx} Ry ${Ry}"
+        puts stdout "rotateX ${rotate3DX} rotateY ${rotate3DY} Rx ${Rx} Ry ${Ry}"
+        set xProjected {}
+        set yProjected {}
+        set zProjected {}
+        foreach xe $x ye $y ze $z {
+            # Transform to coordinates relative to rotation origin
+            set xShifted [expr {$xe - [lindex $rotationCenter 0]}]
+            set yShifted [expr {$ye - [lindex $rotationCenter 1]}]
+            set zShifted [expr {$ze - [lindex $rotationCenter 2]}]
+            
+            # Rotate
+            set xTemp [::loon::listfns::dot [lindex $Ry 0] [list $xShifted $yShifted $zShifted]]
+            set yTemp [::loon::listfns::dot [lindex $Ry 1] [list $xShifted $yShifted $zShifted]]
+            set zTemp [::loon::listfns::dot [lindex $Ry 2] [list $xShifted $yShifted $zShifted]]
         
-        set x {}
-        set y {}
-        set z {}
-        foreach xe $originalX ye $originalY ze $originalZ {
-            set xTemp [::loon::listfns::dot [lindex $Ry 0] [list $xe $ye $ze]]
-            set yTemp [::loon::listfns::dot [lindex $Ry 1] [list $xe $ye $ze]]
-            set zTemp [::loon::listfns::dot [lindex $Ry 2] [list $xe $ye $ze]]
-        
-            lappend x [::loon::listfns::dot [lindex $Rx 0] [list $xTemp $yTemp $zTemp]]
-            lappend y [::loon::listfns::dot [lindex $Rx 1] [list $xTemp $yTemp $zTemp]]
-            lappend z [::loon::listfns::dot [lindex $Rx 2] [list $xTemp $yTemp $zTemp]]
+            set xTemp [::loon::listfns::dot [lindex $Rx 0] [list $xTemp $yTemp $zTemp]]
+            set yTemp [::loon::listfns::dot [lindex $Rx 1] [list $xTemp $yTemp $zTemp]]
+            set zTemp [::loon::listfns::dot [lindex $Rx 2] [list $xTemp $yTemp $zTemp]]
+            
+            # Transform back to original coordinates
+            lappend xProjected [expr {$xTemp + [lindex $rotationCenter 0]}]
+            lappend yProjected [expr {$yTemp + [lindex $rotationCenter 1]}]
+            lappend zProjected [expr {$zTemp + [lindex $rotationCenter 2]}]
         }
+        return [dict create x $xProjected y $yProjected z $zProjected]
     }
 }

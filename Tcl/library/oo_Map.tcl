@@ -24,12 +24,13 @@ oo::class create loon::classes::Map {
 	set plotHeight 1
     set rotate3DX 0
     set rotate3DY 0
+    
     }
     
     method setPanX {panx} { set panX $panx }
     method setPanY {pany} { set panY $pany }
-    method setRotate3DX {rotate3Dx} { set rotate3DX $rotate3Dx }
-    method setRotate3DY {rotate3Dy} { set rotate3DY $rotate3Dy }
+    method setRotate3DX {rotate3dx} { set rotate3DX $rotate3dx }
+    method setRotate3DY {rotate3dy} { set rotate3DY $rotate3dy }
     method setMinX {minx} { set minX $minx }
     method setMinY {miny} { set minY $miny }
     method setZoomX {zoomx} { set zoomX $zoomx }
@@ -207,12 +208,14 @@ oo::class create loon::classes::Map {
     }
     
     method rotate3DUpdate {dx dy} {
+        set pi 3.1415926535897931
+        set fraction 360
         if {$swap} {
-            set newRotate3DX [expr {$rotate3DX + $dx}]
-            set newRotate3DY [expr {$rotate3DY + $dy}]
+            set newRotate3DX [expr {$rotate3DX - $dx * $pi / $fraction}]
+            set newRotate3DY [expr {($rotate3DY - $dy * $pi / $fraction}]
         } else {
-            set newRotate3DX [expr {$rotate3DX + $dy}]
-            set newRotate3DY [expr {$rotate3DY + $dx}]
+            set newRotate3DX [expr {$rotate3DX - $dy * $pi / $fraction}]
+            set newRotate3DY [expr {$rotate3DY - $dx * $pi / $fraction}]
         }
         
         return [list -rotate3DX $newRotate3DX -rotate3DY $newRotate3DY]

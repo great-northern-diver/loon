@@ -4,67 +4,71 @@
     
     superclass ::loon::classes::Canvas_Controller
     
-    variable map updateStep
+    variable map mouse_x mouse_y
 
     constructor {view} {
-	
-	set ns [info object namespace $view]
-	set map [set [uplevel #0 ${ns}::my varname map]]
     
-    set updateStep 1
-
-	next $view
-	
+        set mouse_x 0
+        set mouse_y 0
+        
+        set ns [info object namespace $view]
+        set map [set [uplevel #0 ${ns}::my varname map]]
+        
+        next $view
+        
     }
-
 
     method init {} {
-	my variable view canvas
+        my variable view canvas
 
-	next
-	
-	bind $canvas <ButtonPress-1> {+; focus %W}
-    bind $canvas <Key-plus> "+[self] increaseSpeed"
-    bind $canvas <Key-minus> "+[self] decreaseSpeed"
-    bind $canvas <w> "+[self] rotate3D up"
-	bind $canvas <a> "+[self] rotate3D left"
-    bind $canvas <s> "+[self] rotate3D down"
-    bind $canvas <d> "+[self] rotate3D right"
+        next
 
-    }
-    
-    method increaseSpeed {} {
-        incr updateStep
-    }
-    
-    method decreaseSpeed {} {
-        if {$updateStep > 1} {incr updateStep -1 }
-    }
-    
-    method rotate3D {direction} {
-	my variable model canvas
-    
-	if {$model eq ""} {return}
-	
-	set dx 0
-	set dy 0
-	switch -- $direction {
-	    up {
-        set dy $updateStep
-	    }
-	    down {
-		set dy [expr -$updateStep]
-	    }
-	    left {
-		set dx $updateStep
-	    }
-        right {
-        set dx [expr -$updateStep]
+        # Always save where the mouse was pressed last
+        foreach i {1 2 3} {
+            bind $canvas <ButtonPress-$i> "+[self] zp_button %x %y"
         }
-	}
-    $model configure {*}[$map rotate3DUpdate $dx $dy]
-    puts stdout [$map rotate3DUpdate $dx $dy]
+        
+        bind $canvas <Alt-Button1-Motion> "+[self] rotate3D %x %y both"
+        bind $canvas <Control-Alt-Button1-Motion> "+[self] rotate3D %x %y y"
+        bind $canvas <Shift-Alt-Button1-Motion> "+[self] rotate3D %x %y x"
+
+    }
     
+    method zp_button {x y} {
+        set mouse_x $x
+        set mouse_y $y
+    }
+    
+    method rotate3D {xDir yDir direction} {
+        my variable model canvas
+        
+        if {$model eq ""} {return}
+        
+        set wx [winfo pointerx $canvas]
+        set wy [winfo pointery $canvas]
+        set rx [winfo rootx $canvas]
+        set ry [winfo rooty $canvas]
+        
+        set xn [expr {$wx-$rx}]
+        set yn [expr {$wy-$ry}]
+        
+        set dx [expr {$xn - $mouse_x}]
+        set dy [expr {$yn - $mouse_y}]
+        switch -- $direction {
+            both {
+            $model configure {*}[$map rotate3DUpdate $dx $dy]
+            }
+            x {
+            $model configure {*}[$map rotate3DUpdate $dx 0]
+            }
+            y {
+            $model configure {*}[$map rotate3DUpdate 0 $dy]
+            }
+        }
+
+        set mouse_x $xn
+        set mouse_y $yn
+        update idletasks
     }
     
 }
