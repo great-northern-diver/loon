@@ -13,7 +13,7 @@
     variable map mapns path canvas plotModel plotModelStateBinding\
 	canvas_width canvas_height\
 	panX_var panY_var zoomX_var zoomY_var deltaX_var deltaY_var swap_var\
-	background_var rotate3DX_var rotate3DY_var
+	background_var
 	
     
     constructor {Path} {
@@ -25,8 +25,8 @@
 	
 	set canvas_width 650
 	set canvas_height 460
-	
-	foreach state {panX panY zoomX zoomY deltaX deltaY swap rotate3DX rotate3DY} {
+    
+	foreach state {panX panY zoomX zoomY deltaX deltaY swap} {
 	    set ${state}_var ""
 	}
 
@@ -102,7 +102,7 @@
 	    set plotModelStateBinding [$plotModel systembind state add all "[self] plotUpdate %e"]
 	    set ns [info object namespace $plotModel] 
 	    
-	    foreach state {panX panY zoomX zoomY deltaX deltaY rotate3DX rotate3DY} {
+	    foreach state {panX panY zoomX zoomY deltaX deltaY} {
 		set ${state}_var [uplevel #0 ${ns}::my varname $state]
 		$map set[string toupper $state 0] [set [set ${state}_var]]
 	    }
@@ -235,7 +235,7 @@
     ## for speed performance copy elements in a dict
     method plotUpdateDict {events} {
 
-	set needCoordsUpdate FALSE
+	set needCoordsUpdate [dict exists $events "needCoordsUpdate"]
 	if {[dict exists $events "swapAxes"]} {
 	    $map setSwap [set $swap_var]
 	    set needCoordsUpdate TRUE
@@ -251,20 +251,9 @@
 	    set needCoordsUpdate TRUE
 	}
     
-    if {[dict exists $events "rotate3DX"] } {
-        set needCoordsUpdate TRUE
-        $map setRotate3DX [set $rotate3DX_var]
-    }
-    if {[dict exists $events "rotate3DY"]} {
-        set needCoordsUpdate TRUE
-        $map setRotate3DY [set $rotate3DY_var]
-    }
-    
-	
 	if {$needCoordsUpdate} {
 	    my updateCoords
 	}
-	
 	
     }
 
