@@ -1,5 +1,3 @@
-
-
 #' @rdname loonGrob
 #'
 #' @examples
@@ -269,23 +267,20 @@ loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
 
     gTree(
         children =  gList(
-            {if (showArea) {
-                pch <- 21
-            } else {
-                pch <- 19
-            }
             pointsGrob(x = glyph_info$x, y = glyph_info$y,
-                           gp = gpar(col = glyph_info$color,
-                                     cex = as_r_point_size(glyph_info$size)
-                           ),
-                           pch = pch
-                           )},
+                       gp = gpar(col = glyph_info$color,
+                                 cex = as_r_point_size(glyph_info$size)),
+                       pch = if (showArea) 21 else 19,
+                       name = "point"
+
+            ),
             linesGrob(x = rep(glyph_info$x, 2),
                       y = unit(c(gh['ymin'][glyph_info$index],
                                  gh['ymax'][glyph_info$index]),
                                "native"),
                       gp = gpar(col = glyph_info$color,
-                                lwd =  gh['linewidth'][glyph_info$index]))
+                                lwd =  gh['linewidth'][glyph_info$index]),
+                      name = "range")
         ),
         name = paste0("pointrange_glyph ", glyph_info$index)
     )
@@ -348,7 +343,7 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     showAxes <- gh['showAxes']
     showEnclosing <- gh['showEnclosing']
     showArea <- gh['showArea']
-    # scaling way
+    # scaling method
     scaling <- gh['scaling']
     # line width
     linewidth <- gh['linewidth'][glyph_info$index]
@@ -377,47 +372,38 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
         xaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
         yaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
 
-        gTree (children = gList(
-            if(showEnclosing) {
-                polylineGrob(x = xpos + unit((c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX, "mm"),
-                             y = ypos + unit((c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY, "mm"),
-                             id = rep(1:4, 2),
-                             gp = gpar(col = bboxColor),
-                             name = "boundary: showEnclosing")
-            }else {
-                # using grob here to ensure extra info available to change to a polylineGrob
-                grob(x = xpos + unit((c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX, "mm"),
-                     y = ypos + unit((c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY, "mm"),
-                     id = rep(1:4, 2),
-                     gp = gpar(col = bboxColor),
-                     name = "boundary: polylineGrob arguments")
-                },
-            if(showAxes) {
-                polylineGrob(x = rep(xpos + unit(xaxis, "mm"), each = 2),
-                             y =  ypos + rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), dimension),
-                             id = rep(1:dimension, each = 2),
-                             gp = gpar(col = axesColor),
-                             name = "axes: showAxes")
-            } else {
-                # using grob here to ensure extra info available to change to a polylineGrob
-                grob(x = rep(xpos + unit(xaxis, "mm"), each = 2),
-                     y =  ypos + rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), dimension),
-                     id = rep(1:dimension, each = 2),
-                     gp = gpar(col = axesColor),
-                     name = "axes: polylineGrob arguments")
-            },
-            if(showArea) {
-                polygonGrob(x = xpos + unit(c(xaxis, rev(xaxis)), "mm"),
-                            y = ypos + unit(c(yaxis, rep(-0.5 * scaleY, dimension)), "mm"),
-                            gp = gpar(fill = color, col = NA),
-                            name = "polyline: showArea")
-            } else {
-                linesGrob(x = xpos + unit(xaxis, "mm"),
-                          y = ypos + unit(yaxis, "mm"),
-                          gp = gpar(col = color),
-                          name = "polyline")
-                }),
-            name = paste0("serialaxes_glyph: parallel", " ",  glyph_info$index)
+        gTree (
+            children = gList(
+                condGrob(
+                    test = showEnclosing,
+                    grobFun = polylineGrob,
+                    name = "boundary",
+                    x = xpos + unit((c(0, 0, 1, 0, 0, 1, 1, 1) - 0.5) * scaleX, "mm"),
+                    y = ypos + unit((c(0, 0, 0, 1, 1, 0, 1, 1) - 0.5) * scaleY, "mm"),
+                    id = rep(1:4, 2),
+                    gp = gpar(col = bboxColor)
+                ),
+                condGrob(
+                    test = showAxes,
+                    grobFun = polylineGrob,
+                    name = "axes",
+                    x = xpos + rep(unit(xaxis, "mm"), each = 2),
+                    y = ypos + rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), dimension),
+                    id = rep(1:dimension, each = 2),
+                    gp = gpar(col = axesColor)
+                ),
+                if(showArea) {
+                    polygonGrob(x = xpos + unit(c(xaxis, rev(xaxis)), "mm"),
+                                y = ypos + unit(c(yaxis, rep(-0.5 * scaleY, dimension)), "mm"),
+                                gp = gpar(fill = color, col = NA),
+                                name = "polyline: showArea")
+                } else {
+                    linesGrob(x = xpos + unit(xaxis, "mm"),
+                              y = ypos + unit(yaxis, "mm"),
+                              gp = gpar(col = color),
+                              name = "polyline")
+                }
+            ), name = paste0("serialaxes_glyph: parallel ",  glyph_info$index)
         )
     } else {
         scaleX <- as_r_serialaxesGlyph_size(size, "x", "radial")
@@ -427,46 +413,38 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
         radialxais <- scaleX * scaledData[glyph_info$index,] * cos(angle)
         radialyais <- scaleY * scaledData[glyph_info$index,] * sin(angle)
 
-        gTree(children = gList(
-            if(showArea) {
-                polygonGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
-                            y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
-                            gp = gpar(fill = color, col = NA),
-                            name = "polyline: showArea")
-            } else {
-                linesGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
-                          y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
-                          gp = gpar(col = color),
-                          name = "polyline")
-            },
-            if(showEnclosing) {
-                polygonGrob(x = xpos + unit(scaleX * cos(seq(0, 2*pi, length=101)), "mm"),
-                            y = ypos + unit(scaleY * sin(seq(0, 2*pi, length=101)), "mm"),
-                            gp = gpar(fill = NA, col = bboxColor),
-                            name = "boundary: showEnclosing")
-            } else {
-                # using grob here to ensure extra info available to change to a polygonGrob
-                grob(x = xpos + unit(scaleX * cos(seq(0, 2*pi, length=101)), "mm"),
-                     y = ypos + unit(scaleY * sin(seq(0, 2*pi, length=101)), "mm"),
-                     gp = gpar(fill = NA, col = bboxColor),
-                     name = "boundary: polygonGrob arguments")
-            },
-            if(showAxes) {
-                polylineGrob(x = xpos + unit(c(rep(0, dimension) ,scaleX * cos(angle)), "mm"),
-                             y = ypos + unit(c(rep(0, dimension) ,scaleY * sin(angle)), "mm"),
-                             id = rep(1:dimension, 2),
-                             gp = gpar(col = axesColor),
-                             name = "axes: showAxes")
-            } else {
-                # using grob here to ensure extra info available to change to a polylineGrob
-                grob(x = xpos + unit(c(rep(0, dimension) ,scaleX * cos(angle)), "mm"),
-                     y = ypos + unit(c(rep(0, dimension) ,scaleY * sin(angle)), "mm"),
-                     id = rep(1:dimension, 2),
-                     gp = gpar(col = axesColor),
-                     name = "axes: polylineGrob arguments")
-            }
+        gTree(
+            children = gList(
+                if(showArea) {
+                    polygonGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
+                                y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
+                                gp = gpar(fill = color, col = NA),
+                                name = "polyline: showArea")
+                } else {
+                    linesGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
+                              y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
+                              gp = gpar(col = color),
+                              name = "polyline")
+                },
+                condGrob(
+                    test = showEnclosing,
+                    grobFun = polylineGrob,
+                    name = "boundary",
+                    x = xpos + unit(scaleX * cos(seq(0, 2*pi, length=101)), "mm"),
+                    y = ypos + unit(scaleY * sin(seq(0, 2*pi, length=101)), "mm"),
+                    gp = gpar(col = bboxColor)
+                ),
+                condGrob(
+                    test = showAxes,
+                    grobFun = polylineGrob,
+                    name = "axes",
+                    x = xpos + unit(c(rep(0, dimension), scaleX * cos(angle)), "mm"),
+                    y = ypos + unit(c(rep(0, dimension), scaleY * sin(angle)), "mm"),
+                    id = rep(1:dimension, 2),
+                    gp = gpar(col = axesColor)
+                )
             ),
-            name = paste0("serialaxes_glyph: radial", " ",  glyph_info$index)
+            name = paste0("serialaxes_glyph: radial ", glyph_info$index)
         )
     }
 }
