@@ -4,8 +4,8 @@
 \alias{l_layer.SpatialPolygonsDataFrame}
 \title{Layer polygons in SpatialPolygonDataFrame}
 \usage{
-\method{l_layer}{SpatialPolygonsDataFrame}(widget, x, asSingleLayer = TRUE,
-  ...)
+\method{l_layer}{SpatialPolygonsDataFrame}(widget, x,
+  asSingleLayer = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget widget path as a string or as an object handle}

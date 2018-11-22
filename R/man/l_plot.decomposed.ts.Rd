@@ -6,8 +6,8 @@
 \usage{
 \method{l_plot}{decomposed.ts}(x, y = NULL, pcolor = NULL, size = 1,
   lcolor = NULL, linewidth = 1, xlabels = NULL, ylabels = NULL,
-  title = NULL, tk_title = NULL, linkingGroup = NULL, showScales = TRUE,
-  showGuides = TRUE, showLabels = TRUE, ...)
+  title = NULL, tk_title = NULL, linkingGroup = NULL,
+  showScales = TRUE, showGuides = TRUE, showLabels = TRUE, ...)
 }
 \arguments{
 \item{x}{a \code{decomposed.ts} object}

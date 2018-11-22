@@ -4,10 +4,11 @@
 \alias{l_layer_heatImage}
 \title{Display a Heat Image}
 \usage{
-l_layer_heatImage(widget, x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1,
-  length.out = ncol(z)), z, zlim = range(z[is.finite(z)]), xlim = range(x),
-  ylim = range(y), col = grDevices::heat.colors(12), breaks,
-  oldstyle = FALSE, useRaster, index = "end", parent = "root", ...)
+l_layer_heatImage(widget, x = seq(0, 1, length.out = nrow(z)),
+  y = seq(0, 1, length.out = ncol(z)), z,
+  zlim = range(z[is.finite(z)]), xlim = range(x), ylim = range(y),
+  col = grDevices::heat.colors(12), breaks, oldstyle = FALSE,
+  useRaster, index = "end", parent = "root", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}

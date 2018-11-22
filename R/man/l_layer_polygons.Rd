@@ -5,7 +5,8 @@
 \title{Layer a polygons}
 \usage{
 l_layer_polygons(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "polygons", parent = "root", index = 0, ...)
+  linewidth = 1, label = "polygons", parent = "root", index = 0,
+  ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
