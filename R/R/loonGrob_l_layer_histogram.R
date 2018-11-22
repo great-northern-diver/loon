@@ -27,8 +27,10 @@
 #'
 #' h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
 #'
-#' g <- loonGrob(h)
-#' grid.newpage(); grid.draw(g)
+#' # To print directly use either
+#' plot(h)
+#' # or
+#' grid.loon(h)
 #' }
 #'
 #' @export
@@ -139,7 +141,8 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
 
     gTree(
         children = do.call(gList, unlist(unname(b_bins),  recursive = FALSE)),
-        name = name, gp = gp, vp = vp
+        name = if(is.null(name)) "histogram" else name,
+        gp = gp, vp = vp
     )
 
 }
