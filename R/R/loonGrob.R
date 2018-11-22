@@ -1171,6 +1171,7 @@ loon.pretty <- function(widget, digits = 3) {
 #'                    label = "Some random text")
 #' myGrob
 #'
+#' @export
 
 condGrob <- function (test = TRUE,
                       grobFun = grob,
