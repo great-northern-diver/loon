@@ -178,6 +178,7 @@ oo_Rotate3D_Controller.tcl\
 oo_Scatterplot3D_Model.tcl\
 oo_Scatterplot3D_Widget.tcl\
 oo_Axes3DVisual.tcl\
+oo_RotationOrigin3DVisual.tcl\
 oo_Scatterplot3D_View.tcl\  
 oo_Scatterplot3D_Controller.tcl\
 oo_Plot3DInspector.tcl\

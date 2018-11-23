@@ -160,7 +160,7 @@ oo::class create loon::classes::Map {
 	    set newPanX [expr {$panX - double($dx)*$deltaX/$zoomX/$plotWidth}]
 	    set newPanY [expr {$panY + double($dy)*$deltaY/$zoomY/$plotHeight}]
 	}
-	
+    
 	return [list -panX $newPanX -panY $newPanY]
     }
 
@@ -212,10 +212,14 @@ oo::class create loon::classes::Map {
         set fraction 360
         if {$swap} {
             set newRotate3DX [expr {$rotate3DX - $dx * $pi / $fraction}]
-            set newRotate3DY [expr {($rotate3DY - $dy * $pi / $fraction}]
+            set newRotate3DY [expr {$rotate3DY - $dy * $pi / $fraction}]
+            
+            set rotationOriginX [expr {$panY + 0.5*$deltY/$zoomY}]
+            set rotationOriginY [expr {$panX + 0.5*$deltaX/$zoomX}]
+
         } else {
-            set newRotate3DX [expr {$rotate3DX - $dy * $pi / $fraction}]
-            set newRotate3DY [expr {$rotate3DY - $dx * $pi / $fraction}]
+            set newRotate3DX [expr {- $dy * $pi / $fraction}]
+            set newRotate3DY [expr {- $dx * $pi / $fraction}]
         }
         
         return [list -rotate3DX $newRotate3DX -rotate3DY $newRotate3DY]

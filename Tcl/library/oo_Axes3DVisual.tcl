@@ -15,9 +15,9 @@
         set yColor blue
         set zColor green
         
-        set xCoords [list 0 0]
-        set yCoords [list 0 0]
-        set zCoords [list 0 0]
+        set xCoords [list 0 0 0]
+        set yCoords [list 0 0 0]
+        set zCoords [list 0 0 0]
         
         next {*}$args
     }
@@ -68,17 +68,17 @@
         set xLen [expr {$vpx1 - $vpx0}]
         set yLen [expr {$vpy1 - $vpy0}]
         
-        set axesOriginX [expr {$vpx0 + 0.05 * $xLen}]
-        set axesOriginY [expr {$vpy1 - 0.05 * $yLen}]
+        set axesOriginX [expr {$vpx0 + 0.5 * $xLen}]
+        set axesOriginY [expr {$vpy1 - 0.5 * $yLen}]
         
-        set xAxisEnd [list [expr {$axesOriginX + [lindex $xCoords 0] * 0.05 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $xCoords 1] * 0.05 * $yLen }]]
-        
-        set yAxisEnd [list [expr {$axesOriginX + [lindex $yCoords 0] * 0.05 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $yCoords 1] * 0.05 * $yLen }]]
-        
-        set zAxisEnd [list [expr {$axesOriginX + [lindex $zCoords 0] * 0.05 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $zCoords 1] * 0.05 * $yLen }]]
+        set xAxisEnd [list [expr {$axesOriginX + [lindex $xCoords 0] * 0.08 * $xLen }] \
+                           [expr {$axesOriginY - [lindex $xCoords 1] * 0.08 * $yLen }]]
+                                                                          
+        set yAxisEnd [list [expr {$axesOriginX + [lindex $yCoords 0] * 0.08 * $xLen }] \
+                           [expr {$axesOriginY - [lindex $yCoords 1] * 0.08 * $yLen }]]
+                                                                          
+        set zAxisEnd [list [expr {$axesOriginX + [lindex $zCoords 0] * 0.08 * $xLen }] \
+                           [expr {$axesOriginY - [lindex $zCoords 1] * 0.08 * $yLen }]]
         
         
         uplevel #0 [list $canvas coords $xAxis\
@@ -89,6 +89,17 @@
 
         uplevel #0 [list $canvas coords $zAxis\
                 $axesOriginX $axesOriginY [lindex $zAxisEnd 0] [lindex $zAxisEnd 1]]
+                
+        # Darken axes going into the monitor, brighten those coming out of it
+        set xPercent [expr {int(100 - 80 * [lindex $xCoords 2])}]
+        uplevel #0 [list $canvas itemconfigure $xAxis\
+                -fill [::tk::Darken $xColor $xPercent]]
+        set yPercent [expr {int(100 - 80 * [lindex $yCoords 2])}]
+        uplevel #0 [list $canvas itemconfigure $yAxis\
+                -fill [::tk::Darken $yColor $yPercent]]
+        set zPercent [expr {int(100 - 80 * [lindex $zCoords 2])}]
+        uplevel #0 [list $canvas itemconfigure $zAxis\
+                -fill [::tk::Darken $zColor $zPercent]]
                 
         puts stdout "ax3d: $vpx0 $vpx1 $vpy0 $vpy1 $xLen $yLen $xAxisEnd $yAxisEnd $zAxisEnd $axesOriginX $axesOriginY"
     }
