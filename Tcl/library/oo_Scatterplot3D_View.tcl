@@ -5,7 +5,7 @@
     superclass ::loon::classes::withCanvasAndItemBindings\
 	::loon::classes::Decorated_View
 	
-    variable controller rotate3DX_var rotate3DY_var axesGuides
+    variable controller rotate3DX_var rotate3DY_var axesGuides rotationOriginGuide
     
     constructor {Path} {
         my variable canvas map
@@ -18,6 +18,7 @@
         
         set controller [::loon::classes::Scatterplot3D_Controller new [self]]
         set axesGuides [::loon::classes::Axes3DVisual new "axes3D" $canvas $map]
+        #set rotationOriginGuide [::loon::classes::RotationOrigin3DVisual new "rotationOrigin3D" $canvas $map]
     }
     
     method setPlotModel {Model} {
@@ -54,22 +55,25 @@
     method redraw {} {
         next
         my redrawAxes3D
+        #$rotationOriginGuide redraw
     }
     
     method updateCoords {} {
         next
         my redrawAxes3D
+        #$rotationOriginGuide redraw
     }
     
     method redrawAxes3D {} {
         my variable plotModel
         
-        set newAxesCoords [$plotModel project [list 1 0 0] [list 0 1 0] [list 0 0 1] [list 0 0 0]]
+        set newAxesCoords [$plotModel getAxesCoords]
         set newAxesX [dict get $newAxesCoords x]
         set newAxesY [dict get $newAxesCoords y]
-        $axesGuides setAxesCoords [list [lindex $newAxesX 0] [lindex $newAxesY 0]] \
-                                  [list [lindex $newAxesX 1] [lindex $newAxesY 1]] \
-                                  [list [lindex $newAxesX 2] [lindex $newAxesY 2]]
+        set newAxesZ [dict get $newAxesCoords z]
+        $axesGuides setAxesCoords [list [lindex $newAxesX 0] [lindex $newAxesY 0] [lindex $newAxesZ 0]] \
+                                  [list [lindex $newAxesX 1] [lindex $newAxesY 1] [lindex $newAxesZ 1]] \
+                                  [list [lindex $newAxesX 2] [lindex $newAxesY 2] [lindex $newAxesZ 2]]
         $axesGuides redraw
     }
 }
