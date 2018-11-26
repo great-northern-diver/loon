@@ -31,8 +31,8 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     }
 
     nvar <- (-1 + sqrt(1 + 8 * numofScatterplots)) / 2 + 1
-    showSerialAxes <- if(numofSerialAxes > 0) TRUE else FALSE
-    showHistograms <- if(numofHistograms > 0) TRUE else FALSE
+    showSerialAxes <- (numofSerialAxes > 0)
+    showHistograms <- (numofHistograms > 0)
     if(showHistograms) {
         histLocation <- if(numofHistograms == (nvar - 1) * 2) "edge" else "diag"
         if(histLocation == "edge") {
@@ -61,7 +61,11 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
                                     pi <- scatter_hist[[i]]
                                     pi['foreground'] <- "white"
                                     pi['minimumMargins'] <- rep(2,4)
-                                    loonGrob(pi)
+                                    if(i <= numofScatterplots) {
+                                        loonGrob(pi, name = paste("scatterplot", i))
+                                    } else {
+                                        loonGrob(pi, name = paste("histogram", i - numofScatterplots))
+                                    }
                                 }
     )
 
@@ -80,7 +84,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
         numofTexts <- length(texts)
         textGrobs <- lapply(texts,
                             function(t) {
-                                textGrob(t, gp = gpar(fontsize = 9))
+                                textGrob(t, gp = gpar(fontsize = 9), name = paste("text", i))
                             }
         )
 
@@ -93,27 +97,31 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
                 layout_matrix[(i + 1), i] <- (numofScatterplots + numofHistograms) + i
             }
         }
-    } else {
-        numofTexts <- 0
-        textGrobs <- NULL
-    }
+    } else  numofTexts <- 0
 
-    if(showSerialAxes) {
-        serialAxesSpan <- floor(nvar/2)
-        # square space
-        for(i in 1:serialAxesSpan) {
-            for(j in 1:serialAxesSpan) {
-                layout_matrix[cells - serialAxesSpan + i, j] <- numofScatterplots + numofHistograms + numofTexts + 1
-            }
+    serialAxesSpan <- floor(nvar/2)
+    # square space
+    for(i in 1:serialAxesSpan) {
+        for(j in 1:serialAxesSpan) {
+            layout_matrix[cells - serialAxesSpan + i, j] <- numofScatterplots + numofHistograms + numofTexts + 1
         }
-        serialAxesGrob <- lapply(serialAxes,
-                                 function(s) loonGrob(s)
-        )
-    } else {
-        serialAxesGrob <- NULL
     }
+    serialAxesGrob <- unname(
+        lapply(serialAxes,
+               function(s) {
+                   condGrob(test = showSerialAxes,
+                            grobFun = loonGrob,
+                            name = "serialaxes",
+                            target = s)
+               }
+        )
+    )
 
-    lgrobs <- c(scatter_histGrobs, textGrobs, serialAxesGrob)
+    lgrobs <- if(showTexts) {
+        c(scatter_histGrobs, textGrobs, serialAxesGrob)
+    } else {
+        c(scatter_histGrobs, serialAxesGrob)
+    }
 
     list(
         grobs = lgrobs,
@@ -122,11 +130,14 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     )
 }
 
+#' @export
 l_createCompoundGrob.l_pairs <- function(target, arrangeGrob.args){
     backgroundCol <- "grey94"
     grobTree(
-        rectGrob(gp  = gpar(fill = backgroundCol, col = NA)),
-        do.call(gridExtra::arrangeGrob,  arrangeGrob.args)
+        rectGrob(gp  = gpar(fill = backgroundCol, col = NA),
+                 name = "bounding box"),
+        do.call(gridExtra::arrangeGrob,  arrangeGrob.args),
+        name = "l_pairs"
     )
 }
 
