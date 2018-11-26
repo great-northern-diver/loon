@@ -23,10 +23,10 @@ This is basically a list of graphical parameter settings.}
 \item{vp}{a grid viewport object (or NULL).}
 }
 \value{
-a grid grob
+a grid grob of the loon plot
 }
 \description{
-Grid grobs are useful to create publication quality graphics.
+Create and optionally draw a grid grob from a loon widget handle
 }
 \examples{
 
@@ -36,5 +36,5 @@ grid.loon(widget)
 
 }
 \seealso{
-\code{\link{loonGrob}}
+\code{\link{loonGrob}}, \code{\link{plot.loon}}
 }

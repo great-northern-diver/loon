@@ -2,7 +2,7 @@
 % Please edit documentation in R/loonGrob.R, R/loonGrob_l_compound.R,
 %   R/loonGrob_l_layer_graph.R, R/loonGrob_l_layer_histogram.R,
 %   R/loonGrob_l_layer_scatterplot.R, R/loonGrob_l_navgraph.R,
-%   R/loonGrob_l_navigator.R, R/loonGrob_l_serialaxes.R
+%   R/loonGrob_l_navigator.R, R/loonGrob_l_serialaxes.R, R/loonGrob_l_ts.R
 \name{loonGrob}
 \alias{loonGrob}
 \alias{loonGrob.l_compound}
@@ -12,6 +12,7 @@
 \alias{loonGrob.l_navgraph}
 \alias{loonGrob.l_navigator}
 \alias{loonGrob.l_serialaxes}
+\alias{loonGrob.l_ts}
 \title{Create a grid grob from a loon widget handle}
 \usage{
 loonGrob(target, name = NULL, gp = NULL, vp = NULL)
@@ -36,6 +37,8 @@ loonGrob(target, name = NULL, gp = NULL, vp = NULL)
 
 \method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL,
   vp = NULL)
+
+\method{loonGrob}{l_ts}(target, name = NULL, gp = NULL, vp = NULL)
 }
 \arguments{
 \item{target}{either an object of class loon or a vector that specifies the
@@ -80,7 +83,7 @@ grid.newpage()
 grid.draw(lgrob)
 }
 
- 
+
 \dontrun{
 
 library(grid)
@@ -94,10 +97,15 @@ grid.draw(lgrob)
 
 ## Time series decomposition examples
 
-decompose <- decompose(co2) 
+decompose <- decompose(co2)
 # or decompose <- stl(co2, "per")
 p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
 
+# To print directly use either
+plot(p)
+# or
+grid.loon(p)
+# or to save structure
 lgrob <- loonGrob(p)
 grid.newpage()
 grid.draw(lgrob)
@@ -115,16 +123,21 @@ nav0 <- l_navigator_add(g)
 l_configure(nav0, label = 0)
 con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris[,-5])
 
-nav1 <- l_navigator_add(g, from = "Sepal.Length:Petal.Width", 
+nav1 <- l_navigator_add(g, from = "Sepal.Length:Petal.Width",
   to = "Petal.Length:Petal.Width", proportion = 0.6)
 l_configure(nav1, label = 1)
 con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris[,-5])
 
-nav2 <- l_navigator_add(g, from = "Sepal.Length:Petal.Length", 
+nav2 <- l_navigator_add(g, from = "Sepal.Length:Petal.Length",
   to = "Sepal.Width:Petal.Length", proportion = 0.5)
 l_configure(nav2, label = 2)
 con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
 
+# To print directly use either
+plot(g)
+# or
+grid.loon(g)
+# or to save structure
 library(grid)
 lgrob <- loonGrob(g)
 grid.newpage(); grid.draw(lgrob)
@@ -155,8 +168,10 @@ grid.newpage(); grid.draw(g)
 
 h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
 
-g <- loonGrob(h)
-grid.newpage(); grid.draw(g)
+# To print directly use either
+plot(h)
+# or
+grid.loon(h)
 }
 
 
@@ -183,20 +198,46 @@ grid.newpage(); grid.draw(g)
 
 ng <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
 
+# To print directly use either
+plot(ng)
+# or
+grid.loon(ng)
+# or to save structure
+lgrob <- loonGrob(ng)
 library(grid)
-navGrob <- loonGrob(ng)
 grid.newpage()
-grid.draw(navGrob)
+grid.draw(lgrob)
 }
 
 
 ## Serial axes (radial and parallel coordinate) examples
 
 s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-s['axesLayout'] <- 'parallel'
-
+sGrob_radial <- loonGrob(s)
 library(grid)
-grid.newpage(); grid.loon(s)
+grid.newpage(); grid.draw(sGrob_radial)
+s['axesLayout'] <- 'parallel'
+sGrob_parallel <- loonGrob(s)
+grid.newpage(); grid.draw(sGrob_parallel)
+
+
+\dontrun{
+
+## Time series decomposition examples
+
+decompose <- decompose(co2)
+# or decompose <- stl(co2, "per")
+p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
+
+# To print directly use either
+plot(p)
+# or
+grid.loon(p)
+# or to save structure
+lgrob <- loonGrob(p)
+grid.newpage()
+grid.draw(lgrob)
+}
 
 }
 \seealso{

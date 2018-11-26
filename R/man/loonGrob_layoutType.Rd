@@ -14,7 +14,7 @@ loonGrob_layoutType(target)
 \value{
 either the string "locations" (the default) or the string "arrangeGrobArgs".
 If "locations", then the generic function `l_getLocations()` will be called
-and only the location arguments of `gridExtra::arrangeGrob()` used 
+and only the location arguments of `gridExtra::arrangeGrob()` used
 (i.e. a subset of `c("ncol", "nrow", "layout_matrix", "heights", "widths")`).
 The grobs to be laid out are constructed using the generic function `l_getPlots()`.
 }

@@ -3,7 +3,7 @@
 \name{l_get_arrangeGrobArgs}
 \alias{l_get_arrangeGrobArgs}
 \title{For the target (compound) loon plot, determines all arguments
-(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()` 
+(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
 so as to determine the layout in `grid` graphics.}
 \usage{
 l_get_arrangeGrobArgs(target)
@@ -17,6 +17,6 @@ a list of the named arguments and their values to be passed to
 }
 \description{
 For the target (compound) loon plot, determines all arguments
-(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()` 
+(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
 so as to determine the layout in `grid` graphics.
 }
