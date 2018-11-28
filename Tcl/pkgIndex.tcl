@@ -192,10 +192,10 @@ package ifneeded loon 1.2.0 "
    [list source [file join $dir library/oo_TextWorldviewVisual.tcl]]
    [list source [file join $dir library/oo_Rotate3D_Controller.tcl]]
    [list source [file join $dir library/oo_Scatterplot3D_Controller.tcl]]
-   [list source [file join $dir library/oo_RotationOrigin3DVisual.tcl]]
    [list source [file join $dir library/oo_Axes3DVisual.tcl]]
    [list source [file join $dir library/oo_Scatterplot3D_View.tcl]]
    [list source [file join $dir library/oo_Scatterplot3D_Model.tcl]]
+   [list source [file join $dir library/oo_Plot3DInspectorAnalysis.tcl]]
    [list source [file join $dir library/oo_Scatterplot3D_Widget.tcl]]
    [list source [file join $dir library/oo_Plot3DInspector.tcl]]
 "
