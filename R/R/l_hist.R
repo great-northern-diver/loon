@@ -26,12 +26,28 @@
 #' @export
 #'
 #' @examples
-#' h <- l_hist(iris$Sepal.Length, color=iris$Species)
+#' h <- l_hist(iris$Sepal.Length)
+#'
+#' names(h)
+#' h["xlabel"] <- "Sepal length"
+#' h["showOutlines"] <- FALSE
+#'
+#' h["yshows"]
+#' h["yshows"] <- "density"
+#' l_scaleto_plot(h)
+#'
+#' h["showStackedColors"] <- TRUE
+#' h['color'] <- iris$Species
+#' h["showStackedColors"] <- FALSE
+#' h["showOutlines"] <- TRUE
+#' h["showGuides"] <- TRUE
 #'
 #' # link another plot with the previous plot
 #' h['linkingGroup'] <- "iris_data"
-#' h2 <- with(iris, l_hist(Petal.Width, linkingGroup="iris_data"))
-#'
+#' h2 <- with(iris, l_hist(Petal.Width,
+#'                         linkingGroup="iris_data",
+#'                         showStackedColors = TRUE))
+xs#'
 #'
 #' # Get an R (grid) graphics plot of the current loon plot
 #' plot(h)

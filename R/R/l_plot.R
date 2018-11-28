@@ -46,9 +46,22 @@
 #' # ordinary use
 #' p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 #'
+#' names(p)
+#' p["glyph"]
+#' p["size"] <- 10
+#' p["color"] <- "grey"
+#' p["color"] <- iris$Species
+#' versi <- iris$Species == "versicolor"
+#' p["glyph"][versi] <- "otriangle"
+#' p["glyph"][versi] <- "ctriangle"
+#'
 #' # link another plot with the previous plot
 #' p['linkingGroup'] <- "iris_data"
-#' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris_data"))
+#' p2 <- with(iris, l_plot(Sepal.Length, Petal.Width,
+#'                         linkingGroup="iris_data",
+#'                         title = "Second plot",
+#'                         showGuides = TRUE))
+#' p2["showScales"] <- TRUE
 #'
 #' # Get an R (grid) graphics plot of the current loon plot
 #' plot(p)
