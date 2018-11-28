@@ -7,8 +7,6 @@ oo::class create loon::classes::PlotInspector {
 	vport vportid
 
 
-    
-
     method CheckNewActivewidget {widget} {
 	if {![info object isa typeof $widget\
 		  "::loon::classes::Scatterplot_Widget"]} {
@@ -30,6 +28,9 @@ oo::class create loon::classes::PlotInspector {
 	
     }
     
+    method analysisInspectorFactory {} {
+        return ::loon::plot_inspector_analysis
+    }
     
     method Make {}  {
 	my variable path
@@ -45,9 +46,11 @@ oo::class create loon::classes::PlotInspector {
 	
 	set notebook [::ttk::notebook ${path}.notebook]
 
+    # Use dynamic binding to determine the right analysis inspector
+    # This way, the 3D plot can have its custom inspector
 	if {$::loon::Options(noscrollInspector)} {
 	    set AnalysisInspector\
-		[::loon::plot_inspector_analysis ${path}.analysis]  
+		[[my analysisInspectorFactory] ${path}.analysis]  
 	} else {
 	    ## Scrollable analysis inspector
 	    ## scroll form
@@ -59,7 +62,7 @@ oo::class create loon::classes::PlotInspector {
 	    pack $vport -side left -fill both -expand TRUE
 	    
 	    set AnalysisInspector\
-		[::loon::plot_inspector_analysis ${vport}.inspector]
+		[[my analysisInspectorFactory] ${vport}.inspector]
 	    
 	    update idletasks
 	    $vport configure -width [winfo reqwidth $AnalysisInspector]\

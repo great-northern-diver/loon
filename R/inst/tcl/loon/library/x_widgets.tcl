@@ -2,7 +2,9 @@
 namespace eval loon {
 
     namespace export plot
+    namespace export plot3D
     namespace export plot_inspector
+    namespace export plot3D_inspector
     namespace export worldview
     namespace export plot_inspector_analysis
     namespace export layers_inspector
@@ -41,8 +43,18 @@ namespace eval loon {
 	return  $widget
     }  
     
+    proc plot3D {args} {
+	set widget [WidgetFactory Scatterplot3D plot3D {*}$args]
+	return  $widget
+    }  
+    
     proc plot_inspector {args} {
 	set widget [WidgetFactory PlotInspector plotInspector {*}$args]
+	return  $widget
+    }
+    
+    proc plot3D_inspector {args} {
+	set widget [WidgetFactory Plot3DInspector plot3DInspector {*}$args]
 	return  $widget
     }
     
@@ -53,6 +65,11 @@ namespace eval loon {
 
     proc plot_inspector_analysis {args} {
 	set widget [WidgetFactory PlotInspectorAnalysis plotInspectorAnalysis {*}$args]
+	return  $widget
+    }
+    
+    proc plot3D_inspector_analysis {args} {
+	set widget [WidgetFactory Plot3DInspectorAnalysis plotInspectorAnalysis {*}$args]
 	return  $widget
     }
 
