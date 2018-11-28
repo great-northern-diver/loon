@@ -35,6 +35,7 @@ website at \url{http://waddella.github.io/loon/learn_R_intro.html}.
 Useful links:
 \itemize{
   \item \url{http://waddella.github.io/loon/}
+  \item Report bugs at \url{https://github.com/waddella/loon/issues}
 }
 
 }

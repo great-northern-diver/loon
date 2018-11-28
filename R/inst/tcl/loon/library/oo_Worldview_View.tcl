@@ -105,7 +105,9 @@ oo::class create loon::classes::Worldview_View {
 	} elseif {"origin" in $events || "binwidth" in $events} {
 	    ## not quite sure why the after idle is necessary
 	    after idle [list [self] updateRange]
-	}
+	} elseif {"rotate3DX" in $events || "rotate3DY" in $events } {
+        my updateViewport
+    }
     }
     
     method updateViewarea {} {
