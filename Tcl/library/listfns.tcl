@@ -563,30 +563,6 @@ namespace eval loon::listfns {
 	return $out
     }
     
-    ## project (x,y,z) orthogonally on plane given by its normal vec
-    proc comp3d {x y z vec} {
-	if {[llength $vec] ne 3} {
-	    error "vec needs to have 3 elements"
-	}
-	
-	set nvec [norm $vec]
-	
-	set v1 [lindex $nvec 0]
-	set v2 [lindex $nvec 1]
-    set v3 [lindex $nvec 2]
-
-	set outX {}
-    set outY {}
-    set outZ {}
-	foreach xe $x ye $y ze $z {
-        set dot [expr $xe*$v1+$ye*$v2+$ze*$v3]
-	    lappend outX [expr {dot * $v1}]
-        lappend outY [expr {dot * $v2}]
-        lappend outZ [expr {dot * $v3}]
-	} 
-	return { $outX $outY $outZ }
-    }
-    
     proc norm {vec} {
 	set ssum 0
 	foreach x $vec {
@@ -609,6 +585,33 @@ namespace eval loon::listfns {
             set out [expr {$out + $x*$y}]
         }
         return $out
+    }
+    
+    proc transpose { matrix } {
+        set transposed {}
+        set i 0
+        foreach col [lindex $matrix 0] {
+           set resultRow {}
+           foreach row $matrix {
+               lappend resultRow [lindex $row $i]
+           }
+           lappend transposed $resultRow
+           incr i
+        }
+        return $transposed
+    }
+    
+    proc matmul { m1 m2 } {
+        set result {}
+        set m2t [transpose $m2]
+        foreach row1 $m1 {
+          set resultRow {}
+          foreach row2 $m2t {
+             lappend resultRow [dot $row1 $row2]
+          }
+          lappend result $resultRow
+        }
+        return $result
     }
 
     # mcsplit --

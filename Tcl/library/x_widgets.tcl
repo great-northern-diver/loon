@@ -67,6 +67,11 @@ namespace eval loon {
 	set widget [WidgetFactory PlotInspectorAnalysis plotInspectorAnalysis {*}$args]
 	return  $widget
     }
+    
+    proc plot3D_inspector_analysis {args} {
+	set widget [WidgetFactory Plot3DInspectorAnalysis plotInspectorAnalysis {*}$args]
+	return  $widget
+    }
 
     proc layers_inspector {args} {
 	set widget [WidgetFactory LayersInspector layersInspector {*}$args]

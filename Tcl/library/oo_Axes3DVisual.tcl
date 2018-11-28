@@ -39,16 +39,12 @@
         
         if {$isVisible} {set state normal} else {set state hidden}
         
-        set xAxis [uplevel #0 [list $canvas create line 0 0 0 0\
+        foreach ax {xAxis yAxis zAxis} color {xColor yColor zColor} {
+            set $ax [uplevel #0 [list $canvas create line 0 0 0 0\
                        -tags [list loon $visualid]\
-                       -state $state -fill $xColor]]
-        set yAxis [uplevel #0 [list $canvas create line 0 0 0 0\
-                       -tags [list loon $visualid]\
-                       -state $state -fill $yColor]]
-        set zAxis [uplevel #0 [list $canvas create line 0 0 0 0\
-                       -tags [list loon $visualid]\
-                       -state $state -fill $zColor]]
-        
+                       -state $state -fill [set $color]]]
+        }
+
         my updateCoords
     }
     
@@ -57,9 +53,6 @@
         
         if {$xAxis eq ""} {my redraw}
 
-        set canvas_width [winfo width $canvas]
-        set canvas_height [winfo height $canvas]
-        
         set bbox [$map getViewport]
         set vpx0 [lindex $bbox 0]
         set vpy0 [lindex $bbox 1]
@@ -71,37 +64,18 @@
         set axesOriginX [expr {$vpx0 + 0.5 * $xLen}]
         set axesOriginY [expr {$vpy1 - 0.5 * $yLen}]
         
-        set xAxisEnd [list [expr {$axesOriginX + [lindex $xCoords 0] * 0.08 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $xCoords 1] * 0.08 * $yLen }]]
-                                                                          
-        set yAxisEnd [list [expr {$axesOriginX + [lindex $yCoords 0] * 0.08 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $yCoords 1] * 0.08 * $yLen }]]
-                                                                          
-        set zAxisEnd [list [expr {$axesOriginX + [lindex $zCoords 0] * 0.08 * $xLen }] \
-                           [expr {$axesOriginY - [lindex $zCoords 1] * 0.08 * $yLen }]]
+        foreach ax {xAxis yAxis zAxis} coord {xCoords yCoords zCoords} color {xColor yColor zColor} {
+            set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 0] * 0.08 * $xLen }] \
+                              [expr {$axesOriginY - [lindex [set $coord] 1] * 0.08 * $yLen }]]
+                           
+            uplevel #0 [list $canvas coords [set $ax]\
+                    $axesOriginX $axesOriginY [lindex $axisEnd 0] [lindex $axisEnd 1]]
+            
+            # Darken axes going into the monitor, brighten those coming out of it
+            set brightness [expr {int(100 - 80 * [lindex [set $coord] 2])}]
+            uplevel #0 [list $canvas itemconfigure [set $ax] -fill [::tk::Darken [set $color] $brightness]]
         
-        
-        uplevel #0 [list $canvas coords $xAxis\
-                $axesOriginX $axesOriginY [lindex $xAxisEnd 0] [lindex $xAxisEnd 1]]
-        
-        uplevel #0 [list $canvas coords $yAxis\
-                $axesOriginX $axesOriginY [lindex $yAxisEnd 0] [lindex $yAxisEnd 1]]
-
-        uplevel #0 [list $canvas coords $zAxis\
-                $axesOriginX $axesOriginY [lindex $zAxisEnd 0] [lindex $zAxisEnd 1]]
-                
-        # Darken axes going into the monitor, brighten those coming out of it
-        set xPercent [expr {int(100 - 80 * [lindex $xCoords 2])}]
-        uplevel #0 [list $canvas itemconfigure $xAxis\
-                -fill [::tk::Darken $xColor $xPercent]]
-        set yPercent [expr {int(100 - 80 * [lindex $yCoords 2])}]
-        uplevel #0 [list $canvas itemconfigure $yAxis\
-                -fill [::tk::Darken $yColor $yPercent]]
-        set zPercent [expr {int(100 - 80 * [lindex $zCoords 2])}]
-        uplevel #0 [list $canvas itemconfigure $zAxis\
-                -fill [::tk::Darken $zColor $zPercent]]
-                
-        puts stdout "ax3d: $vpx0 $vpx1 $vpy0 $vpy1 $xLen $yLen $xAxisEnd $yAxisEnd $zAxisEnd $axesOriginX $axesOriginY"
+        }
     }
     
     method clear {} {
