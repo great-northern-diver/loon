@@ -47,7 +47,7 @@
 #' h2 <- with(iris, l_hist(Petal.Width,
 #'                         linkingGroup="iris_data",
 #'                         showStackedColors = TRUE))
-xs#'
+#'
 #'
 #' # Get an R (grid) graphics plot of the current loon plot
 #' plot(h)
