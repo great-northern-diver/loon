@@ -1,3 +1,9 @@
+# loon 1.2.1
+
+* updated `loonGrob()` and `grid.loon()`
+    - provide more meaningful grobs (including better descriptions and more informative "empty" grobs)
+    - introduce the method `plot.loon()` so that `plot(p)` of a loon plot `p` will now draw the corresponding grid object on the current device
+    
 # loon 1.2.0
 
 * added `loonGrob()` and `grid.loon()` functionality 
