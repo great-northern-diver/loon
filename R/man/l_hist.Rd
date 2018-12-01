@@ -11,7 +11,7 @@ l_hist(x, origin = min(x), binwidth = NULL, parent = NULL, ...)
 
 \item{origin}{scalar to define the binning origin}
 
-\item{binwidth}{scalar to specify the binwidth, if NULL then it is set to 
+\item{binwidth}{scalar to specify the binwidth, if NULL then it is set to
 \code{diff(range(x))/30} if that value is >= 0.0001 or 0.0001 otherwise}
 
 \item{parent}{parent widget path}
@@ -22,19 +22,48 @@ l_hist(x, origin = min(x), binwidth = NULL, parent = NULL, ...)
 widget handle
 }
 \description{
-Create an interactive histogram display that can be linked with 
+Create an interactive histogram display that can be linked with
   loon's other displays
 }
 \details{
-Note that when changing the \code{yshows} state form 
-  \code{'frequency'} to \code{'density'} you might have to use 
+Note that when changing the \code{yshows} state form
+  \code{'frequency'} to \code{'density'} you might have to use
   \code{\link{l_scaleto_world}} to show the complete histogram in the plotting
   region.
 
 For more information run: \code{l_help("learn_R_display_hist")}
 }
 \examples{
-h <- l_hist(iris$Sepal.Length, color=iris$Species)
+h <- l_hist(iris$Sepal.Length)
+
+names(h)
+h["xlabel"] <- "Sepal length"
+h["showOutlines"] <- FALSE
+
+h["yshows"]
+h["yshows"] <- "density"
+l_scaleto_plot(h)
+
+h["showStackedColors"] <- TRUE
+h['color'] <- iris$Species
+h["showStackedColors"] <- FALSE
+h["showOutlines"] <- TRUE
+h["showGuides"] <- TRUE
+
+# link another plot with the previous plot
+h['linkingGroup'] <- "iris_data"
+h2 <- with(iris, l_hist(Petal.Width,
+                        linkingGroup="iris_data",
+                        showStackedColors = TRUE))
+
+
+# Get an R (grid) graphics plot of the current loon plot
+plot(h)
+# or with more control about grid parameters
+grid.loon(h)
+# or to save the grid data structure (grob) for later use
+hg <- loonGrob(h)
+
 }
 \seealso{
 \code{\link{l_plot}}

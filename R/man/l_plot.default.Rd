@@ -22,16 +22,16 @@ order to be displayed. See the examples below.}
 \item{...}{named arguments to modify plot states.}
 }
 \description{
-Creates an interactive 2d scatterplot. Also, if no loon 
-  inspector is open then the \code{l_plot} call will also open a loon 
+Creates an interactive 2d scatterplot. Also, if no loon
+  inspector is open then the \code{l_plot} call will also open a loon
   inspector.
 }
 \details{
-The scatterplot displays a number of direct interactions with the 
-  mouse and keyboard, these include: zooming towards the mouse cursor using 
-  the mouse wheel, panning by right-click dragging and various selection 
-  methods using the left mouse button such as sweeping, brushing and 
-  individual point selection. See the documentation for \code{\link{l_plot}} 
+The scatterplot displays a number of direct interactions with the
+  mouse and keyboard, these include: zooming towards the mouse cursor using
+  the mouse wheel, panning by right-click dragging and various selection
+  methods using the left mouse button such as sweeping, brushing and
+  individual point selection. See the documentation for \code{\link{l_plot}}
   for more details about the interaction gestures.
 }
 \examples{
@@ -45,6 +45,6 @@ p2 <- with(iris, l_plot(Petal.Length ~ Petal.Width, color=Species))
 # link the two plots p1 and p2
 l_configure(p1, linkingGroup="iris", sync="push")
 l_configure(p2, linkingGroup="iris", sync="push")
-p1['selected'] <- iris$Species == "setosa" 
+p1['selected'] <- iris$Species == "setosa"
 
 }

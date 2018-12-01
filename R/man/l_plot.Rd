@@ -20,43 +20,63 @@ l_plot(x, y, ...)
 widget handle
 }
 \description{
-\code{l_plot} is a generic function for creating interactive 
+\code{l_plot} is a generic function for creating interactive
   visualization environments for \R objects.
 }
 \details{
 \ifelse{html}{
-\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website 
+\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
   which can be accessed via the <code>l_help()</code> function call. </div>
 }}{
-To get started with loon it is recommended to read loons website 
+To get started with loon it is recommended to read loons website
   which can be accessed via the \code{l_help()} function call.
 }
 
-  
+
   \if{html}{ The general direct manipulation and interaction gestures are
   outlined in the following figures.
-  
+
   Zooming and Panning
-  
-  \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"} 
-  
+
+  \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
+
   Selecting Points/Objects
-  
+
   \figure{gestures_select.png}{options: alt="Select gestures"}
-  
+
   Moving Points on the Scatterplot Display
-  
+
   \figure{gestures_move.png}{options: alt="Move gestures"}
-  
+
   }
 }
 \examples{
 # ordinary use
 p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 
+names(p)
+p["glyph"]
+p["size"] <- 10
+p["color"] <- "grey"
+p["color"] <- iris$Species
+versi <- iris$Species == "versicolor"
+p["glyph"][versi] <- "otriangle"
+p["glyph"][versi] <- "ctriangle"
+
 # link another plot with the previous plot
 p['linkingGroup'] <- "iris_data"
-p2 <- with(iris, l_plot(Sepal.Length, Petal.Width, linkingGroup="iris_data"))
+p2 <- with(iris, l_plot(Sepal.Length, Petal.Width,
+                        linkingGroup="iris_data",
+                        title = "Second plot",
+                        showGuides = TRUE))
+p2["showScales"] <- TRUE
+
+# Get an R (grid) graphics plot of the current loon plot
+plot(p)
+# or with more control about grid parameters
+grid.loon(p)
+# or to save the grid data structure (grob) for later use
+pg <- loonGrob(p)
 
 # Use with other tk widgets
 tt <- tktoplevel()
