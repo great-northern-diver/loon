@@ -64,7 +64,7 @@ p["glyph"][versi] <- "otriangle"
 p["glyph"][versi] <- "ctriangle"
 
 # link another plot with the previous plot
-p['linkingGroup'] <- "iris_data"
+l_configure(p, linkingGroup = "iris_data", sync = "pull")
 p2 <- with(iris, l_plot(Sepal.Length, Petal.Width,
                         linkingGroup="iris_data",
                         title = "Second plot",
