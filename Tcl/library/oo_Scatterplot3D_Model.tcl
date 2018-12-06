@@ -15,7 +15,8 @@
         next {*}$args
         
         my New_state z double n ""
-        my New_state zlabel string 1 ""	
+        my New_state zlabel string 1 ""
+        my New_state dimensionNames string 3 {"" "" ""}
         my New_state rotate3DX double 1 0
         my New_state rotate3DY double 1 0
         my New_state rotationOrigin double 3 {0.0 0.0 0.0}
@@ -38,10 +39,11 @@
     
     method EvalConfigure {} {
         my variable x y z xTemp yTemp confDict rotate3DX rotate3DY rotationOrigin \
-                    panX panY zoomX zoomY deltaX deltaY
+                    panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel
         
         if {$originalX == ""} {
             set originalX $x
+            set dimensionNames [list $xlabel $ylabel $zlabel]
         }
         if {$originalY == ""} {
             set originalY $y
@@ -76,7 +78,7 @@
     }
     
     method setAxesCoordsAndLabels {} {
-        my variable axesCoords
+        my variable axesCoords dimensionNames xlabel ylabel confDict
         # Update coordinates to be fetched by axes3d visual
         set xAxCoords [lindex $axesCoords 0]
         set yAxCoords [lindex $axesCoords 1]
@@ -84,10 +86,14 @@
         set axesCoords [dict values [my project $xAxCoords $yAxCoords $zAxCoords [list 0 0 0]]]
         
         # Set new axis labels
-        #set xLabel [format "%s %.3f + %s %.3f"\
-		#		    [lindex $curYvars 0] [lindex $xAxCoords 0]\
-		#		   [lindex $curYvars 1] [lindex $xAxCoords 1]]
-        #set yLabel "[lindex $yAxCoords 0] ${xlabel} + [lindex $yAxCoords 1] ${ylabel} + [lindex $yAxCoords 2] ${zlabel}"
+        dict set confDict new_xlabel [format "%.3f %s + %.3f %s + %.3f %s"\
+            [lindex $dimensionNames 0] [lindex $xAxCoords 0]\
+            [lindex $dimensionNames 1] [lindex $xAxCoords 1]\
+            [lindex $dimensionNames 2] [lindex $xAxCoords 2]]
+        dict set confDict new_ylabel [format "%.3f %s + %.3f %s + %.3f %s"\
+            [lindex $dimensionNames 0] [lindex $yAxCoords 0]\
+            [lindex $dimensionNames 1] [lindex $yAxCoords 1]\
+            [lindex $dimensionNames 2] [lindex $yAxCoords 2]]
     }
     
     # Handle reset differently from normal plots:
