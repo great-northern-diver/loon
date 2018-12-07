@@ -37,6 +37,13 @@ The scatterplot displays a number of direct interactions with the
 
 # default use as scatterplot
 
-p1 <- with(iris, l_plot3D(Sepal.Length, Sepal.Width, Petal.Width, color=Species))
+p1 <- with(iris, l_plot3D(Sepal.Length, Petal.Length, Petal.Width, color=Species))
+
+p2 <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width color=Species))
+
+# link the two plots p1 and p2
+l_configure(p1, linkingGroup="iris", sync="push")
+l_configure(p2, linkingGroup="iris", sync="push")
+p1['selected'] <- iris$Species == "setosa" 
 
 }

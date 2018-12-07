@@ -15,11 +15,22 @@
         next {*}$args
         
         my New_state z double n ""
-        my New_state zlabel string 1 ""	
+        my New_state zlabel string 1 ""
+        my New_state dimensionNames string 3 {"" "" ""}
         my New_state rotate3DX double 1 0
         my New_state rotate3DY double 1 0
-        my New_state rotationOrigin double 3 {0.0 0.0 0.0}
         my New_state axesCoords nested_double 3 { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
+        
+        my SetStateDescription z "z coordinates"
+        my SetStateDescription zlabel "z axis label"
+        my SetStateDescription dimensionNames \
+            "Internal state used to store the dimension names, as x- and ylabel will be updated on rotation"
+        my SetStateDescription rotate3DX \
+            "Incremental rotation around x axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
+        my SetStateDescription rotate3DY \
+            "Incremental rotation around y axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
+        my SetStateDescription axesCoords \
+            "Stores the projections of the original x-, y- and z-axes to allow drawing the axis visual"
 
         my AddLayer model "scatterplot"\
             [::loon::classes::ScatterplotLayer new [self]] root 0 "Scatterplot"
@@ -37,11 +48,12 @@
     }
     
     method EvalConfigure {} {
-        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY rotationOrigin \
-                    panX panY zoomX zoomY deltaX deltaY
+        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY \
+                    panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel
         
         if {$originalX == ""} {
             set originalX $x
+            set dimensionNames [list $xlabel $ylabel $zlabel]
         }
         if {$originalY == ""} {
             set originalY $y
@@ -68,7 +80,7 @@
             dict set confDict new_x $x
             dict set confDict new_y $y
             dict set confDict new_z $z
-
+            
             my setAxesCoordsAndLabels
         }
         
@@ -76,7 +88,7 @@
     }
     
     method setAxesCoordsAndLabels {} {
-        my variable axesCoords
+        my variable axesCoords dimensionNames xlabel ylabel confDict
         # Update coordinates to be fetched by axes3d visual
         set xAxCoords [lindex $axesCoords 0]
         set yAxCoords [lindex $axesCoords 1]
@@ -84,17 +96,25 @@
         set axesCoords [dict values [my project $xAxCoords $yAxCoords $zAxCoords [list 0 0 0]]]
         
         # Set new axis labels
-        #set xLabel [format "%s %.3f + %s %.3f"\
-		#		    [lindex $curYvars 0] [lindex $xAxCoords 0]\
-		#		   [lindex $curYvars 1] [lindex $xAxCoords 1]]
-        #set yLabel "[lindex $yAxCoords 0] ${xlabel} + [lindex $yAxCoords 1] ${ylabel} + [lindex $yAxCoords 2] ${zlabel}"
+        if {[lindex $xAxCoords 1] >= 0} {set xSign1 "+"} else {set xSign1 "-"}
+        if {[lindex $xAxCoords 2] >= 0} {set xSign2 "+"} else {set xSign2 "-"}
+        if {[lindex $yAxCoords 1] >= 0} {set ySign1 "+"} else {set ySign1 "-"}
+        if {[lindex $yAxCoords 2] >= 0} {set ySign2 "+"} else {set ySign2 "-"}
+        dict set confDict new_xlabel [format "%.3f %s %s %.3f %s %s %.3f %s"\
+            [lindex $xAxCoords 0] [lindex $dimensionNames 0] $xSign1 \
+            [expr {abs([lindex $xAxCoords 1])}] [lindex $dimensionNames 1] $xSign2 \
+            [expr {abs([lindex $xAxCoords 2])}] [lindex $dimensionNames 2]]
+        dict set confDict new_ylabel [format "%.3f %s %s %.3f %s %s %.3f %s"\
+            [lindex $yAxCoords 0] [lindex $dimensionNames 0] $ySign1 \
+            [expr {abs([lindex $yAxCoords 1])}] [lindex $dimensionNames 1] $ySign2 \
+            [expr {abs([lindex $yAxCoords 2])}] [lindex $dimensionNames 2]]
     }
     
     # Handle reset differently from normal plots:
     # if points are temporarily moved: reset to non-moved state
     # else: reset to non-rotated original state.
     method move {how {which "selected"} args} {
-        my variable x y z xTemp yTemp axesCoords n
+        my variable x y z xTemp yTemp axesCoords dimensionNames n
         
         ## indices
         set sel [my ProcessWhich $which n]
@@ -111,6 +131,10 @@
                     set newyTemp {}
                     
                     set newAxesCoords { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
+                    set newxlabel [lindex $dimensionNames 0]
+                    set newylabel [lindex $dimensionNames 1]
+                    my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp \
+                        -axesCoords $newAxesCoords -xlabel $newxlabel  -ylabel $newylabel
                 } else {
                     # Only reset selected points' rotation
                     set newx $x
@@ -130,9 +154,8 @@
                             lset newyTemp $ind [lindex $originalY $ind]
                         }
                     }  
-                    set newAxesCoords $axesCoords
+                    my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp
                 }
-                my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp -axesCoords $newAxesCoords
             }
             default {
                 next $how $which {*}$args
@@ -140,7 +163,7 @@
         }
     }
     
-    method project {x y z rotationCenter} {
+    method project {xs ys zs rotationCenter} {
         my variable rotate3DX rotate3DY
         
         set cosAX [expr {cos($rotate3DX)}]
@@ -154,11 +177,10 @@
         
         set R [::loon::listfns::matmul $Ry $Rx]
         
-        puts stdout "rotateX ${rotate3DX} rotateY ${rotate3DY} R ${R} origin $rotationCenter"
         set xProjected {}
         set yProjected {}
         set zProjected {}
-        foreach xe $x ye $y ze $z {
+        foreach xe $xs ye $ys ze $zs {
             # Transform to coordinates relative to rotation origin
             set xShifted [expr {$xe - [lindex $rotationCenter 0]}]
             set yShifted [expr {$ye - [lindex $rotationCenter 1]}]
