@@ -19,8 +19,18 @@
         my New_state dimensionNames string 3 {"" "" ""}
         my New_state rotate3DX double 1 0
         my New_state rotate3DY double 1 0
-        my New_state rotationOrigin double 3 {0.0 0.0 0.0}
         my New_state axesCoords nested_double 3 { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
+        
+        my SetStateDescription z "z coordinates"
+        my SetStateDescription zlabel "z axis label"
+        my SetStateDescription dimensionNames \
+            "Internal state used to store the dimension names, as x- and ylabel will be updated on rotation"
+        my SetStateDescription rotate3DX \
+            "Incremental rotation around x axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
+        my SetStateDescription rotate3DY \
+            "Incremental rotation around y axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
+        my SetStateDescription axesCoords \
+            "Stores the projections of the original x-, y- and z-axes to allow drawing the axis visual"
 
         my AddLayer model "scatterplot"\
             [::loon::classes::ScatterplotLayer new [self]] root 0 "Scatterplot"
@@ -38,7 +48,7 @@
     }
     
     method EvalConfigure {} {
-        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY rotationOrigin \
+        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY \
                     panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel
         
         if {$originalX == ""} {
@@ -70,7 +80,7 @@
             dict set confDict new_x $x
             dict set confDict new_y $y
             dict set confDict new_z $z
-
+            
             my setAxesCoordsAndLabels
         }
         
@@ -87,20 +97,20 @@
         
         # Set new axis labels
         dict set confDict new_xlabel [format "%.3f %s + %.3f %s + %.3f %s"\
-            [lindex $dimensionNames 0] [lindex $xAxCoords 0]\
-            [lindex $dimensionNames 1] [lindex $xAxCoords 1]\
-            [lindex $dimensionNames 2] [lindex $xAxCoords 2]]
+            [lindex $xAxCoords 0] [lindex $dimensionNames 0]\
+            [lindex $xAxCoords 1] [lindex $dimensionNames 1]\
+            [lindex $xAxCoords 2] [lindex $dimensionNames 2]]
         dict set confDict new_ylabel [format "%.3f %s + %.3f %s + %.3f %s"\
-            [lindex $dimensionNames 0] [lindex $yAxCoords 0]\
-            [lindex $dimensionNames 1] [lindex $yAxCoords 1]\
-            [lindex $dimensionNames 2] [lindex $yAxCoords 2]]
+            [lindex $yAxCoords 0] [lindex $dimensionNames 0]\
+            [lindex $yAxCoords 1] [lindex $dimensionNames 1]\
+            [lindex $yAxCoords 2] [lindex $dimensionNames 2]]
     }
     
     # Handle reset differently from normal plots:
     # if points are temporarily moved: reset to non-moved state
     # else: reset to non-rotated original state.
     method move {how {which "selected"} args} {
-        my variable x y z xTemp yTemp axesCoords n
+        my variable x y z xTemp yTemp axesCoords dimensionNames n
         
         ## indices
         set sel [my ProcessWhich $which n]
@@ -117,6 +127,10 @@
                     set newyTemp {}
                     
                     set newAxesCoords { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
+                    set newxlabel [lindex $dimensionNames 0]
+                    set newylabel [lindex $dimensionNames 1]
+                    my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp \
+                        -axesCoords $newAxesCoords -xlabel $newxlabel  -ylabel $newylabel
                 } else {
                     # Only reset selected points' rotation
                     set newx $x
@@ -136,9 +150,8 @@
                             lset newyTemp $ind [lindex $originalY $ind]
                         }
                     }  
-                    set newAxesCoords $axesCoords
+                    my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp
                 }
-                my configure -x $newx -y $newy -z $newz -xTemp $newxTemp -yTemp $newyTemp -axesCoords $newAxesCoords
             }
             default {
                 next $how $which {*}$args
@@ -146,7 +159,7 @@
         }
     }
     
-    method project {x y z rotationCenter} {
+    method project {xs ys zs rotationCenter} {
         my variable rotate3DX rotate3DY
         
         set cosAX [expr {cos($rotate3DX)}]
@@ -160,11 +173,10 @@
         
         set R [::loon::listfns::matmul $Ry $Rx]
         
-        puts stdout "rotateX ${rotate3DX} rotateY ${rotate3DY} R ${R} origin $rotationCenter"
         set xProjected {}
         set yProjected {}
         set zProjected {}
-        foreach xe $x ye $y ze $z {
+        foreach xe $xs ye $ys ze $zs {
             # Transform to coordinates relative to rotation origin
             set xShifted [expr {$xe - [lindex $rotationCenter 0]}]
             set yShifted [expr {$ye - [lindex $rotationCenter 1]}]

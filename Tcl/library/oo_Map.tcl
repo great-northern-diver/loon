@@ -213,10 +213,6 @@ oo::class create loon::classes::Map {
         if {$swap} {
             set newRotate3DX [expr {$rotate3DX - $dx * $pi / $fraction}]
             set newRotate3DY [expr {$rotate3DY - $dy * $pi / $fraction}]
-            
-            set rotationOriginX [expr {$panY + 0.5*$deltY/$zoomY}]
-            set rotationOriginY [expr {$panX + 0.5*$deltaX/$zoomX}]
-
         } else {
             set newRotate3DX [expr {- $dy * $pi / $fraction}]
             set newRotate3DY [expr {- $dx * $pi / $fraction}]

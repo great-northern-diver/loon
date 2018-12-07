@@ -23,7 +23,7 @@
 #'   outlined in the following figures.
 #'   
 #'   Rotating
-#'   //TODO image, rotate using Alt+LeftClick//
+#'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"} 
 #'   
 #'   Zooming and Panning
 #'   
