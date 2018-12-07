@@ -39,7 +39,8 @@ To get started with loon it is recommended to read loons website
   outlined in the following figures.
   
   Rotating
-  //TODO image, rotate using Alt+LeftClick//
+  
+  \figure{gestures_rotate.png}{options: alt="Rotate gestures"} 
   
   Zooming and Panning
   
@@ -57,7 +58,16 @@ To get started with loon it is recommended to read loons website
 }
 \examples{
 # ordinary use
-p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Sepal.Height, color=Species))
+p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
+
+# link another plot with the previous plot
+p['linkingGroup'] <- "iris_data"
+p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris_data"))
+
+# Use with other tk widgets
+tt <- tktoplevel()
+p1 <- l_plot3D(parent=tt, x=c(1,2,3), y=c(3,2,1), z=c(1,2,3))
+p2 <- l_plot3D(parent=tt, x=c(4,3,1), y=c(6,8,4), z=c(3,2,1))
 
 tkgrid(p1, row=0, column=0, sticky="nesw")
 tkgrid(p2, row=0, column=1, sticky="nesw")

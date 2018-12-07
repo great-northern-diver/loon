@@ -96,14 +96,18 @@
         set axesCoords [dict values [my project $xAxCoords $yAxCoords $zAxCoords [list 0 0 0]]]
         
         # Set new axis labels
-        dict set confDict new_xlabel [format "%.3f %s + %.3f %s + %.3f %s"\
-            [lindex $xAxCoords 0] [lindex $dimensionNames 0]\
-            [lindex $xAxCoords 1] [lindex $dimensionNames 1]\
-            [lindex $xAxCoords 2] [lindex $dimensionNames 2]]
-        dict set confDict new_ylabel [format "%.3f %s + %.3f %s + %.3f %s"\
-            [lindex $yAxCoords 0] [lindex $dimensionNames 0]\
-            [lindex $yAxCoords 1] [lindex $dimensionNames 1]\
-            [lindex $yAxCoords 2] [lindex $dimensionNames 2]]
+        if {[lindex $xAxCoords 1] >= 0} {set xSign1 "+"} else {set xSign1 "-"}
+        if {[lindex $xAxCoords 2] >= 0} {set xSign2 "+"} else {set xSign2 "-"}
+        if {[lindex $yAxCoords 1] >= 0} {set ySign1 "+"} else {set ySign1 "-"}
+        if {[lindex $yAxCoords 2] >= 0} {set ySign2 "+"} else {set ySign2 "-"}
+        dict set confDict new_xlabel [format "%.3f %s %s %.3f %s %s %.3f %s"\
+            [lindex $xAxCoords 0] [lindex $dimensionNames 0] $xSign1 \
+            [expr {abs([lindex $xAxCoords 1])}] [lindex $dimensionNames 1] $xSign2 \
+            [expr {abs([lindex $xAxCoords 2])}] [lindex $dimensionNames 2]]
+        dict set confDict new_ylabel [format "%.3f %s %s %.3f %s %s %.3f %s"\
+            [lindex $yAxCoords 0] [lindex $dimensionNames 0] $ySign1 \
+            [expr {abs([lindex $yAxCoords 1])}] [lindex $dimensionNames 1] $ySign2 \
+            [expr {abs([lindex $yAxCoords 2])}] [lindex $dimensionNames 2]]
     }
     
     # Handle reset differently from normal plots:

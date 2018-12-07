@@ -64,10 +64,16 @@
         set axesOriginX [expr {$vpx0 + 0.5 * $xLen}]
         set axesOriginY [expr {$vpy1 - 0.5 * $yLen}]
         
+        set swap [$map getSwap]
+        
         foreach ax {xAxis yAxis zAxis} coord {xCoords yCoords zCoords} color {xColor yColor zColor} {
-            set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 0] * 0.08 * $xLen }] \
-                              [expr {$axesOriginY - [lindex [set $coord] 1] * 0.08 * $yLen }]]
-                           
+            if {$swap} {
+                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 1] * 0.08 * $xLen }] \
+                                  [expr {$axesOriginY - [lindex [set $coord] 0] * 0.08 * $yLen }]]
+            } else {
+                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 0] * 0.08 * $xLen }] \
+                                  [expr {$axesOriginY - [lindex [set $coord] 1] * 0.08 * $yLen }]]
+            }
             uplevel #0 [list $canvas coords [set $ax]\
                     $axesOriginX $axesOriginY [lindex $axisEnd 0] [lindex $axisEnd 1]]
             
