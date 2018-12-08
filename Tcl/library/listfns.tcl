@@ -304,6 +304,15 @@ namespace eval loon::listfns {
 	return [expr {double($sum)/$n}]
     }
     
+    proc median {vec} {
+       if {[set len [llength $vec]] % 2} then {
+         return [lindex [lsort -real $vec] [expr {($len-1) / 2}]]
+       } else {
+         return [expr {([lindex [set sorted [lsort -real $vec]] [expr {($len/2) - 1}]] \
+                        + [lindex $sorted [expr {$len/2}]]) / 2.0}]
+       }
+    }
+    
     proc stdev {vec {mean ""}} {
 	set n [llength $vec]
 	if {$mean eq ""} {
