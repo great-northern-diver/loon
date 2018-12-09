@@ -1,0 +1,898 @@
+---
+title: "Introduction to loon"
+author: "R.W. Oldford"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to loon}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{maps, grid}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE, 
+    tidy.opts = list(width.cutoff = 65),
+    tidy = TRUE)
+
+set.seed(12314159)
+
+imageDirectory <- "./images/intro"
+dataDirectory <- "data"
+path_concat <- function(path1, path2, sep="/") {paste(path1, path2, sep = sep)}
+```
+
+
+```{r library loon, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 4, out.width = "75%", warning=FALSE, message=FALSE}
+library(loon)
+```
+
+> "Exposure, the effective laying open of the data to display the unanticipated, 
+> is to us a major portion of data analysis."  ... John Tukey and Martin Wilk (1966) 
+
+Because loon is an interactive visualization system, this introduction is meant as a "hands on" tutorial.
+Not all interactions are from the command line (programmatic).
+Suggestions for interactions will also be given and questions that draw attention to the outcome of interactions.
+
+After completing the tutorial, there are numerous other examples of using loon which can be explored.  These include
+
+- the `R` `help(package = "loon")` pages for `loon`,
+- other vignettes,
+- demos on particular topics given by `demo(package = "loon")`.  These are especially useful because the source code for creating them appears in the console, and 
+- the loon website appearing from `l_help()`.
+
+Here, we will walk through some of the **basic** functionality.
+
+
+--- 
+
+# `l_plot()` the basic `loon` plot
+
+Begin with a simple scatterplot of the `quakes` data from `R`
+
+```{r first loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
+l_plot(x = quakes$long, 
+       y = quakes$lat, 
+       xlabel = "longitude", 
+       ylabel = "latitude",
+       title = "Tonga trench earthquakes")
+```
+
+This prints the above information on the loon plot (more on this later) and causes 
+two windows to appear.  
+
+One is the scatterplot:
+
+```{r loonQuakeOriginal, out.width= "60%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "quakesOriginal.png"))
+```
+
+and the other a "loon inspector":
+
+```{r looninspectorQuakeOriginal, out.width= "30%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "inspectorQuakesOriginal.png"))
+```
+
+We'll ignore the "inspector" for the moment and focus on the scatterplot.
+
+--- 
+
+
+
+##  The scatterplot window -- direct manipulation
+
+The loon scatterplot is highly interactive and can be **directly manipulated** using the mouse. 
+Several interactions are immediately available.
+
+
+--- 
+
+### selecting
+
+There are two ways to directly select points on the scatterplot using the mouse: either by selection (one at a time or multiple selections) or by "sweep selection" as shown below:
+
+```{r point selection, out.width= "40%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "selecting.png"))
+```
+
+To try this out, on the scatterplot (which should contain only 16 points)
+
+- place the mouse over the topmost point and click the left (or primary) mouse button
+    - the point will be highlighted (magenta coloured)
+
+- hold the shift key down and select the leftmost, rightmost and bottom most points
+    - there should now be 4 magenta points 
+
+- colour these 4 points light blue and change their glyph to a triangle 
+    - click on the background of the plot to see the change in colour
+
+**Question**: How has the inspector changed?
+
+Now try a holding the left mouse button down and move the mouse.  
+
+This is called **sweeping** or **sweep selection** and allows us to sweep out a contiguous area of the plot.
+
+- use sweep select to identify, and give different colours (none black) to 4 different contiguous groups of your choice.
+
+**Check**: The 16 points should now be separated by colour into 4 groups and by glyph shape into 2 groups.
+
+**Question**: How has the inspector changed? 
+
+
+You will have already discovered how to colour selected points from the inspector.  You can now use the inspector to **select** points by colour:
+
+- **from the inspector**, select all the points of each colour in turn.
+
+--- 
+
+## The inspector -- interacting with the plot
+
+By the above experimentation, you will have already discovered how the inspector is used to change the loon plot. 
+
+For example, try checking the "guides" box on the inspector to place a background grid of guide lines on the loon plot.  Unchecking removes the guide lines.
+
+The loon inspector consists of several component pieces.
+
+At the top is a "World View" which shows a miniature version of the **whole** of the current plot, what is displayed there, and what is active.
+
+Below the "World View"  are a few tabs.  The default (and most used) one is the "Analysis" tab where common interactions are separated into three regions: the "Plot", the "Select", and the "Modify" systems.
+
+Try (in order) the following interactions between the inspector and the plot:
+
+1. select the black points only  
+2. scale the plot to the selected points 
+3. invert the selection 
+4. colour the selected points red 
+5. select all points, and make them all have open circles as glyphs 
+6. select the red points and deactivate them 
+7. select brushing mode 
+8. brush select the remaining black points dividing them into two groups 
+9. colour one of these groups blue, the other orange 
+10. turn off the brush 
+11. re-activate the points 
+12. scale the scatterplot to the "world" 
+13. add guides (**no** scales) 
+
+
+**Check**: You should have a scatterplot of open circles with three clusters of points in red, blue, and orange
+
+--- 
+
+##More on direct manipulation 
+### on brushing
+
+You should have a scatterplot of open circles with three clusters of points in red, blue, and orange.
+
+Use the functionality of the loon inspector to (in order)
+
+1. Using only colour selection from the inspector, select the largest group (and no others) 
+2. Turn on brushing (as opposed to sweeping) mode 
+3. Under **dynamic** selection, choose **deselect** 
+4. Over the scatterplot use this brush mode to **deselect** the region nearest the highest density (shaped a bit like a question mark  -- ?) 
+5. Colour the selected points  green (i.e. low density region of largest coloured group) 
+
+You should now have four different coloured groups or clusters. 
+
+**For fun**, in the inspector
+
+1. select the green group
+2. under **dynamic** selection, choose  **invert**
+3. move the brush over the scatterplot
+4. move the brush over the scatterplot while holding the `<Shift>` key
+
+**Question**: What is going on?  When might this functionality be useful? 
+
+--- 
+
+### on selection
+
+When done, turn the selection back to the defaults:
+
+```{r select defaults, out.width= "40%", fig.align="left", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "inspectorSelectDefaults.png"))
+```
+
+That is,
+
+- [static:] none
+- [dynamic:]  select
+- [by:] sweeping
+
+
+Shift selection works with any mix of
+
+- individual point selection
+- static selection
+- dynamic selection by sweeping or brushing
+- by color
+
+**Exercise**: Try out different combinations of the above selections.
+
+
+--- 
+
+### moving points
+
+For a variety of reasons, we sometimes want to (temporarily) move points in a scatterplot.
+
+
+From the inspector:
+
+1. deactivate all but the small red group 
+2. select the red group and scale the plot to the selected 
+3. with these selected points, explore the effect of each of the `move` modifications on the configuration of the selected points 
+4. describe in words what each one does
+
+
+From the scatterplot, selected points may be moved by hand 
+
+- one at a time using `<Ctrl>-<Left-button>`
+- in groups using `<Shift><Ctrl><Left-button>`
+
+For example:
+
+1. select the red group
+2. move the red group to the bottom of the plot
+3. return the red group to its original location
+
+--- 
+
+###adding colours to the inspector
+
+```{r looninspector plus 10 cols, out.width= "30%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "inspectorQuakesPlus10Cols.png"))
+```
+
+More colours can be added directly by clicking on the `+` or the `+5` in the colour modification section of the inspector.
+
+- clicking `+5` twice adds 10 new colours
+- these colours will persist with the inspector for every loon scatterplot
+the inspector palette of colours
+
+The loon system **default** list of colours get be found programmatically:
+
+```{r l_getColorList, eval = TRUE, tidy = TRUE}
+l_getColorList()
+```
+
+Note:
+
+- loon colours are 6 hexadecimal digits in length and can be a named `R` colour
+- being constrained to tcl/tk colours, no alpha level is available at this time in loon
+- `R` has a similar set of base colours that is default for all its graphics devices:
+
+    ```{r grDevices palette, eval = TRUE, tidy =TRUE}
+    palette()
+    ```
+
+- like the `R` palette, the loon inspector palette persists.
+
+
+
+--- 
+
+### changing the inspector palette of colours
+
+At the **beginning of a loon session** (that is, immediately after executing `library(loon)`) you might choose to change the default palette for the inspector to something that suits your tastes/problem.
+
+**Note**: There may be unintended side effects to changing the inspector colours after a plot (and hence the inspector) has been created so this should be avoided.
+
+A variety of functions exist to change an inspector's palette of colours:
+
+```{r changing the inspector palette, eval = FALSE} 
+l_setColorList_baseR()                             # base R palette
+l_setColorList_ColorBrewer("Set2")                 # colorblind friendly choice from ColorBrewer
+l_setColorList_hcl(luminance = 80)                 # set of hcl colours
+l_setColorList_ggplot2()                           # ggplot2's palette 
+l_setColorList_loon()                              # default loon palette
+l_setColorList(l_colRemoveAlpha(rainbow(5)))       # any set of colours without alpha
+```
+
+To change the palette
+
+- execute one of these functions 
+- if the inspector is open (not recommended), then select the inspector and
+close it to force a refresh its colour palette.
+
+
+`l_setColorList_loon()` returns the inspector to the default loon colour palette.
+
+
+--- 
+
+## Programmatic manipulation 
+### accessing the plot
+
+The plot itself is a (tcl) data structure and can be assigned to an `R` variable.
+
+Either at construction (the preferable way):
+
+```{r assign loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+# loon graphics (note that the result is assigned to p)
+p <- l_plot(x = quakes$long, y = quakes$lat, 
+            xlabel = "longitude", ylabel = "latitude",
+            title = "Tonga trench earthquakes")
+```
+
+or, if (as we did) you forgot to do that or reassigned something else to that variable (more likely), by accessing the plot from its `tcl` string:
+
+```{r create handle for loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+# accessing the plot from its string representation
+p <- l_create_handle(".l0.plot")
+```
+
+
+Note that this string `".l0.plot"` appears on the right side of the window title of an `l_plot`.
+
+Do this and assign your plot to `p`.  You might have to look at the window to get the string if you have created more than one `l_plot()`.
+
+
+--- 
+
+### printing the plot
+
+Were we to now print `p`
+
+```{r printed representation loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+p 
+```
+
+we get the string name of the plot, but with a class attribute.  This is the **value** of `p` and provides us access to a  very rich data structure,  but one whose values reside in `tcl`. 
+
+For example, we can access this value and, like plots from `lattice` or `ggplot2` produce a `grid` data structure that can then be displayed as a `grid` graphic in `R`.
+
+The simplest way to achieve this is to use the generic `R` function `plot()`
+
+```{r plot of loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "50%", warning=FALSE, message=FALSE, tidy = FALSE}
+plot(p)
+```
+
+Note that this will always reflect the *current state of the loon plot*.  In this way, you can get snapshots of the loon plot after any interaction.
+
+**Exercise**: Try this.  Change `p` by direct manipulation in `loon` and repeat. 
+
+This allows the visual representation of a `loon` plot to be displayed at any time.  
+
+---
+
+### getting plot contents
+
+There are `names` associated with a loon plot indicating its contents or **states**:
+
+```{r names, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
+names(p)
+```
+
+These features of `p` can be directly accessed the `[]` function.
+
+For example, 
+
+```{r showGuides, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
+p["showGuides"]
+```
+
+A more meaningful example might be identify groups with the colours of the points.  
+This could be done simply as follows 
+
+```{r set up group cols, eval = TRUE, echo = FALSE}
+cols_saved <- c("red", "red", "orange", "red", "red", "orange", 
+"black", "orange", "orange", "red", "red", "black", 
+"red", "red", "black", "orange", "black", "red", 
+"red", "red", "red", "black", "red", "orange", 
+"red", "red", "black", "red", "red", "red", 
+"red", "black", "orange", "red", "orange", "red", 
+"black", "red", "red", "black", "orange", "orange", 
+"red", "orange", "black", "orange", "orange", "black", 
+"red", "orange", "red", "orange", "black", "red", 
+"red", "red", "red", "red", "red", "red", 
+"red", "red", "steelblue", "black", "red", "orange", 
+"red", "red", "red", "orange", "orange", "orange", 
+"black", "red", "red", "red", "orange", "black", 
+"red", "orange", "orange", "red", "red", "orange", 
+"red", "orange", "black", "red", "orange", "orange", 
+"black", "black", "red", "black", "orange", "red", 
+"orange", "red", "black", "red", "orange", "red", 
+"red", "orange", "red", "orange", "orange", "black", 
+"orange", "orange", "orange", "red", "red", "red", 
+"red", "red", "steelblue", "steelblue", "black", "black", 
+"black", "red", "red", "red", "orange", "black", 
+"orange", "red", "orange", "orange", "orange", "red", 
+"black", "red", "red", "black", "orange", "orange", 
+"orange", "orange", "steelblue", "red", "black", "orange", 
+"steelblue", "orange", "orange", "black", "red", "red", 
+"orange", "black", "orange", "black", "black", "red", 
+"black", "red", "black", "black", "red", "red", 
+"black", "orange", "orange", "orange", "orange", "orange", 
+"red", "black", "red", "red", "red", "red", 
+"red", "orange", "red", "orange", "red", "red", 
+"red", "orange", "orange", "red", "red", "orange", 
+"red", "red", "red", "orange", "orange", "black", 
+"red", "red", "orange", "red", "orange", "orange", 
+"red", "red", "red", "red", "red", "orange", 
+"steelblue", "red", "red", "red", "orange", "red", 
+"orange", "red", "orange", "orange", "red", "red", 
+"orange", "red", "orange", "red", "orange", "black", 
+"orange", "red", "red", "black", "orange", "orange", 
+"orange", "black", "red", "red", "red", "orange", 
+"red", "red", "orange", "red", "black", "red", 
+"red", "orange", "black", "red", "orange", "red", 
+"red", "orange", "red", "black", "black", "black", 
+"red", "black", "orange", "red", "orange", "black", 
+"red", "red", "orange", "red", "black", "red", 
+"red", "orange", "black", "black", "red", "red", 
+"red", "red", "red", "red", "red", "red", 
+"red", "red", "red", "red", "orange", "red", 
+"black", "orange", "orange", "red", "red", "orange", 
+"red", "red", "red", "black", "red", "red", 
+"orange", "orange", "red", "red", "orange", "black", 
+"steelblue", "orange", "orange", "red", "steelblue", "red", 
+"red", "red", "red", "orange", "steelblue", "steelblue", 
+"red", "red", "orange", "red", "red", "black", 
+"red", "black", "black", "orange", "red", "orange", 
+"black", "orange", "red", "black", "orange", "black", 
+"orange", "red", "orange", "black", "red", "orange", 
+"orange", "orange", "orange", "orange", "orange", "orange", 
+"orange", "orange", "orange", "orange", "orange", "orange", 
+"orange", "orange", "orange", "black", "red", "orange", 
+"orange", "red", "black", "red", "orange", "black", 
+"red", "orange", "red", "orange", "black", "orange", 
+"red", "red", "red", "orange", "red", "orange", 
+"red", "red", "orange", "orange", "red", "orange", 
+"orange", "orange", "black", "black", "orange", "black", 
+"red", "orange", "red", "orange", "black", "orange", 
+"orange", "orange", "red", "red", "red", "red", 
+"red", "orange", "red", "steelblue", "orange", "black", 
+"orange", "red", "red", "red", "red", "black", 
+"red", "orange", "orange", "orange", "black", "red", 
+"orange", "black", "black", "orange", "orange", "orange", 
+"red", "orange", "orange", "red", "orange", "orange", 
+"red", "red", "black", "red", "red", "red", 
+"red", "red", "orange", "orange", "black", "red", 
+"red", "orange", "black", "orange", "black", "red", 
+"orange", "orange", "orange", "red", "red", "red", 
+"orange", "red", "black", "orange", "orange", "black", 
+"red", "orange", "red", "red", "orange", "red", 
+"red", "red", "orange", "red", "black", "orange", 
+"red", "orange", "orange", "orange", "orange", "black", 
+"orange", "orange", "orange", "orange", "red", "orange", 
+"red", "red", "orange", "orange", "red", "orange", 
+"orange", "red", "red", "steelblue", "orange", "black", 
+"red", "red", "orange", "black", "orange", "orange", 
+"red", "orange", "orange", "orange", "orange", "black", 
+"red", "red", "black", "black", "black", "red", 
+"orange", "orange", "orange", "red", "red", "orange", 
+"black", "orange", "orange", "red", "orange", "red", 
+"orange", "black", "orange", "red", "black", "black", 
+"red", "orange", "black", "black", "orange", "black", 
+"orange", "black", "red", "black", "black", "red", 
+"black", "black", "black", "black", "black", "black", 
+"black", "red", "orange", "red", "red", "black", 
+"black", "orange", "orange", "orange", "orange", "orange", 
+"red", "black", "red", "orange", "orange", "orange", 
+"red", "orange", "orange", "red", "orange", "orange", 
+"black", "orange", "red", "orange", "red", "orange", 
+"red", "red", "red", "orange", "black", "red", 
+"black", "red", "red", "orange", "black", "red", 
+"red", "red", "red", "red", "black", "black", 
+"orange", "black", "black", "red", "orange", "orange", 
+"orange", "orange", "red", "red", "black", "orange", 
+"orange", "orange", "red", "orange", "orange", "black", 
+"black", "red", "orange", "red", "orange", "black", 
+"red", "black", "orange", "orange", "red", "red", 
+"black", "red", "orange", "red", "black", "red", 
+"red", "orange", "orange", "red", "orange", "red", 
+"orange", "black", "orange", "red", "red", "black", 
+"orange", "orange", "red", "orange", "orange", "orange", 
+"orange", "red", "red", "red", "black", "red", 
+"steelblue", "black", "red", "orange", "red", "red", 
+"orange", "red", "red", "red", "red", "red", 
+"red", "red", "red", "orange", "red", "black", 
+"red", "red", "black", "orange", "orange", "red", 
+"red", "red", "black", "orange", "orange", "red", 
+"orange", "black", "red", "red", "red", "red", 
+"red", "red", "red", "red", "red", "red", 
+"red", "orange", "black", "red", "black", "black", 
+"red", "red", "orange", "orange", "red", "orange", 
+"orange", "red", "orange", "black", "orange", "black", 
+"red", "steelblue", "red", "orange", "orange", "red", 
+"black", "red", "red", "red", "black", "black", 
+"red", "red", "red", "red", "red", "orange", 
+"orange", "red", "black", "orange", "orange", "red", 
+"red", "orange", "red", "orange", "orange", "orange", 
+"red", "orange", "orange", "orange", "red", "red", 
+"red", "orange", "red", "black", "red", "black", 
+"orange", "orange", "black", "orange", "orange", "red", 
+"orange", "orange", "black", "black", "orange", "orange", 
+"black", "orange", "orange", "red", "orange", "red", 
+"red", "red", "orange", "red", "black", "red", 
+"black", "black", "orange", "orange", "red", "orange", 
+"black", "red", "orange", "red", "red", "red", 
+"red", "orange", "red", "orange", "black", "red", 
+"orange", "red", "orange", "red", "orange", "steelblue", 
+"red", "orange", "red", "red", "red", "red", 
+"red", "orange", "black", "orange", "red", "red", 
+"orange", "orange", "red", "red", "red", "orange", 
+"red", "red", "black", "red", "black", "orange", 
+"orange", "orange", "orange", "orange", "orange", "red", 
+"red", "orange", "black", "red", "orange", "black", 
+"red", "orange", "orange", "black", "red", "red", 
+"red", "red", "red", "red", "orange", "black", 
+"black", "orange", "red", "orange", "steelblue", "orange", 
+"orange", "black", "red", "red", "red", "red", 
+"black", "black", "red", "orange", "black", "black", 
+"red", "black", "black", "red", "red", "red", 
+"red", "red", "red", "red", "orange", "red", 
+"black", "black", "orange", "red", "black", "black", 
+"orange", "orange", "black", "red", "black", "orange", 
+"red", "red", "orange", "red", "orange", "red", 
+"orange", "orange", "orange", "red", "red", "red", 
+"red", "black", "black", "orange", "red", "black", 
+"orange", "red", "black", "black", "orange", "orange", 
+"orange", "red", "black", "orange", "red", "red", 
+"orange", "red", "black", "orange", "orange", "black", 
+"orange", "red", "red", "orange", "orange", "orange", 
+"red", "orange", "red", "red", "red", "orange", 
+"red", "orange", "orange", "orange", "red", "orange", 
+"orange", "orange", "red", "orange", "orange", "red", 
+"red", "red", "orange", "orange", "red", "orange", 
+"orange", "black", "black", "orange", "orange", "red", 
+"red", "red", "black", "orange", "orange", "orange", 
+"orange", "black", "orange", "orange", "orange", "orange", 
+"red", "black", "red", "black", "orange", "orange", 
+"orange", "black", "black", "black", "red", "red", 
+"red", "red", "orange", "red", "orange", "red", 
+"black", "orange", "orange", "black"
+)
+p["color"] <- cols_saved
+
+```
+
+```{r group by colour, eval = TRUE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+unique_cols <- unique(p['color'])
+group1 <- p['color'] == unique_cols[1]
+# Number in group 1 (e.g. as you might have -- here from saved colours)
+sum(group1)
+# Data on first few quakes in group 1.
+head(quakes[group1,])
+```
+
+Alternatively, a function could be written to save the groups as a list of logical vectors (one for each group):
+
+```{r getGroups, eval = TRUE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+getGroups <- function(loonplot){
+    # make sure it is an "l_plot"
+    if (!"l_plot" %in% class(loonplot)) stop("loonplot must be an l_plot")
+    
+    # use color to identify groups
+    unique_cols <- unique(loonplot['color'])
+    lapply(unique_cols,
+           FUN = function(col){loonplot['color'] == col}
+           )
+}
+
+myGroups <- getGroups(p)    # returns groups identified by unique colour in p
+nGroups <- length(myGroups) # number of groups
+group1 <- myGroups[[1]]     # each group is an element of the list myGroups
+```
+
+Similarly, other point symbol characteristics (e.g. `size`, `glyph`) might be used to define groups.  This is particularly handy when these are first determined interactively.
+
+--- 
+
+### setting plot contents
+
+In addition to accessing the state values of a loon plot using `[]`, its values may also be set using `[]`.  For example, try these:
+
+```{r set examples, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+p["showGuides"] <- TRUE
+
+p["size"] <- sample(1:30, size = length(p["x"]), replace = TRUE)
+
+for (i in 1:length(myGroups))  {
+    p["selected"] <- myGroups[[i]]
+    Sys.sleep(1)
+}
+p["selected"] <- FALSE
+
+# something a little more involved for up to 6 groups
+myCols <- c("firebrick", "steelblue", "purple", 
+            "orange", "grey10", "grey80")
+for (i in 1:length(myGroups)) {
+    p["color"][myGroups[[i]]] <- myCols[i]
+}
+
+# something crazy
+for (j in 1:10) {
+  p["xTemp"] <- p["x"] + runif(length(p["x"]), min = -0.5, max = 0.5)
+  Sys.sleep(0.1)
+}
+
+# putting locations and size back
+p["xTemp"] <- p["x"]
+p["size"] <- 4
+
+```
+
+--- 
+
+
+##Adding layers
+
+`loon` plots are actually a little richer still.  The scatterplot is only one possible layer in a plot.  It could have many more, each layer having different geometric objects.
+
+---
+
+### Example: adding maps
+For example, we can add a map to the current loon plot `p`.
+
+First get the relevant map:
+
+
+```{r gettingAMap}
+library(maps)
+NZFijiMap <- map("world2", regions=c("New Zealand", "Fiji"), plot=FALSE)
+```
+
+
+It is added as a "layer" to the loon plot
+
+
+```{r addingAMap,  eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+l_layer(p, NZFijiMap, 
+        label = "New Zealand and Fiji",
+        color = "forestgreen",
+        index = "end")
+```
+
+
+Try this out. 
+
+
+```{r quakesGuidesMapInspector, out.width= "30%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "quakesGuidesMapInspector.png"))
+```
+
+```{r quakesGuidesMap, out.width= "50%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "quakesGuidesMap.png"))
+```
+
+As can be seen in the world view, much of the map is outside of the plot display (shown as the black-bordered rectangle in the world view).
+
+Now play with the scaling buttons in the loon inspector.
+
+---
+
+### Effect of scaling choices
+
+
+Adding the map allows us to see the effect of all three plot scaling choices available in the inspector.
+
+The effect is best seen on the world view:
+
+```{r worldViewScaling, out.width= "90%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "quakesWorldViewScaling.png"))
+```
+
+Note that the plot in the world view matches that of the actual plot.  Also the aspect ratio changes with the scaling.
+
+
+---
+
+### the "Layers" tab
+
+The map is added as a layer, which can be seen by selecting the "Layers" tab in the inspector:
+
+```{r quakesLayersInspector, out.width= "70%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "quakesLayersInspector.png"))
+```
+
+This allows a lot of interaction with the layers - for example changing their display order, making some of them invisible, grouping layers, and so on.
+
+---
+
+## loon's `l_plot()` versus base graphics `plot()`
+
+
+`loon`'s `l_plot()` syntax **intentionally resembles** that of `plot()` from the base `graphics` package:
+
+
+```{r loon and base syntax, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
+# Base graphics
+plot(x = quakes$long, y = quakes$lat, 
+     xlab = "longitude", ylab = "latitude",
+     main = "Tonga trench earthquakes")
+
+# loon graphics
+l_plot(x = quakes$long, y = quakes$lat, 
+       xlabel = "longitude", ylabel = "latitude",
+       title = "Tonga trench earthquakes")
+```
+
+
+The arguments to `l_plot()` provide initial values to each named state.
+
+In result, however, loon plots are quite different
+
+-  displays **look different**
+- `l_plot()` **returns a data structure**; `plot()` does not
+    - a rich data structure with many states
+    - can be transformed to a grob
+- the `loon` plot is **highly interactive**
+    - either from the inspector
+    - or programmatically
+    
+In loon, the function `plot.loon()` is a **method** of the base `plot()` generic function
+that turns the loon plot (as the first argument of `plot.loon()`) into a grid object and plots it on the current `R` graphics device.
+
+---
+
+# `l_hist()` the `loon` histogram
+
+As seen earlier, the `quakes` data has some other variates in addition to the latitude and longitude of the quakes.
+
+Before starting, make sure that you have the four groups coloured in the loon plot `p` as described earlier.  If you don't, then colour them again now.
+
+Let's consider a histogram of the `depth` of each earthquake.
+
+
+```{r histogram of magnitude,  eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+h <- l_hist(quakes$depth, 
+            xlabel = "depth", 
+            title = "Tonga trench earthquakes")
+```
+
+
+Note that the inspector has changed.  There is a different inspector for each type of base loon plot.
+
+**Exercise**: 
+
+- in the plot section of the histogram inspector, select `yshows: density`
+- on the histogram, see how individual bars can be selected
+- what happens when you modify the colour?
+- on the histogram, what is the (interactive) function of the small grey object?
+    - how can you make it go away?
+- on the histogram inspector, turn on stacked colours
+- select colours on the histogram
+
+
+---
+
+# Linking 
+
+Now that we have both a scatterplot and a histogram, we can explore one of the most important features of an interactive data visualization system like loon.
+
+## `linkingGroup`
+The principal feature of loon plots which effect the linking of displays is the setting of a common `linkingGroup`.
+
+-  On the histogram inspector, where it says linking group, select the text "none" and replace it with "quakes"
+
+- On the scatterplot inspector, if you do the same you will now be prompted to either "push" or "pull".  Select "push".
+
+- **NOTE**: Programmatically, we might have tried to set the linking group directly on the plot as
+
+    ```{r set linkingGroup mistake, eval = FALSE, warning=FALSE, message=FALSE, tidy = FALSE}
+    h["linkingGroup"] <- "quakes"
+    p["linkingGroup"] <- "quakes"
+    ```
+    
+    but **this would have resulted in an error**.  The problem is that the synchronization must be set at the same time to determine where the linked states are to be drawn from. 
+    To effect this, the loon command `l_confiure()` must be used whenever **two or more states are to be set simultaneously**.
+    The correct programmatic setting of the "linkingGroup" is 
+    ```{r fix colors again, eval = FALSE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
+    l_configure(h, linkingGroup = "quakes", sync = "push")
+    l_configure(p, linkingGroup = "quakes", sync = "pull")
+    ```
+    
+    This causes `h` to push its linked states to the "quakes" group and `p` to pull them from the "quakes" group. (In this example, "pull" could have been used in both cases and is generally recommended.)
+
+- brush the scatterplot and observe the effects in the histogram
+
+- brush the histogram and observe the effects in the scatterplot
+    - shape the brush so that it is tall and thin
+    - brush from left to right and right to left (i.e. from shallow to deeper earthquake depths)
+    
+- could also set colours programmatically on the histogram. Here we colour the histogram bars so that those earthquakes that are deepest are darkest.
+
+    ```{r histogram blues, fig.align="center", fig.width = 7, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
+    blues5 <- blues9[c(2,4,6,8,9)] # select 5 from light blue to dark
+    h["color"] <- blues5[cut(quakes$depth, breaks=5)] # assign colours by depth
+    p["glyph"] <- "ccircle"
+    p["showGuides"] <- TRUE
+    # plot(p) # will print the plot
+    ```
+
+---
+
+## linking many plots
+
+Arbitrarily many plots may be created and linked in loon.
+
+Consider, for example, adding two more histograms to the same `linkingGroup`.  Note that the linking is done at creation and that the synchronization is by default a "pull".
+
+
+```{r final quakes histograms, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+h_mag <- l_hist(x = quakes$mag, 
+                linkingGroup = "quakes", 
+                showStackedColors = TRUE,
+                yshows = "density",
+                xlabel = "magnitude")
+
+h_stations <- l_hist(x = quakes$stations, 
+                     linkingGroup = "quakes", 
+                     showStackedColors = TRUE,
+                     yshows = "density",
+                     xlabel = "Number of stations reporting")
+```
+
+
+
+Brush to show the relationship between magnitude of the earthquake and the number of stations reporting.
+
+Alternatively, we could look at a linked scatterplot of these two variates and explore their relationship conditional on `depth`
+
+```{r final quakes plot, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+p_mag_stations <- l_plot(x = quakes$mag, 
+                         y = quakes$stations, 
+                         showGuides = TRUE,
+                         glyph = "ccircle",
+                         linkingGroup = "quakes", 
+                         xlabel = "Magnitude", 
+                         ylabel = "Number of stations reporting")
+```
+
+Brushing any one of these plots will cause the other plots to highlight in response.
+
+Note that selection effectively shows the relations in one plot  **conditional** upon the values actively being selected (e.g. brushed) in another.
+
+---
+
+#Extras
+
+## loon demos
+
+There are also numerous demos in loon whose source code might be examined for more examples of using `loon`.  Try these
+
+```{r loon demos, eval = FALSE}
+demo(package = "loon")    # list all demos
+demo("l_regression", package = "loon")
+```
+---
+
+## more on grid graphics and loon
+
+Graphics in the `grid` package are built up from graphical objects or `grobs`.
+
+In `loon`, the functions `grid.loon()` and `loonGrob()` construct `grobs` from loon plots which can then be used as any other `grob` in `grid`
+
+For example, when transformed to `grid`,  the loon plot `p` structure becomes a `gTree` in `grid`.
+
+
+```{r grid grob, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+gp <- loonGrob(p)
+gp
+```
+
+This simply produces the grid data structure corresponding to the current state of the loon plot `p`, as can be seen from listing its contents:
+
+```{r list grid grob, eval = FALSE}
+library(grid)
+grid.ls(gp)  # lists the contents of the grob
+```
+
+The grob `gp` could now be used with all the functionality of the `grid` package.  
+
+Note that all of the elements of a loon plot appear in the grob, either explicitly or, if they were not drawn in the loon plot, as an empty `grob` containing the relevant arguments to drawing them.
+
+Another function in loon to help that is the `grid.loon()` function
+```{r grid graphic display loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+library(grid)
+grid.newpage()
+grid.loon(p)
+```
+
+will display `p` as a  `grid` graphic ... and all that entails.
+
+Being able to get and set the plot contents means that it is possible to capture different
+plot states as `grobs`. 
+
