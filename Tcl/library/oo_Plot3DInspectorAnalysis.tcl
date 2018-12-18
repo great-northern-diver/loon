@@ -50,31 +50,37 @@ oo::class create loon::classes::Plot3DInspectorAnalysis {
         if {[llength $args] eq 1} {
             set args {*}$args
         }
-
-        if {"rotationOriginZ" in $args} {
-            uplevel #0 [list set ${path}.plot.show.depth.depthVar\
-                     [$plotWidget cget -rotationOriginZ]]
-        }
         
-        # Update slider min and max so one can always set the rotation center depth
-        # anywhere within twice the current z range
-        if {"rotate3DX" in $args || "rotate3DY" in $args} {
-            set minZ [expr {2* [tcl::mathfunc::min {*}[$plotWidget cget -z]]}]
-            set maxZ [expr {2* [tcl::mathfunc::max {*}[$plotWidget cget -z]]}]
-            ${path}.plot.show.depth.depthslider configure -from $minZ -to $maxZ
+        if {"rotate3DX" in $args || "rotate3DY" in $args || "rotationOriginZ" in $args} {
+            my updateSlider
         }
         
         next {*}$args
     }
     
     method HookAfterStatesSet {} {
-        my variable path plotWidget
         next
-
-        # Set initial rotation center depth
+        my updateSlider
+    }
+    
+    # Update slider min and max so one can always set the rotation center depth
+    # anywhere within twice the current z range
+    method updateSlider {} {
+        my variable path plotWidget
+        
         if {$plotWidget ne ""} {
+            set rotationOriginZ [$plotWidget cget -rotationOriginZ]
+            set minZ [tcl::mathfunc::min {*}[$plotWidget cget -z]]
+            set maxZ [tcl::mathfunc::max {*}[$plotWidget cget -z]]
+
+            set minRange [expr {$minZ - 0.5 * ($maxZ - $minZ)}]
+            set maxRange [expr {$maxZ + 0.5 * ($maxZ - $minZ)}]
+            if {$minRange > $rotationOriginZ} { set minRange $rotationOriginZ}
+            if {$maxRange < $rotationOriginZ} { set maxRange $rotationOriginZ}
+            ${path}.plot.show.depth.depthslider configure -from $minRange -to $maxRange
+            
             uplevel #0 [list set ${path}.plot.show.depth.depthVar\
-                         [$plotWidget cget -rotationOriginZ]]
+                     [$plotWidget cget -rotationOriginZ]]
         }
     }
     

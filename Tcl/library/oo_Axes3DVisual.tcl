@@ -78,7 +78,7 @@
                     $axesOriginX $axesOriginY [lindex $axisEnd 0] [lindex $axisEnd 1]]
             
             # Darken axes going into the monitor, brighten those coming out of it
-            set brightness [expr {int(100 - 80 * [lindex [set $coord] 2])}]
+            set brightness [expr {int(100 + 80 * [lindex [set $coord] 2])}]
             uplevel #0 [list $canvas itemconfigure [set $ax] -fill [::tk::Darken [set $color] $brightness]]
         
         }
