@@ -178,7 +178,7 @@
         set Rx [list [list 1.0 0.0 0.0] [list 0.0 $cosAX [expr {-1 * $sinAX}]] [list 0.0 $sinAX $cosAX]]
         set Ry [list [list $cosAY 0.0 $sinAY] [list 0.0 1.0 0.0] [list [expr {-1 * $sinAY}] 0.0 $cosAY]]
         
-        set R [::loon::listfns::matmul $Ry $Rx]
+        set R [::loon::listfns::matmul $Rx $Ry]
         
         set xProjected {}
         set yProjected {}

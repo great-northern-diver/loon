@@ -140,7 +140,7 @@ loonGrob.l_plot3D <- function(target,  name = NULL, gp = NULL, vp = NULL) {
     
     axes_coords <- target["axesCoords"]
     adjust_brightness <- function(z_coord, r, g, b) {
-        change <- as.integer(100 - 80 * z_coord)
+        change <- as.integer(100 + 80 * z_coord)
         if (change < 0) {
             rgb(0,0,0)
         } else if (change <= 100) {

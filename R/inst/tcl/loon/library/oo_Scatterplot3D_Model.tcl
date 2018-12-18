@@ -19,6 +19,7 @@
         my New_state dimensionNames string 3 {"" "" ""}
         my New_state rotate3DX double 1 0
         my New_state rotate3DY double 1 0
+        my New_state rotationOriginZ double 1 0.0
         my New_state axesCoords nested_double 3 { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
         
         my SetStateDescription z "z coordinates"
@@ -29,6 +30,8 @@
             "Incremental rotation around x axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
         my SetStateDescription rotate3DY \
             "Incremental rotation around y axis. (Doesn't store total rotation as chained rotation and panning would get complex)"
+        my SetStateDescription rotationOriginZ \
+            "depth component of rotation origin"
         my SetStateDescription axesCoords \
             "Stores the projections of the original x-, y- and z-axes to allow drawing the axis visual"
 
@@ -49,7 +52,7 @@
     
     method EvalConfigure {} {
         my variable x y z xTemp yTemp confDict rotate3DX rotate3DY \
-                    panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel
+                    panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel rotationOriginZ
         
         if {$originalX == ""} {
             set originalX $x
@@ -59,9 +62,9 @@
             set originalY $y
         }
         if {$originalZ == ""} {
-            set originalZ $z
+            set originalZ $z            
+            if {$z ne ""} { set rotationOriginZ [expr {[::loon::listfns::median $z]}] }
         }
-        
         if {([dict exists $confDict has_rotate3DX] && [dict get $confDict has_rotate3DX]) \
          || ([dict exists $confDict has_rotate3DY] && [dict get $confDict has_rotate3DY])} {
 
@@ -71,7 +74,7 @@
             
             if {$xTemp != ""} { set x $xTemp }
             if {$yTemp != ""} { set y $yTemp }
-            set projected [my project $x $y $z [list $rotationOriginX $rotationOriginY 0]]
+            set projected [my project $x $y $z [list $rotationOriginX $rotationOriginY $rotationOriginZ]]
            
             set x [dict get $projected x]
             set y [dict get $projected y]
@@ -175,7 +178,7 @@
         set Rx [list [list 1.0 0.0 0.0] [list 0.0 $cosAX [expr {-1 * $sinAX}]] [list 0.0 $sinAX $cosAX]]
         set Ry [list [list $cosAY 0.0 $sinAY] [list 0.0 1.0 0.0] [list [expr {-1 * $sinAY}] 0.0 $cosAY]]
         
-        set R [::loon::listfns::matmul $Ry $Rx]
+        set R [::loon::listfns::matmul $Rx $Ry]
         
         set xProjected {}
         set yProjected {}
