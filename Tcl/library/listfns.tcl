@@ -304,6 +304,15 @@ namespace eval loon::listfns {
 	return [expr {double($sum)/$n}]
     }
     
+    proc median {vec} {
+       if {[set len [llength $vec]] % 2} then {
+         return [lindex [lsort -real $vec] [expr {($len-1) / 2}]]
+       } else {
+         return [expr {([lindex [set sorted [lsort -real $vec]] [expr {($len/2) - 1}]] \
+                        + [lindex $sorted [expr {$len/2}]]) / 2.0}]
+       }
+    }
+    
     proc stdev {vec {mean ""}} {
 	set n [llength $vec]
 	if {$mean eq ""} {
@@ -574,6 +583,44 @@ namespace eval loon::listfns {
 	    lappend out [expr {double($x)/$len}]
 	}
 	return $out
+    }
+    
+    proc dot {v1 v2} {
+        if {[llength $v1] ne [llength $v1]} {
+            error "v1 needs to have same dimension as v2"
+        }
+        set out 0.0
+        foreach x $v1 y $v2 {
+            set out [expr {$out + $x*$y}]
+        }
+        return $out
+    }
+    
+    proc transpose { matrix } {
+        set transposed {}
+        set i 0
+        foreach col [lindex $matrix 0] {
+           set resultRow {}
+           foreach row $matrix {
+               lappend resultRow [lindex $row $i]
+           }
+           lappend transposed $resultRow
+           incr i
+        }
+        return $transposed
+    }
+    
+    proc matmul { m1 m2 } {
+        set result {}
+        set m2t [transpose $m2]
+        foreach row1 $m1 {
+          set resultRow {}
+          foreach row2 $m2t {
+             lappend resultRow [dot $row1 $row2]
+          }
+          lappend result $resultRow
+        }
+        return $result
     }
 
     # mcsplit --

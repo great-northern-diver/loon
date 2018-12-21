@@ -52,6 +52,7 @@ proc WidgetFactory {type postfix args} {
     set isPlotDisplay FALSE
     switch -- $type {
 	Scatterplot -
+    Scatterplot3D -
 	Graph -
 	Serialaxes -
 	Histogram {

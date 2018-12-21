@@ -133,6 +133,37 @@ loonGrob.l_plot <- function(target,  name = NULL, gp = NULL, vp = NULL) {
           name = name, gp = gp, vp = vp)
 }
 
+#' @export
+loonGrob.l_plot3D <- function(target,  name = NULL, gp = NULL, vp = NULL) {
+    rl <- l_create_handle(c(target, "root"))
+    layers_grob <- loonGrob(rl, name = "l_plot_layers")
+    
+    axes_coords <- target["axesCoords"]
+    adjust_brightness <- function(z_coord, r, g, b) {
+        change <- as.integer(100 + 80 * z_coord)
+        if (change < 0) {
+            rgb(0,0,0)
+        } else if (change <= 100) {
+            rgb((r/256) * change/100, (g/256) * change/100, (b/256) * change/100)
+        } else {
+            rgb(r,g,b, maxColorValue=255)
+        }
+    }
+    x_color <- adjust_brightness(axes_coords[[3]][1], 255, 0, 0)
+    y_color <- adjust_brightness(axes_coords[[3]][2], 0, 0, 255)
+    z_color <- adjust_brightness(axes_coords[[3]][3], 0, 255, 0)
+    gTree(children = gList(cartesian2dGrob(target, layers_grob, name = "l_plot3D"),
+        linesGrob(x = c(0.5, 0.5 + 0.08*axes_coords[[1]][1]),
+                 y =  c(0.5, 0.5 + 0.08*axes_coords[[2]][1]),
+                 gp = gpar(col = x_color, lwd=1)),
+        linesGrob(x = c(0.5,0.5 + 0.08*axes_coords[[1]][2]),
+                 y =  c(0.5,0.5 + 0.08*axes_coords[[2]][2]),
+                 gp = gpar(col = y_color, lwd=1)),
+        linesGrob(x = c(0.5,0.5 + 0.08*axes_coords[[1]][3]),
+                 y =  c(0.5,0.5 + 0.08*axes_coords[[2]][3]),
+                 gp = gpar(col = z_color, lwd=1))),
+        name = name, gp = gp, vp = vp)
+}
 
 #' @export
 loonGrob.l_hist <- function(target, name = NULL, gp = NULL, vp = NULL) {

@@ -93,10 +93,10 @@
 	set hasXTemp  [dict exists $confDict new_xTemp]
 	set hasYTemp  [dict exists $confDict new_yTemp]
 	
-	if {$hasX && !$hasXTemp} {
+	if {[dict exists $confDict new_rotate3DX] || $hasX && !$hasXTemp} {
 	    dict set confDict new_xTemp ""
 	}
-	if {$hasY && !$hasYTemp} {
+	if {[dict exists $confDict new_rotate3DY] || $hasY && !$hasYTemp} {
 	    dict set confDict new_yTemp ""
 	}
 	

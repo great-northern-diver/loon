@@ -4,7 +4,7 @@ oo::class create loon::classes::Map {
     superclass ::loon::classes::fancyInfo
     
     variable panX panY minX minY zoomX zoomY deltaX deltaY swap\
-	vpx0 vpy0 vpx1 vpy1 plotHeight plotWidth
+	vpx0 vpy0 vpx1 vpy1 plotHeight plotWidth rotate3DX rotate3DY
     
     constructor {} {
 	set panX 0
@@ -22,10 +22,15 @@ oo::class create loon::classes::Map {
 	set vpy1 1
 	set plotWidth 1
 	set plotHeight 1
+    set rotate3DX 0
+    set rotate3DY 0
+    
     }
     
     method setPanX {panx} { set panX $panx }
     method setPanY {pany} { set panY $pany }
+    method setRotate3DX {rotate3dx} { set rotate3DX $rotate3dx }
+    method setRotate3DY {rotate3dy} { set rotate3DY $rotate3dy }
     method setMinX {minx} { set minX $minx }
     method setMinY {miny} { set minY $miny }
     method setZoomX {zoomx} { set zoomX $zoomx }
@@ -47,6 +52,8 @@ oo::class create loon::classes::Map {
 
     method getPanX {}   { return $panX }
     method getPanY {}   { return $panY }
+    method getRotate3DX {}   { return $rotate3DX }
+    method getRotate3DY {}   { return $rotate3DY }
     method getMinX {}   { return $minX }
     method getMinY {}   { return $minY }
     method getZoomX {}  { return $zoomX }
@@ -62,7 +69,7 @@ oo::class create loon::classes::Map {
 
     method info {} {
 	next panX panY minX minY zoomX zoomY deltaX deltaY swap\
-	    vpx0 vpy0 vpx1 vpy1
+	    vpx0 vpy0 vpx1 vpy1 rotate3DX rotate3DY
     }
 
         
@@ -153,7 +160,7 @@ oo::class create loon::classes::Map {
 	    set newPanX [expr {$panX - double($dx)*$deltaX/$zoomX/$plotWidth}]
 	    set newPanY [expr {$panY + double($dy)*$deltaY/$zoomY/$plotHeight}]
 	}
-	
+    
 	return [list -panX $newPanX -panY $newPanY]
     }
 
@@ -198,6 +205,20 @@ oo::class create loon::classes::Map {
 	} 
 	
 	return [list $xs $ys]	
+    }
+    
+    method rotate3DUpdate {dx dy} {
+        set pi 3.1415926535897931
+        set fraction 360
+        if {$swap} {
+            set newRotate3DX [expr {- $dx * $pi / $fraction}]
+            set newRotate3DY [expr {- $dy * $pi / $fraction}]
+        } else {
+            set newRotate3DX [expr {$dy * $pi / $fraction}]
+            set newRotate3DY [expr {$dx * $pi / $fraction}]
+        }
+        
+        return [list -rotate3DX $newRotate3DX -rotate3DY $newRotate3DY]
     }
 
     
