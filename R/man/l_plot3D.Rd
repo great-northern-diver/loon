@@ -64,6 +64,13 @@ p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
 p['linkingGroup'] <- "iris_data"
 p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris_data"))
 
+# Get an R (grid) graphics plot of the current loon plot
+plot(p)
+# or with more control about grid parameters
+grid.loon(p)
+# or to save the grid data structure (grob) for later use
+pg <- loonGrob(p)
+
 # Use with other tk widgets
 tt <- tktoplevel()
 p1 <- l_plot3D(parent=tt, x=c(1,2,3), y=c(3,2,1), z=c(1,2,3))
