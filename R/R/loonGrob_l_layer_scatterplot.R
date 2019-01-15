@@ -28,7 +28,8 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
 
     if (!any(states$active)) {
         # No active points in scatterplot
-        grob(name = name, gp = gp, vp = vp)
+        points <- grob(name = if(is.null(name)) "points: missing glyphs" else name,
+                       gp = gp, vp = vp)
     } else {
 
         display_order <- get_model_display_order(widget)
