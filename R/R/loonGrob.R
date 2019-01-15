@@ -468,6 +468,7 @@ loonGrob.l_layer_group <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     if(length(states$x)!=0  & length(states$y)!=0){
@@ -499,6 +500,7 @@ loonGrob.l_layer_polygon <- function(target, name = NULL, gp = NULL, vp = NULL) 
 #' @export
 loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     if(length(states$x)!=0  & length(states$y)!=0) {
@@ -528,6 +530,7 @@ loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     if (length(states$x)!=0  & length(states$y)!=0) {
@@ -568,6 +571,7 @@ loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL
 #' @export
 loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     if (length(states$x)!=0  & length(states$y)!=0 ){
@@ -613,6 +617,7 @@ loonGrob.l_layer_oval <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
     adjustedCoords <- getGridTextCoords(
         text = states$text,
@@ -654,6 +659,7 @@ loonGrob.l_layer_text <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     active <- states$active
@@ -691,6 +697,7 @@ loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     active <- states$active
@@ -747,6 +754,7 @@ loonGrob.l_layer_texts <- function(target, name = NULL, gp = NULL, vp = NULL) {
 #' @export
 loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     active <- states$active
@@ -792,6 +800,7 @@ loonGrob.l_layer_polygons <- function(target, name = NULL, gp = NULL, vp = NULL)
 #' @export
 loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     active <- states$active
@@ -847,6 +856,7 @@ loonGrob.l_layer_rectangles <- function(target, name = NULL, gp = NULL, vp = NUL
 #' @export
 loonGrob.l_layer_lines <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
+    widget <- attr(target, "widget")
     states <- get_layer_states(target)
 
     active <- states$active
