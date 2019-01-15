@@ -28,6 +28,7 @@
             bind $canvas <ButtonPress-$i> "+[self] zp_button %x %y"
         }
         
+        bind $canvas <Button1-Motion> "+[self] rotate3D %x %y both"
         bind $canvas <Alt-Button1-Motion> "+[self] rotate3D %x %y both"
         bind $canvas <Control-Alt-Button1-Motion> "+[self] rotate3D %x %y y"
         bind $canvas <Shift-Alt-Button1-Motion> "+[self] rotate3D %x %y x"
