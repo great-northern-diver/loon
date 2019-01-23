@@ -6,23 +6,23 @@
 \title{Canadian Visible Minority Data 2006}
 \format{A data frame with 33 rows and 18 variates}
 \source{
-\url{http://www.statcan.gc.ca}
+\url{https://www.statcan.gc.ca/}
 }
 \usage{
 minority
 }
 \description{
-This data contains information about the visible minority 
-  populations distributed across major census metropolitan areas of Canada. 
-  These data are from the 2006 Canadian census, publicly available from 
-  Statistics Canada Statistics Canada (2006). For each of the 33 Canadian 
-  census metropolitan areas, we have the total population and the population 
-  Implemen- tation of all its "visible minorities". These self-declared 
+This data contains information about the visible minority
+  populations distributed across major census metropolitan areas of Canada.
+  These data are from the 2006 Canadian census, publicly available from
+  Statistics Canada Statistics Canada (2006). For each of the 33 Canadian
+  census metropolitan areas, we have the total population and the population
+  Implemen- tation of all its "visible minorities". These self-declared
   visible minorities are: "Arab", "Black", "Chinese", "Filipino", "Japanese",
-  "Korean", "Latin American", "Multiple visible minority", "South Asian", 
-  "Southeast Asian", "Visible minority (not included elsewhere)", and "West 
-  Asian". For each metropolitan area, we also obtained the approximate 
-  latitude and longitude coordinates using the Google Maps Geocoding API and 
+  "Korean", "Latin American", "Multiple visible minority", "South Asian",
+  "Southeast Asian", "Visible minority (not included elsewhere)", and "West
+  Asian". For each metropolitan area, we also obtained the approximate
+  latitude and longitude coordinates using the Google Maps Geocoding API and
   added them to the data set.
 }
 \keyword{datasets}

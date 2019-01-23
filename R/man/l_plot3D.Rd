@@ -22,38 +22,38 @@ l_plot3D(x, y, z, ...)
 widget handle
 }
 \description{
-\code{l_plot3D} is a generic function for creating interactive 
+\code{l_plot3D} is a generic function for creating interactive
   visualization environments for \R objects.
 }
 \details{
 \ifelse{html}{
-\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website 
+\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
   which can be accessed via the <code>l_help()</code> function call. </div>
 }}{
-To get started with loon it is recommended to read loons website 
+To get started with loon it is recommended to read loons website
   which can be accessed via the \code{l_help()} function call.
 }
 
-  
+
   \if{html}{ The general direct manipulation and interaction gestures are
   outlined in the following figures.
-  
+
   Rotating
-  
-  \figure{gestures_rotate.png}{options: alt="Rotate gestures"} 
-  
+
+  \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
+
   Zooming and Panning
-  
-  \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"} 
-  
+
+  \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
+
   Selecting Points/Objects
-  
+
   \figure{gestures_select.png}{options: alt="Select gestures"}
-  
+
   Moving Points on the Scatterplot Display
-  
+
   \figure{gestures_move.png}{options: alt="Move gestures"}
-  
+
   }
 }
 \examples{
@@ -61,8 +61,8 @@ To get started with loon it is recommended to read loons website
 p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
 
 # link another plot with the previous plot
-p['linkingGroup'] <- "iris_data"
-p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris_data"))
+l_configure(p, linkingGroup = "iris")
+p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris"))
 
 # Get an R (grid) graphics plot of the current loon plot
 plot(p)

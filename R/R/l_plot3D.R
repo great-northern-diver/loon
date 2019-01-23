@@ -52,7 +52,7 @@
 #' p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
 #'
 #' # link another plot with the previous plot
-#' l_configure(p, linkingGroup = "iris")
+#' l_configure(p, linkingGroup = "iris", sync = "push")
 #' p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris"))
 #'
 #' # Get an R (grid) graphics plot of the current loon plot
