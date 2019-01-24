@@ -58,11 +58,16 @@ To get started with loon it is recommended to read loons website
 }
 \examples{
 # ordinary use
-p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
+p <- with(iris,
+          l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
+                   color=Species, linkingGroup = "iris")
+                   )
 
 # link another plot with the previous plot
-l_configure(p, linkingGroup = "iris")
-p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris"))
+p2 <- with(iris,
+           l_plot3D(Sepal.Length, Petal.Width, Petal.Width,
+           linkingGroup="iris")
+           )
 
 # Get an R (grid) graphics plot of the current loon plot
 plot(p)
