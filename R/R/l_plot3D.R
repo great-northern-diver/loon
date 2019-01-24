@@ -49,11 +49,16 @@
 #'
 #' @examples
 #' # ordinary use
-#' p <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width, color=Species))
+#' p <- with(iris,
+#'           l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
+#'                    color=Species, linkingGroup = "iris")
+#'                    )
 #'
 #' # link another plot with the previous plot
-#' l_configure(p, linkingGroup = "iris", sync = "push")
-#' p2 <- with(iris, l_plot3D(Sepal.Length, Petal.Width, Petal.Width, linkingGroup="iris"))
+#' p2 <- with(iris,
+#'            l_plot3D(Sepal.Length, Petal.Width, Petal.Width,
+#'            linkingGroup="iris")
+#'            )
 #'
 #' # Get an R (grid) graphics plot of the current loon plot
 #' plot(p)
@@ -110,9 +115,15 @@ l_plot3D <- function(x, y, z, ...) {
 #'
 #' # default use as scatterplot
 #'
-#' p1 <- with(iris, l_plot3D(Sepal.Length, Petal.Length, Petal.Width, color=Species))
+#' p1 <- with(iris,
+#'            l_plot3D(Sepal.Length, Petal.Length, Petal.Width,
+#'            color=Species)
+#'            )
 #'
-#' p2 <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width color=Species))
+#' p2 <- with(iris,
+#'            l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
+#'            color=Species)
+#'            )
 #'
 #' # link the two plots p1 and p2
 #' l_configure(p1, linkingGroup = "iris", sync = "push")
