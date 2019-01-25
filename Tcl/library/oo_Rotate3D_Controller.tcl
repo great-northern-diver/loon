@@ -1,23 +1,23 @@
 
 
 ::oo::class create ::loon::classes::Rotate3D_Controller {
-    
+
     superclass ::loon::classes::Canvas_Controller
     
     variable map mouse_x mouse_y rotateMode rotateIndicator rotateIndicatorBg
 
     constructor {view} {
-    
+
         set mouse_x 0
         set mouse_y 0
         set rotateMode 0
         set rotateIndicator -1
-        
+
         set ns [info object namespace $view]
         set map [set [uplevel #0 ${ns}::my varname map]]
-        
+
         next $view
-        
+
     }
 
     method init {} {
@@ -55,14 +55,15 @@
             set rotateMode 0
             $canvas itemconfigure $rotateIndicator -state hidden
             $canvas itemconfigure $rotateIndicatorBg -state hidden
+
         }
     }
-    
+
     method zp_button {x y} {
         set mouse_x $x
         set mouse_y $y
     }
-    
+
     method rotate3D {xDir yDir direction} {
         my variable model canvas
         
@@ -72,10 +73,10 @@
         set wy [winfo pointery $canvas]
         set rx [winfo rootx $canvas]
         set ry [winfo rooty $canvas]
-        
+
         set xn [expr {$wx-$rx}]
         set yn [expr {$wy-$ry}]
-        
+
         set dx [expr {$xn - $mouse_x}]
         set dy [expr {$yn - $mouse_y}]
         switch -- $direction {
@@ -94,5 +95,5 @@
         set mouse_y $yn
         update idletasks
     }
-    
+
 }

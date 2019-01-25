@@ -27,8 +27,8 @@
 \item{index}{position among its siblings. valid values are 0, 1, 2, ...,
 'end'}
 
-\item{asSingleLayer}{if \code{TRUE} then all the polygons get placed in a 
-n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each 
+\item{asSingleLayer}{if \code{TRUE} then all the polygons get placed in a
+n-dimension layer of type polygons. Otherwise, if \code{FALSE}, each
 polygon gets its own layer.}
 
 \item{...}{additional arguments are not used for this methiod}
@@ -38,9 +38,9 @@ If \code{asSingleLayer=TRUE} then returns layer id of polygons layer,
   otherwise group layer that contains polygon children layers.
 }
 \description{
-The maps library provides some map data in polygon which can be 
-  added as drawings (currently with polygons) to Loon plots. This function 
-  adds map objects with class map from the maps library as background 
+The maps library provides some map data in polygon which can be
+  added as drawings (currently with polygons) to Loon plots. This function
+  adds map objects with class map from the maps library as background
   drawings.
 }
 \examples{
@@ -52,6 +52,6 @@ if (requireNamespace("maps", quietly = TRUE)) {
   l_scaleto_layer(p, l_map)
   l_map['active'] <- FALSE
   l_map['active'] <- TRUE
-  l_map['tag'] 
+  l_map['tag']
 }
 }

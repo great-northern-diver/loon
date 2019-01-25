@@ -126,7 +126,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     list(
         grobs = lgrobs,
         layout_matrix = layout_matrix,
-        name = "l_pairs"
+        name = "pairs"
     )
 }
 

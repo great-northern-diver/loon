@@ -21,29 +21,35 @@ order to be displayed. See the examples below.}
 \item{...}{named arguments to modify plot states.}
 }
 \description{
-Creates an interactive 3d scatterplot. Also, if no loon 
-  inspector is open then the \code{l_plot3D} call will also open a loon 
+Creates an interactive 3d scatterplot. Also, if no loon
+  inspector is open then the \code{l_plot3D} call will also open a loon
   inspector.
 }
 \details{
-The scatterplot displays a number of direct interactions with the 
-  mouse and keyboard, these include: rotating, zooming towards the mouse cursor using 
-  the mouse wheel, panning by right-click dragging and various selection 
-  methods using the left mouse button such as sweeping, brushing and 
-  individual point selection. See the documentation for \code{\link{l_plot3D}} 
+The scatterplot displays a number of direct interactions with the
+  mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
+  the mouse wheel, panning by right-click dragging and various selection
+  methods using the left mouse button such as sweeping, brushing and
+  individual point selection. See the documentation for \code{\link{l_plot3D}}
   for more details about the interaction gestures.
 }
 \examples{
 
 # default use as scatterplot
 
-p1 <- with(iris, l_plot3D(Sepal.Length, Petal.Length, Petal.Width, color=Species))
+p1 <- with(iris,
+           l_plot3D(Sepal.Length, Petal.Length, Petal.Width,
+           color=Species)
+           )
 
-p2 <- with(iris, l_plot3D(Sepal.Width, Petal.Length, Petal.Width color=Species))
+p2 <- with(iris,
+           l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
+           color=Species)
+           )
 
 # link the two plots p1 and p2
-l_configure(p1, linkingGroup="iris", sync="push")
-l_configure(p2, linkingGroup="iris", sync="push")
-p1['selected'] <- iris$Species == "setosa" 
+l_configure(p1, linkingGroup = "iris", sync = "push")
+l_configure(p2, linkingGroup = "iris", sync = "push")
+p1['selected'] <- iris$Species == "setosa"
 
 }

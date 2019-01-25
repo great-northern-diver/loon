@@ -179,21 +179,21 @@ oo_Scatterplot3D_Model.tcl\
 oo_Plot3DInspectorAnalysis.tcl\
 oo_Scatterplot3D_Widget.tcl\
 oo_Axes3DVisual.tcl\
-oo_Scatterplot3D_View.tcl\  
+oo_Scatterplot3D_View.tcl\
 oo_Scatterplot3D_Controller.tcl\
-oo_Plot3DInspector.tcl\
+oo_Plot3DInspector.tcl
 ]
 
-## Environment Variables 
+## Environment Variables
 puts $fp "   \[list set ::env(LOON_VERSION) 1.1.0\]"
 puts $fp "   \[list set ::env(LOON_LIBRARY) \[file dirname \[info script\]\]\]"
 
 ## Init File
-puts $fp "   \[list source \[file join \$dir library/init.tcl\]\]"    
+puts $fp "   \[list source \[file join \$dir library/init.tcl\]\]"
 
 ## Object Files
 foreach file $oofiles {
-    puts $fp "   \[list source \[file join \$dir library/$file\]\]"    
+    puts $fp "   \[list source \[file join \$dir library/$file\]\]"
 }
 
 
@@ -203,9 +203,9 @@ set omitfiles [concat $oofiles init.tcl]
 foreach file $files {
     #    puts [file join \$dir $file]
     set rsfile [regsub "^library/" $file ""]
-    
+
     if {$rsfile ni $omitfiles} {
-	    puts $fp "   \[list source \[file join \$dir $file\]\]"    
+	    puts $fp "   \[list source \[file join \$dir $file\]\]"
 	}
 }
 

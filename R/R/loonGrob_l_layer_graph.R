@@ -43,7 +43,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
     active <- states$active
     if (!any(active)) {
-        grob(name = name, gp = gp, vp = vp)
+        grob(name = if (is.null(name)) "graph" else name, gp = gp, vp = vp)
     } else {
 
         edgesGrob <- edgesGrob(states)
@@ -59,7 +59,8 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
                           edgesGrob,
                           nodeGlyphGrob,
                           labelGrob),
-                  name = name, gp = gp, vp = vp
+                  name = if (is.null(name)) "graph" else name,
+                  gp = gp, vp = vp
             )
         } else {
             # have navigator, need path and navigator as well
@@ -119,8 +120,8 @@ edgesGrob <- function(states = NULL, name = NULL){
                                              activeY[nodeTo_CoordId]),
                                            "native")
                                  polylineGrob(x, y,
-                                              id=rep(1:numNodesTo, 2),
-                                              gp=gpar(col= cols, lwd=1),
+                                              id = rep(nodeTo_CoordId, 2),
+                                              gp = gpar(col= cols, lwd=1),
                                               name = paste("edge", i))
                              } else {
                                  condGrob(test = FALSE,
