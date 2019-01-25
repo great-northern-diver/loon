@@ -4,12 +4,14 @@
     
     superclass ::loon::classes::Canvas_Controller
     
-    variable map mouse_x mouse_y
+    variable map mouse_x mouse_y rotateMode rotateIndicator rotateIndicatorBg
 
     constructor {view} {
     
         set mouse_x 0
         set mouse_y 0
+        set rotateMode 0
+        set rotateIndicator -1
         
         set ns [info object namespace $view]
         set map [set [uplevel #0 ${ns}::my varname map]]
@@ -28,10 +30,32 @@
             bind $canvas <ButtonPress-$i> "+[self] zp_button %x %y"
         }
         
-        bind $canvas <Alt-Button1-Motion> "+[self] rotate3D %x %y both"
-        bind $canvas <Control-Alt-Button1-Motion> "+[self] rotate3D %x %y y"
-        bind $canvas <Shift-Alt-Button1-Motion> "+[self] rotate3D %x %y x"
-
+        bind $canvas <1> "focus %W"
+        bind $canvas <KeyPress-r> "+[self] toggleRotateMode"
+        bind $canvas <Button2-Motion> "+[self] rotate3D %x %y both; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Control-Button2-Motion> "+[self] rotate3D %x %y y; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Shift-Button2-Motion> "+[self] rotate3D %x %y x; [namespace code {if {$rotateMode eq 1} {break}}]"
+        
+    }
+    
+    method toggleRotateMode {} {
+        my variable canvas
+        if {$rotateMode eq 0} {
+            set rotateMode 1
+            if {$rotateIndicator eq -1} {
+                set rotateIndicator [$canvas create text 40 30 -text "Rotation Mode" -anchor nw]
+                set bbox [$canvas bbox $rotateIndicator]
+                set rotateIndicatorBg [$canvas create rectangle $bbox -fill lightgrey -outline lightgrey]
+                $canvas raise $rotateIndicator $rotateIndicatorBg
+            } else {
+                $canvas itemconfigure $rotateIndicator -state normal
+                $canvas itemconfigure $rotateIndicatorBg -state normal
+            }
+        } else {
+            set rotateMode 0
+            $canvas itemconfigure $rotateIndicator -state hidden
+            $canvas itemconfigure $rotateIndicatorBg -state hidden
+        }
     }
     
     method zp_button {x y} {
@@ -42,7 +66,7 @@
     method rotate3D {xDir yDir direction} {
         my variable model canvas
         
-        if {$model eq ""} {return}
+        if {($model eq "") || ($rotateMode eq 0)} {return}
         
         set wx [winfo pointerx $canvas]
         set wy [winfo pointery $canvas]
