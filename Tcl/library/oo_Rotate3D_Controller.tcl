@@ -32,9 +32,9 @@
         
         bind $canvas <1> "focus %W"
         bind $canvas <KeyPress-r> "+[self] toggleRotateMode"
-        bind $canvas <Button2-Motion> "+[self] rotate3D %x %y both; [namespace code {if {$rotateMode eq 1} {break}}]"
-        bind $canvas <Control-Button2-Motion> "+[self] rotate3D %x %y y; [namespace code {if {$rotateMode eq 1} {break}}]"
-        bind $canvas <Shift-Button2-Motion> "+[self] rotate3D %x %y x; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Button1-Motion> "+[self] rotate3D %x %y both; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Control-Button1-Motion> "+[self] rotate3D %x %y y; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Shift-Button1-Motion> "+[self] rotate3D %x %y x; [namespace code {if {$rotateMode eq 1} {break}}]"
         
     }
     
