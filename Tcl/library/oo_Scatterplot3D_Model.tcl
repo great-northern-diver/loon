@@ -51,7 +51,7 @@
     }
     
     method EvalConfigure {} {
-        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY \
+        my variable x y z xTemp yTemp confDict rotate3DX rotate3DY minX maxX minY maxY \
                     panX panY zoomX zoomY deltaX deltaY dimensionNames xlabel ylabel zlabel rotationOriginZ
         
         if {$originalX == ""} {
@@ -83,6 +83,13 @@
             dict set confDict new_x $x
             dict set confDict new_y $y
             dict set confDict new_z $z
+            
+            set mm [::loon::listfns::MinMax $x]
+            set minX [lindex $mm 0]
+            set maxX [lindex $mm 1]
+            set mm [::loon::listfns::MinMax $y]
+            set minY [lindex $mm 0]
+            set maxY [lindex $mm 1]
             
             my setAxesCoordsAndLabels
         }
