@@ -25,6 +25,7 @@
 #'   Rotating
 #'
 #'   Press 'R' to toggle rotation mode.
+#'   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
 #'   
 #'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
 #'  
@@ -130,20 +131,17 @@ l_plot3D <- function(x, y, z, ...) {
 #'
 #' # default use as scatterplot
 #'
-#' p1 <- with(iris,
-#'            l_plot3D(Sepal.Length, Petal.Length, Petal.Width,
-#'            color=Species)
+#' p1 <- with(quakes,
+#'            l_plot3D(long, lat, depth)
 #'            )
 #'
-#' p2 <- with(iris,
-#'            l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
-#'            color=Species)
+#' p2 <- with(quakes,
+#'            l_plot3D(mag, stations, depth)
 #'            )
 #'
 #' # link the two plots p1 and p2
-#' l_configure(p1, linkingGroup = "iris", sync = "push")
-#' l_configure(p2, linkingGroup = "iris", sync = "push")
-#' p1['selected'] <- iris$Species == "setosa"
+#' l_configure(p1, linkingGroup = "quakes", sync = "push")
+#' l_configure(p2, linkingGroup = "quakes", sync = "push")
 #'
 l_plot3D.default <-  function(x, y=NULL, z=NULL, parent=NULL, ...) {
 

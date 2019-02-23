@@ -41,6 +41,7 @@ To get started with loon it is recommended to read loons website
   Rotating
 
   Press 'R' to toggle rotation mode.
+  When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
   
   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
  
