@@ -25,6 +25,7 @@
 #'   Rotating
 #'
 #'   Press 'R' to toggle rotation mode.
+#'   
 #'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
 #'  
 #'   The centre of the rotation can be changed by panning the plot.
