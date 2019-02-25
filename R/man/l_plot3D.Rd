@@ -61,6 +61,10 @@ To get started with loon it is recommended to read loons website
   \figure{gestures_move.png}{options: alt="Move gestures"}
 
   }
+
+  NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
+  appear as part of the 3D plot's display. There is no provision at present to incorporate
+  rotation of 3D geometric objects other than point glyphs.
 }
 \examples{
 
