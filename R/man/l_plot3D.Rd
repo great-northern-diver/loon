@@ -40,7 +40,13 @@ To get started with loon it is recommended to read loons website
 
   Rotating
 
+  Press 'R' to toggle rotation mode.
+  When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
+  
   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
+ 
+  The centre of the rotation can be changed by panning the plot.
+  To reset the rotation, use the tripod icon in the plot inspector.
 
   Zooming and Panning
 
@@ -57,17 +63,27 @@ To get started with loon it is recommended to read loons website
   }
 }
 \examples{
-# ordinary use
-p <- with(iris,
-          l_plot3D(Sepal.Width, Petal.Length, Petal.Width,
-                   color=Species, linkingGroup = "iris")
-                   )
 
-# link another plot with the previous plot
-p2 <- with(iris,
-           l_plot3D(Sepal.Length, Petal.Width, Petal.Width,
-           linkingGroup="iris")
-           )
+with(quakes,
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+
+scaled_quakes <- as.data.frame(scale(quakes))
+with(scaled_quakes,
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+
+with(scaled_quakes,
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+
+# Or together:
+with(scaled_quakes,{
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+     l_plot3D(mag, stations, depth, linkingGroup = "quakes")
+     }
+)
+
 
 # Get an R (grid) graphics plot of the current loon plot
 plot(p)

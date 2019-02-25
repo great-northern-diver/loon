@@ -32,9 +32,14 @@
         
         bind $canvas <1> "focus %W"
         bind $canvas <KeyPress-r> "+[self] toggleRotateMode"
-        bind $canvas <Button1-Motion> "+[self] rotate3D %x %y both; [namespace code {if {$rotateMode eq 1} {break}}]"
-        bind $canvas <Control-Button1-Motion> "+[self] rotate3D %x %y y; [namespace code {if {$rotateMode eq 1} {break}}]"
-        bind $canvas <Shift-Button1-Motion> "+[self] rotate3D %x %y x; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Button1-Motion> "+[self] rotate3DMouse %x %y both; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Control-Button1-Motion> "+[self] rotate3DMouse %x %y y; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Shift-Button1-Motion> "+[self] rotate3DMouse %x %y x; [namespace code {if {$rotateMode eq 1} {break}}]"
+        
+        bind $canvas <Key-Up> "+[self] rotate3D 0 -1; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Key-Down> "+[self] rotate3D 0 1; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Key-Left> "+[self] rotate3D -1 0; [namespace code {if {$rotateMode eq 1} {break}}]"
+        bind $canvas <Key-Right> "+[self] rotate3D 1 0; [namespace code {if {$rotateMode eq 1} {break}}]"
         
     }
     
@@ -63,8 +68,17 @@
         set mouse_x $x
         set mouse_y $y
     }
+    
+    
+    method rotate3D {dx dy} {
+        my variable model
+        
+        if {($model eq "") || ($rotateMode eq 0)} {return}
+        
+        $model configure {*}[$map rotate3DUpdate $dx $dy]
+    }
 
-    method rotate3D {xDir yDir direction} {
+    method rotate3DMouse {xDir yDir direction} {
         my variable model canvas
         
         if {($model eq "") || ($rotateMode eq 0)} {return}
@@ -79,18 +93,19 @@
 
         set dx [expr {$xn - $mouse_x}]
         set dy [expr {$yn - $mouse_y}]
+        
         switch -- $direction {
             both {
-            $model configure {*}[$map rotate3DUpdate $dx $dy]
+                my rotate3D $dx $dy
             }
             x {
-            $model configure {*}[$map rotate3DUpdate $dx 0]
+                my rotate3D $dx 0
             }
             y {
-            $model configure {*}[$map rotate3DUpdate 0 $dy]
+                my rotate3D 0 $dy
             }
         }
-
+        
         set mouse_x $xn
         set mouse_y $yn
         update idletasks
