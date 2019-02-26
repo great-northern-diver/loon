@@ -46,6 +46,10 @@
 #'
 #'   }
 #'
+#'   NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
+#'   appear as part of the 3D plot's display. There is no provision at present to incorporate
+#'   rotation of 3D geometric objects other than point glyphs.
+#'
 #'
 #' @template return_widget_handle
 #'
@@ -176,7 +180,7 @@ l_plot3D.default <-  function(x, y=NULL, z=NULL, parent=NULL, ...) {
 
     }
 
-    class(plot) <- c("l_plot3D", class(plot))
+    class(plot) <- c("l_plot3D", "l_plot", class(plot))
     return(plot)
 }
 
