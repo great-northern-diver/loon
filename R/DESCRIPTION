@@ -11,7 +11,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     role = "aut"),
              person(given = "Zehao", family = "Xu", 
                     email = "z267xu@uwaterloo.ca", 
-                    role = "ctb")
+                    role = "ctb"),
              person(given = "Martin", family = "Gauch", 
                     email = "Martin.Gauch@uwaterloo.ca", 
                     role = "ctb")
