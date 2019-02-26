@@ -1,3 +1,7 @@
+# loon 1.2.2
+
+* added l_plot3D contributed by Martin Gauch (for rwo)
+
 # loon 1.2.1
 
 * updated `loonGrob()` and `grid.loon()`
