@@ -64,7 +64,7 @@
 #' )
 #'
 #' scaled_quakes <- as.data.frame(scale(quakes))
-#' p <- with(scaled_quakes,
+#' with(scaled_quakes,
 #'           l_plot3D(long, lat, depth, linkingGroup = "quakes")
 #' )
 #'
@@ -81,6 +81,8 @@
 #'
 #'
 #' # Get an R (grid) graphics plot of a loon plot
+#' p <- with(scaled_quakes,
+#'           l_plot3D(long, lat, depth, linkingGroup = "quakes"))
 #' plot(p)
 #' # or with more control about grid parameters
 #' grid.loon(p)
