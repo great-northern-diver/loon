@@ -50,6 +50,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Zehao Xu \email{z267xu@uwaterloo.ca} [contributor]
+  \item Martin Gauch \email{Martin.Gauch@uwaterloo.ca} [contributor]
 }
 
 }

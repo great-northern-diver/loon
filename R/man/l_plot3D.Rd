@@ -42,9 +42,9 @@ To get started with loon it is recommended to read loons website
 
   Press 'R' to toggle rotation mode.
   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
-  
+
   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
- 
+
   The centre of the rotation can be changed by panning the plot.
   To reset the rotation, use the tripod icon in the plot inspector.
 
@@ -74,11 +74,11 @@ with(quakes,
 
 scaled_quakes <- as.data.frame(scale(quakes))
 with(scaled_quakes,
-     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+          l_plot3D(long, lat, depth, linkingGroup = "quakes")
 )
 
 with(scaled_quakes,
-     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+     l_plot3D(mag, stations, depth, linkingGroup = "quakes")
 )
 
 # Or together:
@@ -89,7 +89,9 @@ with(scaled_quakes,{
 )
 
 
-# Get an R (grid) graphics plot of the current loon plot
+# Get an R (grid) graphics plot of a loon plot
+p <- with(scaled_quakes,
+          l_plot3D(long, lat, depth, linkingGroup = "quakes"))
 plot(p)
 # or with more control about grid parameters
 grid.loon(p)
