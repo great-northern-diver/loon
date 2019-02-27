@@ -61,7 +61,7 @@ Being a `grid` graphics object, `gp` could also be exported to an image file of 
 
 For example, we could save `gp` as a ".png" file by drawing it using the `png()` device and `grid.draw()` from the `grid` graphics package.
 
-```{r gp png loon}
+```{r gp png loon, message = FALSE, warning = FALSE, error = FALSE}
 png(filename = "./images/loonplot1.png", width = 600, height = 500)
 grid::grid.draw(gp)
 dev.off()
