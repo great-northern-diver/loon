@@ -51,12 +51,16 @@ Here, we will walk through some of the **basic** functionality.
 
 Begin with a simple scatterplot of the `quakes` data from `R`
 
-```{r first loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
+```{r first loon plot, eval = TRUE, echo = FALSE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
 l_plot(x = quakes$long, 
        y = quakes$lat, 
        xlabel = "longitude", 
        ylabel = "latitude",
        title = "Tonga trench earthquakes")
+
+## [1] ".l0.plot"
+## attr(,"class")
+## [1] "l_plot" "loon"
 ```
 
 This prints the above information on the loon plot (more on this later) and causes 
@@ -308,7 +312,7 @@ The plot itself is a (tcl) data structure and can be assigned to an `R` variable
 
 Either at construction (the preferable way):
 
-```{r assign loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r assign loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 # loon graphics (note that the result is assigned to p)
 p <- l_plot(x = quakes$long, y = quakes$lat, 
             xlabel = "longitude", ylabel = "latitude",
@@ -317,7 +321,7 @@ p <- l_plot(x = quakes$long, y = quakes$lat,
 
 or, if (as we did) you forgot to do that or reassigned something else to that variable (more likely), by accessing the plot from its `tcl` string:
 
-```{r create handle for loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r create handle for loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 # accessing the plot from its string representation
 p <- l_create_handle(".l0.plot")
 ```
