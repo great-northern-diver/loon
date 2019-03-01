@@ -857,9 +857,7 @@ Given that the `quakes` data has three spatial dimensions (`long`, `lat`, and `d
 
 ```{r plot_3D,  fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 # First, scale the data
-ranges <- apply(quakes, 2, FUN = function(x) diff(range(x)))
-
-scaled_quakes <- as.data.frame(scale(quakes, scale = ranges))
+scaled_quakes <- l_scale3D(quakes)
 
 p_mag_stations <- l_plot3D(x = scaled_quakes$long,  
                            y = scaled_quakes$lat, 
