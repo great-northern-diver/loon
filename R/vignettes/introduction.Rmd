@@ -783,7 +783,7 @@ The principal feature of loon plots which effect the linking of displays is the 
     but **this would have resulted in an error**.  The problem is that the synchronization must be set at the same time to determine where the linked states are to be drawn from. 
     To effect this, the loon command `l_confiure()` must be used whenever **two or more states are to be set simultaneously**.
     The correct programmatic setting of the "linkingGroup" is 
-    ```{r fix colors again, eval = FALSE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
+    ```{r fix colors again, eval = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
     l_configure(h, linkingGroup = "quakes", sync = "push")
     l_configure(p, linkingGroup = "quakes", sync = "pull")
     ```
@@ -848,6 +848,35 @@ p_mag_stations <- l_plot(x = quakes$mag,
 Brushing any one of these plots will cause the other plots to highlight in response.
 
 Note that selection effectively shows the relations in one plot  **conditional** upon the values actively being selected (e.g. brushed) in another.
+
+---
+
+#Three dimensional plots
+
+Given that the `quakes` data has three spatial dimensions (`long`, `lat`, and `depth`), it would be natural to view this in a three dimensional scatterplot.
+
+```{r plot_3D,  fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+# First, scale the data
+ranges <- apply(quakes, 2, FUN = function(x) diff(range(x)))
+
+scaled_quakes <- as.data.frame(scale(quakes, scale = ranges))
+
+p_mag_stations <- l_plot3D(x = scaled_quakes$long,  
+                           y = scaled_quakes$lat, 
+                           z = scaled_quakes$depth, 
+                           showGuides = TRUE,
+                           linkingGroup = "quakes", 
+                           title = "Three dimensional plot of quakes")
+```
+
+Select the plot, type `r` to turn on the `rotation mode`.   Press the down arrow on the keyboard untill the darkest points (deepest quakes) are at the bottom of the display.   Press `r` again to turn off the rotation mode.
+
+Selecting the plot, the key `r` toggles the rotation mode; arrow keys rotate the plot vertically and horizontally.  In `rotation mode` the plot may also be rotated free hand using the mouse. 
+When `rotation mode` is toggled off (with the key `r`), the plot can again be brushed et cetera as with any `l_plot`.  See `help("l_plot3D")` for more details.
+
+
+**NOTE** Many methods exist for visualizing higher dimensional data in `loon`.  For e.g. see `help("l_navgraph"), `help("l_pairs")`, or `help("l_serialaxes")`.  See also `l_help()`.
+
 
 ---
 
