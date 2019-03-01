@@ -17,6 +17,9 @@ will be applied successfully if is.numeric(.) is not true.}
 have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
 decomposed via a singular value decomposition so that the resulting variables are uncorrelated.}
 }
+\value{
+a data.frame whose columns are centred and scaled according to the given arguments.
+}
 \description{
 \code{l_scale3D} scales its argument in a variety of ways used for 3D visualization.
 }
@@ -39,5 +42,5 @@ with(l_scale3D(iris, method = "sphere"),
 
 }
 \seealso{
-\code{\link{l_plot3D}},  \code{\link{scale}}
+\code{\link{l_plot3D}} \code{\link{scale}}
 }

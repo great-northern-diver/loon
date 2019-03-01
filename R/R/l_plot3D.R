@@ -10,9 +10,9 @@
 #' have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
 #' decomposed via a singular value decomposition so that the resulting variables are uncorrelated.
 #'
-#' @returns a data.frame whose columnes are centred and scaled according to the given arguments.
+#' @seealso \code{\link{l_plot3D}} \code{\link{scale}}
 #'
-#' @seealso \code{\link{l_plot3D}},  \code{\link{scale}}
+#' @return a data.frame whose columns are centred and scaled according to the given arguments.
 #'
 #' @examples
 #'
