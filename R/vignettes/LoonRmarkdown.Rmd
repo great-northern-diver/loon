@@ -10,10 +10,19 @@ vignette: >
   
 ---
 
-```{r knitr_setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE, 
+    tidy.opts = list(width.cutoff = 65),
+    tidy = TRUE)
+
+set.seed(12314159)
+
+imageDirectory <- "./images/loonRmarkdown"
+dataDirectory <- "data"
+path_concat <- function(path1, path2, sep="/") {paste(path1, path2, sep = sep)}
+```
 # Loon plots
 
 Start by accessing `loon`
@@ -61,8 +70,8 @@ Being a `grid` graphics object, `gp` could also be exported to an image file of 
 
 For example, we could save `gp` as a ".png" file by drawing it using the `png()` device and `grid.draw()` from the `grid` graphics package.
 
-```{r gp png loon, message = FALSE, warning = FALSE, error = FALSE}
-png(filename = "./images/loonplot1.png", width = 600, height = 500)
+```{r gp png loon, eval = FALSE, message = FALSE, warning = FALSE, error = FALSE}
+png(filename = "images/loonplot1.png", width = 600, height = 500)
 grid::grid.draw(gp)
 dev.off()
 ```
@@ -72,21 +81,25 @@ Alternatively, if `gp` was not saved then `plot(p)` could have been used in plac
 
 Once saved, this external image can be embedded in the document using `knitr::include_graphics()` as
 
-```{r knitr png, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5}
-knitr::include_graphics(path = "./images/loonplot1.png")
+```{r knitr png, eval = FALSE, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5}
+knitr::include_graphics("images/loonplot1.png")
 ```
 
-which looks slightly different because of the transfer of the grid graphic to "png"
+```{r knitr png real, echo = FALSE, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5}
+knitr::include_graphics(path_concat(imageDirectory, "loonplot1.png"))
+```
+
+which will look slightly different because of the transfer of the grid graphic to "png"
 
 Instead of `knitr`, the same result (at least for `pdf` output documents) could be produced using the command `\includegraphics` from the LaTeX package `graphicx`.
 \begin{verbatim}
   \begin{center}
-    \includegraphics[width = 0.6\textwidth]{./images/loonplot1.png}
+    \includegraphics[width = 0.6\textwidth]{images/loonplot1.png}
   \end{center}
 \end{verbatim}
 
   \begin{center}
-    \includegraphics[width = 0.6\textwidth]{./images/loonplot1.png}
+    \includegraphics[width = 0.6\textwidth]{images/loonRMarkdown/loonplot1.png}
   \end{center}
 
 One advantage of LaTeX over `knitr` commands is the control it allows over the display, especially of multiple plots.  The disadvantage is that results might vary if the output is not a "pdf" file (e.g. an "html" file).
@@ -137,14 +150,14 @@ grid.arrange(gp, gp_select, gp_select_zoom, gp_setosa_zoom)
 Alternatively, all plots might have been developed through direct manipulation.  
 Any time a snapshot of the current plot is desired, it is simply turned to a `grid` object via `plot(p)` and saved as an external images (e.g. say as a `png` file) through the `png()` device, or the perhaps via RStudio's export as "png" files.  (N.B. Here we do it programmatically only to save the files.)
 
-```{r save many pngs, echo=TRUE, message = FALSE, warning = FALSE, error = FALSE}
-png(filename = "./images/loonplot2.png", width = 600, height = 500)
+```{r save many pngs, eval = FALSE, echo=TRUE, message = FALSE, warning = FALSE, error = FALSE}
+png(filename = "images/loonplot2.png", width = 600, height = 500)
 grid::grid.draw(gp_select)
 dev.off()
-png(filename = "./images/loonplot3.png", width = 600, height = 500)
+png(filename = "images/loonplot3.png", width = 600, height = 500)
 grid::grid.draw(gp_select_zoom)
 dev.off()
-png(filename = "./images/loonplot4.png", width = 600, height = 500)
+png(filename = "images/loonplot4.png", width = 600, height = 500)
 grid::grid.draw(gp_setosa_zoom)
 dev.off()
 ```
@@ -152,35 +165,66 @@ dev.off()
 
 For example, had the previous plots been saved as `"loonplot2.png"`, `"loonplot3.png"`, and `"loonplot4.png"` then `knitr` could produce them in sequence as before but now using `fig.show = "hold"` in the header for the following `R` segment:
 
-```{r knitr several,  eval = TRUE, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5, fig.show = "hold"}
-knitr::include_graphics(path = "./images/loonplot1.png")
-knitr::include_graphics(path = "./images/loonplot2.png")
-knitr::include_graphics(path = "./images/loonplot3.png")
-knitr::include_graphics(path = "./images/loonplot4.png")
+```{r knitr several,  eval = FALSE, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5, fig.show = "hold"}
+knitr::include_graphics(path = "images/loonplot1.png")
+knitr::include_graphics(path = "images/loonplot2.png")
+knitr::include_graphics(path = "images/loonplot3.png")
+knitr::include_graphics(path = "images/loonplot4.png")
+```
+
+```{r real knitr several,  echo = TRUE, out.width = "60%", fig.align = "center", fig.width = 6, fig.height = 5, fig.show = "hold"}
+knitr::include_graphics(path = path_concat(imageDirectory, "loonplot1.png"))
+knitr::include_graphics(path = path_concat(imageDirectory, "loonplot2.png"))
+knitr::include_graphics(path = path_concat(imageDirectory, "loonplot3.png"))
+knitr::include_graphics(path = path_concat(imageDirectory, "loonplot4.png"))
 ```
 
 More layout control is available using `grid` graphics functions `as.raster()` and `rasterGrob()`, the function `grid.arrange()` from the `gridExtra` package, and `readPNG()` from the `png` package.
 
-```{r grid raster funs and png package, message = FALSE, warning = FALSE, error = FALSE, out.width = "100%", fig.align = "center", fig.width = 12, fig.height = 10}
+```{r grid raster funs and png package, eval = FALSE, message = FALSE, warning = FALSE, error = FALSE, out.width = "100%", fig.align = "center", fig.width = 12, fig.height = 10}
 library(grid)
 library(gridExtra)
 library(png)
 
-img <- as.raster(readPNG(source = "./images/loonplot1.png"))
+img <- as.raster(readPNG(source = "images/loonplot1.png"))
 gp <- rasterGrob(img)
 
-img <- as.raster(readPNG(source = "./images/loonplot2.png"))
+img <- as.raster(readPNG(source = "images/loonplot2.png"))
 gp_select <- rasterGrob(img)
 
-img <- as.raster(readPNG(source = "./images/loonplot3.png"))
+img <- as.raster(readPNG(source = "images/loonplot3.png"))
 gp_select_zoom <- rasterGrob(img)
 
-img <- as.raster(readPNG(source = "./images/loonplot4.png"))
+img <- as.raster(readPNG(source = "images/loonplot4.png"))
 gp_setosa_zoom <- rasterGrob(img)
 
 grid.arrange(gp, gp_select, gp_select_zoom, gp_setosa_zoom)
 ```
 
+
+```{r real grid raster funs and png package, echo = FALSE, message = FALSE, warning = FALSE, error = FALSE, out.width = "100%", fig.align = "center", fig.width = 12, fig.height = 10}
+library(grid)
+library(gridExtra)
+library(png)
+
+img <- as.raster(readPNG(source = path_concat(imageDirectory, "loonplot1.png")))
+gp <- rasterGrob(img)
+
+img <- as.raster(readPNG(source = path_concat(imageDirectory, "loonplot2.png")))
+gp_select <- rasterGrob(img)
+
+img <- as.raster(readPNG(source = path_concat(imageDirectory, "loonplot3.png")))
+gp_select_zoom <- rasterGrob(img)
+
+img <- as.raster(readPNG(source = path_concat(imageDirectory, "loonplot4.png")))
+gp_setosa_zoom <- rasterGrob(img)
+
+grid.arrange(gp, gp_select, gp_select_zoom, gp_setosa_zoom)
+```
 Alternatively,  LaTeX commands (like `tabular` layouts) could be used lay out the images.
 
 See also `ggsave` in `grid`.
+
+```{r, echo = FALSE)
+rm(p)
+```}
