@@ -1,3 +1,55 @@
+#' @title Scale for 3d plotting
+#'
+#' @description \code{l_scale3D} scales its argument in a variety of ways used for 3D visualization.
+#'
+#' @param x the matrix or data.frame whose columns are to be scaled.
+#' @param center either a logical value or numeric-like vector of length equal
+#' to the number of columns of x, where ‘numeric-like’ means that as.numeric(.)
+#' will be applied successfully if is.numeric(.) is not true.
+#' @param method the scaling method to use: if "box" (the default) then the columns are scaled to
+#' have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
+#' decomposed via a singular value decomposition so that the resulting variables are uncorrelated.
+#'
+#' @returns a data.frame whose columnes are centred and scaled according to the given arguments.
+#'
+#' @seealso \code{\link{l_plot3D}},  \code{\link{scale}}
+#'
+#' @examples
+#'
+#' with(l_scale3D(quakes),
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#' scaled_quakes <- l_scale3D(quakes)
+#' with(scaled_quakes,
+#'           l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#' @export
+#'
+l_scale3D <- function(x,
+                      center = TRUE,
+                      method = c("box", "sphere")){
+    if (!(is.matrix(x) | is.data.frame(x))) {
+        stop("x must be a data.frame or a matrix of numerical values")}
+    #
+    method = match.arg(method)
+    if (method == "box") {
+        ranges <- apply(x, 2, FUN = function(x) diff(range(x)))
+        scaled_x <- as.data.frame(scale(x, center = center, scale = ranges))
+        result <- scaled_x
+    } else {
+        if (method == "sphere") {
+            scaled_x <- as.data.frame(scale(x, center = center, scale = TRUE))
+            sphered_x <- as.data.frame(svd(scaled_x)$u)
+            names(sphered_x) <- names(scaled_x)
+            result <- sphered_x
+        } else {
+            stop("Unknown method")
+        }
+    }
+    result
+}
 
 #' @title Create an interactive loon 3d plot widget
 #'
@@ -63,7 +115,12 @@
 #'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
 #' )
 #'
-#' scaled_quakes <- as.data.frame(scale(quakes))
+#'
+#' with(l_scale3D(quakes),
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#' scaled_quakes <- l_scale3D(quakes)
 #' with(scaled_quakes,
 #'           l_plot3D(long, lat, depth, linkingGroup = "quakes")
 #' )
