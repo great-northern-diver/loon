@@ -3,8 +3,8 @@
 #' @description \code{l_scale3D} scales its argument in a variety of ways used for 3D visualization.
 #'
 #' @param x the matrix or data.frame whose columns are to be scaled.
-#' @param center either a logical value or numeric-like vector of length equal
-#' to the number of columns of x, where ‘numeric-like’ means that as.numeric(.)
+#' @param center either a logical value or numeric-alike vector of length equal
+#' to the number of columns of x, where ‘numeric-alike’ means that as.numeric(.)
 #' will be applied successfully if is.numeric(.) is not true.
 #' @param method the scaling method to use: if "box" (the default) then the columns are scaled to
 #' have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
@@ -16,22 +16,39 @@
 #'
 #' @examples
 #'
-#' with(l_scale3D(quakes),
-#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#' )
+#' ##### Iris
+#' with(l_scale3D(iris[,1:4]),
+#'      l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
 #'
-#' scaled_quakes <- l_scale3D(quakes)
-#' with(scaled_quakes,
-#'           l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#' )
+#' with(l_scale3D(iris[,1:4], method = "sphere"),
+#'      l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
+#'
+#' # With the Species as a factor
+#'
+#' with(l_scale3D(iris),
+#'      l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
+#'
+#' with(l_scale3D(iris, method = "sphere"),
+#'      l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
 #'
 #' @export
 #'
 l_scale3D <- function(x,
                       center = TRUE,
                       method = c("box", "sphere")){
-    if (!(is.matrix(x) | is.data.frame(x))) {
-        stop("x must be a data.frame or a matrix of numerical values")}
+    if (is.data.frame(x)) {
+        if (sum(sapply(x, FUN = function(v) !is.numeric(v))) > 0){
+            x <- data.frame(lapply(x, as.numeric))
+        }
+    } else {
+        if (is.matrix(x)) {
+            if (!is.numeric(x)) {
+                stop("A matrix x must be numeric")
+            }
+        } else {
+            stop("x must be a data.frame or a numeric matrix")
+        }
+    }
     #
     method = match.arg(method)
     if (method == "box") {
@@ -42,7 +59,7 @@ l_scale3D <- function(x,
         if (method == "sphere") {
             scaled_x <- as.data.frame(scale(x, center = center, scale = TRUE))
             sphered_x <- as.data.frame(svd(scaled_x)$u)
-            names(sphered_x) <- names(scaled_x)
+            names(sphered_x) <- paste0("pc", 1:ncol(scaled_x))
             result <- sphered_x
         } else {
             stop("Unknown method")
