@@ -13,7 +13,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     email = "z267xu@uwaterloo.ca", 
                     role = "ctb"),
              person(given = "Martin", family = "Gauch", 
-                    email = "Martin.Gauch@uwaterloo.ca", 
+                    email = "martin.gauch@student.kit.edu", 
                     role = "ctb")
              )
 Author: Adrian Waddell [aut, cre], R. Wayne Oldford [aut], Zehao Xu [ctb]
