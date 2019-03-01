@@ -72,7 +72,12 @@ with(quakes,
      l_plot3D(long, lat, depth, linkingGroup = "quakes")
 )
 
-scaled_quakes <- as.data.frame(scale(quakes))
+
+with(l_scale3D(quakes),
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+
+scaled_quakes <- l_scale3D(quakes)
 with(scaled_quakes,
           l_plot3D(long, lat, depth, linkingGroup = "quakes")
 )
