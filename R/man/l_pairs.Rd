@@ -73,5 +73,5 @@ for (plot in l_getPlots(p)) {
           }
 }
 \seealso{
-\code{\link{l_compound}}, \code{\link{l_plot}},  and \code{\link{l_getPlots}}
+\code{\link{l_plot}} and \code{\link{l_getPlots}}
 }
