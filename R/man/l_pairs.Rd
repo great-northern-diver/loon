@@ -2,44 +2,76 @@
 % Please edit documentation in R/l_pairs.R
 \name{l_pairs}
 \alias{l_pairs}
-\title{Scatterplot Matrix in Loon}
+\title{An interactive scatterplot matrix}
 \usage{
-l_pairs(data, showHistograms = FALSE, histLocation = c("edge", "diag"),
+l_pairs(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
+  showHistograms = FALSE, histLocation = c("edge", "diag"),
   histHeightProp = 1, histArgs = list(), showSerialAxes = FALSE,
   serialAxesArgs = list(), parent = NULL, ...)
 }
 \arguments{
 \item{data}{a data.frame with numerical data to create the scatterplot matrix}
 
-\item{showHistograms}{logical (default FALSE) to show histograms of each variable or not}
+\item{linkingGroup}{string giving the linkingGroup for all plots.  If missing,
+a default \code{linkingGroup} will be determined from deparsing the \code{data}.}
+
+\item{linkingKey}{a vector of strings to provide a linking identity for each row of the
+\code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{row.names(data)}.}
+
+\item{showItemLabels}{TRUE, logical indicating whether its itemLabel pops up over a point when
+the mouse hovers over it.}
+
+\item{itemLabel}{a vector of strings to be used as pop up information when the mouse hovers
+over a point.  If missing, the default \code{itemLabel} will be the \code{row.names(data)}.}
+
+\item{showHistograms}{logical (default FALSE) to show histograms of each variable
+or not}
 
 \item{histLocation}{one "edge" or "diag", when showHistograms = TRUE}
 
-\item{histHeightProp}{a positive number giving the height of the histograms as a proportion of the height of the scatterplots}
+\item{histHeightProp}{a positive number giving the height of the histograms as a
+proportion of the height of the scatterplots}
 
-\item{histArgs}{arguments to modify the `l_hist` states}
+\item{histArgs}{additional arguments to modify the `l_hist` states}
 
-\item{showSerialAxes}{logical (default FALSE) indication of whether to show a serial axes plot 
+\item{showSerialAxes}{logical (default FALSE) indication of whether to show a serial axes plot
 in the bottom left of the pairs plot (or not)}
 
-\item{serialAxesArgs}{additional arguments given to `l_serialaxes()`}
+\item{serialAxesArgs}{additional arguments to modify the `l_serialaxes` states}
 
 \item{parent}{parent widget path}
 
 \item{...}{named arguments to modify the `l_plot` states of the scatterplots}
 }
 \value{
-a list with handles for the plots
+an `l_pairs` object (an `l_compound` object), being a list with named elements,
+each representing a separate interactive plot.
+The names of the plots should be self explanatory and a list
+of all plots can be accessed from the `l_pairs` object via `l_getPlots()`.
+All plots are linked by default (name taken from data set if not provided).
+Panning and zooming are constrained to work together within the scatterplot
+matrix (and histograms).
 }
 \description{
-Function creates a scatterplot matrix using loon's scatterplot 
+Function creates a scatterplot matrix using loon's scatterplot
   widgets
 }
 \examples{
-p <- l_pairs(iris[,-5], color=iris$Species)
+p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris")
 
-p <- l_pairs(iris[,-5], color=iris$Species, showHistograms = TRUE, showSerialAxes = TRUE)
+p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris",
+             showHistograms = TRUE, showSerialAxes = TRUE)
+# plot names
+names(p)
+
+# Each plot must be accessed to make changes not managed through
+# linking.
+# E.g. to change the glyph on all scatterplots to open circles
+for (plot in l_getPlots(p)) {
+      if (inherits(plot, "l_plot")) {
+          plot["glyph"] <- "ocircle"}
+          }
 }
 \seealso{
-\code{\link{l_plot}}
+\code{\link{l_compound}}, \code{\link{l_plot}},  and \code{\link{l_getPlots}}
 }
