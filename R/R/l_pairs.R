@@ -33,7 +33,7 @@
 #' Panning and zooming are constrained to work together within the scatterplot
 #' matrix (and histograms).
 #'
-#' @seealso \code{\link{l_compound}}, \code{\link{l_plot}},  and \code{\link{l_getPlots}}
+#' @seealso  \code{\link{l_plot}} and \code{\link{l_getPlots}}
 #'
 #' @export
 #'
