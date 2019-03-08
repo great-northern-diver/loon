@@ -68,7 +68,7 @@ names(p)
 # linking.
 # E.g. to change the glyph on all scatterplots to open circles
 for (plot in l_getPlots(p)) {
-      if (inherits(plot, "l_plot")) {
+      if (is(plot, "l_plot")) {
           plot["glyph"] <- "ocircle"}
           }
 }
