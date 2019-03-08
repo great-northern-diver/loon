@@ -1,6 +1,7 @@
 # loon 1.2.2
 
 * added l_plot3D contributed by Martin Gauch (for rwo)
+* l_pairs linking issues and arguments for histograms and serialaxes in the display are fixed
 * added a new vignette "loon and RMarkdown" and tidied up some others
 
 # loon 1.2.1
