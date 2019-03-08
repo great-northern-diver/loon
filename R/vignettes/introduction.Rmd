@@ -2,7 +2,9 @@
 title: "Introduction to loon"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Introduction to loon}
   %\VignetteEngine{knitr::rmarkdown}
@@ -78,21 +80,75 @@ and the other a "loon inspector":
 knitr::include_graphics(path_concat(imageDirectory, "inspectorQuakesOriginal.png"))
 ```
 
-We'll ignore the "inspector" for the moment and focus on the scatterplot.
+
+For the moment we'll focus mainly on the scatterplot.
 
 --- 
 
 
 
-##  The scatterplot window -- direct manipulation
+##  Direct manipulation on the plot
 
 The loon scatterplot is highly interactive and can be **directly manipulated** using the mouse. 
 Several interactions are immediately available.
 
+In what follows, images of a two button mouse (left is primary, right secondary) with a scroll wheel will be used to indicate the interaction.
+The colour red indicates selection, arrows and double images suggest movement, and any modifier keys are shown in the body of the mouse.
+
+---
+
+###Panning
+
+To pan the plot, select the plot interior with the right (or secondary) mouse button and move the mouse (with the button still down).  The direction of panning can be constrained by holding down the named modifier keys while panning. 
+
+\vspace{-0.05\textheight}
+```{r panning, out.width= "40%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "panning.png"))
+```
+
+Try it. Select anywhere on the scatterplot and move it
+
+- freely about
+- only horizontally
+- only vertically
+
+**Question**:  How did the inspector change in response to each movement?
+
+Reproduce these movements on the smaller "World View" plot appearing at the top of the inspector.  
+
+How does the larger scatterplot change?
+
+---
+
+### Zooming
+
+Another way to dynamically focus on different parts of the plot is by zooming, using **scrolling**:
+
+\vspace{-0.05\textheight}
+```{r zooming, out.width= "40%", fig.align="center", echo=FALSE}
+knitr::include_graphics(path_concat(imageDirectory, "zooming.png"))
+```
+
+To try it, note that there is a small cluster of 16 points towards the top left of the scatterplot. 
+
+On the scatterplot,
+
+- zoom in and out and move the plot around until **only** these 16 points appear in the scatterplot
+
+- use the restricted horizontal and vertical zooming so that the same 16 points occupy as much of the scatterplot's space as possible
+
+**Question**: How has the inspector changed in response?
+
+On the inspector click on the button titled `plot`.  What happened?
+
+Using zooming and panning on the "World View" 
+
+- focus the scatterplot on the **same** 16 points.
+
 
 --- 
 
-### selecting
+### Selecting
 
 There are two ways to directly select points on the scatterplot using the mouse: either by selection (one at a time or multiple selections) or by "sweep selection" as shown below:
 
@@ -105,7 +161,7 @@ To try this out, on the scatterplot (which should contain only 16 points)
 - place the mouse over the topmost point and click the left (or primary) mouse button
     - the point will be highlighted (magenta coloured)
 
-- hold the shift key down and select the leftmost, rightmost and bottom most points
+- hold the shift key down and select the leftmost, rightmost and bottom most points of the 16
     - there should now be 4 magenta points 
 
 - colour these 4 points light blue and change their glyph to a triangle 
@@ -117,12 +173,11 @@ Now try a holding the left mouse button down and move the mouse.
 
 This is called **sweeping** or **sweep selection** and allows us to sweep out a contiguous area of the plot.
 
-- use sweep select to identify, and give different colours (none black) to 4 different contiguous groups of your choice.
+- use sweep select to identify, and give different colours (none black) to 4 different (roughly) contiguous groups of your choice from the 16 points.
 
 **Check**: The 16 points should now be separated by colour into 4 groups and by glyph shape into 2 groups.
 
 **Question**: How has the inspector changed? 
-
 
 You will have already discovered how to colour selected points from the inspector.  You can now use the inspector to **select** points by colour:
 
@@ -138,7 +193,7 @@ For example, try checking the "guides" box on the inspector to place a backgroun
 
 The loon inspector consists of several component pieces.
 
-At the top is a "World View" which shows a miniature version of the **whole** of the current plot, what is displayed there, and what is active.
+At the top is the "World View" which shows a miniature version of the **whole** of the current plot, what is displayed there, and what is active.
 
 Below the "World View"  are a few tabs.  The default (and most used) one is the "Analysis" tab where common interactions are separated into three regions: the "Plot", the "Select", and the "Modify" systems.
 
@@ -566,7 +621,7 @@ Alternatively, a function could be written to save the groups as a list of logic
 ```{r getGroups, eval = TRUE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
 getGroups <- function(loonplot){
     # make sure it is an "l_plot"
-    if (!"l_plot" %in% class(loonplot)) stop("loonplot must be an l_plot")
+    if (!is(loonplot, "l_plot")) stop("loonplot must be an l_plot")
     
     # use color to identify groups
     unique_cols <- unique(loonplot['color'])
@@ -695,7 +750,7 @@ This allows a lot of interaction with the layers - for example changing their di
 
 ---
 
-## loon's `l_plot()` versus base graphics `plot()`
+## Syntax: loon's `l_plot()` is like base graphics `plot()`
 
 
 `loon`'s `l_plot()` syntax **intentionally resembles** that of `plot()` from the base `graphics` package:
@@ -714,7 +769,7 @@ l_plot(x = quakes$long, y = quakes$lat,
 ```
 
 
-The arguments to `l_plot()` provide initial values to each named state.
+The arguments to `l_plot()` provide initial values to each named state.  Note that the argument names in `l_plot` are slightly different.
 
 In result, however, loon plots are quite different
 
@@ -849,9 +904,39 @@ Brushing any one of these plots will cause the other plots to highlight in respo
 
 Note that selection effectively shows the relations in one plot  **conditional** upon the values actively being selected (e.g. brushed) in another.
 
+
+## `linkingKey`
+Observations in a `loon` plot are uniquely identified (for the purpose of linking) by their `linkingKey`. Pardon the pun but this is the key to linking in `loon`.
+
+For the most part, the default linking is all that you ever need do.  
+Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows so not match row for row. For example, one `data.frame` might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.
+
+In either case, to have linking work properly the `linkingKey` of the plots associated with the two data frames need to be managed.
+
+For example, 
+
+```{r, eval = FALSE}
+new_order <- sample(1:nrow(quakes), nrow(quakes), replace = FALSE)
+some_quakes <-  sample(1:nrow(quakes), 100, replace = FALSE)
+quakes_linkingKey <- p["linkingKey"]
+p_new <- with(quakes[new_order,],
+              l_plot(long, lat, title = "quakes reordered",
+                     linkingGroup = "quakes",
+                     linkingKey = quakes_linkingKey[new_order] ))
+p_subset <- with(quakes[some_quakes,],
+              l_plot(long, lat, title = "quakes reordered",
+                     linkingGroup = "quakes",
+                     linkingKey = quakes_linkingKey[some_quakes]))
+```
+
+The new plots `p_new` and `p_subset` will link correctly with all the rest.
+
+Rather than the default values, the `linkingKey` can be any vector of unique strings used in any newly created plot as above.  Of course, not using the default linking keys from `loon` may require a little more care in management from the user.
+
+
 ---
 
-#Three dimensional plots
+#Three dimensional plots - `l_plot3D`
 
 Given that the `quakes` data has three spatial dimensions (`long`, `lat`, and `depth`), it would be natural to view this in a three dimensional scatterplot.
 
@@ -873,24 +958,133 @@ Selecting the plot, the key `r` toggles the rotation mode; arrow keys rotate the
 When `rotation mode` is toggled off (with the key `r`), the plot can again be brushed et cetera as with any `l_plot`.  See `help("l_plot3D")` for more details.
 
 
-**NOTE** Many methods exist for visualizing higher dimensional data in `loon`.  For e.g. see `help("l_navgraph"), `help("l_pairs")`, or `help("l_serialaxes")`.  See also `l_help()`.
+**NOTE** Many methods exist for visualizing higher dimensional data in `loon`.  For e.g. see `help("l_navgraph")`, `help("l_pairs")`, or `help("l_serialaxes")`.  See also the online manual `l_help()`.
 
 
 ---
 
 #Extras
 
-## loon demos
+Miscellaneous other topics on and sources of working and programming with `loon`.
 
-There are also numerous demos in loon whose source code might be examined for more examples of using `loon`.  Try these
-
-```{r loon demos, eval = FALSE}
-demo(package = "loon")    # list all demos
-demo("l_regression", package = "loon")
-```
 ---
 
-## more on grid graphics and loon
+## More examples
+Being able to get and set the plot contents means that it is possible to capture different
+plot states as `grobs`. 
+There are a variety of ways to see how you might put `loon` to use.
+
+There are of course many smaller examples available through the `loon`'s `R` documentation available via
+```{r, eval=FALSE}
+help(package = "loon")
+```
+and more complex examples and more general discussion via `loon`'s online help
+```{r, eval=FALSE}
+l_help()
+```
+
+---
+
+### Other vignettes
+Other vignettes have been developed to cover a range of topics.  These currently include:
+
+- An example exploratory analysis: "Visible minorities in Canadian cities" available via
+    ```{r, eval=FALSE}
+    vignette("minorities", package = "loon")
+    ```
+    This illustrates a variety of `loon` features including map layers, parallel coordinate axes, and radial axes glyphs in the context of an exploratory analysis of the distribution of visible minorities in 33 Canadian cities.
+    
+- New interactive graphics in `loon` in a teaching example: "Smoothers and Bone Mineral Density" available via
+    ```{r, eval=FALSE}
+    vignette("teaching-example-smoothing", package = "loon")
+    ```
+    This illustrates how to create new interactions in `loon` through more general bindings.  This is done by developing a teaching tool for explaining how smoothing works.  The example data set is `bone` from the `ElemStatLearn` package. 
+
+- Some suggestions on integrating `loon` plots into an Rmarkdown document: "Loon in RMarkdown" via
+    ```{r, eval=FALSE}
+    vignette("Rmarkdown", package = "loon")
+    ```
+       
+---
+
+### loon demos
+
+There are numerous demos in loon whose source code might be examined for more examples of using `loon`.  To see them all
+
+```{r loon demos, eval = FALSE}
+demo(package = "loon")  # list all demos
+```
+
+The range is quite broad.  For example, 
+
+```{r loon demo examples, eval = FALSE}
+### teaching demos
+demo("l_regression", 
+     package = "loon")  # lots using the Old Faithful geyser
+demo("l_regression_influential", 
+     package = "loon")  # move and recolor points to change the regression fit
+
+### gapminder
+demo("l_us_and_them", 
+     package = "loon")  #  basic demo
+demo("l_us_and_them_slider", 
+     package = "loon")  # year selected on a slider
+demo("l_us_and_them_choropleth", 
+     package = "loon")  # world map and linked with a scatterplot
+
+### the spatial package sp                       
+demo("l_polygons_sp", 
+     package = "loon")  # layer polygons with class sp 
+
+### layering and custom layouts 
+demo("l_layers")  # demonstrate layer types   
+demo("l_layout")  # custom layout widgets      
+demo("l_widgets") # inspector and plot in one window
+
+### novel brushing and linking 
+demo("l_knn")     # brushing by k nearest points in some subspace
+demo("l_us_and_them_choropleth")  # many to one linking 
+
+### high dimensional data and dimensionality reduction
+demo("l_ng_images_frey_LLE") # navigation graphs, image data, LLE
+demo("l_ng_dimred")          # comparing dimension reduction methods
+```
+
+The code that appears in the console after the demo can be examined and reused to create your own loony `loon` code.
+
+---
+
+## Extensions to loon via other packages
+
+###  `zenplots` 
+This package is available on CRAN. 
+```{r, eval=FALSE}
+install.packages("zenplots")
+vignette("intro", package = "zenplots")
+```
+
+Provides a means for compact layout of alternating 1d (e.g. histograms) and 2d (e.g. scatterplots)  plots.  In will layout base `graphics` plots, `grid` graphics plots, and `loon` plots.
+
+It is similar to `pairs` plots but allows many many more plots to be displayed.  From the introductory vignette:
+
+> "A zenplot can show the same information as a pairs plot but with two important display differences.
+>
+>First, the matrix organization of the pairs layout is replaced by the “zig-zag” layout of zenplot. Second, the number of plots produced is about half that of a pairs plot allowing each plot in a zenplot to be given more visual space."
+
+### Specialty `loon` extensions -  `loon.<specialty>` packages
+
+There are/will be other packages available which build on `loon`.  Those developed by us are typically prefixed with `loon` (e.g. `loon.ggplot`)
+
+These will typically be on CRAN when ready, but development versions are accessible from our various `github` repositories. For example,
+
+- [https://github.com/rwoldford](https://github.com/rwoldford)
+- [https://github.com/waddella](https://github.com/waddella)
+
+There you can see what is coming up.
+
+---
+
+## More on grid graphics and loon
 
 Graphics in the `grid` package are built up from graphical objects or `grobs`.
 
@@ -923,7 +1117,3 @@ grid.loon(p)
 ```
 
 will display `p` as a  `grid` graphic ... and all that entails.
-
-Being able to get and set the plot contents means that it is possible to capture different
-plot states as `grobs`. 
-
