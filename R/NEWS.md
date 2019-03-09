@@ -3,6 +3,10 @@
 * added l_plot3D contributed by Martin Gauch (for rwo)
 * l_pairs linking issues and arguments for histograms and serialaxes in the display are fixed
 * added a new vignette "loon and RMarkdown" and tidied up some others
+* new functionality to make it easy to construct statistical glyphs from any R plotting function
+    - new demo(l_make_glyphs) to illustrate statistical glyphs
+    - tiny new data set oliveLocations for lat and long of olive data growing areas (used in demo)
+    - tidied up a couple of demos (very superficially)
 
 # loon 1.2.1
 
