@@ -4,7 +4,7 @@ author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Smoothers and Bone Mineral Density}
+  %\VignetteIndexEntry{Teaching: Smoothers and Bone Mineral Density}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{ElemStatLearn, splines}

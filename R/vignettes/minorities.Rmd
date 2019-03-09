@@ -1,5 +1,5 @@
 ---
-title: "Visible minorities in Canadian cities"
+title: "Anaysis: Visible minorities in Canadian cities"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
