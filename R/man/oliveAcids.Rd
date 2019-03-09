@@ -3,7 +3,7 @@
 \docType{data}
 \name{oliveAcids}
 \alias{oliveAcids}
-\title{Fatty Acid Composition of Italian Olive Oils}
+\title{Just the Fatty Acid Composition of Italian Olive Oils}
 \format{A data frame containing 572 cases and 8 variates.}
 \usage{
 oliveAcids

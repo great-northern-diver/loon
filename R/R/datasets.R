@@ -31,7 +31,7 @@
 #'
 "olive"
 
-#' Fatty Acid Composition of Italian Olive Oils
+#' @title Just the Fatty Acid Composition of Italian Olive Oils
 #'
 #' @description This is the \code{\link{olive}} data set minus the \code{Region}
 #'   and \code{Area} variables.
@@ -61,16 +61,14 @@
 #' @source \url{https://www.statcan.gc.ca/}
 "minority"
 
-#' Locations of olive growing regions in Italy.
+#' @title Locations of olive growing regions in Italy.
 #'
 #' A dataset containing the latitude and longitude of the nine growing
 #' regions from the olive data set.
 #'
 #' @format A data frame with 9 rows and 9 variables:
-#' \describe{
-#'   \item{Area}{Growing region in Italy}
-#'   \item{lat}{Latitude in degrees}
-#'   \item{long}{Longitude in degrees}
-#' }
+#'
+#' @seealso \code{\link{olive}}
+#'
 #' @source \url{https://www.latlong.net}
-"olive_locations"
+"oliveLocations"
