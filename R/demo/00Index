@@ -1,9 +1,10 @@
 loon	an introductory example
 l_glyphs   demonstrate glyph types
 l_glyph_sizes    size mapping to various glyph types
+l_make_glyphs    construct statistical glyphs from any draw function
+l_map    layer a map from the map R package
 l_layers    demonstrate layer types
 l_linking    linking examples
-l_map    layer a map from the map R package
 l_polygons_sp    layer polygons with class sp as defined in the sp R package
 l_power    scatterplot and two scales that control the power transformation for each axis
 l_timeseries    seasonal trend decomposition stl
@@ -14,12 +15,12 @@ l_selectToActive    two scatterplots; in one a regression is fit to the points t
 l_us_and_them    gapminder data made famous by Hans Rosling; fertility, life expectancy, and income
 l_us_and_them_slider    show the life expectancy vs. fertility data for the year selected on a slider
 l_us_and_them_choropleth    life expectancy on a world map and linked with a scatterplot
-l_ng_images_frey_LLE    navigation graph for the frey image data using LLE for dimensionality reduction
-l_ng_images_frey_isomap    navigation graph for the frey image data using isomap for dimensionality reduction
-l_ng_images_faces   navigation graph with olivetti faces data
-l_layout    custom layout widgets
-l_widgets    custom layout
 l_linkPrimitiveGlyphs    custom linking, link the primitive glyphs
 l_add_regressions    interactively add regression lines of a particular order to selected points
 l_knn    interactively highlight k nearest points in some subspace
+l_ng_images_frey_LLE    navigation graph for the frey image data using LLE for dimensionality reduction
+l_ng_images_frey_isomap    navigation graph for the frey image data using isomap for dimensionality reduction
+l_ng_images_faces   navigation graph with olivetti faces data
 l_ng_dimred compare results from various dimensionality reduction methods using navigation graphs
+l_layout    custom layout widgets
+l_widgets    custom layout
