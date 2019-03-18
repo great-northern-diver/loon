@@ -1,10 +1,10 @@
 ---
-title: "Anaysis: Visible minorities in Canadian cities"
+title: "Analysis: Visible minorities in Canadian cities"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visible minorities in Canadian cities}
+  %\VignetteIndexEntry{Analysis: Visible minorities in Canadian cities}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{PairViz, maps, scales}
