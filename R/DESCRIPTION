@@ -8,7 +8,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     role = c("aut", "cre")),
              person(given = "R. Wayne", family = "Oldford",
                     email = "rwoldford@uwaterloo.ca", 
-                    role = "aut"),
+                    role = c("aut", "ths")),
              person(given = "Zehao", family = "Xu", 
                     email = "z267xu@uwaterloo.ca", 
                     role = "ctb"),
@@ -16,8 +16,6 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     email = "martin.gauch@student.kit.edu", 
                     role = "ctb")
              )
-Author: Adrian Waddell [aut, cre], R. Wayne Oldford [aut], Zehao Xu [ctb]
-Maintainer: Adrian Waddell <adrian@waddell.ch>
 URL: http://waddella.github.io/loon/
 Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2

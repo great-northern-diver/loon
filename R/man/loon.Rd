@@ -44,7 +44,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item R. Wayne Oldford \email{rwoldford@uwaterloo.ca}
+  \item R. Wayne Oldford \email{rwoldford@uwaterloo.ca} [thesis advisor]
 }
 
 Other contributors:
