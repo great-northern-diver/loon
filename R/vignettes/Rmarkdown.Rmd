@@ -224,7 +224,3 @@ grid.arrange(gp, gp_select, gp_select_zoom, gp_setosa_zoom)
 Alternatively,  LaTeX commands (like `tabular` layouts) could be used lay out the images.
 
 See also `ggsave` in `grid`.
-
-```{r, echo = FALSE}
-rm(p)
-```}
