@@ -23,13 +23,13 @@ library(loon)
 
 1. linked histograms and scatterplots
 2. interactive maps as scatterplots
-3. plots with multiple layers including nested group layers'
+3. plots with multiple layers including nested group layers
 4. serial axes plots
 5. serial axes glyphs
 
 # The `minority` data
 
-Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities'' within 33 Canadian cities.  All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).
+Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of "visible minorities" within 33 Canadian cities.  All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).
 
 The data are part of the `loon` package and can be accessed through the `data(...)` command.
 
@@ -50,7 +50,7 @@ subset <- t(minority[c("Victoria", "Ottawa", "St. John\'s"),][,1:(length(names(m
 knitr::kable(subset)
 ```
 
-The remaining variates provide the geographic location of each city.  The latitude and longitude of the cities were determined in two ways.  First, the data in `canada.cities` from the `maps` package was used.  This produced the `minority` variates `lat' and `long'.  The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates  `googleLat` and `googleLong`.
+The remaining variates provide the geographic location of each city.  The latitude and longitude of the cities were determined in two ways.  First, the data in `canada.cities` from the `maps` package was used.  This produced the `minority` variates `lat` and `long`.  The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates  `googleLat` and `googleLong`.
 
 To see if they agree we plot them against one another. 
 
@@ -127,7 +127,7 @@ We first look at the populations of the different cities:
 
 The distribution of the `Total.population` is skewed with a heavy right tail. Most Canadian cities have a relatively small population.  A few cities, one in particular, has a relatively large population.
 
-Note, that this histogram has very little in the way of annotation.  This can be changed interactively by making various selections in the loon inspector.  Try a few of these out and observe the results in the histogram.  You may also make some selections in the histogram itself.  Holding the shift key down while making a selection results in a ``sticky'' selection that allows multiple items to be selected.
+Note, that this histogram has very little in the way of annotation.  This can be changed interactively by making various selections in the loon inspector.  Try a few of these out and observe the results in the histogram.  You may also make some selections in the histogram itself.  Holding the shift key down while making a selection results in a "sticky" selection that allows multiple items to be selected.
 
 **Exercise:** Check the show `stacked colors` box in order to see the bar colours.  Select the two histogram bars corresponding to the three most populous cities.  Change the colour of these cities to some different colour selected from the `Modify` section.  Select the `none` button to unhighlight the bars and reveal the modified colour.
 
@@ -168,10 +168,10 @@ l_hist(minorityPercent$"% Minority",
 )
 ```
 
-As can be seen, the visible minority population most of these cities  is less than 20\% of its total population.
+As can be seen, the visible minority population most of these cities  is less than 20% of its total population.
 But for two cities nearly half of the population is from some visible minority.  
 
-One might hypothesize that these two cities are the largest two.  To test this we add the first histogram to the 'linkingGroup' of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as
+One might hypothesize that these two cities are the largest two.  To test this we add the first histogram to the `linkingGroup` of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as
 
 ```{r link, eval=FALSE}
 l_configure(hTotPop, linkingGroup = "minority", sync = "push")
@@ -180,7 +180,7 @@ l_configure(hTotPop, linkingGroup = "minority", sync = "push")
 In either case the displays must be synchronized (`sync`) within the group.  Here we choose to `push` the linked elements of the total population histogram `hTotPop` out to the other members of the group.
 Checking the show `stacked colors` in both histograms will reveal their shared colours.  Alternatively, use selection on each histogram.
 
-As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities.  And conversely, the two cities having the largest visible miinorities are not the two largest cities.  However, selecting the largest of either will show through the linked displays that it is also the largest of the other.  Less than 20\% of the second largest city are visible minority.
+As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities.  And conversely, the two cities having the largest visible miinorities are not the two largest cities.  However, selecting the largest of either will show through the linked displays that it is also the largest of the other.  Less than 20% of the second largest city are visible minority.
 
 ### Largest visible minorities
 It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):
@@ -212,11 +212,11 @@ for (x in largest3) {
 
 ```
 
-In decreasing order the largest three visible minorities ``Chinese'', ``South Asian'', and ``Black''. 
+In decreasing order the largest three visible minorities `Chinese`, `South Asian`, and `Black`. 
 
-Looking at the ``\% Chinese'' histogram one city has nearly 20\% of its population being ``Chinese''.  It is the third largest city in the country.   
-In contrast, the city with the greatest proportion of its population being ``South Asian'' (more than 15 \%) is one of the smallest of the 33 Canadian cities.
-Finally, the city having the largest percentage of ``Black'' inhabitants is the largest one.
+Looking at the `% Chinese` histogram one city has nearly 20% of its population being `Chinese`.  It is the third largest city in the country.   
+In contrast, the city with the greatest proportion of its population being `South Asian` (more than 15%) is one of the smallest of the 33 Canadian cities.
+Finally, the city having the largest percentage of `Black` inhabitants is the largest one.
 
 Other relationships can be uncovered by selecting bars from different histograms.  It's worth exploring to better understand the data.
 
@@ -306,7 +306,7 @@ great.lakes.layer <-  l_layer(p_map,
 l_layer_raise(p_map, great.lakes.layer)
 ```
 
-We can also add the islands back in.  This is a good example of grouping different layers together into a single ``group layer''.
+We can also add the islands back in.  This is a good example of grouping different layers together into a single "group layer".
 
 ```{r GreatLakesIslands, eval=FALSE}
 # 
@@ -439,7 +439,7 @@ l_layer_raise(p_map, boundary.lakes.group)
 And finally, all of the large interior lakes and their islands
 
 ```{r interiorLakes, eval=FALSE}
-
+z
 
 interior.lakes <- map("lakes", 
                       plot=FALSE, 
@@ -519,7 +519,7 @@ In `loon` there is an analogous function `l_pairs(...)` that produces an interac
 ```{r pairsPlot, eval=FALSE}
 # Loon's scatterplot matrix
 # 
-l_pairs(minority_star, linkingGroup="minority")
+l_pairs(minority_star, linkingGroup = "minority")
 ```
 
 Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)
@@ -551,7 +551,7 @@ s <- l_serialaxes(data=minority_star,
                   showItemLabels=TRUE)
 ```
 
-This plot shows all variates at once for each city; each city is a ``curve'' of connected line segments.  As with all other plots in `loon` the serial axes plot is interactive.  Placing the mouse over any curve will reveal the city.  Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.
+This plot shows all variates at once for each city; each city is a `curve` of connected line segments.  As with all other plots in `loon` the serial axes plot is interactive.  Placing the mouse over any curve will reveal the city.  Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.
 
 In axis is scaled from 0 to 1.  In this case, the scaling is done within each variable.  That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis;  the city with the smallest population for that visible minority becomes 0, the lowest point on the axis. 
 
@@ -586,9 +586,9 @@ gstars <-l_glyph_add_serialaxes(p_stars,
                                 axesLayout = "radial",
                                 data=minority_star,
                                 sequence = names(minority_star),
-                                scaling = 'variable',
+                                scaling = "variable",
                                 showArea=TRUE)
-p_stars['glyph'] <- gstars
+p_stars["glyph"] <- gstars
 ```
 
 Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.  
@@ -599,9 +599,9 @@ to a grid.
 
 ```{r moveToGrid, eval=FALSE}
 # 
-l_move_grid(p_stars, which='all')
+l_move_grid(p_stars, which="all")
 # swapAxes neccessary to arrange west-east in the grid (columns)
-p_stars['swapAxes'] <- TRUE
+p_stars["swapAxes"] <- TRUE
 l_zoom(p_stars, .9)
 #
 ```
@@ -619,7 +619,7 @@ west_east_cols <- (col_numeric(c("firebrick",
 
 # Just need to color the glyphs on one of the plots
 # since they are all linked.
-s['color'] <- west_east_cols
+s["color"] <- west_east_cols
 ```
 
 Adding the glyphs to the map gives a precise geographic location for each city.
@@ -629,10 +629,10 @@ Adding the glyphs to the map gives a precise geographic location for each city.
 # scale values within variates
 so <- l_glyph_add_serialaxes(p_map, data=minority_star,
                              sequence = names(minority_star),
-                             scaling = 'variable',
+                             scaling = "variable",
                              showArea=TRUE,
                              label="stars")
-p_map['glyph'] <- so
+p_map["glyph"] <- so
 ```
 
 Unfortunately the three large cities dominate in each of these displays.  All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.  
@@ -672,7 +672,7 @@ An interesting exercise would be to move those glyphs which most resemble each o
 First make sure we put them on a grid to start:
 
 ```{r moveGrid, eval=FALSE}
-l_move_grid(p_stars, which='all')
+l_move_grid(p_stars, which="all")
 ```
 
 Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph.  Many points can be selected at once moved by additionally holding the shift key down.  In loon the shift key always indicates multiple items.  In this way we can visually cluster the cities according to glyph shape.
@@ -766,18 +766,18 @@ Add the glyphs to the grid plot.
 gstars_near <-l_glyph_add_serialaxes(p_stars,
                                 data=minority_star,
                                 sequence = names(minority_star)[o_near],
-                                scaling = 'observation',
+                                scaling = "observation",
                                 label = "Nearest",
                                 showArea=TRUE)
-p_stars['glyph'] <- gstars_near
+p_stars["glyph"] <- gstars_near
 
 gstars_far <-l_glyph_add_serialaxes(p_stars,
                                 data=minority_star,
                                 sequence = names(minority_star)[o_far],
-                                scaling = 'observation',
+                                scaling = "observation",
                                 label = "Farthest",
                                 showArea=TRUE)
-p_stars['glyph'] <- gstars_far
+p_stars["glyph"] <- gstars_far
 
 ```
 
@@ -787,17 +787,17 @@ And now on the map:
 # Add  glyphs to the map
 so_near <- l_glyph_add_serialaxes(p_map, data=minority_star,
                                   sequence = names(minority_star)[o_near],
-                                  scaling = 'observation',
+                                  scaling = "observation",
                                   showArea=TRUE,
                                   label="Nearest")
-p_map['glyph'] <- so_near
+p_map["glyph"] <- so_near
 
 so_far <- l_glyph_add_serialaxes(p_map, data=minority_star,
                                  sequence = names(minority_star)[o_far],
-                                 scaling = 'observation',
+                                 scaling = "observation",
                                  showArea=TRUE,
                                  label="Farthest")
-p_map['glyph'] <- so_near
+p_map["glyph"] <- so_near
 ```
 
 
