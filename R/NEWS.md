@@ -1,3 +1,11 @@
+# loon 1.2.3
+
+* added l_saveStatesRDS() c
+    - saves named or all states to disk for later retrieval (e.g. in Rmarkdown)
+* added l_copyStates(source, target)
+    - copies the info_state values of source to that of target.
+    - some basic states are excluded but can be overridden.
+
 # loon 1.2.2
 
 * added l_plot3D contributed by Martin Gauch (for rwo)
