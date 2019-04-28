@@ -41,7 +41,7 @@ p <- l_plot(iris, showGuides = TRUE)
 # and coloured groups by hand (using the mouse and inspector)
 # so that you ended up with these colours:
 p["color"] <- rep(c( "lightgreen", "firebrick","skyblue"), each = 50)
-# Having determined the coulours you could save them (and other states)
+# Having determined the colours you could save them (and other states)
 # in a file of your choice, here some tempfile:
 myFileName <- tempfile("myPlot", fileext = ".rds")
 # Save the names states of p
