@@ -13,88 +13,87 @@ l_setColorList(colors)
 Modify loon's color mapping list to a set of custom colors.
 }
 \details{
-There are two commonly used mapping schemes of data values to 
-  colors: one scheme maps numeric values to colors on a color gradient and 
-  the other maps nominal data to colors that can be well differentiated 
-  visually (e.g. to highlight the different groups). Presently, loon always 
-  uses the latter approach for its color mappings. You can use specialized 
+There are two commonly used mapping schemes of data values to
+  colors: one scheme maps numeric values to colors on a color gradient and
+  the other maps nominal data to colors that can be well differentiated
+  visually (e.g. to highlight the different groups). Presently, loon always
+  uses the latter approach for its color mappings. You can use specialized
   color pallettes to map continuous values to color gradients as shown in the
   examples below.
-  
+
   When assigning values to a display state of type color then loon maps those
   values using the following rules
-  
+
   \enumerate{
-  
-  \item if all values already represent valid Tk colors (see 
-  \code{\link{tkcolors}}) then those colors are taken
-  
-  \item if the number of distinct values are less than number of values in 
+
+  \item if all values already represent valid Tk colors (see
+  \code{\link{tkcolors}}) then those colors are taken.
+
+  \item if the number of distinct values are less than number of values in
   loon's color mapping list then they get mapped according to the color list,
   see \code{\link{l_setColorList}} and \code{\link{l_getColorList}}.
-  
+
   \item if there are more distinct values as there are colors in loon's color
-  mapping list then loon's own color mapping algorithm is used. See 
-  \code{\link{loon_palette}} and for more details about the algorithm below 
+  mapping list then loon's own color mapping algorithm is used. See
+  \code{\link{loon_palette}} and for more details about the algorithm below
   in this documentation.
-  
+
   }
-  
-  Loon's default color list is composed of the first 11 colors from the 
-  \emph{hcl} color wheel (displayed below in the html version of the 
+
+  Loon's default color list is composed of the first 11 colors from the
+  \emph{hcl} color wheel (displayed below in the html version of the
   documentation). The letters in hcl stand for hue, chroma and luminance, and
-  the hcl wheel is useful for finding "balanced colors" with the same chroma 
-  (radius) and luminance but with different hues (angles), see Ross Ihaka 
-  (2003) "Colour for presentation graphics", Proceedings of DSC, p. 2 
+  the hcl wheel is useful for finding "balanced colors" with the same chroma
+  (radius) and luminance but with different hues (angles), see Ross Ihaka
+  (2003) "Colour for presentation graphics", Proceedings of DSC, p. 2
   (\url{https://www.stat.auckland.ac.nz/~ihaka/courses/787/color.pdf}).
-  
-  The colors in loon's internal color list are also the default ones listed 
-  as the "modify color actions" in the analysis inspectors. To query and 
-  modify loon's color list use \code{\link{l_getColorList}} and 
+
+  The colors in loon's internal color list are also the default ones listed
+  as the "modify color actions" in the analysis inspectors. To query and
+  modify loon's color list use \code{\link{l_getColorList}} and
   \code{\link{l_setColorList}}.
-  
-  In the case where there are more unique data values than colors in loon's 
-  color list then the colors for the mapping are taken from different 
+
+  In the case where there are more unique data values than colors in loon's
+  color list then the colors for the mapping are taken from different
   locations distributed on the hcl color wheel (see above).
-  
-  One of the advantages of using the hcl color wheel is that one can obtain 
-  any number of "balanced colors" with distinct hues. This is useful in 
-  encoding data with colors for a large number of groups; however, it should 
-  be noted that the more groups we have the closer the colors sampled from 
+
+  One of the advantages of using the hcl color wheel is that one can obtain
+  any number of "balanced colors" with distinct hues. This is useful in
+  encoding data with colors for a large number of groups; however, it should
+  be noted that the more groups we have the closer the colors sampled from
   the wheel become and, therefore, the more similar in appearance.
-  
-  A common way to sample distinct "balanced colors" on the hcl wheel is to 
-  choose evenly spaced hues distributed on the wheel (i.e. angles on the 
+
+  A common way to sample distinct "balanced colors" on the hcl wheel is to
+  choose evenly spaced hues distributed on the wheel (i.e. angles on the
   wheel). However, this approach leads to color sets where most colors change
-  when the sample size (i.e. the number of sampled colors from the wheel) 
-  increases by one. For loon, it is desirable to have the first \code{m} 
+  when the sample size (i.e. the number of sampled colors from the wheel)
+  increases by one. For loon, it is desirable to have the first \code{m}
   colors of a color sample of size \code{m+1} to be the same as the colors in
   a color sample of size \code{m}, for all positive natural numbers \code{m}.
-  Hence, we prefer to have a sequence of colors. This way, the colors on the 
-  inspectors stay relevant (i.e. they match with the colors of the data 
-  points) when creating plots that encode with color a data variable with 
+  Hence, we prefer to have a sequence of colors. This way, the colors on the
+  inspectors stay relevant (i.e. they match with the colors of the data
+  points) when creating plots that encode with color a data variable with
   different number of groups.
-  
-  We implemented such a color sampling scheme (or color sequence generator) 
+
+  We implemented such a color sampling scheme (or color sequence generator)
   that also makes sure that neighboring colors in the sequence have different
-  hues. In you can access this color sequence generator with 
-  \code{\link{loon_palette}}. The color wheels below show the color 
+  hues. In you can access this color sequence generator with
+  \code{\link{loon_palette}}. The color wheels below show the color
   generating sequence twice, once for 16 colors and once for 32 colors.
-  
-  \if{html}{\figure{loon_color_wheel.png}{options: alt="Loon's color 
-  mapping"}}
-  
+
+  \if{html}{\figure{loon_color_wheel.png}{options: alt="Loon's color mapping"}}
+
   Note, for the inspector: If there are more unique colors in the data points
-  than there are on the inspectors then it is possible to add the next five 
-  colors in the sequence of the colors with the \emph{+5} button. 
+  than there are on the inspectors then it is possible to add the next five
+  colors in the sequence of the colors with the \emph{+5} button.
   Alternatively, the \emph{+} button on the modify color part of the analysis
-  inspectors allows the user to pick any additional color with a color menu. 
-  Also, if you change the color mapping list and close and re-open the loon 
+  inspectors allows the user to pick any additional color with a color menu.
+  Also, if you change the color mapping list and close and re-open the loon
   inspector these new colors show up in the modify color list.
-  
-  When other color mappings of data values are required (e.g. numerical data 
+
+  When other color mappings of data values are required (e.g. numerical data
   to a color gradient) then the functions in the \code{\link[scales]{scales}}
-  R package provide various mappings including mappings for qualitative, 
+  R package provide various mappings including mappings for qualitative,
   diverging and sequential values.
 }
 \examples{
@@ -108,7 +107,7 @@ l_setColorList(c("red", "blue", "green", "orange"))
 
 l_plot(1:3, color=1:3)   # use the new color mapping
 l_plot(1:10, color=1:10) # use loons default color mapping as color list is too small
- 
+
 # reset to default
 l_setColorList(cols)
 
@@ -123,7 +122,7 @@ if (requireNamespace("scales", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link{l_setColorList}}, \code{\link{l_getColorList}}, 
+\code{\link{l_setColorList}}, \code{\link{l_getColorList}},
   \code{\link{l_setColorList_ColorBrewer}}, \code{\link{l_setColorList_hcl}},
   \code{\link{l_setColorList_baseR}}
 }

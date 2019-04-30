@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_ColorList.R
 \name{hex12tohex6}
 \alias{hex12tohex6}
-\title{Convert 12 hexadecimal digit color representations to 6 hexidecimal digit 
+\title{Convert 12 hexadecimal digit color representations to 6 hexidecimal digit
 color representations}
 \usage{
 hex12tohex6(x)
@@ -13,7 +13,7 @@ hex12tohex6(x)
 \description{
 Tk colors must be in 6 hexadecimal format with two hexadecimal
 digits for each of the red, green, and blue components.  Twelve hexadecimal digit
-colors have 4 hexadecimal digits for each.  This function converts the 12 digit format to the 6 
+colors have 4 hexadecimal digits for each.  This function converts the 12 digit format to the 6
 provided the color is preserved.
 }
 \details{

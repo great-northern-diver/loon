@@ -7,14 +7,14 @@
 l_setColorList_hcl(chroma = 56, luminance = 51, hue_start = 231)
 }
 \arguments{
-\item{chroma}{The chroma of the color. The upper bound for chroma depends on 
+\item{chroma}{The chroma of the color. The upper bound for chroma depends on
 hue and luminance.}
 
-\item{luminance}{A value in the range [0,100] giving the luminance of the 
-colour. For a given combination of hue and chroma, only a subset of this 
+\item{luminance}{A value in the range [0,100] giving the luminance of the
+colour. For a given combination of hue and chroma, only a subset of this
 range is possible.}
 
-\item{hue_start}{The start hue for sampling. The hue of the color specified 
+\item{hue_start}{The start hue for sampling. The hue of the color specified
 as an angle in the range [0,360]. 0 yields red, 120 yields green 240 yields
 blue, etc.}
 }
