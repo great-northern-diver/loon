@@ -4,21 +4,23 @@
 \alias{l_hist}
 \title{Create an interactive histogram}
 \usage{
-l_hist(x, yshows = c("frequency", "density"),
-  showStackedColors = FALSE, origin = NULL, binwidth = NULL,
-  showBinHandle = FALSE, xlabel = NULL, parent = NULL, ...)
+l_hist(x, yshows = c("frequency", "density"), showStackedColors = TRUE,
+  origin = NULL, binwidth = NULL, showBinHandle = FALSE,
+  xlabel = NULL, parent = NULL, ...)
 }
 \arguments{
 \item{x}{vector with numerical data to perform the binning onx,}
 
 \item{yshows}{one of "frequency" (default) or  "density"}
 
-\item{showStackedColors}{FALSE}
+\item{showStackedColors}{if TRUE (default) then bars will be coloured according to
+colours of the points; if FALSE, then the bars will be a uniform colour
+except for highlighted points.}
 
 \item{origin}{numeric scalar to define the binning origin}
 
 \item{binwidth}{a numeric scalar to specify the binwidth
-If NULL \code{binwidth} is set using Sturges rule when \code{x} is numeric and
+If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric and
 and using the minumum numerical difference between factor levels when \code{x}
 is a factor or a character vector.}
 
