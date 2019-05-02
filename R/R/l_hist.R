@@ -6,10 +6,12 @@
 #'
 #' @param x vector with numerical data to perform the binning onx,
 #' @param yshows one of "frequency" (default) or  "density"
-#' @param showStackedColors   FALSE
+#' @param showStackedColors  if TRUE (default) then bars will be coloured according to
+#'    colours of the points; if FALSE, then the bars will be a uniform colour
+#'    except for highlighted points.
 #' @param origin numeric scalar to define the binning origin
 #' @param binwidth a numeric scalar to specify the binwidth
-#'   If NULL \code{binwidth} is set using Sturges rule when \code{x} is numeric and
+#'   If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric and
 #'   and using the minumum numerical difference between factor levels when \code{x}
 #'   is a factor or a character vector.
 #' @param showBinHandle If \code{TRUE}, then an interactive "bin handle" appears on the plot
@@ -67,7 +69,7 @@
 
 l_hist <- function(x,
                    yshows = c("frequency", "density"),
-                   showStackedColors = FALSE,
+                   showStackedColors = TRUE,
                    origin = NULL,
                    binwidth=NULL,
                    showBinHandle = FALSE,
@@ -79,7 +81,7 @@ l_hist <- function(x,
 #' @export
 l_hist.factor <-  function(x,
                            yshows = c("frequency", "density"),
-                           showStackedColors = FALSE,
+                           showStackedColors = TRUE,
                            origin = NULL,
                            binwidth=NULL,
                            showBinHandle = FALSE,
@@ -107,7 +109,7 @@ l_hist.factor <-  function(x,
 #' @export
 l_hist.character <-  function(x,
                            yshows = c("frequency", "density"),
-                           showStackedColors = FALSE,
+                           showStackedColors = TRUE,
                            origin = NULL,
                            binwidth = NULL,
                            showBinHandle = FALSE,
@@ -127,7 +129,7 @@ l_hist.character <-  function(x,
 #' @export
 l_hist.default <-  function(x,
                             yshows = c("frequency", "density"),
-                            showStackedColors = FALSE,
+                            showStackedColors = TRUE,
                             origin = NULL,
                             binwidth = NULL,
                             showBinHandle = FALSE,
@@ -199,8 +201,11 @@ l_hist.default <-  function(x,
             }
 
         if (is.null(binwidth) | !is.numeric(binwidth)) {
+            n <- length(x)
             # Sturges rule
-            binwidth <- diff(range(x))/(1 + 3.322 * (log(length(x), base = 10)))
+            # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
+            # David Scott's rule
+            binwidth <- 3.49 * sd(x)/(n ^(1/3))
         }
 
         plot <- loonPlotFactory('::loon::histogram',
