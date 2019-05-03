@@ -50,11 +50,11 @@
 
 	my New_state showOutlines boolean 1 TRUE
 	my New_state showStackedColors boolean 1 FALSE
-	my New_state colorFill color 1 lightgrey
+	my New_state colorFill color 1 thistle
 	my New_state colorOutline color 1 black
 
 	
-	my New_state color color n thistle
+	my New_state color color n lightgrey
 	my New_state selected boolean n FALSE
 	my New_state active boolean n TRUE
 
