@@ -34,17 +34,17 @@ website at \url{http://waddella.github.io/loon/learn_R_intro.html}.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://waddella.github.io/loon/}
+  \item \url{http://rwoldford.github.io/loon/}
   \item Report bugs at \url{https://github.com/waddella/loon/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Adrian Waddell \email{adrian@waddell.ch}
+\strong{Maintainer}: R. Wayne Oldford \email{rwoldford@uwaterloo.ca} [thesis advisor]
 
 Authors:
 \itemize{
-  \item R. Wayne Oldford \email{rwoldford@uwaterloo.ca} [thesis advisor]
+  \item Adrian Waddell \email{adrian@waddell.ch}
 }
 
 Other contributors:

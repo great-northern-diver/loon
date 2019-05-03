@@ -5,10 +5,10 @@ Version: 1.2.3
 Date: 2019-04-28
 Authors@R: c(person(given = "Adrian", family = "Waddell", 
                     email = "adrian@waddell.ch", 
-                    role = c("aut", "cre")),
+                    role = c("aut")),
              person(given = "R. Wayne", family = "Oldford",
                     email = "rwoldford@uwaterloo.ca", 
-                    role = c("aut", "ths")),
+                    role = c("aut", "cre", "ths")),
              person(given = "Zehao", family = "Xu", 
                     email = "z267xu@uwaterloo.ca", 
                     role = "ctb"),
@@ -16,7 +16,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     email = "martin.gauch@student.kit.edu", 
                     role = "ctb")
              )
-URL: http://waddella.github.io/loon/
+URL: http://rwoldford.github.io/loon/
 Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2
 Depends:
