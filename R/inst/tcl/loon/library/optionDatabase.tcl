@@ -105,7 +105,8 @@ namespace eval loon {
 #			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
 #			     \#CCEBC5 \#FFED6F]
 
-    set Options(colors) [list "gray10" "lightgrey" "white" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+    set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C"  "white" "lightgrey" "#A6CEE3" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99" "#B2DF8A"]
+
     set Options(colors-palette) loon
     
     ##  ::loon::hcl::hclColorPaletteDialog 12 72 66 210
@@ -272,7 +273,8 @@ namespace eval loon {
 	
 	switch -- [string tolower $type] {
 	    loon {		
-		set Options(colors) [list "gray10"  "lightgrey" "white" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+		set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C"  "white" "lightgrey" "#A6CEE3" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99" "#B2DF8A"]
+
 		set Options(colors-palette) loon
 	    }
 	    hcl {
