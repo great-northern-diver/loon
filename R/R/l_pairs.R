@@ -550,3 +550,27 @@ xy_layout <- function(names){
     colnames(lay_out) <- c("x", "y")
     lay_out
 }
+
+
+
+#' @rdname l_getPlots
+#'
+#' @export
+l_getPlots.l_pairs <- function(target){
+    # throw errors if elements of compound are a not loon widget
+    lapply(target,
+           function(tar){l_throwErrorIfNotLoonWidget(tar) }
+    )
+    target
+}
+
+
+
+#' @rdname l_getLocations
+#'
+#' @export
+l_getLocations.l_pairs <- function(target){
+    get_arrangeGrobArgs <- l_get_arrangeGrobArgs(target)
+    get_arrangeGrobArgs$layout_matrix
+}
+

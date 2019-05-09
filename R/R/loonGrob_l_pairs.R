@@ -141,13 +141,3 @@ l_createCompoundGrob.l_pairs <- function(target, arrangeGrob.args){
     )
 }
 
-#' @export
-l_getPlots.l_pairs <- function(target){
-    target
-}
-
-#' @export
-l_getLocations.l_pairs <- function(target){
-    get_arrangeGrobArgs <- l_get_arrangeGrobArgs(target)
-    get_arrangeGrobArgs$layout_matrix
-}
