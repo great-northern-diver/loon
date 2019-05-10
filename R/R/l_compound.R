@@ -38,8 +38,7 @@ l_getPlots.loon <- function(target) {
 #'
 #' @param target the (compound) loon  plot whose locations are needed lay it out.
 #' @return a list of an appropriate subset of the named location arguments
-#' `c("ncol", "nrow", "layout_matrix", "heights", "widths")` and their values
-#'  to be passed to `gridExtra::arrangeGrob()`.  There are as many heights and
+#' `c("ncol", "nrow", "layout_matrix", "heights", "widths")`.  There are as many heights and
 #'  widths as there are plots returned by \code{l_getPlots()}; these specify
 #'  the relative height and width of each plot in the display.  \code{layout_matrix}
 #'  is an \code{nrow} by \code{ncol} matrix whose entries identify the location
