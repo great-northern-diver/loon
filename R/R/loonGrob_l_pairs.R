@@ -6,25 +6,25 @@ loonGrob_layoutType.l_pairs <- function(target) {
 
 
 #' @export
-l_get_arrangeGrobArgs.l_pairs <- function(pairsplot) {
-    nPlots <- length(pairsplot)
+l_get_arrangeGrobArgs.l_pairs <- function(target) {
+    nPlots <- length(target)
     nScatterplots <- nHistograms <- nSerialAxes <- 0
     scatterplots <- histograms <- serialAxes <- list()
-    plotNames <- names(pairsplot)
+    plotNames <- names(target)
     for(i in 1:nPlots) {
-        if("l_plot" %in% class(pairsplot[[i]])) {
+        if("l_plot" %in% class(target[[i]])) {
             nScatterplots <- nScatterplots + 1
-            scatterplots[[nScatterplots]] <- pairsplot[[i]]
+            scatterplots[[nScatterplots]] <- target[[i]]
             names(scatterplots)[nScatterplots] <- plotNames[i]
         }
-        if("l_hist" %in% class(pairsplot[[i]])) {
+        if("l_hist" %in% class(target[[i]])) {
             nHistograms <- nHistograms + 1
-            histograms[[nHistograms]] <- pairsplot[[i]]
+            histograms[[nHistograms]] <- target[[i]]
             names(histograms)[nHistograms] <- plotNames[i]
         }
-        if("l_serialaxes" %in% class(pairsplot[[i]])) {
+        if("l_serialaxes" %in% class(target[[i]])) {
             nSerialAxes <- nSerialAxes + 1
-            serialAxes[[nSerialAxes]] <- pairsplot[[i]]
+            serialAxes[[nSerialAxes]] <- target[[i]]
             names(serialAxes)[nSerialAxes] <- plotNames[i]
         }
     }
