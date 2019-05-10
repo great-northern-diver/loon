@@ -64,7 +64,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     }
 
     if (missing(linkingGroup)) {
-        linkingGroup <- deparse(substitute(data))
+        linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
     }
     if (missing(linkingKey)) {
         linkingKey <- row.names(data)
