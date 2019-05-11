@@ -249,8 +249,8 @@ l_getLocations.l_ts <- function(target){
     list(
         nrow = nPlots,
         ncol = 1,
-        layout_matrix = matrix(1:nPlots, nrow = nPlots, ncol =1),
-        heights = c(1.3, rep(1, nPlots-1)),
-        widths = rep(1, nPlots)
+       # layout_matrix = matrix(1:nPlots, nrow = nPlots, ncol =1),
+        heights = c(1.3, rep(1, nPlots-1)) #,
+       # widths = rep(1, nPlots)
     )
 }
