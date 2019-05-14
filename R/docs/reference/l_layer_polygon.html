@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -202,8 +202,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>500</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>500</span>)
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>30</span>)
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>4</span> + <span class='fl'>3</span>*<span class='no'>x</span> + <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>30</span>)
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>y</span>~<span class='no'>x</span>)
@@ -241,8 +240,104 @@
     <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>gLayer</span>, <span class='kw'>index</span><span class='kw'>=</span><span class='st'>'end'</span>
 )
 
-<span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>piLayer</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>piLayer</span>)</div><div class='output co'>#&gt; $x
+#&gt; $x$type
+#&gt; [1] "double"
+#&gt; 
+#&gt; $x$dimension
+#&gt; [1] "n"
+#&gt; 
+#&gt; $x$defaultvalue
+#&gt; [1] ""
+#&gt; 
+#&gt; $x$description
+#&gt; [1] "x coordinates"
+#&gt; 
+#&gt; 
+#&gt; $y
+#&gt; $y$type
+#&gt; [1] "double"
+#&gt; 
+#&gt; $y$dimension
+#&gt; [1] "n"
+#&gt; 
+#&gt; $y$defaultvalue
+#&gt; [1] ""
+#&gt; 
+#&gt; $y$description
+#&gt; [1] "y coordinates"
+#&gt; 
+#&gt; 
+#&gt; $tag
+#&gt; $tag$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $tag$dimension
+#&gt; [1] "any"
+#&gt; 
+#&gt; $tag$defaultvalue
+#&gt; [1] ""
+#&gt; 
+#&gt; $tag$description
+#&gt; [1] "tags useful for item bindings"
+#&gt; 
+#&gt; 
+#&gt; $itemLabel
+#&gt; $itemLabel$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $itemLabel$dimension
+#&gt; [1] "any"
+#&gt; 
+#&gt; $itemLabel$defaultvalue
+#&gt; [1] "item"  "label"
+#&gt; 
+#&gt; $itemLabel$description
+#&gt; [1] "?"
+#&gt; 
+#&gt; 
+#&gt; $color
+#&gt; $color$type
+#&gt; [1] "colorOrTransparent"
+#&gt; 
+#&gt; $color$dimension
+#&gt; [1] "1"
+#&gt; 
+#&gt; $color$defaultvalue
+#&gt; [1] ""
+#&gt; 
+#&gt; $color$description
+#&gt; [1] "fill color of polygon"
+#&gt; 
+#&gt; 
+#&gt; $linecolor
+#&gt; $linecolor$type
+#&gt; [1] "colorOrTransparent"
+#&gt; 
+#&gt; $linecolor$dimension
+#&gt; [1] "1"
+#&gt; 
+#&gt; $linecolor$defaultvalue
+#&gt; [1] "steelblue"
+#&gt; 
+#&gt; $linecolor$description
+#&gt; [1] "outline color of polygon"
+#&gt; 
+#&gt; 
+#&gt; $linewidth
+#&gt; $linewidth$type
+#&gt; [1] "positive_double"
+#&gt; 
+#&gt; $linewidth$dimension
+#&gt; [1] "1"
+#&gt; 
+#&gt; $linewidth$defaultvalue
+#&gt; [1] "1"
+#&gt; 
+#&gt; $linewidth$description
+#&gt; [1] "linewidth of outline"
+#&gt; 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

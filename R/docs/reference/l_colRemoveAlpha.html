@@ -67,7 +67,7 @@ produce colors with alpha transparency by simply using only the rgb." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -154,14 +154,12 @@ produce colors with alpha transparency by simply using only the rgb.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>l_colRemoveAlpha</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>rainbow</a></span>(<span class='fl'>6</span>))
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>l_colRemoveAlpha</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>rainbow</a></span>(<span class='fl'>6</span>))
 <span class='co'># Also works with ordinary color string representations</span>
 <span class='co'># since it just extracts the rgb values from the colors.</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>l_colRemoveAlpha</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"blue"</span>, <span class='st'>"green"</span>, <span class='st'>"orange"</span>))
-<span class='no'>x</span>
-
-<span class='co'># }</span></pre>
+<span class='no'>x</span></div><div class='output co'>#&gt; [1] "#FF0000" "#0000FF" "#00FF00" "#FFA500"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

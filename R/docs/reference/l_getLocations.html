@@ -66,7 +66,7 @@ arguments to pass to `gridExtra::arrangeGrob()`" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -141,6 +141,9 @@ arguments to pass to `gridExtra::arrangeGrob()`</p>
 
     <pre class="usage"><span class='fu'>l_getLocations</span>(<span class='no'>target</span>)
 
+<span class='co'># S3 method for l_pairs</span>
+<span class='fu'>l_getLocations</span>(<span class='no'>target</span>)
+
 <span class='co'># S3 method for l_ts</span>
 <span class='fu'>l_getLocations</span>(<span class='no'>target</span>)</pre>
     
@@ -156,10 +159,24 @@ arguments to pass to `gridExtra::arrangeGrob()`</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a list of an appropriate subset of the named location arguments
-`c("ncol", "nrow", "layout_matrix", "heights", "widths")` and their values
- to be passed to `gridExtra::arrangeGrob()`.</p>
+`c("ncol", "nrow", "layout_matrix", "heights", "widths")`.  There are as many heights and
+ widths as there are plots returned by <code><a href='l_getPlots.html'>l_getPlots()</a></code>; these specify
+ the relative height and width of each plot in the display.  <code>layout_matrix</code>
+ is an <code>nrow</code> by <code>ncol</code> matrix whose entries identify the location
+ of each plot in <code><a href='l_getPlots.html'>l_getPlots()</a></code> by their index.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()) {
+
+<span class='no'>pp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_pairs.html'>l_pairs</a></span>(<span class='no'>iris</span>, <span class='kw'>showHistograms</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>ll</span> <span class='kw'>&lt;-</span> <span class='fu'>l_getLocations</span>(<span class='no'>pp</span>)
+<span class='no'>nplots</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fu'><a href='l_getPlots.html'>l_getPlots</a></span>(<span class='no'>pp</span>))
+<span class='co'># the plots returned by l_getPlots(pp) are positioned</span>
+<span class='co'># in order by the layout_matrix</span>
+<span class='co'># ll$layout_matrix TODO</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -167,7 +184,9 @@ arguments to pass to `gridExtra::arrangeGrob()`</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -64,7 +64,7 @@ objects of class decomposed.ts" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -217,16 +217,21 @@ by name: "original", "trend", "seasonal", and "remainder".</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>decompose</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/decompose'>decompose</a></span>(<span class='no'>co2</span>)
+    <pre class="examples"><div class='input'><span class='no'>decompose</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/decompose'>decompose</a></span>(<span class='no'>co2</span>)
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>decompose</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Atmospheric carbon dioxide over Mauna Loa"</span>)
 <span class='co'># names of plots in the display</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>)
-<span class='co'># names of states associated with the seasonality plot</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>$<span class='no'>seasonal</span>)
-<span class='co'># which can be set</span>
-<span class='no'>p</span>$<span class='no'>seasonal</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='st'>"steelblue"</span>
-<span class='co'># }</span></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>)</div><div class='output co'>#&gt; [1] "original"  "trend"     "seasonal"  "remainder"</div><div class='input'><span class='co'># names of states associated with the seasonality plot</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>$<span class='no'>seasonal</span>)</div><div class='output co'>#&gt;  [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"    
+#&gt;  [5] "linkingKey"       "zoomX"            "zoomY"            "panX"            
+#&gt;  [9] "panY"             "deltaX"           "deltaY"           "xlabel"          
+#&gt; [13] "ylabel"           "title"            "showLabels"       "showScales"      
+#&gt; [17] "swapAxes"         "showGuides"       "background"       "foreground"      
+#&gt; [21] "guidesBackground" "guidelines"       "minimumMargins"   "labelMargins"    
+#&gt; [25] "scalesMargins"    "x"                "y"                "xTemp"           
+#&gt; [29] "yTemp"            "color"            "selected"         "active"          
+#&gt; [33] "size"             "tag"              "useLoonInspector" "selectBy"        
+#&gt; [37] "selectionLogic"  </div><div class='input'><span class='co'># which can be set</span>
+<span class='no'>p</span>$<span class='no'>seasonal</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='st'>"steelblue"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

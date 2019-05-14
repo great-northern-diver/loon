@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -152,11 +152,17 @@
         
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># check if R colors names and TK color names are the same</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()))
-
+    <pre class="examples"><div class='input'><span class='co'># check if R colors names and TK color names are the same</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()))</div><div class='output co'>#&gt; character(0)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()))</div><div class='output co'>#&gt;  [1] "alice"      "antique"    "blanched"   "almond"     "cadet"     
+#&gt;  [6] "cornflower" "dark"       "olive"      "sea"        "slate"     
+#&gt; [11] "deep"       "sky"        "dim"        "dodger"     "floral"    
+#&gt; [16] "forest"     "ghost"      "hot"        "indian"     "blush"     
+#&gt; [21] "lawn"       "lemon"      "chiffon"    "light"      "steel"     
+#&gt; [26] "lime"       "medium"     "spring"     "midnight"   "mint"      
+#&gt; [31] "cream"      "misty"      "rose"       "navajo"     "old"       
+#&gt; [36] "lace"       "drab"       "pale"       "papaya"     "whip"      
+#&gt; [41] "peach"      "puff"       "powder"     "rosy"       "royal"     
+#&gt; [46] "saddle"     "sandy"      "smoke"     </div><div class='input'>
 <span class='co'># hence there are currently more valid color names in Tk</span>
 <span class='co'># than there are in R</span>
 
@@ -199,8 +205,7 @@
       <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.rect'>grid.rect</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_Tcl</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>3</span>, <span class='st'>"line"</span>),
                 <span class='kw'>height</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>), <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>df_diff</span>[<span class='no'>i</span>,<span class='fl'>2</span>]))
   }
-}
-<span class='co'># }</span></pre>
+}</div><div class='img'><img src='tkcolors-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

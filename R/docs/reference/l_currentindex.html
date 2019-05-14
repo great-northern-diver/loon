@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -164,8 +164,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='kw'>color</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)
+    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='kw'>color</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)
 
 <span class='no'>printEntered</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>W</span>) {
     <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='st'>'Entered point '</span>, <span class='fu'>l_currentindex</span>(<span class='no'>W</span>), <span class='st'>'\n'</span>))
@@ -176,11 +175,9 @@
 }
 
 <span class='fu'><a href='l_bind_item.html'>l_bind_item</a></span>(<span class='no'>p</span>, <span class='kw'>tags</span><span class='kw'>=</span><span class='st'>'model&amp;&amp;point'</span>, <span class='kw'>event</span><span class='kw'>=</span><span class='st'>'&lt;Enter&gt;'</span>,
-            <span class='kw'>callback</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printEntered</span>(<span class='no'>W</span>)})
-
+            <span class='kw'>callback</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printEntered</span>(<span class='no'>W</span>)})</div><div class='output co'>#&gt; [1] "itemBinding0"</div><div class='input'>
 <span class='fu'><a href='l_bind_item.html'>l_bind_item</a></span>(<span class='no'>p</span>, <span class='kw'>tags</span><span class='kw'>=</span><span class='st'>'model&amp;&amp;point'</span>, <span class='kw'>event</span><span class='kw'>=</span><span class='st'>'&lt;Leave&gt;'</span>,
-            <span class='kw'>callback</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printLeave</span>(<span class='no'>W</span>)})
-<span class='co'># }</span></pre>
+            <span class='kw'>callback</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printLeave</span>(<span class='no'>W</span>)})</div><div class='output co'>#&gt; [1] "itemBinding1"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

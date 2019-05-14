@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -167,11 +167,57 @@ objects by their ids.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
-<span class='fu'>l_cget</span>(<span class='no'>p</span>, <span class='st'>"color"</span>)
-<span class='no'>p</span>[<span class='st'>'selected'</span>]
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
+<span class='fu'>l_cget</span>(<span class='no'>p</span>, <span class='st'>"color"</span>)</div><div class='output co'>#&gt;   [1] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;   [5] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;   [9] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [13] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [17] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [21] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [25] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [29] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [33] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [37] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [41] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [45] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1A1A1A1A1A1A"
+#&gt;  [49] "#1A1A1A1A1A1A" "#1A1A1A1A1A1A" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [53] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [57] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [61] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [65] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [69] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [73] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [77] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [81] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [85] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [89] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [93] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt;  [97] "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4" "#1F1F7878B4B4"
+#&gt; [101] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [105] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [109] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [113] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [117] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [121] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [125] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [129] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [133] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [137] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [141] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [145] "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C" "#E3E31A1A1C1C"
+#&gt; [149] "#E3E31A1A1C1C" "#E3E31A1A1C1C"</div><div class='input'><span class='no'>p</span>[<span class='st'>'selected'</span>]</div><div class='output co'>#&gt;   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt;  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [109] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [133] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [145] FALSE FALSE FALSE FALSE FALSE FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

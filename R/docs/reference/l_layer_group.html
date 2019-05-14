@@ -67,7 +67,7 @@ A group layer can contain other layers. If the group layer is
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -179,16 +179,14 @@ A group layer can contain other layers. If the group layer is
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>10</span>,<span class='fl'>1.5</span>,<span class='fl'>7</span>,<span class='fl'>4.3</span>,<span class='fl'>9</span>,<span class='fl'>5</span>,<span class='fl'>2</span>,<span class='fl'>8</span>),
+    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>10</span>,<span class='fl'>1.5</span>,<span class='fl'>7</span>,<span class='fl'>4.3</span>,<span class='fl'>9</span>,<span class='fl'>5</span>,<span class='fl'>2</span>,<span class='fl'>8</span>),
              <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>10</span>,<span class='fl'>7</span>,<span class='fl'>3</span>,<span class='fl'>4</span>,<span class='fl'>3.3</span>,<span class='fl'>8</span>,<span class='fl'>3</span>,<span class='fl'>4</span>),
              <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"Demo Layers"</span>)
 
 <span class='no'>id.g</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_group</span>(<span class='no'>p</span>, <span class='st'>"A Layer Group"</span>)
 <span class='no'>id.pts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_points.html'>l_layer_points</a></span>(<span class='no'>p</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>6</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>7</span>), <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"red"</span>, <span class='kw'>parent</span><span class='kw'>=</span><span class='no'>id.g</span>)
 <span class='fu'><a href='l_scaleto_layer.html'>l_scaleto_layer</a></span>(<span class='no'>p</span>, <span class='no'>id.pts</span>)
-<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>id.pts</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='fl'>12</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>2</span>,-<span class='fl'>5</span>,<span class='fl'>18</span>), <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"lightgray"</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>id.pts</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>,<span class='fl'>12</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>2</span>,-<span class='fl'>5</span>,<span class='fl'>18</span>), <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"lightgray"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

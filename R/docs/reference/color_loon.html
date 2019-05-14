@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -175,12 +175,9 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'>
 <span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'>color_loon</span>()
-<span class='fu'>pal</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>))
-<span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'green'</span>, <span class='st'>'yellow'</span>))
-
+<span class='fu'>pal</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])</div><div class='output co'>#&gt; [1] "#1A1A1A" "#1F78B4" "#E31A1C" "#FF7F00"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "#1A1A1A" "#1A1A1A" "#1F78B4" "#E31A1C"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'green'</span>, <span class='st'>'yellow'</span>))</div><div class='output co'>#&gt; [1] "#008000" "#FFFF00"</div><div class='input'>
 <span class='co'># show color choices for different n's</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"grid"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.newpage'>grid.newpage</a></span>()
@@ -198,9 +195,8 @@
   }
   <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.text'>grid.text</a></span>(<span class='st'>"note the fist i colors are shared for each n"</span>,
                   <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>,<span class='st'>"npc"</span>) + <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>))
-}
-
-<span class='co'># }</span></pre>
+}</div><div class='img'><img src='color_loon-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -166,11 +166,24 @@ character</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loongraph.html'>loongraph</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>4</span>], <span class='fl'>FALSE</span>)
+    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loongraph.html'>loongraph</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='no'>letters</span>[<span class='fl'>2</span>:<span class='fl'>4</span>], <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='linegraph.html'>linegraph</a></span>(<span class='no'>g</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='linegraph.html'>linegraph</a></span>(<span class='no'>g</span>)</div><div class='output co'>#&gt; $nodes
+#&gt; [1] "a:b" "b:c" "c:d"
+#&gt; 
+#&gt; $from
+#&gt; [1] "a:b" "b:c"
+#&gt; 
+#&gt; $to
+#&gt; [1] "b:c" "c:d"
+#&gt; 
+#&gt; $isDirected
+#&gt; [1] FALSE
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "loongraph"
+#&gt; attr(,"separator")
+#&gt; [1] ":"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

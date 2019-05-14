@@ -64,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -202,15 +202,12 @@ re-import them as as image glyphs using <code><a href='l_glyph_add_image.html'>l
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Simple Example with Text Glyphs</span>
+    <pre class="examples"><div class='input'><span class='co'># Simple Example with Text Glyphs</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>stearic</span>, <span class='no'>eicosenoic</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Region</span>))
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_text.html'>l_glyph_add_text</a></span>(<span class='no'>p</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>"Area"</span>)
-<span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>g</span>
-
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>g</span></div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/demo'>demo</a></span>(<span class='st'>"l_glyphs"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"loon"</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='co'># }</span><div class='input'>
 <span class='co'># create a plot that demonstrates the primitive glyphs and the text glyphs</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>15</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>0</span>,<span class='fl'>15</span>), <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>showLabels</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
 <span class='no'>text_glyph</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_text.html'>l_glyph_add_text</a></span>(<span class='no'>p</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>letters</span> [<span class='fl'>1</span>:<span class='fl'>15</span>])
@@ -220,8 +217,7 @@ re-import them as as image glyphs using <code><a href='l_glyph_add_image.html'>l
     <span class='st'>'triangle'</span>, <span class='st'>'otriangle'</span>, <span class='st'>'ctriangle'</span>,
     <span class='st'>'diamond'</span>, <span class='st'>'odiamond'</span>, <span class='st'>'cdiamond'</span>,
     <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='no'>text_glyph</span>, <span class='fl'>3</span>)
-)
-<span class='co'># }</span></pre>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -175,8 +175,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># 2d measures</span>
+    <pre class="examples"><div class='input'><span class='co'># 2d measures</span>
 <span class='co'># s &lt;- scagnostics2d(oliveAcids)</span>
 <span class='co'># nav &lt;- l_ng_ranges(s, color=olive$Area)</span>
 
@@ -187,10 +186,12 @@
      <span class='kw'>q1</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/quantile'>quantile</a></span>(<span class='no'>x</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fl'>0.25</span>)),
      <span class='kw'>q3</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/quantile'>quantile</a></span>(<span class='no'>x</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fl'>0.75</span>)))
 
-<span class='fu'>m1d</span>()
-
-<span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_ranges.html'>l_ng_ranges</a></span>(<span class='no'>m1d</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)
-<span class='co'># }</span></pre>
+<span class='fu'>m1d</span>()</div><div class='output co'>#&gt;                   mean    median        sd         q1        q3
+#&gt; Sepal.Length 0.4287037 0.4166667 0.2300184 0.22222222 0.5833333
+#&gt; Sepal.Width  0.4405556 0.4166667 0.1816110 0.33333333 0.5416667
+#&gt; Petal.Length 0.4674576 0.5677966 0.2992031 0.10169492 0.6949153
+#&gt; Petal.Width  0.4580556 0.5000000 0.3175990 0.08333333 0.7083333</div><div class='input'>
+<span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_ranges.html'>l_ng_ranges</a></span>(<span class='no'>m1d</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -223,30 +223,30 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>) <span class='co'># loon's default mapping</span>
-
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>) <span class='co'># loon's default mapping</span></div><div class='output co'>#&gt; [1] ".l122.plot"
+#&gt; attr(,"class")
+#&gt; [1] "l_plot" "loon"  </div><div class='input'>
 <span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_getColorList.html'>l_getColorList</a></span>()
 <span class='fu'>l_setColorList</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"red"</span>, <span class='st'>"blue"</span>, <span class='st'>"green"</span>, <span class='st'>"orange"</span>))
 
 <span class='co'>## close and reopen inspector</span>
 
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>)   <span class='co'># use the new color mapping</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>10</span>) <span class='co'># use loons default color mapping as color list is too small</span>
-
+<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>)   <span class='co'># use the new color mapping</span></div><div class='output co'>#&gt; [1] ".l123.plot"
+#&gt; attr(,"class")
+#&gt; [1] "l_plot" "loon"  </div><div class='input'><span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>10</span>) <span class='co'># use loons default color mapping as color list is too small</span></div><div class='output co'>#&gt; [1] ".l124.plot"
+#&gt; attr(,"class")
+#&gt; [1] "l_plot" "loon"  </div><div class='input'>
 <span class='co'># reset to default</span>
-<span class='fu'>l_setColorList</span>(<span class='no'>cols</span>)
-
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='fu'>l_setColorList</span>(<span class='no'>cols</span>)</div><span class='co'># NOT RUN {</span>
 <span class='co'># you can also perform the color mapping yourself, for example with</span>
 <span class='co'># the col_numeric function provided in the scales package</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"scales"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>p_custom</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>stearic</span> ~ <span class='no'>oleic</span>,
        <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/scales/topics/col_numeric'>col_numeric</a></span>(<span class='st'>"Greens"</span>, <span class='kw'>domain</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)(<span class='no'>palmitic</span>)))
   }
-<span class='co'># }</span># NOT RUN {
-# }
-</pre>
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

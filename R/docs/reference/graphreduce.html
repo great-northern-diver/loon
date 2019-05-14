@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -160,19 +160,31 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>G</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='completegraph.html'>completegraph</a></span>(<span class='kw'>nodes</span><span class='kw'>=</span><span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
+    <pre class="examples"><div class='input'><span class='no'>G</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='completegraph.html'>completegraph</a></span>(<span class='kw'>nodes</span><span class='kw'>=</span><span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
 <span class='no'>LG</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='linegraph.html'>linegraph</a></span>(<span class='no'>G</span>)
 
 <span class='no'>LLG</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='linegraph.html'>linegraph</a></span>(<span class='no'>LG</span>)
 
-<span class='fu'>graphreduce</span>(<span class='no'>LLG</span>)
-
+<span class='fu'>graphreduce</span>(<span class='no'>LLG</span>)</div><div class='output co'>#&gt; $nodes
+#&gt; [1] "A:B:C" "A:B:D" "A:C:D" "B:C:D"
+#&gt; 
+#&gt; $from
+#&gt;  [1] "A:B:C" "A:B:C" "A:B:C" "A:B:D" "A:B:D" "A:B:C" "A:B:D" "A:C:D" "A:C:D"
+#&gt; [10] "B:C:D"
+#&gt; 
+#&gt; $to
+#&gt;  [1] "A:B:D" "A:B:C" "A:C:D" "A:B:D" "A:C:D" "B:C:D" "B:C:D" "A:C:D" "B:C:D"
+#&gt; [10] "B:C:D"
+#&gt; 
+#&gt; $isDirected
+#&gt; [1] FALSE
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "loongraph"</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"Rgraphviz"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='fu'>graphreduce</span>(<span class='no'>LLG</span>))
-}
-
-<span class='co'># }</span></pre>
+}</div><div class='img'><img src='graphreduce-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

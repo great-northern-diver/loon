@@ -45,7 +45,7 @@ website:
 	cd website && \
 	tclsh makeWebsite.tcl &&  \
 	cd .. && \
-	rsync -av --delete website/html/ ./docs/ && \
+	rsync -av --delete website/html/ ./docs/l_help/ && \
 	rm ./docs/.gitignore
 
 debug:

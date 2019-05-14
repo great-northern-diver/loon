@@ -5,12 +5,17 @@ navbar:
   type: default
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/waddella/loon
+    href: https://github.com/great-northern-diver/loon
 
 development:
   mode: release
 
 reference:
+  - title: Package Information
+    desc:  General Information about the package
+    contents:
+    - loon
+    - l_help
   - title: Main Plotting Functions
     desc:  These are the main functions needed to create plots
     contents:
@@ -18,6 +23,8 @@ reference:
     - l_hist
     - l_pairs
     - l_serialaxes
+    - plot.loon
+    - plot.loongraph
   - title: Access Modify
     desc: Access Modify
     contents:
@@ -25,8 +32,11 @@ reference:
     - l_configure
     - l_info_states
     - l_state_names
+    - names.loon
     - l_getLinkedStates
+    - l_setLinkedStates
     - l_getOption
+    - l_setOption
     - l_userOptions
     - l_getOptionNames
     - l_getPlots
@@ -36,9 +46,12 @@ reference:
     - l_size
     - l_size<-
     - l_zoom
-  - title: Varia
-    desc: varia
+    - l_copyStates
+    - l_saveStatesRDS
+  - title: Miscellaneous
+    desc: Miscellaneous
     contents:
+    - l_resize
     - l_export
     - l_export_valid_formats
     - l_aspect<-
@@ -46,6 +59,10 @@ reference:
     - l_setAspect
     - l_subwin
     - l_widget
+    - l_setTitleFont
+    - l_getLocations
+    - l_userOptionDefault
+
   - title: Colors
     desc: Colors
     contents:
@@ -62,6 +79,7 @@ reference:
     desc: Layers
     contents:
     - starts_with("l_layer")
+    - print.l_layer
   - title: Glyphs
     desc: Glyphs
     contents:
@@ -107,6 +125,8 @@ reference:
     - grid.loon
     - condGrob
     - l_createCompoundGrob
+    - l_get_arrangeGrobArgs
+    - loonGrob_layoutType
   - title: Data
     desc: data
     contents:
@@ -120,6 +140,7 @@ reference:
     contents:
     - ends_with("inspector")
     - l_hist_inspector_analysis
+    - l_worldview
   - title: Others
     desc: others
     contents:
@@ -129,9 +150,12 @@ reference:
     - l_throwErrorIfNotLoonWidget
     - l_toR
     - l_isLoonWidget
-  - title: Measurs
+  - title: Measures
     desc: measures
     contents:
     - measures1d
     - measures2d
+    - scagnostics2d
+    - print.measures1d
+    - print.measures2d
 

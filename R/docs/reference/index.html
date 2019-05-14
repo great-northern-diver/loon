@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -132,6 +132,26 @@
     </colgroup>
 
     <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-package-information" class="hasAnchor"><a href="#section-package-information" class="anchor"></a>Package Information</h2>
+          <p class="section-desc"><p>General Information about the package</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="loon.html">loon</a></code> </p>
+        </td>
+        <td><p>loon: A Toolkit for Interactive Data Visualization and Exploration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_help.html">l_help()</a></code> </p>
+        </td>
+        <td><p>Open a browser with loon's documentation webpage</p></td>
+      </tr>
+    </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-main-plotting-functions" class="hasAnchor"><a href="#section-main-plotting-functions" class="anchor"></a>Main Plotting Functions</h2>
@@ -209,7 +229,7 @@
         <td>
           <p><code><a href="l_hist.html">l_hist()</a></code> </p>
         </td>
-        <td><p>Create an Interactive Histogram</p></td>
+        <td><p>Create an interactive histogram</p></td>
       </tr><tr>
         
         <td>
@@ -222,6 +242,18 @@
           <p><code><a href="l_serialaxes.html">l_serialaxes()</a></code> </p>
         </td>
         <td><p>Create a Serialaxes Widget</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot.loon.html">plot(<i>&lt;loon&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot the current view of any loon plot in the current device.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot.loongraph.html">plot(<i>&lt;loongraph&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot a loon graph object with base R graphics</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -257,15 +289,34 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="names.loon.html">names(<i>&lt;loon&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Get State Names of Loon Object</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_getLinkedStates.html">l_getLinkedStates()</a></code> </p>
         </td>
         <td><p>Query the States that are Linked with Loon's Standard Linking Model</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="l_setLinkedStates.html">l_setLinkedStates()</a></code> </p>
+        </td>
+        <td><p>Modify States of a Plot that are Linked in Loon's Standard Linking 
+  Model</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_getOption.html">l_getOption()</a></code> </p>
         </td>
         <td><p>Get the value of a loon display option</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setOption.html">l_setOption()</a></code> </p>
+        </td>
+        <td><p>Set the value of a loon display option</p></td>
       </tr><tr>
         
         <td>
@@ -387,15 +438,33 @@ in that compound plot.</p></td>
           <p><code><a href="l_zoom.html">l_zoom()</a></code> </p>
         </td>
         <td><p>Zoom from and towards the center</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_copyStates.html">l_copyStates()</a></code> </p>
+        </td>
+        <td><p>A generic function to transfer the values of the states of one `loon` structure to another.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_saveStatesRDS.html">l_saveStatesRDS()</a></code> </p>
+        </td>
+        <td><p>Save the info states of a loon plot widget as an RDS file</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-varia" class="hasAnchor"><a href="#section-varia" class="anchor"></a>Varia</h2>
-          <p class="section-desc"><p>varia</p></p>
+          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
+          <p class="section-desc"><p>Miscellaneous</p></p>
         </th>
       </tr>
       <tr>
+        
+        <td>
+          <p><code><a href="l_resize.html">l_resize()</a></code> </p>
+        </td>
+        <td><p>Resize Plot Widget</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="l_export.html">l_export()</a></code> </p>
@@ -438,6 +507,25 @@ in that compound plot.</p></td>
           <p><code><a href="l_widget.html">l_widget()</a></code> </p>
         </td>
         <td><p>Dummy function to be used in the Roxygen documentation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setTitleFont.html">l_setTitleFont()</a></code> </p>
+        </td>
+        <td><p>Set the title font of all loon displays</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getLocations.html">l_getLocations()</a></code> </p>
+        </td>
+        <td><p>For the target compound loon plot, determines location (only and excluding the grobs)
+arguments to pass to `gridExtra::arrangeGrob()`</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_userOptionDefault.html">l_userOptionDefault()</a></code> </p>
+        </td>
+        <td><p>Get loon's system default value for the named display option.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -828,6 +916,12 @@ color representations</p></td>
           <p><code><a href="l_layers_inspector.html">l_layers_inspector()</a></code> </p>
         </td>
         <td><p>Create a Layers Inspector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.l_layer.html">print(<i>&lt;l_layer&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print a summary of a loon layer object</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1608,7 +1702,23 @@ color representations</p></td>
           <p><code><a href="l_createCompoundGrob.html">l_createCompoundGrob()</a></code> </p>
         </td>
         <td><p>For the target compound loon plot, creates the final grob from
-the class of the `target`` and the `arrangeGrob.args`</p></td>
+the class of the `target` and the `arrangeGrob.args`</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_get_arrangeGrobArgs.html">l_get_arrangeGrobArgs()</a></code> </p>
+        </td>
+        <td><p>For the target (compound) loon plot, determines all arguments
+(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
+so as to determine the layout in `grid` graphics.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loonGrob_layoutType.html">loonGrob_layoutType()</a></code> </p>
+        </td>
+        <td><p>A generic function used to distinguish whether only the locations
+of plots will be used to arrange them in a grob, or whether
+all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1640,10 +1750,8 @@ the class of the `target`` and the `arrangeGrob.args`</p></td>
         <td>
           <p><code><a href="oliveLocations.html">oliveLocations</a></code> </p>
         </td>
-        <td><p>Locations of olive growing regions in Italy.
-
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set.</p></td>
+        <td><p>Geographic location of each Italian olive growing area
+named in the <code>olive</code> data.</p></td>
       </tr><tr>
         
         <td>
@@ -1706,6 +1814,12 @@ regions from the olive data set.</p></td>
           <p><code><a href="l_hist_inspector_analysis.html">l_hist_inspector_analysis()</a></code> </p>
         </td>
         <td><p>Create a Histogram Analysis Inspector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_worldview.html">l_worldview()</a></code> </p>
+        </td>
+        <td><p>Create a Worldview Inspector</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1754,7 +1868,7 @@ regions from the olive data set.</p></td>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-measurs" class="hasAnchor"><a href="#section-measurs" class="anchor"></a>Measurs</h2>
+          <h2 id="section-measures" class="hasAnchor"><a href="#section-measures" class="anchor"></a>Measures</h2>
           <p class="section-desc"><p>measures</p></p>
         </th>
       </tr>
@@ -1770,6 +1884,24 @@ regions from the olive data set.</p></td>
           <p><code><a href="measures2d.html">measures2d()</a></code> </p>
         </td>
         <td><p>Closure of Two Dimensional Measures</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="scagnostics2d.html">scagnostics2d()</a></code> </p>
+        </td>
+        <td><p>Closure of Two Dimensional Scagnostic Measures</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.measures1d.html">print(<i>&lt;measures1d&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print function names from measure1d object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.measures2d.html">print(<i>&lt;measures2d&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print function names from measure2d object</p></td>
       </tr>
     </tbody>
     </table>
@@ -1778,9 +1910,10 @@ regions from the olive data set.</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#section-package-information">Package Information</a></li>
       <li><a href="#section-main-plotting-functions">Main Plotting Functions</a></li>
       <li><a href="#section-access-modify">Access Modify</a></li>
-      <li><a href="#section-varia">Varia</a></li>
+      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
       <li><a href="#section-colors">Colors</a></li>
       <li><a href="#section-layering">Layering</a></li>
       <li><a href="#section-glyphs">Glyphs</a></li>
@@ -1792,7 +1925,7 @@ regions from the olive data set.</p></td>
       <li><a href="#section-data">Data</a></li>
       <li><a href="#section-inspectors">Inspectors</a></li>
       <li><a href="#section-others">Others</a></li>
-      <li><a href="#section-measurs">Measurs</a></li>
+      <li><a href="#section-measures">Measures</a></li>
     </ul>
   </div>
 </div>

@@ -1,6 +1,6 @@
 # loon 1.2.3
 
-* added l_saveStatesRDS() c
+* added l_saveStatesRDS()
     - saves named or all states to disk for later retrieval (e.g. in Rmarkdown)
 * added l_copyStates(source, target)
     - copies the info_state values of source to that of target.

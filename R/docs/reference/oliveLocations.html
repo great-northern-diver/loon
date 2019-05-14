@@ -6,10 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Locations of olive growing regions in Italy.
-
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set. — oliveLocations • loon</title>
+<title>Geographic location of each Italian olive growing area
+named in the <code><a href='olive.html'>olive</a></code> data. — oliveLocations • loon</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,14 +31,11 @@ regions from the olive data set. — oliveLocations • loon</title>
 
 
 
-<meta property="og:title" content="Locations of olive growing regions in Italy.
+<meta property="og:title" content="Geographic location of each Italian olive growing area
+named in the <code><a href='olive.html'>olive</a></code> data. — oliveLocations" />
 
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set. — oliveLocations" />
-
-<meta property="og:description" content="Locations of olive growing regions in Italy.
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set." />
+<meta property="og:description" content="A longitude and latitude for each Area
+ named in the olive data set." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -71,7 +66,7 @@ regions from the olive data set." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -131,19 +126,16 @@ regions from the olive data set." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Locations of olive growing regions in Italy.
-
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set.</h1>
+    <h1>Geographic location of each Italian olive growing area
+named in the <code><a href='olive.html'>olive</a></code> data.</h1>
     
     <div class="hidden name"><code>oliveLocations.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Locations of olive growing regions in Italy.</p>
-<p>A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set.</p>
+    <p>A longitude and latitude for each <code>Area</code>
+ named in the <code><a href='olive.html'>olive</a></code> data set.</p>
     
     </div>
 
@@ -151,7 +143,11 @@ regions from the olive data set.</p>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 9 rows and 9 variables:</p>
+    <p>A data frame containing 9 cases and 3 variates.</p><dl class='dl-horizontal'>
+ <dt>Area</dt><dd><p>name of the Italian growing area of the olive oil.</p></dd>
+ <dt>lat, long</dt><dd><p>latitude and longitude in degrees of the approximate
+ centre of the named growing area</p></dd>
+</dl>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
