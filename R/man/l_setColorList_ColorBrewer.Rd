@@ -16,8 +16,8 @@ Loon's color list is used to map nominal values to colors. See
   the documentation for \code{\link{l_setColorList}}.
 }
 \details{
-Only the following palettes in ColorBrewer are available: Set1, 
-  Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples 
+Only the following palettes in ColorBrewer are available: Set1,
+  Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples
   below.
 }
 \examples{

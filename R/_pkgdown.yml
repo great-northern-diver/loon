@@ -1,0 +1,163 @@
+home:
+  strip_header: true
+
+navbar:
+  type: default
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/great-northern-diver/loon
+
+development:
+  mode: release
+
+destination: ../docs/
+
+reference:
+  - title: Package Information
+    desc:  General Information about the package
+    contents:
+    - loon
+    - l_help
+  - title: Main Plotting Functions
+    desc:  These are the main functions needed to create plots
+    contents:
+    - starts_with("l_plot")
+    - l_hist
+    - l_pairs
+    - l_serialaxes
+    - plot.loon
+    - plot.loongraph
+  - title: Access Modify
+    desc: Access Modify
+    contents:
+    - l_cget
+    - l_configure
+    - l_info_states
+    - l_state_names
+    - names.loon
+    - l_getLinkedStates
+    - l_setLinkedStates
+    - l_getOption
+    - l_setOption
+    - l_userOptions
+    - l_getOptionNames
+    - l_getPlots
+    - starts_with("l_scale")
+    - starts_with("l_move")
+    - l_redraw
+    - l_size
+    - l_size<-
+    - l_zoom
+    - l_copyStates
+    - l_saveStatesRDS
+  - title: Miscellaneous
+    desc: Miscellaneous
+    contents:
+    - l_resize
+    - l_export
+    - l_export_valid_formats
+    - l_aspect<-
+    - l_aspect
+    - l_setAspect
+    - l_subwin
+    - l_widget
+    - l_setTitleFont
+    - l_getLocations
+    - l_userOptionDefault
+
+  - title: Colors
+    desc: Colors
+    contents:
+    - color_loon
+    - tkcolors
+    - hex12tohex6
+    - l_hexcolor
+    - l_getColorList
+    - loon_palette
+    - l_hexcolor
+    - l_colRemoveAlpha
+    - starts_with("l_setColor")
+  - title: Layering
+    desc: Layers
+    contents:
+    - starts_with("l_layer")
+    - print.l_layer
+  - title: Glyphs
+    desc: Glyphs
+    contents:
+    - starts_with("l_glyph")
+    - l_primitiveGlyphs
+    - starts_with("l_image")
+    - l_make_glyphs
+  - title: Bindings
+    desc: Bindings
+    contents:
+    - starts_with("l_bind")
+    - starts_with("l_current")
+    - l_after_idle
+  - title: Graph
+    desc: Graph
+    contents:
+    - starts_with("l_graph")
+    - as.graph
+    - as.loongraph
+    - complement
+    - complement.loongraph
+    - completegraph
+    - graphreduce
+    - loongraph
+    - linegraph
+    - linegraph.loongraph
+    - l_getGraph
+    - ndtransitiongraph
+  - title: Navigation Graphs
+    desc: Navigation
+    contents:
+    - starts_with("l_ng")
+    - starts_with("l_nav")
+    - l_create_handle
+  - title: Contexts
+    desc: Contexts are
+    contents:
+    - starts_with("l_context")
+  - title: Grid Grobs
+    desc: Grid Grobs
+    contents:
+    - loonGrob
+    - grid.loon
+    - condGrob
+    - l_createCompoundGrob
+    - l_get_arrangeGrobArgs
+    - loonGrob_layoutType
+  - title: Data
+    desc: data
+    contents:
+    - UsAndThem
+    - olive
+    - oliveAcids
+    - oliveLocations
+    - minority
+  - title: Inspectors
+    desc: inspectors
+    contents:
+    - ends_with("inspector")
+    - l_hist_inspector_analysis
+    - l_worldview
+  - title: Others
+    desc: others
+    contents:
+    - l_Rlist2nestedTclList
+    - l_nestedTclList2Rlist
+    - l_data
+    - l_throwErrorIfNotLoonWidget
+    - l_toR
+    - l_isLoonWidget
+  - title: Measures
+    desc: measures
+    contents:
+    - measures1d
+    - measures2d
+    - scagnostics2d
+    - print.measures1d
+    - print.measures2d
+

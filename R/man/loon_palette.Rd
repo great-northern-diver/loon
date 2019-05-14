@@ -14,8 +14,8 @@ vector with hexencoded color values
 }
 \description{
 Loon has a color sequence generator implemented  creates a color
-  palettes where the first \code{m} colors of a color palette of size 
-  \code{m+1} are the same as the colors in a color palette of size \code{m}, 
+  palettes where the first \code{m} colors of a color palette of size
+  \code{m+1} are the same as the colors in a color palette of size \code{m},
   for all positive natural numbers \code{m}. See the details in the
   \code{\link{l_setColorList}} documentation.
 }

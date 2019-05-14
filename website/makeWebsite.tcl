@@ -19,7 +19,7 @@ if {[set tcl_version] ne "8.6"} {
 
 set cmd [list pandoc -c style.css\
              -f markdown+header_attributes+fenced_code_blocks+line_blocks+pipe_tables\
-             -s]
+             -s --quiet]
 
 
 if {"all" in $todo || "learn" in $todo} {

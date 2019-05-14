@@ -18,3 +18,4 @@ website/md/generated/
 debug/bugs/known_bugs.html
 loon.Rcheck/
 R.Rcheck/
+/loon_*

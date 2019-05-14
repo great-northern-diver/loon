@@ -7,46 +7,46 @@
 color_loon()
 }
 \value{
-A function that takes a vector with values and maps them to a vector 
-  of 6 digit hexadecimal encoded color representation (strings). Note that 
+A function that takes a vector with values and maps them to a vector
+  of 6 digit hexadecimal encoded color representation (strings). Note that
   loon uses internally 12 digit hexadecimal encoded color values.  If all the
-  values that get passed to the function are valid color names in Tcl then 
-  those colors get returned hexencoded. Otherwise, if there is one or more 
-  elements that is not a valid color name it uses the loons default color 
+  values that get passed to the function are valid color names in Tcl then
+  those colors get returned hexencoded. Otherwise, if there is one or more
+  elements that is not a valid color name it uses the loons default color
   mapping algorithm.
 }
 \description{
-Used to map nominal data to colors. By default these colors are 
-  chosen so that the categories can be well differentiated visually (e.g. to 
+Used to map nominal data to colors. By default these colors are
+  chosen so that the categories can be well differentiated visually (e.g. to
   highlight the different groups)
 }
 \details{
-This is the function that loon uses by default to map values to 
+This is the function that loon uses by default to map values to
   colors. Loon's mapping algorithm is as follows:
-  
+
   \enumerate{
-  
+
   \item if all values already represent valid Tk colors (see
   \code{\link{tkcolors}}) then those colors are taken
-  
-  \item if the number of distinct values is less than the number of values in 
+
+  \item if the number of distinct values is less than the number of values in
   loon's color mapping list then they get mapped according to the color list,
   see \code{\link{l_setColorList}} and \code{\link{l_getColorList}}.
-  
+
   \item if there are more distinct values than there are colors in loon's color
-  mapping list then loon's own color mapping algorithm is used. See 
-  \code{\link{loon_palette}} and the details section in the documentation of 
+  mapping list then loon's own color mapping algorithm is used. See
+  \code{\link{loon_palette}} and the details section in the documentation of
   \code{\link{l_setColorList}}.
-  
+
   }
-  
-  For other mappings see the \code{\link[scales]{col_numeric}} and 
+
+  For other mappings see the \code{\link[scales]{col_numeric}} and
   \code{\link[scales]{col_factor}} functions from the scales package.
 }
 \examples{
 
 pal <- color_loon()
-pal(letters[1:4]) 
+pal(letters[1:4])
 pal(c('a','a','b','c'))
 pal(c('green', 'yellow'))
 
@@ -71,6 +71,6 @@ if (requireNamespace("grid", quietly = TRUE)) {
 
 }
 \seealso{
-\code{\link{l_setColorList}}, \code{\link{l_getColorList}}, 
+\code{\link{l_setColorList}}, \code{\link{l_getColorList}},
   \code{\link{loon_palette}}
 }
