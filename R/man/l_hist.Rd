@@ -2,17 +2,33 @@
 % Please edit documentation in R/l_hist.R
 \name{l_hist}
 \alias{l_hist}
-\title{Create an Interactive Histogram}
+\title{Create an interactive histogram}
 \usage{
-l_hist(x, origin = min(x), binwidth = NULL, parent = NULL, ...)
+l_hist(x, yshows = c("frequency", "density"), showStackedColors = TRUE,
+  origin = NULL, binwidth = NULL, showBinHandle = FALSE,
+  xlabel = NULL, parent = NULL, ...)
 }
 \arguments{
-\item{x}{vector with numerical data to perform the binning on}
+\item{x}{vector with numerical data to perform the binning onx,}
 
-\item{origin}{scalar to define the binning origin}
+\item{yshows}{one of "frequency" (default) or  "density"}
 
-\item{binwidth}{scalar to specify the binwidth, if NULL then it is set to
-\code{diff(range(x))/30} if that value is >= 0.0001 or 0.0001 otherwise}
+\item{showStackedColors}{if TRUE (default) then bars will be coloured according to
+colours of the points; if FALSE, then the bars will be a uniform colour
+except for highlighted points.}
+
+\item{origin}{numeric scalar to define the binning origin}
+
+\item{binwidth}{a numeric scalar to specify the binwidth
+If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric and
+and using the minumum numerical difference between factor levels when \code{x}
+is a factor or a character vector.}
+
+\item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
+whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
+
+\item{xlabel}{label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
+inferred from \code{x} will be made.}
 
 \item{parent}{parent widget path}
 
@@ -22,7 +38,7 @@ l_hist(x, origin = min(x), binwidth = NULL, parent = NULL, ...)
 widget handle
 }
 \description{
-Create an interactive histogram display that can be linked with
+\code{l_hist} is a generic function for creating an interactive histogram display that can be linked with
   loon's other displays
 }
 \details{

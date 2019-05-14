@@ -3,7 +3,7 @@
 \name{l_createCompoundGrob}
 \alias{l_createCompoundGrob}
 \title{For the target compound loon plot, creates the final grob from
-the class of the `target`` and the `arrangeGrob.args`}
+the class of the `target` and the `arrangeGrob.args`}
 \usage{
 l_createCompoundGrob(target, arrangeGrob.args)
 }
@@ -20,5 +20,5 @@ the compound loon plot.  Default for an `l_compound` is to simply execute
 }
 \description{
 For the target compound loon plot, creates the final grob from
-the class of the `target`` and the `arrangeGrob.args`
+the class of the `target` and the `arrangeGrob.args`
 }

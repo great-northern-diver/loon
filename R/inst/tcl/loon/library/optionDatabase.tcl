@@ -27,12 +27,12 @@ namespace eval loon {
     variable sqrt3
     set pi 3.1415926535897931
     set cos30 [expr {cos($pi/6)}]
-    set sin30 [expr {sin($pi/6)}]    
+    set sin30 [expr {sin($pi/6)}]
     set sqrt3 [expr {sqrt(3.0)}]
-    
+
     ## has some of the sizes
-    variable circle_map 
-    
+    variable circle_map
+
     proc warning {msg} {
 	puts $msg
     }
@@ -40,7 +40,7 @@ namespace eval loon {
     set Options(printConfigureDebug) FALSE
     set Options(printInConfigurationWarning) TRUE
     set Options(printInConfigurationWarningMsg) "setting loon::Options(printInConfigurationWarningMsg) to FALSE"
-    
+
     ## abbreviations for states (alias)
     set Options(abbreviations) [dict create\
 				    xlab xlabel\
@@ -55,14 +55,14 @@ namespace eval loon {
     if {[winfo screenheight .] > 750} {
 	set Options(noscrollInspector) TRUE
     } else {
-	set Options(noscrollInspector) FALSE	
+	set Options(noscrollInspector) FALSE
     }
 
     set ::loon::Options(image_scale) "::loon::image_scale"
     ## pre-calculated sizes
     set ::loon::Options(image_sizes) {1 2 3 4 5 6 7 8 9 10 15 20 40}
 
-    
+
     ## Default foreground and background color
     set Options(background) white
     set Options(foreground) black
@@ -79,22 +79,22 @@ namespace eval loon {
     set Options(font-ylabel) $Options(default-font)
     set Options(font-title) [font create {*}[font configure TkDefaultFont]]
     font configure $Options(font-title) -weight bold -size 16
-    
+
     set Options(font-scales) $Options(default-font)
     set Options(font-text_glyph) $Options(default-font)
-    
+
     set Options(export_ps_font) Helvetica
-    
-    
-    
+
+
+
     set Options(select-color) magenta
-    
+
     # suggested number of ticks per 100 pixels
-    set Options(ticks_density) 1    
+    set Options(ticks_density) 1
     set Options(tick_length) 8
 
     set Options(canvas_bg_guides) gray92
-    
+
     set Options(brush_color) lightgray
     set Options(brush_color_handle) gray
 
@@ -105,51 +105,52 @@ namespace eval loon {
 #			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
 #			     \#CCEBC5 \#FFED6F]
 
-    set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+    set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40" "white" "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey"]
+
     set Options(colors-palette) loon
-    
+
     ##  ::loon::hcl::hclColorPaletteDialog 12 72 66 210
-    
+
     ## set Options(colors) [::loon::hcl::hue_pal 12 {15 375} 72 66 210]
     set Options(colors-palette-hcl) {66 70 241}
-    
+
     set Options(size_0_rect) 3
-    
+
     set Options(fixed_guide_distance) 90
 
-   
+
     ## Mouse Meta mapping
     if {$tcl_platform(os) eq "Linux"} {
 	# on my machine Option is always pressed if NumLock is on
 	set Options(metaKeys) {Command Shift Control Alt}
     } else {
 	set Options(metaKeys) {Command Shift Control Alt Option}
-    }   
-        
+    }
+
     set Options(metaMulSel) Shift
     if {$tcl_platform(os) eq "Darwin"} {
 	set Options(metaTempMove) Control
     } else {
 	set Options(metaTempMove) Control
     }
-    
+
     set Options(defaultMetaTempMove) $Options(metaTempMove)
     set Options(defaultMetaMulSel) $Options(metaMulSel)
-    
+
     proc map_size_A {size} {
 	if {$size < 1} {
 	    return 8.0
 	} else {
 	    return [expr {12.0*$size}]
-	}	
+	}
     }
 
-    
+
     ## Glyph size mapping
-    
+
     ## A = r^2*pi
     ## r = sqrt(A/pi)
-    ## 
+    ##
     ## return r
     proc map_circle_size {size} {
 	## do not use on list anymore
@@ -161,28 +162,28 @@ namespace eval loon {
 	return $out
     }
 
-    
+
     ## A = 4s^2
     ## s = sqrt(A/4)
     ##
     ## return s
     proc map_square_size {size} {
 	set A [map_size_A $size]
-	return [expr {round(sqrt($A/4.0))}]	
+	return [expr {round(sqrt($A/4.0))}]
     }
-    
-    ## Equilateral triangle side a 
+
+    ## Equilateral triangle side a
     ## A = 1/4 a^2 sqrt(3)
     ## a = sqrt(4*A/sqrt(3))
     ##
-    ## return a/2 1/3h 2/3h    
+    ## return a/2 1/3h 2/3h
     proc map_triangle_size {size} {
 
 	set A [map_size_A $size]
 	set a2 [expr {sqrt($A/$::loon::sqrt3)}]
 	set h [expr {$a2*$::loon::sqrt3}]
-	
-	return [list $a2 [expr {$h/3.0}] [expr {$h*2.0/3}]]	
+
+	return [list $a2 [expr {$h/3.0}] [expr {$h*2.0/3}]]
     }
 
 
@@ -206,7 +207,7 @@ namespace eval loon {
 		lappend out [expr {600.0*$s}]
 	    }
 	}
-	return $out	
+	return $out
     }
 
 
@@ -235,7 +236,7 @@ namespace eval loon {
 		lappend out 2
 	    } else {
 		lappend out [expr {2 + round($s)}]
-	    } 
+	    }
 	}
 	return $out
     }
@@ -251,8 +252,8 @@ namespace eval loon {
 	}
     }
 
-    
-    
+
+
     ## scaling factor for spiro glyphs
     proc map_spiro_size {size} {
 	if {$size <=1} {
@@ -269,10 +270,11 @@ namespace eval loon {
 
     proc setColorList {type args} {
 	variable Options
-	
+
 	switch -- [string tolower $type] {
-	    loon {		
-		set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#33A02C" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
+	    loon {
+		set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40" "white" "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey"]
+
 		set Options(colors-palette) loon
 	    }
 	    hcl {
@@ -283,25 +285,25 @@ namespace eval loon {
 		} else {
 		    set hue_start 0
 		}
-		
+
 		if {![::loon::listfns::isNumeric $chroma]} {
 		    error "chroma: \"$chroma\" is not a numeric value."
 		}
-		
+
 		if {$luminance < 0 || $luminance>100} {
 		    error "luminance \"$luminance\" is not a valid value. Use a value in \[0, 100\]."
 		}
-		
+
 		if {![::loon::listfns::isNumeric $hue_start]} {
 		    error "hue_start: \"$hue_start\" is not a numeric value."
 		}
-		
+
 		## chorma, luminance, hue_start
 		set ::loon::hcl::memoisedColors ""
 		set Options(colors-palette-hcl) [list $chroma $luminance $hue_start]
 		set Options(colors) [::loon::hcl::hue_mem_pal 10 $chroma $luminance $hue_start]
-		
-		set Options(colors-palette) hcl		
+
+		set Options(colors-palette) hcl
 	    }
 	    colorbrewer {
 		set palette [lindex $args 0]
@@ -324,7 +326,7 @@ namespace eval loon {
 		    paired {
 			 # set Options(colors) [list "#A6CEE3" "#1F78B4" "#B2DF8A" "#33A02C" "#FB9A99" "#E31A1C" "#FDBF6F" "#FF7F00" "#CAB2D6" "#6A3D9A" "#FFFF99" "#B15928"]
 			 set Options(colors) [list "#1F78B4" "#33A02C" "#E31A1C" "#FF7F00" "#6A3D9A" "#B15928" "#A6CEE3" "#B2DF8A" "#FB9A99" "#FDBF6F" "#CAB2D6" "#FFFF99"]
-		    }		    
+		    }
 		    dark2 {
 			set Options(colors) [list "#1B9E77" "#D95F02" "#7570B3" "#E7298A" "#66A61E" "#E6AB02" "#A6761D" "#666666"]
 		    }
@@ -338,7 +340,7 @@ namespace eval loon {
 		    }
 		}
 		set Options(colors-palette) ColorBrewer
-		
+
 	    }
 	    ggplot2 {
 		if { [llength $args] > 0 } {
@@ -354,7 +356,7 @@ namespace eval loon {
 	    baser {
 		set Options(colors) {"#000000" "#FF0000" "#00CD00" "#0000FF" "#00FEFE" "#FF00FF" "#FFFF00" "#BEBEBE"}
 		set Options(colors-palette) baseR
-		
+
 	    }
 	    custom {
 		if {[::loon::listfns::isColor {*}$args]} {
@@ -374,9 +376,9 @@ namespace eval loon {
 	} elseif {$Options(select-color) eq "orange"} {
 	    set Options(select-color) magenta
 	}
-	
+
 	return
     }
-    
-        
+
+
 }
