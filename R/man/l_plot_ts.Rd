@@ -20,10 +20,10 @@ l_plot_ts(stlOrDecomposedTS, pcolor = NULL, size = 1, lcolor = NULL,
 
 \item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
 
-\item{xlabels}{the labels for the x axes: a length four character vector for each of the original 
+\item{xlabels}{the labels for the x axes: a length four character vector for each of the original
 time series, trend, seasonality and remainder. If \code{NULL}, xlabels is created as "time".}
 
-\item{ylabels}{the labels for the vertical axes: a length four character vector for each of the original 
+\item{ylabels}{the labels for the vertical axes: a length four character vector for each of the original
 time series, trend, seasonality and remainder. If \code{NULL}, ylabels is created based on the information provided.}
 
 \item{title}{an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".}

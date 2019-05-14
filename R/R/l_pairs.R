@@ -64,7 +64,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     }
 
     if (missing(linkingGroup)) {
-        linkingGroup <- deparse(substitute(data))
+        linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
     }
     if (missing(linkingKey)) {
         linkingKey <- row.names(data)
@@ -550,3 +550,90 @@ xy_layout <- function(names){
     colnames(lay_out) <- c("x", "y")
     lay_out
 }
+
+
+
+#' @rdname l_getPlots
+#'
+#' @export
+l_getPlots.l_pairs <- function(target){
+    # throw errors if elements of compound are a not loon widget
+    lapply(target,
+           function(tar){l_throwErrorIfNotLoonWidget(tar) }
+    )
+    target
+}
+
+
+
+
+#' @rdname l_getLocations
+#'
+#' @export
+l_getLocations.l_pairs <- function(target) {
+
+    nPlots <- length(target)
+    nScatterplots <- nHistograms <- nSerialAxes <- 0
+    scatterplots <- histograms <- serialAxes <- list()
+    plotNames <- names(target)
+    for(i in 1:nPlots) {
+        if("l_plot" %in% class(target[[i]])) {
+            nScatterplots <- nScatterplots + 1
+            scatterplots[[nScatterplots]] <- target[[i]]
+            names(scatterplots)[nScatterplots] <- plotNames[i]
+        }
+        if("l_hist" %in% class(target[[i]])) {
+            nHistograms <- nHistograms + 1
+            histograms[[nHistograms]] <- target[[i]]
+            names(histograms)[nHistograms] <- plotNames[i]
+        }
+        if("l_serialaxes" %in% class(target[[i]])) {
+            nSerialAxes <- nSerialAxes + 1
+            serialAxes[[nSerialAxes]] <- target[[i]]
+            names(serialAxes)[nSerialAxes] <- plotNames[i]
+        }
+    }
+
+    nvar <- (-1 + sqrt(1 + 8 * nScatterplots)) / 2 + 1
+    showSerialAxes <- (nSerialAxes > 0)
+    showHistograms <- (nHistograms > 0)
+
+    if(showHistograms) {
+        histLocation <- if(nHistograms == (nvar - 1) * 2) "edge" else "diag"
+        if(histLocation == "edge") {
+            cells <- nvar + 1
+        } else {
+            cells <- nvar
+        }
+    } else {
+        cells <- nvar
+    }
+
+    layout_matrix <- matrix(rep(NA, (cells)^2), nrow = cells)
+    scatter_hist <- c(scatterplots, histograms)
+
+    for(i in 1:length(scatter_hist)) {
+        nameOfScatter_hist <- names(scatter_hist[i])
+        pos <- xy_layout(nameOfScatter_hist)
+        layout_matrix[pos$y, pos$x] <- i
+    }
+
+    if(showSerialAxes) {
+        serialAxesSpan <- floor(nvar/2)
+        # square space
+        for(i in 1:serialAxesSpan) {
+            for(j in 1:serialAxesSpan) {
+                layout_matrix[cells - serialAxesSpan + i, j] <- nScatterplots + nHistograms + 1
+            }
+        }
+    }
+
+    list(
+        nrow = cells,
+        ncol = cells,
+        layout_matrix = layout_matrix,
+        heights = rep(1, cells),
+        widths = rep(1, cells)
+    )
+}
+

@@ -4,14 +4,36 @@
 \name{olive}
 \alias{olive}
 \title{Fatty Acid Composition of Italian Olive Oils}
-\format{A data frame containing 572 cases and 10 variates.}
+\format{A data frame containing 572 cases and 10 variates.
+\describe{
+ \item{Region}{Italian olive oil general growing region: North, South, or Sardinia}
+ \item{Area}{These are "Administrative Regions" of Italy (e.g. Sicily, or Umbria), or parts of such a region like
+ "Coastal-Sardinia" and "Inland-Sardinia" or "North-Apulia" and "South-Apulia". Administrative regions are larger
+ than, and contain, Italian provinces.}
+ \item{palmitic}{Percentage (in hundredths of a percent) of Palmitic acid, or hexadecanoic acid in the olive oil.
+ It is the most common saturated fatty acid found in animals, plants and micro-organisms.}
+ \item{palmitoleic}{Percentage (in hundredths of a percent) of Palmitoleic acid, an omega-7 monounsaturated fatty acid.}
+ \item{stearic}{Percentage (in hundredths of a percent) of Stearic acid, a saturated fatty acid. It is a waxy solid and
+ its name comes from the Greek word for tallow. Like palmitic acid, it is
+ one of the most common saturated fatty acids found in nature.}
+ \item{oleic}{Percentage (in hundredths of a percent) of Oleic acid, the most common fatty acid occurring in nature found in
+ various animal and vegetable fats and oils.}
+ \item{linoleic}{Percentage (in hundredths of a percent) of Linoleic acid, a polyunsaturated omega-6 fatty acid.
+ It is one of two essential fatty acids for humans.}
+ \item{linolenic}{Percentage (in hundredths of a percent) of Linolenic acid, a type of fatty acid. It can refer to one
+ of two types of fatty acids or a mixture of both.  One is an omega-3 essential fatty acid; the other an omega-6.}
+ \item{arachidic}{Percentage (in hundredths of a percent) of Arachidic acid, also known as eicosanoic acid, a saturated fatty acid
+ that is used for the production of detergents, photographic materials and lubricants.}
+ \item{eicosenoic}{Percentage (in hundredths of a percent) of Eicosenoic acid, which may refer to one of three closely related
+ fatty acids: gadoleic acid (omega-11), gondoic acid (omega-9), or paullinic acid (omega-7). }
+}
+Note that the percentages (in hundredths of a percent) should sum to approximately 10,000 for each oil (row).}
 \usage{
 olive
 }
 \description{
 This data set records the percentage composition of 8 fatty
-  acids (palmitic, palmitoleic, stearic, oleic, linoleic, linolenic,
-  arachidic, eicosenoic) found in the lipid fraction of 572 Italian olive
+  acids found in the lipid fraction of 572 Italian olive
   oils. The oils are samples taken from three Italian regions varying number
   of areas within each region.  The regions and their areas are recorded as
   shown in the following table:
@@ -25,5 +47,10 @@ Forina, M., Armanino, C., Lanteri, S., and Tiscornia, E. (1983)
   "Classification of Olive Oils from their Fatty Acid Composition", in Food
   Research and Data Analysis (Martens, H., Russwurm, H., eds.), p. 189,
   Applied Science Publ., Barking.
+
+  Wikipedia \url{https://en.wikipedia.org/}
+}
+\seealso{
+\code{\link{oliveLocations}}
 }
 \keyword{datasets}

@@ -4,7 +4,18 @@
 \name{UsAndThem}
 \alias{UsAndThem}
 \title{Data to re-create Hans Rosling's famous "Us and Them" animation}
-\format{A data frame with 9855 rows and 8 variables}
+\format{A data frame with 9855 rows and 8 variables
+\describe{
+ \item{Country}{country name}
+ \item{Year}{year of recorded measurements}
+ \item{Population}{country's population}
+ \item{LifeExpectancy}{average life expectancy in years at birth}
+ \item{Fertility}{in number of babies per woman}
+ \item{Income}{Gross domestic product per person adjusted for inflation and purchasing power
+ (in international dollars)}
+ \item{Geographic.Region}{one of six large global regions}
+ \item{Geographic.Region.ID}{two letter identification of country}
+}}
 \source{
 \url{http://www.gapminder.org/}
 }

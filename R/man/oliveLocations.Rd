@@ -3,11 +3,14 @@
 \docType{data}
 \name{oliveLocations}
 \alias{oliveLocations}
-\title{Locations of olive growing regions in Italy.
-
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set.}
-\format{A data frame with 9 rows and 9 variables:}
+\title{Geographic location of each Italian olive growing area
+named in the \code{\link{olive}} data.}
+\format{A data frame containing 9 cases and 3 variates.
+\describe{
+ \item{Area}{name of the Italian growing area of the olive oil.}
+ \item{lat, long}{latitude and longitude in degrees of the approximate
+ centre of the named growing area}
+}}
 \source{
 \url{https://www.latlong.net}
 }
@@ -15,10 +18,8 @@ regions from the olive data set.}
 oliveLocations
 }
 \description{
-Locations of olive growing regions in Italy.
-
-A dataset containing the latitude and longitude of the nine growing
-regions from the olive data set.
+A longitude and latitude for each \code{Area}
+ named in the \code{\link{olive}} data set.
 }
 \seealso{
 \code{\link{olive}}
