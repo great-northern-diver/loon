@@ -125,7 +125,7 @@ l_get_arrangeGrobArgs.l_compound <- function(target){
 
 
 #' For the target compound loon plot, creates the final grob from
-#' the class of the `target`` and the `arrangeGrob.args`
+#' the class of the `target` and the `arrangeGrob.args`
 #'
 #' @param target the (compound) loon  plot
 #' @param arrangeGrob.args arguments as described by `gridExtra::arrangeGrob()`

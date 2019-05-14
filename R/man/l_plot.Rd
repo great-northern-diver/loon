@@ -25,11 +25,13 @@ widget handle
 }
 \details{
 \ifelse{html}{
-\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
-  which can be accessed via the <code>l_help()</code> function call. </div>
+\out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon
+  it is recommended to follow the introductory loon vignette <code>vignette(topic = "introduction", package  = "loon")</code>
+  and to explore loon's website accessible via <code>l_help()</code>. </div>
 }}{
-To get started with loon it is recommended to read loons website
-  which can be accessed via the \code{l_help()} function call.
+To get started with loon it is recommended to follow the introductory loon vignette
+\code{vignette(topic = "introduction", package  = "loon")}
+  and to explore loon's website accessible via \code{l_help()}.
 }
 
 

@@ -4,7 +4,30 @@
 \name{minority}
 \alias{minority}
 \title{Canadian Visible Minority Data 2006}
-\format{A data frame with 33 rows and 18 variates}
+\format{A data frame with 33 rows and 18 variates
+\describe{
+ \item{Arab}{Number identifying as `Arab`.}
+ \item{Black}{Number identifying as `Black`.}
+ \item{Chinese}{Number identifying as `Chinese`.}
+ \item{Filipino}{Number identifying as `Filipino`.}
+ \item{Japanese}{Number identifying as `Japanese`.}
+ \item{Korean}{Number identifying as `Korean`.}
+ \item{Latin.American}{Number identifying as `Latin American`.}
+ \item{Multiple.visible.minority}{Number identifying as being a member
+ of more than one visible minority.}
+ \item{South.Asian}{Number identifying as `South Asian`.}
+ \item{Southeast.Asian}{Number identifying as `Southeast Asian`.}
+ \item{Total.population}{Total population of the metropolitan census area.}
+ \item{Visible.minority.not.included.elsewhere}{Number identifying as a
+ member of a visible minority that was not included elsewhere.}
+ \item{Visible.minority.population}{Total number identifying as a
+ member of some visible minority.}
+ \item{West.Asian}{Number identifying as `West Asian`.}
+ \item{lat, long}{Latitude and longitude (in degrees) of the metropolitan census area.}
+ \item{googleLat, googleLong}{Latitude and longitude in degrees determined
+ using the Google Maps Geocoding API.}
+}
+\code{rownames(minority)} are the names of the metropolitan areas or cities.}
 \source{
 \url{https://www.statcan.gc.ca/}
 }
@@ -12,17 +35,11 @@
 minority
 }
 \description{
-This data contains information about the visible minority
-  populations distributed across major census metropolitan areas of Canada.
+Population census count of various named
+  visible minority groups in each of 33 major census metropolitan
+  areas of Canada in 2006.
+
   These data are from the 2006 Canadian census, publicly available from
-  Statistics Canada Statistics Canada (2006). For each of the 33 Canadian
-  census metropolitan areas, we have the total population and the population
-  Implemen- tation of all its "visible minorities". These self-declared
-  visible minorities are: "Arab", "Black", "Chinese", "Filipino", "Japanese",
-  "Korean", "Latin American", "Multiple visible minority", "South Asian",
-  "Southeast Asian", "Visible minority (not included elsewhere)", and "West
-  Asian". For each metropolitan area, we also obtained the approximate
-  latitude and longitude coordinates using the Google Maps Geocoding API and
-  added them to the data set.
+  Statistics Canada.
 }
 \keyword{datasets}

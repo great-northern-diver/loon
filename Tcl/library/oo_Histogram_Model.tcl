@@ -54,7 +54,7 @@
 	my New_state colorOutline color 1 black
 
 	
-	my New_state color color n steelblue
+	my New_state color color n lightgrey
 	my New_state selected boolean n FALSE
 	my New_state active boolean n TRUE
 
