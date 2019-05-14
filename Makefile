@@ -42,6 +42,7 @@ rinst:
 	$(RINSTCMD) loon_1.2.3.tar.gz
 
 website:
+	rsync -av --delete R/vignettes/images/ ./docs/articles/images && \
 	cd website && \
 	tclsh makeWebsite.tcl &&  \
 	cd .. && \
