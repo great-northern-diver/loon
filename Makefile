@@ -46,7 +46,7 @@ website:
 	tclsh makeWebsite.tcl &&  \
 	cd .. && \
 	rsync -av --delete website/html/ ./docs/l_help/ && \
-	rm ./docs/.gitignore
+	rm ./docs/l_help/.gitignore 
 
 debug:
 	tclsh8.6 debug.tcl

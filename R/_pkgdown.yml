@@ -10,6 +10,8 @@ navbar:
 development:
   mode: release
 
+destination: ../docs/
+
 reference:
   - title: Package Information
     desc:  General Information about the package
