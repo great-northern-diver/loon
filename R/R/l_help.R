@@ -18,6 +18,7 @@
 #'
 #' \dontrun{
 #' l_help()
+#' l_help("learn_R_intro")
 #' l_help("learn_R_display_hist")
 #' l_help("learn_R_bind")
 #' # jump to a section
