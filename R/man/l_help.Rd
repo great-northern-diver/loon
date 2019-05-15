@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_help.R
 \name{l_help}
 \alias{l_help}
-\title{Open a browser with loon's documentation webpage}
+\title{Open a browser with loon's combined (TCL and R) documentation website}
 \usage{
 l_help(page = "index", ...)
 }
@@ -13,8 +13,8 @@ l_help(page = "index", ...)
 }
 \description{
 \code{l_help} opens a browser with the relevant page on the
-  official loon documentation website at 
-  \url{http://waddella.github.io/loon/}.
+  official combined loon documentation website at
+  \url{http://great-northern-diver.github.io/loon/}.
 }
 \examples{
 
@@ -25,4 +25,8 @@ l_help("learn_R_bind")
 # jump to a section
 l_help("learn_R_bind.html#list-reorder-delete-bindings")
 }
+}
+\seealso{
+\code{help}, \code{l_web} for \code{R} manual or
+web \code{R} manual
 }
