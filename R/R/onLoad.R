@@ -18,7 +18,7 @@
 .onLoad <- function(libname, pkgname) {
 
     if (as.character(tcl('set', 'tcl_version'))!="8.6") {
-        stop("Tcl version 8.6 required. See: http://waddella.github.io/loon/beta.html")
+        stop("Tcl version 8.6 required.")
         ## tclRequire('TclOO') > done by pkgIndex.tcl
         ## .Tcl("
         ##      proc lmap {_var list body} {

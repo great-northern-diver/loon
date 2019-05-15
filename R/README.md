@@ -9,5 +9,5 @@ install.packages("loon")
 
 ## Web Documentation
 
-In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](http://great-northern-diver.github.io/loon/l_help).
+In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](http://great-northern-diver.github.io/loon/).
 
