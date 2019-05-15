@@ -51,7 +51,7 @@ dict with ::loon::data::olive {
 ~~~
 
 For more information please read the *learn* section in the
-[web manual](http://waddella.github.io/loon/learn_Tcl_intro.html).
+[web manual](http://great-northern-diver.github.io/loon/l_help/learn_Tcl_intro.html).
 
 
 # Fast Image Resizing for Image Point Glyphs
