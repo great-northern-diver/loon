@@ -14,7 +14,7 @@ or with the Terminal.
 We have two documentation websites
 
 * `Tcl` and `R` documentation [here](http://great-northern-diver.github.io/loon/l_help)
-* `R` manual [here](http://great-northern-diver.github.io/loon/l_help)
+* `R` manual [here](http://great-northern-diver.github.io/loon/)
 
 
 
