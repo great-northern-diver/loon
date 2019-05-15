@@ -17,7 +17,7 @@
 #' @importFrom utils browseURL
 #' @export
 #'
-#' @seealso \code{l_help},\code{help}, \code{vignette}
+#' @seealso \code{\link{l_help}},\code{\link{help}}, \code{\link{vignette}}
 #' @examples
 #'
 #' \dontrun{

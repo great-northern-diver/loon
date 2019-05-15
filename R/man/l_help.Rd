@@ -28,6 +28,6 @@ l_help("learn_R_bind.html#list-reorder-delete-bindings")
 }
 }
 \seealso{
-\code{help}, \code{l_web} for \code{R} manual or
+\code{\link{help}}, \code{\link{l_web}} for \code{R} manual or
 web \code{R} manual
 }

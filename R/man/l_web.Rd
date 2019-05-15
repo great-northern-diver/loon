@@ -37,5 +37,5 @@ l_web(page = "l_hist", directory = "reference")
 }
 }
 \seealso{
-\code{l_help},\code{help}, \code{vignette}
+\code{\link{l_help}},\code{\link{help}}, \code{\link{vignette}}
 }

@@ -12,7 +12,7 @@
 #' @importFrom utils browseURL
 #' @export
 #'
-#' @seealso \code{help}, \code{l_web} for \code{R} manual or
+#' @seealso \code{\link{help}}, \code{\link{l_web}} for \code{R} manual or
 #' web \code{R} manual
 #' @examples
 #'
