@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>serialaxes display - loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -88,46 +80,53 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">serialaxes display - loon</h1>
-</header>
-<nav id="TOC" role="doc-toc">
+</div>
+<div id="TOC">
 <ul>
 <li><a href="#serialaxes">Serialaxes</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
 <li><a href="#data-scaling">Data Scaling</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_serialaxes").className += " selected";
     setLearnUrl("display_serialaxes");
 }
 </script>
-<p><img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" /></p>
+
+<div class="figure">
+<img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" />
+</div>
 <pre><code>s &lt;- l_serialaxes(data=oliveAcids, color=olive$Area, title=&quot;olive data&quot;)</code></pre>
-<p><img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" /></p>
+<div class="figure">
+<img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" />
+</div>
 <pre><code>s[&#39;axesLayout&#39;] &lt;- &#39;parallel&#39;</code></pre>
 <h1 id="serialaxes">Serialaxes</h1>
 <ul>
 <li><p>Get the state names with</p>
-<pre><code>  states &lt;- l_info_states(s)
-  names(states)</code></pre></li>
+<pre><code>states &lt;- l_info_states(s)
+names(states)</code></pre></li>
 <li><p>Query a state, say <code>sequence</code>, as follows</p>
-<pre><code>  s[&#39;sequence&#39;]</code></pre></li>
+<pre><code>s[&#39;sequence&#39;]</code></pre></li>
 <li><p>Change a state, say again <code>sequence</code>, as follows</p>
-<pre><code>  s[&#39;sequence&#39;] &lt;- names(olive)[c(2:10)]</code></pre>
+<pre><code>s[&#39;sequence&#39;] &lt;- names(olive)[c(2:10)]</code></pre>
 <p>alternatively, and more efficient if you modify more than one state, use</p>
-<pre><code>  l_configure(s, sequence=c(&#39;stearic&#39;, &#39;linoleic&#39;, &#39;palmitic&#39;, &#39;arachidic&#39;))</code></pre>
-<p><img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" /></p></li>
+<pre><code>l_configure(s, sequence=c(&#39;stearic&#39;, &#39;linoleic&#39;, &#39;palmitic&#39;, &#39;arachidic&#39;))</code></pre>
+<div class="figure">
+<img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" />
+</div></li>
 <li><p>When creating a plot you may specify any state at plot creation</p>
-<pre><code>  s1 &lt;- l_serialaxes(data=olive, color=olive$Area, title=&quot;olive data&quot;,
-      sequence=names(olive)[2:10])</code></pre></li>
+<pre><code>s1 &lt;- l_serialaxes(data=olive, color=olive$Area, title=&quot;olive data&quot;,
+    sequence=names(olive)[2:10])</code></pre></li>
 <li><p>details on a state, say <code>sequence</code>, is easily had with</p>
-<pre><code>  states &lt;- l_info_states(s)
-  states$sequence</code></pre>
+<pre><code>states &lt;- l_info_states(s)
+states$sequence</code></pre>
 <p>and a particular field</p>
-<pre><code>  states$sequence$description</code></pre></li>
+<pre><code>states$sequence$description</code></pre></li>
 </ul>
 <h1 id="good-to-know">Good To Know</h1>
 <ul>

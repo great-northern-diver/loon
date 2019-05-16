@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>learn_Tcl_states</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -68,21 +60,22 @@ document.getElementById("learn_Tcl").className += " selected";
 var language = "Tcl";
 </script>
 </div>
-<nav id="TOC" role="doc-toc">
+<div id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#query-and-modify">Query and Modify</a></li>
 <li><a href="#state-dimension">State Dimension</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_states").className += " selected";
     setLearnUrl("states");
 }
 </script>
+
 <h1 id="introduction">Introduction</h1>
-<p>All of <code>loon</code>’s displays have plot states. Plot states specify what is displayed, how it is displayed and if and how the plot is linked with other <code>loon</code> plots. <code>loon</code>’s plot states are derived from <code>Tk</code>’s configurable options. A large part of <code>loon</code>’s framework revolves around modifying states, tracking state changes and the synchronization of plot states between plots.</p>
+<p>All of <code>loon</code>'s displays have plot states. Plot states specify what is displayed, how it is displayed and if and how the plot is linked with other <code>loon</code> plots. <code>loon</code>'s plot states are derived from <code>Tk</code>'s configurable options. A large part of <code>loon</code>'s framework revolves around modifying states, tracking state changes and the synchronization of plot states between plots.</p>
 <p>For example, the plot states of the scatterplot display include <code>x</code>, <code>y</code>, <code>color</code>, <code>size</code>, <code>selected</code>, <code>xlabel</code>, <code>ylabel</code>, <code>zoomX</code>, <code>zoomY</code>, <code>panX</code>, <code>panY</code>, <code>showScales</code> and <code>showGuides</code>. The scatterplot display has more than 30 states.</p>
 <p>To get a complete list of the plot states for a particular <code>loon</code> widget use the <code>info states</code> widget subcommand</p>
 <pre><code>set p [plot -x {1 2 3} -y {3 2 1}]
@@ -100,7 +93,7 @@ l_cget(p, &#39;showScales&#39;)</code></pre>
 <p>To modify a single or multiple states use one the <code>configure</code> subcommand</p>
 <pre><code>$p configure -showScales TRUE -showLabels TRUE</code></pre>
 <h1 id="state-dimension">State Dimension</h1>
-<p>The dimension of a state is either explicit, i.e. a number, or abstract, i.e. a letter.</p>
+<p>The dimension of a state is either explicit, i.e. a number, or abstract, i.e. a letter.</p>
 <ul>
 <li><p>Abstract dimensions take on a value at plot creation time.</p></li>
 <li><p>The value of abstract dimensions can be changed when changing the dominant states for a dimension together. The dominant states for the displays are: <code>x</code> for the histogram, <code>x</code> and <code>y</code> for the scatterplot, <code>data</code> for the serialaxes display, and for the graph display <code>nodes</code> is dominant for <code>n</code> dimensional states and <code>from</code> and <code>to</code> are dominant for the <code>p</code> dimensional states.</p>
