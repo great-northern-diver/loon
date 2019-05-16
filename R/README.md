@@ -1,6 +1,8 @@
 
 ## loon  <img src="man/figures/logo.png" align="right" width="120" />
 
+[![Build Status](https://travis-ci.org/rwoldford/loon.svg?branch=master)](https://travis-ci.org/rwoldford/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
+
 loon is an extendible interactive data visualization system designed for exploratory visualization.
 
 Though primarily for exploratory data analysis, it can also be used to develop new interactive analysis and teaching tools. Some sense of the breadth of application and possible extensions can be seen in the various vignettes, demos, and examples in the documentation. 
