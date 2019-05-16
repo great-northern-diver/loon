@@ -1,7 +1,7 @@
 
 ## loon  <img src="man/figures/logo.png" align="right" width="120" />
 
-[![Build Status](https://travis-ci.org/rwoldford/loon.svg?branch=master)](https://travis-ci.org/rwoldford/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
+[![Build Status](https://travis-ci.org/great-northern-diver/loon.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
 
 loon is an extendible interactive data visualization system designed for exploratory visualization.
 
