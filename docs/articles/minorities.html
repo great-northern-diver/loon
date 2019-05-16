@@ -11,6 +11,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Analysis: Visible minorities in Canadian cities">
 <meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -30,17 +31,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/introduction.html">Intro</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -53,26 +51,23 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Rmarkdown.html">Loon in RMarkdown</a>
+      <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="../articles/introduction.html">Introduction to loon</a>
+      <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
-      <a href="../articles/minorities.html">Analysis: Visible minorities in Canadian cities</a>
+      <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
     </li>
     <li>
-      <a href="../articles/teaching-example-smoothing.html">Smoothers and Bone Mineral Density</a>
+      <a href="../articles/Rmarkdown.html">Using with Rmarkdown</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/waddella/loon">
+  <a href="https://github.com/great-northern-diver/loon">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -92,7 +87,7 @@
       <h1>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-03-24</h4>
+            <h4 class="date">2019-05-15</h4>
       
       
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -104,11 +99,11 @@
 <div id="illustrates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#illustrates" class="anchor"></a>Illustrates:</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(loon)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(loon)</code></pre></div>
 <ol style="list-style-type: decimal">
 <li>linked histograms and scatterplots</li>
 <li>interactive maps as scatterplots</li>
-<li>plots with multiple layers including nested group layers’</li>
+<li>plots with multiple layers including nested group layers</li>
 <li>serial axes plots</li>
 <li>serial axes glyphs</li>
 </ol>
@@ -116,11 +111,11 @@
 <div id="the-minority-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#the-minority-data" class="anchor"></a>The <code>minority</code> data</h1>
-<p>Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of ``visible minorities’’ within 33 Canadian cities. All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).</p>
+<p>Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of “visible minorities” within 33 Canadian cities. All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).</p>
 <p>The data are part of the <code>loon</code> package and can be accessed through the <code><a href="https://www.rdocumentation.org/packages/utils/topics/data">data(...)</a></code> command.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(minority)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(minority)</code></pre></div>
 <p>The data are arranged as a <code>data.frame</code> of <code>nrow(minority) =</code> 33 Canadian cities with <code>ncol(minority) =</code> 18 measurements on each. The first 14 variates are Statistics Canada census numbers of people according to a declared <code>visible minority</code> together with the population of that <code>city</code>. The possibilities are</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority)[<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority)[<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>]</code></pre></div>
 <pre><code>##  [1] "Arab"                                   
 ##  [2] "Black"                                  
 ##  [3] "Chinese"                                
@@ -230,7 +225,7 @@
 </tr>
 </tbody>
 </table>
-<p>The remaining variates provide the geographic location of each city. The latitude and longitude of the cities were determined in two ways. First, the data in <code>canada.cities</code> from the <code>maps</code> package was used. This produced the <code>minority</code> variates <code>lat' and</code>long’. The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates <code>googleLat</code> and <code>googleLong</code>.</p>
+<p>The remaining variates provide the geographic location of each city. The latitude and longitude of the cities were determined in two ways. First, the data in <code>canada.cities</code> from the <code>maps</code> package was used. This produced the <code>minority</code> variates <code>lat</code> and <code>long</code>. The second approach was to use the Google maps API to geocode the city names; the resulting coordinates are the variates <code>googleLat</code> and <code>googleLong</code>.</p>
 <p>To see if they agree we plot them against one another.</p>
 <p><img src="minorities_files/figure-html/unnamed-chunk-2-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>Note the disagreement over the location of the city of Quebec. A check against a map reveals</p>
@@ -247,78 +242,78 @@
 <h2 class="hasAnchor">
 <a href="#populations" class="anchor"></a>Populations</h2>
 <p>We first look at the populations of the different cities:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"> hTotPop &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span> (minority,   <span class="co">## Using the "with" function</span></a>
-<a class="sourceLine" id="cb5-2" title="2">                              <span class="co">## makes for easier reading</span></a>
-<a class="sourceLine" id="cb5-3" title="3">                  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(Total.population,</a>
-<a class="sourceLine" id="cb5-4" title="4">                         <span class="dt">title =</span> <span class="st">"33 Canadian cities"</span></a>
-<a class="sourceLine" id="cb5-5" title="5">                          ) </a>
-<a class="sourceLine" id="cb5-6" title="6">                  )</a>
-<a class="sourceLine" id="cb5-7" title="7">                  <span class="co">## Save the histogram structure </span></a>
-<a class="sourceLine" id="cb5-8" title="8">                  <span class="co">## to work with later from the </span></a>
-<a class="sourceLine" id="cb5-9" title="9">                  <span class="co">## command line</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> hTotPop &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span> (minority,   ## Using the "with" function
+                              ## makes for easier reading
+                  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(Total.population,
+                         <span class="dt">title =</span> <span class="st">"33 Canadian cities"</span>
+                          ) 
+                  )
+                  ## Save the histogram structure 
+                  ## to work with later from the 
+                  ## command line</code></pre></div>
 <p>The distribution of the <code>Total.population</code> is skewed with a heavy right tail. Most Canadian cities have a relatively small population. A few cities, one in particular, has a relatively large population.</p>
-<p>Note, that this histogram has very little in the way of annotation. This can be changed interactively by making various selections in the loon inspector. Try a few of these out and observe the results in the histogram. You may also make some selections in the histogram itself. Holding the shift key down while making a selection results in a ``sticky’’ selection that allows multiple items to be selected.</p>
+<p>Note, that this histogram has very little in the way of annotation. This can be changed interactively by making various selections in the loon inspector. Try a few of these out and observe the results in the histogram. You may also make some selections in the histogram itself. Holding the shift key down while making a selection results in a “sticky” selection that allows multiple items to be selected.</p>
 <p><strong>Exercise:</strong> Check the show <code>stacked colors</code> box in order to see the bar colours. Select the two histogram bars corresponding to the three most populous cities. Change the colour of these cities to some different colour selected from the <code>Modify</code> section. Select the <code>none</code> button to unhighlight the bars and reveal the modified colour.</p>
 </div>
 <div id="percentages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#percentages" class="anchor"></a>Percentages</h2>
 <p>Given that population totals vary so much, it might be more meaningful to look at each visible minority as its percentage of the city’s population.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#  Reduce the minority data to percents of the total population</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#  in each city.</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#</span></a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5">minorityPercent &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">"Total.population"</span>])</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#  Take the opportunity to shorten the Statistics Canada </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#  names of the minorities as well:</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"% Arabic"</span>,  <span class="st">"% Black"</span>, <span class="st">"% Chinese"</span>,  </a>
-<a class="sourceLine" id="cb6-10" title="10">                            <span class="st">"% Filipino"</span>, <span class="st">"% Japanese"</span>,</a>
-<a class="sourceLine" id="cb6-11" title="11">                            <span class="st">"% Korean"</span>,  <span class="st">"% Latino"</span>, <span class="st">"% Multiple"</span>,</a>
-<a class="sourceLine" id="cb6-12" title="12">                            <span class="st">"% S. Asian"</span>,  <span class="st">"% SE Asian"</span>,  <span class="st">"% Other"</span>,</a>
-<a class="sourceLine" id="cb6-13" title="13">                            <span class="st">"% Minority"</span>, <span class="st">"% W Asian"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  Reduce the minority data to percents of the total population</span>
+<span class="co">#  in each city.</span>
+<span class="co">#</span>
+
+minorityPercent &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">"Total.population"</span>])
+
+<span class="co">#  Take the opportunity to shorten the Statistics Canada </span>
+<span class="co">#  names of the minorities as well:</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"% Arabic"</span>,  <span class="st">"% Black"</span>, <span class="st">"% Chinese"</span>,  
+                            <span class="st">"% Filipino"</span>, <span class="st">"% Japanese"</span>,
+                            <span class="st">"% Korean"</span>,  <span class="st">"% Latino"</span>, <span class="st">"% Multiple"</span>,
+                            <span class="st">"% S. Asian"</span>,  <span class="st">"% SE Asian"</span>,  <span class="st">"% Other"</span>,
+                            <span class="st">"% Minority"</span>, <span class="st">"% W Asian"</span>)</code></pre></div>
 <p>We begin by looking at the total visibility minority percentage. Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the <code>linkingGroup</code> is specified to be the string <code>"minority"</code>. This could have been any string – it merely identifies that this histogram will have its display linked with any other plot in the same <code>linkingGroup</code> .</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># The proportion of the city population that is a "visible minority"</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent<span class="op">$</span><span class="st">"% Minority"</span>,</a>
-<a class="sourceLine" id="cb7-3" title="3">       <span class="dt">title =</span> <span class="st">"% Minority in 33 Canadian cities"</span>,</a>
-<a class="sourceLine" id="cb7-4" title="4">       <span class="dt">xlabel =</span> <span class="st">"percent of population"</span>,</a>
-<a class="sourceLine" id="cb7-5" title="5">       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb7-6" title="6">       <span class="dt">yshows =</span> <span class="st">"frequency"</span>,</a>
-<a class="sourceLine" id="cb7-7" title="7">       <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb7-8" title="8">       <span class="dt">showGuides =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb7-9" title="9">       <span class="dt">showScales =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb7-10" title="10">)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The proportion of the city population that is a "visible minority"</span>
+<span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent<span class="op">$</span><span class="st">"% Minority"</span>,
+       <span class="dt">title =</span> <span class="st">"% Minority in 33 Canadian cities"</span>,
+       <span class="dt">xlabel =</span> <span class="st">"percent of population"</span>,
+       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+       <span class="dt">yshows =</span> <span class="st">"frequency"</span>,
+       <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,
+       <span class="dt">showGuides =</span> <span class="ot">TRUE</span>,
+       <span class="dt">showScales =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <p>As can be seen, the visible minority population most of these cities is less than 20% of its total population. But for two cities nearly half of the population is from some visible minority.</p>
-<p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the ‘linkingGroup’ of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/l_configure.html">l_configure</a></span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>, <span class="dt">sync =</span> <span class="st">"push"</span>)</a></code></pre></div>
+<p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the <code>linkingGroup</code> of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_configure.html">l_configure</a></span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>, <span class="dt">sync =</span> <span class="st">"push"</span>)</code></pre></div>
 <p>In either case the displays must be synchronized (<code>sync</code>) within the group. Here we choose to <code>push</code> the linked elements of the total population histogram <code>hTotPop</code> out to the other members of the group. Checking the show <code>stacked colors</code> in both histograms will reveal their shared colours. Alternatively, use selection on each histogram.</p>
 <p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible miinorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
 <div id="largest-visible-minorities" class="section level3">
 <h3 class="hasAnchor">
 <a href="#largest-visible-minorities" class="anchor"></a>Largest visible minorities</h3>
 <p>It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Now show the same for the three minority groups</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="co"># having largest percentages (in decreasing order):</span></a>
-<a class="sourceLine" id="cb9-3" title="3">groups &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minorityPercent)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]</a>
-<a class="sourceLine" id="cb9-4" title="4">largest3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sort">sort</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(minorityPercent[,groups ],</a>
-<a class="sourceLine" id="cb9-5" title="5">                             <span class="dv">2</span>, max),</a>
-<a class="sourceLine" id="cb9-6" title="6">                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb9-7" title="7">                  )[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now show the same for the three minority groups</span>
+<span class="co"># having largest percentages (in decreasing order):</span>
+groups &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minorityPercent)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]
+largest3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sort">sort</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(minorityPercent[,groups ],
+                             <span class="dv">2</span>, max),
+                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+                  )[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
 <p>and plot histograms of them</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># And now plot them</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="cf">for</span> (x <span class="cf">in</span> largest3) {</a>
-<a class="sourceLine" id="cb10-3" title="3">  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent[,x],</a>
-<a class="sourceLine" id="cb10-4" title="4">         <span class="dt">title =</span> x,</a>
-<a class="sourceLine" id="cb10-5" title="5">         <span class="dt">xlabel=</span><span class="st">"percent of population"</span>,</a>
-<a class="sourceLine" id="cb10-6" title="6">         <span class="dt">linkingGroup=</span><span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb10-7" title="7">         <span class="dt">showScales=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb10-8" title="8">         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb10-9" title="9">         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb10-10" title="10">         )</a>
-<a class="sourceLine" id="cb10-11" title="11">}</a></code></pre></div>
-<p>In decreasing order the largest three visible minorities <code>Chinese'',</code>South Asian’‘, and ``Black’’.</p>
-<p>Looking at the <code>\% Chinese'' histogram one city has nearly 20\% of its population being</code>Chinese’‘. It is the third largest city in the country.<br>
-In contrast, the city with the greatest proportion of its population being <code>South Asian'' (more than 15 \%) is one of the smallest of the 33 Canadian cities. Finally, the city having the largest percentage of</code>Black’’ inhabitants is the largest one.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And now plot them</span>
+<span class="cf">for</span> (x <span class="cf">in</span> largest3) {
+  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent[,x],
+         <span class="dt">title =</span> x,
+         <span class="dt">xlabel=</span><span class="st">"percent of population"</span>,
+         <span class="dt">linkingGroup=</span><span class="st">"minority"</span>,
+         <span class="dt">showScales=</span><span class="ot">TRUE</span>,
+         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span>
+         )
+}</code></pre></div>
+<p>In decreasing order the largest three visible minorities <code>Chinese</code>, <code>South Asian</code>, and <code>Black</code>.</p>
+<p>Looking at the <code>% Chinese</code> histogram one city has nearly 20% of its population being <code>Chinese</code>. It is the third largest city in the country.<br>
+In contrast, the city with the greatest proportion of its population being <code>South Asian</code> (more than 15%) is one of the smallest of the 33 Canadian cities. Finally, the city having the largest percentage of <code>Black</code> inhabitants is the largest one.</p>
 <p>Other relationships can be uncovered by selecting bars from different histograms. It’s worth exploring to better understand the data.</p>
 <p>Better still is to link these histograms with the cities’ geographic locations on a map of Canada.</p>
 </div>
@@ -328,31 +323,31 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#interactive-maps" class="anchor"></a>Interactive maps</h2>
 <p>We again use the data from the <code>maps</code> package but now create an interactive map by using Loon’s facility for layering various geometric objects (including map polygons) on top of a scatterplot.</p>
 <p>The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the <code>maps</code> package) are <em>layered</em> on top of the scatterplot.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">p_map &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(minority,</a>
-<a class="sourceLine" id="cb11-2" title="2">              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat,</a>
-<a class="sourceLine" id="cb11-3" title="3">                     <span class="dt">xlabel =</span> <span class="st">"longitude"</span>, <span class="dt">ylabel =</span> <span class="st">"latitude"</span>,</a>
-<a class="sourceLine" id="cb11-4" title="4">                     <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb11-5" title="5">                     <span class="dt">itemLabel =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority),</a>
-<a class="sourceLine" id="cb11-6" title="6">                     <span class="dt">showLabels =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb11-7" title="7">     )</a>
-<a class="sourceLine" id="cb11-8" title="8"></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="co"># Add the map of Canada</span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(maps)</a>
-<a class="sourceLine" id="cb11-11" title="11">landcol &lt;-<span class="st"> "cornsilk"</span></a>
-<a class="sourceLine" id="cb11-12" title="12">canada &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map, </a>
-<a class="sourceLine" id="cb11-13" title="13">                  <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"world"</span>, <span class="st">"Canada"</span>, </a>
-<a class="sourceLine" id="cb11-14" title="14">                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb11-15" title="15">                  <span class="dt">label =</span> <span class="st">"Canada"</span>,</a>
-<a class="sourceLine" id="cb11-16" title="16">                  <span class="dt">color =</span> landcol,</a>
-<a class="sourceLine" id="cb11-17" title="17">                  <span class="dt">index=</span><span class="st">"end"</span>)</a>
-<a class="sourceLine" id="cb11-18" title="18"><span class="co"># Rescale the plot to the size of the map</span></a>
-<a class="sourceLine" id="cb11-19" title="19"><span class="kw"><a href="../reference/l_scaleto_layer.html">l_scaleto_layer</a></span>(p_map, canada)</a>
-<a class="sourceLine" id="cb11-20" title="20"></a>
-<a class="sourceLine" id="cb11-21" title="21"><span class="co"># Could also add the text of the city names to the map</span></a>
-<a class="sourceLine" id="cb11-22" title="22"><span class="co"># as glyphs</span></a>
-<a class="sourceLine" id="cb11-23" title="23"><span class="kw"><a href="../reference/l_glyph_add_text.html">l_glyph_add_text</a></span>(p_map,</a>
-<a class="sourceLine" id="cb11-24" title="24">                 <span class="dt">text=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/row.names">row.names</a></span>(minority),</a>
-<a class="sourceLine" id="cb11-25" title="25">                 <span class="dt">label=</span><span class="st">"city names"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_map &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(minority,
+              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat,
+                     <span class="dt">xlabel =</span> <span class="st">"longitude"</span>, <span class="dt">ylabel =</span> <span class="st">"latitude"</span>,
+                     <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                     <span class="dt">itemLabel =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority),
+                     <span class="dt">showLabels =</span> <span class="ot">TRUE</span>)
+     )
+
+<span class="co"># Add the map of Canada</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(maps)
+landcol &lt;-<span class="st"> "cornsilk"</span>
+canada &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map, 
+                  <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"world"</span>, <span class="st">"Canada"</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                  <span class="dt">label =</span> <span class="st">"Canada"</span>,
+                  <span class="dt">color =</span> landcol,
+                  <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Rescale the plot to the size of the map</span>
+<span class="kw"><a href="../reference/l_scaleto_layer.html">l_scaleto_layer</a></span>(p_map, canada)
+
+<span class="co"># Could also add the text of the city names to the map</span>
+<span class="co"># as glyphs</span>
+<span class="kw"><a href="../reference/l_glyph_add_text.html">l_glyph_add_text</a></span>(p_map,
+                 <span class="dt">text=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/row.names">row.names</a></span>(minority),
+                 <span class="dt">label=</span><span class="st">"city names"</span>)</code></pre></div>
 <p>The map is now ready to be used in analysis. It is part of the same linking group as the histograms so selecting bars in any histogram will highlight the corresponding cities on the map. These may be <strong>identified</strong> by holding the mouse over any point in the map (provided <code>glyphs: itemlabels</code> is checked).</p>
 <p>Alternatively, the filled circle <code>glyph</code> for any city in the map can be replaced by the name of the city (since the last <code>R</code> statement above added these to the map). To <strong>change the glyph</strong>, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select <code>city names</code> from the glyph menu (next to a <code>set</code> button). Clicking on the <code>set</code> button will change the glyph of all selected cities to a text string of their name. The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.</p>
 <p>Note the map may be <strong>zoomed</strong> in on using scrolling and <strong>panned</strong> over directly on the map. Alternatively, the <strong>world view</strong> in the loon inspector may be used in the same way – dragging the scaled box around can be especially convenient. To get the map back to its original position and scale, click on the <code>scale to world</code> button in the <code>Plot</code> section of the loon inspector.</p>
@@ -363,185 +358,187 @@ In contrast, the city with the greatest proportion of its population being <code
 <h3 class="hasAnchor">
 <a href="#more-sophisticated-maps---multiple-layers" class="anchor"></a>More sophisticated maps - multiple layers</h3>
 <p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">lakecol &lt;-<span class="st"> "steelblue"</span></a>
-<a class="sourceLine" id="cb12-2" title="2"></a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="co"># Get the coordinates from the lakes database in the maps package.</span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="co"># All lakes are recorded by name, so you will need to know which</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co"># are in Canada.  You either know the names, or you might have to</span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co"># use trial and error, plotting the lakes and seeing which are inside</span></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="co"># and which are outside the country.  If the database changes,</span></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co"># the indices below will need updating.</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="co">#  </span></a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="co"># First, we'll deal with the Great Lakes:</span></a>
-<a class="sourceLine" id="cb12-11" title="11">great.lakes &lt;-<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb12-12" title="12">                    <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb12-13" title="13">                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]</a>
-<a class="sourceLine" id="cb12-14" title="14"></a>
-<a class="sourceLine" id="cb12-15" title="15"></a>
-<a class="sourceLine" id="cb12-16" title="16"><span class="co"># We can layer these directly</span></a>
-<a class="sourceLine" id="cb12-17" title="17">great.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb12-18" title="18">                              <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, great.lakes, </a>
-<a class="sourceLine" id="cb12-19" title="19">                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb12-20" title="20">                              <span class="dt">label =</span> <span class="st">"Great Lakes Water"</span>,</a>
-<a class="sourceLine" id="cb12-21" title="21">                              <span class="dt">color =</span> lakecol,</a>
-<a class="sourceLine" id="cb12-22" title="22">                              <span class="dt">index=</span><span class="st">"end"</span>    <span class="co"># Add the layer at the end so we know</span></a>
-<a class="sourceLine" id="cb12-23" title="23">                                             <span class="co"># where it is</span></a>
-<a class="sourceLine" id="cb12-24" title="24">                              )</a>
-<a class="sourceLine" id="cb12-25" title="25"></a>
-<a class="sourceLine" id="cb12-26" title="26"><span class="co"># Move the lake layer up to be above the land map</span></a>
-<a class="sourceLine" id="cb12-27" title="27"><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.layer)</a></code></pre></div>
-<p>We can also add the islands back in. This is a good example of grouping different layers together into a single ``group layer’’.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># </span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="co"># Great Lakes islands</span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="co">#</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Unnamed islands are identified by a number added to the lake name</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="co"># in which they appear</span></a>
-<a class="sourceLine" id="cb13-6" title="6"></a>
-<a class="sourceLine" id="cb13-7" title="7">uscolor &lt;-<span class="st"> "grey50"</span></a>
-<a class="sourceLine" id="cb13-8" title="8">great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb13-9" title="9">                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb13-10" title="10">                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, </a>
-<a class="sourceLine" id="cb13-11" title="11">                                                 <span class="dv">45</span><span class="op">:</span><span class="dv">52</span>,<span class="dv">54</span>,</a>
-<a class="sourceLine" id="cb13-12" title="12">                                                 <span class="dv">55</span>, <span class="dv">59</span>,</a>
-<a class="sourceLine" id="cb13-13" title="13">                                                 <span class="dv">61</span><span class="op">:</span><span class="dv">63</span>)]</a>
-<a class="sourceLine" id="cb13-14" title="14"></a>
-<a class="sourceLine" id="cb13-15" title="15">great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb13-16" title="16">                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb13-17" title="17">                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, </a>
-<a class="sourceLine" id="cb13-18" title="18">                                                 <span class="dv">53</span>,<span class="dv">56</span><span class="op">:</span><span class="dv">58</span>,</a>
-<a class="sourceLine" id="cb13-19" title="19">                                                 <span class="dv">60</span>, <span class="dv">64</span><span class="op">:</span><span class="dv">66</span>)]</a>
-<a class="sourceLine" id="cb13-20" title="20"></a>
-<a class="sourceLine" id="cb13-21" title="21"></a>
-<a class="sourceLine" id="cb13-22" title="22"><span class="co"># Now for the islands</span></a>
-<a class="sourceLine" id="cb13-23" title="23">great.lakes.islands.US.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb13-24" title="24">                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb13-25" title="25">                                           great.lakes.islands.US, </a>
-<a class="sourceLine" id="cb13-26" title="26">                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb13-27" title="27">                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (US)"</span>,</a>
-<a class="sourceLine" id="cb13-28" title="28">                                       <span class="dt">color=</span> uscolor,</a>
-<a class="sourceLine" id="cb13-29" title="29">                                       <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb13-30" title="30">                                       )</a>
-<a class="sourceLine" id="cb13-31" title="31"></a>
-<a class="sourceLine" id="cb13-32" title="32">great.lakes.islands.CA.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb13-33" title="33">                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb13-34" title="34">                                           great.lakes.islands.CA,</a>
-<a class="sourceLine" id="cb13-35" title="35">                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb13-36" title="36">                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (CA)"</span>,</a>
-<a class="sourceLine" id="cb13-37" title="37">                                       <span class="dt">color =</span> landcol,</a>
-<a class="sourceLine" id="cb13-38" title="38">                                       <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb13-39" title="39">                                       )</a>
-<a class="sourceLine" id="cb13-40" title="40"></a>
-<a class="sourceLine" id="cb13-41" title="41"><span class="co"># We can put the two sets of islands into a group; first create the group</span></a>
-<a class="sourceLine" id="cb13-42" title="42">great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </a>
-<a class="sourceLine" id="cb13-43" title="43">                                          <span class="dt">label=</span><span class="st">"Great Lakes Islands"</span>, </a>
-<a class="sourceLine" id="cb13-44" title="44">                                          <span class="dt">index=</span><span class="st">"end"</span>)</a>
-<a class="sourceLine" id="cb13-45" title="45"><span class="co"># Because it is immediately below the two sets of islands</span></a>
-<a class="sourceLine" id="cb13-46" title="46"><span class="co"># (as seen in the "Layers" inspector)</span></a>
-<a class="sourceLine" id="cb13-47" title="47"><span class="co"># we drop the islands into the group by demoting them</span></a>
-<a class="sourceLine" id="cb13-48" title="48"><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.CA.layer)</a>
-<a class="sourceLine" id="cb13-49" title="49"><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.US.layer)</a>
-<a class="sourceLine" id="cb13-50" title="50"></a>
-<a class="sourceLine" id="cb13-51" title="51"><span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span></a>
-<a class="sourceLine" id="cb13-52" title="52"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.islands.group)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lakecol &lt;-<span class="st"> "steelblue"</span>
+
+<span class="co"># Get the coordinates from the lakes database in the maps package.</span>
+<span class="co"># All lakes are recorded by name, so you will need to know which</span>
+<span class="co"># are in Canada.  You either know the names, or you might have to</span>
+<span class="co"># use trial and error, plotting the lakes and seeing which are inside</span>
+<span class="co"># and which are outside the country.  If the database changes,</span>
+<span class="co"># the indices below will need updating.</span>
+<span class="co">#  </span>
+<span class="co"># First, we'll deal with the Great Lakes:</span>
+great.lakes &lt;-<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]
+
+
+<span class="co"># We can layer these directly</span>
+great.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                              <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, great.lakes, 
+                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                              <span class="dt">label =</span> <span class="st">"Great Lakes Water"</span>,
+                              <span class="dt">color =</span> lakecol,
+                              <span class="dt">index=</span><span class="st">"end"</span>    <span class="co"># Add the layer at the end so we know</span>
+                                             <span class="co"># where it is</span>
+                              )
+
+<span class="co"># Move the lake layer up to be above the land map</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.layer)</code></pre></div>
+<p>We can also add the islands back in. This is a good example of grouping different layers together into a single “group layer”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="co"># Great Lakes islands</span>
+<span class="co">#</span>
+<span class="co"># Unnamed islands are identified by a number added to the lake name</span>
+<span class="co"># in which they appear</span>
+
+uscolor &lt;-<span class="st"> "grey50"</span>
+great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, 
+                                                 <span class="dv">45</span><span class="op">:</span><span class="dv">52</span>,<span class="dv">54</span>,
+                                                 <span class="dv">55</span>, <span class="dv">59</span>,
+                                                 <span class="dv">61</span><span class="op">:</span><span class="dv">63</span>)]
+
+great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, 
+                                                 <span class="dv">53</span>,<span class="dv">56</span><span class="op">:</span><span class="dv">58</span>,
+                                                 <span class="dv">60</span>, <span class="dv">64</span><span class="op">:</span><span class="dv">66</span>)]
+
+
+<span class="co"># Now for the islands</span>
+great.lakes.islands.US.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                           great.lakes.islands.US, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (US)"</span>,
+                                       <span class="dt">color=</span> uscolor,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+great.lakes.islands.CA.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                           great.lakes.islands.CA,
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (CA)"</span>,
+                                       <span class="dt">color =</span> landcol,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+<span class="co"># We can put the two sets of islands into a group; first create the group</span>
+great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                          <span class="dt">label=</span><span class="st">"Great Lakes Islands"</span>, 
+                                          <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Because it is immediately below the two sets of islands</span>
+<span class="co"># (as seen in the "Layers" inspector)</span>
+<span class="co"># we drop the islands into the group by demoting them</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.CA.layer)
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.US.layer)
+
+<span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.islands.group)</code></pre></div>
 <p>And we can nest groups as well. Here we put the Great Lakes and its islands together into a single group.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co">#</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co"># Create a group layer for the great lakes</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="co"># First create the group layer</span></a>
-<a class="sourceLine" id="cb14-5" title="5">great.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </a>
-<a class="sourceLine" id="cb14-6" title="6">                                   <span class="dt">label=</span><span class="st">"Great Lakes"</span>, </a>
-<a class="sourceLine" id="cb14-7" title="7">                                   <span class="dt">index=</span><span class="st">"end"</span>)</a>
-<a class="sourceLine" id="cb14-8" title="8"></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="co"># Move the group up to be next to the great.lakes.layer</span></a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.group)</a>
-<a class="sourceLine" id="cb14-11" title="11"></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co"># Demoting the great.lakes.layer puts it inside the group</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.layer)</a>
-<a class="sourceLine" id="cb14-14" title="14"></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co"># Now the islands are above the group and can be demoted</span></a>
-<a class="sourceLine" id="cb14-16" title="16"><span class="co"># to become part of it.</span></a>
-<a class="sourceLine" id="cb14-17" title="17"><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.group)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+<span class="co"># Create a group layer for the great lakes</span>
+<span class="co"># </span>
+<span class="co"># First create the group layer</span>
+great.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                   <span class="dt">label=</span><span class="st">"Great Lakes"</span>, 
+                                   <span class="dt">index=</span><span class="st">"end"</span>)
+
+<span class="co"># Move the group up to be next to the great.lakes.layer</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.group)
+
+<span class="co"># Demoting the great.lakes.layer puts it inside the group</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.layer)
+
+<span class="co"># Now the islands are above the group and can be demoted</span>
+<span class="co"># to become part of it.</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.group)</code></pre></div>
 <p>For completion we add the remaining lakes and islands.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Now the same for the boundary lakes.</span></a>
-<a class="sourceLine" id="cb15-2" title="2">other.boundary.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb15-3" title="3">                            <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb15-4" title="4">                            <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">33</span>,<span class="dv">80</span>)]</a>
-<a class="sourceLine" id="cb15-5" title="5"></a>
-<a class="sourceLine" id="cb15-6" title="6">other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb15-7" title="7">                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb15-8" title="8">                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">81</span>)] </a>
-<a class="sourceLine" id="cb15-9" title="9"></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co"># Because we know we are going to group these, we can create the group</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co"># first.</span></a>
-<a class="sourceLine" id="cb15-12" title="12"><span class="co"># </span></a>
-<a class="sourceLine" id="cb15-13" title="13">boundary.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </a>
-<a class="sourceLine" id="cb15-14" title="14">                                      <span class="dt">label=</span><span class="st">"Boundary Lakes"</span>, </a>
-<a class="sourceLine" id="cb15-15" title="15">                                      <span class="dt">index=</span><span class="st">"end"</span>)</a>
-<a class="sourceLine" id="cb15-16" title="16"></a>
-<a class="sourceLine" id="cb15-17" title="17"><span class="co"># We now add the layers directly to that group using the "parent" </span></a>
-<a class="sourceLine" id="cb15-18" title="18"><span class="co"># argument at creation time.</span></a>
-<a class="sourceLine" id="cb15-19" title="19"><span class="co"># </span></a>
-<a class="sourceLine" id="cb15-20" title="20"><span class="co"># Create the islands first this time.</span></a>
-<a class="sourceLine" id="cb15-21" title="21">other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb15-22" title="22">                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb15-23" title="23">                                           other.boundary.lakes, </a>
-<a class="sourceLine" id="cb15-24" title="24">                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb15-25" title="25">                                       <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Water"</span>,</a>
-<a class="sourceLine" id="cb15-26" title="26">                                       <span class="dt">color =</span> lakecol,</a>
-<a class="sourceLine" id="cb15-27" title="27">                                       <span class="dt">parent =</span> boundary.lakes.group,</a>
-<a class="sourceLine" id="cb15-28" title="28">                                       <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb15-29" title="29">                                       )</a>
-<a class="sourceLine" id="cb15-30" title="30"></a>
-<a class="sourceLine" id="cb15-31" title="31">other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb15-32" title="32">                                               <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb15-33" title="33">                                                   other.boundary.lakes.islands,</a>
-<a class="sourceLine" id="cb15-34" title="34">                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb15-35" title="35">                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb15-36" title="36">                                               <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Islands"</span>,</a>
-<a class="sourceLine" id="cb15-37" title="37">                                               <span class="dt">color =</span> uscolor,</a>
-<a class="sourceLine" id="cb15-38" title="38">                                               <span class="dt">parent =</span> boundary.lakes.group,</a>
-<a class="sourceLine" id="cb15-39" title="39">                                               <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb15-40" title="40">                                               )</a>
-<a class="sourceLine" id="cb15-41" title="41"></a>
-<a class="sourceLine" id="cb15-42" title="42"><span class="co"># Move the group layer up</span></a>
-<a class="sourceLine" id="cb15-43" title="43"><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, boundary.lakes.group)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now the same for the boundary lakes.</span>
+other.boundary.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                            <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                            <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">33</span>,<span class="dv">80</span>)]
+
+other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">81</span>)] 
+
+<span class="co"># Because we know we are going to group these, we can create the group</span>
+<span class="co"># first.</span>
+<span class="co"># </span>
+boundary.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                      <span class="dt">label=</span><span class="st">"Boundary Lakes"</span>, 
+                                      <span class="dt">index=</span><span class="st">"end"</span>)
+
+<span class="co"># We now add the layers directly to that group using the "parent" </span>
+<span class="co"># argument at creation time.</span>
+<span class="co"># </span>
+<span class="co"># Create the islands first this time.</span>
+other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                           other.boundary.lakes, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                       <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Water"</span>,
+                                       <span class="dt">color =</span> lakecol,
+                                       <span class="dt">parent =</span> boundary.lakes.group,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                               <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                                   other.boundary.lakes.islands,
+                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                               <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Islands"</span>,
+                                               <span class="dt">color =</span> uscolor,
+                                               <span class="dt">parent =</span> boundary.lakes.group,
+                                               <span class="dt">index=</span><span class="st">"end"</span>
+                                               )
+
+<span class="co"># Move the group layer up</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, boundary.lakes.group)</code></pre></div>
 <p>And finally, all of the large interior lakes and their islands</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">interior.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb16-2" title="2">                      <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb16-3" title="3">                      <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">22</span>, <span class="dv">25</span>, </a>
-<a class="sourceLine" id="cb16-4" title="4">                                         <span class="dv">68</span><span class="op">:</span><span class="dv">73</span>, </a>
-<a class="sourceLine" id="cb16-5" title="5">                                         <span class="dv">82</span>, <span class="dv">85</span>)]</a>
-<a class="sourceLine" id="cb16-6" title="6"></a>
-<a class="sourceLine" id="cb16-7" title="7">interior.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb16-8" title="8">                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb16-9" title="9">                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">23</span><span class="op">:</span><span class="dv">24</span>, </a>
-<a class="sourceLine" id="cb16-10" title="10">                                                 <span class="dv">26</span>, <span class="dv">74</span>, </a>
-<a class="sourceLine" id="cb16-11" title="11">                                                 <span class="dv">83</span><span class="op">:</span><span class="dv">84</span>)]</a>
-<a class="sourceLine" id="cb16-12" title="12"><span class="co"># First the group layer</span></a>
-<a class="sourceLine" id="cb16-13" title="13">interior.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, <span class="dt">label=</span><span class="st">"Interior Lakes"</span>, <span class="dt">index=</span><span class="st">"end"</span>)</a>
-<a class="sourceLine" id="cb16-14" title="14"><span class="co"># Create the interior islands first</span></a>
-<a class="sourceLine" id="cb16-15" title="15">interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb16-16" title="16">                                        <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>,</a>
-<a class="sourceLine" id="cb16-17" title="17">                                            interior.lakes.islands,</a>
-<a class="sourceLine" id="cb16-18" title="18">                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb16-19" title="19">                                        <span class="dt">label =</span> <span class="st">"Interior lakes islands"</span>,</a>
-<a class="sourceLine" id="cb16-20" title="20">                                        <span class="dt">color =</span> landcol,</a>
-<a class="sourceLine" id="cb16-21" title="21">                                        <span class="dt">parent =</span> interior.lakes.group,</a>
-<a class="sourceLine" id="cb16-22" title="22">                                        <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb16-23" title="23">                                        )</a>
-<a class="sourceLine" id="cb16-24" title="24"></a>
-<a class="sourceLine" id="cb16-25" title="25">interior.lakes.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</a>
-<a class="sourceLine" id="cb16-26" title="26">                                <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, </a>
-<a class="sourceLine" id="cb16-27" title="27">                                    interior.lakes, </a>
-<a class="sourceLine" id="cb16-28" title="28">                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb16-29" title="29">                                <span class="dt">label =</span> <span class="st">"Interior lakes"</span>,</a>
-<a class="sourceLine" id="cb16-30" title="30">                                <span class="dt">color =</span> lakecol,</a>
-<a class="sourceLine" id="cb16-31" title="31">                                <span class="dt">parent =</span> interior.lakes.group,</a>
-<a class="sourceLine" id="cb16-32" title="32">                                <span class="dt">index=</span><span class="st">"end"</span></a>
-<a class="sourceLine" id="cb16-33" title="33">                                )</a>
-<a class="sourceLine" id="cb16-34" title="34"></a>
-<a class="sourceLine" id="cb16-35" title="35"><span class="co"># And move the group layer up  </span></a>
-<a class="sourceLine" id="cb16-36" title="36"><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, interior.lakes.group)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z
+
+interior.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                      <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">22</span>, <span class="dv">25</span>, 
+                                         <span class="dv">68</span><span class="op">:</span><span class="dv">73</span>, 
+                                         <span class="dv">82</span>, <span class="dv">85</span>)]
+
+interior.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">23</span><span class="op">:</span><span class="dv">24</span>, 
+                                                 <span class="dv">26</span>, <span class="dv">74</span>, 
+                                                 <span class="dv">83</span><span class="op">:</span><span class="dv">84</span>)]
+<span class="co"># First the group layer</span>
+interior.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, <span class="dt">label=</span><span class="st">"Interior Lakes"</span>, <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Create the interior islands first</span>
+interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                        <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>,
+                                            interior.lakes.islands,
+                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                        <span class="dt">label =</span> <span class="st">"Interior lakes islands"</span>,
+                                        <span class="dt">color =</span> landcol,
+                                        <span class="dt">parent =</span> interior.lakes.group,
+                                        <span class="dt">index=</span><span class="st">"end"</span>
+                                        )
+
+interior.lakes.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                <span class="kw"><a href="https://www.rdocumentation.org/packages/maps/topics/map">map</a></span>(<span class="st">"lakes"</span>, 
+                                    interior.lakes, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                <span class="dt">label =</span> <span class="st">"Interior lakes"</span>,
+                                <span class="dt">color =</span> lakecol,
+                                <span class="dt">parent =</span> interior.lakes.group,
+                                <span class="dt">index=</span><span class="st">"end"</span>
+                                )
+
+<span class="co"># And move the group layer up  </span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, interior.lakes.group)</code></pre></div>
 <p>Now we have a more detailed map.</p>
 </div>
 </div>
@@ -550,17 +547,17 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#minority-distributions-within-city" class="anchor"></a>Minority distributions within city</h2>
 <p>There are several different visible minorities in the data set. It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.</p>
 <p>To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Back to the raw data and just rename variables</span></a>
-<a class="sourceLine" id="cb17-2" title="2">minority_star &lt;-<span class="st"> </span>minority[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
-<a class="sourceLine" id="cb17-3" title="3">    <span class="st">"Southeast.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"South.Asian"</span>, </a>
-<a class="sourceLine" id="cb17-4" title="4">    <span class="st">"Visible.minority.not.included.elsewhere"</span>,</a>
-<a class="sourceLine" id="cb17-5" title="5">     <span class="st">"Black"</span>, <span class="st">"Multiple.visible.minority"</span>, <span class="st">"Filipino"</span>,</a>
-<a class="sourceLine" id="cb17-6" title="6">    <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latin.American"</span>)]</a>
-<a class="sourceLine" id="cb17-7" title="7"></a>
-<a class="sourceLine" id="cb17-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star) &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
-<a class="sourceLine" id="cb17-9" title="9">    <span class="st">"SE.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"S.Asian"</span>, <span class="st">"Other"</span>,</a>
-<a class="sourceLine" id="cb17-10" title="10">    <span class="st">"Black"</span>, <span class="st">"Multiple"</span>, <span class="st">"Filipino"</span>, <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latino"</span></a>
-<a class="sourceLine" id="cb17-11" title="11">)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Back to the raw data and just rename variables</span>
+minority_star &lt;-<span class="st"> </span>minority[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(
+    <span class="st">"Southeast.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"South.Asian"</span>, 
+    <span class="st">"Visible.minority.not.included.elsewhere"</span>,
+     <span class="st">"Black"</span>, <span class="st">"Multiple.visible.minority"</span>, <span class="st">"Filipino"</span>,
+    <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latin.American"</span>)]
+
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star) &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(
+    <span class="st">"SE.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"S.Asian"</span>, <span class="st">"Other"</span>,
+    <span class="st">"Black"</span>, <span class="st">"Multiple"</span>, <span class="st">"Filipino"</span>, <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latino"</span>
+)</code></pre></div>
 <p>As the following few rows of this dataset show:</p>
 <table class="table">
 <thead><tr class="header">
@@ -670,9 +667,9 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#pairs-plot" class="anchor"></a>Pairs plot</h3>
 <p>It would be nice to be able to see all of these values at once to compare the cities. One possibility would be a scatterplot matrix such as that provided by the <code><a href="https://www.rdocumentation.org/packages/graphics/topics/pairs">pairs(...)</a></code> function in <code>R</code>.</p>
 <p>In <code>loon</code> there is an analogous function <code><a href="../reference/l_pairs.html">l_pairs(...)</a></code> that produces an interactive scatterplot matrix.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Loon's scatterplot matrix</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="co"># </span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="kw"><a href="../reference/l_pairs.html">l_pairs</a></span>(minority_star, <span class="dt">linkingGroup=</span><span class="st">"minority"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loon's scatterplot matrix</span>
+<span class="co"># </span>
+<span class="kw"><a href="../reference/l_pairs.html">l_pairs</a></span>(minority_star, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>)</code></pre></div>
 <p>Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)</p>
 <p>While a scatterplot matrix shows all pairs of plots and so reveals some of the multidimensional structure of the data, it does not seem to be the most useful visual representation for the purposes here.</p>
 <p>In a scatterplot matrix the focus is on the points (cities) within each pair of variates. The matrix arrangement and dynamic linking provides some means of connecting the cities across the variates.</p>
@@ -682,83 +679,83 @@ In contrast, the city with the greatest proportion of its population being <code
 <h3 class="hasAnchor">
 <a href="#serial-axes" class="anchor"></a>Serial axes</h3>
 <p>Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially. This allows all of the axes (or a great many of them) to appear in the same plot. Each city, rather than appearing as a point now appears as a series of connected line segments, where each segment connects the values of a city on neighbouring axes. Serial axes in parallel are called parallel coordinate plots and are constructed with the <code><a href="../reference/l_serialaxes.html">l_serialaxes(...)</a></code> function.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Now construct the serial axes display so that </span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="co"># the cities are laid over top of one another.</span></a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb19-4" title="4">s &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </a>
-<a class="sourceLine" id="cb19-5" title="5">                  <span class="dt">axesLayout=</span><span class="st">"parallel"</span>,</a>
-<a class="sourceLine" id="cb19-6" title="6">                  <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb19-7" title="7">                  <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),</a>
-<a class="sourceLine" id="cb19-8" title="8">                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb19-9" title="9">                  <span class="dt">linewidth=</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb19-10" title="10">                  <span class="dt">scaling =</span> <span class="st">"variable"</span>,</a>
-<a class="sourceLine" id="cb19-11" title="11">                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb19-12" title="12">                  <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), </a>
-<a class="sourceLine" id="cb19-13" title="13">                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p>This plot shows all variates at once for each city; each city is a `<code>curve'' of connected line segments.  As with all other plots in</code>loon` the serial axes plot is interactive. Placing the mouse over any curve will reveal the city. Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                  <span class="dt">axesLayout=</span><span class="st">"parallel"</span>,
+                  <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                  <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),
+                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                  <span class="dt">linewidth=</span><span class="dv">5</span>,
+                  <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                  <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), 
+                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>This plot shows all variates at once for each city; each city is a <code>curve</code> of connected line segments. As with all other plots in <code>loon</code> the serial axes plot is interactive. Placing the mouse over any curve will reveal the city. Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.</p>
 <p>In axis is scaled from 0 to 1. In this case, the scaling is done within each variable. That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis; the city with the smallest population for that visible minority becomes 0, the lowest point on the axis.</p>
 <p>For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two).</p>
 <p>For this data, a more interesting serial axes layout is the <code>radial</code> layout. Select this in the loon inspector or from the command line execute</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">s[<span class="st">"axesLayout"</span>] &lt;-<span class="st"> "radial"</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"axesLayout"</span>] &lt;-<span class="st"> "radial"</span></code></pre></div>
 <p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distibution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
 <p>These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using <code>long</code>.<br>
 First create a new scatterplot, then add serial axes as alternative glyphs for the points. To emphasize shape the glyphs are drawn filled in with <code>showArea=TRUE</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Produce grid of star glyphs</span></a>
-<a class="sourceLine" id="cb21-2" title="2">p_stars &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(minority,</a>
-<a class="sourceLine" id="cb21-3" title="3">                <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rank">rank</a></span>(long), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rank">rank</a></span>(long),</a>
-<a class="sourceLine" id="cb21-4" title="4">                       <span class="dt">title =</span> <span class="st">""</span>, </a>
-<a class="sourceLine" id="cb21-5" title="5">                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb21-6" title="6">                       <span class="dt">xlabel =</span> <span class="st">""</span>,</a>
-<a class="sourceLine" id="cb21-7" title="7">                       <span class="dt">ylabel =</span> <span class="st">""</span>,</a>
-<a class="sourceLine" id="cb21-8" title="8">                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb21-9" title="9">                       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb21-10" title="10">                       <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), </a>
-<a class="sourceLine" id="cb21-11" title="11">                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb21-12" title="12"></a>
-<a class="sourceLine" id="cb21-13" title="13">gstars &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</a>
-<a class="sourceLine" id="cb21-14" title="14">                                <span class="dt">axesLayout =</span> <span class="st">"radial"</span>,</a>
-<a class="sourceLine" id="cb21-15" title="15">                                <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb21-16" title="16">                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),</a>
-<a class="sourceLine" id="cb21-17" title="17">                                <span class="dt">scaling =</span> <span class="st">'variable'</span>,</a>
-<a class="sourceLine" id="cb21-18" title="18">                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-19" title="19">p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Produce grid of star glyphs</span>
+p_stars &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(minority,
+                <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rank">rank</a></span>(long), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rank">rank</a></span>(long),
+                       <span class="dt">title =</span> <span class="st">""</span>, 
+                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">xlabel =</span> <span class="st">""</span>,
+                       <span class="dt">ylabel =</span> <span class="st">""</span>,
+                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,
+                       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                       <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), 
+                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))
+
+gstars &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">axesLayout =</span> <span class="st">"radial"</span>,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),
+                                <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars</code></pre></div>
 <p>Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.</p>
 <p>The points could also be moved (temporarily) to a grid.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># </span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)</a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span></a>
-<a class="sourceLine" id="cb22-4" title="4">p_stars[<span class="st">'swapAxes'</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="kw"><a href="../reference/l_zoom.html">l_zoom</a></span>(p_stars, <span class="fl">.9</span>)</a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="co">#</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)
+<span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span>
+p_stars[<span class="st">"swapAxes"</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw"><a href="../reference/l_zoom.html">l_zoom</a></span>(p_stars, .<span class="dv">9</span>)
+<span class="co">#</span></code></pre></div>
 <p>Optionally we could choose to add a continuous color change emphasizing the west to east directionality. There is a <code>col_numeric</code> function in the <code>scales</code> package that will effect a continuous change in color along a spectrum.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(scales)</a>
-<a class="sourceLine" id="cb23-2" title="2">west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/scales/topics/col_numeric">col_numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"firebrick"</span>, </a>
-<a class="sourceLine" id="cb23-3" title="3">                                 <span class="st">"orange"</span>, <span class="st">"sienna"</span>,</a>
-<a class="sourceLine" id="cb23-4" title="4">                                 <span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>,</a>
-<a class="sourceLine" id="cb23-5" title="5">                                 <span class="st">"purple"</span>),</a>
-<a class="sourceLine" id="cb23-6" title="6">                               <span class="dt">domain =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb23-7" title="7">                   )(minority<span class="op">$</span>long)</a>
-<a class="sourceLine" id="cb23-8" title="8"></a>
-<a class="sourceLine" id="cb23-9" title="9"><span class="co"># Just need to color the glyphs on one of the plots</span></a>
-<a class="sourceLine" id="cb23-10" title="10"><span class="co"># since they are all linked.</span></a>
-<a class="sourceLine" id="cb23-11" title="11">s[<span class="st">'color'</span>] &lt;-<span class="st"> </span>west_east_cols</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(scales)
+west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/scales/topics/col_numeric">col_numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"firebrick"</span>, 
+                                 <span class="st">"orange"</span>, <span class="st">"sienna"</span>,
+                                 <span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>,
+                                 <span class="st">"purple"</span>),
+                               <span class="dt">domain =</span> <span class="ot">NULL</span>)
+                   )(minority<span class="op">$</span>long)
+
+<span class="co"># Just need to color the glyphs on one of the plots</span>
+<span class="co"># since they are all linked.</span>
+s[<span class="st">"color"</span>] &lt;-<span class="st"> </span>west_east_cols</code></pre></div>
 <p>Adding the glyphs to the map gives a precise geographic location for each city.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># Add some glyphs to the map,</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="co"># scale values within variates</span></a>
-<a class="sourceLine" id="cb24-3" title="3">so &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb24-4" title="4">                             <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),</a>
-<a class="sourceLine" id="cb24-5" title="5">                             <span class="dt">scaling =</span> <span class="st">'variable'</span>,</a>
-<a class="sourceLine" id="cb24-6" title="6">                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb24-7" title="7">                             <span class="dt">label=</span><span class="st">"stars"</span>)</a>
-<a class="sourceLine" id="cb24-8" title="8">p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some glyphs to the map,</span>
+<span class="co"># scale values within variates</span>
+so &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                             <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star),
+                             <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                             <span class="dt">label=</span><span class="st">"stars"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so</code></pre></div>
 <p>Unfortunately the three large cities dominate in each of these displays. All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.</p>
 <p>A better choice woule be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">s[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></a>
-<a class="sourceLine" id="cb25-2" title="2">gstars[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></a>
-<a class="sourceLine" id="cb25-3" title="3">so[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></a>
-<a class="sourceLine" id="cb25-4" title="4"></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="co"># Double the size of the glyphs on the map.</span></a>
-<a class="sourceLine" id="cb25-6" title="6">p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_map[<span class="st">"size"</span>] </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+gstars[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+so[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+
+<span class="co"># Double the size of the glyphs on the map.</span>
+p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_map[<span class="st">"size"</span>] </code></pre></div>
 <p>Looking over the map a number of interesting observations can be made. For example, regional similarities are easily seen. From the west, Victoria and Vancouver have a very similar visible minority distribution with a large Chinese percentage and then South Asian.</p>
 <p>The other two cities in British Columbia are strikingly different. The visible minority population in Abbotsford-Mission is almost entirely South Asian; the other visible minorities are nearly zero by comparison. The glyph for Kelowna shows an unusually high proportion of Japanese in comparison to the other three cities to its west.</p>
 <p>Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina. The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg’s relatively large Filipino population. The proboscis of Winnipeg’s mosquito shaped glyph draws attention to its unusually large Filipino population.</p>
@@ -773,7 +770,7 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <a href="#manually-moving-points" class="anchor"></a>Manually moving points</h3>
 <p>An interesting exercise would be to move those glyphs which most resemble each other closer together. This is best effected in the plot without the map where we had already placed the glyphs on a grid.</p>
 <p>First make sure we put them on a grid to start:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">'all'</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)</code></pre></div>
 <p>Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph. Many points can be selected at once moved by additionally holding the shift key down. In loon the shift key always indicates multiple items. In this way we can visually cluster the cities according to glyph shape.</p>
 <p><strong>Exercise:</strong> Try it. Visually cluster the glyphs. Which cities are most alike? Do the clusters correspond to spatial map regions? Can the glyphs be ordered in some way? Does this match any spatial map ordering?</p>
 </div>
@@ -781,103 +778,103 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <h3 class="hasAnchor">
 <a href="#ordering-the-axes" class="anchor"></a>Ordering the axes</h3>
 <p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construvt a pairwise ordering. We consider a few of them here.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Axis ordering methods can be found</span></a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="co"># in the pairwise coordinate visualization package</span></a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="co"># called PairViz</span></a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(PairViz)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Axis ordering methods can be found</span>
+<span class="co"># in the pairwise coordinate visualization package</span>
+<span class="co"># called PairViz</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(PairViz)</code></pre></div>
 <p>Perhaps the first thing to consider would be some measure of each pair of visible minorities. For example, suppose we consider the values for each visible minority proportion over all <span class="math inline">\(33\)</span> cities as a single <span class="math inline">\(33\)</span>-dimensional vector. The distance between these vectors will give a measure of how alike the relative population of visible minorities are across all <span class="math inline">\(33\)</span> cities.</p>
 <p>We can calculate the matrix of distances as</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># First transform minority_star to within city percentages.</span></a>
-<a class="sourceLine" id="cb28-2" title="2">minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">*</span>minority_star<span class="op">/</span>minority[,<span class="st">"Total.population"</span>]</a>
-<a class="sourceLine" id="cb28-3" title="3"></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co"># Each variate is now treated as a position in the</span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="co"># space of the cities.  We calculate the distances</span></a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="co"># between the variates.</span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co"># </span></a>
-<a class="sourceLine" id="cb28-8" title="8">VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/dist">dist</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(minority_star_percent))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First transform minority_star to within city percentages.</span>
+minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">*</span>minority_star<span class="op">/</span>minority[,<span class="st">"Total.population"</span>]
+
+<span class="co"># Each variate is now treated as a position in the</span>
+<span class="co"># space of the cities.  We calculate the distances</span>
+<span class="co"># between the variates.</span>
+<span class="co"># </span>
+VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/dist">dist</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(minority_star_percent))</code></pre></div>
 <p>Now these distances can be used to try to find a possibly better ordering of the minorities in a serial axes plot. We will use a solution to a travelling salesman problem (with unintended irony) to order the visible minorities by finding the shortest (or longest) distances between the minorities (and not the cities).</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># We will use these distances in a travelling</span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="co"># salesman problem that chooses an order to have</span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="co"># minimal distances. </span></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="co"># The appropriate function from PairViz is order_tsp(...)</span></a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="co"># </span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="co"># Placing minorities that are close to each other</span></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="co"># (in the above distance) beside each other should</span></a>
-<a class="sourceLine" id="cb29-8" title="8"><span class="co"># result in somewhat more convex shaped glyphs.</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="co"># </span></a>
-<a class="sourceLine" id="cb29-10" title="10">o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(VarDistance)</a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="co"># The order of minorities:</span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_near]</a></code></pre></div>
-<pre><code>##  [1] "Black"    "Arab"     "Latino"   "Korean"   "Japanese" "Other"   
-##  [7] "Multiple" "SE.Asian" "Filipino" "Chinese"  "S.Asian"</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># Alternatively, placing distant variates beside each</span></a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="co"># other should produce less convex shaped glyphs.</span></a>
-<a class="sourceLine" id="cb31-3" title="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb31-4" title="4">o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(<span class="op">-</span>VarDistance)</a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co"># The order of minorities:</span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_far]</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will use these distances in a travelling</span>
+<span class="co"># salesman problem that chooses an order to have</span>
+<span class="co"># minimal distances. </span>
+<span class="co"># The appropriate function from PairViz is order_tsp(...)</span>
+<span class="co"># </span>
+<span class="co"># Placing minorities that are close to each other</span>
+<span class="co"># (in the above distance) beside each other should</span>
+<span class="co"># result in somewhat more convex shaped glyphs.</span>
+<span class="co"># </span>
+o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_near]</code></pre></div>
+<pre><code>##  [1] "Other"    "Multiple" "Japanese" "Korean"   "SE.Asian" "Latino"  
+##  [7] "Arab"     "Filipino" "Black"    "Chinese"  "S.Asian"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
+<span class="co"># other should produce less convex shaped glyphs.</span>
+<span class="co"># </span>
+o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(<span class="op">-</span>VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_far]</code></pre></div>
 <pre><code>##  [1] "Multiple" "Filipino" "Arab"     "Japanese" "S.Asian"  "Other"   
 ##  [7] "Chinese"  "SE.Asian" "Black"    "Korean"   "Latino"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="co"># Now construct the serial axes display so that </span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="co"># the cities are laid over top of one another.</span></a>
-<a class="sourceLine" id="cb33-3" title="3"><span class="co"># </span></a>
-<a class="sourceLine" id="cb33-4" title="4">s_close &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </a>
-<a class="sourceLine" id="cb33-5" title="5">                        <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb33-6" title="6">                        <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],</a>
-<a class="sourceLine" id="cb33-7" title="7">                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb33-8" title="8">                        <span class="dt">linewidth=</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb33-9" title="9">                        <span class="dt">scaling =</span> <span class="st">"observation"</span>,</a>
-<a class="sourceLine" id="cb33-10" title="10">                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb33-11" title="11">                        <span class="dt">title=</span><span class="st">"Nearest minority order"</span>,</a>
-<a class="sourceLine" id="cb33-12" title="12">                        <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), </a>
-<a class="sourceLine" id="cb33-13" title="13">                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb33-14" title="14"></a>
-<a class="sourceLine" id="cb33-15" title="15">s_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </a>
-<a class="sourceLine" id="cb33-16" title="16">                      <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</a>
-<a class="sourceLine" id="cb33-17" title="17">                      <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],</a>
-<a class="sourceLine" id="cb33-18" title="18">                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb33-19" title="19">                      <span class="dt">linewidth=</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb33-20" title="20">                      <span class="dt">scaling =</span> <span class="st">"observation"</span>,</a>
-<a class="sourceLine" id="cb33-21" title="21">                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb33-22" title="22">                      <span class="dt">title=</span><span class="st">"Farthest minority order"</span>,</a>
-<a class="sourceLine" id="cb33-23" title="23">                      <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), </a>
-<a class="sourceLine" id="cb33-24" title="24">                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s_close &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                        <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                        <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],
+                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                        <span class="dt">linewidth=</span><span class="dv">5</span>,
+                        <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                        <span class="dt">title=</span><span class="st">"Nearest minority order"</span>,
+                        <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), 
+                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)
+
+s_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                      <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                      <span class="dt">sequence=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],
+                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                      <span class="dt">linewidth=</span><span class="dv">5</span>,
+                      <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                      <span class="dt">title=</span><span class="st">"Farthest minority order"</span>,
+                      <span class="dt">itemLabel=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(minority), 
+                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
 <p>Add the glyphs to the grid plot.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">gstars_near &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</a>
-<a class="sourceLine" id="cb34-2" title="2">                                <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb34-3" title="3">                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],</a>
-<a class="sourceLine" id="cb34-4" title="4">                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,</a>
-<a class="sourceLine" id="cb34-5" title="5">                                <span class="dt">label =</span> <span class="st">"Nearest"</span>,</a>
-<a class="sourceLine" id="cb34-6" title="6">                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb34-7" title="7">p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_near</a>
-<a class="sourceLine" id="cb34-8" title="8"></a>
-<a class="sourceLine" id="cb34-9" title="9">gstars_far &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</a>
-<a class="sourceLine" id="cb34-10" title="10">                                <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb34-11" title="11">                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],</a>
-<a class="sourceLine" id="cb34-12" title="12">                                <span class="dt">scaling =</span> <span class="st">'observation'</span>,</a>
-<a class="sourceLine" id="cb34-13" title="13">                                <span class="dt">label =</span> <span class="st">"Farthest"</span>,</a>
-<a class="sourceLine" id="cb34-14" title="14">                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb34-15" title="15">p_stars[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>gstars_far</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gstars_near &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],
+                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                <span class="dt">label =</span> <span class="st">"Nearest"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_near
+
+gstars_far &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],
+                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                <span class="dt">label =</span> <span class="st">"Farthest"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_far</code></pre></div>
 <p>And now on the map:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Add  glyphs to the map</span></a>
-<a class="sourceLine" id="cb35-2" title="2">so_near &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb35-3" title="3">                                  <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],</a>
-<a class="sourceLine" id="cb35-4" title="4">                                  <span class="dt">scaling =</span> <span class="st">'observation'</span>,</a>
-<a class="sourceLine" id="cb35-5" title="5">                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb35-6" title="6">                                  <span class="dt">label=</span><span class="st">"Nearest"</span>)</a>
-<a class="sourceLine" id="cb35-7" title="7">p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near</a>
-<a class="sourceLine" id="cb35-8" title="8"></a>
-<a class="sourceLine" id="cb35-9" title="9">so_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</a>
-<a class="sourceLine" id="cb35-10" title="10">                                 <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],</a>
-<a class="sourceLine" id="cb35-11" title="11">                                 <span class="dt">scaling =</span> <span class="st">'observation'</span>,</a>
-<a class="sourceLine" id="cb35-12" title="12">                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb35-13" title="13">                                 <span class="dt">label=</span><span class="st">"Farthest"</span>)</a>
-<a class="sourceLine" id="cb35-14" title="14">p_map[<span class="st">'glyph'</span>] &lt;-<span class="st"> </span>so_near</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add  glyphs to the map</span>
+so_near &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                                  <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_near],
+                                  <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                  <span class="dt">label=</span><span class="st">"Nearest"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near
+
+so_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                                 <span class="dt">sequence =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star)[o_far],
+                                 <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                 <span class="dt">label=</span><span class="st">"Farthest"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near</code></pre></div>
 <p><strong>Exercise:</strong> Try switching to any of these alternatives and see whether your clustering choices change. Which is easier? Convex or non-convex?</p>
 <p>The <code>PairViz</code> package also offers a couple of means of ensuring all variates appear as a pair. This is usually more helpful for serial axes that are parallel than radial. These include the following</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">o_greedy &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/eulerian">eulerian</a></span>(VarDistance)</a>
-<a class="sourceLine" id="cb36-2" title="2">o_balanced &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/whpaths">weighted_hpaths</a></span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">o_greedy &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/eulerian">eulerian</a></span>(VarDistance)
+o_balanced &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/whpaths">weighted_hpaths</a></span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</code></pre></div>
 <p><strong>Exercise:</strong> Try these and determine the difference between them.</p>
 </div>
 </div>
