@@ -1,8 +1,28 @@
 home:
   strip_header: true
+  links:
+  - text: Introduction to loon
+    href: https://github.com/great-northern-diver/loon/articles/introduction.html
 
 navbar:
   type: default
+
+  left:
+    - text: Intro
+      href: articles/introduction.html
+    - text: Reference
+      href: reference/index.html
+    - text: Articles
+      menu:
+      - text: Introduction
+        href: articles/introduction.html
+      - text: Analysis example
+        href: articles/minorities.html
+      - text: Teaching example
+        href: articles/teaching-example-smoothing.html
+      - text: Using with Rmarkdown
+        href: articles/Rmarkdown.html
+
   right:
   - icon: fa-github fa-lg
     href: https://github.com/great-northern-diver/loon
@@ -11,6 +31,8 @@ development:
   mode: release
 
 destination: ../docs/
+
+
 
 reference:
   - title: Package Information
