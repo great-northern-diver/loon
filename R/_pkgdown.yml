@@ -1,8 +1,5 @@
 home:
   strip_header: true
-  links:
-  - text: Introduction to loon
-    href: https://github.com/great-northern-diver/loon/articles/introduction.html
 
 navbar:
   type: default
