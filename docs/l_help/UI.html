@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon - user interface gestures</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -33,36 +25,39 @@ Loon: An Interactive Statistical Visualization Toolkit
   <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
 </ul>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">loon - user interface gestures</h1>
-</header>
+</div>
 <script type="text/javascript">
 document.getElementById("ui").className += " selected";
 </script>
+
 <h3 id="introduction">Introduction</h3>
-<p>The keyboard and mouse gestures for the graphical user interfaces of <code>loon</code>’s displays should be fairly easy to learn. We kept the number of mouse gestures and keyboard shortcuts minimal. The <code>Ctrl</code> and <code>Shift</code> in combination with the left and right mouse button or mouse wheel is all you ever need. In fact, the default gestures for the scatterplot display are summarized by the following figures.</p>
+<p>The keyboard and mouse gestures for the graphical user interfaces of <code>loon</code>'s displays should be fairly easy to learn. We kept the number of mouse gestures and keyboard shortcuts minimal. The <code>Ctrl</code> and <code>Shift</code> in combination with the left and right mouse button or mouse wheel is all you ever need. In fact, the default gestures for the scatterplot display are summarized by the following figures.</p>
 <p>Zoom and Pan gestures are as follows (the serialaxes display does not support zoom and pan)</p>
-<figure>
-<img src="images/gestures_zoom_pan.png" title="Interaction Gestures: Zoom and Pan" alt="Two superimposed mice illustrate a click and drag gesture" /><figcaption>Two superimposed mice illustrate a click and drag gesture</figcaption>
-</figure>
+<div class="figure">
+<img src="images/gestures_zoom_pan.png" title="Interaction Gestures: Zoom and Pan" alt="Two superimposed mice illustrate a click and drag gesture" /><p class="caption">Two superimposed mice illustrate a click and drag gesture</p>
+</div>
 <p>The selection gestures are as follows</p>
-<figure>
-<img src="images/gestures_select.png" title="Interaction Gestures: Selection" alt="Two superimposed mice illustrate a click and drag gesture" /><figcaption>Two superimposed mice illustrate a click and drag gesture</figcaption>
-</figure>
+<div class="figure">
+<img src="images/gestures_select.png" title="Interaction Gestures: Selection" alt="Two superimposed mice illustrate a click and drag gesture" /><p class="caption">Two superimposed mice illustrate a click and drag gesture</p>
+</div>
 <p>And for the scatterplot display one can temporary move points as follows</p>
-<figure>
-<img src="images/gestures_move.png" title="Move points on scatterplot" alt="Move points on scatterplot" /><figcaption>Move points on scatterplot</figcaption>
-</figure>
+<div class="figure">
+<img src="images/gestures_move.png" title="Move points on scatterplot" alt="Move points on scatterplot" /><p class="caption">Move points on scatterplot</p>
+</div>
 <h4 id="macbook-trackpad">MacBook Trackpad</h4>
-<p>Note that for the MacBook trackpad the right button press and drag events can be configured in <em>Settings</em> &gt; <em>Trackpad</em> with the <em>Secondary click</em> setting, see image below. For example, when set to “Click or tab with two fingers” then a two-finger-press and drag movement while keeping the fingers pressed will generate the right-click dragging events (e.g. for panning). There is also a <em>Scroll and Zoom</em> tab to specify the zoom event (usually a two-finger vertical swipe gesture).</p>
-<p><img src="images/Macbook_Rightclick.png" /></p>
+<p>Note that for the MacBook trackpad the right button press and drag events can be configured in <em>Settings</em> &gt; <em>Trackpad</em> with the <em>Secondary click</em> setting, see image below. For example, when set to &quot;Click or tab with two fingers&quot; then a two-finger-press and drag movement while keeping the fingers pressed will generate the right-click dragging events (e.g. for panning). There is also a <em>Scroll and Zoom</em> tab to specify the zoom event (usually a two-finger vertical swipe gesture).</p>
+<div class="figure">
+<img src="images/Macbook_Rightclick.png" />
+</div>
 <h3 id="user-interface-behavior">User Interface Behavior</h3>
 <p>There are a few things which are good to know and are features rather than bugs.</p>
 <h4 id="inspector">Inspector</h4>
 <ul>
 <li><p>Only one <code>loon</code> inspector at a time can be open at a given time. If you would like to deactivate the <code>loon</code> inspector set the <code>useLoonInspector</code> state to <code>FALSE</code> (R-Code)</p>
-<pre><code>  p &lt;- l_plot(iris, useLoonInspector=FALSE)
-  pi &lt;- l_plot_inspector(activewidget=p)</code></pre></li>
+<pre><code>p &lt;- l_plot(iris, useLoonInspector=FALSE)
+pi &lt;- l_plot_inspector(activewidget=p)</code></pre></li>
 </ul>
 <h4 id="resizing-points">Resizing Points</h4>
 <ul>
@@ -77,7 +72,12 @@ document.getElementById("ui").className += " selected";
 <li>The button toolbar in the layers window <img src="images/layers_buttons.png" alt="Layers Toolbar" /> has the functionality as follows: <img src="images/icons/up.png" alt="up" /> and <img src="images/icons/down.png" alt="down" /> move a layer or drawing one position up or down among the children of its parent. The <img src="images/icons/left.png" alt="left" /> moves the layer or drawing to the grand parent layer and the <img src="images/icons/right.png" alt="right" /> button moves the selected layer or drawing into the layer directly below it if the item below the selected element is a layer. <img src="images/icons/visible.png" alt="visible" /> and <img src="images/icons/visible.png" alt="invisible" /> turn the selected drawing or layer and all its children visible and invisible, respectively. <img src="images/icons/plus.png" alt="plus" /> adds a new layer and <img src="images/icons/minus.png" alt="minus" /> removes the selected element where it is a layer it will delete all its children. Finally, <img src="images/icons/scaleto.png" alt="scaleto" /> scales the plot such that the selected layer is completely shown.</li>
 </ul>
 <h3 id="modifier-keys">Modifier Keys</h3>
-<p>The default modifier keys used in <code>loon</code> are <code>Ctrl</code> and <code>Shift</code>. Sometimes operating systems use some of these modifier keys for system functions and hence wont pass their respective key events to <code>Tk</code>. Also, different operating systems generate different events for the mouse scroll wheel. If you experience problems with the above mentioned gestures please try each gesture on the eventutil below and <a href="mailto:adrian@waddell.ch">let me know</a> which events do no get generated on your system:</p>
+<p>The default modifier keys used in <code>loon</code> are <code>Ctrl</code> and <code>Shift</code>. Sometimes operating systems use some of these modifier keys for system functions and hence wont pass their respective key events to <code>Tk</code>. Also, different operating systems generate different events for the mouse scroll wheel. If you experience problems with the above mentioned gestures please try each gesture on the eventutil below and <script type="text/javascript">
+<!--
+h='&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#x61;&#100;&#114;&#x69;&#x61;&#110;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'let me know'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#108;&#x65;&#116;&#32;&#x6d;&#x65;&#32;&#x6b;&#110;&#x6f;&#x77;&#32;&#40;&#x61;&#100;&#114;&#x69;&#x61;&#110;&#32;&#x61;&#116;&#32;&#x77;&#x61;&#100;&#100;&#x65;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript> which events do no get generated on your system:</p>
 <p>In <code>Tcl</code></p>
 <pre><code>::loon::eventsutil</code></pre>
 <p>Or in <code>R</code></p>

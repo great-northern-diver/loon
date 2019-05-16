@@ -32,6 +32,9 @@
 
 <meta property="og:title" content="Changelog" />
 
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -67,10 +70,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/introduction.html">Intro</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -83,27 +83,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Rmarkdown.html">Loon in RMarkdown</a>
+      <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="../articles/introduction.html">Introduction to loon</a>
+      <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
-      <a href="../articles/minorities.html">Analysis: Visible minorities in Canadian cities</a>
+      <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
     </li>
     <li>
-      <a href="../articles/teaching-example-smoothing.html">Smoothers and Bone Mineral Density</a>
+      <a href="../articles/Rmarkdown.html">Using with Rmarkdown</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/waddella/loon">
+  <a href="https://github.com/great-northern-diver/loon">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -124,9 +121,9 @@
       
     </div>
 
-    <div id="loon-123" class="section level1">
+    <div id="loon-1-2-3" class="section level1">
 <h1 class="page-header">
-<a href="#loon-123" class="anchor"></a>loon 1.2.3<small> Unreleased </small>
+<a href="#loon-1-2-3" class="anchor"></a>loon 1.2.3<small> Unreleased </small>
 </h1>
 <ul>
 <li>added l_saveStatesRDS()
@@ -142,9 +139,9 @@
 </li>
 </ul>
 </div>
-    <div id="loon-122" class="section level1">
+    <div id="loon-1-2-2" class="section level1">
 <h1 class="page-header">
-<a href="#loon-122" class="anchor"></a>loon 1.2.2<small> 2019-03-23 </small>
+<a href="#loon-1-2-2" class="anchor"></a>loon 1.2.2<small> 2019-03-23 </small>
 </h1>
 <ul>
 <li>added l_plot3D contributed by Martin Gauch (for rwo)</li>
@@ -159,9 +156,9 @@
 </li>
 </ul>
 </div>
-    <div id="loon-121" class="section level1">
+    <div id="loon-1-2-1" class="section level1">
 <h1 class="page-header">
-<a href="#loon-121" class="anchor"></a>loon 1.2.1<small> 2018-12-10 </small>
+<a href="#loon-1-2-1" class="anchor"></a>loon 1.2.1<small> 2018-12-10 </small>
 </h1>
 <ul>
 <li>updated <code><a href="../reference/loonGrob.html">loonGrob()</a></code> and <code><a href="../reference/grid.loon.html">grid.loon()</a></code>
@@ -174,13 +171,12 @@
 <li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
 </ul>
 </div>
-    <div id="loon-120" class="section level1">
+    <div id="loon-1-2-0" class="section level1">
 <h1 class="page-header">
-<a href="#loon-120" class="anchor"></a>loon 1.2.0<small> 2018-09-30 </small>
+<a href="#loon-1-2-0" class="anchor"></a>loon 1.2.0<small> 2018-09-30 </small>
 </h1>
 <ul>
-<li>
-<p>added <code><a href="../reference/loonGrob.html">loonGrob()</a></code> and <code><a href="../reference/grid.loon.html">grid.loon()</a></code> functionality</p>
+<li>added <code><a href="../reference/loonGrob.html">loonGrob()</a></code> and <code><a href="../reference/grid.loon.html">grid.loon()</a></code> functionality
 <ul>
 <li>any loon plot can now be converted and saved as a grid graphics object</li>
 <li>permits printing/exporting snapshots of loon plots in documentation</li>
@@ -188,20 +184,17 @@
 </ul>
 </li>
 <li>
-<p><code>l_compound</code> classes introduced to ease user creation of complex layouts</p>
+<code>l_compound</code> classes introduced to ease user creation of complex layouts
 <ul>
 <li>includes simple programming interface to extend <code><a href="../reference/loonGrob.html">loonGrob()</a></code> to any user-defined</li>
-<li>converted current compound layouts to new <code>l_compound</code> model (e.g. <code>l_pairs</code>, <code>l_stl</code>)</li>
+<li>converted current compound layouts to new <code>l_compound</code> model (e.g. <code>l_pairs</code>, <code>l_stl</code>)</li>
 <li>
 <code>l_getPlots</code> which returns a list of the loon plots in the display (works for simple loon plots too)</li>
 <li>
 <code>l_getLocations</code> which returns a matrix showing the location of the loon plots (in order) (works for simple loon plots too)</li>
 <li>
-<code>l_get_arrangeGrobArgs</code> which returns the arguments and their values to be passed on to arrangeGrob() (from gridExtra) to allow arbitrary layout by the user.
-<ul>
+<code>l_get_arrangeGrobArgs</code> which returns the arguments and their values to be passed on to arrangeGrob() (from gridExtra) to allow arbitrary layout by the user.</li>
 <li>this is NOT implemented for simple loon plots (but could perhaps be)</li>
-</ul>
-</li>
 <li>
 <code>loonGrob_layoutType</code> which returns a string indicating whether <code>"location"</code> or <code>"arrangeGrobArgs</code>" are to be used when creating a grid version of the <code>l_compound</code>. (default is <code>"locations"</code>, other possibility is <code>"arrangeGrobArgs"</code>
 </li>
@@ -216,9 +209,9 @@
 <li><p><code>names</code> for loon object handles to print out the state names. <code>l_state_names</code> can be used alternatively</p></li>
 </ul>
 </div>
-    <div id="loon-110" class="section level1">
+    <div id="loon-1-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#loon-110" class="anchor"></a>loon 1.1.0<small> 2017-07-26 </small>
+<a href="#loon-1-1-0" class="anchor"></a>loon 1.1.0<small> 2017-07-26 </small>
 </h1>
 <ul>
 <li>first release on CRAN</li>
@@ -241,26 +234,26 @@
 <li>remove the local copy of the website and make <code>l_help</code> point to the official website.</li>
 </ul>
 </div>
-    <div id="loon-101" class="section level1">
+    <div id="loon-1-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#loon-101" class="anchor"></a>loon 1.0.1<small> Unreleased </small>
+<a href="#loon-1-0-1" class="anchor"></a>loon 1.0.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>Bug fix in geodesic2d for 4d transitions</li>
 </ul>
 </div>
-    <div id="loon-091" class="section level1">
+    <div id="loon-0-9-1" class="section level1">
 <h1 class="page-header">
-<a href="#loon-091" class="anchor"></a>loon 0.9.1<small> Unreleased </small>
+<a href="#loon-0-9-1" class="anchor"></a>loon 0.9.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>Bug fix when layering maps (sp classes) with asSingleLayer=TRUE</li>
 <li>Bug fix in scale_image</li>
 </ul>
 </div>
-    <div id="loon-09" class="section level1">
+    <div id="loon-0-9" class="section level1">
 <h1 class="page-header">
-<a href="#loon-09" class="anchor"></a>loon 0.9<small> Unreleased </small>
+<a href="#loon-0-9" class="anchor"></a>loon 0.9<small> Unreleased </small>
 </h1>
 <ul>
 <li>initial beta release for the general public</li>
@@ -272,14 +265,14 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#loon-123">1.2.3</a></li>
-        <li><a href="#loon-122">1.2.2</a></li>
-        <li><a href="#loon-121">1.2.1</a></li>
-        <li><a href="#loon-120">1.2.0</a></li>
-        <li><a href="#loon-110">1.1.0</a></li>
-        <li><a href="#loon-101">1.0.1</a></li>
-        <li><a href="#loon-091">0.9.1</a></li>
-        <li><a href="#loon-09">0.9</a></li>
+        <li><a href="#loon-1-2-3">1.2.3</a></li>
+        <li><a href="#loon-1-2-2">1.2.2</a></li>
+        <li><a href="#loon-1-2-1">1.2.1</a></li>
+        <li><a href="#loon-1-2-0">1.2.0</a></li>
+        <li><a href="#loon-1-1-0">1.1.0</a></li>
+        <li><a href="#loon-1-0-1">1.0.1</a></li>
+        <li><a href="#loon-0-9-1">0.9.1</a></li>
+        <li><a href="#loon-0-9">0.9</a></li>
       </ul>
     </div>
   </div>

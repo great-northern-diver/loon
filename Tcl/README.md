@@ -65,5 +65,5 @@ The TEA setup of `ImageScale` for Windows does currently not work. If
 you know how to change the `makefile.vc` in the
 [win folder](https://github.com/waddella/tclImageScale/tree/master/win)
 so that the `ImageScale` package also compiles under Windows then
-please [contact me](mailto:adrian@waddell.ch).
+please [contact Adrian Waddell](mailto:adrian@waddell.ch).
 

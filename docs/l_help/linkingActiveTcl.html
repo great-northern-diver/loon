@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>linkingActiveTcl</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -33,11 +25,11 @@ Loon: An Interactive Statistical Visualization Toolkit
   <!-- <li id="develop"><a href="develop_setup.html">Develop</a></li> -->
 </ul>
 </div>
-<nav id="TOC" role="doc-toc">
+<div id="TOC">
 <ul>
 <li><a href="#linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</a></li>
 </ul>
-</nav>
+</div>
 <h1 id="linking-activetcl-with-r-on-windows">Linking ActiveTcl with R on Windows</h1>
 <p>We put a screencast with these instructions <a href="https://www.youtube.com/watch?v=2PsVBYNftrU">onto youtube here</a>. Note that you need to install both 32bit and 64 bit Tcl.</p>
 <p>Unfortunately <code>R</code> on Windows still ships with <code>Tcl</code> version 8.5 and <code>loon</code> requires <code>Tcl</code> version 8.6. Hence, for the near future, you need to install <code>Tcl</code> version 8.6 and link it with <code>R</code>.</p>
@@ -55,7 +47,7 @@ if (.Machine$sizeof.pointer == 8) {
 } else {
   Sys.setenv(&quot;MY_TCLTK&quot;=&quot;C:/Tcl32/bin&quot;)
 }</code></pre>
-<p>Restart R (i.e. Rstudio) and check if the above steps were successful by entering the following code in <code>R</code></p>
+<p>Restart R (i.e. Rstudio) and check if the above steps were successful by entering the following code in <code>R</code></p>
 <pre><code>Sys.getenv(&quot;MY_TCLTK&quot;)</code></pre>
 <p>This should either return <code>C:/Tcl32/bin</code> or <code>C:/Tcl64/bin</code>. If this works enter the following code in <code>R</code></p>
 <pre><code>library(tcltk)

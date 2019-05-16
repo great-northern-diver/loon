@@ -9,7 +9,7 @@ title: "install loon"
 
 Note that this page provides installation instructions for R. If you
 want to install `loon` for `Tcl` then follow the instructions
-[here](https://github.com/waddella/loon/tree/master/Tcl).
+[here](https://github.com/great-northern-diver/loon/tree/master/Tcl).
 
 [TclWindows]: linkingActiveTcl.html
 [rstudio]: http://www.rstudio.com/
@@ -33,7 +33,7 @@ want to install `loon` for `Tcl` then follow the instructions
 ## Further Notes
 
 * If you experience difficulties with `loon` use the
-  [Issue tracker on github](https://github.com/waddella/loon/issues).
+  [Issue tracker on github](https://github.com/great-northern-diver/loon/issues).
 * If you have difficulties with exporting images with the `l_export`
   function then take screenshots:
 	  * On OSX press Command + Shift + 4 and then press space and
@@ -50,7 +50,7 @@ want to install `loon` for `Tcl` then follow the instructions
 ## Installing the loon package
 
 The `loon` package is on
-[CRAN](https://cran.r-project.org/web/packages/dplyr/index.html)
+[CRAN](https://cran.r-project.org/web/packages/loon/index.html)
 available. To install the package start your `R` and run
 
 ~~~{r}
@@ -61,7 +61,7 @@ You can also install the latest development release directly from
 GitHub with the following R code
 
 ~~~
-devtools::install_github("rwoldford/loon", subdir="R")
+devtools::install_github("great-northern-diver/loon", subdir="R")
 ~~~
 
 
@@ -157,7 +157,7 @@ The TEA setup of `ImageScale` for Windows does currently not work. If
 you know how to change the `makefile.vc` in the
 [win folder](https://github.com/waddella/tclImageScale/tree/master/win)
 so that the `ImageScale` package also compiles under Windows then
-please [contact me](mailto:adrian@waddell.ch).
+please [contact Adrian](mailto:adrian@waddell.ch).
 
 
 # More Important Notes

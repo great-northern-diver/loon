@@ -59,7 +59,7 @@ variable).
 Get the package from github
 
 ~~~
-git clone https://github.com/waddella/loon.git
+git clone https://github.com/great-northern-diver/loon.git
 ~~~
 
 You can use the `loon` package immediately (without installation):

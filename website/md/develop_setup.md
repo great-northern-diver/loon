@@ -26,7 +26,7 @@ programming language we have defined bindings.
 Download the repository using
 
 ~~~
-git clone http://github.com/waddella/loon.git
+git clone http://github.com/great-northern-diver/loon.git
 ~~~
 
 We have created some make rules to automate some tasks:

@@ -17,15 +17,15 @@ header-includes:
 exploration. Currently, `loon` is embedded in `R` and `Tcl`.
 
 * To issue a bug report use the
-[github issue tracker](https://github.com/waddella/loon/issues).
+[github issue tracker](https://github.com/great-northern-diver/loon/issues).
 
-* You can fork `loon` [on github](https://github.com/waddella/loon). 
+* You can fork `loon` [on github](https://github.com/great-northern-diver/loon). 
 
 # Installation
 
 * For `R` see the [installation section](install.html).
 
-* For `Tcl` see the [github Readme](https://github.com/waddella/loon/tree/master/Tcl).
+* For `Tcl` see the [github Readme](https://github.com/great-northern-diver/loon/tree/master/Tcl).
 
 # Statistical Displays
 
