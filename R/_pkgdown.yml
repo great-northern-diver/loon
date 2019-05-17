@@ -19,10 +19,14 @@ navbar:
         href: articles/teaching-example-smoothing.html
       - text: Using with Rmarkdown
         href: articles/Rmarkdown.html
+    - text: Videos
+      menu:
+      - text: Interactive 3D plots
+        href: https://youtu.be/mMJllGOuDLY
 
   right:
-  - icon: fa-github fa-lg
-    href: https://github.com/great-northern-diver/loon
+    - icon: fa-github fa-lg
+      href: https://github.com/great-northern-diver/loon
 
 development:
   mode: release
