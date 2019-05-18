@@ -44,7 +44,7 @@ The interactive graphics in loon are written on TCL, accessible to R via the tcl
 install.packages("loon")
 
 # You could also install the latest development release directly from GitHub
-devtools::install_github("great-northern-diver/loon")
+devtools::install_github("great-northern-diver/loon", subdir = "R")
 ```
 
 ### Other Usage/Installation notes
