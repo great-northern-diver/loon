@@ -39,10 +39,10 @@ Suggestions for interactions will also be given and questions that draw attentio
 
 After completing the tutorial, there are numerous other examples of using loon which can be explored.  These include
 
-- the `R` `help(package = "loon")` pages for `loon`,
+- the `R` `help(package = "loon")` pages for `loon`, or alternatively online via as `l_web()`
 - other vignettes,
 - demos on particular topics given by `demo(package = "loon")`.  These are especially useful because the source code for creating them appears in the console, and 
-- the loon website appearing from `l_help()`.
+- the loon website appearing from `l_help()` or `R` manual only as `l_web()`.
 
 Here, we will walk through some of the **basic** functionality.
 
@@ -960,13 +960,13 @@ p_mag_stations <- l_plot3D(x = scaled_quakes$long,
                            title = "Three dimensional plot of quakes")
 ```
 
-Select the plot, type `r` to turn on the `rotation mode`.   Press the down arrow on the keyboard untill the darkest points (deepest quakes) are at the bottom of the display.   Press `r` again to turn off the rotation mode.
+Select the plot, type `r` to turn on the `rotation mode`.   Press the down arrow on the keyboard until the darkest points (deepest quakes) are at the bottom of the display.   Press `r` again to turn off the rotation mode.
 
 Selecting the plot, the key `r` toggles the rotation mode; arrow keys rotate the plot vertically and horizontally.  In `rotation mode` the plot may also be rotated free hand using the mouse. 
 When `rotation mode` is toggled off (with the key `r`), the plot can again be brushed et cetera as with any `l_plot`.  See `help("l_plot3D")` for more details.
 
 
-**NOTE** Many methods exist for visualizing higher dimensional data in `loon`.  For e.g. see `help("l_navgraph")`, `help("l_pairs")`, or `help("l_serialaxes")`.  See also the online manual `l_help()`.
+**NOTE** Many methods exist for visualizing higher dimensional data in `loon`.  For e.g. see `help("l_navgraph")`, `help("l_pairs")`, or `help("l_serialaxes")`.  See also the online manual `l_web()`.
 
 
 ---
@@ -990,6 +990,8 @@ help(package = "loon")
 and more complex examples and more general discussion via `loon`'s online help
 ```{r, eval=FALSE}
 l_help()
+# or more simply via the online manual
+l_web()
 ```
 
 ---
