@@ -8,3 +8,4 @@ R/.Rhistory
 R/.Rproj.user
 R/.DS_Store
 R/.gitignore
+R/_pkgdown.yml

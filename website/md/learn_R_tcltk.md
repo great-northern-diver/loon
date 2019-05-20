@@ -50,7 +50,7 @@ puts [factorial 7]
 The backslash `\` in `Tcl` can be used to write an expression on
 multiple lines. A general introduction to `Tcl` written by Adrian
 Waddell can be found
-[here](https://math.uwaterloo.ca/statistics-and-actuarial-science/sites/ca.statistics-and-actuarial-science/files/uploads/files/Rtcltk_tcl.pdf). An
+[here](http://adrian.waddell.ch/EssentialSoftware/Rtcltk_tcl.pdf). An
 introduction to the `tcltk` `R` package by the package author Peter
 Dalgaard's can be found found on
 [page 27 in R News volume 1/3](http://cran.r-project.org/doc/Rnews/Rnews_2001-3.pdf)
@@ -234,7 +234,7 @@ however, still exist in `R` and can be seen when looking at `b$ID` in
 `R`.
 
 The `pack` geometry manager is explained in detail in
-[this document](https://math.uwaterloo.ca/statistics-and-actuarial-science/sites/ca.statistics-and-actuarial-science/files/uploads/files/Rtcltk_geometry.pdf)
+[this document](http://adrian.waddell.ch/EssentialSoftware/Rtcltk_geometry.pdf)
 written by Adrian Waddell.
 
 A description of all `Tk` widgets and their use can be found in the

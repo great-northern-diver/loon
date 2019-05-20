@@ -26,7 +26,7 @@ are either swallowed immediately or, when large, at least brought to the surface
 
 This seemed an excellent metaphor for an agile, interactive, and exploratory visualization system; one which empowered an analyst to chase, and perhaps discover, whatever features might be revealed in the data by quickly diving below its surface.  The goal is to provide such a system in loon.
 
-As an acronym "loon" does not fare so well (**l**east **o**bvious **o**stensive **n**ame) and perhaps its synonym "diver" would be better  (**d**irect **i**nteractive **v**isual **e**xploration in **R**).  But, then,  "loon" is funnier ...  **diveR** will be the name of a collection of "loon" related packages.
+As an acronym "loon" does not fare so well (**l**east **o**bvious **o**stensive **n**ame) and perhaps its synonym "diver" would be better  (**d**irect **i**nteractive **v**isual **e**xploration in **R**).  But, then,  "loon" is funnier ...  **diveR** is the name of a collection of "loon" related packages.
 
 Enjoy!
 

@@ -4,8 +4,9 @@ cran-comments.md
 .DS_Store
 .gitignore
 .Rhistory
-.Rproj.user
+.Rproj.user_pkgdown.yml
 ../.DS_Store
 ../.gitignore
+../_pkgdown.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$

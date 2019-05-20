@@ -2,7 +2,7 @@
 % Please edit documentation in R/inspectors.R
 \name{l_loon_inspector}
 \alias{l_loon_inspector}
-\title{Create a loon linspector}
+\title{Create a loon inspector}
 \usage{
 l_loon_inspector(parent = NULL, ...)
 }

@@ -72,7 +72,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://youtu.be/mMJllGOuDLY">Interactive 3D plots</a>
+      <a href="https://youtu.be/JFJcg855HcQ">the (not so) humble (interactive) histogram</a>
+    </li>
+    <li>
+      <a href="https://youtu.be/mMJllGOuDLY">3D interactive scatterplots</a>
     </li>
   </ul>
 </li>
@@ -99,7 +102,7 @@
       <h1>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-05-16</h4>
+            <h4 class="date">2019-05-19</h4>
       
       
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -299,7 +302,7 @@ minorityPercent &lt;-<span class="st"> </span><span class="kw"><a href="https://
 <p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the <code>linkingGroup</code> of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_configure.html">l_configure</a></span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>, <span class="dt">sync =</span> <span class="st">"push"</span>)</code></pre></div>
 <p>In either case the displays must be synchronized (<code>sync</code>) within the group. Here we choose to <code>push</code> the linked elements of the total population histogram <code>hTotPop</code> out to the other members of the group. Checking the show <code>stacked colors</code> in both histograms will reveal their shared colours. Alternatively, use selection on each histogram.</p>
-<p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible miinorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
+<p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible minorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
 <div id="largest-visible-minorities" class="section level3">
 <h3 class="hasAnchor">
 <a href="#largest-visible-minorities" class="anchor"></a>Largest visible minorities</h3>
@@ -364,12 +367,12 @@ canada &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_la
 <p>Alternatively, the filled circle <code>glyph</code> for any city in the map can be replaced by the name of the city (since the last <code>R</code> statement above added these to the map). To <strong>change the glyph</strong>, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select <code>city names</code> from the glyph menu (next to a <code>set</code> button). Clicking on the <code>set</code> button will change the glyph of all selected cities to a text string of their name. The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.</p>
 <p>Note the map may be <strong>zoomed</strong> in on using scrolling and <strong>panned</strong> over directly on the map. Alternatively, the <strong>world view</strong> in the loon inspector may be used in the same way – dragging the scaled box around can be especially convenient. To get the map back to its original position and scale, click on the <code>scale to world</code> button in the <code>Plot</code> section of the loon inspector.</p>
 <p>The map can be hidden (or removed). It is a <strong>layer</strong> of the scatterplot. Clicking on the <code>Layers</code> tab will provide access to this functionality. Clicking on the <code>Analysis</code> tab will return the inspector to the plot interactions typically used in an exploratory analysis.</p>
-<p>While the above map is sufficient for the analysis it is sometimed of interest to have much more complex maps (or layers of any sort). In the next subsection a more detailed map (with lakes) is constructed using many layers. It provides an introduction to the layering facilities in loon. It can be skipped, or every <code>R</code> section can be evaluated in order to get a more sophisticated map.</p>
+<p>While the above map is sufficient for the analysis it is sometimes of interest to have much more complex maps (or layers of any sort). In the next subsection a more detailed map (with lakes) is constructed using many layers. It provides an introduction to the layering facilities in loon. It can be skipped, or every <code>R</code> section can be evaluated in order to get a more sophisticated map.</p>
 <p>The analysis can proceed with or without the next subsection.</p>
 <div id="more-sophisticated-maps---multiple-layers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#more-sophisticated-maps---multiple-layers" class="anchor"></a>More sophisticated maps - multiple layers</h3>
-<p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analysese (and produces nicer interactive maps).</p>
+<p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analyses (and produces nicer interactive maps).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lakecol &lt;-<span class="st"> "steelblue"</span>
 
 <span class="co"># Get the coordinates from the lakes database in the maps package.</span>
@@ -709,7 +712,7 @@ s &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_seriala
 <p>For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two).</p>
 <p>For this data, a more interesting serial axes layout is the <code>radial</code> layout. Select this in the loon inspector or from the command line execute</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"axesLayout"</span>] &lt;-<span class="st"> "radial"</span></code></pre></div>
-<p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distibution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
+<p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distribution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
 <p>These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using <code>long</code>.<br>
 First create a new scatterplot, then add serial axes as alternative glyphs for the points. To emphasize shape the glyphs are drawn filled in with <code>showArea=TRUE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Produce grid of star glyphs</span>
@@ -761,7 +764,7 @@ so &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_
                              <span class="dt">label=</span><span class="st">"stars"</span>)
 p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so</code></pre></div>
 <p>Unfortunately the three large cities dominate in each of these displays. All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.</p>
-<p>A better choice woule be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
+<p>A better choice would be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
 gstars[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
 so[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
@@ -773,7 +776,7 @@ p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class=
 <p>Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina. The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg’s relatively large Filipino population. The proboscis of Winnipeg’s mosquito shaped glyph draws attention to its unusually large Filipino population.</p>
 <p>Note that this analysis is easily done using only three loon windows showing simultaneously. The first is the serial axes plot, which makes it easy to read off the contributions of each visible minority whenever any glyph is selected elsewhere. The second is the map of Canada, preferably zoomed in to magnify a small rectangular region. Placing the mouse over any glyph reveals the city. And third, the loon inspector. This is particularly handy if it is focused on the map for then the small rectangle in its <code>World View</code> may be dragged across the country to focus the Canada map on any small region.</p>
 <p>Continuing west to east, at the western head of Lake Superior (western most Great Lake) the province of Ontario begins and the glyph for Thunder Bay shows it to have an unusually large (relative) population of Japanese compared to other cities.</p>
-<p>As we move southeast into southern Ontario, some new glyph shapes and hence visible minority patterns emerge. For example, most southern Ontario cities are characterized by relatively high South Asian populations. Compared to the prairie provinces of Alberta, Saskatchewan, and Manitoba, Ontario cities (and cities east of Ontario) have a relatively large black minority. In southern Ontario, Windsor and London have an unusual large Arab population compared to their neighbours. London and St. Catharines have unusally large Latino populations. As with western cities, most Ontario cities have relatively large Chinese populations.</p>
+<p>As we move southeast into southern Ontario, some new glyph shapes and hence visible minority patterns emerge. For example, most southern Ontario cities are characterized by relatively high South Asian populations. Compared to the prairie provinces of Alberta, Saskatchewan, and Manitoba, Ontario cities (and cities east of Ontario) have a relatively large black minority. In southern Ontario, Windsor and London have an unusual large Arab population compared to their neighbours. London and St. Catharines have unusually large Latino populations. As with western cities, most Ontario cities have relatively large Chinese populations.</p>
 <p>This could be contrasted with cities in Quebec, for example, which have relatively low South Asian and Chinese populations. Saguenay is unusual in Quebec in having a relatively large Chines population. Instead, the unusually large populations in Quebec cities are the relatively large Arab and Latino populations.</p>
 <p>The maritime provinces of New Brunswick and Nova Scotia are unusual in having much larger black populations than other visible minorities though Saint John also has a relatively large Chines population. Moncton and Halifax look more alike. St. John’s in Newfoundland resembles the Toronto in its configuration of visible minorities.</p>
 </div>
@@ -789,7 +792,7 @@ p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class=
 <div id="ordering-the-axes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#ordering-the-axes" class="anchor"></a>Ordering the axes</h3>
-<p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construvt a pairwise ordering. We consider a few of them here.</p>
+<p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construct a pairwise ordering. We consider a few of them here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Axis ordering methods can be found</span>
 <span class="co"># in the pairwise coordinate visualization package</span>
 <span class="co"># called PairViz</span>
@@ -817,16 +820,16 @@ VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://www.
 o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_near]</code></pre></div>
-<pre><code>##  [1] "Black"    "Arab"     "Latino"   "SE.Asian" "Multiple" "Other"   
-##  [7] "Japanese" "Korean"   "Filipino" "Chinese"  "S.Asian"</code></pre>
+<pre><code>##  [1] "Other"    "Multiple" "Japanese" "Korean"   "SE.Asian" "Latino"  
+##  [7] "Arab"     "Black"    "Filipino" "Chinese"  "S.Asian"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
 <span class="co"># other should produce less convex shaped glyphs.</span>
 <span class="co"># </span>
 o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(<span class="op">-</span>VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_far]</code></pre></div>
-<pre><code>##  [1] "Japanese" "Black"    "Korean"   "Latino"   "Chinese"  "Other"   
-##  [7] "S.Asian"  "Multiple" "Arab"     "Filipino" "SE.Asian"</code></pre>
+<pre><code>##  [1] "Latino"   "Chinese"  "Multiple" "S.Asian"  "Other"    "Filipino"
+##  [7] "SE.Asian" "Black"    "Japanese" "Arab"     "Korean"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
 <span class="co"># the cities are laid over top of one another.</span>
