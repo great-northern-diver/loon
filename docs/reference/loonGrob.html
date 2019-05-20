@@ -8,6 +8,13 @@
 
 <title>Create a grid grob from a loon widget handle — loonGrob • loon</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -231,29 +238,29 @@ This is basically a list of graphical parameter settings.</p></td>
 #&gt;             text[y label]
 #&gt;             grob[title: textGrob arguments]
 #&gt;           gTree[guides]
-#&gt;             grob[guides background: rectGrob arguments]
-#&gt;             grob[guidelines: xaxis (major), x = 4.5: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (major), x = 5.5: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (major), x = 6.5: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (major), x = 7.5: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (minor), x = 4: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (minor), x = 5: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (minor), x = 6: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (minor), x = 7: linesGrob arguments]
-#&gt;             grob[guidelines: xaxis (minor), x = 8: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (major), y = 2.5: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (major), y = 3.5: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (major), y = 4.5: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (minor), y = 2: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (minor), y = 3: linesGrob arguments]
-#&gt;             grob[guidelines: yaxis (minor), y = 4: linesGrob arguments]
+#&gt;             rect[guides background]
+#&gt;             lines[guidelines: xaxis (major), x = 4.5]
+#&gt;             lines[guidelines: xaxis (major), x = 5.5]
+#&gt;             lines[guidelines: xaxis (major), x = 6.5]
+#&gt;             lines[guidelines: xaxis (major), x = 7.5]
+#&gt;             lines[guidelines: xaxis (minor), x = 4]
+#&gt;             lines[guidelines: xaxis (minor), x = 5]
+#&gt;             lines[guidelines: xaxis (minor), x = 6]
+#&gt;             lines[guidelines: xaxis (minor), x = 7]
+#&gt;             lines[guidelines: xaxis (minor), x = 8]
+#&gt;             lines[guidelines: yaxis (major), y = 2.5]
+#&gt;             lines[guidelines: yaxis (major), y = 3.5]
+#&gt;             lines[guidelines: yaxis (major), y = 4.5]
+#&gt;             lines[guidelines: yaxis (minor), y = 2]
+#&gt;             lines[guidelines: yaxis (minor), y = 3]
+#&gt;             lines[guidelines: yaxis (minor), y = 4]
 #&gt;           gTree[axes]
 #&gt;             grob[x axis: xaxisGrob arguments]
 #&gt;             grob[y axis: yaxisGrob arguments]
 #&gt;           clip[clipping region]
 #&gt;           gTree[l_plot_layers]
 #&gt;             gTree[scatterplot]
-#&gt;               points[points: primitive glyphs without borders]
+#&gt;               points[points: primitive glyphs with borders]
 #&gt;           rect[boundary rectangle]
 #&gt;         upViewport[2]</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.newpage'>grid.newpage</a></span>(); <span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.draw'>grid.draw</a></span>(<span class='no'>lgrob</span>)</div><div class='img'><img src='loonGrob-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
