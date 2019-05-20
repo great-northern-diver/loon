@@ -8,6 +8,13 @@
 
 <title>Add non-primitive glyphs to a scatterplot or graph display — l_glyph_add • loon</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -214,8 +221,7 @@ re-import them as as image glyphs using <code><a href='l_glyph_add_image.html'>l
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Simple Example with Text Glyphs</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>stearic</span>, <span class='no'>eicosenoic</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Region</span>))
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_text.html'>l_glyph_add_text</a></span>(<span class='no'>p</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>"Area"</span>)
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>stearic</span>, <span class='no'>eicosenoic</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Region</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_text.html'>l_glyph_add_text</a></span>(<span class='no'>p</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>"Area"</span>)
 <span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>g</span></div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/demo'>demo</a></span>(<span class='st'>"l_glyphs"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"loon"</span>)
 <span class='co'># }</span><div class='input'>

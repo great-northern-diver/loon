@@ -8,6 +8,13 @@
 
 <title>Create an interactive loon plot widget — l_plot • loon</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -194,8 +201,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># ordinary use</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Width</span>, <span class='no'>Petal.Length</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))
-
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Width</span>, <span class='no'>Petal.Length</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>)</div><div class='output co'>#&gt;  [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"    
 #&gt;  [5] "linkingKey"       "zoomX"            "zoomY"            "panX"            
 #&gt;  [9] "panY"             "deltaX"           "deltaY"           "xlabel"          
@@ -205,25 +211,28 @@
 #&gt; [25] "scalesMargins"    "x"                "y"                "xTemp"           
 #&gt; [29] "yTemp"            "color"            "selected"         "active"          
 #&gt; [33] "size"             "tag"              "useLoonInspector" "selectBy"        
-#&gt; [37] "selectionLogic"  </div><div class='input'><span class='no'>p</span>[<span class='st'>"glyph"</span>]</div><div class='output co'>#&gt;   [1] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;   [9] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [17] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [25] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [33] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [41] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [49] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [57] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [65] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [73] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [81] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [89] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt;  [97] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [105] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [113] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [121] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [129] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [137] "circle" "circle" "circle" "circle" "circle" "circle" "circle" "circle"
-#&gt; [145] "circle" "circle" "circle" "circle" "circle" "circle"</div><div class='input'><span class='no'>p</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
+#&gt; [37] "selectionLogic"  </div><div class='input'><span class='no'>p</span>[<span class='st'>"glyph"</span>]</div><div class='output co'>#&gt;   [1] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;   [8] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [15] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [22] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [29] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [36] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [43] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [50] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [57] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [64] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [71] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [78] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [85] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [92] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt;  [99] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [106] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [113] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [120] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [127] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [134] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [141] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
+#&gt; [148] "ccircle" "ccircle" "ccircle"</div><div class='input'><span class='no'>p</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
 <span class='no'>p</span>[<span class='st'>"color"</span>] <span class='kw'>&lt;-</span> <span class='st'>"grey"</span>
 <span class='no'>p</span>[<span class='st'>"color"</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span>
 <span class='no'>versi</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>

@@ -97,7 +97,41 @@ l_plot <- function(x, y, ...) {
 #'
 #'
 #' @inheritParams graphics::plot.default
-#' @param y please read in the argument description for the \code{x} argument above.
+#' @param y argument description is as for the \code{x} argument above.
+#' @param color colours of points (default "grey60"); colours are repeated
+#'  until matching the number points,
+#' @param glyph shape of point; must be one of the primitive glyphs
+#' "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
+#' or "otriangle". Prefixes "c" and "o" mean closed and open, respectively.
+#' Default is "ccircle" meaning a closed circle glyph.
+#'
+#' Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
+#' serial axes glyphs may be added, but only after the plot has been created.
+#' @param size size of the symbol (roughly in terms of area)
+#' @param active a logical determining whether points appear or not
+#' (default is TRUE for all points). If a logical vector is given of length
+#' equal to the number of points, then it identifies which points appear (TRUE)
+#' and which do not (FALSE).
+#' @param selected a logical determining whether points appear selected at first
+#' (default is FALSE for all points). If a logical vector is given of length
+#' equal to the number of points, then it identifies which points are (TRUE)
+#' and which are not (FALSE).
+#' @param xlabel Label for the horizontal (x) axis. If missing,
+#' one will be inferred from \code{x} if possible.
+#' @param ylabel Label for the vertical (y) axis. If missing,
+#' one will be inferred from \code{y} (or \code{x}) if possible.
+#' @param title Title for the plot, default is an empty string.
+#' @param showLabels logical to determine whether axes label (and title) should
+#' be presented.
+#' @param showScales logical to determine whether numerical scales should
+#' be presented on both axes.
+#' @param showGuides logical to determine whether to present background guidelines
+#' to help determine locations.
+#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE} (default "white").
+#' @param guidesBackground  colour of the background to the guidelines shown when
+#' \code{showGuides = TRUE} (default "grey92").
+#' @param foreground foreground colour used by all other drawing (default "black").
+#' @param background background colour used for the plot (default "white")
 #' @param parent a valid Tk parent widget path. When the parent widget is
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
@@ -112,6 +146,14 @@ l_plot <- function(x, y, ...) {
 #'   individual point selection. See the documentation for \code{\link{l_plot}}
 #'   for more details about the interaction gestures.
 #'
+#' @seealso  See \code{\link{l_glyph_add_polygon}},
+#' \code{\link{l_glyph_add_text}},
+#' \code{\link{l_glyph_add_image}},
+#' \code{\link{l_glyph_add_serialaxes}}, and  \code{\link{l_glyph_add_pointrange}} for glyphs
+#' that may be added to a plot (and then accessible from the inspector).
+#' Note that \code{\link{l_make_glyphs}} constructs an image glyph as drawn any R (static)
+#' graphic function. The demos \code{demo(l_glyph_sizes, package = "loon")}, \code{demo(l_glyphs, package = "loon")},
+#' and \code{demo(l_make_glyphs, package = "loon")} provide examples and code.
 #' @export
 #' @export l_plot.default
 #'
@@ -128,33 +170,117 @@ l_plot <- function(x, y, ...) {
 #' l_configure(p2, linkingGroup="iris", sync="push")
 #' p1['selected'] <- iris$Species == "setosa"
 #'
-l_plot.default <-  function(x, y=NULL, parent=NULL, ...) {
+l_plot.default <-  function(x, y = NULL,
+                            color = "grey60",
+                            glyph = "ccircle",
+                            size = 4,
+                            active = TRUE,
+                            selected = FALSE,
+                            xlabel, ylabel, title,
+                            showLabels = TRUE,
+                            showScales = FALSE,
+                            showGuides = TRUE,
+                            guidelines = "white",
+                            guidesBackground = "grey92",
+                            foreground = "black",
+                            background = "white",
+                            parent = NULL, ...) {
+
+    ## Check for missing arguments
+    ## Get x, y, xlab and ylab
+    if (missing(xlabel)){
+        if (!missing(x)){
+            xlabel <- gsub("\"", "", deparse(substitute(x)))
+        } else {
+            xlabel <- ""
+        }
+    }
+
+    if (missing(ylabel)) {
+        if (!missing(y)){
+            ylabel <- gsub("\"", "", deparse(substitute(y)))
+        } else {
+            ylabel <- ""
+        }
+    }
+    if (missing(title)) { title <- "" }
+
 
     if(missing(x)) {
 
-        plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot', parent, ...)
+        plot <- loonPlotFactory('::loon::plot', 'plot',
+                                'loon scatterplot',
+                                parent,
+                                # No info about points
+                                # to be passed on
+                                xlabel = xlabel,
+                                ylabel = ylabel,
+                                title = title,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background,
+                                ...)
 
     } else {
-
-        ## Get x, y, xlab and ylab
-        ## similar as in plot.default use xy.coords
-        xlabel <- if (!missing(x))
-            gsub("\"", "", deparse(substitute(x)))
-        ylabel <- if (!missing(y))
-            gsub("\"", "", deparse(substitute(y)))
-
+        ## Get x, y, xlab, ylab
+        ## similar to plot.default use of xy.coords
         xy <- xy.coords(x, y, xlabel, ylabel)
-
-        ## xlab and ylab will be overwritten in they
-        ## are defined in ...
-        if (is.null(xy$xlab))
-            xy$xlab <- ""
-        if (is.null(xy$ylab))
-            xy$ylab <- ""
-
-        plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot', parent,
-                                x=xy$x, y=xy$y,
-                                xlabel=xy$xlab, ylabel=xy$ylab,
+        x <- xy$x
+        y <- xy$y
+        if (is.null(xy$xlab)) xy$xlab <- ""
+        if (is.null(xy$ylab)) xy$ylab <- ""
+        ## make sure points parameters are right
+        if (length(color > 1)) {
+            if (length(color) != length(x)) {
+                color <- rep_len(color, length(x))
+            }
+        }
+        if (!is.numeric(size)) stop("size must be numeric")
+        if (length(size > 1)) {
+            if (length(size) != length(x)) {
+                size <- rep_len(size, length(x))
+            }
+        }
+        if (length(active) > 1) {
+            if (length(active) != length(x))
+                stop(paste0("When more than length 1, length of active must match number of points:",
+                            length(x))
+                )
+        }
+        if (length(selected) > 1) {
+            if (length(selected) != length(x))
+                stop(paste0("When more than length 1, length of selected must match number of points:",
+                            length(x))
+                )
+        }
+        if (length(glyph) > 1) {
+            if (length(glyph) != length(x))
+                stop(paste0("When more than length 1, length of glyph must match number of points:",
+                            length(x))
+                )
+        }
+        plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
+                                parent,
+                                x = x, y = y,
+                                color = color,
+                                glyph = glyph,
+                                size = size,
+                                active = active,
+                                selected = selected,
+                                xlabel = xy$xlab,
+                                ylabel = xy$ylab,
+                                title = title,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background,
                                 ...)
 
     }

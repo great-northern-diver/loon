@@ -8,6 +8,13 @@
 
 <title>Create a palette with loon's color mapping — color_loon • loon</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -188,7 +195,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'>color_loon</span>()
-<span class='fu'>pal</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])</div><div class='output co'>#&gt; [1] "#1A1A1A" "#1F78B4" "#E31A1C" "#33A02C"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "#1A1A1A" "#1A1A1A" "#1F78B4" "#E31A1C"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'green'</span>, <span class='st'>'yellow'</span>))</div><div class='output co'>#&gt; [1] "#008000" "#FFFF00"</div><div class='input'>
+<span class='fu'>pal</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])</div><div class='output co'>#&gt; [1] "#999999" "#A6CEE3" "#FFC0CB" "#B2DF8A"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "#999999" "#999999" "#A6CEE3" "#FFC0CB"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'green'</span>, <span class='st'>'yellow'</span>))</div><div class='output co'>#&gt; [1] "#008000" "#FFFF00"</div><div class='input'>
 <span class='co'># show color choices for different n's</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"grid"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.newpage'>grid.newpage</a></span>()
