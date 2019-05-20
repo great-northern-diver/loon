@@ -146,7 +146,7 @@ l_plot <- function(x, y, ...) {
 #'   individual point selection. See the documentation for \code{\link{l_plot}}
 #'   for more details about the interaction gestures.
 #'
-#' @seealso  See \code{\link{l_glyph_add_polygon}},
+#' @seealso  See \code{\link{l_glyph_add}}, \code{\link{l_glyph_add_polygon}},
 #' \code{\link{l_glyph_add_text}},
 #' \code{\link{l_glyph_add_image}},
 #' \code{\link{l_glyph_add_serialaxes}}, and  \code{\link{l_glyph_add_pointrange}} for glyphs
@@ -234,13 +234,13 @@ l_plot.default <-  function(x, y = NULL,
         if (is.null(xy$xlab)) xy$xlab <- ""
         if (is.null(xy$ylab)) xy$ylab <- ""
         ## make sure points parameters are right
-        if (length(color > 1)) {
+        if (length(color) > 1) {
             if (length(color) != length(x)) {
                 color <- rep_len(color, length(x))
             }
         }
         if (!is.numeric(size)) stop("size must be numeric")
-        if (length(size > 1)) {
+        if (length(size) > 1) {
             if (length(size) != length(x)) {
                 size <- rep_len(size, length(x))
             }
