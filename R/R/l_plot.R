@@ -102,7 +102,7 @@ l_plot <- function(x, y, ...) {
 #'  until matching the number points,
 #' @param glyph shape of point; must be one of the primitive glyphs
 #' "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-#' or "otriangle". Prefixes "c" and "o" mean closed and open, respectively.
+#' "otriangle", "diamond", "cdiamond", or "odiamond". Prefixes "c" and "o" mean closed and open, respectively.
 #' Default is "ccircle" meaning a closed circle glyph.
 #'
 #' Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like

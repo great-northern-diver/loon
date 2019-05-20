@@ -1,4 +1,4 @@
-#' @title Create an plot with a map layered
+#' @title Create a plot with a map layer
 #'
 #' @description Creates a scatterplot widget and layers the map in front.
 #'
@@ -53,10 +53,13 @@ l_plot.map <-  function(x, ...) {
 #'
 #' @examples
 #' if (requireNamespace("maps", quietly = TRUE)) {
-#'   canada <- maps::map("world",  "Canada", fill=TRUE, plot=FALSE)
+#'   canada <- maps::map("world",  "Canada",
+#'                       fill=TRUE, plot=FALSE)
 #'   p <- l_plot()
-#'   l_map <- l_layer(p, canada, asSingleLayer=TRUE)
-#'   l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE), "lightblue", "")
+#'   l_map <- l_layer(p, canada,
+#'                    asSingleLayer=TRUE, color = "cornsilk")
+#'   l_map['color'] <- ifelse(grepl("lake", canada$names, TRUE),
+#'                            "lightblue", "cornsilk")
 #'   l_scaleto_layer(p, l_map)
 #'   l_map['active'] <- FALSE
 #'   l_map['active'] <- TRUE

@@ -187,7 +187,7 @@ until matching the number points,</p></td>
       <th>glyph</th>
       <td><p>shape of point; must be one of the primitive glyphs
 "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-or "otriangle". Prefixes "c" and "o" mean closed and open, respectively.
+"otriangle", "diamond", "cdiamond", or "odiamond". Prefixes "c" and "o" mean closed and open, respectively.
 Default is "ccircle" meaning a closed circle glyph.</p>
 <p>Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
 serial axes glyphs may be added, but only after the plot has been created.</p></td>
@@ -280,7 +280,7 @@ order to be displayed. See the examples below.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a></code>,
+    <div class='dont-index'><p>See <code><a href='l_glyph_add.html'>l_glyph_add</a></code>, <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a></code>,
 <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a></code>,
 <code><a href='l_glyph_add_image.html'>l_glyph_add_image</a></code>,
 <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a></code>, and  <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a></code> for glyphs
@@ -294,8 +294,10 @@ and <code><a href='https://www.rdocumentation.org/packages/utils/topics/demo'>de
     <pre class="examples"><div class='input'>
 <span class='co'># default use as scatterplot</span>
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Petal.Length</span> ~ <span class='no'>Petal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))
+
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Petal.Length</span> ~ <span class='no'>Petal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))
+
 <span class='co'># link the two plots p1 and p2</span>
 <span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p1</span>, <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris"</span>, <span class='kw'>sync</span><span class='kw'>=</span><span class='st'>"push"</span>)
 <span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p2</span>, <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris"</span>, <span class='kw'>sync</span><span class='kw'>=</span><span class='st'>"push"</span>)
