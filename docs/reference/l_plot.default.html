@@ -187,7 +187,7 @@ until matching the number points,</p></td>
       <th>glyph</th>
       <td><p>shape of point; must be one of the primitive glyphs
 "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-or "otriangle". Prefixes "c" and "o" mean closed and open, respectively.
+"otriangle", "diamond", "cdiamond", or "odiamond". Prefixes "c" and "o" mean closed and open, respectively.
 Default is "ccircle" meaning a closed circle glyph.</p>
 <p>Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
 serial axes glyphs may be added, but only after the plot has been created.</p></td>
@@ -280,7 +280,7 @@ order to be displayed. See the examples below.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a></code>,
+    <div class='dont-index'><p>See <code><a href='l_glyph_add.html'>l_glyph_add</a></code>, <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a></code>,
 <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a></code>,
 <code><a href='l_glyph_add_image.html'>l_glyph_add_image</a></code>,
 <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a></code>, and  <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a></code> for glyphs
@@ -294,12 +294,49 @@ and <code><a href='https://www.rdocumentation.org/packages/utils/topics/demo'>de
     <pre class="examples"><div class='input'>
 <span class='co'># default use as scatterplot</span>
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Petal.Length</span> ~ <span class='no'>Petal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
-<span class='co'># link the two plots p1 and p2</span>
-<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p1</span>, <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris"</span>, <span class='kw'>sync</span><span class='kw'>=</span><span class='st'>"push"</span>)
-<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p2</span>, <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris"</span>, <span class='kw'>sync</span><span class='kw'>=</span><span class='st'>"push"</span>)
-<span class='no'>p1</span>[<span class='st'>'selected'</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"setosa"</span></div></pre>
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>,
+                        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"First plot"</span>))
+
+<span class='co'># The names of the info states that can be</span>
+<span class='co'># accessed or set.  They can also be given values as</span>
+<span class='co'># arguments to l_plot.default()</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p1</span>)</div><div class='output co'>#&gt;  [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"    
+#&gt;  [5] "linkingKey"       "zoomX"            "zoomY"            "panX"            
+#&gt;  [9] "panY"             "deltaX"           "deltaY"           "xlabel"          
+#&gt; [13] "ylabel"           "title"            "showLabels"       "showScales"      
+#&gt; [17] "swapAxes"         "showGuides"       "background"       "foreground"      
+#&gt; [21] "guidesBackground" "guidelines"       "minimumMargins"   "labelMargins"    
+#&gt; [25] "scalesMargins"    "x"                "y"                "xTemp"           
+#&gt; [29] "yTemp"            "color"            "selected"         "active"          
+#&gt; [33] "size"             "tag"              "useLoonInspector" "selectBy"        
+#&gt; [37] "selectionLogic"  </div><div class='input'><span class='no'>p1</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
+
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Petal.Length</span> ~ <span class='no'>Petal.Width</span>,
+                        <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris_data"</span>,
+                        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Second plot"</span>,
+                        <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
+<span class='no'>p2</span>[<span class='st'>"showScales"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+
+<span class='co'># link first plot with the second plot requires</span>
+<span class='co'># l_configure to coordinate the synchroniztion</span>
+<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p1</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"iris_data"</span>, <span class='kw'>sync</span> <span class='kw'>=</span> <span class='st'>"push"</span>)
+
+<span class='no'>p1</span>[<span class='st'>'selected'</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>
+<span class='no'>p2</span>[<span class='st'>"glyph"</span>][<span class='no'>p1</span>[<span class='st'>'selected'</span>]] <span class='kw'>&lt;-</span> <span class='st'>"cdiamond"</span>
+
+<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='l_plot.default-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
+<span class='co'># Use with other tk widgets</span>
+<span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
+<span class='fu'>tktitle</span>(<span class='no'>tt</span>) <span class='kw'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span>
+
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>1</span>))
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>8</span>,<span class='fl'>4</span>))
+
+<span class='fu'>tkgrid</span>(<span class='no'>p1</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid</span>(<span class='no'>p2</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
+<span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>1</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
+<span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -24,7 +24,7 @@ until matching the number points,}
 
 \item{glyph}{shape of point; must be one of the primitive glyphs
 "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-or "otriangle". Prefixes "c" and "o" mean closed and open, respectively.
+"otriangle", "diamond", "cdiamond", or "odiamond". Prefixes "c" and "o" mean closed and open, respectively.
 Default is "ccircle" meaning a closed circle glyph.
 
 Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
@@ -92,18 +92,49 @@ The scatterplot displays a number of direct interactions with the
 
 # default use as scatterplot
 
-p1 <- with(iris, l_plot(Sepal.Length, Sepal.Width, color=Species))
+p1 <- with(iris, l_plot(Sepal.Length, Sepal.Width, color=Species,
+                        title = "First plot"))
 
-p2 <- with(iris, l_plot(Petal.Length ~ Petal.Width, color=Species))
+# The names of the info states that can be
+# accessed or set.  They can also be given values as
+# arguments to l_plot.default()
+names(p1)
+p1["size"] <- 10
 
-# link the two plots p1 and p2
-l_configure(p1, linkingGroup="iris", sync="push")
-l_configure(p2, linkingGroup="iris", sync="push")
-p1['selected'] <- iris$Species == "setosa"
+p2 <- with(iris, l_plot(Petal.Length ~ Petal.Width,
+                        linkingGroup="iris_data",
+                        title = "Second plot",
+                        showGuides = FALSE))
+p2["showScales"] <- TRUE
+
+# link first plot with the second plot requires
+# l_configure to coordinate the synchroniztion
+l_configure(p1, linkingGroup = "iris_data", sync = "push")
+
+p1['selected'] <- iris$Species == "versicolor"
+p2["glyph"][p1['selected']] <- "cdiamond"
+
+gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
+
+
+# Use with other tk widgets
+tt <- tktoplevel()
+tktitle(tt) <- "Loon plots with custom layout"
+
+p1 <- l_plot(parent=tt, x=c(1,2,3), y=c(3,2,1))
+p2 <- l_plot(parent=tt, x=c(4,3,1), y=c(6,8,4))
+
+tkgrid(p1, row=0, column=0, sticky="nesw")
+tkgrid(p2, row=0, column=1, sticky="nesw")
+
+tkgrid.columnconfigure(tt, 0, weight=1)
+tkgrid.columnconfigure(tt, 1, weight=1)
+
+tkgrid.rowconfigure(tt, 0, weight=1)
 
 }
 \seealso{
-See \code{\link{l_glyph_add_polygon}},
+See \code{\link{l_glyph_add}}, \code{\link{l_glyph_add_polygon}},
 \code{\link{l_glyph_add_text}},
 \code{\link{l_glyph_add_image}},
 \code{\link{l_glyph_add_serialaxes}}, and  \code{\link{l_glyph_add_pointrange}} for glyphs

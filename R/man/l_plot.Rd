@@ -7,14 +7,15 @@
 l_plot(x, y, ...)
 }
 \arguments{
-\item{x}{the coordinates of points in the plot. Alternatively, a
-      single plotting structure, function or \emph{any \R object with a
-        \code{plot} method} can be provided.}
+\item{x}{the coordinates of points in the l_plot.
+Alternatively, a single plotting structure, function, or any R object having an l_plot
+method can be provided.}
 
-\item{y}{the y coordinates of points in the plot, \emph{optional}
-    if \code{x} is an appropriate structure.}
+\item{y}{the y coordinates of points in the l_plot, optional if x is an
+appropriate structure.}
 
-\item{...}{named arguments to modify plot states}
+\item{...}{named arguments to modify plot states. See \code{\link{l_info_states}}
+of any instantiated \code{l_plot} for examples of names and values.}
 }
 \value{
 widget handle
@@ -24,6 +25,21 @@ widget handle
   visualization environments for \R objects.
 }
 \details{
+Like \code{\link{plot}} in \R, \code{\link{l_plot}} is
+the generic plotting function for objects in loon.
+The default method \code{\link{l_plot.default}} produces the interactive
+scatterplot in loon.
+This is the workhorse of `loon` and is often a key part of many
+other displays (e.g. \code{\link{l_pairs}} and \code{\link{l_navgraph}}).
+
+For example, the  methods include \code{\link{l_plot.default}} (the basic interactive scatterplot),
+\code{\link{l_plot.density}} (layers output of \code{\link{density}} in an empty scatterplot),
+ \code{\link{l_plot.map}}  (layers a map in an empty scatterplot), and
+\code{\link{l_plot.stl}} (a compound display of the output of \code{\link{stl}}).
+
+
+A complete list is had from \code{methods(l_plot)}.
+
 \ifelse{html}{
 \out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon
   it is recommended to follow the introductory loon vignette <code>vignette(topic = "introduction", package  = "loon")</code>
@@ -56,22 +72,8 @@ To get started with loon it is recommended to follow the introductory loon vigne
 # ordinary use
 p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 
-names(p)
-p["glyph"]
-p["size"] <- 10
-p["color"] <- "grey"
-p["color"] <- iris$Species
 versi <- iris$Species == "versicolor"
-p["glyph"][versi] <- "otriangle"
 p["glyph"][versi] <- "ctriangle"
-
-# link another plot with the previous plot
-l_configure(p, linkingGroup = "iris_data", sync = "pull")
-p2 <- with(iris, l_plot(Sepal.Length, Petal.Width,
-                        linkingGroup="iris_data",
-                        title = "Second plot",
-                        showGuides = TRUE))
-p2["showScales"] <- TRUE
 
 # Get an R (grid) graphics plot of the current loon plot
 plot(p)
@@ -80,19 +82,18 @@ grid.loon(p)
 # or to save the grid data structure (grob) for later use
 pg <- loonGrob(p)
 
-# Use with other tk widgets
-tt <- tktoplevel()
-p1 <- l_plot(parent=tt, x=c(1,2,3), y=c(3,2,1))
-p2 <- l_plot(parent=tt, x=c(4,3,1), y=c(6,8,4))
+# plot a density estimate
+set.seed(314159)
+ds <- density(rnorm(1000))
+p <- l_plot(ds,  title = "density estimate",
+            xlabel = "x", ylabel = "density",
+            showScales = TRUE)
+plot(p)
 
-tkgrid(p1, row=0, column=0, sticky="nesw")
-tkgrid(p2, row=0, column=1, sticky="nesw")
-tkgrid.columnconfigure(tt, 0, weight=1)
-tkgrid.columnconfigure(tt, 1, weight=1)
-tkgrid.rowconfigure(tt, 0, weight=1)
 
-tktitle(tt) <- "Loon plots with custom layout"
 }
 \seealso{
-\code{\link{l_info_states}}
+\code{\link{l_plot.default}}. All arguments to any \code{l_plot}
+can be seen from the state names of any instance via
+\code{\link{l_info_states}} or \code{\link{names.loon}}.
 }

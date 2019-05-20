@@ -93,14 +93,13 @@ l_plot_ts <- function(stlOrDecomposedTS,
         }
     }
 
-    if(is.null(ylabels) == TRUE ){
-        ylabels <- c(paste(nameOfData, "data"),
-                     paste(nameOfData, "trend"),
-                     paste(nameOfData, "seasonality"),
-                     paste(nameOfData, "remainder"))
+    if(is.null(ylabels)){
+        ylabels <- c("data", "trend", "seasonality", "remainder")
     }else{
         if(length(ylabels) != 4){
-            warning("The length of ylabels should be 4, see Arguments xlabels and ylabels")
+            warning(paste0("The length of ylabels must be 4", "
+                           to match data, trend, seasonality, and remainder")
+            )
         }
     }
 

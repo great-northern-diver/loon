@@ -161,18 +161,19 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the coordinates of points in the plot. Alternatively, a
-      single plotting structure, function or <em>any <span style="R">R</span> object with a
-        <code>plot</code> method</em> can be provided.</p></td>
+      <td><p>the coordinates of points in the l_plot.
+Alternatively, a single plotting structure, function, or any R object having an l_plot
+method can be provided.</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>the y coordinates of points in the plot, <em>optional</em>
-    if <code>x</code> is an appropriate structure.</p></td>
+      <td><p>the y coordinates of points in the l_plot, optional if x is an
+appropriate structure.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>named arguments to modify plot states</p></td>
+      <td><p>named arguments to modify plot states. See <code><a href='l_info_states.html'>l_info_states</a></code>
+of any instantiated <code>l_plot</code> for examples of names and values.</p></td>
     </tr>
     </table>
     
@@ -182,7 +183,18 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><div style="background: #dff0d8; padding: 15px;"> To get started with loon
+    <p>Like <code><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></code> in <span style="R">R</span>, <code>l_plot</code> is
+the generic plotting function for objects in loon.
+The default method <code><a href='l_plot.default.html'>l_plot.default</a></code> produces the interactive
+scatterplot in loon.
+This is the workhorse of `loon` and is often a key part of many
+other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><a href='l_navgraph.html'>l_navgraph</a></code>).</p>
+<p>For example, the  methods include <code><a href='l_plot.default.html'>l_plot.default</a></code> (the basic interactive scatterplot),
+<code><a href='l_plot.density.html'>l_plot.density</a></code> (layers output of <code><a href='https://www.rdocumentation.org/packages/stats/topics/density'>density</a></code> in an empty scatterplot),
+ <code><a href='l_plot.map.html'>l_plot.map</a></code>  (layers a map in an empty scatterplot), and
+<code><a href='l_plot.stl.html'>l_plot.stl</a></code> (a compound display of the output of <code><a href='https://www.rdocumentation.org/packages/stats/topics/stl'>stl</a></code>).</p>
+    <p>A complete list is had from <code><a href='https://www.rdocumentation.org/packages/utils/topics/methods'>methods(l_plot)</a></code>.</p>
+<p><div style="background: #dff0d8; padding: 15px;"> To get started with loon
   it is recommended to follow the introductory loon vignette <code>vignette(topic = "introduction", package  = "loon")</code>
   and to explore loon's website accessible via <code>l_help()</code>. </div></p>
     <p>The general direct manipulation and interaction gestures are
@@ -196,69 +208,32 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_info_states.html'>l_info_states</a></code></p></div>
+    <div class='dont-index'><p><code><a href='l_plot.default.html'>l_plot.default</a></code>. All arguments to any <code>l_plot</code>
+can be seen from the state names of any instance via
+<code><a href='l_info_states.html'>l_info_states</a></code> or <code><a href='names.loon.html'>names.loon</a></code>.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># ordinary use</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Width</span>, <span class='no'>Petal.Length</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: ‘&gt;’ not meaningful for factors</span></div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>p</span>)</div><div class='output co'>#&gt;  [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"    
-#&gt;  [5] "linkingKey"       "zoomX"            "zoomY"            "panX"            
-#&gt;  [9] "panY"             "deltaX"           "deltaY"           "xlabel"          
-#&gt; [13] "ylabel"           "title"            "showLabels"       "showScales"      
-#&gt; [17] "swapAxes"         "showGuides"       "background"       "foreground"      
-#&gt; [21] "guidesBackground" "guidelines"       "minimumMargins"   "labelMargins"    
-#&gt; [25] "scalesMargins"    "x"                "y"                "xTemp"           
-#&gt; [29] "yTemp"            "color"            "selected"         "active"          
-#&gt; [33] "size"             "tag"              "useLoonInspector" "selectBy"        
-#&gt; [37] "selectionLogic"  </div><div class='input'><span class='no'>p</span>[<span class='st'>"glyph"</span>]</div><div class='output co'>#&gt;   [1] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;   [8] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [15] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [22] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [29] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [36] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [43] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [50] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [57] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [64] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [71] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [78] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [85] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [92] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt;  [99] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [106] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [113] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [120] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [127] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [134] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [141] "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle" "ccircle"
-#&gt; [148] "ccircle" "ccircle" "ccircle"</div><div class='input'><span class='no'>p</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
-<span class='no'>p</span>[<span class='st'>"color"</span>] <span class='kw'>&lt;-</span> <span class='st'>"grey"</span>
-<span class='no'>p</span>[<span class='st'>"color"</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span>
-<span class='no'>versi</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>
-<span class='no'>p</span>[<span class='st'>"glyph"</span>][<span class='no'>versi</span>] <span class='kw'>&lt;-</span> <span class='st'>"otriangle"</span>
-<span class='no'>p</span>[<span class='st'>"glyph"</span>][<span class='no'>versi</span>] <span class='kw'>&lt;-</span> <span class='st'>"ctriangle"</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Width</span>, <span class='no'>Petal.Length</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))
 
-<span class='co'># link another plot with the previous plot</span>
-<span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>p</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"iris_data"</span>, <span class='kw'>sync</span> <span class='kw'>=</span> <span class='st'>"pull"</span>)
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/with'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Length</span>, <span class='no'>Petal.Width</span>,
-                        <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris_data"</span>,
-                        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Second plot"</span>,
-                        <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>p2</span>[<span class='st'>"showScales"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='no'>versi</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>
+<span class='no'>p</span>[<span class='st'>"glyph"</span>][<span class='no'>versi</span>] <span class='kw'>&lt;-</span> <span class='st'>"ctriangle"</span>
 
 <span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>p</span>)</div><div class='input'><span class='co'># or with more control about grid parameters</span>
-<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='l_plot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># or to save the grid data structure (grob) for later use</span>
+<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>p</span>)</div><div class='input'><span class='co'># or to save the grid data structure (grob) for later use</span>
 <span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p</span>)
 
-<span class='co'># Use with other tk widgets</span>
-<span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'>l_plot</span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>1</span>))
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>l_plot</span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>8</span>,<span class='fl'>4</span>))
+<span class='co'># plot a density estimate</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>314159</span>)
+<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/density'>density</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>l_plot</span>(<span class='no'>ds</span>,  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"density estimate"</span>,
+            <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='st'>"x"</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='st'>"density"</span>,
+            <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='l_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
-<span class='fu'>tkgrid</span>(<span class='no'>p1</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid</span>(<span class='no'>p2</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>1</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
-<span class='fu'>tktitle</span>(<span class='no'>tt</span>) <span class='kw'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span></div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

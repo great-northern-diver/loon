@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer_map.R
 \name{l_plot.map}
 \alias{l_plot.map}
-\title{Create an plot with a map layered}
+\title{Create a plot with a map layer}
 \usage{
 \method{l_plot}{map}(x, ...)
 }
