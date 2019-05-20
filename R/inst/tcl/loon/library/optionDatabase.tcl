@@ -105,7 +105,7 @@ namespace eval loon {
 #			     \#FDB462 \#B3DE69 \#FCCDE5 \#BC80BD\
 #			     \#CCEBC5 \#FFED6F]
 
-    set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40" "white" "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey"]
+    set Options(colors) [list  "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey" "white" "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40"]
 
     set Options(colors-palette) loon
 
@@ -273,7 +273,7 @@ namespace eval loon {
 
 	switch -- [string tolower $type] {
 	    loon {
-		set Options(colors) [list "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40" "white" "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey"]
+		set Options(colors) [list  "gray60" "#A6CEE3" "pink" "#B2DF8A" "#FDBF6F" "#FFFF99" "#CAB2D6" "#DEB887" "#CDC673" "lightgrey" "white" "gray10" "#1F78B4" "#E31A1C" "#33A02C" "#FF7F00" "#FFFF00" "#6A3D9A" "#B15928" "#8B864E" "gray40"]
 
 		set Options(colors-palette) loon
 	    }

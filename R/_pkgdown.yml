@@ -21,7 +21,9 @@ navbar:
         href: articles/Rmarkdown.html
     - text: Videos
       menu:
-      - text: Interactive 3D plots
+      - text: the (not so) humble (interactive) histogram
+        href: https://youtu.be/JFJcg855HcQ
+      - text: 3D interactive scatterplots
         href: https://youtu.be/mMJllGOuDLY
 
   right:
