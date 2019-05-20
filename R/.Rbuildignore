@@ -10,3 +10,6 @@ cran-comments.md
 ../_pkgdown.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
