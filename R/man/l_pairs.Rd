@@ -16,7 +16,7 @@ l_pairs(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
 a default \code{linkingGroup} will be determined from deparsing the \code{data}.}
 
 \item{linkingKey}{a vector of strings to provide a linking identity for each row of the
-\code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{row.names(data)}.}
+\code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{0:(nrows(data)-1)}.}
 
 \item{showItemLabels}{TRUE, logical indicating whether its itemLabel pops up over a point when
 the mouse hovers over it.}

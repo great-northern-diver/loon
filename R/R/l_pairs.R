@@ -8,7 +8,7 @@
 #' @param linkingGroup string giving the linkingGroup for all plots.  If missing,
 #' a default \code{linkingGroup} will be determined from deparsing the \code{data}.
 #' @param linkingKey a vector of strings to provide a linking identity for each row of the
-#' \code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{row.names(data)}.
+#' \code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{0:(nrows(data)-1)}.
 #' @param showItemLabels TRUE, logical indicating whether its itemLabel pops up over a point when
 #' the mouse hovers over it.
 #' @param itemLabel a vector of strings to be used as pop up information when the mouse hovers
@@ -66,8 +66,9 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     if (missing(linkingGroup)) {
         linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
     }
-    if (missing(linkingKey)) {
-        linkingKey <- row.names(data)
+    # Use default as in tcl/tk
+      if (missing(linkingKey)) {
+        linkingKey <- NULL
     }
     if (missing(itemLabel)) {
         itemLabel <- row.names(data)
