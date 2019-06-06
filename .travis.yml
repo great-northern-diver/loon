@@ -18,7 +18,7 @@ before_install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - R -q -e 'install.packages(c("maps","sp","RColorBrewer","RnavGraphImageData","rworldmap","scales","dplyr","rgl","PairViz","scagnostics","kernlab","testthat","knitr","rmarkdown"))'
-  - R -q -e 'source("https://bioconductor.org/biocLite.R"); biocLite(c("graph","RDRToolbox","Rgraphviz"),suppressUpdates=TRUE, suppressAutoUpdate=TRUE)'
+  - R -q -e 'install.packages("BiocManager"); BiocManager::install(c("graph","RDRToolbox","Rgraphviz"), update=FALSE, ask=FALSE)'
 
 cache: packages
 
