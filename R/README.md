@@ -45,6 +45,8 @@ install.packages("loon")
 
 # You could also install the latest development release directly from GitHub
 devtools::install_github("great-northern-diver/loon", subdir = "R")
+# Or, to ensure you have the vignettes as well (also accessible as articles via l_web())
+devtools::install_github("great-northern-diver/loon", subdir = "R", build_opts = c("--no-resave-data") )
 ```
 
 ### Other Usage/Installation notes
