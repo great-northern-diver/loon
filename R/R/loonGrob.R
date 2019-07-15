@@ -1139,7 +1139,8 @@ get_model_display_order <- function(widget) {
         if (any(is.na(i))) {
             seq_len(n)
         } else {
-            i + 1
+            ii <- i+1
+            ii[!duplicated(ii)]
         }
     }
 }
