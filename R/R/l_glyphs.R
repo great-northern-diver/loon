@@ -300,9 +300,9 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
 #' p <- l_plot(x = 1:3, color = c('red', 'blue', 'green'), showScales=TRUE)
 #' g <- l_glyph_add_pointrange(p, ymin=(1:3)-(1:3)/5, ymax=(1:3)+(1:3)/5)
 #' p['glyph'] <- g
-l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, label="", ...) {
+l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, showArea = TRUE, label="", ...) {
     l_glyph_add.default(widget, "pointrange",
-                        ymin=ymin, ymax=ymax, linewidth=linewidth,
+                        ymin=ymin, ymax=ymax, linewidth=linewidth, showArea = showArea,
                         label=label, ...)
 }
 
@@ -364,7 +364,7 @@ l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, label="", ..
 #' p['glyph'] <- gl
 #'
 #' gl['showArea'] <- FALSE
-l_glyph_add_polygon <- function(widget, x, y, showArea=TRUE, label="", ...) {
+l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, label="", ...) {
 
     if (is.list(x))
         x <- l_Rlist2nestedTclList(x)
@@ -372,7 +372,7 @@ l_glyph_add_polygon <- function(widget, x, y, showArea=TRUE, label="", ...) {
         y <- l_Rlist2nestedTclList(y)
 
     l_glyph_add.default(widget, "polygon",
-                        x=x, y=y, showArea=showArea, label=label, ...)
+                        x=x, y=y, linewidth = linewidth, showArea=showArea, label=label, ...)
 }
 
 
