@@ -4,8 +4,8 @@
 \alias{l_glyph_add_pointrange}
 \title{Add a Pointrange Glyph}
 \usage{
-l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1, label = "",
-  ...)
+l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1,
+  showArea = TRUE, label = "", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
@@ -15,6 +15,8 @@ l_glyph_add_pointrange(widget, ymin, ymax, linewidth = 1, label = "",
 \item{ymax}{vector with upper y-yalue of the point range.}
 
 \item{linewidth}{line with in pixel.}
+
+\item{showArea}{boolean, show a filled point or just the outline point}
 
 \item{label}{label of a glyph (currently shown only in the glyph inspector)}
 
