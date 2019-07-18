@@ -23,10 +23,10 @@ Generic method for adding user-defined glyphs. See details for
 }
 \details{
 The scatterplot and graph displays both have the n-dimensional state
-  \code{'glyph'} that assigns each data point or graph node a glyph (i.e. a 
-visual representation). 
+  \code{'glyph'} that assigns each data point or graph node a glyph (i.e. a
+visual representation).
 
-Loon distinguishes between primitive and non-primitive glyphs: the primitive 
+Loon distinguishes between primitive and non-primitive glyphs: the primitive
 glyphs are always available for use whereas the non-primitive glyphs need to
 be first specified and added to a plot before they can be used.
 
@@ -40,7 +40,7 @@ The primitive glyphs are:
   \code{'diamond'}, \code{'odiamond'}, \code{'cdiamond'}
 }
 
-Note that the letter \code{'o'} stands for outline only, and the letter 
+Note that the letter \code{'o'} stands for outline only, and the letter
 \code{'c'} stands for contrast and adds an outline with the
 \code{'foreground'} color (black by default).
 }

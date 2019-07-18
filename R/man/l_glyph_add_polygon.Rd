@@ -4,7 +4,8 @@
 \alias{l_glyph_add_polygon}
 \title{Add a Polygon Glyph}
 \usage{
-l_glyph_add_polygon(widget, x, y, showArea = TRUE, label = "", ...)
+l_glyph_add_polygon(widget, x, y, linewidth = 1, showArea = TRUE,
+  label = "", ...)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
@@ -14,6 +15,8 @@ scatterplot point.}
 
 \item{y}{nested list of y-coordinates of polygons, one list element for each
 scatterplot point.}
+
+\item{linewidth}{linewidth of outline.}
 
 \item{showArea}{boolean, show a filled polygon or just the outline}
 
@@ -26,34 +29,34 @@ Add one polygon per scatterplot point.
 }
 \details{
 A polygon can be a useful point glyph to visualize arbitrary shapes
-  such as airplanes, animals and shapes that are not available in the 
+  such as airplanes, animals and shapes that are not available in the
   primitive glyph types (e.g. cross). The \code{l_glyphs} demo has an example
   of polygon glyphs which we reuse here.
 }
 \examples{
-x_star <- 
-    c(-0.000864304235090734, 0.292999135695765, 0.949870354364736, 
-      0.474503025064823, 0.586862575626621, -0.000864304235090734, 
+x_star <-
+    c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
+      0.474503025064823, 0.586862575626621, -0.000864304235090734,
       -0.586430423509075, -0.474070872947277, -0.949438202247191,
       -0.29256698357822)
 y_star <-
-    c(-1, -0.403630077787381, -0.308556611927398, 0.153846153846154, 
+    c(-1, -0.403630077787381, -0.308556611927398, 0.153846153846154,
       0.808556611927398, 0.499567847882455, 0.808556611927398,
       0.153846153846154, -0.308556611927398, -0.403630077787381)
-x_cross <- 
-    c(-0.258931143762604, -0.258931143762604, -0.950374531835206, 
+x_cross <-
+    c(-0.258931143762604, -0.258931143762604, -0.950374531835206,
       -0.950374531835206, -0.258931143762604, -0.258931143762604,
       0.259651397291847, 0.259651397291847, 0.948934024776722,
       0.948934024776722, 0.259651397291847, 0.259651397291847)
 y_cross <-
-    c(-0.950374531835206, -0.258931143762604, -0.258931143762604, 
+    c(-0.950374531835206, -0.258931143762604, -0.258931143762604,
       0.259651397291847, 0.259651397291847, 0.948934024776722,
       0.948934024776722, 0.259651397291847, 0.259651397291847,
       -0.258931143762604, -0.258931143762604, -0.950374531835206)
 x_hexagon <-
-    c(0.773552290406223, 0, -0.773552290406223, -0.773552290406223, 
+    c(0.773552290406223, 0, -0.773552290406223, -0.773552290406223,
       0, 0.773552290406223)
-y_hexagon <- 
+y_hexagon <-
     c(0.446917314894843, 0.894194756554307, 0.446917314894843,
       -0.447637568424085, -0.892754249495822, -0.447637568424085)
 

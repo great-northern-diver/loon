@@ -1071,7 +1071,7 @@ cartesian_model_widget_states <- c(
 #' loon:::get_layer_states(c(as.vector(p), as.vector(l)))
 #' }
 #'
-get_layer_states <- function(target, omit = NULL) {
+get_layer_states <- function(target, omit = NULL, native_unit = TRUE) {
 
     if (!is(target, "loon")) {
         target <- l_create_handle(target)
@@ -1096,7 +1096,7 @@ get_layer_states <- function(target, omit = NULL) {
 
     # Add Coordinates
     if (!is(layer, "l_layer_group")) {
-        states <- c(xy_coords_layer(layer), states)
+        states <- c(xy_coords_layer(layer, native_unit = native_unit), states)
     }
 
 
@@ -1139,7 +1139,8 @@ get_model_display_order <- function(widget) {
         if (any(is.na(i))) {
             seq_len(n)
         } else {
-            i + 1
+            ii <- i+1
+            ii[!duplicated(ii)]
         }
     }
 }
