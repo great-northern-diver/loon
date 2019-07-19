@@ -1,5 +1,5 @@
 
-if (requireNamespace("RnavGraphImageData", quietly = TRUE)) {
+if (requireNamespace("loon.data", quietly = TRUE)) {
     local({
         # Plot glyphsizes for different glyphs
         sizes <- c(0:10) # seq(15,25,by=5)
@@ -48,7 +48,7 @@ if (requireNamespace("RnavGraphImageData", quietly = TRUE)) {
 
 
         ## Images
-        data(faces, package = "RnavGraphImageData")
+        data(faces, package = "loon.data")
         faces.imgs <- l_image_import_array(faces, 64, 64, img_in_row = FALSE)
         faces.imgs[1]
         g_image <- l_glyph_add_image(p, image=rep(faces.imgs[1], p['n']), label='faces')
@@ -108,7 +108,7 @@ if (requireNamespace("RnavGraphImageData", quietly = TRUE)) {
     }
     )
 } else {
-    cat("need the tkimg tcl extension and RnavGraphImageData R package installed to run this demo.\n")
+    cat("need the tkimg tcl extension and loon.data R package installed to run this demo.\n")
 }
 
 

@@ -174,7 +174,7 @@ a default <code>linkingGroup</code> will be determined from deparsing the <code>
     <tr>
       <th>linkingKey</th>
       <td><p>a vector of strings to provide a linking identity for each row of the
-<code>data</code> data.frame.  If missing, a default <code>linkingKey</code> will be <code><a href='https://www.rdocumentation.org/packages/base/topics/row.names'>row.names(data)</a></code>.</p></td>
+<code>data</code> data.frame.  If missing, a default <code>linkingKey</code> will be <code>0:(nrows(data)-1)</code>.</p></td>
     </tr>
     <tr>
       <th>showItemLabels</th>

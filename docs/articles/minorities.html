@@ -108,7 +108,7 @@
       <h1>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-05-20</h4>
+            <h4 class="date">2019-07-18</h4>
       
       
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -826,7 +826,7 @@ VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://www.
 o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_near]</code></pre></div>
-<pre><code>##  [1] "Filipino" "Multiple" "Other"    "Japanese" "Korean"   "SE.Asian"
+<pre><code>##  [1] "Filipino" "Korean"   "Japanese" "Other"    "Multiple" "SE.Asian"
 ##  [7] "Latino"   "Arab"     "Black"    "Chinese"  "S.Asian"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
 <span class="co"># other should produce less convex shaped glyphs.</span>
@@ -834,8 +834,8 @@ o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocu
 o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/PairViz/topics/order_tsp">order_tsp</a></span>(<span class="op">-</span>VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(minority_star_percent)[o_far]</code></pre></div>
-<pre><code>##  [1] "Multiple" "Filipino" "Arab"     "Japanese" "S.Asian"  "Other"   
-##  [7] "Chinese"  "SE.Asian" "Black"    "Korean"   "Latino"</code></pre>
+<pre><code>##  [1] "Latino"   "Chinese"  "Multiple" "S.Asian"  "Other"    "Filipino"
+##  [7] "SE.Asian" "Black"    "Japanese" "Arab"     "Korean"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
 <span class="co"># the cities are laid over top of one another.</span>

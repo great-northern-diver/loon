@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a Polygon Glyph — l_glyph_add_polygon • loon</title>
+<title>Euclidean distance between two vectors,
+or between column vectors of two matrices. — L2_distance • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +38,12 @@
 
 
 
-<meta property="og:title" content="Add a Polygon Glyph — l_glyph_add_polygon" />
+<meta property="og:title" content="Euclidean distance between two vectors,
+or between column vectors of two matrices. — L2_distance" />
 
-<meta property="og:description" content="Add one polygon per scatterplot point." />
+<meta property="og:description" content="Quickly calculates and returns the Euclidean distances between m vectors
+in one set and n vectors in another.  Each set of vectors is given as
+the columns of a matrix." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -141,108 +145,74 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a Polygon Glyph</h1>
+    <h1>Euclidean distance between two vectors,
+or between column vectors of two matrices.</h1>
     
-    <div class="hidden name"><code>l_glyph_add_polygon.Rd</code></div>
+    <div class="hidden name"><code>L2_distance.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Add one polygon per scatterplot point.</p>
+    <p>Quickly calculates and returns the Euclidean distances between m vectors
+in one set and n vectors in another.  Each set of vectors is given as
+the columns of a matrix.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>l_glyph_add_polygon</span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>showArea</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>L2_distance</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>widget</th>
-      <td><p>widget path as a string or as an object handle</p></td>
+      <th>a</th>
+      <td><p>A d by m numeric matrix giving the first set of m vectors of dimension d
+as the columns of <code>a</code>.</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>nested list of x-coordinates of polygons (relative to ), one list element for each
-scatterplot point.</p></td>
+      <th>b</th>
+      <td><p>A d by n numeric matrix giving the second set of n vectors of dimension d
+as the columns of <code>b</code>.</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>nested list of y-coordinates of polygons, one list element for each
-scatterplot point.</p></td>
-    </tr>
-    <tr>
-      <th>linewidth</th>
-      <td><p>linewidth of outline.</p></td>
-    </tr>
-    <tr>
-      <th>showArea</th>
-      <td><p>boolean, show a filled polygon or just the outline</p></td>
-    </tr>
-    <tr>
-      <th>label</th>
-      <td><p>label of a glyph (currently shown only in the glyph inspector)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>state arguments</p></td>
+      <th>df</th>
+      <td><p>Indicator whether to force the diagonals of the returned matrix to
+be zero (<code>df = 1</code>) or not (the default <code>df = 0</code>).</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An m by n matrix containing the Euclidean distances between the column
+vectors of the matrix <code>a</code> and the column vectors of the matrix <code>b</code>.</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A polygon can be a useful point glyph to visualize arbitrary shapes
-  such as airplanes, animals and shapes that are not available in the
-  primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example
-  of polygon glyphs which we reuse here.</p>
+    <p>This fully vectorized (VERY FAST!) function computes the Euclidean distance between
+two vectors by:</p>
+<p>||A-B|| = sqrt ( ||A||^2 + ||B||^2 - 2*A.B )</p>
+<p>Originally written as L2_distance.m for Matlab by Roland Bunschoten of
+the University of Amsterdam, Netherlands.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_glyph_add.html'>l_glyph_add</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x_star</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.000864304235090734</span>, <span class='fl'>0.292999135695765</span>, <span class='fl'>0.949870354364736</span>,
-      <span class='fl'>0.474503025064823</span>, <span class='fl'>0.586862575626621</span>, -<span class='fl'>0.000864304235090734</span>,
-      -<span class='fl'>0.586430423509075</span>, -<span class='fl'>0.474070872947277</span>, -<span class='fl'>0.949438202247191</span>,
-      -<span class='fl'>0.29256698357822</span>)
-<span class='no'>y_star</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>1</span>, -<span class='fl'>0.403630077787381</span>, -<span class='fl'>0.308556611927398</span>, <span class='fl'>0.153846153846154</span>,
-      <span class='fl'>0.808556611927398</span>, <span class='fl'>0.499567847882455</span>, <span class='fl'>0.808556611927398</span>,
-      <span class='fl'>0.153846153846154</span>, -<span class='fl'>0.308556611927398</span>, -<span class='fl'>0.403630077787381</span>)
-<span class='no'>x_cross</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.950374531835206</span>,
-      -<span class='fl'>0.950374531835206</span>, -<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.258931143762604</span>,
-      <span class='fl'>0.259651397291847</span>, <span class='fl'>0.259651397291847</span>, <span class='fl'>0.948934024776722</span>,
-      <span class='fl'>0.948934024776722</span>, <span class='fl'>0.259651397291847</span>, <span class='fl'>0.259651397291847</span>)
-<span class='no'>y_cross</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.950374531835206</span>, -<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.258931143762604</span>,
-      <span class='fl'>0.259651397291847</span>, <span class='fl'>0.259651397291847</span>, <span class='fl'>0.948934024776722</span>,
-      <span class='fl'>0.948934024776722</span>, <span class='fl'>0.259651397291847</span>, <span class='fl'>0.259651397291847</span>,
-      -<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.258931143762604</span>, -<span class='fl'>0.950374531835206</span>)
-<span class='no'>x_hexagon</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.773552290406223</span>, <span class='fl'>0</span>, -<span class='fl'>0.773552290406223</span>, -<span class='fl'>0.773552290406223</span>,
-      <span class='fl'>0</span>, <span class='fl'>0.773552290406223</span>)
-<span class='no'>y_hexagon</span> <span class='kw'>&lt;-</span>
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.446917314894843</span>, <span class='fl'>0.894194756554307</span>, <span class='fl'>0.446917314894843</span>,
-      -<span class='fl'>0.447637568424085</span>, -<span class='fl'>0.892754249495822</span>, -<span class='fl'>0.447637568424085</span>)
-
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='fl'>1</span>:<span class='fl'>3</span>)
-
-<span class='no'>gl</span> <span class='kw'>&lt;-</span> <span class='fu'>l_glyph_add_polygon</span>(<span class='no'>p</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>x_star</span>, <span class='no'>x_cross</span>, <span class='no'>x_hexagon</span>),
-                          <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>y_star</span>, <span class='no'>y_cross</span>, <span class='no'>y_hexagon</span>))
-
-<span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>gl</span>
-
-<span class='no'>gl</span>[<span class='st'>'showArea'</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span></div></pre>
+    <pre class="examples"><div class='input'><span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>400</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>800</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='fu'>L2_distance</span>(<span class='no'>A</span>[,<span class='fl'>1</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>], <span class='no'>B</span>[,<span class='fl'>1</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>])</div><div class='output co'>#&gt;          [,1]
+#&gt; [1,] 6.139374</div><div class='input'><span class='no'>d_AB</span> <span class='kw'>&lt;-</span> <span class='fu'>L2_distance</span>(<span class='no'>A</span>,<span class='no'>B</span>)
+<span class='no'>d_BB</span> <span class='kw'>&lt;-</span> <span class='fu'>L2_distance</span>(<span class='no'>B</span>,<span class='no'>B</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># force diagonal to be zero</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
@@ -250,6 +220,8 @@ scatterplot point.</p></td>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Roland Bunschoten (original), Adrian Waddell, Wayne Oldford</p>
   </div>
 </div>
 

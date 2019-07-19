@@ -142,7 +142,11 @@
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"loon"</span>)
 
 <span class="co"># You could also install the latest development release directly from GitHub</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>)
+<span class="co"># Or, to ensure you have the vignettes as well </span>
+<span class="co"># (  also accessible via l_web(directory = "articles")  )</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>, 
+                         <span class="dt">build_opts =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"--no-resave-data"</span>) )</code></pre></div>
 <div id="other-usageinstallation-notes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-usageinstallation-notes" class="anchor"></a>Other Usage/Installation notes</h3>
