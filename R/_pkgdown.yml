@@ -49,6 +49,7 @@ reference:
     contents:
     - starts_with("l_plot")
     - l_hist
+    - l_plot3D
     - l_pairs
     - l_serialaxes
     - plot.loon

@@ -96,4 +96,9 @@ plot(p)
 \code{\link{l_plot.default}}. All arguments to any \code{l_plot}
 can be seen from the state names of any instance via
 \code{\link{l_info_states}} or \code{\link{names.loon}}.
+
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.default}},
+  \code{\link{l_plot.density}}, \code{\link{l_plot.stl}}
 }
+\concept{two-dimensional plotting functions}

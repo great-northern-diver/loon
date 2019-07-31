@@ -4,6 +4,8 @@
 #' @description \code{l_plot} is a generic function for creating interactive
 #'   visualization environments for \R objects.
 #'
+#' @family two-dimensional plotting functions
+#'
 #' @param x	the coordinates of points in the l_plot.
 #' Alternatively, a single plotting structure, function, or any R object having an l_plot
 #' method can be provided.
@@ -93,12 +95,14 @@ l_plot <- function(x, y, ...) {
 }
 
 
-#' @title Create an interactive 2d scatterplot display
+#' @title The default \code{l_plot} for plotting data
 #'
 #' @description Creates an interactive 2d scatterplot. Also, if no loon
 #'   inspector is open then the \code{l_plot} call will also open a loon
 #'   inspector.
 #'
+#' @family two-dimensional plotting functions
+#' @method l_plot default
 #'
 #' @inheritParams graphics::plot.default
 #' @param y argument description is as for the \code{x} argument above.

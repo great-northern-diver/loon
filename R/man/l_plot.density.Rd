@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_plot_density.R
 \name{l_plot.density}
 \alias{l_plot.density}
-\title{Loon methods for Kernel Density Estimation}
+\title{The \code{l_plot} method for \code{density} objects.}
 \usage{
 \method{l_plot}{density}(x, y = NULL, ylabel = NULL, xlabel = NULL,
   title = NULL, linewidth = 2, color = NULL, size = 0.5, ...)
@@ -12,10 +12,10 @@
 
 \item{y}{NULL .  This argument is ignored.}
 
-\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created 
+\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
 based on the combination of data name and "density".}
 
-\item{xlabel}{the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created 
+\item{xlabel}{the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created
 based on the information available from the \code{density} objects.}
 
 \item{title}{providing a title for the plot. If \code{NULL} (the default), the title will be the call which produced the result.}
@@ -29,10 +29,19 @@ based on the information available from the \code{density} objects.}
 \item{...}{named arguments being states passed to l_plot()}
 }
 \description{
-The loon plot method for \code{density} objects.
+Creates an loon plot displaying contours
+             of the supplied (kernel) density estimate
 }
 \examples{
 ds <- density(faithful$eruptions)
 p <- l_plot(ds, color = "steelblue")
 
 }
+\seealso{
+\code{\link{l_layer.density}}
+
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.default}}, \code{\link{l_plot.stl}},
+  \code{\link{l_plot}}
+}
+\concept{two-dimensional plotting functions}

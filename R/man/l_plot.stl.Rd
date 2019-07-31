@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_plot_stl.R
 \name{l_plot.stl}
 \alias{l_plot.stl}
-\title{l_plot method for seasonally decomposed by loess time series objects (i.e. via stl)}
+\title{The \code{l_plot} methods for seasonally decomposed by loess time series objects (i.e. via stl)}
 \usage{
 \method{l_plot}{stl}(x, y = NULL, pcolor = NULL, size = 1,
   lcolor = NULL, linewidth = 1, xlabels = NULL, ylabels = NULL,
@@ -22,10 +22,10 @@
 
 \item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
 
-\item{xlabels}{the labels for the x axes: a length four character vector for each of the original 
+\item{xlabels}{the labels for the x axes: a length four character vector for each of the original
 time series, trend, seasonality and remainder. If \code{NULL}, xlabels is created as "time".}
 
-\item{ylabels}{the labels for the vertical axes: a length four character vector for each of the original 
+\item{ylabels}{the labels for the vertical axes: a length four character vector for each of the original
 time series, trend, seasonality and remainder. If \code{NULL}, ylabels is created based on the information provided.}
 
 \item{title}{an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".}
@@ -48,7 +48,7 @@ A structure of class \code{"l_ts"} containing four loon plots each representing 
 by name: "original", "trend", "seasonal", and "remainder".
 }
 \description{
-a generic function for creating a decomposed time series plot based on 
+Creates a decomposed time series plot based on
 objects of class \code{stl}
 }
 \examples{
@@ -61,3 +61,9 @@ names(p$seasonal)
 # which can be set
 p$seasonal['color'] <- "steelblue"
 }
+\seealso{
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.default}},
+  \code{\link{l_plot.density}}, \code{\link{l_plot}}
+}
+\concept{two-dimensional plotting functions}

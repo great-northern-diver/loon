@@ -26,7 +26,8 @@
 #' @return A structure of class \code{"l_ts"} containing four loon plots each representing a part of the decomposition
 #' by name: "original", "trend", "seasonal", and "remainder".
 #'
-#' @seealso \code{\link{l_plot.stl}} and \code{\link{l_plot.decomposed.ts}}
+#' @seealso \code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
+#' \code{\link{stl}}, or \code{\link{decompose}}.
 #'
 #'
 

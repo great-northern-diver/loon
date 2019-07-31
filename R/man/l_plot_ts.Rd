@@ -50,5 +50,6 @@ by name: "original", "trend", "seasonal", and "remainder".
 is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
 }
 \seealso{
-\code{\link{l_plot.stl}} and \code{\link{l_plot.decomposed.ts}}
+\code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
+\code{\link{stl}}, or \code{\link{decompose}}.
 }

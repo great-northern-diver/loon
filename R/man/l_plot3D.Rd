@@ -178,4 +178,8 @@ tktitle(tt) <- "Loon plots with custom layout"
 }
 \seealso{
 \code{\link{l_info_states}}
+
+Other three-dimensional plotting functions: \code{\link{l_plot3D.default}},
+  \code{\link{l_scale3D}}
 }
+\concept{three-dimensional plotting functions}

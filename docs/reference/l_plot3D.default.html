@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an interactive 3d scatterplot display — l_plot3D.default • loon</title>
+<title>The default <code>l_plot</code> method to create 3d interactive scatterplot — l_plot3D.default • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,7 +37,7 @@
 
 
 
-<meta property="og:title" content="Create an interactive 3d scatterplot display — l_plot3D.default" />
+<meta property="og:title" content="The default <code>l_plot</code> method to create 3d interactive scatterplot — l_plot3D.default" />
 
 <meta property="og:description" content="Creates an interactive 3d scatterplot. Also, if no loon
   inspector is open then the l_plot3D call will also open a loon
@@ -143,7 +143,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an interactive 3d scatterplot display</h1>
+    <h1>The default <code>l_plot</code> method to create 3d interactive scatterplot</h1>
     
     <div class="hidden name"><code>l_plot3D.default.Rd</code></div>
     </div>
@@ -157,22 +157,121 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='l_plot3D.html'>l_plot3D</a></span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='l_plot3D.html'>l_plot3D</a></span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>axisScaleFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>, <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='st'>"ccircle"</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>xlabel</span>, <span class='no'>ylabel</span>, <span class='no'>zlabel</span>,
+  <span class='no'>title</span>, <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='st'>"grey92"</span>,
+  <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the x, y and z arguments provide the x, y and z coordinates for the plot. Any reasonable way of defining the coordinates is acceptable. See the function xyz.coords for details. If supplied separately, they must be of the same length.</p></td>
+      <td><p>the x, y and z arguments provide the x, y and z coordinates for the plot.
+         Any reasonable way of defining the coordinates is acceptable.
+         See the function xyz.coords for details.</p>
+<p>If supplied separately, they must be of the same length.</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>please read in the argument description for the <code>x</code> argument above.</p></td>
+      <td><p>the y coordinates of points in the plot,
+optional if x is an appropriate structure.</p></td>
     </tr>
     <tr>
       <th>z</th>
-      <td><p>please read in the argument description for the <code>x</code> argument above.</p></td>
+      <td><p>the z coordinates of points in the plot,
+optional if x is an appropriate structure.</p></td>
+    </tr>
+    <tr>
+      <th>axisScaleFactor</th>
+      <td><p>the amount to scale the axes at the centre of the rotation.
+Default is 1.
+    All numerical values are acceptable (0 removes the axes, &lt; 0 inverts the direction of
+    all axes.)</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>colours of points; colours are repeated until matching the number points,</p></td>
+    </tr>
+    <tr>
+      <th>glyph</th>
+      <td><p>shape of point; must be one of the primitive glyphs
+             "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
+             "otriangle", "diamond", "cdiamond", or "odiamond".</p>
+<p>Prefixes "c" and "o" mean closed and open, respectively.
+             Default is "ccircle" meaning a closed circle glyph.</p>
+<p>Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
+             serial axes glyphs may be added, but only after the plot has been created.</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>size of the symbol (roughly in terms of area)</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>a logical determining whether points appear or not
+(default is TRUE for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (TRUE)
+and which do not (FALSE).</p></td>
+    </tr>
+    <tr>
+      <th>selected</th>
+      <td><p>a logical determining whether points appear selected at first
+(default is FALSE for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (TRUE)
+and which are not (FALSE).</p></td>
+    </tr>
+    <tr>
+      <th>xlabel</th>
+      <td><p>Label for the horizontal (x) axis. If missing,
+one will be inferred from <code>x</code> if possible.</p></td>
+    </tr>
+    <tr>
+      <th>ylabel</th>
+      <td><p>Label for the vertical (y) axis. If missing,
+one will be inferred from <code>y</code> (or <code>x</code>) if possible.</p></td>
+    </tr>
+    <tr>
+      <th>zlabel</th>
+      <td><p>Label for the third (perpendicular to the screen) (z) axis. If missing,
+one will be inferred from <code>z</code> (or <code>x</code>) if possible.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Title for the plot, default is an empty string.</p></td>
+    </tr>
+    <tr>
+      <th>showLabels</th>
+      <td><p>logical to determine whether axes label (and title) should be presented.</p></td>
+    </tr>
+    <tr>
+      <th>showScales</th>
+      <td><p>logical to determine whether numerical scales should
+be presented on both axes.</p></td>
+    </tr>
+    <tr>
+      <th>showGuides</th>
+      <td><p>logical to determine whether to present background guidelines
+to help determine locations.</p></td>
+    </tr>
+    <tr>
+      <th>guidelines</th>
+      <td><p>colour of the guidelines shown when <code>showGuides = TRUE</code> (default "white").</p></td>
+    </tr>
+    <tr>
+      <th>guidesBackground</th>
+      <td><p>colour of the background to the guidelines shown when
+<code>showGuides = TRUE</code> (default "grey92").</p></td>
+    </tr>
+    <tr>
+      <th>foreground</th>
+      <td><p>foreground colour used by all other drawing (default "black").</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>background colour used for the plot (default "white")</p></td>
     </tr>
     <tr>
       <th>parent</th>
@@ -195,6 +294,11 @@ order to be displayed. See the examples below.</p></td>
   methods using the left mouse button such as sweeping, brushing and
   individual point selection. See the documentation for <code><a href='l_plot3D.html'>l_plot3D</a></code>
   for more details about the interaction gestures.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other three-dimensional plotting functions: <code><a href='l_plot3D.html'>l_plot3D</a></code>,
+  <code><a href='l_scale3D.html'>l_scale3D</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -219,6 +323,8 @@ order to be displayed. See the examples below.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

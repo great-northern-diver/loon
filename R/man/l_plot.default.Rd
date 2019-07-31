@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_plot.R
 \name{l_plot.default}
 \alias{l_plot.default}
-\title{Create an interactive 2d scatterplot display}
+\title{The default \code{l_plot} for plotting data}
 \usage{
 \method{l_plot}{default}(x, y = NULL, color = "grey60",
   glyph = "ccircle", size = 4, active = TRUE, selected = FALSE,
@@ -142,4 +142,9 @@ that may be added to a plot (and then accessible from the inspector).
 Note that \code{\link{l_make_glyphs}} constructs an image glyph as drawn any R (static)
 graphic function. The demos \code{demo(l_glyph_sizes, package = "loon")}, \code{demo(l_glyphs, package = "loon")},
 and \code{demo(l_make_glyphs, package = "loon")} provide examples and code.
+
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.density}}, \code{\link{l_plot.stl}},
+  \code{\link{l_plot}}
 }
+\concept{two-dimensional plotting functions}
