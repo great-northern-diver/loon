@@ -51,6 +51,9 @@ one will be inferred from \code{x} if possible.}
 \item{ylabel}{Label for the vertical (y) axis. If missing,
 one will be inferred from \code{y} (or \code{x}) if possible.}
 
+\item{zlabel}{Label for the third (perpendicular to the screen) (z) axis. If missing,
+one will be inferred from \code{z} (or \code{x}) if possible.}
+
 \item{title}{Title for the plot, default is an empty string.}
 
 \item{showLabels}{logical to determine whether axes label (and title) should be presented.}

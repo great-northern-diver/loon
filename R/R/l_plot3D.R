@@ -102,6 +102,8 @@ l_scale3D <- function(x,
 #'               one will be inferred from \code{x} if possible.
 #' @param ylabel Label for the vertical (y) axis. If missing,
 #'               one will be inferred from \code{y} (or \code{x}) if possible.
+#' @param zlabel Label for the third (perpendicular to the screen) (z) axis. If missing,
+#'               one will be inferred from \code{z} (or \code{x}) if possible.
 #' @param title Title for the plot, default is an empty string.
 #' @param showLabels logical to determine whether axes label (and title) should be presented.
 #' @param showScales logical to determine whether numerical scales should
