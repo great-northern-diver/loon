@@ -4,25 +4,25 @@
 \alias{l_plot.density}
 \title{The \code{l_plot} method for \code{density} objects.}
 \usage{
-\method{l_plot}{density}(x, y = NULL, ylabel = NULL, xlabel = NULL,
+\method{l_plot}{density}(x, y = NULL, xlabel = NULL, ylabel = NULL,
   title = NULL, linewidth = 2, color = NULL, size = 0.5, ...)
 }
 \arguments{
 \item{x}{a \code{density} object}
 
-\item{y}{NULL .  This argument is ignored.}
-
-\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
-based on the combination of data name and "density".}
+\item{y}{\code{NULL},  ignored.}
 
 \item{xlabel}{the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created
 based on the information available from the \code{density} objects.}
+
+\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
+based on the combination of data name and "density".}
 
 \item{title}{providing a title for the plot. If \code{NULL} (the default), the title will be the call which produced the result.}
 
 \item{linewidth}{line width, default value is 2.}
 
-\item{color}{line colour.  If NULL (the default) colour will be taken from \code{l_getOption("foreground")}.}
+\item{color}{line colour.  If \code{NULL} (the default) colour will be taken from \code{l_getOption("foreground")}.}
 
 \item{size}{points size, default value is 0.5}
 

@@ -75,52 +75,19 @@ l_scale3D <- function(x,
 #'
 #' @family three-dimensional plotting functions
 #'
-#' @inheritParams graphics::plot
-#' @param y the y coordinates of points in the plot, optional if x is an appropriate structure.
-#' @param z the z coordinates of points in the plot, optional if x is an appropriate structure.
-#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation. Default is 1.
-#'              All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
-#'              all axes.)
-#' @param color colours of points; colours are repeated until matching the number points,
-#' @param glyph shape of point; must be one of the primitive glyphs
-#'              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-#'              "otriangle", "diamond", "cdiamond", or "odiamond".
+#' @param x the x, y and z arguments provide the x, y and z coordinates for the plot.
+#'          Any reasonable way of defining the coordinates is acceptable.
+#'          See the function xyz.coords for details.
 #'
-#'              Prefixes "c" and "o" mean closed and open, respectively.
-#'              Default is "ccircle" meaning a closed circle glyph.
+#'          If supplied separately, they must be of the same length.
 #'
-#'              Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
-#'              serial axes glyphs may be added, but only after the plot has been created.
-#' @param size size of the symbol (roughly in terms of area)
-#' @param active a logical determining whether points appear or not
-#'               (default is TRUE for all points). If a logical vector is given of length
-#'               equal to the number of points, then it identifies which points appear (TRUE)
-#'               and which do not (FALSE).
-#' @param selected a logical determining whether points appear selected at first
-#'               (default is FALSE for all points). If a logical vector is given of length
-#'               equal to the number of points, then it identifies which points are (TRUE)
-#'               and which are not (FALSE).
-#' @param xlabel Label for the horizontal (x) axis. If missing,
-#'               one will be inferred from \code{x} if possible.
-#' @param ylabel Label for the vertical (y) axis. If missing,
-#'               one will be inferred from \code{y} (or \code{x}) if possible.
-#' @param zlabel Label for the third (perpendicular to the screen) (z) axis. If missing,
-#'               one will be inferred from \code{z} (or \code{x}) if possible.
-#' @param title Title for the plot, default is an empty string.
-#' @param showLabels logical to determine whether axes label (and title) should be presented.
-#' @param showScales logical to determine whether numerical scales should
-#'               be presented on both axes.
-#' @param showGuides logical to determine whether to present background guidelines
-#'               to help determine locations.
-#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE} (default "white").
-#' @param guidesBackground  colour of the background to the guidelines shown when
-#'               \code{showGuides = TRUE} (default "grey92").
-#' @param foreground foreground colour used by all other drawing (default "black").
-#' @param background background colour used for the plot (default "white")
-#' @param parent a valid Tk parent widget path. When the parent widget is
-#'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
-#'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
-#'   order to be displayed. See the examples below.
+#' @param y the y coordinates of points in the plot,
+#'          optional if x is an appropriate structure.
+#' @param z the z coordinates of points in the plot,
+#'          optional if x is an appropriate structure.
+#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
+#'          Default is 1.
+#'              All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)
 #' @param ... named arguments to modify plot states.
 #'
 #' @details
@@ -221,7 +188,7 @@ l_scale3D <- function(x,
 #' tkgrid.rowconfigure(tt, 0, weight=1)
 #'
 #' tktitle(tt) <- "Loon plots with custom layout"
-l_plot3D <- function(x, y, z, ...) {
+l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
     UseMethod("l_plot3D")
 }
 

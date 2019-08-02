@@ -5,16 +5,15 @@
 #'
 #' @method l_plot density
 #' @family two-dimensional plotting functions
-#' @inheritParams loon::l_plot
 #' @param x a \code{density} object
-#' @param y NULL .  This argument is ignored.
-#' @param ylabel the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
-#' based on the combination of data name and "density".
+#' @param y \code{NULL},  ignored.
 #' @param xlabel the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created
 #' based on the information available from the \code{density} objects.
+#' @param ylabel the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
+#' based on the combination of data name and "density".
 #' @param title providing a title for the plot. If \code{NULL} (the default), the title will be the call which produced the result.
 #' @param linewidth line width, default value is 2.
-#' @param color line colour.  If NULL (the default) colour will be taken from \code{l_getOption("foreground")}.
+#' @param color line colour.  If \code{NULL} (the default) colour will be taken from \code{l_getOption("foreground")}.
 #' @param size points size, default value is 0.5
 #' @param ... named arguments being states passed to l_plot()
 #'
@@ -25,7 +24,7 @@
 #' @seealso \code{\link{l_layer.density}}
 #' @export
 
-l_plot.density <- function(x, y = NULL, ylabel = NULL, xlabel = NULL, title = NULL,
+l_plot.density <- function(x, y = NULL, xlabel = NULL,  ylabel = NULL, title = NULL,
                            linewidth = 2, color = NULL, size = 0.5,
                            ...){
     if (!is.null(y)) warning("value of y argument is ignored")
