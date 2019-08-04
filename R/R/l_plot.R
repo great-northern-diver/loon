@@ -5,11 +5,12 @@
 #'   visualization environments for \R objects.
 #'
 #' @family two-dimensional plotting functions
+#' @family loon interactive states
 #'
-#' @param x	the coordinates of points in the l_plot.
-#' Alternatively, a single plotting structure, function, or any R object having an l_plot
+#' @param x	the coordinates of points in the \code{\link{l_plot}}.
+#' Alternatively, a single plotting structure, function, or any R object having an \code{\link{l_plot}}
 #' method can be provided.
-#' @param y	the y coordinates of points in the l_plot, optional if x is an
+#' @param y	the y coordinates of points in the \code{\link{l_plot}}, optional if x is an
 #' appropriate structure.
 #' @param ... named arguments to modify plot states. See \code{\link{l_info_states}}
 #' of any instantiated \code{l_plot} for examples of names and values.
@@ -60,9 +61,7 @@
 #'
 #' @template return_widget_handle
 #'
-#' @seealso \code{\link{l_plot.default}}. All arguments to any \code{l_plot}
-#' can be seen from the state names of any instance via
-#' \code{\link{l_info_states}} or \code{\link{names.loon}}.
+#' @seealso  \code{\link{l_plot_arguments}} and \code{\link{l_plot.default}}.
 #'
 #'
 #' @export
@@ -102,9 +101,13 @@ l_plot <- function(x, y, ...) {
 #'   inspector.
 #'
 #' @family two-dimensional plotting functions
+#' @family loon interactive states
 #' @method l_plot default
-#'
-#' @inheritParams graphics::plot.default
+#' @param x the \code{x} and \code{y} arguments provide the x and y
+#'  coordinates for the plot.
+#'  Any reasonable way of defining the coordinates is acceptable.
+#'  See the function \code{\link{xy.coords}} for details.
+#'  If supplied separately, they must be of the same length.
 #' @param y argument description is as for the \code{x} argument above.
 #' @param color colours of points (default "grey60"); colours are repeated
 #'  until matching the number points,
@@ -154,14 +157,7 @@ l_plot <- function(x, y, ...) {
 #'   individual point selection. See the documentation for \code{\link{l_plot}}
 #'   for more details about the interaction gestures.
 #'
-#' @seealso  See \code{\link{l_glyph_add}}, \code{\link{l_glyph_add_polygon}},
-#' \code{\link{l_glyph_add_text}},
-#' \code{\link{l_glyph_add_image}},
-#' \code{\link{l_glyph_add_serialaxes}}, and  \code{\link{l_glyph_add_pointrange}} for glyphs
-#' that may be added to a plot (and then accessible from the inspector).
-#' Note that \code{\link{l_make_glyphs}} constructs an image glyph as drawn any R (static)
-#' graphic function. The demos \code{demo(l_glyph_sizes, package = "loon")}, \code{demo(l_glyphs, package = "loon")},
-#' and \code{demo(l_make_glyphs, package = "loon")} provide examples and code.
+#' @seealso  \code{\link{l_plot_arguments}}
 #' @export
 #' @export l_plot.default
 #'

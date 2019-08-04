@@ -7,11 +7,11 @@
 l_plot(x, y, ...)
 }
 \arguments{
-\item{x}{the coordinates of points in the l_plot.
-Alternatively, a single plotting structure, function, or any R object having an l_plot
+\item{x}{the coordinates of points in the \code{\link{l_plot}}.
+Alternatively, a single plotting structure, function, or any R object having an \code{\link{l_plot}}
 method can be provided.}
 
-\item{y}{the y coordinates of points in the l_plot, optional if x is an
+\item{y}{the y coordinates of points in the \code{\link{l_plot}}, optional if x is an
 appropriate structure.}
 
 \item{...}{named arguments to modify plot states. See \code{\link{l_info_states}}
@@ -93,12 +93,15 @@ plot(p)
 
 }
 \seealso{
-\code{\link{l_plot.default}}. All arguments to any \code{l_plot}
-can be seen from the state names of any instance via
-\code{\link{l_info_states}} or \code{\link{names.loon}}.
+\code{\link{l_plot_arguments}} and \code{\link{l_plot.default}}.
 
 Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
   \code{\link{l_plot.default}},
   \code{\link{l_plot.density}}, \code{\link{l_plot.stl}}
+
+Other loon interactive states: \code{\link{l_info_states}},
+  \code{\link{l_plot.default}},
+  \code{\link{l_state_names}}, \code{\link{names.loon}}
 }
+\concept{loon interactive states}
 \concept{two-dimensional plotting functions}

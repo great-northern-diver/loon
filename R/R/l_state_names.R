@@ -4,6 +4,7 @@
 #' States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 #' and modified with \code{\link{l_configure}}.
 #'
+#' @family loon interactive states
 #' @template param_target
 #'
 #' @details
@@ -29,6 +30,7 @@ l_state_names <- function(target) {
 #'
 #' States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 #' and modified with \code{\link{l_configure}}.
+#' @family loon interactive states
 #'
 #' @param x loon object
 #'

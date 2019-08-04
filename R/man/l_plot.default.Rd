@@ -13,9 +13,10 @@
 }
 \arguments{
 \item{x}{the \code{x} and \code{y} arguments provide the x and y
-    coordinates for the plot.  Any reasonable way of defining the
-    coordinates is acceptable.  See the function \code{\link{xy.coords}}
-    for details.  If supplied separately, they must be of the same length.}
+coordinates for the plot.
+Any reasonable way of defining the coordinates is acceptable.
+See the function \code{\link{xy.coords}} for details.
+If supplied separately, they must be of the same length.}
 
 \item{y}{argument description is as for the \code{x} argument above.}
 
@@ -134,17 +135,15 @@ tkgrid.rowconfigure(tt, 0, weight=1)
 
 }
 \seealso{
-See \code{\link{l_glyph_add}}, \code{\link{l_glyph_add_polygon}},
-\code{\link{l_glyph_add_text}},
-\code{\link{l_glyph_add_image}},
-\code{\link{l_glyph_add_serialaxes}}, and  \code{\link{l_glyph_add_pointrange}} for glyphs
-that may be added to a plot (and then accessible from the inspector).
-Note that \code{\link{l_make_glyphs}} constructs an image glyph as drawn any R (static)
-graphic function. The demos \code{demo(l_glyph_sizes, package = "loon")}, \code{demo(l_glyphs, package = "loon")},
-and \code{demo(l_make_glyphs, package = "loon")} provide examples and code.
+\code{\link{l_plot_arguments}}
 
 Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
   \code{\link{l_plot.density}}, \code{\link{l_plot.stl}},
   \code{\link{l_plot}}
+
+Other loon interactive states: \code{\link{l_info_states}},
+  \code{\link{l_plot}}, \code{\link{l_state_names}},
+  \code{\link{names.loon}}
 }
+\concept{loon interactive states}
 \concept{two-dimensional plotting functions}

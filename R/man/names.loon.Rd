@@ -17,3 +17,9 @@ state names
 States of loon objects can be accessed \code{`[`} and \code{\link{l_cget}}
 and modified with \code{\link{l_configure}}.
 }
+\seealso{
+Other loon interactive states: \code{\link{l_info_states}},
+  \code{\link{l_plot.default}}, \code{\link{l_plot}},
+  \code{\link{l_state_names}}
+}
+\concept{loon interactive states}
