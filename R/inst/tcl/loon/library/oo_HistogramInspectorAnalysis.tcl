@@ -324,7 +324,7 @@ oo::class create loon::classes::HistogramInspectorAnalysis {
 	set i [lindex [$canvas gettags current] 2]
 	set sel_color [$canvas itemcget "color && inner && $i" -fill]
 	
-	set color [uplevel #0 $activewidget cget -color]
+	set color [uplevel #0 [list $activewidget cget -color]]
 	
 	if {$add} {
 	    set selected [uplevel #0 [list $activewidget cget -selected]]

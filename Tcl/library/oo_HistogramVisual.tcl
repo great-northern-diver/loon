@@ -20,7 +20,7 @@
 	
 	foreach state {count bins binwidth origin color colorStackingOrder\
 			   showOutlines showStackedColors showBinHandle colorFill colorOutline} {
-	    set ${state}_var [uplevel #0 ${modelns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${modelns}::my varname $state]]
 	}
 	
 	next $Layerobj {*}$args

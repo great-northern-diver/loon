@@ -19,7 +19,7 @@
 	    set ${state}_var ""
 	}
 	
-	set viewMap [set [uplevel #0 [info object namespace $view]::my varname map]]
+	set viewMap [set [uplevel #0 [list [info object namespace $view]::my varname map]]]
 	
 	next $view
 	
@@ -32,7 +32,7 @@
 
 	set ns [info object namespace $Model] 
 	foreach state $tm_soi {
-	    set ${state}_var [uplevel #0 ${ns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
 	}
 	
 	next $Model

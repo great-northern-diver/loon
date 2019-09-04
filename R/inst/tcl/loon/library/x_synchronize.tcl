@@ -332,7 +332,7 @@ namespace eval loon {
     proc hasModelLinkedMembers {model} {
 	variable LinkingG2M
 	
-	set group [uplevel #0 ${model}::my cget -linkingGroup]
+	set group [uplevel #0 [list ${model}::my cget -linkingGroup]]
 	
 	return [::loon::hasGroupLinkedMembers $group $model]
     }
@@ -343,7 +343,7 @@ namespace eval loon {
 	variable LinkingG2M
 	variable LinkingM2G
 
-	set group [uplevel #0 ${model}::my cget -linkingGroup]
+	set group [uplevel #0 [list ${model}::my cget -linkingGroup]]
 	
 	unmapModelFromGroup $model
 	lappend LinkingG2M($group) $model
@@ -408,7 +408,7 @@ namespace eval loon {
     proc numberOfLinkedModels {model} {
 	variable LinkingG2M
 	
-	set group [uplevel #0 ${model}::my cget -linkingGroup]
+	set group [uplevel #0 [list ${model}::my cget -linkingGroup]]
 	set linkedModels $LinkingG2M($group)
 	
 	set i [lsearch -exact $linkedModels $model]

@@ -10,7 +10,7 @@
 
 	set ns [info object namespace $Layerobj]	
 	foreach state {color size text angle anchor justify} {
-	    set ${state}_var [uplevel #0 ${ns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
 	}
 	
 	next $Layerobj {*}$args	

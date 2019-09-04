@@ -11,11 +11,11 @@ oo::class create loon::classes::PointrangeGlyphVisual {
 	
 	set ns [info object namespace $glyphObj]
 	
- 	set ymin_var [uplevel #0 ${ns}::my varname ymin]
-	set ymax_var [uplevel #0 ${ns}::my varname ymax]
-	set linewidth_var [uplevel #0 ${ns}::my varname linewidth]
+ 	set ymin_var [uplevel #0 [list ${ns}::my varname ymin]]
+	set ymax_var [uplevel #0 [list ${ns}::my varname ymax]]
+	set linewidth_var [uplevel #0 [list ${ns}::my varname linewidth]]
 	
-	set swap_var [uplevel #0 [info object namespace $map]::my varname swap]
+	set swap_var [uplevel #0 [list [info object namespace $map]::my varname swap]]
 	set y_var $yvar
 		
     }

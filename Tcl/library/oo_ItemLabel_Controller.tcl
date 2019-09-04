@@ -35,7 +35,7 @@
 	
 	set ns [info object namespace $Model] 
 	foreach state {showItemLabels itemLabel} {
-	    set ${state}_var [uplevel #0 ${ns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
 	}       	
 	
 	next $Model
