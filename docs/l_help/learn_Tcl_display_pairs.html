@@ -1,12 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>scatterplot matrix - loon</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loon</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <div id="title">
@@ -81,24 +89,21 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">scatterplot matrix - loon</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#scatterplot-matrix">Scatterplot Matrix</a></li>
 </ul>
-</div>
+</nav>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_pairs").className += " selected";
     setLearnUrl("display_pairs");
 }
 </script>
-
-<div class="figure">
-<img src="images/display_pairs.png" title="loon scatterplot matrix" />
-</div>
+<p><img src="images/display_pairs.png" title="loon scatterplot matrix" /></p>
 <pre class="todo"><code>source iris.tcl
 set ps [pairs -data $iris -color $Species]</code></pre>
 <div class="todo">

@@ -1,12 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loon</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <div id="title">
@@ -60,11 +68,11 @@ document.getElementById("learn_Tcl").className += " selected";
 var language = "Tcl";
 </script>
 </div>
-<div id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#tk-concepts">Tk Concepts</a></li>
 </ul>
-</div>
+</nav>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_Tcl_Tk").className += " selected";
@@ -72,15 +80,13 @@ window.onload = function() {
     document.getElementById("learn_Tcl").firstChild.href = "learn_Tcl_Tk.html";
 }
 </script>
-
-
 <h1 id="tk-concepts">Tk Concepts</h1>
 <p>For those new to <code>Tk</code>, it is useful to understand some concepts of <code>Tk</code> as we loosely follow the standard <code>Tk</code> widget behavior. Generally, <a href="http://wiki.tcl.tk/490">widgets</a> are GUI elements like buttons and sliders. The <code>loon</code> scatterplot display and inspector can be considered as megawidgets; a widget that combines several other widgets but behaves like a normal widget itself. Every widget in a <code>Tk</code> session has a unique hierarchical window path name with the root being a dot <code>.</code> and children and parents are separated by a dot. Hence a typical widget path name for a widget <code>button</code> with three ancestors (root, <code>frameA</code> and <code>frameB</code>) is <code>.frameA.frameB.button</code> where the user is free to name all the nodes (except the root) as he/she wishes. When a <code>Tk</code> widget gets created a function with the function name equivalent to the widget path name gets created to query or modify the widget. For example in <code>tkcon</code> run</p>
 <pre><code>package require Tk
 button .b -text &quot;Hello World&quot;
 pack .b
 info commands</code></pre>
-<p>and you will see a button with the label &quot;Hello World&quot; and the output for <code>info commands</code> will list the function <code>.b</code>.</p>
+<p>and you will see a button with the label “Hello World” and the output for <code>info commands</code> will list the function <code>.b</code>.</p>
 <p>The widget function can be used to query and modify the widget options via <code>cget</code> and <code>configure</code>. For example continuing with the above example</p>
 <pre><code>.b configure -text &quot;A new label&quot;
 .b cget -text</code></pre>

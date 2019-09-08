@@ -18,6 +18,7 @@ if {[set tcl_version] ne "8.6"} {
 }
 
 set cmd [list pandoc -c style.css\
+             --metadata pagetitle=loon\
              -f markdown+header_attributes+fenced_code_blocks+line_blocks+pipe_tables\
              -s ]
              ## --quiet]
