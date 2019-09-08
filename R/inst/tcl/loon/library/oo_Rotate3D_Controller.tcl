@@ -14,7 +14,7 @@
         set rotateIndicator -1
 
         set ns [info object namespace $view]
-        set map [set [uplevel #0 ${ns}::my varname map]]
+        set map [set [uplevel #0 [list ${ns}::my varname map]]]
 
         next $view
 

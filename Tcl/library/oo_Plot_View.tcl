@@ -103,11 +103,11 @@
 	    set ns [info object namespace $plotModel] 
 	    
 	    foreach state {panX panY zoomX zoomY deltaX deltaY} {
-		set ${state}_var [uplevel #0 ${ns}::my varname $state]
+		set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
 		$map set[string toupper $state 0] [set [set ${state}_var]]
 	    }
-	    set background_var [uplevel #0 ${ns}::my varname background]
-	    set swap_var [uplevel #0 ${ns}::my varname swapAxes]
+	    set background_var [uplevel #0 [list ${ns}::my varname background]]
+	    set swap_var [uplevel #0 [list ${ns}::my varname swapAxes]]
 	    $map setSwap [set $swap_var]
 
 	    uplevel #0 [list $canvas configure -background [set $background_var]]

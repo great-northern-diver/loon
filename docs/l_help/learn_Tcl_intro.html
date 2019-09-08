@@ -1,12 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>learn loon</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loon</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <div id="title">
@@ -60,20 +68,19 @@ document.getElementById("learn_Tcl").className += " selected";
 var language = "Tcl";
 </script>
 </div>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">learn loon</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#getting-started">Getting Started</a></li>
 </ul>
-</div>
+</nav>
 <script type="text/javascript">
 document.getElementById("learn_intro").className += " selected";
 </script>
-
 <h1 id="introduction">Introduction</h1>
 <p><code>loon</code> is written in <code>Tcl</code> and <code>Tk</code>. Users familiar with <code>Tk</code> widgets will feel familiar with the <code>loon</code> API as the <code>loon</code> widgets follow the standard <code>Tk</code> conventions.</p>
 <h1 id="installation">Installation</h1>
@@ -88,11 +95,11 @@ document.getElementById("learn_intro").className += " selected";
 <pre><code>package require Img</code></pre>
 <p>The following line in <code>load.tcl</code></p>
 <pre><code>namespace import loon::*</code></pre>
-<p>imports all of <code>loon</code>'s (exported) commands into the global namespace. If you do not import <code>loon</code>'s procedures into the global namespace then you need to prepend <code>loon::</code> in front of <code>loon</code>'s procedure names (e.g. <code>loon::plot</code> instead of <code>plot</code>).</p>
+<p>imports all of <code>loon</code>’s (exported) commands into the global namespace. If you do not import <code>loon</code>’s procedures into the global namespace then you need to prepend <code>loon::</code> in front of <code>loon</code>’s procedure names (e.g. <code>loon::plot</code> instead of <code>plot</code>).</p>
 <h1 id="getting-started">Getting Started</h1>
-<p>Once the package is loaded (i.e. with the <code>load.tcl</code> script) an example scatterplot is created as follows</p>
+<p>Once the package is loaded (i.e. with the <code>load.tcl</code> script) an example scatterplot is created as follows</p>
 <pre><code>plot -x {4 1 5} -y {2 3 1} -color {red orange blue} -size {1.4 5.2 4}</code></pre>
 <p>If you want to use <code>loon</code> interactively via the <code>tcl</code> shell take a look at the <code>tk</code> console <a href="http://tkcon.sourceforge.net/"><code>tkcon</code></a>.</p>
-<p>The user interfaces of <code>loon</code>'s displays are explained in the <a href="UI.html">UI section</a>.</p>
+<p>The user interfaces of <code>loon</code>’s displays are explained in the <a href="UI.html">UI section</a>.</p>
 </body>
 </html>

@@ -12,8 +12,8 @@
 	set navigatorId $NavigatorId
 	set navigatorObj $NavigatorObj
 	
-	set color_var [uplevel #0 ${navigatorObj}::my varname color]
-	set label_var [uplevel #0 ${navigatorObj}::my varname label]
+	set color_var [uplevel #0 [list ${navigatorObj}::my varname color]]
+	set label_var [uplevel #0 [list ${navigatorObj}::my varname label]]
 
 	next {*}${args}	
     }

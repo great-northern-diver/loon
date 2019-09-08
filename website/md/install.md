@@ -126,10 +126,13 @@ The following packages on [CRAN][CRAN] have dependencies that might need special
 
 
 ~~~
-install.packages(c('dplyr', 'rgl', 
-                   'PairViz', 'scagnostics', 
-                   'kernlab', 'testthat', 
-                   'knitr', 'rmarkdown'))
+install.packages(c(
+  'dplyr', 'rgl',
+  'PairViz', 'scagnostics',
+  'kernlab', 'testthat',
+  'knitr', 'rmarkdown',
+  'formatR', 'ElemStatLearn'
+))
 ~~~
 
 

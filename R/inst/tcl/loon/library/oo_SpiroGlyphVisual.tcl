@@ -21,8 +21,8 @@ oo::class create loon::classes::SpiroGlyphVisual {
 	my variable glyphObject
 	
 	
-	set id [uplevel #0 $canvas create line 0 0 0 0\
-		    -width [lindex [set $linewidth_var] $ind]]
+	set id [uplevel #0 [list $canvas create line 0 0 0 0\
+		    -width [lindex [set $linewidth_var] $ind]]]
 	
 	return $id
     }
