@@ -44,7 +44,7 @@
 	my variable canvas visualid idEdges ids
 	
 	
-	uplevel #0 [$canvas delete "layer&&$visualid"]
+	uplevel #0 [list $canvas delete "layer&&$visualid"]
 	
 	set idEdges {}
 	set ids {}

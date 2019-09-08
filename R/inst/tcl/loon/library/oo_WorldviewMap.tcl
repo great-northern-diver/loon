@@ -27,7 +27,7 @@ oo::class create loon::classes::WorldviewMap {
 	    set modelns [info object namespace $model]
 	    
 	    foreach var {panX panY zoomX zoomY} {
-		set ${var}_var [uplevel #0 ${modelns}::my varname $var]
+		set ${var}_var [uplevel #0 [list ${modelns}::my varname $var]]
 	    }
 	}
     }

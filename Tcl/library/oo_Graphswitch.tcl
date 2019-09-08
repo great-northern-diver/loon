@@ -269,7 +269,7 @@ oo::class create loon::classes::Graphswitch {
 			-to [lindex $G 2]\
 			-isDirected [lindex $G 3]]
 	
-	uplevel #0 [$activewidget scaleto world]
+	uplevel #0 [list $activewidget scaleto world]
     }
 
     method ActivewidgetToTreeview {id} {

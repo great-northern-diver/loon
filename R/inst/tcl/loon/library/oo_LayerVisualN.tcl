@@ -11,9 +11,9 @@
 	set ids "noinit"
 
 	set ns [info object namespace $Layerobj]	
-	set n_var [uplevel #0 ${ns}::my varname n]
-	set active_var [uplevel #0 ${ns}::my varname active]
-	set type_var [uplevel #0 ${ns}::my varname type]
+	set n_var [uplevel #0 [list ${ns}::my varname n]]
+	set active_var [uplevel #0 [list ${ns}::my varname active]]
+	set type_var [uplevel #0 [list ${ns}::my varname type]]
 	
 	next $Layerobj {*}$args	
     }

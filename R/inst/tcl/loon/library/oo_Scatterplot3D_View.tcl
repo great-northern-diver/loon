@@ -26,7 +26,7 @@
         next $Model
         set ns [info object namespace $plotModel] 
         foreach state {rotate3DX rotate3DY} {
-            set ${state}_var [uplevel #0 ${ns}::my varname $state]
+            set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
             $map set[string toupper $state 0] [set [set ${state}_var]]
         }
         $controller setModel $Model
