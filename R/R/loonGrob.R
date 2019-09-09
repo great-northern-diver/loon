@@ -1019,7 +1019,7 @@ xy_coords_layer <- function(layer, native_unit = TRUE) {
     )
   } else if(type == "histogram"){
     list(
-      x = l_cget(layer, "x"),
+      x = l_cget(widget, "x"),
       y = NA
     )
   } else {
