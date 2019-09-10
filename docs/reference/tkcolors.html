@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,19 +41,19 @@
 
 
 
-<meta property="og:title" content="List the valid Tk color names — tkcolors" />
 
+<meta property="og:title" content="List the valid Tk color names — tkcolors" />
 <meta property="og:description" content="The core of Loon is implemented in Tcl and Tk. Hence, when
   defining colors using color names, Loon uses the Tcl color representation
   and not those of R. The colors are taken from the Tk sources:
-  doc/colors.n." />
+  doc/colors.n.
 
-<meta property="og:description" content="If you want to make sure that the color names are represented exactly as
+If you want to make sure that the color names are represented exactly as
   they are in R then you can convert the color names to hexencoded color
   strings, see the examples below." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -61,6 +65,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -128,7 +133,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
@@ -143,6 +147,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -154,24 +159,23 @@
     </div>
 
     <div class="ref-description">
-    
     <p>The core of Loon is implemented in Tcl and Tk. Hence, when
   defining colors using color names, Loon uses the Tcl color representation
   and not those of R. The colors are taken from the Tk sources:
   <code>doc/colors.n</code>.</p>
 
-    <p>If you want to make sure that the color names are represented exactly as
+<p>If you want to make sure that the color names are represented exactly as
   they are in R then you can convert the color names to hexencoded color
   strings, see the examples below.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>tkcolors</span>()</pre>
-        
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># check if R colors names and TK color names are the same</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()))</div><div class='output co'>#&gt; character(0)</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sets'>setdiff</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'>tkcolors</span>()), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()))</div><div class='output co'>#&gt;  [1] "alice"      "antique"    "blanched"   "almond"     "cadet"     
+<span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></span>()), <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'>tkcolors</span>()))</div><div class='output co'>#&gt; character(0)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'>tkcolors</span>()), <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></span>()))</div><div class='output co'>#&gt;  [1] "alice"      "antique"    "blanched"   "almond"     "cadet"     
 #&gt;  [6] "cornflower" "dark"       "olive"      "sea"        "slate"     
 #&gt; [11] "deep"       "sky"        "dim"        "dodger"     "floral"    
 #&gt; [16] "forest"     "ghost"      "hot"        "indian"     "blush"     
@@ -186,54 +190,54 @@
 
 <span class='co'># Let's compare the colors of the R color names in R and Tk</span>
 <span class='no'>tohex</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>) {
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></span>(<span class='no'>x</span>, <span class='kw'>function</span>(<span class='no'>xi</span>) {
-        <span class='no'>crgb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/col2rgb'>col2rgb</a></span>(<span class='no'>xi</span>))
-        <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/rgb'>rgb</a></span>(<span class='no'>crgb</span>[<span class='fl'>1</span>], <span class='no'>crgb</span>[<span class='fl'>2</span>], <span class='no'>crgb</span>[<span class='fl'>3</span>], <span class='kw'>maxColorValue</span> <span class='kw'>=</span> <span class='fl'>255</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>x</span>, <span class='kw'>function</span>(<span class='no'>xi</span>) {
+        <span class='no'>crgb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/col2rgb.html'>col2rgb</a></span>(<span class='no'>xi</span>))
+        <span class='fu'><a href='https://rdrr.io/r/grDevices/rgb.html'>rgb</a></span>(<span class='no'>crgb</span>[<span class='fl'>1</span>], <span class='no'>crgb</span>[<span class='fl'>2</span>], <span class='no'>crgb</span>[<span class='fl'>3</span>], <span class='kw'>maxColorValue</span> <span class='kw'>=</span> <span class='fl'>255</span>)
     })
 }
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
-    <span class='kw'>R_col</span> <span class='kw'>=</span> <span class='fu'>tohex</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>()),
-    <span class='kw'>Tcl_col</span> <span class='kw'>=</span> <span class='fu'><a href='hex12tohex6.html'>hex12tohex6</a></span>(<span class='fu'><a href='l_hexcolor.html'>l_hexcolor</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>())),
-    <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/colors'>colors</a></span>(),
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    <span class='kw'>R_col</span> <span class='kw'>=</span> <span class='fu'>tohex</span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></span>()),
+    <span class='kw'>Tcl_col</span> <span class='kw'>=</span> <span class='fu'><a href='hex12tohex6.html'>hex12tohex6</a></span>(<span class='fu'><a href='l_hexcolor.html'>l_hexcolor</a></span>(<span class='fu'><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></span>())),
+    <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></span>(),
     <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 
 <span class='no'>df_diff</span> <span class='kw'>&lt;-</span> <span class='no'>df</span>[<span class='no'>df</span>$<span class='no'>R_col</span> <span class='kw'>!=</span> <span class='no'>df</span>$<span class='no'>Tcl_col</span>,]
 
-<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"grid"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.newpage'>grid.newpage</a></span>()
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/viewports'>pushViewport</a></span>(<span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/plotViewport'>plotViewport</a></span>())
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"grid"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>()
+  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/viewports.html'>pushViewport</a></span>(<span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/plotViewport.html'>plotViewport</a></span>())
 
-  <span class='no'>x_col</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>0</span>, <span class='st'>"npc"</span>)
-  <span class='no'>x_R</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>6</span>, <span class='st'>"lines"</span>)
-  <span class='no'>x_Tcl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>10</span>, <span class='st'>"lines"</span>)
+  <span class='no'>x_col</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>0</span>, <span class='st'>"npc"</span>)
+  <span class='no'>x_R</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>6</span>, <span class='st'>"lines"</span>)
+  <span class='no'>x_Tcl</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>10</span>, <span class='st'>"lines"</span>)
 
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.text'>grid.text</a></span>(<span class='st'>'color'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_col</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>),
-                  <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'left'</span>, <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.text'>grid.text</a></span>(<span class='st'>'R'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_R</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>), <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'center'</span>,
-                   <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.text'>grid.text</a></span>(<span class='st'>'Tcl'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_Tcl</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>), <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'center'</span>,
-                   <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
-  <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>df_diff</span>)) {
-      <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>) - <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='no'>i</span>*<span class='fl'>1.2</span>, <span class='st'>"lines"</span>)
-      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.text'>grid.text</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>df_diff</span>)[<span class='no'>i</span>], <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_col</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'left'</span>)
-      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.rect'>grid.rect</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_R</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>3</span>, <span class='st'>"line"</span>),
-                <span class='kw'>height</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>), <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>df_diff</span>[<span class='no'>i</span>,<span class='fl'>1</span>]))
-      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.rect'>grid.rect</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_Tcl</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>3</span>, <span class='st'>"line"</span>),
-                <span class='kw'>height</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>), <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/gpar'>gpar</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>df_diff</span>[<span class='no'>i</span>,<span class='fl'>2</span>]))
+  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span>(<span class='st'>'color'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_col</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>),
+                  <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'left'</span>, <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
+  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span>(<span class='st'>'R'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_R</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>), <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'center'</span>,
+                   <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
+  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span>(<span class='st'>'Tcl'</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_Tcl</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>), <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'center'</span>,
+                   <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fontface</span><span class='kw'>=</span><span class='st'>'bold'</span>))
+  <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>df_diff</span>)) {
+      <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"npc"</span>) - <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='no'>i</span>*<span class='fl'>1.2</span>, <span class='st'>"lines"</span>)
+      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>df_diff</span>)[<span class='no'>i</span>], <span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_col</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>just</span><span class='kw'>=</span><span class='st'>'left'</span>)
+      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.rect.html'>grid.rect</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_R</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>3</span>, <span class='st'>"line"</span>),
+                <span class='kw'>height</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>), <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>df_diff</span>[<span class='no'>i</span>,<span class='fl'>1</span>]))
+      <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.rect.html'>grid.rect</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x_Tcl</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>3</span>, <span class='st'>"line"</span>),
+                <span class='kw'>height</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>), <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>df_diff</span>[<span class='no'>i</span>,<span class='fl'>2</span>]))
   }
 }</div><div class='img'><img src='tkcolors-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -241,13 +245,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

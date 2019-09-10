@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,17 +41,17 @@
 
 
 
-<meta property="og:title" content="Display Tcl Images in a Simple Image Viewer — l_imageviewer" />
 
+<meta property="og:title" content="Display Tcl Images in a Simple Image Viewer — l_imageviewer" />
 <meta property="og:description" content="Loon provides a simple image viewer to browse through the specified
 tcl image objects.
 The simple GUI supports either the use of the mouse or left and
 right arrow keys to switch the images to the previous or next image
 in the specified image vector.
 The images are resized to fill the viewer window." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -59,6 +63,7 @@ The images are resized to fill the viewer window." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -126,7 +131,6 @@ The images are resized to fill the viewer window." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
@@ -141,6 +145,7 @@ The images are resized to fill the viewer window." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -152,18 +157,16 @@ The images are resized to fill the viewer window." />
     </div>
 
     <div class="ref-description">
-    
     <p>Loon provides a simple image viewer to browse through the specified
 tcl image objects.</p>
 <p>The simple GUI supports either the use of the mouse or left and
 right arrow keys to switch the images to the previous or next image
 in the specified image vector.</p>
 <p>The images are resized to fill the viewer window.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>l_imageviewer</span>(<span class='no'>tclimages</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -172,31 +175,29 @@ in the specified image vector.</p>
       <td><p>Vector of tcl image object names.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>the <code>tclimages</code> vector is returned</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>img2</span> <span class='kw'>&lt;-</span> <span class='fu'>tkimage.create</span>(<span class='st'>'photo'</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>150</span>)
 <span class='fu'>tcl</span>(<span class='no'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'yellow'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>199</span>, <span class='fl'>149</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tcl</span>(<span class='no'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>20</span>, <span class='fl'>130</span>, <span class='fl'>40</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='no'>img3</span> <span class='kw'>&lt;-</span> <span class='fu'>tkimage.create</span>(<span class='st'>'photo'</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>100</span>)
 <span class='fu'>tcl</span>(<span class='no'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'orange'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>499</span>, <span class='fl'>99</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tcl</span>(<span class='no'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>80</span>, <span class='fl'>350</span>, <span class='fl'>95</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
-<span class='fu'>l_imageviewer</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'>tclvalue</span>(<span class='no'>img2</span>), <span class='fu'>tclvalue</span>(<span class='no'>img3</span>)))</div><div class='output co'>#&gt; [1] "image163" "image164"</div></pre>
+<span class='fu'>l_imageviewer</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>tclvalue</span>(<span class='no'>img2</span>), <span class='fu'>tclvalue</span>(<span class='no'>img3</span>)))</div><div class='output co'>#&gt; [1] "image163" "image164"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -204,13 +205,16 @@ in the specified image vector.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

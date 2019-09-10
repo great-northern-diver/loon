@@ -180,6 +180,7 @@ reference:
     - l_throwErrorIfNotLoonWidget
     - l_toR
     - l_isLoonWidget
+    - L2_distance
   - title: Measures
     desc: measures
     contents:
