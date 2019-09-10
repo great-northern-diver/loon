@@ -152,7 +152,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>l_glyph_add_polygon</span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>showArea</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>l_glyph_add_polygon</span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>showArea</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +173,10 @@ scatterplot point.</p></td>
 scatterplot point.</p></td>
     </tr>
     <tr>
+      <th>linewidth</th>
+      <td><p>linewidth of outline.</p></td>
+    </tr>
+    <tr>
       <th>showArea</th>
       <td><p>boolean, show a filled polygon or just the outline</p></td>
     </tr>
@@ -188,13 +193,23 @@ scatterplot point.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A polygon can be a useful point glyph to visualize arbitrary shapes
-  such as airplanes, animals and shapes that are not available in the 
+  such as airplanes, animals and shapes that are not available in the
   primitive glyph types (e.g. cross). The <code>l_glyphs</code> demo has an example
   of polygon glyphs which we reuse here.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_glyph_add.html'>l_glyph_add</a></code></p></div>
+    <div class='dont-index'><p><code><a href='l_glyph_add.html'>l_glyph_add</a></code></p>
+<p>Other glyph functions: <code><a href='l_glyph_add.default.html'>l_glyph_add.default</a></code>,
+  <code><a href='l_glyph_add_image.html'>l_glyph_add_image</a></code>,
+  <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a></code>,
+  <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a></code>,
+  <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a></code>,
+  <code><a href='l_glyph_add.html'>l_glyph_add</a></code>, <code><a href='l_glyph_delete.html'>l_glyph_delete</a></code>,
+  <code><a href='l_glyph_getLabel.html'>l_glyph_getLabel</a></code>,
+  <code><a href='l_glyph_getType.html'>l_glyph_getType</a></code>, <code><a href='l_glyph_ids.html'>l_glyph_ids</a></code>,
+  <code><a href='l_glyph_relabel.html'>l_glyph_relabel</a></code>,
+  <code><a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

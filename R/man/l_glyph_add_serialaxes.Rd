@@ -46,3 +46,16 @@ p <- with(olive, l_plot(oleic, stearic, color=Area))
 gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 p['glyph'] <- gs
 }
+\seealso{
+Other glyph functions: \code{\link{l_glyph_add.default}},
+  \code{\link{l_glyph_add_image}},
+  \code{\link{l_glyph_add_pointrange}},
+  \code{\link{l_glyph_add_polygon}},
+  \code{\link{l_glyph_add_text}},
+  \code{\link{l_glyph_add}}, \code{\link{l_glyph_delete}},
+  \code{\link{l_glyph_getLabel}},
+  \code{\link{l_glyph_getType}}, \code{\link{l_glyph_ids}},
+  \code{\link{l_glyph_relabel}},
+  \code{\link{l_primitiveGlyphs}}
+}
+\concept{glyph functions}

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Loon methods for Kernel Density Estimation — l_plot.density • loon</title>
+<title>The <code>l_plot</code> method for <code>density</code> objects. — l_plot.density • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,10 @@
 
 
 
-<meta property="og:title" content="Loon methods for Kernel Density Estimation — l_plot.density" />
+<meta property="og:title" content="The <code>l_plot</code> method for <code>density</code> objects. — l_plot.density" />
 
-<meta property="og:description" content="The loon plot method for density objects." />
+<meta property="og:description" content="Creates an loon plot displaying contours
+             of the supplied (kernel) density estimate" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -141,19 +142,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Loon methods for Kernel Density Estimation</h1>
+    <h1>The <code>l_plot</code> method for <code>density</code> objects.</h1>
     
     <div class="hidden name"><code>l_plot.density.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The loon plot method for <code>density</code> objects.</p>
+    <p>Creates an loon plot displaying contours
+             of the supplied (kernel) density estimate</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for density</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,17 +167,17 @@
     </tr>
     <tr>
       <th>y</th>
-      <td><p>NULL .  This argument is ignored.</p></td>
-    </tr>
-    <tr>
-      <th>ylabel</th>
-      <td><p>the graphical parameter ylabel labelling the y axis of the plot. If <code>NULL</code> (the default), an ylabel is created 
-based on the combination of data name and "density".</p></td>
+      <td><p><code>NULL</code>,  ignored.</p></td>
     </tr>
     <tr>
       <th>xlabel</th>
-      <td><p>the graphical parameter xlabel labelling the x axis of the plot. If <code>NULL</code> (the default), an xlabel is created 
+      <td><p>the graphical parameter xlabel labelling the x axis of the plot. If <code>NULL</code> (the default), an xlabel is created
 based on the information available from the <code>density</code> objects.</p></td>
+    </tr>
+    <tr>
+      <th>ylabel</th>
+      <td><p>the graphical parameter ylabel labelling the y axis of the plot. If <code>NULL</code> (the default), an ylabel is created
+based on the combination of data name and "density".</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -187,7 +189,7 @@ based on the information available from the <code>density</code> objects.</p></t
     </tr>
     <tr>
       <th>color</th>
-      <td><p>line colour.  If NULL (the default) colour will be taken from <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+      <td><p>line colour.  If <code>NULL</code> (the default) colour will be taken from <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
     </tr>
     <tr>
       <th>size</th>
@@ -199,6 +201,13 @@ based on the information available from the <code>density</code> objects.</p></t
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='l_layer.density.html'>l_layer.density</a></code></p>
+<p>Other two-dimensional plotting functions: <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code>,
+  <code><a href='l_plot.default.html'>l_plot.default</a></code>, <code><a href='l_plot.stl.html'>l_plot.stl</a></code>,
+  <code><a href='l_plot.html'>l_plot</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/density'>density</a></span>(<span class='no'>faithful</span>$<span class='no'>eruptions</span>)
@@ -208,7 +217,9 @@ based on the information available from the <code>density</code> objects.</p></t
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

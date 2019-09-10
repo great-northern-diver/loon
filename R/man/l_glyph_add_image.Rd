@@ -17,7 +17,7 @@ and \code{\link{l_image_import_files}} helper functions.}
 \item{...}{state arguments}
 }
 \description{
-Image glyphs are useful to show pictures or other sophisticated 
+Image glyphs are useful to show pictures or other sophisticated
   compound glyphs. Note that images in the Tk canvas support transparancy.
 }
 \details{
@@ -39,4 +39,16 @@ p['glyph'] <- g
 \seealso{
 \code{\link{l_glyph_add}}, \code{\link{l_image_import_array}},
   \code{\link{l_image_import_files}}, \code{\link{l_make_glyphs}}
+
+Other glyph functions: \code{\link{l_glyph_add.default}},
+  \code{\link{l_glyph_add_pointrange}},
+  \code{\link{l_glyph_add_polygon}},
+  \code{\link{l_glyph_add_serialaxes}},
+  \code{\link{l_glyph_add_text}},
+  \code{\link{l_glyph_add}}, \code{\link{l_glyph_delete}},
+  \code{\link{l_glyph_getLabel}},
+  \code{\link{l_glyph_getType}}, \code{\link{l_glyph_ids}},
+  \code{\link{l_glyph_relabel}},
+  \code{\link{l_primitiveGlyphs}}
 }
+\concept{glyph functions}

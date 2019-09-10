@@ -44,6 +44,9 @@
             set needCoordsUpdate TRUE
             $map setRotate3DY [set $rotate3DY_var]
         }
+        if {[dict exists $events "axisScaleFactor"]} {
+            set needCoordsUpdate TRUE
+        }
         if {$needCoordsUpdate} {
             dict append events "needCoordsUpdate" TRUE
             my redrawAxes3D
@@ -68,6 +71,8 @@
         set newAxesX [lindex $newAxesCoords 0]
         set newAxesY [lindex $newAxesCoords 1]
         set newAxesZ [lindex $newAxesCoords 2]
+        
+        $axesGuides setAxisScaleFactor [$plotModel getAxisScaleFactor]
         $axesGuides setAxesCoords [list [lindex $newAxesX 0] [lindex $newAxesY 0] [lindex $newAxesZ 0]] \
                                   [list [lindex $newAxesX 1] [lindex $newAxesY 1] [lindex $newAxesZ 1]] \
                                   [list [lindex $newAxesX 2] [lindex $newAxesY 2] [lindex $newAxesZ 2]]

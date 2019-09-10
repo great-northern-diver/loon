@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Glyph Label — l_glyph_getLabel • loon</title>
+<title>Euclidean distance between two vectors,
+or between column vectors of two matrices. — L2_distance • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +38,12 @@
 
 
 
-<meta property="og:title" content="Get Glyph Label — l_glyph_getLabel" />
+<meta property="og:title" content="Euclidean distance between two vectors,
+or between column vectors of two matrices. — L2_distance" />
 
-<meta property="og:description" content="Returns the label of a glyph" />
+<meta property="og:description" content="Quickly calculates and returns the Euclidean distances between m vectors
+in one set and n vectors in another.  Each set of vectors is given as
+the columns of a matrix." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -141,57 +145,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Glyph Label</h1>
+    <h1>Euclidean distance between two vectors,
+or between column vectors of two matrices.</h1>
     
-    <div class="hidden name"><code>l_glyph_getLabel.Rd</code></div>
+    <div class="hidden name"><code>L2_distance.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Returns the label of a glyph</p>
+    <p>Quickly calculates and returns the Euclidean distances between m vectors
+in one set and n vectors in another.  Each set of vectors is given as
+the columns of a matrix.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>l_glyph_getLabel</span>(<span class='no'>widget</span>, <span class='no'>id</span>)</pre>
+    <pre class="usage"><span class='fu'>L2_distance</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>widget</th>
-      <td><p>widget path as a string or as an object handle</p></td>
+      <th>a</th>
+      <td><p>A d by m numeric matrix giving the first set of m vectors of dimension d
+as the columns of <code>a</code>.</p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>glyph id</p></td>
+      <th>b</th>
+      <td><p>A d by n numeric matrix giving the second set of n vectors of dimension d
+as the columns of <code>b</code>.</p></td>
+    </tr>
+    <tr>
+      <th>df</th>
+      <td><p>Indicator whether to force the diagonals of the returned matrix to
+be zero (<code>df = 1</code>) or not (the default <code>df = 0</code>).</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An m by n matrix containing the Euclidean distances between the column
+vectors of the matrix <code>a</code> and the column vectors of the matrix <code>b</code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This fully vectorized (VERY FAST!) function computes the Euclidean distance between
+two vectors by:</p>
+<p>||A-B|| = sqrt ( ||A||^2 + ||B||^2 - 2*A.B )</p>
+<p>Originally written as L2_distance.m for Matlab by Roland Bunschoten of
+the University of Amsterdam, Netherlands.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_glyph_add.html'>l_glyph_add</a></code>, <code><a href='l_glyph_ids.html'>l_glyph_ids</a></code>,
-  <code><a href='l_glyph_relabel.html'>l_glyph_relabel</a></code></p>
-<p>Other glyph functions: <code><a href='l_glyph_add.default.html'>l_glyph_add.default</a></code>,
-  <code><a href='l_glyph_add_image.html'>l_glyph_add_image</a></code>,
-  <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a></code>,
-  <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a></code>,
-  <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a></code>,
-  <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a></code>,
-  <code><a href='l_glyph_add.html'>l_glyph_add</a></code>, <code><a href='l_glyph_delete.html'>l_glyph_delete</a></code>,
-  <code><a href='l_glyph_getType.html'>l_glyph_getType</a></code>, <code><a href='l_glyph_ids.html'>l_glyph_ids</a></code>,
-  <code><a href='l_glyph_relabel.html'>l_glyph_relabel</a></code>,
-  <code><a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>400</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>800</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='fu'>L2_distance</span>(<span class='no'>A</span>[,<span class='fl'>1</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>], <span class='no'>B</span>[,<span class='fl'>1</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>])</div><div class='output co'>#&gt;          [,1]
+#&gt; [1,] 6.139374</div><div class='input'><span class='no'>d_AB</span> <span class='kw'>&lt;-</span> <span class='fu'>L2_distance</span>(<span class='no'>A</span>,<span class='no'>B</span>)
+<span class='no'>d_BB</span> <span class='kw'>&lt;-</span> <span class='fu'>L2_distance</span>(<span class='no'>B</span>,<span class='no'>B</span>, <span class='kw'>df</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='co'># force diagonal to be zero</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+    <h2>Author</h2>
+    <p>Roland Bunschoten (original), Adrian Waddell, Wayne Oldford</p>
   </div>
 </div>
 

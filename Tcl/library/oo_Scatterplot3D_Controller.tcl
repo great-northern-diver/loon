@@ -8,6 +8,7 @@
     ::loon::classes::Rotate3D_Controller
     
     
+    
     ## The scatterplot controller can swap dynamically the _Model
     ## but not the _View
 	

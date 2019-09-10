@@ -154,43 +154,28 @@ is mainly used in <code>l_plot.decomposed.ts</code> and <code>l_plot.stl</code><
     
     </div>
 
-    <pre class="usage"><span class='fu'>l_plot_ts</span>(<span class='no'>stlOrDecomposedTS</span>, <span class='kw'>pcolor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>xlabels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylabels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tk_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>l_plot_ts</span>(<span class='no'>x</span>, <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tk_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stlOrDecomposedTS</th>
+      <th>x</th>
       <td><p>Either an <code>stl</code> object or a <code>decomposed.ts</code> object.</p></td>
     </tr>
     <tr>
-      <th>pcolor</th>
-      <td><p>points colour of all time series. If NULL (the default) <code>lcolor</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+      <th>xlabel</th>
+      <td><p>the labels for the x axes.  This is a length four character vector one for each: of the original
+time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if <code>NULL</code>, <code>xlabel</code> is "time".</p></td>
     </tr>
     <tr>
-      <th>size</th>
-      <td><p>points size of all time series. Default value is 1.</p></td>
-    </tr>
-    <tr>
-      <th>lcolor</th>
-      <td><p>line colour of all time series. If NULL (the default) <code>lcolor</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>linewidth</th>
-      <td><p>line width of all time series (incl. original and decomposed components. Default is 1.</p></td>
-    </tr>
-    <tr>
-      <th>xlabels</th>
-      <td><p>the labels for the x axes: a length four character vector for each of the original
-time series, trend, seasonality and remainder. If <code>NULL</code>, xlabels is created as "time".</p></td>
-    </tr>
-    <tr>
-      <th>ylabels</th>
-      <td><p>the labels for the vertical axes: a length four character vector for each of the original
-time series, trend, seasonality and remainder. If <code>NULL</code>, ylabels is created based on the information provided.</p></td>
+      <th>ylabel</th>
+      <td><p>the labels for the vertical axes.  This is a length four character vector one for each: of the original
+time series, the trend component, the seasonality component, and the remainder. If <code>NULL</code>, the default,
+<code>ylabel</code> will be <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("data", "trend", "seasonality", "remainder")</a></code>; if a character vector of length 1, the label is repeated four times.</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -201,9 +186,26 @@ time series, trend, seasonality and remainder. If <code>NULL</code>, ylabels is 
       <td><p>provides an alternative window name to Tk's <code>wm title</code>.  If <code>NULL</code>, <code>stl</code> will be used.</p></td>
     </tr>
     <tr>
+      <th>color</th>
+      <td><p>points colour of all time series.
+If <code>NULL</code> (the default) <code>color</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>points size of all time series. Default value is 1.</p></td>
+    </tr>
+    <tr>
+      <th>lcolor</th>
+      <td><p>line colour of all time series. If <code>NULL</code> (the default) <code>lcolor</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>linewidth</th>
+      <td><p>line width of all time series (incl. original and decomposed components. Default is 1.</p></td>
+    </tr>
+    <tr>
       <th>linkingGroup</th>
       <td><p>name of linking group.
-If NULL, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
+If <code>NULL</code>, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
     </tr>
     <tr>
       <th>showScales</th>
@@ -230,7 +232,10 @@ by name: "original", "trend", "seasonal", and "remainder".</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_plot.stl.html'>l_plot.stl</a></code> and <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code></p></div>
+    <div class='dont-index'><p><code><a href='l_plot.stl.html'>l_plot.stl</a></code>, <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code>,
+<code><a href='https://www.rdocumentation.org/packages/stats/topics/stl'>stl</a></code>, or <code><a href='https://www.rdocumentation.org/packages/stats/topics/decompose'>decompose</a></code>.</p>
+<p>Other time series decomposition plotting functions: <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code>,
+  <code><a href='l_plot.stl.html'>l_plot.stl</a></code></p></div>
     
 
   </div>

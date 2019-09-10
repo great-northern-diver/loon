@@ -26,7 +26,7 @@ path_concat <- function(path1, path2, sep="/") {paste(path1, path2, sep = sep)}
 ```
 
 
-```{r library loon, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 4, out.width = "75%", warning=FALSE, message=FALSE}
+```{r library_loon, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 4, out.width = "75%", warning=FALSE, message=FALSE}
 library(loon)
 ```
 
@@ -39,6 +39,7 @@ Suggestions for interactions will also be given and questions that draw attentio
 
 After completing the tutorial, there are numerous other examples of using loon which can be explored.  These include
 
+- many of the common arguments to `l_plot()` are described in the help topic `?l_plot_arguments`
 - the `R` `help(package = "loon")` pages for `loon`, or alternatively online via as `l_web()`
 - other vignettes,
 - demos on particular topics given by `demo(package = "loon")`.  These are especially useful because the source code for creating them appears in the console, and 
@@ -53,7 +54,7 @@ Here, we will walk through some of the **basic** functionality.
 
 Begin with a simple scatterplot of the `quakes` data from `R`
 
-```{r first loon plot, eval = TRUE, echo = FALSE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
+```{r first loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
 l_plot(x = quakes$long, 
        y = quakes$lat, 
        xlabel = "longitude", 

@@ -108,7 +108,7 @@
       <h1>Introduction to loon</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-05-20</h4>
+            <h4 class="date">2019-08-04</h4>
       
       
       <div class="hidden name"><code>introduction.Rmd</code></div>
@@ -124,6 +124,8 @@
 <p>Because loon is an interactive visualization system, this introduction is meant as a “hands on” tutorial. Not all interactions are from the command line (programmatic). Suggestions for interactions will also be given and questions that draw attention to the outcome of interactions.</p>
 <p>After completing the tutorial, there are numerous other examples of using loon which can be explored. These include</p>
 <ul>
+<li>many of the common arguments to <code><a href="../reference/l_plot.html">l_plot()</a></code> are described in the help topic <code><a href="../reference/l_plot_arguments.html">?l_plot_arguments</a></code>
+</li>
 <li>the <code>R</code> <code><a href="https://www.rdocumentation.org/packages/utils/topics/help">help(package = "loon")</a></code> pages for <code>loon</code>, or alternatively online via as <code><a href="../reference/l_web.html">l_web()</a></code>
 </li>
 <li>other vignettes,</li>
@@ -136,9 +138,15 @@
 <h1 class="hasAnchor">
 <a href="#l_plot-the-basic-loon-plot" class="anchor"></a><code><a href="../reference/l_plot.html">l_plot()</a></code> the basic <code>loon</code> plot</h1>
 <p>Begin with a simple scatterplot of the <code>quakes</code> data from <code>R</code></p>
-<pre><code>## [1] ".l0.plot"
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="dt">x =</span> quakes<span class="op">$</span>long, 
+       <span class="dt">y =</span> quakes<span class="op">$</span>lat, 
+       <span class="dt">xlabel =</span> <span class="st">"longitude"</span>, 
+       <span class="dt">ylabel =</span> <span class="st">"latitude"</span>,
+       <span class="dt">title =</span> <span class="st">"Tonga trench earthquakes"</span>)
+
+## [1] ".l0.plot"
 ## attr(,"class")
-## [1] "l_plot" "loon"</code></pre>
+## [1] "l_plot" "loon"</code></pre></div>
 <p>This prints the above information on the loon plot (more on this later) and causes two windows to appear.</p>
 <p>One is the scatterplot:</p>
 <p><img src="images/intro/quakesOriginal.png" width="60%" style="display: block; margin: auto;"></p>
@@ -406,7 +414,7 @@ p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_create_
 <a href="#printing-the-plot" class="anchor"></a>printing the plot</h3>
 <p>Were we to now print <code>p</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p </code></pre></div>
-<pre><code>## [1] ".l2.plot"
+<pre><code>## [1] ".l0.plot"
 ## attr(,"class")
 ## [1] "l_plot" "loon"</code></pre>
 <p>we get the string name of the plot, but with a class attribute. This is the <strong>value</strong> of <code>p</code> and provides us access to a very rich data structure, but one whose values reside in <code>tcl</code>.</p>
@@ -524,7 +532,7 @@ NZFijiMap &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rd
         <span class="dt">label =</span> <span class="st">"New Zealand and Fiji"</span>,
         <span class="dt">color =</span> <span class="st">"forestgreen"</span>,
         <span class="dt">index =</span> <span class="st">"end"</span>)</code></pre></div>
-<pre><code>## loon layer "New Zealand and Fiji" of type polygons of plot .l2.plot
+<pre><code>## loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 ## [1] "layer0"</code></pre>
 <p>Try this out.</p>
 <p><img src="images/intro/quakesGuidesMapInspector.png" width="30%" style="display: block; margin: auto;"></p>

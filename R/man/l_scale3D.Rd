@@ -43,4 +43,8 @@ with(l_scale3D(iris, method = "sphere"),
 }
 \seealso{
 \code{\link{l_plot3D}} \code{\link{scale}}
+
+Other three-dimensional plotting functions: \code{\link{l_plot3D.default}},
+  \code{\link{l_plot3D}}
 }
+\concept{three-dimensional plotting functions}

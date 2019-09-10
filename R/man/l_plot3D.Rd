@@ -4,19 +4,26 @@
 \alias{l_plot3D}
 \title{Create an interactive loon 3d plot widget}
 \usage{
-l_plot3D(x, y, z, ...)
+l_plot3D(x, y, z, axisScaleFactor, ...)
 }
 \arguments{
-\item{x}{the coordinates of points in the plot. Alternatively, a
-      single plotting structure, function or \emph{any \R object with a
-        \code{plot} method} can be provided.}
+\item{x}{the x, y and z arguments provide the x, y and z coordinates for the plot.
+         Any reasonable way of defining the coordinates is acceptable.
+         See the function xyz.coords for details.
 
-\item{y}{the y coordinates of points in the plot, \emph{optional}
-    if \code{x} is an appropriate structure.}
+         If supplied separately, they must be of the same length.}
 
-\item{z}{the z coordinates of points in the plot, optional if x is an appropriate structure.}
+\item{y}{the y coordinates of points in the plot,
+optional if x is an appropriate structure.}
 
-\item{...}{named arguments to modify plot states}
+\item{z}{the z coordinates of points in the plot,
+optional if x is an appropriate structure.}
+
+\item{axisScaleFactor}{the amount to scale the axes at the centre of the rotation.
+Default is 1.
+    All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)}
+
+\item{...}{named arguments to modify plot states.}
 }
 \value{
 widget handle
@@ -118,4 +125,8 @@ tktitle(tt) <- "Loon plots with custom layout"
 }
 \seealso{
 \code{\link{l_info_states}}
+
+Other three-dimensional plotting functions: \code{\link{l_plot3D.default}},
+  \code{\link{l_scale3D}}
 }
+\concept{three-dimensional plotting functions}
