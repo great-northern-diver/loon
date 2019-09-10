@@ -1,5 +1,5 @@
-package ifneeded loon 1.2.0 "
-   package provide loon 1.2.0 
+package ifneeded loon 1.2.3 "
+   package provide loon 1.2.3 
    package require Tcl 8.6 
    package require Tk 8.6 
    [list set ::env(LOON_VERSION) 1.1.0]
