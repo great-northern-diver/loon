@@ -13,8 +13,8 @@ set fp [open "pkgIndex.tcl" w+]
 #    puts \"Img package is missing. Can not load png and jpeg images.\"
 #\}"
 
-puts  $fp "package ifneeded loon 1.2.0 \""
-puts  $fp "   package provide loon 1.2.0 "
+puts  $fp "package ifneeded loon 1.2.3 \""
+puts  $fp "   package provide loon 1.2.3 "
 puts  $fp "   package require Tcl 8.6 "
 puts  $fp "   package require Tk 8.6 "
 ## Objects need to be loaded according to inheritance
