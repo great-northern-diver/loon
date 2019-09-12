@@ -52,7 +52,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
         # add navigators
         nav_ids <- l_navigator_ids(widget)
 
-        if(length(nav_ids) == 0){
+        if(length(nav_ids) == 0) {
             # No navigator, just return the graph
             gTree(children =
                       gList(
@@ -108,11 +108,12 @@ edgesGrob <- function(states = NULL, name = NULL){
                              nodeFrom <- activeNode[i]
                              nodeFrom_EdgeId <- which(states$from[isActiveEdge] == nodeFrom)
 
-                             if (length(nodeFrom_EdgeId) != 0){
+                             if (length(nodeFrom_EdgeId) != 0) {
                                  nodeTo <- states$to[isActiveEdge][nodeFrom_EdgeId]
-                                 nodeTo_CoordId <- which (activeNode %in% nodeTo == TRUE)
+                                 nodeTo_CoordId <- which(activeNode %in% nodeTo)
                                  numNodesTo <- length(nodeTo_CoordId)
-                                 cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId]
+                                 cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId][which(nodeTo %in% activeNode)]
+
                                  x <- unit(c(rep(activeX[i], numNodesTo),
                                              activeX[nodeTo_CoordId]),
                                            "native")
@@ -220,8 +221,8 @@ navPathGrob <- function(states, navigator, name = NULL){
     to <- navigator['to']
     prop <- navigator['proportion']
 
-    fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == T)})
-    toId <- sapply(1:length(to), function(i){which(node %in% to[i] == T)})
+    fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == TRUE)})
+    toId <- sapply(1:length(to), function(i){which(node %in% to[i] == TRUE)})
 
     if(length(from) == 0 || length(to) == 0) {
         grob(name = name)
@@ -303,10 +304,7 @@ navPointsGrob <- function(activeNavigator,
     fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == TRUE)})
     toId <- sapply(1:length(to), function(i){which(node %in% to[i] == TRUE)})
 
-    sel_color <- as.character(l_getOption("select-color"))
-    if (grepl("^#", sel_color) && nchar(sel_color) == 13) {
-        sel_color <- hex12tohex6(sel_color)
-    }
+    sel_color <- l_getOption("select-color")
 
     circleGp <- if(length(activeNavigator) != 0) {
         if(activeNavigator == navigator) {
@@ -318,7 +316,7 @@ navPointsGrob <- function(activeNavigator,
 
     fromRadius <- unit(5.5, "mm")
 
-    if(length(from) == 0){
+    if(length(from) == 0) {
 
         xx <- unit(0.1, "npc")
         yy <- unit(0.9, "npc")
@@ -329,7 +327,7 @@ navPointsGrob <- function(activeNavigator,
                                if(length(label) != 0) {
                                    textGrob(paste(label, collapse = " "),
                                             xx, yy,
-                                            gp = gpar(fill = "black", fontsize = 9),
+                                            gp = gpar(fill = l_getOption("foreground"), fontsize = 9),
                                             name = "navigator label") # font size?
                                }
         ),
@@ -350,7 +348,7 @@ navPointsGrob <- function(activeNavigator,
             ),
             if(length(label) != 0) {
                 textGrob(paste(label, collapse = " "), xx, yy,
-                         gp = gpar(fill = "black", fontsize = 9),
+                         gp = gpar(fill = l_getOption("foreground"), fontsize = 9),
                          name = "navigator label")
             }
 
@@ -386,7 +384,7 @@ navPointsGrob <- function(activeNavigator,
                 name = "navigator label",
                 label = paste(label, collapse = " "),
                 x = xx, y = yy,
-                gp = gpar(fill = "black", fontsize = 9)
+                gp = gpar(fill = l_getOption("foreground"), fontsize = 9)
                 )
         ),
         name = if (is.null(name)) "navigator" else name

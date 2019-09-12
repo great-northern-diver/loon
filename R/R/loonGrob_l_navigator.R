@@ -27,7 +27,7 @@ loonGrob.l_navigator <- function(target, name = NULL, gp = NULL, vp = NULL){
             x = unit(0.5, "npc"),
             y = unit(0.5, "npc"),
             label = paste(label, collapse = " "),
-            gp = gpar(fill = "black", fontsize = 9),
+            gp = gpar(fill = l_getOption("foreground"), fontsize = 9),
             vp = vp
         )
     )
