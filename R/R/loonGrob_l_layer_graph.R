@@ -52,7 +52,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
         # add navigators
         nav_ids <- l_navigator_ids(widget)
 
-        if(length(nav_ids) == 0){
+        if(length(nav_ids) == 0) {
             # No navigator, just return the graph
             gTree(children =
                       gList(
@@ -108,11 +108,12 @@ edgesGrob <- function(states = NULL, name = NULL){
                              nodeFrom <- activeNode[i]
                              nodeFrom_EdgeId <- which(states$from[isActiveEdge] == nodeFrom)
 
-                             if (length(nodeFrom_EdgeId) != 0){
+                             if (length(nodeFrom_EdgeId) != 0) {
                                  nodeTo <- states$to[isActiveEdge][nodeFrom_EdgeId]
-                                 nodeTo_CoordId <- which (activeNode %in% nodeTo == TRUE)
+                                 nodeTo_CoordId <- which(activeNode %in% nodeTo)
                                  numNodesTo <- length(nodeTo_CoordId)
-                                 cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId]
+                                 cols <- states$colorEdge[isActiveEdge][nodeFrom_EdgeId][which(nodeTo %in% activeNode)]
+
                                  x <- unit(c(rep(activeX[i], numNodesTo),
                                              activeX[nodeTo_CoordId]),
                                            "native")
@@ -220,8 +221,8 @@ navPathGrob <- function(states, navigator, name = NULL){
     to <- navigator['to']
     prop <- navigator['proportion']
 
-    fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == T)})
-    toId <- sapply(1:length(to), function(i){which(node %in% to[i] == T)})
+    fromId <- sapply(1:length(from), function(i){which(node %in% from[i] == TRUE)})
+    toId <- sapply(1:length(to), function(i){which(node %in% to[i] == TRUE)})
 
     if(length(from) == 0 || length(to) == 0) {
         grob(name = name)
@@ -318,7 +319,7 @@ navPointsGrob <- function(activeNavigator,
 
     fromRadius <- unit(5.5, "mm")
 
-    if(length(from) == 0){
+    if(length(from) == 0) {
 
         xx <- unit(0.1, "npc")
         yy <- unit(0.9, "npc")
