@@ -110,7 +110,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                             lapply(1:(len.xaxis + len.yaxis + 1),
                                    function(i) {
                                        if(i == 1){
-                                           rectGrob(gp = gpar(col = NA, fill = "#EBEBEB" ), name = "bounding box")
+                                           rectGrob(gp = gpar(col = NA, fill = l_getOption("canvas_bg_guides") ), name = "bounding box")
                                        } else if( i > 1 && i<= (1 + len.xaxis)){
                                            condGrob(
                                                test = showAxes,
@@ -118,14 +118,14 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                                                name = paste("x axis", i - 1),
                                                x = unit(rep(xaxis[i - 1],2 ), "native"),
                                                y =  unit(c(0, 1), "native"),
-                                               gp = gpar(col =  "white", lwd = 2)
+                                               gp = gpar(col =  l_getOption("background"), lwd = 2)
                                            )
 
                                        } else {
                                            linesGrob(
                                                x = unit(c(0, 1), "native"),
                                                y =  unit(rep(yaxis[i - (1 + len.xaxis)],2 ), "native"),
-                                               gp = gpar(col ="white", lwd = 2),
+                                               gp = gpar(col =l_getOption("background"), lwd = 2),
                                                name = paste("y axis", i - (1 + len.xaxis))
                                            )
                                        }
@@ -144,7 +144,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                                            name = paste("x axis", i),
                                            x = unit(rep(xaxis[i],2 ), "native"),
                                            y =  unit(c(0, 1), "native"),
-                                           gp = gpar(col =  "black", lwd = 2)
+                                           gp = gpar(col =  l_getOption("foreground"), lwd = 2)
                                        )
                                    }
                             )
@@ -236,7 +236,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                 if (showGuides) {
                     gTree(
                         children = gList(
-                            rectGrob(gp = gpar(col = NA, fill = "#EBEBEB" ), name = "bounding box"),  # TODO find background colour need info in TCL
+                            rectGrob(gp = gpar(col = NA, fill = l_getOption("canvas_bg_guides")), name = "bounding box"),  # TODO find background colour need info in TCL
                             polygonGrob(xpos + unit(radius * cos(seq(0, 2*pi, length=101)), "npc"),
                                         ypos + unit(radius * sin(seq(0, 2*pi, length=101)), "npc"),
                                         gp = gpar(fill = NA, col = l_getOption("guidelines"),
@@ -250,7 +250,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                                 x = xpos + unit(c(rep(0, len.xaxis) ,radius * cos(angle)), "npc"),
                                 y =  ypos + unit(c(rep(0, len.xaxis) ,radius * sin(angle)), "npc"),
                                 id = rep(1:len.xaxis, 2),
-                                gp = gpar(col = "white", lwd = 2)   # TODO Again with width loon should use guide colours
+                                gp = gpar(col = l_getOption("background"), lwd = 2)   # TODO Again with width loon should use guide colours
                             )
                         ),
                         name = "guides"
@@ -265,7 +265,7 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL){
                                 x = unit(c(rep(0, len.xaxis) ,radius * cos(angle)), "npc") + xpos,
                                 y = unit(c(rep(0, len.xaxis) ,radius * sin(angle)), "npc") + ypos,
                                 id = rep(1:len.xaxis, 2),
-                                gp = gpar(col =  "black", lwd = 2) # TODO Again with width loon should use guide colours
+                                gp = gpar(col =  l_getOption("foreground"), lwd = 2) # TODO Again with width loon should use guide colours
                             )
                         ), name = "guides"
                     )

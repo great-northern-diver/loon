@@ -47,7 +47,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     scatter_histGrobs <- lapply(1:(nScatterplots + nHistograms),
                                 function(i){
                                     pi <- scatter_hist[[i]]
-                                    pi['foreground'] <- "white"
+                                    pi['foreground'] <- l_getOption("background")
                                     pi['minimumMargins'] <- rep(2,4)
                                     if(i <= nScatterplots) {
                                         loonGrob(pi, name = paste("scatterplot", i))
@@ -121,7 +121,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
 
 #' @export
 l_createCompoundGrob.l_pairs <- function(target, arrangeGrob.args){
-    backgroundCol <- "grey94"
+    backgroundCol <- l_getOption("canvas_bg_guides")
     grobTree(
         rectGrob(gp  = gpar(fill = backgroundCol, col = NA),
                  name = "bounding box"),
