@@ -44,17 +44,17 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                     color = get_display_color(states$color[display_order][active], selected),
                     size = states$size[display_order][active],
                     index = seq_along(states$x)[display_order][active]
-                    )
+        )
 
         pch <- glyph_to_pch(s_a$glyph)
         if (!any(is.na(pch)) && !any(pch %in% 21:24)) {
             # No NAs and no points with borders
             points <- pointsGrob(name = "points: primitive glyphs without borders",
-                                         x = s_a$x,
-                                         y = s_a$y,
-                                         pch = pch,
-                                         gp = gpar(col = s_a$color,
-                                                   cex = as_r_point_size(s_a$size))
+                                 x = s_a$x,
+                                 y = s_a$y,
+                                 pch = pch,
+                                 gp = gpar(col = s_a$color,
+                                           cex = as_r_point_size(s_a$size))
             )
         } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
             # No NAs and ALL points with borders
@@ -105,7 +105,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                      })
 
             points <- gTree(children = do.call('gList', children_grobs),
-                                name = "points: mixed glyphs")
+                            name = "points: mixed glyphs")
 
         }
     }
@@ -134,22 +134,22 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
         # is there a fill colour?
         filled <- (pch %in% 21:24)
         if (filled) {
-                pointsGrob(x = glyph_info$x,
-                           y = glyph_info$y,
-                           pch = pch,
-                           gp = gpar(fill = col,
-                                     col = l_getOption("foreground"),
-                                     cex = cex),
-                           name = paste0("primitive_glyph ", glyph_info$index)
-                           )
+            pointsGrob(x = glyph_info$x,
+                       y = glyph_info$y,
+                       pch = pch,
+                       gp = gpar(fill = col,
+                                 col = l_getOption("foreground"),
+                                 cex = cex),
+                       name = paste0("primitive_glyph ", glyph_info$index)
+            )
         } else {
-                pointsGrob(x = glyph_info$x,
-                           y = glyph_info$y,
-                           pch = pch,
-                           gp = gpar(col = col,
-                                     cex = cex),
-                           name = paste0("primitive_glyph ", glyph_info$index)
-                )
+            pointsGrob(x = glyph_info$x,
+                       y = glyph_info$y,
+                       pch = pch,
+                       gp = gpar(col = col,
+                                 cex = cex),
+                       name = paste0("primitive_glyph ", glyph_info$index)
+            )
         }
     }
 }
@@ -257,7 +257,7 @@ loonGlyphGrob.text <-  function(widget, x, glyph_info) {
              gp=gpar(fontsize = as_r_text_size(glyph_info$size),
                      col = glyph_info$color),
              name = paste0("text_glyph ", glyph_info$index)
-             )
+    )
 }
 
 loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
@@ -464,29 +464,15 @@ get_glyph_scale_info <- function(widget){
             gh <- l_create_handle(c(widget, unique_glyph[i]))
 
             if(name[i] == "serialaxes" ) {
-                scaling <- gh['scaling']
-                sequence <- gh['sequence']
-                dat <- sapply( gh['data'], as.numeric)  # convert to numeric if not
-                dat <- dat[, sequence]
-                switch(scaling,
-                       "variable" = {
-                           minV <- apply(dat, 2, "min")
-                           maxV <- apply(dat, 2, "max")
-                           t(
-                               (t(dat) - minV) / (maxV  - minV)
-                           )
-                       },
-                       "observation" = {
-                           minO <- apply(dat, 1, "min")
-                           maxO <- apply(dat, 1, "max")
-                           (dat - minO) / (maxO - minO)
-                       },
-                       "data" = {
-                           minD <- min(dat)
-                           maxD <- max(dat)
-                           (dat - minD)/ (maxD - minD)
-                       },
-                       "none" = NULL)
+
+                dat <- char2num.data.frame(gh['data'])
+
+                get_scaledData(
+                    data = dat, # convert to numeric
+                    sequence = gh['sequence'],
+                    scaling = gh['scaling'],
+                    displayOrder = 1:dim(dat)[1])
+
             } else if (name[i] == "polygon") {
                 # to be general
                 NULL
