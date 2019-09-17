@@ -410,6 +410,8 @@ get_scaledData <- function(data,
                            scaling = c("variable", "observation", "data", "none"),
                            displayOrder = NULL) {
 
+    # data is the original data set
+    # since "variable" scaling is based on the original data
     if(missing(data) || is.null(data) || is.null(displayOrder)) return(NULL)
 
     scaling <- match.arg(scaling)
