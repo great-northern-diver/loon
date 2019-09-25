@@ -82,9 +82,9 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
             )
         )
 
-        textGrobs <- lapply(texts,
-                            function(t) {
-                                textGrob(t, gp = gpar(fontsize = 9), name = paste("text", i))
+        textGrobs <- lapply(1:length(texts),
+                            function(i) {
+                                textGrob(texts[i], gp = gpar(fontsize = 9), name = paste("text", i))
                             }
         )
 
