@@ -414,25 +414,38 @@ get_scaledData <- function(data,
     # since "variable" scaling is based on the original data
     if(missing(data) || is.null(data) || is.null(displayOrder)) return(NULL)
 
+    if(!is.null(sequence)) {
+        col_name <- colnames(data)
+        if(!all(sequence %in% col_name)) {
+            warning("unknown variable names in sequence")
+            sequence <- intersect(sequence, col_name)
+        }
+        data <-  data[, sequence]
+    }
+
     scaling <- match.arg(scaling)
+
+    is_char <- FALSE
+    is_factor <- FALSE
+    is_logical <- FALSE
 
     dat <- sapply(data,
                   function(x) {
                       if(is.numeric(x)) x
                       else if(is.character(x)) {
-                          warning("character column exists and will be converted to numeric",
-                                  call. = FALSE)
+                          is_char <<- TRUE
                           as.numeric(as.factor(x))
                       } else if (is.factor(x)) {
-                          warning("factor column exists and will be converted to numeric",
-                                  call. = FALSE)
+                          is_factor <<- TRUE
                           as.numeric(x)
                       } else if(is.logical(x)) {
-                          warning("logical column exists and will be converted to numeric",
-                                  call. = FALSE)
+                          is_logical <<- TRUE
                           as.numeric(x)
                       } else stop("unknown data structure")
                   })
+    # give warning once
+    if(is_char || is_factor || is_logical)
+        warning("No numerical columns exist", call. = FALSE)
 
     if(length(displayOrder) == 1) {
         dat <- setNames(as.data.frame(matrix(dat, nrow = 1)), names(dat))
@@ -442,10 +455,6 @@ get_scaledData <- function(data,
         }
     }
 
-    if(!is.null(sequence)) {
-        if(!all(sequence %in% colnames(dat))) stop("unknown variable names in sequence")
-        dat <-  dat[, sequence]
-    }
     switch(scaling,
            "variable" = {
                minV <- apply(dat, 2, "min")
