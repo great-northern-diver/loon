@@ -1125,6 +1125,7 @@ get_model_display_order <- function(widget) {
   if (n == 0) {
     numeric(0)
   } else {
+
     can <- paste0(widget, ".canvas")
     id <- as.numeric(tcl(can, "find", "withtag", paste("layer", "model", sep = "&&")))
 
@@ -1138,12 +1139,16 @@ get_model_display_order <- function(widget) {
       }
     }, numeric(1))
 
-    if (any(is.na(i))) {
+    order <- if (any(is.na(i))) {
       seq_len(n)
     } else {
       ii <- i+1
       ii[!duplicated(ii)]
     }
+    # TODO: A bug in l_serialaxes;
+    # In l_serialaxes, `tcl` only return active model order instead of full order
+    # It should be fixed in `tcl`, so far it is fixed in R temporarily.
+    c(setdiff(1:n, order), order)
   }
 }
 
