@@ -31,15 +31,15 @@
 #'
 
 l_plot_ts <- function(stlOrDecomposedTS,
-                        pcolor = NULL, size = 1,
-                        lcolor = NULL, linewidth = 1,
-                        xlabels = NULL,  ylabels = NULL,
-                        title = NULL, tk_title = NULL,
-                        linkingGroup = NULL,
-                        showScales=TRUE,
-                        showGuides=TRUE,
-                        showLabels=TRUE,
-                        ...){
+                      pcolor = NULL, size = 1,
+                      lcolor = NULL, linewidth = 1,
+                      xlabels = NULL,  ylabels = NULL,
+                      title = NULL, tk_title = NULL,
+                      linkingGroup = NULL,
+                      showScales=TRUE,
+                      showGuides=TRUE,
+                      showLabels=TRUE,
+                      ...){
 
     if (is.null(lcolor)) lcolor <- getOption("foreground")
     if (is.null(pcolor)) pcolor <- getOption("foreground")
@@ -49,7 +49,7 @@ l_plot_ts <- function(stlOrDecomposedTS,
     if (is.na(nameOfData)) nameOfData <- "a time series"
     if (is.null(linkingGroup)) linkingGroup <- paste(nameOfData, class(stlOrDecomposedTS))
 
-    if(class(stlOrDecomposedTS) == "decomposed.ts"){
+    if(inherits(stlOrDecomposedTS, "decomposed.ts")){
         data <- stlOrDecomposedTS$x
 
         if(is.null(data)){
@@ -70,7 +70,7 @@ l_plot_ts <- function(stlOrDecomposedTS,
         xy.trend <- list(x = xy.raw$x[index.trend], y = stlOrDecomposedTS$trend[index.trend])
         xy.remainder <- list(x = xy.raw$x[index.random], y = stlOrDecomposedTS$random[index.random])
         xy.seasonal <- list(x = xy.raw$x, y = stlOrDecomposedTS$seasonal)
-    } else if(class(stlOrDecomposedTS) == "stl"){
+    } else if(inherits(stlOrDecomposedTS, "stl")){
         stl <- stlOrDecomposedTS$time.series
 
         # extract trend, seasonal and remainder
@@ -103,7 +103,7 @@ l_plot_ts <- function(stlOrDecomposedTS,
         }
     }
 
-    decompType <- if(class(stlOrDecomposedTS)== "stl") "loess" else "moving averages"
+    decompType <- if(inherits(stlOrDecomposedTS, "stl")) "loess" else "moving averages"
     if(is.null(tk_title)){tk_title <- paste0(decompType, " decomposition of ", nameOfData)}
     if(is.null(title)){title <- paste0("Decomposition (", decompType,") of ", nameOfData)
     }
