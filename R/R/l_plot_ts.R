@@ -3,7 +3,7 @@
 #' @description \code{l_plot_ts} is a generic function for creating a decomposed time series plot. It
 #' is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
 #' @family time series decomposition plotting functions
-#' @param stlOrDecomposedTS Either an \code{stl} object or a \code{decomposed.ts} object.
+#' @param x Either an \code{stl} object or a \code{decomposed.ts} object.
 #' @param color points colour of all time series.
 #'        If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.
 #' @param size points size of all time series. Default value is 1.
@@ -32,10 +32,10 @@
 #'
 #'
 
-l_plot_ts <- function(stlOrDecomposedTS,
+l_plot_ts <- function(x,
                       color = NULL, size = 1,
                       lcolor = NULL, linewidth = 1,
-                      xlabels = NULL,  ylabels = NULL,
+                      xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
                       linkingGroup = NULL,
                       showScales=TRUE,
