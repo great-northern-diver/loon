@@ -35,7 +35,7 @@
 l_plot_ts <- function(stlOrDecomposedTS,
                       color = NULL, size = 1,
                       lcolor = NULL, linewidth = 1,
-                      xlabels = NULL,  ylabels = NULL,
+                      xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
                       linkingGroup = NULL,
                       showScales=TRUE,
