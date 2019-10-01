@@ -4,7 +4,7 @@
     superclass ::loon::classes::Visual
 
 
-    variable xAxis yAxis zAxis xCoords yCoords zCoords xColor yColor zColor
+    variable xAxis yAxis zAxis xCoords yCoords zCoords xColor yColor zColor axisScaleFactor
     
     constructor {args} {
 	
@@ -15,6 +15,8 @@
         set yColor blue
         set zColor green
         
+        set axisScaleFactor 1.0
+        
         set xCoords [list 0 0 0]
         set yCoords [list 0 0 0]
         set zCoords [list 0 0 0]
@@ -23,13 +25,17 @@
     }
 
     method InfoDebug {args} {
-        next xAxis yAxis zAxis xCoords yCoords zCoords xColor yColor zColor {*}$args
+        next xAxis yAxis zAxis xCoords yCoords zCoords xColor yColor zColor axisScaleFactor {*}$args
     }
     
     method setAxesCoords {xAx yAx zAx} {
         set xCoords $xAx
         set yCoords $yAx
         set zCoords $zAx
+    }
+
+    method setAxisScaleFactor {factor} {
+        set axisScaleFactor $factor
     }
     
     method redraw {} {
@@ -68,11 +74,11 @@
         
         foreach ax {xAxis yAxis zAxis} coord {xCoords yCoords zCoords} color {xColor yColor zColor} {
             if {$swap} {
-                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 1] * 0.08 * $xLen }] \
-                                  [expr {$axesOriginY - [lindex [set $coord] 0] * 0.08 * $yLen }]]
+                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 1] * 0.08 * $xLen * $axisScaleFactor}] \
+                                  [expr {$axesOriginY - [lindex [set $coord] 0] * 0.08 * $yLen * $axisScaleFactor}]]
             } else {
-                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 0] * 0.08 * $xLen }] \
-                                  [expr {$axesOriginY - [lindex [set $coord] 1] * 0.08 * $yLen }]]
+                set axisEnd [list [expr {$axesOriginX + [lindex [set $coord] 0] * 0.08 * $xLen * $axisScaleFactor}] \
+                                  [expr {$axesOriginY - [lindex [set $coord] 1] * 0.08 * $yLen * $axisScaleFactor}]]
             }
             uplevel #0 [list $canvas coords [set $ax]\
                     $axesOriginX $axesOriginY [lindex $axisEnd 0] [lindex $axisEnd 1]]

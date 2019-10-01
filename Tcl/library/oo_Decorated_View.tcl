@@ -58,7 +58,7 @@
 	    
 	    set ns [info object namespace $Model] 
 	    foreach state $dv_soi {
-		set ${state}_var [uplevel #0 ${ns}::my varname $state]
+		set ${state}_var [uplevel #0 [list ${ns}::my varname $state]]
 	    }
 
 	    set showScales [set $showScales_var]

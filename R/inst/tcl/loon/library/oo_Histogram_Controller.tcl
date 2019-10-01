@@ -48,7 +48,7 @@
 		if {[$model cget -yshows] eq "density"} {
 		    $model scaleto world
 		}
-		uplevel #0 [update idletasks]
+		update idletasks
 	    }
 	    binwidth {
 		set bw [lindex [$map mapS2D $x $y] 0]
@@ -58,7 +58,7 @@
 		    if {[$model cget -yshows] eq "density"} {
 			$model scaleto world
 		    }
-		    uplevel #0 [update idletasks]
+		    update idletasks
 		}
 	    }
 	    default {

@@ -22,8 +22,8 @@ oo::class create loon::classes::PolygonGlyphVisual {
 	my variable glyphObject
 	
 	
-	set id [uplevel #0 $canvas create polygon 0 0 0 0\
-		    -width [lindex [set $linewidth_var] $ind]]
+	set id [uplevel #0 [list $canvas create polygon 0 0 0 0\
+		    -width [lindex [set $linewidth_var] $ind]]]
 	
 	return $id
     }

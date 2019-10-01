@@ -135,10 +135,10 @@
 #	    }
 #	    set siblings [$plotModel layer getSiblings $a]
 #	    if {[lindex $siblings 0] ne ""} {
-#		uplevel #0 $canvas lower $layer [lindex $siblings 0]
+#		uplevel #0 [list $canvas lower $layer [lindex $siblings 0]]
 #		break
 #	    } elseif {[lindex $siblings 1] ne ""} {
-#		uplevel #0 $canvas raise $layer [lindex $siblings 1]
+#		uplevel #0 [list $canvas raise $layer [lindex $siblings 1]]
 #		break
 #	    } 
 #	}

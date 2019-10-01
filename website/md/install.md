@@ -100,8 +100,9 @@ First, these packages from [CRAN][CRAN] should install without any
 issues
 
 ~~~
-install.packages(c('maps','sp','RColorBrewer',
-    'RnavGraphImageData','rworldmap', 'scales'))
+install.packages(c('loon.data','maps',
+                   'sp','RColorBrewer',
+                   'rworldmap', 'scales'))
 ~~~
 
 The following packages on [Bioconductor](http://www.bioconductor.org/)
@@ -125,8 +126,13 @@ The following packages on [CRAN][CRAN] have dependencies that might need special
 
 
 ~~~
-install.packages(c('dplyr', 'rgl', 'PairViz', 'scagnostics', 'kernlab',
-    'testthat', 'knitr', 'rmarkdown'))
+install.packages(c(
+  'dplyr', 'rgl',
+  'PairViz', 'scagnostics',
+  'kernlab', 'testthat',
+  'knitr', 'rmarkdown',
+  'formatR', 'ElemStatLearn'
+))
 ~~~
 
 

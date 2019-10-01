@@ -27,7 +27,7 @@
 
 	foreach state {n color size selected active xTemp yTemp\
 			   glyph glyphZoomSensitivity foreground} {
-	    set ${state}_var [uplevel #0 ${modelns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${modelns}::my varname $state]]
 	}
 	
 
@@ -523,8 +523,8 @@
 	if {$value} {
 	    my redraw
 	} else {
-	    set tmp [uplevel #0 $canvas create oval 0 0 0 0 -state hidden]
-	    uplevel #0 $canvas lower $tmp $visualid
+	    set tmp [uplevel #0 [list $canvas create oval 0 0 0 0 -state hidden]]
+	    uplevel #0 [list $canvas lower $tmp $visualid]
 	    my clear
 	    set ids $tmp
 	}       	

@@ -2,21 +2,22 @@
 #'
 #' @description \code{l_plot_ts} is a generic function for creating a decomposed time series plot. It
 #' is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
-#'
-#' @inheritParams l_plot
+#' @family time series decomposition plotting functions
 #' @param stlOrDecomposedTS Either an \code{stl} object or a \code{decomposed.ts} object.
-#' @param pcolor points colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
+#' @param color points colour of all time series.
+#'        If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.
 #' @param size points size of all time series. Default value is 1.
-#' @param lcolor line colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
+#' @param lcolor line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
 #' @param linewidth line width of all time series (incl. original and decomposed components. Default is 1.
-#' @param xlabels the labels for the x axes: a length four character vector for each of the original
-#' time series, trend, seasonality and remainder. If \code{NULL}, xlabels is created as "time".
-#' @param ylabels the labels for the vertical axes: a length four character vector for each of the original
-#' time series, trend, seasonality and remainder. If \code{NULL}, ylabels is created based on the information provided.
+#' @param xlabel the labels for the x axes.  This is a length four character vector one for each: of the original
+#' time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if \code{NULL}, \code{xlabel} is "time".
+#' @param ylabel the labels for the vertical axes.  This is a length four character vector one for each: of the original
+#' time series, the trend component, the seasonality component, and the remainder. If \code{NULL}, the default,
+#' \code{ylabel} will be \code{c("data", "trend", "seasonality", "remainder")}; if a character vector of length 1, the label is repeated four times.
 #' @param title an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".
 #' @param tk_title provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.
 #' @param linkingGroup name of linking group.
-#'        If NULL, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
+#'        If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
@@ -26,12 +27,13 @@
 #' @return A structure of class \code{"l_ts"} containing four loon plots each representing a part of the decomposition
 #' by name: "original", "trend", "seasonal", and "remainder".
 #'
-#' @seealso \code{\link{l_plot.stl}} and \code{\link{l_plot.decomposed.ts}}
+#' @seealso \code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
+#' \code{\link{stl}}, or \code{\link{decompose}}.
 #'
 #'
 
 l_plot_ts <- function(stlOrDecomposedTS,
-                      pcolor = NULL, size = 1,
+                      color = NULL, size = 1,
                       lcolor = NULL, linewidth = 1,
                       xlabels = NULL,  ylabels = NULL,
                       title = NULL, tk_title = NULL,
@@ -42,8 +44,9 @@ l_plot_ts <- function(stlOrDecomposedTS,
                       ...){
 
     if (is.null(lcolor)) lcolor <- getOption("foreground")
-    if (is.null(pcolor)) pcolor <- getOption("foreground")
+    if (is.null(color)) color <- getOption("foreground")
 
+    stlOrDecomposedTS <- x  # Just to remind us about what x is
 
     nameOfData <- strsplit(toString(stlOrDecomposedTS$call), ", ")[[1]][2]
     if (is.na(nameOfData)) nameOfData <- "a time series"
@@ -85,21 +88,29 @@ l_plot_ts <- function(stlOrDecomposedTS,
 
     }
 
-    if(is.null(xlabels) == TRUE ){
-        xlabels <- rep("time", 4)
-    }else{
-        if(length(xlabels) != 4){
-            warning("The length of xlabels should be 4, see Arguments xlabels and ylabels")
+    if(is.null(xlabel) == TRUE ){
+        xlabel <- rep("time", 4)
+    } else {
+        if(length(xlabel) == 1) {
+            xlabel <- rep(xlabel, 4)
+        } else {
+            if(length(xlabel) != 4){
+                warning("The length of xlabel should be 4, see Arguments xlabel and ylabel")
+            }
         }
     }
 
-    if(is.null(ylabels)){
-        ylabels <- c("data", "trend", "seasonality", "remainder")
-    }else{
-        if(length(ylabels) != 4){
-            warning(paste0("The length of ylabels must be 4", "
+    if(is.null(ylabel)){
+        ylabel <- c("data", "trend", "seasonality", "remainder")
+    } else {
+        if(length(ylabel) == 1) {
+            ylabel <- rep(ylabel, 4)
+        } else {
+            if(length(ylabel) != 4){
+                warning(paste0("The length of ylabel must be 4", "
                            to match data, trend, seasonality, and remainder")
-            )
+                )
+            }
         }
     }
 
@@ -114,9 +125,9 @@ l_plot_ts <- function(stlOrDecomposedTS,
     p1 <- l_plot(parent = tt,
                  x = xy.raw$x,
                  y = xy.raw$y,
-                 color = pcolor, size = size,
-                 ylabel = ylabels[1],
-                 xlabel = xlabels[1],
+                 color = color, size = size,
+                 ylabel = ylabel[1],
+                 xlabel = xlabel[1],
                  title = title,
                  linkingGroup = linkingGroup,
                  showScales = showScales,
@@ -133,9 +144,9 @@ l_plot_ts <- function(stlOrDecomposedTS,
     p2 <- l_plot(parent = tt,
                  x = xy.trend$x,
                  y = xy.trend$y,
-                 color = pcolor, size = size,
-                 ylabel = ylabels[2],
-                 xlabel = xlabels[2],
+                 color = color, size = size,
+                 ylabel = ylabel[2],
+                 xlabel = xlabel[2],
                  linkingGroup = linkingGroup,
                  showScales = showScales,
                  showGuides = showGuides,
@@ -151,9 +162,9 @@ l_plot_ts <- function(stlOrDecomposedTS,
     p3 <- l_plot(parent = tt,
                  x = xy.seasonal$x,
                  y = xy.seasonal$y,
-                 color = pcolor, size=size,
-                 ylabel = ylabels[3],
-                 xlabel = xlabels[3],
+                 color = color, size=size,
+                 ylabel = ylabel[3],
+                 xlabel = xlabel[3],
                  linkingGroup = linkingGroup,
                  showScales = showScales,
                  showGuides = showGuides,
@@ -169,9 +180,9 @@ l_plot_ts <- function(stlOrDecomposedTS,
     p4 <- l_plot(parent = tt,
                  x = xy.remainder$x,
                  y = xy.remainder$y,
-                 color = pcolor, size=size,
-                 ylabel = ylabels[4],
-                 xlabel = xlabels[4],
+                 color = color, size=size,
+                 ylabel = ylabel[4],
+                 xlabel = xlabel[4],
                  linkingGroup = linkingGroup,
                  showScales = showScales,
                  showGuides = showGuides,

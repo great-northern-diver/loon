@@ -10,14 +10,13 @@ l_glyph <- function(widget, ...) {
 #'
 #' @description Change the label of a glyph. Note that the label is only
 #'   displayed in the glyph inspector.
+#' @family glyph functions
 #'
 #' @template param_widget
 #' @param id glyph id
 #' @param label new label
 #' @export
 #'
-#' @seealso \code{\link{l_glyph_add}}, \code{\link{l_glyph_ids}},
-#'   \code{\link{l_glyph_getLabel}}
 #'
 #' @examples
 #' p <- l_plot(iris, color = iris$Species)
@@ -33,6 +32,7 @@ l_glyph_relabel <- function(widget, id, label) {
 #' @title Delete a Glyph
 #'
 #' @description Delete a glyph from the plot.
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_relabel
 #'
@@ -47,6 +47,7 @@ l_glyph_delete <- function(widget, id) {
 #' @title List glyphs ids
 #'
 #' @description List all the non-primitive glyph ids attached to display.
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_relabel
 #'
@@ -61,6 +62,7 @@ l_glyph_ids <- function(widget) {
 #' @title Get Glyph Label
 #'
 #' @description Returns the label of a glyph
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_relabel
 #'
@@ -75,6 +77,7 @@ l_glyph_getLabel <- function(widget, id) {
 #' @title Get Glyph Type
 #'
 #' @description Query the type of a glyph
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_relabel
 #'
@@ -92,6 +95,7 @@ l_glyph_getType <- function(widget, id) {
 #' @title The primitive glyphs available to a scatterplot or graph display
 #'
 #' @description Returns a vector of the available primitive glyphs.
+#' @family glyph functions
 #'
 #'
 #' @details The scatterplot and graph displays both have the n-dimensional state
@@ -145,6 +149,7 @@ l_primitiveGlyphs <- function() {
 #'
 #' @description Generic method for adding user-defined glyphs. See details for
 #'   more information about non-primitive and primitive glyphs.
+#' @family glyph functions
 #'
 #' @template param_widget
 #' @param type object used for method dispatch
@@ -235,6 +240,7 @@ l_glyph_add <- function(widget, type, ...) {
 #'
 #' @description Generic function to write new glyph types using loon's primitive
 #'   glyphs
+#' @family glyph functions
 #'
 #' @template param_widget
 #' @param type loon-native non-primitive glyph type, one of \code{'text'},
@@ -259,6 +265,7 @@ l_glyph_add.default <- function(widget, type, label="", ...) {
 #' @title Add a Text Glyph
 #'
 #' @description Each text glyph can be a multiline string.
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_add.default
 #' @param text the text strings for each observartion. If the object is a factor
@@ -285,6 +292,7 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
 #'
 #' @description Pointrange glyphs show a filled circle at the x-y location and
 #'   also a y-range.
+#' @family glyph functions
 #'
 #' @inheritParams l_glyph_add.default
 #' @param ymin vector with lower y-yalue of the point range.
@@ -310,6 +318,7 @@ l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, showArea = T
 #' @title Add a Polygon Glyph
 #'
 #' @description Add one polygon per scatterplot point.
+#' @family glyph functions
 #'
 #' @details A polygon can be a useful point glyph to visualize arbitrary shapes
 #'   such as airplanes, animals and shapes that are not available in the
@@ -381,6 +390,7 @@ l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, labe
 #' @description Serialaxes glyph show either a star glyph or a parralel
 #'   coordinate glyph for each point.
 #'
+#' @family glyph functions
 #' @inheritParams l_glyph_add.default
 #' @inheritParams l_serialaxes
 #' @param linewidth linewidth of outline

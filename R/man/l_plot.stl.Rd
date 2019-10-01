@@ -2,38 +2,41 @@
 % Please edit documentation in R/l_plot_stl.R
 \name{l_plot.stl}
 \alias{l_plot.stl}
-\title{l_plot method for seasonally decomposed by loess time series objects (i.e. via stl)}
+\title{The \code{l_plot} methods for seasonally decomposed by loess time series objects (i.e. via stl)}
 \usage{
-\method{l_plot}{stl}(x, y = NULL, pcolor = NULL, size = 1,
-  lcolor = NULL, linewidth = 1, xlabels = NULL, ylabels = NULL,
-  title = NULL, tk_title = NULL, linkingGroup = NULL,
+\method{l_plot}{stl}(x, y = NULL, xlabel = NULL, ylabel = NULL,
+  title = NULL, tk_title = NULL, color = NULL, size = 1,
+  lcolor = NULL, linewidth = 1, linkingGroup = NULL,
   showScales = TRUE, showGuides = TRUE, showLabels = TRUE, ...)
 }
 \arguments{
 \item{x}{an \code{stl} object}
 
-\item{y}{NULL, ignored}
+\item{y}{\code{NULL}, ignored}
 
-\item{pcolor}{points colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
+\item{xlabel}{the labels for the x axes.  This is a length four character vector one for each: of the original
+time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if \code{NULL}, \code{xlabel} is "time".}
 
-\item{size}{points size of all time series. Default value is 1.}
+\item{ylabel}{the labels for the vertical axes.  This is a length four character vector one for each: of the original
+time series, the trend component, the seasonality component, and the remainder. If \code{NULL}, the default,
+\code{ylabel} will be \code{c("data", "trend", "seasonality", "remainder")}; if a character vector of length 1, the label is repeated four times.}
 
-\item{lcolor}{line colour of all time series. If NULL (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
-
-\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
-
-\item{xlabels}{the labels for the x axes: a length four character vector for each of the original 
-time series, trend, seasonality and remainder. If \code{NULL}, xlabels is created as "time".}
-
-\item{ylabels}{the labels for the vertical axes: a length four character vector for each of the original 
-time series, trend, seasonality and remainder. If \code{NULL}, ylabels is created based on the information provided.}
-
-\item{title}{an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".}
+\item{title}{an overall title for the entire display. If \code{NULL} (the default),
+the title will be "Seasonal Trend Analysis".}
 
 \item{tk_title}{provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.}
 
+\item{color}{points colour of all time series.
+If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.}
+
+\item{size}{points size of all time series. Default value is 1.}
+
+\item{lcolor}{line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
+
+\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
+
 \item{linkingGroup}{name of linking group.
-If NULL, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
+If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
 
 \item{showScales}{a logical as to whether to display the scales on all axes, default is TRUE.}
 
@@ -48,7 +51,7 @@ A structure of class \code{"l_ts"} containing four loon plots each representing 
 by name: "original", "trend", "seasonal", and "remainder".
 }
 \description{
-a generic function for creating a decomposed time series plot based on 
+Creates a decomposed time series plot based on
 objects of class \code{stl}
 }
 \examples{
@@ -61,3 +64,13 @@ names(p$seasonal)
 # which can be set
 p$seasonal['color'] <- "steelblue"
 }
+\seealso{
+Other time series decomposition plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot_ts}}
+
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.default}},
+  \code{\link{l_plot.density}}, \code{\link{l_plot}}
+}
+\concept{time series decomposition plotting functions}
+\concept{two-dimensional plotting functions}

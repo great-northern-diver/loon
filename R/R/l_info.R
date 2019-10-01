@@ -1,6 +1,6 @@
 
 #' @title Retrieve Information about the States of a Loon Widget
-#'
+#' @family loon interactive states
 #' @description Loon's built-in object documentation. Can be used with every
 #'   loon object that has plot states including plots, layers, navigators,
 #'   contexts.  This is a generic function.

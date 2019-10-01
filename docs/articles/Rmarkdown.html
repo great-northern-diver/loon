@@ -13,8 +13,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Loon in RMarkdown">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
@@ -102,6 +103,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -120,38 +122,38 @@
 <h1 class="hasAnchor">
 <a href="#loon-plots" class="anchor"></a>Loon plots</h1>
 <p>Start by accessing <code>loon</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(loon)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)</span></code></pre></div>
 <p>Plots in <code>loon</code> are dynamic and interactive. Their display contents can be changed either through direct manipulation and the loon inspector, or programmatically. To interact with them programmatically (including transferring them to <code>grid</code> graphics objects), it is best to assign them to a variable at creation.</p>
 <p>For example,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">color =</span> iris<span class="op">$</span>Species, 
-    <span class="dt">xlabel =</span> <span class="st">"sepal width"</span>, <span class="dt">ylabel =</span> <span class="st">"sepal length"</span>, <span class="dt">title =</span> <span class="st">"The famous Iris data"</span>, 
-    <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">color =</span> iris<span class="op">$</span>Species, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="dt">xlabel =</span> <span class="st">"sepal width"</span>, <span class="dt">ylabel =</span> <span class="st">"sepal length"</span>, <span class="dt">title =</span> <span class="st">"The famous Iris data"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <div id="just-plot-the-loon-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#just-plot-the-loon-plot" class="anchor"></a>Just <code>plot</code> the <code>loon</code> plot!</h2>
-<p>This can now be printed and embedded in the document at any time using the <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code> function as in</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p)</code></pre></div>
+<p>This can now be printed and embedded in the document at any time using the <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code> function as in</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>gp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p)</span></code></pre></div>
 <p><img src="Rmarkdown_files/figure-html/plot%20l_plot-1.png" width="60%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gp</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>gp</span></code></pre></div>
 <pre><code>## gTree[GRID.gTree.1]</code></pre>
-<p>In addition to displaying the plot as a <code>grid</code> graphic, the value of <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot(p)</a></code> is saved by setting it to the variable <code>gp</code>. The value is a very rich data structure (a <code>gtree</code>) which can now be used as any other <code>grid</code> graphics object (or <code>grob</code>). Note that the display could have been suppressed at this time simply as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gp &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
-gp</code></pre></div>
+<p>In addition to displaying the plot as a <code>grid</code> graphic, the value of <code><a href="https://rdrr.io/r/graphics/plot.html">plot(p)</a></code> is saved by setting it to the variable <code>gp</code>. The value is a very rich data structure (a <code>gtree</code>) which can now be used as any other <code>grid</code> graphics object (or <code>grob</code>). Note that the display could have been suppressed at this time simply as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>gp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>gp</span></code></pre></div>
 <pre><code>## gTree[GRID.gTree.2]</code></pre>
-<p>Either way, <code>gp</code> is a <code>grid</code> data structure that can be manipulated as any other <code>grob</code>. Try <code><a href="https://www.rdocumentation.org/packages/grid/topics/grid.ls">grid::grid.ls(gp)</a></code> or in RStudio <code><a href="https://www.rdocumentation.org/packages/utils/topics/View">View(gp)</a></code> to examine the full data structure.</p>
+<p>Either way, <code>gp</code> is a <code>grid</code> data structure that can be manipulated as any other <code>grob</code>. Try <code><a href="https://rdrr.io/r/grid/grid.ls.html">grid::grid.ls(gp)</a></code> or in RStudio <code><a href="https://rdrr.io/r/utils/View.html">View(gp)</a></code> to examine the full data structure.</p>
 <p>See <code>plot.loon</code>, <code>grid.loon</code>, and <code>loonGrob</code> for more details on transferring a <code>loon</code> plot to a <code>grid</code> graphics object.</p>
 </div>
 <div id="exporting-to-an-image-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exporting-to-an-image-file" class="anchor"></a>Exporting to an image file</h2>
-<p>Being a <code>grid</code> graphics object, <code>gp</code> could also be exported to an image file of some kind using any of a variety of graphics devices (e.g. see <code><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">?png</a></code>) or perhaps via RStudio’s “Export” plot functionality (to a “png” or “pdf” format).</p>
-<p>For example, we could save <code>gp</code> as a “.png” file by drawing it using the <code><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png()</a></code> device and <code><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw()</a></code> from the <code>grid</code> graphics package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot1.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)
-grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(gp)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()</code></pre></div>
-<p>The plot is now saved as a “png” file “loonplot1.png” in the “images” sub-directory of the current directory “.” (you could save it into any existing directory you choose and for which you have write privileges). Alternatively, if <code>gp</code> was not saved then <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot(p)</a></code> could have been used in place of the <code><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid::grid.draw(gp)</a></code> line above.</p>
-<p>Once saved, this external image can be embedded in the document using <code><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">knitr::include_graphics()</a></code> as</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="st">"images/loonplot1.png"</span>)</code></pre></div>
+<p>Being a <code>grid</code> graphics object, <code>gp</code> could also be exported to an image file of some kind using any of a variety of graphics devices (e.g. see <code><a href="https://rdrr.io/r/grDevices/png.html">?png</a></code>) or perhaps via RStudio’s “Export” plot functionality (to a “png” or “pdf” format).</p>
+<p>For example, we could save <code>gp</code> as a “.png” file by drawing it using the <code><a href="https://rdrr.io/r/grDevices/png.html">png()</a></code> device and <code><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw()</a></code> from the <code>grid</code> graphics package.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot1.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>grid<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>(gp)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</span></code></pre></div>
+<p>The plot is now saved as a “png” file “loonplot1.png” in the “images” sub-directory of the current directory “.” (you could save it into any existing directory you choose and for which you have write privileges). Alternatively, if <code>gp</code> was not saved then <code><a href="https://rdrr.io/r/graphics/plot.html">plot(p)</a></code> could have been used in place of the <code><a href="https://rdrr.io/r/grid/grid.draw.html">grid::grid.draw(gp)</a></code> line above.</p>
+<p>Once saved, this external image can be embedded in the document using <code><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">knitr::include_graphics()</a></code> as</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="st">"images/loonplot1.png"</span>)</span></code></pre></div>
 <p><img src="images/loonRmarkdown/loonplot1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>which will look slightly different because of the transfer of the grid graphic to “png”</p>
 Instead of <code>knitr</code>, the same result (at least for <code>pdf</code> output documents) could be produced using the command <code>\includegraphics</code> from the LaTeX package <code>graphicx</code>.
@@ -165,37 +167,37 @@ Instead of <code>knitr</code>, the same result (at least for <code>pdf</code> ou
 <a href="#reading-in-previously-saved-states" class="anchor"></a>Reading in previously saved states</h2>
 <p>We could also just save the relevant display states from one loon plot as an <code>R</code> data set (in an <code>RDS</code> file). This is done using the function <code><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS()</a></code>.</p>
 <p>Suppose, for example, suppose the previously constructed <code>p</code> contains valuable information in its display. We could save its states (<code><a href="../reference/l_info_states.html">l_info_states()</a></code>) as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Having determined the colours you could save them (and other</span>
-<span class="co"># states) in a file of your choice, here some tempfile:</span>
-myFileName &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>(<span class="st">"myPlot"</span>, <span class="dt">fileext =</span> <span class="st">".rds"</span>)
-
-<span class="co"># We could save all of the 'usual' states (excludes certain</span>
-<span class="co"># 'basic' states, see help(l_saveStatesRDS))</span>
-<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">file =</span> myFileName)
-
-<span class="co"># Or simply save selected named states as an RDS</span>
-<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">states =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>), <span class="dt">file =</span> myFileName)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Having determined the colours you could save them (and other</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># states) in a file of your choice, here some tempfile:</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>myFileName &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="st">"myPlot"</span>, <span class="dt">fileext =</span> <span class="st">".rds"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># We could save all of the 'usual' states (excludes certain</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># 'basic' states, see help(l_saveStatesRDS))</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">file =</span> myFileName)</span>
+<span id="cb10-8"><a href="#cb10-8"></a></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co"># Or simply save selected named states as an RDS</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">states =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>), <span class="dt">file =</span> myFileName)</span></code></pre></div>
 <p>Having saved the desired states (not in a temporary file as above, but in some more permanent file), they can be retrieved later and used on a new plot (say in <code>RMarkdown</code>) to set the new plot’s values to those previously determined interactively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We have a new plot (or two)</span>
-p_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(iris, <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)
-h_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(iris<span class="op">$</span>Sepal.Width, <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>, <span class="dt">yshows =</span> <span class="st">"density"</span>, 
-    <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># And read the saved data back in using R's readRDS() function</span>
-p_saved_info &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">readRDS</a></span>(myFileName)
-<span class="co"># which is an object of class</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">class</a></span>(p_saved_info)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># We have a new plot (or two)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>p_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(iris, <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>h_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(iris<span class="op">$</span>Sepal.Width, <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>, <span class="dt">yshows =</span> <span class="st">"density"</span>, </span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co"># And read the saved data back in using R's readRDS() function</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>p_saved_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(myFileName)</span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co"># which is an object of class</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="kw"><a href="https://rdrr.io/r/base/class.html">class</a></span>(p_saved_info)</span></code></pre></div>
 <pre><code>## [1] "l_savedStates"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The values on p_saved_info can now be all set using</span>
-<span class="co"># l_copyStates()</span>
-<span class="kw"><a href="../reference/l_copyStates.html">l_copyStates</a></span>(<span class="dt">source =</span> p_saved_info, <span class="dt">target =</span> p_new)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># The values on p_saved_info can now be all set using</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># l_copyStates()</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw"><a href="../reference/l_copyStates.html">l_copyStates</a></span>(<span class="dt">source =</span> p_saved_info, <span class="dt">target =</span> p_new)</span></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or selectively and even from different classes of loon plots</span>
-h_new[<span class="st">"color"</span>] &lt;-<span class="st"> </span>p_saved_info<span class="op">$</span>color</code></pre></div>
-<p>Having assigned the saved states to the new plots, the new plots can be presented in the <code>Rmarkdown</code> document via <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p_new)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># or selectively and even from different classes of loon plots</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>h_new[<span class="st">"color"</span>] &lt;-<span class="st"> </span>p_saved_info<span class="op">$</span>color</span></code></pre></div>
+<p>Having assigned the saved states to the new plots, the new plots can be presented in the <code>Rmarkdown</code> document via <code><a href="https://rdrr.io/r/graphics/plot.html">plot()</a></code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p_new)</span></code></pre></div>
 <p><img src="Rmarkdown_files/figure-html/plot%20the%20saved%20states-1.png" width="50%" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(h_new)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(h_new)</span></code></pre></div>
 <p><img src="Rmarkdown_files/figure-html/plot%20the%20saved%20histogram-1.png" width="50%" style="display: block; margin: auto;"></p>
 </div>
 <div id="multiple-views-of-a-loon-plot" class="section level2">
@@ -206,72 +208,72 @@ h_new[<span class="st">"color"</span>] &lt;-<span class="st"> </span>p_saved_inf
 <div id="plots-from-programmatic-manipulation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plots-from-programmatic-manipulation" class="anchor"></a>Plots from programmatic manipulation</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">saveTitle &lt;-<span class="st"> </span>p[<span class="st">"title"</span>]
-
-p[<span class="st">"title"</span>] &lt;-<span class="st"> "1. Setosa selected"</span>
-p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> "setosa"</span>
-gp_select &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
-
-p[<span class="st">"title"</span>] &lt;-<span class="st"> "2. Scale to the selected points"</span>
-<span class="kw"><a href="../reference/l_scaleto_selected.html">l_scaleto_selected</a></span>(p)
-gp_select_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
-
-p[<span class="st">"title"</span>] &lt;-<span class="st"> "3. Turn off selection"</span>
-p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span><span class="ot">FALSE</span>
-gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
-
-<span class="co"># Put the plot back to how it was originally</span>
-p[<span class="st">"title"</span>] &lt;-<span class="st"> </span>saveTitle
-<span class="kw"><a href="../reference/l_scaleto_plot.html">l_scaleto_plot</a></span>(p)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>saveTitle &lt;-<span class="st"> </span>p[<span class="st">"title"</span>]</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>p[<span class="st">"title"</span>] &lt;-<span class="st"> "1. Setosa selected"</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> "setosa"</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>gp_select &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a></span>
+<span id="cb18-7"><a href="#cb18-7"></a>p[<span class="st">"title"</span>] &lt;-<span class="st"> "2. Scale to the selected points"</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="kw"><a href="../reference/l_scaleto_selected.html">l_scaleto_selected</a></span>(p)</span>
+<span id="cb18-9"><a href="#cb18-9"></a>gp_select_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a>p[<span class="st">"title"</span>] &lt;-<span class="st"> "3. Turn off selection"</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span><span class="ot">FALSE</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a>gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb18-14"><a href="#cb18-14"></a></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co"># Put the plot back to how it was originally</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>p[<span class="st">"title"</span>] &lt;-<span class="st"> </span>saveTitle</span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="kw"><a href="../reference/l_scaleto_plot.html">l_scaleto_plot</a></span>(p)</span></code></pre></div>
 <p>We now have three more “snapshots” of our interaction with the <code>loon</code> plot <code>p</code>.</p>
 <p>We can now use the <code>gridExtra</code> package to arrange these in a single display.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gridExtra)
-<span class="co"># which can now be arranged in sequence</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange</a></span>(gp, gp_select, gp_select_zoom, gp_setosa_zoom)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gridExtra)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># which can now be arranged in sequence</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span>(gp, gp_select, gp_select_zoom, gp_setosa_zoom)</span></code></pre></div>
 <p><img src="Rmarkdown_files/figure-html/gridExtra%20multiple%20loon%20plots-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div id="plots-from-saved-exported-images" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plots-from-saved-exported-images" class="anchor"></a>Plots from saved exported images</h3>
 <p>Alternatively, all plots might have been developed through direct manipulation.<br>
-Any time a snapshot of the current plot is desired, it is simply turned to a <code>grid</code> object via <code><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot(p)</a></code> and saved as an external images (e.g. say as a <code>png</code> file) through the <code><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png()</a></code> device, or the perhaps via RStudio’s export as “png” files. (N.B. Here we do it programmatically only to save the files.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot2.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)
-grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(gp_select)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot3.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)
-grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(gp_select_zoom)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot4.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)
-grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.draw">grid.draw</a></span>(gp_setosa_zoom)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()</code></pre></div>
+Any time a snapshot of the current plot is desired, it is simply turned to a <code>grid</code> object via <code><a href="https://rdrr.io/r/graphics/plot.html">plot(p)</a></code> and saved as an external images (e.g. say as a <code>png</code> file) through the <code><a href="https://rdrr.io/r/grDevices/png.html">png()</a></code> device, or the perhaps via RStudio’s export as “png” files. (N.B. Here we do it programmatically only to save the files.)</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot2.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>grid<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>(gp_select)</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot3.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)</span>
+<span id="cb20-5"><a href="#cb20-5"></a>grid<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>(gp_select_zoom)</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="dt">filename =</span> <span class="st">"images/loonplot4.png"</span>, <span class="dt">width =</span> <span class="dv">600</span>, <span class="dt">height =</span> <span class="dv">500</span>)</span>
+<span id="cb20-8"><a href="#cb20-8"></a>grid<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>(gp_setosa_zoom)</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</span></code></pre></div>
 <p>For example, had the previous plots been saved as <code>"loonplot2.png"</code>, <code>"loonplot3.png"</code>, and <code>"loonplot4.png"</code> then <code>knitr</code> could produce them in sequence as before but now using <code>fig.show = "hold"</code> in the header for the following <code>R</code> segment:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot1.png"</span>)
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot2.png"</span>)
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot3.png"</span>)
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot4.png"</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot1.png"</span>))
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot2.png"</span>))
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot3.png"</span>))
-knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/include_graphics">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot4.png"</span>))</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot1.png"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot2.png"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot3.png"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="st">"images/loonplot4.png"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot1.png"</span>))</span>
+<span id="cb22-2"><a href="#cb22-2"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot2.png"</span>))</span>
+<span id="cb22-3"><a href="#cb22-3"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot3.png"</span>))</span>
+<span id="cb22-4"><a href="#cb22-4"></a>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span>(<span class="dt">path =</span> <span class="kw">path_concat</span>(imageDirectory, <span class="st">"loonplot4.png"</span>))</span></code></pre></div>
 <p><img src="images/loonRmarkdown/loonplot1.png" width="60%" style="display: block; margin: auto;"><img src="images/loonRmarkdown/loonplot2.png" width="60%" style="display: block; margin: auto;"><img src="images/loonRmarkdown/loonplot3.png" width="60%" style="display: block; margin: auto;"><img src="images/loonRmarkdown/loonplot4.png" width="60%" style="display: block; margin: auto;"></p>
-<p>More layout control is available using <code>grid</code> graphics functions <code><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster()</a></code> and <code><a href="https://www.rdocumentation.org/packages/grid/topics/grid.raster">rasterGrob()</a></code>, the function <code><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange()</a></code> from the <code>gridExtra</code> package, and <code><a href="https://www.rdocumentation.org/packages/png/topics/readPNG">readPNG()</a></code> from the <code>png</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grid)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gridExtra)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(png)
-
-img &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/png/topics/readPNG">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot1.png"</span>))
-gp &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.raster">rasterGrob</a></span>(img)
-
-img &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/png/topics/readPNG">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot2.png"</span>))
-gp_select &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.raster">rasterGrob</a></span>(img)
-
-img &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/png/topics/readPNG">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot3.png"</span>))
-gp_select_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.raster">rasterGrob</a></span>(img)
-
-img &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/as.raster">as.raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/png/topics/readPNG">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot4.png"</span>))
-gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/grid.raster">rasterGrob</a></span>(img)
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob">grid.arrange</a></span>(gp, gp_select, gp_select_zoom, gp_setosa_zoom)</code></pre></div>
+<p>More layout control is available using <code>grid</code> graphics functions <code><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster()</a></code> and <code><a href="https://rdrr.io/r/grid/grid.raster.html">rasterGrob()</a></code>, the function <code><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange()</a></code> from the <code>gridExtra</code> package, and <code><a href="https://rdrr.io/pkg/png/man/readPNG.html">readPNG()</a></code> from the <code>png</code> package.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(grid)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gridExtra)</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(png)</span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a>img &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/png/man/readPNG.html">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot1.png"</span>))</span>
+<span id="cb23-6"><a href="#cb23-6"></a>gp &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grid/grid.raster.html">rasterGrob</a></span>(img)</span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>img &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/png/man/readPNG.html">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot2.png"</span>))</span>
+<span id="cb23-9"><a href="#cb23-9"></a>gp_select &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grid/grid.raster.html">rasterGrob</a></span>(img)</span>
+<span id="cb23-10"><a href="#cb23-10"></a></span>
+<span id="cb23-11"><a href="#cb23-11"></a>img &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/png/man/readPNG.html">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot3.png"</span>))</span>
+<span id="cb23-12"><a href="#cb23-12"></a>gp_select_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grid/grid.raster.html">rasterGrob</a></span>(img)</span>
+<span id="cb23-13"><a href="#cb23-13"></a></span>
+<span id="cb23-14"><a href="#cb23-14"></a>img &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grDevices/as.raster.html">as.raster</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/png/man/readPNG.html">readPNG</a></span>(<span class="dt">source =</span> <span class="st">"images/loonplot4.png"</span>))</span>
+<span id="cb23-15"><a href="#cb23-15"></a>gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/grid/grid.raster.html">rasterGrob</a></span>(img)</span>
+<span id="cb23-16"><a href="#cb23-16"></a></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="kw"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span>(gp, gp_select, gp_select_zoom, gp_setosa_zoom)</span></code></pre></div>
 <p><img src="Rmarkdown_files/figure-html/real%20grid%20raster%20funs%20and%20png%20package-1.png" width="100%" style="display: block; margin: auto;"> Alternatively, LaTeX commands (like <code>tabular</code> layouts) could be used lay out the images.</p>
 <p>See also <code>ggsave</code> in <code>grid</code>.</p>
 </div>
@@ -280,6 +282,7 @@ gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://w
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -299,17 +302,20 @@ gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://w
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Adrian Waddell, R. Wayne Oldford.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

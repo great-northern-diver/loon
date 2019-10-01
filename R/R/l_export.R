@@ -14,7 +14,6 @@
 #' @param width image width in pixels
 #' @param height image height in pixels
 #'
-#'
 #' @details Note that the \code{CTRL-P} key combination opens a dialog to export
 #'   the graphic.
 #'
@@ -95,7 +94,7 @@ filetypes <- list(
 exportImageDialog <- function(widget) {
 
     fm <- l_export_valid_formats()
-    formats <- fm[-which(fm=='jpeg')]
+    formats <- fm[fm != "jpeg"]
     fnames <- vapply(formats, function(x)filetypes[[x]], character(1))
 
     types <- ""

@@ -2,37 +2,46 @@
 % Please edit documentation in R/l_plot_density.R
 \name{l_plot.density}
 \alias{l_plot.density}
-\title{Loon methods for Kernel Density Estimation}
+\title{The \code{l_plot} method for \code{density} objects.}
 \usage{
-\method{l_plot}{density}(x, y = NULL, ylabel = NULL, xlabel = NULL,
+\method{l_plot}{density}(x, y = NULL, xlabel = NULL, ylabel = NULL,
   title = NULL, linewidth = 2, color = NULL, size = 0.5, ...)
 }
 \arguments{
 \item{x}{a \code{density} object}
 
-\item{y}{NULL .  This argument is ignored.}
+\item{y}{\code{NULL},  ignored.}
 
-\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created 
-based on the combination of data name and "density".}
-
-\item{xlabel}{the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created 
+\item{xlabel}{the graphical parameter xlabel labelling the x axis of the plot. If \code{NULL} (the default), an xlabel is created
 based on the information available from the \code{density} objects.}
+
+\item{ylabel}{the graphical parameter ylabel labelling the y axis of the plot. If \code{NULL} (the default), an ylabel is created
+based on the combination of data name and "density".}
 
 \item{title}{providing a title for the plot. If \code{NULL} (the default), the title will be the call which produced the result.}
 
 \item{linewidth}{line width, default value is 2.}
 
-\item{color}{line colour.  If NULL (the default) colour will be taken from \code{l_getOption("foreground")}.}
+\item{color}{line colour.  If \code{NULL} (the default) colour will be taken from \code{l_getOption("foreground")}.}
 
 \item{size}{points size, default value is 0.5}
 
 \item{...}{named arguments being states passed to l_plot()}
 }
 \description{
-The loon plot method for \code{density} objects.
+Creates an loon plot displaying contours
+             of the supplied (kernel) density estimate
 }
 \examples{
 ds <- density(faithful$eruptions)
 p <- l_plot(ds, color = "steelblue")
 
 }
+\seealso{
+\code{\link{l_layer.density}}
+
+Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
+  \code{\link{l_plot.default}}, \code{\link{l_plot.stl}},
+  \code{\link{l_plot}}
+}
+\concept{two-dimensional plotting functions}

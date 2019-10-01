@@ -1,12 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>histogram - loon</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loon</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <div id="title">
@@ -81,25 +89,22 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">histogram - loon</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#histogram">Histogram</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
 </ul>
-</div>
+</nav>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_hist").className += " selected";
     setLearnUrl("display_hist");
 }
 </script>
-
-<div class="figure">
-<img src="images/display_histogram.png" title="loon histogram" />
-</div>
+<p><img src="images/display_histogram.png" title="loon histogram" /></p>
 <pre><code>namespace import loon::*
 # extract variables
 dict for {name value} $loon::data::olive {set $name $value}
@@ -110,28 +115,26 @@ set h [histogram -x $oleic -xlabel oleic]</code></pre>
 <h1 id="histogram">Histogram</h1>
 <ul>
 <li><p>Get the state names with</p>
-<pre><code>set states [$h info states]
-dict keys $states</code></pre></li>
+<pre><code>  set states [$h info states]
+  dict keys $states</code></pre></li>
 <li><p>Query a state, say <code>showBinHandle</code>, as follows</p>
-<pre><code>$h cget -showBinHandle</code></pre></li>
+<pre><code>  $h cget -showBinHandle</code></pre></li>
 <li><p>Change a state, say again <code>showBinHandle</code>, as follows</p>
-<pre><code>$h configure -showBinHandle FALSE</code></pre></li>
+<pre><code>  $h configure -showBinHandle FALSE</code></pre></li>
 <li><p>When creating a plot you may specify any state at plot creation</p>
-<pre><code>set h1 [histogram -x $oleic, -showBinHandle FALSE\
-    -yshows density -color $Area -showStackedColors TRUE]</code></pre></li>
+<pre><code>  set h1 [histogram -x $oleic, -showBinHandle FALSE\
+      -yshows density -color $Area -showStackedColors TRUE]</code></pre></li>
 <li><p>details on a state, say <code>showBinHandle</code>, is easily had with</p>
-<pre><code>set states [$h info states]
-dict get $states showBinHandle</code></pre>
+<pre><code>  set states [$h info states]
+  dict get $states showBinHandle</code></pre>
 <p>and a particular field</p>
-<pre><code>dict get $states showBinHandle description</code></pre></li>
+<pre><code>  dict get $states showBinHandle description</code></pre></li>
 </ul>
 <h1 id="good-to-know">Good To Know</h1>
 <ul>
 <li><p>When changing <code>yshows</code> to <code>frequency</code> or <code>density</code> per command line, you probably have to re-scale the plot as the y ranges of the histogram visualization changes</p>
-<pre><code>$h scaleto world </code></pre></li>
-</ul>
-<p>When changing <code>yshows</code> via the inspector the rescaling happens automatically.</p>
-<ul>
+<pre><code>  $h scaleto world </code></pre>
+<p>When changing <code>yshows</code> via the inspector the rescaling happens automatically.</p></li>
 <li><p>When changing the bin handles when <code>yshows</code> is <code>density</code> the histogram is re-scaled every time the bin handle changes.</p></li>
 <li><p>The histogram display supports <a href="learn_Tcl_layer.html">layers</a>.</p></li>
 </ul>

@@ -10,7 +10,7 @@
 	set id "noinit"
 
 	set ns [info object namespace $Layerobj]
-	set type_var [uplevel #0 ${ns}::my varname type]
+	set type_var [uplevel #0 [list ${ns}::my varname type]]
 	
 	next $Layerobj {*}$args	
     }

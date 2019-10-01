@@ -1,12 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>learn loon</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>loon</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <div id="title">
@@ -59,10 +67,10 @@ document.getElementById("learn_R").className += " selected";
 var language = "R";
 </script>
 </div>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">learn loon</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#installation">Installation</a></li>
@@ -71,11 +79,10 @@ var language = "R";
 <li><a href="#re-creating-object-handles">Re-creating Object Handles</a></li>
 <li><a href="#a-couple-of-notes">A Couple of Notes</a></li>
 </ul>
-</div>
+</nav>
 <script type="text/javascript">
 document.getElementById("learn_intro").className += " selected";
 </script>
-
 <h1 id="introduction">Introduction</h1>
 <!--
 
@@ -83,7 +90,6 @@ document.getElementById("learn_intro").className += " selected";
 package which is hosted on `CRAN`.</div> 
 
 -->
-
 <p><code>loon</code> is written in <code>Tcl</code> and <code>Tk</code>, and the <code>loon</code> <code>R</code> package provides a thin layer of <code>R</code> code to embed <code>loon</code> into the <code>R</code> environment.. <code>Tcl</code> is a programming language and <code>Tk</code> is a GUI toolkit written as an extension for <code>Tcl</code>.</p>
 <p>Knowledge of <code>Tcl</code> and <code>Tk</code> are not required to use <code>loon</code> in <code>R</code>. However, a basic understanding of <code>Tcl</code> and <code>Tk</code> helps to appreciate certain API design decisions and, it also helps to follow some advanced topics such as event bindings and widget layout with geometry management. Hence, you may read <a href="learn_R_tcltk.html">our short overview of <code>tcltk</code> <code>R</code> package</a>.</p>
 <p>If your knowledge of <code>R</code> is generally basic, then consider reading the slides from the <a href="http://adrian.waddell.ch/RforEcon/">R introduction course</a> written by Adrian Waddell.</p>
@@ -106,13 +112,13 @@ p[&#39;color&#39;]
 
 # Modify a plot state
 p[&#39;size&#39;] &lt;- iris$Petal.Length</code></pre>
-<p>The user interfaces of <code>loon</code>'s displays are explained in the <a href="UI.html">UI section</a>.</p>
+<p>The user interfaces of <code>loon</code>’s displays are explained in the <a href="UI.html">UI section</a>.</p>
 <h1 id="package-demos">Package Demos</h1>
 <p>The <code>loon</code> <code>R</code> package comes with many demos that show how to use particular parts of the <code>loon</code> API. See,</p>
 <pre class="notrun"><code>demo(package = &quot;loon&quot;)</code></pre>
 <p>Run a particular demo as follows</p>
 <pre class="notrun"><code>demo(&quot;l_us_and_them_choropleth&quot;)</code></pre>
-<p>To get the location of the source code of a particular demo (e.g. <code>l_us_and_them_choropleth</code>) use</p>
+<p>To get the location of the source code of a particular demo (e.g. <code>l_us_and_them_choropleth</code>) use</p>
 <pre class="notrun"><code>system.file(&quot;demo&quot;, &quot;l_us_and_them_choropleth.R&quot;, package = &quot;loon&quot;)</code></pre>
 <h1 id="re-creating-object-handles">Re-creating Object Handles</h1>
 <p>It is possible to re-create any <code>loon</code> object handle in an <code>R</code> session. That is, handles for displays, layers, glyphs, navigators and context handles can be created with the widget path name and the appropriate ids. The object handle can then be used with the methods <code>[</code> and <code>[&lt;-</code> to access and modify states. For example, for a display with the widget path name <code>.l1.hist</code> one can create a <code>loon</code> plot handle as follows</p>
@@ -136,20 +142,20 @@ l_configure(c(&#39;.l1.hist&#39;, &#39;layer23&#39;), color=&#39;green&#39;)</co
 l_configure(c(&#39;.l4.graph&#39;, &#39;navigator1&#39;, &#39;context0&#39;), command=&#39;&#39;)</code></pre>
 <p>The re-creation of object handles is useful when, for example, an object handle is lost or overwritten.</p>
 <h1 id="a-couple-of-notes">A Couple of Notes</h1>
-<p><code>loon</code>'s <code>l_plot</code> and <code>l_hist</code> functions are similar to use as <code>R</code>'s base graphic function <code>plot</code>. This is because we use the <code>R</code> function <code>xy.coords</code> to extract the coordinates from <code>x</code> and <code>y</code>. For example for</p>
+<p><code>loon</code>’s <code>l_plot</code> and <code>l_hist</code> functions are similar to use as <code>R</code>’s base graphic function <code>plot</code>. This is because we use the <code>R</code> function <code>xy.coords</code> to extract the coordinates from <code>x</code> and <code>y</code>. For example for</p>
 <pre><code>l_plot(c(1,2,3), c(4,2,4), cex=c(4,1,8), col=c(&#39;red&#39;,&#39;blue&#39;,&#39;yellow&#39;))
 with(mtcars, l_plot(hp ~ wt))</code></pre>
-<p>the <code>l_plot</code> function call could be replaced with <code>plot</code> for non-interactive equivalents using <code>R</code>'s base graphics. Note that <code>loon</code> will generate warnings if you use some base <code>R</code> graphics argument names instead of <code>loon</code>'s state names (e.g. <code>col</code> vs <code>color</code> or <code>lwd</code> vs <code>linewidth</code>).</p>
+<p>the <code>l_plot</code> function call could be replaced with <code>plot</code> for non-interactive equivalents using <code>R</code>’s base graphics. Note that <code>loon</code> will generate warnings if you use some base <code>R</code> graphics argument names instead of <code>loon</code>’s state names (e.g. <code>col</code> vs <code>color</code> or <code>lwd</code> vs <code>linewidth</code>).</p>
 <p>Also,</p>
 <ul>
 <li><p>Note that in <code>l_plot</code> the arguments <code>x</code> and <code>y</code> are the only arguments that are allowed to be unnamed. All other arguments must be named. See <code>args(l_plot)</code>.</p></li>
 <li><p>For <code>loon</code> plots, the arguments <code>cex</code>, <code>col</code>, <code>xlab</code>, <code>ylab</code> and <code>lwd</code> get always internally changed to <code>size</code>, <code>color</code>, <code>xlabel</code>, <code>ylabel</code> and <code>linewidth</code>, respectively. We recommend to use the long version as they represent the plot state names.</p></li>
 <li><p>To save a <code>loon</code> plot use the <code>l_export</code> function. For any format other than <code>ps</code> and <code>pdf</code> you need the <code>Img</code> <code>Tcl</code> package to be loaded.</p></li>
-<li><p>Note that in <code>R</code> consecutive <code>plot</code> calls write their output to the same device (e.g. window), but in <code>loon</code> consecutive <code>l_plot</code> calls will open a new window for each call. If an existing <code>loon</code> plot should be modified use the <code>l_configure</code> function with an <code>x</code> and/or <code>y</code> argument. For example,</p>
-<pre><code>p &lt;- l_plot(iris[,1:2], color=iris$Species, showScales=TRUE)
-l_configure(p, x=mtcars$hp, y=mtcars$mpg, color=mtcars$gear,
-    ylabel=&#39;Gross horsepower&#39;, ylabel=&#39;Miles/(US) gallon&#39;)
-l_scaleto_world(p)</code></pre></li>
+<li><p>Note that in <code>R</code> consecutive <code>plot</code> calls write their output to the same device (e.g. window), but in <code>loon</code> consecutive <code>l_plot</code> calls will open a new window for each call. If an existing <code>loon</code> plot should be modified use the <code>l_configure</code> function with an <code>x</code> and/or <code>y</code> argument. For example,</p>
+<pre><code>  p &lt;- l_plot(iris[,1:2], color=iris$Species, showScales=TRUE)
+  l_configure(p, x=mtcars$hp, y=mtcars$mpg, color=mtcars$gear,
+      ylabel=&#39;Gross horsepower&#39;, ylabel=&#39;Miles/(US) gallon&#39;)
+  l_scaleto_world(p)</code></pre></li>
 </ul>
 </body>
 </html>

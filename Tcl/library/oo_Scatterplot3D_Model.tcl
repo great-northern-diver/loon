@@ -21,6 +21,7 @@
         my New_state rotate3DY double 1 0
         my New_state rotationOriginZ double 1 0.0
         my New_state axesCoords nested_double 3 { {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} }
+        my New_state axisScaleFactor double 1 1
         
         my SetStateDescription z "z coordinates"
         my SetStateDescription zlabel "z axis label"
@@ -34,6 +35,8 @@
             "depth component of rotation origin"
         my SetStateDescription axesCoords \
             "Stores the projections of the original x-, y- and z-axes to allow drawing the axis visual"
+        my SetStateDescription axisScaleFactor \
+            "Factor by which to scale the axis indicators"
 
         my AddLayer model "scatterplot"\
             [::loon::classes::ScatterplotLayer new [self]] root 0 "Scatterplot"
@@ -48,6 +51,11 @@
     method getAxesCoords {} {
         my variable axesCoords
         return $axesCoords
+    }
+    
+    method getAxisScaleFactor {} {
+        my variable axisScaleFactor
+        return $axisScaleFactor
     }
     
     method EvalConfigure {} {

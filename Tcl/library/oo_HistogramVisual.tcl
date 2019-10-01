@@ -20,7 +20,7 @@
 	
 	foreach state {count bins binwidth origin color colorStackingOrder\
 			   showOutlines showStackedColors showBinHandle colorFill colorOutline} {
-	    set ${state}_var [uplevel #0 ${modelns}::my varname $state]
+	    set ${state}_var [uplevel #0 [list ${modelns}::my varname $state]]
 	}
 	
 	next $Layerobj {*}$args
@@ -215,7 +215,7 @@
 			    continue
 			}
 			set newcount [expr {$previousCount + $count}]
-			uplevel #0 [$canvas coords [dict get $vals $col]\
+			uplevel #0 [list $canvas coords [dict get $vals $col]\
 					[$map mapDxy2Scoords $xrange\
 					     [list $previousCount $newcount]]]
 			
@@ -224,12 +224,12 @@
 		    
 		}
 	    } else {
-		uplevel #0 [$canvas coords [dict get $vals allFill] $coordsAll]
+		uplevel #0 [list $canvas coords [dict get $vals allFill] $coordsAll]
 		
 		set count_selected  [dict get $bins bin $id count selected]
 		
 		if {$count_selected > 0} {
-		    uplevel #0 [$canvas coords [dict get $vals selected]\
+		    uplevel #0 [list $canvas coords [dict get $vals selected]\
 				    [$map mapDxy2Scoords $xrange\
 					 [list 0 $count_selected]]]
 		}
@@ -240,7 +240,7 @@
 	    
 	
 	    if {$showOutlines} {
-		uplevel #0 [$canvas coords [dict get $vals allOutline] $coordsAll]
+		uplevel #0 [list $canvas coords [dict get $vals allOutline] $coordsAll]
 	    }
 	}
 

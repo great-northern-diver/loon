@@ -39,3 +39,9 @@ l_info_states(l)
 h <- l_hist(iris$Sepal.Length, linkingGroup="iris")
 l_info_states(h)
 }
+\seealso{
+Other loon interactive states: \code{\link{l_plot.default}},
+  \code{\link{l_plot}}, \code{\link{l_state_names}},
+  \code{\link{names.loon}}
+}
+\concept{loon interactive states}

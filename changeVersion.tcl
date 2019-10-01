@@ -50,17 +50,17 @@ set pattern [format "s/loon_\%s\\.tar\\.gz/loon_%s\\.tar\\.gz/g"\
 		 [regsub -all -- \\. $newVersion \\.]]
 
 # Change in website beta
-# exec sed -i $pattern website/md/beta.md
+# exec sed $pattern website/md/beta.md > website/md/beta.md
 
 # Change in Makefile
-exec sed -i $pattern Makefile
+exec sed -i .bak $pattern Makefile
 
 
 # Change in makePkgIndex.tcl
-exec cd Tcl
-exec sed -i $pattern makePkgIndex.tcl
-exec ./makePkgIndex.tcl
-exec cd ..
+cd Tcl
+exec sed -i .bak s/$oldVersion/$newVersion/g makePkgIndex.tcl
+exec tclsh makePkgIndex.tcl
+cd ..
 
 puts "\n\n DIFF on affected files\n ===================== \n\n"
 
