@@ -4,13 +4,22 @@
 \alias{l_plot_ts}
 \title{Draw a decomposed time series loon plot}
 \usage{
-l_plot_ts(x, xlabel = NULL, ylabel = NULL, title = NULL,
-  tk_title = NULL, color = NULL, size = 1, lcolor = NULL,
-  linewidth = 1, linkingGroup = NULL, showScales = TRUE,
-  showGuides = TRUE, showLabels = TRUE, ...)
+l_plot_ts(x, color = NULL, size = 1, lcolor = NULL, linewidth = 1,
+  xlabel = NULL, ylabel = NULL, title = NULL, tk_title = NULL,
+  linkingGroup = NULL, showScales = TRUE, showGuides = TRUE,
+  showLabels = TRUE, ...)
 }
 \arguments{
 \item{x}{Either an \code{stl} object or a \code{decomposed.ts} object.}
+
+\item{color}{points colour of all time series.
+If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.}
+
+\item{size}{points size of all time series. Default value is 1.}
+
+\item{lcolor}{line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
+
+\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
 
 \item{xlabel}{the labels for the x axes.  This is a length four character vector one for each: of the original
 time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if \code{NULL}, \code{xlabel} is "time".}
@@ -22,15 +31,6 @@ time series, the trend component, the seasonality component, and the remainder. 
 \item{title}{an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".}
 
 \item{tk_title}{provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.}
-
-\item{color}{points colour of all time series.
-If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.}
-
-\item{size}{points size of all time series. Default value is 1.}
-
-\item{lcolor}{line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
-
-\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
 
 \item{linkingGroup}{name of linking group.
 If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
