@@ -23,7 +23,6 @@ before_install:
   - R -q -e 'BiocManager::install("Rgraphviz")'
   - R -q -e 'BiocManager::install("graph")'
 
-
 cache: packages
 
 r:
