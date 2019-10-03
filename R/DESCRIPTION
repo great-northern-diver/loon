@@ -20,7 +20,7 @@ URL: http://great-northern-diver.github.io/loon/
 Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2
 Depends:
-    R (>= 3.4.0),
+    R (>= 3.6.0),
     methods,
     tcltk
 Imports:
