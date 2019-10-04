@@ -24,6 +24,5 @@ cache: packages
 
 r:
   - release
-  - devel
   - bioc-devel
 
