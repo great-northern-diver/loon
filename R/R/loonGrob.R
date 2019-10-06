@@ -51,7 +51,7 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' @return invisible()
 #'
 #'
-#' @seealso \code{\link{loonGrob}}, \code{\link{grid.loon}}
+#' @seealso \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{l_export}}
 #'
 #' @examples
 #'
@@ -316,11 +316,13 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                   fontface = titleFont$face
                         ),
                         vjust = .5)
+
   gTree(
     children = gList(
       rectGrob(gp = gpar(col = NA,
-                         fill = as_hex6color(widget['background'])),
-               name = "bounding box") ,
+                         fill = as_hex6color(widget['background']),
+                         alpha = background_alpha(widget['background'])),
+               name = "bounding box"),
       gTree(
         children = gList(
           gTree(children = gList(xlabelGrob,
@@ -1341,4 +1343,9 @@ condGrob <- function (test = TRUE,
                        " arguments"),
          ...)
   }
+}
+
+
+background_alpha <- function(x) {
+  ifelse(x == "#999999999999", 0, 1)
 }
