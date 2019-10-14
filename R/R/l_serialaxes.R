@@ -7,7 +7,7 @@
 #' @param data a data frame with numerical data only
 #' @param sequence vector with variable names that defines the axes sequence
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
-#'   how the data is scaled. See Details for more information
+#'   how the data is scaled. See Details and Examples for more information.
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
 #' @param showAxes boolean to indicate whether axes should be shown or not
 #' @template param_parent
@@ -146,7 +146,7 @@
 #'                        linkingGroup = "irisFlowers data")
 #'
 #' #
-#' #  scaling = "none
+#' #  scaling = "none"
 #' #
 #' #  Sometimes we might wish to choose a min and max to use
 #' #  for the whole data set; or perhaps a separate min and max
