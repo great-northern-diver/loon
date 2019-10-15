@@ -107,9 +107,9 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="loon-" class="section level2">
+<div id="loon" class="section level2">
 <h2 class="hasAnchor">
-<a href="#loon-" class="anchor"></a>loon <img src="reference/figures/logo.png" align="right" width="120">
+<a href="#loon" class="anchor"></a>loon <img src="reference/figures/logo.png" align="right" width="120">
 </h2>
 
 <p>loon is an extendible interactive data visualization system designed for exploratory visualization.</p>
@@ -121,34 +121,34 @@
 <a href="#web-documentation" class="anchor"></a>Web Documentation</h2>
 <p>In addition to the <code>R</code> package documentation we also have both <code>TCL</code> and <code>R</code> documentation <a href="http://great-northern-diver.github.io/loon/l_help/">here</a>.</p>
 <p>Once in R, these are accessible from loon as</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Combined TCL and R documentation (a learning document)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="reference/l_help.html">l_help</a></span>()</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># R only manual</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw"><a href="reference/l_web.html">l_web</a></span>()</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw"><a href="reference/l_web.html">l_web</a></span>(<span class="dt">directory =</span> <span class="st">"articles"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># R system documentation</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="dt">package =</span> loon<span class="st">")</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="st">vignette(package = "</span>loon<span class="st">")</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="st">demo(package = "</span>loon<span class="st">")</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Combined TCL and R documentation (a learning document)</span>
+<span class="kw"><a href="reference/l_help.html">l_help</a></span>()
+
+<span class="co"># R only manual</span>
+<span class="kw"><a href="reference/l_web.html">l_web</a></span>()
+
+<span class="kw"><a href="reference/l_web.html">l_web</a></span>(<span class="dt">directory =</span> <span class="st">"articles"</span>)
+
+<span class="co"># R system documentation</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="dt">package =</span> loon<span class="st">")</span>
+
+<span class="st">vignette(package = "</span>loon<span class="st">")</span>
+
+<span class="st">demo(package = "</span>loon<span class="st">")</span></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The interactive graphics in loon are written on TCL, accessible to R via the tcltk R package. Be sure to have a version of R that includes Tcl/Tk 8.6.6 (which happens by default but might be missing if you have a custom R build).</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># The easiest way to install loon</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"loon"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># You could also install the latest development release directly from GitHub</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Or, to ensure you have the vignettes as well </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># (  also accessible via l_web(directory = "articles")  )</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>, </span>
-<span id="cb2-9"><a href="#cb2-9"></a>                         <span class="dt">build_opts =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-resave-data"</span>) )</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The easiest way to install loon</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"loon"</span>)
+
+<span class="co"># You could also install the latest development release directly from GitHub</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>)
+<span class="co"># Or, to ensure you have the vignettes as well </span>
+<span class="co"># (  also accessible via l_web(directory = "articles")  )</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"great-northern-diver/loon"</span>, <span class="dt">subdir =</span> <span class="st">"R"</span>, 
+                         <span class="dt">build_opts =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"--no-resave-data"</span>) )</code></pre></div>
 <div id="other-usageinstallation-notes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-usageinstallation-notes" class="anchor"></a>Other Usage/Installation notes</h3>
@@ -174,18 +174,18 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p>Once loon is installed, work your way through the introductory vignette:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># from the vignette in R</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"introduction"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># or via the web</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw"><a href="reference/l_web.html">l_web</a></span>(<span class="st">"introduction"</span>, <span class="dt">directory =</span> <span class="st">"articles"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)
+<span class="co">#</span>
+<span class="co"># from the vignette in R</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"introduction"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)
+<span class="co">#</span>
+<span class="co"># or via the web</span>
+<span class="kw"><a href="reference/l_web.html">l_web</a></span>(<span class="st">"introduction"</span>, <span class="dt">directory =</span> <span class="st">"articles"</span>)</code></pre></div>
 </div>
 <div id="on-the-name" class="section level2">
 <h2 class="hasAnchor">
 <a href="#on-the-name" class="anchor"></a>On the name</h2>
-<p>The software is named after a large aquatic bird known as the <a href="https://en.wikipedia.org/wiki/Common_loon"><strong>common loon</strong></a> in Canada and the United States, or the <strong>great northern diver</strong> in the United Kingdom. (Hence the name of the github organization: <a href="https://github.com/great-northern-diver">https://github.com/great-northern-diver</a>)</p>
+<p>The software is named after a large aquatic bird known as the <a href="https://en.wikipedia.org/wiki/Common_loon"><strong>common loon</strong></a> in Canada and the United States, or the <strong>great northern diver</strong> in the United Kingdom. (Hence the name of the github organization: <a href="https://github.com/great-northern-diver" class="uri">https://github.com/great-northern-diver</a>)</p>
 <p>The loon is a visual predator, diving deep beneath the surface, there chasing its prey with speed and remarkable maneuvrability. Once apprehended, the prey are either swallowed immediately or, when large, at least brought to the surface to be dealt with there.</p>
 <p>This seemed an excellent metaphor for an agile, interactive, and exploratory visualization system; one which empowered an analyst to chase, and perhaps discover, whatever features might be revealed in the data by quickly diving below its surface. The goal is to provide such a system in loon.</p>
 <p>As an acronym “loon” does not fare so well (<strong>l</strong>east <strong>o</strong>bvious <strong>o</strong>stensive <strong>n</strong>ame) and perhaps its synonym “diver” would be better (<strong>d</strong>irect <strong>i</strong>nteractive <strong>v</strong>isual <strong>e</strong>xploration in <strong>R</strong>). But, then, “loon” is funnier … <strong>diveR</strong> will be the name of a collection of “loon” related packages.</p>
@@ -235,7 +235,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

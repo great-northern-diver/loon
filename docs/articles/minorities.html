@@ -110,7 +110,7 @@
       <h1>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-09-10</h4>
+            <h4 class="date">2019-10-08</h4>
       
       
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -122,7 +122,7 @@
 <div id="illustrates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#illustrates" class="anchor"></a>Illustrates:</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)</code></pre></div>
 <ol style="list-style-type: decimal">
 <li>linked histograms and scatterplots</li>
 <li>interactive maps as scatterplots</li>
@@ -136,9 +136,9 @@
 <a href="#the-minority-data" class="anchor"></a>The <code>minority</code> data</h1>
 <p>Here we look at a brief exploratory analysis of some Statistics Canada data on the distribution of “visible minorities” within 33 Canadian cities. All descriptions of minorities are taken from Statistics Canada (though shortened here sometimes to aid the displays).</p>
 <p>The data are part of the <code>loon</code> package and can be accessed through the <code><a href="https://rdrr.io/r/utils/data.html">data(...)</a></code> command.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(minority)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(minority)</code></pre></div>
 <p>The data are arranged as a <code>data.frame</code> of <code>nrow(minority) =</code> 33 Canadian cities with <code>ncol(minority) =</code> 18 measurements on each. The first 14 variates are Statistics Canada census numbers of people according to a declared <code>visible minority</code> together with the population of that <code>city</code>. The possibilities are</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority)[<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority)[<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>]</code></pre></div>
 <pre><code>##  [1] "Arab"                                   
 ##  [2] "Black"                                  
 ##  [3] "Chinese"                                
@@ -265,15 +265,15 @@
 <h2 class="hasAnchor">
 <a href="#populations" class="anchor"></a>Populations</h2>
 <p>We first look at the populations of the different cities:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a> hTotPop &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span> (minority,   <span class="co">## Using the "with" function</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>                              <span class="co">## makes for easier reading</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>                  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(Total.population,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>                         <span class="dt">title =</span> <span class="st">"33 Canadian cities"</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>                          ) </span>
-<span id="cb5-6"><a href="#cb5-6"></a>                  )</span>
-<span id="cb5-7"><a href="#cb5-7"></a>                  <span class="co">## Save the histogram structure </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>                  <span class="co">## to work with later from the </span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>                  <span class="co">## command line</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> hTotPop &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span> (minority,   ## Using the "with" function
+                              ## makes for easier reading
+                  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(Total.population,
+                         <span class="dt">title =</span> <span class="st">"33 Canadian cities"</span>
+                          ) 
+                  )
+                  ## Save the histogram structure 
+                  ## to work with later from the 
+                  ## command line</code></pre></div>
 <p>The distribution of the <code>Total.population</code> is skewed with a heavy right tail. Most Canadian cities have a relatively small population. A few cities, one in particular, has a relatively large population.</p>
 <p>Note, that this histogram has very little in the way of annotation. This can be changed interactively by making various selections in the loon inspector. Try a few of these out and observe the results in the histogram. You may also make some selections in the histogram itself. Holding the shift key down while making a selection results in a “sticky” selection that allows multiple items to be selected.</p>
 <p><strong>Exercise:</strong> Check the show <code>stacked colors</code> box in order to see the bar colours. Select the two histogram bars corresponding to the three most populous cities. Change the colour of these cities to some different colour selected from the <code>Modify</code> section. Select the <code>none</code> button to unhighlight the bars and reveal the modified colour.</p>
@@ -282,58 +282,58 @@
 <h2 class="hasAnchor">
 <a href="#percentages" class="anchor"></a>Percentages</h2>
 <p>Given that population totals vary so much, it might be more meaningful to look at each visible minority as its percentage of the city’s population.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#  Reduce the minority data to percents of the total population</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#  in each city.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a>minorityPercent &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">"Total.population"</span>])</span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#  Take the opportunity to shorten the Statistics Canada </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#  names of the minorities as well:</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"% Arabic"</span>,  <span class="st">"% Black"</span>, <span class="st">"% Chinese"</span>,  </span>
-<span id="cb6-10"><a href="#cb6-10"></a>                            <span class="st">"% Filipino"</span>, <span class="st">"% Japanese"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11"></a>                            <span class="st">"% Korean"</span>,  <span class="st">"% Latino"</span>, <span class="st">"% Multiple"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12"></a>                            <span class="st">"% S. Asian"</span>,  <span class="st">"% SE Asian"</span>,  <span class="st">"% Other"</span>,</span>
-<span id="cb6-13"><a href="#cb6-13"></a>                            <span class="st">"% Minority"</span>, <span class="st">"% W Asian"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  Reduce the minority data to percents of the total population</span>
+<span class="co">#  in each city.</span>
+<span class="co">#</span>
+
+minorityPercent &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dv">100</span><span class="op">*</span>minority[,<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">12</span><span class="op">:</span><span class="dv">14</span>)]<span class="op">/</span>minority[,<span class="st">"Total.population"</span>])
+
+<span class="co">#  Take the opportunity to shorten the Statistics Canada </span>
+<span class="co">#  names of the minorities as well:</span>
+<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minorityPercent) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"% Arabic"</span>,  <span class="st">"% Black"</span>, <span class="st">"% Chinese"</span>,  
+                            <span class="st">"% Filipino"</span>, <span class="st">"% Japanese"</span>,
+                            <span class="st">"% Korean"</span>,  <span class="st">"% Latino"</span>, <span class="st">"% Multiple"</span>,
+                            <span class="st">"% S. Asian"</span>,  <span class="st">"% SE Asian"</span>,  <span class="st">"% Other"</span>,
+                            <span class="st">"% Minority"</span>, <span class="st">"% W Asian"</span>)</code></pre></div>
 <p>We begin by looking at the total visibility minority percentage. Again a histogram is drawn, this time though many of its display values are specified at creation. Note that the <code>linkingGroup</code> is specified to be the string <code>"minority"</code>. This could have been any string – it merely identifies that this histogram will have its display linked with any other plot in the same <code>linkingGroup</code> .</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># The proportion of the city population that is a "visible minority"</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent<span class="op">$</span><span class="st">"% Minority"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>       <span class="dt">title =</span> <span class="st">"% Minority in 33 Canadian cities"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>       <span class="dt">xlabel =</span> <span class="st">"percent of population"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6"></a>       <span class="dt">yshows =</span> <span class="st">"frequency"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>       <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>       <span class="dt">showGuides =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb7-9"><a href="#cb7-9"></a>       <span class="dt">showScales =</span> <span class="ot">TRUE</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The proportion of the city population that is a "visible minority"</span>
+<span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent<span class="op">$</span><span class="st">"% Minority"</span>,
+       <span class="dt">title =</span> <span class="st">"% Minority in 33 Canadian cities"</span>,
+       <span class="dt">xlabel =</span> <span class="st">"percent of population"</span>,
+       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+       <span class="dt">yshows =</span> <span class="st">"frequency"</span>,
+       <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>,
+       <span class="dt">showGuides =</span> <span class="ot">TRUE</span>,
+       <span class="dt">showScales =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <p>As can be seen, the visible minority population most of these cities is less than 20% of its total population. But for two cities nearly half of the population is from some visible minority.</p>
 <p>One might hypothesize that these two cities are the largest two. To test this we add the first histogram to the <code>linkingGroup</code> of the second. This can be done from the loon inspector for the total population histogram or programmatically from the command line as</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../reference/l_configure.html">l_configure</a></span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>, <span class="dt">sync =</span> <span class="st">"push"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_configure.html">l_configure</a></span>(hTotPop, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>, <span class="dt">sync =</span> <span class="st">"push"</span>)</code></pre></div>
 <p>In either case the displays must be synchronized (<code>sync</code>) within the group. Here we choose to <code>push</code> the linked elements of the total population histogram <code>hTotPop</code> out to the other members of the group. Checking the show <code>stacked colors</code> in both histograms will reveal their shared colours. Alternatively, use selection on each histogram.</p>
 <p>As can be seen from the linked histograms, the two largest cities are not the two cities with the largest percentage of visible minorities. And conversely, the two cities having the largest visible minorities are not the two largest cities. However, selecting the largest of either will show through the linked displays that it is also the largest of the other. Less than 20% of the second largest city are visible minority.</p>
 <div id="largest-visible-minorities" class="section level3">
 <h3 class="hasAnchor">
 <a href="#largest-visible-minorities" class="anchor"></a>Largest visible minorities</h3>
 <p>It might be interesting to begin by looking at the percent visible minority in each city for the top three (say) visible minorities (in total):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Now show the same for the three minority groups</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># having largest percentages (in decreasing order):</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>groups &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minorityPercent)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]</span>
-<span id="cb9-4"><a href="#cb9-4"></a>largest3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(minorityPercent[,groups ],</span>
-<span id="cb9-5"><a href="#cb9-5"></a>                             <span class="dv">2</span>, max),</span>
-<span id="cb9-6"><a href="#cb9-6"></a>                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb9-7"><a href="#cb9-7"></a>                  )[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now show the same for the three minority groups</span>
+<span class="co"># having largest percentages (in decreasing order):</span>
+groups &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minorityPercent)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">15</span>)]
+largest3 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(minorityPercent[,groups ],
+                             <span class="dv">2</span>, max),
+                       <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+                  )[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
 <p>and plot histograms of them</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># And now plot them</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="cf">for</span> (x <span class="cf">in</span> largest3) {</span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent[,x],</span>
-<span id="cb10-4"><a href="#cb10-4"></a>         <span class="dt">title =</span> x,</span>
-<span id="cb10-5"><a href="#cb10-5"></a>         <span class="dt">xlabel=</span><span class="st">"percent of population"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6"></a>         <span class="dt">linkingGroup=</span><span class="st">"minority"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7"></a>         <span class="dt">showScales=</span><span class="ot">TRUE</span>,</span>
-<span id="cb10-8"><a href="#cb10-8"></a>         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>         )</span>
-<span id="cb10-11"><a href="#cb10-11"></a>}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And now plot them</span>
+<span class="cf">for</span> (x <span class="cf">in</span> largest3) {
+  <span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(minorityPercent[,x],
+         <span class="dt">title =</span> x,
+         <span class="dt">xlabel=</span><span class="st">"percent of population"</span>,
+         <span class="dt">linkingGroup=</span><span class="st">"minority"</span>,
+         <span class="dt">showScales=</span><span class="ot">TRUE</span>,
+         <span class="dt">showGuides=</span><span class="ot">TRUE</span>,
+         <span class="dt">showStackedColors =</span><span class="ot">TRUE</span>
+         )
+}</code></pre></div>
 <p>In decreasing order the largest three visible minorities <code>Chinese</code>, <code>South Asian</code>, and <code>Black</code>.</p>
 <p>Looking at the <code>% Chinese</code> histogram one city has nearly 20% of its population being <code>Chinese</code>. It is the third largest city in the country.<br>
 In contrast, the city with the greatest proportion of its population being <code>South Asian</code> (more than 15%) is one of the smallest of the 33 Canadian cities. Finally, the city having the largest percentage of <code>Black</code> inhabitants is the largest one.</p>
@@ -346,31 +346,31 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#interactive-maps" class="anchor"></a>Interactive maps</h2>
 <p>We again use the data from the <code>maps</code> package but now create an interactive map by using Loon’s facility for layering various geometric objects (including map polygons) on top of a scatterplot.</p>
 <p>The map construction begins with a scatterplot of the cities located by their longitude and latitude. The coordinates of the polygons that make up the map of Canada (from the <code>maps</code> package) are <em>layered</em> on top of the scatterplot.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p_map &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(minority,</span>
-<span id="cb11-2"><a href="#cb11-2"></a>              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>                     <span class="dt">xlabel =</span> <span class="st">"longitude"</span>, <span class="dt">ylabel =</span> <span class="st">"latitude"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>                     <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5"></a>                     <span class="dt">itemLabel =</span> <span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority),</span>
-<span id="cb11-6"><a href="#cb11-6"></a>                     <span class="dt">showLabels =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb11-7"><a href="#cb11-7"></a>     )</span>
-<span id="cb11-8"><a href="#cb11-8"></a></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co"># Add the map of Canada</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(maps)</span>
-<span id="cb11-11"><a href="#cb11-11"></a>landcol &lt;-<span class="st"> "cornsilk"</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>canada &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map, </span>
-<span id="cb11-13"><a href="#cb11-13"></a>                  <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world"</span>, <span class="st">"Canada"</span>, </span>
-<span id="cb11-14"><a href="#cb11-14"></a>                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </span>
-<span id="cb11-15"><a href="#cb11-15"></a>                  <span class="dt">label =</span> <span class="st">"Canada"</span>,</span>
-<span id="cb11-16"><a href="#cb11-16"></a>                  <span class="dt">color =</span> landcol,</span>
-<span id="cb11-17"><a href="#cb11-17"></a>                  <span class="dt">index=</span><span class="st">"end"</span>)</span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co"># Rescale the plot to the size of the map</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="kw"><a href="../reference/l_scaleto_layer.html">l_scaleto_layer</a></span>(p_map, canada)</span>
-<span id="cb11-20"><a href="#cb11-20"></a></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co"># Could also add the text of the city names to the map</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co"># as glyphs</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="kw"><a href="../reference/l_glyph_add_text.html">l_glyph_add_text</a></span>(p_map,</span>
-<span id="cb11-24"><a href="#cb11-24"></a>                 <span class="dt">text=</span><span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(minority),</span>
-<span id="cb11-25"><a href="#cb11-25"></a>                 <span class="dt">label=</span><span class="st">"city names"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_map &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(minority,
+              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat,
+                     <span class="dt">xlabel =</span> <span class="st">"longitude"</span>, <span class="dt">ylabel =</span> <span class="st">"latitude"</span>,
+                     <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                     <span class="dt">itemLabel =</span> <span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority),
+                     <span class="dt">showLabels =</span> <span class="ot">TRUE</span>)
+     )
+
+<span class="co"># Add the map of Canada</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(maps)
+landcol &lt;-<span class="st"> "cornsilk"</span>
+canada &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map, 
+                  <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world"</span>, <span class="st">"Canada"</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                  <span class="dt">label =</span> <span class="st">"Canada"</span>,
+                  <span class="dt">color =</span> landcol,
+                  <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Rescale the plot to the size of the map</span>
+<span class="kw"><a href="../reference/l_scaleto_layer.html">l_scaleto_layer</a></span>(p_map, canada)
+
+<span class="co"># Could also add the text of the city names to the map</span>
+<span class="co"># as glyphs</span>
+<span class="kw"><a href="../reference/l_glyph_add_text.html">l_glyph_add_text</a></span>(p_map,
+                 <span class="dt">text=</span><span class="kw"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span>(minority),
+                 <span class="dt">label=</span><span class="st">"city names"</span>)</code></pre></div>
 <p>The map is now ready to be used in analysis. It is part of the same linking group as the histograms so selecting bars in any histogram will highlight the corresponding cities on the map. These may be <strong>identified</strong> by holding the mouse over any point in the map (provided <code>glyphs: itemlabels</code> is checked).</p>
 <p>Alternatively, the filled circle <code>glyph</code> for any city in the map can be replaced by the name of the city (since the last <code>R</code> statement above added these to the map). To <strong>change the glyph</strong>, first select the intended cities in the map then in the modification section at the bottom of the loon inspector select <code>city names</code> from the glyph menu (next to a <code>set</code> button). Clicking on the <code>set</code> button will change the glyph of all selected cities to a text string of their name. The glyph can be changed back by selecting the same points and then clicking on the filled circle glyph.</p>
 <p>Note the map may be <strong>zoomed</strong> in on using scrolling and <strong>panned</strong> over directly on the map. Alternatively, the <strong>world view</strong> in the loon inspector may be used in the same way – dragging the scaled box around can be especially convenient. To get the map back to its original position and scale, click on the <code>scale to world</code> button in the <code>Plot</code> section of the loon inspector.</p>
@@ -381,187 +381,187 @@ In contrast, the city with the greatest proportion of its population being <code
 <h3 class="hasAnchor">
 <a href="#more-sophisticated-maps---multiple-layers" class="anchor"></a>More sophisticated maps - multiple layers</h3>
 <p>Here we illustrate loon’s capacity for building and manipulating layers by adding the lakes to the map of Canada. While this is certainly unnecessary in the present analysis, it could be of value in other analyses (and produces nicer interactive maps).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>lakecol &lt;-<span class="st"> "steelblue"</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># Get the coordinates from the lakes database in the maps package.</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># All lakes are recorded by name, so you will need to know which</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># are in Canada.  You either know the names, or you might have to</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># use trial and error, plotting the lakes and seeing which are inside</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># and which are outside the country.  If the database changes,</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co"># the indices below will need updating.</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#  </span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co"># First, we'll deal with the Great Lakes:</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>great.lakes &lt;-<span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb12-12"><a href="#cb12-12"></a>                    <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb12-13"><a href="#cb12-13"></a>                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]</span>
-<span id="cb12-14"><a href="#cb12-14"></a></span>
-<span id="cb12-15"><a href="#cb12-15"></a></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="co"># We can layer these directly</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>great.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb12-18"><a href="#cb12-18"></a>                              <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, great.lakes, </span>
-<span id="cb12-19"><a href="#cb12-19"></a>                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </span>
-<span id="cb12-20"><a href="#cb12-20"></a>                              <span class="dt">label =</span> <span class="st">"Great Lakes Water"</span>,</span>
-<span id="cb12-21"><a href="#cb12-21"></a>                              <span class="dt">color =</span> lakecol,</span>
-<span id="cb12-22"><a href="#cb12-22"></a>                              <span class="dt">index=</span><span class="st">"end"</span>    <span class="co"># Add the layer at the end so we know</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>                                             <span class="co"># where it is</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a>                              )</span>
-<span id="cb12-25"><a href="#cb12-25"></a></span>
-<span id="cb12-26"><a href="#cb12-26"></a><span class="co"># Move the lake layer up to be above the land map</span></span>
-<span id="cb12-27"><a href="#cb12-27"></a><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.layer)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lakecol &lt;-<span class="st"> "steelblue"</span>
+
+<span class="co"># Get the coordinates from the lakes database in the maps package.</span>
+<span class="co"># All lakes are recorded by name, so you will need to know which</span>
+<span class="co"># are in Canada.  You either know the names, or you might have to</span>
+<span class="co"># use trial and error, plotting the lakes and seeing which are inside</span>
+<span class="co"># and which are outside the country.  If the database changes,</span>
+<span class="co"># the indices below will need updating.</span>
+<span class="co">#  </span>
+<span class="co"># First, we'll deal with the Great Lakes:</span>
+great.lakes &lt;-<span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">27</span>)]
+
+
+<span class="co"># We can layer these directly</span>
+great.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                              <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, great.lakes, 
+                                  <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                              <span class="dt">label =</span> <span class="st">"Great Lakes Water"</span>,
+                              <span class="dt">color =</span> lakecol,
+                              <span class="dt">index=</span><span class="st">"end"</span>    <span class="co"># Add the layer at the end so we know</span>
+                                             <span class="co"># where it is</span>
+                              )
+
+<span class="co"># Move the lake layer up to be above the land map</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.layer)</code></pre></div>
 <p>We can also add the islands back in. This is a good example of grouping different layers together into a single “group layer”.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># </span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># Great Lakes islands</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Unnamed islands are identified by a number added to the lake name</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># in which they appear</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a></span>
-<span id="cb13-7"><a href="#cb13-7"></a>uscolor &lt;-<span class="st"> "grey50"</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb13-9"><a href="#cb13-9"></a>                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb13-10"><a href="#cb13-10"></a>                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, </span>
-<span id="cb13-11"><a href="#cb13-11"></a>                                                 <span class="dv">45</span><span class="op">:</span><span class="dv">52</span>,<span class="dv">54</span>,</span>
-<span id="cb13-12"><a href="#cb13-12"></a>                                                 <span class="dv">55</span>, <span class="dv">59</span>,</span>
-<span id="cb13-13"><a href="#cb13-13"></a>                                                 <span class="dv">61</span><span class="op">:</span><span class="dv">63</span>)]</span>
-<span id="cb13-14"><a href="#cb13-14"></a></span>
-<span id="cb13-15"><a href="#cb13-15"></a>great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb13-16"><a href="#cb13-16"></a>                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb13-17"><a href="#cb13-17"></a>                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, </span>
-<span id="cb13-18"><a href="#cb13-18"></a>                                                 <span class="dv">53</span>,<span class="dv">56</span><span class="op">:</span><span class="dv">58</span>,</span>
-<span id="cb13-19"><a href="#cb13-19"></a>                                                 <span class="dv">60</span>, <span class="dv">64</span><span class="op">:</span><span class="dv">66</span>)]</span>
-<span id="cb13-20"><a href="#cb13-20"></a></span>
-<span id="cb13-21"><a href="#cb13-21"></a></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="co"># Now for the islands</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a>great.lakes.islands.US.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb13-24"><a href="#cb13-24"></a>                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb13-25"><a href="#cb13-25"></a>                                           great.lakes.islands.US, </span>
-<span id="cb13-26"><a href="#cb13-26"></a>                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </span>
-<span id="cb13-27"><a href="#cb13-27"></a>                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (US)"</span>,</span>
-<span id="cb13-28"><a href="#cb13-28"></a>                                       <span class="dt">color=</span> uscolor,</span>
-<span id="cb13-29"><a href="#cb13-29"></a>                                       <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb13-30"><a href="#cb13-30"></a>                                       )</span>
-<span id="cb13-31"><a href="#cb13-31"></a></span>
-<span id="cb13-32"><a href="#cb13-32"></a>great.lakes.islands.CA.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb13-33"><a href="#cb13-33"></a>                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb13-34"><a href="#cb13-34"></a>                                           great.lakes.islands.CA,</span>
-<span id="cb13-35"><a href="#cb13-35"></a>                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), </span>
-<span id="cb13-36"><a href="#cb13-36"></a>                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (CA)"</span>,</span>
-<span id="cb13-37"><a href="#cb13-37"></a>                                       <span class="dt">color =</span> landcol,</span>
-<span id="cb13-38"><a href="#cb13-38"></a>                                       <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb13-39"><a href="#cb13-39"></a>                                       )</span>
-<span id="cb13-40"><a href="#cb13-40"></a></span>
-<span id="cb13-41"><a href="#cb13-41"></a><span class="co"># We can put the two sets of islands into a group; first create the group</span></span>
-<span id="cb13-42"><a href="#cb13-42"></a>great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </span>
-<span id="cb13-43"><a href="#cb13-43"></a>                                          <span class="dt">label=</span><span class="st">"Great Lakes Islands"</span>, </span>
-<span id="cb13-44"><a href="#cb13-44"></a>                                          <span class="dt">index=</span><span class="st">"end"</span>)</span>
-<span id="cb13-45"><a href="#cb13-45"></a><span class="co"># Because it is immediately below the two sets of islands</span></span>
-<span id="cb13-46"><a href="#cb13-46"></a><span class="co"># (as seen in the "Layers" inspector)</span></span>
-<span id="cb13-47"><a href="#cb13-47"></a><span class="co"># we drop the islands into the group by demoting them</span></span>
-<span id="cb13-48"><a href="#cb13-48"></a><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.CA.layer)</span>
-<span id="cb13-49"><a href="#cb13-49"></a><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.US.layer)</span>
-<span id="cb13-50"><a href="#cb13-50"></a></span>
-<span id="cb13-51"><a href="#cb13-51"></a><span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span></span>
-<span id="cb13-52"><a href="#cb13-52"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.islands.group)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="co"># Great Lakes islands</span>
+<span class="co">#</span>
+<span class="co"># Unnamed islands are identified by a number added to the lake name</span>
+<span class="co"># in which they appear</span>
+
+uscolor &lt;-<span class="st"> "grey50"</span>
+great.lakes.islands.US &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">9</span>, <span class="dv">29</span>,<span class="dv">31</span>, 
+                                                 <span class="dv">45</span><span class="op">:</span><span class="dv">52</span>,<span class="dv">54</span>,
+                                                 <span class="dv">55</span>, <span class="dv">59</span>,
+                                                 <span class="dv">61</span><span class="op">:</span><span class="dv">63</span>)]
+
+great.lakes.islands.CA &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">10</span>, <span class="dv">28</span>,<span class="dv">30</span>, 
+                                                 <span class="dv">53</span>,<span class="dv">56</span><span class="op">:</span><span class="dv">58</span>,
+                                                 <span class="dv">60</span>, <span class="dv">64</span><span class="op">:</span><span class="dv">66</span>)]
+
+
+<span class="co"># Now for the islands</span>
+great.lakes.islands.US.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                           great.lakes.islands.US, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (US)"</span>,
+                                       <span class="dt">color=</span> uscolor,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+great.lakes.islands.CA.layer &lt;-<span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                           great.lakes.islands.CA,
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>), 
+                                       <span class="dt">label =</span> <span class="st">"Great Lakes Islands (CA)"</span>,
+                                       <span class="dt">color =</span> landcol,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+<span class="co"># We can put the two sets of islands into a group; first create the group</span>
+great.lakes.islands.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                          <span class="dt">label=</span><span class="st">"Great Lakes Islands"</span>, 
+                                          <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Because it is immediately below the two sets of islands</span>
+<span class="co"># (as seen in the "Layers" inspector)</span>
+<span class="co"># we drop the islands into the group by demoting them</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.CA.layer)
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.US.layer)
+
+<span class="co"># Move the group layer up (twice now - once above the land, once above the lakes)</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>) <span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.islands.group)</code></pre></div>
 <p>And we can nest groups as well. Here we put the Great Lakes and its islands together into a single group.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">#</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Create a group layer for the great lakes</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># </span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># First create the group layer</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>great.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </span>
-<span id="cb14-6"><a href="#cb14-6"></a>                                   <span class="dt">label=</span><span class="st">"Great Lakes"</span>, </span>
-<span id="cb14-7"><a href="#cb14-7"></a>                                   <span class="dt">index=</span><span class="st">"end"</span>)</span>
-<span id="cb14-8"><a href="#cb14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co"># Move the group up to be next to the great.lakes.layer</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.group)</span>
-<span id="cb14-11"><a href="#cb14-11"></a></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># Demoting the great.lakes.layer puts it inside the group</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.layer)</span>
-<span id="cb14-14"><a href="#cb14-14"></a></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="co"># Now the islands are above the group and can be demoted</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co"># to become part of it.</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.group)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+<span class="co"># Create a group layer for the great lakes</span>
+<span class="co"># </span>
+<span class="co"># First create the group layer</span>
+great.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                   <span class="dt">label=</span><span class="st">"Great Lakes"</span>, 
+                                   <span class="dt">index=</span><span class="st">"end"</span>)
+
+<span class="co"># Move the group up to be next to the great.lakes.layer</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, great.lakes.group)
+
+<span class="co"># Demoting the great.lakes.layer puts it inside the group</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.layer)
+
+<span class="co"># Now the islands are above the group and can be demoted</span>
+<span class="co"># to become part of it.</span>
+<span class="kw"><a href="../reference/l_layer_demote.html">l_layer_demote</a></span>(p_map, great.lakes.islands.group)</code></pre></div>
 <p>For completion we add the remaining lakes and islands.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Now the same for the boundary lakes.</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>other.boundary.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>                            <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb15-4"><a href="#cb15-4"></a>                            <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">33</span>,<span class="dv">80</span>)]</span>
-<span id="cb15-5"><a href="#cb15-5"></a></span>
-<span id="cb15-6"><a href="#cb15-6"></a>other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb15-7"><a href="#cb15-7"></a>                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb15-8"><a href="#cb15-8"></a>                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">81</span>)] </span>
-<span id="cb15-9"><a href="#cb15-9"></a></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># Because we know we are going to group these, we can create the group</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="co"># first.</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="co"># </span></span>
-<span id="cb15-13"><a href="#cb15-13"></a>boundary.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, </span>
-<span id="cb15-14"><a href="#cb15-14"></a>                                      <span class="dt">label=</span><span class="st">"Boundary Lakes"</span>, </span>
-<span id="cb15-15"><a href="#cb15-15"></a>                                      <span class="dt">index=</span><span class="st">"end"</span>)</span>
-<span id="cb15-16"><a href="#cb15-16"></a></span>
-<span id="cb15-17"><a href="#cb15-17"></a><span class="co"># We now add the layers directly to that group using the "parent" </span></span>
-<span id="cb15-18"><a href="#cb15-18"></a><span class="co"># argument at creation time.</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a><span class="co"># </span></span>
-<span id="cb15-20"><a href="#cb15-20"></a><span class="co"># Create the islands first this time.</span></span>
-<span id="cb15-21"><a href="#cb15-21"></a>other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb15-22"><a href="#cb15-22"></a>                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb15-23"><a href="#cb15-23"></a>                                           other.boundary.lakes, </span>
-<span id="cb15-24"><a href="#cb15-24"></a>                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</span>
-<span id="cb15-25"><a href="#cb15-25"></a>                                       <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Water"</span>,</span>
-<span id="cb15-26"><a href="#cb15-26"></a>                                       <span class="dt">color =</span> lakecol,</span>
-<span id="cb15-27"><a href="#cb15-27"></a>                                       <span class="dt">parent =</span> boundary.lakes.group,</span>
-<span id="cb15-28"><a href="#cb15-28"></a>                                       <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb15-29"><a href="#cb15-29"></a>                                       )</span>
-<span id="cb15-30"><a href="#cb15-30"></a></span>
-<span id="cb15-31"><a href="#cb15-31"></a>other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb15-32"><a href="#cb15-32"></a>                                               <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb15-33"><a href="#cb15-33"></a>                                                   other.boundary.lakes.islands,</span>
-<span id="cb15-34"><a href="#cb15-34"></a>                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb15-35"><a href="#cb15-35"></a>                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),</span>
-<span id="cb15-36"><a href="#cb15-36"></a>                                               <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Islands"</span>,</span>
-<span id="cb15-37"><a href="#cb15-37"></a>                                               <span class="dt">color =</span> uscolor,</span>
-<span id="cb15-38"><a href="#cb15-38"></a>                                               <span class="dt">parent =</span> boundary.lakes.group,</span>
-<span id="cb15-39"><a href="#cb15-39"></a>                                               <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb15-40"><a href="#cb15-40"></a>                                               )</span>
-<span id="cb15-41"><a href="#cb15-41"></a></span>
-<span id="cb15-42"><a href="#cb15-42"></a><span class="co"># Move the group layer up</span></span>
-<span id="cb15-43"><a href="#cb15-43"></a><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, boundary.lakes.group)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now the same for the boundary lakes.</span>
+other.boundary.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                            <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                            <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">33</span>,<span class="dv">80</span>)]
+
+other.boundary.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                    <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">81</span>)] 
+
+<span class="co"># Because we know we are going to group these, we can create the group</span>
+<span class="co"># first.</span>
+<span class="co"># </span>
+boundary.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, 
+                                      <span class="dt">label=</span><span class="st">"Boundary Lakes"</span>, 
+                                      <span class="dt">index=</span><span class="st">"end"</span>)
+
+<span class="co"># We now add the layers directly to that group using the "parent" </span>
+<span class="co"># argument at creation time.</span>
+<span class="co"># </span>
+<span class="co"># Create the islands first this time.</span>
+other.boundary.lakes.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                       <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                           other.boundary.lakes, 
+                                           <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                       <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Water"</span>,
+                                       <span class="dt">color =</span> lakecol,
+                                       <span class="dt">parent =</span> boundary.lakes.group,
+                                       <span class="dt">index=</span><span class="st">"end"</span>
+                                       )
+
+other.boundary.lakes.islands.layer &lt;-<span class="st">  </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                               <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                                   other.boundary.lakes.islands,
+                                                   <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                                                   <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                               <span class="dt">label =</span> <span class="st">"Other Boundary Lakes Islands"</span>,
+                                               <span class="dt">color =</span> uscolor,
+                                               <span class="dt">parent =</span> boundary.lakes.group,
+                                               <span class="dt">index=</span><span class="st">"end"</span>
+                                               )
+
+<span class="co"># Move the group layer up</span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, boundary.lakes.group)</code></pre></div>
 <p>And finally, all of the large interior lakes and their islands</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>z</span>
-<span id="cb16-2"><a href="#cb16-2"></a></span>
-<span id="cb16-3"><a href="#cb16-3"></a>interior.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb16-4"><a href="#cb16-4"></a>                      <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb16-5"><a href="#cb16-5"></a>                      <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">22</span>, <span class="dv">25</span>, </span>
-<span id="cb16-6"><a href="#cb16-6"></a>                                         <span class="dv">68</span><span class="op">:</span><span class="dv">73</span>, </span>
-<span id="cb16-7"><a href="#cb16-7"></a>                                         <span class="dv">82</span>, <span class="dv">85</span>)]</span>
-<span id="cb16-8"><a href="#cb16-8"></a></span>
-<span id="cb16-9"><a href="#cb16-9"></a>interior.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb16-10"><a href="#cb16-10"></a>                              <span class="dt">plot=</span><span class="ot">FALSE</span>, </span>
-<span id="cb16-11"><a href="#cb16-11"></a>                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">23</span><span class="op">:</span><span class="dv">24</span>, </span>
-<span id="cb16-12"><a href="#cb16-12"></a>                                                 <span class="dv">26</span>, <span class="dv">74</span>, </span>
-<span id="cb16-13"><a href="#cb16-13"></a>                                                 <span class="dv">83</span><span class="op">:</span><span class="dv">84</span>)]</span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="co"># First the group layer</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a>interior.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, <span class="dt">label=</span><span class="st">"Interior Lakes"</span>, <span class="dt">index=</span><span class="st">"end"</span>)</span>
-<span id="cb16-16"><a href="#cb16-16"></a><span class="co"># Create the interior islands first</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a>interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb16-18"><a href="#cb16-18"></a>                                        <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>,</span>
-<span id="cb16-19"><a href="#cb16-19"></a>                                            interior.lakes.islands,</span>
-<span id="cb16-20"><a href="#cb16-20"></a>                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</span>
-<span id="cb16-21"><a href="#cb16-21"></a>                                        <span class="dt">label =</span> <span class="st">"Interior lakes islands"</span>,</span>
-<span id="cb16-22"><a href="#cb16-22"></a>                                        <span class="dt">color =</span> landcol,</span>
-<span id="cb16-23"><a href="#cb16-23"></a>                                        <span class="dt">parent =</span> interior.lakes.group,</span>
-<span id="cb16-24"><a href="#cb16-24"></a>                                        <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb16-25"><a href="#cb16-25"></a>                                        )</span>
-<span id="cb16-26"><a href="#cb16-26"></a></span>
-<span id="cb16-27"><a href="#cb16-27"></a>interior.lakes.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,</span>
-<span id="cb16-28"><a href="#cb16-28"></a>                                <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, </span>
-<span id="cb16-29"><a href="#cb16-29"></a>                                    interior.lakes, </span>
-<span id="cb16-30"><a href="#cb16-30"></a>                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),</span>
-<span id="cb16-31"><a href="#cb16-31"></a>                                <span class="dt">label =</span> <span class="st">"Interior lakes"</span>,</span>
-<span id="cb16-32"><a href="#cb16-32"></a>                                <span class="dt">color =</span> lakecol,</span>
-<span id="cb16-33"><a href="#cb16-33"></a>                                <span class="dt">parent =</span> interior.lakes.group,</span>
-<span id="cb16-34"><a href="#cb16-34"></a>                                <span class="dt">index=</span><span class="st">"end"</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a>                                )</span>
-<span id="cb16-36"><a href="#cb16-36"></a></span>
-<span id="cb16-37"><a href="#cb16-37"></a><span class="co"># And move the group layer up  </span></span>
-<span id="cb16-38"><a href="#cb16-38"></a><span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, interior.lakes.group)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z
+
+interior.lakes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                      <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                      <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">22</span>, <span class="dv">25</span>, 
+                                         <span class="dv">68</span><span class="op">:</span><span class="dv">73</span>, 
+                                         <span class="dv">82</span>, <span class="dv">85</span>)]
+
+interior.lakes.islands &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                              <span class="dt">plot=</span><span class="ot">FALSE</span>, 
+                              <span class="dt">fill=</span><span class="ot">TRUE</span>)<span class="op">$</span>names[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">23</span><span class="op">:</span><span class="dv">24</span>, 
+                                                 <span class="dv">26</span>, <span class="dv">74</span>, 
+                                                 <span class="dv">83</span><span class="op">:</span><span class="dv">84</span>)]
+<span class="co"># First the group layer</span>
+interior.lakes.group &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer_group.html">l_layer_group</a></span>(p_map, <span class="dt">label=</span><span class="st">"Interior Lakes"</span>, <span class="dt">index=</span><span class="st">"end"</span>)
+<span class="co"># Create the interior islands first</span>
+interior.lakes.islands.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                        <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>,
+                                            interior.lakes.islands,
+                                            <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                        <span class="dt">label =</span> <span class="st">"Interior lakes islands"</span>,
+                                        <span class="dt">color =</span> landcol,
+                                        <span class="dt">parent =</span> interior.lakes.group,
+                                        <span class="dt">index=</span><span class="st">"end"</span>
+                                        )
+
+interior.lakes.layer &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p_map,
+                                <span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"lakes"</span>, 
+                                    interior.lakes, 
+                                    <span class="dt">plot=</span><span class="ot">FALSE</span>, <span class="dt">fill=</span><span class="ot">TRUE</span>),
+                                <span class="dt">label =</span> <span class="st">"Interior lakes"</span>,
+                                <span class="dt">color =</span> lakecol,
+                                <span class="dt">parent =</span> interior.lakes.group,
+                                <span class="dt">index=</span><span class="st">"end"</span>
+                                )
+
+<span class="co"># And move the group layer up  </span>
+<span class="kw"><a href="../reference/l_layer_raise.html">l_layer_raise</a></span>(p_map, interior.lakes.group)</code></pre></div>
 <p>Now we have a more detailed map.</p>
 </div>
 </div>
@@ -570,17 +570,17 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#minority-distributions-within-city" class="anchor"></a>Minority distributions within city</h2>
 <p>There are several different visible minorities in the data set. It might be of interest to look at how the cities differ from one another according to the relative differences in visible minority populations.</p>
 <p>To facilitate the displays we will want to have short variate names for the visible minorities than those provided by Statistics Canada.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Back to the raw data and just rename variables</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>minority_star &lt;-<span class="st"> </span>minority[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</span>
-<span id="cb17-3"><a href="#cb17-3"></a>    <span class="st">"Southeast.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"South.Asian"</span>, </span>
-<span id="cb17-4"><a href="#cb17-4"></a>    <span class="st">"Visible.minority.not.included.elsewhere"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5"></a>     <span class="st">"Black"</span>, <span class="st">"Multiple.visible.minority"</span>, <span class="st">"Filipino"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6"></a>    <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latin.American"</span>)]</span>
-<span id="cb17-7"><a href="#cb17-7"></a></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    <span class="st">"SE.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"S.Asian"</span>, <span class="st">"Other"</span>,</span>
-<span id="cb17-10"><a href="#cb17-10"></a>    <span class="st">"Black"</span>, <span class="st">"Multiple"</span>, <span class="st">"Filipino"</span>, <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latino"</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Back to the raw data and just rename variables</span>
+minority_star &lt;-<span class="st"> </span>minority[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+    <span class="st">"Southeast.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"South.Asian"</span>, 
+    <span class="st">"Visible.minority.not.included.elsewhere"</span>,
+     <span class="st">"Black"</span>, <span class="st">"Multiple.visible.minority"</span>, <span class="st">"Filipino"</span>,
+    <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latin.American"</span>)]
+
+<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star) &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+    <span class="st">"SE.Asian"</span>, <span class="st">"Chinese"</span>, <span class="st">"Japanese"</span>, <span class="st">"S.Asian"</span>, <span class="st">"Other"</span>,
+    <span class="st">"Black"</span>, <span class="st">"Multiple"</span>, <span class="st">"Filipino"</span>, <span class="st">"Arab"</span>, <span class="st">"Korean"</span>, <span class="st">"Latino"</span>
+)</code></pre></div>
 <p>As the following few rows of this dataset show:</p>
 <table class="table">
 <thead><tr class="header">
@@ -690,9 +690,9 @@ In contrast, the city with the greatest proportion of its population being <code
 <a href="#pairs-plot" class="anchor"></a>Pairs plot</h3>
 <p>It would be nice to be able to see all of these values at once to compare the cities. One possibility would be a scatterplot matrix such as that provided by the <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs(...)</a></code> function in <code>R</code>.</p>
 <p>In <code>loon</code> there is an analogous function <code><a href="../reference/l_pairs.html">l_pairs(...)</a></code> that produces an interactive scatterplot matrix.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Loon's scatterplot matrix</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># </span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw"><a href="../reference/l_pairs.html">l_pairs</a></span>(minority_star, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loon's scatterplot matrix</span>
+<span class="co"># </span>
+<span class="kw"><a href="../reference/l_pairs.html">l_pairs</a></span>(minority_star, <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>)</code></pre></div>
 <p>Because we have created it with the same linking group, every scatterplot here is linked to every other display in the group. (Note that each plot here is a separate scatterplot and may be interacted with individually.)</p>
 <p>While a scatterplot matrix shows all pairs of plots and so reveals some of the multidimensional structure of the data, it does not seem to be the most useful visual representation for the purposes here.</p>
 <p>In a scatterplot matrix the focus is on the points (cities) within each pair of variates. The matrix arrangement and dynamic linking provides some means of connecting the cities across the variates.</p>
@@ -702,83 +702,83 @@ In contrast, the city with the greatest proportion of its population being <code
 <h3 class="hasAnchor">
 <a href="#serial-axes" class="anchor"></a>Serial axes</h3>
 <p>Rather than arrange the axes in a Cartesian (orthogonal) system, serial axes arrange the axes side by side, either in parallel, or radially. This allows all of the axes (or a great many of them) to appear in the same plot. Each city, rather than appearing as a point now appears as a series of connected line segments, where each segment connects the values of a city on neighbouring axes. Serial axes in parallel are called parallel coordinate plots and are constructed with the <code><a href="../reference/l_serialaxes.html">l_serialaxes(...)</a></code> function.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Now construct the serial axes display so that </span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># the cities are laid over top of one another.</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># </span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>s &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </span>
-<span id="cb19-5"><a href="#cb19-5"></a>                  <span class="dt">axesLayout=</span><span class="st">"parallel"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>                  <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb19-7"><a href="#cb19-7"></a>                  <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),</span>
-<span id="cb19-8"><a href="#cb19-8"></a>                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</span>
-<span id="cb19-9"><a href="#cb19-9"></a>                  <span class="dt">linewidth=</span><span class="dv">5</span>,</span>
-<span id="cb19-10"><a href="#cb19-10"></a>                  <span class="dt">scaling =</span> <span class="st">"variable"</span>,</span>
-<span id="cb19-11"><a href="#cb19-11"></a>                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,</span>
-<span id="cb19-12"><a href="#cb19-12"></a>                  <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), </span>
-<span id="cb19-13"><a href="#cb19-13"></a>                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                  <span class="dt">axesLayout=</span><span class="st">"parallel"</span>,
+                  <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                  <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),
+                  <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                  <span class="dt">linewidth=</span><span class="dv">5</span>,
+                  <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                  <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                  <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), 
+                  <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
 <p>This plot shows all variates at once for each city; each city is a <code>curve</code> of connected line segments. As with all other plots in <code>loon</code> the serial axes plot is interactive. Placing the mouse over any curve will reveal the city. Curves are selected by clicking on them or by sweeping (holding the mouse button down and moving it) a straight line over any number of curves.</p>
 <p>In axis is scaled from 0 to 1. In this case, the scaling is done within each variable. That is, on each axis the city with the highest population for that visible minority is mapped to 1, the highest point on the axis; the city with the smallest population for that visible minority becomes 0, the lowest point on the axis.</p>
 <p>For example the city with the highest Japanese population is Vancouver, the highest Arab population is Montreal, and the highest in all other visible minorities is Toronto (which is second highest in the other two).</p>
 <p>For this data, a more interesting serial axes layout is the <code>radial</code> layout. Select this in the loon inspector or from the command line execute</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>s[<span class="st">"axesLayout"</span>] &lt;-<span class="st"> "radial"</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"axesLayout"</span>] &lt;-<span class="st"> "radial"</span></code></pre></div>
 <p>Now the axes are arranged in the same order but radially with the zero at the centre and the maximum values at the radial axis extremes. Radial axes allow the curve to be closed which gives each city a distinctive shape according to its distribution of visible minorities. Toronto, for example, is clearly the largest (and nearly convex) shape. Montreal and Vancouver are also large and distinctive, as selecting them will reveal.</p>
 <p>These shapes can be also be used as glyphs in a scatterplot which allows them to be visually separated. For example, we can use the features of a scatterplot to place these figures in roughly east to west order using <code>long</code>.<br>
 First create a new scatterplot, then add serial axes as alternative glyphs for the points. To emphasize shape the glyphs are drawn filled in with <code>showArea=TRUE</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Produce grid of star glyphs</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>p_stars &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(minority,</span>
-<span id="cb21-3"><a href="#cb21-3"></a>                <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rank.html">rank</a></span>(long), <span class="kw"><a href="https://rdrr.io/r/base/rank.html">rank</a></span>(long),</span>
-<span id="cb21-4"><a href="#cb21-4"></a>                       <span class="dt">title =</span> <span class="st">""</span>, </span>
-<span id="cb21-5"><a href="#cb21-5"></a>                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, </span>
-<span id="cb21-6"><a href="#cb21-6"></a>                       <span class="dt">xlabel =</span> <span class="st">""</span>,</span>
-<span id="cb21-7"><a href="#cb21-7"></a>                       <span class="dt">ylabel =</span> <span class="st">""</span>,</span>
-<span id="cb21-8"><a href="#cb21-8"></a>                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>                       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb21-10"><a href="#cb21-10"></a>                       <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), </span>
-<span id="cb21-11"><a href="#cb21-11"></a>                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))</span>
-<span id="cb21-12"><a href="#cb21-12"></a></span>
-<span id="cb21-13"><a href="#cb21-13"></a>gstars &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</span>
-<span id="cb21-14"><a href="#cb21-14"></a>                                <span class="dt">axesLayout =</span> <span class="st">"radial"</span>,</span>
-<span id="cb21-15"><a href="#cb21-15"></a>                                <span class="dt">data=</span>minority_star,</span>
-<span id="cb21-16"><a href="#cb21-16"></a>                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),</span>
-<span id="cb21-17"><a href="#cb21-17"></a>                                <span class="dt">scaling =</span> <span class="st">"variable"</span>,</span>
-<span id="cb21-18"><a href="#cb21-18"></a>                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</span>
-<span id="cb21-19"><a href="#cb21-19"></a>p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Produce grid of star glyphs</span>
+p_stars &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(minority,
+                <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rank.html">rank</a></span>(long), <span class="kw"><a href="https://rdrr.io/r/base/rank.html">rank</a></span>(long),
+                       <span class="dt">title =</span> <span class="st">""</span>, 
+                       <span class="dt">showScales =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">xlabel =</span> <span class="st">""</span>,
+                       <span class="dt">ylabel =</span> <span class="st">""</span>,
+                       <span class="dt">showLabels=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">3</span>,
+                       <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                       <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), 
+                       <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>))
+
+gstars &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">axesLayout =</span> <span class="st">"radial"</span>,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),
+                                <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars</code></pre></div>
 <p>Clearly, Toronto dominates in size, followed by Vancouver at the far left, and Montreal to the near right.</p>
 <p>The points could also be moved (temporarily) to a grid.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># </span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>p_stars[<span class="st">"swapAxes"</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="kw"><a href="../reference/l_zoom.html">l_zoom</a></span>(p_stars, <span class="fl">.9</span>)</span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="co">#</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+<span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)
+<span class="co"># swapAxes neccessary to arrange west-east in the grid (columns)</span>
+p_stars[<span class="st">"swapAxes"</span>] &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw"><a href="../reference/l_zoom.html">l_zoom</a></span>(p_stars, .<span class="dv">9</span>)
+<span class="co">#</span></code></pre></div>
 <p>Optionally we could choose to add a continuous color change emphasizing the west to east directionality. There is a <code>col_numeric</code> function in the <code>scales</code> package that will effect a continuous change in color along a spectrum.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(scales)</span>
-<span id="cb23-2"><a href="#cb23-2"></a>west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://rdrr.io/pkg/scales/man/col_numeric.html">col_numeric</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, </span>
-<span id="cb23-3"><a href="#cb23-3"></a>                                 <span class="st">"orange"</span>, <span class="st">"sienna"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4"></a>                                 <span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5"></a>                                 <span class="st">"purple"</span>),</span>
-<span id="cb23-6"><a href="#cb23-6"></a>                               <span class="dt">domain =</span> <span class="ot">NULL</span>)</span>
-<span id="cb23-7"><a href="#cb23-7"></a>                   )(minority<span class="op">$</span>long)</span>
-<span id="cb23-8"><a href="#cb23-8"></a></span>
-<span id="cb23-9"><a href="#cb23-9"></a><span class="co"># Just need to color the glyphs on one of the plots</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a><span class="co"># since they are all linked.</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a>s[<span class="st">"color"</span>] &lt;-<span class="st"> </span>west_east_cols</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(scales)
+west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://rdrr.io/pkg/scales/man/col_numeric.html">col_numeric</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, 
+                                 <span class="st">"orange"</span>, <span class="st">"sienna"</span>,
+                                 <span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>,
+                                 <span class="st">"purple"</span>),
+                               <span class="dt">domain =</span> <span class="ot">NULL</span>)
+                   )(minority<span class="op">$</span>long)
+
+<span class="co"># Just need to color the glyphs on one of the plots</span>
+<span class="co"># since they are all linked.</span>
+s[<span class="st">"color"</span>] &lt;-<span class="st"> </span>west_east_cols</code></pre></div>
 <p>Adding the glyphs to the map gives a precise geographic location for each city.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Add some glyphs to the map,</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># scale values within variates</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>so &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</span>
-<span id="cb24-4"><a href="#cb24-4"></a>                             <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),</span>
-<span id="cb24-5"><a href="#cb24-5"></a>                             <span class="dt">scaling =</span> <span class="st">"variable"</span>,</span>
-<span id="cb24-6"><a href="#cb24-6"></a>                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,</span>
-<span id="cb24-7"><a href="#cb24-7"></a>                             <span class="dt">label=</span><span class="st">"stars"</span>)</span>
-<span id="cb24-8"><a href="#cb24-8"></a>p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add some glyphs to the map,</span>
+<span class="co"># scale values within variates</span>
+so &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                             <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star),
+                             <span class="dt">scaling =</span> <span class="st">"variable"</span>,
+                             <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                             <span class="dt">label=</span><span class="st">"stars"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so</code></pre></div>
 <p>Unfortunately the three large cities dominate in each of these displays. All other cities are so tiny that the shape is difficult to discern. This is due to scaling within each variate.</p>
 <p>A better choice would be to scale each city by its largest visible minority population. That way the differences in population size between cities will not dominate. Instead, the differences in visible minority populations within cities will be emphasized. Those cities, however large or small, which have a similarly shaped glyph will have a similar distribution within its visible minority populations.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>s[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>gstars[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>so[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a></span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># Double the size of the glyphs on the map.</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_map[<span class="st">"size"</span>] </span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+gstars[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+so[<span class="st">"scaling"</span>] &lt;-<span class="st"> "observation"</span>
+
+<span class="co"># Double the size of the glyphs on the map.</span>
+p_map[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_map[<span class="st">"size"</span>] </code></pre></div>
 <p>Looking over the map a number of interesting observations can be made. For example, regional similarities are easily seen. From the west, Victoria and Vancouver have a very similar visible minority distribution with a large Chinese percentage and then South Asian.</p>
 <p>The other two cities in British Columbia are strikingly different. The visible minority population in Abbotsford-Mission is almost entirely South Asian; the other visible minorities are nearly zero by comparison. The glyph for Kelowna shows an unusually high proportion of Japanese in comparison to the other three cities to its west.</p>
 <p>Moving into the provinces of Alberta and Saskatchewan (the next four glyphs moving east) we see a great similarity in the glyph shape of the four cities of Calgary, Edmonton, Saskatoon, and Regina. The next one to the right (east) is Winnipeg, having a shape which would match that of the previous four were it not for Winnipeg’s relatively large Filipino population. The proboscis of Winnipeg’s mosquito shaped glyph draws attention to its unusually large Filipino population.</p>
@@ -793,7 +793,7 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <a href="#manually-moving-points" class="anchor"></a>Manually moving points</h3>
 <p>An interesting exercise would be to move those glyphs which most resemble each other closer together. This is best effected in the plot without the map where we had already placed the glyphs on a grid.</p>
 <p>First make sure we put them on a grid to start:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_move_grid.html">l_move_grid</a></span>(p_stars, <span class="dt">which=</span><span class="st">"all"</span>)</code></pre></div>
 <p>Now any single point can be moved through direct manipulation by selecting it and, while holding both the mouse button and control (ctrl) keys down, dragging it to be near a similarly shaped glyph. Many points can be selected at once moved by additionally holding the shift key down. In loon the shift key always indicates multiple items. In this way we can visually cluster the cities according to glyph shape.</p>
 <p><strong>Exercise:</strong> Try it. Visually cluster the glyphs. Which cities are most alike? Do the clusters correspond to spatial map regions? Can the glyphs be ordered in some way? Does this match any spatial map ordering?</p>
 </div>
@@ -801,103 +801,103 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <h3 class="hasAnchor">
 <a href="#ordering-the-axes" class="anchor"></a>Ordering the axes</h3>
 <p>Since our perception of which glyphs look most alike might depend on which variates appear beside each other, it is often a good idea to consider more than one ordering of the glyph axes. This attention to pairwise ordering is the raison d’etre of the pairwise visualization package <code>PairViz</code>. It offers a number of ways to construct a pairwise ordering. We consider a few of them here.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Axis ordering methods can be found</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># in the pairwise coordinate visualization package</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="co"># called PairViz</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(PairViz)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Axis ordering methods can be found</span>
+<span class="co"># in the pairwise coordinate visualization package</span>
+<span class="co"># called PairViz</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(PairViz)</code></pre></div>
 <p>Perhaps the first thing to consider would be some measure of each pair of visible minorities. For example, suppose we consider the values for each visible minority proportion over all <span class="math inline">\(33\)</span> cities as a single <span class="math inline">\(33\)</span>-dimensional vector. The distance between these vectors will give a measure of how alike the relative population of visible minorities are across all <span class="math inline">\(33\)</span> cities.</p>
 <p>We can calculate the matrix of distances as</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># First transform minority_star to within city percentages.</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">*</span>minority_star<span class="op">/</span>minority[,<span class="st">"Total.population"</span>]</span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="co"># Each variate is now treated as a position in the</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="co"># space of the cities.  We calculate the distances</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a><span class="co"># between the variates.</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a><span class="co"># </span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(minority_star_percent))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First transform minority_star to within city percentages.</span>
+minority_star_percent &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">*</span>minority_star<span class="op">/</span>minority[,<span class="st">"Total.population"</span>]
+
+<span class="co"># Each variate is now treated as a position in the</span>
+<span class="co"># space of the cities.  We calculate the distances</span>
+<span class="co"># between the variates.</span>
+<span class="co"># </span>
+VarDistance &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(minority_star_percent))</code></pre></div>
 <p>Now these distances can be used to try to find a possibly better ordering of the minorities in a serial axes plot. We will use a solution to a travelling salesman problem (with unintended irony) to order the visible minorities by finding the shortest (or longest) distances between the minorities (and not the cities).</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># We will use these distances in a travelling</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># salesman problem that chooses an order to have</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="co"># minimal distances. </span></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># The appropriate function from PairViz is order_tsp(...)</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="co"># </span></span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="co"># Placing minorities that are close to each other</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="co"># (in the above distance) beside each other should</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a><span class="co"># result in somewhat more convex shaped glyphs.</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a><span class="co"># </span></span>
-<span id="cb29-10"><a href="#cb29-10"></a>o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span>(VarDistance)</span>
-<span id="cb29-11"><a href="#cb29-11"></a><span class="co"># The order of minorities:</span></span>
-<span id="cb29-12"><a href="#cb29-12"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star_percent)[o_near]</span></code></pre></div>
-<pre><code>##  [1] "Black"    "Arab"     "Latino"   "SE.Asian" "Multiple" "Other"   
-##  [7] "Japanese" "Korean"   "Filipino" "Chinese"  "S.Asian"</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Alternatively, placing distant variates beside each</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="co"># other should produce less convex shaped glyphs.</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="co"># </span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span>(<span class="op">-</span>VarDistance)</span>
-<span id="cb31-5"><a href="#cb31-5"></a><span class="co"># The order of minorities:</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star_percent)[o_far]</span></code></pre></div>
-<pre><code>##  [1] "Latino"   "Black"    "Korean"   "Chinese"  "Other"    "S.Asian" 
-##  [7] "Japanese" "Arab"     "Multiple" "Filipino" "SE.Asian"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will use these distances in a travelling</span>
+<span class="co"># salesman problem that chooses an order to have</span>
+<span class="co"># minimal distances. </span>
+<span class="co"># The appropriate function from PairViz is order_tsp(...)</span>
+<span class="co"># </span>
+<span class="co"># Placing minorities that are close to each other</span>
+<span class="co"># (in the above distance) beside each other should</span>
+<span class="co"># result in somewhat more convex shaped glyphs.</span>
+<span class="co"># </span>
+o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span>(VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star_percent)[o_near]</code></pre></div>
+<pre><code>##  [1] "Arab"     "Other"    "Japanese" "Korean"   "Multiple" "SE.Asian"
+##  [7] "Latino"   "Filipino" "Black"    "Chinese"  "S.Asian"</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, placing distant variates beside each</span>
+<span class="co"># other should produce less convex shaped glyphs.</span>
+<span class="co"># </span>
+o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span>(<span class="op">-</span>VarDistance)
+<span class="co"># The order of minorities:</span>
+<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star_percent)[o_far]</code></pre></div>
+<pre><code>##  [1] "Japanese" "Black"    "Korean"   "Latino"   "Chinese"  "Other"   
+##  [7] "S.Asian"  "Multiple" "Arab"     "Filipino" "SE.Asian"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Now construct the serial axes display so that </span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="co"># the cities are laid over top of one another.</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="co"># </span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>s_close &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </span>
-<span id="cb33-5"><a href="#cb33-5"></a>                        <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6"></a>                        <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],</span>
-<span id="cb33-7"><a href="#cb33-7"></a>                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</span>
-<span id="cb33-8"><a href="#cb33-8"></a>                        <span class="dt">linewidth=</span><span class="dv">5</span>,</span>
-<span id="cb33-9"><a href="#cb33-9"></a>                        <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb33-10"><a href="#cb33-10"></a>                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,</span>
-<span id="cb33-11"><a href="#cb33-11"></a>                        <span class="dt">title=</span><span class="st">"Nearest minority order"</span>,</span>
-<span id="cb33-12"><a href="#cb33-12"></a>                        <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), </span>
-<span id="cb33-13"><a href="#cb33-13"></a>                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</span>
-<span id="cb33-14"><a href="#cb33-14"></a></span>
-<span id="cb33-15"><a href="#cb33-15"></a>s_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, </span>
-<span id="cb33-16"><a href="#cb33-16"></a>                      <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,</span>
-<span id="cb33-17"><a href="#cb33-17"></a>                      <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],</span>
-<span id="cb33-18"><a href="#cb33-18"></a>                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,</span>
-<span id="cb33-19"><a href="#cb33-19"></a>                      <span class="dt">linewidth=</span><span class="dv">5</span>,</span>
-<span id="cb33-20"><a href="#cb33-20"></a>                      <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb33-21"><a href="#cb33-21"></a>                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,</span>
-<span id="cb33-22"><a href="#cb33-22"></a>                      <span class="dt">title=</span><span class="st">"Farthest minority order"</span>,</span>
-<span id="cb33-23"><a href="#cb33-23"></a>                      <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), </span>
-<span id="cb33-24"><a href="#cb33-24"></a>                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
+<span class="co"># the cities are laid over top of one another.</span>
+<span class="co"># </span>
+s_close &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                        <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                        <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],
+                        <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                        <span class="dt">linewidth=</span><span class="dv">5</span>,
+                        <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                        <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                        <span class="dt">title=</span><span class="st">"Nearest minority order"</span>,
+                        <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), 
+                        <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)
+
+s_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_serialaxes.html">l_serialaxes</a></span>(<span class="dt">data=</span>minority_star, 
+                      <span class="dt">linkingGroup =</span> <span class="st">"minority"</span>,
+                      <span class="dt">sequence=</span><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],
+                      <span class="dt">showGuides=</span><span class="ot">FALSE</span>,
+                      <span class="dt">linewidth=</span><span class="dv">5</span>,
+                      <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                      <span class="dt">showArea=</span><span class="ot">FALSE</span>,
+                      <span class="dt">title=</span><span class="st">"Farthest minority order"</span>,
+                      <span class="dt">itemLabel=</span><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(minority), 
+                      <span class="dt">showItemLabels=</span><span class="ot">TRUE</span>)</code></pre></div>
 <p>Add the glyphs to the grid plot.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>gstars_near &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</span>
-<span id="cb34-2"><a href="#cb34-2"></a>                                <span class="dt">data=</span>minority_star,</span>
-<span id="cb34-3"><a href="#cb34-3"></a>                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],</span>
-<span id="cb34-4"><a href="#cb34-4"></a>                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5"></a>                                <span class="dt">label =</span> <span class="st">"Nearest"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6"></a>                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</span>
-<span id="cb34-7"><a href="#cb34-7"></a>p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_near</span>
-<span id="cb34-8"><a href="#cb34-8"></a></span>
-<span id="cb34-9"><a href="#cb34-9"></a>gstars_far &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,</span>
-<span id="cb34-10"><a href="#cb34-10"></a>                                <span class="dt">data=</span>minority_star,</span>
-<span id="cb34-11"><a href="#cb34-11"></a>                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],</span>
-<span id="cb34-12"><a href="#cb34-12"></a>                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb34-13"><a href="#cb34-13"></a>                                <span class="dt">label =</span> <span class="st">"Farthest"</span>,</span>
-<span id="cb34-14"><a href="#cb34-14"></a>                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)</span>
-<span id="cb34-15"><a href="#cb34-15"></a>p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_far</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gstars_near &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],
+                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                <span class="dt">label =</span> <span class="st">"Nearest"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_near
+
+gstars_far &lt;-<span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_stars,
+                                <span class="dt">data=</span>minority_star,
+                                <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],
+                                <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                <span class="dt">label =</span> <span class="st">"Farthest"</span>,
+                                <span class="dt">showArea=</span><span class="ot">TRUE</span>)
+p_stars[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>gstars_far</code></pre></div>
 <p>And now on the map:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Add  glyphs to the map</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>so_near &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</span>
-<span id="cb35-3"><a href="#cb35-3"></a>                                  <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],</span>
-<span id="cb35-4"><a href="#cb35-4"></a>                                  <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5"></a>                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,</span>
-<span id="cb35-6"><a href="#cb35-6"></a>                                  <span class="dt">label=</span><span class="st">"Nearest"</span>)</span>
-<span id="cb35-7"><a href="#cb35-7"></a>p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near</span>
-<span id="cb35-8"><a href="#cb35-8"></a></span>
-<span id="cb35-9"><a href="#cb35-9"></a>so_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,</span>
-<span id="cb35-10"><a href="#cb35-10"></a>                                 <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],</span>
-<span id="cb35-11"><a href="#cb35-11"></a>                                 <span class="dt">scaling =</span> <span class="st">"observation"</span>,</span>
-<span id="cb35-12"><a href="#cb35-12"></a>                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,</span>
-<span id="cb35-13"><a href="#cb35-13"></a>                                 <span class="dt">label=</span><span class="st">"Farthest"</span>)</span>
-<span id="cb35-14"><a href="#cb35-14"></a>p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add  glyphs to the map</span>
+so_near &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                                  <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_near],
+                                  <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                  <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                  <span class="dt">label=</span><span class="st">"Nearest"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near
+
+so_far &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_glyph_add_serialaxes.html">l_glyph_add_serialaxes</a></span>(p_map, <span class="dt">data=</span>minority_star,
+                                 <span class="dt">sequence =</span> <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star)[o_far],
+                                 <span class="dt">scaling =</span> <span class="st">"observation"</span>,
+                                 <span class="dt">showArea=</span><span class="ot">TRUE</span>,
+                                 <span class="dt">label=</span><span class="st">"Farthest"</span>)
+p_map[<span class="st">"glyph"</span>] &lt;-<span class="st"> </span>so_near</code></pre></div>
 <p><strong>Exercise:</strong> Try switching to any of these alternatives and see whether your clustering choices change. Which is easier? Convex or non-convex?</p>
 <p>The <code>PairViz</code> package also offers a couple of means of ensuring all variates appear as a pair. This is usually more helpful for serial axes that are parallel than radial. These include the following</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>o_greedy &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/eulerian.html">eulerian</a></span>(VarDistance)</span>
-<span id="cb36-2"><a href="#cb36-2"></a>o_balanced &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/whpaths.html">weighted_hpaths</a></span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">o_greedy &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/eulerian.html">eulerian</a></span>(VarDistance)
+o_balanced &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/whpaths.html">weighted_hpaths</a></span>(VarDistance, <span class="dt">matrix=</span><span class="ot">FALSE</span>)</code></pre></div>
 <p><strong>Exercise:</strong> Try these and determine the difference between them.</p>
 </div>
 </div>
@@ -932,7 +932,7 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>
