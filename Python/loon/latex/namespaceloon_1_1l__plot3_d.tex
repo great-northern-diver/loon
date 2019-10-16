@@ -1,0 +1,90 @@
+\hypertarget{namespaceloon_1_1l__plot3_d}{}\doxysection{loon.\+l\+\_\+plot3D Namespace Reference}
+\label{namespaceloon_1_1l__plot3_d}\index{loon.l\_plot3D@{loon.l\_plot3D}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceloon_1_1l__plot3_d_abcfbb2de9b2d55719dffcf743f083013}{l\+\_\+plot3D}} (x, y=None, z=None, axis\+Scale\+Factor=1, color=\char`\"{}grey60\char`\"{}, glyph=\char`\"{}ccircle\char`\"{}, size=4, active=True, selected=False, xlabel=None, ylabel=None, zlabel=None, title=\textquotesingle{}\textquotesingle{}, show\+Labels=True, show\+Scales=False, show\+Guides=True, guidelines=\char`\"{}white\char`\"{}, guides\+Background=\char`\"{}grey92\char`\"{}, foreground=\char`\"{}black\char`\"{}, background=\char`\"{}white\char`\"{}, parent=None, $\ast$$\ast$options)
+\begin{DoxyCompactList}\small\item\em Create an interactive loon 3d plot widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceloon_1_1l__plot3_d_abcfbb2de9b2d55719dffcf743f083013}\label{namespaceloon_1_1l__plot3_d_abcfbb2de9b2d55719dffcf743f083013}} 
+\index{loon.l\_plot3D@{loon.l\_plot3D}!l\_plot3D@{l\_plot3D}}
+\index{l\_plot3D@{l\_plot3D}!loon.l\_plot3D@{loon.l\_plot3D}}
+\doxysubsubsection{\texorpdfstring{l\_plot3D()}{l\_plot3D()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+plot3\+D.\+l\+\_\+plot3D (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y = {\ttfamily None},  }\item[{}]{z = {\ttfamily None},  }\item[{}]{axis\+Scale\+Factor = {\ttfamily 1},  }\item[{}]{color = {\ttfamily \char`\"{}grey60\char`\"{}},  }\item[{}]{glyph = {\ttfamily \char`\"{}ccircle\char`\"{}},  }\item[{}]{size = {\ttfamily 4},  }\item[{}]{active = {\ttfamily True},  }\item[{}]{selected = {\ttfamily False},  }\item[{}]{xlabel = {\ttfamily None},  }\item[{}]{ylabel = {\ttfamily None},  }\item[{}]{zlabel = {\ttfamily None},  }\item[{}]{title = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{show\+Labels = {\ttfamily True},  }\item[{}]{show\+Scales = {\ttfamily False},  }\item[{}]{show\+Guides = {\ttfamily True},  }\item[{}]{guidelines = {\ttfamily \char`\"{}white\char`\"{}},  }\item[{}]{guides\+Background = {\ttfamily \char`\"{}grey92\char`\"{}},  }\item[{}]{foreground = {\ttfamily \char`\"{}black\char`\"{}},  }\item[{}]{background = {\ttfamily \char`\"{}white\char`\"{}},  }\item[{}]{parent = {\ttfamily None},  }\item[{$\ast$$\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Create an interactive loon 3d plot widget. 
+
+\begin{DoxyVerb}   l_plot3D is a generic function for creating interactive
+   visualization environments for python objects.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & the x, y and z arguments provide the x, y and z coordinates for the plot. Any reasonable way of defining the coordinates is acceptable. See the function xyz.\+coords for details. If supplied separately, they must be of the same length. \\
+\hline
+{\em y} & the y coordinates of points in the plot, optional if x is an appropriate structure. \\
+\hline
+{\em z} & the z coordinates of points in the plot, optional if x is an appropriate structure. \\
+\hline
+{\em axis\+Scale\+Factor} & the amount to scale the axes at the centre of the rotation. Default is 1. All numerical values are acceptable (0 removes the axes, $<$ 0 reverses their direction.) \\
+\hline
+{\em color} & colours of points; colours are repeated until matching the number points \\
+\hline
+{\em glyph} & shape of point; must be one of the primitive glyphs 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{stringliteral}{"circle"}, \textcolor{stringliteral}{"ccircle"}, \textcolor{stringliteral}{"ocircle"}, \textcolor{stringliteral}{"square"}, \textcolor{stringliteral}{"csquare"}, \textcolor{stringliteral}{"osquare"},}
+\end{DoxyCode}
+ \char`\"{}triangle\char`\"{}, \char`\"{}ctriangle\char`\"{}, \char`\"{}otriangle\char`\"{}, \char`\"{}diamond\char`\"{}, \char`\"{}cdiamond\char`\"{}, or \char`\"{}odiamond\char`\"{}. Prefixes \char`\"{}c\char`\"{} and \char`\"{}o\char`\"{} mean closed and open, respectively. Default is \char`\"{}ccircle\char`\"{} meaning a closed circle glyph. Non-\/primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like serial axes glyphs may be added, but only after the plot has been created. \\
+\hline
+{\em size} & size of the symbol (roughly in terms of area) \\
+\hline
+{\em active} & a logical determining whether points appear or not (default is T\+R\+UE for all points). If a logical vector is given of length equal to the number of points, then it identifies which points appear (T\+R\+UE) and which do not (F\+A\+L\+SE). \\
+\hline
+{\em selected} & a logical determining whether points appear selected at first (default is F\+A\+L\+SE for all points). If a logical vector is given of length equal to the number of points, then it identifies which points are (T\+R\+UE) and which are not (F\+A\+L\+SE). \\
+\hline
+{\em xlabel} & Label for the horizontal (x) axis. If missing, one will be inferred from x if possible. \\
+\hline
+{\em ylabel} & Label for the vertical (y) axis. If missing, one will be inferred from y (or x) if possible. \\
+\hline
+{\em zlabel} & Label for the third (perpendicular to the screen) (z) axis. If missing, one will be inferred from z (or x) if possible. \\
+\hline
+{\em title} & Title for the plot, default is an empty string. \\
+\hline
+{\em show\+Labels} & logical to determine whether axes label (and title) should be presented. \\
+\hline
+{\em show\+Scales} & logical to determine whether numerical scales should be presented on both axes. \\
+\hline
+{\em show\+Guides} & logical to determine whether to present background guidelines to help determine locations. \\
+\hline
+{\em guidelines} & colour of the guidelines shown when show\+Guides = T\+R\+UE (default \char`\"{}white\char`\"{}). \\
+\hline
+{\em guides\+Background} & colour of the background to the guidelines shown when show\+Guides = T\+R\+UE (default \char`\"{}grey92\char`\"{}). \\
+\hline
+{\em foreground} & foreground colour used by all other drawing (default \char`\"{}black\char`\"{}). \\
+\hline
+{\em background} & background colour used for the plot (default \char`\"{}white\char`\"{}) \\
+\hline
+{\em parent} & a valid Tk parent widget path. When the parent widget is specified (i.\+e. not None) then the plot widget needs to be placed using some geometry manager like tkpack or tkplace in order to be displayed. See the examples below. $\ast$$\ast$options\+: named arguments to modify plot states. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The scatterplot displays a number of direct interactions with the mouse and keyboard, these include\+: rotating, zooming towards the mouse cursor using the mouse wheel, panning by right-\/click dragging and various selection methods using the left mouse button such as sweeping, brushing and individual point selection. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+widget handle 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{height = [1,2,1]}
+\DoxyCodeLine{width = [1,2,3]}
+\DoxyCodeLine{length = [1,2,3]}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l__plot3_d_abcfbb2de9b2d55719dffcf743f083013}{l\_plot3D}}(height,width,length)}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

@@ -32,10 +32,13 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             p1["size"] <- 10
         @endcode
     """
+    if(isinstance(x,pd.core.frame.DataFrame)):
+        y = x.iloc[:,1]
+        x = x.iloc[:,0]
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
         x = list(x)
-
+        
     if(isinstance(y,pd.core.series.Series)):
         ylabel = y.name
         y = list(y)

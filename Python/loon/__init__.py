@@ -1,5 +1,7 @@
 import sys
-sys.path.append('./loon')
+#sys.path.append('./loon')
+working_dir = '/Users/tedwang/Documents/GitHub/loon/Python/loon'
+sys.path.append(working_dir)
 from l_data import *
 from l_hist import *
 from l_plot import *
@@ -12,5 +14,14 @@ from dataset import *
 from graphutils import *
 from l_graph import *
 from l_plot3D import *
+from l_isLoonWidget import *
+from l_throwErrorIfNotLoonWidget import *
+from l_cget import *
+from l_widget import *
+from l_configure import *
+### remove later 
+from loonobject import *
+###
+namespace = globals().keys()
 #__all__ = ["l_data","l_hist","l_plot","l_serialaxes",
 #           "l_subwin","l_toplevel","loonobject","loonPlotFactory"]

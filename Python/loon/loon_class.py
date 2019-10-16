@@ -1,5 +1,7 @@
 
 from tk import tk 
+from l_cget import *
+from l_configure import *
 class loon:
     """
     Loon class 
@@ -8,10 +10,10 @@ class loon:
         self.plot = plot
         self.type = type
         #self.color = tk.eval()
-    def __getattr__(self, name):
-        if(name == 'plot'):
+    def __getattr__(self, key):
+        if(key == 'plot'):
             return self.plot
-        elif(name == 'names'):
+        elif(key == 'names'):
             try:    
                 tk.eval(self.plot + ' cget -option')
             except Exception as e:
@@ -20,7 +22,8 @@ class loon:
             res = [x.split(',')[0] for x in res]
             return res
         else:
-            return tk.eval(self.plot + ' cget -' + name)      
+            return tk.eval(self.plot + ' cget -' + key)      
+            #return l_cget(self,key)
     def __getitem__(self, key):
         if(key == 'plot'):
             return self.plot
@@ -34,7 +37,15 @@ class loon:
             return res
         else:
             return tk.eval(self.plot + ' cget -' + key)  
+            #return l_cget(self,key)
+    # #overload .
+    # def __setattr__(self, name, value):
+    #     #self.__dict__[name] = value
+    #     opt = {name:value}
+    #     l_configure(self,**opt)
+    #     #l_configure(self,name,value)
 
-    def __setattr__(self, name, value):
-        self.__dict__[name] = value
-    #def __setitem__(self, name, value):
+    # overload []   
+    def __setitem__(self, name, value):
+        opt = {name:value}
+        l_configure(self,**opt)

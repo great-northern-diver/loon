@@ -216,7 +216,7 @@ l_hist.default <-  function(x,
                                 yshows = yshows,
                                 showStackedColors = showStackedColors,
                                 origin = origin,
-                                binwidth=binwidth,
+                                binwidth = binwidth,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 ...)

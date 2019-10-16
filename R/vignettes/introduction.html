@@ -13,7 +13,7 @@
 
 <meta name="author" content="R.W. Oldford" />
 
-<meta name="date" content="2019-10-13" />
+<meta name="date" content="2019-10-15" />
 
 <title>Introduction to loon</title>
 
@@ -96,7 +96,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to loon</h1>
 <h4 class="author">R.W. Oldford</h4>
-<h4 class="date">2019-10-13</h4>
+<h4 class="date">2019-10-15</h4>
 
 
 <div id="TOC">
@@ -361,8 +361,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>The loon system <strong>default</strong> list of colours get be found programmatically:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l_getColorList</span>()</code></pre></div>
-<pre><code>##  [1] &quot;gray10&quot;  &quot;#1F78B4&quot; &quot;#E31A1C&quot; &quot;#FF7F00&quot; &quot;#6A3D9A&quot; &quot;#B15928&quot; &quot;#33A02C&quot;
-##  [8] &quot;#A6CEE3&quot; &quot;#B2DF8A&quot; &quot;#FB9A99&quot; &quot;#FDBF6F&quot; &quot;#CAB2D6&quot; &quot;#FFFF99&quot;</code></pre>
+<pre><code>##  [1] &quot;gray60&quot;    &quot;#A6CEE3&quot;   &quot;pink&quot;      &quot;#B2DF8A&quot;   &quot;#FDBF6F&quot;  
+##  [6] &quot;#FFFF99&quot;   &quot;#CAB2D6&quot;   &quot;#DEB887&quot;   &quot;#CDC673&quot;   &quot;lightgrey&quot;
+## [11] &quot;white&quot;     &quot;gray10&quot;    &quot;#1F78B4&quot;   &quot;#E31A1C&quot;   &quot;#33A02C&quot;  
+## [16] &quot;#FF7F00&quot;   &quot;#FFFF00&quot;   &quot;#6A3D9A&quot;   &quot;#B15928&quot;   &quot;#8B864E&quot;  
+## [21] &quot;gray40&quot;</code></pre>
 <p>Note:</p>
 <ul>
 <li>loon colours are 6 hexadecimal digits in length and can be a named <code>R</code> colour</li>
@@ -448,7 +451,7 @@ p &lt;-<span class="st"> </span><span class="kw">l_create_handle</span>(<span cl
 <p>These features of <code>p</code> can be directly accessed the <code>[]</code> function.</p>
 <p>For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p[<span class="st">&quot;showGuides&quot;</span>]</code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>A more meaningful example might be identify groups with the colours of the points.<br />
 This could be done simply as follows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">unique_cols &lt;-<span class="st"> </span><span class="kw">unique</span>(p[<span class="st">'color'</span>])

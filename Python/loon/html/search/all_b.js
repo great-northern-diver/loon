@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usandthem_56',['UsAndThem',['../namespacepyloon_1_1dataset.html#af965fd03560c545298deea7f85d0b383',1,'pyloon::dataset']]]
+  ['type_57',['type',['../classloon_1_1loon__class_1_1loon.html#a7a5c1accf7ea51daad04e6b5ed32d53e',1,'loon::loon_class::loon']]]
 ];
