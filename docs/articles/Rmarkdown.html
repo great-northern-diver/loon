@@ -123,16 +123,11 @@
 <a href="#loon-plots" class="anchor"></a>Loon plots</h1>
 <p>Start by accessing <code>loon</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(loon)</code></pre></div>
-<pre><code>## Warning in system2("/usr/bin/otool", c("-L", shQuote(DSO)), stdout = TRUE):
-## running command ''/usr/bin/otool' -L '/Library/Frameworks/R.framework/
-## Resources/library/tcltk/libs//tcltk.so'' had status 71</code></pre>
 <p>Plots in <code>loon</code> are dynamic and interactive. Their display contents can be changed either through direct manipulation and the loon inspector, or programmatically. To interact with them programmatically (including transferring them to <code>grid</code> graphics objects), it is best to assign them to a variable at creation.</p>
 <p>For example,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Sepal.Length, 
-            <span class="dt">color =</span> iris<span class="op">$</span>Species, 
-            <span class="dt">xlabel =</span> <span class="st">"sepal width"</span>, <span class="dt">ylabel =</span> <span class="st">"sepal length"</span>,
-            <span class="dt">title =</span> <span class="st">"The famous Iris data"</span>, 
-            <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="dt">x =</span> iris<span class="op">$</span>Sepal.Width, <span class="dt">y =</span> iris<span class="op">$</span>Sepal.Length, <span class="dt">color =</span> iris<span class="op">$</span>Species, 
+    <span class="dt">xlabel =</span> <span class="st">"sepal width"</span>, <span class="dt">ylabel =</span> <span class="st">"sepal length"</span>, <span class="dt">title =</span> <span class="st">"The famous Iris data"</span>, 
+    <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div id="just-plot-the-loon-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#just-plot-the-loon-plot" class="anchor"></a>Just <code>plot</code> the <code>loon</code> plot!</h2>
@@ -172,34 +167,29 @@ Instead of <code>knitr</code>, the same result (at least for <code>pdf</code> ou
 <a href="#reading-in-previously-saved-states" class="anchor"></a>Reading in previously saved states</h2>
 <p>We could also just save the relevant display states from one loon plot as an <code>R</code> data set (in an <code>RDS</code> file). This is done using the function <code><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS()</a></code>.</p>
 <p>Suppose, for example, suppose the previously constructed <code>p</code> contains valuable information in its display. We could save its states (<code><a href="../reference/l_info_states.html">l_info_states()</a></code>) as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Having determined the colours you could save them (and other states)</span>
-<span class="co"># in a file of your choice, here some tempfile:</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Having determined the colours you could save them (and other</span>
+<span class="co"># states) in a file of your choice, here some tempfile:</span>
 myFileName &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="st">"myPlot"</span>, <span class="dt">fileext =</span> <span class="st">".rds"</span>)
 
-<span class="co">#</span>
-<span class="co"># We could save all of the "usual" states </span>
-<span class="co"># (excludes certain "basic" states, see help(l_saveStatesRDS))</span>
+<span class="co"># We could save all of the 'usual' states (excludes certain</span>
+<span class="co"># 'basic' states, see help(l_saveStatesRDS))</span>
 <span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">file =</span> myFileName)
 
-<span class="co"># </span>
 <span class="co"># Or simply save selected named states as an RDS</span>
-<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p,
-                <span class="dt">states =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>),
-                <span class="dt">file =</span> myFileName)</code></pre></div>
+<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">states =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>), <span class="dt">file =</span> myFileName)</code></pre></div>
 <p>Having saved the desired states (not in a temporary file as above, but in some more permanent file), they can be retrieved later and used on a new plot (say in <code>RMarkdown</code>) to set the new plot’s values to those previously determined interactively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We have a new plot (or two)</span>
 p_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(iris, <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)
-h_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(iris<span class="op">$</span>Sepal.Width, 
-                <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>, 
-                <span class="dt">yshows =</span> <span class="st">"density"</span>, 
-                <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>)
+h_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(iris<span class="op">$</span>Sepal.Width, <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>, <span class="dt">yshows =</span> <span class="st">"density"</span>, 
+    <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># And read the saved data back in using R's readRDS() function</span>
 p_saved_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(myFileName)
-<span class="co"># which is an object of class </span>
+<span class="co"># which is an object of class</span>
 <span class="kw"><a href="https://rdrr.io/r/base/class.html">class</a></span>(p_saved_info)</code></pre></div>
 <pre><code>## [1] "l_savedStates"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The values on p_saved_info can now be all set using l_copyStates()</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The values on p_saved_info can now be all set using</span>
+<span class="co"># l_copyStates()</span>
 <span class="kw"><a href="../reference/l_copyStates.html">l_copyStates</a></span>(<span class="dt">source =</span> p_saved_info, <span class="dt">target =</span> p_new)</code></pre></div>
 <pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or selectively and even from different classes of loon plots</span>
@@ -220,20 +210,20 @@ h_new[<span class="st">"color"</span>] &lt;-<span class="st"> </span>p_saved_inf
 <a href="#plots-from-programmatic-manipulation" class="anchor"></a>Plots from programmatic manipulation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">saveTitle &lt;-<span class="st"> </span>p[<span class="st">"title"</span>]
 
-p[<span class="st">'title'</span>] &lt;-<span class="st"> "1. Setosa selected"</span>
-p[<span class="st">'selected'</span>] &lt;-<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> "setosa"</span>
+p[<span class="st">"title"</span>] &lt;-<span class="st"> "1. Setosa selected"</span>
+p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> "setosa"</span>
 gp_select &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
 
-p[<span class="st">'title'</span>] &lt;-<span class="st"> "2. Scale to the selected points"</span>
+p[<span class="st">"title"</span>] &lt;-<span class="st"> "2. Scale to the selected points"</span>
 <span class="kw"><a href="../reference/l_scaleto_selected.html">l_scaleto_selected</a></span>(p)
 gp_select_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
 
-p[<span class="st">'title'</span>] &lt;-<span class="st"> "3. Turn off selection"</span>
-p[<span class="st">'selected'</span>] &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+p[<span class="st">"title"</span>] &lt;-<span class="st"> "3. Turn off selection"</span>
+p[<span class="st">"selected"</span>] &lt;-<span class="st"> </span><span class="ot">FALSE</span>
 gp_setosa_zoom &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(p, <span class="dt">draw =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># Put the plot back to how it was originally</span>
-p[<span class="st">"title"</span>] &lt;-<span class="st"> </span>saveTitle 
+p[<span class="st">"title"</span>] &lt;-<span class="st"> </span>saveTitle
 <span class="kw"><a href="../reference/l_scaleto_plot.html">l_scaleto_plot</a></span>(p)</code></pre></div>
 <p>We now have three more “snapshots” of our interaction with the <code>loon</code> plot <code>p</code>.</p>
 <p>We can now use the <code>gridExtra</code> package to arrange these in a single display.</p>

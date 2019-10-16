@@ -110,7 +110,7 @@
       <h1>Introduction to loon</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-10-08</h4>
+            <h4 class="date">2019-10-14</h4>
       
       
       <div class="hidden name"><code>introduction.Rmd</code></div>
@@ -377,12 +377,12 @@
 <p>At the <strong>beginning of a loon session</strong> (that is, immediately after executing <code><a href="https://rdrr.io/r/base/library.html">library(loon)</a></code>) you might choose to change the default palette for the inspector to something that suits your tastes/problem.</p>
 <p><strong>Note</strong>: There may be unintended side effects to changing the inspector colours after a plot (and hence the inspector) has been created so this should be avoided.</p>
 <p>A variety of functions exist to change an inspector’s palette of colours:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_setColorList_baseR.html">l_setColorList_baseR</a></span>()                             <span class="co"># base R palette</span>
-<span class="kw"><a href="../reference/l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer</a></span>(<span class="st">"Set2"</span>)                 <span class="co"># colorblind friendly choice from ColorBrewer</span>
-<span class="kw"><a href="../reference/l_setColorList_hcl.html">l_setColorList_hcl</a></span>(<span class="dt">luminance =</span> <span class="dv">80</span>)                 <span class="co"># set of hcl colours</span>
-<span class="kw"><a href="../reference/l_setColorList_ggplot2.html">l_setColorList_ggplot2</a></span>()                           <span class="co"># ggplot2's palette </span>
-<span class="kw"><a href="../reference/l_setColorList_loon.html">l_setColorList_loon</a></span>()                              <span class="co"># default loon palette</span>
-<span class="kw"><a href="../reference/l_setColorList.html">l_setColorList</a></span>(<span class="kw"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span>(<span class="kw"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span>(<span class="dv">5</span>)))       <span class="co"># any set of colours without alpha</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_setColorList_baseR.html">l_setColorList_baseR</a></span>()  <span class="co"># base R palette</span>
+<span class="kw"><a href="../reference/l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer</a></span>(<span class="st">"Set2"</span>)  <span class="co"># colorblind friendly choice from ColorBrewer</span>
+<span class="kw"><a href="../reference/l_setColorList_hcl.html">l_setColorList_hcl</a></span>(<span class="dt">luminance =</span> <span class="dv">80</span>)  <span class="co"># set of hcl colours</span>
+<span class="kw"><a href="../reference/l_setColorList_ggplot2.html">l_setColorList_ggplot2</a></span>()  <span class="co"># ggplot2's palette </span>
+<span class="kw"><a href="../reference/l_setColorList_loon.html">l_setColorList_loon</a></span>()  <span class="co"># default loon palette</span>
+<span class="kw"><a href="../reference/l_setColorList.html">l_setColorList</a></span>(<span class="kw"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span>(<span class="kw"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span>(<span class="dv">5</span>)))  <span class="co"># any set of colours without alpha</span></code></pre></div>
 <p>To change the palette</p>
 <ul>
 <li>execute one of these functions</li>
@@ -528,9 +528,7 @@ p[<span class="st">"size"</span>] &lt;-<span class="st"> </span><span class="dv"
 <p>For example, we can add a map to the current loon plot <code>p</code>.</p>
 <p>First get the relevant map:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(maps)
-NZFijiMap &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world2"</span>, 
-                 <span class="dt">regions=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span>),
-                 <span class="dt">plot=</span><span class="ot">FALSE</span>)</code></pre></div>
+NZFijiMap &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world2"</span>, <span class="dt">regions =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span>), <span class="dt">plot =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>It is added as a “layer” to the loon plot</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/l_layer.html">l_layer</a></span>(p, NZFijiMap, 
         <span class="dt">label =</span> <span class="st">"New Zealand and Fiji"</span>,
@@ -703,16 +701,12 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <p>In either case, to have linking work properly the <code>linkingKey</code> of the plots associated with the two data frames need to be managed.</p>
 <p>For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_order &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(quakes), <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(quakes), <span class="dt">replace =</span> <span class="ot">FALSE</span>)
-some_quakes &lt;-<span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(quakes), <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+some_quakes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(quakes), <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
 quakes_linkingKey &lt;-<span class="st"> </span>p[<span class="st">"linkingKey"</span>]
-p_new &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(quakes[new_order,],
-              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat, <span class="dt">title =</span> <span class="st">"quakes reordered"</span>,
-                     <span class="dt">linkingGroup =</span> <span class="st">"quakes"</span>,
-                     <span class="dt">linkingKey =</span> quakes_linkingKey[new_order] ))
-p_subset &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(quakes[some_quakes,],
-              <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat, <span class="dt">title =</span> <span class="st">"quakes reordered"</span>,
-                     <span class="dt">linkingGroup =</span> <span class="st">"quakes"</span>,
-                     <span class="dt">linkingKey =</span> quakes_linkingKey[some_quakes]))</code></pre></div>
+p_new &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(quakes[new_order, ], <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat, <span class="dt">title =</span> <span class="st">"quakes reordered"</span>, 
+    <span class="dt">linkingGroup =</span> <span class="st">"quakes"</span>, <span class="dt">linkingKey =</span> quakes_linkingKey[new_order]))
+p_subset &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(quakes[some_quakes, ], <span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(long, lat, <span class="dt">title =</span> <span class="st">"quakes reordered"</span>, 
+    <span class="dt">linkingGroup =</span> <span class="st">"quakes"</span>, <span class="dt">linkingKey =</span> quakes_linkingKey[some_quakes]))</code></pre></div>
 <p>The new plots <code>p_new</code> and <code>p_subset</code> will link correctly with all the rest.</p>
 <p>Rather than the default values, the <code>linkingKey</code> can be any vector of unique strings used in any newly created plot as above. Of course, not using the default linking keys from <code>loon</code> may require a little more care in management from the user.</p>
 <hr>
@@ -782,35 +776,29 @@ p_mag_stations &lt;-<span class="st"> </span><span class="kw"><a href="../refere
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># list all demos</span></code></pre></div>
 <p>The range is quite broad. For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### teaching demos
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># lots using the Old Faithful geyser</span>
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression_influential"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># move and recolor points to change the regression fit</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># lots using the Old Faithful geyser</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression_influential"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># move and recolor points to change the regression fit</span>
 
 ### gapminder
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co">#  basic demo</span>
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_slider"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># year selected on a slider</span>
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_choropleth"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># world map and linked with a scatterplot</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co">#  basic demo</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_slider"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># year selected on a slider</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_choropleth"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># world map and linked with a scatterplot</span>
 
-### the spatial package sp                       
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_polygons_sp"</span>, 
-     <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># layer polygons with class sp </span>
+### the spatial package sp
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_polygons_sp"</span>, <span class="dt">package =</span> <span class="st">"loon"</span>)  <span class="co"># layer polygons with class sp </span>
 
-### layering and custom layouts 
+### layering and custom layouts
 <span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_layers"</span>)  <span class="co"># demonstrate layer types   </span>
 <span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_layout"</span>)  <span class="co"># custom layout widgets      </span>
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_widgets"</span>) <span class="co"># inspector and plot in one window</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_widgets"</span>)  <span class="co"># inspector and plot in one window</span>
 
-### novel brushing and linking 
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_knn"</span>)     <span class="co"># brushing by k nearest points in some subspace</span>
+### novel brushing and linking
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_knn"</span>)  <span class="co"># brushing by k nearest points in some subspace</span>
 <span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_choropleth"</span>)  <span class="co"># many to one linking </span>
 
 ### high dimensional data and dimensionality reduction
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_images_frey_LLE"</span>) <span class="co"># navigation graphs, image data, LLE</span>
-<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_dimred"</span>)          <span class="co"># comparing dimension reduction methods</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_images_frey_LLE"</span>)  <span class="co"># navigation graphs, image data, LLE</span>
+<span class="kw"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_dimred"</span>)  <span class="co"># comparing dimension reduction methods</span></code></pre></div>
 <p>The code that appears in the console after the demo can be examined and reused to create your own loony <code>loon</code> code.</p>
 <hr>
 </div>

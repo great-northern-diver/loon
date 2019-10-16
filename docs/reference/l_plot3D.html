@@ -216,24 +216,24 @@ Default is 1.
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>quakes</span>,
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l90.plot3D"
+)</div><div class='output co'>#&gt; [1] ".l100.plot3D"
 #&gt; attr(,"class")
 #&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
 
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>),
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l91.plot3D"
+)</div><div class='output co'>#&gt; [1] ".l101.plot3D"
 #&gt; attr(,"class")
 #&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
 <span class='no'>scaled_quakes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
           <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l92.plot3D"
+)</div><div class='output co'>#&gt; [1] ".l102.plot3D"
 #&gt; attr(,"class")
 #&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
      <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l93.plot3D"
+)</div><div class='output co'>#&gt; [1] ".l103.plot3D"
 #&gt; attr(,"class")
 #&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
 <span class='co'># Or together:</span>
@@ -241,7 +241,7 @@ Default is 1.
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
      <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
      }
-)</div><div class='output co'>#&gt; [1] ".l95.plot3D"
+)</div><div class='output co'>#&gt; [1] ".l105.plot3D"
 #&gt; attr(,"class")
 #&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
 
