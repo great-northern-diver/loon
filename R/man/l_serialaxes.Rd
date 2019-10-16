@@ -13,7 +13,7 @@ l_serialaxes(data, sequence, scaling = "variable",
 \item{sequence}{vector with variable names that defines the axes sequence}
 
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
-how the data is scaled. See Details for more information}
+how the data is scaled. See Details and Examples for more information.}
 
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
@@ -27,7 +27,7 @@ how the data is scaled. See Details for more information}
 plot handle object
 }
 \description{
-The seerialaxes widget displays multivariate data either as a
+The serialaxes widget displays multivariate data either as a
   stacked star glyph plot, or as a parallel coordinate plot.
 }
 \details{
@@ -47,4 +47,167 @@ s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
 s['axesLayout'] <- 'parallel'
 states <- l_info_states(s)
 names(states)
+
+#######
+#
+# Effect of the choice of the argument "scaling"
+#
+# To illustrate we will look at the four measurements of
+# 150 iris flowers from the iris data of Edgar Anderson made
+# famous by R.A. Fisher.
+#
+# First separate the measurements
+irisFlowers <- iris[, 1:4]
+# from their species
+species <- iris[,5]
+# and get some identifiers for the individual flowers
+flowerIDs <- paste(species, 1:50)
+#
+# Now create parallel axes plots of the measurements
+# using different scaling values.
+
+#
+# scaling = "variable"
+#
+# This is the standard scaling of most serial axes plots,
+# scaling each axis from the minimum to the maximum of that variable.
+# Hence it is the default scaling.
+#
+# More precisely, it maps the minimum value in each column (variable) to
+# zero and the maximum to one.  The result is every parallel
+# axis will have a point at 0 and a point at 1.
+#
+# This scaling highlights the relationships (e.g. correlations)
+# between the variables (removes the effect of the location and scale of
+# each variable).
+#
+# For the iris data, ignoring species we see for example that
+# Sepal.Length and Sepal.Width are negatively correlated (lots of
+# crossings) across species but more positively correlated (mostly
+# parallel lines) within each species (colour).
+#
+sa_var <- l_serialaxes(irisFlowers,
+                       scaling = "variable",    # scale within column
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = variable (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+# scaling = "observation"
+#
+# This maps the minimum value in each row (observation) to
+# zero and the maximum value in each row to one.
+#
+# The result is that every observation (curve in the parallel
+# coordinate plot) will touch 0 on at least one axis and touch
+# 1 on another.
+#
+# This scaling highlights the differences between observations (rows)
+# in terms of the relative measurements across the variables for each
+# observation.
+#
+# For example, for the iris data we can see that for every flower (row)
+# the Sepal.Length is the largest measurement and the Petal.Width
+# is the smallest.  Each curve gives some sense of the *shape* of each
+# flower without regard to its size.  Two species (versicolor and
+# virginica) have similar shaped flowers (relatively long but narrow
+# sepals and petals), whereas the third (setosa) has relatively large
+# sepals compared to small petals.
+#
+sa_obs <- l_serialaxes(irisFlowers,
+                       scaling = "observation", # scale within row
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = observation (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+# scaling = "data"
+#
+# This maps the minimum value in the whole dataset (over all elements)
+# to zero and the maximum value in the whole dataset to one.
+#
+# The result is that every measurement is on the same numeric (if not
+# measurement) scale.  Highlighting the relative magnitudes of all
+# numerical values in the data set, each curve shows the relative magnitudes
+# without rescaling by variable.
+#
+# This is most sensible data such as the iris flower where all four measurements
+# appear to have been taken on the same measuring scale.
+#
+# For example, for the iris data full data scaling preserves the size
+# and shape of each flower.  Again virginica is of roughly the same
+# shape as versicolor but has distinctly larger petals.
+# Setosa in contrast is quite differently shaped in both sepals and petals
+# but with sepals more similar in size to the two other flowers and
+# with significantly smaller petals.
+sa_dat <- l_serialaxes(irisFlowers,
+                       scaling = "data",        # scale using all data
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = data (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+#  scaling = "none"
+#
+#  Sometimes we might wish to choose a min and max to use
+#  for the whole data set; or perhaps a separate min and max
+#  for each variable.
+
+#  This would be done outside of the construction of the plot
+#  and displayed by having scaling = "none" in the plot.
+#
+#  For example, for the iris data, we might choose scales so that
+#  the minimum and the maximum values within the data set do not
+#  appear at the end points 0 and 1 of the axes but instead inside.
+#
+#  Suppose we choose the following limits for all variables
+lower_lim <- -3 ; upper_lim <- max(irisFlowers) + 1
+
+#  These are the limits we want to use to define the end points of
+#  the axes for all variables.
+#  We need only scale the data as
+irisFlowers_0_1 <- (irisFlowers - lower_lim)/(upper_lim - lower_lim)
+#  Or alternatively using the built-in scale function
+#  (which allows different scaling for each variable)
+irisFlowers_0_1 <- scale(irisFlowers,
+                         center = rep(lower_lim, 4),
+                         scale = rep((upper_lim - lower_lim), 4))
+
+# Different scales for different
+# And instruct the plot to not scale the data but plot it on the 0-1 scale
+# for all axes.  (Note any rescaled date outside of [0,1] will not appear.)
+#
+sa_none <- l_serialaxes(irisFlowers_0_1,
+                        scaling = "none",        # do not scale
+                        axesLayout = "parallel",
+                        color = species,
+                        linewidth = 2,
+                        itemLabel = flowerIDs,
+                        showItemLabels = TRUE,
+                        title = "scaling = none (initially)",
+                        linkingGroup = "irisFlowers data")
+
+# This is particularly useful for "radial" axes to keep the polygons away from
+# the centre of the display.
+# For example
+sa_none["axesLayout"] <- "radial"
+# now displays each flower as a polygon where shapes and sizes are easily
+# compared.
+#
+#  NOTE: rescaling the data so that all values are within [0,1] is perhaps
+#        the best way to proceed (especially if there are natural lower and
+#        upper limits for each variable).
+#        Then scaling can always be changed via the inspector.
 }

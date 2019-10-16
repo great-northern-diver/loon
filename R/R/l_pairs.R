@@ -59,9 +59,6 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL, ...) {
 
     args <- list(...)
-    if(!identical(class(data), "data.frame")) { # use of identical to deal with tibbles
-        data <- as.data.frame(data)
-    }
 
     if (missing(linkingGroup)) {
         linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
@@ -157,14 +154,14 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
             # The first half are top hists, the second half are right hists
             for(i in 1:(2*nvar)){
                 if (i <= nvar) {
-                    histArgs[['x']] <- as.numeric(data[, i])
+                    histArgs[['x']] <- as.numeric(data[[varnames[i]]])
                     histArgs[['xlabel']] <- varnames[i]
                     # top level histograms
                     histArgs[['swapAxes']] <- FALSE
                     ix <- i
                     iy <- 1
                 } else {
-                    histArgs[['x']] <- as.numeric(data[, i - nvar])
+                    histArgs[['x']] <- as.numeric(data[[varnames[i - nvar]]])
                     histArgs[['xlabel']] <- varnames[i - nvar]
                     # right level histograms
                     histArgs[['swapAxes']] <- TRUE
@@ -216,7 +213,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
         } else {
             if(histHeightProp != 1) warning("histHeightProp must be 1 when histograms are placed on diagonal")
             for(i in 1:nvar){
-                histArgs[['x']] <- as.numeric(data[, i])
+                histArgs[['x']] <- as.numeric(data[[varnames[i]]])
                 histArgs[['xlabel']] <- varnames[i]
                 histArgs[['swapAxes']] <- FALSE
                 histograms[[i]] <- do.call(l_hist, histArgs)
@@ -273,11 +270,15 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
 
     ## create first plot
     for (i in 1:dim(pair)[2]) {
-        ix <- pair[2,i]; iy <- pair[1,i]
-        args[['x']] <- data[,ix]
-        args[['y']] <- data[,iy]
+        ix <- pair[2,i]
+        iy <- pair[1,i]
+
         args[['xlabel']] <- varnames[ix]
         args[['ylabel']] <- varnames[iy]
+
+        args[['x']] <- data[[varnames[ix]]]
+        args[['y']] <- data[[varnames[iy]]]
+
         scatterplots[[i]] <- do.call(l_plot, args)
         # reset names (if showHistograms)
         if (showHistograms & histLocation == "edge") {

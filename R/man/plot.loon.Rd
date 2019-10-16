@@ -32,5 +32,5 @@ plot(loonPlot)
 
 }
 \seealso{
-\code{\link{loonGrob}}, \code{\link{grid.loon}}
+\code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{l_export}}
 }

@@ -22,14 +22,15 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
     # sequences
     seqName <- widget['sequence']
 
-    # function `get_model_display_order` can automatically select actived points
     displayOrder <- get_model_display_order(widget)
+    active <- widget['active'][displayOrder]
+    active_displayOrder <- displayOrder[active]
 
     scaledActiveData <- get_scaledData(
         data = char2num.data.frame(widget['data']), # convert to numeric
         sequence = seqName,
         scaling = widget['scaling'],
-        displayOrder = displayOrder)
+        displayOrder = active_displayOrder)
 
     layout <- widget['axesLayout']
 
@@ -57,9 +58,9 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
             axesGrobTree(data = scaledActiveData,
                          showArea = widget['showArea'],
                          len.xaxis = length(seqName),
-                         colour = get_display_color(as_hex6color(widget['color'][displayOrder]),
-                                                    widget['selected'][displayOrder]),
-                         lineWidth = widget['linewidth'][displayOrder],
+                         colour = get_display_color(as_hex6color(widget['color'][active_displayOrder]),
+                                                    widget['selected'][active_displayOrder]),
+                         lineWidth = widget['linewidth'][active_displayOrder],
                          layout = layout)
         ),
         vp = vpStack(

@@ -40,10 +40,10 @@ class loon:
             #return l_cget(self,key)
     # #overload .
     # def __setattr__(self, name, value):
-    #     #self.__dict__[name] = value
-    #     opt = {name:value}
-    #     l_configure(self,**opt)
-    #     #l_configure(self,name,value)
+    # #     #self.__dict__[name] = value
+    #      opt = {name:value}
+    #      l_configure(self,**opt)
+    # #     #l_configure(self,name,value)
 
     # overload []   
     def __setitem__(self, name, value):

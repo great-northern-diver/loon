@@ -80,7 +80,7 @@
                    navigator=c(widget, 'navigator', 'use', specifier[2]),
                    context=c(widget, 'navigator', 'use', specifier[2],
                              'context', 'use', specifier[3]))
-    print(call)
+    
     function(...) {
         convert(do.call('tcl', append(call, list(...))))
     }
