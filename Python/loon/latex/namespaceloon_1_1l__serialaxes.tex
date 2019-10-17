@@ -1,0 +1,62 @@
+\hypertarget{namespaceloon_1_1l__serialaxes}{}\doxysection{loon.\+l\+\_\+serialaxes Namespace Reference}
+\label{namespaceloon_1_1l__serialaxes}\index{loon.l\_serialaxes@{loon.l\_serialaxes}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceloon_1_1l__serialaxes_ad661dcdfc778d15985b6c771ad1387aa}{l\+\_\+serialaxes}} (data, sequence=None, scaling=\char`\"{}variable\char`\"{}, axes\+Layout=\textquotesingle{}radial\textquotesingle{}, show\+Axes=True, parent=None, $\ast$$\ast$options)
+\begin{DoxyCompactList}\small\item\em Create a Serialaxes Widget. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceloon_1_1l__serialaxes_ad661dcdfc778d15985b6c771ad1387aa}\label{namespaceloon_1_1l__serialaxes_ad661dcdfc778d15985b6c771ad1387aa}} 
+\index{loon.l\_serialaxes@{loon.l\_serialaxes}!l\_serialaxes@{l\_serialaxes}}
+\index{l\_serialaxes@{l\_serialaxes}!loon.l\_serialaxes@{loon.l\_serialaxes}}
+\doxysubsubsection{\texorpdfstring{l\_serialaxes()}{l\_serialaxes()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+serialaxes.\+l\+\_\+serialaxes (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{sequence = {\ttfamily None},  }\item[{}]{scaling = {\ttfamily \char`\"{}variable\char`\"{}},  }\item[{}]{axes\+Layout = {\ttfamily \textquotesingle{}radial\textquotesingle{}},  }\item[{}]{show\+Axes = {\ttfamily True},  }\item[{}]{parent = {\ttfamily None},  }\item[{$\ast$$\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Create a Serialaxes Widget. 
+
+\begin{DoxyVerb}  The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & a data frame with numerical data only \\
+\hline
+{\em sequence} & vector with variable names that defines the axes sequence \\
+\hline
+{\em scaling} & one of \textquotesingle{}variable\textquotesingle{}, \textquotesingle{}data\textquotesingle{}, \textquotesingle{}observation\textquotesingle{} or \textquotesingle{}none\textquotesingle{} to specify how the data is scaled. See Details for more information \\
+\hline
+{\em axes\+Layout} & either \char`\"{}radial\char`\"{} or \char`\"{}parallel\char`\"{} \\
+\hline
+{\em show\+Axes} & boolean to indicate whether axes should be shown or not \\
+\hline
+{\em parent} & parent widget path \\
+\hline
+{\em options} & state arguments, see l\+\_\+info\+\_\+states. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+plot handle object 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Details}
+The scaling state defines how the data is scaled. The axes display 0 at one end and 1 at the other. For the following explanation assume that the data is in a nxp dimensional matrix. The scaling options are then \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+variable &per column scaling \\\cline{1-2}
+observation &per row scaling \\\cline{1-2}
+data &whole matrix scaling \\\cline{1-2}
+none &do not scale \\\cline{1-2}
+\end{longtabu}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{s = \mbox{\hyperlink{namespaceloon_1_1l__serialaxes_ad661dcdfc778d15985b6c771ad1387aa}{l\_serialaxes}}(data=oliveAcids, color=olive\$Area, title=\textcolor{stringliteral}{"olive data"})}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

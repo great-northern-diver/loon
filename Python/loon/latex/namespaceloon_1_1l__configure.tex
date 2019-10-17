@@ -1,0 +1,43 @@
+\hypertarget{namespaceloon_1_1l__configure}{}\doxysection{loon.\+l\+\_\+configure Namespace Reference}
+\label{namespaceloon_1_1l__configure}\index{loon.l\_configure@{loon.l\_configure}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceloon_1_1l__configure_af026676c8807cef281171884b069a73f}{l\+\_\+configure}} (target, $\ast$$\ast$kwargs)
+\begin{DoxyCompactList}\small\item\em Modify one or multiple plot states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceloon_1_1l__configure_af026676c8807cef281171884b069a73f}\label{namespaceloon_1_1l__configure_af026676c8807cef281171884b069a73f}} 
+\index{loon.l\_configure@{loon.l\_configure}!l\_configure@{l\_configure}}
+\index{l\_configure@{l\_configure}!loon.l\_configure@{loon.l\_configure}}
+\doxysubsubsection{\texorpdfstring{l\_configure()}{l\_configure()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+configure.\+l\+\_\+configure (\begin{DoxyParamCaption}\item[{}]{target,  }\item[{$\ast$$\ast$}]{kwargs }\end{DoxyParamCaption})}
+
+
+
+Modify one or multiple plot states. 
+
+\begin{DoxyVerb}   All of loon's displays have plot states. Plot states specify
+   what is displayed, how it is displayed and if and how the plot is linked
+   with other loon plots. Layers, glyphs, navigators and contexts have states
+   too (also refered to as plot states). This function modifies one or
+   multiple plot states.
+\end{DoxyVerb}
+ \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespaceloon_1_1l__cget}{l\+\_\+cget}}, l\+\_\+info\+\_\+states, l\+\_\+create\+\_\+handle
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em target} & target loon object $\ast$$\ast$kwargs\+: configuration states and values(state=value) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{p = \mbox{\hyperlink{namespaceloon_1_1l__plot_ad0057185e8a8fad554d4daaaa6cd4dd9}{l\_plot}}(iris, color = iris[\textcolor{stringliteral}{'Species'}])}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l__configure_af026676c8807cef281171884b069a73f}{l\_configure}}(p, color=\textcolor{stringliteral}{'red'})}
+\DoxyCodeLine{p[\textcolor{stringliteral}{'size'}] = [2 \textcolor{keywordflow}{if} x == \textcolor{stringliteral}{'versicolor'} \textcolor{keywordflow}{else} 8 \textcolor{keywordflow}{for} x \textcolor{keywordflow}{in} iris[\textcolor{stringliteral}{'Species'}]]}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

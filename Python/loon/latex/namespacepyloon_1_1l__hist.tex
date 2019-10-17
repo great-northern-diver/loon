@@ -1,0 +1,57 @@
+\hypertarget{namespacepyloon_1_1l__hist}{}\doxysection{pyloon.\+l\+\_\+hist Namespace Reference}
+\label{namespacepyloon_1_1l__hist}\index{pyloon.l\_hist@{pyloon.l\_hist}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacepyloon_1_1l__hist_a0127a9b4d4951e17308b1e538c795b80}{l\+\_\+hist}} (x=None, origin=None, binwidth=None, parent=None, $\ast$$\ast$options)
+\begin{DoxyCompactList}\small\item\em Create an interactive histogram. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacepyloon_1_1l__hist_a0127a9b4d4951e17308b1e538c795b80}\label{namespacepyloon_1_1l__hist_a0127a9b4d4951e17308b1e538c795b80}} 
+\index{pyloon.l\_hist@{pyloon.l\_hist}!l\_hist@{l\_hist}}
+\index{l\_hist@{l\_hist}!pyloon.l\_hist@{pyloon.l\_hist}}
+\doxysubsubsection{\texorpdfstring{l\_hist()}{l\_hist()}}
+{\footnotesize\ttfamily def pyloon.\+l\+\_\+hist.\+l\+\_\+hist (\begin{DoxyParamCaption}\item[{}]{x = {\ttfamily None},  }\item[{}]{origin = {\ttfamily None},  }\item[{}]{binwidth = {\ttfamily None},  }\item[{}]{parent = {\ttfamily None},  }\item[{$\ast$$\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Create an interactive histogram. 
+
+\begin{DoxyVerb}   l_hist is a generic function for creating an interactive histogram display that can be linked with
+   loon's other displays
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & vector with numerical data to perform the binning onx \\
+\hline
+{\em yshows} & one of \char`\"{}frequency\char`\"{} (default) or \char`\"{}density\char`\"{} \\
+\hline
+{\em show\+Stacked\+Colors} & if T\+R\+UE (default) then bars will be coloured according to colours of the points; if F\+A\+L\+SE, then the bars will be a uniform colour except for highlighted points. \\
+\hline
+{\em origin} & numeric scalar to define the binning origin \\
+\hline
+{\em binwidth} & a numeric scalar to specify the binwidth If N\+U\+LL binwidth is set using David Scott\textquotesingle{}s rule when x is numeric and using the minumum numerical difference between factor levels when x is a factor or a character vector. \\
+\hline
+{\em show\+Bin\+Handle} & If True, then an interactive \char`\"{}bin handle\char`\"{} appears on the plot whose movement resets the origin and the binwidth. Default is False \\
+\hline
+{\em xlabel} & label to be used on the horizontal axis. If N\+U\+LL, an attempt at a meaningful label inferred from x will be made. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+widget handle 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{h = \mbox{\hyperlink{namespacepyloon_1_1l__hist_a0127a9b4d4951e17308b1e538c795b80}{l\_hist}}(iris[\textcolor{stringliteral}{"Sepal.Length"}])}
+\DoxyCodeLine{h.names}
+\DoxyCodeLine{h[\textcolor{stringliteral}{"xlabel"}] = \textcolor{stringliteral}{"Sepal length"}}
+\DoxyCodeLine{h[\textcolor{stringliteral}{"showOutlines"}] = \textcolor{keyword}{False}}
+\DoxyCodeLine{h[\textcolor{stringliteral}{"yshows"}]}
+\DoxyCodeLine{h[\textcolor{stringliteral}{"yshows"}] = \textcolor{stringliteral}{"density"}}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
