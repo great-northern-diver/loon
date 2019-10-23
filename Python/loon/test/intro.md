@@ -93,7 +93,7 @@ One is the scatterplot:
 
 and the other a "loon inspector":
 
-<img src="./images/intro/inspectorQuakesOriginal.png" width="220" height="500">
+<img src="./images/intro/inspectorQuakesOriginal.png" width="150" height="300">
 
 
 For the moment we'll focus mainly on the scatterplot.
