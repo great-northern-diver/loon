@@ -152,13 +152,11 @@ def l_hist(x = None,
             h["yshows"]
             h["yshows"] = "density"
             l_scaleto(h)
-
             h["showStackedColors"] = True
             h['color'] = list(iris["Species"])
             h["showStackedColors"] = False
             h["showOutlines"] = True
             h["showGuides"] = True
-
             # link another plot with the previous plot
             h['linkingGroup'] = "iris_data" 
             h2 = l_hist(iris["Petal.Width"],

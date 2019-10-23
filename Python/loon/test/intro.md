@@ -16,30 +16,23 @@
         - [moving points](#moving-points)
         - [adding colours to the inspector](#adding-colours-to-the-inspector)
         - [changing the inspector palette of colours](#changing-the-inspector-palette-of-colours)
-    - [Programmatic manipulation](#programmatic-manipulation)
-        - [accessing the plot](#accessing-the-plot)
-        - [printing the plot](#printing-the-plot)
-        - [getting plot contents](#getting-plot-contents)
-        - [setting plot contents](#setting-plot-contents)
-    - [Adding layers](#adding-layers)
-        - [Example: adding maps](#example-adding-maps)
-        - [Effect of scaling choices](#effect-of-scaling-choices)
-        - [the "Layers" tab](#the-layers-tab)
-    - [Syntax: loon's `lplot()` is like base graphics `plot()`](#syntax-loons-lplot-is-like-base-graphics-plot)
-- [`lhist()` the `loon` histogram](#lhist-the-loon-histogram)
-- [Linking](#linking)
-    - [`linkingGroup`](#linkinggroup)
-    - [linking many plots](#linking-many-plots)
-    - [`linkingKey`](#linkingkey)
-- [Three dimensional plots - `lplot3D`](#three-dimensional-plots---lplot3d)
-- [Extras](#extras)
-    - [More examples](#more-examples)
-        - [Other vignettes](#other-vignettes)
-        - [loon demos](#loon-demos)
-    - [Extensions to loon via other packages](#extensions-to-loon-via-other-packages)
-        - [`zenplots`](#zenplots)
-        - [Specialty `loon` extensions -  `loon.<specialty>` packages](#specialty-loon-extensions----loonspecialty-packages)
-    - [More on grid graphics and loon](#more-on-grid-graphics-and-loon)
+- [loon graphics (note that the result is assigned to p)](#loon-graphics-note-that-the-result-is-assigned-to-p)
+- [accessing the plot from its string representation](#accessing-the-plot-from-its-string-representation)
+- [Number in group 1 (e.g. as you might have -- here from saved colours)](#number-in-group-1-eg-as-you-might-have----here-from-saved-colours)
+- [Data on first few quakes in group 1.](#data-on-first-few-quakes-in-group-1)
+- [something a little more involved for up to 6 groups](#something-a-little-more-involved-for-up-to-6-groups)
+- [something crazy](#something-crazy)
+- [putting locations and size back](#putting-locations-and-size-back)
+- [Base graphics](#base-graphics)
+- [loon graphics](#loon-graphics)
+- [First, scale the data](#first-scale-the-data)
+- [or more simply via the online manual](#or-more-simply-via-the-online-manual)
+        - [teaching demos](#teaching-demos)
+        - [gapminder](#gapminder)
+        - [the spatial package sp](#the-spatial-package-sp)
+        - [layering and custom layouts](#layering-and-custom-layouts)
+        - [novel brushing and linking](#novel-brushing-and-linking)
+        - [high dimensional data and dimensionality reduction](#high-dimensional-data-and-dimensionality-reduction)
 
 <!-- /TOC -->
 <details><summary>setup</summary>
@@ -100,7 +93,7 @@ One is the scatterplot:
 
 and the other a "loon inspector":
 
-![](./images/intro/inspectorQuakesOriginal.png)
+<img src="./images/intro/inspectorQuakesOriginal.png" width="220" height="500">
 
 
 For the moment we'll focus mainly on the scatterplot.
@@ -312,7 +305,7 @@ For example:
 
 ### adding colours to the inspector
 
-<img src="./images/intro/inspectorQuakesPlus10Cols.png" width="150" height="400">
+<img src="./images/intro/inspectorQuakesPlus10Cols.png" width="200" height="500">
 
 More colours can be added directly by clicking on the `+` or the `+5` in the colour modification section of the inspector.
 
@@ -325,31 +318,22 @@ The loon system **default** list of colours get be found programmatically:
 ```python
 l_getColorList()
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Note:
 
-- loon colours are 6 hexadecimal digits in length and can be a named `R` colour
+- loon colours are 6 hexadecimal digits in length and can be a named colour(e.g red, blue)
 - being constrained to tcl/tk colours, no alpha level is available at this time in loon
-- `R` has a similar set of base colours that is default for all its graphics devices:
-
-    ```{r grDevices palette, eval = TRUE, tidy =TRUE}
-    palette()
-    ```
-
-- like the `R` palette, the loon inspector palette persists.
-
-
 
 --- 
 
 ### changing the inspector palette of colours
 
-At the **beginning of a loon session** (that is, immediately after executing `library(loon)`) you might choose to change the default palette for the inspector to something that suits your tastes/problem.
+At the **beginning of a loon session** (that is, immediately after executing `import loon`) you might choose to change the default palette for the inspector to something that suits your tastes/problem.
 
 **Note**: There may be unintended side effects to changing the inspector colours after a plot (and hence the inspector) has been created so this should be avoided.
 
 A variety of functions exist to change an inspector's palette of colours:
-
+~~~~~~~~~~~~~~~~
 ```{r changing the inspector palette, eval = FALSE} 
 l_setColorList_baseR()                             # base R palette
 l_setColorList_ColorBrewer("Set2")                 # colorblind friendly choice from ColorBrewer

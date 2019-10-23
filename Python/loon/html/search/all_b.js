@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_57',['type',['../classloon_1_1loon__class_1_1loon.html#a7a5c1accf7ea51daad04e6b5ed32d53e',1,'loon::loon_class::loon']]]
+  ['quakes_99',['quakes',['../namespaceloon_1_1dataset.html#a7474e7bec502345fde2198b33a3056fe',1,'loon::dataset']]],
+  ['question_2epy_100',['question.py',['../question_8py.html',1,'']]]
 ];

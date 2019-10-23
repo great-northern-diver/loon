@@ -1,21 +1,4 @@
 var searchData=
 [
-  ['l_5fcget_136',['l_cget',['../namespaceloon_1_1l__cget.html#aab539f84cd3b0a845a78a9e1cf424bf6',1,'loon::l_cget']]],
-  ['l_5fconfigure_137',['l_configure',['../namespaceloon_1_1l__configure.html#af026676c8807cef281171884b069a73f',1,'loon::l_configure']]],
-  ['l_5fdata_138',['l_data',['../namespaceloon_1_1l__data.html#a87e4130406efd8336c28431186c41884',1,'loon::l_data']]],
-  ['l_5fgraph_139',['l_graph',['../namespaceloon_1_1l__graph.html#aed8946ec0caad0ac09c1301d930584ec',1,'loon::l_graph']]],
-  ['l_5fhist_140',['l_hist',['../namespaceloon_1_1l__hist.html#a4cb30dfdadb35dfa1f0bfdc0a18780e8',1,'loon::l_hist']]],
-  ['l_5finfo_5fstates_141',['l_info_states',['../namespaceloon_1_1l__info.html#af1402907547adaf4da1b2ffd92ceec1d',1,'loon::l_info']]],
-  ['l_5fisloonwidget_142',['l_isLoonWidget',['../namespaceloon_1_1l__is_loon_widget.html#a6a9937536c1d2596fa9be0c9c6fce2d1',1,'loon::l_isLoonWidget']]],
-  ['l_5fplot_143',['l_plot',['../namespaceloon_1_1l__plot.html#ad0057185e8a8fad554d4daaaa6cd4dd9',1,'loon::l_plot']]],
-  ['l_5fplot3d_144',['l_plot3D',['../namespaceloon_1_1l__plot3_d.html#abcfbb2de9b2d55719dffcf743f083013',1,'loon::l_plot3D']]],
-  ['l_5fserialaxes_145',['l_serialaxes',['../namespaceloon_1_1l__serialaxes.html#ad661dcdfc778d15985b6c771ad1387aa',1,'loon::l_serialaxes']]],
-  ['l_5fstate_5fnames_146',['l_state_names',['../namespaceloon_1_1l__state__names.html#abae91395df0373abfe3d95e284ad8989',1,'loon::l_state_names']]],
-  ['l_5fsubwin_147',['l_subwin',['../namespaceloon_1_1l__subwin.html#ad190e726adfa6165e9662dc2de2248e7',1,'loon::l_subwin']]],
-  ['l_5fthrowerrorifnotloonwidget_148',['l_throwErrorIfNotLoonWidget',['../namespaceloon_1_1l__throw_error_if_not_loon_widget.html#a4c22f50233b49fc3c900e5a6091f1bf3',1,'loon::l_throwErrorIfNotLoonWidget']]],
-  ['l_5ftoplevel_149',['l_toplevel',['../namespaceloon_1_1l__toplevel.html#a531d87421ab3f7c3455a2ab5bc652319',1,'loon::l_toplevel']]],
-  ['l_5fwidget_150',['l_widget',['../namespaceloon_1_1l__widget.html#a5318a8d569dd72d70c590092641485e7',1,'loon::l_widget']]],
-  ['loongraph_151',['loongraph',['../namespaceloon_1_1graphutils.html#a4dd56765bd981800542c875e895e017c',1,'loon::graphutils']]],
-  ['loonobject_152',['loonobject',['../namespaceloon_1_1loonobject.html#acaf8211f8e6f08d2e7c32105ee286f74',1,'loon::loonobject']]],
-  ['loonplotfactory_153',['loonPlotFactory',['../namespaceloon_1_1loon_plot_factory.html#aafe345cd51b981edec8035e144238661',1,'loon::loonPlotFactory']]]
+  ['hex12tohex6_177',['hex12tohex6',['../namespaceloon_1_1l___color_list.html#a8306c61f4e9ad93c1a590d68fa5f9c38',1,'loon::l_ColorList']]]
 ];

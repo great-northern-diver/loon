@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['graphutils_2epy_8',['graphutils.py',['../graphutils_8py.html',1,'']]],
-  ['getting_20started_9',['Getting started',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['faithful_9',['faithful',['../namespaceloon_1_1dataset.html#a44fee1f85483b7891941952bb85fbcf1',1,'loon::dataset']]]
 ];

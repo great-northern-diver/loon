@@ -23,6 +23,7 @@ from l_info import *
 from l_state_names import *
 from l_scaleto import *
 from l_layer import *
+from l_ColorList import *
 ### remove later 
 from loonobject import *
 ###

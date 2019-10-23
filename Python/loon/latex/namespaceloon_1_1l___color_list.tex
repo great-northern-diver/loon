@@ -1,0 +1,233 @@
+\hypertarget{namespaceloon_1_1l___color_list}{}\doxysection{loon.\+l\+\_\+\+Color\+List Namespace Reference}
+\label{namespaceloon_1_1l___color_list}\index{loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceloon_1_1l___color_list_a8306c61f4e9ad93c1a590d68fa5f9c38}{hex12tohex6}} (x)
+\begin{DoxyCompactList}\small\item\em Convert 12 hexadecimal digit color representations to 6 hexidecimal digit color representations. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa54645fe2d85eaa2c096f238508d6075}{color\+\_\+loon}} ()
+\begin{DoxyCompactList}\small\item\em Create a palette with loon\textquotesingle{}s color mapping. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceloon_1_1l___color_list_a127b25608dc77ff0cb42aef9f0ac9459}{loon\+\_\+palette}} (n)
+\begin{DoxyCompactList}\small\item\em Loon\textquotesingle{}s color generator for creating color palettes. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\+\_\+set\+Color\+List}} (colors)
+\begin{DoxyCompactList}\small\item\em Use custom colors for mapping nominal values to distinct colors. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}{l\+\_\+get\+Color\+List}} ()
+\begin{DoxyCompactList}\small\item\em Get loon\textquotesingle{}s color mapping list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceloon_1_1l___color_list_aa54645fe2d85eaa2c096f238508d6075}\label{namespaceloon_1_1l___color_list_aa54645fe2d85eaa2c096f238508d6075}} 
+\index{loon.l\_ColorList@{loon.l\_ColorList}!color\_loon@{color\_loon}}
+\index{color\_loon@{color\_loon}!loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsubsection{\texorpdfstring{color\_loon()}{color\_loon()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+\+Color\+List.\+color\+\_\+loon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create a palette with loon\textquotesingle{}s color mapping. 
+
+\begin{DoxyParagraph}{Description}
+Used to map nominal data to colors. By default these colors are chosen so that the categories can be well differentiated visually (e.\+g. to highlight the different groups) 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Details}
+This is the function that loon uses by default to map values to colors. Loon\textquotesingle{}s mapping algorithm is as follows\+:
+\begin{DoxyItemize}
+\item if all values already represent valid Tk colors (see tkcolors) then those colors are taken 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item if the number of distinct values is less than the number of values in loon\textquotesingle{}s color mapping list then they get mapped according to the color list, see l\+\_\+set\+Color\+List and l\+\_\+get\+Color\+List. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\begin{DoxyItemize}
+\item if there are more distinct values than there are colors in loon\textquotesingle{}s color mapping list then loon\textquotesingle{}s own color mapping algorithm is used. See loon\+\_\+palette and the details section in the documentation of l\+\_\+set\+Color\+List. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+For other mappings see the col\+\_\+numeric and col\+\_\+factor functions from the scales package.
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+A function that takes a vector with values and maps them to a vector of 6 digit hexadecimal encoded color representation (strings). Note that loon uses internally 12 digit hexadecimal encoded color values. If all the values that get passed to the function are valid color names in Tcl then those colors get returned hexencoded. Otherwise, if there is one or more elements that is not a valid color name it uses the loons default color mapping algorithm. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\+\_\+set\+Color\+List}}, \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}{l\+\_\+get\+Color\+List}}, \mbox{\hyperlink{namespaceloon_1_1l___color_list_a127b25608dc77ff0cb42aef9f0ac9459}{loon\+\_\+palette}} 
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pal = \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa54645fe2d85eaa2c096f238508d6075}{color\_loon}}()}
+\DoxyCodeLine{pal([\textcolor{stringliteral}{'a'},\textcolor{stringliteral}{'b'},\textcolor{stringliteral}{'c'},\textcolor{stringliteral}{'d'}])}
+\DoxyCodeLine{pal([\textcolor{stringliteral}{'a'},\textcolor{stringliteral}{'a'},\textcolor{stringliteral}{'b'},\textcolor{stringliteral}{'c'}])}
+\DoxyCodeLine{pal([\textcolor{stringliteral}{'green'}, \textcolor{stringliteral}{'yellow'}])}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{namespaceloon_1_1l___color_list_a8306c61f4e9ad93c1a590d68fa5f9c38}\label{namespaceloon_1_1l___color_list_a8306c61f4e9ad93c1a590d68fa5f9c38}} 
+\index{loon.l\_ColorList@{loon.l\_ColorList}!hex12tohex6@{hex12tohex6}}
+\index{hex12tohex6@{hex12tohex6}!loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsubsection{\texorpdfstring{hex12tohex6()}{hex12tohex6()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+\+Color\+List.\+hex12tohex6 (\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+Convert 12 hexadecimal digit color representations to 6 hexidecimal digit color representations. 
+
+\begin{DoxyParagraph}{Description}
+Tk colors must be in 6 hexadecimal format with two hexadecimal digits for each of the red, green, and blue components. Twelve hexadecimal digit colors have 4 hexadecimal digits for each. This function converts the 12 digit format to the 6 provided the color is preserved.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & a list with 12 digit hexcolors \\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+Function throws a warning if the conversion loses information. The l\+\_\+hexcolor function converts any Tcl color specification to a 12 digit hexadecimal color representation. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+For other mappings see the col\+\_\+numeric and col\+\_\+factor functions from the scales package.
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+a list with 6 git hexcolors 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{x = l\_hexcolor([\textcolor{stringliteral}{"red"}, \textcolor{stringliteral}{"green"}, \textcolor{stringliteral}{"blue"}, \textcolor{stringliteral}{"orange"}])}
+\DoxyCodeLine{print(x)}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l___color_list_a8306c61f4e9ad93c1a590d68fa5f9c38}{hex12tohex6}}(x)}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}\label{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}} 
+\index{loon.l\_ColorList@{loon.l\_ColorList}!l\_getColorList@{l\_getColorList}}
+\index{l\_getColorList@{l\_getColorList}!loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsubsection{\texorpdfstring{l\_getColorList()}{l\_getColorList()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+\+Color\+List.\+l\+\_\+get\+Color\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get loon\textquotesingle{}s color mapping list. 
+
+\begin{DoxyParagraph}{Description}
+The color mapping list is used by loon to convert nominal values to color values, see the documentation for l\+\_\+set\+Color\+List.
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+a vector with hex-\/encoded colors 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\+\_\+set\+Color\+List}} 
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}{l\_getColorList}}()}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}\label{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}} 
+\index{loon.l\_ColorList@{loon.l\_ColorList}!l\_setColorList@{l\_setColorList}}
+\index{l\_setColorList@{l\_setColorList}!loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsubsection{\texorpdfstring{l\_setColorList()}{l\_setColorList()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+\+Color\+List.\+l\+\_\+set\+Color\+List (\begin{DoxyParamCaption}\item[{}]{colors }\end{DoxyParamCaption})}
+
+
+
+Use custom colors for mapping nominal values to distinct colors. 
+
+\begin{DoxyParagraph}{Description}
+Modify loon\textquotesingle{}s color mapping list to a set of custom colors.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em colors} & list with valid color names or hex-\/encoded colors \\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+There are two commonly used mapping schemes of data values to colors one scheme maps numeric values to colors on a color gradient and the other maps nominal data to colors that can be well differentiated visually (e.\+g. to highlight the different groups). Presently, loon always uses the latter approach for its color mappings. You can use specialized color pallettes to map continuous values to color gradients as shown in the examples below. When assigning values to a display state of type color then loon maps those values using the following rules
+\begin{DoxyItemize}
+\item if all values already represent valid Tk colors (see tkcolors) then those colors are taken.
+\item if the number of distinct values are less than number of values in loon\textquotesingle{}s color mapping list then they get mapped according to the color list, see l\+\_\+set\+Color\+List and l\+\_\+get\+Color\+List.
+\item if there are more distinct values as there are colors in loon\textquotesingle{}s color mapping list then loon\textquotesingle{}s own color mapping algorithm is used. See loon\+\_\+palette and for more details about the algorithm below in this documentation. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Loon\textquotesingle{}s default color list is composed of the first 11 colors from the hcl color wheel (displayed below in the html version of the documentation). The letters in hcl stand for hue, chroma and luminance, and the hcl wheel is useful for finding \char`\"{}balanced colors\char`\"{} with the same chroma (radius) and luminance but with different hues (angles), see Ross Ihaka (2003) \char`\"{}\+Colour for presentation graphics\char`\"{}, Proceedings of D\+SC, p. 2 (@url \href{https://www.stat.auckland.ac.nz/~ihaka/courses/787/color.pdf}{\texttt{ https\+://www.\+stat.\+auckland.\+ac.\+nz/$\sim$ihaka/courses/787/color.\+pdf}}). 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The colors in loon\textquotesingle{}s internal color list are also the default ones listed as the \char`\"{}modify color actions\char`\"{} in the analysis inspectors. To query and modify loon\textquotesingle{}s color list use l\+\_\+get\+Color\+List and l\+\_\+set\+Color\+List. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+In the case where there are more unique data values than colors in loon\textquotesingle{}s color list then the colors for the mapping are taken from different locations distributed on the hcl color wheel (see above). 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+One of the advantages of using the hcl color wheel is that one can obtain any number of \char`\"{}balanced colors\char`\"{} with distinct hues. This is useful in encoding data with colors for a large number of groups; however, it should be noted that the more groups we have the closer the colors sampled from the wheel become and, therefore, the more similar in appearance. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+A common way to sample distinct \char`\"{}balanced colors\char`\"{} on the hcl wheel is to choose evenly spaced hues distributed on the wheel (i.\+e. angles on the wheel). However, this approach leads to color sets where most colors change when the sample size (i.\+e. the number of sampled colors from the wheel) increases by one. For loon, it is desirable to have the first m colors of a color sample of size m+1 to be the same as the colors in a color sample of size m, for all positive natural numbers m. Hence, we prefer to have a sequence of colors. This way, the colors on the inspectors stay relevant (i.\+e. they match with the colors of the data points) when creating plots that encode with color a data variable with different number of groups. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+We implemented such a color sampling scheme (or color sequence generator) that also makes sure that neighboring colors in the sequence have different hues. In you can access this color sequence generator with loon\+\_\+palette. The color wheels below show the color generating sequence twice, once for 16 colors and once for 32 colors. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Note, for the inspector\+: If there are more unique colors in the data points than there are on the inspectors then it is possible to add the next five colors in the sequence of the colors with the +5 button. Alternatively, the + button on the modify color part of the analysis inspectors allows the user to pick any additional color with a color menu. Also, if you change the color mapping list and close and re-\/open the loon inspector these new colors show up in the modify color list. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+When other color mappings of data values are required (e.\+g. numerical data to a color gradient) then the functions in the scales
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\+\_\+set\+Color\+List}}, \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}{l\+\_\+get\+Color\+List}}, l\+\_\+set\+Color\+List\+\_\+\+Color\+Brewer, l\+\_\+set\+Color\+List\+\_\+hcl 
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l__plot_abdde149a3ffeab84faa405d91f03cc7d}{l\_plot}}([1,2,3], color=[1,2,3]) \textcolor{comment}{\# loon's default mapping}}
+\DoxyCodeLine{cols = \mbox{\hyperlink{namespaceloon_1_1l___color_list_aa75bd31895e8749e15091137c61875ef}{l\_getColorList}}()}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\_setColorList}}([\textcolor{stringliteral}{"red"}, \textcolor{stringliteral}{"blue"}, \textcolor{stringliteral}{"green"}, \textcolor{stringliteral}{"orange"}])}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l__plot_abdde149a3ffeab84faa405d91f03cc7d}{l\_plot}}([1,2,3], color=[1,2,3])   \textcolor{comment}{\# use the new color mapping}}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l__plot_abdde149a3ffeab84faa405d91f03cc7d}{l\_plot}}(list(range(10)), color=list(range(10))) \textcolor{comment}{\# use loons default color mapping as color list is too small}}
+\DoxyCodeLine{\textcolor{comment}{\# reset to default}}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\_setColorList}}(cols)}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\mbox{\Hypertarget{namespaceloon_1_1l___color_list_a127b25608dc77ff0cb42aef9f0ac9459}\label{namespaceloon_1_1l___color_list_a127b25608dc77ff0cb42aef9f0ac9459}} 
+\index{loon.l\_ColorList@{loon.l\_ColorList}!loon\_palette@{loon\_palette}}
+\index{loon\_palette@{loon\_palette}!loon.l\_ColorList@{loon.l\_ColorList}}
+\doxysubsubsection{\texorpdfstring{loon\_palette()}{loon\_palette()}}
+{\footnotesize\ttfamily def loon.\+l\+\_\+\+Color\+List.\+loon\+\_\+palette (\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})}
+
+
+
+Loon\textquotesingle{}s color generator for creating color palettes. 
+
+\begin{DoxyParagraph}{Description}
+Loon has a color sequence generator implemented creates a color palettes where the first m colors of a color palette of size m+1 are the same as the colors in a color palette of size m, for all positive natural numbers m. See the details in the l\+\_\+set\+Color\+List documentation.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em n} & numer of different colors in the palette\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+list with hexencoded color values 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespaceloon_1_1l___color_list_a3a6599aa7a78d22e830eed009995c29d}{l\+\_\+set\+Color\+List}} 
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{namespaceloon_1_1l___color_list_a127b25608dc77ff0cb42aef9f0ac9459}{loon\_palette}}(12)}
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

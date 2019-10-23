@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['iris_154',['iris',['../namespaceloon_1_1dataset.html#afe83a03710a3a4dc088f0f51a68429de',1,'loon::dataset']]]
+  ['faithful_215',['faithful',['../namespaceloon_1_1dataset.html#a44fee1f85483b7891941952bb85fbcf1',1,'loon::dataset']]]
 ];

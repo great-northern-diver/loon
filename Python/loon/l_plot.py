@@ -35,12 +35,18 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
     if(isinstance(x,pd.core.frame.DataFrame)):
         y = x.iloc[:,1]
         x = x.iloc[:,0]
-    if(isinstance(x,pd.core.series.Series)):
+    elif(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
         x = list(x)
-        
+    elif(isinstance(x,range)):
+        xlabel = retrieve_name(x)
+        x = list(x)
+    
     if(isinstance(y,pd.core.series.Series)):
         ylabel = y.name
+        y = list(y)
+    elif(isinstance(y,range)):
+        ylabel = retrieve_name(y)
         y = list(y)
     
     if(isinstance(color,pd.core.series.Series)):
@@ -79,12 +85,14 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
         if(len(glyph) > 1):
             if(len(glyph) != len(x)):
                 exit("When more than length 1, length of glyph must match number of points:"+str(len(x)))
-
+        if(y == None):
+            y = x
         kwargs = {"x":x,"y":y,"color": color, "glyph": glyph, "size": size, "active": active,"xlabel": xlabel,
                 "ylabel": ylabel,"title": title,"selected": selected,"showLabels": showLabels,
                 "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
                 "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
         kwargs.update(options)
+        
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',**kwargs)
     plot = loon_l_plot(plot)
     return(plot)
