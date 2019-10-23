@@ -112,9 +112,9 @@ from loon_class import *
 #'     return(id)
 #' }
 #' 
-#' p <- l_plot()
+#' p = l_plot()
 #' 
-#' obj <- newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color='yellow')
+#' obj = newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color='yellow')
 #' 
 #' id = l_layer_foo(p, **obj)
 #' 
@@ -125,10 +125,10 @@ from loon_class import *
 # }
 #obj = {'x':list(range(1,7)) + list(range(6,1,-1)),'y':[3,1,0,0,1,3,3,5,6,6,5],'color':'yellow'}
 
-# def l_layer_foo(widget, **x):
-#       x["widget"] = widget.plot
-#       id = l_layer_polygon(**x)
-#       return(id)
+def l_layer_foo(widget, **x):
+      x["widget"] = widget.plot
+      id = l_layer_polygon(**x)
+      return(id)
 
 # #' @title Layer Method for Kernel Density Estimation
 # #'   
@@ -161,7 +161,8 @@ def l_layer_add(widget, Type, **kwargs):
     for key, value in kwargs.items():
         opt.append('-' + key)
         opt.append(value)        
-    res = tk.tk.call(widget,'layer',Type,*opt)
+    res = tk.tk.call(widget,'layer',Type,*opt)[0]
+    res = loon_l_layer(widget,Type,res)
     return(res)
 
 def l_layer_polygon(widget, x, y,

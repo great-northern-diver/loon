@@ -26,8 +26,10 @@ def loonobject(target, convert=str):
     #     specifier = 0     
     #     Type = 'widget'
     if (isinstance(target,loon_class.loon_l_layer) or isinstance(target,loon_class.loon_l_glyph) ):
-        specifier = 0
-        Type = 'widget'
+        loon_obj = target
+        specifier = [target.widget,target.id]
+        Type = type(target).__name__[7:]
+        hasRecognized = True
     elif (isinstance(target,loon_class.loon_l_navigator)):        
         specifier = 0
         Type = 'widget'
@@ -36,7 +38,7 @@ def loonobject(target, convert=str):
         Type = 'widget'
     else: 
         ## strip attributes
-        specifier = target.plot
+        specifier = [target.plot]
 
         # type <- switch(length(specifier),
         #                '1'= "widget",
@@ -64,11 +66,12 @@ def loonobject(target, convert=str):
         #                    widget=structure(specifier, class="loon"),
         #                    context=structure(specifier[3],
         #                                      widget=specifier[1],
+        
         #                                      navigator=specifier[2],
         #                                      class="loon"),
         #                    structure(specifier[2], widget=specifier[1],
         #                              class=c("loon", paste0("l_", type))))
-    widget = specifier
+    widget = specifier[0]
     #widget <- specifier[1]
     l_throwErrorIfNotLoonWidget(widget)
     # call <- switch(type,
@@ -78,9 +81,15 @@ def loonobject(target, convert=str):
     #                navigator=c(widget, 'navigator', 'use', specifier[2]),
     #                context=c(widget, 'navigator', 'use', specifier[2],
     #                          'context', 'use', specifier[3]))
-    call = Type    
+    #call = Type  
+    if(Type == 'widget'):
+        call = [widget]
+    elif(Type == 'layer'):
+        call = [widget,'layer','use',specifier[1]] 
+    else:
+        print('not finished yet ~~~~~')
+
     def fun(*args):
-        #plot = tk.tk.call(factory_tclcmd,child,*opt)
-        #convert(do.call('tcl', append(call, list(...))))
-        return convert(str(tk.tk.call(specifier,*args)))
+        args = call + list(args)
+        return convert(str(tk.tk.call(*args)))
     return  fun
