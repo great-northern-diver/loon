@@ -1,7 +1,8 @@
 from loonPlotFactory import *
 import pandas as pd
 from retrieve_name import *
-from loon_class import *
+from loon_class import loon_l_plot3D
+
 def l_plot3D(x,  y = None, z = None,
                 axisScaleFactor = 1, color = "grey60",
                 glyph = "ccircle", size = 4, active = True, selected = False,
@@ -131,7 +132,8 @@ def l_plot3D(x,  y = None, z = None,
                 "background": "white"}
         kwargs.update(options)
         plot = loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D', parent,**kwargs)
-    plot = loon(plot,"l_plot3D")
+    #plot = loon(plot,"l_plot3D")
+    plot = loon_l_plot3D(plot)
     return(plot)
 
 

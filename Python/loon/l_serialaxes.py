@@ -1,6 +1,6 @@
 import pandas as pd
 from loonPlotFactory import *
-from loon_class import *
+from loon_class import loon_l_serialaxes
 from l_data import *
 
 def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',showAxes=True, parent=None,**options):
@@ -41,5 +41,6 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
                 "scaling":scaling,"axesLayout":axesLayout}
     kwargs.update(options)
     plot = loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,**kwargs)
-    plot = loon(plot,'l_serialaxes')
+    #plot = loon(plot,'l_serialaxes')
+    plot = loon_l_serialaxes(plot)
     return(plot)   

@@ -1,5 +1,5 @@
 from loonPlotFactory import *
-from loon_class import *
+from loon_class import loon_l_plot
 from retrieve_name import *
 import numpy as np
 import pandas as pd
@@ -8,7 +8,7 @@ import pandas as pd
 def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"],glyph = ["ccircle"],
             size = 4,active = [True],selected = [False],showLabels = True,showScales = False,
             showGuides = True, guidelines = "white",guidesBackground = "grey92",foreground = "black",
-            background = "white",parent = None):
+            background = "white",parent = None,**options):
     """    
     l_plot is a generic function for creating interactive
        
@@ -84,10 +84,9 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
                 "ylabel": ylabel,"title": title,"selected": selected,"showLabels": showLabels,
                 "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
                 "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
-        #plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
-        #                        options= {'x':x,'y':y,'xlabel':xlabel,'ylabel':ylabel})
+        kwargs.update(options)
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',**kwargs)
-    plot = loon(plot,'l_plot')
+    plot = loon_l_plot(plot)
     return(plot)
 
 

@@ -13,6 +13,5 @@ def l_toplevel(path= None):
             child = '.l'+ str(i)                    
         path = child
         tt = str(tk.eval('toplevel ' + path))
-    #print("tt: ",tt)
     tk.eval('wm iconphoto ' + tt + ' -default ::loon::loonIcon')    
     return(tt)

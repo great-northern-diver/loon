@@ -19,6 +19,10 @@ from l_throwErrorIfNotLoonWidget import *
 from l_cget import *
 from l_widget import *
 from l_configure import *
+from l_info import *
+from l_state_names import *
+from l_scaleto import *
+from l_layer import *
 ### remove later 
 from loonobject import *
 ###

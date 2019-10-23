@@ -29,3 +29,6 @@ oliveLocations = pd.read_csv(working_dir + '/datasets/oliveLocations.csv')
 
 #quakes = pd.read_csv('./loon/datasets/quakes.csv')
 quakes = pd.read_csv(working_dir + '/datasets/quakes.csv')
+
+###
+faithful = pd.read_csv(working_dir + '/datasets/faithful.csv')

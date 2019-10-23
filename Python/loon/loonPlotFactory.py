@@ -17,8 +17,8 @@ def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot"
     else:
         opt = []
         for key, value in kwargs.items():
-            opt.append('-' + key)
-            opt.append(value)
+           opt.append('-' + key)
+           opt.append(value)
         plot = tk.tk.call(factory_tclcmd,child,*opt)
     if(new_toplevel):
         tk.tk.call('pack', plot,'-expand',1,'-fill','both')

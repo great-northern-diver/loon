@@ -1,11 +1,12 @@
 from loonPlotFactory import *
-from loon_class import *
+from loon_class import loon_l_hist
 from retrieve_name import *
 import pandas as pd
 from functools import singledispatch
 import numpy as np
 from genetic_func.UseMethod import *
 from genetic_func.getclass import *
+
 # def l_hist(x = None,
 #          yshows = ["frequency", "density"],
 #          showStackedColors = True,
@@ -150,6 +151,19 @@ def l_hist(x = None,
             h["showOutlines"] = False
             h["yshows"]
             h["yshows"] = "density"
+            l_scaleto(h)
+
+            h["showStackedColors"] = True
+            h['color'] = list(iris["Species"])
+            h["showStackedColors"] = False
+            h["showOutlines"] = True
+            h["showGuides"] = True
+
+            # link another plot with the previous plot
+            h['linkingGroup'] = "iris_data" 
+            h2 = l_hist(iris["Petal.Width"],
+                        linkingGroup="iris_data",
+                        showStackedColors = True)
         @endcode
     """
     if(isinstance(x,pd.core.series.Series)):
@@ -172,7 +186,6 @@ def l_hist(x = None,
                     "xlabel":xlabel}
 
         plot = loonPlotFactory('::loon::histogram', 'hist', 'loon histogram', **kwargs)
-        plot = loon(plot)
     else:
         ndims = len(np.asarray(x).shape)
         if (ndims > 2): exit("x should have at most two dimensions")
@@ -218,7 +231,8 @@ def l_hist(x = None,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 **options)
-        plot = loon(plot,'l_hist')
+    #plot = loon(plot,'l_hist')
+    plot = loon_l_hist(plot)
     return(plot)
 
 # def l_hist(x = None,

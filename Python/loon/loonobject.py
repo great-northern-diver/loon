@@ -1,6 +1,7 @@
 
 from l_throwErrorIfNotLoonWidget import *
 from tk import tk
+import loon_class
 def loonobject(target, convert=str):
     """    
     Create closure to evaluate code for a loon object
@@ -15,13 +16,22 @@ def loonobject(target, convert=str):
         a closure that will evaluate tcl code for the particular object.
     """
     ## first check for loon objects
-    if (target.type == 'l_layer' or target.type == 'l_glyph'):
+    # if (target.type == 'l_layer' or target.type == 'l_glyph'):
+    #     specifier = 0
+    #     Type = 'widget'
+    # elif (target.type == 'l_navigator'):        
+    #     specifier = 0
+    #     Type = 'widget'
+    # elif (target.type == 'l_context'):
+    #     specifier = 0     
+    #     Type = 'widget'
+    if (isinstance(target,loon_class.loon_l_layer) or isinstance(target,loon_class.loon_l_glyph) ):
         specifier = 0
         Type = 'widget'
-    elif (target.type == 'l_navigator'):        
+    elif (isinstance(target,loon_class.loon_l_navigator)):        
         specifier = 0
         Type = 'widget'
-    elif (target.type == 'l_context'):
+    elif (isinstance(target,loon_class.loon_l_context)):
         specifier = 0     
         Type = 'widget'
     else: 
@@ -72,5 +82,5 @@ def loonobject(target, convert=str):
     def fun(*args):
         #plot = tk.tk.call(factory_tclcmd,child,*opt)
         #convert(do.call('tcl', append(call, list(...))))
-        return convert(tk.tk.call(specifier,*args)) 
+        return convert(str(tk.tk.call(specifier,*args)))
     return  fun
