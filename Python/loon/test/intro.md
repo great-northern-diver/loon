@@ -89,11 +89,11 @@ two windows to appear.
 
 One is the scatterplot:
 
-![](./images/intro/quakesOriginal.png)
+<img src="./images/intro/quakesOriginal.png" width="350">
 
 and the other a "loon inspector":
 
-<img src="./images/intro/inspectorQuakesOriginal.png" width="150" height="300">
+<img src="./images/intro/inspectorQuakesOriginal.png" width="250" height="560">
 
 
 For the moment we'll focus mainly on the scatterplot.
