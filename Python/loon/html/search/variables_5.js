@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quakes_223',['quakes',['../namespaceloon_1_1dataset.html#a7474e7bec502345fde2198b33a3056fe',1,'loon::dataset']]]
+  ['pdf_222',['pdf',['../namespaceloon_1_1question.html#a79c58f260d88a6246767b9bf6f21360d',1,'loon::question']]]
 ];

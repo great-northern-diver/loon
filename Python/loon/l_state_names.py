@@ -16,8 +16,8 @@ def l_state_names(target):
         In order to access values of a states use l_info_states.
     @see l_info_states, l_cget, l_configure
     """
-    if(not isinstance(target,loon_class.loon)):
-        exit('target needs to be of class loon')
+    # if(not isinstance(target,loon_class.loon)):
+    #     exit('target needs to be of class loon')
     return list(l_info_states(target).keys())
     
 

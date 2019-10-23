@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['faithful_215',['faithful',['../namespaceloon_1_1dataset.html#a44fee1f85483b7891941952bb85fbcf1',1,'loon::dataset']]]
+  ['dd_215',['dd',['../namespaceloon_1_1question.html#af474369cd47ec7c50e8cc0e3d579cc15',1,'loon::question']]]
 ];

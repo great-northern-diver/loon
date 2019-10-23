@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "l",
   3: "_dglnqr",
   4: "_chl",
-  5: "finopqwxy",
+  5: "dfinopqwxy",
   6: "g"
 };
 
