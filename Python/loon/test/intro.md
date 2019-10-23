@@ -262,7 +262,8 @@ You should now have four different coloured groups or clusters.
 ### on selection
 
 When done, turn the selection back to the defaults:
-![](./images/intro/inspectorSelectDefaults.png)
+
+<img src="./images/intro/inspectorSelectDefaults.png" width="300" height="100">
 
 That is,
 
@@ -311,8 +312,7 @@ For example:
 
 ### adding colours to the inspector
 
-![](./images/intro/inspectorQuakesPlus10Cols.png)
-
+<img src="./images/intro/inspectorQuakesPlus10Cols.png" width="150" height="400">
 
 More colours can be added directly by clicking on the `+` or the `+5` in the colour modification section of the inspector.
 
