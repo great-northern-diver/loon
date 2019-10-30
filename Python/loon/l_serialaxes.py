@@ -6,7 +6,7 @@ from l_data import *
 def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',showAxes=True, parent=None,**options):
     """
     Create a Serialaxes Widget
-
+    Description:
        The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.    
     
     Args:
@@ -33,6 +33,7 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
         @code
             s = l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
         @endcode
+    @namespace loon.l_serialaxes
     """
     data = pd.DataFrame(data)                            
     if(sequence == None):

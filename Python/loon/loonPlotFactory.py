@@ -1,8 +1,8 @@
 from l_toplevel import *
 from l_subwin import *
 from tk import tk 
+import threading
 
-#def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot", parent=None, options=None):
 def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot", parent=None, **kwargs):
     """Documentation for a function.
     More details.

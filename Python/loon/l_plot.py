@@ -3,8 +3,9 @@ from loon_class import loon_l_plot
 from retrieve_name import *
 import numpy as np
 import pandas as pd
+from tkinter import *
 # from functools import singledispatch
-
+from threading import Thread
 def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"],glyph = ["ccircle"],
             size = 4,active = [True],selected = [False],showLabels = True,showScales = False,
             showGuides = True, guidelines = "white",guidesBackground = "grey92",foreground = "black",
@@ -31,6 +32,7 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             p1.names
             p1["size"] <- 10
         @endcode
+    @namespace loon.l_plot
     """
     if(isinstance(x,pd.core.frame.DataFrame)):
         y = x.iloc[:,1]
@@ -71,6 +73,9 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
         #        "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
         #        "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',parent)
+        # s = threading.Thread(target=loonPlotFactory, args=('::loon::plot','plot','loon scatterplot',parent,))
+        # t = s.start()
+        # mainloop()
     else:        
         ## Get x, y, xlab and ylab
         if(len(color) > 1):
@@ -92,8 +97,11 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
                 "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
                 "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
         kwargs.update(options)
-        
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',**kwargs)
+        # s = threading.Thread(target=loonPlotFactory, args=('::loon::plot','plot','loon scatterplot',),kwargs= kwargs)
+        # t =s.start()
+        # mainloop()
+    
     plot = loon_l_plot(plot)
     return(plot)
 

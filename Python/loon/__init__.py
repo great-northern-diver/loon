@@ -24,9 +24,9 @@ from l_state_names import *
 from l_scaleto import *
 from l_layer import *
 from l_ColorList import *
+from l_hexcolor import *
+from tkcolors import *
 ### remove later 
 from loonobject import *
 ###
 namespace = globals().keys()
-#__all__ = ["l_data","l_hist","l_plot","l_serialaxes",
-#           "l_subwin","l_toplevel","loonobject","loonPlotFactory"]

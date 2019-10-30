@@ -13,7 +13,8 @@ def l_plot3D(x,  y = None, z = None,
                 background = "white", parent = None, **options):
     """    
     Create an interactive loon 3d plot widget
-       
+
+    Description:   
         l_plot3D is a generic function for creating interactive
         visualization environments for python objects.
 
@@ -81,6 +82,7 @@ def l_plot3D(x,  y = None, z = None,
             length = [1,2,3] 
             l_plot3D(height,width,length)
         @endcode
+    @namespace loon.l_plot3D
     """
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name

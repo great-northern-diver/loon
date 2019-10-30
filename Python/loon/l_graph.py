@@ -15,6 +15,7 @@ def l_graph(nodes='', f='', t='',  parent=None,**options):
     Returns:
         graph handle
     @see loongraph, l_graph, l_info_states, l_graph.graph
+    @namespace loon.l_graph
     """
     kwargs = {'nodes':nodes, 'from':f, 'to': t}
     kwargs.update(options)

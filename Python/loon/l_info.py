@@ -28,6 +28,7 @@ def l_info_states(target, states=['all']):
         l_info_states(l)
         h = l_hist(iris["Sepal.Length"], linkingGroup="iris")
         l_info_states(h)
+    @namespace loon.l_info_states
     """
 
     def trans(tclvalue):

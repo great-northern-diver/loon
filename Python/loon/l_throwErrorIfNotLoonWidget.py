@@ -3,6 +3,7 @@ def l_throwErrorIfNotLoonWidget(widget):
     """
     Throw an error if string is not associated with a loon widget
     
+    Description:
         Helper function to ensure that a widget path is associated with a
         loon widget.
 
@@ -11,6 +12,7 @@ def l_throwErrorIfNotLoonWidget(widget):
     Returns:
         True if the string is associated with a loon widget,
         otherwise an error is thrown.
+    @namespace loon.l_throwErrorIfNotLoonWidget
     """
     # if(not isinstance(widget, str)):
     #     widget = widget.plot 

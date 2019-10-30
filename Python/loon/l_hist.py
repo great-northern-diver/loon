@@ -163,6 +163,7 @@ def l_hist(x = None,
                         linkingGroup="iris_data",
                         showStackedColors = True)
         @endcode
+    @namespace loon.l_hist
     """
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name

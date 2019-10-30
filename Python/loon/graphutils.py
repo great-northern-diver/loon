@@ -28,6 +28,7 @@ def loongraph(nodes, f = '', t='', isDirected=False):
             >>># create a loon graph plot
             >>>p = l_graph(**g)
         @endcode
+    @namespace loon.loongraph
     """
     if (len(nodes) != len(np.unique(nodes))):
         warnings.warn("node names are not unique")
@@ -66,6 +67,7 @@ def completegraph(nodes, isDirected=False):
             >>>g = completegraph(l)
             >>>l_graph(**g)
         @endcode
+    @namespace loon.completegraph
     """
     n = len(nodes)
     if(n < 2):

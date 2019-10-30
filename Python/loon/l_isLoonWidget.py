@@ -11,6 +11,7 @@ def l_isLoonWidget(widget):
     Returns:
         boolean, True if the argument is a valid loon widget path, False 
         otherwise
+    @namespace loon.l_isLoonWidget
     """
     if(isinstance(type(widget), list)):
         return False

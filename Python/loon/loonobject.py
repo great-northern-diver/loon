@@ -5,7 +5,8 @@ import loon_class
 def loonobject(target, convert=str):
     """    
     Create closure to evaluate code for a loon object
-       
+
+    Description:   
         Returns a closure that evaluates code for a partiular part of a 
         loon plot widget such as a: the widget itself, layer, glyph,
         navigator, or context.
@@ -14,6 +15,7 @@ def loonobject(target, convert=str):
         target: target loon object
     Returns:
         a closure that will evaluate tcl code for the particular object.
+    @namespace loon.loonobject
     """
     ## first check for loon objects
     # if (target.type == 'l_layer' or target.type == 'l_glyph'):
