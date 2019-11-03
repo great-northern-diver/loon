@@ -1,6 +1,6 @@
 import sys
 #sys.path.append('./loon')
-working_dir = '/Users/tedwang/Documents/GitHub/loon/Python/loon'
+working_dir = './loon'
 sys.path.append(working_dir)
 from l_data import *
 from l_hist import *
@@ -26,6 +26,7 @@ from l_layer import *
 from l_ColorList import *
 from l_hexcolor import *
 from tkcolors import *
+from l_resize import *
 ### remove later 
 from loonobject import *
 ###

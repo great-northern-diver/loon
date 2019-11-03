@@ -33,7 +33,6 @@ class loon:
         opt = {name:value}
         l_configure(self,**opt)
 
-
 class loon_l_plot(loon):
     '''
     l_plot
