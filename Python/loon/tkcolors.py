@@ -1,3 +1,4 @@
+
 def tkcolors(): 
     """
     List the valid Tk color names
@@ -15,8 +16,9 @@ def tkcolors():
     Returns:
        a list of Tk color names
             
-    @namespace loon.tkcolors 
+    @namespace loon.tkcolors
     """
+
     return(["alice", "blue", "AliceBlue", "antique", "white", "AntiqueWhite",
              "AntiqueWhite1", "AntiqueWhite2", "AntiqueWhite3", "AntiqueWhite4",
              "aquamarine", "aquamarine1", "aquamarine2", "aquamarine3", "aquamarine4",

@@ -32,6 +32,9 @@ class loon:
     def __setitem__(self, name, value):
         opt = {name:value}
         l_configure(self,**opt)
+    
+    def __dir__(self):
+        return self.names + ['plot','names']
 
 class loon_l_plot(loon):
     '''
@@ -142,6 +145,10 @@ class loon_l_pairs(loon):
         # [x[name] = value for x in self.plot.values()]
         #list(map(lambda x: l_configure(x,**opt), self.plot.values()))
         [l_configure(v,**opt) if name in v.names else None for v in self.plot.values()]
+    
+    # def __dir__(self):
+    #     return list(self.plot.values())[0].names + ['plot','names']
+
 class loon_l_glyph(loon):
     '''
     l_plot

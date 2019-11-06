@@ -25,7 +25,7 @@ This manual is divided in the following sections:
     desc:  These are the main functions needed to create plots
     contents:
     - l_plot_arguments
-    - starts_with("l_plot")
+    - l_plot
     - l_hist
     - l_plot3D
     - l_pairs
@@ -74,7 +74,7 @@ This manual is divided in the following sections:
     desc: Colors
     contents:
     - color_loon
-    - tkcolors
+    - loon::tkcolors
     - hex12tohex6
     - l_hexcolor
     - l_getColorList
