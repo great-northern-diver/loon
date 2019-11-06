@@ -17,7 +17,7 @@ def l_resize(widget, width, height):
     Examples:
             p = l_plot(iris)
             l_resize(p,300,300)
-            l_size(p) = [500,500]
+            l_size(p)
 
     @namespace loon.l_resize
     '''

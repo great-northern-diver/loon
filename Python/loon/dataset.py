@@ -1,6 +1,6 @@
 import pandas as pd
 
-working_dir = '/Users/tedwang/Documents/GitHub/loon/Python/loon'
+working_dir = './loon'
 
  
 ## iris data set 

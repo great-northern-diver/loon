@@ -104,9 +104,44 @@ class loon_l_layer():
         opt = {name:value}
         l_configure(self,**opt)
 
+
 ######## Not finished yet 
-
-
+class loon_l_pairs(loon):
+    '''
+    l_plot3D
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)
+        
+    def __getattr__(self, key):
+        if(key == 'plot'):
+            return self.plot
+        elif(key == 'names'):
+            return list(self.plot.keys())
+        else:  
+            return {k: v[key] if key in v.names else None for k,v in self.plot.items()}
+    def __getitem__(self, key):
+        if(key == 'plot'):
+            return self.plot
+        elif(key == 'names'):
+            return list(self.plot.keys())
+        else:
+            # return l_cget(self,key)
+            return {k: v[key] if key in v.names else None for k,v in self.plot.items()}
+    # overload .    
+    def __setattr__(self, name, value):
+        opt = {name:value}
+        #l_configure(self,**opt)
+        #[lambda x: x[name] = value for x in self.plot.values()]
+        #list(map(lambda x: l_configure(x,**opt), self.plot.values()))
+        [l_configure(v,**opt) if name in v.names else None for v in self.plot.values()]
+    # overload []   
+    def __setitem__(self, name, value):
+        opt = {name:value}
+        #l_configure(self,**opt)
+        # [x[name] = value for x in self.plot.values()]
+        #list(map(lambda x: l_configure(x,**opt), self.plot.values()))
+        [l_configure(v,**opt) if name in v.names else None for v in self.plot.values()]
 class loon_l_glyph(loon):
     '''
     l_plot

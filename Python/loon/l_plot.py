@@ -4,8 +4,7 @@ from retrieve_name import *
 import numpy as np
 import pandas as pd
 from tkinter import *
-# from functools import singledispatch
-from threading import Thread
+
 def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"],glyph = ["ccircle"],
             size = 4,active = [True],selected = [False],showLabels = True,showScales = False,
             showGuides = True, guidelines = "white",guidesBackground = "grey92",foreground = "black",
@@ -35,9 +34,11 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
     @namespace loon.l_plot
     """
     if(isinstance(x,pd.core.frame.DataFrame)):
-        y = x.iloc[:,1]
-        x = x.iloc[:,0]
-    elif(isinstance(x,pd.core.series.Series)):
+        if(x.shape[1] > 1):
+            y = x.iloc[:,1]
+        x = x.iloc[:,0]      
+    
+    if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
         x = list(x)
     elif(isinstance(x,range)):
@@ -73,9 +74,6 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
         #        "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
         #        "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',parent)
-        # s = threading.Thread(target=loonPlotFactory, args=('::loon::plot','plot','loon scatterplot',parent,))
-        # t = s.start()
-        # mainloop()
     else:        
         ## Get x, y, xlab and ylab
         if(len(color) > 1):
@@ -91,17 +89,14 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             if(len(glyph) != len(x)):
                 exit("When more than length 1, length of glyph must match number of points:"+str(len(x)))
         if(y == None):
-            y = x
+            y = list(range(len(x)))
         kwargs = {"x":x,"y":y,"color": color, "glyph": glyph, "size": size, "active": active,"xlabel": xlabel,
                 "ylabel": ylabel,"title": title,"selected": selected,"showLabels": showLabels,
                 "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,
-                "guidesBackground": guidesBackground,"foreground": foreground,"background": background}
+                "guidesBackground": guidesBackground,"foreground": foreground,"background": background,"parent":parent}
         kwargs.update(options)
         plot = loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',**kwargs)
-        # s = threading.Thread(target=loonPlotFactory, args=('::loon::plot','plot','loon scatterplot',),kwargs= kwargs)
-        # t =s.start()
-        # mainloop()
-    
+
     plot = loon_l_plot(plot)
     return(plot)
 

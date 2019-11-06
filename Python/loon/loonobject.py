@@ -2,6 +2,7 @@
 from l_throwErrorIfNotLoonWidget import *
 from tk import tk
 import loon_class
+import numpy as np
 def loonobject(target, convert=str):
     """    
     Create closure to evaluate code for a loon object
@@ -92,6 +93,14 @@ def loonobject(target, convert=str):
         print('not finished yet ~~~~~')
 
     def fun(*args):
+        #plot = tk.tk.call(factory_tclcmd,child,*opt)
+        #convert(do.call('tcl', append(call, list(...))))
         args = call + list(args)
-        return convert(str(tk.tk.call(*args)))
+        temp = tk.tk.call(*args)
+        if(isinstance(temp,tuple)):
+            return np.array(temp).flatten()
+        elif(isinstance(temp,(int,float))):
+            return temp
+        else:
+            return convert(str(temp))
     return  fun

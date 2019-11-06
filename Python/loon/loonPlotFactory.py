@@ -7,11 +7,14 @@ def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot"
     """Documentation for a function.
     More details.
     """
+    # print('parent:',parent)
     new_toplevel = False
     if(parent == None):
         new_toplevel = True
         parent = l_toplevel()
     child = l_subwin(parent, factory_path)
+    # print('child:',child)
+
     if(len(kwargs) == 0):
         plot = tk.tk.call(factory_tclcmd, child)
     else:
@@ -20,6 +23,7 @@ def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot"
            opt.append('-' + key)
            opt.append(value)
         plot = tk.tk.call(factory_tclcmd,child,*opt)
+
     if(new_toplevel):
         tk.tk.call('pack', plot,'-expand',1,'-fill','both')
         tk.tk.call('wm','title',parent, factory_window_title +" "+ str(plot))

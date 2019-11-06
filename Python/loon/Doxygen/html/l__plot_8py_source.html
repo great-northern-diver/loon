@@ -71,40 +71,40 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">from</span> tkinter <span class="keyword">import</span> *</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"># from functools import singledispatch</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">from</span> threading <span class="keyword">import</span> Thread</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">def </span>l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = [&quot;grey60&quot;],glyph = [&quot;ccircle&quot;],</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            size = 4,active = [True],selected = [False],showLabels = True,showScales = False,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            showGuides = True, guidelines = &quot;white&quot;,guidesBackground = &quot;grey92&quot;,foreground = &quot;black&quot;,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            background = &quot;white&quot;,parent = None,**options):</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;    </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">    l_plot is a generic function for creating interactive</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">       </span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">       visualization environments for R objects.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    </span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">    Args:</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">        x:  the x coordinates of points in the l_plot.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">            Alternatively, a single plotting structure, function, or any R object having an l_plot</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">            method can be provided.  </span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">        y:  the y coordinates of points in the l_plot, optional if x is an</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">            appropriate structure.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">    Returns:</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">        widget handle</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">    Examples:</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">        @code </span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">            p1 = l_plot(iris[&#39;Sepal.Length&#39;],iris[&#39;Sepal.Width&#39;],color = iris[&#39;Species&#39;],title = &quot;First plot&quot;)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">            # The names of the info states that can be</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">            # accessed or set.  They can also be given values as    </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">            # arguments to l_plot.default()</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">            p1.names</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">            p1[&quot;size&quot;] &lt;- 10</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">        @endcode</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">    @namespace loon.l_plot</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    if(isinstance(x,pd.core.frame.DataFrame)):</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        y = x.iloc[:,1]</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        x = x.iloc[:,0]</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    elif(isinstance(x,pd.core.series.Series)):</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">def </span>l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = [&quot;grey60&quot;],glyph = [&quot;ccircle&quot;],</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            size = 4,active = [True],selected = [False],showLabels = True,showScales = False,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            showGuides = True, guidelines = &quot;white&quot;,guidesBackground = &quot;grey92&quot;,foreground = &quot;black&quot;,</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            background = &quot;white&quot;,parent = None,**options):</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;    </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">    l_plot is a generic function for creating interactive</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">       </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">       visualization environments for R objects.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    Args:</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">        x:  the x coordinates of points in the l_plot.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">            Alternatively, a single plotting structure, function, or any R object having an l_plot</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">            method can be provided.  </span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">        y:  the y coordinates of points in the l_plot, optional if x is an</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">            appropriate structure.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">    Returns:</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">        widget handle</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">    Examples:</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">        @code </span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">            p1 = l_plot(iris[&#39;Sepal.Length&#39;],iris[&#39;Sepal.Width&#39;],color = iris[&#39;Species&#39;],title = &quot;First plot&quot;)</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">            # The names of the info states that can be</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">            # accessed or set.  They can also be given values as    </span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">            # arguments to l_plot.default()</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">            p1.names</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">            p1[&quot;size&quot;] &lt;- 10</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">        @endcode</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">    @namespace loon.l_plot</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    if(isinstance(x,pd.core.frame.DataFrame)):</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        y = x.iloc[:,1]</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        x = x.iloc[:,0]</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    if(isinstance(x,pd.core.series.Series)):</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        xlabel = x.name</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        x = list(x)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    elif(isinstance(x,range)):</div>
@@ -140,43 +140,37 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="comment">#        &quot;showScales&quot;: showScales,&quot;showGuides&quot;: showGuides, &quot;guidelines&quot;: guidelines,</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="comment">#        &quot;guidesBackground&quot;: guidesBackground,&quot;foreground&quot;: foreground,&quot;background&quot;: background}</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        plot = loonPlotFactory(<span class="stringliteral">&#39;::loon::plot&#39;</span>, <span class="stringliteral">&#39;plot&#39;</span>, <span class="stringliteral">&#39;loon scatterplot&#39;</span>,parent)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="comment"># s = threading.Thread(target=loonPlotFactory, args=(&#39;::loon::plot&#39;,&#39;plot&#39;,&#39;loon scatterplot&#39;,parent,))</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment"># t = s.start()</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment"># mainloop()</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">else</span>:        </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        if(len(color) &gt; 1):</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            if(len(color) != len(x)):</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                color = np.resize(color, len(x))</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        if(len(active) &gt; 1):</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">if</span> (len(active) != len(x)):</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of active must match number of points:&quot;</span>+str(len(x)))</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        if(len(selected) &gt; 1):</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            if(len(selected) != len(x)):</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of selected must match number of points:&quot;</span>+str(len(x)))</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        if(len(glyph) &gt; 1):</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            if(len(glyph) != len(x)):</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of glyph must match number of points:&quot;</span>+str(len(x)))</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        if(y == <span class="keywordtype">None</span>):</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            y = x</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        kwargs = {<span class="stringliteral">&quot;x&quot;</span>:x,<span class="stringliteral">&quot;y&quot;</span>:y,<span class="stringliteral">&quot;color&quot;</span>: color, <span class="stringliteral">&quot;glyph&quot;</span>: glyph, <span class="stringliteral">&quot;size&quot;</span>: size, <span class="stringliteral">&quot;active&quot;</span>: active,<span class="stringliteral">&quot;xlabel&quot;</span>: xlabel,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="stringliteral">&quot;ylabel&quot;</span>: ylabel,<span class="stringliteral">&quot;title&quot;</span>: title,<span class="stringliteral">&quot;selected&quot;</span>: selected,<span class="stringliteral">&quot;showLabels&quot;</span>: showLabels,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="stringliteral">&quot;showScales&quot;</span>: showScales,<span class="stringliteral">&quot;showGuides&quot;</span>: showGuides, <span class="stringliteral">&quot;guidelines&quot;</span>: guidelines,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="stringliteral">&quot;guidesBackground&quot;</span>: guidesBackground,<span class="stringliteral">&quot;foreground&quot;</span>: foreground,<span class="stringliteral">&quot;background&quot;</span>: background}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        kwargs.update(options)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        plot = loonPlotFactory(<span class="stringliteral">&#39;::loon::plot&#39;</span>, <span class="stringliteral">&#39;plot&#39;</span>, <span class="stringliteral">&#39;loon scatterplot&#39;</span>,**kwargs)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment"># s = threading.Thread(target=loonPlotFactory, args=(&#39;::loon::plot&#39;,&#39;plot&#39;,&#39;loon scatterplot&#39;,),kwargs= kwargs)</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment"># t =s.start()</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment"># mainloop()</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    plot = <a class="code" href="classloon_1_1loon__class_1_1loon__l__plot.html">loon_l_plot</a>(plot)</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    return(plot)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">else</span>:        </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        if(len(color) &gt; 1):</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            if(len(color) != len(x)):</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                color = np.resize(color, len(x))</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        if(len(active) &gt; 1):</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">if</span> (len(active) != len(x)):</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of active must match number of points:&quot;</span>+str(len(x)))</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        if(len(selected) &gt; 1):</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            if(len(selected) != len(x)):</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of selected must match number of points:&quot;</span>+str(len(x)))</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        if(len(glyph) &gt; 1):</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            if(len(glyph) != len(x)):</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                exit(<span class="stringliteral">&quot;When more than length 1, length of glyph must match number of points:&quot;</span>+str(len(x)))</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        if(y == <span class="keywordtype">None</span>):</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            y = x</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        kwargs = {<span class="stringliteral">&quot;x&quot;</span>:x,<span class="stringliteral">&quot;y&quot;</span>:y,<span class="stringliteral">&quot;color&quot;</span>: color, <span class="stringliteral">&quot;glyph&quot;</span>: glyph, <span class="stringliteral">&quot;size&quot;</span>: size, <span class="stringliteral">&quot;active&quot;</span>: active,<span class="stringliteral">&quot;xlabel&quot;</span>: xlabel,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="stringliteral">&quot;ylabel&quot;</span>: ylabel,<span class="stringliteral">&quot;title&quot;</span>: title,<span class="stringliteral">&quot;selected&quot;</span>: selected,<span class="stringliteral">&quot;showLabels&quot;</span>: showLabels,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="stringliteral">&quot;showScales&quot;</span>: showScales,<span class="stringliteral">&quot;showGuides&quot;</span>: showGuides, <span class="stringliteral">&quot;guidelines&quot;</span>: guidelines,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="stringliteral">&quot;guidesBackground&quot;</span>: guidesBackground,<span class="stringliteral">&quot;foreground&quot;</span>: foreground,<span class="stringliteral">&quot;background&quot;</span>: background}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        kwargs.update(options)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        plot = loonPlotFactory(<span class="stringliteral">&#39;::loon::plot&#39;</span>, <span class="stringliteral">&#39;plot&#39;</span>, <span class="stringliteral">&#39;loon scatterplot&#39;</span>,**kwargs)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    plot = <a class="code" href="classloon_1_1loon__class_1_1loon__l__plot.html">loon_l_plot</a>(plot)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    return(plot)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespaceretrieve__name_html"><div class="ttname"><a href="namespaceretrieve__name.html">retrieve_name</a></div></div>
-<div class="ttc" id="aclassloon_1_1loon__class_1_1loon__l__plot_html"><div class="ttname"><a href="classloon_1_1loon__class_1_1loon__l__plot.html">loon.loon_class.loon_l_plot</a></div><div class="ttdoc">l_plot</div><div class="ttdef"><b>Definition:</b> <a href="loon__class_8py_source.html#l00040">loon_class.py:40</a></div></div>
+<div class="ttc" id="aclassloon_1_1loon__class_1_1loon__l__plot_html"><div class="ttname"><a href="classloon_1_1loon__class_1_1loon__l__plot.html">loon.loon_class.loon_l_plot</a></div><div class="ttdoc">l_plot</div><div class="ttdef"><b>Definition:</b> <a href="loon__class_8py_source.html#l00039">loon_class.py:39</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

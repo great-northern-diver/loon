@@ -24,5 +24,5 @@ def l_subwin(parent, name="w"):
     child = parent + '.'+ name
     while(int(tk.eval('winfo ' + 'exists '+ child))):       
         i = i + 1
-        child = parent+ '.'+ name+ i        
+        child = parent+ '.'+ name+ str(i)        
     return(child)

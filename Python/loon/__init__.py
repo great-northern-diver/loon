@@ -27,6 +27,8 @@ from l_ColorList import *
 from l_hexcolor import *
 from tkcolors import *
 from l_resize import *
+from l_zoom import *
+from l_pairs import *
 ### remove later 
 from loonobject import *
 ###

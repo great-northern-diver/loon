@@ -1,6 +1,6 @@
 from loonobject import *
 from l_data import *
-
+import numpy as np
 def l_configure(target,**kwargs):
     """
     Modify one or multiple plot states
@@ -63,6 +63,8 @@ def l_configure(target,**kwargs):
     opt = []
     for key, value in kwargs.items():
         opt.append('-' + key)
+        if(isinstance(value,np.ndarray)):
+            value = list(value)
         opt.append(value)
     obj_eval('configure',*opt)
     

@@ -1,4 +1,5 @@
 from l_isLoonWidget import *
+from sys import exit
 def l_throwErrorIfNotLoonWidget(widget):
     """
     Throw an error if string is not associated with a loon widget

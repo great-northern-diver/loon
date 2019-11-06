@@ -165,6 +165,8 @@ def l_hist(x = None,
         @endcode
     @namespace loon.l_hist
     """
+    if(isinstance(yshows,list)):
+        yshows = yshows[0]
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
         x = list(x)
@@ -175,7 +177,7 @@ def l_hist(x = None,
                 binwidth = min(np.diff(np.sort(np.unique(x))))
     if(isinstance(x,type(None))):
         #yshows <- match.arg(yshows)
-        yshows = yshows[0]
+        
         if (origin == None or not isinstance(origin,(int,float))):
             origin = 0
         if (binwidth == None or not isinstance(binwidth,(int, float))):
@@ -209,7 +211,6 @@ def l_hist(x = None,
                            parent=parent,**options)
         else:
         #yshows <- match.arg(yshows)
-            yshows = yshows[0]
             if (xlabel == None):
                 xlabel = retrieve_name(x)
         ## ylabel will be overwritten in ...
