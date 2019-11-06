@@ -66,26 +66,27 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespaceloon_1_1l__throw_error_if_not_loon_widget.html">    1</a></span>&#160;<span class="keyword">from</span> l_isLoonWidget <span class="keyword">import</span> *</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">def </span>l_throwErrorIfNotLoonWidget(widget):</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral">    Throw an error if string is not associated with a loon widget</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">    </span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">    Description:</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral">        Helper function to ensure that a widget path is associated with a</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral">        loon widget.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="stringliteral">    Args:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">        widget: widget path name as a string</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">    Returns:</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">        True if the string is associated with a loon widget,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">        otherwise an error is thrown.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">    @namespace loon.l_throwErrorIfNotLoonWidget</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment"># if(not isinstance(widget, str)):</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">#     widget = widget.plot </span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    if(<span class="keywordflow">not</span> l_isLoonWidget(widget)):</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        exit(<span class="stringliteral">&#39;Widget path &quot;&#39;</span> + widget + <span class="stringliteral">&#39;&quot; is not a known loon widget.&#39;</span>)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">True</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="keyword">from</span> sys <span class="keyword">import</span> exit</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">def </span>l_throwErrorIfNotLoonWidget(widget):</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">    Throw an error if string is not associated with a loon widget</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">    </span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral">    Description:</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral">        Helper function to ensure that a widget path is associated with a</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral">        loon widget.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">    Args:</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">        widget: widget path name as a string</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">    Returns:</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">        True if the string is associated with a loon widget,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">        otherwise an error is thrown.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    @namespace loon.l_throwErrorIfNotLoonWidget</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment"># if(not isinstance(widget, str)):</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">#     widget = widget.plot </span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    if(<span class="keywordflow">not</span> l_isLoonWidget(widget)):</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        exit(<span class="stringliteral">&#39;Widget path &quot;&#39;</span> + widget + <span class="stringliteral">&#39;&quot; is not a known loon widget.&#39;</span>)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">True</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

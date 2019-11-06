@@ -10,81 +10,76 @@ from tk import *
 from itertools import combinations
 from helper import asnumeric
 from loon_class import *
-## forbidden states
-def undoScatterStateChanges(W):
-    Warning("showLabels, showScales, and swapAxes can not be changed for scatterplot matrix.")
-    l_configure(W, showLabels = False, showScales = False, swapAxes = False)
-
-
-def undoHistStateChanges(W):
-    Warning("showLabels, showScales can not be changed for scatterplot matrix.")
-    l_configure(W, showLabels = False, showScales = False)
-
-#' @title An interactive scatterplot matrix
-#'
-#' @description Function creates a scatterplot matrix using loon's scatterplot
-#'   widgets
-#'
-#' @param data a data.frame with numerical data to create the scatterplot matrix
-#' @param linkingGroup string giving the linkingGroup for all plots.  If missing,
-#' a default \code{linkingGroup} will be determined from deparsing the \code{data}.
-#' @param linkingKey a vector of strings to provide a linking identity for each row of the
-#' \code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{0:(nrows(data)-1)}.
-#' @param showItemLabels TRUE, logical indicating whether its itemLabel pops up over a point when
-#' the mouse hovers over it.
-#' @param itemLabel a vector of strings to be used as pop up information when the mouse hovers
-#' over a point.  If missing, the default \code{itemLabel} will be the \code{row.names(data)}.
-#' @param showHistograms logical (default FALSE) to show histograms of each variable
-#' or not
-#' @param histLocation one "edge" or "diag", when showHistograms = TRUE
-#' @param histHeightProp a positive number giving the height of the histograms as a
-#' proportion of the height of the scatterplots
-#' @param histArgs additional arguments to modify the `l_hist` states
-#' @param showSerialAxes logical (default FALSE) indication of whether to show a serial axes plot
-#' in the bottom left of the pairs plot (or not)
-#' @param serialAxesArgs additional arguments to modify the `l_serialaxes` states
-#' @template param_parent
-#' @param ... named arguments to modify the `l_plot` states of the scatterplots
-#'
-#' @return an `l_pairs` object (an `l_compound` object), being a list with named elements,
-#' each representing a separate interactive plot.
-#' The names of the plots should be self explanatory and a list
-#' of all plots can be accessed from the `l_pairs` object via `l_getPlots()`.
-#' All plots are linked by default (name taken from data set if not provided).
-#' Panning and zooming are constrained to work together within the scatterplot
-#' matrix (and histograms).
-#'
-#' @seealso  \code{\link{l_plot}} and \code{\link{l_getPlots}}
-#'
-#' @export
-#'
-#' @examples
-#' p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris")
-#'
-#' p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris",
-#'              showHistograms = TRUE, showSerialAxes = TRUE)
-#' # plot names
-#' names(p)
-#'
-#' # Each plot must be accessed to make changes not managed through
-#' # linking.
-#' # E.g. to change the glyph on all scatterplots to open circles
-#' for (plot in l_getPlots(p)) {
-#'       if (is(plot, "l_plot")) {
-#'           plot["glyph"] <- "ocircle"}
-#'           }
 
 def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True, itemLabel = None,
                     showHistograms = False, histLocation = ["edge", "diag"],
                     histHeightProp = 1, histArgs = {},
                     showSerialAxes = False, serialAxesArgs = {}, parent=None, **args):
+    '''
+    An interactive scatterplot matrix
+
+    Description:
+        Function creates a scatterplot matrix using loon's scatterplot
+        widgets
+
+    Args:
+        data: a pandas dataFrame with numerical(or categorical) data to create the scatterplot matrix
+        linkingGroup: string giving the linkingGroup for all plots.  If missing,
+                      a default `linkingGroup` will be determined from deparsing the `data`.
+        linkingKey: a vector of strings to provide a linking identity for each row of the
+                    `data`.  If missing, a default `linkingKey` will be `0:(data.shape[0]-1)`.
+        showItemLabels: True, logical indicating whether its itemLabel pops up over a point when
+                        the mouse hovers over it.
+        itemLabel: a list of strings to be used as pop up information when the mouse hovers
+                    over a point.  If missing, the default `itemLabel` will be the `data.index`.
+        showHistograms: logical (default False) to show histograms of each variable or not
+        histLocation: one "edge" or "diag", when showHistograms = True
+        histHeightProp: a positive number giving the height of the histograms as a
+                        proportion of the height of the scatterplots
+        histArgs: additional arguments to modify the `l_hist` states
+        showSerialAxes: logical (default False) indication of whether to show a serial axes plot
+                        in the bottom left of the pairs plot (or not)
+        serialAxesArgs: additional arguments to modify the `l_serialaxes` states
+        **args: named arguments to modify the `l_plot` states of the scatterplots
+    Returns:
+        an `loon_l_pairs` class (an `l_compound` object)
+
+    @see  `l_plot` and `l_getPlots`
+
+    Examples:
+
+        p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris")
+        p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris",showHistograms = True, showSerialAxes = True)
+        # plot names
+        p.names
+        # Each plot must be accessed to make changes not managed through
+        # linking.
+    @namespace loon.l_pairs
+    '''
+    
+    def undoScatterStateChanges(W):
+        Warning("showLabels, showScales, and swapAxes can not be changed for scatterplot matrix.")
+        l_configure(W, showLabels = False, showScales = False, swapAxes = False)
+
+
+    def undoHistStateChanges(W):
+        Warning("showLabels, showScales can not be changed for scatterplot matrix.")
+        l_configure(W, showLabels = False, showScales = False)
+    
     if(not isinstance(data,pd.DataFrame)):
         exit('Require pandas dataframe data')
+    dataname = retrieve_name(data)
+    if(len(dataname) > 0):
+        dataname = dataname[0]
+    else:
+        dataname = 'data'
+    
     if (linkingGroup == None):
-        linkingGroup = "l_pairs_" + retrieve_name(data)[0]
+        linkingGroup = "l_pairs_" + dataname
     # Use default as in tcl/tk
     if (linkingKey == None):
         linkingKey = []
+    
     if (itemLabel == None):
         itemLabel = list(data.index)
     
@@ -110,10 +105,11 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     args['swapAxes'] = False
 
     new_toplevel = False
+
     if(parent==None):
         new_toplevel = True
         parent = l_toplevel()
-        title = "loon scatterplot matrix for"+ retrieve_name(data)[0] +  "data"
+        title = "loon scatterplot matrix for "+ dataname +  " data"
         tk.tk.call('wm','title',parent,title)
     child = str(tk.tk.call('frame', l_subwin(parent, 'pairs')))
 
@@ -124,19 +120,19 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     pair = np.array(list(combinations(range(nvar),2))).transpose()
     varnames = list(data.columns)
 
-    ## combn returns the variable combinations for the scatterplot
-    ## matrix. The scatterplot arrangements is as follows
-    ##
-    ##      0      1      2      3
-    ##  0  [0]   (1,0)  (2,0)  (3,0)
-    ##  1         [1]   (2,1)  (3,1)
-    ##  2                [2]   (3,2)
-    ##  3                       [3]
-    ##
-    ##
-    ## pair is
-    ##  0  0  0  1  1  2
-    ##  1  2  3  2  3  3
+    # combn returns the variable combinations for the scatterplot
+    # matrix. The scatterplot arrangements is as follows
+    #
+    #      0      1      2      3
+    #  0  [0]   (1,0)  (2,0)  (3,0)
+    #  1         [1]   (2,1)  (3,1)
+    #  2                [2]   (3,2)
+    #  3                       [3]
+    #
+    #
+    # pair is
+    #  0  0  0  1  1  2
+    #  1  2  3  2  3  3
 
     cells = nvar 
     text_adjustValue = 1

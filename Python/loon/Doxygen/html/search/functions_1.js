@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['color_5floon_257',['color_loon',['../namespaceloon_1_1l___color_list.html#aa54645fe2d85eaa2c096f238508d6075',1,'loon::l_ColorList']]],
-  ['completegraph_258',['completegraph',['../namespaceloon_1_1graphutils.html#ae72b3da7549d837054789eda2497cad9',1,'loon::graphutils']]]
+  ['undohiststatechanges_118',['undoHistStateChanges',['../namespaceloon_1_1l__pairs.html#ad7cfe0cdb3f541af3b6555b0d1f466cb',1,'loon::l_pairs']]],
+  ['undoscatterstatechanges_119',['undoScatterStateChanges',['../namespaceloon_1_1l__pairs.html#ab7648bba07f11b6f0bc5efb78758ba1c',1,'loon::l_pairs']]]
 ];
