@@ -11,22 +11,22 @@ l_layer(widget, x, ...)
 
 \item{x}{object that should be layered}
 
-\item{...}{additional arguments, often state definition for the basic 
+\item{...}{additional arguments, often state definition for the basic
 layering function}
 }
 \value{
 layer object handle, layer id
 }
 \description{
-Loon supports layering of visuals and groups of visuals. The 
+Loon supports layering of visuals and groups of visuals. The
   \code{l_layer} function is a generic method.
 }
 \details{
-loon's displays that use the main graphics model (i.e. histogram, 
+loon's displays that use the main graphics model (i.e. histogram,
   scatterplot and graph displays) support layering of visual information. The
-  following table lists the layer types and functions for layering on a 
+  following table lists the layer types and functions for layering on a
   display.
-  
+
   \tabular{lll}{ \strong{Type} \tab \strong{Description} \tab \strong{Creator
   Function}\cr group \tab a group can be a parent of other layers \tab
   \code{\link{l_layer_group}}\cr polygon \tab one polygon \tab
@@ -40,42 +40,42 @@ loon's displays that use the main graphics model (i.e. histogram,
   \code{\link{l_layer_polygons}}\cr rectangles \tab n rectangles \tab
   \code{\link{l_layer_rectangles}}\cr lines \tab n sets of connected line
   segments \tab \code{\link{l_layer_lines}}\cr }
-  
-  Every layer within a display has a unique id. The visuals of the data in a 
-  display present the default layer of that display and has the layer id 
-  \code{'model'}. For example, the \code{'model'} layer of a scatterplot 
+
+  Every layer within a display has a unique id. The visuals of the data in a
+  display present the default layer of that display and has the layer id
+  \code{'model'}. For example, the \code{'model'} layer of a scatterplot
   display visualizes the scatterplot glyphs. Functions useful to query layers
   are
-  
-  \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr 
-  \code{\link{l_layer_ids}} \tab List layer ids\cr 
+
+  \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr
+  \code{\link{l_layer_ids}} \tab List layer ids\cr
   \code{\link{l_layer_getType}} \tab Get layer type }
-  
+
   Layers are arranged in a tree structure with the tree root having the layer
-  id \code{'root'}. The rendering order of the layers is according to a 
-  depth-first traversal of the layer tree. This tree also maintains a label 
-  and a visibility flag for each layer. The layer tree, layer ids, layer 
-  labels and the visibility of each layer are visualized in the layers 
+  id \code{'root'}. The rendering order of the layers is according to a
+  depth-first traversal of the layer tree. This tree also maintains a label
+  and a visibility flag for each layer. The layer tree, layer ids, layer
+  labels and the visibility of each layer are visualized in the layers
   inspector. If a layer is set to be invisible then it is not rendered on the
-  display. If a group layer is set to be invisible then all its children are 
-  not rendered; however, the visibility flag of the children layers remain 
+  display. If a group layer is set to be invisible then all its children are
+  not rendered; however, the visibility flag of the children layers remain
   unchanged. Relevant functions are:
-  
-  \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr 
-  \code{\link{l_layer_getParent}} \tab Get parent layer id of a layer\cr 
-  \code{\link{l_layer_getChildren}} \tab Get children of a group layer\cr 
+
+  \tabular{ll}{ \strong{Function} \tab \strong{Description}\cr
+  \code{\link{l_layer_getParent}} \tab Get parent layer id of a layer\cr
+  \code{\link{l_layer_getChildren}} \tab Get children of a group layer\cr
   \code{\link{l_layer_index}} \tab Get the order index of a layer among its
   siblings\cr \code{\link{l_layer_printTree}} \tab Print out the layer
-  tree\cr \code{\link{l_layer_move}} \tab Move a layer\cr 
+  tree\cr \code{\link{l_layer_move}} \tab Move a layer\cr
   \code{\link{l_layer_lower}} \tab Switch the layer place with its sibling to
   the right\cr \code{\link{l_layer_raise}} \tab Switch the layer place with
   its sibling to the left\cr \code{\link{l_layer_demote}} \tab Moves the
-  layer up to be a left sibling of its parent\cr 
+  layer up to be a left sibling of its parent\cr
   \code{\link{l_layer_promote}} \tab Moves the layer to be a child of its
   right group layer sibling \cr \code{\link{l_layer_hide}} \tab Set the
   layers visibility flag to \code{FALSE}\cr \code{\link{l_layer_show}} \tab
-  Set the layers visibility flag to \code{TRUE}\cr 
-  \code{\link{l_layer_isVisible}} \tab Return visibility flag of layer\cr 
+  Set the layers visibility flag to \code{TRUE}\cr
+  \code{\link{l_layer_isVisible}} \tab Return visibility flag of layer\cr
   \code{\link{l_layer_layerVisibility}} \tab Returns logical value for
   whether layer is actually seen\cr \code{\link{l_layer_groupVisibility}}
   \tab Returns \code{all}, \code{part} or \code{none} for expressing which
@@ -83,16 +83,16 @@ loon's displays that use the main graphics model (i.e. histogram,
   \tab Delete a layer. If the layer is a group move all its children layers
   to the layers parent. \cr \code{\link{l_layer_expunge}} \tab Delete layer
   and all its children layer.\cr \code{\link{l_layer_getLabel}} \tab Get
-  layer label.\cr \code{\link{l_layer_relabel}} \tab Change layer label.\cr 
+  layer label.\cr \code{\link{l_layer_relabel}} \tab Change layer label.\cr
   \code{\link{l_layer_bbox}} \tab Get the bounding box of a layer. }
-  
-  All layers have states that can be queried and modified using the same 
-  functions as the ones used for displays (i.e. \code{\link{l_cget}}, 
-  \code{\link{l_configure}}, \code{`[`} and \code{`[<-`}). The 
-  last group of layer types in the above table have n-dimensional states, 
+
+  All layers have states that can be queried and modified using the same
+  functions as the ones used for displays (i.e. \code{\link{l_cget}},
+  \code{\link{l_configure}}, \code{`[`} and \code{`[<-`}). The
+  last group of layer types in the above table have n-dimensional states,
   where the actual value of n can be different for every layer in a display.
-  
-  The difference between the model layer and the other layers is that the 
+
+  The difference between the model layer and the other layers is that the
   model layer has a \emph{selected} state, responds to selection gestures and
   supports linking.
 

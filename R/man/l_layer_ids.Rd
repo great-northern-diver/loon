@@ -14,7 +14,7 @@ vector with layer ids in rendering order. To create a layer handle
   object use \code{\link{l_create_handle}}.
 }
 \description{
-Every layer within a display has a unique id. This function 
+Every layer within a display has a unique id. This function
   returns a list of all the layer ids for a widget.
 }
 \details{

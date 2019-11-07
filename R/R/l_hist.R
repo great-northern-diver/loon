@@ -91,21 +91,30 @@ l_hist.factor <-  function(x,
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
-    x <- as.numeric(x)
+    levelNames <- levels(x)
+    nlevels <- length(levelNames)
+    x <-  unclass(x)  # Get the level numbers as numeric values
     if (is.null(origin) | !is.numeric(origin)) {
         origin <- min(x)}
     if (is.null(binwidth) | !is.numeric(binwidth)) {
         binwidth <- min(diff(sort(unique(x))))
     }
-    l_hist(x,
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           xlabel = xlabel,
-           parent=parent, ...)
-}
+    h <-  l_hist(x,
+                 yshows = yshows,
+                 showStackedColors = showStackedColors,
+                 origin = origin,
+                 binwidth=binwidth,
+                 showBinHandle = showBinHandle,
+                 xlabel = xlabel,
+                 parent=parent, ...)
+    # Add level names to plot
+    l_layer_texts(h, x = 1:nlevels + 0.5 , y = rep(-1, nlevels),
+                  text = levelNames, label = "Factor levels",
+                  angle = 0,
+                  size = 12, color = l_getOption("foreground"))
+    h
+    }
+
 
 #' @export
 l_hist.character <-  function(x,
@@ -117,6 +126,7 @@ l_hist.character <-  function(x,
                            xlabel = NULL,
                            parent=NULL, ...) {
     x <- factor(x)
+
     l_hist(x,
            yshows = yshows,
            showStackedColors = showStackedColors,
@@ -194,8 +204,7 @@ l_hist.default <-  function(x,
 
         yshows <- match.arg(yshows)
         if (is.null(xlabel)){
-            xlabel <- gsub("\"", "", deparse(substitute(x)))
-        }
+            xlabel <- gsub("\"", "", deparse(substitute(x))) }
         ## ylabel will be overwritten in ...
         if (is.null(origin) | !is.numeric(origin)){
             origin <- min(x)
@@ -230,3 +239,5 @@ l_hist.default <-  function(x,
     return(plot)
 
 }
+
+
