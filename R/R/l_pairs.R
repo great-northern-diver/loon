@@ -154,14 +154,14 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
             # The first half are top hists, the second half are right hists
             for(i in 1:(2*nvar)){
                 if (i <= nvar) {
-                    histArgs[['x']] <- as.numeric(data[[varnames[i]]])
+                    histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
                     histArgs[['xlabel']] <- varnames[i]
                     # top level histograms
                     histArgs[['swapAxes']] <- FALSE
                     ix <- i
                     iy <- 1
                 } else {
-                    histArgs[['x']] <- as.numeric(data[[varnames[i - nvar]]])
+                    histArgs[['x']] <- data[[varnames[i - nvar]]] # as.numeric(data[[varnames[i - nvar]]])
                     histArgs[['xlabel']] <- varnames[i - nvar]
                     # right level histograms
                     histArgs[['swapAxes']] <- TRUE
@@ -213,7 +213,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
         } else {
             if(histHeightProp != 1) warning("histHeightProp must be 1 when histograms are placed on diagonal")
             for(i in 1:nvar){
-                histArgs[['x']] <- as.numeric(data[[varnames[i]]])
+                histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
                 histArgs[['xlabel']] <- varnames[i]
                 histArgs[['swapAxes']] <- FALSE
                 histograms[[i]] <- do.call(l_hist, histArgs)

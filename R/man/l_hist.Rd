@@ -20,9 +20,10 @@ except for highlighted points.}
 \item{origin}{numeric scalar to define the binning origin}
 
 \item{binwidth}{a numeric scalar to specify the binwidth
-If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric and
+If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
+(namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) > 0 and 1 if sd(x) == 0)
 and using the minumum numerical difference between factor levels when \code{x}
-is a factor or a character vector.}
+is a factor or a character vector (coerced to factor).}
 
 \item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
 whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
