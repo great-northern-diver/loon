@@ -1,0 +1,78 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+
+namespace eval ::loon::test {
+    
+        namespace import ::tcltest::*
+	
+	# tclsh all.tcl -file Configurable.test
+	
+
+	test create-class {} -body {
+
+	    ::oo::class create ::loon::test::T {
+
+		superclass ::loon::classes::Configurable
+		
+		constructor {} {
+		    
+		    next 
+		    my New_state a boolean 2  {FALSE 1}
+		    my New_state b color   1  blue
+		    my New_state c double  3  {-1.3 2 0}
+		    my New_state d positive_double 2 {2.4 2}
+		    my New_state e string  2  {{AA A} BBB}
+		    my New_state f factor 1 A {A B C D}
+		    my New_state g color 2 {white black}
+		}
+	    }
+	    
+	    set m [::loon::test::T new]
+
+	    return [lmap v {a b c d e f} {$m cget -$v}]
+
+	} -result {{FALSE TRUE} #00000000FFFF {-1.3 2 0} {2.4 2} {{AA A} BBB} A}
+	    
+	    
+	test cget-1 {} -body {
+	    $m cget -g
+	} -result {{#FFFFFFFFFFFF} #000000000000}
+
+	    
+        test configure-1 {} -body {
+		$m configure -a {0 0} -b green -c {-2 -4 23.2}\
+		-d {3 2} -e {Hello World} -f D -g {yellow brown}
+	    return [lmap v {a b c d e f} {$m cget -$v}]
+	} -result {{FALSE FALSE} #000080800000 {-2 -4 23.2} {3 2} {Hello World} D}
+	
+	test  config-err-1 {} -body {
+	    $m configure -a "B"
+	} -returnCodes error -result "Not all elements in -a are of type boolean."
+
+	test  config-err-2 {} -body {
+	    $m configure -c {A 1.3 2}
+	} -returnCodes error -result "Not all elements in -c are of type double."
+	
+	test  config-err-3 {} -body {
+	    $m configure -d {-2 1.3 2}
+	} -returnCodes error -result "Not all elements in -d are of type positive double."
+	
+	test  config-err-4 {} -body {
+	    $m configure -f E
+	} -returnCodes error -result {factor -f level "E" is not valid. Choose from: A, B, C, D.}
+	
+	test config-color {} -body {
+	    $m configure -g {A B}
+	    return [$m cget -g]
+	} -result [::loon::listfns::toHexcolor [lrange $::loon::Options(colors) 0 1]]
+	
+	cleanupTests
+}
+
+namespace delete ::loon::test
