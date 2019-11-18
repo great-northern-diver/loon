@@ -16,10 +16,10 @@ objects by their ids.}
 \item{...}{state=value pairs}
 }
 \description{
-All of loon's displays have plot states. Plot states specify 
-  what is displayed, how it is displayed and if and how the plot is linked 
-  with other loon plots. Layers, glyphs, navigators and contexts have states 
-  too (also refered to as plot states). This function modifies one or 
+All of loon's displays have plot states. Plot states specify
+  what is displayed, how it is displayed and if and how the plot is linked
+  with other loon plots. Layers, glyphs, navigators and contexts have states
+  too (also refered to as plot states). This function modifies one or
   multiple plot states.
 }
 \examples{
