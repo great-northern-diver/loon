@@ -19,7 +19,7 @@ l_glyph_add_serialaxes(widget, data, sequence, linewidth = 1,
 \item{linewidth}{linewidth of outline}
 
 \item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
-how the data is scaled. See Details for more information}
+how the data is scaled. See Details and Examples for more information.}
 
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
