@@ -16,8 +16,8 @@ then the layer argument is not used}
 0 if success otherwise the function throws an error
 }
 \description{
-Change the layers position within its parent layer group by 
-  increasing the \code{index} of the layer by one if possible. This means 
+Change the layers position within its parent layer group by
+  increasing the \code{index} of the layer by one if possible. This means
   that the raised layer will be rendered before (or on below) of its sibling
   layer to the right.
 }

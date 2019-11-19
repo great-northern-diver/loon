@@ -28,7 +28,7 @@ l_layer_text(widget, x, y, text, color = "gray60", size = 6,
 
 \item{index}{of the newly added layer in its parent group}
 
-\item{...}{additional state initialization arguments, see 
+\item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
 \value{

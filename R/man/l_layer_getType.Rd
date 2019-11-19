@@ -15,7 +15,7 @@ then the layer argument is not used}
 \value{
 One of: \code{'group'}, \code{'polygon'}, \code{'text'},
   \code{'line'}, \code{'rectangle'}, \code{'oval'}, \code{'points'},
-  \code{'texts'}, \code{'polygons'}, \code{'rectangles'}, \code{'lines'} and 
+  \code{'texts'}, \code{'polygons'}, \code{'rectangles'}, \code{'lines'} and
   \code{'scatterplot'}, \code{'histogram'}, \code{'serialaxes'} and
   \code{'graph'}.
 }

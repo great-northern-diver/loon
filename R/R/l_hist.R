@@ -11,9 +11,10 @@
 #'    except for highlighted points.
 #' @param origin numeric scalar to define the binning origin
 #' @param binwidth a numeric scalar to specify the binwidth
-#'   If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric and
+#'   If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
+#'   (namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) > 0 and 1 if sd(x) == 0)
 #'   and using the minumum numerical difference between factor levels when \code{x}
-#'   is a factor or a character vector.
+#'   is a factor or a character vector (coerced to factor).
 #' @param showBinHandle If \code{TRUE}, then an interactive "bin handle" appears on the plot
 #'   whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}
 #' @param xlabel label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
@@ -90,21 +91,30 @@ l_hist.factor <-  function(x,
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
-    x <- as.numeric(x)
+    levelNames <- levels(x)
+    nlevels <- length(levelNames)
+    x <-  unclass(x)  # Get the level numbers as numeric values
     if (is.null(origin) | !is.numeric(origin)) {
         origin <- min(x)}
     if (is.null(binwidth) | !is.numeric(binwidth)) {
         binwidth <- min(diff(sort(unique(x))))
     }
-    l_hist(x,
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           xlabel = xlabel,
-           parent=parent, ...)
-}
+    h <-  l_hist(x,
+                 yshows = yshows,
+                 showStackedColors = showStackedColors,
+                 origin = origin,
+                 binwidth=binwidth,
+                 showBinHandle = showBinHandle,
+                 xlabel = xlabel,
+                 parent=parent, ...)
+    # Add level names to plot
+    l_layer_texts(h, x = 1:nlevels + 0.5 , y = rep(-1, nlevels),
+                  text = levelNames, label = "Factor levels",
+                  angle = 0,
+                  size = 12, color = l_getOption("foreground"))
+    h
+    }
+
 
 #' @export
 l_hist.character <-  function(x,
@@ -116,6 +126,7 @@ l_hist.character <-  function(x,
                            xlabel = NULL,
                            parent=NULL, ...) {
     x <- factor(x)
+
     l_hist(x,
            yshows = yshows,
            showStackedColors = showStackedColors,
@@ -193,8 +204,7 @@ l_hist.default <-  function(x,
 
         yshows <- match.arg(yshows)
         if (is.null(xlabel)){
-            xlabel <- gsub("\"", "", deparse(substitute(x)))
-        }
+            xlabel <- gsub("\"", "", deparse(substitute(x))) }
         ## ylabel will be overwritten in ...
         if (is.null(origin) | !is.numeric(origin)){
             origin <- min(x)
@@ -205,7 +215,9 @@ l_hist.default <-  function(x,
             # Sturges rule
             # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
             # David Scott's rule
-            binwidth <- 3.49 * sd(x)/(n ^(1/3))
+            sd <- sd(x)
+            binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+
         }
 
         plot <- loonPlotFactory('::loon::histogram',
@@ -227,3 +239,5 @@ l_hist.default <-  function(x,
     return(plot)
 
 }
+
+

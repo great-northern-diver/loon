@@ -1,7 +1,8 @@
-from loonPlotFactory import *
 import pandas as pd
-from retrieve_name import *
-from loon_class import *
+from .loonPlotFactory import *
+from .retrieve_name import *
+from .loon_class import loon_l_plot3D
+
 def l_plot3D(x,  y = None, z = None,
                 axisScaleFactor = 1, color = "grey60",
                 glyph = "ccircle", size = 4, active = True, selected = False,
@@ -12,7 +13,8 @@ def l_plot3D(x,  y = None, z = None,
                 background = "white", parent = None, **options):
     """    
     Create an interactive loon 3d plot widget
-       
+
+    Description:   
         l_plot3D is a generic function for creating interactive
         visualization environments for python objects.
 
@@ -80,6 +82,7 @@ def l_plot3D(x,  y = None, z = None,
             length = [1,2,3] 
             l_plot3D(height,width,length)
         @endcode
+    @namespace loon.l_plot3D
     """
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
@@ -131,7 +134,8 @@ def l_plot3D(x,  y = None, z = None,
                 "background": "white"}
         kwargs.update(options)
         plot = loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D', parent,**kwargs)
-    plot = loon(plot,"l_plot3D")
+    #plot = loon(plot,"l_plot3D")
+    plot = loon_l_plot3D(plot)
     return(plot)
 
 

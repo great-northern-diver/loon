@@ -1,12 +1,12 @@
 import pandas as pd
-from loonPlotFactory import *
-from loon_class import *
-from l_data import *
+from .loonPlotFactory import *
+from .loon_class import loon_l_serialaxes
+from .l_data import *
 
 def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',showAxes=True, parent=None,**options):
     """
     Create a Serialaxes Widget
-
+    Description:
        The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.    
     
     Args:
@@ -33,6 +33,7 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
         @code
             s = l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
         @endcode
+    @namespace loon.l_serialaxes
     """
     data = pd.DataFrame(data)                            
     if(sequence == None):
@@ -41,5 +42,6 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
                 "scaling":scaling,"axesLayout":axesLayout}
     kwargs.update(options)
     plot = loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,**kwargs)
-    plot = loon(plot,'l_serialaxes')
+    #plot = loon(plot,'l_serialaxes')
+    plot = loon_l_serialaxes(plot)
     return(plot)   

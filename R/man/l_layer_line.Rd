@@ -14,14 +14,14 @@ l_layer_line(widget, x, y = NULL, color = "black", linewidth = 1,
 function or any \emph{R} object with a plot method can be provided as x and
 y are passed on to \code{\link{xy.coords}}}
 
-\item{y}{the y coordinates of the line, optional if x is an appropriate 
+\item{y}{the y coordinates of the line, optional if x is an appropriate
 structure.}
 
 \item{color}{color of line}
 
 \item{linewidth}{linewidth of outline}
 
-\item{dash}{dash pattern of line, see 
+\item{dash}{dash pattern of line, see
 \url{https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M26}}
 
 \item{label}{label used in the layers inspector}
@@ -30,7 +30,7 @@ structure.}
 
 \item{index}{of the newly added layer in its parent group}
 
-\item{...}{additional state initialization arguments, see 
+\item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
 \value{

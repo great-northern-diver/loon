@@ -10,16 +10,13 @@ l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
 \arguments{
 \item{widget}{widget path name as a string}
 
-\item{x}{the coordinates of line. Alternatively, a single plotting structure,
-function or any \emph{R} object with a plot method can be provided as x and
-y are passed on to \code{\link{xy.coords}}}
+\item{x}{vector of x coordinates}
 
-\item{y}{the y coordinates of the line, optional if x is an appropriate 
-structure.}
+\item{y}{vector of y coordinates}
 
 \item{text}{vector with text strings}
 
-\item{color}{color of line}
+\item{color}{color of text}
 
 \item{size}{font size}
 
@@ -31,7 +28,7 @@ structure.}
 
 \item{index}{of the newly added layer in its parent group}
 
-\item{...}{additional state initialization arguments, see 
+\item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
 \value{
@@ -41,8 +38,14 @@ layer object handle, layer id
 Loon's displays that are based on Cartesian coordinates (i.e.
   scatterplot, histogram and graph display) allow for layering visual
   information including polygons, text and rectangles.
+
+Layer a vector of character strings.
 }
 \details{
+As a side effect of \code{Tcl}'s text-based design, it is best to
+  use \code{l_layer_text} if one would like to layer a single character
+  string (and not \code{\link{l_layer_texts}} with \code{n=1}).
+
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{

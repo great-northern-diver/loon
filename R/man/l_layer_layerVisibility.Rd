@@ -13,7 +13,7 @@ l_layer_layerVisibility(widget, layer)
 then the layer argument is not used}
 }
 \value{
-\code{TRUE} if the layer and all its ancestor layers have their 
+\code{TRUE} if the layer and all its ancestor layers have their
   visibility flag set to true and the layer is actually rendered, otherwise
   \code{FALSE}.
 }
@@ -37,7 +37,7 @@ Visibile layers are rendered, invisible ones are not. If any
   parent widget).
 }
 \seealso{
-\code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+\code{\link{l_layer}}, \code{\link{l_layer_show}},
   \code{\link{l_layer_hide}}, \code{\link{l_layer_isVisible}},
   \code{\link{l_layer_groupVisibility}}
 }

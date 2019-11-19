@@ -13,7 +13,7 @@ l_layer_printTree(widget)
 empty string
 }
 \description{
-Prints the layer tree (i.e. the layer ids) to the prompt. Group 
+Prints the layer tree (i.e. the layer ids) to the prompt. Group
   layers are prefixed with a \code{'+'}. The \code{'root'} layer is not
   listed.
 }

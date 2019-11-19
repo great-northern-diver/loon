@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       =
+OUTPUT_DIRECTORY       = ./Doxygen
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -163,6 +163,7 @@ FULL_PATH_NAMES        = YES
 # The STRIP_FROM_PATH tag can be used to strip a user-defined part of the path.
 # Stripping is only done if one of the specified strings matches the left-hand
 # part of the path. The tag can be used to show relative paths in the file list.
+# part of the path. The tag can be used to show relative paths in the file list.
 # If left blank the directory from which doxygen is run is used as the path to
 # strip.
 #
@@ -195,7 +196,7 @@ SHORT_NAMES            = NO
 # description.)
 # The default value is: NO.
 
-JAVADOC_AUTOBRIEF      = NO
+JAVADOC_AUTOBRIEF      = YES
 
 # If the JAVADOC_BANNER tag is set to YES then doxygen will interpret a line
 # such as
@@ -283,7 +284,7 @@ OPTIMIZE_OUTPUT_FOR_C  = NO
 # qualified scopes will look different, etc.
 # The default value is: NO.
 
-OPTIMIZE_OUTPUT_JAVA   = NO
+OPTIMIZE_OUTPUT_JAVA   = YES
 
 # Set the OPTIMIZE_FOR_FORTRAN tag to YES if your project consists of Fortran
 # sources. Doxygen will then generate output that is tailored for Fortran.
@@ -467,7 +468,7 @@ LOOKUP_CACHE_SIZE      = 0
 # normally produced when WARNINGS is set to YES.
 # The default value is: NO.
 
-EXTRACT_ALL            = YES
+EXTRACT_ALL            = NO
 
 # If the EXTRACT_PRIVATE tag is set to YES, all private members of a class will
 # be included in the documentation.
@@ -828,8 +829,7 @@ WARN_LOGFILE           =
 # directories like /usr/src/myproject. Separate the files or directories with
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
-
-INPUT                  =
+INPUT                  = 
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -904,7 +904,7 @@ FILE_PATTERNS          = *.c \
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE              = NO
+RECURSIVE              = YES
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a
@@ -932,6 +932,7 @@ EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       = tk.py
 EXCLUDE_PATTERNS       += helper.py
 EXCLUDE_PATTERNS       += retrieve_name.py
+EXCLUDE_PATTERNS       += *.tcl
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the
@@ -1024,7 +1025,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE =
+USE_MDFILE_AS_MAINPAGE = ./Doxygen/mainpage.py
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
@@ -1037,7 +1038,7 @@ USE_MDFILE_AS_MAINPAGE =
 # also VERBATIM_HEADERS is set to NO.
 # The default value is: NO.
 
-SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = YES
 
 # Setting the INLINE_SOURCES tag to YES will include the body of functions,
 # classes and enums directly into the documentation.
@@ -1700,7 +1701,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = NO
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

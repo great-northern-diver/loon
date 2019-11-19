@@ -14,7 +14,7 @@ l_layer_points(widget, x, y = NULL, color = "gray60", size = 6,
 function or any \emph{R} object with a plot method can be provided as x and
 y are passed on to \code{\link{xy.coords}}}
 
-\item{y}{the y coordinates of the line, optional if x is an appropriate 
+\item{y}{the y coordinates of the line, optional if x is an appropriate
 structure.}
 
 \item{color}{color of points}
@@ -27,7 +27,7 @@ structure.}
 
 \item{index}{of the newly added layer in its parent group}
 
-\item{...}{additional state initialization arguments, see 
+\item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
 \value{

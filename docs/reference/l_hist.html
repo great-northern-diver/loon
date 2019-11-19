@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
       </span>
     </div>
 
@@ -185,9 +185,10 @@ except for highlighted points.</p></td>
     <tr>
       <th>binwidth</th>
       <td><p>a numeric scalar to specify the binwidth
-If NULL <code>binwidth</code> is set using David Scott's rule when <code>x</code> is numeric and
+If NULL <code>binwidth</code> is set using David Scott's rule when <code>x</code> is numeric
+(namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) &gt; 0 and 1 if sd(x) == 0)
 and using the minumum numerical difference between factor levels when <code>x</code>
-is a factor or a character vector.</p></td>
+is a factor or a character vector (coerced to factor).</p></td>
     </tr>
     <tr>
       <th>showBinHandle</th>

@@ -1,4 +1,4 @@
-from tk import tk
+from .tk import tk
 def l_isLoonWidget(widget):
     """
     Check if a widget path is a valid loon widget
@@ -11,10 +11,15 @@ def l_isLoonWidget(widget):
     Returns:
         boolean, True if the argument is a valid loon widget path, False 
         otherwise
+    @namespace loon.l_isLoonWidget
     """
-    if(isinstance(type(widget), list)):
+    
+    if(not isinstance(widget, str)):
+        #return False
+        widget = widget.plot
+    if(not isinstance(widget,str)):
         return False
-    else:
+    else:    
         isLoon = tk.tk.call('::loon::isKnownWidget', widget)
         if (isLoon): return True
         else: return False

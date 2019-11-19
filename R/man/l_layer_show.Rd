@@ -16,7 +16,7 @@ then the layer argument is not used}
 0 if success otherwise the function throws an error
 }
 \description{
-Hidden or invisible layers are not rendered. This function 
+Hidden or invisible layers are not rendered. This function
   unhides invisible layer so that they are rendered again.
 }
 \details{
@@ -40,7 +40,7 @@ l_layer_hide(p, l)
 l_layer_show(p, l)
 }
 \seealso{
-\code{\link{l_layer}}, \code{\link{l_layer_hide}}, 
+\code{\link{l_layer}}, \code{\link{l_layer_hide}},
   \code{\link{l_layer_isVisible}}, \code{\link{l_layer_layerVisibility}},
   \code{\link{l_layer_groupVisibility}}
 }
