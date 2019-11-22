@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
       </span>
     </div>
 
@@ -233,7 +233,7 @@
   Also, if you change the color mapping list and close and re-open the loon
   inspector these new colors show up in the modify color list.</p>
 <p>When other color mappings of data values are required (e.g. numerical data
-  to a color gradient) then the functions in the <code><a href='https://rdrr.io/pkg/scales/man/package-scales.html'>scales</a></code>
+  to a color gradient) then the functions in the <code><a href='https://scales.r-lib.org//reference/package-scales.html'>scales</a></code>
   R package provide various mappings including mappings for qualitative,
   diverging and sequential values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -265,7 +265,7 @@
 <span class='co'># the col_numeric function provided in the scales package</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"scales"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='no'>p_custom</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>stearic</span> ~ <span class='no'>oleic</span>,
-       <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/scales/man/col_numeric.html'>col_numeric</a></span>(<span class='st'>"Greens"</span>, <span class='kw'>domain</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)(<span class='no'>palmitic</span>)))
+       <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='fu'><a href='https://scales.r-lib.org//reference/col_numeric.html'>col_numeric</a></span>(<span class='st'>"Greens"</span>, <span class='kw'>domain</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)(<span class='no'>palmitic</span>)))
   }
 }</div></pre>
   </div>

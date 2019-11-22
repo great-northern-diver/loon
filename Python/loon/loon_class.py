@@ -1,51 +1,182 @@
+from .tk import tk 
+from .l_cget import *
+from .l_configure import *
+from .l_state_names import *
 
-from tk import tk 
-from l_cget import *
-from l_configure import *
 class loon:
     """
     Loon class 
     """
-    def __init__(self, plot,type):
-        self.plot = plot
-        self.type = type
-        #self.color = tk.eval()
+    def __init__(self, plot):
+        self.__dict__['plot'] = plot
     def __getattr__(self, key):
         if(key == 'plot'):
             return self.plot
         elif(key == 'names'):
-            try:    
-                tk.eval(self.plot + ' cget -option')
-            except Exception as e:
-                temp = str(e)
-            res = temp.split('-')[1:]
-            res = [x.split(',')[0] for x in res]
-            return res
-        else:
-            return tk.eval(self.plot + ' cget -' + key)      
-            #return l_cget(self,key)
+            return l_state_names(self)
+        else:  
+            return l_cget(self,key)
     def __getitem__(self, key):
         if(key == 'plot'):
             return self.plot
         elif(key == 'names'):
-            try:    
-                tk.eval(self.plot + ' cget -option')
-            except Exception as e:
-                temp = str(e)
-            res = temp.split('-')[1:]
-            res = [x.split(',')[0] for x in res]
-            return res
+            return l_state_names(self)
         else:
-            return tk.eval(self.plot + ' cget -' + key)  
-            #return l_cget(self,key)
-    # #overload .
-    # def __setattr__(self, name, value):
-    # #     #self.__dict__[name] = value
-    #      opt = {name:value}
-    #      l_configure(self,**opt)
-    # #     #l_configure(self,name,value)
+            return l_cget(self,key)
+    # overload .
+    def __setattr__(self, name, value):
+         opt = {name:value}
+         l_configure(self,**opt)
 
     # overload []   
     def __setitem__(self, name, value):
         opt = {name:value}
         l_configure(self,**opt)
+    
+    def __dir__(self):
+        return self.names + ['plot','names']
+
+class loon_l_plot(loon):
+    '''
+    l_plot
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+
+class loon_l_hist(loon):
+    '''
+    l_hist
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+
+class loon_l_graph(loon):
+    '''
+    l_graph
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+
+class loon_l_serialaxes(loon):
+    '''
+    l_serialaxes
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+
+class loon_l_plot3D(loon):
+    '''
+    l_plot3D
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+class loon_l_layer():
+    '''
+    l_layer 
+    '''
+    def __init__(self, widget, Type, id):
+        self.__dict__['widget'] = widget
+        self.__dict__['Type'] = Type 
+        self.__dict__['id'] = id    
+    def __getattr__(self, key):
+        if(key in {'widget','Type','id'}):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:
+            return l_cget(self,key)
+    def __getitem__(self, key):
+        if(key in {'widget','Type','id'}):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:
+            return l_cget(self,key)
+    # #overload .
+    def __setattr__(self, name, value):
+         opt = {name:value}
+         l_configure(self,**opt)
+
+    # overload []   
+    def __setitem__(self, name, value):
+        opt = {name:value}
+        l_configure(self,**opt)
+
+
+######## Not finished yet 
+## class loon_l_comp should be a super class of loon_l_pairs 
+
+class loon_l_compound():
+    '''
+    l_compound class 
+    '''
+    def __init__(self, plot):
+        self.__dict__["plot"] = plot 
+        
+    def __getattr__(self, key):
+        if(key == 'plot'):
+            return self.plot
+        elif(key == 'names'):
+            return list(self.plot.keys())
+        else:  
+            return {k: v[key] if key in v.names else None for k,v in self.plot.items()}
+    def __getitem__(self, key):
+        if(key == 'plot'):
+            return self.plot
+        elif(key == 'names'):
+            return list(self.plot.keys())
+        else:
+            # return l_cget(self,key)
+            return {k: v[key] if key in v.names else None for k,v in self.plot.items()}
+    # overload .    
+    def __setattr__(self, name, value):
+        opt = {name:value}
+        #l_configure(self,**opt)
+        #[lambda x: x[name] = value for x in self.plot.values()]
+        #list(map(lambda x: l_configure(x,**opt), self.plot.values()))
+        [l_configure(v,**opt) if name in v.names else None for v in self.plot.values()]
+    # overload []   
+    def __setitem__(self, name, value):
+        opt = {name:value}
+        #l_configure(self,**opt)
+        # [x[name] = value for x in self.plot.values()]
+        #list(map(lambda x: l_configure(x,**opt), self.plot.values()))
+        [l_configure(v,**opt) if name in v.names else None for v in self.plot.values()]
+    
+    # def __dir__(self):
+    #     return list(self.plot.values())[0].names + ['plot','names']
+
+class loon_l_pairs(loon_l_compound):
+    '''
+    l_pairs class 
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)
+            
+
+class loon_l_glyph(loon):
+    '''
+    l_plot
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+
+class loon_l_navigator(loon):
+    '''
+    l_plot
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
+
+class loon_l_context(loon):
+    '''
+    l_plot
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    

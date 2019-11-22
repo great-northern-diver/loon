@@ -1,10 +1,11 @@
-from loonobject import *
-from l_data import *
-
+from .loonobject import *
+from .l_data import *
+import numpy as np
 def l_configure(target,**kwargs):
     """
     Modify one or multiple plot states
     
+    Description:
         All of loon's displays have plot states. Plot states specify 
         what is displayed, how it is displayed and if and how the plot is linked 
         with other loon plots. Layers, glyphs, navigators and contexts have states 
@@ -20,6 +21,7 @@ def l_configure(target,**kwargs):
             l_configure(p, color='red')
             p['size'] = [2 if x == 'versicolor' else 8 for x in iris['Species']]
         @endcode
+    @namespace loon.l_configure
     """
     obj_eval = loonobject(target)
     #args <- list('configure', ...)
@@ -61,6 +63,8 @@ def l_configure(target,**kwargs):
     opt = []
     for key, value in kwargs.items():
         opt.append('-' + key)
+        if(isinstance(value,np.ndarray)):
+            value = list(value)
         opt.append(value)
     obj_eval('configure',*opt)
     

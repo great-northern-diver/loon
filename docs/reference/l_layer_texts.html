@@ -45,7 +45,8 @@
 <meta property="og:title" content="Layer a texts — l_layer_texts" />
 <meta property="og:description" content="Loon's displays that are based on Cartesian coordinates (i.e.
   scatterplot, histogram and graph display) allow for layering visual
-  information including polygons, text and rectangles." />
+  information including polygons, text and rectangles.
+Layer a vector of character strings." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -79,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
       </span>
     </div>
 
@@ -157,6 +158,7 @@
     <p>Loon's displays that are based on Cartesian coordinates (i.e.
   scatterplot, histogram and graph display) allow for layering visual
   information including polygons, text and rectangles.</p>
+<p>Layer a vector of character strings.</p>
     </div>
 
     <pre class="usage"><span class='fu'>l_layer_texts</span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>text</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"gray60"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>6</span>,
@@ -171,14 +173,11 @@
     </tr>
     <tr>
       <th>x</th>
-      <td><p>the coordinates of line. Alternatively, a single plotting structure,
-function or any <em>R</em> object with a plot method can be provided as x and
-y are passed on to <code><a href='https://rdrr.io/r/grDevices/xy.coords.html'>xy.coords</a></code></p></td>
+      <td><p>vector of x coordinates</p></td>
     </tr>
     <tr>
       <th>y</th>
-      <td><p>the y coordinates of the line, optional if x is an appropriate 
-structure.</p></td>
+      <td><p>vector of y coordinates</p></td>
     </tr>
     <tr>
       <th>text</th>
@@ -186,7 +185,7 @@ structure.</p></td>
     </tr>
     <tr>
       <th>color</th>
-      <td><p>color of line</p></td>
+      <td><p>color of text</p></td>
     </tr>
     <tr>
       <th>size</th>
@@ -210,7 +209,7 @@ structure.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional state initialization arguments, see 
+      <td><p>additional state initialization arguments, see
 <code><a href='l_info_states.html'>l_info_states</a></code></p></td>
     </tr>
     </table>
@@ -220,7 +219,10 @@ structure.</p></td>
     <p>layer object handle, layer id</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer")</a></code></p>
+    <p>As a side effect of <code>Tcl</code>'s text-based design, it is best to
+  use <code>l_layer_text</code> if one would like to layer a single character
+  string (and not <code>l_layer_texts</code> with <code>n=1</code>).</p>
+<p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='l_layer.html'>l_layer</a></code>, <code><a href='l_info_states.html'>l_info_states</a></code></p></div>

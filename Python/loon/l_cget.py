@@ -1,13 +1,14 @@
-from tk import tk 
+from .tk import tk 
 from functools import singledispatch
-from loon_class import *
-from loonobject import *
+from .loon_class import *
+from .loonobject import *
 
 # @singledispatch
 def l_cget(target, state):
     """
     Query a Plot State
     
+    Description:
         All of loon's displays have plot states. Plot states specify 
         what is displayed, how it is displayed and if and how the plot is linked 
         with other loon plots. Layers, glyphs, navigators and contexts have states 
@@ -24,6 +25,7 @@ def l_cget(target, state):
             l_cget(p, "color")
             p['selected']
         @endcode
+    @namespace loon.l_cget
     """
 #    exit('target should be a loon claas or string')
 

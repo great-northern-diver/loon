@@ -11,7 +11,7 @@
 
 \item{x}{object from \code{\link{density}} of class \code{"density"}}
 
-\item{...}{additional arguments, often state definition for the basic 
+\item{...}{additional arguments, often state definition for the basic
 layering function}
 }
 \value{
@@ -21,7 +21,6 @@ layer object handle, layer id
 Layer a line that represents a kernel density estimate.
 }
 \examples{
- 
 d <- density(faithful$eruptions, bw = "sj")
 h <- l_hist(x = faithful$eruptions, yshows="density")
 l <- l_layer.density(h, d, color="steelblue", linewidth=3)

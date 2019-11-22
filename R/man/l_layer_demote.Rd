@@ -26,7 +26,7 @@ g1 <- l_layer_group(p)
 g2 <- l_layer_group(p, parent=g1)
 l1 <- l_layer_oval(p, x=0:1, y=0:1)
 
-l_layer_printTree(p) 
+l_layer_printTree(p)
 l_layer_demote(p, l1)
 l_layer_printTree(p)
 l_layer_demote(p, l1)

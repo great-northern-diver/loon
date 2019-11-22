@@ -1,11 +1,12 @@
-from loonPlotFactory import *
-from loon_class import *
-from retrieve_name import *
+from .loonPlotFactory import *
+from .loon_class import loon_l_hist
+from .retrieve_name import *
 import pandas as pd
 from functools import singledispatch
 import numpy as np
-from genetic_func.UseMethod import *
-from genetic_func.getclass import *
+#from genetic_func.UseMethod import *
+#from genetic_func.getclass import *
+from .helper import match_arg
 # def l_hist(x = None,
 #          yshows = ["frequency", "density"],
 #          showStackedColors = True,
@@ -112,7 +113,7 @@ from genetic_func.getclass import *
 #     return(plot)
 
 def l_hist(x = None,
-         yshows = ["frequency", "density"],
+         yshows = 'frequency',
          showStackedColors = True,
          origin = None,
          binwidth = None,
@@ -150,19 +151,37 @@ def l_hist(x = None,
             h["showOutlines"] = False
             h["yshows"]
             h["yshows"] = "density"
+            l_scaleto(h)
+            h["showStackedColors"] = True
+            h['color'] = list(iris["Species"])
+            h["showStackedColors"] = False
+            h["showOutlines"] = True
+            h["showGuides"] = True
+            # link another plot with the previous plot
+            h['linkingGroup'] = "iris_data" 
+            h2 = l_hist(iris["Petal.Width"],
+                        linkingGroup="iris_data",
+                        showStackedColors = True)
         @endcode
+    @namespace loon.l_hist
     """
+    if(yshows != 'frequency'):
+        yshow_opt = ["frequency", "density"]
+        yshows = match_arg(yshows,yshow_opt,'yshows')
+    
     if(isinstance(x,pd.core.series.Series)):
         xlabel = x.name
         x = list(x)
-    if(type(x[0]) is not int):
+    if(not isinstance(x[0], (int,float))):
         x = pd.Series(x,dtype='category')
         x = list(x.cat.codes + 1)
         if (binwidth == None or not isinstance(binwidth,(int, float))):
                 binwidth = min(np.diff(np.sort(np.unique(x))))
+        if (origin == None):
+            origin = min(x)
     if(isinstance(x,type(None))):
         #yshows <- match.arg(yshows)
-        yshows = yshows[0]
+        
         if (origin == None or not isinstance(origin,(int,float))):
             origin = 0
         if (binwidth == None or not isinstance(binwidth,(int, float))):
@@ -172,7 +191,6 @@ def l_hist(x = None,
                     "xlabel":xlabel}
 
         plot = loonPlotFactory('::loon::histogram', 'hist', 'loon histogram', **kwargs)
-        plot = loon(plot)
     else:
         ndims = len(np.asarray(x).shape)
         if (ndims > 2): exit("x should have at most two dimensions")
@@ -197,15 +215,16 @@ def l_hist(x = None,
                            parent=parent,**options)
         else:
         #yshows <- match.arg(yshows)
-            yshows = yshows[0]
             if (xlabel == None):
                 xlabel = retrieve_name(x)
         ## ylabel will be overwritten in ...
             if (origin == None or not isinstance(origin,(int,float))):
                 origin = min(x)
-            if (binwidth == None or not isinstance(binwidth,(int, float))):
+
+            if (binwidth == None):
                 n = len(x)
                 binwidth = 3.49 * np.std(x)/(n **(1/3))
+            
             plot = loonPlotFactory('::loon::histogram',
                                 'hist',
                                 'loon histogram',
@@ -218,7 +237,8 @@ def l_hist(x = None,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 **options)
-        plot = loon(plot,'l_hist')
+    #plot = loon(plot,'l_hist')
+    plot = loon_l_hist(plot)
     return(plot)
 
 # def l_hist(x = None,

@@ -23,7 +23,7 @@ Loon's displays that are based on Cartesian coordinates (i.e.
   scatterplot, histogram and graph display) allow for layering visual
   information including polygons, text and rectangles.
 
-A group layer can contain other layers. If the group layer is 
+A group layer can contain other layers. If the group layer is
   invisible, then so are all its children.
 }
 \details{

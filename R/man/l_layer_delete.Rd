@@ -16,7 +16,7 @@ then the layer argument is not used}
 0 if success otherwise the function throws an error
 }
 \description{
-All but the \code{'model'} and the \code{'root'} layer can be 
+All but the \code{'model'} and the \code{'root'} layer can be
   dynamically deleted. If a group layer gets deleted with
   \code{l_layer_delete} then all its children layers get moved into their
   grandparent group layer.

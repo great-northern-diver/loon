@@ -49,7 +49,7 @@ l_layer_hide(p, g)
 l_layer_groupVisibility(p, g)
 }
 \seealso{
-\code{\link{l_layer}}, \code{\link{l_layer_show}}, 
+\code{\link{l_layer}}, \code{\link{l_layer_show}},
   \code{\link{l_layer_hide}}, \code{\link{l_layer_isVisible}},
   \code{\link{l_layer_layerVisibility}}
 }

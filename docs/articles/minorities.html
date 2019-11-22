@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
       <h1>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2019-10-14</h4>
+            <h4 class="date">2019-11-07</h4>
       
       
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -752,7 +752,7 @@ p_stars[<span class="st">"swapAxes"</span>] &lt;-<span class="st"> </span><span 
 <span class="co">#</span></code></pre></div>
 <p>Optionally we could choose to add a continuous color change emphasizing the west to east directionality. There is a <code>col_numeric</code> function in the <code>scales</code> package that will effect a continuous change in color along a spectrum.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(scales)
-west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://rdrr.io/pkg/scales/man/col_numeric.html">col_numeric</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, 
+west_east_cols &lt;-<span class="st"> </span>(<span class="kw"><a href="https://scales.r-lib.org//reference/col_numeric.html">col_numeric</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, 
                                  <span class="st">"orange"</span>, <span class="st">"sienna"</span>,
                                  <span class="st">"darkgreen"</span>, <span class="st">"steelblue"</span>,
                                  <span class="st">"purple"</span>),
@@ -836,8 +836,8 @@ o_near &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/p
 o_far &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span>(<span class="op">-</span>VarDistance)
 <span class="co"># The order of minorities:</span>
 <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(minority_star_percent)[o_far]</code></pre></div>
-<pre><code>##  [1] "Multiple" "Filipino" "Arab"     "Japanese" "S.Asian"  "Other"   
-##  [7] "Chinese"  "SE.Asian" "Black"    "Korean"   "Latino"</code></pre>
+<pre><code>##  [1] "Latino"   "Other"    "S.Asian"  "Multiple" "Chinese"  "Japanese"
+##  [7] "Black"    "SE.Asian" "Filipino" "Arab"     "Korean"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now construct the serial axes display so that </span>
 <span class="co"># the cities are laid over top of one another.</span>

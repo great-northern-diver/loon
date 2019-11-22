@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Loon layers — l_layer" />
-<meta property="og:description" content="Loon supports layering of visuals and groups of visuals. The 
+<meta property="og:description" content="Loon supports layering of visuals and groups of visuals. The
   l_layer function is a generic method." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Loon supports layering of visuals and groups of visuals. The 
+    <p>Loon supports layering of visuals and groups of visuals. The
   <code>l_layer</code> function is a generic method.</p>
     </div>
 
@@ -172,7 +172,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments, often state definition for the basic 
+      <td><p>additional arguments, often state definition for the basic
 layering function</p></td>
     </tr>
     </table>
@@ -182,10 +182,10 @@ layering function</p></td>
     <p>layer object handle, layer id</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>loon's displays that use the main graphics model (i.e. histogram, 
+    <p>loon's displays that use the main graphics model (i.e. histogram,
   scatterplot and graph displays) support layering of visual information. The
-  following table lists the layer types and functions for layering on a 
-  display.</p>  
+  following table lists the layer types and functions for layering on a
+  display.</p>
 <p></p><table class='table'>
 <tr><td><strong>Type</strong></td><td><strong>Description</strong></td><td><strong>Creator
   Function</strong></td></tr>
@@ -204,28 +204,28 @@ layering function</p></td>
   segments</td><td><code><a href='l_layer_lines.html'>l_layer_lines</a></code></td></tr>
 </table>
 
-  
-<p>Every layer within a display has a unique id. The visuals of the data in a 
-  display present the default layer of that display and has the layer id 
-  <code>'model'</code>. For example, the <code>'model'</code> layer of a scatterplot 
+
+<p>Every layer within a display has a unique id. The visuals of the data in a
+  display present the default layer of that display and has the layer id
+  <code>'model'</code>. For example, the <code>'model'</code> layer of a scatterplot
   display visualizes the scatterplot glyphs. Functions useful to query layers
-  are</p>  
+  are</p>
 <p></p><table class='table'>
 <tr><td><strong>Function</strong></td><td><strong>Description</strong></td></tr>
 <tr><td><code><a href='l_layer_ids.html'>l_layer_ids</a></code></td><td>List layer ids</td></tr>
 <tr><td><code><a href='l_layer_getType.html'>l_layer_getType</a></code></td><td>Get layer type</td></tr>
 </table>
 
-  
+
 <p>Layers are arranged in a tree structure with the tree root having the layer
-  id <code>'root'</code>. The rendering order of the layers is according to a 
-  depth-first traversal of the layer tree. This tree also maintains a label 
-  and a visibility flag for each layer. The layer tree, layer ids, layer 
-  labels and the visibility of each layer are visualized in the layers 
+  id <code>'root'</code>. The rendering order of the layers is according to a
+  depth-first traversal of the layer tree. This tree also maintains a label
+  and a visibility flag for each layer. The layer tree, layer ids, layer
+  labels and the visibility of each layer are visualized in the layers
   inspector. If a layer is set to be invisible then it is not rendered on the
-  display. If a group layer is set to be invisible then all its children are 
-  not rendered; however, the visibility flag of the children layers remain 
-  unchanged. Relevant functions are:</p>  
+  display. If a group layer is set to be invisible then all its children are
+  not rendered; however, the visibility flag of the children layers remain
+  unchanged. Relevant functions are:</p>
 <p></p><table class='table'>
 <tr><td><strong>Function</strong></td><td><strong>Description</strong></td></tr>
 <tr><td><code><a href='l_layer_getParent.html'>l_layer_getParent</a></code></td><td>Get parent layer id of a layer</td></tr>
@@ -261,13 +261,13 @@ layering function</p></td>
 <tr><td><code><a href='l_layer_bbox.html'>l_layer_bbox</a></code></td><td>Get the bounding box of a layer.</td></tr>
 </table>
 
-  
-<p>All layers have states that can be queried and modified using the same 
-  functions as the ones used for displays (i.e. <code><a href='l_cget.html'>l_cget</a></code>, 
-  <code><a href='l_configure.html'>l_configure</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>`[`</a></code> and <code>`[&lt;-`</code>). The 
-  last group of layer types in the above table have n-dimensional states, 
-  where the actual value of n can be different for every layer in a display.</p>  
-<p>The difference between the model layer and the other layers is that the 
+
+<p>All layers have states that can be queried and modified using the same
+  functions as the ones used for displays (i.e. <code><a href='l_cget.html'>l_cget</a></code>,
+  <code><a href='l_configure.html'>l_configure</a></code>, <code><a href='https://rdrr.io/r/base/Extract.html'>`[`</a></code> and <code>`[&lt;-`</code>). The
+  last group of layer types in the above table have n-dimensional states,
+  where the actual value of n can be different for every layer in a display.</p>
+<p>The difference between the model layer and the other layers is that the
   model layer has a <em>selected</em> state, responds to selection gestures and
   supports linking.</p>
 <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer")</a></code></p>

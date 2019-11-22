@@ -24,7 +24,7 @@ l_layer_lines(widget, x, y, color = "black", linewidth = 1,
 
 \item{index}{of the newly added layer in its parent group}
 
-\item{...}{additional state initialization arguments, see 
+\item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
 \value{
