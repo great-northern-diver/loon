@@ -88,6 +88,7 @@ l_hist.factor <-  function(x,
                            showBinHandle = FALSE,
                            xlabel = NULL,
                            parent=NULL, ...) {
+
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
@@ -97,7 +98,14 @@ l_hist.factor <-  function(x,
     if (is.null(origin) | !is.numeric(origin)) {
         origin <- min(x)}
     if (is.null(binwidth) | !is.numeric(binwidth)) {
-        binwidth <- min(diff(sort(unique(x))))
+        uni_x <- unique(x)
+        binwidth <- if(length(uni_x) == 1) {
+            # This is a single bin histogram
+            # the binwidth can be set as any non-negtive value
+            0.1
+        } else {
+            min(diff(sort(uni_x)))
+        }
     }
     h <-  l_hist(x,
                  yshows = yshows,
@@ -107,24 +115,35 @@ l_hist.factor <-  function(x,
                  showBinHandle = showBinHandle,
                  xlabel = xlabel,
                  parent=parent, ...)
+
     # Add level names to plot
-    l_layer_texts(h, x = 1:nlevels + 0.5 , y = rep(-1, nlevels),
+    ## Adjust text coords
+    ## The reason to do so is to make sure that
+    ## `labels` always lay down the corresponding bins no matter how origin shifts
+    text_adjust <- h['origin']
+    if(text_adjust > 1 || text_adjust <= 0) {
+        text_adjust <- text_adjust - as.integer(text_adjust)
+        if(text_adjust <= 0) text_adjust <- text_adjust + 1
+    }
+    text_adjust <- text_adjust - 0.5
+
+    l_layer_texts(h, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
                   text = levelNames, label = "Factor levels",
                   angle = 0,
                   size = 12, color = l_getOption("foreground"))
     h
-    }
+}
 
 
 #' @export
 l_hist.character <-  function(x,
-                           yshows = c("frequency", "density"),
-                           showStackedColors = TRUE,
-                           origin = NULL,
-                           binwidth = NULL,
-                           showBinHandle = FALSE,
-                           xlabel = NULL,
-                           parent=NULL, ...) {
+                              yshows = c("frequency", "density"),
+                              showStackedColors = TRUE,
+                              origin = NULL,
+                              binwidth = NULL,
+                              showBinHandle = FALSE,
+                              xlabel = NULL,
+                              parent=NULL, ...) {
     x <- factor(x)
 
     l_hist(x,
@@ -154,10 +173,10 @@ l_hist.default <-  function(x,
         yshows <- match.arg(yshows)
         if (is.null(origin) | !is.numeric(origin)){
             origin <- 0
-            }
+        }
         if (is.null(binwidth)| !is.numeric(binwidth)) {
             binwidth <- 1
-            }
+        }
         if (is.null(xlabel)| !is.character(xlabel)){
             xlabel <- gsub("\"", "", deparse(substitute(x)))
         }
@@ -173,8 +192,7 @@ l_hist.default <-  function(x,
         class(plot) <- c("l_hist", class(plot))
 
 
-    } else
-    {
+    } else {
         ndims <- length(dim(x))
         if (ndims > 2) stop("x should have at most two dimensions")
         if (length(dim(x)) == 2) {
@@ -199,45 +217,43 @@ l_hist.default <-  function(x,
                            xlabel = xlabel,
                            parent=parent,
                            ...)
-    } else
-    {
+        } else {
 
-        yshows <- match.arg(yshows)
-        if (is.null(xlabel)){
-            xlabel <- gsub("\"", "", deparse(substitute(x))) }
-        ## ylabel will be overwritten in ...
-        if (is.null(origin) | !is.numeric(origin)){
-            origin <- min(x)
+            yshows <- match.arg(yshows)
+            if (is.null(xlabel)){
+                xlabel <- gsub("\"", "", deparse(substitute(x))) }
+            ## ylabel will be overwritten in ...
+            if (is.null(origin) | !is.numeric(origin)){
+                origin <- min(x)
             }
 
-        if (is.null(binwidth) | !is.numeric(binwidth)) {
-            n <- length(x)
-            # Sturges rule
-            # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
-            # David Scott's rule
-            sd <- sd(x)
-            binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+            if (is.null(binwidth) | !is.numeric(binwidth)) {
+                n <- length(x)
+                # Sturges rule
+                # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
+                # David Scott's rule
+                sd <- sd(x)
+                binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+
+            }
+
+            plot <- loonPlotFactory('::loon::histogram',
+                                    'hist',
+                                    'loon histogram',
+                                    parent,
+                                    x = x,
+                                    yshows = yshows,
+                                    showStackedColors = showStackedColors,
+                                    origin = origin,
+                                    binwidth=binwidth,
+                                    showBinHandle = showBinHandle,
+                                    xlabel = xlabel,
+                                    ...)
+            class(plot) <- c("l_hist", class(plot))
 
         }
-
-        plot <- loonPlotFactory('::loon::histogram',
-                                'hist',
-                                'loon histogram',
-                                parent,
-                                x = x,
-                                yshows = yshows,
-                                showStackedColors = showStackedColors,
-                                origin = origin,
-                                binwidth=binwidth,
-                                showBinHandle = showBinHandle,
-                                xlabel = xlabel,
-                                ...)
-        class(plot) <- c("l_hist", class(plot))
-
-    }
     }
     return(plot)
-
 }
 
 
