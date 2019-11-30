@@ -13,6 +13,7 @@ from .helper import *
 from .loon_class import loon_l_pairs
 from .l_compound import l_getPlots,l_getLocations
 from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
+from .l_export import exportImageDialog
 def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True, itemLabel = None,
                     showHistograms = False, histLocation = "edge",
                     histHeightProp = 1, histArgs = {},
@@ -342,12 +343,13 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
         
 
     ## Make bindings for scatter synchronizing zoom and pan
-    busy = False
+    busy = {'status':False}
 
     def synchronizeScatterBindings(W):
-        #print(paste(W, ', busy', busy))
-        if (not busy):
-            busy = True
+        if (not busy['status']):
+            if(not isinstance(W,loon)):
+                W = loon(W)
+            busy['status'] = True
             # class(W) <- "loon"
             zoomX = W['zoomX']
             zoomY = W['zoomY']
@@ -355,20 +357,18 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
             panY = W['panY']
             deltaX = W['deltaX']
             deltaY = W['deltaY']
-            map(lambda p: l_configure(p,zoomX=zoomX,panX=panX,deltaX=deltaX), plotsHash["scatter_x_"+W])            
-            map(lambda p: l_configure(p,zoomY=zoomY,panY=panY,deltaY=deltaY), plotsHash["scatter_y_"+W])
+            list(map(lambda p: l_configure(p,zoomX=zoomX,panX=panX,deltaX=deltaX), plotsHash["scatter_x_"+W.plot]))            
+            list(map(lambda p: l_configure(p,zoomY=zoomY,panY=panY,deltaY=deltaY), plotsHash["scatter_y_"+W.plot]))
             if (showHistograms):
-                map(lambda p: l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY),plotsHash["swap_hist_"+W])
-            
-            busy = False
-            tk.tk.call('update', 'idletasks')
-            ##assign("busy", FALSE, envir=parent.env(environment()))
-        
+                map(lambda p: l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY),plotsHash["swap_hist_"+W.plot])
 
+            busy['status'] = False
+            tk.tk.call('update', 'idletasks')        
+    synchronizeScatterBindings_tcl = tk._register(synchronizeScatterBindings)
     list(map(lambda p: tk.tk.call(p.plot,'systembind', 'state', 'add',
-                        ['zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'],
-                        synchronizeScatterBindings),scatterplots.values()))
-
+                    ['zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'],
+                    [synchronizeScatterBindings_tcl,p.plot]),scatterplots.values()))
+    
     # forbidden scatter plots
     # synchronize
     list(map(lambda p: tk.tk.call(p.plot,'systembind', 'state', 'add',
@@ -470,7 +470,7 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     #     plots <- c(plots, list(serialAxes = serialAxes))
     # }
 
-    ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
+    # # beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
     # callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings
     # callbackFunctions$state[[paste(child,"undoScatterStateChanges", sep="_")]] <- undoScatterStateChanges
 
@@ -490,6 +490,12 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
         #plots <- c(plots, list(serialAxes = serialAxes))
         plots['serialAxes'] = serialAxes
     plots = loon_l_pairs(plots)
+    def temp():
+            exportImageDialog(parent)
+        ## Bind Ctrl-P to export image
+        #temp_f = tk._register(temp)
+    tk.tk.createcommand('temp_f',temp)
+    tk.tk.call("bind", parent, "<Control-KeyPress-p>",'temp_f')
     return plots
 
 

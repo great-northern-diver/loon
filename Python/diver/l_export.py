@@ -1,119 +1,113 @@
-# #' @title Export a loon plot as an image
-# #'
-# #' @description The supported image formats are dependent on the system
-# #'   environment. Plots can always be exported to the PostScript format.
-# #'   Exporting displays as \code{.pdf}s is only possible when the command line tool
-# #'   \code{epstopdf} is installed. Finally, exporting to either \code{png}, \code{jpg},
-# #'   \code{bmp}, \code{tiff} or \code{gif} requires the Img Tcl extension.
-# #'   When choosing one of the formats that
-# #'   depend on the Img extension, it is possible to export any Tk widget as an
-# #'   image including inspectors.
-# #'
-# #' @template param_widget
-# #' @param filename path of output file
-# #' @param width image width in pixels
-# #' @param height image height in pixels
-# #'
-# #' @details Note that the \code{CTRL-P} key combination opens a dialog to export
-# #'   the graphic.
-# #'
-# #'   The native export format is to \code{ps} as this is what the Tk canvas
-# #'   offers. If the the \code{l_export} fails with other formats then please
-# #'   resort to a screen capture method for the moment.
-# #'
-# #' @return path to the exported file
-# #'
-# #' @seealso \code{\link{l_export_valid_formats}}, \code{\link{plot.loon}}
-# #'
-# #' @export
-# l_export <- function(widget, filename, width, height) {
+from .onload import *
+from .tk import tk
+from .l_size import l_size 
+import os 
+from .helper import file_ext
+from sys import exit
+def l_export(widget, filename, width = None, height = None):
+    '''
+    Export a loon plot as an image
 
-#     if (missing(width))
-#         width <- l_size(widget)[1]
-#     if (missing(height))
-#         height <- l_size(widget)[2]
+    Description:
+        The supported image formats are dependent on the systemenvironment.
+        Plots can always be exported to the PostScript format.
+        Exporting displays as '.pdf' is only possible when the command line tool
+        epstopdf is installed. Finally, exporting to either `png`, `jpg`,
+        `bmp, `tiff` or `gif` requires the Img Tcl extension.
+        When choosing one of the formats that depend on the Img extension,
+        it is possible to export any Tk widget as an image including inspectors.
+    
+    Args:
+        filename: path of output file
+        width: image width in pixels
+        height: image height in pixels
 
-#     valid_extensions <- l_export_valid_formats()
+    Details:
+        Note that the `CTRL-P` key combination opens a dialog to export
+        the graphic.
+    
+    Returns:
+        path to the exported file
 
-#     file_extension <- tools::file_ext(filename)
-#     if (file_extension %in% valid_extensions) {
-#         fname <- as.character(tcl("::loon::export",
-#                                   widget, filename, width, height))
-#     } else {
-#         stop(paste0("The file format '",
-#                    file_extension,
-#                    "' is not supported on your system.\nSupported formats are: ",
-#                    paste(valid_extensions, collapse=', '), '.'))
-#     }
+    @see `l_export_valid_formats`
 
-#     fname
-# }
+    @namespace loon.l_export
+    '''
+    if(not isinstance(widget,str)):
+        widget = widget.plot
+    if (width == None):
+        width = l_size(widget)[0]
+    if (height == None):
+        height = l_size(widget)[1]
 
-# #' @title Return a list of the available image formats when exporting a loon
-# #'   plot
-# #'
-# #'
-# #' @description The supported image formats are dependent on the system
-# #'   environment. Plots can always be exported to the Postscript format.
-# #'   Exporting displays as .pdfs is only possible when the command line tool
-# #'   epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or
-# #'   gif requires the Img Tcl extension. When choosing one of the formats that
-# #'   depend on the Img extension, it is possible to export any Tk widget as an
-# #'   image including inspectors.
-# #'
-# #' @return a vector with the image formats available for exporting a loon plot.
-# #'
-# #' @export
-# l_export_valid_formats <- function() {
-#     valid_extensions <- c("ps", "eps")
+    valid_extensions = l_export_valid_formats()
 
-#     if (Sys.which('epstopdf') != "") {
-#         valid_extensions <- c(valid_extensions, "pdf")
-#     }
+    file_extension = file_ext(filename)
 
-#     if (.withTclImg) {
-#         valid_extensions <- c(valid_extensions,
-#                               'jpg','jpeg','png','bmp','tiff','gif')
-#     }
-#     valid_extensions
-# }
+    if (file_extension in valid_extensions):
+        fname = tk.tk.call("::loon::export",widget, filename, width, height)
+    else:
+        if(file_extension == None): 
+            return None
+        else:
+            exit("The file format '" + file_extension + 
+                "' is not supported on your system.\nSupported formats are: ",
+                ','.join(valid_extensions) +  '.')
+    return fname
+
+def l_export_valid_formats():
+    '''
+    Return a list of the available image formats when exporting a loon plot
+
+    Description:
+        The supported image formats are dependent on the system
+        environment. Plots can always be exported to the Postscript format.
+        Exporting displays as .pdfs is only possible when the command line tool
+        epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or
+        gif requires the Img Tcl extension. When choosing one of the formats that
+        depend on the Img extension, it is possible to export any Tk widget as an
+        image including inspectors.
+    
+    Returns: 
+        a vector with the image formats available for exporting a loon plot.
+    
+    @namespace loon.l_export_valid_formats
+    '''
+    valid_extensions = ["ps", "eps"]
+    # if (Sys.which('epstopdf') != "") {
+    #     valid_extensions <- c(valid_extensions, "pdf")
+    # }
+    # if (.withTclImg) {
+    #     valid_extensions <- c(valid_extensions,
+    #                           'jpg','jpeg','png','bmp','tiff','gif')
+    # }
+    # valid_extensions
+    valid_extensions.append('pdf')
+    return valid_extensions
 
 
 
-# filetypes <- list(
-#     png="Portable Network Graphics",
-#     jpg="JPEG",
-#     ps="Postscript",
-#     eps="Encapsulated Postscript",
-#     pdf="Portable Document Graphics",
-#     tiff="Tagged Image File Format",
-#     bmp="Bitmap",
-#     gif="Graphics Interchange Format"
-#     )
+filetypes = {'png':"Portable Network Graphics",'jpg':"JPEG",'ps':"Postscript",
+            'eps':'Encapsulated Postscript','pdf':"Portable Document Graphics",
+            'tiff':"Tagged Image File Format",'bmp':"Bitmap",
+            'gif':"Graphics Interchange Format"}
 
-# def exportImageDialog(widget):
-#     fm <- l_export_valid_formats()
-#     formats <- fm[fm != "jpeg"]
-#     fnames <- vapply(formats, function(x)filetypes[[x]], character(1))
+def exportImageDialog(widget):
+    if(not isinstance(widget,str)):
+        widget = widget.plot
+    fm = l_export_valid_formats()
+    formats = [x for x in fm if x != 'jpeg']
+    fnames = {x: filetypes[x] for x in formats}
+    types = ""
+    for x,y in fnames.items():
+        types = types + '{ {' + y + '} {.' + x + '} } ' 
+    types = types[:-1]
 
-#     types <- ""
-#     for (i in seq_along(formats)) {
-#         types <- paste(types, '{',
-#                        paste0('{', fnames[i], '}'),
-#                        paste0('{','.', formats[i], '}'),
-#                        '}')
-#     }
+    fileName = tk.tk.call('tk_getSaveFile','-initialdir',os.getcwd(),
+                          '-initialfile','loon_plot','-title','Export Plot As Image',
+                          '-parent',tk.tk.call('winfo','toplevel',widget),
+                          '-filetypes',types)
+    if (isinstance(fileName,str)):
+        l_export(widget, fileName)
+    return(fileName)
 
-#     fileName <- as.character(
-#         tcl('tk_getSaveFile',
-#             initialdir=getwd(),
-#             initialfile='loon_plot',
-#             title="Export Plot As Image",
-#             parent=tkwinfo('toplevel', widget),
-#             filetypes=types))
-
-#     if (length(fileName) == 1) {
-#         l_export(widget, fileName)
-#     }
-#     return(fileName)
-# }

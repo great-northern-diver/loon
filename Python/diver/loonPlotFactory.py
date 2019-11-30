@@ -2,6 +2,7 @@ from .l_toplevel import *
 from .l_subwin import *
 from .tk import tk 
 from .helper import opts_to_list
+from .l_export import exportImageDialog
 import threading
 
 def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot", parent=None, **kwargs):
@@ -28,11 +29,11 @@ def loonPlotFactory(factory_tclcmd,factory_path,factory_window_title="loon plot"
         ## Bind the toplevel <FocusIn> event to update the loon inspector
         tk.tk.call("bind", parent, "<FocusIn>","+::loon::setLoonInspectorActiveWidget "+ str(plot))
         def temp():
-                exportImageDialog(plot)
+            exportImageDialog(plot)
         ## Bind Ctrl-P to export image
-        tk.tk.call("bind", parent, "<Control-KeyPress-p>",temp)
-
-        # tcl("bind", parent, "<Control-KeyPress-P>",
-        #     function()exportImageDialog(plot))
+        #temp_f = tk._register(temp)
+        tk.tk.createcommand('temp_f',temp)
+        tk.tk.call("bind", parent, "<Control-KeyPress-p>",'temp_f')
+        #tk.tk.deletecommand('temp_f')
     plot = str(plot)
     return(plot)

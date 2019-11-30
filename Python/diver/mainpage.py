@@ -18,63 +18,63 @@ This manual is divided in the following sections:
   # Package Information
     desc:  General Information about the package
     contents:
-    - loon::loon
-    - l_help
-    - l_web
+    - loon.loon
+    - loon.l_help
+    - loon.l_web
   # Main Plotting Functions
     desc:  These are the main functions needed to create plots
     contents:
-    - l_plot
-    - l_hist
-    - l_plot3D
-    - l_pairs
-    - l_serialaxes
+    - loon.l_plot
+    - loon.l_hist
+    - loon.l_plot3D
+    - loon.l_pairs
+    - loon.l_serialaxes
   # Access Modify
     desc: Access Modify
     contents:
-    - l_cget
-    - l_configure
-    - l_info_states
-    - l_state_names
-    - l_getLinkedStates
-    - l_setLinkedStates
-    - l_getOption
-    - l_setOption
-    - l_userOptions
-    - l_getOptionNames
-    - l_getPlots
-    - l_scale
-    - l_move
-    - l_redraw
-    - l_size
-    - l_zoom
-    - l_copyStates
-    - l_saveStatesRDS
+    - loon.l_cget
+    - loon.l_configure
+    - loon.l_info_states
+    - loon.l_state_names
+    - loon.l_getLinkedStates
+    - loon.l_setLinkedStates
+    - loon.l_getOption
+    - loon.l_setOption
+    - loon.l_userOptions
+    - loon.l_getOptionNames
+    - loon.l_getPlots
+    - loon.l_scale
+    - loon.l_move
+    - loon.l_redraw
+    - loon.l_size
+    - loon.l_zoom
+    - loon.l_copyStates
+    - loon.l_saveStates
   # Miscellaneous
     desc: Miscellaneous
     contents:
-    - l_resize
-    - l_export
-    - l_export_valid_formats
-    - l_aspect<-
-    - l_aspect
-    - l_setAspect
-    - l_subwin
-    - l_widget
-    - l_setTitleFont
-    - l_getLocations
-    - l_userOptionDefault
+    - loon.l_resize
+    - loon.l_export
+    - loon.l_export_valid_formats
+    - loon.l_aspect<-
+    - loon.l_aspect
+    - loon.l_setAspect
+    - loon.l_subwin
+    - loon.l_widget
+    - loon.l_setTitleFont
+    - loon.l_getLocations
+    - loon.l_userOptionDefault
 
   # Colors
     desc: Colors
     contents:
-    - color_loon
-    - loon::tkcolors
-    - hex12tohex6
-    - l_hexcolor
-    - l_getColorList
-    - loon_palette
-    - l_colRemoveAlpha
+    - loon.color_loon
+    - loon.tkcolors
+    - loon.hex12tohex6
+    - loon.l_hexcolor
+    - loon.l_getColorList
+    - loon.loon_palette
+    - loon.l_colRemoveAlpha
     - starts_with("l_setColor")
   # Layering
     desc: Layers
@@ -97,18 +97,18 @@ This manual is divided in the following sections:
   # Graph
     desc: Graph
     contents:
-    - l_graph
-    - as.graph
-    - as.loongraph
-    - complement
-    - complement.loongraph
-    - completegraph
-    - graphreduce
-    - loongraph
-    - linegraph
-    - linegraph.loongraph
-    - l_getGraph
-    - ndtransitiongraph
+    - loon.l_graph
+    - loon.as.graph
+    - loon.as.loongraph
+    - loon.complement
+    - loon.complement.loongraph
+    - loon.completegraph
+    - loon.graphreduce
+    - loon.loongraph
+    - loon.linegraph
+    - loon.linegraph.loongraph
+    - loon.l_getGraph
+    - loon.ndtransitiongraph
   # Navigation Graphs
     desc: Navigation
     contents:
@@ -122,43 +122,43 @@ This manual is divided in the following sections:
   # Grid Grobs
     desc: Grid Grobs
     contents:
-    - loonGrob
-    - grid.loon
-    - condGrob
-    - l_createCompoundGrob
-    - l_get_arrangeGrobArgs
-    - loonGrob_layoutType
+    - loon.loonGrob
+    - loon.grid.loon
+    - loon.condGrob
+    - loon.l_createCompoundGrob
+    - loon.l_get_arrangeGrobArgs
+    - loon.loonGrob_layoutType
   # Data
     desc: data
     contents:
-    - UsAndThem
-    - olive
-    - oliveAcids
-    - oliveLocations
-    - minority
+    - loon.UsAndThem
+    - loon.olive
+    - loon.oliveAcids
+    - loon.oliveLocations
+    - loon.minority
   # Inspectors
     desc: inspectors
     contents:
     - ends_with("inspector")
-    - l_hist_inspector_analysis
-    - l_worldview
+    - loon.l_hist_inspector_analysis
+    - loon.l_worldview
   # Others
     desc: others
     contents:
-    - l_list2nestedTclList
-    - l_nestedTclList2list
-    - l_data
-    - l_throwErrorIfNotLoonWidget
-    - l_toR
-    - l_isLoonWidget
-    - L2_distance
+    - loon.l_list2nestedTclList
+    - loon.l_nestedTclList2list
+    - loon.l_data
+    - loon.l_throwErrorIfNotLoonWidget
+    - loon.l_toR
+    - loon.l_isLoonWidget
+    - loon.L2_distance
   # Measures
     desc: measures
     contents:
-    - measures1d
-    - measures2d
-    - scagnostics2d
-    - print.measures1d
-    - print.measures2d
+    - loon.measures1d
+    - loon.measures2d
+    - loon.scagnostics2d
+    - loon.print.measures1d
+    - loon.print.measures2d
 
 '''

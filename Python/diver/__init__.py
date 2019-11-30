@@ -33,11 +33,18 @@ from .l_getOption import l_getOption,l_getOptionNames,l_userOptions,l_userOption
 from .l_compound import l_getPlots,l_getLocations
 from .l_move import l_move,l_move_grid,l_move_halign,l_move_hdist,l_move_jitter,l_move_reset,l_move_valign,l_move_vdist
 from .l_redraw import l_redraw
+from .l_size import l_size
+from .l_export import l_export,filetypes,l_export_valid_formats,exportImageDialog
+from .l_saveStates import l_saveStates
+from .l_setTitleFont import l_setTitleFont
+from .l_copyStates import l_copyStates
+from .tk import tk
+
 ### remove later 
 #from .loonobject import *
 ###
 namespace = globals().keys()
-__all__ = ['l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel',
+__all__ = ['tk','l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel',
             'loon','loon_l_context','loon_l_glyph','loon_l_graph','loon_l_hist',
             'loon_l_layer','loon_l_navigator','loon_l_pairs','loon_l_plot',
             'loon_l_plot3D','loon_l_serialaxes','loon_l_compound','loonPlotFactory','iris',
@@ -55,4 +62,6 @@ __all__ = ['l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel',
             'l_pairs','l_help','l_web','l_setLinkedStates','l_getLinkedStates',
             'l_getOption','l_getOptionNames','l_userOptions','l_userOptionDefault','l_setOption',
             'l_getPlots','l_getLocations','l_move','l_move_grid','l_move_halign',
-            'l_move_hdist','l_move_jitter','l_move_reset','l_move_valign','l_move_vdist']
+            'l_move_hdist','l_move_jitter','l_move_reset','l_move_valign','l_move_vdist',
+            'l_size','l_export','l_export_valid_formats','exportImageDialog',
+            'l_saveStates','l_setTitleFont','l_copyStates']

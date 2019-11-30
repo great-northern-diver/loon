@@ -26,3 +26,7 @@ def opts_to_list(opt):
         res.append(value)
     return res
 
+def file_ext(filename):
+    pos = filename.rfind('.')
+    if(pos >= 0):
+        return(filename[pos + 1:])

@@ -2,7 +2,7 @@ from .tk import tk
 from .l_cget import *
 from .l_configure import *
 from .l_state_names import *
-
+from sys import exit
 class loon:
     """
     Loon class 
@@ -109,7 +109,6 @@ class loon_l_layer():
 
 
 ######## Not finished yet 
-## class loon_l_comp should be a super class of loon_l_pairs 
 
 class loon_l_compound():
     '''
@@ -180,3 +179,17 @@ class loon_l_context(loon):
     '''
     def __init__(self, plot):
         super().__init__(plot)    
+
+
+
+class loon_l_savedStates:
+    def __init__(self,info,obj_type):
+        self.__dict__['info'] = info
+        self.__dict__['type'] = obj_type
+    # def __getattr__(self, key):
+    #     return self.type
+    def __getitem__(self, key):
+        if(key in self.info.keys()):
+            return self.info[key]
+        else:
+            exit(key + 'is not an vaild attribute in the saveState')
