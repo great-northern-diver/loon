@@ -14,6 +14,7 @@ from .loon_class import loon_l_pairs
 from .l_compound import l_getPlots,l_getLocations
 from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 from .l_export import exportImageDialog
+#busy = False
 def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True, itemLabel = None,
                     showHistograms = False, histLocation = "edge",
                     histHeightProp = 1, histArgs = {},
@@ -141,8 +142,6 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     text_adjustValue = 1
     scatter_adjustValue = 0
     span = 1
-    # histLocation <- match.arg(histLocation)
-    #histLocation = histLocation[0]
     if(histLocation != 'edge'):
         histLocation_opt = ['edge','diag']
         histLocation = match_arg(histLocation,histLocation_opt,'histLocation')
@@ -175,15 +174,14 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                     # top level histograms
                     histArgs['swapAxes'] = False
                     ix = i
-                    iy = 1
+                    iy = 0
                 else:
                     histArgs['x'] = asnumeric(data[varnames[i - nvar]])
                     histArgs['xlabel'] = varnames[i - nvar]
                     # right level histograms
                     histArgs['swapAxes'] = True
-                    ix = nvar + 1
+                    ix = nvar 
                     iy = i - nvar + 1
-                
                 #histograms.append(l_hist(**histArgs))
                 #names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
                 histograms['x' + str(ix) + 'y' + str(iy)] = l_hist(**histArgs)
@@ -219,7 +217,6 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                 histArgs['x'] = asnumeric(data[varnames[i]])
                 histArgs['xlabel'] = varnames[i]
                 histArgs['swapAxes'] = False
-                #histograms[i] =l_hist(**histArgs)
                 histograms['x'+str(i) +'y' + str(i)] = l_hist(**histArgs)
                 xText = list(histograms.values())[i]['panX'] + list(histograms.values())[i]['deltaX']/(2*list(histograms.values())[i]['zoomX'])
                 yText = list(histograms.values())[i]['panY'] + list(histograms.values())[i]['deltaY']/(2*list(histograms.values())[i]['zoomY'])
@@ -246,8 +243,6 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
 
     if (showSerialAxes):
         serialAxesArgs['data'] = data
-        #serialAxesArgs['showScales'] <- NULL
-        #serialAxesArgs['swapAxes'] <- NULL
         serialAxesArgs['axesLayout'] = "parallel"
         serialAxesArgs['showLabels'] = args['showLabels']
         serialAxesArgs['parent'] = args['parent']
@@ -344,12 +339,11 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
 
     ## Make bindings for scatter synchronizing zoom and pan
     busy = {'status':False}
-
-    def synchronizeScatterBindings(W):
+    def synchronizeScatterBindings(W):       
         if (not busy['status']):
+            busy['status'] = True
             if(not isinstance(W,loon)):
                 W = loon(W)
-            busy['status'] = True
             # class(W) <- "loon"
             zoomX = W['zoomX']
             zoomY = W['zoomY']
@@ -361,9 +355,8 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
             list(map(lambda p: l_configure(p,zoomY=zoomY,panY=panY,deltaY=deltaY), plotsHash["scatter_y_"+W.plot]))
             if (showHistograms):
                 map(lambda p: l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY),plotsHash["swap_hist_"+W.plot])
-
+            # tk.tk.call('update', 'idletasks')        
             busy['status'] = False
-            tk.tk.call('update', 'idletasks')        
     synchronizeScatterBindings_tcl = tk._register(synchronizeScatterBindings)
     list(map(lambda p: tk.tk.call(p.plot,'systembind', 'state', 'add',
                     ['zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'],
@@ -371,9 +364,10 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     
     # forbidden scatter plots
     # synchronize
+    undoScatterStateChanges_tcl = tk._register(undoScatterStateChanges)
     list(map(lambda p: tk.tk.call(p.plot,'systembind', 'state', 'add',
                         ['showLabels', 'showScales', 'swapAxes'],
-                        undoScatterStateChanges),scatterplots.values()))
+                        [undoScatterStateChanges_tcl,p.plot]),scatterplots.values()))
 
     plots = scatterplots
     # if (showHistograms):

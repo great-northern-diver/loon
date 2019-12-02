@@ -1,7 +1,7 @@
 build/
 build/lib
 dist/
-LOONTEST.egg-info/
+diver.egg-info/
 
 
 
