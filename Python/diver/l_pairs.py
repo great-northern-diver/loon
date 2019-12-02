@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from itertools import combinations
+from itertools import combinations,compress
 from functools import singledispatch
 from .retrieve_name import *
 from .l_plot import *
@@ -370,116 +370,80 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                         [undoScatterStateChanges_tcl,p.plot]),scatterplots.values()))
 
     plots = scatterplots
-    # if (showHistograms):
-    #     # synchronize hist bindings
-    #     histsHash = {}
-    #     namesHist = names(histograms)
-    #     namesScatter <- names(scatterplots)
+    # names must follow the pattern xayb, (a,b) is the coords of the corresponding layout
+    def xy_layout(names):
+        xpos = [x.find('x') for x in names]
+        ypos = [y.find('y') for y in names]
+        len_char = [len(x) for x in names]
+        x = [int(names[i][xpos[i]+1:ypos[i]]) for i in range(len(xpos))]
+        y = [int(names[i][ypos[i]+1:len_char[i]]) for i in range(len(ypos))]
+        return {'x':x,'y':y}
 
-    #     scatterLayout <- xy_layout(namesScatter)
-    #     scatterX <- scatterLayout$x
-    #     scatterY <- scatterLayout$y
+    if (showHistograms):
+        # synchronize hist bindings
+        histsHash = {}
+        namesHist =  list(histograms.keys())
+        namesScatter = list(scatterplots.keys())
 
-    #     if(histLocation == "edge") {
-    #         for(i in 1:length(histograms)) {
-    #             nameHist <- namesHist[i]
-    #             if(i != 1 & i != length(histograms)) {
-    #                 if(i <= nvar) {
-    #                     histX <- xy_layout(nameHist)$x
-    #                     shareX <- which(scatterX %in% histX == TRUE)
-    #                     histsHash[[paste("hist_x_",
-    #                                      histograms[i],sep="")]] <- c(scatterplots[shareX])
-    #                 } else {
-    #                     histY <- xy_layout(nameHist)$y
-    #                     shareY <- which(scatterY %in% histY == TRUE)
-    #                     histsHash[[paste("hist_y_",
-    #                                      histograms[i],sep="")]] <- c(scatterplots[shareY])
-    #                 }
-    #             }
-    #         }
+        scatterLayout = xy_layout(namesScatter)
+        scatterX = scatterLayout['x']
+        scatterY = scatterLayout['y']
 
-    #     } else {
-    #        for(i in 1:length(histograms)){
-    #            nameHist <- namesHist[i]
-    #            histLayout <- xy_layout(nameHist)
-    #            histX <- histLayout$x
-    #            histY <- histLayout$y
-    #            shareX <- which(scatterX %in% histX == TRUE)
-    #            shareY <- which(scatterY %in% histY == TRUE)
-    #            if(length(shareX) > 0) {
-    #                histsHash[[paste0("hist_x_",
-    #                                  histograms[i])]] <- c(scatterplots[shareX])
-    #            }
-    #            if(length(shareY) > 0) {
-    #                histsHash[[paste0("hist_y_",
-    #                                  histograms[i])]] <- c(scatterplots[shareY])
-    #            }
-    #        }
-    #     }
+        if(histLocation == "edge"):
+            for i in range(len(histograms)):
+                nameHist = namesHist[i]
+                if(i != 0 and i != len(histograms)):
+                    if(i < nvar):
+                        histX = xy_layout([nameHist])['x'][0]
+                        shareX = [x == histX for x in scatterX]
+                        histsHash["hist_x_"+ list(histograms.values())[i].plot] =list(compress(list(scatterplots.values()),shareX))
+                    else:
+                        histY = xy_layout([nameHist])['y'][0]
+                        shareY = [y == histY for y in scatterY]
+                        histsHash["hist_y_" + list(histograms.values())[i].plot]= list(compress(list(scatterplots.values()),shareY))
+        else:
+            for i in range(len(histograms)):
+                nameHist = namesHist[i]
+                histLayout = xy_layout([nameHist])
+                histX = histLayout['x'][0]
+                histY <- histLayout['y'][0]
+                shareX = [x == histX for x in scatterX]
+                shareY = [y == histY for y in scatterY]
+                if(len(shareX) > 0):
+                    histsHash["hist_x_"+ list(histograms.values())[i].plot] =list(compress(list(scatterplots.values()),shareX))
+                if(len(shareY) > 0):
+                    histsHash["hist_y_" + list(histograms.values())[i].plot]= list(compress(list(scatterplots.values()),shareY))
+        def synchronizeHistBindings(W):
+            #print(paste(W, ', busy', busy))
+            if (not busy['status']):
+                busy['status'] = True
+                if(not isinstance(W,loon)):
+                    W = loon(W)
+                zoomX = W['zoomX']
+                zoomY = W['zoomY']
+                panX = W['panX']
+                panY = W['panY']
+                deltaX = W['deltaX']
+                deltaY = W['deltaY']
+                if("hist_x_"+W.plot in histsHash.keys()):
+                    list(map(lambda h: l_configure(h,zoomX=zoomX,panX=panX,deltaX=deltaX), histsHash["hist_x_"+W.plot]))            
+                if("hist_y_"+W.plot in histsHash.keys()):
+                    list(map(lambda h: l_configure(h,zoomY=zoomY,panY=panY,deltaY=deltaY), histsHash["hist_y_"+W.plot]))
+                busy['status'] = False
+                #tk.tk.call('update', 'idletasks')
+        synchronizeHistBindings_tcl = tk._register(synchronizeHistBindings)
+        # synchronize
+        list(map(lambda h: tk.tk.call(h.plot,'systembind', 'state', 'add',
+                        ['zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'],
+                        [synchronizeHistBindings_tcl,h.plot]),histograms.values()))   
+        # forbidden
+        undoHistStateChanges_tcl = tk._register(undoHistStateChanges)
+        list(map(lambda h: tk.tk.call(h.plot,'systembind', 'state', 'add',
+                            ['showLabels', 'showScales'],
+                            undoHistStateChanges_tcl),histograms.values()))  
+        plots.update(histograms) 
 
-    #     synchronizeHistBindings <- function(W) {
-    #         #print(paste(W, ', busy', busy))
-    #         if (!busy) {
-    #             busy <<- TRUE
-    #             class(W) <- "loon"
-    #             zoomX <- W['zoomX']; zoomY <- W['zoomY']
-    #             panX <- W['panX']; panY <- W['panY']
-    #             deltaX <- W['deltaX']; deltaY <- W['deltaY']
 
-    #             lapply(histsHash[[paste("hist_x_",W,sep="")]], function(h) {
-    #                 l_configure(h, zoomX=zoomX, panX=panX, deltaX=deltaX)
-    #             })
-
-    #             lapply(histsHash[[paste("hist_y_",W,sep="")]], function(h) {
-    #                 l_configure(h, zoomY=zoomX, panY=panX, deltaY=deltaX)
-    #             })
-    #             busy <<- FALSE
-    #             tcl('update', 'idletasks')
-    #             ##assign("busy", FALSE, envir=parent.env(environment()))
-    #         }
-    #     }
-    #     # synchronize
-    #     lapply(histograms, function(h) {
-    #         tcl(h, 'systembind', 'state', 'add',
-    #             c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-    #             synchronizeHistBindings)
-    #     })
-    #     # forbidden
-    #     lapply(histograms, function(h) {
-    #         tcl(h, 'systembind', 'state', 'add',
-    #             c('showLabels', 'showScales'),
-    #             undoHistStateChanges)
-    #     })
-
-    #     if(histLocation == "edge") {
-    #         plots<- c(plots, histograms[2:(2*nvar-1)])
-    #     } else {
-    #         plots<- c(plots, histograms)
-    #     }
-
-    #     callbackFunctions$state[[paste(child,"synchronizeHist", sep="_")]] <- synchronizeHistBindings
-    #     callbackFunctions$state[[paste(child,"undoHistStateChanges", sep="_")]] <- undoHistStateChanges
-    # }
-    # if(showSerialAxes) {
-    #     plots <- c(plots, list(serialAxes = serialAxes))
-    # }
-
-    # # beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
-    # callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings
-    # callbackFunctions$state[[paste(child,"undoScatterStateChanges", sep="_")]] <- undoScatterStateChanges
-
-    # structure(
-    #     plots,
-    #     class = c("l_pairs", "l_compound", "loon")
-    # )
-
-    if(showHistograms):
-        #if(histLocation == "edge"):
-        #    plots.update(histograms[2:(2*nvar-1)])
-        #else {
-        #    plots<- c(plots, histograms)
-        #}
-        plots.update(histograms)
     if(showSerialAxes):
         #plots <- c(plots, list(serialAxes = serialAxes))
         plots['serialAxes'] = serialAxes
@@ -491,31 +455,6 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     tk.tk.createcommand('temp_f',temp)
     tk.tk.call("bind", parent, "<Control-KeyPress-p>",'temp_f')
     return plots
-
-
-####################################################################################
-####################################################################################
-
-
-# # names must follow the pattern xayb, (a,b) is the coords of the corresponding layout
-# xy_layout <- function(names){
-#     namesSplit <- strsplit(names, split = "")
-#     lay_out <- as.data.frame(
-#         t(
-#             sapply(namesSplit,
-#                    function(char){
-#                        xpos <- which(char %in% "x" == TRUE)
-#                        ypos <- which(char %in% "y" == TRUE)
-#                        len_char <- length(char)
-#                        c(as.numeric(paste0(char[(xpos + 1) : (ypos - 1)], collapse = "")),
-#                          as.numeric(paste0(char[(ypos + 1) : (len_char)], collapse = "")))
-#                    }
-#             )
-#         )
-#     )
-#     colnames(lay_out) <- c("x", "y")
-#     lay_out
-# }
 
 
 @l_getPlots.register

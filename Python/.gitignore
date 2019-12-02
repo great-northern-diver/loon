@@ -5,9 +5,5 @@ diver.egg-info/
 
 
 
-LIENSE
-MANIFEST.in
-setup.py
-
 /loon/__pycache__
-/loon/Tcl
+
