@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="diver", # Replace with your own username
-    version="1.2.6",
+    version="1.2.8",
     author="Example Author",
     author_email="author@example.com",
     description="A small example package",
