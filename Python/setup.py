@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="diver", # Replace with your own username
-    version="1.2.5",
+    version="1.2.6",
     author="Example Author",
     author_email="author@example.com",
     description="A small example package",
@@ -16,6 +16,12 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+    ],
+    install_requires = [
+        'numpy',
+        'pandas',
+        'sklearn',
+        'matplotlib'
     ],
     include_package_data=True,
     python_requires='>=3.6',

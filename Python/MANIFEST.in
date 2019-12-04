@@ -1,0 +1,5 @@
+include diver/Tcl/*
+include diver/Tcl/library/*
+include diver/Tcl/images/*
+include diver/Tcl/images/*
+include diver/datasets/*
