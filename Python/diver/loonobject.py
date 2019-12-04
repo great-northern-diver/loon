@@ -89,6 +89,8 @@ def loonobject(target, convert=str):
         call = [widget]
     elif(Type == 'layer'):
         call = [widget,'layer','use',specifier[1]] 
+    elif(Type == 'glyph'):
+        call = [widget, 'glyph', 'use', specifier[1]]
     else:
         print('not finished yet ~~~~~')
 

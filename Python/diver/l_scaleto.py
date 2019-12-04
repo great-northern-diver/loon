@@ -9,74 +9,62 @@ def l_scaleto(widget, *opt):
 
 
 
-# #' @title Change Plot Region to Display All Plot Data
-# #'   
-# #' @description The function modifies the \code{zoomX}, \code{zoomY}, 
-# #'   \code{panX}, and \code{panY} so that all elements in the plot are
-# #'   displayed.
-# #' 
-# #' @template param_widget
-# #'   
-# #' @export
 def l_scaleto_world(widget):
+    '''
+    Change Plot Region to Display All Plot Data
+
+    Description: 
+        The function modifies the `zoomX`, `zoomY`, 
+        panX, and `panY` so that all elements in the plot are displayed.
+    '''
     l_scaleto(widget, "world")
 
 
-# #' @title Change Plot Region to Display the All Data of the Model Layer
-# #'   
-# #' @description The function modifies the \code{zoomX}, \code{zoomY}, 
-# #'   \code{panX}, and \code{panY} so that all elements in the model layer of the
-# #'   plot are displayed.
-# #'   
-# #' @template param_widget
-# #'   
-# #' @export
 def l_scaleto_plot(widget):
+    '''
+    Change Plot Region to Display the All Data of the Model Layer
+
+    Description: 
+        The function modifies the `zoomX`, `zoomY`, 
+        `panX`, and `panY` so that all elements in the model layer of the
+        plot are displayed
+    '''
     l_scaleto(widget, "plot")
 
 
-# #' @title Change Plot Region to Display All Selected Data
-# #'   
-# #' @description The function modifies the \code{zoomX}, \code{zoomY}, 
-# #'   \code{panX}, and \code{panY} so that all selected data points are
-# #'   displayed.
-# #'   
-# #' @template param_widget
-# #'   
-# #' @export
 def l_scaleto_selected(widget):
+    '''
+    Change Plot Region to Display All Selected Data
+
+    Description: 
+        The function modifies the `zoomX`, `zoomY`, 
+        `panX`, and `panY` so that all selected data points are displayed. 
+    '''
     l_scaleto(widget, "selected")
 
 
-# #' @title Change Plot Region to Display All Active Data
-# #'   
-# #' @description The function modifies the \code{zoomX}, \code{zoomY}, 
-# #'   \code{panX}, and \code{panY} so that all active data points are displayed.
-# #' 
-# #' @template param_widget
-# #'    
-# #' @export
+
 def l_scaleto_active(widget):
+    '''
+    Change Plot Region to Display All Active Data
+
+    Description:
+        The function modifies the `zoomX`, `zoomY`, 
+        `panX`, and `panY` so that all active data points are displayed.    
+    '''
     l_scaleto(widget, "active")
 
+def l_scaleto_layer(layer):
+    '''
+    Change Plot Region to Display All Elements of a Particular Layer
 
-# #' @title Change Plot Region to Display All Elements of a Particular Layer
-# #'   
-# #' @description The function modifies the \code{zoomX}, \code{zoomY}, 
-# #'   \code{panX}, and \code{panY} so that all elements of a particular layer are
-# #'   displayed.
-# #'   
-# #' @template param_target
-# #' @param layer layer id
-# #' 
-# #' @seealso \code{\link{l_layer_ids}}
-# #'   
-# #' @export
-# def l_scaleto_layer(target, layer):
-#     if (is(target, "l_layer")) {
-#         layer <- target
-#         target <- attr(layer, "widget")
-#     }
-#     l_scaleto(target, "layer", layer)
+    Description: 
+        The function modifies the zoomX, zoomY, 
+        `panX`, and `panY` so that all elements of a particular layer are displayed.    
+
+    @see `l_layer_ids`
+    '''
+    target = layer.widget
+    l_scaleto(target, "layer", layer.id)
 
 

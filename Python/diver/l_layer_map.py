@@ -1,3 +1,5 @@
+# from .l_layer import l_layer
+# from multipledispatch import dispatch
 
 # #' @title Add a Map of class map as Drawings to Loon plot
 # #'
@@ -37,6 +39,7 @@
 # #'   l_map['active'] <- TRUE
 # #'   l_map['tag']
 # #' }
+# @dispatch(object,)
 # def l_layer_map(widget, x, color="", linecolor="black", linewidth=1,
 #                 label, parent="root", index=0, asSingleLayer=TRUE, **options):
 

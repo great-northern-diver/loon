@@ -25,11 +25,15 @@ class loon:
             return l_cget(self,key)
     # overload .
     def __setattr__(self, name, value):
-         opt = {name:value}
-         l_configure(self,**opt)
+        if(isinstance(value,loon_l_glyph)):
+            value = value.id
+        opt = {name:value}
+        l_configure(self,**opt)
 
     # overload []   
     def __setitem__(self, name, value):
+        if(isinstance(value,loon_l_glyph)):
+            value = value.id
         opt = {name:value}
         l_configure(self,**opt)
     
@@ -158,12 +162,37 @@ class loon_l_pairs(loon_l_compound):
         super().__init__(plot)
             
 
-class loon_l_glyph(loon):
+class loon_l_glyph():
     '''
     l_plot
     '''
-    def __init__(self, plot):
-        super().__init__(plot)    
+    def __init__(self, widget,id,Type):
+        self.__dict__['widget'] = widget
+        self.__dict__['id'] = id 
+        self.__dict__['type'] = Type      
+    def __getattr__(self, key):
+        if(key in {'widget','id','type'}):
+            return self[key]
+        else:  
+            return l_cget(self,key)
+    def __getitem__(self, key):
+        if(key in {'widget','id','type'}):
+            return self.plot
+        else:
+            return l_cget(self,key)
+    # overload .
+    def __setattr__(self, name, value):
+        if(isinstance(value,loon_l_glyph)):
+            value = value.id
+        opt = {name:value}
+        l_configure(self,**opt)
+
+    # overload []   
+    def __setitem__(self, name, value):
+        if(isinstance(value,loon_l_glyph)):
+            value = value.id
+        opt = {name:value}
+        l_configure(self,**opt)
 
 
 class loon_l_navigator(loon):

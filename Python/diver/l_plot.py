@@ -89,7 +89,7 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             if(len(glyph) != len(x)):
                 exit("When more than length 1, length of glyph must match number of points:"+str(len(x)))
         if(y == None):
-            y = list(range(len(x)))
+            y = list(range(1,len(x)+1))
         kwargs = {"x":x,"y":y,"color": color, "glyph": glyph, "size": size, "active": active,"xlabel": xlabel,
                 "ylabel": ylabel,"title": title,"selected": selected,"showLabels": showLabels,
                 "showScales": showScales,"showGuides": showGuides, "guidelines": guidelines,

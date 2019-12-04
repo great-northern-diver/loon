@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+from sys import exit
+from .loon_class import loon
+
 ### input a list/tuple/np.Series of number of strings 
 ### output a list of number 
 def asnumeric(x):
@@ -30,3 +33,11 @@ def file_ext(filename):
     pos = filename.rfind('.')
     if(pos >= 0):
         return(filename[pos + 1:])
+
+def widget_to_string(widget):
+    if(isinstance(widget,loon)):
+        return widget.plot
+    elif(isinstance(widget,str)):
+        return widget
+    else:
+        exit('Widget should be string or loon class object.')

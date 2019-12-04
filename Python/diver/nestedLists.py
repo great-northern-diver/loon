@@ -16,7 +16,7 @@
 #' x <- list(c(1,3,4), c(4,3,2,1), c(4,3,2,5,6))
 #' l_Rlist2nestedTclList(x)
 def l_list2nestedTclList(x):
-    return(' '.join(['{' + str(i) + '}' for i in x]))
+    return(' '.join(['{' + ' '.join([str(j) for j in i]) + '}' for i in x]))
 
 
 #' @title Convert a Nested Tcl List to an R List

@@ -79,7 +79,7 @@ This manual is divided in the following sections:
   # Layering
     desc: Layers
     contents:
-    - starts_with("l_layer")
+    - loon.l_layer
     - print.l_layer
   # Glyphs
     desc: Glyphs

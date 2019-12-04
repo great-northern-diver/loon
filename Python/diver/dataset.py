@@ -40,3 +40,8 @@ quakes = pd.read_csv(working_dir + '/datasets/quakes.csv')
 #  @namespace loon.faithful
 
 faithful = pd.read_csv(working_dir + '/datasets/faithful.csv')
+
+
+## UsAndThem data set
+#  @namespace loon.UsAndThem
+UsAndThem = pd.read_csv(working_dir + '/datasets/UsAndThem.csv')

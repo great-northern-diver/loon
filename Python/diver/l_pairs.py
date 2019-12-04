@@ -14,7 +14,7 @@ from .loon_class import loon_l_pairs
 from .l_compound import l_getPlots,l_getLocations
 from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 from .l_export import exportImageDialog
-#busy = False
+
 def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True, itemLabel = None,
                     showHistograms = False, histLocation = "edge",
                     histHeightProp = 1, histArgs = {},
