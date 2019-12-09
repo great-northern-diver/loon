@@ -240,6 +240,11 @@ l_layer_polygon <- function(widget, x, y,
                             color="gray80", linecolor="black", linewidth=1,
                             label="polygon", parent="root", index=0, ...) {
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
     l_layer_add(widget, 'polygon',
                 x=x, y=y, color=color,
                 linecolor=linecolor,
@@ -260,6 +265,7 @@ l_layer_polygon <- function(widget, x, y,
 #' @param linewidth vector with line widths
 #' @param ... additional state initialization arguments, see
 #'   \code{\link{l_info_states}}
+#' @param group separate x vector or y vector into a list by group.
 #'
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
@@ -284,10 +290,41 @@ l_layer_polygon <- function(widget, x, y,
 #' l_scaleto_world(p)
 #'
 #' l_info_states(l, "color")
+#'
+#'
+#' # the following illustrates how 'group' works
+#' p <- l_plot()
+#' l_layer_polygons(p,
+#'                  x = c(1, 2, 1.5, 3, 4, 6, 5, 2, 1, 3, 5, 3),
+#'                  y = c(1, 1, 2, 1, 1.5, 1, 4, 2, 3, 5, 6, 4),
+#'                  group = c(rep(1,3), rep(2,5), rep(3, 4)))
+#' l_scaleto_world(p)
 l_layer_polygons <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
-                             label="polygons", parent="root", index=0,...) {
+                             label="polygons", parent="root", index=0,
+                             group = NULL, ...) {
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
+    if(!is.list(x)) {
+        if(is.null(group)) group <- rep(1, length(x))
+        x <- lapply(unique(group),
+                    function(g) {
+                        x[group == g]
+                    })
+    }
+
+    if(!is.list(y)) {
+        if(is.null(group)) group <- rep(1, length(y))
+        y <- lapply(unique(group),
+                    function(g) {
+                        y[group == g]
+                    })
+    }
+
     l_layer_add(widget, 'polygons',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
@@ -321,6 +358,10 @@ l_layer_rectangle <- function(widget, x, y,
                               label="rectangle", parent="root", index=0, ...) {
     l_throwErrorIfNotLoonWidget(widget)
 
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
     l_layer_add(widget, 'rectangle',
                 x=x, y=y, color=color,
                 linecolor=linecolor,
@@ -344,7 +385,7 @@ l_layer_rectangle <- function(widget, x, y,
 #' @export
 #'
 #' @examples
-#'
+#' ## example 1
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangles(
@@ -357,10 +398,44 @@ l_layer_rectangle <- function(widget, x, y,
 #' l_scaleto_world(p)
 #'
 #' l_info_states(l)
+#'
+#' ## example 2
+#' pp <- l_plot(x = c(0,1,1,2,2,3,5,6),
+#'              y = c(0,1,1,2,0,1,3,4))
+#' # x and y are inherited from pp
+#' ll <- l_layer_rectangles(
+#'      pp,
+#'      group = rep(1:4, each = 2),
+#'      color = c('red', 'blue', 'green', 'orange'),
+#'      linecolor = "black"
+#' )
+#' l_scaleto_world(pp)
 l_layer_rectangles <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
-                             label="rectangles", parent="root", index=0,...) {
+                             label="rectangles", parent="root", index=0,
+                             group = NULL, ...) {
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
+    if(!is.list(x)) {
+        if(is.null(group)) group <- rep(1, length(x))
+        x <- lapply(unique(group),
+                    function(g) {
+                        x[group == g]
+                    })
+    }
+
+    if(!is.list(y)) {
+        if(is.null(group)) group <- rep(1, length(y))
+        y <- lapply(unique(group),
+                    function(g) {
+                        y[group == g]
+                    })
+    }
+
     l_layer_add(widget, 'rectangles',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
@@ -413,6 +488,14 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 
     l_throwErrorIfNotLoonWidget(widget)
 
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(is.null(y)) {
+        y <- widget['y']
+        if(length(y) != length(x))
+            y <- NULL
+    }
+
     xy <- try(xy.coords(x, y))
 
     l_layer_add(widget, 'line',
@@ -449,8 +532,30 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 #' l_scaleto_layer(l)
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,
-                          label="lines", parent="root", index=0,...) {
+                          label="lines", parent="root", index=0,
+                          group = NULL, ...) {
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
+    if(!is.list(x)) {
+        if(is.null(group)) group <- rep(1, length(x))
+        x <- lapply(unique(group),
+                    function(g) {
+                        x[group == g]
+                    })
+    }
+
+    if(!is.list(y)) {
+        if(is.null(group)) group <- rep(1, length(y))
+        y <- lapply(unique(group),
+                    function(g) {
+                        y[group == g]
+                    })
+    }
+
     l_layer_add(widget, 'lines',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
@@ -487,6 +592,10 @@ l_layer_oval <- function(widget, x, y,
                          label="oval", parent="root", index=0, ...) {
     l_throwErrorIfNotLoonWidget(widget)
 
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
     l_layer_add(widget, 'oval',
                 x=x, y=y, color=color,
                 linecolor=linecolor,
@@ -514,10 +623,18 @@ l_layer_oval <- function(widget, x, y,
 #' @template seealso_layers
 #' @export
 #'
-l_layer_points <- function(widget, x, y=NULL, color="gray60", size=6,
+l_layer_points <- function(widget, x, y = NULL, color="gray60", size=6,
                            label="points", parent="root", index=0, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(is.null(y)) {
+        y <- widget['y']
+        if(length(y) != length(x))
+            y <- NULL
+    }
 
     xy <- try(xy.coords(x, y))
 
@@ -559,6 +676,11 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="text", parent="root", index=0, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
+
     l_layer_add(widget, 'text',
                 x=x, y=y, text=text, color=color,
                 size=size, angle=angle,
@@ -599,6 +721,10 @@ l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="texts", parent="root", index=0, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
+
+    # inherits coords from widget
+    if(missing(x)) x <- widget['x']
+    if(missing(y)) y <- widget['y']
 
     xy <- try(xy.coords(x, y))
 

@@ -6,7 +6,7 @@
 \usage{
 l_layer_rectangles(widget, x, y, color = "gray80", linecolor = "black",
   linewidth = 1, label = "rectangles", parent = "root", index = 0,
-  ...)
+  group = NULL, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -28,6 +28,8 @@ fill is transparant}
 
 \item{index}{of the newly added layer in its parent group}
 
+\item{group}{separate x vector or y vector into a list by group.}
+
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
 }
@@ -43,7 +45,7 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
-
+## example 1
 p <- l_plot()
 
 l <- l_layer_rectangles(
@@ -56,6 +58,18 @@ l <- l_layer_rectangles(
 l_scaleto_world(p)
 
 l_info_states(l)
+
+## example 2
+pp <- l_plot(x = c(0,1,1,2,2,3,5,6),
+             y = c(0,1,1,2,0,1,3,4))
+# x and y are inherited from pp
+ll <- l_layer_rectangles(
+     pp,
+     group = rep(1:4, each = 2),
+     color = c('red', 'blue', 'green', 'orange'),
+     linecolor = "black"
+)
+l_scaleto_world(pp)
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

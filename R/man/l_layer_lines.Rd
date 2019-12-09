@@ -5,7 +5,7 @@
 \title{Layer a lines}
 \usage{
 l_layer_lines(widget, x, y, color = "black", linewidth = 1,
-  label = "lines", parent = "root", index = 0, ...)
+  label = "lines", parent = "root", index = 0, group = NULL, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -23,6 +23,8 @@ l_layer_lines(widget, x, y, color = "black", linewidth = 1,
 \item{parent}{group layer}
 
 \item{index}{of the newly added layer in its parent group}
+
+\item{group}{separate x vector or y vector into a list by group.}
 
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
