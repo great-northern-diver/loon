@@ -33,7 +33,7 @@
 #' (for each plot whose states were affected), or
 #' NULL if none were copied or `returnNames == FALSE`.
 #'
-#' @seealso \code{\link{l_saveStatesRDS}} \code{\link{l_info_states}} \code{\link{saveRDS}}
+#' @seealso \code{\link{l_saveStates}} \code{\link{l_info_states}} \code{\link{saveRDS}}
 #'
 #' @export
 #'

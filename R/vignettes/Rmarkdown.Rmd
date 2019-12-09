@@ -109,24 +109,24 @@ See also the `png` package.
 ## Reading in previously saved states
 
 We could also just save the relevant display states from one loon plot as an `R` data set (in an `RDS` file).
-This is done using the function `l_saveStatesRDS()`.
+This is done using the function `l_saveStates()`.
 
 Suppose, for example, suppose the previously constructed `p` contains valuable information
 in its display. We could save its states (`l_info_states()`) as follows:
 
-```{r l_saveStatesRDS, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+```{r l_saveStates, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 # Having determined the colours you could save them (and other states)
 # in a file of your choice, here some tempfile:
 myFileName <- tempfile("myPlot", fileext = ".rds")
 
 #
 # We could save all of the "usual" states 
-# (excludes certain "basic" states, see help(l_saveStatesRDS))
-l_saveStatesRDS(p, file = myFileName)
+# (excludes certain "basic" states, see help(l_saveStates))
+l_saveStates(p, file = myFileName)
 
 # 
 # Or simply save selected named states as an RDS
-l_saveStatesRDS(p,
+l_saveStates(p,
                 states = c("color", "active", "selected"),
                 file = myFileName)
 ```
@@ -135,7 +135,7 @@ Having saved the desired states (not in a temporary file as above, but in some m
 they can be retrieved later and used on a new plot (say in `RMarkdown`) to set the new plot's values to those
 previously determined interactively.
 
-```{r readRDS, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+```{r l_getSavedStates, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
 # We have a new plot (or two)
 p_new <- l_plot(iris, showGuides = TRUE)
 h_new <- l_hist(iris$Sepal.Width, 
@@ -143,8 +143,8 @@ h_new <- l_hist(iris$Sepal.Width,
                 yshows = "density", 
                 showStackedColors = TRUE)
 
-# And read the saved data back in using R's readRDS() function
-p_saved_info <- readRDS(myFileName)
+# And read the saved data back in using l_getSavedStates()
+p_saved_info <- l_getSavedStates(myFileName)
 # which is an object of class 
 class(p_saved_info)
 # The values on p_saved_info can now be all set using l_copyStates()
