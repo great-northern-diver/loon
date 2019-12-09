@@ -77,8 +77,8 @@ reference:
     - l_size<-
     - l_zoom
     - l_copyStates
-    - l_saveStates
     - l_getSavedStates
+    - l_saveStates
   - title: Miscellaneous
     desc: Miscellaneous
     contents:
