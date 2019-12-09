@@ -1,3 +1,16 @@
+# loon 1.2.3.9000
+
+* deprecated l_saveStatesRDS() 
+    - replaced by l_saveStates
+    - reasoning for name change is to have the same name be used in 
+    the Python release for the same functionality
+    - introduced l_getSavedStates() to read the states (instead of readRDS for the
+    same reason as above).
+    
+* updated l_cget()
+    - Fixed reading of labels to retrieve raw characters so that braces etc. can appear in labels
+    - updated l_hist.factor so that a layer of factor level labels appear below the corresponding bar
+    
 # loon 1.2.3
 
 * added l_saveStatesRDS()

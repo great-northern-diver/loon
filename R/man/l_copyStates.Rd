@@ -110,5 +110,5 @@ if(interactive()){
 
 }
 \seealso{
-\code{\link{l_saveStatesRDS}} \code{\link{l_info_states}} \code{\link{saveRDS}}
+\code{\link{l_saveStates}} \code{\link{l_info_states}} \code{\link{saveRDS}}
 }
