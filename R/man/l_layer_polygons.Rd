@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_polygons}
 \alias{l_layer_polygons}
-\title{Layer a polygons}
+\title{Layer polygons}
 \usage{
 l_layer_polygons(widget, x, y, color = "gray80", linecolor = "black",
   linewidth = 1, label = "polygons", parent = "root", index = 0,
@@ -45,7 +45,6 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
-
 p <- l_plot()
 
 l <- l_layer_polygons(
@@ -60,7 +59,7 @@ l_scaleto_world(p)
 l_info_states(l, "color")
 
 
-# the following illustrates how 'group' works
+# Set groups
 p <- l_plot()
 l_layer_polygons(p,
                  x = c(1, 2, 1.5, 3, 4, 6, 5, 2, 1, 3, 5, 3),

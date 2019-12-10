@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_rectangles}
 \alias{l_layer_rectangles}
-\title{Layer a rectangles}
+\title{Layer rectangles}
 \usage{
 l_layer_rectangles(widget, x, y, color = "gray80", linecolor = "black",
   linewidth = 1, label = "rectangles", parent = "root", index = 0,
@@ -45,7 +45,6 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
-## example 1
 p <- l_plot()
 
 l <- l_layer_rectangles(
@@ -59,7 +58,7 @@ l_scaleto_world(p)
 
 l_info_states(l)
 
-## example 2
+# Set groups
 pp <- l_plot(x = c(0,1,1,2,2,3,5,6),
              y = c(0,1,1,2,0,1,3,4))
 # x and y are inherited from pp

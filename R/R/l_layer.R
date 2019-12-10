@@ -254,6 +254,7 @@ l_layer_polygon <- function(widget, x, y,
 
 
 #' @templateVar type polygons
+#' @title Layer polygons
 #' @template title_layer
 #'
 #' @inheritParams l_layer_group
@@ -277,7 +278,6 @@ l_layer_polygon <- function(widget, x, y,
 #' @export
 #'
 #' @examples
-#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_polygons(
@@ -292,7 +292,7 @@ l_layer_polygon <- function(widget, x, y,
 #' l_info_states(l, "color")
 #'
 #'
-#' # the following illustrates how 'group' works
+#' # Set groups
 #' p <- l_plot()
 #' l_layer_polygons(p,
 #'                  x = c(1, 2, 1.5, 3, 4, 6, 5, 2, 1, 3, 5, 3),
@@ -371,6 +371,7 @@ l_layer_rectangle <- function(widget, x, y,
 
 
 #' @templateVar type rectangles
+#' @title Layer rectangles
 #' @template title_layer
 #'
 #' @inheritParams l_layer_polygons
@@ -385,7 +386,6 @@ l_layer_rectangle <- function(widget, x, y,
 #' @export
 #'
 #' @examples
-#' ## example 1
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangles(
@@ -399,7 +399,7 @@ l_layer_rectangle <- function(widget, x, y,
 #'
 #' l_info_states(l)
 #'
-#' ## example 2
+#' # Set groups
 #' pp <- l_plot(x = c(0,1,1,2,2,3,5,6),
 #'              y = c(0,1,1,2,0,1,3,4))
 #' # x and y are inherited from pp
@@ -506,6 +506,7 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 
 
 #' @templateVar type lines
+#' @title Layer lines
 #' @template title_layer
 #'
 #' @inheritParams l_layer_polygons
@@ -529,6 +530,16 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 #'
 #' p <- l_plot(showItemLabels=TRUE)
 #' l <- l_layer_lines(p, xcoords, ycoords, itemLabel=names(sUaT), color=region)
+#' l_scaleto_layer(l)
+#'
+#' # Set groups
+#' p <- l_plot(showItemLabels=TRUE)
+#' l <- l_layer_lines(p,
+#'                    x = c((0:4)/10, rep(.5, 5), (10:6)/10, rep(.5, 5)),
+#'                    y = c(rep(.5, 5), (10:6/10), rep(.5, 5), (0:4)/10),
+#'                    group = rep(1:5, 4),
+#'                    linewidth = 4,
+#'                    col = l_getColorList()[1:5])
 #' l_scaleto_layer(l)
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,
@@ -605,7 +616,7 @@ l_layer_oval <- function(widget, x, y,
 
 
 
-
+#' @title Layer points
 #' @templateVar type points
 #' @template title_layer
 #'
@@ -687,6 +698,7 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                 label=label, parent=parent, index=index, ...)
 }
 
+#' @title Layer texts
 #' @templateVar type texts
 #' @template title_layer
 #'
