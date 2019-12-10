@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_lines}
 \alias{l_layer_lines}
-\title{Layer a lines}
+\title{Layer lines}
 \usage{
 l_layer_lines(widget, x, y, color = "black", linewidth = 1,
   label = "lines", parent = "root", index = 0, group = NULL, ...)
@@ -49,6 +49,16 @@ region <- sapply(sUaT, function(x)as.character(x$Geographic.Region[1]))
 
 p <- l_plot(showItemLabels=TRUE)
 l <- l_layer_lines(p, xcoords, ycoords, itemLabel=names(sUaT), color=region)
+l_scaleto_layer(l)
+
+# Set groups
+p <- l_plot(showItemLabels=TRUE)
+l <- l_layer_lines(p,
+                   x = c((0:4)/10, rep(.5, 5), (10:6)/10, rep(.5, 5)),
+                   y = c(rep(.5, 5), (10:6/10), rep(.5, 5), (0:4)/10),
+                   group = rep(1:5, 4),
+                   linewidth = 4,
+                   col = l_getColorList()[1:5])
 l_scaleto_layer(l)
 }
 \seealso{

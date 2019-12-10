@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_layer.R
 \name{l_layer_texts}
 \alias{l_layer_texts}
-\title{Layer a texts}
+\title{Layer texts}
 \usage{
 l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
   angle = 0, label = "texts", parent = "root", index = 0, ...)
