@@ -165,26 +165,26 @@ Instead of <code>knitr</code>, the same result (at least for <code>pdf</code> ou
 <div id="reading-in-previously-saved-states" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading-in-previously-saved-states" class="anchor"></a>Reading in previously saved states</h2>
-<p>We could also just save the relevant display states from one loon plot as an <code>R</code> data set (in an <code>RDS</code> file). This is done using the function <code><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS()</a></code>.</p>
+<p>We could also just save the relevant display states from one loon plot as an <code>R</code> data set (in an <code>RDS</code> file). This is done using the function <code><a href="../reference/l_saveStates.html">l_saveStates()</a></code>.</p>
 <p>Suppose, for example, suppose the previously constructed <code>p</code> contains valuable information in its display. We could save its states (<code><a href="../reference/l_info_states.html">l_info_states()</a></code>) as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Having determined the colours you could save them (and other</span>
 <span class="co"># states) in a file of your choice, here some tempfile:</span>
 myFileName &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="st">"myPlot"</span>, <span class="dt">fileext =</span> <span class="st">".rds"</span>)
 
 <span class="co"># We could save all of the 'usual' states (excludes certain</span>
-<span class="co"># 'basic' states, see help(l_saveStatesRDS))</span>
-<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">file =</span> myFileName)
+<span class="co"># 'basic' states, see help(l_saveStates))</span>
+<span class="kw"><a href="../reference/l_saveStates.html">l_saveStates</a></span>(p, <span class="dt">file =</span> myFileName)
 
 <span class="co"># Or simply save selected named states as an RDS</span>
-<span class="kw"><a href="../reference/l_saveStatesRDS.html">l_saveStatesRDS</a></span>(p, <span class="dt">states =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>), <span class="dt">file =</span> myFileName)</code></pre></div>
+<span class="kw"><a href="../reference/l_saveStates.html">l_saveStates</a></span>(p, <span class="dt">states =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"color"</span>, <span class="st">"active"</span>, <span class="st">"selected"</span>), <span class="dt">file =</span> myFileName)</code></pre></div>
 <p>Having saved the desired states (not in a temporary file as above, but in some more permanent file), they can be retrieved later and used on a new plot (say in <code>RMarkdown</code>) to set the new plot’s values to those previously determined interactively.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We have a new plot (or two)</span>
 p_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_plot.html">l_plot</a></span>(iris, <span class="dt">showGuides =</span> <span class="ot">TRUE</span>)
 h_new &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_hist.html">l_hist</a></span>(iris<span class="op">$</span>Sepal.Width, <span class="dt">showBinHandle =</span> <span class="ot">FALSE</span>, <span class="dt">yshows =</span> <span class="st">"density"</span>, 
     <span class="dt">showStackedColors =</span> <span class="ot">TRUE</span>)
 
-<span class="co"># And read the saved data back in using R's readRDS() function</span>
-p_saved_info &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(myFileName)
+<span class="co"># And read the saved data back in using l_getSavedStates()</span>
+p_saved_info &lt;-<span class="st"> </span><span class="kw"><a href="../reference/l_getSavedStates.html">l_getSavedStates</a></span>(myFileName)
 <span class="co"># which is an object of class</span>
 <span class="kw"><a href="https://rdrr.io/r/base/class.html">class</a></span>(p_saved_info)</code></pre></div>
 <pre><code>## [1] "l_savedStates"</code></pre>
