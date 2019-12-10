@@ -319,9 +319,29 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         if (is.null(xyz$zlab))
             xyz$zlab <- ""
 
-        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D', parent,
-                                x=xyz$x, y=xyz$y, z=xyz$z,
-                                xlabel=xyz$xlab, ylabel=xyz$ylab, zlabel=xyz$zlab,
+        if (missing(title)) { title <- "" }
+
+        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D',
+                                parent,
+                                x=xyz$x,
+                                y=xyz$y,
+                                z=xyz$z,
+                                xlabel=xyz$xlab,
+                                ylabel=xyz$ylab,
+                                zlabel=xyz$zlab,
+                                title = title,
+                                color = color,
+                                glyph = glyph,
+                                size = size,
+                                active = active,
+                                selected = selected,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background,
                                 ...)
 
     }
