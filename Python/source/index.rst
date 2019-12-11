@@ -12,7 +12,16 @@ This project depens on the following packages:
     * pandas 
     * matplotlib
     * multipleddispatch 
-:meth:`diver.l_plot`
+
+:mod:`diver.l_plot`
+
+Here are some sample code::
+
+    print('hello World')
+    >>> hello World
+
+Guide:
+^^^^^^
 
 .. toctree::
     :numbered:

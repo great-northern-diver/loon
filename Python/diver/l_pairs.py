@@ -2,18 +2,20 @@ import pandas as pd
 import numpy as np
 from itertools import combinations,compress
 from functools import singledispatch
-from .retrieve_name import *
-from .l_plot import *
-from .l_hist import *
+from .retrieve_name import retrieve_name
+from .l_plot import l_plot
+from .l_hist import l_hist
 from .l_layer import *
-from .l_serialaxes import *
-from .l_toplevel import *
-from .tk import *
+from .l_serialaxes import l_serialaxes
+from .l_toplevel import l_toplevel
+from .l_subwin import l_subwin
+from .tk import tk
 from .helper import *
 from .loon_class import loon_l_pairs
 from .l_compound import l_getPlots,l_getLocations
 from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 from .l_export import exportImageDialog
+from .l_configure import l_configure
 
 def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True, itemLabel = None,
                     showHistograms = False, histLocation = "edge",

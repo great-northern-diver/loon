@@ -6,7 +6,7 @@ from multipledispatch import dispatch
 @dispatch(object,object,object,object)
 def l_graph(nodes='', f='', t='',  parent=None,**options):
     """Create a graph display based on node names and from-to edges list
-    
+        
     This default method uses the loongraph display states as arguments to create a graph display.
     
     Args:
@@ -28,8 +28,8 @@ def l_graph(nodes='', f='', t='',  parent=None,**options):
     return(plot)
 
 @dispatch(loon_loongraph)
-def l_graph(nodes,**options):
-    graph = nodes 
+def l_graph(graph,**options):
+    
     options["isDirected"] = graph.isDirected
     if('parent' in options.keys()):
         parent = options['parent']
