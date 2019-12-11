@@ -1,0 +1,96 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+namespace eval ::loon::test {
+
+    namespace import ::tcltest::*
+    
+    # tclsh all.tcl -file linking.test
+
+    test create-model {} -body {
+	
+	set p [::loon::classes::Scatterplot_Model new]
+	$p configure -x {1 2 3} -y {6 5 4} -linkingGroup test
+	return [$p cget -linkingGroup]
+    } -result {test}
+
+    
+    test hasGroupLinkedMember-1 {} -body {
+	return [::loon::hasGroupLinkedMembers aaa $p]
+    } -result {FALSE}
+
+
+    test hasGroupLinkedMember-2 {} -body {
+	return [::loon::hasGroupLinkedMembers aaa]
+    } -result {FALSE}
+
+    test hasGroupLinkedMember-3 {} -body {
+	return [::loon::hasGroupLinkedMembers test]
+    } -result {TRUE}
+
+    test hasGroupLinkedMember-4 {} -body {
+	return [::loon::hasModelLinkedMembers $p]
+    } -result {FALSE}
+
+    test hasGroupLinkedMember-5 {} -body {
+	set p2 [::loon::classes::Scatterplot_Model new]
+	$p2 configure -x {5 7 2 3} -y {6 4 2 1} -linkingGroup test
+	return [::loon::hasModelLinkedMembers $p2]
+    } -result {TRUE}
+    
+    test linking-Push-1 {} -body {
+	$p configure -selected {0 1 1}
+	return [$p2 cget -selected]
+    } -result {FALSE TRUE TRUE FALSE}
+
+    test linking-Push-2 {} -body {
+
+	$p2 configure -size {1 2 3 4}	
+
+	$p configure -linkingKey {1 0 2} -sync push
+
+	return [$p2 cget -size]
+    } -result {2 1 3 4}
+
+    test linking-Push-3 {} -body {
+	$p2 configure -size {9 8 7 6}	
+	return [$p cget -size]
+    } -result {8 9 7}
+
+    test linking-Push-4 {} -body {
+	$p configure -linkingKey {4 5 2} -sync push
+	$p2 configure -size 1
+	$p configure -size {10 11 12}
+	return [$p2 cget -size]
+    } -result {1 1 12 1}
+
+    test linking-Pull-1 {sync pull and init} -body {
+	set p3 [::loon::classes::Scatterplot_Model new]
+	$p3 configure -x {1 1 1 1 1} -y {1 2 3 4 5}\
+	    -linkingKey {a b 5 c 2} -linkingGroup test
+	return [$p3 cget -size]
+    } -result {4 4 11 4 12}
+
+    test linking-Pull-2 {only sync pull} -body {
+	# 1 p3: a b 5 c 2
+	# 2 p2: 3 a 5 b
+	# 3 p : 1 a 2
+	
+	$p3 configure -linkingGroup aaa -size 1 -color red -selected TRUE -active TRUE
+	$p2 configure -linkingKey {3 a 5 b} -size 2 -sync pull
+	$p configure -linkingKey {1 a 2} -size 3 -sync pull
+	$p3 configure -linkingGroup test -sync pull
+	return [$p3 cget -size]
+    } -result {3 2 2 1 3}
+    
+    
+    cleanupTests
+
+}
+
+namespace delete ::loon::test
