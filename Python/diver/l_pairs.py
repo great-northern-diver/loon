@@ -21,9 +21,8 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                     showSerialAxes = False, serialAxesArgs = {}, parent=None, **args):
     '''An interactive scatterplot matrix
 
-    Description:
-        Function creates a scatterplot matrix using loon's scatterplot
-        widgets
+    Function creates a scatterplot matrix using loon's scatterplot
+    widgets
 
     Args:
         data: a pandas dataFrame with numerical(or categorical) data to create the scatterplot matrix
@@ -44,20 +43,20 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                         in the bottom left of the pairs plot (or not)
         serialAxesArgs: additional arguments to modify the `l_serialaxes` states
         **args: named arguments to modify the `l_plot` states of the scatterplots
+
     Returns:
         an `loon_l_pairs` class (an `l_compound` object)
 
-    SeeAlso:
+    See Also:
         `l_plot` and `l_getPlots`
 
     Examples:
-        p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris")
-        p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris",showHistograms = True, showSerialAxes = True)
-        # plot names
-        p.names
-        # Each plot must be accessed to make changes not managed through
-        # linking.
-    @namespace loon.l_pairs
+        >>> p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris")
+        >>> p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris",showHistograms = True, showSerialAxes = True)
+        >>> # plot names
+        >>> p.names
+        >>> # Each plot must be accessed to make changes not managed through
+        >>> # linking.
     '''
     
     def undoScatterStateChanges(W):

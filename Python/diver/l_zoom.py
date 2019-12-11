@@ -2,16 +2,13 @@ from .loon_class import *
 def l_zoom(widget, factor=1.1):
     '''Zoom from and towards the center
 
-    Description:
-        This function changes the plot states `panX`, `panY`, 
-        `zoomX`, `zoomY` to zoom towards or away from the center of
-        the current view.
+    This function changes the plot states `panX`, `panY`, 
+    `zoomX`, `zoomY` to zoom towards or away from the center of
+    the current view.
 
     Args:
         widget: target widget 
-        factor: a zoom factor
-    
-    @namespace loon.l_zoom
+        factor: a zoom factor   
     '''
     if(not isinstance(widget,loon)):
         widget = loon(widget)

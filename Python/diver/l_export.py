@@ -7,14 +7,13 @@ from sys import exit
 def l_export(widget, filename, width = None, height = None):
     '''Export a loon plot as an image
 
-    Description:
-        The supported image formats are dependent on the systemenvironment.
-        Plots can always be exported to the PostScript format.
-        Exporting displays as '.pdf' is only possible when the command line tool
-        epstopdf is installed. Finally, exporting to either `png`, `jpg`,
-        `bmp, `tiff` or `gif` requires the Img Tcl extension.
-        When choosing one of the formats that depend on the Img extension,
-        it is possible to export any Tk widget as an image including inspectors.
+    The supported image formats are dependent on the systemenvironment.
+    Plots can always be exported to the PostScript format.
+    Exporting displays as '.pdf' is only possible when the command line tool
+    epstopdf is installed. Finally, exporting to either `png`, `jpg`,
+    `bmp, `tiff` or `gif` requires the Img Tcl extension.
+    When choosing one of the formats that depend on the Img extension,
+    it is possible to export any Tk widget as an image including inspectors.
     
     Args:
         filename: path of output file
@@ -28,10 +27,9 @@ def l_export(widget, filename, width = None, height = None):
     Returns:
         path to the exported file
 
-    SeeAlso: 
+    See Also: 
         `l_export_valid_formats`
 
-    @namespace loon.l_export
     '''
     if(not isinstance(widget,str)):
         widget = widget.plot
@@ -58,19 +56,17 @@ def l_export(widget, filename, width = None, height = None):
 def l_export_valid_formats():
     '''Return a list of the available image formats when exporting a loon plot
 
-    Description:
-        The supported image formats are dependent on the system
-        environment. Plots can always be exported to the Postscript format.
-        Exporting displays as .pdfs is only possible when the command line tool
-        epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or
-        gif requires the Img Tcl extension. When choosing one of the formats that
-        depend on the Img extension, it is possible to export any Tk widget as an
-        image including inspectors.
+    The supported image formats are dependent on the system
+    environment. Plots can always be exported to the Postscript format.
+    Exporting displays as .pdfs is only possible when the command line tool
+    epstopdf is installed. Finally, exporting to either png, jpg, bmp, tiff or
+    gif requires the Img Tcl extension. When choosing one of the formats that
+    depend on the Img extension, it is possible to export any Tk widget as an
+    image including inspectors.
     
     Returns: 
         a vector with the image formats available for exporting a loon plot.
     
-    @namespace loon.l_export_valid_formats
     '''
     valid_extensions = ["ps", "eps"]
     # if (Sys.which('epstopdf') != "") {

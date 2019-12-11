@@ -29,5 +29,4 @@ Details:
     http://great-northern-diver.github.io/loon/
     Report bugs at https://github.com/great-northern-diver/loon/issues
 
-@namespace loon.loon
 '''

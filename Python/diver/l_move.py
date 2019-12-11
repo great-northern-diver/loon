@@ -4,7 +4,6 @@ from .helper import opts_to_list
 def l_move(widget,*args,**kwargs):
     '''l_move 
     
-    @namespace loon.l_move
     '''
     l_throwErrorIfNotLoonWidget(widget)    
     opts = opts_to_list(kwargs)

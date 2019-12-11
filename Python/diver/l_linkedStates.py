@@ -2,10 +2,9 @@ from .tk import tk
 def l_setLinkedStates(widget, states):
     '''Modify States of a Plot that are Linked in Loon's Standard Linking Model
 
-    Description:
-        Loon's standard linking model is based on three levels, the 
-        `linkingGroup` and `linkingKey` states and the *used linkable states*.
-        See the details below.
+    Loon's standard linking model is based on three levels, the 
+    `linkingGroup` and `linkingKey` states and the *used linkable states*.
+    See the details below.
     
     Args:
         widget: widget path as a string or as an loon class 
@@ -33,13 +32,15 @@ def l_setLinkedStates(widget, states):
         each display maintains a list that defines which of its linkable states 
         should be used for linking; we call these states the *used linkable* 
         states. The default used linkable states are as follows
-        <table>
-        <tr><th>Display         <th> Default *used linkable* states
-        <tr><td>scatterplot     <td> `selected`,`color`, `active`, `size`
-        <tr><td>histogram       <td> `selected`,`color`, `active`
-        <tr><td>serialaxes      <td> `selected`,`color`, `active`
-        <tr><td>graph           <td> `selected`,`color`, `active`, `size`
-        </table>
+
+        ===============          =====================================
+        Display                  Default *used linkable* states
+        ===============          =====================================
+        scatterplot              `selected`, `color`, `active`, `size`
+        histogram                `selected`, `color`, `active`
+        serialaxes               `selected`, `color`, `active`
+        graph                    `selected`, `color`, `active`, `size`
+        ===============          =====================================        
 
         If any two displays are set to be linked (i.e. they share the same linking 
         group) then the intersection of their *used linkable* states are 
@@ -49,8 +50,6 @@ def l_setLinkedStates(widget, states):
         `n`-dimensional `linkingKey` state. Hence, every data point has 
         an associated linking key. Data points between linked plots are linked if 
         they share the same linking key.
-    
-    @namespace loon.l_setLinkedStates
     '''
     if(not isinstance(widget, str)):
         widget = widget.plot
@@ -61,10 +60,9 @@ def l_setLinkedStates(widget, states):
 def l_getLinkedStates(widget):
     '''Query the States that are Linked with Loon's Standard Linking Model
 
-    Description:
-        Loon's standard linking model is based on three levels, the 
-        `linkingGroup` and `linkingKey` states and the *used linkable states*.
-        See the details in the documentation for l_setLinkedStates.
+    Loon's standard linking model is based on three levels, the 
+    `linkingGroup` and `linkingKey` states and the *used linkable states*.
+    See the details in the documentation for l_setLinkedStates.
     
     Args:
         widget: widget path as a string or as an loon class 
@@ -72,10 +70,8 @@ def l_getLinkedStates(widget):
     Return:
         list with state names that are linked states
     
-    SeeAlso:
-        l_setLinkedStates
-
-    @namespace loon.l_getLinkedStates
+    See Also:
+        `l_setLinkedStates`
     '''
     if(not isinstance(widget,str)):
         widget = widget.plot

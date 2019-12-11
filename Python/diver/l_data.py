@@ -1,17 +1,16 @@
 import pandas as pd
 def l_data(data):
     """Convert an R data.frame to a Tcl dictionary
-    
-    Description:
-        This is a helper function to convert an R data.frame object to 
-        a Tcl data frame object. This function is useful when changing a data state
-        with l_configure 
+    This is a helper function to convert an R data.frame object to 
+    a Tcl data frame object. This function is useful when changing a data state
+    with l_configure 
+
     Args:
         data: a pandas dataframe object
+    
     Returns:
         a string that represents with data.frame with a Tcl dictionary data
         structure.
-    @namespace loon.l_data
     """
     if (type(data) != pd.DataFrame):
         exit("data is expected to be a pandas DataFrame")

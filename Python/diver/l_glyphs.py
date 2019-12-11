@@ -22,15 +22,14 @@ def l_glyph(widget,*args ,**options):
 def l_glyph_relabel(widget, id, label):
     '''Relabel Glyph
 
-    Description: 
-        Change the label of a glyph. Note that the label is only
-        displayed in the glyph inspector.
+    Change the label of a glyph. Note that the label is only
+    displayed in the glyph inspector.
     
     Examples:
-        p = l_plot(iris, color = iris.Species)
-        g = l_glyph_add_text(p, iris.Species, "test_label")
-        p['glyph'] = g
-        l_glyph_relabel(p, g, "Species")
+        >>> p = l_plot(iris, color = iris.Species)
+        >>> g = l_glyph_add_text(p, iris.Species, "test_label")
+        >>> p['glyph'] = g
+        >>> l_glyph_relabel(p, g, "Species")
     '''
     if(isinstance(id,loon_l_glyph)):
         id = id.id
@@ -41,10 +40,9 @@ def l_glyph_relabel(widget, id, label):
 def l_glyph_delete(widget, id):
     '''Delete a Glyph
 
-    Description: 
-        Delete a glyph from the plot.
+    Delete a glyph from the plot.
 
-    SeeAlso: 
+    See Also: 
         `l_glyph_add`
     '''
     if(isinstance(id,loon_l_glyph)):
@@ -54,10 +52,9 @@ def l_glyph_delete(widget, id):
 def l_glyph_ids(widget):
     '''List glyphs ids
 
-    Description:
-        List all the non-primitive glyph ids attached to display.
+    List all the non-primitive glyph ids attached to display.
     
-    SeeAlso:
+    See Also:
         `l_glyph_add`
     '''
     l_glyph(widget, "ids")
@@ -66,10 +63,9 @@ def l_glyph_ids(widget):
 def l_glyph_getLabel(widget, id):
     '''Get Glyph Label
     
-    Description: 
-        Returns the label of a glyph
+    Returns the label of a glyph
     
-    SeeAlso:
+    See Also:
         `l_glyph_add`, `l_glyph_ids`, `l_glyph_relabel`
     '''
     if(isinstance(id,loon_l_glyph)):
@@ -80,10 +76,9 @@ def l_glyph_getLabel(widget, id):
 def l_glyph_getType(widget, id):
     '''Get Glyph Type
 
-    Description:
-        Query the type of a glyph    
+    Query the type of a glyph    
     
-    SeeAlso: 
+    See Also: 
         `l_glyph_add`
     '''
     if(isinstance(id,loon_l_glyph)):
@@ -98,8 +93,7 @@ def l_glyph_getType(widget, id):
 def l_primitiveGlyphs():
     '''The primitive glyphs available to a scatterplot or graph display
 
-    Description: 
-        Returns a vector of the available primitive glyphs.
+    Returns a vector of the available primitive glyphs.
     
     Details: 
         The scatterplot and graph displays both have the n-dimensional state
@@ -226,9 +220,8 @@ def l_primitiveGlyphs():
 def l_glyph_add(widget, type, label="", **options):
     '''Default method for adding non-primitive glyphs
 
-    Description:
-        Generic function to write new glyph types using loon's primitive
-        glyphs
+    Generic function to write new glyph types using loon's primitive
+    glyphs
 
     Args:
         type: loon-native non-primitive glyph type, one of `text`,
@@ -248,19 +241,18 @@ def l_glyph_add(widget, type, label="", **options):
 def l_glyph_add_text(widget, text, label="", **options):
     '''Add a Text Glyph
 
-    Description: 
-        Each text glyph can be a multiline string.    
+    Each text glyph can be a multiline string.    
     
     Args: 
         text: the text strings for each observartion.
     
-    SeeAlso: 
+    See Also: 
         `l_glyph_add`
 
     Examples:
-        p = l_plot(iris, color = iris.Species)
-        g = l_glyph_add_text(p, iris.Species, "test_label")
-        p['glyph'] = g
+        >>> p = l_plot(iris, color = iris.Species)
+        >>> g = l_glyph_add_text(p, iris.Species, "test_label")
+        >>> p['glyph'] = g
     '''
     if(isinstance(text,pd.Series)):
         text = list(text)
@@ -270,9 +262,8 @@ def l_glyph_add_text(widget, text, label="", **options):
 def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, label="", **options):
     '''Add a Pointrange Glyph
 
-    Description:
-        Pointrange glyphs show a filled circle at the x-y location and
-        also a y-range.
+    Pointrange glyphs show a filled circle at the x-y location and
+    also a y-range.
     
     Args:
         ymin: list with lower y-yalue of the point range.
@@ -280,12 +271,13 @@ def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, lab
         linewidth: line with in pixel.
         showArea: boolean, show a filled point or just the outline point
     
-    SeeAlso:
+    See Also:
         l_glyph_add
+
     Examples:
-            p =  l_plot(x = [1,2,3], color = ['red', 'blue', 'green'], showScales=True)
-            g = l_glyph_add_pointrange(p, ymin=np.array([1,2,3]) - np.array([1,2,3])/5, ymax=np.array([1,2,3]) + np.array([1,2,3])/5)
-            p['glyph'] =  g
+        >>> p =  l_plot(x = [1,2,3], color = ['red', 'blue', 'green'], showScales=True)
+        >>> g = l_glyph_add_pointrange(p, ymin=np.array([1,2,3]) - np.array([1,2,3])/5, ymax=np.array([1,2,3]) + np.array([1,2,3])/5)
+        >>> p['glyph'] =  g
     '''
     if(isinstance(ymin,np.ndarray)):
         ymin = list(ymin)
@@ -299,8 +291,7 @@ def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, lab
 def l_glyph_add_polygon(widget, x, y, linewidth = 1, showArea=True, label="", **options):    
     '''Add a Polygon Glyph
 
-    Description: 
-        Add one polygon per scatterplot point.
+    Add one polygon per scatterplot point.
 
     Details: 
         A polygon can be a useful point glyph to visualize arbitrary shapes
@@ -316,34 +307,33 @@ def l_glyph_add_polygon(widget, x, y, linewidth = 1, showArea=True, label="", **
         linewidth: linewidth of outline.
         showArea: boolean, show a filled polygon or just the outline
     
-    SeeAlso: 
+    See Also: 
         `l_glyph_add`
 
     Examples:
-        x_star = [-0.000864304235090734, 0.292999135695765, 0.949870354364736,
+        >>> x_star = [-0.000864304235090734, 0.292999135695765, 0.949870354364736,
                 0.474503025064823, 0.586862575626621, -0.000864304235090734,
                 -0.586430423509075, -0.474070872947277, -0.949438202247191,
                 -0.29256698357822]
-        y_star = [-1, -0.403630077787381, -0.308556611927398, 0.153846153846154,
+        >>> y_star = [-1, -0.403630077787381, -0.308556611927398, 0.153846153846154,
                     0.808556611927398, 0.499567847882455, 0.808556611927398,
                     0.153846153846154, -0.308556611927398, -0.403630077787381]
-        x_cross = [-0.258931143762604, -0.258931143762604, -0.950374531835206,
+        >>> x_cross = [-0.258931143762604, -0.258931143762604, -0.950374531835206,
                     -0.950374531835206, -0.258931143762604, -0.258931143762604,
                     0.259651397291847, 0.259651397291847, 0.948934024776722,
                     0.948934024776722, 0.259651397291847, 0.259651397291847]
-        y_cross = [-0.950374531835206, -0.258931143762604, -0.258931143762604,
+        >>> y_cross = [-0.950374531835206, -0.258931143762604, -0.258931143762604,
                     0.259651397291847, 0.259651397291847, 0.948934024776722,
                     0.948934024776722, 0.259651397291847, 0.259651397291847,
                     -0.258931143762604, -0.258931143762604, -0.950374531835206]
-        x_hexagon = [0.773552290406223, 0, -0.773552290406223, -0.773552290406223,
+        >>> x_hexagon = [0.773552290406223, 0, -0.773552290406223, -0.773552290406223,
                     0, 0.773552290406223]
-        y_hexagon = [0.446917314894843, 0.894194756554307, 0.446917314894843,
+        >>> y_hexagon = [0.446917314894843, 0.894194756554307, 0.446917314894843,
                     -0.447637568424085, -0.892754249495822, -0.447637568424085]
-                
-        p = l_plot([1,2,3])
-        gl = l_glyph_add_polygon(p, x = [x_star, x_cross, x_hexagon], y = [y_star, y_cross, y_hexagon])
-        p['glyph'] = gl
-        gl['showArea'] = False
+        >>> p = l_plot([1,2,3])
+        >>> gl = l_glyph_add_polygon(p, x = [x_star, x_cross, x_hexagon], y = [y_star, y_cross, y_hexagon])
+        >>> p['glyph'] = gl
+        >>> gl['showArea'] = False
     '''
     if (isinstance(x[0],list)):
         x = l_list2nestedTclList(x)
@@ -369,9 +359,9 @@ def l_glyph_add_serialaxes(widget,
                            **options):
     '''Add a Serialaxes Glyph
 
-    Description: 
-        Serialaxes glyph show either a star glyph or a parralel
-        coordinate glyph for each point.
+    Serialaxes glyph show either a star glyph or a parralel
+    coordinate glyph for each point.
+
     Args:
         linewidth: linewidth of outline
         axesColor: color of axes
@@ -379,10 +369,11 @@ def l_glyph_add_serialaxes(widget,
           (axesLayout=parallel) to show bounding box/circle of the glyph (or showing
           unit circle or rectangle with height 1 if scaling=none)
         bboxColor: color of bounding box/circle
+    
     Examples:
-        p = l_plot(olive.oleic, olive.stearic, color=olive.Area)
-        gs = l_glyph_add_serialaxes(p, data=olive.iloc[:,2:olive.shape[1]], showArea=False)
-        p['glyph'] = gs
+        >>> p = l_plot(olive.oleic, olive.stearic, color=olive.Area)
+        >>> gs = l_glyph_add_serialaxes(p, data=olive.iloc[:,2:olive.shape[1]], showArea=False)
+        >>> p['glyph'] = gs
     '''
     if(sequence == None):
         sequence = list(data.columns)

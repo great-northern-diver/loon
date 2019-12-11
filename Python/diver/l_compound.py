@@ -15,7 +15,6 @@ def l_getPlots(target):
     Returns: 
         a list of the named arguments and their values
 
-    @namespace loon.l_getPlots
     '''
     exit("l_getPlots.default has no valid inheritance; not an l_compound or loon plot")
 
@@ -59,7 +58,6 @@ def _(target: loon_l_compound):
 def l_getLocations(target):
     '''For the target compound loon plot, determines location (only and excluding the grobs) arguments to pass to `gridExtra::arrangeGrob()`
     
-    @namespace loon.l_getLocations
     '''
     exit("l_getLocations.default has no valid inheritance; not an l_compound or loon plot")
 

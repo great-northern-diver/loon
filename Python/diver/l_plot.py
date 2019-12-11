@@ -11,8 +11,7 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             background = "white",parent = None,**options):
     """l_plot is a generic function for creating interactive
 
-    Description:
-       visualization environments for R objects.
+    visualization environments for R objects.
     
     Args:
         x:  the x coordinates of points in the l_plot.
@@ -22,14 +21,14 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             appropriate structure.
     Returns:
         widget handle
+
     Examples:
-        p1 = l_plot(iris['Sepal.Length'],iris['Sepal.Width'],color = iris['Species'],title = "First plot")
-        # The names of the info states that can be
-        # accessed or set.  They can also be given values as    
-        # arguments to l_plot.default()
-        p1.names
-        p1["size"] <- 10
-    @namespace loon.l_plot
+        >>> p1 = l_plot(iris['Sepal.Length'],iris['Sepal.Width'],color = iris['Species'],title = "First plot")
+        >>> # The names of the info states that can be
+        >>> # accessed or set.  They can also be given values as    
+        >>> # arguments to l_plot.default()
+        >>> p1.names
+        >>> p1["size"] <- 10
     """
     if(isinstance(x,pd.core.frame.DataFrame)):
         if(x.shape[1] > 1):

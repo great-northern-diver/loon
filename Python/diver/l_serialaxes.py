@@ -6,8 +6,7 @@ from .l_data import *
 def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',showAxes=True, parent=None,**options):
     """Create a Serialaxes Widget
     
-    Description:
-       The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.    
+    The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.    
     
     Args:
        data: a data frame with numerical data only
@@ -25,17 +24,16 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
         The scaling state defines how the data is scaled. The axes display 0 at 
         one end and 1 at the other. For the following explanation assume that the 
         data is in a nxp dimensional matrix. The scaling options are then
-        <table>
-        <tr><td>variable    <td>per column scaling
-        <tr><td>observation <td>per row scaling
-        <tr><td>data        <td>whole matrix scaling
-        <tr><td>none        <td>do not scale
-        </table>
-    
+
+        =============           =====================
+        variable                per column scaling
+        observation             per row scaling
+        data                    whole matrix scaling
+        none                    do not scale
+        =============           =====================
+
     Examples:
-        s = l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-    
-    @namespace loon.l_serialaxes
+        >>> s = l_serialaxes(data=oliveAcids, color=olive.Area, title="olive data")
     """
     data = pd.DataFrame(data)                            
     if(sequence == None):

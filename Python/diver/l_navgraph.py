@@ -13,9 +13,8 @@ from sys import exit
 def l_navgraph(data, separator=":", graph=None,**options):
     '''Explore a dataset with the canonical 2d navigation graph setting
     
-    Description: 
-        Creates a navigation graph, a graphswitch, a navigator and a 
-        geodesic2d context added, and a scatterplot.
+    Creates a navigation graph, a graphswitch, a navigator and a 
+    geodesic2d context added, and a scatterplot.
 
     Args:
         data: a pandas.DataFrame with numeric variables only
@@ -30,8 +29,8 @@ def l_navgraph(data, separator=":", graph=None,**options):
         handle, and `context` handle.
 
     Examples:
-        ng = l_navgraph(oliveAcids, color=olive.Area)
-        ng2 = l_navgraph(oliveAcids, separator='-', color=olive.Area)
+        >>> ng = l_navgraph(oliveAcids, color=olive.Area)
+        >>> ng2 = l_navgraph(oliveAcids, separator='-', color=olive.Area)
     '''
     if(not isinstance(data,pd.DataFrame)):
         data = pd.DataFrame(data)

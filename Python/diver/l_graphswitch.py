@@ -271,9 +271,14 @@ def l_graphswitch_move(widget, id, index):
 def l_graphswitch_reorder(widget, ids):
     if(isinstance(widget,loon)):
         widget = widget.plot
-    ids = [x.id for x in ids if ininstance(x,loon_l_graphswitch) else x ]
+    new_ids = []
+    for x in ids:
+        if(isinstance(x,loon_l_graphswitch)):
+            new_ids.append(x.id)
+        else:
+            new_ids.append(x)
     #as.character(tcl(widget, 'reorder', ids))
-    res = tk.tk.call(widget, 'reorder',ids)
+    res = tk.tk.call(widget, 'reorder',new_ids)
     return res 
 
 #' @title Change the Graph shown in the Active Graph Widget

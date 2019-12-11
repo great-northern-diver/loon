@@ -5,11 +5,10 @@ import operator
 from itertools import compress,combinations
 from .loon_class import loon_loongraph
 def loongraph(nodes, f = '', t='', isDirected=False):
-    """    
-    Create a graph object of class loongraph
-       
-       The loongraph class provides a simple alternative to the graph 
-       class to create common graphs that are useful for use as navigation graphs.
+    """Create a graph object of class loongraph
+    
+    The loongraph class provides a simple alternative to the graph 
+    class to create common graphs that are useful for use as navigation graphs.
     
     Args:
         nodes:  a character vector with node names, each element defines a node
@@ -17,19 +16,21 @@ def loongraph(nodes, f = '', t='', isDirected=False):
         f: a character vector with node names, each element defines an edge
         t: a character vector with node names, each element defines an edge
         isDirected: boolean scalar, defines whether from and to define directed edges
+    
     Note: 
         loongraph objects can be converted to graph objects (i.e. objects of
         class graph which is defined in the graph package) with the as.graph 
         function.
+
     Returns:
         a loon gragh object 
+
     Examples:
-            >>>g = loongraph(nodes = ["A", "B", "C", "D"],
-                            f    = ["A", "A", "B", "B", "C"],
-                            t    = ["B", "C", "C", "D", "D"])
-            >>># create a loon graph plot
-            >>>p = l_graph(g)
-    @namespace loon.loongraph
+        >>> g = loongraph(nodes = ["A", "B", "C", "D"],
+                        f    = ["A", "A", "B", "B", "C"],
+                        t    = ["B", "C", "C", "D", "D"])
+        >>> # create a loon graph plot
+        >>> p = l_graph(g)
     """
     if (len(nodes) != len(np.unique(nodes))):
         warnings.warn("node names are not unique")
@@ -45,29 +46,31 @@ def loongraph(nodes, f = '', t='', isDirected=False):
     return(graph)
 
 def completegraph(nodes, isDirected=False):
-    """    
-    Create a complete graph or digraph with a set of nodes
-       
-        From Wikipedia: "a complete graph is a simple undirected graph 
-        in which every pair of distinct vertices is connected by a unique edge. A 
-        complete digraph is a directed graph in which every pair of distinct 
-        vertices is connected by a pair of unique edges (one in each direction
+    """Create a complete graph or digraph with a set of nodes
+    
+    From Wikipedia: "a complete graph is a simple undirected graph 
+    in which every pair of distinct vertices is connected by a unique edge. A 
+    complete digraph is a directed graph in which every pair of distinct 
+    vertices is connected by a pair of unique edges (one in each direction
     
     Args:
         nodes:  a character vector with node names, each element defines a node
                 hence the elements need to be unique
         isDirected: a boolean scalar to indicate wheter the returned object is 
                     a complete graph (undirected) or a complete digraph (directed).
-    @note Note that this function masks the completegraph function of the
-             graph package. Hence it is a good idead to specify the package namespace
-             with ::, i.e. loon::completegraph and graph::completegraph.
+
+    Note: 
+        Note that this function masks the completegraph function of the
+        graph package. Hence it is a good idead to specify the package namespace
+        with ::, i.e. loon::completegraph and graph::completegraph.
+
     Returns:
         a loon gragh object 
+
     Examples:
-            >>>l = ['a','b','c','d','e']
-            >>>g = completegraph(l)
-            >>>l_graph(g)
-    @namespace loon.completegraph
+            >>> l = ['a','b','c','d','e']
+            >>> g = completegraph(l)
+            >>> l_graph(g)
     """
     n = len(nodes)
     if(n < 2):
@@ -87,9 +90,7 @@ def completegraph(nodes, isDirected=False):
 
 def linegraph(x, separator=":", **options):
     '''Create a linegraph of a graph
-    
-    Description:
-        Create a lingraph of a loongraph
+    Create a lingraph of a loongraph
     
     Args:
         x: loon_loongraph class object
@@ -97,11 +98,11 @@ def linegraph(x, separator=":", **options):
     
     Details:
         linegraph needs the code part for directed graphs (i.e.
-        isDirected=TRUE)
+        isDirected=True)
     
     Examples:
-        g = loongraph(['a','b','c','d'], ['a','b','c'], ['b','c','d'], False)
-        linegraph(g)
+        >>> g = loongraph(['a','b','c','d'], ['a','b','c'], ['b','c','d'], False)
+        >>> linegraph(g)
     '''
     if(not isinstance(x,loon_loongraph)):
         exit('x should be loon_loongraph class object')
@@ -134,8 +135,7 @@ def linegraph(x, separator=":", **options):
 def complement(x):
     '''Create the Complement Graph of a loon Graph
     
-    Description:
-        Creates a complement graph of a graph
+    Creates a complement graph of a graph
         
     Details:
         This method is currently only implemented for undirected graphs.

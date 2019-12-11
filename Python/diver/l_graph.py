@@ -7,19 +7,19 @@ from multipledispatch import dispatch
 def l_graph(nodes='', f='', t='',  parent=None,**options):
     """Create a graph display based on node names and from-to edges list
     
-    Description:
-       This default method uses the loongraph display states as arguments to create a graph display.
+    This default method uses the loongraph display states as arguments to create a graph display.
     
     Args:
         nodes: vector with nodenames
         f:  vector with node names of the from-to pairs for edges
         t: vector with node names of the from-to pairs for edges
         parent: parent widget of graph display
+
     Returns:
         graph handle
-    SeeAlso: 
-        loongraph, l_graph, l_info_states, l_graph.graph
-    @namespace loon.l_graph
+
+    See Also: 
+        `loongraph`, `l_graph`, `l_info_states`, `l_graph.graph`
     """
     kwargs = {'nodes':nodes, 'from':f, 'to': t}
     kwargs.update(options)

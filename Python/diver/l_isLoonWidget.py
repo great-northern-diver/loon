@@ -2,16 +2,15 @@ from .tk import tk
 def l_isLoonWidget(widget):
     """Check if a widget path is a valid loon widget
     
-    Desctiption:
-        This function can be useful to check whether a loon widget is
-        has been closed by the user.
+    This function can be useful to check whether a loon widget is
+    has been closed by the user.
 
     Args:
         widget: widget path name as a string
+    
     Returns:
         boolean, True if the argument is a valid loon widget path, False 
         otherwise
-    @namespace loon.l_isLoonWidget
     """
     
     if(not isinstance(widget, str)):

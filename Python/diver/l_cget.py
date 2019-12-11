@@ -6,24 +6,24 @@ from .loonobject import *
 # @singledispatch
 def l_cget(target, state):
     """Query a Plot State
-    
-    Description:
-        All of loon's displays have plot states. Plot states specify 
-        what is displayed, how it is displayed and if and how the plot is linked 
-        with other loon plots. Layers, glyphs, navigators and contexts have states 
-        too (also refered to as plot states). This function queries a single plot 
-        state.
 
-    SeeAlso: 
-        l_cget, l_info_states, l_create_handle
+    All of loon's displays have plot states. Plot states specify 
+    what is displayed, how it is displayed and if and how the plot is linked 
+    with other loon plots. Layers, glyphs, navigators and contexts have states 
+    too (also refered to as plot states). This function queries a single plot 
+    state.
+
+    See Also: 
+        `l_cget`, `l_info_states`, `l_create_handle`
+
     Args:
         target: target loon object 
         state: query state
+    
     Examples:
-            p = l_plot(iris, color = iris.Species)
-            l_cget(p, "color")
-            p['selected']
-    @namespace loon.l_cget
+        >>> p = l_plot(iris, color = iris.Species)
+        >>> l_cget(p, "color")
+        >>> p['selected']
     """
 #    exit('target should be a loon claas or string')
 

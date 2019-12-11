@@ -2,20 +2,17 @@
 def tkcolors(): 
     """List the valid Tk color names
        
-    Description:
-        The core of Loon is implemented in Tcl and Tk. Hence, when
-        defining colors using color names, Loon uses the Tcl color representation
-        and not those of R. The colors are taken from the Tk sources:
-        doc/colors.n
-        
-        If you want to make sure that the color names are represented exactly as
-        they are in python then you can convert the color names to hexencoded color
-        strings, see the examples below.
+    The core of Loon is implemented in Tcl and Tk. Hence, when
+    defining colors using color names, Loon uses the Tcl color representation
+    and not those of R. The colors are taken from the Tk sources:
+    doc/colors.n
+    
+    If you want to make sure that the color names are represented exactly as
+    they are in python then you can convert the color names to hexencoded color
+    strings, see the examples below.
 
     Returns:
        a list of Tk color names
-            
-    @namespace loon.tkcolors
     """
 
     return(["alice", "blue", "AliceBlue", "antique", "white", "AntiqueWhite",

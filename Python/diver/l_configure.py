@@ -4,25 +4,24 @@ import numpy as np
 import pandas as pd
 def l_configure(target,**kwargs):
     """Modify one or multiple plot states
-    
-    Description:
-        All of loon's displays have plot states. Plot states specify 
-        what is displayed, how it is displayed and if and how the plot is linked 
-        with other loon plots. Layers, glyphs, navigators and contexts have states 
-        too (also refered to as plot states). This function modifies one or 
-        multiple plot states.
-    SeeAlso: 
-        l_cget, l_info_states, l_create_handle
+
+    All of loon's displays have plot states. Plot states specify 
+    what is displayed, how it is displayed and if and how the plot is linked 
+    with other loon plots. Layers, glyphs, navigators and contexts have states 
+    too (also refered to as plot states). This function modifies one or 
+    multiple plot states.
+
+    See Also: 
+        `l_cget`, `l_info_states`, `l_create_handle`
+
     Args:
         target: target loon object 
         **kwargs: configuration states and values(state=value)
+   
     Examples:
-        @code
-            p = l_plot(iris, color = iris['Species'])
-            l_configure(p, color='red')
-            p['size'] = [2 if x == 'versicolor' else 8 for x in iris['Species']]
-        @endcode
-    @namespace loon.l_configure
+        >>> p = l_plot(iris, color = iris['Species'])
+        >>> l_configure(p, color='red')
+        >>> p['size'] = [2 if x == 'versicolor' else 8 for x in iris['Species']]
     """
     obj_eval = loonobject(target)
     #args <- list('configure', ...)

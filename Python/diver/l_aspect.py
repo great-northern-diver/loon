@@ -10,11 +10,9 @@ def l_aspect(widget):
         aspect ratio
 
     Examples: 
-            p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
-            l_aspect(p)
-            l_setAspect(p,ratio = 1)
-    
-    @namespace loon.l_aspect
+        >>> p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
+        >>> l_aspect(p)
+        >>> l_setAspect(p,ratio = 1)    
     '''
     widget = widget_to_string(widget)
     l_throwErrorIfNotLoonWidget(widget)
@@ -32,11 +30,9 @@ def l_setAspect(widget, ratio = None,x = None , y = None):
         y: see description for `x` argument above
     
     Examples:
-        p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
-        l_aspect(p)
-        l_setAspect(p, x = 1, y = 2) 
-
-    @namespace loon.l_setAspect
+        >>> p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
+        >>> l_aspect(p)
+        >>> l_setAspect(p, x = 1, y = 2) 
     '''
     if(ratio == x == y == None):
         exit('ratio, x, and y can not both be empty.')

@@ -116,3 +116,6 @@ __all__ = ['tk','l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel
             'l_context','l_context_delete','l_context_ids','l_context_relabel',
             'l_context_getLabel', 'l_context_add','l_context_add_context2d',
             'l_context_add_geodesic2d','l_context_add_slicing2d','l_navgraph']
+
+if __name__ == '__main__' :
+    print(123)

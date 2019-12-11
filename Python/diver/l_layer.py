@@ -1,5 +1,4 @@
 ## \file
-#  @namespace loon.l_layer 
 from .tk import tk
 from .l_throwErrorIfNotLoonWidget import *
 from .nestedLists import *
@@ -14,42 +13,44 @@ import numpy as np
 def l_layer(widget,x,**options):
     '''Loon layers
 
-    Description: 
-        Loon supports layering of visuals and groups of visuals. The 
-        `l_layer` function is a generic method.
+    Loon supports layering of visuals and groups of visuals. The 
+    `l_layer` function is a generic method.
 
     Details: 
         loon's displays that use the main graphics model (i.e. histogram, 
         scatterplot and graph displays) support layering of visual information. The
         following table lists the layer types and functions for layering on a 
         display.
-        
-        <table>
-        <tr><th>*Type*         <th> *Description*                              <th> *Creator Function*
-        <tr><td>group          <td> a group can be a parent of other layers    <td> `l_layer_group`
-        <tr><td>polygon        <td> one polygon                                <td> `l_layer_polygon`
-        <tr><td>text           <td> one text string                            <td> `l_layer_text`
-        <tr><td>line           <td> one line (i.e. connected line segments)    <td> `l_layer_line`
-        <tr><td>rectangle      <td> one rectangle                              <td> `l_layer_rectangle`
-        <tr><td>oval           <td> one oval                                   <td> `l_layer_oval`
-        <tr><td>points         <td> n points (filled) circle                   <td> `l_layer_points`
-        <tr><td>texts          <td> n text strings                             <td> `l_layer_text`
-        <tr><td>polygons       <td> n polygons                                 <td> `l_layer_polygons`
-        <tr><td>rectangles     <td> n rectangles                               <td> `l_layer_rectangles`
-        <tr><td>lines          <td> n sets of connected line segments          <td> `l_layer_lines`
-        </table>
 
+        =======             ========================================          ====================
+        *Type*              *Description*                                     *Creator Function*
+        =======             ========================================          ====================
+        group               a group can be a parent of other layers           `l_layer_group`
+        polygon             one polygon                                       `l_layer_polygon`
+        text                one text string                                   `l_layer_text`
+        line                one line (i.e. connected line segments)           `l_layer_line`
+        rectangle           one rectangle                                     `l_layer_rectangle`
+        oval                one oval                                          `l_layer_oval`
+        points              n points (filled) circle                          `l_layer_points`
+        texts               n text strings                                    `l_layer_text`
+        polygons            n polygons                                        `l_layer_polygons`
+        rectangles          n rectangles                                      `l_layer_rectangles`
+        lines               n sets of connected line segments                 `l_layer_lines`
+       =======             ========================================          ====================
+        
         Every layer within a display has a unique id. The visuals of the data in a 
         display present the default layer of that display and has the layer id 
         `'model'`. For example, the `'model'` layer of a scatterplot 
         display visualizes the scatterplot glyphs. Functions useful to query layers
         are
-        <table>
-        <tr><th>*Function*           <th> *Description*                           
-        <tr><td>l_layer_ids          <td> List layer ids   
-        <tr><td>l_layer_getType      <td> Get layer type                            
-        </table>
- 
+
+        ============                 ==================
+        *Function*                   *Description* 
+        ============                 ==================
+        l_layer_ids                  List layer ids   
+        l_layer_getType              Get layer type    
+        ============                 ==================                        
+        
         Layers are arranged in a tree structure with the tree root having the layer
         id `'root'`. The rendering order of the layers is according to a 
         depth-first traversal of the layer tree. This tree also maintains a label 
@@ -60,29 +61,29 @@ def l_layer(widget,x,**options):
         not rendered; however, the visibility flag of the children layers remain 
         unchanged. Relevant functions are:
 
-        <table>
-        <tr><th>*Function*              <th> *Description*                           
-        <tr><td>l_layer_getParent       <td> Get parent layer id of a layer   
-        <tr><td>l_layer_getChildren     <td> Get children of a group layer
-        <tr><td>l_layer_index           <td> Get the order index of a layer among its siblings
-        <tr><td>l_layer_printTree       <td> Print out the layer tree
-        <tr><td>l_layer_move            <td> Move a layer
-        <tr><td>l_layer_lower           <td> Switch the layer place with its sibling to the right
-        <tr><td>l_layer_raise           <td> Switch the layer place with its sibling to the left
-        <tr><td>l_layer_demote          <td> Moves the layer up to be a left sibling of its parent
-        <tr><td>l_layer_promote         <td> Moves the layer to be a child of its right group layer sibling
-        <tr><td>l_layer_hide            <td> Set the layers visibility flag to `False`
-        <tr><td>l_layer_show            <td> Set the layers visibility flag to `True`
-        <tr><td>l_layer_isVisible       <td> Return visibility flag of layer
-        <tr><td>l_layer_layerVisibility	<td> Returns logical value for whether layer is actually seen
-        <tr><td>l_layer_groupVisibility	<td> Returns `all`, `part` or `none` for expressing which part of the layers children are visible.
-        <tr><td>l_layer_delete	        <td> Delete a layer. If the layer is a group move all its children layers to the layers parent.
-        <tr><td>l_layer_expunge	        <td> Delete layer and all its children layer.
-        <tr><td>l_layer_getLabel	    <td> Get layer label.
-        <tr><td>l_layer_relabel	        <td> Change layer label.
-        <tr><td>l_layer_bbox	        <td> Get the bounding box of a layer.        
-        </table>
-
+        =========================       =============================================================================================
+        *Function*                      *Description* 
+        =========================       =============================================================================================
+        l_layer_getParent               Get parent layer id of a layer   
+        l_layer_getChildren             Get children of a group layer
+        l_layer_index                   Get the order index of a layer among its siblings
+        l_layer_printTree               Print out the layer tree
+        l_layer_move                    Move a layer
+        l_layer_lower                   Switch the layer place with its sibling to the right
+        l_layer_raise                   Switch the layer place with its sibling to the left
+        l_layer_demote                  Moves the layer up to be a left sibling of its parent
+        l_layer_promote                 Moves the layer to be a child of its right group layer sibling
+        l_layer_hide                    Set the layers visibility flag to `False`
+        l_layer_show                    Set the layers visibility flag to `True`
+        l_layer_isVisible               Return visibility flag of layer
+        l_layer_layerVisibility	        Returns logical value for whether layer is actually seen
+        l_layer_groupVisibility	        Returns `all`, `part` or `none` for expressing which part of the layers children are visible.
+        l_layer_delete	                Delete a layer. If the layer is a group move all its children layers to the layers parent.
+        l_layer_expunge	                Delete layer and all its children layer.
+        l_layer_getLabel	            Get layer label.
+        l_layer_relabel	                Change layer label.
+        l_layer_bbox	                Get the bounding box of a layer.        
+        =========================       =============================================================================================       
 
         All layers have states that can be queried and modified using the same 
         functions as the ones used for displays (i.e. `l_cget`, 
@@ -97,26 +98,24 @@ def l_layer(widget,x,**options):
         x: object that should be layered
         **options: additional arguments, often state definition for the basic layering function
     
-    SeeAlso: 
+    See Also: 
         `l_info_states`, `l_scaleto_layer`, `l_scaleto_world`
 
     Examples:
-        class foo:
-            def __init__(self,x,y,color):
-                self.x = x
-                self.y = y
-                self.color = color 
-
-        obj = foo(x = list(range(1,7)) + list(range(6,1,-1)), y = [3,1,0,0,1,3,3,5,6,6,5], color = 'yellow')
-        from multipledispatch import dispatch            
-        @dispatch(object,foo)
-        def l_layer(widget, x, **options):
-            l = l_layer_polygon(widget,x = x.x,y = x.y,color = x.color)
-            return(l)
-    
-        p = l_plot()
-        l = l_layer(p,obj)
-        l_scaleto_world(p)
+        >>> class foo:
+        >>>    def __init__(self,x,y,color):
+        >>>        self.x = x
+        >>>        self.y = y
+        >>>        self.color = color 
+        >>> obj = foo(x = list(range(1,7)) + list(range(6,1,-1)), y = [3,1,0,0,1,3,3,5,6,6,5], color = 'yellow')
+        >>> from multipledispatch import dispatch            
+        >>> @dispatch(object,foo)
+        >>> def l_layer(widget, x, **options):
+        >>>    l = l_layer_polygon(widget,x = x.x,y = x.y,color = x.color)
+        >>>    return(l)
+        >>> p = l_plot()
+        >>> l = l_layer(p,obj)
+        >>> l_scaleto_world(p)
     '''
     print('No support type of ' + str(type(x)))
 
@@ -126,20 +125,19 @@ def l_layer(widget,x,**options):
 def l_layer(widget, x, **options):
     '''Layer Method for Kernel Density Estimation
 
-    Description:
-        Layer a line that represents a kernel density estimate.
+    Layer a line that represents a kernel density estimate.
+
     Args:
         widget: target widget
         x: an density object of scipy.stats.gaussian_kde or sklearn.neighbors.KernelDensity
     
     Examples:
-        from diver import l_layer,iris,l_hist
-        from scipy.stats import gaussian_kde
-        import numpy as np
-        d = gaussian_kde(iris.iloc[:,1])
-        h = l_hist(iris.iloc[:,1],yshows='density')
-        l = l_layer(h, d, color="steelblue", linewidth=3)
-    @namespace loon.l_layer.density
+        >>> from diver import l_layer,iris,l_hist
+        >>> from scipy.stats import gaussian_kde
+        >>> import numpy as np
+        >>> d = gaussian_kde(iris.iloc[:,1])
+        >>> h = l_hist(iris.iloc[:,1],yshows='density')
+        >>> l = l_layer(h, d, color="steelblue", linewidth=3)
     '''
     if(not isinstance(widget,loon)):
         widget = loon(widget)
@@ -168,9 +166,8 @@ def l_layer_add(widget, Type, **kwargs):
 def l_layer_ids(widget):
     '''List ids of layers in Plot
 
-    Description:
-        Every layer within a display has a unique id. This function
-        returns a list of all the layer ids for a widget.
+    Every layer within a display has a unique id. This function
+    returns a list of all the layer ids for a widget.
 
     Returns:
         vector with layer ids in rendering order. To create a layer handle
@@ -184,9 +181,8 @@ def l_layer_ids(widget):
 def l_layer_group(widget, label="group", parent="root", index=0):
     '''layer a group node
 
-    Description: 
-        A group layer can contain other layers. If the group layer is
-        invisible, then so are all its children.
+    A group layer can contain other layers. If the group layer is
+    invisible, then so are all its children.
     
     Args:
         label: label used in the layers inspector
@@ -234,13 +230,13 @@ def l_layer_polygons(widget, x, y,
         **options additional state initialization arguments, see `l_info_states` 
 
     Examples:
-        p = l_plot()
-        l = l_layer_polygons(p,[[1,2,1.5], [3,4,6.0,5,2], [1.0,3,5,3]],
+        >>> p = l_plot()
+        >>> l = l_layer_polygons(p,[[1,2,1.5], [3,4,6.0,5,2], [1.0,3,5,3]],
                     y = [[1,1,2.0], [1,1.5,1,4,2], [3.0,5,6,4]],
                     color = ['red', 'green', 'blue'],
                     linecolor = "")
-        l_scaleto_world(p)
-        l_info_states(l, "color")
+        >>> l_scaleto_world(p)
+        >>> l_info_states(l, "color")
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot
@@ -262,9 +258,9 @@ def l_layer_rectangle(widget, x, y,
     '''layer a rectangle
 
     Examples:
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[2,3], y=[1,10], color='steelblue')  
-            l_scaleto_layer(l)
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[2,3], y=[1,10], color='steelblue')  
+        >>> l_scaleto_layer(l)
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot    
@@ -285,16 +281,15 @@ def l_layer_rectangles(widget, x, y,
     '''layer multiple rectangles at the same time 
 
     Examples:
-            p = l_plot()
-            l = l_layer_rectangles(
+        >>> p = l_plot()
+        >>> l = l_layer_rectangles(
                 p,
                 x = [[0,1], [1,2], [2,3], [5,6]],
                 y = [[0,1], [1,2], [0,1], [3,4]],
                 color = ['red', 'blue', 'green', 'orange'],
                 linecolor = "black")
-            l_scaleto_world(p)
-
-            l_info_states(l)
+        >>> l_scaleto_world(p)
+        >>> l_info_states(l)
     '''
     if(isinstance(parent, loon_l_layer)):
         parent = parent.id
@@ -314,17 +309,15 @@ def l_layer_line(widget, x, y=None, color="black",
     '''layer a line 
 
     Args:
-        x: the coordinates of line. Alternatively, a single plotting structure,
-           function or any *R* object with a plot method can be provided as x and
-            y are passed on to `xy.coords`
-        y: the y coordinates of the line, optional if x is an appropriate structure.
+        x: the coordinates of line.
+        y: the y coordinates of the line
         color: color of line
         dash: dash pattern of line, see https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M26
     
     Examples:
-        p = l_plot()
-        l = l_layer_line(p, x=[1,2,3,4], y=[1,3,2,4], color='red', linewidth=2)
-        l_scaleto_world(p)
+        >>> p = l_plot()
+        >>> l = l_layer_line(p, x=[1,2,3,4], y=[1,3,2,4], color='red', linewidth=2)
+        >>> l_scaleto_world(p)
     '''
     if(isinstance(parent, loon_l_layer)):
         parent = parent.id
@@ -344,14 +337,14 @@ def l_layer_lines(widget, x, y,
     '''layer multiple lines at the same time 
 
     Examples:
-        s = [rows for _, rows in UsAndThem.groupby('Country') if rows.shape[0] > 1]
-        s1 = [x.sort_values('Year') for x in s]
-        xcoords = [x.Year for x in s1]
-        ycoords = [x.LifeExpectancy for x in s1]
-        region = [x['Geographic.Region'].iloc[0] for x in s1]
-        p = l_plot(showItemLabels=True)
-        l = l_layer_lines(p, xcoords, ycoords, color=region)
-        l_scaleto_layer(l)
+        >>> s = [rows for _, rows in UsAndThem.groupby('Country') if rows.shape[0] > 1]
+        >>> s1 = [x.sort_values('Year') for x in s]
+        >>> xcoords = [x.Year for x in s1]
+        >>> ycoords = [x.LifeExpectancy for x in s1]
+        >>> region = [x['Geographic.Region'].iloc[0] for x in s1]
+        >>> p = l_plot(showItemLabels=True)
+        >>> l = l_layer_lines(p, xcoords, ycoords, color=region)
+        >>> l_scaleto_layer(l)
     '''
     if(isinstance(parent, loon_l_layer)):
         parent = parent.id
@@ -372,9 +365,9 @@ def l_layer_oval(widget, x, y,
     '''layer oval 
 
     Examples:
-        p = l_plot()
-        l = l_layer_oval(p, [1,5], [2,12], color='steelblue')
-        l_configure(p, panX=0, panY=0, deltaX=20, deltaY=20)
+        >>> p = l_plot()
+        >>> l = l_layer_oval(p, [1,5], [2,12], color='steelblue')
+        >>> l_configure(p, panX=0, panY=0, deltaX=20, deltaY=20)
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot    
@@ -412,8 +405,7 @@ def l_layer_text(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="text", parent="root", index=0, **options):
     '''layer text 
 
-    Description: 
-        layer a single character string
+    layer a single character string
     
     Args:
         x: x coordinate
@@ -429,8 +421,8 @@ def l_layer_text(widget, x, y, text, color="gray60", size=6, angle=0,
         string (and not `l_layer_texts` with `n=1`).
     
     Examples:
-        p = l_plot()
-        l = l_layer_text(p, 0, 0, "Hello World")
+        >>> p = l_plot()
+        >>> l = l_layer_text(p, 0, 0, "Hello World")
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot    
@@ -448,8 +440,7 @@ def l_layer_texts(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="texts", parent="root", index=0, **options):
     '''layer multiple texts at the same time 
     
-    Description: 
-        Layer a vector of character strings.
+    Layer a vector of character strings.
     
     Args:
         x: list of x coordinates
@@ -465,9 +456,9 @@ def l_layer_texts(widget, x, y, text, color="gray60", size=6, angle=0,
         string (and not `l_layer_texts` with `n=1`).
     
     Examples:
-        p = l_plot()
-        l = l_layer_texts(p, x=[1,2,3], y=[3,2,1], text=["This is", "a", "test"], size=20)
-        l_scaleto_world(p)
+        >>> p = l_plot()
+        >>> l = l_layer_texts(p, x=[1,2,3], y=[3,2,1], text=["This is", "a", "test"], size=20)
+        >>> l_scaleto_world(p)
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot   
@@ -500,68 +491,66 @@ def layer_cmd(widget, layer, cmd = None,*args,**options):
 def l_layer_delete(widget, layer):
     '''Delete a layer
 
-    Description:
-        All but the `'model'` and the `'root'` layer can be 
-        dynamically deleted. If a group layer gets deleted with
-        `l_layer_delete` then all its children layers get moved into their
-        grandparent group layer.
+    All but the `'model'` and the `'root'` layer can be 
+    dynamically deleted. If a group layer gets deleted with
+    `l_layer_delete` then all its children layers get moved into their
+    grandparent group layer.
     
     Args:
         widget: widget path or loon object of class `loon`
         layer: layer id or the layer object of calls `loon_l_layer`
 
     Examples:
-        p = l_plot()
-        l1 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='red')
-        l_layer_delete(p,l1)
-        l2 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='yellow')
-        l_layer_delete(p,l2)
+        >>> p = l_plot()
+        >>> l1 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='red')
+        >>> l_layer_delete(p,l1)
+        >>> l2 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='yellow')
+        >>> l_layer_delete(p,l2)
     '''
     layer_cmd(widget, layer, 'delete')
 
 def l_layer_expunge(widget, layer):
     '''Delete a layer and all its descendants
 
-    Description:
-        Delete a group layer and all it's descendants. Note that the
-        `model` layer cannot be deleted.
+    Delete a group layer and all it's descendants. Note that the
+    `model` layer cannot be deleted.
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_delete`
 
     Examples:
-        p = l_plot()
-        g = l_layer_group(p)
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g.id, color="", linecolor="orange", linewidth=2)
-        l2 = l_layer_line(p, x=[0,.5,1], y=[0,1,0], parent=g.id, color="blue")
-        l_layer_expunge(p, g)
+        >>> p = l_plot()
+        >>> g = l_layer_group(p)
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g.id, color="", linecolor="orange", linewidth=2)
+        >>> l2 = l_layer_line(p, x=[0,.5,1], y=[0,1,0], parent=g.id, color="blue")
+        >>> l_layer_expunge(p, g)
     '''
     layer_cmd(widget, layer, 'expunge')
 
 def l_layer_move(widget, layer, parent = None, index="0"):
     '''Move a layer
 
-    Description: 
-        The postition of a layer in the layer tree determines the 
-        rendering order. That is, the non-group layers are rendered in order of a 
-        Depth-first traversal of the layer tree. The toplevel group layer is called
-        `root`.
+    The postition of a layer in the layer tree determines the 
+    rendering order. That is, the non-group layers are rendered in order of a 
+    Depth-first traversal of the layer tree. The toplevel group layer is called
+    `root`.
+
     Args:
         parent: if parent layer is not specified it is set to the current
                 parent layer of the layer
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_printTree`, `l_layer_index`
 
     Examples:
-        p = l_plot() 
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-        g = l_layer_group(p)
-        l_layer_printTree(p)
-        l_layer_move(p,l, parent=g)
-        l_layer_printTree(p)
-        l_layer_move(p, 'model', parent=g)
-        l_layer_printTree(p)
+        >>> p = l_plot() 
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        >>> g = l_layer_group(p)
+        >>> l_layer_printTree(p)
+        >>> l_layer_move(p,l, parent=g)
+        >>> l_layer_printTree(p)
+        >>> l_layer_move(p, 'model', parent=g)
+        >>> l_layer_printTree(p)
     '''
     if(parent == None):
         parent = l_layer_getParent(widget, layer)
@@ -572,18 +561,17 @@ def l_layer_move(widget, layer, parent = None, index="0"):
 def l_layer_hide(widget, layer):
     '''Hide a Layer
 
-    Description: 
-        A hidden layer is not rendered. If a group layer is set to
-        be hidden then all its descendants are not rendered either.
+    A hidden layer is not rendered. If a group layer is set to
+    be hidden then all its descendants are not rendered either.
     
     See Also:
         `l_layer`, `l_layer_show`, `l_layer_isVisible`, 
         `l_layer_layerVisibility`,`l_layer_groupVisibility`
     
     Examples:
-        p = l_plot()
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-        l_layer_hide(p, l)
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        >>> l_layer_hide(p, l)
     '''
     layer_cmd(widget, layer, 'hide')
 
@@ -591,55 +579,53 @@ def l_layer_hide(widget, layer):
 def l_layer_show(widget, layer):
     '''Show or unhide a Layer
 
-    Description: 
-        Hidden or invisible layers are not rendered. This function 
-        unhides invisible layer so that they are rendered again. 
+    Hidden or invisible layers are not rendered. This function 
+    unhides invisible layer so that they are rendered again. 
     
-    SeeAlso: 
+    See Also: 
         `l_layer`, `l_layer_hide`, `l_layer_isVisible`,
         `l_layer_layerVisibility`, `l_layer_groupVisibility`
 
     Examples:
-        p = l_plot()
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-        l_layer_hide(p, l) 
-        l_layer_show(p, l)
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        >>> l_layer_hide(p, l) 
+        >>> l_layer_show(p, l)
     '''
     layer_cmd(widget, layer, 'show')
 
 def l_layer_relabel(widget, layer, label):
     '''Change layer label
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_getLabel`
 
     Examples:
-        p = l_plot()
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1], label="A rectangle")
-        l_layer_getLabel(p, l)
-        l_layer_relabel(p, l, label="A relabelled rectangle")
-        l_layer_getLabel(p, l)
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1], label="A rectangle")
+        >>> l_layer_getLabel(p, l)
+        >>> l_layer_relabel(p, l, label="A relabelled rectangle")
+        >>> l_layer_getLabel(p, l)
     '''
     layer_cmd(widget, layer, 'relabel', label)
 
 def l_layer_raise(widget, layer):
     '''Switch the layer place with its sibling to the left
 
-    Description:
-        Change the layers position within its parent layer group by 
-        decreasing the `index` of the layer by one if possible. This means 
-        that the raised layer will be rendered after (or on top) of its sibling
-        layer to the left.
+    Change the layers position within its parent layer group by 
+    decreasing the `index` of the layer by one if possible. This means 
+    that the raised layer will be rendered after (or on top) of its sibling
+    layer to the left.
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_lower`, `l_layer_move` 
 
     Examples:
-        p = l_plot()
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
-        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle')
-        l_setAspect(p,1)
-        l_layer_raise(p, l1)
+        >>> p = l_plot()
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        >>> l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle')
+        >>> l_setAspect(p,1)
+        >>> l_layer_raise(p, l1)
     '''
     layer_cmd(widget, layer, 'raise') 
 
@@ -647,21 +633,20 @@ def l_layer_raise(widget, layer):
 def l_layer_lower(widget, layer):
     '''Switch the layer place with its sibling to the right
 
-    Description: 
-        Change the layers position within its parent layer group by 
-        increasing the `index` of the layer by one if possible. This means 
-        that the raised layer will be rendered before (or on below) of its sibling
-        layer to the right.
+    Change the layers position within its parent layer group by 
+    increasing the `index` of the layer by one if possible. This means 
+    that the raised layer will be rendered before (or on below) of its sibling
+    layer to the right.
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_raise`, `l_layer_move`
 
     Examples:
-        p = l_plot()
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
-        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle') 
-        l_setAspect(p,1)
-        l_layer_lower(p, l2)
+        >>> p = l_plot()
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        >>> l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle') 
+        >>> l_setAspect(p,1)
+        >>> l_layer_lower(p, l2)
     '''
     layer_cmd(widget, layer, 'lower') 
 
@@ -669,43 +654,38 @@ def l_layer_lower(widget, layer):
 def l_layer_promote(widget, layer):
     '''Moves the layer up to be a left sibling of its parent
 
-    Description: 
-        Moves the layer down the layer tree (towards the root layer) if
-        the parent layer is not the root layer.
+    Moves the layer down the layer tree (towards the root layer) if
+    the parent layer is not the root layer.
 
     Examples: 
-        p = l_plot()
-
-        g1 = l_layer_group(p)
-        g2 = l_layer_group(p, parent=g1)
-        l1 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g2)
-
-        l_layer_printTree(p)
-        l_layer_promote(p, l1)
-        l_layer_printTree(p)
-        l_layer_promote(p, l1)
-        l_layer_printTree(p)
+        >>> p = l_plot()
+        >>> g1 = l_layer_group(p)
+        >>> g2 = l_layer_group(p, parent=g1)
+        >>> l1 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g2)
+        >>> l_layer_printTree(p)
+        >>> l_layer_promote(p, l1)
+        >>> l_layer_printTree(p)
+        >>> l_layer_promote(p, l1)
+        >>> l_layer_printTree(p)
     '''
     layer_cmd(widget, layer, 'promote')
 
 def l_layer_demote(widget, layer):
     '''Moves the layer to be a child of its right group layer sibling
 
-    Description: 
-        Moves the layer up the layer tree (away from the root layer) if
-        there is a sibling group layer to the right of the layer.
+    Moves the layer up the layer tree (away from the root layer) if
+    there is a sibling group layer to the right of the layer.
     
     Examples: 
-        p = l_plot()
-        
-        g1 = l_layer_group(p)
-        g2 = l_layer_group(p, parent=g1)
-        l1 = l_layer_oval(p, x=[0,1], y=[0,1])
-        l_layer_printTree(p) 
-        l_layer_demote(p, l1)
-        l_layer_printTree(p)
-        l_layer_demote(p, l1)
-        l_layer_printTree(p)
+        >>> p = l_plot()
+        >>> g1 = l_layer_group(p)
+        >>> g2 = l_layer_group(p, parent=g1)
+        >>> l1 = l_layer_oval(p, x=[0,1], y=[0,1])
+        >>> l_layer_printTree(p) 
+        >>> l_layer_demote(p, l1)
+        >>> l_layer_printTree(p)
+        >>> l_layer_demote(p, l1)
+        >>> l_layer_printTree(p)
     '''
     layer_cmd(widget, layer, 'demote')
 
@@ -733,20 +713,19 @@ def layer_get(widget, layer, what, convert=str):
 def l_layer_bbox(widget, layer="root"):
     '''Get the bounding box of a layer.
 
-    Description: 
-        The bounding box of a layer returns the coordinates of the
-        smallest rectangle that encloses all the elements of the layer.
+    The bounding box of a layer returns the coordinates of the
+    smallest rectangle that encloses all the elements of the layer.
     
     Returns:
         Numeric list of length 4 with (xmin, ymin, xmax, ymax) of the
         bounding box
     
     Examples:
-        p = l_plot(iris['Sepal.Length'], iris['Sepal.Width'], color=iris['Species'])
-        l_layer_bbox(p, layer='model')
-        l = l_layer_rectangle(p, x=[0,1], y=[30,31])
-        l_layer_bbox(p, l)
-        l_layer_bbox(p, 'root')
+        >>> p = l_plot(iris['Sepal.Length'], iris['Sepal.Width'], color=iris['Species'])
+        >>> l_layer_bbox(p, layer='model')
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[30,31])
+        >>> l_layer_bbox(p, l)
+        >>> l_layer_bbox(p, 'root')
     '''
     res = layer_get(widget, layer, 'bbox', int)
     return res
@@ -758,14 +737,14 @@ def l_layer_getLabel(widget, layer):
     Returns:
         Named vector of length 1 with layer label as value and layer id as name.
 
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_relabel`
     
     Examples:
-        p = l_plot()
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], label="a rectangle")
-        l_layer_getLabel(p, 'model')
-        l_layer_getLabel(p, l1)
+        >>> p = l_plot()
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], label="a rectangle")
+        >>> l_layer_getLabel(p, 'model')
+        >>> l_layer_getLabel(p, l1)
     '''
     res = layer_get(widget,layer,'getLabel')
     return res
@@ -774,24 +753,22 @@ def l_layer_getLabel(widget, layer):
 def l_layer_getChildren(widget, layer='root'):
     '''Get children of a group layer    
     
-    Description: 
-        Returns the ids of a group layer's children.
+    Returns the ids of a group layer's children.
     
     Returns:
         Character vector with ids of the childrens. To create layer handles
         (i.e. objects of class `l_layer` use the
         `l_create_handle` function.
     
-    SeeAlso: 
+    See Also: 
         `l_layer`, `l_layer_getParent`
 
     Examples:
-        p = l_plot()
-
-        g = l_layer_group(p)
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
-        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle', parent=g) 
-        l_layer_getChildren(p, g)
+        >>> p = l_plot()
+        >>> g = l_layer_group(p)
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
+        >>> l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle', parent=g) 
+        >>> l_layer_getChildren(p, g)
     '''
     res = layer_get(widget, layer, 'getChildren')
     return res
@@ -799,15 +776,14 @@ def l_layer_getChildren(widget, layer='root'):
 def l_layer_getParent(widget, layer):
     '''Get parent layer id of a layer
 
-    Description: 
-        The toplevel parent is the `root` layer.
+    The toplevel parent is the `root` layer.
 
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_getChildren`
 
     Examples: 
-        p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
-        l_layer_getParent(p, 'model')
+        >>> p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
+        >>> l_layer_getParent(p, 'model')
     '''
     res = layer_get(widget, layer, 'getParent')
     return res
@@ -815,24 +791,23 @@ def l_layer_getParent(widget, layer):
 def l_layer_printTree(widget):
     '''Print the layer tree
 
-    Description: 
-        Prints the layer tree (i.e. the layer ids) to the prompt. Group 
-        layers are prefixed with a `'+'`. The `'root'` layer is not
-        listed.
+    Prints the layer tree (i.e. the layer ids) to the prompt. Group 
+    layers are prefixed with a `'+'`. The `'root'` layer is not
+    listed.
     
     Returns: 
         empty string
 
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_getChildren`, `l_layer_getParent`
 
     Examples:
-        p = l_plot()
-        l_layer_rectangle(p, x=[0,1], y=[0,1])
-        g = l_layer_group(p)
-        l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
-        l_layer_line(p, x=[0,1], y=[0,1], parent=g)
-        l_layer_printTree(p)
+        >>> p = l_plot()
+        >>> l_layer_rectangle(p, x=[0,1], y=[0,1])
+        >>> g = l_layer_group(p)
+        >>> l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
+        >>> l_layer_line(p, x=[0,1], y=[0,1], parent=g)
+        >>> l_layer_printTree(p)
     '''
     if(isinstance(widget,loon)):
         widget = widget.plot
@@ -843,21 +818,21 @@ def l_layer_printTree(widget):
 def l_layer_isVisible(widget, layer):
     '''Return visibility flag of layer
 
-    Description: 
-        Hidden or invisible layers are not rendered. This function
-        queries whether a layer is visible/rendered or not.
+    Hidden or invisible layers are not rendered. This function
+    queries whether a layer is visible/rendered or not.
     
     Returns: 
         `True` or `False` depending whether the layer is visible or not.
 
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_layerVisibility`,`l_layer_groupVisibility`
+    
     Examples:
-        p = l_plot()
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1])
-        l_layer_isVisible(p, l)
-        l_layer_hide(p, l)
-        l_layer_isVisible(p, l)
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        >>> l_layer_isVisible(p, l)
+        >>> l_layer_hide(p, l)
+        >>> l_layer_isVisible(p, l)
     '''
     res = layer_get(widget, layer, 'isVisible',bool)
     return res
@@ -865,9 +840,8 @@ def l_layer_isVisible(widget, layer):
 def l_layer_getType(widget, layer):
     '''Get layer type
     
-    Description: 
-        To see the manual page of `l_layer` for all the
-        primitive layer types.
+    To see the manual page of `l_layer` for all the
+    primitive layer types.
     
     Returns:
         One of: `group`, `polygon`, `text`,
@@ -875,13 +849,14 @@ def l_layer_getType(widget, layer):
         `texts`, `polygons`, `rectangles`, `lines` and 
         `scatterplot`, `histogram`, `serialaxes` and `graph`.
 
-    SeeAlso: 
+    See Also: 
         `l_layer` 
+
     Examples: 
-        p = l_plot()
-        l = l_layer_rectangle(p, x=[0,1], y=[0,1])
-        l_layer_getType(p, l)
-        l_layer_getType(p, 'model')
+        >>> p = l_plot()
+        >>> l = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        >>> l_layer_getType(p, l)
+        >>> l_layer_getType(p, 'model')
     '''
     res = layer_get(widget, layer, 'getType')
     return res
@@ -889,9 +864,8 @@ def l_layer_getType(widget, layer):
 def l_layer_index(widget, layer):
     '''Get the order index of a layer among its siblings
 
-    Description: 
-        The index determines the rendering order of the children layers
-        of a parent. The layer with index=0 is rendered first.
+    The index determines the rendering order of the children layers
+    of a parent. The layer with index=0 is rendered first.
     
     Details: 
         Note that the index for layers is 0 based.
@@ -899,7 +873,7 @@ def l_layer_index(widget, layer):
     Returns: 
         numeric value 
     
-    SeeAlso: 
+    See Also: 
         `l_layer`, `l_layer_move`
     '''
     res = layer_get(widget, layer, 'index', int)
@@ -908,19 +882,18 @@ def l_layer_index(widget, layer):
 def l_layer_layerVisibility(widget, layer):
     '''Returns logical value for whether layer is actually seen
 
-    Description:
-        Although the visibility flag for a layer might be set to
-        `True` it won't be rendered as on of its ancestor group layer is set
-        to be invisible. The `l_layer_visibility` returns `True` if the
-        layer and all its ancestor layers have their visibility flag set to true
-        and the layer is actually rendered.
+    Although the visibility flag for a layer might be set to
+    `True` it won't be rendered as on of its ancestor group layer is set
+    to be invisible. The `l_layer_visibility` returns `True` if the
+    layer and all its ancestor layers have their visibility flag set to true
+    and the layer is actually rendered.
     
     Returns: 
         `True` if the layer and all its ancestor layers have their 
         visibility flag set to true and the layer is actually rendered, otherwise
         `False`.
     
-    SeeAlso:
+    See Also:
         `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_groupVisibility`
     '''
     res = layer_get(widget, layer, 'layerVisibility', int)
@@ -929,31 +902,28 @@ def l_layer_layerVisibility(widget, layer):
 def l_layer_groupVisibility(widget, layer):
     '''Queries visibility status of decendants
 
-    Description: 
-        Query whether all, part or none of the group layers descendants
-        are visible.
+    Query whether all, part or none of the group layers descendants
+    are visible.
     
     Returns:
         `'all'`, `'part'` or `'none'` depending on the
         visibility status of the descendants.
     
-    SeeAlso: 
+    See Also: 
         `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_layerVisibility`
  
     Examples: 
-        p = l_plot()
-
-        g = l_layer_group(p)
-        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
-        l2 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
-
-        l_layer_groupVisibility(p, g)
-        l_layer_hide(p, l2)
-        l_layer_groupVisibility(p, g)
-        l_layer_hide(p, l1)
-        l_layer_groupVisibility(p, g)
-        l_layer_hide(p, g)
-        l_layer_groupVisibility(p, g)
+        >>> p = l_plot()
+        >>> g = l_layer_group(p)
+        >>> l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
+        >>> l2 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
+        >>> l_layer_groupVisibility(p, g)
+        >>> l_layer_hide(p, l2)
+        >>> l_layer_groupVisibility(p, g)
+        >>> l_layer_hide(p, l1)
+        >>> l_layer_groupVisibility(p, g)
+        >>> l_layer_hide(p, g)
+        >>> l_layer_groupVisibility(p, g)
     '''
     res = layer_get(widget, layer, 'groupVisibility')
     return res
