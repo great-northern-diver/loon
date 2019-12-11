@@ -1,7 +1,6 @@
 from .loon_class import *
 def l_zoom(widget, factor=1.1):
-    '''
-    Zoom from and towards the center
+    '''Zoom from and towards the center
 
     Description:
         This function changes the plot states `panX`, `panY`, 

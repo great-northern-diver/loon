@@ -3,8 +3,7 @@ from .l_data import *
 import numpy as np
 import pandas as pd
 def l_configure(target,**kwargs):
-    """
-    Modify one or multiple plot states
+    """Modify one or multiple plot states
     
     Description:
         All of loon's displays have plot states. Plot states specify 
@@ -12,7 +11,8 @@ def l_configure(target,**kwargs):
         with other loon plots. Layers, glyphs, navigators and contexts have states 
         too (also refered to as plot states). This function modifies one or 
         multiple plot states.
-    @see l_cget, l_info_states, l_create_handle
+    SeeAlso: 
+        l_cget, l_info_states, l_create_handle
     Args:
         target: target loon object 
         **kwargs: configuration states and values(state=value)

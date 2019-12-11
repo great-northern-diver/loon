@@ -1,8 +1,8 @@
 from .tk import tk
 def l_isLoonWidget(widget):
-    """
-    Check if a widget path is a valid loon widget
+    """Check if a widget path is a valid loon widget
     
+    Desctiption:
         This function can be useful to check whether a loon widget is
         has been closed by the user.
 

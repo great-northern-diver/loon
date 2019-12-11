@@ -1,7 +1,6 @@
 from .tk import tk
 def l_setTitleFont(size='16', weight="bold", family="Helvetica"):
-    '''
-    Set the title font of all loon displays
+    '''Set the title font of all loon displays
     
     Description:
         All of loon's displays access a set of common options.  
@@ -12,10 +11,11 @@ def l_setTitleFont(size='16', weight="bold", family="Helvetica"):
         weight: the font size, default is 'bold'
         family: the font family, default is 'Helvetica'
 
-    @see `l_getOptionNames`, `l_userOptions`, `l_userOptionDefault, `l_setOption`   
+    SeeAlso: 
+        `l_getOptionNames`, `l_userOptions`, `l_userOptionDefault, `l_setOption`   
 
     Examples:
-            l_setTitleFont(14)
+        l_setTitleFont(14)
     
     @namespace loon.l_setTitleFont
     '''

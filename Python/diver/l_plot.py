@@ -9,9 +9,9 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
             size = 4,active = [True],selected = [False],showLabels = True,showScales = False,
             showGuides = True, guidelines = "white",guidesBackground = "grey92",foreground = "black",
             background = "white",parent = None,**options):
-    """    
-    l_plot is a generic function for creating interactive
-       
+    """l_plot is a generic function for creating interactive
+
+    Description:
        visualization environments for R objects.
     
     Args:
@@ -23,14 +23,12 @@ def l_plot(x=None, y=None,xlabel=None, ylabel=None, title=None,color = ["grey60"
     Returns:
         widget handle
     Examples:
-        @code 
-            p1 = l_plot(iris['Sepal.Length'],iris['Sepal.Width'],color = iris['Species'],title = "First plot")
-            # The names of the info states that can be
-            # accessed or set.  They can also be given values as    
-            # arguments to l_plot.default()
-            p1.names
-            p1["size"] <- 10
-        @endcode
+        p1 = l_plot(iris['Sepal.Length'],iris['Sepal.Width'],color = iris['Species'],title = "First plot")
+        # The names of the info states that can be
+        # accessed or set.  They can also be given values as    
+        # arguments to l_plot.default()
+        p1.names
+        p1["size"] <- 10
     @namespace loon.l_plot
     """
     if(isinstance(x,pd.core.frame.DataFrame)):

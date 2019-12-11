@@ -4,8 +4,8 @@ from .loon_class import loon_l_serialaxes
 from .l_data import *
 
 def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',showAxes=True, parent=None,**options):
-    """
-    Create a Serialaxes Widget
+    """Create a Serialaxes Widget
+    
     Description:
        The seerialaxes widget displays multivariate data either as a stacked star glyph plot, or as a parallel coordinate plot.    
     
@@ -17,8 +17,10 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
        showAxes: boolean to indicate whether axes should be shown or not
        parent: parent widget path
        options: state arguments, see l_info_states.
+    
     Returns:
         plot handle object
+    
     Details: 
         The scaling state defines how the data is scaled. The axes display 0 at 
         one end and 1 at the other. For the following explanation assume that the 
@@ -29,10 +31,10 @@ def l_serialaxes(data, sequence=None, scaling="variable", axesLayout='radial',sh
         <tr><td>data        <td>whole matrix scaling
         <tr><td>none        <td>do not scale
         </table>
+    
     Examples:
-        @code
-            s = l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-        @endcode
+        s = l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
+    
     @namespace loon.l_serialaxes
     """
     data = pd.DataFrame(data)                            

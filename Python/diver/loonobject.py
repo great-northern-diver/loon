@@ -4,8 +4,7 @@ from .tk import tk
 from . import loon_class
 import numpy as np
 def loonobject(target, convert=str):
-    """    
-    Create closure to evaluate code for a loon object
+    """Create closure to evaluate code for a loon object
 
     Description:   
         Returns a closure that evaluates code for a partiular part of a 
@@ -14,8 +13,10 @@ def loonobject(target, convert=str):
     
     Args:
         target: target loon object
+
     Returns:
         a closure that will evaluate tcl code for the particular object.
+        
     @namespace loon.loonobject
     """
     ## first check for loon objects

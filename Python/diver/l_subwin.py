@@ -2,8 +2,7 @@ from .loonPlotFactory import *
 from .tk import tk 
 
 def l_subwin(parent, name="w"):
-    """
-    Create a child widget path 
+    """Create a child widget path 
     
     Description:
         This function is similar to Tk.subwin except that does
@@ -14,8 +13,10 @@ def l_subwin(parent, name="w"):
     Args:
         parent: parent widget path
         name: child name
+
     Returns:
         widget path name as a string
+        
     @namespace loon.l_subwin
     """
     if(parent == "tkwin"): 

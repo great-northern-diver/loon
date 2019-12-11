@@ -1,8 +1,7 @@
 from .tk import tk
 
 def l_size(widget):
-    '''
-    Query Size of a Plot Display
+    '''Query Size of a Plot Display
 
     Description:
         Get the width and height of a plot in pixels
@@ -10,7 +9,8 @@ def l_size(widget):
     Returns:
         list of width and height in pixels
 
-    @see `l_resize`
+    SeeAlso: 
+        `l_resize`
 
     @namespace loon.l_size 
     '''

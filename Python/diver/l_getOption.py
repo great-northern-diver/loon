@@ -2,8 +2,7 @@ from .tk import tk
 from sys import exit
 
 def l_getOption(option):
-    """ 
-    Get the value of a loon display option
+    """Get the value of a loon display option
 
     Description:
         All of loon's displays access a set of common options.  
@@ -15,7 +14,8 @@ def l_getOption(option):
     Returns:
         the value of the named option.
 
-    @see `l_getOptionNames`, `l_userOptions`,`l_userOptionDefault`, `l_setOption`
+    SeeAlso:
+        `l_getOptionNames`, `l_userOptions`,`l_userOptionDefault`, `l_setOption`
 
     Examples: 
             l_getOption("background")
@@ -31,7 +31,7 @@ def l_getOption(option):
     return tk.tk.eval("set ::loon::Options("+ option+ ")")
 
 def l_getOptionNames():
-    ''' Get the names of all loon display options
+    '''Get the names of all loon display options
 
     Description:
         All of loon's displays access a set of common options.  
@@ -40,10 +40,11 @@ def l_getOptionNames():
     Returns:
         a list of all loon display option names.
 
-    @see `l_getOption`, `l_userOptions`, `l_userOptionDefault`, `l_setOption`
+    SeeAlso: 
+        `l_getOption`, `l_userOptions`, `l_userOptionDefault`, `l_setOption`
 
     Examples: 
-            l_getOptionNames()
+        l_getOptionNames()
     
     @namespace loon.l_getOptionNames
     '''
@@ -51,8 +52,7 @@ def l_getOptionNames():
 
 
 def l_userOptions():
-    '''
-    Get the names of all loon display options that can be set by the user.
+    '''Get the names of all loon display options that can be set by the user.
 
     Description:
         All of loon's displays access a set of common options.  
@@ -62,10 +62,11 @@ def l_userOptions():
     Returns:
         a list of all user settable option names.
 
-    @see `l_getOptionNames`, `l_getOption`, `l_userOptionDefault`, `l_setOption`
+    SeeAlso: 
+        `l_getOptionNames`, `l_getOption`, `l_userOptionDefault`, `l_setOption`
 
     Examples: 
-            l_userOptions()
+        l_userOptions()
 
     @namespace loon.l_userOptions
     '''
@@ -74,8 +75,7 @@ def l_userOptions():
 
 
 def l_userOptionDefault(option):
-    '''
-    Get loon's system default value for the named display option.
+    '''Get loon's system default value for the named display option.
 
     Description:
         All of loon's displays access a set of common options.  
@@ -88,10 +88,11 @@ def l_userOptionDefault(option):
     Returns:
         the default value for the named option
 
-    @see `l_getOptionNames`, `l_getOption`, `l_userOptionDefault`, `l_userOptions`
+    SeeAlso: 
+        `l_getOptionNames`, `l_getOption`, `l_userOptionDefault`, `l_userOptions`
 
     Examples: 
-            l_userOptionDefault("background")
+        l_userOptionDefault("background")
 
     @namespace loon.l_userOptionDefault
     '''
@@ -107,8 +108,7 @@ def l_userOptionDefault(option):
     return switcher.get(option,"ERROR: option "+ option+ " is not settable by user, so no default value.")
 
 def l_setOption(option, value):
-    '''
-    Set the value of a loon display option
+    '''Set the value of a loon display option
 
     Description:
         All of loon's displays access a set of common options.  
@@ -122,11 +122,12 @@ def l_setOption(option, value):
     Returns:
         the new value
 
-    @see `l_getOption`, `l_getOptionNames`, `l_userOptions`,`l_userOptionDefault`
+    SeeAlso: 
+        `l_getOption`, `l_getOptionNames`, `l_userOptions`,`l_userOptionDefault`
 
     Examples: 
-            l_setOption("select-color", "red")
-            l_setOption("select-color", "default")
+        l_setOption("select-color", "red")
+        l_setOption("select-color", "default")
 
     @namespace loon.l_setOption
     '''

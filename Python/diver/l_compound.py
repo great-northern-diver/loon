@@ -7,8 +7,7 @@ from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 
 @singledispatch
 def l_getPlots(target):
-    '''
-    For the target compound loon plot, determines all the loon plots in that compound plot.
+    '''For the target compound loon plot, determines all the loon plots in that compound plot.
 
     Args:
         param: target the (compound) loon  plot to be laid out.
@@ -58,9 +57,7 @@ def _(target: loon_l_compound):
 #' @export
 @singledispatch
 def l_getLocations(target):
-    '''
-    For the target compound loon plot, determines location (only and excluding the grobs)
-    arguments to pass to `gridExtra::arrangeGrob()`
+    '''For the target compound loon plot, determines location (only and excluding the grobs) arguments to pass to `gridExtra::arrangeGrob()`
     
     @namespace loon.l_getLocations
     '''

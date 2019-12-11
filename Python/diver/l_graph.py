@@ -5,9 +5,9 @@ from multipledispatch import dispatch
 
 @dispatch(object,object,object,object)
 def l_graph(nodes='', f='', t='',  parent=None,**options):
-    """    
-    Create a graph display based on node names and from-to edges list
-       
+    """Create a graph display based on node names and from-to edges list
+    
+    Description:
        This default method uses the loongraph display states as arguments to create a graph display.
     
     Args:
@@ -17,7 +17,8 @@ def l_graph(nodes='', f='', t='',  parent=None,**options):
         parent: parent widget of graph display
     Returns:
         graph handle
-    @see loongraph, l_graph, l_info_states, l_graph.graph
+    SeeAlso: 
+        loongraph, l_graph, l_info_states, l_graph.graph
     @namespace loon.l_graph
     """
     kwargs = {'nodes':nodes, 'from':f, 'to': t}

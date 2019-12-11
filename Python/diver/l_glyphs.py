@@ -20,8 +20,7 @@ def l_glyph(widget,*args ,**options):
     return res 
 
 def l_glyph_relabel(widget, id, label):
-    '''
-    Relabel Glyph
+    '''Relabel Glyph
 
     Description: 
         Change the label of a glyph. Note that the label is only
@@ -40,38 +39,38 @@ def l_glyph_relabel(widget, id, label):
 
 
 def l_glyph_delete(widget, id):
-    '''
-    Delete a Glyph
+    '''Delete a Glyph
 
     Description: 
         Delete a glyph from the plot.
 
-    @see `l_glyph_add`
+    SeeAlso: 
+        `l_glyph_add`
     '''
     if(isinstance(id,loon_l_glyph)):
         id = id.id 
     l_glyph(widget, "delete", id)
 
 def l_glyph_ids(widget):
-    '''
-    List glyphs ids
+    '''List glyphs ids
 
     Description:
         List all the non-primitive glyph ids attached to display.
     
-    @see `l_glyph_add`
+    SeeAlso:
+        `l_glyph_add`
     '''
     l_glyph(widget, "ids")
 
 
 def l_glyph_getLabel(widget, id):
-    '''
-    Get Glyph Label
+    '''Get Glyph Label
     
     Description: 
         Returns the label of a glyph
     
-    #see `l_glyph_add`, `l_glyph_ids`, `l_glyph_relabel`
+    SeeAlso:
+        `l_glyph_add`, `l_glyph_ids`, `l_glyph_relabel`
     '''
     if(isinstance(id,loon_l_glyph)):
         id = id.id
@@ -79,13 +78,13 @@ def l_glyph_getLabel(widget, id):
     return res
 
 def l_glyph_getType(widget, id):
-    '''
-    Get Glyph Type
+    '''Get Glyph Type
 
     Description:
         Query the type of a glyph    
     
-    @see `l_glyph_add`
+    SeeAlso: 
+        `l_glyph_add`
     '''
     if(isinstance(id,loon_l_glyph)):
         id = id.id
@@ -97,8 +96,7 @@ def l_glyph_getType(widget, id):
     
 
 def l_primitiveGlyphs():
-    '''
-    The primitive glyphs available to a scatterplot or graph display
+    '''The primitive glyphs available to a scatterplot or graph display
 
     Description: 
         Returns a vector of the available primitive glyphs.
@@ -226,8 +224,7 @@ def l_primitiveGlyphs():
 
 
 def l_glyph_add(widget, type, label="", **options):
-    '''
-    Default method for adding non-primitive glyphs
+    '''Default method for adding non-primitive glyphs
 
     Description:
         Generic function to write new glyph types using loon's primitive
@@ -249,8 +246,7 @@ def l_glyph_add(widget, type, label="", **options):
 
 
 def l_glyph_add_text(widget, text, label="", **options):
-    '''
-    Add a Text Glyph
+    '''Add a Text Glyph
 
     Description: 
         Each text glyph can be a multiline string.    
@@ -258,7 +254,8 @@ def l_glyph_add_text(widget, text, label="", **options):
     Args: 
         text: the text strings for each observartion.
     
-    @see `l_glyph_add`
+    SeeAlso: 
+        `l_glyph_add`
 
     Examples:
         p = l_plot(iris, color = iris.Species)
@@ -271,8 +268,7 @@ def l_glyph_add_text(widget, text, label="", **options):
     return res 
 
 def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, label="", **options):
-    '''
-    Add a Pointrange Glyph
+    '''Add a Pointrange Glyph
 
     Description:
         Pointrange glyphs show a filled circle at the x-y location and
@@ -284,7 +280,8 @@ def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, lab
         linewidth: line with in pixel.
         showArea: boolean, show a filled point or just the outline point
     
-    @see l_glyph_add
+    SeeAlso:
+        l_glyph_add
     Examples:
             p =  l_plot(x = [1,2,3], color = ['red', 'blue', 'green'], showScales=True)
             g = l_glyph_add_pointrange(p, ymin=np.array([1,2,3]) - np.array([1,2,3])/5, ymax=np.array([1,2,3]) + np.array([1,2,3])/5)
@@ -300,8 +297,7 @@ def l_glyph_add_pointrange(widget, ymin, ymax, linewidth=1, showArea = True, lab
     return res 
 
 def l_glyph_add_polygon(widget, x, y, linewidth = 1, showArea=True, label="", **options):    
-    '''
-    Add a Polygon Glyph
+    '''Add a Polygon Glyph
 
     Description: 
         Add one polygon per scatterplot point.
@@ -320,7 +316,8 @@ def l_glyph_add_polygon(widget, x, y, linewidth = 1, showArea=True, label="", **
         linewidth: linewidth of outline.
         showArea: boolean, show a filled polygon or just the outline
     
-    @see `l_glyph_add`
+    SeeAlso: 
+        `l_glyph_add`
 
     Examples:
         x_star = [-0.000864304235090734, 0.292999135695765, 0.949870354364736,
@@ -370,8 +367,7 @@ def l_glyph_add_serialaxes(widget,
                            bboxColor="gray70",
                            label="",
                            **options):
-    '''
-    Add a Serialaxes Glyph
+    '''Add a Serialaxes Glyph
 
     Description: 
         Serialaxes glyph show either a star glyph or a parralel

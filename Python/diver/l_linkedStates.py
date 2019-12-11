@@ -1,7 +1,6 @@
 from .tk import tk
 def l_setLinkedStates(widget, states):
-    '''
-    Modify States of a Plot that are Linked in Loon's Standard Linking Model
+    '''Modify States of a Plot that are Linked in Loon's Standard Linking Model
 
     Description:
         Loon's standard linking model is based on three levels, the 
@@ -60,8 +59,7 @@ def l_setLinkedStates(widget, states):
 
 
 def l_getLinkedStates(widget):
-    '''
-    Query the States that are Linked with Loon's Standard Linking Model
+    '''Query the States that are Linked with Loon's Standard Linking Model
 
     Description:
         Loon's standard linking model is based on three levels, the 
@@ -74,7 +72,8 @@ def l_getLinkedStates(widget):
     Return:
         list with state names that are linked states
     
-    @see l_setLinkedStates
+    SeeAlso:
+        l_setLinkedStates
 
     @namespace loon.l_getLinkedStates
     '''

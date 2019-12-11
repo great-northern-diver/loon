@@ -121,9 +121,9 @@ def l_hist(x = None,
          xlabel = None,
          parent = None,
          **options):
-    """
-    Create an interactive histogram
+    """Create an interactive histogram
     
+    Description:
         l_hist is a generic function for creating an interactive histogram display that can be linked with
         loon's other displays
     Args:
@@ -144,25 +144,24 @@ def l_hist(x = None,
     Returns:
         widget handle
     Examples:
-        @code
-            h = l_hist(iris["Sepal.Length"])
-            h.names
-            h["xlabel"] = "Sepal length"
-            h["showOutlines"] = False
-            h["yshows"]
-            h["yshows"] = "density"
-            l_scaleto(h)
-            h["showStackedColors"] = True
-            h['color'] = list(iris["Species"])
-            h["showStackedColors"] = False
-            h["showOutlines"] = True
-            h["showGuides"] = True
-            # link another plot with the previous plot
-            h['linkingGroup'] = "iris_data" 
-            h2 = l_hist(iris["Petal.Width"],
-                        linkingGroup="iris_data",
-                        showStackedColors = True)
-        @endcode
+        h = l_hist(iris["Sepal.Length"])
+        h.names
+        h["xlabel"] = "Sepal length"
+        h["showOutlines"] = False
+        h["yshows"]
+        h["yshows"] = "density"
+        l_scaleto(h)
+        h["showStackedColors"] = True
+        h['color'] = list(iris["Species"])
+        h["showStackedColors"] = False
+        h["showOutlines"] = True
+        h["showGuides"] = True
+        # link another plot with the previous plot
+        h['linkingGroup'] = "iris_data" 
+        h2 = l_hist(iris["Petal.Width"],
+                    linkingGroup="iris_data",
+                    showStackedColors = True)
+
     @namespace loon.l_hist
     """
     if(yshows != 'frequency'):

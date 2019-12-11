@@ -19,8 +19,7 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
                     showHistograms = False, histLocation = "edge",
                     histHeightProp = 1, histArgs = {},
                     showSerialAxes = False, serialAxesArgs = {}, parent=None, **args):
-    '''
-    An interactive scatterplot matrix
+    '''An interactive scatterplot matrix
 
     Description:
         Function creates a scatterplot matrix using loon's scatterplot
@@ -48,10 +47,10 @@ def l_pairs(data, linkingGroup = None, linkingKey = None, showItemLabels = True,
     Returns:
         an `loon_l_pairs` class (an `l_compound` object)
 
-    @see  `l_plot` and `l_getPlots`
+    SeeAlso:
+        `l_plot` and `l_getPlots`
 
     Examples:
-
         p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris")
         p = l_pairs(iris.iloc[:,0:4], color=iris.Species, linkingGroup = "iris",showHistograms = True, showSerialAxes = True)
         # plot names

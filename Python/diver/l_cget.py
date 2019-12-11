@@ -5,8 +5,7 @@ from .loonobject import *
 
 # @singledispatch
 def l_cget(target, state):
-    """
-    Query a Plot State
+    """Query a Plot State
     
     Description:
         All of loon's displays have plot states. Plot states specify 
@@ -15,16 +14,15 @@ def l_cget(target, state):
         too (also refered to as plot states). This function queries a single plot 
         state.
 
-    @see l_cget, l_info_states, l_create_handle
+    SeeAlso: 
+        l_cget, l_info_states, l_create_handle
     Args:
         target: target loon object 
         state: query state
     Examples:
-        @code
             p = l_plot(iris, color = iris.Species)
             l_cget(p, "color")
             p['selected']
-        @endcode
     @namespace loon.l_cget
     """
 #    exit('target should be a loon claas or string')

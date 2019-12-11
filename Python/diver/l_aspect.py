@@ -4,8 +4,7 @@ from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 from sys import exit 
 
 def l_aspect(widget):
-    '''
-    Query the aspect ratio of a plot
+    '''Query the aspect ratio of a plot
 
     Returns: 
         aspect ratio
@@ -23,8 +22,7 @@ def l_aspect(widget):
 
  
 def l_setAspect(widget, ratio = None,x = None , y = None):
-    '''
-    Set the aspect ratio of a plot  
+    '''Set the aspect ratio of a plot  
 
     Args:
         ratio: aspect ratio, optional, if omitted then the `x` and 

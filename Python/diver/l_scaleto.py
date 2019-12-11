@@ -10,8 +10,7 @@ def l_scaleto(widget, *opt):
 
 
 def l_scaleto_world(widget):
-    '''
-    Change Plot Region to Display All Plot Data
+    '''Change Plot Region to Display All Plot Data
 
     Description: 
         The function modifies the `zoomX`, `zoomY`, 
@@ -21,8 +20,7 @@ def l_scaleto_world(widget):
 
 
 def l_scaleto_plot(widget):
-    '''
-    Change Plot Region to Display the All Data of the Model Layer
+    '''Change Plot Region to Display the All Data of the Model Layer
 
     Description: 
         The function modifies the `zoomX`, `zoomY`, 
@@ -33,8 +31,7 @@ def l_scaleto_plot(widget):
 
 
 def l_scaleto_selected(widget):
-    '''
-    Change Plot Region to Display All Selected Data
+    '''Change Plot Region to Display All Selected Data
 
     Description: 
         The function modifies the `zoomX`, `zoomY`, 
@@ -45,8 +42,7 @@ def l_scaleto_selected(widget):
 
 
 def l_scaleto_active(widget):
-    '''
-    Change Plot Region to Display All Active Data
+    '''Change Plot Region to Display All Active Data
 
     Description:
         The function modifies the `zoomX`, `zoomY`, 
@@ -55,14 +51,14 @@ def l_scaleto_active(widget):
     l_scaleto(widget, "active")
 
 def l_scaleto_layer(layer):
-    '''
-    Change Plot Region to Display All Elements of a Particular Layer
+    '''Change Plot Region to Display All Elements of a Particular Layer
 
     Description: 
         The function modifies the zoomX, zoomY, 
         `panX`, and `panY` so that all elements of a particular layer are displayed.    
 
-    @see `l_layer_ids`
+    SeeAlso: 
+        `l_layer_ids`
     '''
     target = layer.widget
     l_scaleto(target, "layer", layer.id)

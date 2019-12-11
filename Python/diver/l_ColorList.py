@@ -1,8 +1,7 @@
 from .tk import tk
 from matplotlib import colors
 def hex12tohex6(x):
-    """
-    Convert 12 hexadecimal digit color representations to 6 hexidecimal digit color representations
+    """Convert 12 hexadecimal digit color representations to 6 hexidecimal digit color representations
        
     Description:
         Tk colors must be in 6 hexadecimal format with two hexadecimal
@@ -38,8 +37,7 @@ def hex12tohex6(x):
     return col1
 
 def color_loon():
-    """    
-    Create a palette with loon's color mapping
+    """Create a palette with loon's color mapping
        
     Description:
         Used to map nominal data to colors. By default these colors are
@@ -70,14 +68,14 @@ def color_loon():
         those colors get returned hexencoded. Otherwise, if there is one or more
         elements that is not a valid color name it uses the loons default color
         mapping algorithm.
-    @see l_setColorList, l_getColorList, loon_palette
+    SeeAlso: 
+        l_setColorList, l_getColorList, loon_palette
 
     Examples: 
-
-            pal = color_loon()
-            pal(['a','b','c','d'])
-            pal(['a','a','b','c'])
-            pal(['green', 'yellow'])
+        pal = color_loon()
+        pal(['a','b','c','d'])
+        pal(['a','a','b','c'])
+        pal(['green', 'yellow'])
 
     @namespace loon.color_loon
     """
@@ -89,8 +87,7 @@ def color_loon():
     return f
 
 def loon_palette(n):
-    """    
-    Loon's color generator for creating color palettes
+    """Loon's color generator for creating color palettes
        
     Description:
         Loon has a color sequence generator implemented  creates a color
@@ -104,7 +101,8 @@ def loon_palette(n):
 
     Returns:
        list with hexencoded color values
-    @see l_setColorList
+    SeeAlso: 
+        l_setColorList
 
     Examples:
             loon_palette(12)
@@ -118,8 +116,7 @@ def loon_palette(n):
 
 
 def l_colRemoveAlpha(col):
-    """    
-    Convert color representations having an alpha transparency level to 6 digit color representations
+    """Convert color representations having an alpha transparency level to 6 digit color representations
     
     Description:
         Colors in the standard tk used by loon do not allow for alpha transparency.
@@ -133,12 +130,11 @@ def l_colRemoveAlpha(col):
        a list of 6 digit color representations
 
     Examples: 
-
-            x = l_colRemoveAlpha('#0f0f0f80')
-            # Also works with ordinary color string representations
-            # since it just extracts the rgb values from the colors.
-            x = l_colRemoveAlpha(["red", "blue", "green", "orange"])
-            print(x)
+        x = l_colRemoveAlpha('#0f0f0f80')
+        # Also works with ordinary color string representations
+        # since it just extracts the rgb values from the colors.
+        x = l_colRemoveAlpha(["red", "blue", "green", "orange"])
+        print(x)
     
     @namespace loon.l_colRemoveAlpha
     """
@@ -148,8 +144,7 @@ def l_colRemoveAlpha(col):
     
 
 def l_setColorList(colors):
-    """    
-    Use custom colors for mapping nominal values to distinct colors
+    """Use custom colors for mapping nominal values to distinct colors
        
     Description:
         Modify loon's color mapping list to a set of custom colors.
@@ -229,25 +224,23 @@ def l_setColorList(colors):
 
     Returns:
        None
-    @see l_setColorList, l_getColorList, l_setColorList_ColorBrewer, l_setColorList_hcl
+    SeeAlso:
+        l_setColorList, l_getColorList, l_setColorList_ColorBrewer, l_setColorList_hcl
     Examples:
-        @code
-            l_plot([1,2,3], color=[1,2,3]) # loon's default mapping
-            cols = l_getColorList()
-            l_setColorList(["red", "blue", "green", "orange"])
-            ## close and reopen inspector
-            l_plot([1,2,3], color=[1,2,3])   # use the new color mapping
-            l_plot(list(range(10)), color=list(range(10))) # use loons default color mapping as color list is too small
-            # reset to default
-            l_setColorList(cols)
-        @endcode
+        l_plot([1,2,3], color=[1,2,3]) # loon's default mapping
+        cols = l_getColorList()
+        l_setColorList(["red", "blue", "green", "orange"])
+        ## close and reopen inspector
+        l_plot([1,2,3], color=[1,2,3])   # use the new color mapping
+        l_plot(list(range(10)), color=list(range(10))) # use loons default color mapping as color list is too small
+        # reset to default
+        l_setColorList(cols)
     @namespace loon.l_setColorList
     """
     tk.tk.call('::loon::setColorList', 'custom', colors)
     
 def l_getColorList():
-    """    
-    Get loon's color mapping list
+    """Get loon's color mapping list
        
     Description:
         The color mapping list is used by loon to convert nominal values
@@ -255,17 +248,17 @@ def l_getColorList():
 
     Returns:
        a vector with hex-encoded colors
-    @see l_setColorList
+    SeeAlso: 
+        l_setColorList
     Examples: 
-                l_getColorList()
+        l_getColorList()
     @namespace loon.l_getColorList
     """
     return tk.tk.eval('::loon::getColorList').split(' ')
 
 
 def l_setColorList_ColorBrewer(palette=None):
-    """    
-    set color list of type ColorBrewer
+    """set color list of type ColorBrewer
        
     Args:
         palette: one of the following RColorBrewer palette name: Set1, Set2, Set3, Pastel1, Pastel2, Paired, Dark2, or Accent
@@ -275,8 +268,8 @@ def l_setColorList_ColorBrewer(palette=None):
         Set2, Set3, Pastel1, Pastel2, Paired, Dark2, and Accent. See the examples
         below.
     Examples: 
-                l_setColorList_ColorBrewer("Set1")
-                p = l_plot(iris)
+        l_setColorList_ColorBrewer("Set1")
+        p = l_plot(iris)
     @namespace loon.l_setColorList_ColorBrewer
     """
     if(palette not in {"Set1", "Set2", "Set3",
@@ -287,8 +280,7 @@ def l_setColorList_ColorBrewer(palette=None):
 
 
 def l_setColorList_hcl(chroma=56, luminance=51, hue_start=231):
-    """    
-    set color list of type hcl color wheen
+    """set color list of type hcl color wheen
        
     Args:
         chroma: The chroma of the color. The upper bound for chroma depends on hue and luminance.
@@ -307,24 +299,21 @@ def l_setColorList_hcl(chroma=56, luminance=51, hue_start=231):
 
 
 def l_setColorList_ggplot2():
-    """    
-    set color list of type ggplot2    
+    """set color list of type ggplot2    
     @namespace loon.l_setColorList_ggplot2 
     """
     tk.tk.call('::loon::setColorList', 'ggplot2')
 
 
 def l_setColorList_baseR():
-    """    
-    set color list of type R    
+    """set color list of type R    
     @namespace loon.l_setColorList_baseR 
     """
     tk.tk.call('::loon::setColorList', 'baseR')
 
 
 def l_setColorList_loon():
-    """    
-    set color list of type loon defaults   
+    """set color list of type loon defaults   
     @namespace loon.l_setColorList_loon 
     """
     tk.tk.loon('::loon::setColorList', 'loon')

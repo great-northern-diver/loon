@@ -5,8 +5,7 @@ import os
 from .helper import file_ext
 from sys import exit
 def l_export(widget, filename, width = None, height = None):
-    '''
-    Export a loon plot as an image
+    '''Export a loon plot as an image
 
     Description:
         The supported image formats are dependent on the systemenvironment.
@@ -29,7 +28,8 @@ def l_export(widget, filename, width = None, height = None):
     Returns:
         path to the exported file
 
-    @see `l_export_valid_formats`
+    SeeAlso: 
+        `l_export_valid_formats`
 
     @namespace loon.l_export
     '''
@@ -56,8 +56,7 @@ def l_export(widget, filename, width = None, height = None):
     return fname
 
 def l_export_valid_formats():
-    '''
-    Return a list of the available image formats when exporting a loon plot
+    '''Return a list of the available image formats when exporting a loon plot
 
     Description:
         The supported image formats are dependent on the system

@@ -20,8 +20,7 @@ from .tk import tk
 #' 
 #' l_hexcolor('red')
 def l_hexcolor(color):
-    """    
-    Convert color names to their 12 digit hexadecimal color representation
+    """Convert color names to their 12 digit hexadecimal color representation
        
     Description:
         Color names in loon will be mapped to colors according to the Tk
@@ -33,10 +32,10 @@ def l_hexcolor(color):
        a character vector with the 12 digit hexadecimal color strings.
 
     Examples: 
-            p = l_plot([1,2])
-            p['color'] = 'red'
-            p['color']
-            l_hexcolor('red')
+        p = l_plot([1,2])
+        p['color'] = 'red'
+        p['color']
+        l_hexcolor('red')
 
     @namespace loon.l_hexcolor
     """

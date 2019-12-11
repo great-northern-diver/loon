@@ -1,7 +1,6 @@
 import pandas as pd
 def l_data(data):
-    """
-    Convert an R data.frame to a Tcl dictionary
+    """Convert an R data.frame to a Tcl dictionary
     
     Description:
         This is a helper function to convert an R data.frame object to 

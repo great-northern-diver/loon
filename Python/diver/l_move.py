@@ -2,8 +2,7 @@ from .tk import tk
 from .l_throwErrorIfNotLoonWidget import l_throwErrorIfNotLoonWidget
 from .helper import opts_to_list
 def l_move(widget,*args,**kwargs):
-    '''
-    L_move 
+    '''l_move 
     
     @namespace loon.l_move
     '''

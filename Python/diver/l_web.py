@@ -2,8 +2,7 @@ from .helper import match_arg
 import webbrowser
 
 def l_web(page="index", directory = "home"):
-    '''
-    Open a browser with loon's R documentation webpage
+    '''Open a browser with loon's R documentation webpage
 
     Description:
         `l_web` opens a browser with the relevant page on the
@@ -18,12 +17,13 @@ def l_web(page="index", directory = "home"):
         manual reference, then directory must be "reference"; if `page` refers to the name
         of a vignette file, then directory should be "articles"
 
-    @see l_help 
+    SeeAlso: 
+        l_help 
 
-    @Examples:
-            l_web()
-            l_web(page = "introduction", directory = "articles")
-            l_web(page = "l_hist", directory = "reference")
+    Examples:
+        l_web()
+        l_web(page = "introduction", directory = "articles")
+        l_web(page = "l_hist", directory = "reference")
 
     @namespace loon.l_web
     '''

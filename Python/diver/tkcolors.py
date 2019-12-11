@@ -1,7 +1,6 @@
 
 def tkcolors(): 
-    """
-    List the valid Tk color names
+    """List the valid Tk color names
        
     Description:
         The core of Loon is implemented in Tcl and Tk. Hence, when

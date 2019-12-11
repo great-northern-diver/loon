@@ -12,8 +12,7 @@ import numpy as np
 
 @dispatch(object,object)
 def l_layer(widget,x,**options):
-    '''
-    Loon layers
+    '''Loon layers
 
     Description: 
         Loon supports layering of visuals and groups of visuals. The 
@@ -125,8 +124,7 @@ def l_layer(widget,x,**options):
 
 @dispatch(object,(gaussian_kde,KernelDensity))
 def l_layer(widget, x, **options):
-    '''
-    Layer Method for Kernel Density Estimation
+    '''Layer Method for Kernel Density Estimation
 
     Description:
         Layer a line that represents a kernel density estimate.
@@ -168,8 +166,7 @@ def l_layer_add(widget, Type, **kwargs):
     return(res)
 
 def l_layer_ids(widget):
-    '''
-    List ids of layers in Plot
+    '''List ids of layers in Plot
 
     Description:
         Every layer within a display has a unique id. This function
@@ -185,8 +182,7 @@ def l_layer_ids(widget):
     return tk.tk.call(widget, 'layer', 'ids')
 
 def l_layer_group(widget, label="group", parent="root", index=0):
-    '''
-    layer a group node
+    '''layer a group node
 
     Description: 
         A group layer can contain other layers. If the group layer is
@@ -226,8 +222,7 @@ def l_layer_polygon(widget, x, y,
 def l_layer_polygons(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="polygons", parent="root", index=0,**options):
-    '''
-    layer multiple polygons at the same time 
+    '''layer multiple polygons at the same time 
 
     Args:
         x: list with lists with x coordinates
@@ -264,8 +259,7 @@ def l_layer_polygons(widget, x, y,
 def l_layer_rectangle(widget, x, y,
                               color="gray80", linecolor="black", linewidth=1,
                               label="rectangle", parent="root", index=0, **options):
-    '''
-    layer a rectangle
+    '''layer a rectangle
 
     Examples:
             p = l_plot()
@@ -288,8 +282,7 @@ def l_layer_rectangle(widget, x, y,
 def l_layer_rectangles(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="rectangles", parent="root", index=0,**options):
-    '''
-    layer multiple rectangles at the same time 
+    '''layer multiple rectangles at the same time 
 
     Examples:
             p = l_plot()
@@ -318,8 +311,7 @@ def l_layer_rectangles(widget, x, y,
 def l_layer_line(widget, x, y=None, color="black",
                          linewidth=1, dash="",
                          label="line", parent="root", index=0, **options):
-    '''
-    layer a line 
+    '''layer a line 
 
     Args:
         x: the coordinates of line. Alternatively, a single plotting structure,
@@ -330,9 +322,9 @@ def l_layer_line(widget, x, y=None, color="black",
         dash: dash pattern of line, see https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M26
     
     Examples:
-            p = l_plot()
-            l = l_layer_line(p, x=[1,2,3,4], y=[1,3,2,4], color='red', linewidth=2)
-            l_scaleto_world(p)
+        p = l_plot()
+        l = l_layer_line(p, x=[1,2,3,4], y=[1,3,2,4], color='red', linewidth=2)
+        l_scaleto_world(p)
     '''
     if(isinstance(parent, loon_l_layer)):
         parent = parent.id
@@ -349,18 +341,17 @@ def l_layer_line(widget, x, y=None, color="black",
 def l_layer_lines(widget, x, y,
                           color="black", linewidth=1,
                           label="lines", parent="root", index=0,**options):
-    '''
-    layer multiple lines at the same time 
+    '''layer multiple lines at the same time 
 
     Examples:
-            s = [rows for _, rows in UsAndThem.groupby('Country') if rows.shape[0] > 1]
-            s1 = [x.sort_values('Year') for x in s]
-            xcoords = [x.Year for x in s1]
-            ycoords = [x.LifeExpectancy for x in s1]
-            region = [x['Geographic.Region'].iloc[0] for x in s1]
-            p = l_plot(showItemLabels=True)
-            l = l_layer_lines(p, xcoords, ycoords, color=region)
-            l_scaleto_layer(l)
+        s = [rows for _, rows in UsAndThem.groupby('Country') if rows.shape[0] > 1]
+        s1 = [x.sort_values('Year') for x in s]
+        xcoords = [x.Year for x in s1]
+        ycoords = [x.LifeExpectancy for x in s1]
+        region = [x['Geographic.Region'].iloc[0] for x in s1]
+        p = l_plot(showItemLabels=True)
+        l = l_layer_lines(p, xcoords, ycoords, color=region)
+        l_scaleto_layer(l)
     '''
     if(isinstance(parent, loon_l_layer)):
         parent = parent.id
@@ -378,8 +369,7 @@ def l_layer_lines(widget, x, y,
 def l_layer_oval(widget, x, y,
                          color="gray80", linecolor="black", linewidth=1,
                          label="oval", parent="root", index=0, **options):
-    '''
-    layer oval 
+    '''layer oval 
 
     Examples:
         p = l_plot()
@@ -402,8 +392,7 @@ def l_layer_oval(widget, x, y,
 
 def l_layer_points(widget, x, y=None, color="gray60", size=6,
                     label="points", parent="root", index=0,**options):
-    '''
-    layer points 
+    '''layer points 
 
     Args:
         color: color of points
@@ -421,8 +410,7 @@ def l_layer_points(widget, x, y=None, color="gray60", size=6,
 
 def l_layer_text(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="text", parent="root", index=0, **options):
-    '''
-    layer text 
+    '''layer text 
 
     Description: 
         layer a single character string
@@ -441,8 +429,8 @@ def l_layer_text(widget, x, y, text, color="gray60", size=6, angle=0,
         string (and not `l_layer_texts` with `n=1`).
     
     Examples:
-            p = l_plot()
-            l = l_layer_text(p, 0, 0, "Hello World")
+        p = l_plot()
+        l = l_layer_text(p, 0, 0, "Hello World")
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot    
@@ -458,8 +446,7 @@ def l_layer_text(widget, x, y, text, color="gray60", size=6, angle=0,
 
 def l_layer_texts(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="texts", parent="root", index=0, **options):
-    '''
-    layer multiple texts at the same time 
+    '''layer multiple texts at the same time 
     
     Description: 
         Layer a vector of character strings.
@@ -478,9 +465,9 @@ def l_layer_texts(widget, x, y, text, color="gray60", size=6, angle=0,
         string (and not `l_layer_texts` with `n=1`).
     
     Examples:
-            p = l_plot()
-            l = l_layer_texts(p, x=[1,2,3], y=[3,2,1], text=["This is", "a", "test"], size=20)
-            l_scaleto_world(p)
+        p = l_plot()
+        l = l_layer_texts(p, x=[1,2,3], y=[3,2,1], text=["This is", "a", "test"], size=20)
+        l_scaleto_world(p)
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot   
@@ -511,8 +498,7 @@ def layer_cmd(widget, layer, cmd = None,*args,**options):
 
 
 def l_layer_delete(widget, layer):
-    '''
-    Delete a layer
+    '''Delete a layer
 
     Description:
         All but the `'model'` and the `'root'` layer can be 
@@ -525,17 +511,16 @@ def l_layer_delete(widget, layer):
         layer: layer id or the layer object of calls `loon_l_layer`
 
     Examples:
-            p = l_plot()
-            l1 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='red')
-            l_layer_delete(p,l1)
-            l2 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='yellow')
-            l_layer_delete(p,l2)
+        p = l_plot()
+        l1 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='red')
+        l_layer_delete(p,l1)
+        l2 = l_layer_rectangle(p, x = [0,1], y = [0,1], color='yellow')
+        l_layer_delete(p,l2)
     '''
     layer_cmd(widget, layer, 'delete')
 
 def l_layer_expunge(widget, layer):
-    '''
-    Delete a layer and all its descendants
+    '''Delete a layer and all its descendants
 
     Description:
         Delete a group layer and all it's descendants. Note that the
@@ -545,17 +530,16 @@ def l_layer_expunge(widget, layer):
         `l_layer`, `l_layer_delete`
 
     Examples:
-            p = l_plot()
-            g = l_layer_group(p)
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g.id, color="", linecolor="orange", linewidth=2)
-            l2 = l_layer_line(p, x=[0,.5,1], y=[0,1,0], parent=g.id, color="blue")
-            l_layer_expunge(p, g)
+        p = l_plot()
+        g = l_layer_group(p)
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g.id, color="", linecolor="orange", linewidth=2)
+        l2 = l_layer_line(p, x=[0,.5,1], y=[0,1,0], parent=g.id, color="blue")
+        l_layer_expunge(p, g)
     '''
     layer_cmd(widget, layer, 'expunge')
 
 def l_layer_move(widget, layer, parent = None, index="0"):
-    '''
-    Move a layer
+    '''Move a layer
 
     Description: 
         The postition of a layer in the layer tree determines the 
@@ -570,14 +554,14 @@ def l_layer_move(widget, layer, parent = None, index="0"):
         `l_layer`, `l_layer_printTree`, `l_layer_index`
 
     Examples:
-            p = l_plot() 
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-            g = l_layer_group(p)
-            l_layer_printTree(p)
-            l_layer_move(p,l, parent=g)
-            l_layer_printTree(p)
-            l_layer_move(p, 'model', parent=g)
-            l_layer_printTree(p)
+        p = l_plot() 
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        g = l_layer_group(p)
+        l_layer_printTree(p)
+        l_layer_move(p,l, parent=g)
+        l_layer_printTree(p)
+        l_layer_move(p, 'model', parent=g)
+        l_layer_printTree(p)
     '''
     if(parent == None):
         parent = l_layer_getParent(widget, layer)
@@ -586,8 +570,7 @@ def l_layer_move(widget, layer, parent = None, index="0"):
     layer_cmd(widget, layer, 'move', parent, index)
 
 def l_layer_hide(widget, layer):
-    '''
-    Hide a Layer
+    '''Hide a Layer
 
     Description: 
         A hidden layer is not rendered. If a group layer is set to
@@ -598,16 +581,15 @@ def l_layer_hide(widget, layer):
         `l_layer_layerVisibility`,`l_layer_groupVisibility`
     
     Examples:
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-            l_layer_hide(p, l)
+        p = l_plot()
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        l_layer_hide(p, l)
     '''
     layer_cmd(widget, layer, 'hide')
 
 
 def l_layer_show(widget, layer):
-    '''
-    Show or unhide a Layer
+    '''Show or unhide a Layer
 
     Description: 
         Hidden or invisible layers are not rendered. This function 
@@ -618,32 +600,30 @@ def l_layer_show(widget, layer):
         `l_layer_layerVisibility`, `l_layer_groupVisibility`
 
     Examples:
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
-            l_layer_hide(p, l) 
-            l_layer_show(p, l)
+        p = l_plot()
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1], color="steelblue")
+        l_layer_hide(p, l) 
+        l_layer_show(p, l)
     '''
     layer_cmd(widget, layer, 'show')
 
 def l_layer_relabel(widget, layer, label):
-    '''
-    Change layer label
+    '''Change layer label
     
     SeeAlso:
         `l_layer`, `l_layer_getLabel`
 
     Examples:
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1], label="A rectangle")
-            l_layer_getLabel(p, l)
-            l_layer_relabel(p, l, label="A relabelled rectangle")
-            l_layer_getLabel(p, l)
+        p = l_plot()
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1], label="A rectangle")
+        l_layer_getLabel(p, l)
+        l_layer_relabel(p, l, label="A relabelled rectangle")
+        l_layer_getLabel(p, l)
     '''
     layer_cmd(widget, layer, 'relabel', label)
 
 def l_layer_raise(widget, layer):
-    '''
-    Switch the layer place with its sibling to the left
+    '''Switch the layer place with its sibling to the left
 
     Description:
         Change the layers position within its parent layer group by 
@@ -655,18 +635,17 @@ def l_layer_raise(widget, layer):
         `l_layer`, `l_layer_lower`, `l_layer_move` 
 
     Examples:
-            p = l_plot()
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
-            l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle')
-            l_setAspect(p,1)
-            l_layer_raise(p, l1)
+        p = l_plot()
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle')
+        l_setAspect(p,1)
+        l_layer_raise(p, l1)
     '''
     layer_cmd(widget, layer, 'raise') 
 
 
 def l_layer_lower(widget, layer):
-    '''
-    Switch the layer place with its sibling to the right
+    '''Switch the layer place with its sibling to the right
 
     Description: 
         Change the layers position within its parent layer group by 
@@ -678,57 +657,55 @@ def l_layer_lower(widget, layer):
         `l_layer`, `l_layer_raise`, `l_layer_move`
 
     Examples:
-            p = l_plot()
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
-            l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle') 
-            l_setAspect(p,1)
-            l_layer_lower(p, l2)
+        p = l_plot()
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle') 
+        l_setAspect(p,1)
+        l_layer_lower(p, l2)
     '''
     layer_cmd(widget, layer, 'lower') 
 
 
 def l_layer_promote(widget, layer):
-    '''
-    Moves the layer up to be a left sibling of its parent
+    '''Moves the layer up to be a left sibling of its parent
 
     Description: 
         Moves the layer down the layer tree (towards the root layer) if
         the parent layer is not the root layer.
 
     Examples: 
-            p = l_plot()
+        p = l_plot()
 
-            g1 = l_layer_group(p)
-            g2 = l_layer_group(p, parent=g1)
-            l1 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g2)
+        g1 = l_layer_group(p)
+        g2 = l_layer_group(p, parent=g1)
+        l1 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g2)
 
-            l_layer_printTree(p)
-            l_layer_promote(p, l1)
-            l_layer_printTree(p)
-            l_layer_promote(p, l1)
-            l_layer_printTree(p)
+        l_layer_printTree(p)
+        l_layer_promote(p, l1)
+        l_layer_printTree(p)
+        l_layer_promote(p, l1)
+        l_layer_printTree(p)
     '''
     layer_cmd(widget, layer, 'promote')
 
 def l_layer_demote(widget, layer):
-    '''
-    Moves the layer to be a child of its right group layer sibling
+    '''Moves the layer to be a child of its right group layer sibling
 
     Description: 
         Moves the layer up the layer tree (away from the root layer) if
         there is a sibling group layer to the right of the layer.
     
-    @examples 
-            p = l_plot()
-            
-            g1 = l_layer_group(p)
-            g2 = l_layer_group(p, parent=g1)
-            l1 = l_layer_oval(p, x=[0,1], y=[0,1])
-            l_layer_printTree(p) 
-            l_layer_demote(p, l1)
-            l_layer_printTree(p)
-            l_layer_demote(p, l1)
-            l_layer_printTree(p)
+    Examples: 
+        p = l_plot()
+        
+        g1 = l_layer_group(p)
+        g2 = l_layer_group(p, parent=g1)
+        l1 = l_layer_oval(p, x=[0,1], y=[0,1])
+        l_layer_printTree(p) 
+        l_layer_demote(p, l1)
+        l_layer_printTree(p)
+        l_layer_demote(p, l1)
+        l_layer_printTree(p)
     '''
     layer_cmd(widget, layer, 'demote')
 
@@ -754,8 +731,7 @@ def layer_get(widget, layer, what, convert=str):
     return res
 
 def l_layer_bbox(widget, layer="root"):
-    '''
-    Get the bounding box of a layer.
+    '''Get the bounding box of a layer.
 
     Description: 
         The bounding box of a layer returns the coordinates of the
@@ -766,19 +742,18 @@ def l_layer_bbox(widget, layer="root"):
         bounding box
     
     Examples:
-            p = l_plot(iris['Sepal.Length'], iris['Sepal.Width'], color=iris['Species'])
-            l_layer_bbox(p, layer='model')
-            l = l_layer_rectangle(p, x=[0,1], y=[30,31])
-            l_layer_bbox(p, l)
-            l_layer_bbox(p, 'root')
+        p = l_plot(iris['Sepal.Length'], iris['Sepal.Width'], color=iris['Species'])
+        l_layer_bbox(p, layer='model')
+        l = l_layer_rectangle(p, x=[0,1], y=[30,31])
+        l_layer_bbox(p, l)
+        l_layer_bbox(p, 'root')
     '''
     res = layer_get(widget, layer, 'bbox', int)
     return res
 
 
 def l_layer_getLabel(widget, layer):
-    '''
-    Get layer label.
+    '''Get layer label.
 
     Returns:
         Named vector of length 1 with layer label as value and layer id as name.
@@ -787,18 +762,17 @@ def l_layer_getLabel(widget, layer):
         `l_layer`, `l_layer_relabel`
     
     Examples:
-            p = l_plot()
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], label="a rectangle")
-            l_layer_getLabel(p, 'model')
-            l_layer_getLabel(p, l1)
+        p = l_plot()
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], label="a rectangle")
+        l_layer_getLabel(p, 'model')
+        l_layer_getLabel(p, l1)
     '''
     res = layer_get(widget,layer,'getLabel')
     return res
 
 
 def l_layer_getChildren(widget, layer='root'):
-    '''
-    Get children of a group layer    
+    '''Get children of a group layer    
     
     Description: 
         Returns the ids of a group layer's children.
@@ -812,19 +786,18 @@ def l_layer_getChildren(widget, layer='root'):
         `l_layer`, `l_layer_getParent`
 
     Examples:
-            p = l_plot()
+        p = l_plot()
 
-            g = l_layer_group(p)
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
-            l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle', parent=g) 
-            l_layer_getChildren(p, g)
+        g = l_layer_group(p)
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
+        l2 = l_layer_oval(p, x=[0,1], y=[0,1], color='thistle', parent=g) 
+        l_layer_getChildren(p, g)
     '''
     res = layer_get(widget, layer, 'getChildren')
     return res
 
 def l_layer_getParent(widget, layer):
-    '''
-    Get parent layer id of a layer
+    '''Get parent layer id of a layer
 
     Description: 
         The toplevel parent is the `root` layer.
@@ -833,15 +806,14 @@ def l_layer_getParent(widget, layer):
         `l_layer`, `l_layer_getChildren`
 
     Examples: 
-            p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
-            l_layer_getParent(p, 'model')
+        p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
+        l_layer_getParent(p, 'model')
     '''
     res = layer_get(widget, layer, 'getParent')
     return res
 
 def l_layer_printTree(widget):
-    '''
-    Print the layer tree
+    '''Print the layer tree
 
     Description: 
         Prints the layer tree (i.e. the layer ids) to the prompt. Group 
@@ -855,12 +827,12 @@ def l_layer_printTree(widget):
         `l_layer`, `l_layer_getChildren`, `l_layer_getParent`
 
     Examples:
-            p = l_plot()
-            l_layer_rectangle(p, x=[0,1], y=[0,1])
-            g = l_layer_group(p)
-            l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
-            l_layer_line(p, x=[0,1], y=[0,1], parent=g)
-            l_layer_printTree(p)
+        p = l_plot()
+        l_layer_rectangle(p, x=[0,1], y=[0,1])
+        g = l_layer_group(p)
+        l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
+        l_layer_line(p, x=[0,1], y=[0,1], parent=g)
+        l_layer_printTree(p)
     '''
     if(isinstance(widget,loon)):
         widget = widget.plot
@@ -869,8 +841,7 @@ def l_layer_printTree(widget):
     return ''
 
 def l_layer_isVisible(widget, layer):
-    '''
-    Return visibility flag of layer
+    '''Return visibility flag of layer
 
     Description: 
         Hidden or invisible layers are not rendered. This function
@@ -882,18 +853,17 @@ def l_layer_isVisible(widget, layer):
     SeeAlso:
         `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_layerVisibility`,`l_layer_groupVisibility`
     Examples:
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1])
-            l_layer_isVisible(p, l)
-            l_layer_hide(p, l)
-            l_layer_isVisible(p, l)
+        p = l_plot()
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        l_layer_isVisible(p, l)
+        l_layer_hide(p, l)
+        l_layer_isVisible(p, l)
     '''
     res = layer_get(widget, layer, 'isVisible',bool)
     return res
 
 def l_layer_getType(widget, layer):
-    '''
-    Get layer type
+    '''Get layer type
     
     Description: 
         To see the manual page of `l_layer` for all the
@@ -908,17 +878,16 @@ def l_layer_getType(widget, layer):
     SeeAlso: 
         `l_layer` 
     Examples: 
-            p = l_plot()
-            l = l_layer_rectangle(p, x=[0,1], y=[0,1])
-            l_layer_getType(p, l)
-            l_layer_getType(p, 'model')
+        p = l_plot()
+        l = l_layer_rectangle(p, x=[0,1], y=[0,1])
+        l_layer_getType(p, l)
+        l_layer_getType(p, 'model')
     '''
     res = layer_get(widget, layer, 'getType')
     return res
 
 def l_layer_index(widget, layer):
-    '''
-    Get the order index of a layer among its siblings
+    '''Get the order index of a layer among its siblings
 
     Description: 
         The index determines the rendering order of the children layers
@@ -937,8 +906,7 @@ def l_layer_index(widget, layer):
     return res
 
 def l_layer_layerVisibility(widget, layer):
-    '''
-    Returns logical value for whether layer is actually seen
+    '''Returns logical value for whether layer is actually seen
 
     Description:
         Although the visibility flag for a layer might be set to
@@ -959,8 +927,7 @@ def l_layer_layerVisibility(widget, layer):
     return res
 
 def l_layer_groupVisibility(widget, layer):
-    '''
-    Queries visibility status of decendants
+    '''Queries visibility status of decendants
 
     Description: 
         Query whether all, part or none of the group layers descendants
@@ -974,19 +941,19 @@ def l_layer_groupVisibility(widget, layer):
         `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_layerVisibility`
  
     Examples: 
-            p = l_plot()
+        p = l_plot()
 
-            g = l_layer_group(p)
-            l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
-            l2 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
+        g = l_layer_group(p)
+        l1 = l_layer_rectangle(p, x=[0,1], y=[0,1], parent=g)
+        l2 = l_layer_oval(p, x=[0,1], y=[0,1], parent=g)
 
-            l_layer_groupVisibility(p, g)
-            l_layer_hide(p, l2)
-            l_layer_groupVisibility(p, g)
-            l_layer_hide(p, l1)
-            l_layer_groupVisibility(p, g)
-            l_layer_hide(p, g)
-            l_layer_groupVisibility(p, g)
+        l_layer_groupVisibility(p, g)
+        l_layer_hide(p, l2)
+        l_layer_groupVisibility(p, g)
+        l_layer_hide(p, l1)
+        l_layer_groupVisibility(p, g)
+        l_layer_hide(p, g)
+        l_layer_groupVisibility(p, g)
     '''
     res = layer_get(widget, layer, 'groupVisibility')
     return res

@@ -11,8 +11,7 @@ def l_plot3D(x,  y = None, z = None,
                 showGuides = True, guidelines = "white",
                 guidesBackground = "grey92", foreground = "black",
                 background = "white", parent = None, **options):
-    """    
-    Create an interactive loon 3d plot widget
+    """Create an interactive loon 3d plot widget
 
     Description:   
         l_plot3D is a generic function for creating interactive
@@ -68,20 +67,22 @@ def l_plot3D(x,  y = None, z = None,
                 some geometry manager like tkpack or tkplace in
                 order to be displayed. See the examples below.
         **options: named arguments to modify plot states.
-    @note  The scatterplot displays a number of direct interactions with the
-           mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
-           the mouse wheel, panning by right-click dragging and various selection
-           methods using the left mouse button such as sweeping, brushing and
-           individual point selection.
+    Note:  
+        The scatterplot displays a number of direct interactions with the
+        mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
+        the mouse wheel, panning by right-click dragging and various selection
+        methods using the left mouse button such as sweeping, brushing and
+        individual point selection.
+    
     Returns:
         widget handle
+    
     Examples:
-        @code
-            height = [1,2,1]
-            width = [1,2,3]    
-            length = [1,2,3] 
-            l_plot3D(height,width,length)
-        @endcode
+        height = [1,2,1]
+        width = [1,2,3]    
+        length = [1,2,3] 
+        l_plot3D(height,width,length)
+    
     @namespace loon.l_plot3D
     """
     if(isinstance(x,pd.core.series.Series)):

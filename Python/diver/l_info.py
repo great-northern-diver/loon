@@ -2,8 +2,7 @@ from .loonobject import *
 from .tk import tk
 
 def l_info_states(target, states=['all']):
-    """    
-    Retrieve Information about the States of a Loon Widget
+    """Retrieve Information about the States of a Loon Widget
     
     Description:
         Loon's built-in object documentation. Can be used with every
