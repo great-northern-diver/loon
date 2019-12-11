@@ -25,6 +25,8 @@ def match_arg(arg,options, argname):
 def opts_to_list(opt):
     res = []
     for key, value in opt.items():
+        if(key == 'From'):
+            key = 'from'
         res.append('-' + key)
         res.append(value)
     return res

@@ -98,7 +98,8 @@ def l_layer(widget,x,**options):
         x: object that should be layered
         **options: additional arguments, often state definition for the basic layering function
     
-    @see `l_info_states`, `l_scaleto_layer`, `l_scaleto_world`
+    SeeAlso: 
+        `l_info_states`, `l_scaleto_layer`, `l_scaleto_world`
 
     Examples:
         class foo:
@@ -207,7 +208,7 @@ def l_layer_polygon(widget, x, y,
                             color="gray80", linecolor="black", linewidth=1,
                             label="polygon", parent="root", index=0,**options):
     '''
-    layger a polygon     
+    layger a polygon
     '''
     if(isinstance(widget,loon_class.loon)):
         widget = widget.plot
@@ -540,7 +541,8 @@ def l_layer_expunge(widget, layer):
         Delete a group layer and all it's descendants. Note that the
         `model` layer cannot be deleted.
     
-    @see `l_layer`, `l_layer_delete`
+    SeeAlso:
+        `l_layer`, `l_layer_delete`
 
     Examples:
             p = l_plot()
@@ -564,7 +566,8 @@ def l_layer_move(widget, layer, parent = None, index="0"):
         parent: if parent layer is not specified it is set to the current
                 parent layer of the layer
     
-    @see `l_layer`, `l_layer_printTree`, `l_layer_index`
+    SeeAlso:
+        `l_layer`, `l_layer_printTree`, `l_layer_index`
 
     Examples:
             p = l_plot() 
@@ -590,7 +593,8 @@ def l_layer_hide(widget, layer):
         A hidden layer is not rendered. If a group layer is set to
         be hidden then all its descendants are not rendered either.
     
-    @see `l_layer`, `l_layer_show`, `l_layer_isVisible`, 
+    See Also:
+        `l_layer`, `l_layer_show`, `l_layer_isVisible`, 
         `l_layer_layerVisibility`,`l_layer_groupVisibility`
     
     Examples:
@@ -609,8 +613,9 @@ def l_layer_show(widget, layer):
         Hidden or invisible layers are not rendered. This function 
         unhides invisible layer so that they are rendered again. 
     
-    @see `l_layer`, `l_layer_hide`, `l_layer_isVisible`,
-         `l_layer_layerVisibility`, `l_layer_groupVisibility`
+    SeeAlso: 
+        `l_layer`, `l_layer_hide`, `l_layer_isVisible`,
+        `l_layer_layerVisibility`, `l_layer_groupVisibility`
 
     Examples:
             p = l_plot()
@@ -624,7 +629,8 @@ def l_layer_relabel(widget, layer, label):
     '''
     Change layer label
     
-    @see `l_layer`, `l_layer_getLabel`
+    SeeAlso:
+        `l_layer`, `l_layer_getLabel`
 
     Examples:
             p = l_plot()
@@ -645,7 +651,8 @@ def l_layer_raise(widget, layer):
         that the raised layer will be rendered after (or on top) of its sibling
         layer to the left.
     
-    @see `l_layer`, `l_layer_lower`, `l_layer_move` 
+    SeeAlso:
+        `l_layer`, `l_layer_lower`, `l_layer_move` 
 
     Examples:
             p = l_plot()
@@ -667,7 +674,8 @@ def l_layer_lower(widget, layer):
         that the raised layer will be rendered before (or on below) of its sibling
         layer to the right.
     
-    @see `l_layer`, `l_layer_raise`, `l_layer_move`
+    SeeAlso:
+        `l_layer`, `l_layer_raise`, `l_layer_move`
 
     Examples:
             p = l_plot()
@@ -775,7 +783,8 @@ def l_layer_getLabel(widget, layer):
     Returns:
         Named vector of length 1 with layer label as value and layer id as name.
 
-    @see `l_layer`, `l_layer_relabel`
+    SeeAlso:
+        `l_layer`, `l_layer_relabel`
     
     Examples:
             p = l_plot()
@@ -799,7 +808,8 @@ def l_layer_getChildren(widget, layer='root'):
         (i.e. objects of class `l_layer` use the
         `l_create_handle` function.
     
-    @see `l_layer`, `l_layer_getParent`
+    SeeAlso: 
+        `l_layer`, `l_layer_getParent`
 
     Examples:
             p = l_plot()
@@ -819,7 +829,8 @@ def l_layer_getParent(widget, layer):
     Description: 
         The toplevel parent is the `root` layer.
 
-    @see `l_layer`, `l_layer_getChildren`
+    SeeAlso:
+        `l_layer`, `l_layer_getChildren`
 
     Examples: 
             p = l_plot(iris['Sepal.Length'],iris['Sepal.Width'], color=iris['Species']) 
@@ -840,7 +851,8 @@ def l_layer_printTree(widget):
     Returns: 
         empty string
 
-    @see `l_layer`, `l_layer_getChildren`, `l_layer_getParent`
+    SeeAlso:
+        `l_layer`, `l_layer_getChildren`, `l_layer_getParent`
 
     Examples:
             p = l_plot()
@@ -867,7 +879,8 @@ def l_layer_isVisible(widget, layer):
     Returns: 
         `True` or `False` depending whether the layer is visible or not.
 
-    @see `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_layerVisibility`,`l_layer_groupVisibility`
+    SeeAlso:
+        `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_layerVisibility`,`l_layer_groupVisibility`
     Examples:
             p = l_plot()
             l = l_layer_rectangle(p, x=[0,1], y=[0,1])
@@ -892,7 +905,8 @@ def l_layer_getType(widget, layer):
         `texts`, `polygons`, `rectangles`, `lines` and 
         `scatterplot`, `histogram`, `serialaxes` and `graph`.
 
-    @see `l_layer` 
+    SeeAlso: 
+        `l_layer` 
     Examples: 
             p = l_plot()
             l = l_layer_rectangle(p, x=[0,1], y=[0,1])
@@ -916,7 +930,8 @@ def l_layer_index(widget, layer):
     Returns: 
         numeric value 
     
-    @seea `l_layer`, `l_layer_move`
+    SeeAlso: 
+        `l_layer`, `l_layer_move`
     '''
     res = layer_get(widget, layer, 'index', int)
     return res
@@ -937,7 +952,8 @@ def l_layer_layerVisibility(widget, layer):
         visibility flag set to true and the layer is actually rendered, otherwise
         `False`.
     
-    @see `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_groupVisibility`
+    SeeAlso:
+        `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_groupVisibility`
     '''
     res = layer_get(widget, layer, 'layerVisibility', int)
     return res
@@ -954,7 +970,8 @@ def l_layer_groupVisibility(widget, layer):
         `'all'`, `'part'` or `'none'` depending on the
         visibility status of the descendants.
     
-    @see `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_layerVisibility`
+    SeeAlso: 
+        `l_layer`, `l_layer_show`, `l_layer_hide`, `l_layer_isVisible`, `l_layer_layerVisibility`
  
     Examples: 
             p = l_plot()

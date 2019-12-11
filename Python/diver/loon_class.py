@@ -63,6 +63,29 @@ class loon_l_graph(loon):
     def __init__(self, plot):
         super().__init__(plot)    
 
+class loon_loongraph():
+    def __init__(self,nodes,From, to,isDirected):
+        self.nodes = nodes
+        self.From = From
+        self.to = to
+        self.isDirected = isDirected
+        self.separator = None
+    def set_separator(self,separator):
+        self.separator = separator
+    def print_detail(self):
+        print('nodes:', self.nodes)
+        print('from:', self.From)
+        print('to:', self.to)
+        print('isDirected:', self.isDirected)
+        if(self.separator != None):
+            print('separator:',self.separator)        
+
+class loon_l_graphswitch(loon):
+    '''
+    l_graphswitch
+    '''
+    def __init__(self, plot):
+        super().__init__(plot)    
 
 class loon_l_serialaxes(loon):
     '''
@@ -112,8 +135,6 @@ class loon_l_layer():
         l_configure(self,**opt)
 
 
-######## Not finished yet 
-
 class loon_l_compound():
     '''
     l_compound class 
@@ -161,7 +182,10 @@ class loon_l_pairs(loon_l_compound):
     def __init__(self, plot):
         super().__init__(plot)
             
-
+class loon_l_navgraph(loon_l_compound):
+    def __init__(self, plot):
+        super().__init__(plot)        
+        
 class loon_l_glyph():
     '''
     l_plot
@@ -199,16 +223,58 @@ class loon_l_navigator(loon):
     '''
     l_plot
     '''
-    def __init__(self, plot):
-        super().__init__(plot)    
+    def __init__(self, id,widget):
+        self.__dict__['id'] = id 
+        self.__dict__['widget'] = widget 
+
+    def __getattr__(self, key):
+        if(key in ['id','widget']):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:  
+            return l_cget(self,key)
+    def __getitem__(self, key):
+        if(key in ['id','widget']):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:
+            return l_cget(self,key)
 
 class loon_l_context(loon):
     '''
     l_plot
     '''
-    def __init__(self, plot):
-        super().__init__(plot)    
+    def __init__(self, id,widget,navigator):
+        #super().__init__(plot)    
+        self.__dict__['id'] = id 
+        self.__dict__['widget'] = widget 
+        self.__dict__['navigator'] = navigator 
+    
+    def add_plot_handle(self,plot):
+        self.__dict__['plot'] = plot 
 
+    def add_plot_xy_handle(self,plot):
+        self.__dict__['plot_xy'] = plot
+
+    def add_plot_uv_handle(self,plot):
+        self.__dict__['plot_uv'] = plot
+    
+    def __getattr__(self, key):
+        if(key in ['id','widget','navigator']):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:  
+            return l_cget(self,key)
+    def __getitem__(self, key):
+        if(key in ['id','widget','navigator']):
+            return self.key
+        elif(key == 'names'):
+            return l_state_names(self)
+        else:
+            return l_cget(self,key)
 
 
 class loon_l_savedStates:
@@ -222,3 +288,5 @@ class loon_l_savedStates:
             return self.info[key]
         else:
             exit(key + 'is not an vaild attribute in the saveState')
+
+######## Not finished yet 

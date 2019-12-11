@@ -139,3 +139,7 @@ def _(target: loon):
 #     values
 
 # }
+#' @export
+# l_getPlots.l_navgraph <- function(target){
+#     list(graph = target$graph, plot = target$plot)
+# }

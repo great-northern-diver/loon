@@ -1,5 +1,8 @@
 ## @package loon
-from .loon_class import loon,loon_l_context,loon_l_glyph,loon_l_graph,loon_l_hist,loon_l_layer,loon_l_navigator,loon_l_pairs,loon_l_plot,loon_l_plot3D,loon_l_serialaxes,loon_l_compound
+from .loon_class import loon,loon_l_context,loon_l_glyph,loon_l_graph, \
+                        loon_l_hist,loon_l_layer,loon_l_navigator,loon_l_pairs, \
+                        loon_l_plot,loon_l_plot3D,loon_l_serialaxes, \
+                        loon_l_compound, loon_loongraph, loon_l_graphswitch,loon_l_navgraph
 from .l_data import l_data
 from .l_hist import l_hist
 from .l_plot import l_plot
@@ -8,7 +11,7 @@ from .l_subwin import l_subwin
 from .l_toplevel import l_toplevel
 from .loonPlotFactory import loonPlotFactory
 from .dataset import iris,olive,oliveAcids,oliveLocations,quakes,faithful,UsAndThem
-from .graphutils import loongraph,completegraph
+from .graphutils import loongraph,completegraph,linegraph,complement
 from .l_graph import l_graph
 from .l_plot3D import l_plot3D
 from .l_isLoonWidget import l_isLoonWidget
@@ -56,6 +59,16 @@ from .l_glyphs import l_glyph,l_glyph_relabel,l_glyph_delete,l_glyph_ids, \
                       l_glyph_getLabel,l_glyph_getType,l_primitiveGlyphs, \
                       l_glyph_add,l_glyph_add_text,l_glyph_add_pointrange, \
                       l_glyph_add_polygon,l_glyph_add_serialaxes
+from .l_graphswitch import l_graphswitch,l_graphswitch_add
+
+from .l_navigator import l_navigator,l_navigator_add,l_navigator_delete,\
+                         l_navigator_ids,l_navigator_walk_path,l_navigator_walk_forward,\
+                         l_navigator_walk_backward,l_navigator_relabel,l_navigator_getLabel,\
+                         l_navigator_getPath
+from .l_context2d import l_context,l_context_delete,l_context_ids,l_context_relabel,\
+                         l_context_getLabel, l_context_add,l_context_add_context2d,\
+                         l_context_add_geodesic2d,l_context_add_slicing2d
+from .l_navgraph import l_navgraph
 from .tk import tk
 
 ### remove later 
@@ -65,9 +78,10 @@ namespace = globals().keys()
 __all__ = ['tk','l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel',
             'loon','loon_l_context','loon_l_glyph','loon_l_graph','loon_l_hist',
             'loon_l_layer','loon_l_navigator','loon_l_pairs','loon_l_plot',
-            'loon_l_plot3D','loon_l_serialaxes','loon_l_compound','loonPlotFactory','iris',
+            'loon_l_plot3D','loon_l_serialaxes','loon_l_compound', 'loon_loongraph',
+            'loon_l_graphswitch','loon_l_navgraph','loonPlotFactory','iris',
             'olive','oliveAcids','oliveLocations','quakes','faithful','UsAndThem',
-            'loongraph','completegraph','l_graph','l_plot3D','l_isLoonWidget',
+            'loongraph','completegraph','linegraph','complement','l_graph','l_plot3D','l_isLoonWidget',
             'l_throwErrorIfNotLoonWidget','l_cget','l_widget','l_configure',
             'l_info_states','l_state_names','l_scaleto', 'l_scaleto_world',
             'l_scaleto_plot','l_scaleto_selected','l_scaleto_active','l_scaleto_layer',
@@ -93,4 +107,12 @@ __all__ = ['tk','l_data','l_hist','l_plot','l_serialaxes','l_subwin','l_toplevel
             'l_saveStates','l_setTitleFont','l_copyStates','l_aspect','l_setAspect',
             'l_glyph','l_glyph_relabel','l_glyph_delete','l_glyph_ids','l_glyph_getLabel',
             'l_glyph_getType','l_primitiveGlyphs','l_glyph_add','l_glyph_add_text',
-            'l_glyph_add_pointrange','l_glyph_add_polygon','l_glyph_add_serialaxes']
+            'l_glyph_add_pointrange','l_glyph_add_polygon','l_glyph_add_serialaxes',
+            'l_graphswitch','l_graphswitch_add',
+            'l_navigator','l_navigator_add','l_navigator_delete',
+            'l_navigator_ids','l_navigator_walk_path','l_navigator_walk_forward',
+            'l_navigator_walk_backward','l_navigator_relabel','l_navigator_getLabel',
+            'l_navigator_getPath',
+            'l_context','l_context_delete','l_context_ids','l_context_relabel',
+            'l_context_getLabel', 'l_context_add','l_context_add_context2d',
+            'l_context_add_geodesic2d','l_context_add_slicing2d','l_navgraph']

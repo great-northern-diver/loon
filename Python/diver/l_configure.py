@@ -1,6 +1,7 @@
 from .loonobject import *
 from .l_data import *
 import numpy as np
+import pandas as pd
 def l_configure(target,**kwargs):
     """
     Modify one or multiple plot states
@@ -64,6 +65,8 @@ def l_configure(target,**kwargs):
     for key, value in kwargs.items():
         opt.append('-' + key)
         if(isinstance(value,np.ndarray)):
+            value = list(value)
+        if(isinstance(value,pd.Series)):
             value = list(value)
         opt.append(value)
     obj_eval('configure',*opt)

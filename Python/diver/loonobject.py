@@ -34,11 +34,15 @@ def loonobject(target, convert=str):
         Type = type(target).__name__[7:]
         hasRecognized = True
     elif (isinstance(target,loon_class.loon_l_navigator)):        
-        specifier = 0
-        Type = 'widget'
+        loon_obj = target
+        specifier = [target.widget,target.id] 
+        Type = type(target).__name__[7:]
+        hasRecognized = True
     elif (isinstance(target,loon_class.loon_l_context)):
-        specifier = 0     
-        Type = 'widget'
+        loon_obj = target
+        specifier = [target.widget,target.navigator,target.id] 
+        Type = "context"
+        hasRecognized = True
     else: 
         ## strip attributes
         specifier = [target.plot]
@@ -91,9 +95,13 @@ def loonobject(target, convert=str):
         call = [widget,'layer','use',specifier[1]] 
     elif(Type == 'glyph'):
         call = [widget, 'glyph', 'use', specifier[1]]
+    elif(Type == 'navigator'):
+        call = [widget, 'navigator', 'use', specifier[1]]
+    elif(Type == 'context'):
+        call = [widget, 'navigator', 'use', specifier[1],
+                    'context', 'use', specifier[2]]
     else:
         print('not finished yet ~~~~~')
-
     def fun(*args):
         #plot = tk.tk.call(factory_tclcmd,child,*opt)
         #convert(do.call('tcl', append(call, list(...))))
