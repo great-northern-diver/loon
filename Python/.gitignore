@@ -1,13 +1,9 @@
 build/
 build/lib
 dist/
-LOONTEST.egg-info/
+diver.egg-info/
 
 
 
-LIENSE
-MANIFEST.in
-setup.py
+/diver/__pycache__/
 
-/loon/__pycache__
-/loon/Tcl

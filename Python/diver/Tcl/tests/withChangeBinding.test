@@ -1,0 +1,94 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+
+namespace eval ::loon::test {
+    
+    namespace import ::tcltest::*
+    
+    # tclsh all.tcl -file withStateBinding.test
+    
+    test create-class {} -body {
+	::oo::class create ::loon::test::T2 {
+	    
+	    superclass ::loon::classes::withStateBindings\
+		::loon::classes::Linkable
+	    
+	    constructor {} {
+		
+		next 
+		
+		my New_state x double n ""
+		my New_state y double n ""
+		
+		my New_state selected boolean n FALSE
+		my New_state color color n blue
+		my New_state size double n 4
+				
+		my New_state sequence factor p "" {I II III IV V}		    
+		my New_state direction boolean p 1
+		
+		
+		my SetInitStates n {x y}
+		my SetInitStates p sequence
+		
+		my AddNotLinkableStates {x y}
+		my setLinkedStates {color size selected}
+		
+			    
+	    }
+	   		
+	}
+	
+	set m [::loon::test::T2 create ::m]
+	set o [::loon::test::T2 create ::n]
+	
+	[info object namespace $m]::my SetSubstitutions {%W M}
+	[info object namespace $o]::my SetSubstitutions {%W O}
+	
+	set bm1 [$m bind state all {set ::a [format "%s events: %s" %W %e]}]
+	$m configure -x {1 2} -y {1 2}
+	return $::a
+    } -result "M events: n linkingKey selected color size x y"
+
+    
+    test test-2 {} -body {
+	set ::a "---"
+	$m configure -selected F
+	return $::a
+    } -result "---"
+
+
+    test test-3 {} -body {
+	set ::a "---"
+	$m configure -selected T
+	return $::a
+    } -result "M events: selected"
+
+    test test-4 {} -body {
+	set ::a "---"
+	$m configure -selected T -color yellow
+	return $::a
+    } -result "M events: color"
+
+    test test-5 {} -body {
+	set ::a "---"
+	$m configure -x {6 90}
+	return $::a
+    } -result "M events: x"
+
+    test test-6 {} -body {
+	set ::a "---"
+	$m configure -sequence {I II III V II}
+	return $::a
+    } -result "M events: p direction sequence"
+    
+    
+    cleanupTests
+}
+namespace delete ::loon::test
