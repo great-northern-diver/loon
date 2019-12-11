@@ -7,7 +7,7 @@ contents:
 # Main Plotting Functions
 desc:  These are the main functions needed to create plots
 contents:
-- `diver::l_plot`
+- :mod:`diver.l_plot`
 - `diver::l_hist`
 - `diver.l_plot3D`
 - `diver::l_pairs`
