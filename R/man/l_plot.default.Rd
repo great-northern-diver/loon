@@ -21,7 +21,7 @@ If supplied separately, they must be of the same length.}
 \item{y}{argument description is as for the \code{x} argument above.}
 
 \item{color}{colours of points (default "grey60"); colours are repeated
-until matching the number points,}
+until matching the number points.}
 
 \item{glyph}{shape of point; must be one of the primitive glyphs
 "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
@@ -34,14 +34,14 @@ serial axes glyphs may be added, but only after the plot has been created.}
 \item{size}{size of the symbol (roughly in terms of area)}
 
 \item{active}{a logical determining whether points appear or not
-(default is TRUE for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points appear (TRUE)
-and which do not (FALSE).}
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
+and which do not (\code{FALSE}).}
 
 \item{selected}{a logical determining whether points appear selected at first
-(default is FALSE for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points are (TRUE)
-and which are not (FALSE).}
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
+and which are not (\code{FALSE}).}
 
 \item{xlabel}{Label for the horizontal (x) axis. If missing,
 one will be inferred from \code{x} if possible.}

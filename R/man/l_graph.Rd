@@ -15,7 +15,7 @@ l_graph(nodes = NULL, ...)
 graph handle
 }
 \description{
-Interactive graphs in loon are currently most often used for 
+Interactive graphs in loon are currently most often used for
   navigation graphs.
 }
 \details{
