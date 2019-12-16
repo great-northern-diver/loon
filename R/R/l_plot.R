@@ -110,7 +110,7 @@ l_plot <- function(x, y, ...) {
 #'  If supplied separately, they must be of the same length.
 #' @param y argument description is as for the \code{x} argument above.
 #' @param color colours of points (default "grey60"); colours are repeated
-#'  until matching the number points,
+#'  until matching the number points.
 #' @param glyph shape of point; must be one of the primitive glyphs
 #' "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
 #' "otriangle", "diamond", "cdiamond", or "odiamond". Prefixes "c" and "o" mean closed and open, respectively.
@@ -120,13 +120,13 @@ l_plot <- function(x, y, ...) {
 #' serial axes glyphs may be added, but only after the plot has been created.
 #' @param size size of the symbol (roughly in terms of area)
 #' @param active a logical determining whether points appear or not
-#' (default is TRUE for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points appear (TRUE)
-#' and which do not (FALSE).
+#' (default is \code{TRUE} for all points). If a logical vector is given of length
+#' equal to the number of points, then it identifies which points appear (\code{TRUE})
+#' and which do not (\code{FALSE}).
 #' @param selected a logical determining whether points appear selected at first
-#' (default is FALSE for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points are (TRUE)
-#' and which are not (FALSE).
+#' (default is \code{FALSE} for all points). If a logical vector is given of length
+#' equal to the number of points, then it identifies which points are (\code{TRUE})
+#' and which are not (\code{FALSE}).
 #' @param xlabel Label for the horizontal (x) axis. If missing,
 #' one will be inferred from \code{x} if possible.
 #' @param ylabel Label for the vertical (y) axis. If missing,
@@ -240,7 +240,6 @@ l_plot.default <-  function(x, y = NULL,
     }
     if (missing(title)) { title <- "" }
 
-
     if(missing(x)) {
 
         plot <- loonPlotFactory('::loon::plot', 'plot',
@@ -269,35 +268,65 @@ l_plot.default <-  function(x, y = NULL,
         if (is.null(xy$xlab)) xy$xlab <- ""
         if (is.null(xy$ylab)) xy$ylab <- ""
         ## make sure points parameters are right
-        if (length(color) > 1) {
-            if (length(color) != length(x)) {
-                color <- rep_len(color, length(x))
+
+        n <- length(x)
+        len_color <- length(color)
+        if (len_color > 1) {
+            if (len_color != n) {
+                color <- rep_len(color, n)
             }
+        } else {
+            if(is.na(color)) color <- "grey60"
         }
-        if (!is.numeric(size)) stop("size must be numeric")
-        if (length(size) > 1) {
-            if (length(size) != length(x)) {
-                size <- rep_len(size, length(x))
+
+        len_size <- length(size)
+        if (len_size > 1) {
+            if (len_size != n) {
+                size <- rep_len(size, n)
             }
+        } else {
+            if(is.na(size)) size <- 4
         }
-        if (length(active) > 1) {
-            if (length(active) != length(x))
+
+        len_active <- length(active)
+        if (len_active > 1) {
+            if (len_active != n)
                 stop(paste0("When more than length 1, length of active must match number of points:",
-                            length(x))
+                            n)
                 )
+        } else {
+            if(is.na(active)) active <- TRUE
         }
-        if (length(selected) > 1) {
-            if (length(selected) != length(x))
+
+        len_selected <- length(selected)
+        if (len_selected > 1) {
+            if (len_selected != n)
                 stop(paste0("When more than length 1, length of selected must match number of points:",
-                            length(x))
+                            n)
                 )
+        } else {
+            if(is.na(selected)) selected <- FALSE
         }
-        if (length(glyph) > 1) {
-            if (length(glyph) != length(x))
+
+        len_glyph <- length(glyph)
+        if (len_glyph > 1) {
+            if (len_glyph != n)
                 stop(paste0("When more than length 1, length of glyph must match number of points:",
-                            length(x))
+                            n)
                 )
+        } else {
+            if(is.na(glyph)) glyph <- "ccircle"
         }
+
+        # NA_factory returns nothing
+        # Variables in this environment will be checked (NA, NaN, Inf, -Inf) and
+        # modified after NA_factory is called.
+        args <- list(...)
+        linkingKey <- args[["linkingKey"]]
+        itemLabel <- args[["itemLabel"]]
+        tag <- args[["tag"]]
+        NA_factory("l_plot.default", ...)
+
         plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
                                 parent,
                                 x = x, y = y,
@@ -316,7 +345,10 @@ l_plot.default <-  function(x, y = NULL,
                                 guidesBackground = guidesBackground,
                                 foreground = foreground,
                                 background = background,
-                                ...)
+                                ...,
+                                linkingKey = linkingKey,
+                                itemLabel = itemLabel,
+                                tag = tag)
 
     }
 
