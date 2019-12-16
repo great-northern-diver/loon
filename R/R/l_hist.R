@@ -4,7 +4,7 @@
 #' @description \code{l_hist} is a generic function for creating an interactive histogram display that can be linked with
 #'   loon's other displays
 #'
-#' @param x vector with numerical data to perform the binning onx,
+#' @param x vector with numerical data to perform the binning on x,
 #' @param yshows one of "frequency" (default) or  "density"
 #' @param showStackedColors  if TRUE (default) then bars will be coloured according to
 #'    colours of the points; if FALSE, then the bars will be a uniform colour
@@ -17,6 +17,16 @@
 #'   is a factor or a character vector (coerced to factor).
 #' @param showBinHandle If \code{TRUE}, then an interactive "bin handle" appears on the plot
 #'   whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}
+#' @param color colour fills of bins (default "grey60"); colours are repeated
+#'  until matching the number x.
+#' @param active a logical determining whether x appears or not
+#' (default is \code{TRUE} for all x). If a logical vector is given of length
+#' equal to the number of x, then it identifies which x appears (\code{TRUE})
+#' and which does not (\code{FALSE}).
+#' @param selected a logical determining whether x appears selected at first
+#' (default is \code{FALSE} for all x). If a logical vector is given of length
+#' equal to the number of x, then it identifies which x is (\code{TRUE})
+#' and which is not (\code{FALSE}).
 #' @param xlabel label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 #'   inferred from \code{x} will be made.
 #' @template param_parent
@@ -74,9 +84,76 @@ l_hist <- function(x,
                    origin = NULL,
                    binwidth=NULL,
                    showBinHandle = FALSE,
+                   color = "grey60",
+                   active = TRUE,
+                   selected = FALSE,
                    xlabel = NULL,
                    parent=NULL, ...) {
     UseMethod("l_hist")
+}
+
+#' @export
+l_hist.data.frame <- function(x,
+                              yshows = c("frequency", "density"),
+                              showStackedColors = TRUE,
+                              origin = NULL,
+                              binwidth=NULL,
+                              showBinHandle = FALSE,
+                              color = "grey60",
+                              active = TRUE,
+                              selected = FALSE,
+                              xlabel = NULL,
+                              parent=NULL, ...) {
+
+    # get a relatively informative xlabel
+    if (is.null(xlabel)){
+        name <- colnames(x)
+        if (is.null(name)) {
+            name <- "column 1"
+        }
+        name <- name[1]
+        dataname <- gsub("\"", "", deparse(substitute(x)))
+        xlabel <- paste(name, "from", dataname)
+    }
+    x <- x[, 1]
+
+    l_hist(x,
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
+}
+
+#' @export
+l_hist.matrix <- function(x,
+                          yshows = c("frequency", "density"),
+                          showStackedColors = TRUE,
+                          origin = NULL,
+                          binwidth=NULL,
+                          showBinHandle = FALSE,
+                          color = "grey60",
+                          active = TRUE,
+                          selected = FALSE,
+                          xlabel = NULL,
+                          parent=NULL, ...) {
+
+    l_hist(c(x),
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
 }
 
 #' @export
@@ -86,12 +163,16 @@ l_hist.factor <-  function(x,
                            origin = NULL,
                            binwidth=NULL,
                            showBinHandle = FALSE,
+                           color = "grey60",
+                           active = TRUE,
+                           selected = FALSE,
                            xlabel = NULL,
                            parent=NULL, ...) {
 
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
+
     levelNames <- levels(x)
     nlevels <- length(levelNames)
     x <-  unclass(x)  # Get the level numbers as numeric values
@@ -113,6 +194,9 @@ l_hist.factor <-  function(x,
                  origin = origin,
                  binwidth=binwidth,
                  showBinHandle = showBinHandle,
+                 color = color,
+                 active = active,
+                 selected = selected,
                  xlabel = xlabel,
                  parent=parent, ...)
 
@@ -142,8 +226,12 @@ l_hist.character <-  function(x,
                               origin = NULL,
                               binwidth = NULL,
                               showBinHandle = FALSE,
+                              color = "grey60",
+                              active = TRUE,
+                              selected = FALSE,
                               xlabel = NULL,
                               parent=NULL, ...) {
+
     x <- factor(x)
 
     l_hist(x,
@@ -152,6 +240,9 @@ l_hist.character <-  function(x,
            origin = origin,
            binwidth=binwidth,
            showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
            xlabel = xlabel,
            parent=parent, ...)
 }
@@ -163,6 +254,9 @@ l_hist.default <-  function(x,
                             origin = NULL,
                             binwidth = NULL,
                             showBinHandle = FALSE,
+                            color = "grey60",
+                            active = TRUE,
+                            selected = FALSE,
                             xlabel = NULL,
                             parent = NULL,
                             ...) {
@@ -193,65 +287,74 @@ l_hist.default <-  function(x,
 
 
     } else {
-        ndims <- length(dim(x))
-        if (ndims > 2) stop("x should have at most two dimensions")
-        if (length(dim(x)) == 2) {
-            # get a relatively informative xlabel
-            if (is.null(xlabel)){
-                name <- colnames(x)
-                if (is.null(name)) {
-                    name <- "column 1"
-                }
-                name <- name[1]
-                dataname <- gsub("\"", "", deparse(substitute(x)))
-                xlabel <- paste(name, "from", dataname)
-            }
-            x <- x[,1]
 
-            plot <- l_hist(x,
-                           yshows = yshows,
-                           showStackedColors = showStackedColors,
-                           origin = origin,
-                           binwidth=binwidth,
-                           showBinHandle = showBinHandle,
-                           xlabel = xlabel,
-                           parent=parent,
-                           ...)
+        n <- length(x)
+        len_color <- length(color)
+        if (len_color > 1) {
+            if (len_color != n) {
+                color <- rep_len(color, n)
+            }
         } else {
-
-            yshows <- match.arg(yshows)
-            if (is.null(xlabel)){
-                xlabel <- gsub("\"", "", deparse(substitute(x))) }
-            ## ylabel will be overwritten in ...
-            if (is.null(origin) | !is.numeric(origin)){
-                origin <- min(x)
-            }
-
-            if (is.null(binwidth) | !is.numeric(binwidth)) {
-                n <- length(x)
-                # Sturges rule
-                # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
-                # David Scott's rule
-                sd <- sd(x)
-                binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
-
-            }
-
-            plot <- loonPlotFactory('::loon::histogram',
-                                    'hist',
-                                    'loon histogram',
-                                    parent,
-                                    x = x,
-                                    yshows = yshows,
-                                    showStackedColors = showStackedColors,
-                                    origin = origin,
-                                    binwidth=binwidth,
-                                    showBinHandle = showBinHandle,
-                                    xlabel = xlabel,
-                                    ...)
-            class(plot) <- c("l_hist", class(plot))
-
+            if(is.na(color)) color <- "grey60"
         }
+
+        len_active <- length(active)
+        if (len_active > 1) {
+            if (len_active != n)
+                stop(paste0("When more than length 1, length of active must match number of points:",
+                            n)
+                )
+        } else {
+            if(is.na(active)) active <- TRUE
+        }
+
+        len_selected <- length(selected)
+        if (len_selected > 1) {
+            if (len_selected != n)
+                stop(paste0("When more than length 1, length of selected must match number of points:",
+                            n)
+                )
+        } else {
+            if(is.na(selected)) selected <- FALSE
+        }
+
+        if (is.null(xlabel))
+            xlabel <- gsub("\"", "", deparse(substitute(x)))
+
+        linkingKey <- list(...)[["linkingKey"]]
+        NA_factory("l_hist", ...)
+
+        yshows <- match.arg(yshows)
+        ## ylabel will be overwritten in ...
+        if (is.null(origin) | !is.numeric(origin)){
+            origin <- min(x)
+        }
+
+        if (is.null(binwidth) | !is.numeric(binwidth)) {
+            # Sturges rule
+            # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
+            # David Scott's rule
+            sd <- sd(x)
+            binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+        }
+
+        plot <- loonPlotFactory('::loon::histogram',
+                                'hist',
+                                'loon histogram',
+                                parent,
+                                x = x,
+                                yshows = yshows,
+                                showStackedColors = showStackedColors,
+                                origin = origin,
+                                binwidth=binwidth,
+                                color = color,
+                                active = active,
+                                selected = selected,
+                                showBinHandle = showBinHandle,
+                                xlabel = xlabel,
+                                ...,
+                                linkingKey = linkingKey)
+        class(plot) <- c("l_hist", class(plot))
     }
     return(plot)
 }
