@@ -1,7 +1,7 @@
 # loon
 
 [![Build Status](https://travis-ci.org/great-northern-diver/loon.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
-[![Travis build status](https://travis-ci.org/z267xu/loon.svg?branch=master)](https://travis-ci.org/z267xu/loon)
+[![Codecov test coverage](https://codecov.io/gh/z267xu/loon/branch/master/graph/badge.svg)](https://codecov.io/gh/z267xu/loon?branch=master)
 [![](https://cranlogs.r-pkg.org/badges/loon)](https://cran.r-project.org/package=loon)
 
 `loon` is a toolkit for interactive data visualization and
