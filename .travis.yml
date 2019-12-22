@@ -27,5 +27,5 @@ r:
   - bioc-devel
 
 after_success:
-  - Rscript -e 'covr::coveralls()'
+  - Rscript -e 'covr::codecov()'
 
