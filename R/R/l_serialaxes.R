@@ -269,7 +269,7 @@ l_serialaxes <- function(data,
     linkingKey <- args[["linkingKey"]]
     itemLabel <- args[["itemLabel"]]
     tag <- args[["tag"]]
-    NA_factory("l_serialaxes", ...)
+    l_na_omit("l_serialaxes", ...)
 
     plot <- loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
                             data=l_data(data),

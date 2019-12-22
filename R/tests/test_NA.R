@@ -57,12 +57,14 @@ if (requireNamespace("testthat", quietly = TRUE)) {
                                       size = size)
         )
         ########## l_layer_line ##########
-        expect_warning(l_layer_line(p,
-                                    x = x,
-                                    y = y)
+        xx <- co2
+        xx[100] <- NA
+        xx[200] <- NA
+        expect_warning(
+            l_layer_line(p, 1:length(xx), xx)
         )
         ########## l_layer_polygon ##########
-        expect_warning(l_layer_polygon(p,
+        expect_error(l_layer_polygon(p,
                                        x = x,
                                        y = y)
         )

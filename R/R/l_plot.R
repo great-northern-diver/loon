@@ -318,14 +318,14 @@ l_plot.default <-  function(x, y = NULL,
             if(is.na(glyph)) glyph <- "ccircle"
         }
 
-        # NA_factory returns nothing
+        # l_na_omit returns nothing
         # Variables in this environment will be checked (NA, NaN, Inf, -Inf) and
-        # modified after NA_factory is called.
+        # modified after l_na_omit is called.
         args <- list(...)
         linkingKey <- args[["linkingKey"]]
         itemLabel <- args[["itemLabel"]]
         tag <- args[["tag"]]
-        NA_factory("l_plot.default", ...)
+        l_na_omit("l_plot.default", ...)
 
         plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
                                 parent,

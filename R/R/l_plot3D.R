@@ -387,7 +387,7 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         linkingKey <- args[["linkingKey"]]
         itemLabel <- args[["itemLabel"]]
         tag <- args[["tag"]]
-        NA_factory("l_plot3D", ...)
+        l_na_omit("l_plot3D", ...)
 
         plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D',
                                 parent,
