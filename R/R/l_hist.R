@@ -93,70 +93,6 @@ l_hist <- function(x,
 }
 
 #' @export
-l_hist.data.frame <- function(x,
-                              yshows = c("frequency", "density"),
-                              showStackedColors = TRUE,
-                              origin = NULL,
-                              binwidth=NULL,
-                              showBinHandle = FALSE,
-                              color = "grey60",
-                              active = TRUE,
-                              selected = FALSE,
-                              xlabel = NULL,
-                              parent=NULL, ...) {
-
-    # get a relatively informative xlabel
-    if (is.null(xlabel)){
-        name <- colnames(x)
-        if (is.null(name)) {
-            name <- "column 1"
-        }
-        name <- name[1]
-        dataname <- gsub("\"", "", deparse(substitute(x)))
-        xlabel <- paste(name, "from", dataname)
-    }
-    x <- x[, 1]
-
-    l_hist(x,
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           parent=parent, ...)
-}
-
-#' @export
-l_hist.matrix <- function(x,
-                          yshows = c("frequency", "density"),
-                          showStackedColors = TRUE,
-                          origin = NULL,
-                          binwidth=NULL,
-                          showBinHandle = FALSE,
-                          color = "grey60",
-                          active = TRUE,
-                          selected = FALSE,
-                          xlabel = NULL,
-                          parent=NULL, ...) {
-
-    l_hist(c(x),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           parent=parent, ...)
-}
-
-#' @export
 l_hist.factor <-  function(x,
                            yshows = c("frequency", "density"),
                            showStackedColors = TRUE,
@@ -288,6 +224,12 @@ l_hist.default <-  function(x,
 
     } else {
 
+        # x should be a vector and a vector should return NULL when we call dim(x)
+        dim_x <- dim(x)
+        if(!is.null(dim_x))
+            stop("Unkown data structure",
+                 call. = FALSE)
+
         n <- length(x)
         len_color <- length(color)
         if (len_color > 1) {
@@ -322,7 +264,7 @@ l_hist.default <-  function(x,
             xlabel <- gsub("\"", "", deparse(substitute(x)))
 
         linkingKey <- list(...)[["linkingKey"]]
-        NA_factory("l_hist", ...)
+        l_na_omit("l_hist", ...)
 
         yshows <- match.arg(yshows)
         ## ylabel will be overwritten in ...
@@ -359,4 +301,162 @@ l_hist.default <-  function(x,
     return(plot)
 }
 
+#' @export
+l_hist.data.frame <- function(x,
+                              yshows = c("frequency", "density"),
+                              showStackedColors = TRUE,
+                              origin = NULL,
+                              binwidth=NULL,
+                              showBinHandle = FALSE,
+                              color = "grey60",
+                              active = TRUE,
+                              selected = FALSE,
+                              xlabel = NULL,
+                              parent=NULL, ...) {
 
+    # get a relatively informative xlabel
+    if (is.null(xlabel)){
+        name <- colnames(x)
+        if (is.null(name)) {
+            name <- "column 1"
+        }
+        name <- name[1]
+        dataname <- gsub("\"", "", deparse(substitute(x)))
+        xlabel <- paste(name, "from", dataname)
+    }
+    x <- x[, 1]
+
+    l_hist(x,
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
+}
+
+#' @export
+l_hist.matrix <- function(x,
+                          yshows = c("frequency", "density"),
+                          showStackedColors = TRUE,
+                          origin = NULL,
+                          binwidth=NULL,
+                          showBinHandle = FALSE,
+                          color = "grey60",
+                          active = TRUE,
+                          selected = FALSE,
+                          xlabel = NULL,
+                          parent=NULL, ...) {
+
+    l_hist(c(x),
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
+}
+
+#' @export
+l_hist.list <- function(x,
+                        yshows = c("frequency", "density"),
+                        showStackedColors = TRUE,
+                        origin = NULL,
+                        binwidth=NULL,
+                        showBinHandle = FALSE,
+                        color = "grey60",
+                        active = TRUE,
+                        selected = FALSE,
+                        xlabel = NULL,
+                        parent=NULL, ...) {
+
+    l_hist(unlist(x),
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
+}
+
+#' @export
+l_hist.table <- function(x,
+                         yshows = c("frequency", "density"),
+                         showStackedColors = TRUE,
+                         origin = NULL,
+                         binwidth=NULL,
+                         showBinHandle = FALSE,
+                         color = "grey60",
+                         active = TRUE,
+                         selected = FALSE,
+                         xlabel = NULL,
+                         parent=NULL, ...) {
+
+    dim_x <- dim(x)
+    if(length(dim_x) > 2)
+        stop(x,
+             "should have at most two dimensions",
+             call. = FALSE)
+    else {
+        if (is.null(xlabel)){
+            name <- colnames(x)
+            if (is.null(name)) {
+                name <- "column 1"
+            }
+            name <- name[1]
+            dataname <- gsub("\"", "", deparse(substitute(x)))
+            xlabel <- paste(name, "from", dataname)
+        }
+        x <- x[,1]
+    }
+
+
+    l_hist(x,
+           yshows = yshows,
+           showStackedColors = showStackedColors,
+           origin = origin,
+           binwidth=binwidth,
+           showBinHandle = showBinHandle,
+           color = color,
+           active = active,
+           selected = selected,
+           xlabel = xlabel,
+           parent=parent, ...)
+}
+
+#' @export
+l_hist.array <- function(x,
+                         yshows = c("frequency", "density"),
+                         showStackedColors = TRUE,
+                         origin = NULL,
+                         binwidth=NULL,
+                         showBinHandle = FALSE,
+                         color = "grey60",
+                         active = TRUE,
+                         selected = FALSE,
+                         xlabel = NULL,
+                         parent=NULL, ...) {
+    l_hist.table(x = x,
+                 yshows = yshows,
+                 showStackedColors = showStackedColors,
+                 origin = origin,
+                 binwidth=binwidth,
+                 showBinHandle = showBinHandle,
+                 color = color,
+                 active = active,
+                 selected = selected,
+                 xlabel = xlabel,
+                 parent=parent, ...)
+}
