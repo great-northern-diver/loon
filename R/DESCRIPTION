@@ -50,7 +50,8 @@ Suggests:
     rmarkdown, 
     png,
     ElemStatLearn,
-    formatR
+    formatR,
+    covr
 BugReports: https://github.com/great-northern-diver/loon/issues
 Encoding: UTF-8
 LazyData: true
