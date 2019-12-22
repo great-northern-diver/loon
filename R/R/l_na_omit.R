@@ -1,9 +1,4 @@
-NA_factory <- function(w, ..., envir = parent.frame()) {
-    class(w) <- w
-    UseMethod("NA_factory", w)
-}
-
-NA_factory.default <- function(w, ..., envir = parent.frame()) {
+l_na_omit <- function(w, ..., envir = parent.frame()) {
 
     n_dim_states <- l_nDimStateNames(w)
 
@@ -53,7 +48,9 @@ NA_factory.default <- function(w, ..., envir = parent.frame()) {
     # Give a warning if any missing values appear
     if(length(no_valid_index) > 0) {
         warning(
-            paste0("Removed ",
+            paste0("Removed {",
+                   no_valid_index,
+                   "} ",
                    length(no_valid_index),
                    " observations containing missing values"),
             call. = FALSE
@@ -130,42 +127,4 @@ seq_n <- function(n, char = "") {
     if(n > 0)
         paste0(char, (seq_len(n)-1))
     else character(0)
-}
-
-
-l_nDimStateNames <- function(loon_plot = c("l_plot.default",
-                                           "l_plot3D",
-                                           "l_hist",
-                                           "l_graph",
-                                           "l_serialaxes",
-                                           "l_layer_lines",
-                                           "l_layer_polygons",
-                                           "l_layer_texts",
-                                           "l_layer_rectangles",
-                                           "l_layer_points")) {
-
-    plot_fun <- match.arg(loon_plot)
-
-    switch(
-        plot_fun,
-        l_plot.default = c("itemLabel", "x", "y", "color",
-                           "selected", "active", "size", "tag", "linkingKey", "glyph"),
-        l_hist = c("x", "color", "selected", "active", "linkingKey"),
-        l_graph = c("itemLabel","glyph" ,"linkingKey" ,"x" ,"y" ,
-                    "color" , "selected" , "active" , "size" , "tag" ,
-                    "nodes", "orbitAngle"),
-        l_serialaxes = c("itemLabel", "linkingKey", "linewidth",
-                         "data", "active", "color", "selected", "tag"),
-        l_plot3D = c("itemLabel", "x", "y", "z", "color",
-                     "selected", "active", "size", "tag", "linkingKey", "glyph"),
-        l_layer_lines = c("x", "y", "tag", "itemLabel", "color", "active",
-                          "group", "linewidth"),
-        l_layer_polygons = c("x", "y", "tag", "itemLabel", "color", "active",
-                             "group", "linecolor", "linewidth"),
-        l_layer_texts = c("x", "y", "tag", "active", "itemLabel", "color", "text",
-                          "angle", "size", "anchor", "justify"),
-        l_layer_rectangles = c("x", "y", "tag", "active", "itemLabel", "color",
-                               "linecolor", "linewidth"),
-        l_layer_points = c("x", "y", "tag", "active", "itemLabel", "size", "color")
-    )
 }
