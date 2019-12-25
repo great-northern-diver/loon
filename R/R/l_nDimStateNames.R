@@ -89,11 +89,27 @@ l_nDimStateNames.character <- function(loon_plot) {
     result
 }
 
-# #' @inherit nDimStateNames
-# #' @rdname nDimStateNames
-# #' @param name A function name you created
-# #' @param key Corresponding n dimensional state names for your created function
-# #' @export
+#' @inherit nDimStateNames
+#' @rdname nDimStateNames
+#' @param name A function name you created
+#' @param key Corresponding n dimensional state names for your created function
+#' @export
+#' @examples
+#' name <- "l_foo"
+#' key <- c("x", "y", "foo")
+#' l_add_nDimStateNames(name, key)
+l_add_nDimStateNames <- function(name, key) {
+
+    if(missing(name)) stop("Name is missing")
+    if(missing(key)) stop("Key is missing")
+    envir <- getNamespace("loon")
+    name <- as.character(name)
+
+    n_dim_states_list <- get("n_dim_states_list", envir = envir)
+
+    c(n_dim_states_list,
+      stats::setNames(list(key), name))
+}
 
 # #' @inherit l_set_nDimStateNames
 # #' @rdname nDimStateNames

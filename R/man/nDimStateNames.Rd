@@ -3,12 +3,19 @@
 \name{nDimStateNames}
 \alias{nDimStateNames}
 \alias{l_nDimStateNames}
+\alias{l_add_nDimStateNames}
 \title{N dimensional state names access}
 \usage{
 l_nDimStateNames(loon_plot)
+
+l_add_nDimStateNames(name, key)
 }
 \arguments{
 \item{loon_plot}{A \code{loon} widget or a specified character}
+
+\item{name}{A function name you created}
+
+\item{key}{Corresponding n dimensional state names for your created function}
 }
 \description{
 Get, set, delete n dimensional state names
@@ -64,4 +71,7 @@ l_set_nDimStateNames("l_foo", c("x", "y", "linkingKey"))
 l_nDimStateNames("l_foo")
 l_delete_nDimStateNames("l_foo")
 }
+name <- "l_foo"
+key <- c("x", "y", "foo")
+l_add_nDimStateNames(name, key)
 }
