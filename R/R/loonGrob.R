@@ -512,7 +512,7 @@ loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
       x = states$x, y = states$y,
       gp = if(is.null(gp)) gpar(col = states$color,
                                 lwd = states$linewidth,
-                                lty = states$dash) else gp,
+                                lty = dash2lty(states$dash)) else gp,
       name = if(is.null(name)) {
         label <- l_layer_getLabel(widget, target)
         paste0("l_layer_line: ", label, " ", names(label))
@@ -531,7 +531,6 @@ loonGrob.l_layer_line <- function(target, name = NULL, gp = NULL, vp = NULL) {
     )
   }
 }
-
 
 #' @export
 loonGrob.l_layer_rectangle <- function(target, name = NULL, gp = NULL, vp = NULL) {
@@ -1350,4 +1349,13 @@ condGrob <- function (test = TRUE,
 
 background_alpha <- function(x) {
   ifelse(x == "#999999999999", 0, 1)
+}
+
+dash2lty <- function(x) {
+  if(length(x) == 0)
+    1
+  else {
+    x <- as.numeric(x)
+    x[1]
+  }
 }
