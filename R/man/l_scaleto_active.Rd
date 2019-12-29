@@ -10,6 +10,6 @@ l_scaleto_active(widget)
 \item{widget}{widget path as a string or as an object handle}
 }
 \description{
-The function modifies the \code{zoomX}, \code{zoomY}, 
+The function modifies the \code{zoomX}, \code{zoomY},
   \code{panX}, and \code{panY} so that all active data points are displayed.
 }
