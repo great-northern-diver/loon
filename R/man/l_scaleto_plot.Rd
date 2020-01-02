@@ -10,7 +10,7 @@ l_scaleto_plot(widget)
 \item{widget}{widget path as a string or as an object handle}
 }
 \description{
-The function modifies the \code{zoomX}, \code{zoomY}, 
+The function modifies the \code{zoomX}, \code{zoomY},
   \code{panX}, and \code{panY} so that all elements in the model layer of the
   plot are displayed.
 }

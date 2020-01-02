@@ -7,7 +7,7 @@
 \method{l_graph}{loongraph}(nodes, ...)
 }
 \arguments{
-\item{nodes}{a loongraph object created with the \code{\link{loongraph}} 
+\item{nodes}{a loongraph object created with the \code{\link{loongraph}}
 function.}
 
 \item{...}{arguments to modify the graph display state}
@@ -23,6 +23,6 @@ Loongraphs can be created with the \code{\link{loongraph}}
 For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 }
 \seealso{
-\code{\link{loongraph}}, \code{\link{l_graph}}, 
+\code{\link{loongraph}}, \code{\link{l_graph}},
   \code{\link{l_info_states}}, \code{\link{l_graph.graph}}
 }

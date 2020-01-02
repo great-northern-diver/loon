@@ -16,3 +16,5 @@ cran-comments.md
 ./inst/doc/*
 ^doc$
 ^Meta$
+^\.travis\.yml$
+^codecov\.yml$

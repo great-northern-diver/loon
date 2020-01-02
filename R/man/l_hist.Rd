@@ -6,10 +6,11 @@
 \usage{
 l_hist(x, yshows = c("frequency", "density"), showStackedColors = TRUE,
   origin = NULL, binwidth = NULL, showBinHandle = FALSE,
-  xlabel = NULL, parent = NULL, ...)
+  color = "grey60", active = TRUE, selected = FALSE, xlabel = NULL,
+  parent = NULL, ...)
 }
 \arguments{
-\item{x}{vector with numerical data to perform the binning onx,}
+\item{x}{vector with numerical data to perform the binning on x,}
 
 \item{yshows}{one of "frequency" (default) or  "density"}
 
@@ -27,6 +28,19 @@ is a factor or a character vector (coerced to factor).}
 
 \item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
 whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
+
+\item{color}{colour fills of bins (default "grey60"); colours are repeated
+until matching the number x.}
+
+\item{active}{a logical determining whether x appears or not
+(default is \code{TRUE} for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x appears (\code{TRUE})
+and which does not (\code{FALSE}).}
+
+\item{selected}{a logical determining whether x appears selected at first
+(default is \code{FALSE} for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x is (\code{TRUE})
+and which is not (\code{FALSE}).}
 
 \item{xlabel}{label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 inferred from \code{x} will be made.}

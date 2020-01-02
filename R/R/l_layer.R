@@ -239,14 +239,26 @@ l_layer_group <- function(widget, label="group", parent="root", index=0) {
 l_layer_polygon <- function(widget, x, y,
                             color="gray80", linecolor="black", linewidth=1,
                             label="polygon", parent="root", index=0, ...) {
+
     l_throwErrorIfNotLoonWidget(widget)
 
     # inherits coords from widget
     if(missing(x)) x <- widget['x']
     if(missing(y)) y <- widget['y']
 
+    is_finite <- is.finite(x) & is.finite(y)
+    if(any(!is_finite))
+        stop(
+            paste0("There are ",
+                   sum(!is_finite),
+                   " items containing missing values"),
+            call. = FALSE
+        )
+
     l_layer_add(widget, 'polygon',
-                x=x, y=y, color=color,
+                x=x,
+                y=y,
+                color=color,
                 linecolor=linecolor,
                 linewidth=linewidth,
                 label=label, parent=parent, index=index, ...)
@@ -303,6 +315,7 @@ l_layer_polygons <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="polygons", parent="root", index=0,
                              group = NULL, ...) {
+
     l_throwErrorIfNotLoonWidget(widget)
 
     # inherits coords from widget
@@ -325,13 +338,21 @@ l_layer_polygons <- function(widget, x, y,
                     })
     }
 
+    args <- list(...)
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_layer_polygons", ...)
+
     l_layer_add(widget, 'polygons',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
                 color=color,
                 linecolor=linecolor,
                 linewidth=linewidth,
-                label=label, parent=parent, index=index, ...)
+                label=label, parent=parent, index=index,
+                ...,
+                itemLabel = itemLabel,
+                tag = tag)
 }
 
 
@@ -361,6 +382,15 @@ l_layer_rectangle <- function(widget, x, y,
     # inherits coords from widget
     if(missing(x)) x <- widget['x']
     if(missing(y)) y <- widget['y']
+
+    is_finite <- is.finite(x) & is.finite(y)
+    if(any(!is_finite))
+        stop(
+            paste0("There are ",
+                   sum(!is_finite),
+                   " items containing missing values"),
+            call. = FALSE
+        )
 
     l_layer_add(widget, 'rectangle',
                 x=x, y=y, color=color,
@@ -414,6 +444,7 @@ l_layer_rectangles <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="rectangles", parent="root", index=0,
                              group = NULL, ...) {
+
     l_throwErrorIfNotLoonWidget(widget)
 
     # inherits coords from widget
@@ -436,13 +467,21 @@ l_layer_rectangles <- function(widget, x, y,
                     })
     }
 
+    args <- list(...)
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_layer_rectangles", ...)
+
     l_layer_add(widget, 'rectangles',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
                 color=color,
                 linecolor=linecolor,
                 linewidth=linewidth,
-                label=label, parent=parent, index=index, ...)
+                label=label, parent=parent, index=index,
+                ...,
+                itemLabel = itemLabel,
+                tag = tag)
 }
 
 
@@ -497,11 +536,51 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
     }
 
     xy <- try(xy.coords(x, y))
+    x <- xy$x
+    y <- xy$y
 
-    l_layer_add(widget, 'line',
-                x=xy$x, y=xy$y, color=color,
-                linewidth=linewidth, dash=dash,
-                label=label, parent=parent, index=index, ...)
+    is_finite <- is.finite(x) & is.finite(y)
+
+    if(any(!is_finite)) {
+        warning(
+            paste0("Removed ",
+                   sum(!is_finite),
+                   " items containing missing values"),
+            call. = FALSE
+        )
+        group <- c()
+        start_value <- 1
+        lapply(seq(length(is_finite)),
+               function(i) {
+                   if(i == 1) {
+                      if(is_finite[i]) {
+                          group <<- c(group, start_value)
+                      }
+                   } else {
+                       if(is_finite[i]) {
+                           group <<- c(group, start_value)
+                       } else {
+                           start_value <<- start_value + 1
+                       }
+                   }
+               })
+
+        x <- x[is_finite]
+        y <- y[is_finite]
+
+        l_layer_lines(
+            widget, x= x, y= y, color=color,
+            linewidth = linewidth,
+            label=label, parent=parent, index=index,
+            group = group, ...
+        )
+    } else {
+        l_layer_add(widget, 'line',
+                    x= x, y= y, color=color,
+                    linewidth=linewidth, dash=dash,
+                    label=label, parent=parent, index=index, ...)
+    }
+
 }
 
 
@@ -567,18 +646,21 @@ l_layer_lines <- function(widget, x, y,
                     })
     }
 
+    args <- list(...)
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_layer_lines", ...)
+
     l_layer_add(widget, 'lines',
                 x=l_Rlist2nestedTclList(x),
                 y=l_Rlist2nestedTclList(y),
                 color=color,
                 linewidth=linewidth,
-                label=label, parent=parent, index=index, ...)
+                label=label, parent=parent, index=index,
+                ...,
+                itemLabel = itemLabel,
+                tag = tag)
 }
-
-
-
-
-
 
 #' @templateVar type oval
 #' @template title_layer
@@ -648,11 +730,21 @@ l_layer_points <- function(widget, x, y = NULL, color="gray60", size=6,
     }
 
     xy <- try(xy.coords(x, y))
+    x <- xy$x
+    y <- xy$y
+
+    args <- list(...)
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_layer_points", ...)
 
     l_layer_add(widget, 'points',
-                x=xy$x, y=xy$y, color=color,
+                x= x, y= y, color=color,
                 size=size,
-                label=label, parent=parent, index=index, ...)
+                label=label, parent=parent, index=index,
+                ...,
+                itemLabel = itemLabel,
+                tag = tag)
 }
 
 #' @templateVar type text
@@ -739,11 +831,20 @@ l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
     if(missing(y)) y <- widget['y']
 
     xy <- try(xy.coords(x, y))
+    x <- xy$x
+    y <- xy$y
+    args <- list(...)
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_layer_texts", ...)
 
     l_layer_add(widget, 'texts',
-                x=xy$x, y=xy$y, text=text, color=color,
+                x = x, y = y, text=text, color=color,
                 size=size, angle=angle,
-                label=label, parent=parent, index=index, ...)
+                label=label, parent=parent, index=index,
+                ... ,
+                itemLabel = itemLabel,
+                tag = tag)
 }
 
 

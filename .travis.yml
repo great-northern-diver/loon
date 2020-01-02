@@ -26,3 +26,6 @@ r:
   - release
   - bioc-devel
 
+after_success:
+  - Rscript -e 'covr::codecov()'
+

@@ -10,6 +10,16 @@
 #'   how the data is scaled. See Details and Examples for more information.
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
 #' @param showAxes boolean to indicate whether axes should be shown or not
+#' @param linewidth vector with line widths
+#' @param color vector with line colors
+#' @param active a logical determining whether items appear or not
+#' (default is \code{TRUE} for all items). If a logical vector is given of length
+#' equal to the number of items, then it identifies which items appear (\code{TRUE})
+#' and which do not (\code{FALSE}).
+#' @param selected a logical determining whether items appear selected at first
+#' (default is \code{FALSE} for all items). If a logical vector is given of length
+#' equal to the number of items, then it identifies which items are (\code{TRUE})
+#' and which are not (\code{FALSE}).
 #' @template param_parent
 #' @template param_dots_state_args
 #'
@@ -198,8 +208,16 @@
 #' #        upper limits for each variable).
 #' #        Then scaling can always be changed via the inspector.
 
-l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial',
-                         showAxes=TRUE, parent=NULL, ... ){
+l_serialaxes <- function(data,
+                         sequence,
+                         scaling="variable",
+                         axesLayout='radial',
+                         showAxes=TRUE,
+                         linewidth = 1,
+                         color = "steelblue",
+                         active = TRUE,
+                         selected = FALSE,
+                         parent=NULL, ... ){
 
 
     data <- as.data.frame(data)
@@ -208,13 +226,65 @@ l_serialaxes <- function(data, sequence, scaling="variable", axesLayout='radial'
         sequence <- names(data)
     }
 
+    n <- dim(data)[1]
+    len_color <- length(color)
+    if (len_color > 1) {
+        if (len_color != n) {
+            color <- rep_len(color, n)
+        }
+    } else {
+        if(is.na(color)) color <- "steelblue"
+    }
+
+    len_linewidth <- length(linewidth)
+    if (len_linewidth > 1) {
+        if (len_linewidth != n) {
+            linewidth <- rep_len(linewidth, n)
+        }
+    } else {
+        if(is.na(linewidth)) linewidth <- 1
+    }
+
+    len_active <- length(active)
+    if (len_active > 1) {
+        if (len_active != n)
+            stop(paste0("When more than length 1, length of active must match number of points:",
+                        n)
+            )
+    } else {
+        if(is.na(active)) active <- TRUE
+    }
+
+    len_selected <- length(selected)
+    if (len_selected > 1) {
+        if (len_selected != n)
+            stop(paste0("When more than length 1, length of selected must match number of points:",
+                        n)
+            )
+    } else {
+        if(is.na(selected)) selected <- FALSE
+    }
+
+    args <- list(...)
+    linkingKey <- args[["linkingKey"]]
+    itemLabel <- args[["itemLabel"]]
+    tag <- args[["tag"]]
+    l_na_omit("l_serialaxes", ...)
+
     plot <- loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
-                    data=l_data(data),
-                    sequence=sequence,
-                    showAxes=showAxes,
-                    scaling=scaling,
-                    axesLayout=axesLayout,
-                    ...)
+                            data=l_data(data),
+                            sequence=sequence,
+                            showAxes=showAxes,
+                            scaling=scaling,
+                            axesLayout=axesLayout,
+                            linewidth = linewidth,
+                            color = color,
+                            active = active,
+                            selected = selected,
+                            ...,
+                            linkingKey = linkingKey,
+                            itemLabel = itemLabel,
+                            tag = tag)
 
     class(plot) <- c("l_serialaxes", class(plot))
 
