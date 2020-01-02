@@ -34,7 +34,7 @@ data(bone, package = "loon.data")
 summary(bone)
 ```
 
-As can be seen, there are four variates.  The `idnum` uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261) and `sex` identifies their sex. The response variate of interest is `rspnbmd` which is a relative measure of spinal bone mineral density determined as the ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate `age` is the average of the adolescent's age in years on those two visits. 
+As can be seen, there are five variates.  The `idnum` uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261), `sex` identifies their sex, and `ethnic` their "ethnicity/race".  The response variate of interest is `rspnbmd` which is a relative measure of spinal bone mineral density determined as the ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate `age` is the average of the adolescent's age in years on those two visits. 
 
 In this vignette we investigate the fit of smoothing splines to this data.  
 
