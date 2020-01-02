@@ -29,7 +29,7 @@ library(loon)
 
 The data consists of measurements of spinal bone mineral density.  Several such measurements were  taken from 261 North American adolescents over a few years.  The entire dataset is called `bone` and can be found in the `R` package `loon.data`.
 
-```{r loadElemStatLearn, eval=FALSE}
+```{r loadBoneData, eval=FALSE}
 data(bone, package = "loon.data")
 summary(bone)
 ```
