@@ -5,7 +5,9 @@
 \title{Create a Serialaxes Widget}
 \usage{
 l_serialaxes(data, sequence, scaling = "variable",
-  axesLayout = "radial", showAxes = TRUE, parent = NULL, ...)
+  axesLayout = "radial", showAxes = TRUE, linewidth = 1,
+  color = "steelblue", active = TRUE, selected = FALSE,
+  parent = NULL, ...)
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
@@ -18,6 +20,20 @@ how the data is scaled. See Details and Examples for more information.}
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
+
+\item{linewidth}{vector with line widths}
+
+\item{color}{vector with line colors}
+
+\item{active}{a logical determining whether items appear or not
+(default is \code{TRUE} for all items). If a logical vector is given of length
+equal to the number of items, then it identifies which items appear (\code{TRUE})
+and which do not (\code{FALSE}).}
+
+\item{selected}{a logical determining whether items appear selected at first
+(default is \code{FALSE} for all items). If a logical vector is given of length
+equal to the number of items, then it identifies which items are (\code{TRUE})
+and which are not (\code{FALSE}).}
 
 \item{parent}{parent widget path}
 

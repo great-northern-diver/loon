@@ -29,6 +29,6 @@ This default method uses the loongraph display states as
 For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 }
 \seealso{
-\code{\link{loongraph}}, \code{\link{l_graph}}, 
+\code{\link{loongraph}}, \code{\link{l_graph}},
   \code{\link{l_info_states}}, \code{\link{l_graph.graph}}
 }

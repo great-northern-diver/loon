@@ -29,7 +29,7 @@ Default is 1.
     All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
     all axes.)}
 
-\item{color}{colours of points; colours are repeated until matching the number points,}
+\item{color}{colours of points; colours are repeated until matching the number points.}
 
 \item{glyph}{shape of point; must be one of the primitive glyphs
              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
@@ -44,14 +44,14 @@ Default is 1.
 \item{size}{size of the symbol (roughly in terms of area)}
 
 \item{active}{a logical determining whether points appear or not
-(default is TRUE for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points appear (TRUE)
-and which do not (FALSE).}
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
+and which do not (\code{FALSE}).}
 
 \item{selected}{a logical determining whether points appear selected at first
-(default is FALSE for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points are (TRUE)
-and which are not (FALSE).}
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
+and which are not (\code{FALSE}).}
 
 \item{xlabel}{Label for the horizontal (x) axis. If missing,
 one will be inferred from \code{x} if possible.}

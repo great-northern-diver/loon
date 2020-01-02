@@ -15,7 +15,7 @@ objects by their ids.}
 \item{layer}{layer id}
 }
 \description{
-The function modifies the \code{zoomX}, \code{zoomY}, 
+The function modifies the \code{zoomX}, \code{zoomY},
   \code{panX}, and \code{panY} so that all elements of a particular layer are
   displayed.
 }
