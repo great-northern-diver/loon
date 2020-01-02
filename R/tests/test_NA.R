@@ -76,6 +76,16 @@ if (requireNamespace("testthat", quietly = TRUE)) {
                        "No valid input")
         expect_warning(l_plot3D(x, y, x, color = color),
                        "No valid input")
+        ############################ l_hist.factor
+        n <- 10
+        levels <- LETTERS[1:4]
+        foo <- factor(rep(NA, n), levels = levels)
+        selection <- sample(1:n, 9, replace = FALSE)
+        for (i in selection) {
+            foo[i] <- sample(levels, 1)
+        }
+        foo
+        l_hist(foo)
     })
 
 

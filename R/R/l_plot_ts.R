@@ -69,10 +69,11 @@ l_plot_ts <- function(x,
         # get rid of the index of na
         index.trend <- which(is.na(stlOrDecomposedTS$trend)== FALSE)
         index.random <- which(is.na(stlOrDecomposedTS$random)== FALSE)
+        index.seasonal <- which(is.na(stlOrDecomposedTS$seasonal)== FALSE)
 
         xy.trend <- list(x = xy.raw$x[index.trend], y = stlOrDecomposedTS$trend[index.trend])
         xy.remainder <- list(x = xy.raw$x[index.random], y = stlOrDecomposedTS$random[index.random])
-        xy.seasonal <- list(x = xy.raw$x, y = stlOrDecomposedTS$seasonal)
+        xy.seasonal <- list(x = xy.raw$x[index.seasonal], y = stlOrDecomposedTS$seasonal[index.seasonal])
     } else if(inherits(stlOrDecomposedTS, "stl")){
         stl <- stlOrDecomposedTS$time.series
 
