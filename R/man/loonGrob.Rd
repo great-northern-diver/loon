@@ -165,7 +165,6 @@ h['colorStackingOrder'] <- c("selected", unique(h['color']))
 g <- loonGrob(h)
 grid.newpage(); grid.draw(g)
 
-
 h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
 
 # To print directly use either
