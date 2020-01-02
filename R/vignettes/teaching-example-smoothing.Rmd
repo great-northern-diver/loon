@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{Teaching: Smoothers and Bone Mineral Density}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{ElemStatLearn, splines}
+  %\VignetteDepends{splines}
 ---
 
 ```{r knitr_setup, include=FALSE}
@@ -27,14 +27,14 @@ library(loon)
 
 ## The data: Bone mineral density
 
-The data consists of measurements of spinal bone mineral density.  Several such measurements were  taken from 261 North American adolescents over a few years.  The entire dataset is called `bone` and can be found in the `R` package `ElemStatLearn`.
+The data consists of measurements of spinal bone mineral density.  Several such measurements were  taken from 261 North American adolescents over a few years.  The entire dataset is called `bone` and can be found in the `R` package `loon.data`.
 
-```{r loadElemStatLearn, eval=FALSE}
-library("ElemStatLearn")
+```{r loadBoneData, eval=FALSE}
+data(bone, package = "loon.data")
 summary(bone)
 ```
 
-As can be seen, there are four variates.  The `idnum` uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261) and `gender` identifies their sex. The response variate of interest is `spnbmd` which is a ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate `age` is the average of the adolescent's age in years on those two visits. 
+As can be seen, there are five variates.  The `idnum` uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261), `sex` identifies their sex, and `ethnic` their "ethnicity/race".  The response variate of interest is `rspnbmd` which is a relative measure of spinal bone mineral density determined as the ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate `age` is the average of the adolescent's age in years on those two visits. 
 
 In this vignette we investigate the fit of smoothing splines to this data.  
 
@@ -45,18 +45,18 @@ To begin, execute the following code:
 ```{r scatterplot, eval=FALSE}
 # The plot
 x <- bone$age
-y <- bone$spnbmd
+y <- bone$rspnbmd
 #  A scatterplot
 p <- l_plot(x, y,
             color="darkgrey",
-            xlabel="age", ylabel="spnbmd",
+            xlabel="age", ylabel="rspnbmd",
             showGuides = TRUE, showScales = TRUE,
             itemLabel = paste0("IDnum = ", bone$idnum, "\n", 
-                               bone$gender, "\n", 
+                               bone$sex, "\n", 
                                "Age: ", bone$age),
             showItemLabels = TRUE,
             linkingGroup="Bone density",
-            title = "Spinal bone mineral density (spnbmd)")
+            title = "Spinal bone mineral density (rspnbmd)")
 ```
 
 Two windows will have appeared once the above code has been executed.  One is the plot `p`, the other the **inspector** of the plot `p`. 
@@ -83,7 +83,7 @@ p["swapAxes"] <- TRUE
 p["swapAxes"] <- FALSE
 ```
 
-The vertical variate, `spnbmd`, measured the  *change* in spinal bone mineral density.  Anything above zero indicates an increase, anything below a decrease; the magnitude is the rate of change in density.  It might be of interest, then, to add a horizontal line to the plot at zero.  This is accomplished by **layering a line** on the plot `p` as follows:
+The vertical variate, `rspnbmd`, measured the  *change* in spinal bone mineral density.  Anything above zero indicates an increase, anything below a decrease; the magnitude is the rate of change in density.  It might be of interest, then, to add a horizontal line to the plot at zero.  This is accomplished by **layering a line** on the plot `p` as follows:
 
 ```{r addAxis, eval=FALSE}
 axis <- l_layer_line(p,
@@ -103,19 +103,17 @@ The axis (or any other layer, e.g. the Scatterplot), could be removed entirely w
 
 ## Histogram
 
-A histogram can be constructed in the same way for *numeric* values.  Even so, one can be used to construct a simple bar plot for the factor `gender`:
+A histogram can be constructed in the same way as for *numeric* values.  Now, because `sex` is a `factor`, the result is essentially a simple bar plot with a layer labelling the bars by the corresponding `sex`:
 
 ```{r histogram, eval=FALSE}
-h <- l_hist(as.numeric(bone$gender), # note as.numeric(...)
-            binwidth = 1, showBinHandle = FALSE,
-            showStackedColors = TRUE,
-            xlabel = "gender",
+h <- l_hist(bone$sex, 
+            xlabel = "sex",
             linkingGroup="Bone density",
-            title = "Gender (female=1; male=2)"
+            title = "Sex"
             )
 ```
 
-Note that the inspector now shows the histogram in the World View and that the plot section of the Analysis now has options peculiar to a histogram.
+Note that the inspector now shows the histogram (i.e. barplot) in the World View and that the plot section of the Analysis now has options peculiar to a histogram.
 
 The histogram and the scatterplot both have the same `linkingGroup` "Bone density" and the inspector shows that the 2 plots are **linked**.  Selecting the left most bar of the histogram highlights all of the females in both plots.  Switching back and forth between the two bars while observing the scatterplot shows that the pattern for males seems to be shifted slightly to the right of those for the females.
 

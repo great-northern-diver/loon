@@ -159,14 +159,15 @@
 
     <pre class="usage"><span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='kw'>yshows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"frequency"</span>, <span class='st'>"density"</span>), <span class='kw'>showStackedColors</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>origin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>showBinHandle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>, <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>vector with numerical data to perform the binning onx,</p></td>
+      <td><p>vector with numerical data to perform the binning on x,</p></td>
     </tr>
     <tr>
       <th>yshows</th>
@@ -194,6 +195,25 @@ is a factor or a character vector (coerced to factor).</p></td>
       <th>showBinHandle</th>
       <td><p>If <code>TRUE</code>, then an interactive "bin handle" appears on the plot
 whose movement resets the <code>origin</code> and the <code>binwidth</code>.  Default is <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>colour fills of bins (default "grey60"); colours are repeated
+until matching the number x.</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>a logical determining whether x appears or not
+(default is <code>TRUE</code> for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x appears (<code>TRUE</code>)
+and which does not (<code>FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>selected</th>
+      <td><p>a logical determining whether x appears selected at first
+(default is <code>FALSE</code> for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x is (<code>TRUE</code>)
+and which is not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>xlabel</th>

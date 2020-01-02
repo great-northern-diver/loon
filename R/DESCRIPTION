@@ -49,7 +49,6 @@ Suggests:
     knitr,
     rmarkdown, 
     png,
-    ElemStatLearn,
     formatR,
     covr
 BugReports: https://github.com/great-northern-diver/loon/issues

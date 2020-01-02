@@ -1,0 +1,147 @@
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+
+namespace eval ::loon::test {
+    
+    namespace import ::tcltest::*
+    
+    # tclsh all.tcl -file VariableDimensions.test
+    
+    test create-class {} -body {
+
+	::oo::class create ::loon::test::T2 {		
+	    superclass ::loon::classes::VariableDimensions
+	    
+	    constructor {} {
+		
+		next 
+		## n
+		my New_state x double n ""
+		my New_state y double n ""
+		my New_state selected boolean n FALSE
+		my New_state color color n blue
+		my New_state size double n 4
+		my New_state label string n "point label"
+		
+		## p
+		my New_state sequence factor p "" {I II III IV V}		    
+		my New_state direction boolean p 1
+		my New_state p_boolean boolean p TRUE
+
+		## q - fixed
+		my New_state a positive_double q 2
+		my New_state b factor q A {A B C D}
+		
+		## init
+		my SetInitStates n {x y}
+		my SetInitStates p sequence
+		my SetInitStates q a
+		
+		my SetDimFixed q 3
+		
+	    }
+	    
+	    method GetDefaultValue {state length} {
+		if {$state eq "label"} {
+		    return [::loon::listfns::ljoin\
+				[lrepeat $length "point"]\
+				[::loon::listfns::lseq 0 [expr {$length-1}]]]
+		} else {
+		    return [next $state $length]
+		}
+	    }	
+	    
+	}
+	
+	set m [::loon::test::T2 new]
+	
+	return [lmap v {x y selected color size label sequence direction a b} {$m cget -$v}]
+	
+    } -result {{} {} {} {} {} {} {} {} {} {}}
+    
+    
+    test init-1 {} -body {
+	$m configure -selected {1 0} -x {2 3} -y {-1 -3} -color white
+	return [lmap v {x y selected color size label} {$m cget -$v}]
+    } -result {{2 3} {-1 -3} {TRUE FALSE} {{#FFFFFFFFFFFF} #FFFFFFFFFFFF} {4 4} {point0 point1}}
+	
+    test init-2 {} -body {
+	$m configure -sequence {I I II V}
+	return [lmap v {sequence direction} {$m cget -$v}]
+    } -result {{I I II V} {TRUE TRUE TRUE TRUE}}
+    
+    test init-3 {} -body {
+	$m configure -a {9}
+    } -returnCodes error\
+	-result "Illegal length 1 for any of the state a. Length is fixed to 3."
+    
+    test init-4 {} -body {
+	$m configure -a {9 9 7}
+	return [lmap v {a b} {$m cget -$v}]
+    } -result {{9 9 7} {A A A}}
+    
+    test init-5 {} -body {
+	return [lmap s {n p q} {$m cget -$s}]
+    } -result {2 4 3}
+    
+    test illegal-1 {} -body {
+	$m configure -x {3 5 2 -4 2}
+    } -returnCodes error -result "To re-initialize n-dimensional states the following states must be changed together: x, y."
+    
+    test illegal-2 {} -body {
+	$m configure -x {3 5 2 -4 2} -y {1 3}
+    } -returnCodes error -result "The states that can re-initialize n-dimensional states (i.e. x, y) have different speciefied dimensions: 5, 2."
+
+    test illegal-3 {} -body {
+	$m configure -size {4 2 1 3}
+    } -returnCodes error -result "-size has length 4 but length 1 or 2 is expected."
+    
+    test illegal-4 {} -body {
+	$m configure -direction {0 0 1 1 1}
+    } -returnCodes error -result "-direction has length 5 but length 1 or 4 is expected."
+    
+    
+    test which-1 {} -body {
+	$m configure -x {} -y {}
+	$m configure -x {1 2 3 4} -y {9 1 0 3}
+	$m configure -x {-1 -2} -y {-3 -3} -size {3 1} -which {0 3}  
+	return [lmap v {x y selected color size label} {$m cget -$v}]
+    } -result {{-1 2 3 -2} {-3 1 0 -3} {FALSE FALSE FALSE FALSE} {{#00000000FFFF} #00000000FFFF #00000000FFFF #00000000FFFF} {3 4 4 1} {point0 point1 point2 point3}}
+	 
+	
+    test which-2 {} -body {
+	$m configure -selected 1 -which {F F T T} -sequence {I V}
+	return [lmap v {selected sequence} {$m cget -$v}]
+    } -result {{FALSE FALSE TRUE TRUE} {I V}}
+    
+    test which-3 {} -body {
+	$m configure -size 0 -which_n selected
+	return [$m cget -size]
+    } -result {3 4 0 0}
+    
+    test which-p-1 {} -body {
+	$m configure -sequence {I I II III} -direction FALSE -p_boolean {0 0 1 1}
+	return [$m cget -sequence]
+    } -result {I I II III}
+
+    test which-p-2 {} -body {
+	$m configure -which_p p_boolean -direction TRUE -sequence {IV V}
+	return [list [$m cget -direction] [$m cget -sequence]]
+    } -result {{FALSE FALSE TRUE TRUE} {I I IV V}}
+
+    ## careful, direction gets applied because only a warning is thrown.
+    test which-p-3 {} -body {
+	$m configure -which_n p_boolean -direction FALSE
+	return [$m cget -direction]
+    } -result {FALSE FALSE FALSE FALSE}
+    
+
+    cleanupTests
+}
+
+namespace delete ::loon::test

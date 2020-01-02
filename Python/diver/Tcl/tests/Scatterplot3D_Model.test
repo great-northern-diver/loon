@@ -1,0 +1,89 @@
+
+package require tcltest 2.2
+
+eval ::tcltest::configure $argv
+
+lappend auto_path [file dirname [file dirname [file normalize [info script]]]]
+package require loon
+
+namespace eval ::loon::test {
+
+    namespace import ::tcltest::*
+
+    # Avoid floating point precision issues
+    proc matchFloat4DecimalsInProjection { expected actual } {
+        set xExp [dict get $expected x]
+        set yExp [dict get $expected y]
+        set zExp [dict get $expected z]
+        set xAct [dict get $actual x]
+        set yAct [dict get $actual y]
+        set zAct [dict get $actual z]     
+        foreach xe $xExp xa $xAct ye $yExp ya $yAct ze $zExp za $zAct {
+            if {[expr {abs($xe-$xa) > 0.5e-4}] || [expr {abs($ye-$ya) > 0.5e-4}] ||\
+                    [expr {abs($ze-$za) > 0.5e-4}]} {
+                return false
+            }
+        }
+        return true
+    }
+    customMatch fourDecimals ::loon::test::matchFloat4DecimalsInProjection
+    
+    set pi 3.1415926535897931
+    
+    test create-model {} -body {
+	set p [::loon::classes::Scatterplot3D_Model new]
+	return [$p cget -n]
+    } -result {0}
+
+    test init {} -body {
+	$p configure -x {1 2 3} -y {4 5 6} -z {7 8 9} -xlabel "x" -ylabel "y" -zlabel "z"
+	return [$p cget -x]
+    } -result {1 2 3}
+
+    test init-2 {} -body {
+	return [$p cget -y]
+    } -result {4 5 6}
+    
+    test init-3 {} -body {
+	return [$p cget -z]
+    } -result {7 8 9}
+    
+    test projection-identity {} -match fourDecimals -body {
+        return [$p project {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} {0.0 0.0 0.0}]
+    } -result {x {1.0 0.0 0.0} y {0.0 1.0 0.0} z {0.0 0.0 1.0}}
+    
+    test projection-rotatedX {} -match fourDecimals -body {
+        $p configure -rotate3DX $pi -rotate3DY 0 
+        return [$p project {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} {0.0 0.0 0.0}]
+    } -result {x {1.0 0.0 0.0} y {0.0 -1.0 0.0} z {0.0 0.0 -1.0}}
+
+	test projection-rotatedY {} -match fourDecimals -body {
+        $p configure -rotate3DX 0 -rotate3DY $pi
+        return [$p project {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} {0.0 0.0 0.0}]
+    } -result {x {-1.0 0.0 0.0} y {0.0 1.0 0.0} z {0.0 0.0 -1.0}}
+    
+    test projection-rotatedXY {} -match fourDecimals -body {
+        $p configure -rotate3DX $pi -rotate3DY $pi
+        return [$p project {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} {0.0 0.0 0.0}]
+    } -result {x {-1.0 0.0 0.0} y {0.0 -1.0 0.0} z {0.0 0.0 1.0}}
+    
+    test projection-rotatedOffOrigin {} -match fourDecimals -body {
+        $p configure -rotate3DX 0 -rotate3DY $pi
+        return [$p project {1.0 0.0 0.0} {0.0 1.0 0.0} {0.0 0.0 1.0} {1.0 0.0 0.0}]
+    } -result {x {1.0 2.0 2.0} y {0.0 1.0 0.0} z {0.0 0.0 -1.0}}
+    
+    test rotation-reset {} -match fourDecimals -body {
+        $p move resetRotation
+        set out {}
+        foreach state {x y z} {
+            dict set out $state [$p cget -$state]
+        }
+
+        return $out
+    } -result {x {1 2 3} y {4 5 6} z {7 8 9}}
+    
+    cleanupTests
+
+}
+
+namespace delete ::example::test

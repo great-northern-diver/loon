@@ -1011,7 +1011,7 @@ Other vignettes have been developed to cover a range of topics.  These currently
     ```{r, eval=FALSE}
     vignette("teaching-example-smoothing", package = "loon")
     ```
-    This illustrates how to create new interactions in `loon` through more general bindings.  This is done by developing a teaching tool for explaining how smoothing works.  The example data set is `bone` from the `ElemStatLearn` package. 
+    This illustrates how to create new interactions in `loon` through more general bindings.  This is done by developing a teaching tool for explaining how smoothing works.  The example data set is `bone` from the `loon.data` package. 
 
 - Some suggestions on integrating `loon` plots into an Rmarkdown document: "Loon in RMarkdown" via
     ```{r, eval=FALSE}
@@ -1089,12 +1089,11 @@ It is similar to `pairs` plots but allows many many more plots to be displayed. 
 
 There are/will be other packages available which build on `loon`.  Those developed by us are typically prefixed with `loon` (e.g. `loon.ggplot`)
 
-These will typically be on CRAN when ready, but development versions are accessible from our various `github` repositories. For example,
+These will typically be on CRAN when ready, but development versions are accessible from our **great northern diver** `github` repositories. For example,
 
-- [https://github.com/rwoldford](https://github.com/rwoldford)
-- [https://github.com/waddella](https://github.com/waddella)
+- [https://github.com/great-northern-diver](https://github.com/great-northern-diver)
 
-There you can see what is coming up.
+There you can see related packages as well as what is coming up.
 
 ---
 
