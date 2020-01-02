@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layer a lines — l_layer_lines • loon</title>
+<title>Layer lines — l_layer_lines • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Layer a lines — l_layer_lines" />
+<meta property="og:title" content="Layer lines — l_layer_lines" />
 <meta property="og:description" content="Loon's displays that are based on Cartesian coordinates (i.e.
   scatterplot, histogram and graph display) allow for layering visual
   information including polygons, text and rectangles." />
@@ -148,7 +148,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layer a lines</h1>
+    <h1>Layer lines</h1>
     
     <div class="hidden name"><code>l_layer_lines.Rd</code></div>
     </div>
@@ -227,6 +227,16 @@
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>showItemLabels</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_lines</span>(<span class='no'>p</span>, <span class='no'>xcoords</span>, <span class='no'>ycoords</span>, <span class='kw'>itemLabel</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>sUaT</span>), <span class='kw'>color</span><span class='kw'>=</span><span class='no'>region</span>)
+<span class='fu'><a href='l_scaleto_layer.html'>l_scaleto_layer</a></span>(<span class='no'>l</span>)
+
+<span class='co'># Set groups</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>showItemLabels</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_lines</span>(<span class='no'>p</span>,
+                   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>((<span class='fl'>0</span>:<span class='fl'>4</span>)/<span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.5</span>, <span class='fl'>5</span>), (<span class='fl'>10</span>:<span class='fl'>6</span>)/<span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.5</span>, <span class='fl'>5</span>)),
+                   <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.5</span>, <span class='fl'>5</span>), (<span class='fl'>10</span>:<span class='fl'>6</span>/<span class='fl'>10</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>.5</span>, <span class='fl'>5</span>), (<span class='fl'>0</span>:<span class='fl'>4</span>)/<span class='fl'>10</span>),
+                   <span class='kw'>group</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>4</span>),
+                   <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+                   <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='l_getColorList.html'>l_getColorList</a></span>()[<span class='fl'>1</span>:<span class='fl'>5</span>])
 <span class='fu'><a href='l_scaleto_layer.html'>l_scaleto_layer</a></span>(<span class='no'>l</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

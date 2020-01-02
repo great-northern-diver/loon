@@ -158,7 +158,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>l_serialaxes</span>(<span class='no'>data</span>, <span class='no'>sequence</span>, <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"variable"</span>,
-  <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"radial"</span>, <span class='kw'>showAxes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"radial"</span>, <span class='kw'>showAxes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"steelblue"</span>, <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,6 +185,28 @@ how the data is scaled. See Details and Examples for more information.</p></td>
     <tr>
       <th>showAxes</th>
       <td><p>boolean to indicate whether axes should be shown or not</p></td>
+    </tr>
+    <tr>
+      <th>linewidth</th>
+      <td><p>vector with line widths</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>vector with line colors</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>a logical determining whether items appear or not
+(default is <code>TRUE</code> for all items). If a logical vector is given of length
+equal to the number of items, then it identifies which items appear (<code>TRUE</code>)
+and which do not (<code>FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>selected</th>
+      <td><p>a logical determining whether items appear selected at first
+(default is <code>FALSE</code> for all items). If a logical vector is given of length
+equal to the number of items, then it identifies which items are (<code>TRUE</code>)
+and which are not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>parent</th>
