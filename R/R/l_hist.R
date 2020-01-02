@@ -113,7 +113,8 @@ l_hist.factor <-  function(x,
     nlevels <- length(levelNames)
     x <-  unclass(x)  # Get the level numbers as numeric values
     if (is.null(origin) | !is.numeric(origin)) {
-        origin <- min(x)}
+        origin <- min(x, na.rm = TRUE)
+    }
     if (is.null(binwidth) | !is.numeric(binwidth)) {
         uni_x <- unique(x)
         binwidth <- if(length(uni_x) == 1) {
@@ -145,6 +146,7 @@ l_hist.factor <-  function(x,
         text_adjust <- text_adjust - as.integer(text_adjust)
         if(text_adjust <= 0) text_adjust <- text_adjust + 1
     }
+
     text_adjust <- text_adjust - 0.5
 
     l_layer_texts(h, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
