@@ -31,6 +31,10 @@ l_scaleto_world.l_graph <- function(widget) {
     l_scaleto(widget, "world")
 }
 #' @export
+l_scaleto_world.l_hist <- function(widget) {
+    l_scaleto(widget, "world")
+}
+#' @export
 l_scaleto_world.l_compound <- function(widget) {
     lapply(widget,
            function(w) {
@@ -60,6 +64,10 @@ l_scaleto_plot.l_plot <- function(widget) {
 }
 #' @export
 l_scaleto_plot.l_graph <- function(widget) {
+    l_scaleto(widget, "plot")
+}
+#' @export
+l_scaleto_plot.l_hist <- function(widget) {
     l_scaleto(widget, "plot")
 }
 #' @export

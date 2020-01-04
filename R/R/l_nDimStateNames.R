@@ -89,7 +89,6 @@ l_nDimStateNames.character <- function(loon_plot) {
     result
 }
 
-#' @inherit nDimStateNames
 #' @rdname nDimStateNames
 #' @param name A function name you created
 #' @param key Corresponding n dimensional state names for your created function
