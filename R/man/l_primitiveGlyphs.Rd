@@ -39,15 +39,18 @@ Note that the letter \code{'o'} stands for outline only, and the letter
 For more information run: \code{l_help("learn_R_display_plot.html#glyphs")}
 }
 \seealso{
-Other glyph functions: \code{\link{l_glyph_add.default}},
-  \code{\link{l_glyph_add_image}},
-  \code{\link{l_glyph_add_pointrange}},
-  \code{\link{l_glyph_add_polygon}},
-  \code{\link{l_glyph_add_serialaxes}},
-  \code{\link{l_glyph_add_text}},
-  \code{\link{l_glyph_add}}, \code{\link{l_glyph_delete}},
-  \code{\link{l_glyph_getLabel}},
-  \code{\link{l_glyph_getType}}, \code{\link{l_glyph_ids}},
-  \code{\link{l_glyph_relabel}}
+Other glyph functions: 
+\code{\link{l_glyph_add.default}()},
+\code{\link{l_glyph_add_image}()},
+\code{\link{l_glyph_add_pointrange}()},
+\code{\link{l_glyph_add_polygon}()},
+\code{\link{l_glyph_add_serialaxes}()},
+\code{\link{l_glyph_add_text}()},
+\code{\link{l_glyph_add}()},
+\code{\link{l_glyph_delete}()},
+\code{\link{l_glyph_getLabel}()},
+\code{\link{l_glyph_getType}()},
+\code{\link{l_glyph_ids}()},
+\code{\link{l_glyph_relabel}()}
 }
 \concept{glyph functions}

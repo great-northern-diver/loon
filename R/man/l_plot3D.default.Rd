@@ -4,12 +4,30 @@
 \alias{l_plot3D.default}
 \title{The default \code{l_plot} method to create 3d interactive scatterplot}
 \usage{
-\method{l_plot3D}{default}(x, y = NULL, z = NULL,
-  axisScaleFactor = 1, color = "grey60", glyph = "ccircle",
-  size = 4, active = TRUE, selected = FALSE, xlabel, ylabel, zlabel,
-  title, showLabels = TRUE, showScales = FALSE, showGuides = TRUE,
-  guidelines = "white", guidesBackground = "grey92",
-  foreground = "black", background = "white", parent = NULL, ...)
+\method{l_plot3D}{default}(
+  x,
+  y = NULL,
+  z = NULL,
+  axisScaleFactor = 1,
+  color = "grey60",
+  glyph = "ccircle",
+  size = 4,
+  active = TRUE,
+  selected = FALSE,
+  xlabel,
+  ylabel,
+  zlabel,
+  title,
+  showLabels = TRUE,
+  showScales = FALSE,
+  showGuides = TRUE,
+  guidelines = "white",
+  guidesBackground = "grey92",
+  foreground = "black",
+  background = "white",
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{the x, y and z arguments provide the x, y and z coordinates for the plot.
@@ -119,7 +137,8 @@ l_configure(p2, linkingGroup = "quakes", sync = "push")
 
 }
 \seealso{
-Other three-dimensional plotting functions: \code{\link{l_plot3D}},
-  \code{\link{l_scale3D}}
+Other three-dimensional plotting functions: 
+\code{\link{l_plot3D}()},
+\code{\link{l_scale3D}()}
 }
 \concept{three-dimensional plotting functions}

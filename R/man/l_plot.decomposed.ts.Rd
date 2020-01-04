@@ -4,10 +4,23 @@
 \alias{l_plot.decomposed.ts}
 \title{The \code{l_plot} method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)}
 \usage{
-\method{l_plot}{decomposed.ts}(x, y = NULL, xlabel = NULL,
-  ylabel = NULL, title = NULL, tk_title = NULL, color = NULL,
-  size = 1, lcolor = NULL, linewidth = 1, linkingGroup = NULL,
-  showScales = TRUE, showGuides = TRUE, showLabels = TRUE, ...)
+\method{l_plot}{decomposed.ts}(
+  x,
+  y = NULL,
+  xlabel = NULL,
+  ylabel = NULL,
+  title = NULL,
+  tk_title = NULL,
+  color = NULL,
+  size = 1,
+  lcolor = NULL,
+  linewidth = 1,
+  linkingGroup = NULL,
+  showScales = TRUE,
+  showGuides = TRUE,
+  showLabels = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{a \code{decomposed.ts} object}
@@ -64,12 +77,15 @@ names(p$seasonal)
 p$seasonal['color'] <- "steelblue"
 }
 \seealso{
-Other two-dimensional plotting functions: \code{\link{l_plot.default}},
-  \code{\link{l_plot.density}}, \code{\link{l_plot.stl}},
-  \code{\link{l_plot}}
+Other two-dimensional plotting functions: 
+\code{\link{l_plot.default}()},
+\code{\link{l_plot.density}()},
+\code{\link{l_plot.stl}()},
+\code{\link{l_plot}()}
 
-Other time series decomposition plotting functions: \code{\link{l_plot.stl}},
-  \code{\link{l_plot_ts}}
+Other time series decomposition plotting functions: 
+\code{\link{l_plot.stl}()},
+\code{\link{l_plot_ts}()}
 }
 \concept{time series decomposition plotting functions}
 \concept{two-dimensional plotting functions}

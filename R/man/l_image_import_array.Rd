@@ -4,8 +4,14 @@
 \alias{l_image_import_array}
 \title{Import Greyscale Images as Tcl images from an Array}
 \usage{
-l_image_import_array(array, width, height, img_in_row = TRUE,
-  invert = FALSE, rotate = 0)
+l_image_import_array(
+  array,
+  width,
+  height,
+  img_in_row = TRUE,
+  invert = FALSE,
+  rotate = 0
+)
 }
 \arguments{
 \item{array}{of 0-255 grayscale value data.}

@@ -4,9 +4,18 @@
 \alias{l_layer_rectangle}
 \title{Layer a rectangle}
 \usage{
-l_layer_rectangle(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "rectangle", parent = "root", index = 0,
-  ...)
+l_layer_rectangle(
+  widget,
+  x,
+  y,
+  color = "gray80",
+  linecolor = "black",
+  linewidth = 1,
+  label = "rectangle",
+  parent = "root",
+  index = 0,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

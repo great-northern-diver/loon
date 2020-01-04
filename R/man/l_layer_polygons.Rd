@@ -4,9 +4,19 @@
 \alias{l_layer_polygons}
 \title{Layer polygons}
 \usage{
-l_layer_polygons(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "polygons", parent = "root", index = 0,
-  group = NULL, ...)
+l_layer_polygons(
+  widget,
+  x,
+  y,
+  color = "gray80",
+  linecolor = "black",
+  linewidth = 1,
+  label = "polygons",
+  parent = "root",
+  index = 0,
+  group = NULL,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

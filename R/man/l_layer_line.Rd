@@ -4,8 +4,18 @@
 \alias{l_layer_line}
 \title{Layer a line}
 \usage{
-l_layer_line(widget, x, y = NULL, color = "black", linewidth = 1,
-  dash = "", label = "line", parent = "root", index = 0, ...)
+l_layer_line(
+  widget,
+  x,
+  y = NULL,
+  color = "black",
+  linewidth = 1,
+  dash = "",
+  label = "line",
+  parent = "root",
+  index = 0,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

@@ -4,8 +4,16 @@
 \alias{l_graphswitch_add.default}
 \title{Add a graph that is defined by node names and a from-to edges list}
 \usage{
-\method{l_graphswitch_add}{default}(widget, graph, from, to, isDirected,
-  label = "", index = "end", ...)
+\method{l_graphswitch_add}{default}(
+  widget,
+  graph,
+  from,
+  to,
+  isDirected,
+  label = "",
+  index = "end",
+  ...
+)
 }
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}

@@ -95,13 +95,17 @@ plot(p)
 \seealso{
 \code{\link{l_plot_arguments}} and \code{\link{l_plot.default}}.
 
-Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
-  \code{\link{l_plot.default}},
-  \code{\link{l_plot.density}}, \code{\link{l_plot.stl}}
+Other two-dimensional plotting functions: 
+\code{\link{l_plot.decomposed.ts}()},
+\code{\link{l_plot.default}()},
+\code{\link{l_plot.density}()},
+\code{\link{l_plot.stl}()}
 
-Other loon interactive states: \code{\link{l_info_states}},
-  \code{\link{l_plot.default}},
-  \code{\link{l_state_names}}, \code{\link{names.loon}}
+Other loon interactive states: 
+\code{\link{l_info_states}()},
+\code{\link{l_plot.default}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
 }
 \concept{loon interactive states}
 \concept{two-dimensional plotting functions}

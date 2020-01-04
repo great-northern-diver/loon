@@ -4,8 +4,14 @@
 \alias{l_copyStates}
 \title{A generic function to transfer the values of the states of one `loon` structure to another.}
 \usage{
-l_copyStates(source, target, states = NULL, exclude = NULL,
-  excludeBasicStates = TRUE, returnNames = FALSE)
+l_copyStates(
+  source,
+  target,
+  states = NULL,
+  exclude = NULL,
+  excludeBasicStates = TRUE,
+  returnNames = FALSE
+)
 }
 \arguments{
 \item{source}{the `loon` object providing the values of the states.}

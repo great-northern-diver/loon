@@ -17,26 +17,19 @@
 \usage{
 loonGrob(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_compound}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_compound}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_layer_graph}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_layer_graph}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_layer_histogram}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_layer_histogram}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_layer_scatterplot}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_layer_scatterplot}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_navgraph}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_navgraph}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_navigator}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_navigator}(target, name = NULL, gp = NULL, vp = NULL)
 
-\method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL,
-  vp = NULL)
+\method{loonGrob}{l_serialaxes}(target, name = NULL, gp = NULL, vp = NULL)
 
 \method{loonGrob}{l_ts}(target, name = NULL, gp = NULL, vp = NULL)
 }

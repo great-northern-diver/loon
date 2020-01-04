@@ -4,9 +4,19 @@
 \alias{l_layer_rasterImage}
 \title{Layer a Raster Image}
 \usage{
-l_layer_rasterImage(widget, image, xleft, ybottom, xright, ytop,
-  angle = 0, interpolate = FALSE, parent = "root", index = "end",
-  ...)
+l_layer_rasterImage(
+  widget,
+  image,
+  xleft,
+  ybottom,
+  xright,
+  ytop,
+  angle = 0,
+  interpolate = FALSE,
+  parent = "root",
+  index = "end",
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
