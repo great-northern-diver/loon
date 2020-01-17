@@ -141,6 +141,7 @@ loonGrob.l_plot3D <- function(target,  name = NULL, gp = NULL, vp = NULL) {
   layers_grob <- loonGrob(rl, name = "l_plot_layers")
 
   axes_coords <- target["axesCoords"]
+  radius <- scaleFator2radius(target["axisScaleFactor"])
 
   adjust_brightness <- function(z_coord, r, g, b) {
     change <- as.integer(100 + 80 * z_coord)
@@ -158,16 +159,16 @@ loonGrob.l_plot3D <- function(target,  name = NULL, gp = NULL, vp = NULL) {
   z_color <- adjust_brightness(axes_coords[[3]][3], 0, 255, 0)
 
   gTree(children = gList(cartesian2dGrob(target, layers_grob, name = "l_plot3D"),
-                         linesGrob(x = c(0.5, 0.5 + 0.08*axes_coords[[1]][1]),
-                                   y =  c(0.5, 0.5 + 0.08*axes_coords[[2]][1]),
+                         linesGrob(x = c(0.5, 0.5 + radius*axes_coords[[1]][1]),
+                                   y =  c(0.5, 0.5 + radius*axes_coords[[2]][1]),
                                    gp = gpar(col = x_color, lwd=1),
                                    name = "3d x axis"),
-                         linesGrob(x = c(0.5,0.5 + 0.08*axes_coords[[1]][2]),
-                                   y =  c(0.5,0.5 + 0.08*axes_coords[[2]][2]),
+                         linesGrob(x = c(0.5,0.5 + radius*axes_coords[[1]][2]),
+                                   y =  c(0.5,0.5 + radius*axes_coords[[2]][2]),
                                    gp = gpar(col = y_color, lwd=1),
                                    name = "3d y axis"),
-                         linesGrob(x = c(0.5,0.5 + 0.08*axes_coords[[1]][3]),
-                                   y =  c(0.5,0.5 + 0.08*axes_coords[[2]][3]),
+                         linesGrob(x = c(0.5,0.5 + radius*axes_coords[[1]][3]),
+                                   y =  c(0.5,0.5 + radius*axes_coords[[2]][3]),
                                    gp = gpar(col = z_color, lwd=1),
                                    name = "3d z axis")),
         name = name, gp = gp, vp = vp)
@@ -1358,4 +1359,8 @@ dash2lty <- function(x) {
     x <- as.numeric(x)
     x[1]
   }
+}
+
+scaleFator2radius <- function(x) {
+  x/12.5
 }
