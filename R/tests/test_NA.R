@@ -14,11 +14,14 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         group1 <- sample(1:50, 100, replace = TRUE)[sample(1:100, 100)]
         group2 <- sample(1:2, 100, replace = TRUE)[sample(1:100, 100)]
         ########## l_plot ##########
-        expect_warning(l_plot(x, y, color = color, size = size))
+        expect_warning(l_plot(x, y, color = color, size = size,
+                              linkingKey = linkingKey))
         ########## l_plot3D ##########
-        expect_warning(l_plot3D(x, y, y, color = color, size = size))
+        expect_warning(l_plot3D(x, y, y, color = color, size = size,
+                                linkingKey = linkingKey))
         ########## l_hist ##########
-        expect_warning(l_hist(x, color = color))
+        expect_warning(l_hist(x, color = color,
+                              linkingKey = linkingKey))
         ########## l_serialaxes ##########
         expect_warning(l_serialaxes(data = data.frame(x = x, y = y),
                                     linkingKey = linkingKey))
