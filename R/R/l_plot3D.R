@@ -320,6 +320,9 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             gsub("\"", "", deparse(substitute(z)))
 
         xyz <- xyz.coords(x, y, z, xlabel, ylabel, zlabel)
+        x <- xyz$x
+        y <- xyz$y
+        z <- xyz$z
 
         if (is.null(xyz$xlab))
             xyz$xlab <- ""
@@ -379,42 +382,55 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             if(is.na(glyph)) glyph <- "ccircle"
         }
 
-        x <- xyz$x
-        y <- xyz$y
-        z <- xyz$z
-
         args <- list(...)
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
+
         linkingKey <- args[["linkingKey"]]
         itemLabel <- args[["itemLabel"]]
         tag <- args[["tag"]]
         l_na_omit("l_plot3D", ...)
 
-        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D',
-                                parent,
-                                x = x,
-                                y = y,
-                                z = z,
-                                xlabel=xyz$xlab,
-                                ylabel=xyz$ylab,
-                                zlabel=xyz$zlab,
-                                title = title,
-                                color = color,
-                                glyph = glyph,
-                                size = size,
-                                active = active,
-                                selected = selected,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background,
-                                ...,
-                                linkingKey = linkingKey,
-                                itemLabel = itemLabel,
-                                tag = tag)
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::plot3D',
+                    factory_path = 'plot3D',
+                    factory_window_title = 'loon scatterplot3D',
+                    parent = parent,
+                    x = x,
+                    y = y,
+                    z = z,
+                    xlabel = xyz$xlab,
+                    ylabel = xyz$ylab,
+                    zlabel = xyz$zlab,
+                    title = title,
+                    color = color,
+                    glyph = glyph,
+                    size = size,
+                    active = active,
+                    selected = selected,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
+                    guidelines = guidelines,
+                    guidesBackground = guidesBackground,
+                    foreground = foreground,
+                    background = background,
+                    linkingKey = linkingKey,
+                    itemLabel = itemLabel,
+                    tag = tag
+                )
+            )
+        )
 
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+        }
     }
 
     class(plot) <- c("l_plot3D", "l_plot", class(plot))

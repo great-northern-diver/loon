@@ -266,25 +266,44 @@ l_serialaxes <- function(data,
     }
 
     args <- list(...)
+    linkingGroup <- args[["linkingGroup"]]
+    args$linkingGroup <- NULL
+
     linkingKey <- args[["linkingKey"]]
     itemLabel <- args[["itemLabel"]]
     tag <- args[["tag"]]
     l_na_omit("l_serialaxes", ...)
 
-    plot <- loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
-                            data=l_data(data),
-                            sequence=sequence,
-                            showAxes=showAxes,
-                            scaling=scaling,
-                            axesLayout=axesLayout,
-                            linewidth = linewidth,
-                            color = color,
-                            active = active,
-                            selected = selected,
-                            ...,
-                            linkingKey = linkingKey,
-                            itemLabel = itemLabel,
-                            tag = tag)
+    plot <- do.call(
+        loonPlotFactory,
+        c(
+            args,
+            list(
+                factory_tclcmd = '::loon::serialaxes',
+                factory_path = 'serialaxes',
+                factory_window_title = 'loon serialaxes plot',
+                parent = parent,
+                data = l_data(data),
+                sequence = sequence,
+                showAxes = showAxes,
+                scaling = scaling,
+                axesLayout = axesLayout,
+                linewidth = linewidth,
+                color = color,
+                active = active,
+                selected = selected,
+                linkingKey = linkingKey,
+                itemLabel = itemLabel,
+                tag = tag
+            )
+        )
+    )
+
+    if(!is.null(linkingGroup)) {
+        l_configure(plot,
+                    linkingGroup = linkingGroup,
+                    sync = ifelse(is.null(args$sync), "pull", args$sync))
+    }
 
     class(plot) <- c("l_serialaxes", class(plot))
 

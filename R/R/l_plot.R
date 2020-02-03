@@ -317,39 +317,54 @@ l_plot.default <-  function(x, y = NULL,
         } else {
             if(is.na(glyph)) glyph <- "ccircle"
         }
+        # linkingGroup is set after the plot is created
+        args <- list(...)
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
 
         # l_na_omit returns nothing
         # Variables in this environment will be checked (NA, NaN, Inf, -Inf) and
         # modified after l_na_omit is called.
-        args <- list(...)
         linkingKey <- args[["linkingKey"]]
         itemLabel <- args[["itemLabel"]]
         tag <- args[["tag"]]
         l_na_omit("l_plot.default", ...)
 
-        plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
-                                parent,
-                                x = x, y = y,
-                                color = color,
-                                glyph = glyph,
-                                size = size,
-                                active = active,
-                                selected = selected,
-                                xlabel = xy$xlab,
-                                ylabel = xy$ylab,
-                                title = title,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background,
-                                ...,
-                                linkingKey = linkingKey,
-                                itemLabel = itemLabel,
-                                tag = tag)
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(factory_tclcmd = '::loon::plot',
+                     factory_path = 'plot',
+                     factory_window_title = 'loon scatterplot',
+                     parent = parent,
+                     x = x, y = y,
+                     color = color,
+                     glyph = glyph,
+                     size = size,
+                     active = active,
+                     selected = selected,
+                     xlabel = xy$xlab,
+                     ylabel = xy$ylab,
+                     title = title,
+                     showLabels = showLabels,
+                     showScales = showScales,
+                     showGuides = showGuides,
+                     guidelines = guidelines,
+                     guidesBackground = guidesBackground,
+                     foreground = foreground,
+                     background = background,
+                     linkingKey = linkingKey,
+                     itemLabel = itemLabel,
+                     tag = tag)
+            )
+        )
 
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+        }
     }
 
     class(plot) <- c("l_plot", class(plot))

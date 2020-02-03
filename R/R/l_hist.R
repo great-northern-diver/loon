@@ -221,9 +221,6 @@ l_hist.default <-  function(x,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 ...)
-        class(plot) <- c("l_hist", class(plot))
-
-
     } else {
 
         # x should be a vector and a vector should return NULL when we call dim(x)
@@ -282,24 +279,42 @@ l_hist.default <-  function(x,
             binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
-        plot <- loonPlotFactory('::loon::histogram',
-                                'hist',
-                                'loon histogram',
-                                parent,
-                                x = x,
-                                yshows = yshows,
-                                showStackedColors = showStackedColors,
-                                origin = origin,
-                                binwidth=binwidth,
-                                color = color,
-                                active = active,
-                                selected = selected,
-                                showBinHandle = showBinHandle,
-                                xlabel = xlabel,
-                                ...,
-                                linkingKey = linkingKey)
-        class(plot) <- c("l_hist", class(plot))
+        args <- list(...)
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
+
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::histogram',
+                    factory_path = 'hist',
+                    factory_window_title = 'loon histogram',
+                    parent = parent,
+                    x = x,
+                    yshows = yshows,
+                    showStackedColors = showStackedColors,
+                    origin = origin,
+                    binwidth=binwidth,
+                    color = color,
+                    active = active,
+                    selected = selected,
+                    showBinHandle = showBinHandle,
+                    xlabel = xlabel,
+                    linkingKey = linkingKey
+                )
+            )
+        )
+
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+        }
     }
+
+    class(plot) <- c("l_hist", class(plot))
     return(plot)
 }
 
