@@ -313,7 +313,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
         }
   )
 
-  ## Column and Row wheight such that the cells expand
+  ## Column and Row weight such that the cells expand
   for (i in seq(0, cells)) {
     tkgrid.columnconfigure(child, i, weight = 1)
     tkgrid.rowconfigure(child, i, weight = 1)
