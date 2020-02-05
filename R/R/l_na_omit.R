@@ -49,7 +49,7 @@ l_na_omit <- function(w, ..., envir = parent.frame()) {
     if(length(no_valid_index) > 0) {
         warning(
             paste0("Removed {",
-                   no_valid_index,
+                   paste0(no_valid_index, collapse = ","),
                    "} ",
                    length(no_valid_index),
                    " observations containing missing values"),
