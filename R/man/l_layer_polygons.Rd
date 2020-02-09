@@ -6,7 +6,7 @@
 \usage{
 l_layer_polygons(widget, x, y, color = "gray80", linecolor = "black",
   linewidth = 1, label = "polygons", parent = "root", index = 0,
-  group = NULL, ...)
+  group = NULL, active = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -29,6 +29,9 @@ fill is transparant}
 \item{index}{of the newly added layer in its parent group}
 
 \item{group}{separate x vector or y vector into a list by group.}
+
+\item{active}{a logical determining whether objects appear or not
+(default is \code{TRUE} for all).}
 
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}

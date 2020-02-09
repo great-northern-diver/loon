@@ -5,7 +5,8 @@
 \title{Layer lines}
 \usage{
 l_layer_lines(widget, x, y, color = "black", linewidth = 1,
-  label = "lines", parent = "root", index = 0, group = NULL, ...)
+  label = "lines", parent = "root", index = 0, group = NULL,
+  active = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -25,6 +26,9 @@ l_layer_lines(widget, x, y, color = "black", linewidth = 1,
 \item{index}{of the newly added layer in its parent group}
 
 \item{group}{separate x vector or y vector into a list by group.}
+
+\item{active}{a logical determining whether objects appear or not
+(default is \code{TRUE} for all).}
 
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}

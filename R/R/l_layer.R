@@ -279,7 +279,8 @@ l_layer_polygon <- function(widget, x, y,
 #' @param ... additional state initialization arguments, see
 #'   \code{\link{l_info_states}}
 #' @param group separate x vector or y vector into a list by group.
-#'
+#' @param active a logical determining whether objects appear or not
+#' (default is \code{TRUE} for all).
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'
@@ -314,7 +315,7 @@ l_layer_polygon <- function(widget, x, y,
 l_layer_polygons <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="polygons", parent="root", index=0,
-                             group = NULL, ...) {
+                             group = NULL, active = TRUE, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
 
@@ -339,20 +340,29 @@ l_layer_polygons <- function(widget, x, y,
     }
 
     args <- list(...)
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_layer_polygons", ...)
+    args$x <- x
+    args$y <- y
+    args$color <- color
+    args$linecolor <- linecolor
+    args$linewidth <- linewidth
+    args$active <- active
+    args <- l_na_omit("l_layer_polygons", args)
+    args$x <- l_Rlist2nestedTclList(args$x)
+    args$y <- l_Rlist2nestedTclList(args$y)
 
-    l_layer_add(widget, 'polygons',
-                x=l_Rlist2nestedTclList(x),
-                y=l_Rlist2nestedTclList(y),
-                color=color,
-                linecolor=linecolor,
-                linewidth=linewidth,
-                label=label, parent=parent, index=index,
-                ...,
-                itemLabel = itemLabel,
-                tag = tag)
+    do.call(
+        l_layer_add,
+        c(
+            args,
+            list(
+                widget = widget,
+                type = 'polygons',
+                label=label,
+                parent=parent,
+                index=index
+            )
+        )
+    )
 }
 
 
@@ -443,7 +453,7 @@ l_layer_rectangle <- function(widget, x, y,
 l_layer_rectangles <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="rectangles", parent="root", index=0,
-                             group = NULL, ...) {
+                             group = NULL, active = TRUE, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
 
@@ -468,20 +478,29 @@ l_layer_rectangles <- function(widget, x, y,
     }
 
     args <- list(...)
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_layer_rectangles", ...)
+    args$x <- x
+    args$y <- y
+    args$color <- color
+    args$linecolor <- linecolor
+    args$linewidth <- linewidth
+    args$active <- active
+    args <- l_na_omit("l_layer_rectangles", args)
+    args$x <- l_Rlist2nestedTclList(args$x)
+    args$y <- l_Rlist2nestedTclList(args$y)
 
-    l_layer_add(widget, 'rectangles',
-                x=l_Rlist2nestedTclList(x),
-                y=l_Rlist2nestedTclList(y),
-                color=color,
-                linecolor=linecolor,
-                linewidth=linewidth,
-                label=label, parent=parent, index=index,
-                ...,
-                itemLabel = itemLabel,
-                tag = tag)
+    do.call(
+        l_layer_add,
+        c(
+            args,
+            list(
+                widget = widget,
+                type = 'rectangles',
+                label=label,
+                parent=parent,
+                index=index
+            )
+        )
+    )
 }
 
 
@@ -623,7 +642,7 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,
                           label="lines", parent="root", index=0,
-                          group = NULL, ...) {
+                          group = NULL, active = TRUE, ...) {
     l_throwErrorIfNotLoonWidget(widget)
 
     # inherits coords from widget
@@ -647,19 +666,28 @@ l_layer_lines <- function(widget, x, y,
     }
 
     args <- list(...)
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_layer_lines", ...)
+    args$x <- x
+    args$y <- y
+    args$color <- color
+    args$linewidth <- linewidth
+    args$active <- active
+    args <- l_na_omit("l_layer_lines", args)
+    args$x <- l_Rlist2nestedTclList(args$x)
+    args$y <- l_Rlist2nestedTclList(args$y)
 
-    l_layer_add(widget, 'lines',
-                x=l_Rlist2nestedTclList(x),
-                y=l_Rlist2nestedTclList(y),
-                color=color,
-                linewidth=linewidth,
-                label=label, parent=parent, index=index,
-                ...,
-                itemLabel = itemLabel,
-                tag = tag)
+    do.call(
+        l_layer_add,
+        c(
+            args,
+            list(
+                widget = widget,
+                type = 'lines',
+                label=label,
+                parent=parent,
+                index=index
+            )
+        )
+    )
 }
 
 #' @templateVar type oval
@@ -707,7 +735,8 @@ l_layer_oval <- function(widget, x, y,
 #' @inheritParams l_layer_line
 #' @param color color of points
 #' @param size size point, as for scatterplot model layer
-#'
+#' @param active a logical determining whether objects appear or not
+#' (default is \code{TRUE} for all).
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'
@@ -717,7 +746,7 @@ l_layer_oval <- function(widget, x, y,
 #' @export
 #'
 l_layer_points <- function(widget, x, y = NULL, color="gray60", size=6,
-                           label="points", parent="root", index=0, ...) {
+                           label="points", parent="root", index=0, active = TRUE, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
 
@@ -734,17 +763,26 @@ l_layer_points <- function(widget, x, y = NULL, color="gray60", size=6,
     y <- xy$y
 
     args <- list(...)
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_layer_points", ...)
+    args$x <- x
+    args$y <- y
+    args$color <- color
+    args$size <- size
+    args$active <- active
+    args <- l_na_omit("l_layer_points", args)
 
-    l_layer_add(widget, 'points',
-                x= x, y= y, color=color,
-                size=size,
-                label=label, parent=parent, index=index,
-                ...,
-                itemLabel = itemLabel,
-                tag = tag)
+    do.call(
+        l_layer_add,
+        c(
+            args,
+            list(
+                widget = widget,
+                type = 'points',
+                label=label,
+                parent=parent,
+                index=index
+            )
+        )
+    )
 }
 
 #' @templateVar type text
@@ -801,6 +839,18 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #' @param color color of text
 #' @param size font size
 #' @param angle text rotation
+#' @param anchor specifies how the information in a text is to be displayed in the widget.
+#' Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center).
+#' For example, "nw" means display the information such that its top-left corner is at the
+#' top-left corner of the widget.
+#' @param justify when there are multiple lines of text displayed in a widget,
+#' this option determines how the lines line up with each other.
+#' Must be one of c("left", "center", "right").
+#' "Left" means that the lines' left edges all line up,
+#' "center" means that the lines' centers are aligned,
+#' and "right" means that the lines' right edges line up.
+#' @param active a logical determining whether objects appear or not
+#' (default is \code{TRUE} for all).
 #'
 #'
 #' @description Layer a vector of character strings.
@@ -822,7 +872,8 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #' l <- l_layer_texts(p, x=1:3, y=3:1, text=c("This is", "a", "test"), size=20)
 #' l_scaleto_world(p)
 l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
-                         label="texts", parent="root", index=0, ...) {
+                          anchor = "center", justify = "center", label="texts",
+                          parent="root", index=0, active = TRUE, ...) {
 
     l_throwErrorIfNotLoonWidget(widget)
 
@@ -833,18 +884,30 @@ l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
     xy <- try(xy.coords(x, y))
     x <- xy$x
     y <- xy$y
-    args <- list(...)
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_layer_texts", ...)
 
-    l_layer_add(widget, 'texts',
-                x = x, y = y, text=text, color=color,
-                size=size, angle=angle,
-                label=label, parent=parent, index=index,
-                ... ,
-                itemLabel = itemLabel,
-                tag = tag)
+    args <- list(...)
+    args$x <- x
+    args$y <- y
+    args$text <- text
+    args$color <- color
+    args$size <- size
+    args$angle <- angle
+    args$active <- active
+    args <- l_na_omit("l_layer_texts", args)
+
+    do.call(
+        l_layer_add,
+        c(
+            args,
+            list(
+                widget = widget,
+                type = 'texts',
+                label=label,
+                parent=parent,
+                index=index
+            )
+        )
+    )
 }
 
 

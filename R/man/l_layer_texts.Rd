@@ -5,7 +5,8 @@
 \title{Layer texts}
 \usage{
 l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
-  angle = 0, label = "texts", parent = "root", index = 0, ...)
+  angle = 0, anchor = "center", justify = "center",
+  label = "texts", parent = "root", index = 0, active = TRUE, ...)
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -22,11 +23,26 @@ l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
 
 \item{angle}{text rotation}
 
+\item{anchor}{specifies how the information in a text is to be displayed in the widget.
+Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center).
+For example, "nw" means display the information such that its top-left corner is at the
+top-left corner of the widget.}
+
+\item{justify}{when there are multiple lines of text displayed in a widget,
+this option determines how the lines line up with each other.
+Must be one of c("left", "center", "right").
+"Left" means that the lines' left edges all line up,
+"center" means that the lines' centers are aligned,
+and "right" means that the lines' right edges line up.}
+
 \item{label}{label used in the layers inspector}
 
 \item{parent}{group layer}
 
 \item{index}{of the newly added layer in its parent group}
+
+\item{active}{a logical determining whether objects appear or not
+(default is \code{TRUE} for all).}
 
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}
