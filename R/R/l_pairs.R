@@ -103,13 +103,14 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   if(is.null(parent)) {
     new.toplevel <- TRUE
     parent <- l_toplevel()
-    title <- paste("loon scatterplot matrix for",
-                   deparse(substitute(data)), "data")
-    tktitle(parent) <- title
   }
 
-  child <- as.character(tcl('frame', l_subwin(parent, 'pairs')))
+  subwin <- l_subwin(parent, 'pairs')
+  child <- as.character(tcl('frame', subwin))
 
+  title <- paste("loon scatterplot matrix for",
+                 deparse(substitute(data)), "data", subwin)
+  tktitle(parent) <- title
   ## parent for individual scatterplots
   args[['parent']] <- child
 
