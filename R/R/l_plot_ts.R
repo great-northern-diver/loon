@@ -121,8 +121,9 @@ l_plot_ts <- function(x,
     }
 
     parent <- l_toplevel()
-    tktitle(parent) <- tk_title
-    child <- as.character(tcl('frame', l_subwin(parent, 'ts')))
+    subwin <- l_subwin(parent, 'ts')
+    tktitle(parent) <- paste(tk_title, subwin)
+    child <- as.character(tcl('frame', subwin))
 
     p1 <- l_plot(parent = child,
                  x = xy.raw$x,
@@ -195,8 +196,6 @@ l_plot_ts <- function(x,
                        y = xy.remainder$y,
                        color = lcolor, linewidth = linewidth,
                        index="end")
-
-
 
     ## make the canvas resize to fairly small
     plots <- list(p1,p2,p3,p4)

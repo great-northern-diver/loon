@@ -1,25 +1,37 @@
-l_na_omit <- function(w, ..., envir = parent.frame()) {
+l_na_omit <- function(w, args) {
+
+    is_not_valid <- function(x) {
+        if(is.numeric(x))
+            !is.finite(x)
+        else
+            is.na(x)
+    }
 
     n_dim_states <- l_nDimStateNames(w)
+
+    # what is the n?
+    x <- args[["x"]]
+    n <- if(is.null(x)) {
+        # serialaxes?
+        x <- args[["data"]]
+        if(is.null(x)) integer(0) else dim(x)[1]
+    } else {
+        length(x)
+    }
 
     ## NA index
     no_valid_index <- lapply(n_dim_states,
                              function(state) {
 
-                                 value <- .get(state, envir = envir)
+                                 value <- args[[state]]
 
                                  if(is.null(value)) {
-                                     # maybe in '...' ?
-                                     args <- list(...)
-                                     value <- args[[state]]
-                                     if(is.null(value)) {
-                                         # no defined
-                                         NULL
-                                     } else {
-                                         # Not NA, NaN, Inf or -Inf
-                                         which(is_not_valid(value))
-                                     }
+                                     NULL
                                  } else if(is.data.frame(value)) {
+
+                                     if(dim(value)[1] != n)
+                                         stop(state, " has unexpected length")
+
                                      which(apply(value, 1, function(x) any(is_not_valid(x))))
                                  } else if(is.list(value)) {
 
@@ -30,26 +42,23 @@ l_na_omit <- function(w, ..., envir = parent.frame()) {
                                                 }, logical(1))
                                      )
                                  } else {
-                                     if(length(value) > 1)
+                                     if(length(value) > 1) {
+
+                                         if(length(value) != n)
+                                             stop(state, " has unexpected length")
+
                                          which(is_not_valid(value))
+                                     }
                                  }
                              })
 
     no_valid_index <- unique(unlist(no_valid_index))
-    x <- .get("x", envir = envir)
-    n <- if(is.null(x)) {
-        # serialaxes?
-        x <- .get("data", envir = envir)
-        if(is.null(x)) integer(0) else dim(x)[1]
-    } else {
-        length(x)
-    }
 
     # Give a warning if any missing values appear
     if(length(no_valid_index) > 0) {
         warning(
             paste0("Removed {",
-                   paste0(no_valid_index, collapse = ","),
+                   paste0(sort(no_valid_index), collapse = ","),
                    "} ",
                    length(no_valid_index),
                    " observations containing missing values"),
@@ -64,67 +73,46 @@ l_na_omit <- function(w, ..., envir = parent.frame()) {
     if(valid_index_len == 0)
         warning("No valid input", call. = FALSE)
 
+    seq_n <- function(n, char = "") {
+
+        if(char == "linkingKey") char <- ""
+        if(char == "xTemp") return(NULL)
+        if(char == "yTemp") return(NULL)
+
+        if(n > 0)
+            paste0(char, (seq_len(n)-1))
+        else character(0)
+    }
+
     lapply(n_dim_states,
            function(state) {
-               value <- .get(state, envir = envir)
+
+               value <- args[[state]]
 
                if(is.null(value)) {
 
-                   args <- list(...)
-                   value <- args[[state]]
-                   if(is.null(value)) {
-                       # state is defined in ..., like linkingKey, tag, itemLabel, etc
-                       if(!state %in% formalArgs(w)) {
-                           assign(state,
-                                  seq_n(n, char = state)[valid_index],
-                                  envir = envir)
-                       }
-                   } else
-                       assign(state, value[valid_index], envir = envir)
+                   # state is defined in ..., like linkingKey, tag, itemLabel, etc
+                   if(!state %in% formalArgs(w))
+                       args[[state]] <<- seq_n(n, char = state)[valid_index]
 
                } else if(is.data.frame(value)) {
 
-                   assign(state, value[valid_index, ], envir = envir)
+                   args[[state]] <<- value[valid_index, ]
 
                } else if(is.list(value)) {
 
-                   assign(state, value[valid_index], envir = envir)
+                   args[[state]] <<- value[valid_index]
 
                } else {
                    if(length(value) > 1)
-                       assign(state, value[valid_index], envir = envir)
+                       args[[state]] <<- value[valid_index]
                    else
-                       if(valid_index_len == 0) assign(state, character(0), envir = envir)
+                       if(valid_index_len == 0) args[[state]] <<- character(0)
                }
            })
 
-    return(NULL)
-}
+    # remove NULL
+    args <- Filter(Negate(is.null), args)
 
-is_not_valid <- function(x) {
-    if(is.numeric(x))
-        !is.finite(x)
-    else
-        is.na(x)
-}
-
-.get <- function(x, envir = as.environment(-1), mode = "any", ifnotfound,
-                 inherits = FALSE) {
-
-    if(missing(ifnotfound))
-        ifnotfound <- list(NULL)
-
-    mget(x = x, envir = envir, mode = mode,
-         ifnotfound = ifnotfound,
-         inherits = inherits)[[x]]
-
-}
-
-seq_n <- function(n, char = "") {
-
-    if(char == "linkingKey") char <- ""
-
-    if(n > 0)
-        paste0(char, (seq_len(n)-1))
-    else character(0)
+    return(args)
 }

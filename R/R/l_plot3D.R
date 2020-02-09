@@ -333,6 +333,30 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
 
         if (missing(title)) { title <- "" }
 
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+
+            if(length(size) != 1) {
+                sync <- "push"
+            } else {
+                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
+            }
+
+            if(length(glyph) != 1) {
+                sync <- "push"
+            } else {
+                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
+            }
+        }
+
         n <- length(x)
         len_color <- length(color)
         if (len_color > 1) {
@@ -382,14 +406,19 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             if(is.na(glyph)) glyph <- "ccircle"
         }
 
-        args <- list(...)
         linkingGroup <- args[["linkingGroup"]]
         args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$y <- y
+        args$z <- z
+        args$color <- color
+        args$glyph <- glyph
+        args$size <- size
+        args$active <- active
+        args$selected <- selected
 
-        linkingKey <- args[["linkingKey"]]
-        itemLabel <- args[["itemLabel"]]
-        tag <- args[["tag"]]
-        l_na_omit("l_plot3D", ...)
+        args <- l_na_omit("l_plot3D", args)
 
         plot <- do.call(
             loonPlotFactory,
@@ -400,28 +429,17 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                     factory_path = 'plot3D',
                     factory_window_title = 'loon scatterplot3D',
                     parent = parent,
-                    x = x,
-                    y = y,
-                    z = z,
                     xlabel = xyz$xlab,
                     ylabel = xyz$ylab,
                     zlabel = xyz$zlab,
                     title = title,
-                    color = color,
-                    glyph = glyph,
-                    size = size,
-                    active = active,
-                    selected = selected,
                     showLabels = showLabels,
                     showScales = showScales,
                     showGuides = showGuides,
                     guidelines = guidelines,
                     guidesBackground = guidesBackground,
                     foreground = foreground,
-                    background = background,
-                    linkingKey = linkingKey,
-                    itemLabel = itemLabel,
-                    tag = tag
+                    background = background
                 )
             )
         )
@@ -429,7 +447,7 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         if(!is.null(linkingGroup)) {
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+                        sync = sync)
         }
     }
 

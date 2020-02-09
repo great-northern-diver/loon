@@ -260,6 +260,32 @@ l_plot.default <-  function(x, y = NULL,
                                 ...)
 
     } else {
+
+
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+
+            if(length(size) != 1) {
+                sync <- "push"
+            } else {
+                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
+            }
+
+            if(length(glyph) != 1) {
+                sync <- "push"
+            } else {
+                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
+            }
+        }
+
         ## Get x, y, xlab, ylab
         ## similar to plot.default use of xy.coords
         xy <- xy.coords(x, y, xlabel, ylabel)
@@ -318,17 +344,18 @@ l_plot.default <-  function(x, y = NULL,
             if(is.na(glyph)) glyph <- "ccircle"
         }
         # linkingGroup is set after the plot is created
-        args <- list(...)
         linkingGroup <- args[["linkingGroup"]]
         args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$y <- y
+        args$color <- color
+        args$glyph <- glyph
+        args$size <- size
+        args$active <- active
+        args$selected <- selected
 
-        # l_na_omit returns nothing
-        # Variables in this environment will be checked (NA, NaN, Inf, -Inf) and
-        # modified after l_na_omit is called.
-        linkingKey <- args[["linkingKey"]]
-        itemLabel <- args[["itemLabel"]]
-        tag <- args[["tag"]]
-        l_na_omit("l_plot.default", ...)
+        args <- l_na_omit("l_plot.default", args)
 
         plot <- do.call(
             loonPlotFactory,
@@ -338,12 +365,6 @@ l_plot.default <-  function(x, y = NULL,
                      factory_path = 'plot',
                      factory_window_title = 'loon scatterplot',
                      parent = parent,
-                     x = x, y = y,
-                     color = color,
-                     glyph = glyph,
-                     size = size,
-                     active = active,
-                     selected = selected,
                      xlabel = xy$xlab,
                      ylabel = xy$ylab,
                      title = title,
@@ -353,17 +374,14 @@ l_plot.default <-  function(x, y = NULL,
                      guidelines = guidelines,
                      guidesBackground = guidesBackground,
                      foreground = foreground,
-                     background = background,
-                     linkingKey = linkingKey,
-                     itemLabel = itemLabel,
-                     tag = tag)
+                     background = background)
             )
         )
 
         if(!is.null(linkingGroup)) {
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+                        sync = sync)
         }
     }
 
