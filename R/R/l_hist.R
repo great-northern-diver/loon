@@ -229,6 +229,18 @@ l_hist.default <-  function(x,
             stop("Unkown data structure",
                  call. = FALSE)
 
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+        }
+
         n <- length(x)
         len_color <- length(color)
         if (len_color > 1) {
@@ -262,26 +274,29 @@ l_hist.default <-  function(x,
         if (is.null(xlabel))
             xlabel <- gsub("\"", "", deparse(substitute(x)))
 
-        linkingKey <- list(...)[["linkingKey"]]
-        l_na_omit("l_hist", ...)
-
         yshows <- match.arg(yshows)
         ## ylabel will be overwritten in ...
-        if (is.null(origin) | !is.numeric(origin)){
-            origin <- min(x)
+        if (is.null(origin) | !is.numeric(origin)) {
+            origin <- min(x, na.rm = TRUE)
         }
 
         if (is.null(binwidth) | !is.numeric(binwidth)) {
             # Sturges rule
             # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
             # David Scott's rule
-            sd <- sd(x)
+            sd <- sd(x, na.rm = TRUE)
             binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
-        args <- list(...)
         linkingGroup <- args[["linkingGroup"]]
         args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$color <- color
+        args$active <- active
+        args$selected <- selected
+
+        args <- l_na_omit("l_hist", args)
 
         plot <- do.call(
             loonPlotFactory,
@@ -292,17 +307,12 @@ l_hist.default <-  function(x,
                     factory_path = 'hist',
                     factory_window_title = 'loon histogram',
                     parent = parent,
-                    x = x,
                     yshows = yshows,
                     showStackedColors = showStackedColors,
                     origin = origin,
                     binwidth=binwidth,
-                    color = color,
-                    active = active,
-                    selected = selected,
                     showBinHandle = showBinHandle,
-                    xlabel = xlabel,
-                    linkingKey = linkingKey
+                    xlabel = xlabel
                 )
             )
         )
@@ -310,7 +320,7 @@ l_hist.default <-  function(x,
         if(!is.null(linkingGroup)) {
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = ifelse(is.null(args$sync), "pull", args$sync))
+                        sync = sync)
         }
     }
 
