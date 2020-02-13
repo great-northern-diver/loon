@@ -285,7 +285,7 @@ l_hist.default <-  function(x,
             # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
             # David Scott's rule
             sd <- sd(x, na.rm = TRUE)
-            binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+            binwidth <- if (sd == 0 || is.na(sd)) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
         linkingGroup <- args[["linkingGroup"]]
