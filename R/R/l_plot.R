@@ -221,26 +221,27 @@ l_plot.default <-  function(x, y = NULL,
                             background = "white",
                             parent = NULL, ...) {
 
-    ## Check for missing arguments
-    ## Get x, y, xlab and ylab
-    if (missing(xlabel)){
-        if (!missing(x)){
-            xlabel <- gsub("\"", "", deparse(substitute(x)))
-        } else {
-            xlabel <- ""
-        }
-    }
-
-    if (missing(ylabel)) {
-        if (!missing(y)){
-            ylabel <- gsub("\"", "", deparse(substitute(y)))
-        } else {
-            ylabel <- ""
-        }
-    }
     if (missing(title)) { title <- "" }
 
     if(missing(x)) {
+
+        ## Check for missing arguments
+        ## Get x, y, xlab and ylab
+        if (missing(xlabel)){
+            if (!missing(x)){
+                xlabel <- gsub("\"", "", deparse(substitute(x)))
+            } else {
+                xlabel <- ""
+            }
+        }
+
+        if (missing(ylabel)) {
+            if (!missing(y)){
+                ylabel <- gsub("\"", "", deparse(substitute(y)))
+            } else {
+                ylabel <- ""
+            }
+        }
 
         plot <- loonPlotFactory('::loon::plot', 'plot',
                                 'loon scatterplot',
@@ -288,11 +289,17 @@ l_plot.default <-  function(x, y = NULL,
 
         ## Get x, y, xlab, ylab
         ## similar to plot.default use of xy.coords
-        xy <- xy.coords(x, y, xlabel, ylabel)
+        xy <- xy.coords(x, y)
         x <- xy$x
         y <- xy$y
-        if (is.null(xy$xlab)) xy$xlab <- ""
-        if (is.null(xy$ylab)) xy$ylab <- ""
+
+        if (missing(xlabel)){
+            xlabel <- if (is.null(xy$xlab)) "" else xy$xlab
+        }
+
+        if (missing(ylabel)) {
+            ylabel <- if (is.null(xy$ylab)) "" else xy$ylab
+        }
         ## make sure points parameters are right
 
         n <- length(x)
@@ -365,8 +372,8 @@ l_plot.default <-  function(x, y = NULL,
                      factory_path = 'plot',
                      factory_window_title = 'loon scatterplot',
                      parent = parent,
-                     xlabel = xy$xlab,
-                     ylabel = xy$ylab,
+                     xlabel = xlabel,
+                     ylabel = ylabel,
                      title = title,
                      showLabels = showLabels,
                      showScales = showScales,

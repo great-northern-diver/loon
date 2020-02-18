@@ -304,34 +304,74 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               background = "white",
                               parent = NULL, ...) {
 
+    if (missing(title)) { title <- "" }
+
     if(missing(x)) {
-
-        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D', parent, ...)
-
-    } else {
 
         ## Get x, y, z, xlab, ylab, zlab
         ## similar as in plot.default use xyz.coords
-        xlabel <- if (!missing(x))
-            gsub("\"", "", deparse(substitute(x)))
-        ylabel <- if (!missing(y))
-            gsub("\"", "", deparse(substitute(y)))
-        zlabel <- if (!missing(z))
-            gsub("\"", "", deparse(substitute(z)))
+        if (missing(xlabel)){
+            if (!missing(x)){
+                xlabel <- gsub("\"", "", deparse(substitute(x)))
+            } else {
+                xlabel <- ""
+            }
+        }
 
-        xyz <- xyz.coords(x, y, z, xlabel, ylabel, zlabel)
+        if (missing(ylabel)) {
+            if (!missing(y)){
+                ylabel <- gsub("\"", "", deparse(substitute(y)))
+            } else {
+                ylabel <- ""
+            }
+        }
+
+        if (missing(zlabel)) {
+            if (!missing(z)){
+                zlabel <- gsub("\"", "", deparse(substitute(z)))
+            } else {
+                zlabel <- ""
+            }
+        }
+
+        plot <- loonPlotFactory('::loon::plot3D',
+                                'plot3D',
+                                'loon scatterplot3D',
+                                parent,
+                                axisScaleFactor = axisScaleFactor,
+                                xlabel = xlabel,
+                                ylabel = ylabel,
+                                zlabel = zlabel,
+                                title = title,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background,
+                                ...)
+
+    } else {
+
+        xyz <- xyz.coords(x, y, z)
         x <- xyz$x
         y <- xyz$y
         z <- xyz$z
 
-        if (is.null(xyz$xlab))
-            xyz$xlab <- ""
-        if (is.null(xyz$ylab))
-            xyz$ylab <- ""
-        if (is.null(xyz$zlab))
-            xyz$zlab <- ""
+        ## Get x, y, z, xlab, ylab, zlab
+        ## similar as in plot.default use xyz.coords
+        if (missing(xlabel)){
+            xlabel <- if (is.null(xyz$xlab)) "" else xyz$xlab
+        }
 
-        if (missing(title)) { title <- "" }
+        if (missing(ylabel)) {
+            ylabel <- if (is.null(xyz$ylab)) "" else xyz$ylab
+        }
+
+        if (missing(zlabel)) {
+            zlabel <- if (is.null(xyz$zlab)) "" else xyz$zlab
+        }
 
         args <- list(...)
         sync <- args$sync
@@ -429,9 +469,9 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                     factory_path = 'plot3D',
                     factory_window_title = 'loon scatterplot3D',
                     parent = parent,
-                    xlabel = xyz$xlab,
-                    ylabel = xyz$ylab,
-                    zlabel = xyz$zlab,
+                    xlabel = xlabel,
+                    ylabel = ylabel,
+                    zlabel = zlabel,
                     title = title,
                     showLabels = showLabels,
                     showScales = showScales,
