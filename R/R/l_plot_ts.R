@@ -122,7 +122,7 @@ l_plot_ts <- function(x,
 
     parent <- l_toplevel()
     subwin <- l_subwin(parent, 'ts')
-    tktitle(parent) <- paste(tk_title, subwin)
+    tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
 
     p1 <- l_plot(parent = child,

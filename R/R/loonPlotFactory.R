@@ -16,7 +16,7 @@ loonPlotFactory <- function(factory_tclcmd, factory_path, factory_window_title="
 
     if(new.toplevel) {
         tkpack(plot,  fill="both", expand=TRUE)
-        tktitle(parent) <- paste(factory_window_title, plot)
+        tktitle(parent) <- paste(factory_window_title, "--path:", plot)
         ## Bind the toplevel <FocusIn> event to update the loon inspector
         tcl("bind", parent, "<FocusIn>",
             paste0("+::loon::setLoonInspectorActiveWidget ", plot))
