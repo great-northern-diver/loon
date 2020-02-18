@@ -13,7 +13,7 @@
 #' @template see_l_help
 #'
 #' @param target loon object specification (e.g. \code{".l0.plot"})
-#'
+#' @seealso \code{\link{l_getFromPath}}
 #' @export
 #'
 #' @examples
@@ -47,38 +47,6 @@
 #'
 l_create_handle <- function(target) {
 
-    l_compound_create_handle <- function(target) {
-
-        create_handles <- function(target, plots, type) {
-            i <- 0
-            hasRecognized <- TRUE
-            while(hasRecognized) {
-                path <- if(i == 0) {
-                    paste0(target[1], ".", type)
-                } else {
-                    paste0(target[1], ".", type, i)
-                }
-                hasRecognized <- l_isLoonWidget(path)
-                i <- i + 1
-                if(hasRecognized) {
-                    plots[[length(plots) + 1]] <- l_create_handle(path)
-                }
-            }
-            return(plots)
-        }
-
-        plots <- list()
-        plots <- create_handles(target = target, plots = plots, type = "plot")
-        plots <- create_handles(target = target, plots = plots, type = "hist")
-        plots <- create_handles(target = target, plots = plots, type = "serialaxes")
-        plots <- create_handles(target = target, plots = plots, type = "graph")
-
-        if(length(plots) == 0) stop(target, " is not a valid loon widget", call. = FALSE)
-
-        class(plots) <- c("l_compound", "loon")
-        return(plots)
-    }
-
     ## first check for loon objects
     if (is(target,'loon')) {
         loon_obj <- target
@@ -89,12 +57,7 @@ l_create_handle <- function(target) {
 
         widget <- specifier[1]
 
-        # create a compound handle
-        if (!l_isLoonWidget(widget)) {
-            loon_obj <- l_compound_create_handle(widget)
-            # return a compound widget
-            return(loon_obj)
-        }
+        if (!l_isLoonWidget(widget)) stop(widget, " is not a valid loon widget")
 
         loon_obj <- if (length(specifier) == 1) {
 
