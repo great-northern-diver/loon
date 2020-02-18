@@ -23,7 +23,7 @@ For more information run: \code{l_help("learn_R_display_graph.html#graph-switch-
 \seealso{
 \code{\link{l_graphswitch_add}}, \code{\link{l_graphswitch_ids}},
   \code{\link{l_graphswitch_delete}}, \code{\link{l_graphswitch_relabel}},
-  \code{\link{l_graphswitch_getLabel}}, \code{\link{l_graphswitch_move}}, 
+  \code{\link{l_graphswitch_getLabel}}, \code{\link{l_graphswitch_move}},
   \code{\link{l_graphswitch_reorder}}, \code{\link{l_graphswitch_set}},
   \code{\link{l_graphswitch_get}}
 }

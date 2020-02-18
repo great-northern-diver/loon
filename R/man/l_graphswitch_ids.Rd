@@ -10,7 +10,7 @@ l_graphswitch_ids(widget)
 \item{widget}{graphswitch widget handle (or widget path)}
 }
 \description{
-Every graph in the graphswitch widget has an id. This function 
+Every graph in the graphswitch widget has an id. This function
   returns these ids preserving the oder of how the graphs are listed in the
   graphswitch.
 }

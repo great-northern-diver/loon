@@ -50,3 +50,6 @@ con_new['separator']
 
 
 }
+\seealso{
+\code{\link{l_getFromPath}}
+}

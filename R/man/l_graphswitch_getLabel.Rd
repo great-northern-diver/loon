@@ -12,7 +12,7 @@ l_graphswitch_getLabel(widget, id)
 \item{id}{of the graph}
 }
 \description{
-The graphs in the graphswitch widgets have labels. Use this 
+The graphs in the graphswitch widgets have labels. Use this
   function to query the label of a graph.
 }
 \seealso{
