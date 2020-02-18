@@ -105,6 +105,20 @@ l_hist.factor <-  function(x,
                            xlabel = NULL,
                            parent=NULL, ...) {
 
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
+
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
@@ -169,6 +183,20 @@ l_hist.character <-  function(x,
                               selected = FALSE,
                               xlabel = NULL,
                               parent=NULL, ...) {
+
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
 
     x <- factor(x)
 
@@ -340,6 +368,20 @@ l_hist.data.frame <- function(x,
                               selected = FALSE,
                               xlabel = NULL,
                               parent=NULL, ...) {
+
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
 
     # get a relatively informative xlabel
     if (is.null(xlabel)){
