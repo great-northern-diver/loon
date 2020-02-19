@@ -15,13 +15,13 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         gs <- l_glyph_add_serialaxes(p, data = quakes, showArea=FALSE)
         p['glyph'][1:100] <- gs
         f <- l_facet_grid(p, by = "color", linkingGroup = "quakes")
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_glyph_add_pointrange ##########
         p <- l_plot(x = rep(1:3, 2), color = rep(c('red', 'blue', 'green'), 2), showScales=TRUE)
         g <- l_glyph_add_pointrange(p, ymin=(1:6)-(1:6)/5, ymax=(1:6)+(1:6)/5)
         p['glyph'][1:2] <- g
         f <- l_facet_grid(p, by = "color")
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_glyph_add_image ##########
         p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
         img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
@@ -32,7 +32,7 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         g <- l_glyph_add_image(p, imgs[i], label="Flags")
         p['glyph'] <- g
         f <- l_facet_grid(p, by = "color")
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_glyph_add_polygon ##########
         x_star <-
             c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
@@ -67,13 +67,13 @@ if (requireNamespace("testthat", quietly = TRUE)) {
 
         p['glyph'] <- gl
         f <- l_facet_grid(p, by = "color")
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_glyph_add_text ##########
         p <- l_plot(iris, color = iris$Species)
         g <- l_glyph_add_text(p, iris$Species, "test_label")
         p['glyph'][1:100] <- g
         f <- l_facet_grid(p, by = "color")
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 
         ########################################## plots ##########################################
         ########## l_plot ##########
@@ -82,34 +82,34 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         p['size'][21:40] <- 12
         p['size'][41:60] <- 16
         f <- l_facet_wrap(p, by = c("color", "size"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet_grid(p, by = c("color", "size"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_plot3D ##########
         p <-  l_plot3D(iris, color = iris$Species)
         p['size'][1:20] <- 8
         p['size'][21:40] <- 12
         p['size'][41:60] <- 16
         f <- l_facet_wrap(p, by = c("color", "size"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet_grid(p, by = c("color", "size"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_hist ##########
         h <- l_hist(iris, color = iris$Species)
         h['selected'][1:30] <- TRUE
         h['selected'][31:60] <- TRUE
         f <- l_facet_wrap(h, by = c("color", "selected"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet_grid(h, by = c("color", "selected"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########## l_serialaxes ##########
         s <- l_serialaxes(iris, color = iris$Species)
         s['selected'][1:30] <- TRUE
         s['selected'][31:60] <- TRUE
         f <- l_facet_wrap(s, by = c("color", "selected"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet_grid(s, by = c("color", "selected"))
-        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+        expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     })
 
 
