@@ -35,7 +35,11 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
            })
 
     # TODO by is an expression
+    byOriginal <- by
     by <- intersect(by, column_names)
+    if(length(by) == 0) {
+        stop(byOriginal, " is not a valid setting")
+    }
     subtitles <- setNames(lapply(by, function(b) as.character(unique(data[[b]]))), by)
 
     # split data by "by"
@@ -141,33 +145,6 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
                                args
                            )
                        )
-                   }
-                   #### THIS IS A HACK!
-                   #### IT IS BECAUSE L_PLOT CANNOT DRAW A SINGEL POINT YET
-                   #### WHEN LOON CAN DO THIS, REMOVE ME!
-                   if(dim(d)[1] == 1) {
-                       if(inherits(widget, "l_plot")) {
-                           # # copy one point to two
-                           # d <- rbind(d,d)
-                           # # fix linkingKey and tag
-                           # N <<- N + 1
-                           # d[2, "linkingKey"] <- paste0(gsub("[0-9]", "", d[1, "linkingKey"]), N)
-                           # d[2, "tag"] <- paste0(gsub("[0-9]", "", d[1, "tag"]), N)
-
-                           args <- c(
-                               ...,
-                               inheritArgs ,
-                               parent = child
-                           )
-                           # remove duplicated names
-                           args <- args[which(!duplicated(names(args)))]
-                           return(
-                               do.call(
-                                   loonFun(widget),
-                                   args
-                               )
-                           )
-                       }
                    }
                    args <- as.list(d)
                    glyph <- args$glyph
