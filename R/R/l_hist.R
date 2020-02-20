@@ -105,6 +105,20 @@ l_hist.factor <-  function(x,
                            xlabel = NULL,
                            parent=NULL, ...) {
 
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
+
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
@@ -170,6 +184,20 @@ l_hist.character <-  function(x,
                               xlabel = NULL,
                               parent=NULL, ...) {
 
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
+
     x <- factor(x)
 
     l_hist(x,
@@ -221,9 +249,6 @@ l_hist.default <-  function(x,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 ...)
-        class(plot) <- c("l_hist", class(plot))
-
-
     } else {
 
         # x should be a vector and a vector should return NULL when we call dim(x)
@@ -231,6 +256,18 @@ l_hist.default <-  function(x,
         if(!is.null(dim_x))
             stop("Unkown data structure",
                  call. = FALSE)
+
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+        }
 
         n <- length(x)
         len_color <- length(color)
@@ -265,41 +302,57 @@ l_hist.default <-  function(x,
         if (is.null(xlabel))
             xlabel <- gsub("\"", "", deparse(substitute(x)))
 
-        linkingKey <- list(...)[["linkingKey"]]
-        l_na_omit("l_hist", ...)
-
         yshows <- match.arg(yshows)
         ## ylabel will be overwritten in ...
-        if (is.null(origin) | !is.numeric(origin)){
-            origin <- min(x)
+        if (is.null(origin) | !is.numeric(origin)) {
+            origin <- min(x, na.rm = TRUE)
         }
 
         if (is.null(binwidth) | !is.numeric(binwidth)) {
             # Sturges rule
             # binwidth <- diff(range(x))/(1 + 3.322 * (log(n, base = 10)))
             # David Scott's rule
-            sd <- sd(x)
-            binwidth <- if (sd == 0) {1} else  {3.49 * sd/(n ^(1/3))}
+            sd <- sd(x, na.rm = TRUE)
+            binwidth <- if (sd == 0 || is.na(sd)) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
-        plot <- loonPlotFactory('::loon::histogram',
-                                'hist',
-                                'loon histogram',
-                                parent,
-                                x = x,
-                                yshows = yshows,
-                                showStackedColors = showStackedColors,
-                                origin = origin,
-                                binwidth=binwidth,
-                                color = color,
-                                active = active,
-                                selected = selected,
-                                showBinHandle = showBinHandle,
-                                xlabel = xlabel,
-                                ...,
-                                linkingKey = linkingKey)
-        class(plot) <- c("l_hist", class(plot))
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$color <- color
+        args$active <- active
+        args$selected <- selected
+
+        args <- l_na_omit("l_hist", args)
+
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::histogram',
+                    factory_path = 'hist',
+                    factory_window_title = 'loon histogram',
+                    parent = parent,
+                    yshows = yshows,
+                    showStackedColors = showStackedColors,
+                    origin = origin,
+                    binwidth=binwidth,
+                    showBinHandle = showBinHandle,
+                    xlabel = xlabel
+                )
+            )
+        )
+
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = sync)
+        }
     }
+
+    class(plot) <- c("l_hist", class(plot))
     return(plot)
 }
 
@@ -315,6 +368,20 @@ l_hist.data.frame <- function(x,
                               selected = FALSE,
                               xlabel = NULL,
                               parent=NULL, ...) {
+
+    if(missing(x)) return(
+        l_hist.default(x,
+                       yshows = yshows,
+                       showStackedColors = showStackedColors,
+                       origin = origin,
+                       binwidth=binwidth,
+                       showBinHandle = showBinHandle,
+                       color = color,
+                       active = active,
+                       selected = selected,
+                       xlabel = xlabel,
+                       parent=parent, ...)
+    )
 
     # get a relatively informative xlabel
     if (is.null(xlabel)){

@@ -68,7 +68,7 @@ l_nDimStateNames.loon <- function(loon_plot) {
                             FUN = function(i){
                                 info_name  <- names_p[[i]]
                                 info_state <- info_states[[i]]
-                                if ("dimension" %in% names(info_state)) {
+                                if ("dimension" %in% names(info_state) && !info_name %in% c("colorStackingOrder", "sequence", "axesLabels")) {
                                     if (info_state$dimension == "n" |
                                         info_state$dimension == "-1") {
                                         info_name

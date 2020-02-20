@@ -226,6 +226,24 @@ l_serialaxes <- function(data,
         sequence <- names(data)
     }
 
+    args <- list(...)
+    sync <- args$sync
+
+    if(is.null(sync)) {
+        sync <- "pull"
+        if(length(color) > 1) {
+            sync <- "push"
+        } else {
+            if(length(color) == 1 && !is.na(color) && color != "steelblue") sync <- "push"
+        }
+
+        if(length(linewidth) != 1) {
+            sync <- "push"
+        } else {
+            if(length(linewidth) == 1 && !is.na(linewidth) && linewidth != 1) sync <- "push"
+        }
+    }
+
     n <- dim(data)[1]
     len_color <- length(color)
     if (len_color > 1) {
@@ -265,26 +283,40 @@ l_serialaxes <- function(data,
         if(is.na(selected)) selected <- FALSE
     }
 
-    args <- list(...)
-    linkingKey <- args[["linkingKey"]]
-    itemLabel <- args[["itemLabel"]]
-    tag <- args[["tag"]]
-    l_na_omit("l_serialaxes", ...)
+    linkingGroup <- args[["linkingGroup"]]
+    args$linkingGroup <- NULL
+    # n dimensional states NA check
+    args$data <- data
+    args$color <- color
+    args$linewidth <- linewidth
+    args$active <- active
+    args$selected <- selected
 
-    plot <- loonPlotFactory('::loon::serialaxes', 'serialaxes', 'loon serialaxes plot', parent,
-                            data=l_data(data),
-                            sequence=sequence,
-                            showAxes=showAxes,
-                            scaling=scaling,
-                            axesLayout=axesLayout,
-                            linewidth = linewidth,
-                            color = color,
-                            active = active,
-                            selected = selected,
-                            ...,
-                            linkingKey = linkingKey,
-                            itemLabel = itemLabel,
-                            tag = tag)
+    args <- l_na_omit("l_serialaxes", args)
+    args$data <- l_data(args$data)
+
+    plot <- do.call(
+        loonPlotFactory,
+        c(
+            args,
+            list(
+                factory_tclcmd = '::loon::serialaxes',
+                factory_path = 'serialaxes',
+                factory_window_title = 'loon serialaxes plot',
+                parent = parent,
+                sequence = sequence,
+                showAxes = showAxes,
+                scaling = scaling,
+                axesLayout = axesLayout
+            )
+        )
+    )
+
+    if(!is.null(linkingGroup)) {
+        l_configure(plot,
+                    linkingGroup = linkingGroup,
+                    sync = sync)
+    }
 
     class(plot) <- c("l_serialaxes", class(plot))
 

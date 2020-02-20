@@ -138,8 +138,10 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
         }
     })
 
+    args <- unlist(unname(b_bins),  recursive = FALSE)
+
     gTree(
-        children = do.call(gList, unlist(unname(b_bins),  recursive = FALSE)),
+        children = do.call(gList, if(is.null(args)) list() else args),
         name = if(is.null(name)) "histogram" else name,
         gp = gp, vp = vp
     )

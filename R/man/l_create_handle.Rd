@@ -11,11 +11,11 @@ l_create_handle(target)
 }
 \description{
 This function can be used to create the loon object handles from
-  a vector of the widget path name and the object ids (in the order of the 
+  a vector of the widget path name and the object ids (in the order of the
   parent-child relationships).
 }
 \details{
-loon's plot handles are useful to query and modify plot states 
+loon's plot handles are useful to query and modify plot states
   via the command line.
 
 For more information run: \code{l_help("learn_R_intro.html#re-creating-object-handles")}
@@ -47,4 +47,9 @@ nav_new['from']
 con <- l_context_add_context2d(nav)
 con_new <- l_create_handle(c(as.vector(g), as.vector(nav), as.vector(con)))
 con_new['separator']
+
+
+}
+\seealso{
+\code{\link{l_getFromPath}}
 }

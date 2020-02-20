@@ -70,7 +70,7 @@ names(p)
 for (plot in l_getPlots(p)) {
       if (is(plot, "l_plot")) {
           plot["glyph"] <- "ocircle"}
-          }
+}
 }
 \seealso{
 \code{\link{l_plot}} and \code{\link{l_getPlots}}
