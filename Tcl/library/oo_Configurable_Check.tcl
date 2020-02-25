@@ -67,6 +67,12 @@
 	}
 	set values $col
 
+<<<<<<< HEAD
+=======
+    ## remove unexpected braces
+    set values [regsub -all {\{|\}} $values ""]
+
+>>>>>>> 1ae151c310a4036babf8c6ace8f515ddd94ec322
 	if {![::loon::listfns::isColor $values]} {
 	    #puts "Warning: Non color arguments for a color state is treated as factor."
 	    set values [::loon::listfns::mapColor $values]
