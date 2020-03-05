@@ -2,12 +2,15 @@ facet_grid_layout <- function(plots,
                               subtitles,
                               span = 10,
                               parent = NULL,
+                              title = "",
+                              xlabel = "",
+                              ylabel = "",
                               column_labels_loc = "top",
                               row_labels_loc = "right",
                               byrow = TRUE,
                               label_background = "gray80", label_foreground = "black",
                               label_borderwidth = 2,
-                              label_relief = "groove") {
+                              label_relief = "groove", ...) {
 
     by <- names(subtitles)
     len <- length(by)
@@ -39,6 +42,14 @@ facet_grid_layout <- function(plots,
     row_start_pos <- ifelse(column_labels_loc == "top", len_colsLabel, 0)
     col_start_pos <- ifelse(row_labels_loc == "right", 0, len_rowsLabel)
 
+    # To simplify the settings of labels, we clarify that
+    ## 1. title will be always on top
+    ## 2. ylabel is always on left
+    ## 3. xlabel is always on bottom
+    title_span <- 2
+    title_pos <- ifelse(title == "", 0, title_span)
+    ylabel_pos <- ifelse(ylabel == "", 0, 1)
+
     layout_orders <- apply(do.call(expand.grid, lapply(c(rowsLabel, colsLabel), function(x) x)), 1, paste, collapse="*")
 
 
@@ -46,7 +57,17 @@ facet_grid_layout <- function(plots,
         plot_id <- which(
             sapply(strsplit(matched_string, split = "[*]"),
                    function(str) {
-                       all(vapply(string, function(s) s %in% str, logical(1)))
+
+                       all(
+                           vapply(string,
+                                  function(s) {
+                                      isIn <- s %in% str
+                                      str[which(str %in% s)[1]] <- NA
+                                      str <<- str
+                                      isIn
+                                  },
+                                  logical(1))
+                       )
                    })
         )
         if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
@@ -63,14 +84,15 @@ facet_grid_layout <- function(plots,
             plot_id <- c(plot_id, plotid)
             new_names <- c(new_names, paste0("x", j, "y", i))
             tkgrid(plots[[plotid]],
-                   row = (j - 1) * span + row_start_pos, # leave space for labels
-                   column = (i - 1) * span + col_start_pos,
+                   row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
+                   column = (i - 1) * span + col_start_pos + ylabel_pos,
                    rowspan = span,
                    columnspan = span,
                    sticky="nesw")
 
         }
     }
+
     # pack column labels
     if(len_colsLabel > 0) {
         colsLabel <- rev(colsLabel)
@@ -101,15 +123,15 @@ facet_grid_layout <- function(plots,
                                                             relief = label_relief))
                        if(column_labels_loc == "top")
                            tkgrid(tkcolname,
-                                  row = (j - 1),
-                                  column = (i - 1) * columnspan + col_start_pos,
+                                  row = (j - 1) + title_pos,
+                                  column = (i - 1) * columnspan + col_start_pos + ylabel_pos,
                                   rowspan = 1,
                                   columnspan = columnspan,
                                   sticky="nesw")
                        else
                            tkgrid(tkcolname,
-                                  row = -(j - 1) + nrowsLabel * span + len_rowsLabel,
-                                  column= (i - 1) * columnspan + col_start_pos,
+                                  row = -(j - 1) + nrowsLabel * span + len_rowsLabel + title_pos,
+                                  column= (i - 1) * columnspan + col_start_pos + ylabel_pos,
                                   rowspan = 1,
                                   columnspan = columnspan,
                                   sticky="nesw")
@@ -148,25 +170,85 @@ facet_grid_layout <- function(plots,
                                                             relief = label_relief))
                        if(row_labels_loc == "right")
                            tkgrid(tkrowname,
-                                  row = (j - 1) * rowspan + row_start_pos,
-                                  column= -(i - 1) + ncolsLabel * span + len_colsLabel,
+                                  row = (j - 1) * rowspan + row_start_pos + title_pos,
+                                  column= -(i - 1) + ncolsLabel * span + len_colsLabel + ylabel_pos,
                                   rowspan = rowspan,
                                   columnspan = 1,
                                   sticky="nesw")
                        else
                            tkgrid(tkrowname,
-                                  row = (j - 1) * rowspan + row_start_pos,
-                                  column= (i - 1),
+                                  row = (j - 1) * rowspan + row_start_pos + title_pos,
+                                  column= (i - 1)+ ylabel_pos,
                                   rowspan = rowspan,
                                   columnspan = 1,
                                   sticky="nesw")
                    }
                })
     }
-    for (i in seq(ncolsLabel*span) - 1 + col_start_pos) {
+
+    labelBG <- "grey70"
+    # pack title
+    if(title != "") {
+
+        title <- as.character(tcltk::tcl('label',
+                                         as.character(l_subwin(parent,'label')),
+                                         text = title,
+                                         bg = labelBG,
+                                         fg = label_foreground,
+                                         borderwidth = label_borderwidth,
+                                         relief = "raised"))
+
+        tkgrid(title,
+               row = 0,
+               column= col_start_pos + ylabel_pos,
+               rowspan = title_span,
+               columnspan = ncolsLabel * span,
+               sticky="nesw")
+    }
+
+    # pack xlabel
+    if(xlabel != "") {
+
+        xlabel <- as.character(tcltk::tcl('label',
+                                         as.character(l_subwin(parent,'label')),
+                                         text = xlabel,
+                                         bg = labelBG,
+                                         fg = label_foreground,
+                                         borderwidth = label_borderwidth,
+                                         relief = "raised"))
+
+        tkgrid(xlabel,
+               row = len_rowsLabel + title_pos + nrowsLabel * span + len_colsLabel,
+               column= col_start_pos + ylabel_pos,
+               rowspan = 1,
+               columnspan = ncolsLabel * span,
+               sticky="nesw")
+
+    }
+
+    # pack ylabel
+    if(ylabel != "") {
+
+        ylabel <- as.character(tcltk::tcl('label',
+                                          as.character(l_subwin(parent,'label')),
+                                          text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
+                                          bg = labelBG,
+                                          fg = label_foreground,
+                                          borderwidth = label_borderwidth,
+                                          relief = "raised"))
+
+        tkgrid(ylabel,
+               row = title_pos + row_start_pos,
+               column= 0,
+               rowspan = nrowsLabel * span,
+               columnspan = 1,
+               sticky="nesw")
+
+    }
+    for (i in seq(ncolsLabel*span) - 1 + col_start_pos + ylabel_pos) {
         tkgrid.columnconfigure(parent, i, weight=1)
     }
-    for (i in seq(nrowsLabel*span) - 1 + row_start_pos) {
+    for (i in seq(nrowsLabel*span) - 1 + row_start_pos + title_pos) {
         tkgrid.rowconfigure(parent, i, weight=1)
     }
     tkpack(parent, fill="both", expand=TRUE)
@@ -180,6 +262,9 @@ facet_grid_layout <- function(plots,
 facet_wrap_layout <- function(plots,
                               subtitles,
                               span = 10,
+                              title = "",
+                              xlabel = "",
+                              ylabel = "",
                               parent = NULL,
                               nrow = NULL,
                               ncol = NULL,
@@ -187,7 +272,7 @@ facet_wrap_layout <- function(plots,
                               byrow = FALSE,
                               label_background = "gray80", label_foreground = "black",
                               label_borderwidth = 2,
-                              label_relief = "groove") {
+                              label_relief = "groove", ...) {
 
     N <- length(plots)
 
@@ -206,6 +291,14 @@ facet_wrap_layout <- function(plots,
 
     by <- names(subtitles)
     len <- length(by)
+
+    # To simplify the settings of labels, we clarify that
+    ## 1. title will be always on top
+    ## 2. ylabel is always on left
+    ## 3. xlabel is always on bottom
+    title_span <- 2
+    title_pos <- ifelse(title == "", 0, title_span)
+    ylabel_pos <- ifelse(ylabel == "", 0, 1)
 
 
     # tk configure
@@ -232,7 +325,7 @@ facet_wrap_layout <- function(plots,
             for(j in seq(ncol)) {
 
                 plotid <- (i - 1) * ncol + j
-                if(plotid <= N) break()
+                if(plotid > N) break()
 
                 new_names <- c(new_names, paste0("x", i, "y", j))
 
@@ -243,8 +336,8 @@ facet_wrap_layout <- function(plots,
                 if(labels_loc == "top") {
                     # pack plots
                     tkgrid(plots[[plotid]],
-                           row = (i - 1) * span + label_span,
-                           column = (j - 1) * plots_span,
+                           row = (i - 1) * span + label_span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
                            rowspan = plots_span,
                            columnspan = plots_span,
                            sticky="nesw")
@@ -265,8 +358,8 @@ facet_wrap_layout <- function(plots,
                                                                   borderwidth = label_borderwidth,
                                                                   relief = label_relief))
                                tkgrid(tklabel,
-                                      row = (i - 1) * span + (k - 1),
-                                      column = (j - 1) * plots_span,
+                                      row = (i - 1) * span + (k - 1) + title_pos,
+                                      column = (j - 1) * plots_span+ ylabel_pos,
                                       rowspan = 1,
                                       columnspan = plots_span,
                                       sticky="nesw")
@@ -276,8 +369,8 @@ facet_wrap_layout <- function(plots,
 
                     # pack plots
                     tkgrid(plots[[plotid]],
-                           row = (i - 1) * span,
-                           column = (j - 1) * plots_span,
+                           row = (i - 1) * span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
                            rowspan = plots_span,
                            columnspan = plots_span,
                            sticky="nesw")
@@ -298,8 +391,8 @@ facet_wrap_layout <- function(plots,
                                                                   borderwidth = label_borderwidth,
                                                                   relief = label_relief))
                                tkgrid(tklabel,
-                                      row = (i - 1) * span + plots_span + k - 2,
-                                      column = (j - 1) * plots_span,
+                                      row = (i - 1) * span + plots_span + k - 2 + title_pos,
+                                      column = (j - 1) * plots_span + ylabel_pos,
                                       rowspan = 1,
                                       columnspan = plots_span,
                                       sticky="nesw")
@@ -327,8 +420,8 @@ facet_wrap_layout <- function(plots,
                 if(labels_loc == "top") {
                     # pack plots
                     tkgrid(plots[[plotid]],
-                           row = (i - 1) * span + label_span,
-                           column = (j - 1) * plots_span,
+                           row = (i - 1) * span + label_span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
                            rowspan = plots_span,
                            columnspan = plots_span,
                            sticky="nesw")
@@ -349,8 +442,8 @@ facet_wrap_layout <- function(plots,
                                                                   borderwidth = label_borderwidth,
                                                                   relief = label_relief))
                                tkgrid(tklabel,
-                                      row = (i - 1) * span + (k - 1),
-                                      column = (j - 1) * plots_span,
+                                      row = (i - 1) * span + (k - 1) + title_pos,
+                                      column = (j - 1) * plots_span + ylabel_pos,
                                       rowspan = 1,
                                       columnspan = plots_span,
                                       sticky="nesw")
@@ -360,8 +453,8 @@ facet_wrap_layout <- function(plots,
 
                     # pack plots
                     tkgrid(plots[[plotid]],
-                           row = (i - 1) * span,
-                           column = (j - 1) * plots_span,
+                           row = (i - 1) * span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
                            rowspan = plots_span,
                            columnspan = plots_span,
                            sticky="nesw")
@@ -382,8 +475,8 @@ facet_wrap_layout <- function(plots,
                                                                   borderwidth = label_borderwidth,
                                                                   relief = label_relief))
                                tkgrid(tklabel,
-                                      row = (i - 1) * span + plots_span + k - 1,
-                                      column = (j - 1) * plots_span,
+                                      row = (i - 1) * span + plots_span + k - 1 + title_pos,
+                                      column = (j - 1) * plots_span + ylabel_pos,
                                       rowspan = 1,
                                       columnspan = plots_span,
                                       sticky="nesw")
@@ -396,16 +489,75 @@ facet_wrap_layout <- function(plots,
 
     }
 
+    # pack title
+    if(title != "") {
+
+        title <- as.character(tcltk::tcl('label',
+                                         as.character(l_subwin(parent,'label')),
+                                         text = title,
+                                         bg = label_background,
+                                         fg = label_foreground,
+                                         borderwidth = label_borderwidth,
+                                         relief = "raised"))
+
+        tkgrid(title,
+               row = 0,
+               column = ylabel_pos,
+               rowspan = title_span,
+               columnspan = ncol * span,
+               sticky="nesw")
+    }
+
+    # pack xlabel
+    if(xlabel != "") {
+
+        xlabel <- as.character(tcltk::tcl('label',
+                                          as.character(l_subwin(parent,'label')),
+                                          text = xlabel,
+                                          bg = label_background,
+                                          fg = label_foreground,
+                                          borderwidth = label_borderwidth,
+                                          relief = "raised"))
+
+        tkgrid(xlabel,
+               row = title_pos + nrow * span,
+               column = ylabel_pos,
+               rowspan = 1,
+               columnspan = ncol * span,
+               sticky="nesw")
+
+    }
+
+    # pack ylabel
+    if(ylabel != "") {
+
+        ylabel <- as.character(tcltk::tcl('label',
+                                          as.character(l_subwin(parent,'label')),
+                                          text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
+                                          bg = label_background,
+                                          fg = label_foreground,
+                                          borderwidth = label_borderwidth,
+                                          relief = "raised"))
+
+        tkgrid(ylabel,
+               row = title_pos,
+               column= 0,
+               rowspan = nrow * span,
+               columnspan = 1,
+               sticky="nesw")
+
+    }
+
     label_pos <- if(labels_loc == "top") {
         unlist(lapply(span * (seq(nrow) - 1), function(s) s + seq(label_span) - 1))
     } else {
         unlist(lapply(span * (seq(nrow) - 1), function(s) s + plots_span + seq(label_span) - 1))
     }
 
-    for (i in setdiff(seq(nrow * span) - 1, label_pos)) {
+    for (i in setdiff(seq(nrow * span) - 1, label_pos) + title_pos) {
         tkgrid.rowconfigure(parent, i, weight=1)
     }
-    for (i in seq(ncol * plots_span) - 1) {
+    for (i in seq(ncol * plots_span) - 1 + ylabel_pos) {
         tkgrid.columnconfigure(parent, i, weight=1)
     }
     tkpack(parent, fill="both", expand=TRUE)
