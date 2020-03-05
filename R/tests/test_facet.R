@@ -111,47 +111,47 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         f <- l_facet_grid(s, by = c("color", "selected"))
         expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         ########################################## by arg ##########################################
-        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
-                                 column_labels_loc = "bottom", row_labels_loc = "left",
-                                 span = 20, label_background = "lightblue", label_foreground = "red",
-                                 label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
-                                 color = "blue",
-                                 facet = "wrap", byrow = TRUE,
-                                 column_labels_loc = "bottom", row_labels_loc = "left",
-                                 span = 20, label_background = "lightblue", label_foreground = "red",
-                                 label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-        p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
-                                   column_labels_loc = "bottom", row_labels_loc = "left",
-                                   span = 20, label_background = "lightblue", label_foreground = "red",
-                                   label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-        p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl),
-                                   color = "blue",
-                                   facet = "wrap", byrow = TRUE,
-                                   column_labels_loc = "bottom", row_labels_loc = "left",
-                                   span = 20, label_background = "lightblue", label_foreground = "red",
-                                   label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-        p <- with(mtcars, l_hist(mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
-                                 column_labels_loc = "bottom", row_labels_loc = "left",
-                                 span = 20, label_background = "lightblue", label_foreground = "red",
-                                 label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-        p <- with(mtcars, l_hist(mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), facet = "wrap", byrow = TRUE,
-                                 column_labels_loc = "bottom", row_labels_loc = "left",
-                                 span = 20, label_background = "lightblue", label_foreground = "red",
-                                 label_borderwidth = 5, label_relief = "flat"))
-        expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-        s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
-                          by = iris$Species, scaling = "observation")
-        expect_equal(class(s), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-        s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
-                          by = iris$Species, scaling = "observation", axesLayout = "parallel",
-                          facet = "wrap")
-        expect_equal(class(s), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
+        #                          column_labels_loc = "bottom", row_labels_loc = "left",
+        #                          span = 20, label_background = "lightblue", label_foreground = "red",
+        #                          label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
+        #                          color = "blue",
+        #                          facet = "wrap", byrow = TRUE,
+        #                          column_labels_loc = "bottom", row_labels_loc = "left",
+        #                          span = 20, label_background = "lightblue", label_foreground = "red",
+        #                          label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
+        #                            column_labels_loc = "bottom", row_labels_loc = "left",
+        #                            span = 20, label_background = "lightblue", label_foreground = "red",
+        #                            label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl),
+        #                            color = "blue",
+        #                            facet = "wrap", byrow = TRUE,
+        #                            column_labels_loc = "bottom", row_labels_loc = "left",
+        #                            span = 20, label_background = "lightblue", label_foreground = "red",
+        #                            label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_hist(mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), byrow = TRUE,
+        #                          column_labels_loc = "bottom", row_labels_loc = "left",
+        #                          span = 20, label_background = "lightblue", label_foreground = "red",
+        #                          label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        # p <- with(mtcars, l_hist(mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), facet = "wrap", byrow = TRUE,
+        #                          column_labels_loc = "bottom", row_labels_loc = "left",
+        #                          span = 20, label_background = "lightblue", label_foreground = "red",
+        #                          label_borderwidth = 5, label_relief = "flat"))
+        # expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+        # s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
+        #                   by = iris$Species, scaling = "observation")
+        # expect_equal(class(s), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        # s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
+        #                   by = iris$Species, scaling = "observation", axesLayout = "parallel",
+        #                   facet = "wrap")
+        # expect_equal(class(s), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
     })
 
 
