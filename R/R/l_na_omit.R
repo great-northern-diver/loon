@@ -1,4 +1,5 @@
-l_na_omit <- function(w, args) {
+l_na_omit <- function(w, args,
+                      n_dim_states = NULL) {
 
     is_not_valid <- function(x) {
         if(is.numeric(x))
@@ -7,7 +8,7 @@ l_na_omit <- function(w, args) {
             is.na(x)
     }
 
-    n_dim_states <- l_nDimStateNames(w)
+    if(is.null(n_dim_states)) n_dim_states <- l_nDimStateNames(w)
 
     # what is the n?
     x <- args[["x"]]
