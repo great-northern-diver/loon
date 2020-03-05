@@ -336,23 +336,25 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         plot <- do.call(
             loonPlotFactory,
             c(
-                factory_tclcmd = '::loon::plot3D',
-                factory_path = 'plot3D',
-                factory_window_title = 'loon scatterplot3D',
-                parent,
-                axisScaleFactor = axisScaleFactor,
-                xlabel = xlabel,
-                ylabel = ylabel,
-                zlabel = zlabel,
-                title = title,
-                showLabels = showLabels,
-                showScales = showScales,
-                showGuides = showGuides,
-                guidelines = guidelines,
-                guidesBackground = guidesBackground,
-                foreground = foreground,
-                background = background,
-                args
+                args,
+                list(
+                    factory_tclcmd = '::loon::plot3D',
+                    factory_path = 'plot3D',
+                    factory_window_title = 'loon scatterplot3D',
+                    parent = parent,
+                    axisScaleFactor = axisScaleFactor,
+                    xlabel = xlabel,
+                    ylabel = ylabel,
+                    zlabel = zlabel,
+                    title = title,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
+                    guidelines = guidelines,
+                    guidesBackground = guidesBackground,
+                    foreground = foreground,
+                    background = background
+                )
             )
         )
 

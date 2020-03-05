@@ -252,21 +252,24 @@ l_plot.default <-  function(x, y = NULL,
             loonPlotFactory,
             c(
                 args,
-                '::loon::plot', 'plot',
-                'loon scatterplot',
-                parent,
-                # No info about points
-                # to be passed on
-                xlabel = xlabel,
-                ylabel = ylabel,
-                title = title,
-                showLabels = showLabels,
-                showScales = showScales,
-                showGuides = showGuides,
-                guidelines = guidelines,
-                guidesBackground = guidesBackground,
-                foreground = foreground,
-                background = background
+                list(
+                    factory_tclcmd = '::loon::plot',
+                    factory_path = 'plot',
+                    factory_window_title = 'loon scatterplot',
+                    parent = parent,
+                    # No info about points
+                    # to be passed on
+                    xlabel = xlabel,
+                    ylabel = ylabel,
+                    title = title,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
+                    guidelines = guidelines,
+                    guidesBackground = guidesBackground,
+                    foreground = foreground,
+                    background = background
+                )
             )
         )
 
@@ -443,15 +446,15 @@ l_plot.default <-  function(x, y = NULL,
     }
 }
 
-byArgs <- c("scales",
-            "nrow",
-            "ncol",
-            "byrow",
-            "column_labels_loc",
-            "row_labels_loc",
-            "labels_loc",
-            "span",
-            "label_background",
-            "label_foreground",
-            "label_borderwidth",
-            "label_relief")
+byArgs <-c("scales",
+           "nrow",
+           "ncol",
+           "byrow",
+           "column_labels_loc",
+           "row_labels_loc",
+           "labels_loc",
+           "span",
+           "label_background",
+           "label_foreground",
+           "label_borderwidth",
+           "label_relief")

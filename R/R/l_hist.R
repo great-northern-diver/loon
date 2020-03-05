@@ -264,15 +264,25 @@ l_hist.default <-  function(x,
         if (is.null(xlabel)| !is.character(xlabel)){
             xlabel <- gsub("\"", "", deparse(substitute(x)))
         }
-        plot <- loonPlotFactory('::loon::histogram', 'hist', 'loon histogram',
-                                parent,
-                                yshows = yshows,
-                                showStackedColors = showStackedColors,
-                                origin = origin,
-                                binwidth = binwidth,
-                                showBinHandle = showBinHandle,
-                                xlabel = xlabel,
-                                ...)
+
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::histogram',
+                    factory_path = 'hist',
+                    factory_window_title = 'loon histogram',
+                    parent = parent,
+                    yshows = yshows,
+                    showStackedColors = showStackedColors,
+                    origin = origin,
+                    binwidth = binwidth,
+                    showBinHandle = showBinHandle,
+                    xlabel = xlabel
+                )
+            )
+        )
 
         class(plot) <- c("l_hist", class(plot))
         return(plot)
