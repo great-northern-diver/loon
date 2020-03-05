@@ -5,11 +5,12 @@
 \title{The default \code{l_plot} method to create 3d interactive scatterplot}
 \usage{
 \method{l_plot3D}{default}(x, y = NULL, z = NULL,
-  axisScaleFactor = 1, color = "grey60", glyph = "ccircle",
-  size = 4, active = TRUE, selected = FALSE, xlabel, ylabel, zlabel,
-  title, showLabels = TRUE, showScales = FALSE, showGuides = TRUE,
-  guidelines = "white", guidesBackground = "grey92",
-  foreground = "black", background = "white", parent = NULL, ...)
+  axisScaleFactor = 1, by = NULL, facet = c("grid", "wrap"),
+  color = "grey60", glyph = "ccircle", size = 4, active = TRUE,
+  selected = FALSE, xlabel, ylabel, zlabel, title, showLabels = TRUE,
+  showScales = FALSE, showGuides = TRUE, guidelines = "white",
+  guidesBackground = "grey92", foreground = "black",
+  background = "white", parent = NULL, ...)
 }
 \arguments{
 \item{x}{the x, y and z arguments provide the x, y and z coordinates for the plot.
@@ -28,6 +29,11 @@ optional if x is an appropriate structure.}
 Default is 1.
     All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
     all axes.)}
+
+\item{by}{loon plot can be separated by some variables into mutiple panels.
+This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
 
 \item{color}{colours of points; colours are repeated until matching the number points.}
 

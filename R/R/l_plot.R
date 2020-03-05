@@ -109,6 +109,9 @@ l_plot <- function(x, y, ...) {
 #'  See the function \code{\link{xy.coords}} for details.
 #'  If supplied separately, they must be of the same length.
 #' @param y argument description is as for the \code{x} argument above.
+#' @param by loon plot can be separated by some variables into mutiple panels.
+#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
 #' @param color colours of points (default "grey60"); colours are repeated
 #'  until matching the number points.
 #' @param glyph shape of point; must be one of the primitive glyphs
@@ -189,6 +192,8 @@ l_plot <- function(x, y, ...) {
 #'
 #' gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 #'
+#' # facetting
+#' p <- with(mtcars, l_plot(wt, mpg, by = cyl, facet = "wrap"))
 #'
 #' # Use with other tk widgets
 #' tt <- tktoplevel()
@@ -206,6 +211,8 @@ l_plot <- function(x, y, ...) {
 #' tkgrid.rowconfigure(tt, 0, weight=1)
 #'
 l_plot.default <-  function(x, y = NULL,
+                            by = NULL,
+                            facet = c("grid", "wrap"),
                             color = "grey60",
                             glyph = "ccircle",
                             size = 4,
@@ -221,49 +228,53 @@ l_plot.default <-  function(x, y = NULL,
                             background = "white",
                             parent = NULL, ...) {
 
-    if (missing(title)) { title <- "" }
+    args <- list(...)
+    # set by args, used for facetting
+    by_args <- args[byArgs]
+    # args passed into loonPlotFactory
+    args[byArgs] <- NULL
+
+    if(missing(title)) { title <- "" }
 
     if(missing(x)) {
 
         ## Check for missing arguments
         ## Get x, y, xlab and ylab
         if (missing(xlabel)){
-            if (!missing(x)){
-                xlabel <- gsub("\"", "", deparse(substitute(x)))
-            } else {
-                xlabel <- ""
-            }
+            xlabel <- ""
         }
 
         if (missing(ylabel)) {
-            if (!missing(y)){
-                ylabel <- gsub("\"", "", deparse(substitute(y)))
-            } else {
-                ylabel <- ""
-            }
+            ylabel <- ""
         }
+        # Should we check `by` var here?
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                '::loon::plot', 'plot',
+                'loon scatterplot',
+                parent,
+                # No info about points
+                # to be passed on
+                xlabel = xlabel,
+                ylabel = ylabel,
+                title = title,
+                showLabels = showLabels,
+                showScales = showScales,
+                showGuides = showGuides,
+                guidelines = guidelines,
+                guidesBackground = guidesBackground,
+                foreground = foreground,
+                background = background
+            )
+        )
 
-        plot <- loonPlotFactory('::loon::plot', 'plot',
-                                'loon scatterplot',
-                                parent,
-                                # No info about points
-                                # to be passed on
-                                xlabel = xlabel,
-                                ylabel = ylabel,
-                                title = title,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background,
-                                ...)
+        class(plot) <- c("l_plot", class(plot))
+        return(plot)
 
     } else {
 
-
-        args <- list(...)
         sync <- args$sync
 
         if(is.null(sync)) {
@@ -289,16 +300,18 @@ l_plot.default <-  function(x, y = NULL,
 
         ## Get x, y, xlab, ylab
         ## similar to plot.default use of xy.coords
+        xlab <- deparse(substitute(x))
+        ylab <- deparse(substitute(y))
         xy <- xy.coords(x, y)
         x <- xy$x
         y <- xy$y
 
         if (missing(xlabel)){
-            xlabel <- if (is.null(xy$xlab)) "" else xy$xlab
+            xlabel <- if (is.null(xy$xlab)) xlab else xy$xlab
         }
 
         if (missing(ylabel)) {
-            ylabel <- if (is.null(xy$ylab)) "" else xy$ylab
+            ylabel <- if (is.null(xy$ylab)) ylab else xy$ylab
         }
         ## make sure points parameters are right
 
@@ -362,39 +375,83 @@ l_plot.default <-  function(x, y = NULL,
         args$active <- active
         args$selected <- selected
 
-        args <- l_na_omit("l_plot.default", args)
+        if(is.null(by)) {
+            args <- l_na_omit("l_plot.default", args)
 
-        plot <- do.call(
-            loonPlotFactory,
-            c(
-                args,
-                list(factory_tclcmd = '::loon::plot',
-                     factory_path = 'plot',
-                     factory_window_title = 'loon scatterplot',
-                     parent = parent,
-                     xlabel = xlabel,
-                     ylabel = ylabel,
-                     title = title,
-                     showLabels = showLabels,
-                     showScales = showScales,
-                     showGuides = showGuides,
-                     guidelines = guidelines,
-                     guidesBackground = guidesBackground,
-                     foreground = foreground,
-                     background = background)
+            plot <- do.call(
+                loonPlotFactory,
+                c(
+                    args,
+                    list(factory_tclcmd = '::loon::plot',
+                         factory_path = 'plot',
+                         factory_window_title = 'loon scatterplot',
+                         parent = parent,
+                         xlabel = xlabel,
+                         ylabel = ylabel,
+                         title = title,
+                         showLabels = showLabels,
+                         showScales = showScales,
+                         showGuides = showGuides,
+                         guidelines = guidelines,
+                         guidesBackground = guidesBackground,
+                         foreground = foreground,
+                         background = background)
+                )
             )
-        )
 
-        if(!is.null(linkingGroup)) {
-            l_configure(plot,
-                        linkingGroup = linkingGroup,
-                        sync = sync)
+            if(!is.null(linkingGroup)) {
+                l_configure(plot,
+                            linkingGroup = linkingGroup,
+                            sync = sync)
+            }
+
+
+            class(plot) <- c("l_plot", class(plot))
+            return(plot)
+
+        } else {
+
+            if(is.atomic(by)) {
+                by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+            } else
+                by <- as.data.frame(by, stringsAsFactors = FALSE)
+
+            plots <- loonFacets(type = "l_plot",
+                                by,
+                                args,
+                                facet = match.arg(facet),
+                                by_args = Filter(Negate(is.null), by_args),
+                                linkingGroup = linkingGroup,
+                                sync = sync,
+                                parent = parent,
+                                xlabel = xlabel,
+                                ylabel = ylabel,
+                                title = title,
+                                factory_tclcmd = '::loon::plot',
+                                factory_path = 'plot',
+                                factory_window_title = 'loon scatterplot',
+                                showLabels = TRUE,
+                                showScales = FALSE,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background)
+
+            return(plots)
         }
     }
-
-    class(plot) <- c("l_plot", class(plot))
-    return(plot)
 }
 
-
-
+byArgs <- c("scales",
+            "nrow",
+            "ncol",
+            "byrow",
+            "column_labels_loc",
+            "row_labels_loc",
+            "labels_loc",
+            "span",
+            "label_background",
+            "label_foreground",
+            "label_borderwidth",
+            "label_relief")

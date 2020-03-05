@@ -9,6 +9,9 @@
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
 #'   how the data is scaled. See Details and Examples for more information.
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
+#' @param by loon plot can be separated by some variables into mutiple panels.
+#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
 #' @param showAxes boolean to indicate whether axes should be shown or not
 #' @param linewidth vector with line widths
 #' @param color vector with line colors
@@ -212,6 +215,8 @@ l_serialaxes <- function(data,
                          sequence,
                          scaling="variable",
                          axesLayout='radial',
+                         by = NULL,
+                         facet = c("grid", "wrap"),
                          showAxes=TRUE,
                          linewidth = 1,
                          color = "steelblue",
@@ -219,6 +224,11 @@ l_serialaxes <- function(data,
                          selected = FALSE,
                          parent=NULL, ... ){
 
+    args <- list(...)
+    # set by args, used for facetting
+    by_args <- args[byArgs]
+    # args passed into loonPlotFactory
+    args[byArgs] <- NULL
 
     data <- as.data.frame(data)
 
@@ -226,7 +236,6 @@ l_serialaxes <- function(data,
         sequence <- names(data)
     }
 
-    args <- list(...)
     sync <- args$sync
 
     if(is.null(sync)) {
@@ -292,34 +301,60 @@ l_serialaxes <- function(data,
     args$active <- active
     args$selected <- selected
 
-    args <- l_na_omit("l_serialaxes", args)
-    args$data <- l_data(args$data)
+    if(is.null(by)) {
+        args <- l_na_omit("l_serialaxes", args)
+        args$data <- l_data(args$data)
 
-    plot <- do.call(
-        loonPlotFactory,
-        c(
-            args,
-            list(
-                factory_tclcmd = '::loon::serialaxes',
-                factory_path = 'serialaxes',
-                factory_window_title = 'loon serialaxes plot',
-                parent = parent,
-                sequence = sequence,
-                showAxes = showAxes,
-                scaling = scaling,
-                axesLayout = axesLayout
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::serialaxes',
+                    factory_path = 'serialaxes',
+                    factory_window_title = 'loon serialaxes plot',
+                    parent = parent,
+                    sequence = sequence,
+                    showAxes = showAxes,
+                    scaling = scaling,
+                    axesLayout = axesLayout
+                )
             )
         )
-    )
 
-    if(!is.null(linkingGroup)) {
-        l_configure(plot,
-                    linkingGroup = linkingGroup,
-                    sync = sync)
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = sync)
+        }
+
+        class(plot) <- c("l_serialaxes", class(plot))
+        return(plot)
+
+    } else {
+
+        if(is.atomic(by)) {
+            by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        } else
+            by <- as.data.frame(by, stringsAsFactors = FALSE)
+
+        plots <- loonFacets(type = "l_serialaxes",
+                            by,
+                            args,
+                            facet = match.arg(facet),
+                            by_args = Filter(Negate(is.null), by_args),
+                            linkingGroup = linkingGroup,
+                            sync = sync,
+                            parent = parent,
+                            factory_tclcmd = '::loon::serialaxes',
+                            factory_path = 'serialaxes',
+                            factory_window_title = 'loon serialaxes plot',
+                            sequence = sequence,
+                            showAxes = showAxes,
+                            scaling = scaling,
+                            axesLayout = axesLayout)
+
+        return(plots)
+
     }
-
-    class(plot) <- c("l_serialaxes", class(plot))
-
-    plot
-
 }

@@ -6,6 +6,9 @@
 #'
 #' @param x vector with numerical data to perform the binning on x,
 #' @param yshows one of "frequency" (default) or  "density"
+#' @param by loon plot can be separated by some variables into mutiple panels.
+#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
 #' @param showStackedColors  if TRUE (default) then bars will be coloured according to
 #'    colours of the points; if FALSE, then the bars will be a uniform colour
 #'    except for highlighted points.
@@ -80,6 +83,8 @@
 
 l_hist <- function(x,
                    yshows = c("frequency", "density"),
+                   by = NULL,
+                   facet = c("grid", "wrap"),
                    showStackedColors = TRUE,
                    origin = NULL,
                    binwidth=NULL,
@@ -95,6 +100,8 @@ l_hist <- function(x,
 #' @export
 l_hist.factor <-  function(x,
                            yshows = c("frequency", "density"),
+                           by = NULL,
+                           facet = c("grid", "wrap"),
                            showStackedColors = TRUE,
                            origin = NULL,
                            binwidth=NULL,
@@ -107,6 +114,8 @@ l_hist.factor <-  function(x,
 
     if(missing(x)) return(
         l_hist.default(x,
+                       by = by,
+                       facet = facet,
                        yshows = yshows,
                        showStackedColors = showStackedColors,
                        origin = origin,
@@ -141,6 +150,8 @@ l_hist.factor <-  function(x,
     }
     h <-  l_hist(x,
                  yshows = yshows,
+                 by = by,
+                 facet = facet,
                  showStackedColors = showStackedColors,
                  origin = origin,
                  binwidth=binwidth,
@@ -174,6 +185,8 @@ l_hist.factor <-  function(x,
 #' @export
 l_hist.character <-  function(x,
                               yshows = c("frequency", "density"),
+                              by = NULL,
+                              facet = c("grid", "wrap"),
                               showStackedColors = TRUE,
                               origin = NULL,
                               binwidth = NULL,
@@ -186,6 +199,8 @@ l_hist.character <-  function(x,
 
     if(missing(x)) return(
         l_hist.default(x,
+                       by = by,
+                       facet = facet,
                        yshows = yshows,
                        showStackedColors = showStackedColors,
                        origin = origin,
@@ -201,6 +216,8 @@ l_hist.character <-  function(x,
     x <- factor(x)
 
     l_hist(x,
+           by = by,
+           facet = facet,
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -216,6 +233,8 @@ l_hist.character <-  function(x,
 #' @export
 l_hist.default <-  function(x,
                             yshows = c("frequency", "density"),
+                            by = NULL,
+                            facet = c("grid", "wrap"),
                             showStackedColors = TRUE,
                             origin = NULL,
                             binwidth = NULL,
@@ -227,6 +246,11 @@ l_hist.default <-  function(x,
                             parent = NULL,
                             ...) {
 
+    args <- list(...)
+    # set by args, used for facetting
+    by_args <- args[byArgs]
+    # args passed into loonPlotFactory
+    args[byArgs] <- NULL
 
     if(missing(x)) {
 
@@ -249,6 +273,10 @@ l_hist.default <-  function(x,
                                 showBinHandle = showBinHandle,
                                 xlabel = xlabel,
                                 ...)
+
+        class(plot) <- c("l_hist", class(plot))
+        return(plot)
+
     } else {
 
         # x should be a vector and a vector should return NULL when we call dim(x)
@@ -256,8 +284,6 @@ l_hist.default <-  function(x,
         if(!is.null(dim_x))
             stop("Unkown data structure",
                  call. = FALSE)
-
-        args <- list(...)
         sync <- args$sync
 
         if(is.null(sync)) {
@@ -324,41 +350,77 @@ l_hist.default <-  function(x,
         args$active <- active
         args$selected <- selected
 
-        args <- l_na_omit("l_hist", args)
+        if(is.null(by)) {
 
-        plot <- do.call(
-            loonPlotFactory,
-            c(
-                args,
-                list(
-                    factory_tclcmd = '::loon::histogram',
-                    factory_path = 'hist',
-                    factory_window_title = 'loon histogram',
-                    parent = parent,
-                    yshows = yshows,
-                    showStackedColors = showStackedColors,
-                    origin = origin,
-                    binwidth=binwidth,
-                    showBinHandle = showBinHandle,
-                    xlabel = xlabel
+            args <- l_na_omit("l_hist", args)
+
+            plot <- do.call(
+                loonPlotFactory,
+                c(
+                    args,
+                    list(
+                        factory_tclcmd = '::loon::histogram',
+                        factory_path = 'hist',
+                        factory_window_title = 'loon histogram',
+                        parent = parent,
+                        yshows = yshows,
+                        showStackedColors = showStackedColors,
+                        origin = origin,
+                        binwidth=binwidth,
+                        showBinHandle = showBinHandle,
+                        xlabel = xlabel
+                    )
                 )
             )
-        )
 
-        if(!is.null(linkingGroup)) {
-            l_configure(plot,
-                        linkingGroup = linkingGroup,
-                        sync = sync)
+            if(!is.null(linkingGroup)) {
+                l_configure(plot,
+                            linkingGroup = linkingGroup,
+                            sync = sync)
+            }
+
+            class(plot) <- c("l_hist", class(plot))
+            return(plot)
+
+        } else {
+
+            if(is.atomic(by)) {
+                by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+            } else
+                by <- as.data.frame(by, stringsAsFactors = FALSE)
+
+            plots <- loonFacets(type = "l_hist",
+                                by,
+                                args,
+                                facet = match.arg(facet),
+                                by_args = Filter(Negate(is.null), by_args),
+                                linkingGroup = linkingGroup,
+                                sync = sync,
+                                parent = parent,
+                                factory_tclcmd = '::loon::histogram',
+                                factory_path = 'hist',
+                                factory_window_title = 'loon histogram',
+                                showLabels = TRUE,
+                                showScales = FALSE,
+                                yshows = yshows,
+                                showStackedColors = showStackedColors,
+                                origin = origin,
+                                binwidth=binwidth,
+                                showBinHandle = showBinHandle,
+                                xlabel = xlabel,
+                                ylabel = yshows)
+
+            return(plots)
+
         }
     }
-
-    class(plot) <- c("l_hist", class(plot))
-    return(plot)
 }
 
 #' @export
 l_hist.data.frame <- function(x,
                               yshows = c("frequency", "density"),
+                              by = NULL,
+                              facet = c("grid", "wrap"),
                               showStackedColors = TRUE,
                               origin = NULL,
                               binwidth=NULL,
@@ -371,6 +433,8 @@ l_hist.data.frame <- function(x,
 
     if(missing(x)) return(
         l_hist.default(x,
+                       by = by,
+                       facet = facet,
                        yshows = yshows,
                        showStackedColors = showStackedColors,
                        origin = origin,
@@ -396,6 +460,8 @@ l_hist.data.frame <- function(x,
     x <- x[, 1]
 
     l_hist(x,
+           by = by,
+           facet = facet,
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -411,6 +477,8 @@ l_hist.data.frame <- function(x,
 #' @export
 l_hist.matrix <- function(x,
                           yshows = c("frequency", "density"),
+                          by = NULL,
+                          facet = c("grid", "wrap"),
                           showStackedColors = TRUE,
                           origin = NULL,
                           binwidth=NULL,
@@ -422,6 +490,8 @@ l_hist.matrix <- function(x,
                           parent=NULL, ...) {
 
     l_hist(c(x),
+           by = by,
+           facet = facet,
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -437,6 +507,8 @@ l_hist.matrix <- function(x,
 #' @export
 l_hist.list <- function(x,
                         yshows = c("frequency", "density"),
+                        by = NULL,
+                        facet = c("grid", "wrap"),
                         showStackedColors = TRUE,
                         origin = NULL,
                         binwidth=NULL,
@@ -448,6 +520,8 @@ l_hist.list <- function(x,
                         parent=NULL, ...) {
 
     l_hist(unlist(x),
+           by = by,
+           facet = facet,
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -463,6 +537,8 @@ l_hist.list <- function(x,
 #' @export
 l_hist.table <- function(x,
                          yshows = c("frequency", "density"),
+                         by = NULL,
+                         facet = c("grid", "wrap"),
                          showStackedColors = TRUE,
                          origin = NULL,
                          binwidth=NULL,
@@ -493,6 +569,8 @@ l_hist.table <- function(x,
 
 
     l_hist(x,
+           by = by,
+           facet = facet,
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -508,6 +586,8 @@ l_hist.table <- function(x,
 #' @export
 l_hist.array <- function(x,
                          yshows = c("frequency", "density"),
+                         by = NULL,
+                         facet = c("grid", "wrap"),
                          showStackedColors = TRUE,
                          origin = NULL,
                          binwidth=NULL,
@@ -518,6 +598,8 @@ l_hist.array <- function(x,
                          xlabel = NULL,
                          parent=NULL, ...) {
     l_hist.table(x = x,
+                 by = by,
+                 facet = facet,
                  yshows = yshows,
                  showStackedColors = showStackedColors,
                  origin = origin,
