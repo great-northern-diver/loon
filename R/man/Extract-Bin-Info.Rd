@@ -60,11 +60,10 @@ gg_color_hue <- function(n) {
 # l_getBinIds
 ## number of bins
 binIds <- l_getBinIds(p)
+p['color'] <- l_binCut(p, labels = gg_color_hue(length(binIds)))
+
 ## The count of each bin
 lengths(binIds)
 # l_breaks
 breaks <- l_breaks(p)
-p['color'] <- l_binCut(p, labels = gg_color_hue(length(binIds)))
-
-
 }
