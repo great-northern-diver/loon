@@ -41,7 +41,7 @@ l_facet_wrap <- function(widget,
                          scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
                          nrow = NULL,
                          ncol = NULL,
-                         byrow = FALSE,
+                         byrow = TRUE,
                          labels_loc = c("top", "bottom"),
                          span = 10,
                          label_background = "gray80", label_foreground = "black",
@@ -83,6 +83,9 @@ l_facet_wrap.loon <- function(widget,
     plots <- facet_wrap_layout(plots = facets$plots,
                                subtitles = facets$subtitles,
                                span = span,
+                               xlabel = widget['xlabel'],
+                               ylabel = widget['ylabel'],
+                               title = widget['title'],
                                parent = child,
                                nrow = nrow,
                                ncol = ncol,
@@ -93,19 +96,12 @@ l_facet_wrap.loon <- function(widget,
                                label_borderwidth = label_borderwidth,
                                label_relief = match.arg(label_relief))
 
+
     # forbidden swapAxes showScales and showLabels
-    swapAxes <- widget['swapAxes']
-    undoStateChanges <- function(W) {
-        l_configure(W, showLabels = TRUE, showScales = FALSE, swapAxes = swapAxes)
-    }
-    lapply(plots,
-           function(p) {
-               undoStateChanges(p)
-               tcl(p, 'systembind', 'state', 'add',
-                   c('showLabels', 'showScales', 'swapAxes'),
-                   undoStateChanges)
-           })
-    callbackFunctions$state[[paste(child,"undoStateChanges", sep="_")]] <- undoStateChanges
+    facet_forbiddenSetting(plots,
+                           child = child,
+                           showLabels = TRUE, showScales = FALSE,
+                           swapAxes = widget['swapAxes'])
 
     scales <- match.arg(scales)
     scales <- switch(scales,
@@ -114,6 +110,7 @@ l_facet_wrap.loon <- function(widget,
                      {
                          scales
                      })
+
     # get widget ranges
     loonranges <- function(widget, f = 0.05) {
         if(inherits(widget, "l_plot") || inherits(widget, "l_graph")) {
@@ -147,6 +144,75 @@ l_facet_wrap.loon <- function(widget,
     xrange <- loonrange$xrange
     yrange <- loonrange$yrange
 
+    facet_wrap_synchronizeSetting(plots, child = child, scales = scales,
+                                  xrange = xrange, yrange = yrange,
+                                  zoomX = widget['zoomX'], zoomY = widget['zoomY'])
+
+    p <- structure(
+        plots,
+        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+    )
+
+    # comment(p) <- names(facets$plots)
+    return(p)
+}
+
+#' @export
+l_facet_wrap.l_serialaxes <- function(widget,
+                                      by, linkingGroup,
+                                      inheritLayers = TRUE,
+                                      scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
+                                      nrow = NULL,
+                                      ncol = NULL,
+                                      byrow = FALSE,
+                                      labels_loc = c("top", "bottom"),
+                                      span = 10,
+                                      label_background = "gray80", label_foreground = "black",
+                                      label_borderwidth = 2,
+                                      label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                                      parent = NULL, ...) {
+
+    loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
+    if(missing(by)) return(widget)
+
+    facets <- get_facets(widget, by,
+                         parent = parent,
+                         linkingGroup,
+                         inheritLayers = inheritLayers,
+                         ...)
+    child <- facets$child
+
+    ## Two major objectives here
+    # 1. pack plots and labels
+    # 2. rename and reorder plots
+    plots <- facet_wrap_layout(plots = facets$plots,
+                               subtitles = facets$subtitles,
+                               span = span,
+                               xlabel = "",
+                               ylabel = "",
+                               title = widget['title'],
+                               parent = child,
+                               nrow = nrow,
+                               ncol = ncol,
+                               labels_loc = match.arg(labels_loc),
+                               byrow = byrow,
+                               label_background = label_background,
+                               label_foreground = label_foreground,
+                               label_borderwidth = label_borderwidth,
+                               label_relief = match.arg(label_relief))
+
+    p <- structure(
+        plots,
+        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+    )
+
+    # comment(p) <- names(facets$plots)
+    return(p)
+}
+
+facet_wrap_synchronizeSetting <- function(plots, child, scales,
+                                          xrange, yrange,
+                                          zoomX = 5/6, zoomY = 5/6) {
     busy <- FALSE
     switch(scales,
            "fixed" = {
@@ -180,14 +246,14 @@ l_facet_wrap.loon <- function(widget,
                           if(diff(xrange) != 0) {
                               l_configure(p,
                                           panX = xrange[1],
-                                          deltaX = widget["deltaX"],
-                                          zoomX = widget["deltaX"]/diff(xrange))
+                                          deltaX = zoomX * diff(xrange),
+                                          zoomX = zoomX)
                           }
                           if(diff(yrange) != 0) {
                               l_configure(p,
                                           panY = yrange[1],
-                                          deltaY = widget["deltaY"],
-                                          zoomY = widget["deltaY"]/diff(yrange))
+                                          deltaY = zoomY * diff(yrange),
+                                          zoomY = zoomY)
                           }
                       }
                )
@@ -223,8 +289,8 @@ l_facet_wrap.loon <- function(widget,
                           if(diff(yrange) != 0) {
                               l_configure(p,
                                           panY = yrange[1],
-                                          deltaY = widget["deltaY"],
-                                          zoomY = widget["deltaY"]/diff(yrange))
+                                          deltaY = zoomY * diff(yrange),
+                                          zoomY = zoomY)
                           }
                       }
                )
@@ -261,8 +327,8 @@ l_facet_wrap.loon <- function(widget,
                           if(diff(xrange) != 0) {
                               l_configure(p,
                                           panX = xrange[1],
-                                          deltaX = widget["deltaX"],
-                                          zoomX = widget["deltaX"]/diff(xrange))
+                                          deltaX = zoomX * diff(xrange),
+                                          zoomX = zoomX)
                           }
                       }
                )
@@ -277,75 +343,4 @@ l_facet_wrap.loon <- function(widget,
            },
            "free" = NULL)
 
-    p <- structure(
-        plots,
-        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
-    )
-
-    comment(p) <- names(facets$plots)
-    return(p)
 }
-
-#' @export
-l_facet_wrap.l_serialaxes <- function(widget,
-                                      by, linkingGroup,
-                                      inheritLayers = TRUE,
-                                      scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
-                                      nrow = NULL,
-                                      ncol = NULL,
-                                      byrow = FALSE,
-                                      labels_loc = c("top", "bottom"),
-                                      span = 10,
-                                      label_background = "gray80", label_foreground = "black",
-                                      label_borderwidth = 2,
-                                      label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                                      parent = NULL, ...) {
-
-    loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
-    if(missing(by)) return(widget)
-
-    facets <- get_facets(widget, by,
-                         parent = parent,
-                         linkingGroup,
-                         inheritLayers = inheritLayers,
-                         ...)
-    child <- facets$child
-
-    ## Two major objectives here
-    # 1. pack plots and labels
-    # 2. rename and reorder plots
-    plots <- facet_wrap_layout(plots = facets$plots,
-                               subtitles = facets$subtitles,
-                               span = span,
-                               parent = child,
-                               nrow = nrow,
-                               ncol = ncol,
-                               labels_loc = match.arg(labels_loc),
-                               byrow = byrow,
-                               label_background = label_background,
-                               label_foreground = label_foreground,
-                               label_borderwidth = label_borderwidth,
-                               label_relief = match.arg(label_relief))
-
-    p <- structure(
-        plots,
-        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
-    )
-
-    comment(p) <- names(facets$plots)
-    return(p)
-}
-
-#' @rdname l_getPlots
-#'
-#' @export
-l_getPlots.l_facet <- function(target){
-    # throw errors if elements of compound are a not loon widget
-    lapply(target,
-           function(tar){l_throwErrorIfNotLoonWidget(tar) }
-    )
-    target
-}
-
-
-loonGrob_layoutType.l_facet <- function(target) "locations"
