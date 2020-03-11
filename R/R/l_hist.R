@@ -112,21 +112,22 @@ l_hist.factor <-  function(x,
                            xlabel = NULL,
                            parent=NULL, ...) {
 
-    if(missing(x)) return(
-        l_hist.default(x,
-                       by = by,
-                       facet = facet,
-                       yshows = yshows,
-                       showStackedColors = showStackedColors,
-                       origin = origin,
-                       binwidth=binwidth,
-                       showBinHandle = showBinHandle,
-                       color = color,
-                       active = active,
-                       selected = selected,
-                       xlabel = xlabel,
-                       parent=parent, ...)
-    )
+    if(missing(x))
+        return(
+            l_hist.default(x,
+                           by = by,
+                           facet = facet,
+                           yshows = yshows,
+                           showStackedColors = showStackedColors,
+                           origin = origin,
+                           binwidth=binwidth,
+                           showBinHandle = showBinHandle,
+                           color = color,
+                           active = active,
+                           selected = selected,
+                           xlabel = xlabel,
+                           parent=parent, ...)
+        )
 
     if (is.null(xlabel)){
         xlabel <-  gsub("\"", "", deparse(substitute(x)))
@@ -148,6 +149,14 @@ l_hist.factor <-  function(x,
             min(diff(sort(uni_x)))
         }
     }
+
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
+
     h <-  l_hist(x,
                  yshows = yshows,
                  by = by,
@@ -166,18 +175,40 @@ l_hist.factor <-  function(x,
     ## Adjust text coords
     ## The reason to do so is to make sure that
     ## `labels` always lay down the corresponding bins no matter how origin shifts
-    text_adjust <- h['origin']
-    if(text_adjust > 1 || text_adjust <= 0) {
-        text_adjust <- text_adjust - as.integer(text_adjust)
-        if(text_adjust <= 0) text_adjust <- text_adjust + 1
+
+    if(inherits(h, "l_compound")) {
+
+        lapply(h,
+               function(p) {
+                   text_adjust <- p['origin']
+                   if(text_adjust > 1 || text_adjust <= 0) {
+                       text_adjust <- text_adjust - as.integer(text_adjust)
+                       if(text_adjust <= 0) text_adjust <- text_adjust + 1
+                   }
+
+                   text_adjust <- text_adjust - 0.5
+
+                   l_layer_texts(p, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
+                                 text = levelNames, label = "Factor levels",
+                                 angle = 0,
+                                 size = 12, color = l_getOption("foreground"))
+               })
+
+    } else {
+        text_adjust <- h['origin']
+        if(text_adjust > 1 || text_adjust <= 0) {
+            text_adjust <- text_adjust - as.integer(text_adjust)
+            if(text_adjust <= 0) text_adjust <- text_adjust + 1
+        }
+
+        text_adjust <- text_adjust - 0.5
+
+        l_layer_texts(h, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
+                      text = levelNames, label = "Factor levels",
+                      angle = 0,
+                      size = 12, color = l_getOption("foreground"))
     }
 
-    text_adjust <- text_adjust - 0.5
-
-    l_layer_texts(h, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
-                  text = levelNames, label = "Factor levels",
-                  angle = 0,
-                  size = 12, color = l_getOption("foreground"))
     h
 }
 
@@ -197,23 +228,31 @@ l_hist.character <-  function(x,
                               xlabel = NULL,
                               parent=NULL, ...) {
 
-    if(missing(x)) return(
-        l_hist.default(x,
-                       by = by,
-                       facet = facet,
-                       yshows = yshows,
-                       showStackedColors = showStackedColors,
-                       origin = origin,
-                       binwidth=binwidth,
-                       showBinHandle = showBinHandle,
-                       color = color,
-                       active = active,
-                       selected = selected,
-                       xlabel = xlabel,
-                       parent=parent, ...)
-    )
+    if(missing(x))
+        return(
+            l_hist.default(x,
+                           by = by,
+                           facet = facet,
+                           yshows = yshows,
+                           showStackedColors = showStackedColors,
+                           origin = origin,
+                           binwidth=binwidth,
+                           showBinHandle = showBinHandle,
+                           color = color,
+                           active = active,
+                           selected = selected,
+                           xlabel = xlabel,
+                           parent=parent, ...)
+        )
 
     x <- factor(x)
+
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
 
     l_hist(x,
            by = by,
@@ -441,21 +480,22 @@ l_hist.data.frame <- function(x,
                               xlabel = NULL,
                               parent=NULL, ...) {
 
-    if(missing(x)) return(
-        l_hist.default(x,
-                       by = by,
-                       facet = facet,
-                       yshows = yshows,
-                       showStackedColors = showStackedColors,
-                       origin = origin,
-                       binwidth=binwidth,
-                       showBinHandle = showBinHandle,
-                       color = color,
-                       active = active,
-                       selected = selected,
-                       xlabel = xlabel,
-                       parent=parent, ...)
-    )
+    if(missing(x))
+        return(
+            l_hist.default(x,
+                           by = by,
+                           facet = facet,
+                           yshows = yshows,
+                           showStackedColors = showStackedColors,
+                           origin = origin,
+                           binwidth=binwidth,
+                           showBinHandle = showBinHandle,
+                           color = color,
+                           active = active,
+                           selected = selected,
+                           xlabel = xlabel,
+                           parent=parent, ...)
+        )
 
     # get a relatively informative xlabel
     if (is.null(xlabel)){
@@ -468,6 +508,13 @@ l_hist.data.frame <- function(x,
         xlabel <- paste(name, "from", dataname)
     }
     x <- x[, 1]
+
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
 
     l_hist(x,
            by = by,
@@ -499,6 +546,13 @@ l_hist.matrix <- function(x,
                           xlabel = NULL,
                           parent=NULL, ...) {
 
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
+
     l_hist(c(x),
            by = by,
            facet = facet,
@@ -528,6 +582,13 @@ l_hist.list <- function(x,
                         selected = FALSE,
                         xlabel = NULL,
                         parent=NULL, ...) {
+
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
 
     l_hist(unlist(x),
            by = by,
@@ -577,6 +638,12 @@ l_hist.table <- function(x,
         x <- x[,1]
     }
 
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
 
     l_hist(x,
            by = by,
@@ -607,6 +674,14 @@ l_hist.array <- function(x,
                          selected = FALSE,
                          xlabel = NULL,
                          parent=NULL, ...) {
+
+    if(!is.null(by)) {
+        by <- if(is.atomic(by))
+            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+        else
+            as.data.frame(by, stringsAsFactors = FALSE)
+    }
+
     l_hist.table(x = x,
                  by = by,
                  facet = facet,
