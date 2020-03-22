@@ -1,6 +1,5 @@
 #' @rdname Extract-Bin-Info
 #'
-#' @inheritParams Extract-Bin-Info
 #' @param labels Labels for the levels of the resulting category.
 #' By default, labels are constructed using "(a,b]" interval notation.
 #' If labels = FALSE, simple integer codes are returned instead of a factor.

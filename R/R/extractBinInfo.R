@@ -67,8 +67,6 @@ getBinData <- function(widget) {
 
 #' @rdname Extract-Bin-Info
 #'
-#' @inheritParams Extract-Bin-Info
-#'
 #' @details \code{l_getBinIds} returns the ids of each bin
 #'
 #' @export
@@ -91,8 +89,6 @@ l_getBinIds <- function(widget) {
 }
 
 #' @rdname Extract-Bin-Info
-#'
-#' @inheritParams Extract-Bin-Info
 #'
 #' @details \code{l_breaks} returns the range (breaks) of each bin
 #'
