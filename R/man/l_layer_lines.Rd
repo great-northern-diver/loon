@@ -4,7 +4,6 @@
 \alias{l_layer_lines}
 \title{Layer lines}
 \usage{
-<<<<<<< HEAD
 l_layer_lines(
   widget,
   x,
@@ -15,13 +14,9 @@ l_layer_lines(
   parent = "root",
   index = 0,
   group = NULL,
+  active = TRUE,
   ...
 )
-=======
-l_layer_lines(widget, x, y, color = "black", linewidth = 1,
-  label = "lines", parent = "root", index = 0, group = NULL,
-  active = TRUE, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{widget}{widget path name as a string}

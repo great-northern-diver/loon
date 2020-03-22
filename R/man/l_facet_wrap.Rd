@@ -4,13 +4,24 @@
 \alias{l_facet_wrap}
 \title{Layout Facets in a grid}
 \usage{
-l_facet_wrap(widget, by, linkingGroup, inheritLayers = TRUE,
+l_facet_wrap(
+  widget,
+  by,
+  linkingGroup,
+  inheritLayers = TRUE,
   scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
-  nrow = NULL, ncol = NULL, byrow = FALSE, labels_loc = c("top",
-  "bottom"), span = 10, label_background = "gray80",
-  label_foreground = "black", label_borderwidth = 2,
-  label_relief = c("groove", "flat", "raised", "sunken", "ridge",
-  "solid"), parent = NULL, ...)
+  nrow = NULL,
+  ncol = NULL,
+  byrow = FALSE,
+  labels_loc = c("top", "bottom"),
+  span = 10,
+  label_background = "gray80",
+  label_foreground = "black",
+  label_borderwidth = 2,
+  label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{widget}{A loon widget}

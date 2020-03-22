@@ -4,7 +4,6 @@
 \alias{l_layer_polygons}
 \title{Layer polygons}
 \usage{
-<<<<<<< HEAD
 l_layer_polygons(
   widget,
   x,
@@ -16,13 +15,9 @@ l_layer_polygons(
   parent = "root",
   index = 0,
   group = NULL,
+  active = TRUE,
   ...
 )
-=======
-l_layer_polygons(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "polygons", parent = "root", index = 0,
-  group = NULL, active = TRUE, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{widget}{widget path name as a string}

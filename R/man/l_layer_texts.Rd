@@ -4,7 +4,6 @@
 \alias{l_layer_texts}
 \title{Layer texts}
 \usage{
-<<<<<<< HEAD
 l_layer_texts(
   widget,
   x,
@@ -13,16 +12,14 @@ l_layer_texts(
   color = "gray60",
   size = 6,
   angle = 0,
+  anchor = "center",
+  justify = "center",
   label = "texts",
   parent = "root",
   index = 0,
+  active = TRUE,
   ...
 )
-=======
-l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
-  angle = 0, anchor = "center", justify = "center",
-  label = "texts", parent = "root", index = 0, active = TRUE, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{widget}{widget path name as a string}

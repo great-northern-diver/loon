@@ -4,7 +4,6 @@
 \alias{l_layer_rectangles}
 \title{Layer rectangles}
 \usage{
-<<<<<<< HEAD
 l_layer_rectangles(
   widget,
   x,
@@ -16,13 +15,9 @@ l_layer_rectangles(
   parent = "root",
   index = 0,
   group = NULL,
+  active = TRUE,
   ...
 )
-=======
-l_layer_rectangles(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "rectangles", parent = "root", index = 0,
-  group = NULL, active = TRUE, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{widget}{widget path name as a string}
