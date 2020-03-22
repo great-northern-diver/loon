@@ -4,6 +4,7 @@
 \alias{l_serialaxes}
 \title{Create a Serialaxes Widget}
 \usage{
+<<<<<<< HEAD
 l_serialaxes(
   data,
   sequence,
@@ -17,6 +18,12 @@ l_serialaxes(
   parent = NULL,
   ...
 )
+=======
+l_serialaxes(data, sequence, scaling = "variable",
+  axesLayout = "radial", by = NULL, facet = c("grid", "wrap"),
+  showAxes = TRUE, linewidth = 1, color = "steelblue",
+  active = TRUE, selected = FALSE, parent = NULL, ...)
+>>>>>>> upstream/master
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
@@ -27,6 +34,11 @@ l_serialaxes(
 how the data is scaled. See Details and Examples for more information.}
 
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
+
+\item{by}{loon plot can be separated by some variables into mutiple panels.
+This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 

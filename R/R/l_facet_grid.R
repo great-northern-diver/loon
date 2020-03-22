@@ -88,6 +88,9 @@ l_facet_grid.loon <- function(widget,
                                subtitles = facets$subtitles,
                                span = span,
                                parent = child,
+                               xlabel = widget['xlabel'],
+                               ylabel = widget['ylabel'],
+                               title = widget['title'],
                                row_labels_loc = match.arg(row_labels_loc),
                                column_labels_loc = match.arg(column_labels_loc),
                                byrow = byrow,
@@ -97,9 +100,90 @@ l_facet_grid.loon <- function(widget,
                                label_relief = match.arg(label_relief))
 
     # forbidden swapAxes showScales and showLabels
-    swapAxes <- widget['swapAxes']
+    facet_forbiddenSetting(plots,
+                           child = child,
+                           showLabels = TRUE, showScales = FALSE,
+                           swapAxes = widget['swapAxes'])
+
+    # synchronize
+    facet_grid_synchronizeSetting(plots, child = child)
+
+    p <- structure(
+        plots,
+        class = c("l_facet_grid", "l_facet", "l_compound", "loon")
+    )
+
+    # comment(p) <- names(facets$plots)
+    return(p)
+}
+
+#' @export
+l_facet_grid.l_serialaxes <- function(widget,
+                                      by, linkingGroup,
+                                      inheritLayers = TRUE,
+                                      byrow = TRUE,
+                                      column_labels_loc = c("top", "bottom"),
+                                      row_labels_loc = c("right", "left"),
+                                      span = 10,
+                                      label_background = "gray80", label_foreground = "black",
+                                      label_borderwidth = 2,
+                                      label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                                      parent = NULL, ...) {
+
+    loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
+    if(missing(by)) return(widget)
+
+    facets <- get_facets(widget, by,
+                         parent = parent,
+                         linkingGroup,
+                         inheritLayers = inheritLayers,
+                         ...)
+
+    ## Two major objectives here
+    # 1. pack plots and labels
+    # 2. rename and reorder plots
+    plots <- facet_grid_layout(plots = facets$plots,
+                               subtitles = facets$subtitles,
+                               span = span,
+                               parent = facets$child,
+                               xlabel = "",
+                               ylabel = "",
+                               title = widget['title'],
+                               row_labels_loc = match.arg(row_labels_loc),
+                               column_labels_loc = match.arg(column_labels_loc),
+                               byrow = byrow,
+                               label_background = label_background,
+                               label_foreground = label_foreground,
+                               label_borderwidth = label_borderwidth,
+                               label_relief = match.arg(label_relief))
+
+    p <- structure(
+        plots,
+        class = c("l_facet_grid", "l_facet", "l_compound", "loon")
+    )
+
+    # comment(p) <- names(facets$plots)
+    return(p)
+}
+
+layout_position <- function(target) {
+    plotNames <- names(target)
+
+    layout_position <- t(
+        as.matrix(
+            as.data.frame(
+                lapply(strsplit(vapply(strsplit(plotNames, "x"), function(x) x[2], character(1)), "y"), as.numeric),
+                fix.empty.names = FALSE)
+        )
+    )
+    colnames(layout_position) <- c("x", "y")
+    layout_position
+}
+
+facet_forbiddenSetting <- function(plots, child,
+                                   showLabels = TRUE, showScales = FALSE, swapAxes = FALSE) {
     undoStateChanges <- function(W) {
-        l_configure(W, showLabels = TRUE, showScales = FALSE, swapAxes = swapAxes)
+        l_configure(W, showLabels = showLabels, showScales = showScales, swapAxes = swapAxes)
     }
     lapply(plots,
            function(p) {
@@ -109,13 +193,12 @@ l_facet_grid.loon <- function(widget,
                    undoStateChanges)
            })
     callbackFunctions$state[[paste(child,"undoStateChanges", sep="_")]] <- undoStateChanges
+}
 
-    p <- structure(
-        plots,
-        class = c("l_facet_grid", "l_facet", "l_compound", "loon")
-    )
+facet_grid_synchronizeSetting <- function(plots, child) {
+
     ## Make bindings for scatter synchronizing zoom and pan
-    layout_position <- layout_position(p)
+    layout_position <- layout_position(plots)
     plotsHash <- list()
     for (i in 1:length(plots)) {
 
@@ -158,52 +241,9 @@ l_facet_grid.loon <- function(widget,
            }
     )
     callbackFunctions$state[[paste(child,"synchronize", sep="_")]] <- synchronizeBindings
-    return(p)
 }
 
-#' @export
-l_facet_grid.l_serialaxes <- function(widget,
-                                      by, linkingGroup,
-                                      inheritLayers = TRUE,
-                                      byrow = TRUE,
-                                      column_labels_loc = c("top", "bottom"),
-                                      row_labels_loc = c("right", "left"),
-                                      span = 10,
-                                      label_background = "gray80", label_foreground = "black",
-                                      label_borderwidth = 2,
-                                      label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                                      parent = NULL, ...) {
-
-    loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
-    if(missing(by)) return(widget)
-
-    facets <- get_facets(widget, by,
-                         parent = parent,
-                         linkingGroup,
-                         inheritLayers = inheritLayers,
-                         ...)
-
-    ## Two major objectives here
-    # 1. pack plots and labels
-    # 2. rename and reorder plots
-    plots <- facet_grid_layout(plots = facets$plots,
-                               subtitles = facets$subtitles,
-                               span = span,
-                               parent = facets$child,
-                               row_labels_loc = match.arg(row_labels_loc),
-                               column_labels_loc = match.arg(column_labels_loc),
-                               byrow = byrow,
-                               label_background = label_background,
-                               label_foreground = label_foreground,
-                               label_borderwidth = label_borderwidth,
-                               label_relief = match.arg(label_relief))
-
-    structure(
-        plots,
-        class = c("l_facet_grid", "l_facet", "l_compound", "loon")
-    )
-}
-
+##########################################
 #' @rdname l_getLocations
 #'
 #' @export
@@ -230,18 +270,16 @@ l_getLocations.l_facet <- function(target) {
         widths = NULL
     )
 }
-
-
-layout_position <- function(target) {
-    plotNames <- names(target)
-
-    layout_position <- t(
-        as.matrix(
-            as.data.frame(
-                lapply(strsplit(vapply(strsplit(plotNames, "x"), function(x) x[2], character(1)), "y"), as.numeric),
-                fix.empty.names = FALSE)
-        )
+#' @rdname l_getPlots
+#'
+#' @export
+l_getPlots.l_facet <- function(target){
+    # throw errors if elements of compound are a not loon widget
+    lapply(target,
+           function(tar){l_throwErrorIfNotLoonWidget(tar) }
     )
-    colnames(layout_position) <- c("x", "y")
-    layout_position
+    target
 }
+
+
+loonGrob_layoutType.l_facet <- function(target) "locations"

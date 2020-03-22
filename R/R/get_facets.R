@@ -40,7 +40,7 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
     if(length(by) == 0) {
         stop(byOriginal, " is not a valid setting")
     }
-    subtitles <- setNames(lapply(by, function(b) as.character(unique(data[[b]]))), by)
+    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
 
     # split data by "by"
     splitted_data <- split(data, f = lapply(by, function(b) data[[b]]), drop = FALSE, sep = "*")
@@ -52,23 +52,12 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
         parent <- l_toplevel()
         subwin <- l_subwin(parent, 'facet')
 
-        title <- paste("loon facets on",
-                       deparse(substitute(by)), "--path:", subwin)
-        tktitle(parent) <- title
+        tktitle(parent) <- paste("loon facets on",
+                                 deparse(substitute(by)), "--path:", subwin)
         # create child
         child <- as.character(tcl('frame', subwin))
     } else {
         child <- parent
-    }
-
-    valid_path <- function() {
-        i <- 0
-        child <- paste('.l', i , sep="")
-        while(as.logical(tcl('winfo','exists', child))) {
-            i <- i + 1
-            child <- paste('.l', i , sep="")
-        }
-        return(i)
     }
 
     # linkingGroup
@@ -99,7 +88,7 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
                function(s) {
                    if(is.list(widget[s])) return(NULL)
 
-                   if(s %in% c("xlabel", "ylabel", "zlabel"))
+                   if(s %in% c("xlabel", "ylabel", "zlabel", "title"))
                        ""
                    else if(s == "minimumMargins")
                        rep(5, 4)
@@ -133,7 +122,7 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
                    if(dim(d)[1] == 0) {
 
                        args <- c(
-                           ...,
+                           list(...),
                            inheritArgs ,
                            parent = child
                        )
@@ -161,7 +150,7 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
                    args$parent <- child
 
                    args <- c(
-                       ...,
+                       list(...),
                        args,
                        inheritArgs
                    )
@@ -285,7 +274,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup, inh
 
     # TODO by is an expression
     by <- intersect(by, column_names)
-    subtitles <- setNames(lapply(by, function(b) as.character(unique(data[[b]]))), by)
+    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
 
     # split data by "by"
     splitted_data <- split(data, f = lapply(by, function(b) data[[b]]), sep = "*")
@@ -297,23 +286,12 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup, inh
         parent <- l_toplevel()
         subwin <- l_subwin(parent, 'facet')
 
-        title <- paste("loon facets on",
-                       deparse(substitute(by)), "--path:", subwin)
-        tktitle(parent) <- title
+        tktitle(parent) <- paste("loon facets on",
+                                 deparse(substitute(by)), "--path:", subwin)
         # create child
         child <- as.character(tcl('frame', subwin))
     } else {
         child <- parent
-    }
-
-    valid_path <- function() {
-        i <- 0
-        child <- paste('.l', i , sep="")
-        while(as.logical(tcl('winfo','exists', child))) {
-            i <- i + 1
-            child <- paste('.l', i , sep="")
-        }
-        return(i)
     }
 
     # linkingGroup

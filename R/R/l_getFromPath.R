@@ -48,8 +48,29 @@ l_getFromPath <- function(target) {
         plots <- create_handles(target = target, plots = plots, type = "graph")
 
         if(length(plots) == 0) stop(target, " is not a valid loon widget", call. = FALSE)
+        if(length(plots) == 1) {
+            # length 1 plots
+            # convert a list to a char
+            return(plots[[1]])
+        }
 
-        class(plots) <- c("l_compound", "loon")
+        loonClass <- function(target) {
+
+            class <- c("l_compound", "loon")
+
+            if(grepl("pairs", target)) {
+                c("l_pairs", class)
+            } else if(grepl("ts", target)) {
+                c("l_ts", class)
+            } else if(grepl("facet", target)) {
+                c("l_facet", class)
+            } else if(grepl("ggplot", target)) {
+                c("l_ggplot", class)
+            } else
+                class
+        }
+
+        class(plots) <- loonClass(target)
         return(plots)
     }
 

@@ -4,6 +4,7 @@
 \alias{l_hist}
 \title{Create an interactive histogram}
 \usage{
+<<<<<<< HEAD
 l_hist(
   x,
   yshows = c("frequency", "density"),
@@ -18,11 +19,23 @@ l_hist(
   parent = NULL,
   ...
 )
+=======
+l_hist(x, yshows = c("frequency", "density"), by = NULL,
+  facet = c("grid", "wrap"), showStackedColors = TRUE, origin = NULL,
+  binwidth = NULL, showBinHandle = FALSE, color = "grey60",
+  active = TRUE, selected = FALSE, xlabel = NULL, parent = NULL,
+  ...)
+>>>>>>> upstream/master
 }
 \arguments{
 \item{x}{vector with numerical data to perform the binning on x,}
 
 \item{yshows}{one of "frequency" (default) or  "density"}
+
+\item{by}{loon plot can be separated by some variables into mutiple panels.
+This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
 
 \item{showStackedColors}{if TRUE (default) then bars will be coloured according to
 colours of the points; if FALSE, then the bars will be a uniform colour
