@@ -4,10 +4,11 @@
 \alias{l_plot.default}
 \title{The default \code{l_plot} for plotting data}
 \usage{
-<<<<<<< HEAD
 \method{l_plot}{default}(
   x,
   y = NULL,
+  by = NULL,
+  facet = c("grid", "wrap"),
   color = "grey60",
   glyph = "ccircle",
   size = 4,
@@ -26,14 +27,6 @@
   parent = NULL,
   ...
 )
-=======
-\method{l_plot}{default}(x, y = NULL, by = NULL, facet = c("grid",
-  "wrap"), color = "grey60", glyph = "ccircle", size = 4,
-  active = TRUE, selected = FALSE, xlabel, ylabel, title,
-  showLabels = TRUE, showScales = FALSE, showGuides = TRUE,
-  guidelines = "white", guidesBackground = "grey92",
-  foreground = "black", background = "white", parent = NULL, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{x}{the \code{x} and \code{y} arguments provide the x and y

@@ -4,12 +4,13 @@
 \alias{l_plot3D.default}
 \title{The default \code{l_plot} method to create 3d interactive scatterplot}
 \usage{
-<<<<<<< HEAD
 \method{l_plot3D}{default}(
   x,
   y = NULL,
   z = NULL,
   axisScaleFactor = 1,
+  by = NULL,
+  facet = c("grid", "wrap"),
   color = "grey60",
   glyph = "ccircle",
   size = 4,
@@ -29,15 +30,6 @@
   parent = NULL,
   ...
 )
-=======
-\method{l_plot3D}{default}(x, y = NULL, z = NULL,
-  axisScaleFactor = 1, by = NULL, facet = c("grid", "wrap"),
-  color = "grey60", glyph = "ccircle", size = 4, active = TRUE,
-  selected = FALSE, xlabel, ylabel, zlabel, title, showLabels = TRUE,
-  showScales = FALSE, showGuides = TRUE, guidelines = "white",
-  guidesBackground = "grey92", foreground = "black",
-  background = "white", parent = NULL, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{x}{the x, y and z arguments provide the x, y and z coordinates for the plot.

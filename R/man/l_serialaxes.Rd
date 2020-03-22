@@ -4,12 +4,13 @@
 \alias{l_serialaxes}
 \title{Create a Serialaxes Widget}
 \usage{
-<<<<<<< HEAD
 l_serialaxes(
   data,
   sequence,
   scaling = "variable",
   axesLayout = "radial",
+  by = NULL,
+  facet = c("grid", "wrap"),
   showAxes = TRUE,
   linewidth = 1,
   color = "steelblue",
@@ -18,12 +19,6 @@ l_serialaxes(
   parent = NULL,
   ...
 )
-=======
-l_serialaxes(data, sequence, scaling = "variable",
-  axesLayout = "radial", by = NULL, facet = c("grid", "wrap"),
-  showAxes = TRUE, linewidth = 1, color = "steelblue",
-  active = TRUE, selected = FALSE, parent = NULL, ...)
->>>>>>> upstream/master
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
