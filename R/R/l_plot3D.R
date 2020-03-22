@@ -304,31 +304,98 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               background = "white",
                               parent = NULL, ...) {
 
+    if (missing(title)) { title <- "" }
+
     if(missing(x)) {
-
-        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D', parent, ...)
-
-    } else {
 
         ## Get x, y, z, xlab, ylab, zlab
         ## similar as in plot.default use xyz.coords
-        xlabel <- if (!missing(x))
-            gsub("\"", "", deparse(substitute(x)))
-        ylabel <- if (!missing(y))
-            gsub("\"", "", deparse(substitute(y)))
-        zlabel <- if (!missing(z))
-            gsub("\"", "", deparse(substitute(z)))
+        if (missing(xlabel)){
+            if (!missing(x)){
+                xlabel <- gsub("\"", "", deparse(substitute(x)))
+            } else {
+                xlabel <- ""
+            }
+        }
 
-        xyz <- xyz.coords(x, y, z, xlabel, ylabel, zlabel)
+        if (missing(ylabel)) {
+            if (!missing(y)){
+                ylabel <- gsub("\"", "", deparse(substitute(y)))
+            } else {
+                ylabel <- ""
+            }
+        }
 
-        if (is.null(xyz$xlab))
-            xyz$xlab <- ""
-        if (is.null(xyz$ylab))
-            xyz$ylab <- ""
-        if (is.null(xyz$zlab))
-            xyz$zlab <- ""
+        if (missing(zlabel)) {
+            if (!missing(z)){
+                zlabel <- gsub("\"", "", deparse(substitute(z)))
+            } else {
+                zlabel <- ""
+            }
+        }
 
-        if (missing(title)) { title <- "" }
+        plot <- loonPlotFactory('::loon::plot3D',
+                                'plot3D',
+                                'loon scatterplot3D',
+                                parent,
+                                axisScaleFactor = axisScaleFactor,
+                                xlabel = xlabel,
+                                ylabel = ylabel,
+                                zlabel = zlabel,
+                                title = title,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background,
+                                ...)
+
+    } else {
+
+        xyz <- xyz.coords(x, y, z)
+        x <- xyz$x
+        y <- xyz$y
+        z <- xyz$z
+
+        ## Get x, y, z, xlab, ylab, zlab
+        ## similar as in plot.default use xyz.coords
+        if (missing(xlabel)){
+            xlabel <- if (is.null(xyz$xlab)) "" else xyz$xlab
+        }
+
+        if (missing(ylabel)) {
+            ylabel <- if (is.null(xyz$ylab)) "" else xyz$ylab
+        }
+
+        if (missing(zlabel)) {
+            zlabel <- if (is.null(xyz$zlab)) "" else xyz$zlab
+        }
+
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+
+            if(length(size) != 1) {
+                sync <- "push"
+            } else {
+                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
+            }
+
+            if(length(glyph) != 1) {
+                sync <- "push"
+            } else {
+                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
+            }
+        }
 
         n <- length(x)
         len_color <- length(color)
@@ -379,42 +446,49 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             if(is.na(glyph)) glyph <- "ccircle"
         }
 
-        x <- xyz$x
-        y <- xyz$y
-        z <- xyz$z
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$y <- y
+        args$z <- z
+        args$color <- color
+        args$glyph <- glyph
+        args$size <- size
+        args$active <- active
+        args$selected <- selected
 
-        args <- list(...)
-        linkingKey <- args[["linkingKey"]]
-        itemLabel <- args[["itemLabel"]]
-        tag <- args[["tag"]]
-        l_na_omit("l_plot3D", ...)
+        args <- l_na_omit("l_plot3D", args)
 
-        plot <- loonPlotFactory('::loon::plot3D', 'plot3D', 'loon scatterplot3D',
-                                parent,
-                                x = x,
-                                y = y,
-                                z = z,
-                                xlabel=xyz$xlab,
-                                ylabel=xyz$ylab,
-                                zlabel=xyz$zlab,
-                                title = title,
-                                color = color,
-                                glyph = glyph,
-                                size = size,
-                                active = active,
-                                selected = selected,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background,
-                                ...,
-                                linkingKey = linkingKey,
-                                itemLabel = itemLabel,
-                                tag = tag)
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(
+                    factory_tclcmd = '::loon::plot3D',
+                    factory_path = 'plot3D',
+                    factory_window_title = 'loon scatterplot3D',
+                    parent = parent,
+                    xlabel = xlabel,
+                    ylabel = ylabel,
+                    zlabel = zlabel,
+                    title = title,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
+                    guidelines = guidelines,
+                    guidesBackground = guidesBackground,
+                    foreground = foreground,
+                    background = background
+                )
+            )
+        )
 
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = sync)
+        }
     }
 
     class(plot) <- c("l_plot3D", "l_plot", class(plot))

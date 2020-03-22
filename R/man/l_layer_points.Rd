@@ -4,6 +4,7 @@
 \alias{l_layer_points}
 \title{Layer points}
 \usage{
+<<<<<<< HEAD
 l_layer_points(
   widget,
   x,
@@ -15,6 +16,10 @@ l_layer_points(
   index = 0,
   ...
 )
+=======
+l_layer_points(widget, x, y = NULL, color = "gray60", size = 6,
+  label = "points", parent = "root", index = 0, active = TRUE, ...)
+>>>>>>> upstream/master
 }
 \arguments{
 \item{widget}{widget path name as a string}
@@ -35,6 +40,9 @@ structure.}
 \item{parent}{group layer}
 
 \item{index}{of the newly added layer in its parent group}
+
+\item{active}{a logical determining whether objects appear or not
+(default is \code{TRUE} for all).}
 
 \item{...}{additional state initialization arguments, see
 \code{\link{l_info_states}}}

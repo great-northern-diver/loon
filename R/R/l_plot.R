@@ -221,26 +221,27 @@ l_plot.default <-  function(x, y = NULL,
                             background = "white",
                             parent = NULL, ...) {
 
-    ## Check for missing arguments
-    ## Get x, y, xlab and ylab
-    if (missing(xlabel)){
-        if (!missing(x)){
-            xlabel <- gsub("\"", "", deparse(substitute(x)))
-        } else {
-            xlabel <- ""
-        }
-    }
-
-    if (missing(ylabel)) {
-        if (!missing(y)){
-            ylabel <- gsub("\"", "", deparse(substitute(y)))
-        } else {
-            ylabel <- ""
-        }
-    }
     if (missing(title)) { title <- "" }
 
     if(missing(x)) {
+
+        ## Check for missing arguments
+        ## Get x, y, xlab and ylab
+        if (missing(xlabel)){
+            if (!missing(x)){
+                xlabel <- gsub("\"", "", deparse(substitute(x)))
+            } else {
+                xlabel <- ""
+            }
+        }
+
+        if (missing(ylabel)) {
+            if (!missing(y)){
+                ylabel <- gsub("\"", "", deparse(substitute(y)))
+            } else {
+                ylabel <- ""
+            }
+        }
 
         plot <- loonPlotFactory('::loon::plot', 'plot',
                                 'loon scatterplot',
@@ -260,13 +261,45 @@ l_plot.default <-  function(x, y = NULL,
                                 ...)
 
     } else {
+
+
+        args <- list(...)
+        sync <- args$sync
+
+        if(is.null(sync)) {
+            sync <- "pull"
+            if(length(color) > 1) {
+                sync <- "push"
+            } else {
+                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+            }
+
+            if(length(size) != 1) {
+                sync <- "push"
+            } else {
+                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
+            }
+
+            if(length(glyph) != 1) {
+                sync <- "push"
+            } else {
+                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
+            }
+        }
+
         ## Get x, y, xlab, ylab
         ## similar to plot.default use of xy.coords
-        xy <- xy.coords(x, y, xlabel, ylabel)
+        xy <- xy.coords(x, y)
         x <- xy$x
         y <- xy$y
-        if (is.null(xy$xlab)) xy$xlab <- ""
-        if (is.null(xy$ylab)) xy$ylab <- ""
+
+        if (missing(xlabel)){
+            xlabel <- if (is.null(xy$xlab)) "" else xy$xlab
+        }
+
+        if (missing(ylabel)) {
+            ylabel <- if (is.null(xy$ylab)) "" else xy$ylab
+        }
         ## make sure points parameters are right
 
         n <- length(x)
@@ -317,39 +350,46 @@ l_plot.default <-  function(x, y = NULL,
         } else {
             if(is.na(glyph)) glyph <- "ccircle"
         }
+        # linkingGroup is set after the plot is created
+        linkingGroup <- args[["linkingGroup"]]
+        args$linkingGroup <- NULL
+        # n dimensional states NA check
+        args$x <- x
+        args$y <- y
+        args$color <- color
+        args$glyph <- glyph
+        args$size <- size
+        args$active <- active
+        args$selected <- selected
 
-        # l_na_omit returns nothing
-        # Variables in this environment will be checked (NA, NaN, Inf, -Inf) and
-        # modified after l_na_omit is called.
-        args <- list(...)
-        linkingKey <- args[["linkingKey"]]
-        itemLabel <- args[["itemLabel"]]
-        tag <- args[["tag"]]
-        l_na_omit("l_plot.default", ...)
+        args <- l_na_omit("l_plot.default", args)
 
-        plot <- loonPlotFactory('::loon::plot', 'plot', 'loon scatterplot',
-                                parent,
-                                x = x, y = y,
-                                color = color,
-                                glyph = glyph,
-                                size = size,
-                                active = active,
-                                selected = selected,
-                                xlabel = xy$xlab,
-                                ylabel = xy$ylab,
-                                title = title,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background,
-                                ...,
-                                linkingKey = linkingKey,
-                                itemLabel = itemLabel,
-                                tag = tag)
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                args,
+                list(factory_tclcmd = '::loon::plot',
+                     factory_path = 'plot',
+                     factory_window_title = 'loon scatterplot',
+                     parent = parent,
+                     xlabel = xlabel,
+                     ylabel = ylabel,
+                     title = title,
+                     showLabels = showLabels,
+                     showScales = showScales,
+                     showGuides = showGuides,
+                     guidelines = guidelines,
+                     guidesBackground = guidesBackground,
+                     foreground = foreground,
+                     background = background)
+            )
+        )
 
+        if(!is.null(linkingGroup)) {
+            l_configure(plot,
+                        linkingGroup = linkingGroup,
+                        sync = sync)
+        }
     }
 
     class(plot) <- c("l_plot", class(plot))

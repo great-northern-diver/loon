@@ -51,7 +51,7 @@
 #' for (plot in l_getPlots(p)) {
 #'       if (is(plot, "l_plot")) {
 #'           plot["glyph"] <- "ocircle"}
-#'           }
+#' }
 
 l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
                     showHistograms = FALSE, histLocation = c("edge", "diag"),
@@ -103,13 +103,14 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   if(is.null(parent)) {
     new.toplevel <- TRUE
     parent <- l_toplevel()
-    title <- paste("loon scatterplot matrix for",
-                   deparse(substitute(data)), "data")
-    tktitle(parent) <- title
   }
 
-  child <- as.character(tcl('frame', l_subwin(parent, 'pairs')))
+  subwin <- l_subwin(parent, 'pairs')
+  child <- as.character(tcl('frame', subwin))
 
+  title <- paste("loon scatterplot matrix for",
+                 deparse(substitute(data)), "data", "--path:", subwin)
+  tktitle(parent) <- title
   ## parent for individual scatterplots
   args[['parent']] <- child
 
@@ -313,7 +314,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
         }
   )
 
-  ## Column and Row wheight such that the cells expand
+  ## Column and Row weight such that the cells expand
   for (i in seq(0, cells)) {
     tkgrid.columnconfigure(child, i, weight = 1)
     tkgrid.rowconfigure(child, i, weight = 1)
@@ -324,7 +325,8 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     maxchar <- max(sapply(names(data), nchar))
     strf <- paste("%-", maxchar,'s', sep='')
     for (i in 1:nvar) {
-      lab <- as.character(tcl('label', as.character(l_subwin(child,'label')),
+      lab <- as.character(tcl('label',
+                              as.character(l_subwin(child,'label')),
                               text= sprintf(strf, names(data)[i])))
       tkgrid(lab,
              row = (i - text_adjustValue - 1) * span + 1,
@@ -584,17 +586,17 @@ l_getLocations.l_pairs <- function(target) {
   scatterplots <- histograms <- serialAxes <- list()
   plotNames <- names(target)
   for(i in 1:nPlots) {
-    if("l_plot" %in% class(target[[i]])) {
+    if(inherits(target[[i]], "l_plot")) {
       nScatterplots <- nScatterplots + 1
       scatterplots[[nScatterplots]] <- target[[i]]
       names(scatterplots)[nScatterplots] <- plotNames[i]
     }
-    if("l_hist" %in% class(target[[i]])) {
+    if(inherits(target[[i]], "l_hist")) {
       nHistograms <- nHistograms + 1
       histograms[[nHistograms]] <- target[[i]]
       names(histograms)[nHistograms] <- plotNames[i]
     }
-    if("l_serialaxes" %in% class(target[[i]])) {
+    if(inherits(target[[i]], "l_serialaxes")) {
       nSerialAxes <- nSerialAxes + 1
       serialAxes[[nSerialAxes]] <- target[[i]]
       names(serialAxes)[nSerialAxes] <- plotNames[i]

@@ -25,7 +25,7 @@ as the nodes argument to creat a \code{\link{loongraph}} like object}
 
 \item{to}{vector with node names of the from-to pairs for edges}
 
-\item{isDirected}{boolean to indicate whether the from-to-list defines 
+\item{isDirected}{boolean to indicate whether the from-to-list defines
 directed or undirected edges}
 
 \item{label}{string with label for graph}
@@ -38,7 +38,7 @@ directed or undirected edges}
 id for graph in the graphswitch widget
 }
 \description{
-This default method uses the loongraph display states as 
+This default method uses the loongraph display states as
   arguments to add a graph to the graphswitch widget.
 }
 \seealso{

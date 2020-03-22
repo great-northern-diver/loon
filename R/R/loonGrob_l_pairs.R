@@ -14,17 +14,17 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     plotNames <- names(target)
 
     for(i in 1:nPlots) {
-        if("l_plot" %in% class(target[[i]])) {
+        if(inherits(target[[i]], "l_plot")) {
             nScatterplots <- nScatterplots + 1
             scatterplots[[nScatterplots]] <- target[[i]]
             names(scatterplots)[nScatterplots] <- plotNames[i]
         }
-        if("l_hist" %in% class(target[[i]])) {
+        if(inherits(target[[i]], "l_hist")) {
             nHistograms <- nHistograms + 1
             histograms[[nHistograms]] <- target[[i]]
             names(histograms)[nHistograms] <- plotNames[i]
         }
-        if("l_serialaxes" %in% class(target[[i]])) {
+        if(inherits(target[[i]], "l_serialaxes")) {
             nSerialAxes <- nSerialAxes + 1
             serialAxes[[nSerialAxes]] <- target[[i]]
             names(serialAxes)[nSerialAxes] <- plotNames[i]

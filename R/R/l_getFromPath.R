@@ -1,51 +1,57 @@
-#' @title Create a loon object handle
+#' @title Create loon objects from path name
 #'
-#' @description This function can be used to create the loon object handles from
-#'   a vector of the widget path name and the object ids (in the order of the
-#'   parent-child relationships).
-#'
-#'
-#' @details loon's plot handles are useful to query and modify plot states
-#'   via the command line.
+#' @description This function can be used to create the loon objects from
+#'   a valid widget path name. The main difference between \code{l_create_handle} is that \code{l_getFromPath} can
+#'   take a loon compound widget path but \code{l_create_handle} cannot.
 #'
 #' @templateVar page learn_R_intro
 #' @templateVar section re-creating-object-handles
 #' @template see_l_help
 #'
 #' @param target loon object specification (e.g. \code{".l0.plot"})
-#' @seealso \code{\link{l_getFromPath}}
+#' @seealso \code{\link{l_create_handle}}
 #' @export
 #'
 #' @examples
-#'
-#' # plot handle
-#' p <- l_plot(x=1:3, y=1:3)
-#' p_new <- l_create_handle(unclass(p))
-#' p_new['showScales']
-#'
-#' # glyph handle
-#' gl <- l_glyph_add_text(p, text=LETTERS[1:3])
-#' gl_new <- l_create_handle(c(as.vector(p), as.vector(gl)))
-#' gl_new['text']
-#'
-#' # layer handle
-#' l <- l_layer_rectangle(p, x=c(1,3), y=c(1,3), color='yellow', index='end')
-#' l_new <- l_create_handle(c(as.vector(p), as.vector(l)))
-#' l_new['color']
-#'
-#' # navigator handle
-#' g <- l_graph(linegraph(completegraph(LETTERS[1:3])))
-#' nav <- l_navigator_add(g)
-#' nav_new <- l_create_handle(c(as.vector(g), as.vector(nav)))
-#' nav_new['from']
-#'
-#' # context handle
-#' con <- l_context_add_context2d(nav)
-#' con_new <- l_create_handle(c(as.vector(g), as.vector(nav), as.vector(con)))
-#' con_new['separator']
-#'
-#'
-l_create_handle <- function(target) {
+#'\dontrun{
+#'  l_pairs(iris, showHistogram = TRUE)
+#'  # The path can be found at the top of tk title
+#'  # Suppose it is the first loon widget, this path should be ".l0.pairs"
+#'  p <- l_create_handle(".l0.pairs") # error
+#'  p <- l_getFromPath(".l0.pairs")
+#'}
+
+l_getFromPath <- function(target) {
+
+    l_compound_create_handle <- function(target) {
+
+        create_handles <- function(target, plots, type) {
+            i <- 0
+            hasRecognized <- TRUE
+            while(hasRecognized) {
+
+                path <- compound_path(target = target, type = type, index = i)
+
+                hasRecognized <- l_isLoonWidget(path)
+                i <- i + 1
+                if(hasRecognized) {
+                    plots[[length(plots) + 1]] <- l_create_handle(path)
+                }
+            }
+            return(plots)
+        }
+
+        plots <- list()
+        plots <- create_handles(target = target, plots = plots, type = "plot")
+        plots <- create_handles(target = target, plots = plots, type = "hist")
+        plots <- create_handles(target = target, plots = plots, type = "serialaxes")
+        plots <- create_handles(target = target, plots = plots, type = "graph")
+
+        if(length(plots) == 0) stop(target, " is not a valid loon widget", call. = FALSE)
+
+        class(plots) <- c("l_compound", "loon")
+        return(plots)
+    }
 
     ## first check for loon objects
     if (is(target,'loon')) {
@@ -57,7 +63,12 @@ l_create_handle <- function(target) {
 
         widget <- specifier[1]
 
-        if (!l_isLoonWidget(widget)) stop(widget, " is not a valid loon widget")
+        # create a compound handle
+        if (!l_isLoonWidget(widget)) {
+            loon_obj <- l_compound_create_handle(widget)
+            # return a compound widget
+            return(loon_obj)
+        }
 
         loon_obj <- if (length(specifier) == 1) {
 
@@ -115,3 +126,11 @@ l_create_handle <- function(target) {
     loon_obj
 }
 
+
+compound_path <- function(target, type, index) {
+    if(index == 0) {
+        paste0(target[1], ".", type)
+    } else {
+        paste0(target[1], ".", type, index)
+    }
+}

@@ -138,53 +138,12 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
         }
     })
 
+    args <- unlist(unname(b_bins),  recursive = FALSE)
+
     gTree(
-        children = do.call(gList, unlist(unname(b_bins),  recursive = FALSE)),
+        children = do.call(gList, if(is.null(args)) list() else args),
         name = if(is.null(name)) "histogram" else name,
         gp = gp, vp = vp
     )
 
-}
-
-
-tcl_obj_varname <- function(widget, varname = NULL) {
-    x <- tcl("info", "object", "namespace", widget)
-
-    if (!is.null(varname)) {
-        x <- paste(x, varname, sep="::")
-    }
-    x
-}
-
-dict_get <- function(d, keys) {
-    .Tcl(paste0("dict get $", d, " ", paste(keys, collapse = " ")))
-}
-
-dict_with <- function(d, expr) {
-    as.character(.Tcl(paste("dict with", paste(d, collapse = " "), paste("{", expr, "}"))))
-}
-
-getBinData <- function(widget) {
-
-    l_throwErrorIfNotLoonWidget(widget)
-
-    tclbins <- tcl_obj_varname(widget, "bins")
-
-    ## see oo_Histogram_Model.tcl
-    sapply(dict_with(tclbins, "dict keys $bin"), function(binid) {
-
-        keys_count <- dict_with(c(tclbins, "bin", binid), "dict keys $count")
-        keys_points <- dict_with(c(tclbins, "bin", binid), "dict keys $points")
-
-        list(
-            count = sapply(keys_count, function(x) {
-                as.numeric(dict_get(tclbins, c("bin", binid, "count", x)))
-            }, USE.NAMES = TRUE, simplify = FALSE),
-            points = sapply(keys_points, function(x) {
-                as.numeric(dict_get(tclbins, c("bin", binid, "points", x)))
-            }, USE.NAMES = TRUE, simplify = FALSE),
-            x0 = as.numeric(dict_get(tclbins, c("bin", binid, "x0"))),
-            x1 = as.numeric(dict_get(tclbins, c("bin", binid, "x1")))
-        )
-    }, USE.NAMES = TRUE, simplify = FALSE)
 }

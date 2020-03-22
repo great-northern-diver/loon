@@ -120,10 +120,12 @@ l_plot_ts <- function(x,
     if(is.null(title)){title <- paste0("Decomposition (", decompType,") of ", nameOfData)
     }
 
-    tt <- tktoplevel()
-    tktitle(tt) <- tk_title
+    parent <- l_toplevel()
+    subwin <- l_subwin(parent, 'ts')
+    tktitle(parent) <- paste(tk_title, "--path:", subwin)
+    child <- as.character(tcl('frame', subwin))
 
-    p1 <- l_plot(parent = tt,
+    p1 <- l_plot(parent = child,
                  x = xy.raw$x,
                  y = xy.raw$y,
                  color = color, size = size,
@@ -142,7 +144,7 @@ l_plot_ts <- function(x,
                        color= lcolor,
                        linewidth = linewidth, index="end")
 
-    p2 <- l_plot(parent = tt,
+    p2 <- l_plot(parent = child,
                  x = xy.trend$x,
                  y = xy.trend$y,
                  color = color, size = size,
@@ -160,7 +162,7 @@ l_plot_ts <- function(x,
                        color=lcolor, linewidth = linewidth,
                        index="end")
 
-    p3 <- l_plot(parent = tt,
+    p3 <- l_plot(parent = child,
                  x = xy.seasonal$x,
                  y = xy.seasonal$y,
                  color = color, size=size,
@@ -178,7 +180,7 @@ l_plot_ts <- function(x,
                        color = lcolor, linewidth = linewidth ,
                        index="end")
 
-    p4 <- l_plot(parent = tt,
+    p4 <- l_plot(parent = child,
                  x = xy.remainder$x,
                  y = xy.remainder$y,
                  color = color, size=size,
@@ -195,19 +197,28 @@ l_plot_ts <- function(x,
                        color = lcolor, linewidth = linewidth,
                        index="end")
 
-
-
     ## make the canvas resize to fairly small
+    plots <- list(p1,p2,p3,p4)
+    lapply(plots,
+           function(p) {
+               if(p == p1){
+                   tkconfigure(paste(p,".canvas", sep=''), width=500, height=190)
+               } else {
+                   tkconfigure(paste(p,".canvas", sep=''), width=500, height=150)
+               }
+           })
 
-    for (p in c(p1,p2,p3,p4)) {
-        if(p == p1){
-            tkconfigure(paste(p,".canvas", sep=''), width=500, height=190)
-        }else{
-            tkconfigure(paste(p,".canvas", sep=''), width=500, height=150)
-        }
-    }
-
-    tkpack(p1, p2, p3, p4,  expand = TRUE, fill = "both")
+    lapply(seq(length(plots)),
+           function(i) {
+               tkgrid(plots[[i]],
+                      row = i - 1,
+                      column = 0,
+                      sticky="nesw")
+               tkgrid.rowconfigure(child, i - 1, weight=1)
+           })
+    tkgrid.columnconfigure(child, 0, weight=1)
+    tkpack(child, fill="both", expand=TRUE)
+    # tkpack(p1, p2, p3, p4,  expand = TRUE, fill = "both")
 
 
     ## Bind so that they show the same x range
