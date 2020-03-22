@@ -4,12 +4,12 @@
 \alias{l_plot.default}
 \title{The default \code{l_plot} for plotting data}
 \usage{
-\method{l_plot}{default}(x, y = NULL, color = "grey60",
-  glyph = "ccircle", size = 4, active = TRUE, selected = FALSE,
-  xlabel, ylabel, title, showLabels = TRUE, showScales = FALSE,
-  showGuides = TRUE, guidelines = "white",
-  guidesBackground = "grey92", foreground = "black",
-  background = "white", parent = NULL, ...)
+\method{l_plot}{default}(x, y = NULL, by = NULL, facet = c("grid",
+  "wrap"), color = "grey60", glyph = "ccircle", size = 4,
+  active = TRUE, selected = FALSE, xlabel, ylabel, title,
+  showLabels = TRUE, showScales = FALSE, showGuides = TRUE,
+  guidelines = "white", guidesBackground = "grey92",
+  foreground = "black", background = "white", parent = NULL, ...)
 }
 \arguments{
 \item{x}{the \code{x} and \code{y} arguments provide the x and y
@@ -19,6 +19,11 @@ See the function \code{\link{xy.coords}} for details.
 If supplied separately, they must be of the same length.}
 
 \item{y}{argument description is as for the \code{x} argument above.}
+
+\item{by}{loon plot can be separated by some variables into mutiple panels.
+This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
 
 \item{color}{colours of points (default "grey60"); colours are repeated
 until matching the number points.}
@@ -117,6 +122,8 @@ p2["glyph"][p1['selected']] <- "cdiamond"
 
 gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 
+# facetting
+p <- with(mtcars, l_plot(wt, mpg, by = cyl, facet = "wrap"))
 
 # Use with other tk widgets
 tt <- tktoplevel()
