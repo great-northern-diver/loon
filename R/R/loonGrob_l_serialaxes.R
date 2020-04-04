@@ -416,7 +416,13 @@ get_scaledData <- function(data,
     if(missing(data) || is.null(data) || is.null(displayOrder)) return(NULL)
 
     if(!is.null(sequence)) {
-        col_name <- colnames(data)
+
+        col_name <- make.names(colnames(data))
+        # sequence names may involve invalid chars
+        # such as `(`, `)`, ` ` space, etc.
+        # call function `make.names` can remove all these chars to match data column names
+        sequence <- make.names(sequence)
+
         if(!all(sequence %in% col_name)) {
             warning("unknown variable names in sequence")
             sequence <- intersect(sequence, col_name)
