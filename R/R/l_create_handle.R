@@ -69,6 +69,7 @@ l_create_handle <- function(target) {
                 "::loon::classes::Histogram_Widget" = "l_hist",
                 "::loon::classes::Serialaxes_Widget" = "l_serialaxes",
                 "::loon::classes::Graph_Widget" = "l_graph",
+                "::loon::classes::Scatterplot3D_Widget" = c("l_plot3D", "l_plot"),
                 character(0)
             )
             structure(widget, class = c(wcl, "loon"))
