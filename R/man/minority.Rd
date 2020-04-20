@@ -4,7 +4,8 @@
 \name{minority}
 \alias{minority}
 \title{Canadian Visible Minority Data 2006}
-\format{A data frame with 33 rows and 18 variates
+\format{
+A data frame with 33 rows and 18 variates
 \describe{
  \item{Arab}{Number identifying as `Arab`.}
  \item{Black}{Number identifying as `Black`.}
@@ -27,7 +28,8 @@
  \item{googleLat, googleLong}{Latitude and longitude in degrees determined
  using the Google Maps Geocoding API.}
 }
-\code{rownames(minority)} are the names of the metropolitan areas or cities.}
+\code{rownames(minority)} are the names of the metropolitan areas or cities.
+}
 \source{
 \url{https://www.statcan.gc.ca/}
 }
