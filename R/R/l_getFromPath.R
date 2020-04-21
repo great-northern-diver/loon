@@ -1,7 +1,7 @@
 #' @title Create loon objects from path name
 #'
 #' @description This function can be used to create the loon objects from
-#'   a valid widget path name. The main difference between \code{l_create_handle} is that \code{l_getFromPath} can
+#'   a valid widget path name. The main difference from \code{l_create_handle} is that \code{l_getFromPath} can
 #'   take a loon compound widget path but \code{l_create_handle} cannot.
 #'
 #' @templateVar page learn_R_intro
