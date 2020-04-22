@@ -439,8 +439,8 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
                     test = showAxes,
                     grobFun = polylineGrob,
                     name = "axes",
-                    x = xpos + unit(c(rep(0, dimension), scaleX * cos(angle)), "mm"),
-                    y = ypos + unit(c(rep(0, dimension), scaleY * sin(angle)), "mm"),
+                    x = xpos + unit(c(rep(0, dimension), radialxais), "mm"),
+                    y = ypos + unit(c(rep(0, dimension), radialyais), "mm"),
                     id = rep(1:dimension, 2),
                     gp = gpar(col = axesColor)
                 )
