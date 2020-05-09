@@ -111,7 +111,7 @@ l_plot <- function(x, y, ...) {
 #' @param y argument description is as for the \code{x} argument above.
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
+#' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
 #' @param color colours of points (default "grey60"); colours are repeated
 #'  until matching the number points.
 #' @param glyph shape of point; must be one of the primitive glyphs
@@ -150,15 +150,25 @@ l_plot <- function(x, y, ...) {
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 #'   order to be displayed. See the examples below.
-#' @param ... named arguments to modify plot states.
+#' @param ... named arguments to modify plot states or layouts, see details.
 #'
 #'
-#' @details The scatterplot displays a number of direct interactions with the
+#' @details \itemize{
+#'   \item {The scatterplot displays a number of direct interactions with the
 #'   mouse and keyboard, these include: zooming towards the mouse cursor using
 #'   the mouse wheel, panning by right-click dragging and various selection
 #'   methods using the left mouse button such as sweeping, brushing and
 #'   individual point selection. See the documentation for \code{\link{l_plot}}
 #'   for more details about the interaction gestures.
+#'   }
+#'   \item {Some arguments to modify layouts can be passed through,
+#'   e.g. "separate", "byrow", etc. Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}}
+#'   to see how these arguments work.
+#'   }
+#' }
+#'
+#'
+#'
 #'
 #' @seealso  \code{\link{l_plot_arguments}}
 #' @export
@@ -192,8 +202,8 @@ l_plot <- function(x, y, ...) {
 #'
 #' gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 #'
-#' # facetting
-#' p <- with(mtcars, l_plot(wt, mpg, by = cyl, facet = "wrap"))
+#' # Layout facets
+#' p <- with(mtcars, l_plot(wt, mpg, by = cyl, layout = "wrap"))
 #'
 #' # Use with other tk widgets
 #' tt <- tktoplevel()
@@ -212,7 +222,7 @@ l_plot <- function(x, y, ...) {
 #'
 l_plot.default <-  function(x, y = NULL,
                             by = NULL,
-                            facet = c("grid", "wrap"),
+                            layout = c("grid", "wrap"),
                             color = "grey60",
                             glyph = "ccircle",
                             size = 4,
@@ -419,27 +429,27 @@ l_plot.default <-  function(x, y = NULL,
             } else
                 by <- as.data.frame(by, stringsAsFactors = FALSE)
 
-            plots <- loonFacets(type = "l_plot",
-                                by,
-                                args,
-                                facet = match.arg(facet),
-                                by_args = Filter(Negate(is.null), by_args),
-                                linkingGroup = linkingGroup,
-                                sync = sync,
-                                parent = parent,
-                                xlabel = xlabel,
-                                ylabel = ylabel,
-                                title = title,
-                                factory_tclcmd = '::loon::plot',
-                                factory_path = 'plot',
-                                factory_window_title = 'loon scatterplot',
-                                showLabels = TRUE,
-                                showScales = FALSE,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background)
+            plots <- loonLayouts(type = "l_plot",
+                                 by,
+                                 args,
+                                 layout = match.arg(layout),
+                                 by_args = Filter(Negate(is.null), by_args),
+                                 linkingGroup = linkingGroup,
+                                 sync = sync,
+                                 parent = parent,
+                                 xlabel = xlabel,
+                                 ylabel = ylabel,
+                                 title = title,
+                                 factory_tclcmd = '::loon::plot',
+                                 factory_path = 'plot',
+                                 factory_window_title = 'loon scatterplot',
+                                 showLabels = TRUE,
+                                 showScales = showScales,
+                                 showGuides = showGuides,
+                                 guidelines = guidelines,
+                                 guidesBackground = guidesBackground,
+                                 foreground = foreground,
+                                 background = background)
 
             return(plots)
         }
@@ -447,6 +457,7 @@ l_plot.default <-  function(x, y = NULL,
 }
 
 byArgs <-c("scales",
+           "separate",
            "nrow",
            "ncol",
            "byrow",

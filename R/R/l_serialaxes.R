@@ -11,7 +11,7 @@
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
+#' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
 #' @param showAxes boolean to indicate whether axes should be shown or not
 #' @param linewidth vector with line widths
 #' @param color vector with line colors
@@ -25,8 +25,11 @@
 #' and which are not (\code{FALSE}).
 #' @template param_parent
 #' @template param_dots_state_args
+#' @param ... named arguments to modify the serialaxes states or layouts, see details.
 #'
-#' @details The \code{scaling} state defines how the data is scaled. The axes
+#' @details \itemize{
+#'   \item {
+#'   The \code{scaling} state defines how the data is scaled. The axes
 #'   display 0 at one end and 1 at the other. For the following explanation
 #'   assume that the data is in a nxp dimensional matrix. The scaling options
 #'   are then
@@ -35,6 +38,12 @@
 #' observation \tab per row scaling\cr
 #' data \tab whole matrix scaling\cr
 #' none \tab do not scale
+#' }
+#'   }
+#'   \item {Some arguments to modify layouts can be passed through,
+#'   e.g. "separate", "byrow", etc.
+#'   Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+#'   }
 #' }
 #'
 #'
@@ -216,7 +225,7 @@ l_serialaxes <- function(data,
                          scaling="variable",
                          axesLayout='radial',
                          by = NULL,
-                         facet = c("grid", "wrap"),
+                         layout = c("grid", "wrap"),
                          showAxes=TRUE,
                          linewidth = 1,
                          color = "steelblue",
@@ -338,21 +347,21 @@ l_serialaxes <- function(data,
         } else
             by <- as.data.frame(by, stringsAsFactors = FALSE)
 
-        plots <- loonFacets(type = "l_serialaxes",
-                            by,
-                            args,
-                            facet = match.arg(facet),
-                            by_args = Filter(Negate(is.null), by_args),
-                            linkingGroup = linkingGroup,
-                            sync = sync,
-                            parent = parent,
-                            factory_tclcmd = '::loon::serialaxes',
-                            factory_path = 'serialaxes',
-                            factory_window_title = 'loon serialaxes plot',
-                            sequence = sequence,
-                            showAxes = showAxes,
-                            scaling = scaling,
-                            axesLayout = axesLayout)
+        plots <- loonLayouts(type = "l_serialaxes",
+                             by,
+                             args,
+                             layout = match.arg(layout),
+                             by_args = Filter(Negate(is.null), by_args),
+                             linkingGroup = linkingGroup,
+                             sync = sync,
+                             parent = parent,
+                             factory_tclcmd = '::loon::serialaxes',
+                             factory_path = 'serialaxes',
+                             factory_window_title = 'loon serialaxes plot',
+                             sequence = sequence,
+                             showAxes = showAxes,
+                             scaling = scaling,
+                             axesLayout = axesLayout)
 
         return(plots)
 
