@@ -4,9 +4,22 @@
 \alias{l_layer_texts}
 \title{Layer texts}
 \usage{
-l_layer_texts(widget, x, y, text, color = "gray60", size = 6,
-  angle = 0, anchor = "center", justify = "center",
-  label = "texts", parent = "root", index = 0, active = TRUE, ...)
+l_layer_texts(
+  widget,
+  x,
+  y,
+  text,
+  color = "gray60",
+  size = 6,
+  angle = 0,
+  anchor = "center",
+  justify = "center",
+  label = "texts",
+  parent = "root",
+  index = 0,
+  active = TRUE,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

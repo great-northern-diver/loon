@@ -4,8 +4,14 @@
 \alias{l_navigator_add}
 \title{Add a Navigator to a Graph}
 \usage{
-l_navigator_add(widget, from = "", to = "", proportion = 0,
-  color = "orange", ...)
+l_navigator_add(
+  widget,
+  from = "",
+  to = "",
+  proportion = 0,
+  color = "orange",
+  ...
+)
 }
 \arguments{
 \item{widget}{graph widget}

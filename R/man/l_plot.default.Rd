@@ -4,12 +4,29 @@
 \alias{l_plot.default}
 \title{The default \code{l_plot} for plotting data}
 \usage{
-\method{l_plot}{default}(x, y = NULL, by = NULL, facet = c("grid",
-  "wrap"), color = "grey60", glyph = "ccircle", size = 4,
-  active = TRUE, selected = FALSE, xlabel, ylabel, title,
-  showLabels = TRUE, showScales = FALSE, showGuides = TRUE,
-  guidelines = "white", guidesBackground = "grey92",
-  foreground = "black", background = "white", parent = NULL, ...)
+\method{l_plot}{default}(
+  x,
+  y = NULL,
+  by = NULL,
+  facet = c("grid", "wrap"),
+  color = "grey60",
+  glyph = "ccircle",
+  size = 4,
+  active = TRUE,
+  selected = FALSE,
+  xlabel,
+  ylabel,
+  title,
+  showLabels = TRUE,
+  showScales = FALSE,
+  showGuides = TRUE,
+  guidelines = "white",
+  guidesBackground = "grey92",
+  foreground = "black",
+  background = "white",
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{the \code{x} and \code{y} arguments provide the x and y
@@ -144,13 +161,17 @@ tkgrid.rowconfigure(tt, 0, weight=1)
 \seealso{
 \code{\link{l_plot_arguments}}
 
-Other two-dimensional plotting functions: \code{\link{l_plot.decomposed.ts}},
-  \code{\link{l_plot.density}}, \code{\link{l_plot.stl}},
-  \code{\link{l_plot}}
+Other two-dimensional plotting functions: 
+\code{\link{l_plot.decomposed.ts}()},
+\code{\link{l_plot.density}()},
+\code{\link{l_plot.stl}()},
+\code{\link{l_plot}()}
 
-Other loon interactive states: \code{\link{l_info_states}},
-  \code{\link{l_plot}}, \code{\link{l_state_names}},
-  \code{\link{names.loon}}
+Other loon interactive states: 
+\code{\link{l_info_states}()},
+\code{\link{l_plot}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
 }
 \concept{loon interactive states}
 \concept{two-dimensional plotting functions}

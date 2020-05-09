@@ -7,44 +7,81 @@
 l_scale3D(x, center = TRUE, method = c("box", "sphere"))
 }
 \arguments{
-\item{x}{the matrix or data.frame whose columns are to be scaled.}
+\item{x}{the matrix or data.frame whose columns are to be scaled.
+Any \code{NA} entries will be preserved but ignored in calculations.
+\code{x} must have exactly 3 columns for \code{method = "sphere"}.}
 
 \item{center}{either a logical value or numeric-alike vector of length equal
-to the number of columns of x, where ‘numeric-alike’ means that as.numeric(.)
-will be applied successfully if is.numeric(.) is not true.}
+to the number of columns of \code{x}, where ‘numeric-alike’ means that
+\code{as.numeric(.)}
+will be applied successfully if \code{is.numeric(.)} is not true.}
 
-\item{method}{the scaling method to use: if "box" (the default) then the columns are scaled to
-have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
-decomposed via a singular value decomposition so that the resulting variables are uncorrelated.}
+\item{method}{the scaling method to use.
+If \code{method = "box"} (the default) then the columns are scaled to
+have equal ranges and, when \code{center = TRUE}, to be centred by the
+average of the min and max;
+If \code{method = "sphere"} then \code{x} must be three dimensional.
+For sphering, on each of the original 3 dimensions \code{x} is first centred
+(mean centred when \code{center = TRUE}) and scaled to equal standard deviation on.
+The V matrix of the singular value decomposition (svd) is applied to the right
+resulting in uncorrelated variables. Coordinates are then divided by (non-zero as
+tested by \code{!all.equal(0, .)}) singular values.
+If \code{x} contains no \code{NA}s, the resulting coordinates are simply the
+U matrix of the svd.}
 }
 \value{
-a data.frame whose columns are centred and scaled according to the given arguments.
+a data.frame whose columns are centred and scaled according to
+the given arguments. For \code{method = "sphere")}, the three variable names are
+\code{x1},  \code{x2}, and  \code{x3}.
 }
 \description{
-\code{l_scale3D} scales its argument in a variety of ways used for 3D visualization.
+\code{l_scale3D} scales its argument in a variety of ways
+used for 3D visualization.
 }
 \examples{
 
-##### Iris
-with(l_scale3D(iris[,1:4]),
-     l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
+##### Iris data
+#
+# All variables (including Species as a factor)
+result_box <- l_scale3D(iris)
+head(result_box, n = 3)
+apply(result_box, 2, FUN = range)
+# Note mean is not zero.
+apply(result_box, 2, FUN = mean)
 
-with(l_scale3D(iris[,1:4], method = "sphere"),
-     l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
 
-# With the Species as a factor
+# Sphering only on 3D data.
+result_sphere <- l_scale3D(iris[, 1:3], method = "sphere")
+head(result_sphere, n = 3)
+apply(result_sphere, 2, FUN = range)
+# Note mean is numerically zero.
+apply(result_sphere, 2, FUN = mean)
 
-with(l_scale3D(iris),
-     l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
 
-with(l_scale3D(iris, method = "sphere"),
-     l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
+#  With NAs
+x <- iris
+x[c(1, 3), 1] <- NA
+x[2, 3] <- NA
+
+result_box <- l_scale3D(x)
+head(result_box, n = 5)
+apply(result_box, 2, FUN = function(x) {range(x, na.rm = TRUE)})
+
+# Sphering only on 3D data.
+result_sphere <- l_scale3D(x[, 1:3], method = "sphere")
+# Rows having had any NA are all NA after sphering.
+head(result_sphere, n = 5)
+# Note with NAs mean is no longer numerically zero.
+# because centring was based on all non-NAs in each column
+apply(result_sphere, 2, FUN = function(x) {mean(x, na.rm = TRUE)})
+
 
 }
 \seealso{
-\code{\link{l_plot3D}} \code{\link{scale}}
+\code{\link{l_plot3D}}, \code{\link{scale}}, and \code{\link{prcomp}}.
 
-Other three-dimensional plotting functions: \code{\link{l_plot3D.default}},
-  \code{\link{l_plot3D}}
+Other three-dimensional plotting functions: 
+\code{\link{l_plot3D.default}()},
+\code{\link{l_plot3D}()}
 }
 \concept{three-dimensional plotting functions}

@@ -1,0 +1,366 @@
+---
+title: "Saving loon plots"
+author: "R.W. Oldford"
+date: "20/04/2020"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Saving loon plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{grid, gridExtra, png}
+  \usepackage[utf8]{inputenc}
+geometry: margin=.75in
+urlcolor: blue
+graphics: yes
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center", 
+                      fig.width = 6, 
+                      fig.height = 5,
+                      out.width = "60%", 
+                      tidy.opts = list(width.cutoff = 65),
+                      tidy = FALSE)
+set.seed(12314159)
+library(loon.data)
+library(loon)
+library(gridExtra)
+
+imageDirectory <- "./images/savingLoonPlots"
+dataDirectory <- "./data/savingLoonPlots"
+path_concat <- function(path1, ..., sep="/") {
+    # The "/" is standard unix directory separator and so will
+    # work on Macs and Linux.
+    # In windows the separator might have to be sep = "\" or 
+    # even sep = "\\" or possibly something else. 
+    paste(path1, ..., sep = sep)
+    }
+```
+
+---
+
+# Interactive analysis and static plots
+
+When carrying out an interactive analysis, you might want to save some pictures  to include in any later report.  You might also want to save the state of some interactive plot so that you can pause your analysis, quit R, and later return to your analysis where you left off.
+
+To illustrate how to do this, consider the classic data set `iris`.  Here are three different **linked** plots that might be displayed.
+
+```{r basic plots}
+library(loon)
+# First, make sure you always assign a loon plot to a variable
+# at the same time that you create it.  This will give you access
+# to it later.  
+# (NB: If you haven't assigned it, you can later using l_getFromPath(). )
+# 
+#  A histogram, the name for the linkingGroup is arbitrary
+h <- l_hist(iris$Sepal.Length, color = "grey", xlabel = "Sepal length",
+            linkingGroup = "flowers")
+#
+# A scatterplot
+p <- l_plot(iris$Petal.Width, iris$Petal.Length,  
+            color = "grey", size = 10,
+            xlabel = "Petal Width", ylabel = "Petal Length",
+            linkingGroup = "flowers")
+#
+# A serial axes plot using the first 4 columns of iris (i.e. no Species info).
+sa <- l_serialaxes(iris[, 1:4],   
+            color = "grey", linkingGroup = "flowers")
+#
+# A static version of the plot can be easily produced.
+plot(h)
+```
+
+That plot will simply just appear (**as it is**) in the processed `RMarkdown` file.
+
+If you have the `grid` and `gridExtra` packages loaded, you could arrange to see several such plots in one place.
+
+```{r grid packages, fig.width = 16, fig.height = 5}
+library(grid); library(gridExtra)
+```
+```{r several plots, fig.width = 16, fig.height = 5}
+# First get the data stuctures corresponding to the static snapshots
+# of the current plots.  Because we want to arrange them, we don't
+# draw them at first.
+plot_h <- plot(h, draw = FALSE)
+plot_p <- plot(p, draw = FALSE)
+plot_sa <- plot(sa, draw = FALSE)
+# Now we draw them
+grid.arrange(plot_h, plot_p, plot_sa, nrow = 1)
+```
+
+## When interaction is only programmatic
+
+This works fine when what you want to display has been entirely determined by programming done inside the `RMarkdown` code.  For example, if the colours had been changed programmatically,  the linked plots would change and plotting them again would reflect that change.
+
+```{r several plots changed, fig.width = 16, fig.height = 5}
+# Change the colour by changing it *programmatically* on the plot
+# 
+h["color"] <- iris$Species  # use species to determine the colours
+plot_h <- plot(h, draw = FALSE)
+plot_p <- plot(p, draw = FALSE)
+plot_sa <- plot(sa, draw = FALSE)
+# And draw them again
+grid.arrange(plot_h, plot_p, plot_sa, nrow = 1)
+```
+
+
+There are a couple of things to note here.  
+
+First, the plots had to be redrawn because they are static snapshots reflecting what the interactive plot looked like **at the time** the snapshot was taken using `plot()`.  
+
+Second, all linked plots changed when the colour was only directly changed on the histogram.
+
+Finally, there are numerous `states` that **can be programmatically accessed and set** on an interactive plot.  These states can be found by calling `names()` on the plot in question.
+
+- e.g. `names(h)` returns the state names for the histogram `h`.
+
+Knowing the state names provides the user a programmatic means to access and/or to set their values.  The values can be queried at any time, whether they were set programmatically or interactively.  For example, 
+
+```{r plot states}
+# Accessing values
+head(sa["color"])  # will show the current colours of sa
+# Note that these colours are expressed as 12 hexadecimal digits 
+# This is what is used in TCL.  To turn them into R's 6 digit hexadecimal 
+# (to use in other R static plots, for example) just use hex12tohex6()
+hex12tohex6(sa["color"][1:3])
+# Setting values ... make only specied iris versicolor active
+sa["active"] <- iris$Species == "versicolor"
+plot(sa)
+# Setting values ... make everything active
+sa["active"] <- TRUE
+plot(sa)
+```
+
+
+
+A problem with doing things interactively is that any direct manipulation of the plots using the inspector or brushing, panning, zooming, etc. **is not being recorded.**   
+
+If you want to have the values of states (which were set interactively) to appear later in a report, these values will need to be recorded somewhere first.  
+
+It will be necessary to **save the state somehow, either as a snapshot or as data** in a separate file to be recovered later (saving plot states like colours, selections, etc.).
+
+In either case, information must be stored so that an `RMarkdown` file can read it back in and adjust the plots programmatically.
+
+## Saving shapshots for later display.
+
+When you are doing things interactively, you may just want to save a current version of the plot, effectively a snapshot, to a file.  Then, **after** you have completed your analysis you can read those back in.
+
+You would save the current picture in a variety of ways.
+
+### Export from RStudio 
+
+Simply `plot(p)` and select the `Export` button above the static plot.  Choose a file name and location for your plot.
+
+Because `plot()` actually turns the loon plot into a `grid` graphic, the picture saves will be close but not necessarily exactly as it appears on screen.  Typical differences include font sizes and names.
+
+### Use `l_export()`
+
+This is a `loon` function to export a loon plot to a file.  On the plus side, what you see is what you get.  The loon plot saved to the file will be the same as it appears on the display. 
+
+Trouble is, depending on your `OS`, you might not be able to save the picture as any type of image.  For example, `pdf` images will be available to nearly all OSes, `png` will not.  You do need to specify the file suffix:
+
+```{r l_export, eval = FALSE}
+l_export(p, filename = "myplot_via_l_export.pdf", height = 500, width = 600)
+```
+
+
+### Use R's `png()` device
+
+In R, there are a variety of graphics "devices".  These identify where R will draw a static plot. The call `dev.cur()` will tell you what the current device is. 
+
+One such device is `png()` which allows R plots to be drawn as a `png` graphic.
+It would work like this
+
+```{r png device, eval = FALSE}
+# turn the png graphics device on with name of the file
+png(file = "myplot_via_R.png", width = 600, height = 500)
+# Draw the static plot
+plot(p)
+# Turn the device off/close the file
+dev.off()
+```
+
+### Including saved graphics in your report
+
+Having saved various snapshots to various files, you can now include them in your Rmarkdown file using the `include_graphics()` function from `knitr`.
+
+Of course, this means that the various files mentioned above were previously saved (not created in the markdown file) and so can now be read into your RMarkdown report as follows:
+
+```{r show the saved plots, eval = FALSE}
+# The one exported from RStudio
+knitr::include_graphics("myplot_via_RStudio.png")
+# Followed by the one saved using l_export 
+# (note that background grid is missing)
+knitr::include_graphics("myplot_via_l_export.pdf")
+# And finally, the one saved using R's png device
+knitr::include_graphics("myplot_via_R.png")
+```
+
+```{r load the saved plots, echo = FALSE}
+# The one exported from RStudio
+knitr::include_graphics(path_concat(imageDirectory, "myplot_via_RStudio.png"))
+# Followed by the one saved using l_export 
+# (note that background grid is missing)
+knitr::include_graphics(path_concat(imageDirectory, "myplot_via_l_export.pdf"))
+# And finally, the one saved using R's png device
+knitr::include_graphics(path_concat(imageDirectory, "myplot_via_R.png"))
+```
+
+Alternatively, you could use **LaTeX** if you want more control.  For example, the following 
+**LaTeX** code would centre the three plots in each column of a tabular lay out:
+
+
+<!-- \begin{verbatim} -->
+```{}
+\begin{center}
+  \begin{tabular} {ccc}
+    \includegraphics[height = 0.15\textheight]{myplot_via_RStudio.png} & 
+    \includegraphics[height = 0.15\textheight]{myplot_via_l_export.pdf} &
+    \includegraphics[height = 0.15\textheight]{myplot_via_R.png} 
+    \\
+    {\scriptsize The one exported from RStudio} & 
+    {\scriptsize The one saved using \code{l\_export}} & 
+    {\scriptsize The one saved using R's \code{png} device}
+  \end{tabular}
+\end{center}
+```
+<!-- \end{verbatim} -->
+
+<!-- \begin{center} -->
+<!--   \begin{tabular}{ccc} -->
+<!--     \includegraphics[height = 0.15\textheight]{./images.savingLoonPlots/myplot_via_RStudio.png} & -->
+<!--     \includegraphics[height = 0.15\textheight]{./images.savingLoonPlots/myplot_via_l_export.pdf} & -->
+<!--     \includegraphics[height = 0.15\textheight]{./images.savingLoonPlots/myplot_via_R.png}  -->
+<!--     \\ -->
+<!--     {\scriptsize The one exported from RStudio} &  -->
+<!--     {\scriptsize The one saved using \code{l\_export}} &  -->
+<!--     {\scriptsize The one saved using R's \code{png} device} -->
+<!--   \end{tabular} -->
+<!-- \end{center} -->
+
+
+## Reconstruct the plot from saved states
+
+`loon` also provides some functionality to save the *current* states of a loon plot. As with saving snapshots, this would be done at any time during the interactive analysis.  Then later, when it is time to write the report, the saved states of the plot could be read back in and the plot *reconstructed programmatically* to be displayed in the report using `plot()` as above.
+
+The use model is
+
+1. Use `l_saveStates()` to save the current states of the loon plot to a file (repeat as often as desirable, saving to a *different* file each time).
+2. Later, use `l_getStates()` to recover the saved states from the named file/
+3. Construct a new loon plot of the desired type.
+4. Copy the saved states to the new plot using `l_copyStates()` (alternatively, assign selected saved states of the new plot using `$`).
+5. Produce a static picture of the new loon plot using `plot()` as above.
+
+Note that only the first step happens in the interactive part of the analysis.  Steps 2 through 5 programmatically recover the plot and its picture for incorporation in a report.
+
+Of course in place of step 5, one could use steps 2 through 4 to restart an interactive analysis where one left off.
+
+### A simple example
+
+A typical use will be simply recording the plot after some interaction with the display, usually involving linking between two displays, say the scatterplot and histogram above.
+
+We save the states of the plot `p` in a file as
+
+```{r p saveStates, eval = FALSE}
+l_saveStates(p, file = "p_savedStates")
+```
+
+Later, when we construct a new plot (perhaps for a report), the states are recovered from file
+```{r show get p states back, eval = FALSE}
+p_savedStates <- l_getSavedStates(file = "p_savedStates")
+```
+
+```{r get p states back, echo = TRUE}
+p_savedStates <- l_getSavedStates(file = path_concat(dataDirectory, "p_savedStates"))
+```
+
+A new plot is constructed and the saved states transferred to it.
+```{r new plot and copy}
+new_p <- l_plot(iris$Petal.Width, iris$Petal.Length)
+l_copyStates(source = p_savedStates, target = new_p)
+```
+and can be programmatically incorporated into a report as
+
+```{r plot new_p}
+plot(new_p)
+```
+
+Again, alternatively `new_p` could simply be a reconstruction so as to continue an interactive analysis from that point.
+
+### A more complex example
+
+Again, by default, only the following states related to linking are saved 
+
+```{r default states}
+names(p_savedStates)
+```
+
+Sometimes, the interactive analysis will have been more involved. 
+It could, for example, have involved panning and zooming, changing of glyphs, particular choices for labels and titles, and so on.
+
+For example, through direct manipulation of the loon plot and inspector, the scatterplot `p` might at some point look something like this:
+```{r zoom and change glyphs on p, echo = FALSE}
+p["selected"] <- iris$Species == "versicolor"
+l_move_jitter(p, which = "selected")
+l_scaleto_selected(p)
+p["selected"] <- FALSE
+sample <- sample(1:nrow(iris), 50, replace = FALSE)
+p["glyph"][sample] <- "ctriangle"
+p["size"][sample] <- 30
+plot(p)
+```
+Here, the analyst zoomed in on the species "versicolor", jittered the locations of the points, and changed some of the glyphs to be large closed triangles.  This involves many more states, all of which must be saved to reproduce the plot.
+
+The states to be saved can be named explicitly to be most efficient in storage, providing of course one knows which are the states that need to be saved. 
+
+All of the states of a loon plot `p` are given by `names(p)`.  At the risk of saving more information than necessary, we could choose to save all of the states of `p`, as in
+```{r save states  zooming, eval = FALSE}
+l_saveStates(p, 
+             states = names(p), 
+             file = "p_focusOnVersicolor")
+```
+
+Now all of the states are available when this file is read back in.
+```{r, eval = FALSE}
+p_focusOnVersicolor <- l_getSavedStates(file = "p_focusOnVersicolor")
+```
+```{r, echo = FALSE}
+p_focusOnVersicolor <- l_getSavedStates(file = path_concat(dataDirectory, "p_focusOnVersicolor"))
+```
+
+When it comes to transferring the states to a new plot there are many choices.  We could go with a large collection of display states (more than the default states but still excluding more "basic" states about panning and zooming for example).  To see which states, we add the argument `returnNames = TRUE`:
+```{r copy all but basic states, eval = TRUE}
+l_copyStates(source = p_focusOnVersicolor, 
+             target = new_p, 
+             returnNames = TRUE)
+```
+
+This excluded "basic" states through the argument `excludeBasicStates` whose default value is `TRUE`.
+
+More, or different, states could be excluded by using the argument `exclude` to list them in a vector.
+Alternatively, the only states to be transferred could be made explicit by naming them in the value of the argument `states`.
+
+Because the "basic" states were excluded by default, the new plot now looks like
+```{r a changed new_p}
+plot(new_p)
+```
+
+As can be seen, the glyph sizes and shapes were transferred but not the zooming or the jittering.
+To ensure we get an exact copy, we need to include all of the states, that is to exclude none of them.
+
+```{r copy all states, eval = TRUE}
+l_copyStates(source = p_focusOnVersicolor, 
+             target = new_p, 
+             excludeBasicStates = FALSE)
+```
+
+Now the `new_p` should look much like the original interactive plot did when it was saved.
+
+```{r final plot focus on versicolor}
+plot(new_p)
+```
+
+which it does.

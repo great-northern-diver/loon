@@ -1,35 +1,71 @@
 #' @title Scale for 3d plotting
 #'
-#' @description \code{l_scale3D} scales its argument in a variety of ways used for 3D visualization.
+#' @description \code{l_scale3D} scales its argument in a variety of ways
+#' used for 3D visualization.
 #' @family three-dimensional plotting functions
 #' @param x the matrix or data.frame whose columns are to be scaled.
+#' Any \code{NA} entries will be preserved but ignored in calculations.
+#' \code{x} must have exactly 3 columns for \code{method = "sphere"}.
 #' @param center either a logical value or numeric-alike vector of length equal
-#' to the number of columns of x, where ‘numeric-alike’ means that as.numeric(.)
-#' will be applied successfully if is.numeric(.) is not true.
-#' @param method the scaling method to use: if "box" (the default) then the columns are scaled to
-#' have equal ranges; if "sphere" then x is centered, scaled to equal standard deviation and then
-#' decomposed via a singular value decomposition so that the resulting variables are uncorrelated.
+#' to the number of columns of \code{x}, where ‘numeric-alike’ means that
+#' \code{as.numeric(.)}
+#' will be applied successfully if \code{is.numeric(.)} is not true.
+#' @param method the scaling method to use.
+#' If \code{method = "box"} (the default) then the columns are scaled to
+#' have equal ranges and, when \code{center = TRUE}, to be centred by the
+#' average of the min and max;
+#' If \code{method = "sphere"} then \code{x} must be three dimensional.
+#' For sphering, on each of the original 3 dimensions \code{x} is first centred
+#' (mean centred when \code{center = TRUE}) and scaled to equal standard deviation on.
+#' The V matrix of the singular value decomposition (svd) is applied to the right
+#' resulting in uncorrelated variables. Coordinates are then divided by (non-zero as
+#' tested by \code{!all.equal(0, .)}) singular values.
+#' If \code{x} contains no \code{NA}s, the resulting coordinates are simply the
+#' U matrix of the svd.
 #'
-#' @seealso \code{\link{l_plot3D}} \code{\link{scale}}
+#' @seealso \code{\link{l_plot3D}}, \code{\link{scale}}, and \code{\link{prcomp}}.
 #'
-#' @return a data.frame whose columns are centred and scaled according to the given arguments.
+#' @return a data.frame whose columns are centred and scaled according to
+#' the given arguments. For \code{method = "sphere")}, the three variable names are
+#' \code{x1},  \code{x2}, and  \code{x3}.
 #'
 #' @examples
 #'
-#' ##### Iris
-#' with(l_scale3D(iris[,1:4]),
-#'      l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
+#' ##### Iris data
+#' #
+#' # All variables (including Species as a factor)
+#' result_box <- l_scale3D(iris)
+#' head(result_box, n = 3)
+#' apply(result_box, 2, FUN = range)
+#' # Note mean is not zero.
+#' apply(result_box, 2, FUN = mean)
 #'
-#' with(l_scale3D(iris[,1:4], method = "sphere"),
-#'      l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
 #'
-#' # With the Species as a factor
+#' # Sphering only on 3D data.
+#' result_sphere <- l_scale3D(iris[, 1:3], method = "sphere")
+#' head(result_sphere, n = 3)
+#' apply(result_sphere, 2, FUN = range)
+#' # Note mean is numerically zero.
+#' apply(result_sphere, 2, FUN = mean)
 #'
-#' with(l_scale3D(iris),
-#'      l_plot3D(Petal.Length, Petal.Width, Sepal.Length, linkingGroup = "iris"))
 #'
-#' with(l_scale3D(iris, method = "sphere"),
-#'      l_plot3D(pc1, pc2, pc3, linkingGroup = "iris"))
+#' #  With NAs
+#' x <- iris
+#' x[c(1, 3), 1] <- NA
+#' x[2, 3] <- NA
+#'
+#' result_box <- l_scale3D(x)
+#' head(result_box, n = 5)
+#' apply(result_box, 2, FUN = function(x) {range(x, na.rm = TRUE)})
+#'
+#' # Sphering only on 3D data.
+#' result_sphere <- l_scale3D(x[, 1:3], method = "sphere")
+#' # Rows having had any NA are all NA after sphering.
+#' head(result_sphere, n = 5)
+#' # Note with NAs mean is no longer numerically zero.
+#' # because centring was based on all non-NAs in each column
+#' apply(result_sphere, 2, FUN = function(x) {mean(x, na.rm = TRUE)})
+#'
 #'
 #' @export
 #'
@@ -50,17 +86,65 @@ l_scale3D <- function(x,
         }
     }
     #
+
+
     method = match.arg(method)
     if (method == "box") {
-        ranges <- apply(x, 2, FUN = function(x) diff(range(x)))
-        scaled_x <- as.data.frame(scale(x, center = center, scale = ranges))
+        ranges <- apply(x, 2, FUN = function(x) range(x, na.rm =TRUE))
+        width <- apply(ranges, 2, FUN = diff)
+
+        if (is.logical(center)) {
+            if (center){
+                center <- apply(ranges, 2, FUN = mean)
+            }
+        }
+
+        scaled_x <- as.data.frame(scale(x, center = center, scale = width))
+
         result <- scaled_x
     } else {
         if (method == "sphere") {
-            scaled_x <- as.data.frame(scale(x, center = center, scale = TRUE))
-            sphered_x <- as.data.frame(svd(scaled_x)$u)
-            names(sphered_x) <- paste0("pc", 1:ncol(scaled_x))
-            result <- sphered_x
+            # Only allow sphering for 3D data.
+            # If the user wants more dimensions (or fewer)
+            # then they can do principal components themselves.
+            #
+            if(ncol(x) != 3) {
+                stop(
+                    paste0("The sphere method is only to be used on three dimensional data, not ncol(x) = ",
+                           ncol(x), ".") )
+            }
+            sds <- apply(x, 2, FUN = function(xi) sd(xi, na.rm =TRUE))
+
+            if (is.logical(center)) {
+                if (center){
+                    center <- apply(x, 2, FUN = function(xi) mean(xi, na.rm =TRUE))
+                }
+            }
+
+            scaled_x <- as.data.frame(scale(x, center = center, scale = sds))
+
+            if (sum(is.na(scaled_x)) == 0) {
+                # No NAs
+                result <- svd(scaled_x)$u
+            } else # there are NAs
+            {   # Need to preserve all rows in result
+                # but use only complete rows for svd.
+                svd_result <- svd(na.omit(scaled_x))
+                # Note some rows in result will become all NA
+                result <- as.matrix(scaled_x) %*% svd_result$v
+                d <- svd_result$d
+                for (i in 1:3) {
+                    if (!is.logical(all.equal(d[i],  0))) {
+                        result[, i] <- result[, i] / d[i]
+                    } else {
+                        warning(paste0("Singular value ", 3, " was ", d[i],
+                                       " suggesting a singular matrix.",
+                                       "  No scaling done on x", i, "."))
+                    }
+                }
+            }
+            result  <- as.data.frame(result)
+            names(result) <- paste0("x", 1:ncol(result))
         } else {
             stop("Unknown method")
         }
@@ -152,7 +236,7 @@ l_scale3D <- function(x,
 #'
 #' scaled_quakes <- l_scale3D(quakes)
 #' with(scaled_quakes,
-#'           l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
 #' )
 #'
 #' with(scaled_quakes,
@@ -166,28 +250,6 @@ l_scale3D <- function(x,
 #'      }
 #' )
 #'
-#'
-#' # Get an R (grid) graphics plot of a loon plot
-#' p <- with(scaled_quakes,
-#'           l_plot3D(long, lat, depth, linkingGroup = "quakes"))
-#' plot(p)
-#' # or with more control about grid parameters
-#' grid.loon(p)
-#' # or to save the grid data structure (grob) for later use
-#' pg <- loonGrob(p)
-#'
-#' # Use with other tk widgets
-#' tt <- tktoplevel()
-#' p1 <- l_plot3D(parent=tt, x=c(1,2,3), y=c(3,2,1), z=c(1,2,3))
-#' p2 <- l_plot3D(parent=tt, x=c(4,3,1), y=c(6,8,4), z=c(3,2,1))
-#'
-#' tkgrid(p1, row=0, column=0, sticky="nesw")
-#' tkgrid(p2, row=0, column=1, sticky="nesw")
-#' tkgrid.columnconfigure(tt, 0, weight=1)
-#' tkgrid.columnconfigure(tt, 1, weight=1)
-#' tkgrid.rowconfigure(tt, 0, weight=1)
-#'
-#' tktitle(tt) <- "Loon plots with custom layout"
 l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
     UseMethod("l_plot3D")
 }

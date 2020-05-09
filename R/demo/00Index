@@ -1,7 +1,6 @@
 loon	an introductory example
 l_glyphs   demonstrate glyph types
 l_glyph_sizes    size mapping to various glyph types
-l_make_glyphs    construct statistical glyphs from any draw function
 l_map    layer a map from the map R package
 l_layers    demonstrate layer types
 l_linking    linking examples

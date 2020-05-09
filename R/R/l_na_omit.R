@@ -56,13 +56,21 @@ l_na_omit <- function(w, args,
     no_valid_index <- unique(unlist(no_valid_index))
 
     # Give a warning if any missing values appear
-    if(length(no_valid_index) > 0) {
+    num_missing <- length(no_valid_index)
+    if(num_missing > 0) {
         warning(
             paste0("Removed {",
-                   paste0(sort(no_valid_index), collapse = ","),
-                   "} ",
-                   length(no_valid_index),
-                   " observations containing missing values"),
+                   paste0(sort(no_valid_index), collapse = ", "),
+                   "}  as the ",
+                   num_missing,
+                   " ",
+                   if (num_missing == 1) {
+                       "observation which contains"
+                   } else {
+                       "observations which contain"
+                   },
+                   " ",
+                   "missing values."),
             call. = FALSE
         )
     }

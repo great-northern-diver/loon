@@ -4,11 +4,22 @@
 \alias{l_hist}
 \title{Create an interactive histogram}
 \usage{
-l_hist(x, yshows = c("frequency", "density"), by = NULL,
-  facet = c("grid", "wrap"), showStackedColors = TRUE, origin = NULL,
-  binwidth = NULL, showBinHandle = FALSE, color = "grey60",
-  active = TRUE, selected = FALSE, xlabel = NULL, parent = NULL,
-  ...)
+l_hist(
+  x,
+  yshows = c("frequency", "density"),
+  by = NULL,
+  facet = c("grid", "wrap"),
+  showStackedColors = TRUE,
+  origin = NULL,
+  binwidth = NULL,
+  showBinHandle = FALSE,
+  color = "grey60",
+  active = TRUE,
+  selected = FALSE,
+  xlabel = NULL,
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{vector with numerical data to perform the binning on x,}

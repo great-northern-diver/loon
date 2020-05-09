@@ -4,7 +4,8 @@
 \name{olive}
 \alias{olive}
 \title{Fatty Acid Composition of Italian Olive Oils}
-\format{A data frame containing 572 cases and 10 variates.
+\format{
+A data frame containing 572 cases and 10 variates.
 \describe{
  \item{Region}{Italian olive oil general growing region: North, South, or Sardinia}
  \item{Area}{These are "Administrative Regions" of Italy (e.g. Sicily, or Umbria), or parts of such a region like
@@ -27,7 +28,8 @@
  \item{eicosenoic}{Percentage (in hundredths of a percent) of Eicosenoic acid, which may refer to one of three closely related
  fatty acids: gadoleic acid (omega-11), gondoic acid (omega-9), or paullinic acid (omega-7). }
 }
-Note that the percentages (in hundredths of a percent) should sum to approximately 10,000 for each oil (row).}
+Note that the percentages (in hundredths of a percent) should sum to approximately 10,000 for each oil (row).
+}
 \usage{
 olive
 }

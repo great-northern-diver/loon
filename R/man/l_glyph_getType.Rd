@@ -17,15 +17,18 @@ Query the type of a glyph
 \seealso{
 \code{\link{l_glyph_add}}
 
-Other glyph functions: \code{\link{l_glyph_add.default}},
-  \code{\link{l_glyph_add_image}},
-  \code{\link{l_glyph_add_pointrange}},
-  \code{\link{l_glyph_add_polygon}},
-  \code{\link{l_glyph_add_serialaxes}},
-  \code{\link{l_glyph_add_text}},
-  \code{\link{l_glyph_add}}, \code{\link{l_glyph_delete}},
-  \code{\link{l_glyph_getLabel}},
-  \code{\link{l_glyph_ids}}, \code{\link{l_glyph_relabel}},
-  \code{\link{l_primitiveGlyphs}}
+Other glyph functions: 
+\code{\link{l_glyph_add.default}()},
+\code{\link{l_glyph_add_image}()},
+\code{\link{l_glyph_add_pointrange}()},
+\code{\link{l_glyph_add_polygon}()},
+\code{\link{l_glyph_add_serialaxes}()},
+\code{\link{l_glyph_add_text}()},
+\code{\link{l_glyph_add}()},
+\code{\link{l_glyph_delete}()},
+\code{\link{l_glyph_getLabel}()},
+\code{\link{l_glyph_ids}()},
+\code{\link{l_glyph_relabel}()},
+\code{\link{l_primitiveGlyphs}()}
 }
 \concept{glyph functions}

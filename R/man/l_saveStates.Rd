@@ -4,8 +4,12 @@
 \alias{l_saveStates}
 \title{Save the info states of a loon plot widget in a  file}
 \usage{
-l_saveStates(p, states = c("color", "active", "selected", "linkingKey",
-  "linkingGroup"), file = stop("missing name of file"), ...)
+l_saveStates(
+  p,
+  states = c("color", "active", "selected", "linkingKey", "linkingGroup"),
+  file = stop("missing name of file"),
+  ...
+)
 }
 \arguments{
 \item{p}{the `l_plot` object whose info states are to be saved.}

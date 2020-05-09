@@ -3,6 +3,7 @@
 \name{l_configure}
 \alias{l_configure}
 \alias{[<-.loon}
+\alias{"[<-.loon"}
 \title{Modify one or multiple plot states}
 \usage{
 l_configure(target, ...)

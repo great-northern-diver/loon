@@ -4,10 +4,22 @@
 \alias{l_plot_ts}
 \title{Draw a decomposed time series loon plot}
 \usage{
-l_plot_ts(x, color = NULL, size = 1, lcolor = NULL, linewidth = 1,
-  xlabel = NULL, ylabel = NULL, title = NULL, tk_title = NULL,
-  linkingGroup = NULL, showScales = TRUE, showGuides = TRUE,
-  showLabels = TRUE, ...)
+l_plot_ts(
+  x,
+  color = NULL,
+  size = 1,
+  lcolor = NULL,
+  linewidth = 1,
+  xlabel = NULL,
+  ylabel = NULL,
+  title = NULL,
+  tk_title = NULL,
+  linkingGroup = NULL,
+  showScales = TRUE,
+  showGuides = TRUE,
+  showLabels = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{Either an \code{stl} object or a \code{decomposed.ts} object.}
@@ -55,7 +67,8 @@ is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
 \code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
 \code{\link{stl}}, or \code{\link{decompose}}.
 
-Other time series decomposition plotting functions: \code{\link{l_plot.decomposed.ts}},
-  \code{\link{l_plot.stl}}
+Other time series decomposition plotting functions: 
+\code{\link{l_plot.decomposed.ts}()},
+\code{\link{l_plot.stl}()}
 }
 \concept{time series decomposition plotting functions}

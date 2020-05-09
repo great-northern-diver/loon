@@ -4,8 +4,7 @@
 \alias{l_web}
 \title{Open a browser with loon's R documentation webpage}
 \usage{
-l_web(page = "index", directory = c("home", "reference", "articles"),
-  ...)
+l_web(page = "index", directory = c("home", "reference", "articles"), ...)
 }
 \arguments{
 \item{page}{relative path to a page, the .html part may be omitted}

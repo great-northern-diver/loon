@@ -4,8 +4,18 @@
 \alias{l_layer_oval}
 \title{Layer a oval}
 \usage{
-l_layer_oval(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "oval", parent = "root", index = 0, ...)
+l_layer_oval(
+  widget,
+  x,
+  y,
+  color = "gray80",
+  linecolor = "black",
+  linewidth = 1,
+  label = "oval",
+  parent = "root",
+  index = 0,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}
