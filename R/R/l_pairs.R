@@ -82,6 +82,10 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   args[['linkingKey']] <- linkingKey
   args[['itemLabel']] <- itemLabel
   args[['showItemLabels']] <- showItemLabels
+  if(!is.null(args[['by']])) {
+    warning("'l_pairs' does not support facetting layouts")
+    args[['by']] <- NULL
+  }
 
   if (dim(data)[2] < 2) {
     args[['x']] <- data
@@ -142,6 +146,10 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     if(is.null(histArgs[['showOutlines']])) histArgs[['showOutlines']] <- FALSE
     if(is.null(histArgs[['yshows']])) histArgs[['yshows']] <- "density"
     if(is.null(histArgs[['showBinHandle']])) histArgs[['showBinHandle']] <- FALSE
+    if(!is.null(histArgs[['by']])) {
+      warning("'l_pairs' does not support facetting layouts")
+      histArgs[['by']] <- NULL
+    }
     # histArgs is consistent with args
     histArgs[['showLabels']] <- args[['showLabels']]
     histArgs[['showScales']] <- args[['showScales']]
@@ -258,6 +266,10 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     serialAxesArgs[['linkingKey']] <- args[['linkingKey']]
     serialAxesArgs[['itemLabel']] <- args[['itemLabel']]
     serialAxesArgs[['showItemLabels']] <- args[['showItemLabels']]
+    if(!is.null(serialAxesArgs[['by']])) {
+      warning("'l_pairs' does not support facetting layouts")
+      histArgs[['by']] <- NULL
+    }
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
