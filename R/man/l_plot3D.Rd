@@ -86,7 +86,7 @@ with(l_scale3D(quakes),
 
 scaled_quakes <- l_scale3D(quakes)
 with(scaled_quakes,
-          l_plot3D(long, lat, depth, linkingGroup = "quakes")
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
 )
 
 with(scaled_quakes,
@@ -100,28 +100,6 @@ with(scaled_quakes,{
      }
 )
 
-
-# Get an R (grid) graphics plot of a loon plot
-p <- with(scaled_quakes,
-          l_plot3D(long, lat, depth, linkingGroup = "quakes"))
-plot(p)
-# or with more control about grid parameters
-grid.loon(p)
-# or to save the grid data structure (grob) for later use
-pg <- loonGrob(p)
-
-# Use with other tk widgets
-tt <- tktoplevel()
-p1 <- l_plot3D(parent=tt, x=c(1,2,3), y=c(3,2,1), z=c(1,2,3))
-p2 <- l_plot3D(parent=tt, x=c(4,3,1), y=c(6,8,4), z=c(3,2,1))
-
-tkgrid(p1, row=0, column=0, sticky="nesw")
-tkgrid(p2, row=0, column=1, sticky="nesw")
-tkgrid.columnconfigure(tt, 0, weight=1)
-tkgrid.columnconfigure(tt, 1, weight=1)
-tkgrid.rowconfigure(tt, 0, weight=1)
-
-tktitle(tt) <- "Loon plots with custom layout"
 }
 \seealso{
 \code{\link{l_info_states}}
