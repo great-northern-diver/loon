@@ -4,13 +4,32 @@
 \alias{l_plot3D.default}
 \title{The default \code{l_plot} method to create 3d interactive scatterplot}
 \usage{
-\method{l_plot3D}{default}(x, y = NULL, z = NULL,
-  axisScaleFactor = 1, by = NULL, facet = c("grid", "wrap"),
-  color = "grey60", glyph = "ccircle", size = 4, active = TRUE,
-  selected = FALSE, xlabel, ylabel, zlabel, title, showLabels = TRUE,
-  showScales = FALSE, showGuides = TRUE, guidelines = "white",
-  guidesBackground = "grey92", foreground = "black",
-  background = "white", parent = NULL, ...)
+\method{l_plot3D}{default}(
+  x,
+  y = NULL,
+  z = NULL,
+  axisScaleFactor = 1,
+  by = NULL,
+  layout = c("grid", "wrap"),
+  color = "grey60",
+  glyph = "ccircle",
+  size = 4,
+  active = TRUE,
+  selected = FALSE,
+  xlabel,
+  ylabel,
+  zlabel,
+  title,
+  showLabels = TRUE,
+  showScales = FALSE,
+  showGuides = TRUE,
+  guidelines = "white",
+  guidesBackground = "grey92",
+  foreground = "black",
+  background = "white",
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{the x, y and z arguments provide the x, y and z coordinates for the plot.
@@ -33,7 +52,7 @@ Default is 1.
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{color}{colours of points; colours are repeated until matching the number points.}
 
@@ -125,7 +144,8 @@ l_configure(p2, linkingGroup = "quakes", sync = "push")
 
 }
 \seealso{
-Other three-dimensional plotting functions: \code{\link{l_plot3D}},
-  \code{\link{l_scale3D}}
+Other three-dimensional plotting functions: 
+\code{\link{l_plot3D}()},
+\code{\link{l_scale3D}()}
 }
 \concept{three-dimensional plotting functions}

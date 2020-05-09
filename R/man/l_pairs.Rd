@@ -4,10 +4,21 @@
 \alias{l_pairs}
 \title{An interactive scatterplot matrix}
 \usage{
-l_pairs(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
-  showHistograms = FALSE, histLocation = c("edge", "diag"),
-  histHeightProp = 1, histArgs = list(), showSerialAxes = FALSE,
-  serialAxesArgs = list(), parent = NULL, ...)
+l_pairs(
+  data,
+  linkingGroup,
+  linkingKey,
+  showItemLabels = TRUE,
+  itemLabel,
+  showHistograms = FALSE,
+  histLocation = c("edge", "diag"),
+  histHeightProp = 1,
+  histArgs = list(),
+  showSerialAxes = FALSE,
+  serialAxesArgs = list(),
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a data.frame with numerical data to create the scatterplot matrix}

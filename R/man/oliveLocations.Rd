@@ -5,12 +5,14 @@
 \alias{oliveLocations}
 \title{Geographic location of each Italian olive growing area
 named in the \code{\link{olive}} data.}
-\format{A data frame containing 9 cases and 3 variates.
+\format{
+A data frame containing 9 cases and 3 variates.
 \describe{
  \item{Area}{name of the Italian growing area of the olive oil.}
  \item{lat, long}{latitude and longitude in degrees of the approximate
  centre of the named growing area}
-}}
+}
+}
 \source{
 \url{https://www.latlong.net}
 }

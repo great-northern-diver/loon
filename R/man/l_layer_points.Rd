@@ -4,8 +4,18 @@
 \alias{l_layer_points}
 \title{Layer points}
 \usage{
-l_layer_points(widget, x, y = NULL, color = "gray60", size = 6,
-  label = "points", parent = "root", index = 0, active = TRUE, ...)
+l_layer_points(
+  widget,
+  x,
+  y = NULL,
+  color = "gray60",
+  size = 6,
+  label = "points",
+  parent = "root",
+  index = 0,
+  active = TRUE,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

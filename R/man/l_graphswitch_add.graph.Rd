@@ -4,8 +4,7 @@
 \alias{l_graphswitch_add.graph}
 \title{Add a graph to the graphswitch widget using a graph object}
 \usage{
-\method{l_graphswitch_add}{graph}(widget, graph, label = "",
-  index = "end", ...)
+\method{l_graphswitch_add}{graph}(widget, graph, label = "", index = "end", ...)
 }
 \arguments{
 \item{widget}{graphswitch widget handle (or widget path)}

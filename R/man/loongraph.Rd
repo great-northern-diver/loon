@@ -4,8 +4,7 @@
 \alias{loongraph}
 \title{Create a graph object of class loongraph}
 \usage{
-loongraph(nodes, from = character(0), to = character(0),
-  isDirected = FALSE)
+loongraph(nodes, from = character(0), to = character(0), isDirected = FALSE)
 }
 \arguments{
 \item{nodes}{a character vector with node names, each element defines a node

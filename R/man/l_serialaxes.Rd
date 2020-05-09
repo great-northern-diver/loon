@@ -4,10 +4,21 @@
 \alias{l_serialaxes}
 \title{Create a Serialaxes Widget}
 \usage{
-l_serialaxes(data, sequence, scaling = "variable",
-  axesLayout = "radial", by = NULL, facet = c("grid", "wrap"),
-  showAxes = TRUE, linewidth = 1, color = "steelblue",
-  active = TRUE, selected = FALSE, parent = NULL, ...)
+l_serialaxes(
+  data,
+  sequence,
+  scaling = "variable",
+  axesLayout = "radial",
+  by = NULL,
+  layout = c("grid", "wrap"),
+  showAxes = TRUE,
+  linewidth = 1,
+  color = "steelblue",
+  active = TRUE,
+  selected = FALSE,
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
@@ -22,7 +33,7 @@ how the data is scaled. See Details and Examples for more information.}
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 
@@ -42,7 +53,7 @@ and which are not (\code{FALSE}).}
 
 \item{parent}{parent widget path}
 
-\item{...}{state arguments, see \code{\link{l_info_states}}.}
+\item{...}{named arguments to modify the serialaxes states or layouts, see details.}
 }
 \value{
 plot handle object
@@ -52,7 +63,9 @@ The serialaxes widget displays multivariate data either as a
   stacked star glyph plot, or as a parallel coordinate plot.
 }
 \details{
-The \code{scaling} state defines how the data is scaled. The axes
+\itemize{
+  \item {
+  The \code{scaling} state defines how the data is scaled. The axes
   display 0 at one end and 1 at the other. For the following explanation
   assume that the data is in a nxp dimensional matrix. The scaling options
   are then
@@ -61,6 +74,12 @@ variable \tab per column scaling\cr
 observation \tab per row scaling\cr
 data \tab whole matrix scaling\cr
 none \tab do not scale
+}
+  }
+  \item {Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc.
+  Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+  }
 }
 }
 \examples{

@@ -4,9 +4,18 @@
 \alias{l_layer.map}
 \title{Add a Map of class map as Drawings to Loon plot}
 \usage{
-\method{l_layer}{map}(widget, x, color = "", linecolor = "black",
-  linewidth = 1, label, parent = "root", index = 0,
-  asSingleLayer = TRUE, ...)
+\method{l_layer}{map}(
+  widget,
+  x,
+  color = "",
+  linecolor = "black",
+  linewidth = 1,
+  label,
+  parent = "root",
+  index = 0,
+  asSingleLayer = TRUE,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path as a string or as an object handle}

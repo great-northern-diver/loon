@@ -4,7 +4,9 @@
 \name{oliveAcids}
 \alias{oliveAcids}
 \title{Just the Fatty Acid Composition of Italian Olive Oils}
-\format{A data frame containing 572 cases and 8 variates.}
+\format{
+A data frame containing 572 cases and 8 variates.
+}
 \usage{
 oliveAcids
 }

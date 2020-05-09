@@ -4,9 +4,18 @@
 \alias{l_layer_polygon}
 \title{Layer a polygon}
 \usage{
-l_layer_polygon(widget, x, y, color = "gray80", linecolor = "black",
-  linewidth = 1, label = "polygon", parent = "root", index = 0,
-  ...)
+l_layer_polygon(
+  widget,
+  x,
+  y,
+  color = "gray80",
+  linecolor = "black",
+  linewidth = 1,
+  label = "polygon",
+  parent = "root",
+  index = 0,
+  ...
+)
 }
 \arguments{
 \item{widget}{widget path name as a string}

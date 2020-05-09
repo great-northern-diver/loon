@@ -4,9 +4,12 @@
 \alias{scagnostics2d}
 \title{Closure of Two Dimensional Scagnostic Measures}
 \usage{
-scagnostics2d(data, scagnostics = c("Clumpy", "Monotonic", "Convex",
-  "Stringy", "Skinny", "Outlying", "Sparse", "Striated", "Skewed"),
-  separator = ":")
+scagnostics2d(
+  data,
+  scagnostics = c("Clumpy", "Monotonic", "Convex", "Stringy", "Skinny", "Outlying",
+    "Sparse", "Striated", "Skewed"),
+  separator = ":"
+)
 }
 \arguments{
 \item{data}{a data.frame with the data used to calculate the measures}
