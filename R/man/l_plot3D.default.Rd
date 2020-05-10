@@ -10,7 +10,7 @@
   z = NULL,
   axisScaleFactor = 1,
   by = NULL,
-  facet = c("grid", "wrap"),
+  layout = c("grid", "wrap"),
   color = "grey60",
   glyph = "ccircle",
   size = 4,
@@ -52,7 +52,7 @@ Default is 1.
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{color}{colours of points; colours are repeated until matching the number points.}
 

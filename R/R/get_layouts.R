@@ -1,8 +1,9 @@
-get_facets <- function(widget, ...) {
-    UseMethod("get_facets")
+get_layouts <- function(widget, ...) {
+    UseMethod("get_layouts")
 }
 
-get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLayers = TRUE, ...) {
+get_layouts.loon <- function(widget, by, parent = NULL,
+                            linkingGroup, inheritLayers = TRUE, separate = FALSE, ...) {
 
     nDimStates <- l_nDimStateNames(widget)
     states <- names(l_info_states(widget))
@@ -47,24 +48,28 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
     if(length(splitted_data) == 1) return(widget)
 
     # set parent
-    if(is.null(parent)) {
-        # create parent
-        parent <- l_toplevel()
-        subwin <- l_subwin(parent, 'facet')
-
-        tktitle(parent) <- paste("loon facets on",
-                                 deparse(substitute(by)), "--path:", subwin)
-        # create child
-        child <- as.character(tcl('frame', subwin))
-    } else {
+    if(separate) {
         child <- parent
+    } else {
+        if(is.null(parent)) {
+            # create parent
+            parent <- l_toplevel()
+            subwin <- l_subwin(parent, 'layout')
+
+            tktitle(parent) <- paste("loon layouts on",
+                                     deparse(substitute(by)), "--path:", subwin)
+            # create child
+            child <- as.character(tcl('frame', subwin))
+        } else {
+            child <- parent
+        }
     }
 
     # linkingGroup
     if(missing(linkingGroup)) {
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
-            linkingGroup <- paste0("facet", valid_path())
+            linkingGroup <- paste0("layout", valid_path())
         print(paste("linkingGroup:", linkingGroup))
     }
 
@@ -238,7 +243,8 @@ get_facets.loon <- function(widget, by, parent = NULL, linkingGroup, inheritLaye
     )
 }
 
-get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup, inheritLayers = TRUE) {
+get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
+                                    inheritLayers = TRUE, separate = FALSE) {
 
     nDimStates <- setdiff(l_nDimStateNames(widget), "data")
     states <- names(l_info_states(widget))
@@ -280,25 +286,29 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup, inh
     splitted_data <- split(data, f = lapply(by, function(b) data[[b]]), sep = "*")
     if(length(splitted_data) == 1) return(widget)
 
-    # set parent
-    if(is.null(parent)) {
-        # create parent
-        parent <- l_toplevel()
-        subwin <- l_subwin(parent, 'facet')
-
-        tktitle(parent) <- paste("loon facets on",
-                                 deparse(substitute(by)), "--path:", subwin)
-        # create child
-        child <- as.character(tcl('frame', subwin))
-    } else {
+    if(separate) {
         child <- parent
+    } else {
+        # set parent
+        if(is.null(parent)) {
+            # create parent
+            parent <- l_toplevel()
+            subwin <- l_subwin(parent, 'layout')
+
+            tktitle(parent) <- paste("loon layouts on",
+                                     deparse(substitute(by)), "--path:", subwin)
+            # create child
+            child <- as.character(tcl('frame', subwin))
+        } else {
+            child <- parent
+        }
     }
 
     # linkingGroup
     if(missing(linkingGroup)) {
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
-            linkingGroup <- paste0("facet", valid_path())
+            linkingGroup <- paste0("layout", valid_path())
         print(paste("linkingGroup:", linkingGroup))
     }
 
@@ -316,12 +326,13 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup, inh
     plots <- setNames(
         lapply(splitted_data,
                function(d) {
-                   if(dim(d)[1] == 0) return(
-                       l_plot(parent = child,
-                              showScales = FALSE,
-                              showLabels = FALSE,
-                              guidelines = l_getOption('guidesBackground'))
-                   ) #fill the place
+                   if(dim(d)[1] == 0)
+                       return(
+                           l_plot(parent = child,
+                                  showScales = FALSE,
+                                  showLabels = FALSE,
+                                  guidelines = l_getOption('guidesBackground'))
+                       ) #fill the place
                    args <- as.list(d)
                    index <- args$index
                    args$index <- NULL

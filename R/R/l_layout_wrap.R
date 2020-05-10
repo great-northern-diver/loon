@@ -1,12 +1,13 @@
 #' @title Layout Facets in a grid
 #' @description It takes a loon widget and forms a matrix of loon widgets
-#' faceting by aesthetics ("color", "size", "glyph", etc). It can handle mutiple (more than 2) faceting categories
+#' layout by aesthetics ("color", "size", "glyph", etc). It can handle mutiple (more than 2) layout categories
 #' @param widget A loon widget
-#' @param by Faceting categories. It could be "color", "size", etc.
-#' Available faceting categories can be achieved by \code{l_nDimStateNames(your widget)}
+#' @param by Layout categories. It could be "color", "size", etc.
+#' Available layout categories can be achieved by \code{l_nDimStateNames(your widget)}
 #' @param linkingGroup A linkingGroup for widgets. If missing, default would be a paste of
-#' "facet" and the current tk path number
-#' @param inheritLayers Logical. Should widget layers be inherited into faceting panels?
+#' "layout" and the current tk path number
+#' @param inheritLayers Logical. Should widget layers be inherited into layout panels?
+#' @param separate Logical value. Separate several windows or pack all as a whole.
 #' @param scales All panels can share the same scales if it is "fixed"; or all panels only vary the
 #' scales across rows ("free_x" or "fixed_y"); or all panels only vary the
 #' scales across columns ("free_y" or "fixed_x"); or their scales are totally free ("free"). Note that when rows or
@@ -24,64 +25,79 @@
 #' @template param_parent
 #' @param ... named arguments to modify the `loon` widget states
 #'
-#' @return an `l_facet` object (an `l_compound` object), being a list with named elements,
+#' @return an `l_layout` object (an `l_compound` object), being a list with named elements,
 #' each representing a separate interactive plot.
 #' The names of the plots should be self explanatory and a list
-#' of all plots can be accessed from the `l_facet` object via `l_getPlots()`.
+#' of all plots can be accessed from the `l_layout` object via `l_getPlots()`.
 #'
 #' @export
 #'
 #' @examples
 #' p <- with(mtcars, l_plot3D(mpg, hp, wt, color = cyl))
-#' fp <- l_facet_wrap(p, by = "color")
+#' fp <- l_layout_wrap(p, by = "color")
 #'
-l_facet_wrap <- function(widget,
-                         by, linkingGroup,
-                         inheritLayers = TRUE,
-                         scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
-                         nrow = NULL,
-                         ncol = NULL,
-                         byrow = TRUE,
-                         labels_loc = c("top", "bottom"),
-                         span = 10,
-                         label_background = "gray80", label_foreground = "black",
-                         label_borderwidth = 2,
-                         label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                         parent = NULL, ...) {
-    UseMethod("l_facet_wrap", widget)
+l_layout_wrap <- function(widget,
+                          by, linkingGroup,
+                          inheritLayers = TRUE,
+                          separate = FALSE,
+                          scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
+                          nrow = NULL,
+                          ncol = NULL,
+                          byrow = TRUE,
+                          labels_loc = c("top", "bottom"),
+                          span = 10,
+                          label_background = "gray80", label_foreground = "black",
+                          label_borderwidth = 2,
+                          label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                          parent = NULL, ...) {
+    UseMethod("l_layout_wrap", widget)
 }
 
 
 #' @export
-l_facet_wrap.loon <- function(widget,
-                              by, linkingGroup,
-                              inheritLayers = TRUE,
-                              scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
-                              nrow = NULL,
-                              ncol = NULL,
-                              byrow = FALSE,
-                              labels_loc = c("top", "bottom"),
-                              span = 10,
-                              label_background = "gray80", label_foreground = "black",
-                              label_borderwidth = 2,
-                              label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                              parent = NULL, ...) {
+l_layout_wrap.loon <- function(widget,
+                               by, linkingGroup,
+                               inheritLayers = TRUE,
+                               separate = FALSE,
+                               scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
+                               nrow = NULL,
+                               ncol = NULL,
+                               byrow = FALSE,
+                               labels_loc = c("top", "bottom"),
+                               span = 10,
+                               label_background = "gray80", label_foreground = "black",
+                               label_borderwidth = 2,
+                               label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                               parent = NULL, ...) {
 
     loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
     if(missing(by)) return(widget)
 
-    facets <- get_facets(widget, by,
-                         parent = parent,
-                         linkingGroup,
-                         inheritLayers = inheritLayers,
-                         ...)
-    child <- facets$child
+    layouts <- get_layouts(
+        widget, by,
+        parent = parent,
+        linkingGroup,
+        inheritLayers = inheritLayers,
+        separate = separate,
+        ...)
+
+    if(separate) {
+        plots <- layouts$plots
+        # scale to plot
+        p <- structure(
+            plots,
+            class = c("l_layout", "l_compound", "loon")
+        )
+        return(p)
+    }
+
+    child <- layouts$child
 
     ## Two major objectives here
     # 1. pack plots and labels
     # 2. rename and reorder plots
-    plots <- facet_wrap_layout(plots = facets$plots,
-                               subtitles = facets$subtitles,
+    plots <- facet_wrap_layout(plots = layouts$plots,
+                               subtitles = layouts$subtitles,
                                span = span,
                                xlabel = widget['xlabel'],
                                ylabel = widget['ylabel'],
@@ -98,10 +114,10 @@ l_facet_wrap.loon <- function(widget,
 
 
     # forbidden swapAxes showScales and showLabels
-    facet_forbiddenSetting(plots,
-                           child = child,
-                           showLabels = TRUE, showScales = FALSE,
-                           swapAxes = widget['swapAxes'])
+    layout_forbiddenSetting(plots,
+                            child = child,
+                            showLabels = TRUE,
+                            swapAxes = widget['swapAxes'])
 
     scales <- match.arg(scales)
     scales <- switch(scales,
@@ -111,82 +127,66 @@ l_facet_wrap.loon <- function(widget,
                          scales
                      })
 
-    # get widget ranges
-    loonranges <- function(widget, f = 0.05) {
-        if(inherits(widget, "l_plot") || inherits(widget, "l_graph")) {
-            xrange <- extendrange(widget["x"], f = f)
-            yrange <- extendrange(widget["y"], f = f)
-        } else if(inherits(widget, "l_hist")) {
-
-            bins <- getBinData(widget)
-            xrange <- c()
-            yrange <- c(0)
-
-            lapply(bins,
-                   function(bin) {
-                       xrange <<- c(xrange, bin$x0, bin$x1)
-                       yrange <<- c(yrange, bin$count$all)
-                   })
-
-            xrange <- grDevices::extendrange(xrange, f = f)
-            yrange <- grDevices::extendrange(yrange, f = f)
-        } else {
-            xrange <- NULL
-            yrange <- NULL
-        }
-        list(
-            xrange = xrange,
-            yrange = yrange
-        )
-    }
-
     loonrange <- loonranges(widget)
     xrange <- loonrange$xrange
     yrange <- loonrange$yrange
 
-    facet_wrap_synchronizeSetting(plots, child = child, scales = scales,
-                                  xrange = xrange, yrange = yrange,
-                                  zoomX = widget['zoomX'], zoomY = widget['zoomY'])
+    layout_wrap_synchronizeSetting(plots, child = child, scales = scales,
+                                   xrange = xrange, yrange = yrange,
+                                   zoomX = widget['zoomX'], zoomY = widget['zoomY'])
 
     p <- structure(
         plots,
-        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+        class = c("l_layout_wrap", "l_layout", "l_compound", "loon")
     )
 
-    # comment(p) <- names(facets$plots)
+    # comment(p) <- names(layouts$plots)
     return(p)
 }
 
 #' @export
-l_facet_wrap.l_serialaxes <- function(widget,
-                                      by, linkingGroup,
-                                      inheritLayers = TRUE,
-                                      scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
-                                      nrow = NULL,
-                                      ncol = NULL,
-                                      byrow = FALSE,
-                                      labels_loc = c("top", "bottom"),
-                                      span = 10,
-                                      label_background = "gray80", label_foreground = "black",
-                                      label_borderwidth = 2,
-                                      label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                                      parent = NULL, ...) {
+l_layout_wrap.l_serialaxes <- function(widget,
+                                       by, linkingGroup,
+                                       inheritLayers = TRUE,
+                                       separate = FALSE,
+                                       scales = c("fixed", "fixed_x", "fixed_y", "free_x", "free_y", "free"),
+                                       nrow = NULL,
+                                       ncol = NULL,
+                                       byrow = FALSE,
+                                       labels_loc = c("top", "bottom"),
+                                       span = 10,
+                                       label_background = "gray80", label_foreground = "black",
+                                       label_borderwidth = 2,
+                                       label_relief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                                       parent = NULL, ...) {
 
     loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
     if(missing(by)) return(widget)
 
-    facets <- get_facets(widget, by,
-                         parent = parent,
-                         linkingGroup,
-                         inheritLayers = inheritLayers,
-                         ...)
-    child <- facets$child
+    layouts <- get_layouts(
+        widget, by,
+        parent = parent,
+        linkingGroup,
+        inheritLayers = inheritLayers,
+        separate = separate,
+        ...)
 
+    if(separate) {
+        plots <- layouts$plots
+        # scale to plot
+        p <- structure(
+            plots,
+            class = c("l_layout", "l_compound", "loon")
+        )
+        return(p)
+    }
+
+    child <- layouts$child
     ## Two major objectives here
     # 1. pack plots and labels
     # 2. rename and reorder plots
-    plots <- facet_wrap_layout(plots = facets$plots,
-                               subtitles = facets$subtitles,
+    plots <- facet_wrap_layout(plots = layouts$plots,
+                               subtitles = layouts$subtitles,
                                span = span,
                                xlabel = "",
                                ylabel = "",
@@ -203,16 +203,16 @@ l_facet_wrap.l_serialaxes <- function(widget,
 
     p <- structure(
         plots,
-        class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+        class = c("l_layout_wrap", "l_layout", "l_compound", "loon")
     )
 
     # comment(p) <- names(facets$plots)
     return(p)
 }
 
-facet_wrap_synchronizeSetting <- function(plots, child, scales,
-                                          xrange, yrange,
-                                          zoomX = 5/6, zoomY = 5/6) {
+layout_wrap_synchronizeSetting <- function(plots, child, scales,
+                                           xrange, yrange,
+                                           zoomX = 5/6, zoomY = 5/6) {
     busy <- FALSE
     switch(scales,
            "fixed" = {
@@ -343,4 +343,33 @@ facet_wrap_synchronizeSetting <- function(plots, child, scales,
            },
            "free" = NULL)
 
+}
+
+# get widget ranges
+loonranges <- function(widget, f = 0.05) {
+    if(inherits(widget, "l_plot") || inherits(widget, "l_graph")) {
+        xrange <- extendrange(widget["x"], f = f)
+        yrange <- extendrange(widget["y"], f = f)
+    } else if(inherits(widget, "l_hist")) {
+
+        bins <- getBinData(widget)
+        xrange <- c()
+        yrange <- c(0)
+
+        lapply(bins,
+               function(bin) {
+                   xrange <<- c(xrange, bin$x0, bin$x1)
+                   yrange <<- c(yrange, bin$count$all)
+               })
+
+        xrange <- grDevices::extendrange(xrange, f = f)
+        yrange <- grDevices::extendrange(yrange, f = f)
+    } else {
+        xrange <- NULL
+        yrange <- NULL
+    }
+    list(
+        xrange = xrange,
+        yrange = yrange
+    )
 }

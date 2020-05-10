@@ -8,7 +8,7 @@
   x,
   y = NULL,
   by = NULL,
-  facet = c("grid", "wrap"),
+  layout = c("grid", "wrap"),
   color = "grey60",
   glyph = "ccircle",
   size = 4,
@@ -40,7 +40,7 @@ If supplied separately, they must be of the same length.}
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{color}{colours of points (default "grey60"); colours are repeated
 until matching the number points.}
@@ -96,7 +96,7 @@ specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
 
-\item{...}{named arguments to modify plot states.}
+\item{...}{named arguments to modify plot states or layouts, see details.}
 }
 \description{
 Creates an interactive 2d scatterplot. Also, if no loon
@@ -104,12 +104,19 @@ Creates an interactive 2d scatterplot. Also, if no loon
   inspector.
 }
 \details{
-The scatterplot displays a number of direct interactions with the
+\itemize{
+  \item {The scatterplot displays a number of direct interactions with the
   mouse and keyboard, these include: zooming towards the mouse cursor using
   the mouse wheel, panning by right-click dragging and various selection
   methods using the left mouse button such as sweeping, brushing and
   individual point selection. See the documentation for \code{\link{l_plot}}
   for more details about the interaction gestures.
+  }
+  \item {Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc. Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}}
+  to see how these arguments work.
+  }
+}
 }
 \examples{
 
@@ -139,8 +146,8 @@ p2["glyph"][p1['selected']] <- "cdiamond"
 
 gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 
-# facetting
-p <- with(mtcars, l_plot(wt, mpg, by = cyl, facet = "wrap"))
+# Layout facets
+p <- with(mtcars, l_plot(wt, mpg, by = cyl, layout = "wrap"))
 
 # Use with other tk widgets
 tt <- tktoplevel()

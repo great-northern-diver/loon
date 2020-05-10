@@ -281,7 +281,7 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #'              all axes.)
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param facet facets in a \code{'grid'} or a \code{'wrap'}
+#' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
 #' @param color colours of points; colours are repeated until matching the number points.
 #' @param glyph shape of point; must be one of the primitive glyphs
 #'              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
@@ -354,7 +354,7 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               axisScaleFactor = 1,
                               by = NULL,
-                              facet = c("grid", "wrap"),
+                              layout = c("grid", "wrap"),
                               color = "grey60",
                               glyph = "ccircle",
                               size = 4,
@@ -575,27 +575,27 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             } else
                 by <- as.data.frame(by, stringsAsFactors = FALSE)
 
-            plots <- loonFacets(type = c("l_plot3D", "l_plot"),
-                                by,
-                                args,
-                                facet = match.arg(facet),
-                                by_args = Filter(Negate(is.null), by_args),
-                                factory_tclcmd = '::loon::plot3D',
-                                factory_path = 'plot3D',
-                                factory_window_title = 'loon scatterplot3D',
-                                linkingGroup = linkingGroup,
-                                sync = sync,
-                                parent = parent,
-                                xlabel = xlabel,
-                                ylabel = ylabel,
-                                title = title,
-                                showLabels = TRUE,
-                                showScales = FALSE,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background)
+            plots <- loonLayouts(type = c("l_plot3D", "l_plot"),
+                                 by,
+                                 args,
+                                 layout = match.arg(layout),
+                                 by_args = Filter(Negate(is.null), by_args),
+                                 factory_tclcmd = '::loon::plot3D',
+                                 factory_path = 'plot3D',
+                                 factory_window_title = 'loon scatterplot3D',
+                                 linkingGroup = linkingGroup,
+                                 sync = sync,
+                                 parent = parent,
+                                 xlabel = xlabel,
+                                 ylabel = ylabel,
+                                 title = title,
+                                 showLabels = TRUE,
+                                 showScales = showScales,
+                                 showGuides = showGuides,
+                                 guidelines = guidelines,
+                                 guidesBackground = guidesBackground,
+                                 foreground = foreground,
+                                 background = background)
 
             return(plots)
         }

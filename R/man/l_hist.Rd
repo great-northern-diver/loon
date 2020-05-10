@@ -8,7 +8,7 @@ l_hist(
   x,
   yshows = c("frequency", "density"),
   by = NULL,
-  facet = c("grid", "wrap"),
+  layout = c("grid", "wrap"),
   showStackedColors = TRUE,
   origin = NULL,
   binwidth = NULL,
@@ -29,7 +29,7 @@ l_hist(
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{facet}{facets in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{showStackedColors}{if TRUE (default) then bars will be coloured according to
 colours of the points; if FALSE, then the bars will be a uniform colour
@@ -64,7 +64,7 @@ inferred from \code{x} will be made.}
 
 \item{parent}{parent widget path}
 
-\item{...}{named arguments to modify the histogram plot states}
+\item{...}{named arguments to modify the histogram plot states or layouts, see details.}
 }
 \value{
 widget handle
@@ -74,10 +74,18 @@ widget handle
   loon's other displays
 }
 \details{
-Note that when changing the \code{yshows} state form
+\itemize{
+  \item {
+  Note that when changing the \code{yshows} state form
   \code{'frequency'} to \code{'density'} you might have to use
   \code{\link{l_scaleto_world}} to show the complete histogram in the plotting
   region.
+  }
+  \item {Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc.
+  Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+  }
+}
 
 For more information run: \code{l_help("learn_R_display_hist")}
 }
