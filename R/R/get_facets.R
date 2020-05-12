@@ -1,9 +1,10 @@
-get_layouts <- function(widget, ...) {
-    UseMethod("get_layouts")
+get_facets <- function(widget, ...) {
+    UseMethod("get_facets")
 }
 
-get_layouts.loon <- function(widget, by, parent = NULL,
-                            linkingGroup, inheritLayers = TRUE, separate = FALSE, ...) {
+get_facets.loon <- function(widget, by, parent = NULL,
+                             linkingGroup, inheritLayers = TRUE, separate = FALSE,
+                             by_title = "by", ...) {
 
     nDimStates <- l_nDimStateNames(widget)
     states <- names(l_info_states(widget))
@@ -35,16 +36,15 @@ get_layouts.loon <- function(widget, by, parent = NULL,
                }
            })
 
-    # TODO by is an expression
-    byOriginal <- by
-    by <- intersect(by, column_names)
-    if(length(by) == 0) {
-        stop(byOriginal, " is not a valid setting")
-    }
-    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
+    # TODO by is a formula
+    splited <- splitedFun(data = data,
+                          by = by,
+                          column_names = column_names,
+                          by_title = by_title)
+    splitted_data <- splited$splitted_data
+    subtitles <- splited$subtitles
+    by <- splited$by
 
-    # split data by "by"
-    splitted_data <- split(data, f = lapply(by, function(b) data[[b]]), drop = FALSE, sep = "*")
     if(length(splitted_data) == 1) return(widget)
 
     # set parent
@@ -54,10 +54,10 @@ get_layouts.loon <- function(widget, by, parent = NULL,
         if(is.null(parent)) {
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'layout')
+            subwin <- l_subwin(parent, 'facet')
 
-            tktitle(parent) <- paste("loon layouts on",
-                                     deparse(substitute(by)), "--path:", subwin)
+            tktitle(parent) <- paste("loon facets on",
+                                     names(subtitles), "--path:", subwin)
             # create child
             child <- as.character(tcl('frame', subwin))
         } else {
@@ -69,7 +69,7 @@ get_layouts.loon <- function(widget, by, parent = NULL,
     if(missing(linkingGroup)) {
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
-            linkingGroup <- paste0("layout", valid_path())
+            linkingGroup <- paste0("facet", valid_path())
         print(paste("linkingGroup:", linkingGroup))
     }
 
@@ -243,8 +243,9 @@ get_layouts.loon <- function(widget, by, parent = NULL,
     )
 }
 
-get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
-                                    inheritLayers = TRUE, separate = FALSE) {
+get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
+                                     inheritLayers = TRUE, separate = FALSE,
+                                     by_title = "by") {
 
     nDimStates <- setdiff(l_nDimStateNames(widget), "data")
     states <- names(l_info_states(widget))
@@ -278,12 +279,15 @@ get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                }
            })
 
-    # TODO by is an expression
-    by <- intersect(by, column_names)
-    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
+    # TODO by is a formula
+    splited <- splitedFun(data = data,
+                          by = by,
+                          column_names = column_names,
+                          by_title = by_title)
+    splitted_data <- splited$splitted_data
+    subtitles <- splited$subtitles
+    by <- splited$by
 
-    # split data by "by"
-    splitted_data <- split(data, f = lapply(by, function(b) data[[b]]), sep = "*")
     if(length(splitted_data) == 1) return(widget)
 
     if(separate) {
@@ -293,10 +297,10 @@ get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
         if(is.null(parent)) {
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'layout')
+            subwin <- l_subwin(parent, 'facet')
 
-            tktitle(parent) <- paste("loon layouts on",
-                                     deparse(substitute(by)), "--path:", subwin)
+            tktitle(parent) <- paste("loon facets on",
+                                     names(subtitles), "--path:", subwin)
             # create child
             child <- as.character(tcl('frame', subwin))
         } else {
@@ -308,7 +312,7 @@ get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     if(missing(linkingGroup)) {
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
-            linkingGroup <- paste0("layout", valid_path())
+            linkingGroup <- paste0("facet", valid_path())
         print(paste("linkingGroup:", linkingGroup))
     }
 
@@ -354,5 +358,61 @@ get_layouts.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
         plots = plots,
         subtitles = subtitles,
         child = child
+    )
+}
+
+splitedFun <- function(data, by, column_names = NULL,
+                       by_title = "by", sep = "*",
+                       N = nrow(data)) {
+
+    if(is.atomic(by)) {
+        if(length(by) == N) {
+            # a vector
+            subtitles <- setNames(
+                list(levels(factor(by))),
+                by_title
+            )
+            splitted_data <- split(data,
+                                   f = by,
+                                   drop = FALSE,
+                                   sep = sep)
+        } else {
+
+            # some aesthetics (e.g. color, glyph, size, etc) char
+            byOriginal <- by
+            by <- intersect(by, column_names)
+            if(length(by) == 0) {
+                stop(byOriginal, " is not a valid setting")
+            }
+            subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
+            # split data by "by"
+            splitted_data <- split(data,
+                                   f = lapply(by, function(b) data[[b]]),
+                                   drop = FALSE,
+                                   sep = sep)
+        }
+    } else {
+        # by is a data.frame or a list
+        ## as.data.frame
+        by <- as.data.frame(by, stringsAsFactors = FALSE)
+        by_column_names <- colnames(by)
+
+        subtitles <- setNames(
+            lapply(by_column_names,
+                   function(b)
+                       as.character(levels(factor(by[[b]])))),
+            by_column_names
+        )
+        # split data by "by"
+        splitted_data <- split(data,
+                               f = by,
+                               drop = FALSE,
+                               sep = sep)
+    }
+
+    list(
+        subtitles = subtitles,
+        splitted_data = splitted_data,
+        by = by
     )
 }
