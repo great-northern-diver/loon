@@ -10,7 +10,7 @@ l_serialaxes(
   scaling = "variable",
   axesLayout = "radial",
   by = NULL,
-  layout = c("grid", "wrap"),
+  layout = c("grid", "wrap", "separate"),
   showAxes = TRUE,
   linewidth = 1,
   color = "steelblue",
@@ -78,7 +78,7 @@ none \tab do not scale
   }
   \item {Some arguments to modify layouts can be passed through,
   e.g. "separate", "byrow", etc.
-  Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+  Check \code{\link{l_facet}} to see how these arguments work.
   }
 }
 }
