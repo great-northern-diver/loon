@@ -1,20 +1,21 @@
-loonLayouts <- function(type, by, args, layout = "grid",
-                        by_args, linkingGroup, sync, parent,
-                        factory_tclcmd, factory_path,
-                        factory_window_title,
-                        xlabel = "", ylabel = "", title = "", ...) {
+loonFacets <- function(type, by, args, layout = "grid",
+                       connectedScales = "both", by_args, linkingGroup, sync, parent,
+                       factory_tclcmd, factory_path, factory_window_title,
+                       xlabel = "", ylabel = "", title = "", ...) {
     class(type) <- type[1]
-    UseMethod("loonLayouts", type)
+    UseMethod("loonFacets", type)
 }
 
-loonLayouts.default <- function(type,
-                                by,
-                                args,
-                                layout = "grid",
-                                by_args, linkingGroup, sync, parent,
-                                factory_tclcmd, factory_path,
-                                factory_window_title,
-                                xlabel = "", ylabel = "", title = "", ...) {
+loonFacets.default <- function(type,
+                               by,
+                               args,
+                               layout = "grid",
+                               connectedScales = "both",
+                               by_args,
+                               linkingGroup, sync, parent,
+                               factory_tclcmd, factory_path,
+                               factory_window_title,
+                               xlabel = "", ylabel = "", title = "", ...) {
 
     by_names <- colnames(by)
 
@@ -25,9 +26,7 @@ loonLayouts.default <- function(type,
     args$by <- NULL
 
     # separate windows or not
-    separate <- by_args$separate
-    by_args$separate <- NULL
-    if(is.null(separate) || !is.logical(separate)) separate <- FALSE
+    separate <- ifelse(layout == "separate", TRUE, FALSE)
 
     ## get N dimensional data frame
     # what is the n?
@@ -44,7 +43,10 @@ loonLayouts.default <- function(type,
     # 1 dim args
     oneDimArgs <- args[which(lengths(args) != N)]
 
-    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(b)))), by_names)
+    subtitles <- setNames(lapply(by,
+                                 function(b)
+                                     as.character(levels(factor(b)))),
+                          by_names)
 
     # split data by "by"
     splitted_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
@@ -118,10 +120,12 @@ loonLayouts.default <- function(type,
 
                         } else {
 
-                            oneDimArgs$minimumMargins <- rep(5, 4)
-                            oneDimArgs$xlabel <- ""
-                            oneDimArgs$ylabel <- ""
-                            oneDimArgs$title <- ""
+                            if(!separate) {
+                                oneDimArgs$minimumMargins <- rep(5, 4)
+                                oneDimArgs$xlabel <- ""
+                                oneDimArgs$ylabel <- ""
+                                oneDimArgs$title <- ""
+                            }
 
                             p <- do.call(
                                 loonPlotFactory,
@@ -142,15 +146,33 @@ loonLayouts.default <- function(type,
                     })
 
     if(separate) {
-        # scale to plot
         p <- structure(
             plots,
-            class = c("l_layout", "l_compound", "loon")
+            class = c("l_facet", "l_compound", "loon")
         )
         return(p)
     }
 
     if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+
+    xrange <- c()
+    yrange <- c()
+    lapply(plots,
+           function(p) {
+               xrange <<- c(xrange, p['panX'], p['panX'] + p['deltaX']/p['zoomX'])
+               yrange <<- c(yrange, p['panY'], p['panY'] + p['deltaY']/p['zoomY'])
+           })
+    xrange <- extendrange(xrange)
+    yrange <- extendrange(yrange)
+
+    # the way to synchronize scales
+    connectedScales <- switch(connectedScales,
+                              "cross" = "both",
+                              "row" = "y",
+                              "column" = "x",
+                              {
+                                  connectedScales
+                              })
 
     if(layout == "grid") {
 
@@ -173,12 +195,25 @@ loonLayouts.default <- function(type,
 
         # forbidden swapAxes showScales and showLabels
         layout_forbiddenSetting(plots,
-                               child = child,
-                               showLabels = TRUE,
-                               swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
+                                child = child,
+                                showLabels = TRUE,
+                                swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
 
-        # synchronize
-        layout_grid_synchronizeSetting(plots, child = child)
+        if(connectedScales == "both") {
+
+            layout_grid_synchronizeSetting(plots,
+                                           xrange = xrange,
+                                           yrange = yrange,
+                                           child = child)
+
+        } else {
+
+            layout_wrap_synchronizeSetting(plots,
+                                           child = child,
+                                           connectedScales = connectedScales,
+                                           xrange = xrange, yrange = yrange)
+        }
+
 
         # set class and linkingGroup for each plot
         plots <- lapply(plots,
@@ -190,10 +225,10 @@ loonLayouts.default <- function(type,
 
         structure(
             plots,
-            class = c("l_layout_grid", "l_layout", "l_compound", "loon")
+            class = c("l_facet_grid", "l_facet", "l_compound", "loon")
         )
 
-    } else {
+    } else if(layout == "wrap") {
 
         plots <- do.call(
             facet_wrap_layout,
@@ -211,35 +246,15 @@ loonLayouts.default <- function(type,
 
         # forbidden swapAxes showScales and showLabels
         layout_forbiddenSetting(plots,
-                               child = child,
-                               showLabels = TRUE,
-                               swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
-
-        scales <- by_args$scales
-        scales <- if(is.null(scales)) {
-            "fixed"
-        } else {
-            switch(scales,
-                   "fixed_x" = "free_y",
-                   "fixed_y" = "free_x",
-                   {
-                       scales
-                   })
-        }
-
-        xrange <- c()
-        yrange <- c()
-        lapply(plots,
-               function(p) {
-                   xrange <<- c(xrange, p['panX'], p['panX'] + p['deltaX']/p['zoomX'])
-                   yrange <<- c(yrange, p['panY'], p['panY'] + p['deltaY']/p['zoomY'])
-               })
-        xrange <- extendrange(xrange)
-        yrange <- extendrange(yrange)
+                                child = child,
+                                showLabels = TRUE,
+                                swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
 
 
-        layout_wrap_synchronizeSetting(plots, child = child, scales = scales,
-                                      xrange = xrange, yrange = yrange)
+        layout_wrap_synchronizeSetting(plots,
+                                       child = child,
+                                       connectedScales = connectedScales,
+                                       xrange = xrange, yrange = yrange)
 
         # set class and linkingGroup for each plot
         plots <- lapply(plots,
@@ -251,19 +266,21 @@ loonLayouts.default <- function(type,
 
         structure(
             plots,
-            class = c("l_layout_wrap", "l_layout", "l_compound", "loon")
+            class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
         )
-    }
+    } else
+        stop("Unknown layouts")
 }
 
-loonLayouts.l_serialaxes <- function(type,
-                                     by,
-                                     args,
-                                     layout = "grid",
-                                     by_args, linkingGroup, sync, parent,
-                                     factory_tclcmd, factory_path,
-                                     factory_window_title,
-                                     xlabel = "", ylabel = "", title = "", ...) {
+loonFacets.l_serialaxes <- function(type,
+                                    by,
+                                    args,
+                                    layout = "grid",
+                                    connectedScales = "both",
+                                    by_args, linkingGroup, sync, parent,
+                                    factory_tclcmd, factory_path,
+                                    factory_window_title,
+                                    xlabel = "", ylabel = "", title = "", ...) {
 
     by_names <- colnames(by)
 
@@ -276,9 +293,7 @@ loonLayouts.l_serialaxes <- function(type,
     args$by <- NULL
 
     # separate windows or not
-    separate <- by_args$separate
-    by_args$separate <- NULL
-    if(is.null(separate) || !is.logical(separate)) separate <- FALSE
+    separate <- ifelse(layout == "separate", TRUE, FALSE)
 
     ## get N dimensional data frame
     # what is the n?
@@ -401,7 +416,7 @@ loonLayouts.l_serialaxes <- function(type,
         # scale to plot
         p <- structure(
             plots,
-            class = c("l_layout", "l_compound", "loon")
+            class = c("l_facet", "l_compound", "loon")
         )
         return(p)
     }
@@ -437,10 +452,10 @@ loonLayouts.l_serialaxes <- function(type,
 
         structure(
             plots,
-            class = c("l_layout_grid", "l_layout", "l_compound", "loon")
+            class = c("l_facet_grid", "l_facet", "l_compound", "loon")
         )
 
-    } else {
+    } else if(layout == "wrap") {
 
         plots <- do.call(
             facet_wrap_layout,
@@ -466,7 +481,8 @@ loonLayouts.l_serialaxes <- function(type,
 
         structure(
             plots,
-            class = c("l_layout_wrap", "l_layout", "l_compound", "loon")
+            class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
         )
-    }
+    } else
+        stop("Unknown layouts")
 }
