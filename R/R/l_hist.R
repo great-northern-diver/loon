@@ -9,6 +9,21 @@
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
 #' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
+#' @param connectedScales How to connect the scales of all panels. It depends on \code{layout}.
+#' \itemize{
+#' \item{wrap: all panels share 'both' scales (fix 'x' and 'y'),
+#' all panels only vary the scales across 'x' (fix 'x' and free 'y'),
+#' all panels only vary the scales across 'y' (fix 'y' and free 'x') or
+#' 'none' scales are fixed  (free 'x' and 'y').
+#' }
+#' \item{grid: all panels on the 'cross' (sharing the same row and column) connect the same scales (both 'x' and 'y'),
+#' all panels only vary the scales across 'row' (fix 'x' and free 'y'),
+#' all panels only vary the scales across 'column' (fix 'y' and free 'x') or
+#' 'none' scales are fixed  (free 'x' and 'y').
+#' }
+#' }
+#' Note that 'both' and 'cross', 'row' and 'y', 'column' and 'x' are equivalent for layout \code{grid} and \code{wrap}, respectively.
+#' When 'row's ('y') or 'column's ('x') share the same scale, the dynamic chages of scales will be synchronized.
 #' @param showStackedColors  if TRUE (default) then bars will be coloured according to
 #'    colours of the points; if FALSE, then the bars will be a uniform colour
 #'    except for highlighted points.
@@ -44,7 +59,7 @@
 #'   }
 #'   \item {Some arguments to modify layouts can be passed through,
 #'   e.g. "separate", "byrow", etc.
-#'   Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+#'   Check \code{\link{l_facet}} to see how these arguments work.
 #'   }
 #' }
 #'
@@ -92,7 +107,8 @@
 l_hist <- function(x,
                    yshows = c("frequency", "density"),
                    by = NULL,
-                   layout = c("grid", "wrap"),
+                   layout = c("grid", "wrap", "separate"),
+                   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                    showStackedColors = TRUE,
                    origin = NULL,
                    binwidth=NULL,
@@ -109,7 +125,8 @@ l_hist <- function(x,
 l_hist.factor <-  function(x,
                            yshows = c("frequency", "density"),
                            by = NULL,
-                           layout = c("grid", "wrap"),
+                           layout = c("grid", "wrap", "separate"),
+                           connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                            showStackedColors = TRUE,
                            origin = NULL,
                            binwidth=NULL,
@@ -124,7 +141,8 @@ l_hist.factor <-  function(x,
         return(
             l_hist.default(x,
                            by = by,
-                           layout = layout,
+                           layout = match.arg(layout),
+                           connectedScales = match.arg(connectedScales),
                            yshows = yshows,
                            showStackedColors = showStackedColors,
                            origin = origin,
@@ -158,17 +176,11 @@ l_hist.factor <-  function(x,
         }
     }
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     h <-  l_hist(x,
                  yshows = yshows,
                  by = by,
-                 layout = layout,
+                 layout = match.arg(layout),
+                 connectedScales = match.arg(connectedScales),
                  showStackedColors = showStackedColors,
                  origin = origin,
                  binwidth=binwidth,
@@ -225,7 +237,8 @@ l_hist.factor <-  function(x,
 l_hist.character <-  function(x,
                               yshows = c("frequency", "density"),
                               by = NULL,
-                              layout = c("grid", "wrap"),
+                              layout = c("grid", "wrap", "separate"),
+                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                               showStackedColors = TRUE,
                               origin = NULL,
                               binwidth = NULL,
@@ -240,7 +253,8 @@ l_hist.character <-  function(x,
         return(
             l_hist.default(x,
                            by = by,
-                           layout = layout,
+                           layout = match.arg(layout),
+                           connectedScales = match.arg(connectedScales),
                            yshows = yshows,
                            showStackedColors = showStackedColors,
                            origin = origin,
@@ -255,16 +269,10 @@ l_hist.character <-  function(x,
 
     x <- factor(x)
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist(x,
            by = by,
-           layout = layout,
+           layout = match.arg(layout),
+           connectedScales = match.arg(connectedScales),
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -281,7 +289,8 @@ l_hist.character <-  function(x,
 l_hist.default <-  function(x,
                             yshows = c("frequency", "density"),
                             by = NULL,
-                            layout = c("grid", "wrap"),
+                            layout = c("grid", "wrap", "separate"),
+                            connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                             showStackedColors = TRUE,
                             origin = NULL,
                             binwidth = NULL,
@@ -441,30 +450,37 @@ l_hist.default <-  function(x,
 
         } else {
 
+            # convert all types of 'by' to a data frame
             if(is.atomic(by)) {
-                by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-            } else
+                if(length(by) == n) {
+                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+                } else {
+                    stop("Unknown 'by' type")
+                }
+            } else {
                 by <- as.data.frame(by, stringsAsFactors = FALSE)
+            }
 
-            plots <- loonLayouts(type = "l_hist",
-                                 by,
-                                 args,
-                                 layout = match.arg(layout),
-                                 by_args = Filter(Negate(is.null), by_args),
-                                 linkingGroup = linkingGroup,
-                                 sync = sync,
-                                 parent = parent,
-                                 factory_tclcmd = '::loon::histogram',
-                                 factory_path = 'hist',
-                                 factory_window_title = 'loon histogram',
-                                 showLabels = TRUE,
-                                 yshows = yshows,
-                                 showStackedColors = showStackedColors,
-                                 origin = origin,
-                                 binwidth=binwidth,
-                                 showBinHandle = showBinHandle,
-                                 xlabel = xlabel,
-                                 ylabel = yshows)
+            plots <- loonFacets(type = "l_hist",
+                                by,
+                                args,
+                                layout = match.arg(layout),
+                                connectedScales = match.arg(connectedScales),
+                                by_args = Filter(Negate(is.null), by_args),
+                                linkingGroup = linkingGroup,
+                                sync = sync,
+                                parent = parent,
+                                factory_tclcmd = '::loon::histogram',
+                                factory_path = 'hist',
+                                factory_window_title = 'loon histogram',
+                                showLabels = TRUE,
+                                yshows = yshows,
+                                showStackedColors = showStackedColors,
+                                origin = origin,
+                                binwidth=binwidth,
+                                showBinHandle = showBinHandle,
+                                xlabel = xlabel,
+                                ylabel = yshows)
 
             return(plots)
 
@@ -476,7 +492,8 @@ l_hist.default <-  function(x,
 l_hist.data.frame <- function(x,
                               yshows = c("frequency", "density"),
                               by = NULL,
-                              layout = c("grid", "wrap"),
+                              layout = c("grid", "wrap", "separate"),
+                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                               showStackedColors = TRUE,
                               origin = NULL,
                               binwidth=NULL,
@@ -491,7 +508,8 @@ l_hist.data.frame <- function(x,
         return(
             l_hist.default(x,
                            by = by,
-                           layout = layout,
+                           layout = match.arg(layout),
+                           connectedScales = match.arg(connectedScales),
                            yshows = yshows,
                            showStackedColors = showStackedColors,
                            origin = origin,
@@ -516,16 +534,10 @@ l_hist.data.frame <- function(x,
     }
     x <- x[, 1]
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist(x,
            by = by,
-           layout = layout,
+           layout = match.arg(layout),
+           connectedScales = match.arg(connectedScales),
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -542,7 +554,8 @@ l_hist.data.frame <- function(x,
 l_hist.matrix <- function(x,
                           yshows = c("frequency", "density"),
                           by = NULL,
-                          layout = c("grid", "wrap"),
+                          layout = c("grid", "wrap", "separate"),
+                          connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                           showStackedColors = TRUE,
                           origin = NULL,
                           binwidth=NULL,
@@ -553,16 +566,10 @@ l_hist.matrix <- function(x,
                           xlabel = NULL,
                           parent=NULL, ...) {
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist(c(x),
            by = by,
-           layout = layout,
+           layout = match.arg(layout),
+           connectedScales = match.arg(connectedScales),
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -579,7 +586,8 @@ l_hist.matrix <- function(x,
 l_hist.list <- function(x,
                         yshows = c("frequency", "density"),
                         by = NULL,
-                        layout = c("grid", "wrap"),
+                        layout = c("grid", "wrap", "separate"),
+                        connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                         showStackedColors = TRUE,
                         origin = NULL,
                         binwidth=NULL,
@@ -590,16 +598,10 @@ l_hist.list <- function(x,
                         xlabel = NULL,
                         parent=NULL, ...) {
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist(unlist(x),
            by = by,
-           layout = layout,
+           layout = match.arg(layout),
+           connectedScales = match.arg(connectedScales),
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -616,7 +618,8 @@ l_hist.list <- function(x,
 l_hist.table <- function(x,
                          yshows = c("frequency", "density"),
                          by = NULL,
-                         layout = c("grid", "wrap"),
+                         layout = c("grid", "wrap", "separate"),
+                         connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                          showStackedColors = TRUE,
                          origin = NULL,
                          binwidth=NULL,
@@ -645,16 +648,10 @@ l_hist.table <- function(x,
         x <- x[,1]
     }
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist(x,
            by = by,
-           layout = layout,
+           layout = match.arg(layout),
+           connectedScales = match.arg(connectedScales),
            yshows = yshows,
            showStackedColors = showStackedColors,
            origin = origin,
@@ -671,7 +668,8 @@ l_hist.table <- function(x,
 l_hist.array <- function(x,
                          yshows = c("frequency", "density"),
                          by = NULL,
-                         layout = c("grid", "wrap"),
+                         layout = c("grid", "wrap", "separate"),
+                         connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                          showStackedColors = TRUE,
                          origin = NULL,
                          binwidth=NULL,
@@ -682,16 +680,10 @@ l_hist.array <- function(x,
                          xlabel = NULL,
                          parent=NULL, ...) {
 
-    if(!is.null(by)) {
-        by <- if(is.atomic(by))
-            setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        else
-            as.data.frame(by, stringsAsFactors = FALSE)
-    }
-
     l_hist.table(x = x,
                  by = by,
-                 layout = layout,
+                 layout = match.arg(layout),
+                 connectedScales = match.arg(connectedScales),
                  yshows = yshows,
                  showStackedColors = showStackedColors,
                  origin = origin,

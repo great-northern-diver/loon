@@ -8,7 +8,8 @@ l_hist(
   x,
   yshows = c("frequency", "density"),
   by = NULL,
-  layout = c("grid", "wrap"),
+  layout = c("grid", "wrap", "separate"),
+  connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
   showStackedColors = TRUE,
   origin = NULL,
   binwidth = NULL,
@@ -30,6 +31,22 @@ l_hist(
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
 \item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
+
+\item{connectedScales}{How to connect the scales of all panels. It depends on \code{layout}.
+\itemize{
+\item{wrap: all panels share 'both' scales (fix 'x' and 'y'),
+all panels only vary the scales across 'x' (fix 'x' and free 'y'),
+all panels only vary the scales across 'y' (fix 'y' and free 'x') or
+'none' scales are fixed  (free 'x' and 'y').
+}
+\item{grid: all panels on the 'cross' (sharing the same row and column) connect the same scales (both 'x' and 'y'),
+all panels only vary the scales across 'row' (fix 'x' and free 'y'),
+all panels only vary the scales across 'column' (fix 'y' and free 'x') or
+'none' scales are fixed  (free 'x' and 'y').
+}
+}
+Note that 'both' and 'cross', 'row' and 'y', 'column' and 'x' are equivalent for layout \code{grid} and \code{wrap}, respectively.
+When 'row's ('y') or 'column's ('x') share the same scale, the dynamic chages of scales will be synchronized.}
 
 \item{showStackedColors}{if TRUE (default) then bars will be coloured according to
 colours of the points; if FALSE, then the bars will be a uniform colour
@@ -83,7 +100,7 @@ widget handle
   }
   \item {Some arguments to modify layouts can be passed through,
   e.g. "separate", "byrow", etc.
-  Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+  Check \code{\link{l_facet}} to see how these arguments work.
   }
 }
 

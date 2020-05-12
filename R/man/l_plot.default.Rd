@@ -8,7 +8,8 @@
   x,
   y = NULL,
   by = NULL,
-  layout = c("grid", "wrap"),
+  layout = c("grid", "wrap", "separate"),
+  connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
   color = "grey60",
   glyph = "ccircle",
   size = 4,
@@ -40,7 +41,23 @@ If supplied separately, they must be of the same length.}
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
-\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
+\item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
+
+\item{connectedScales}{How to connect the scales of all panels. It depends on \code{layout}.
+\itemize{
+\item{wrap: all panels share 'both' scales (fix 'x' and 'y'),
+all panels only vary the scales across 'x' (fix 'x' and free 'y'),
+all panels only vary the scales across 'y' (fix 'y' and free 'x') or
+'none' scales are fixed  (free 'x' and 'y').
+}
+\item{grid: all panels on the 'cross' (sharing the same row and column) connect the same scales (both 'x' and 'y'),
+all panels only vary the scales across 'row' (fix 'x' and free 'y'),
+all panels only vary the scales across 'column' (fix 'y' and free 'x') or
+'none' scales are fixed  (free 'x' and 'y').
+}
+}
+Note that 'both' and 'cross', 'row' and 'y', 'column' and 'x' are equivalent for layout \code{grid} and \code{wrap}, respectively.
+When 'row's ('y') or 'column's ('x') share the same scale, the dynamic chages of scales will be synchronized.}
 
 \item{color}{colours of points (default "grey60"); colours are repeated
 until matching the number points.}
@@ -113,7 +130,7 @@ Creates an interactive 2d scatterplot. Also, if no loon
   for more details about the interaction gestures.
   }
   \item {Some arguments to modify layouts can be passed through,
-  e.g. "separate", "byrow", etc. Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}}
+  e.g. "separate", "byrow", etc. Check \code{\link{l_facet}}
   to see how these arguments work.
   }
 }

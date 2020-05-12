@@ -42,7 +42,7 @@
 #'   }
 #'   \item {Some arguments to modify layouts can be passed through,
 #'   e.g. "separate", "byrow", etc.
-#'   Check \code{\link{l_layout_grid}} and \code{\link{l_layout_wrap}} to see how these arguments work.
+#'   Check \code{\link{l_facet}} to see how these arguments work.
 #'   }
 #' }
 #'
@@ -225,7 +225,7 @@ l_serialaxes <- function(data,
                          scaling="variable",
                          axesLayout='radial',
                          by = NULL,
-                         layout = c("grid", "wrap"),
+                         layout = c("grid", "wrap", "separate"),
                          showAxes=TRUE,
                          linewidth = 1,
                          color = "steelblue",
@@ -342,26 +342,33 @@ l_serialaxes <- function(data,
 
     } else {
 
+        # convert all types of 'by' to a data frame
         if(is.atomic(by)) {
-            by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
-        } else
+            if(length(by) == n) {
+                by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+            } else {
+                warning("Set 'by' as variables is not recommended")
+                by <- data[by]
+            }
+        } else {
             by <- as.data.frame(by, stringsAsFactors = FALSE)
+        }
 
-        plots <- loonLayouts(type = "l_serialaxes",
-                             by,
-                             args,
-                             layout = match.arg(layout),
-                             by_args = Filter(Negate(is.null), by_args),
-                             linkingGroup = linkingGroup,
-                             sync = sync,
-                             parent = parent,
-                             factory_tclcmd = '::loon::serialaxes',
-                             factory_path = 'serialaxes',
-                             factory_window_title = 'loon serialaxes plot',
-                             sequence = sequence,
-                             showAxes = showAxes,
-                             scaling = scaling,
-                             axesLayout = axesLayout)
+        plots <- loonFacets(type = "l_serialaxes",
+                            by,
+                            args,
+                            layout = match.arg(layout),
+                            by_args = Filter(Negate(is.null), by_args),
+                            linkingGroup = linkingGroup,
+                            sync = sync,
+                            parent = parent,
+                            factory_tclcmd = '::loon::serialaxes',
+                            factory_path = 'serialaxes',
+                            factory_window_title = 'loon serialaxes plot',
+                            sequence = sequence,
+                            showAxes = showAxes,
+                            scaling = scaling,
+                            axesLayout = axesLayout)
 
         return(plots)
 
