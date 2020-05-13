@@ -442,9 +442,11 @@ l_plot.default <-  function(x, y = NULL,
         } else {
 
             # convert all types of 'by' to a data frame
+            byDeparse <- deparse(substitute(by))
+
             if(is.atomic(by)) {
                 if(length(by) == n) {
-                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)
                 } else {
                     # 'by' is a char vector
                     # 'x' should be a data.frame
@@ -455,12 +457,20 @@ l_plot.default <-  function(x, y = NULL,
                     by <- xOrigin[by]
                 }
             } else {
-                by <- as.data.frame(by, stringsAsFactors = FALSE)
+
+                if(is.null(names(by))) {
+
+                    by <- as.data.frame(by, stringsAsFactors = FALSE)
+                    names(by) <- NULL
+                } else {
+                    by <- as.data.frame(by, stringsAsFactors = FALSE)
+                }
             }
 
             plots <- loonFacets(type = "l_plot",
                                 by,
                                 args,
+                                byDeparse = byDeparse,
                                 layout = match.arg(layout),
                                 connectedScales = match.arg(connectedScales),
                                 by_args = Filter(Negate(is.null), by_args),
