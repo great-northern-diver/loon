@@ -34,13 +34,34 @@ facet_grid_layout <- function(plots,
         ylabel <- label
     }
 
-    # tk layout
-    if(byrow && !swapAxes) {
-        rowsLabel <- subtitles[seq(len) %% 2 == 0]
-        colsLabel <- subtitles[seq(len) %% 2 == 1]
+    rowGoesFirst <- FALSE
+
+    if(byrow) {
+
+        if(len == 1) {
+            colsLabel <- subtitles
+            rowsLabel <- list()
+        } else {
+            rowsLabel <- subtitles[seq(len) > (len/2)]
+            colsLabel <- subtitles[seq(len) <= (len/2)]
+        }
     } else {
-        rowsLabel <- subtitles[seq(len) %% 2 == 1]
-        colsLabel <- subtitles[seq(len) %% 2 == 0]
+
+        if(len == 1) {
+            colsLabel <- list()
+            rowsLabel <- subtitles
+        } else {
+            rowsLabel <- subtitles[seq(len) <= (len/2)]
+            colsLabel <- subtitles[seq(len) > (len/2)]
+        }
+        rowGoesFirst <- TRUE
+    }
+
+    if(swapAxes) {
+        label <- colsLabel
+        colsLabel <- rowsLabel
+        rowsLabel <- label
+        rowGoesFirst <- !rowGoesFirst
     }
 
     nrowsLabel <- prod(lengths(rowsLabel))
@@ -79,63 +100,91 @@ facet_grid_layout <- function(plots,
     title_pos <- ifelse(title == "", 0, title_span)
     ylabel_pos <- ifelse(ylabel == "", 0, 1)
 
-    layout_orders <- apply(do.call(expand.grid, lapply(c(rowsLabel, colsLabel), function(x) x)), 1, paste, collapse="*")
+    layout_orders <- apply(do.call(expand.grid,
+                                   lapply(if(rowGoesFirst) c(rowsLabel, colsLabel) else c(colsLabel, rowsLabel),
+                                          function(x) x)), 1,
+                           paste, collapse="*")
 
+    # get_plot_id <- function(string, matched_string, sep = "*") {
+    #
+    #     if(string %in% matched_string) {
+    #         # perfect match
+    #         ## string is "a * b",
+    #         ## matched_string is c("a * a", "a * b", "a * c")
+    #
+    #         # This case fails if
+    #         ## string is "b * a",
+    #         ## matched_string is c("a * a", "a * b", "a * c")
+    #
+    #         plot_id <- which(matched_string == string)
+    #         if(length(plot_id) == 1) return(plot_id)
+    #     }
+    #
+    #     # The following code should be deprecated
+    #     split <- paste0("[", sep, "]")
+    #     string <- strsplit(string, split = split)[[1]]
+    #     plot_id <- which(
+    #         sapply(strsplit(matched_string, split = split),
+    #                function(str) {
+    #
+    #                    all(
+    #                        vapply(string,
+    #                               function(s) {
+    #                                   isIn <- s %in% str
+    #                                   str[which(str %in% s)[1]] <- NA
+    #                                   str <<- str
+    #                                   isIn
+    #                               },
+    #                               logical(1))
+    #                    )
+    #                })
+    #     )
+    #     if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
+    #     plot_id
+    # }
 
-    get_plot_id <- function(string, matched_string, sep = "*") {
+    # plot_id <- c()
+    new_names <- c()
 
-        if(string %in% matched_string) {
-            # perfect match
-            ## string is "a * b",
-            ## matched_string is c("a * a", "a * b", "a * c")
+    if(rowGoesFirst) {
 
-            # This case fails if
-            ## string is "b * a",
-            ## matched_string is c("a * a", "a * b", "a * c")
+        for(j in seq(nrowsLabel)) {
+            for(i in seq(ncolsLabel)) {
+                id <- (j - 1) * ncolsLabel + i
+                # plotid <- get_plot_id(layout_orders[id],
+                #                       plot_names,
+                #                       sep = sep)
+                # plot_id <- c(plot_id, plotid)
+                new_names <- c(new_names, paste0("x", j, "y", i))
+                tkgrid(plots[[id]],
+                       row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
+                       column = (i - 1) * span + col_start_pos + ylabel_pos,
+                       rowspan = span,
+                       columnspan = span,
+                       sticky="nesw")
 
-            plot_id <- which(matched_string == string)
-            if(length(plot_id) == 1) return(plot_id)
+            }
         }
 
-        split <- paste0("[", sep, "]")
-        string <- strsplit(string, split = split)[[1]]
-        plot_id <- which(
-            sapply(strsplit(matched_string, split = split),
-                   function(str) {
 
-                       all(
-                           vapply(string,
-                                  function(s) {
-                                      isIn <- s %in% str
-                                      str[which(str %in% s)[1]] <- NA
-                                      str <<- str
-                                      isIn
-                                  },
-                                  logical(1))
-                       )
-                   })
-        )
-        if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
-        plot_id
-    }
+    } else {
 
-    plot_id <- c()
-    new_names <- c()
-    for(i in seq(ncolsLabel)) {
-        for(j in seq(nrowsLabel)) {
-            id <- (i - 1) * nrowsLabel + j
-            plotid <- get_plot_id(layout_orders[id],
-                                  plot_names,
-                                  sep = sep)
-            plot_id <- c(plot_id, plotid)
-            new_names <- c(new_names, paste0("x", j, "y", i))
-            tkgrid(plots[[plotid]],
-                   row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
-                   column = (i - 1) * span + col_start_pos + ylabel_pos,
-                   rowspan = span,
-                   columnspan = span,
-                   sticky="nesw")
+        for(i in seq(ncolsLabel)) {
+            for(j in seq(nrowsLabel)) {
+                id <- (i - 1) * nrowsLabel + j
+                # plotid <- get_plot_id(layout_orders[id],
+                #                       plot_names,
+                #                       sep = sep)
+                # plot_id <- c(plot_id, plotid)
+                new_names <- c(new_names, paste0("x", j, "y", i))
+                tkgrid(plots[[id]],
+                       row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
+                       column = (i - 1) * span + col_start_pos + ylabel_pos,
+                       rowspan = span,
+                       columnspan = span,
+                       sticky="nesw")
 
+            }
         }
     }
 
@@ -143,18 +192,27 @@ facet_grid_layout <- function(plots,
     if(len_colsLabel > 0) {
         colsLabel <- rev(colsLabel)
         fluid_colsLabel <- colsLabel
+
         # the names can be NULL
         column_names <- names(fluid_colsLabel)
+        fluid_colsLabel_names <- column_names
 
-        lapply(seq(length(fluid_colsLabel)),
+        if(is.null(fluid_colsLabel_names)) {
+            fluid_colsLabel_names <- as.character(seq(length(fluid_colsLabel)))
+            names(fluid_colsLabel) <- fluid_colsLabel_names
+        }
+
+        lapply(seq(length(fluid_colsLabel_names)),
                function(j) {
 
+                   fluid_colsLabel_name <-  fluid_colsLabel_names[j]
+
                    col <- if(j == 1) {
-                       fluid_colsLabel[[j]]
+                       fluid_colsLabel[[fluid_colsLabel_name]]
                    } else {
-                       rep(fluid_colsLabel[[j]], prod(lengths(colsLabel[1:(j - 1)])))
+                       rep(fluid_colsLabel[[fluid_colsLabel_name]], prod(lengths(colsLabel[1:(j - 1)])))
                    }
-                   fluid_colsLabel[j] <<- NULL
+                   fluid_colsLabel[fluid_colsLabel_name] <<- NULL
                    columnspan <- prod(lengths(fluid_colsLabel)) * span
 
                    name <- column_names[j]
@@ -204,18 +262,27 @@ facet_grid_layout <- function(plots,
     if(len_rowsLabel > 0) {
         rowsLabel <- rev(rowsLabel)
         fluid_rowsLabel <- rowsLabel
+
         # the names can be NULL
         row_names <- names(fluid_rowsLabel)
+        fluid_rowsLabel_names <- row_names
 
-        lapply(seq(length(fluid_rowsLabel)),
+        if(is.null(fluid_rowsLabel_names)) {
+            fluid_rowsLabel_names <- as.character(seq(length(fluid_rowsLabel)))
+            names(fluid_rowsLabel) <- fluid_rowsLabel_names
+        }
+
+        lapply(seq(length(fluid_rowsLabel_names)),
                function(i) {
 
+                   fluid_rowsLabel_name <-  fluid_rowsLabel_names[i]
+
                    row <- if(i == 1) {
-                       fluid_rowsLabel[[i]]
+                       fluid_rowsLabel[[fluid_rowsLabel_name]]
                    } else {
-                       rep(fluid_rowsLabel[[i]], prod(lengths(rowsLabel[1:(i - 1)])))
+                       rep(fluid_rowsLabel[[fluid_rowsLabel_name]], prod(lengths(rowsLabel[1:(i - 1)])))
                    }
-                   fluid_rowsLabel[i] <<- NULL
+                   fluid_rowsLabel[fluid_rowsLabel_name] <<- NULL
 
                    name <- row_names[i]
                    rowspan <- prod(lengths(fluid_rowsLabel)) * span
@@ -334,7 +401,7 @@ facet_grid_layout <- function(plots,
     }
     tkpack(parent, fill="both", expand=TRUE)
 
-    plots <- plots[plot_id]
+    # plots <- plots[plot_id]
     names(plots) <- new_names
     return(plots)
 }
