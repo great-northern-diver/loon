@@ -119,7 +119,7 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         f <- l_facet(s, layout = "separate", by = c("color", "selected"))
         expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
         ########################################## by arg ##########################################
-        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
+        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl, vs = vs),
                                  labelLocation = c("bottom", "left"),
                                  labelBackground = "lightblue", labelForeground = "red",
                                  labelBorderwidth = 5, labelRelief = "flat"))
