@@ -96,6 +96,8 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet(p, layout = "grid", by = c("color", "size"))
         expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        f <- l_facet(p, layout = "separate", by = c("color", "selected"))
+        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
         ########## l_hist ##########
         h <- l_hist(iris, color = iris$Species)
         h['selected'][1:30] <- TRUE
@@ -104,6 +106,8 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet(h, layout = "grid", by = c("color", "selected"))
         expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        f <- l_facet(h, layout = "separate", by = c("color", "selected"))
+        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
         ########## l_serialaxes ##########
         s <- l_serialaxes(iris, color = iris$Species)
         s['selected'][1:30] <- TRUE
@@ -112,8 +116,10 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         f <- l_facet(s, layout = "grid", by = c("color", "selected"))
         expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+        f <- l_facet(s, layout = "separate", by = c("color", "selected"))
+        expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
         ########################################## by arg ##########################################
-        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
+        p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl, vs = vs),
                                  labelLocation = c("bottom", "left"),
                                  labelBackground = "lightblue", labelForeground = "red",
                                  labelBorderwidth = 5, labelRelief = "flat"))
@@ -162,18 +168,29 @@ if (requireNamespace("testthat", quietly = TRUE)) {
         expect_equal(class(s), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
         ########################################## test by ##########################################
         p <- l_plot(iris)
-        # by is a vector
-        fp <- l_facet(p, layout = "grid", by = iris$Species)
-        expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         # by is a data.frame
-        fp <- l_facet(p, layout = "grid", by = data.frame(foo = iris$Species, bar = iris$Species))
+        fp <- l_facet(p, layout = "grid", by = data.frame(iris$Species, iris$Species))
         expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         # by is a list
-        fp <- l_facet(p, layout = "grid", by = list(foo = iris$Species, bar = iris$Species))
+        fp <- l_facet(p, layout = "grid", by = list(iris$Species, iris$Species))
         expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
         h <- l_hist(iris)
+        # by is a vector
         fp <- l_facet(h, layout = "wrap", by = iris$Species)
         expect_equal(class(fp), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+        ########################################## separate layouts ##########################################
+        p <- l_plot(iris, by = iris$Species,
+                    layout = "separate")
+        expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
+        p <- l_plot3D(iris, by = iris$Species,
+                      layout = "separate")
+        expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
+        p <- l_hist(iris, by = iris$Species,
+                    layout = "separate")
+        expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
+        s <- l_serialaxes(iris, by = iris$Species,
+                          layout = "separate")
+        expect_equal(class(s), c("l_facet",    "l_compound", "loon" ))
     })
 
 

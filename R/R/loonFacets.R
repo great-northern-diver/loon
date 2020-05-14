@@ -1,4 +1,4 @@
-loonFacets <- function(type, by, args, layout = "grid",
+loonFacets <- function(type, by, args, layout = "grid", byDeparse = "",
                        connectedScales = "both", by_args, linkingGroup, sync, parent,
                        factory_tclcmd, factory_path, factory_window_title,
                        xlabel = "", ylabel = "", title = "", ...) {
@@ -9,6 +9,7 @@ loonFacets <- function(type, by, args, layout = "grid",
 loonFacets.default <- function(type,
                                by,
                                args,
+                               byDeparse = "",
                                layout = "grid",
                                connectedScales = "both",
                                by_args,
@@ -26,7 +27,7 @@ loonFacets.default <- function(type,
     args$by <- NULL
 
     # separate windows or not
-    separate <- ifelse(layout == "separate", TRUE, FALSE)
+    separate <- layout == "separate"
 
     ## get N dimensional data frame
     # what is the n?
@@ -39,7 +40,7 @@ loonFacets.default <- function(type,
         length(x)
     }
     # N dim args
-    data <- cbind(as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE), by)
+    data <- as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE)
     # 1 dim args
     oneDimArgs <- args[which(lengths(args) != N)]
 
@@ -83,9 +84,14 @@ loonFacets.default <- function(type,
             # create parent
             parent <- l_toplevel()
             subwin <- l_subwin(parent, 'layout')
+            tktitle <- if(!is.null(by_names))
+                paste("loon layouts on",
+                      deparse(substitute(by_names)), "--path:", subwin)
+            else
+                paste("loon layouts on",
+                      byDeparse, "--path:", subwin)
+            tktitle(parent) <- tktitle
 
-            tktitle(parent) <- paste("loon layouts on",
-                                     deparse(substitute(by_names)), "--path:", subwin)
             # create child
             child <- as.character(tcl('frame', subwin))
         } else {
@@ -102,21 +108,31 @@ loonFacets.default <- function(type,
     plots <- lapply(splitted_data,
                     function(d) {
 
-                        d <- d[ , !(names(d) %in% by_names)]
-
                         if(dim(d)[1] == 0) {
 
-                            p <- loonPlotFactory(
-                                factory_tclcmd = factory_tclcmd,
-                                factory_path = factory_path,
-                                factory_window_title = factory_window_title,
-                                parent = child,
-                                xlabel = "",
-                                ylabel = "",
-                                title = "",
-                                minimumMargins = rep(5, 4),
-                                ...
-                            )
+                            p <- if(separate) {
+
+                                loonPlotFactory(
+                                    factory_tclcmd = factory_tclcmd,
+                                    factory_path = factory_path,
+                                    factory_window_title = factory_window_title,
+                                    parent = child,
+                                    ...
+                                )
+
+                            } else {
+                                loonPlotFactory(
+                                    factory_tclcmd = factory_tclcmd,
+                                    factory_path = factory_path,
+                                    factory_window_title = factory_window_title,
+                                    parent = child,
+                                    xlabel = "",
+                                    ylabel = "",
+                                    title = "",
+                                    minimumMargins = rep(5, 4),
+                                    ...
+                                )
+                            }
 
                         } else {
 
@@ -145,15 +161,13 @@ loonFacets.default <- function(type,
                         p
                     })
 
-    if(separate) {
-        p <- structure(
-            plots,
-            class = c("l_facet", "l_compound", "loon")
-        )
-        return(p)
-    }
-
-    if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+    # set linkingGroup for each plot
+    plots <- lapply(plots,
+                    function(plot) {
+                        l_configure(plot,
+                                    linkingGroup = linkingGroup,
+                                    sync = sync)
+                    })
 
     xrange <- c()
     yrange <- c()
@@ -174,6 +188,32 @@ loonFacets.default <- function(type,
                                   connectedScales
                               })
 
+    if(separate) {
+
+        # force scales
+        forceScales(plots = plots,
+                    xrange = xrange,
+                    yrange = yrange,
+                    connectedScales = connectedScales)
+
+        facet_separate_layout(plots = plots,
+                              subtitles = subtitles,
+                              title = title,
+                              xlabel = xlabel,
+                              ylabel = ylabel,
+                              labelMargins = args$labelMargins)
+
+        p <- structure(
+            plots,
+            class = c("l_facet", "l_compound", "loon")
+        )
+        return(p)
+    }
+
+    if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+
+    swapAxes <- ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes)
+
     if(layout == "grid") {
 
         ## Two major objectives here
@@ -188,7 +228,8 @@ loonFacets.default <- function(type,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
-                     title = title
+                     title = title,
+                     swapAxes = swapAxes
                 )
             )
         )
@@ -197,7 +238,7 @@ loonFacets.default <- function(type,
         layout_forbiddenSetting(plots,
                                 child = child,
                                 showLabels = TRUE,
-                                swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
+                                swapAxes = swapAxes)
 
         if(connectedScales == "both") {
 
@@ -214,14 +255,8 @@ loonFacets.default <- function(type,
                                            xrange = xrange, yrange = yrange)
         }
 
-
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
+        # synchronize scales
+        linkOneDimentionalStates(plots, oneDimentionalStates = "showScales")
 
         structure(
             plots,
@@ -239,16 +274,17 @@ loonFacets.default <- function(type,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
-                     title =  title
+                     title =  title,
+                     swapAxes = swapAxes
                 )
             )
         )
 
-        # forbidden swapAxes showScales and showLabels
+        # forbidden swapAxes and showLabels
         layout_forbiddenSetting(plots,
                                 child = child,
                                 showLabels = TRUE,
-                                swapAxes = ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes))
+                                swapAxes = swapAxes)
 
 
         layout_wrap_synchronizeSetting(plots,
@@ -256,13 +292,8 @@ loonFacets.default <- function(type,
                                        connectedScales = connectedScales,
                                        xrange = xrange, yrange = yrange)
 
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
+        # synchronize scales
+        linkOneDimentionalStates(plots, oneDimentionalStates = "showScales")
 
         structure(
             plots,
@@ -275,6 +306,7 @@ loonFacets.default <- function(type,
 loonFacets.l_serialaxes <- function(type,
                                     by,
                                     args,
+                                    byDeparse = "",
                                     layout = "grid",
                                     connectedScales = "both",
                                     by_args, linkingGroup, sync, parent,
@@ -293,7 +325,7 @@ loonFacets.l_serialaxes <- function(type,
     args$by <- NULL
 
     # separate windows or not
-    separate <- ifelse(layout == "separate", TRUE, FALSE)
+    separate <- layout == "separate"
 
     ## get N dimensional data frame
     # what is the n?
@@ -306,7 +338,7 @@ loonFacets.l_serialaxes <- function(type,
         length(x)
     }
     # N dim args
-    data <- cbind(index = 1:N, as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE), by)
+    data <- cbind(index = 1:N, as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE))
 
     serialaxesData <- args$data
     # 1 dim args
@@ -352,8 +384,14 @@ loonFacets.l_serialaxes <- function(type,
             parent <- l_toplevel()
             subwin <- l_subwin(parent, 'layout')
 
-            tktitle(parent) <- paste("loon layouts on",
-                                     deparse(substitute(by_names)), "--path:", subwin)
+            tktitle <- if(!is.null(by_names))
+                paste("loon layouts on",
+                      deparse(substitute(by_names)), "--path:", subwin)
+            else
+                paste("loon layouts on",
+                      byDeparse, "--path:", subwin)
+            tktitle(parent) <- tktitle
+
             # create child
             child <- as.character(tcl('frame', subwin))
         } else {
@@ -369,8 +407,6 @@ loonFacets.l_serialaxes <- function(type,
 
     plots <- lapply(splitted_data,
                     function(d) {
-
-                        d <- d[ , !(names(d) %in% by_names)]
 
                         if(dim(d)[1] == 0) {
 
@@ -412,16 +448,22 @@ loonFacets.l_serialaxes <- function(type,
                         p
                     })
 
-    if(separate) {
-        # scale to plot
-        p <- structure(
-            plots,
-            class = c("l_facet", "l_compound", "loon")
-        )
-        return(p)
-    }
-
     if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+
+    if(separate) {
+
+        facet_separate_layout(plots = plots,
+                              subtitles = subtitles,
+                              title = title)
+
+        # scale to plot
+        return(
+            structure(
+                plots,
+                class = c("l_facet", "l_compound", "loon")
+            )
+        )
+    }
 
     if(layout == "grid") {
 
