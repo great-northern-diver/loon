@@ -1,22 +1,24 @@
-linkOneDimentionalStates <- function(plots, oneDimentionalStates = "showScales") {
+linkOneDimensionalStates <- function(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides")) {
 
     # 'n_dim_states_list' is a global variable in loon NAMESPACE
     nDimentionalStates <- unique(unlist(n_dim_states_list))
-    if(any(oneDimentionalStates %in% nDimentionalStates))
-        stop(oneDimentionalStates, " are not one dimensional states")
+    if(any(oneDimensionalStates %in% nDimentionalStates))
+        stop(oneDimensionalStates, " are not one dimensional states")
 
-    # The outside loop may be not necessary
-    # fix me if you can make it more efficient
     lapply(plots,
            function(p) {
-               l_bind_state(p, oneDimentionalStates,
+               l_bind_state(p, oneDimensionalStates,
                             function() {
-                                lapply(plots,
-                                       function(pp) {
-                                           for(s in oneDimentionalStates) {
-                                               pp[s] <- p[s]
-                                           }
-                                       })
+
+                                for(s in oneDimensionalStates) {
+                                    ps <- p[s]
+                                    lapply(plots,
+                                           function(pp) {
+                                                   pp[s] <- ps
+                                           })
+                                }
+
+
                             }
                )
            })

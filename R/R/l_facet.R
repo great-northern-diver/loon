@@ -213,13 +213,12 @@ l_facet.loon <- function(widget,
     } else stop("Unknown layout type")
 
     # forbidden swapAxes and showLabels
-    layout_forbiddenSetting(plots,
+    swap_forbiddenSetting(plots,
                             child = child,
-                            showLabels = TRUE,
                             swapAxes = widget['swapAxes'])
 
     # synchronize scales
-    linkOneDimentionalStates(plots, oneDimentionalStates = "showScales")
+    linkOneDimensionalStates(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
 
     return(plots)
 }
@@ -555,16 +554,15 @@ forceScales <- function(plots, xrange, yrange, connectedScales = "both",
     )
 }
 
-layout_forbiddenSetting <- function(plots, child,
-                                    showLabels = TRUE, swapAxes = FALSE) {
+swap_forbiddenSetting <- function(plots, child, swapAxes = FALSE) {
     undoStateChanges <- function(W) {
-        l_configure(W, showLabels = showLabels, swapAxes = swapAxes)
+        l_configure(W, swapAxes = swapAxes)
     }
     lapply(plots,
            function(p) {
                undoStateChanges(p)
                tcl(p, 'systembind', 'state', 'add',
-                   c('showLabels', 'swapAxes'),
+                   c('swapAxes'),
                    undoStateChanges)
            })
     callbackFunctions$state[[paste(child,"undoStateChanges", sep="_")]] <- undoStateChanges
