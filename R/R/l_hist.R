@@ -451,19 +451,29 @@ l_hist.default <-  function(x,
         } else {
 
             # convert all types of 'by' to a data frame
+            byDeparse <- deparse(substitute(by))
+
             if(is.atomic(by)) {
                 if(length(by) == n) {
-                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), deparse(substitute(by)))
+                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)
                 } else {
                     stop("Unknown 'by' type")
                 }
             } else {
-                by <- as.data.frame(by, stringsAsFactors = FALSE)
+
+                if(is.null(names(by))) {
+
+                    by <- as.data.frame(by, stringsAsFactors = FALSE)
+                    names(by) <- NULL
+                } else {
+                    by <- as.data.frame(by, stringsAsFactors = FALSE)
+                }
             }
 
             plots <- loonFacets(type = "l_hist",
                                 by,
                                 args,
+                                byDeparse = byDeparse,
                                 layout = match.arg(layout),
                                 connectedScales = match.arg(connectedScales),
                                 by_args = Filter(Negate(is.null), by_args),
@@ -473,7 +483,6 @@ l_hist.default <-  function(x,
                                 factory_tclcmd = '::loon::histogram',
                                 factory_path = 'hist',
                                 factory_window_title = 'loon histogram',
-                                showLabels = TRUE,
                                 yshows = yshows,
                                 showStackedColors = showStackedColors,
                                 origin = origin,

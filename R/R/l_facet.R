@@ -98,7 +98,7 @@ l_facet.loon <- function(widget,
                          parent = parent,
                          linkingGroup,
                          inheritLayers = inheritLayers,
-                         by_title = deparse(substitute(by)),
+                         byDeparse = deparse(substitute(by)),
                          separate = separate,
                          ...)
 
@@ -124,8 +124,16 @@ l_facet.loon <- function(widget,
         forceScales(plots = plots,
                     xrange = xrange,
                     yrange = yrange,
+                    connectedScales = connectedScales,
                     zoomX = widget['zoomX'],
                     zoomY = widget['zoomY'])
+
+        facet_separate_layout(plots = plots,
+                              subtitles = facets$subtitles,
+                              title = widget['title'],
+                              xlabel = widget['xlabel'],
+                              ylabel = widget['ylabel'],
+                              ...)
 
         return(
             structure(
@@ -145,6 +153,7 @@ l_facet.loon <- function(widget,
                                    xlabel = widget['xlabel'],
                                    ylabel = widget['ylabel'],
                                    title = widget['title'],
+                                   swapAxes = widget['swapAxes'],
                                    labelLocation = labelLocation,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
@@ -184,6 +193,7 @@ l_facet.loon <- function(widget,
                                    ylabel = widget['ylabel'],
                                    title = widget['title'],
                                    parent = child,
+                                   swapAxes = widget['swapAxes'],
                                    nrow = nrow,
                                    ncol = ncol,
                                    labelLocation = labelLocation,
@@ -202,11 +212,13 @@ l_facet.loon <- function(widget,
         )
     } else stop("Unknown layout type")
 
-    # forbidden swapAxes showScales and showLabels
-    layout_forbiddenSetting(plots,
+    # forbidden swapAxes and showLabels
+    swap_forbiddenSetting(plots,
                             child = child,
-                            showLabels = TRUE,
                             swapAxes = widget['swapAxes'])
+
+    # synchronize scales
+    linkOneDimensionalStates(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
 
     return(plots)
 }
@@ -242,13 +254,17 @@ l_facet.l_serialaxes <- function(widget,
     facets <- get_facets(widget, by,
                          parent = parent,
                          linkingGroup,
-                         by_title = deparse(substitute(by)),
+                         byDeparse = deparse(substitute(by)),
                          separate = separate,
                          ...)
 
     if(separate) {
 
         plots <- facets$plots
+
+        facet_separate_layout(plots = plots,
+                              subtitles = facets$subtitles,
+                              title = widget['title'])
 
         return(
             structure(
@@ -352,9 +368,19 @@ loonGrob_layoutType.l_facet <- function(target) "locations"
 layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
                                            xrange, yrange,
                                            zoomX = 5/6, zoomY = 5/6) {
+
+    # force scales
+    forceScales(plots = plots,
+                xrange = xrange,
+                yrange = yrange,
+                connectedScales = connectedScales,
+                zoomX = zoomX,
+                zoomY = zoomY)
+
     busy <- FALSE
     switch(connectedScales,
            "both" = {
+
                synchronizeXYBindings <- function(W) {
                    if (!busy) {
                        busy <<- TRUE
@@ -380,13 +406,6 @@ layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
                    }
                }
 
-               # force scales
-               forceScales(plots = plots,
-                           xrange = xrange,
-                           yrange = yrange,
-                           zoomX = zoomX,
-                           zoomY = zoomY)
-
                lapply(plots,
                       function(p) {
                           tcl(p, 'systembind', 'state', 'add',
@@ -397,6 +416,8 @@ layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
                callbackFunctions$state[[paste(child,"synchronizeXY", sep="_")]] <- synchronizeXYBindings
            },
            "y" = {
+
+
                # fixed Y
                synchronizeYBindings <- function(W) {
                    if (!busy) {
@@ -416,22 +437,13 @@ layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
 
                lapply(plots,
                       function(p) {
-                          if(diff(yrange) != 0) {
-                              l_configure(p,
-                                          panY = yrange[1],
-                                          deltaY = zoomY * diff(yrange),
-                                          zoomY = zoomY)
-                          }
-                      }
-               )
-               lapply(plots,
-                      function(p) {
                           tcl(p, 'systembind', 'state', 'add',
                               c('zoomY', 'panY', 'deltaY'),
                               synchronizeYBindings)
                       }
                )
                callbackFunctions$state[[paste(child,"synchronizeY", sep="_")]] <- synchronizeYBindings
+
            },
            "x" = {
                # fixed X
@@ -454,16 +466,6 @@ layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
 
                lapply(plots,
                       function(p) {
-                          if(diff(xrange) != 0) {
-                              l_configure(p,
-                                          panX = xrange[1],
-                                          deltaX = zoomX * diff(xrange),
-                                          zoomX = zoomX)
-                          }
-                      }
-               )
-               lapply(plots,
-                      function(p) {
                           tcl(p, 'systembind', 'state', 'add',
                               c('zoomX', 'panX', 'deltaX'),
                               synchronizeXBindings)
@@ -472,7 +474,6 @@ layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
                callbackFunctions$state[[paste(child,"synchronizeX", sep="_")]] <- synchronizeXBindings
            },
            "none" = NULL)
-
 }
 
 # get widget ranges
@@ -529,36 +530,39 @@ layout_position <- function(target) {
     layout_position
 }
 
-forceScales <- function(plots, xrange, yrange,
+forceScales <- function(plots, xrange, yrange, connectedScales = "both",
                         zoomX = 5/6, zoomY = 5/6) {
     lapply(plots,
            function(p) {
-               if(diff(xrange) != 0) {
-                   l_configure(p,
-                               panX = xrange[1],
-                               deltaX = zoomX * diff(xrange),
-                               zoomX = zoomX)
+               if(connectedScales == "x" || connectedScales == "both") {
+                   if(diff(xrange) != 0) {
+                       l_configure(p,
+                                   panX = xrange[1],
+                                   deltaX = zoomX * diff(xrange),
+                                   zoomX = zoomX)
+                   }
                }
-               if(diff(yrange) != 0) {
-                   l_configure(p,
-                               panY = yrange[1],
-                               deltaY = zoomY * diff(yrange),
-                               zoomY = zoomY)
+               if(connectedScales == "y" || connectedScales == "both") {
+                   if(diff(yrange) != 0) {
+                       l_configure(p,
+                                   panY = yrange[1],
+                                   deltaY = zoomY * diff(yrange),
+                                   zoomY = zoomY)
+                   }
                }
            }
     )
 }
 
-layout_forbiddenSetting <- function(plots, child,
-                                    showLabels = TRUE, swapAxes = FALSE) {
+swap_forbiddenSetting <- function(plots, child, swapAxes = FALSE) {
     undoStateChanges <- function(W) {
-        l_configure(W, showLabels = showLabels, swapAxes = swapAxes)
+        l_configure(W, swapAxes = swapAxes)
     }
     lapply(plots,
            function(p) {
                undoStateChanges(p)
                tcl(p, 'systembind', 'state', 'add',
-                   c('showLabels', 'showScales', 'swapAxes'),
+                   c('swapAxes'),
                    undoStateChanges)
            })
     callbackFunctions$state[[paste(child,"undoStateChanges", sep="_")]] <- undoStateChanges
@@ -616,4 +620,34 @@ layout_grid_synchronizeSetting <- function(plots, child, xrange, yrange, zoomX =
            }
     )
     callbackFunctions$state[[paste(child,"synchronize", sep="_")]] <- synchronizeBindings
+}
+
+updateYshows <- function(plots, swapAxes = FALSE,
+                         tkXlabel, tkYlabel, xlabel, ylabel) {
+
+    p <- plots[[1]]
+
+    # sychronize yshows
+    if(swapAxes) {
+        # xlabel is "yshows"
+        if(xlabel != "")
+
+            l_bind_state(p,
+                         "yshows",
+                         callback = function() {
+                             tcltk::tkconfigure(tkXlabel,
+                                                text = p['yshows'])
+                         })
+    } else {
+        # ylabel is "yshows"
+        if(ylabel != "")
+            l_bind_state(p,
+                         "yshows",
+                         callback = function() {
+                             tcltk::tkconfigure(tkYlabel,
+                                                text = paste(paste0(" ", strsplit(p['yshows'], "")[[1]], " "), collapse = "\n"))
+                         })
+    }
+
+    return(invisible())
 }

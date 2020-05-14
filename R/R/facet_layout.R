@@ -7,6 +7,7 @@ facet_grid_layout <- function(plots,
                               ylabel = "",
                               labelLocation = c("top", "right"),
                               byrow = TRUE,
+                              swapAxes = FALSE,
                               labelBackground = "gray80", labelForeground = "black",
                               labelBorderwidth = 2,
                               labelRelief = "groove",
@@ -14,8 +15,7 @@ facet_grid_layout <- function(plots,
                               maxCharInOneRow = 15,
                               ...) {
 
-    by <- names(subtitles)
-    len <- length(by)
+    len <- length(subtitles)
     span <- labelHeight
 
     # tk configure
@@ -28,13 +28,40 @@ facet_grid_layout <- function(plots,
     )
     plot_names <- names(plots)
 
-    # tk layout
+    if(swapAxes) {
+        label <- xlabel
+        xlabel <- ylabel
+        ylabel <- label
+    }
+
+    rowGoesFirst <- FALSE
+
     if(byrow) {
-        rowsLabel <- subtitles[seq(len) %% 2 == 0]
-        colsLabel <- subtitles[seq(len) %% 2 == 1]
+
+        if(len == 1) {
+            colsLabel <- subtitles
+            rowsLabel <- list()
+        } else {
+            rowsLabel <- subtitles[seq(len) > (len/2)]
+            colsLabel <- subtitles[seq(len) <= (len/2)]
+        }
     } else {
-        rowsLabel <- subtitles[seq(len) %% 2 == 1]
-        colsLabel <- subtitles[seq(len) %% 2 == 0]
+
+        if(len == 1) {
+            colsLabel <- list()
+            rowsLabel <- subtitles
+        } else {
+            rowsLabel <- subtitles[seq(len) <= (len/2)]
+            colsLabel <- subtitles[seq(len) > (len/2)]
+        }
+        rowGoesFirst <- TRUE
+    }
+
+    if(swapAxes) {
+        label <- colsLabel
+        colsLabel <- rowsLabel
+        rowsLabel <- label
+        rowGoesFirst <- !rowGoesFirst
     }
 
     nrowsLabel <- prod(lengths(rowsLabel))
@@ -73,63 +100,91 @@ facet_grid_layout <- function(plots,
     title_pos <- ifelse(title == "", 0, title_span)
     ylabel_pos <- ifelse(ylabel == "", 0, 1)
 
-    layout_orders <- apply(do.call(expand.grid, lapply(c(rowsLabel, colsLabel), function(x) x)), 1, paste, collapse="*")
+    layout_orders <- apply(do.call(expand.grid,
+                                   lapply(if(rowGoesFirst) c(rowsLabel, colsLabel) else c(colsLabel, rowsLabel),
+                                          function(x) x)), 1,
+                           paste, collapse="*")
 
+    # get_plot_id <- function(string, matched_string, sep = "*") {
+    #
+    #     if(string %in% matched_string) {
+    #         # perfect match
+    #         ## string is "a * b",
+    #         ## matched_string is c("a * a", "a * b", "a * c")
+    #
+    #         # This case fails if
+    #         ## string is "b * a",
+    #         ## matched_string is c("a * a", "a * b", "a * c")
+    #
+    #         plot_id <- which(matched_string == string)
+    #         if(length(plot_id) == 1) return(plot_id)
+    #     }
+    #
+    #     # The following code should be deprecated
+    #     split <- paste0("[", sep, "]")
+    #     string <- strsplit(string, split = split)[[1]]
+    #     plot_id <- which(
+    #         sapply(strsplit(matched_string, split = split),
+    #                function(str) {
+    #
+    #                    all(
+    #                        vapply(string,
+    #                               function(s) {
+    #                                   isIn <- s %in% str
+    #                                   str[which(str %in% s)[1]] <- NA
+    #                                   str <<- str
+    #                                   isIn
+    #                               },
+    #                               logical(1))
+    #                    )
+    #                })
+    #     )
+    #     if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
+    #     plot_id
+    # }
 
-    get_plot_id <- function(string, matched_string, sep = "*") {
+    # plot_id <- c()
+    new_names <- c()
 
-        if(string %in% matched_string) {
-            # perfect match
-            ## string is "a * b",
-            ## matched_string is c("a * a", "a * b", "a * c")
+    if(rowGoesFirst) {
 
-            # This case fails if
-            ## string is "b * a",
-            ## matched_string is c("a * a", "a * b", "a * c")
+        for(j in seq(nrowsLabel)) {
+            for(i in seq(ncolsLabel)) {
+                id <- (j - 1) * ncolsLabel + i
+                # plotid <- get_plot_id(layout_orders[id],
+                #                       plot_names,
+                #                       sep = sep)
+                # plot_id <- c(plot_id, plotid)
+                new_names <- c(new_names, paste0("x", j, "y", i))
+                tkgrid(plots[[id]],
+                       row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
+                       column = (i - 1) * span + col_start_pos + ylabel_pos,
+                       rowspan = span,
+                       columnspan = span,
+                       sticky="nesw")
 
-            plot_id <- which(matched_string == string)
-            if(length(plot_id) == 1) return(plot_id)
+            }
         }
 
-        split <- paste0("[", sep, "]")
-        string <- strsplit(string, split = split)[[1]]
-        plot_id <- which(
-            sapply(strsplit(matched_string, split = split),
-                   function(str) {
 
-                       all(
-                           vapply(string,
-                                  function(s) {
-                                      isIn <- s %in% str
-                                      str[which(str %in% s)[1]] <- NA
-                                      str <<- str
-                                      isIn
-                                  },
-                                  logical(1))
-                       )
-                   })
-        )
-        if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
-        plot_id
-    }
+    } else {
 
-    plot_id <- c()
-    new_names <- c()
-    for(i in seq(ncolsLabel)) {
-        for(j in seq(nrowsLabel)) {
-            id <- (i - 1) * nrowsLabel + j
-            plotid <- get_plot_id(layout_orders[id],
-                                  plot_names,
-                                  sep = sep)
-            plot_id <- c(plot_id, plotid)
-            new_names <- c(new_names, paste0("x", j, "y", i))
-            tkgrid(plots[[plotid]],
-                   row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
-                   column = (i - 1) * span + col_start_pos + ylabel_pos,
-                   rowspan = span,
-                   columnspan = span,
-                   sticky="nesw")
+        for(i in seq(ncolsLabel)) {
+            for(j in seq(nrowsLabel)) {
+                id <- (i - 1) * nrowsLabel + j
+                # plotid <- get_plot_id(layout_orders[id],
+                #                       plot_names,
+                #                       sep = sep)
+                # plot_id <- c(plot_id, plotid)
+                new_names <- c(new_names, paste0("x", j, "y", i))
+                tkgrid(plots[[id]],
+                       row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
+                       column = (i - 1) * span + col_start_pos + ylabel_pos,
+                       rowspan = span,
+                       columnspan = span,
+                       sticky="nesw")
 
+            }
         }
     }
 
@@ -137,26 +192,42 @@ facet_grid_layout <- function(plots,
     if(len_colsLabel > 0) {
         colsLabel <- rev(colsLabel)
         fluid_colsLabel <- colsLabel
+
+        # the names can be NULL
         column_names <- names(fluid_colsLabel)
-        lapply(seq(length(column_names)),
+        fluid_colsLabel_names <- column_names
+
+        if(is.null(fluid_colsLabel_names)) {
+            fluid_colsLabel_names <- as.character(seq(length(fluid_colsLabel)))
+            names(fluid_colsLabel) <- fluid_colsLabel_names
+        }
+
+        lapply(seq(length(fluid_colsLabel_names)),
                function(j) {
-                   name <- column_names[j]
+
+                   fluid_colsLabel_name <-  fluid_colsLabel_names[j]
+
                    col <- if(j == 1) {
-                       fluid_colsLabel[[name]]
+                       fluid_colsLabel[[fluid_colsLabel_name]]
                    } else {
-                       rep(fluid_colsLabel[[name]], prod(lengths(colsLabel[1:(j - 1)])))
+                       rep(fluid_colsLabel[[fluid_colsLabel_name]], prod(lengths(colsLabel[1:(j - 1)])))
                    }
-                   fluid_colsLabel[name] <<- NULL
+                   fluid_colsLabel[fluid_colsLabel_name] <<- NULL
                    columnspan <- prod(lengths(fluid_colsLabel)) * span
 
-                   label <- if(name == "color") {
-                       paste(name, color.id(hex12tohex6(col)), sep = ":")
+                   name <- column_names[j]
+                   label <- if(is.null(name)) {
+                       col
                    } else {
-                       tt <- paste(name, col, sep = ":")
-                       if(any(nchar(tt) >= maxCharInOneRow))
-                           paste(name, col, sep = ":\n")
-                       else
-                           tt
+                       if(name == "color") {
+                           paste(name, color.id(hex12tohex6(col)), sep = ":")
+                       } else {
+                           tt <- paste(name, col, sep = ":")
+                           if(any(nchar(tt) >= maxCharInOneRow))
+                               paste(name, col, sep = ":\n")
+                           else
+                               tt
+                       }
                    }
 
                    for(i in seq(length(label))) {
@@ -191,23 +262,40 @@ facet_grid_layout <- function(plots,
     if(len_rowsLabel > 0) {
         rowsLabel <- rev(rowsLabel)
         fluid_rowsLabel <- rowsLabel
+
+        # the names can be NULL
         row_names <- names(fluid_rowsLabel)
-        lapply(seq(length(row_names)),
+        fluid_rowsLabel_names <- row_names
+
+        if(is.null(fluid_rowsLabel_names)) {
+            fluid_rowsLabel_names <- as.character(seq(length(fluid_rowsLabel)))
+            names(fluid_rowsLabel) <- fluid_rowsLabel_names
+        }
+
+        lapply(seq(length(fluid_rowsLabel_names)),
                function(i) {
-                   name <- row_names[i]
+
+                   fluid_rowsLabel_name <-  fluid_rowsLabel_names[i]
+
                    row <- if(i == 1) {
-                       fluid_rowsLabel[[name]]
+                       fluid_rowsLabel[[fluid_rowsLabel_name]]
                    } else {
-                       rep(fluid_rowsLabel[[name]], prod(lengths(rowsLabel[1:(i - 1)])))
+                       rep(fluid_rowsLabel[[fluid_rowsLabel_name]], prod(lengths(rowsLabel[1:(i - 1)])))
                    }
-                   fluid_rowsLabel[name] <<- NULL
+                   fluid_rowsLabel[fluid_rowsLabel_name] <<- NULL
+
+                   name <- row_names[i]
                    rowspan <- prod(lengths(fluid_rowsLabel)) * span
                    for(j in seq(length(row))) {
                        # row index
                        label <- row[j]
-                       text <- ifelse(name == "color",
-                                      paste(name, color.id(hex12tohex6(label)), sep = ":"),
-                                      paste(name, label, sep = ":"))
+                       text <- if(is.null(name)) {
+                           label
+                       } else {
+                           ifelse(name == "color",
+                                  paste(name, color.id(hex12tohex6(label)), sep = ":"),
+                                  paste(name, label, sep = ":"))
+                       }
 
                        tkrowname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,'label')),
@@ -257,15 +345,15 @@ facet_grid_layout <- function(plots,
     # pack xlabel
     if(xlabel != "") {
 
-        xlabel <- as.character(tcltk::tcl('label',
-                                          as.character(l_subwin(parent,'label')),
-                                          text = xlabel,
-                                          bg = labelBG,
-                                          fg = labelForeground,
-                                          borderwidth = labelBorderwidth,
-                                          relief = "raised"))
+        tkXlabel <- as.character(tcltk::tcl('label',
+                                            as.character(l_subwin(parent,'label')),
+                                            text = xlabel,
+                                            bg = labelBG,
+                                            fg = labelForeground,
+                                            borderwidth = labelBorderwidth,
+                                            relief = "raised"))
 
-        tkgrid(xlabel,
+        tkgrid(tkXlabel,
                row = len_rowsLabel + title_pos + nrowsLabel * span + len_colsLabel,
                column= col_start_pos + ylabel_pos,
                rowspan = 1,
@@ -277,15 +365,15 @@ facet_grid_layout <- function(plots,
     # pack ylabel
     if(ylabel != "") {
 
-        ylabel <- as.character(tcltk::tcl('label',
-                                          as.character(l_subwin(parent,'label')),
-                                          text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
-                                          bg = labelBG,
-                                          fg = labelForeground,
-                                          borderwidth = labelBorderwidth,
-                                          relief = "raised"))
+        tkYlabel <- as.character(tcltk::tcl('label',
+                                            as.character(l_subwin(parent,'label')),
+                                            text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
+                                            bg = labelBG,
+                                            fg = labelForeground,
+                                            borderwidth = labelBorderwidth,
+                                            relief = "raised"))
 
-        tkgrid(ylabel,
+        tkgrid(tkYlabel,
                row = title_pos + row_start_pos,
                column= 0,
                rowspan = nrowsLabel * span,
@@ -293,6 +381,18 @@ facet_grid_layout <- function(plots,
                sticky="nesw")
 
     }
+
+    # update ylabel (xlabel if swapAxes) when histograms change y shows
+    if(inherits(plots[[1]], "l_hist")) {
+
+        linkOneDimensionalStates(plots, oneDimensionalStates = "yshows")
+        updateYshows(plots, swapAxes = swapAxes,
+                     tkXlabel = tkXlabel,
+                     tkYlabel = tkYlabel,
+                     xlabel = xlabel,
+                     ylabel = ylabel)
+    }
+
     for (i in seq(ncolsLabel*span) - 1 + col_start_pos + ylabel_pos) {
         tkgrid.columnconfigure(parent, i, weight=1)
     }
@@ -301,7 +401,7 @@ facet_grid_layout <- function(plots,
     }
     tkpack(parent, fill="both", expand=TRUE)
 
-    plots <- plots[plot_id]
+    # plots <- plots[plot_id]
     names(plots) <- new_names
     return(plots)
 }
@@ -318,6 +418,7 @@ facet_wrap_layout <- function(plots,
                               ncol = NULL,
                               labelLocation = "top",
                               byrow = TRUE,
+                              swapAxes = FALSE,
                               labelBackground = "gray80", labelForeground = "black",
                               labelBorderwidth = 2,
                               labelRelief = "groove",
@@ -340,8 +441,14 @@ facet_wrap_layout <- function(plots,
         ncol <- nm[1]
     }
 
+    if(swapAxes) {
+        label <- xlabel
+        xlabel <- ylabel
+        ylabel <- label
+    }
+
     by <- names(subtitles)
-    len <- length(by)
+    len <- length(subtitles)
 
     # To simplify the settings of labels, we clarify that
     ## 1. title will be always on top
@@ -409,9 +516,14 @@ facet_wrap_layout <- function(plots,
                            function(k) {
                                l <- label[k]
                                name <- by[k]
-                               text <- ifelse(name == "color",
-                                              paste(name, color.id(hex12tohex6(l)), sep = ":"),
-                                              paste(name, l, sep = ":"))
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+                                   ifelse(name == "color",
+                                          paste(name, color.id(hex12tohex6(l)), sep = ":"),
+                                          paste(name, l, sep = ":"))
+                               }
 
                                tklabel <- as.character(tcltk::tcl('label',
                                                                   as.character(l_subwin(parent, 'label')),
@@ -442,9 +554,14 @@ facet_wrap_layout <- function(plots,
                            function(k) {
                                l <- label[k]
                                name <- by[k]
-                               text <- ifelse(name == "color",
-                                              paste(name, color.id(hex12tohex6(l)), sep = ":"),
-                                              paste(name, l, sep = ":"))
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+                                   ifelse(name == "color",
+                                          paste(name, color.id(hex12tohex6(l)), sep = ":"),
+                                          paste(name, l, sep = ":"))
+                               }
 
                                tklabel <- as.character(tcltk::tcl('label',
                                                                   as.character(l_subwin(parent, 'label')),
@@ -493,9 +610,14 @@ facet_wrap_layout <- function(plots,
                            function(k) {
                                l <- label[k]
                                name <- by[k]
-                               text <- ifelse(name == "color",
-                                              paste(name, color.id(hex12tohex6(l)), sep = ":"),
-                                              paste(name, l, sep = ":"))
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+                                   ifelse(name == "color",
+                                          paste(name, color.id(hex12tohex6(l)), sep = ":"),
+                                          paste(name, l, sep = ":"))
+                               }
 
                                tklabel <- as.character(tcltk::tcl('label',
                                                                   as.character(l_subwin(parent, 'label')),
@@ -526,9 +648,14 @@ facet_wrap_layout <- function(plots,
                            function(k) {
                                l <- label[k]
                                name <- by[k]
-                               text <- ifelse(name == "color",
-                                              paste(name, color.id(hex12tohex6(l)), sep = ":"),
-                                              paste(name, l, sep = ":"))
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+                                   ifelse(name == "color",
+                                          paste(name, color.id(hex12tohex6(l)), sep = ":"),
+                                          paste(name, l, sep = ":"))
+                               }
 
                                tklabel <- as.character(tcltk::tcl('label',
                                                                   as.character(l_subwin(parent, 'label')),
@@ -574,15 +701,15 @@ facet_wrap_layout <- function(plots,
     # pack xlabel
     if(xlabel != "") {
 
-        xlabel <- as.character(tcltk::tcl('label',
-                                          as.character(l_subwin(parent,'label')),
-                                          text = xlabel,
-                                          bg = labelBackground,
-                                          fg = labelForeground,
-                                          borderwidth = labelBorderwidth,
-                                          relief = "raised"))
+        tkXlabel <- as.character(tcltk::tcl('label',
+                                            as.character(l_subwin(parent,'label')),
+                                            text = xlabel,
+                                            bg = labelBackground,
+                                            fg = labelForeground,
+                                            borderwidth = labelBorderwidth,
+                                            relief = "raised"))
 
-        tkgrid(xlabel,
+        tkgrid(tkXlabel,
                row = title_pos + nrow * span,
                column = ylabel_pos,
                rowspan = 1,
@@ -594,15 +721,15 @@ facet_wrap_layout <- function(plots,
     # pack ylabel
     if(ylabel != "") {
 
-        ylabel <- as.character(tcltk::tcl('label',
-                                          as.character(l_subwin(parent,'label')),
-                                          text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
-                                          bg = labelBackground,
-                                          fg = labelForeground,
-                                          borderwidth = labelBorderwidth,
-                                          relief = "raised"))
+        tkYlabel <- as.character(tcltk::tcl('label',
+                                            as.character(l_subwin(parent,'label')),
+                                            text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
+                                            bg = labelBackground,
+                                            fg = labelForeground,
+                                            borderwidth = labelBorderwidth,
+                                            relief = "raised"))
 
-        tkgrid(ylabel,
+        tkgrid(tkYlabel,
                row = title_pos,
                column= 0,
                rowspan = nrow * span,
@@ -610,6 +737,18 @@ facet_wrap_layout <- function(plots,
                sticky="nesw")
 
     }
+
+    # update ylabel (xlabel if swapAxes) when histograms change y shows
+    if(inherits(plots[[1]], "l_hist")) {
+
+        linkOneDimensionalStates(plots, oneDimensionalStates = "yshows")
+        updateYshows(plots, swapAxes = swapAxes,
+                     tkXlabel = tkXlabel,
+                     tkYlabel = tkYlabel,
+                     xlabel = xlabel,
+                     ylabel = ylabel)
+    }
+
 
     label_pos <- if(labelLocation == "top") {
         unlist(lapply(span * (seq(nrow) - 1), function(s) s + seq(label_span) - 1))
@@ -627,6 +766,65 @@ facet_wrap_layout <- function(plots,
 
     names(plots) <- new_names
     return(plots)
+}
+
+facet_separate_layout <- function(plots,
+                                  subtitles,
+                                  title = "",
+                                  xlabel = "",
+                                  ylabel = "",
+                                  sep = "*",
+                                  maxCharInOneRow = 15, # to be consistent
+                                  ...) {
+
+    # pack title
+    by_names <- names(subtitles)
+    split <- paste0("[", sep, "]")
+    if(title == "") title <- NULL
+
+    if(is.null(by_names)) {
+        titles <- vapply(names(plots),
+                         function(name) {
+                             paste(c(title, strsplit(name, split = split)[[1]]), collapse = "\n")
+                         }, character(1))
+    } else {
+        titles <- vapply(names(plots),
+                         function(name) {
+
+                             subtitle <- strsplit(name, split = split)[[1]]
+                             paste(c(title, paste(by_names, subtitle, sep = ":")), collapse = "\n")
+                         }, character(1))
+    }
+
+    # set labelMargins
+    labelMargins <- list(...)$labelMargins
+
+    if(is.null(labelMargins)) {
+        t <- 1
+        if(is.null(title)) t <- 0
+        t <- t + length(subtitles)
+        # 3 is the top label margin
+        # default is 60
+        labelMargins3 <- ifelse(t < 3, 60, t * 30)
+    }
+
+
+    # pack xlabel and ylabel
+    lapply(seq(length(plots)),
+           function(i) {
+               p <- plots[[i]]
+
+               if(inherits(p, "l_serialaxes")) {
+                   p['title'] <- titles[i]
+               } else {
+                   p['xlabel'] <- xlabel
+                   p['ylabel'] <- ylabel
+                   p['title'] <- titles[i]
+                   if(is.null(labelMargins))
+                       p['labelMargins'][3] <- labelMargins3
+               }
+
+           })
 }
 
 
