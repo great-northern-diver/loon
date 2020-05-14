@@ -385,7 +385,7 @@ facet_grid_layout <- function(plots,
     # update ylabel (xlabel if swapAxes) when histograms change y shows
     if(inherits(plots[[1]], "l_hist")) {
 
-        linkOneDimentionalStates(plots, oneDimentionalStates = "yshows")
+        linkOneDimensionalStates(plots, oneDimensionalStates = "yshows")
         updateYshows(plots, swapAxes = swapAxes,
                      tkXlabel = tkXlabel,
                      tkYlabel = tkYlabel,
@@ -741,7 +741,7 @@ facet_wrap_layout <- function(plots,
     # update ylabel (xlabel if swapAxes) when histograms change y shows
     if(inherits(plots[[1]], "l_hist")) {
 
-        linkOneDimentionalStates(plots, oneDimentionalStates = "yshows")
+        linkOneDimensionalStates(plots, oneDimensionalStates = "yshows")
         updateYshows(plots, swapAxes = swapAxes,
                      tkXlabel = tkXlabel,
                      tkYlabel = tkYlabel,

@@ -214,6 +214,14 @@ loonFacets.default <- function(type,
 
     swapAxes <- ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes)
 
+    # forbidden swapAxes
+    swap_forbiddenSetting(plots,
+                          child = child,
+                          swapAxes = swapAxes)
+
+    # synchronize scales
+    linkOneDimensionalStates(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
+
     if(layout == "grid") {
 
         ## Two major objectives here
@@ -234,12 +242,6 @@ loonFacets.default <- function(type,
             )
         )
 
-        # forbidden swapAxes showScales and showLabels
-        layout_forbiddenSetting(plots,
-                                child = child,
-                                showLabels = TRUE,
-                                swapAxes = swapAxes)
-
         if(connectedScales == "both") {
 
             layout_grid_synchronizeSetting(plots,
@@ -254,9 +256,6 @@ loonFacets.default <- function(type,
                                            connectedScales = connectedScales,
                                            xrange = xrange, yrange = yrange)
         }
-
-        # synchronize scales
-        linkOneDimentionalStates(plots, oneDimentionalStates = "showScales")
 
         structure(
             plots,
@@ -280,20 +279,10 @@ loonFacets.default <- function(type,
             )
         )
 
-        # forbidden swapAxes and showLabels
-        layout_forbiddenSetting(plots,
-                                child = child,
-                                showLabels = TRUE,
-                                swapAxes = swapAxes)
-
-
         layout_wrap_synchronizeSetting(plots,
                                        child = child,
                                        connectedScales = connectedScales,
                                        xrange = xrange, yrange = yrange)
-
-        # synchronize scales
-        linkOneDimentionalStates(plots, oneDimentionalStates = "showScales")
 
         structure(
             plots,
