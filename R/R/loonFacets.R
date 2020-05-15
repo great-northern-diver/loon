@@ -179,14 +179,16 @@ loonFacets.default <- function(type,
     xrange <- extendrange(xrange)
     yrange <- extendrange(yrange)
 
-    # the way to synchronize scales
-    connectedScales <- switch(connectedScales,
-                              "cross" = "both",
-                              "row" = "y",
-                              "column" = "x",
-                              {
-                                  connectedScales
-                              })
+    swapAxes <- ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes)
+
+    if(swapAxes) {
+        connectedScales <- switch(connectedScales,
+               "x" = "y",
+               "y" = "x",
+               {
+                   connectedScales
+               })
+    }
 
     if(separate) {
 
@@ -212,15 +214,14 @@ loonFacets.default <- function(type,
 
     if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
 
-    swapAxes <- ifelse(is.null(oneDimArgs$swapAxes), FALSE, oneDimArgs$swapAxes)
-
     # forbidden swapAxes
     swap_forbiddenSetting(plots,
                           child = child,
                           swapAxes = swapAxes)
 
     # synchronize scales
-    linkOneDimensionalStates(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
+    linkOneDimensionalStates(plots,
+                             oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
 
     if(layout == "grid") {
 
@@ -242,20 +243,11 @@ loonFacets.default <- function(type,
             )
         )
 
-        if(connectedScales == "both") {
-
-            layout_grid_synchronizeSetting(plots,
-                                           xrange = xrange,
-                                           yrange = yrange,
-                                           child = child)
-
-        } else {
-
-            layout_wrap_synchronizeSetting(plots,
-                                           child = child,
-                                           connectedScales = connectedScales,
-                                           xrange = xrange, yrange = yrange)
-        }
+        layout_grid_synchronizeSetting(plots,
+                                       connectedScales = connectedScales,
+                                       xrange = xrange,
+                                       yrange = yrange,
+                                       child = child)
 
         structure(
             plots,
@@ -282,7 +274,8 @@ loonFacets.default <- function(type,
         layout_wrap_synchronizeSetting(plots,
                                        child = child,
                                        connectedScales = connectedScales,
-                                       xrange = xrange, yrange = yrange)
+                                       xrange = xrange,
+                                       yrange = yrange)
 
         structure(
             plots,
