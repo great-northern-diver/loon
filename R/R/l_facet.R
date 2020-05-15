@@ -16,21 +16,31 @@ l_facet <- function(widget,
 }
 
 #' @rdname l_facet
-#' @param connectedScales How to connect the scales of all panels. It depends on \code{layout}.
+#' @param connectedScales Determines how the scales of the facets are to be connected depending
+#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
+#' as follows:
 #' \itemize{
-#' \item{wrap: all panels share 'both' scales (fix 'x' and 'y'),
-#' all panels only vary the scales across 'x' (fix 'x' and free 'y'),
-#' all panels only vary the scales across 'y' (fix 'y' and free 'x') or
-#' 'none' scales are fixed  (free 'x' and 'y').
-#' }
-#' \item{grid: all panels on the 'cross' (sharing the same row and column) connect the same scales (both 'x' and 'y'),
-#' all panels only vary the scales across 'row' (fix 'x' and free 'y'),
-#' all panels only vary the scales across 'column' (fix 'y' and free 'x') or
-#' 'none' scales are fixed  (free 'x' and 'y').
-#' }
-#' }
-#' Note that 'both' and 'cross', 'row' and 'y', 'column' and 'x' are equivalent for layout \code{grid} and \code{wrap}, respectively.
-#' When 'row's ('y') or 'column's ('x') share the same scale, the dynamic chages of scales will be synchronized.
+#' \item{\code{layout = "wrap:}  Across all facets, when \code{connectedScales} is
+#'    \itemize{
+#'    \item{\code{"x"}, then  only the "x"  scales are connected}
+#'    \item{\code{"y"}, then only the "y" scales are connected}
+#'    \item{\code{"both"},  both "x" and "y" scales are connected}
+#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
+#'    For any other value, only the "y" scale is connected.
+#'    }
+#'    }
+#' \item{\code{layout = "grid:}  Across all facets, when \code{connectedScales} is
+#'    \itemize{
+#'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
+#'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
+#'    \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
+#'    \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
+#'    \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
+#'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
+#'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
+#'    }
+#'    }
+#'  }
 #' @param linkingGroup A linkingGroup for widgets. If missing, default would be a paste of
 #' "layout" and the current tk path number.
 #' @param ncol The number of layout columns
@@ -104,17 +114,22 @@ l_facet.loon <- function(widget,
 
     # synchronize
     connectedScales <- match.arg(connectedScales)
-    connectedScales <- switch(connectedScales,
-                              "cross" = "both",
-                              "row" = "y",
-                              "column" = "x",
-                              {
-                                  connectedScales
-                              })
+    swapAxes <- widget['swapAxes']
 
     loonrange <- loonranges(widget)
     xrange <- loonrange$xrange
     yrange <- loonrange$yrange
+
+    if(swapAxes) {
+        connectedScales <- switch(connectedScales,
+                                  "x" = "y",
+                                  "y" = "x",
+                                  "row" = "column",
+                                  "column" = "row",
+                                  {
+                                      connectedScales
+                                  })
+    }
 
     if(separate) {
 
@@ -153,29 +168,19 @@ l_facet.loon <- function(widget,
                                    xlabel = widget['xlabel'],
                                    ylabel = widget['ylabel'],
                                    title = widget['title'],
-                                   swapAxes = widget['swapAxes'],
+                                   swapAxes = swapAxes,
                                    labelLocation = labelLocation,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief))
 
-        if(connectedScales == "both") {
-
-            layout_grid_synchronizeSetting(plots,
-                                           xrange = xrange,
-                                           yrange = yrange,
-                                           child = child,
-                                           zoomX = widget['zoomX'], zoomY = widget['zoomY'])
-
-        } else {
-
-            layout_wrap_synchronizeSetting(plots,
-                                           child = child,
-                                           connectedScales = connectedScales,
-                                           xrange = xrange, yrange = yrange,
-                                           zoomX = widget['zoomX'], zoomY = widget['zoomY'])
-        }
+        layout_grid_synchronizeSetting(plots,
+                                       connectedScales = connectedScales,
+                                       xrange = xrange,
+                                       yrange = yrange,
+                                       child = child,
+                                       zoomX = widget['zoomX'], zoomY = widget['zoomY'])
 
         plots <- structure(
             plots,
@@ -193,7 +198,7 @@ l_facet.loon <- function(widget,
                                    ylabel = widget['ylabel'],
                                    title = widget['title'],
                                    parent = child,
-                                   swapAxes = widget['swapAxes'],
+                                   swapAxes = swapAxes,
                                    nrow = nrow,
                                    ncol = ncol,
                                    labelLocation = labelLocation,
@@ -201,6 +206,14 @@ l_facet.loon <- function(widget,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief))
+
+        if(swapAxes) {
+            connectedScales <- switch(connectedScales,
+                                      "row" = "column",
+                                      "column" = "row", {
+                                          connectedScales
+                                      })
+        }
 
         layout_wrap_synchronizeSetting(plots, child = child, connectedScales = connectedScales,
                                        xrange = xrange, yrange = yrange,
@@ -214,8 +227,8 @@ l_facet.loon <- function(widget,
 
     # forbidden swapAxes and showLabels
     swap_forbiddenSetting(plots,
-                            child = child,
-                            swapAxes = widget['swapAxes'])
+                          child = child,
+                          swapAxes = swapAxes)
 
     # synchronize scales
     linkOneDimensionalStates(plots, oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
@@ -365,117 +378,6 @@ l_getPlots.l_facet <- function(target){
 loonGrob_layoutType.l_facet <- function(target) "locations"
 
 ######################################## facets helper function ########################################
-layout_wrap_synchronizeSetting <- function(plots, child, connectedScales,
-                                           xrange, yrange,
-                                           zoomX = 5/6, zoomY = 5/6) {
-
-    # force scales
-    forceScales(plots = plots,
-                xrange = xrange,
-                yrange = yrange,
-                connectedScales = connectedScales,
-                zoomX = zoomX,
-                zoomY = zoomY)
-
-    busy <- FALSE
-    switch(connectedScales,
-           "both" = {
-
-               synchronizeXYBindings <- function(W) {
-                   if (!busy) {
-                       busy <<- TRUE
-                       class(W) <- "loon"
-                       zoomX <- W['zoomX']
-                       panX <- W['panX']
-                       deltaX <- W['deltaX']
-
-                       lapply(plots,
-                              function(p) {
-                                  l_configure(p, zoomX=zoomX, panX=panX, deltaX=deltaX)
-                              })
-
-                       zoomY <- W['zoomY']
-                       panY <- W['panY']
-                       deltaY <- W['deltaY']
-                       lapply(plots,
-                              function(p) {
-                                  l_configure(p, zoomY=zoomY, panY=panY, deltaY=deltaY)
-                              })
-                       busy <<- FALSE
-                       tcl('update', 'idletasks')
-                   }
-               }
-
-               lapply(plots,
-                      function(p) {
-                          tcl(p, 'systembind', 'state', 'add',
-                              c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-                              synchronizeXYBindings)
-                      }
-               )
-               callbackFunctions$state[[paste(child,"synchronizeXY", sep="_")]] <- synchronizeXYBindings
-           },
-           "y" = {
-
-
-               # fixed Y
-               synchronizeYBindings <- function(W) {
-                   if (!busy) {
-                       busy <<- TRUE
-                       class(W) <- "loon"
-                       zoomY <- W['zoomY']
-                       panY <- W['panY']
-                       deltaY <- W['deltaY']
-                       lapply(plots,
-                              function(p) {
-                                  l_configure(p, zoomY=zoomY, panY=panY, deltaY=deltaY)
-                              })
-                       busy <<- FALSE
-                       tcl('update', 'idletasks')
-                   }
-               }
-
-               lapply(plots,
-                      function(p) {
-                          tcl(p, 'systembind', 'state', 'add',
-                              c('zoomY', 'panY', 'deltaY'),
-                              synchronizeYBindings)
-                      }
-               )
-               callbackFunctions$state[[paste(child,"synchronizeY", sep="_")]] <- synchronizeYBindings
-
-           },
-           "x" = {
-               # fixed X
-               synchronizeXBindings <- function(W) {
-                   if (!busy) {
-                       busy <<- TRUE
-                       class(W) <- "loon"
-                       zoomX <- W['zoomX']
-                       panX <- W['panX']
-                       deltaX <- W['deltaX']
-
-                       lapply(plots,
-                              function(p) {
-                                  l_configure(p, zoomX=zoomX, panX=panX, deltaX=deltaX)
-                              })
-                       busy <<- FALSE
-                       tcl('update', 'idletasks')
-                   }
-               }
-
-               lapply(plots,
-                      function(p) {
-                          tcl(p, 'systembind', 'state', 'add',
-                              c('zoomX', 'panX', 'deltaX'),
-                              synchronizeXBindings)
-                      }
-               )
-               callbackFunctions$state[[paste(child,"synchronizeX", sep="_")]] <- synchronizeXBindings
-           },
-           "none" = NULL)
-}
-
 # get widget ranges
 loonranges <- function(widget, f = 0.05) {
     # if(inherits(widget, "l_plot") || inherits(widget, "l_graph")) {
@@ -534,7 +436,7 @@ forceScales <- function(plots, xrange, yrange, connectedScales = "both",
                         zoomX = 5/6, zoomY = 5/6) {
     lapply(plots,
            function(p) {
-               if(connectedScales == "x" || connectedScales == "both") {
+               if(connectedScales == "x" || connectedScales == "both" || connectedScales == "row" || connectedScales == "cross") {
                    if(diff(xrange) != 0) {
                        l_configure(p,
                                    panX = xrange[1],
@@ -542,7 +444,7 @@ forceScales <- function(plots, xrange, yrange, connectedScales = "both",
                                    zoomX = zoomX)
                    }
                }
-               if(connectedScales == "y" || connectedScales == "both") {
+               if(connectedScales == "y" || connectedScales == "both" || connectedScales == "column" || connectedScales == "cross") {
                    if(diff(yrange) != 0) {
                        l_configure(p,
                                    panY = yrange[1],
@@ -566,60 +468,6 @@ swap_forbiddenSetting <- function(plots, child, swapAxes = FALSE) {
                    undoStateChanges)
            })
     callbackFunctions$state[[paste(child,"undoStateChanges", sep="_")]] <- undoStateChanges
-}
-
-layout_grid_synchronizeSetting <- function(plots, child, xrange, yrange, zoomX = 5/6, zoomY = 5/6) {
-
-    # force scales
-    forceScales(plots = plots,
-                xrange = xrange,
-                yrange = yrange,
-                zoomX = zoomX,
-                zoomY = zoomY)
-
-    layout_position <- layout_position(plots)
-    plotsHash <- list()
-    for (i in 1:length(plots)) {
-
-        tmpX <- which(layout_position[, "y"] == layout_position[i, "y"])
-        shareX <- tmpX[tmpX != i]
-
-        tmpY <- which(layout_position[, "x"] == layout_position[i, "x"])
-        shareY <- tmpY[tmpY != i]
-        plotsHash[[paste("scatter_x_",
-                         plots[[i]],
-                         sep="")]] <- plots[shareX]
-        plotsHash[[paste("scatter_y_",
-                         plots[[i]],
-                         sep="")]] <- plots[shareY]
-    }
-    busy <- FALSE
-    synchronizeBindings <- function(W) {
-        if (!busy) {
-            busy <<- TRUE
-            class(W) <- "loon"
-            zoomX <- W['zoomX']; zoomY <- W['zoomY']
-            panX <- W['panX']; panY <- W['panY']
-            deltaX <- W['deltaX']; deltaY <- W['deltaY']
-
-            lapply(plotsHash[[paste("scatter_x_", W, sep="")]], function(p) {
-                l_configure(p, zoomX=zoomX, panX=panX, deltaX=deltaX)
-            })
-            lapply(plotsHash[[paste("scatter_y_",W,sep="")]], function(p) {
-                l_configure(p, zoomY=zoomY, panY=panY, deltaY=deltaY)
-            })
-            busy <<- FALSE
-            tcl('update', 'idletasks')
-        }
-    }
-    lapply(plots,
-           function(p) {
-               tcl(p, 'systembind', 'state', 'add',
-                   c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-                   synchronizeBindings)
-           }
-    )
-    callbackFunctions$state[[paste(child,"synchronize", sep="_")]] <- synchronizeBindings
 }
 
 updateYshows <- function(plots, swapAxes = FALSE,
