@@ -20,16 +20,15 @@ l_facet <- function(widget,
 #' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
 #' as follows:
 #' \itemize{
-#' \item{\code{layout = "wrap:}  Across all facets, when \code{connectedScales} is
+#' \item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
 #'    \itemize{
-#'    \item{\code{"x"}, then  only the "x"  scales are connected}
-#'    \item{\code{"y"}, then only the "y" scales are connected}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected}
+#'    \item{\code{"x"} or \code{"column"} (not suggested), then  only the "x"  scales are connected}
+#'    \item{\code{"y"} or \code{"row"} (not suggested), then only the "y" scales are connected}
+#'    \item{\code{"both"} or \code{"cross"} (not suggested),  both "x" and "y" scales are connected}
 #'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    For any other value, only the "y" scale is connected.
 #'    }
 #'    }
-#' \item{\code{layout = "grid:}  Across all facets, when \code{connectedScales} is
+#' \item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
 #'    \itemize{
 #'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
 #'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
