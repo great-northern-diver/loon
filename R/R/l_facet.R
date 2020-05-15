@@ -124,8 +124,6 @@ l_facet.loon <- function(widget,
         connectedScales <- switch(connectedScales,
                                   "x" = "y",
                                   "y" = "x",
-                                  "row" = "column",
-                                  "column" = "row",
                                   {
                                       connectedScales
                                   })
