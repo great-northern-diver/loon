@@ -100,10 +100,10 @@ facet_grid_layout <- function(plots,
     title_pos <- ifelse(title == "", 0, title_span)
     ylabel_pos <- ifelse(ylabel == "", 0, 1)
 
-    layout_orders <- apply(do.call(expand.grid,
-                                   lapply(if(rowGoesFirst) c(rowsLabel, colsLabel) else c(colsLabel, rowsLabel),
-                                          function(x) x)), 1,
-                           paste, collapse="*")
+    # layout_orders <- apply(do.call(expand.grid,
+    #                                lapply(if(rowGoesFirst) c(rowsLabel, colsLabel) else c(colsLabel, rowsLabel),
+    #                                       function(x) x)), 1,
+    #                        paste, collapse="*")
 
     # get_plot_id <- function(string, matched_string, sep = "*") {
     #
