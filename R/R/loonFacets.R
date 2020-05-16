@@ -243,11 +243,11 @@ loonFacets.default <- function(type,
             )
         )
 
-        layout_grid_synchronizeSetting(plots,
-                                       connectedScales = connectedScales,
-                                       xrange = xrange,
-                                       yrange = yrange,
-                                       child = child)
+        layout_synchronizeSetting(plots,
+                                  connectedScales = connectedScales,
+                                  xrange = xrange,
+                                  yrange = yrange,
+                                  child = child)
 
         structure(
             plots,
@@ -271,11 +271,11 @@ loonFacets.default <- function(type,
             )
         )
 
-        layout_wrap_synchronizeSetting(plots,
-                                       child = child,
-                                       connectedScales = connectedScales,
-                                       xrange = xrange,
-                                       yrange = yrange)
+        layout_synchronizeSetting(plots,
+                                  connectedScales = connectedScales,
+                                  xrange = xrange,
+                                  yrange = yrange,
+                                  child = child)
 
         structure(
             plots,

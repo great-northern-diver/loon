@@ -16,19 +16,7 @@ l_facet <- function(widget,
 }
 
 #' @rdname l_facet
-#' @param connectedScales Determines how the scales of the facets are to be connected depending
-#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-#' as follows:
-#' \itemize{
-#' \item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"x"} or \code{"column"} (not suggested), then  only the "x"  scales are connected}
-#'    \item{\code{"y"} or \code{"row"} (not suggested), then only the "y" scales are connected}
-#'    \item{\code{"both"} or \code{"cross"} (not suggested),  both "x" and "y" scales are connected}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    }
-#'    }
-#' \item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
+#' @param connectedScales Determines how the scales of the facets are to be connected.
 #'    \itemize{
 #'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
 #'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
@@ -38,8 +26,6 @@ l_facet <- function(widget,
 #'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
 #'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
 #'    }
-#'    }
-#'  }
 #' @param linkingGroup A linkingGroup for widgets. If missing, default would be a paste of
 #' "layout" and the current tk path number.
 #' @param ncol The number of layout columns
@@ -172,12 +158,12 @@ l_facet.loon <- function(widget,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief))
 
-        layout_grid_synchronizeSetting(plots,
-                                       connectedScales = connectedScales,
-                                       xrange = xrange,
-                                       yrange = yrange,
-                                       child = child,
-                                       zoomX = widget['zoomX'], zoomY = widget['zoomY'])
+        layout_synchronizeSetting(plots,
+                                  connectedScales = connectedScales,
+                                  xrange = xrange,
+                                  yrange = yrange,
+                                  child = child,
+                                  zoomX = widget['zoomX'], zoomY = widget['zoomY'])
 
         plots <- structure(
             plots,
@@ -212,9 +198,9 @@ l_facet.loon <- function(widget,
                                       })
         }
 
-        layout_wrap_synchronizeSetting(plots, child = child, connectedScales = connectedScales,
-                                       xrange = xrange, yrange = yrange,
-                                       zoomX = widget['zoomX'], zoomY = widget['zoomY'])
+        layout_synchronizeSetting(plots, child = child, connectedScales = connectedScales,
+                                  xrange = xrange, yrange = yrange,
+                                  zoomX = widget['zoomX'], zoomY = widget['zoomY'])
 
         plots <- structure(
             plots,

@@ -1,6 +1,40 @@
+#' @title Layout as a grid
+#' @param plots A list of \code{loon} plots
+#' @param subtitles The subtitles of the layout. It is a list and the length is equal to
+#' the number of \code{by} variables. Each element in a list is the unique values of such \code{by} variable.
+#' @param prop The proportion of the label height and widget height
+#' @param parent a valid Tk parent widget path. When the parent widget is
+#'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+#'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+#'   order to be displayed. See the examples below.
+#' @param title The title of the widget
+#' @param xlabel The xlabel of the widget
+#' @param ylabel The ylabel of the widget
+#' @param labelLocation Labels location.
+#' \itemize{
+#' \item {
+#' Length two vector for layout \code{grid}.
+#' The first one is used to determine the position of column labels ('top' or 'bottom').
+#' The second one is used to determine the position of row labels ('right' or 'left').
+#' }
+#' \item {
+#' Length one vector for layout \code{wrap}, 'top' or 'bottom'.
+#' }
+#' }
+#' @param byrow Place widget by row or by column
+#' @param swapAxes swap axes, \code{TRUE} or \code{FALSE}
+#' @param labelBackground Label background color
+#' @param labelForeground Label foreground color
+#' @param labelBorderwidth Label border width
+#' @param labelRelief Label relief
+#' @param sep The character string to separate or combine a vector
+#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param ... named arguments to modify plot states.
+#' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
+#'
 facet_grid_layout <- function(plots,
                               subtitles,
-                              labelHeight = 10,
+                              prop = 10,
                               parent = NULL,
                               title = "",
                               xlabel = "",
@@ -16,7 +50,7 @@ facet_grid_layout <- function(plots,
                               ...) {
 
     len <- length(subtitles)
-    span <- labelHeight
+    span <- prop
 
     # tk configure
     sapply(plots,
@@ -406,14 +440,49 @@ facet_grid_layout <- function(plots,
     return(plots)
 }
 
-
+#' @title Layout as a wrap
+#' @param plots A list of \code{loon} plots
+#' @param subtitles The subtitles of the layout. It is a list and the length is equal to
+#' the number of \code{by} variables. Each element in a list is the unique values of such \code{by} variable.
+#' @param prop The proportion of the label height and widget height
+#' @param parent a valid Tk parent widget path. When the parent widget is
+#'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+#'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+#'   order to be displayed. See the examples below.
+#' @param title The title of the widget
+#' @param xlabel The xlabel of the widget
+#' @param ylabel The ylabel of the widget
+#' @param ncol The number of layout columns
+#' @param nrow The number of layout rows
+#' @param labelLocation Labels location.
+#' \itemize{
+#' \item {
+#' Length two vector for layout \code{grid}.
+#' The first one is used to determine the position of column labels ('top' or 'bottom').
+#' The second one is used to determine the position of row labels ('right' or 'left').
+#' }
+#' \item {
+#' Length one vector for layout \code{wrap}, 'top' or 'bottom'.
+#' }
+#' }
+#' @param byrow Place widget by row or by column
+#' @param swapAxes swap axes, \code{TRUE} or \code{FALSE}
+#' @param labelBackground Label background color
+#' @param labelForeground Label foreground color
+#' @param labelBorderwidth Label border width
+#' @param labelRelief Label relief
+#' @param sep The character string to separate or combine a vector
+#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param ... named arguments to modify plot states.
+#' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
+#'
 facet_wrap_layout <- function(plots,
                               subtitles,
-                              labelHeight = 10,
+                              prop = 10,
+                              parent = NULL,
                               title = "",
                               xlabel = "",
                               ylabel = "",
-                              parent = NULL,
                               nrow = NULL,
                               ncol = NULL,
                               labelLocation = "top",
@@ -427,7 +496,7 @@ facet_wrap_layout <- function(plots,
                               ...) {
 
     N <- length(plots)
-    span <- labelHeight
+    span <- prop
     if (is.null(nrow) && !is.null(ncol)) {
         nrow <- ceiling(N/ncol)
     }
@@ -768,6 +837,18 @@ facet_wrap_layout <- function(plots,
     return(plots)
 }
 
+#' @title layout separately
+#' @param plots A list of \code{loon} plots
+#' @param subtitles The subtitles of the layout. It is a list and the length is equal to
+#' the number of \code{by} variables. Each element in a list is the unique values of such \code{by} variable.
+#' @param title The title of the widget
+#' @param xlabel The xlabel of the widget
+#' @param ylabel The ylabel of the widget
+#' @param sep The character string to separate or combine a vector
+#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param ... named arguments to modify plot states.
+#' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
+#'
 facet_separate_layout <- function(plots,
                                   subtitles,
                                   title = "",
