@@ -55,30 +55,16 @@ This argument can take a \code{vector}, a \code{list} of same lengths or a \code
 
 \item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
-\item{connectedScales}{Determines how the scales of the facets are to be connected depending
-on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-as follows:
+\item{connectedScales}{Determines how the scales of the facets are to be connected.
 \itemize{
-\item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
-   \itemize{
-   \item{\code{"x"} or \code{"column"} (not suggested), then  only the "x"  scales are connected}
-   \item{\code{"y"} or \code{"row"} (not suggested), then only the "y" scales are connected}
-   \item{\code{"both"} or \code{"cross"} (not suggested),  both "x" and "y" scales are connected}
-   \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-   }
-   }
-\item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
-   \itemize{
-   \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
-   \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
-   \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
-   \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
-   \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
-   \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
-   \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
-   }
-   }
- }}
+\item{\code{"cross"}, then only the scales in the same row and the same column are connected}
+\item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
+\item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
+\item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
+\item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
+\item{\code{"both"},  both "x" and "y" scales are connected in all facets}
+\item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
+}}
 
 \item{color}{colours of points; colours are repeated until matching the number points.}
 
