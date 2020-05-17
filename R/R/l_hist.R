@@ -9,20 +9,7 @@
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
 #' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
-#' @param connectedScales Determines how the scales of the facets are to be connected depending
-#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-#' as follows:
-#' \itemize{
-#' \item{\code{layout = "wrap:}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"x"}, then  only the "x"  scales are connected}
-#'    \item{\code{"y"}, then only the "y" scales are connected}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    For any other value, only the "y" scale is connected.
-#'    }
-#'    }
-#' \item{\code{layout = "grid:}  Across all facets, when \code{connectedScales} is
+#' @param connectedScales Determines how the scales of the facets are to be connected.
 #'    \itemize{
 #'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
 #'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
@@ -32,8 +19,6 @@
 #'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
 #'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
 #'    }
-#'    }
-#'  }
 #' @param showStackedColors  if TRUE (default) then bars will be coloured according to
 #'    colours of the points; if FALSE, then the bars will be a uniform colour
 #'    except for highlighted points.
