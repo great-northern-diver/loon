@@ -36,62 +36,101 @@ development:
 destination: ../docs/
 
 
-
 reference:
   - title: Package Information
     desc:  General Information about the package
     contents:
     - loon
-    - l_help
     - l_web
+    - l_help
+
   - title: Main Plotting Functions
     desc:  These are the main functions needed to create plots
     contents:
     - l_plot_arguments
     - starts_with("l_plot")
     - l_hist
+    - Extract-Bin-Info
+  - subtitle: multivariate plots
+    contents:
     - l_plot3D
     - l_pairs
     - l_serialaxes
-    - plot.loon
-    - plot.loongraph
-  - title: Access Modify
-    desc: Access Modify
+
+
+  - title: Loon plot states
+    desc:  Accessing and modifying loon plot states
+  - subtitle: general
     contents:
+    - names.loon
     - l_cget
     - l_configure
     - l_info_states
     - l_state_names
-    - names.loon
+  - subtitle: linked states
+    contents:
     - l_getLinkedStates
     - l_setLinkedStates
+  - subtitle: saving and reusing
+    contents:
+    - l_copyStates
+    - l_getSavedStates
+    - l_saveStates
+  - subtitle: aspect ratio
+    contents:
+    - l_aspect<-
+    - l_aspect
+    - l_setAspect
+
+  - title: Loon plots and grid graphics
+    desc:  These are the main functions needed to create plots
+    contents:
+    - plot.loon
+    - plot.loongraph
+    - loonGrob
+    - grid.loon
+    - condGrob
+    - l_createCompoundGrob
+    - l_get_arrangeGrobArgs
+    - loonGrob_layoutType
+
+
+  - title: Facets and compound plots
+    desc:  Compound plot interaction
+    contents:
+    - l_facet
+    - l_getLocations
+    - l_getPlots
+
+  - title: Options
+    desc: Options used by many plots
+    contents:
     - l_getOption
     - l_setOption
     - l_userOptions
     - l_getOptionNames
-    - l_getPlots
+
+  - title: Access Modify
+    desc: Access Modify
+    contents:
     - starts_with("l_scale")
     - starts_with("l_move")
     - l_redraw
     - l_size
     - l_size<-
     - l_zoom
-    - l_copyStates
-    - l_getSavedStates
-    - l_saveStates
+    - l_create_handle
+    - l_getFromPath
+
   - title: Miscellaneous
     desc: Miscellaneous
     contents:
     - l_resize
     - l_export
     - l_export_valid_formats
-    - l_aspect<-
-    - l_aspect
-    - l_setAspect
     - l_subwin
     - l_widget
     - l_setTitleFont
-    - l_getLocations
     - l_userOptionDefault
 
   - title: Colors
@@ -118,12 +157,14 @@ reference:
     - l_primitiveGlyphs
     - starts_with("l_image")
     - l_make_glyphs
+
   - title: Bindings
-    desc: Bindings
+    desc: Binding events
     contents:
     - starts_with("l_bind")
     - starts_with("l_current")
     - l_after_idle
+
   - title: Graph
     desc: Graph
     contents:
@@ -139,25 +180,18 @@ reference:
     - linegraph.loongraph
     - l_getGraph
     - ndtransitiongraph
+
   - title: Navigation Graphs
     desc: Navigation
     contents:
     - starts_with("l_ng")
     - starts_with("l_nav")
-    - l_create_handle
+
   - title: Contexts
     desc: Contexts are
     contents:
     - starts_with("l_context")
-  - title: Grid Grobs
-    desc: Grid Grobs
-    contents:
-    - loonGrob
-    - grid.loon
-    - condGrob
-    - l_createCompoundGrob
-    - l_get_arrangeGrobArgs
-    - loonGrob_layoutType
+
   - title: Data
     desc: data
     contents:
@@ -166,12 +200,14 @@ reference:
     - oliveAcids
     - oliveLocations
     - minority
+
   - title: Inspectors
     desc: inspectors
     contents:
     - ends_with("inspector")
     - l_hist_inspector_analysis
     - l_worldview
+
   - title: Others
     desc: others
     contents:

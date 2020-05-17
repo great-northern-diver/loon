@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -47,7 +51,6 @@
   inspector is open then the l_plot call will also open a loon
   inspector." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -65,7 +68,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -149,7 +152,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>The default <code>l_plot</code> for plotting data</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot.R'><code>R/l_plot.R</code></a></small>
     <div class="hidden name"><code>l_plot.default.Rd</code></div>
     </div>
 
@@ -160,12 +163,30 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>,
-  <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='st'>"ccircle"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>xlabel</span>, <span class='no'>ylabel</span>, <span class='no'>title</span>, <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='st'>"grey92"</span>, <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='l_plot.html'>l_plot</a></span>(
+  <span class='no'>x</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span>),
+  <span class='kw'>connectedScales</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>,
+  <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='st'>"ccircle"</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>xlabel</span>,
+  <span class='no'>ylabel</span>,
+  <span class='no'>title</span>,
+  <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='st'>"grey92"</span>,
+  <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,6 +202,40 @@ If supplied separately, they must be of the same length.</p></td>
     <tr>
       <th>y</th>
       <td><p>argument description is as for the <code>x</code> argument above.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>loon plot can be separated by some variables into mutiple panels.
+This argument can take a <code>vector</code>, a <code>list</code> of same lengths or a <code>data.frame</code> as input.</p></td>
+    </tr>
+    <tr>
+      <th>layout</th>
+      <td><p>layout facets as <code>'grid'</code>, <code>'wrap'</code> or <code>'separate'</code></p></td>
+    </tr>
+    <tr>
+      <th>connectedScales</th>
+      <td><p>Determines how the scales of the facets are to be connected depending
+on which <code>layout</code> is used.  For each value of <code>layout</code>, the scales are connected
+as follows:</p><ul>
+<li><p><code>layout = "wrap":</code>  Across all facets, when <code>connectedScales</code> is
+   <ul>
+<li><p><code>"x"</code>, then  only the "x"  scales are connected</p></li>
+<li><p><code>"y"</code>, then only the "y" scales are connected</p></li>
+<li><p><code>"both"</code>,  both "x" and "y" scales are connected</p></li>
+<li><p><code>"none"</code>,  neither "x" nor "y" scales are connected.
+   For any other value, only the "y" scale is connected.</p></li>
+</ul></p></li>
+<li><p><code>layout = "grid":</code>  Across all facets, when <code>connectedScales</code> is
+   <ul>
+<li><p><code>"cross"</code>, then only the scales in the same row and the same column are connected</p></li>
+<li><p><code>"row"</code>, then both "x" and "y" scales of facets in the same row are connected</p></li>
+<li><p><code>"column"</code>, then both "x" and "y" scales of facets in the same column are connected</p></li>
+<li><p><code>"x"</code>, then all of the "x"  scales are connected (regardless of column)</p></li>
+<li><p><code>"y"</code>, then all of the "y" scales are connected (regardless of row)</p></li>
+<li><p><code>"both"</code>,  both "x" and "y" scales are connected in all facets</p></li>
+<li><p><code>"none"</code>,  neither "x" nor "y" scales are connected in any facets.</p></li>
+</ul></p></li>
+</ul></td>
     </tr>
     <tr>
       <th>color</th>
@@ -269,27 +324,38 @@ order to be displayed. See the examples below.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>named arguments to modify plot states.</p></td>
+      <td><p>named arguments to modify plot states or layouts, see details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The scatterplot displays a number of direct interactions with the
+    
+<ul>
+<li><p>The scatterplot displays a number of direct interactions with the
   mouse and keyboard, these include: zooming towards the mouse cursor using
   the mouse wheel, panning by right-click dragging and various selection
   methods using the left mouse button such as sweeping, brushing and
   individual point selection. See the documentation for <code><a href='l_plot.html'>l_plot</a></code>
-  for more details about the interaction gestures.</p>
+  for more details about the interaction gestures.</p></li>
+<li><p>Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc. Check <code><a href='l_facet.html'>l_facet</a></code>
+  to see how these arguments work.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='l_plot_arguments.html'>l_plot_arguments</a></code></p>
-<p>Other two-dimensional plotting functions: <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code>,
-  <code><a href='l_plot.density.html'>l_plot.density</a></code>, <code><a href='l_plot.stl.html'>l_plot.stl</a></code>,
-  <code><a href='l_plot.html'>l_plot</a></code></p>
-<p>Other loon interactive states: <code><a href='l_info_states.html'>l_info_states</a></code>,
-  <code><a href='l_plot.html'>l_plot</a></code>, <code><a href='l_state_names.html'>l_state_names</a></code>,
-  <code><a href='names.loon.html'>names.loon</a></code></p></div>
+<p>Other two-dimensional plotting functions: 
+<code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a>()</code>,
+<code><a href='l_plot.density.html'>l_plot.density</a>()</code>,
+<code><a href='l_plot.stl.html'>l_plot.stl</a>()</code>,
+<code><a href='l_plot.html'>l_plot</a>()</code></p>
+<p>Other loon interactive states: 
+<code><a href='l_info_states.html'>l_info_states</a>()</code>,
+<code><a href='l_plot.html'>l_plot</a>()</code>,
+<code><a href='l_state_names.html'>l_state_names</a>()</code>,
+<code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -326,7 +392,8 @@ order to be displayed. See the examples below.</p></td>
 <span class='no'>p2</span>[<span class='st'>"glyph"</span>][<span class='no'>p1</span>[<span class='st'>'selected'</span>]] <span class='kw'>&lt;-</span> <span class='st'>"cdiamond"</span>
 
 <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='l_plot.default-1.png' alt='' width='700' height='433' /></div><div class='input'>
-
+<span class='co'># Layout facets</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))</div><div class='output co'>#&gt; [1] "linkingGroup: layout109"</div><div class='input'>
 <span class='co'># Use with other tk widgets</span>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
 <span class='fu'>tktitle</span>(<span class='no'>tt</span>) <span class='kw'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span>
@@ -339,15 +406,10 @@ order to be displayed. See the examples below.</p></td>
 <span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -358,7 +420,7 @@ order to be displayed. See the examples below.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

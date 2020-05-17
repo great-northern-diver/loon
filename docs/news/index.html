@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -145,12 +148,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-1-2-4" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.4">
+<a href="#loon-1-2-4" class="anchor"></a>loon 1.2.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>several new features added to loon plots
+<ul>
+<li>NAs are now accommodated</li>
+<li>histograms recognize factors to produce barplots</li>
+</ul>
+</li>
+<li>group by and facetting in loon plots
+<ul>
+<li>l_plot() and l_hist() now accept arguments by and facet</li>
+</ul>
+</li>
+<li>in some OSes the function l_image_import_files() has stopped working
+<ul>
+<li>seems to be a problem with the tcltk function tkimage.create()</li>
+<li>tkimage.create() function works on older .png files but seemingly not on newer ones</li>
+<li>l_make_glyphs() calls l_image_import_files() and so although it will still create the necessary png files, it may fail to read them back in.</li>
+<li>the problem has been observed (unreliably) to work if the png is further processed outside R.</li>
+<li>so demo(“l_make_glyphs”) has been removed</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="loon-1-2-3-9000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.3.9000">
 <a href="#loon-1-2-3-9000" class="anchor"></a>loon 1.2.3.9000<small> Unreleased </small>
 </h1>
 <ul>
@@ -170,7 +200,7 @@
 </ul>
 </div>
     <div id="loon-1-2-3" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.3">
 <a href="#loon-1-2-3" class="anchor"></a>loon 1.2.3<small> 2019-10-16 </small>
 </h1>
 <ul>
@@ -188,7 +218,7 @@
 </ul>
 </div>
     <div id="loon-1-2-2" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.2">
 <a href="#loon-1-2-2" class="anchor"></a>loon 1.2.2<small> 2019-03-23 </small>
 </h1>
 <ul>
@@ -205,7 +235,7 @@
 </ul>
 </div>
     <div id="loon-1-2-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.1">
 <a href="#loon-1-2-1" class="anchor"></a>loon 1.2.1<small> 2018-12-10 </small>
 </h1>
 <ul>
@@ -216,11 +246,11 @@
 <li>added <code><a href="../reference/condGrob.html">condGrob()</a></code> to effect the conditional construction of either the desired grob (if it is visible in the loon plot) or the empty grob as placeholder containing relevant arguments</li>
 </ul>
 </li>
-<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/graphics/plot.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
+<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/base/plot.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
 </ul>
 </div>
     <div id="loon-1-2-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.0">
 <a href="#loon-1-2-0" class="anchor"></a>loon 1.2.0<small> 2018-09-30 </small>
 </h1>
 <ul>
@@ -241,8 +271,11 @@
 <li>
 <code>l_getLocations</code> which returns a matrix showing the location of the loon plots (in order) (works for simple loon plots too)</li>
 <li>
-<code>l_get_arrangeGrobArgs</code> which returns the arguments and their values to be passed on to arrangeGrob() (from gridExtra) to allow arbitrary layout by the user.</li>
+<code>l_get_arrangeGrobArgs</code> which returns the arguments and their values to be passed on to arrangeGrob() (from gridExtra) to allow arbitrary layout by the user.
+<ul>
 <li>this is NOT implemented for simple loon plots (but could perhaps be)</li>
+</ul>
+</li>
 <li>
 <code>loonGrob_layoutType</code> which returns a string indicating whether <code>"location"</code> or <code>"arrangeGrobArgs</code>" are to be used when creating a grid version of the <code>l_compound</code>. (default is <code>"locations"</code>, other possibility is <code>"arrangeGrobArgs"</code>
 </li>
@@ -258,7 +291,7 @@
 </ul>
 </div>
     <div id="loon-1-1-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1.0">
 <a href="#loon-1-1-0" class="anchor"></a>loon 1.1.0<small> 2017-07-26 </small>
 </h1>
 <ul>
@@ -283,7 +316,7 @@
 </ul>
 </div>
     <div id="loon-1-0-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0.1">
 <a href="#loon-1-0-1" class="anchor"></a>loon 1.0.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -291,7 +324,7 @@
 </ul>
 </div>
     <div id="loon-0-9-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.9.1">
 <a href="#loon-0-9-1" class="anchor"></a>loon 0.9.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -300,7 +333,7 @@
 </ul>
 </div>
     <div id="loon-0-9" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.9">
 <a href="#loon-0-9" class="anchor"></a>loon 0.9<small> Unreleased </small>
 </h1>
 <ul>
@@ -309,21 +342,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#loon-1-2-3-9000">1.2.3.9000</a></li>
-        <li><a href="#loon-1-2-3">1.2.3</a></li>
-        <li><a href="#loon-1-2-2">1.2.2</a></li>
-        <li><a href="#loon-1-2-1">1.2.1</a></li>
-        <li><a href="#loon-1-2-0">1.2.0</a></li>
-        <li><a href="#loon-1-1-0">1.1.0</a></li>
-        <li><a href="#loon-1-0-1">1.0.1</a></li>
-        <li><a href="#loon-0-9-1">0.9.1</a></li>
-        <li><a href="#loon-0-9">0.9</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -335,7 +357,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

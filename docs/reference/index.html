@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Function reference" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
       </span>
     </div>
 
@@ -163,6 +166,11 @@
           <p class="section-desc"><p>General Information about the package</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -175,12 +183,6 @@
           <p><code><a href="l_help.html">l_help()</a></code> </p>
         </td>
         <td><p>Open a browser with loon's combined (TCL and R) documentation website</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_web.html">l_web()</a></code> </p>
-        </td>
-        <td><p>Open a browser with loon's R documentation webpage</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -189,6 +191,11 @@
           <p class="section-desc"><p>These are the main functions needed to create plots</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -270,6 +277,31 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="Extract-Bin-Info.html">getBinData()</a></code> <code><a href="Extract-Bin-Info.html">l_getBinIds()</a></code> <code><a href="Extract-Bin-Info.html">l_breaks()</a></code> <code><a href="Extract-Bin-Info.html">l_binCut()</a></code> </p>
+        </td>
+        <td><p>Some useful <code>loon</code> histogram functions</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-multivariate-plots" class="hasAnchor"><a href="#section-multivariate-plots" class="anchor"></a>multivariate plots</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_plot3D.html">l_plot3D()</a></code> </p>
+        </td>
+        <td><p>Create an interactive loon 3d plot widget</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_pairs.html">l_pairs()</a></code> </p>
         </td>
         <td><p>An interactive scatterplot matrix</p></td>
@@ -279,27 +311,35 @@
           <p><code><a href="l_serialaxes.html">l_serialaxes()</a></code> </p>
         </td>
         <td><p>Create a Serialaxes Widget</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.loon.html">plot(<i>&lt;loon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot the current view of any loon plot in the current device.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot.loongraph.html">plot(<i>&lt;loongraph&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot a loon graph object with base R graphics</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-access-modify" class="hasAnchor"><a href="#section-access-modify" class="anchor"></a>Access Modify</h2>
-          <p class="section-desc"><p>Access Modify</p></p>
+          <h2 id="section-loon-plot-states" class="hasAnchor"><a href="#section-loon-plot-states" class="anchor"></a>Loon plot states</h2>
+          <p class="section-desc"><p>Accessing and modifying loon plot states</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
       <tr>
+        <th colspan="2">
+          <h3 id="section-general" class="hasAnchor"><a href="#section-general" class="anchor"></a>general</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="names.loon.html">names(<i>&lt;loon&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Get State Names of Loon Object</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="l_cget.html">l_cget()</a></code> </p>
@@ -323,13 +363,20 @@
           <p><code><a href="l_state_names.html">l_state_names()</a></code> </p>
         </td>
         <td><p>Get State Names of Loon Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="names.loon.html">names(<i>&lt;loon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Get State Names of Loon Object</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-linked-states" class="hasAnchor"><a href="#section-linked-states" class="anchor"></a>linked states</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_getLinkedStates.html">l_getLinkedStates()</a></code> </p>
@@ -342,7 +389,181 @@
         </td>
         <td><p>Modify States of a Plot that are Linked in Loon's Standard Linking 
   Model</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-saving-and-reusing" class="hasAnchor"><a href="#section-saving-and-reusing" class="anchor"></a>saving and reusing</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_copyStates.html">l_copyStates()</a></code> </p>
+        </td>
+        <td><p>A generic function to transfer the values of the states of one `loon` structure to another.</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getSavedStates.html">l_getSavedStates()</a></code> </p>
+        </td>
+        <td><p>Retrieve saved plot states from the named file.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_saveStates.html">l_saveStates()</a></code> </p>
+        </td>
+        <td><p>Save the info states of a loon plot widget in a  file</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-aspect-ratio" class="hasAnchor"><a href="#section-aspect-ratio" class="anchor"></a>aspect ratio</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_aspect-set.html">`l_aspect&lt;-`()</a></code> </p>
+        </td>
+        <td><p>Set the aspect ratio of a plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_aspect.html">l_aspect()</a></code> </p>
+        </td>
+        <td><p>Query the aspect ratio of a plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setAspect.html">l_setAspect()</a></code> </p>
+        </td>
+        <td><p>Set the aspect ratio of a plot</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-loon-plots-and-grid-graphics" class="hasAnchor"><a href="#section-loon-plots-and-grid-graphics" class="anchor"></a>Loon plots and grid graphics</h2>
+          <p class="section-desc"><p>These are the main functions needed to create plots</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="plot.loon.html">plot(<i>&lt;loon&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot the current view of any loon plot in the current device.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot.loongraph.html">plot(<i>&lt;loongraph&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot a loon graph object with base R graphics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loonGrob.html">loonGrob()</a></code> </p>
+        </td>
+        <td><p>Create a grid grob from a loon widget handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grid.loon.html">grid.loon()</a></code> </p>
+        </td>
+        <td><p>Create and optionally draw a grid grob from a loon widget handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="condGrob.html">condGrob()</a></code> </p>
+        </td>
+        <td><p>Create a named grob or a template grob depending on a test</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_createCompoundGrob.html">l_createCompoundGrob()</a></code> </p>
+        </td>
+        <td><p>For the target compound loon plot, creates the final grob from
+the class of the `target` and the `arrangeGrob.args`</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_get_arrangeGrobArgs.html">l_get_arrangeGrobArgs()</a></code> </p>
+        </td>
+        <td><p>For the target (compound) loon plot, determines all arguments
+(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
+so as to determine the layout in `grid` graphics.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loonGrob_layoutType.html">loonGrob_layoutType()</a></code> </p>
+        </td>
+        <td><p>A generic function used to distinguish whether only the locations
+of plots will be used to arrange them in a grob, or whether
+all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-facets-and-compound-plots" class="hasAnchor"><a href="#section-facets-and-compound-plots" class="anchor"></a>Facets and compound plots</h2>
+          <p class="section-desc"><p>Compound plot interaction</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_facet.html">l_facet()</a></code> </p>
+        </td>
+        <td><p>Layout Facets in a multiple panels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getLocations.html">l_getLocations()</a></code> </p>
+        </td>
+        <td><p>For the target compound loon plot, determines location (only and excluding the grobs)
+arguments to pass to `gridExtra::arrangeGrob()`</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getPlots.html">l_getPlots()</a></code> </p>
+        </td>
+        <td><p>For the target compound loon plot, determines all the loon plots
+in that compound plot.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-options" class="hasAnchor"><a href="#section-options" class="anchor"></a>Options</h2>
+          <p class="section-desc"><p>Options used by many plots</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_getOption.html">l_getOption()</a></code> </p>
@@ -366,14 +587,20 @@
           <p><code><a href="l_getOptionNames.html">l_getOptionNames()</a></code> </p>
         </td>
         <td><p>Get the names of all loon display options</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getPlots.html">l_getPlots()</a></code> </p>
-        </td>
-        <td><p>For the target compound loon plot, determines all the loon plots
-in that compound plot.</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-access-modify" class="hasAnchor"><a href="#section-access-modify" class="anchor"></a>Access Modify</h2>
+          <p class="section-desc"><p>Access Modify</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_scale3D.html">l_scale3D()</a></code> </p>
@@ -466,7 +693,7 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_size-set.html">`l_size<-`()</a></code> </p>
+          <p><code><a href="l_size-set.html">`l_size&lt;-`()</a></code> </p>
         </td>
         <td><p>Resize Plot Widget</p></td>
       </tr><tr>
@@ -478,21 +705,15 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_copyStates.html">l_copyStates()</a></code> </p>
+          <p><code><a href="l_create_handle.html">l_create_handle()</a></code> </p>
         </td>
-        <td><p>A generic function to transfer the values of the states of one `loon` structure to another.</p></td>
+        <td><p>Create a loon object handle</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_getSavedStates.html">l_getSavedStates()</a></code> </p>
+          <p><code><a href="l_getFromPath.html">l_getFromPath()</a></code> </p>
         </td>
-        <td><p>Retrieve saved plot states from the named file.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_saveStates.html">l_saveStates()</a></code> </p>
-        </td>
-        <td><p>Save the info states of a loon plot widget in a  file</p></td>
+        <td><p>Create loon objects from path name</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -501,6 +722,11 @@ in that compound plot.</p></td>
           <p class="section-desc"><p>Miscellaneous</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -523,24 +749,6 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_aspect-set.html">`l_aspect<-`()</a></code> </p>
-        </td>
-        <td><p>Set the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_aspect.html">l_aspect()</a></code> </p>
-        </td>
-        <td><p>Query the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setAspect.html">l_setAspect()</a></code> </p>
-        </td>
-        <td><p>Set the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_subwin.html">l_subwin()</a></code> </p>
         </td>
         <td><p>Create a child widget path</p></td>
@@ -559,13 +767,6 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_getLocations.html">l_getLocations()</a></code> </p>
-        </td>
-        <td><p>For the target compound loon plot, determines location (only and excluding the grobs)
-arguments to pass to `gridExtra::arrangeGrob()`</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_userOptionDefault.html">l_userOptionDefault()</a></code> </p>
         </td>
         <td><p>Get loon's system default value for the named display option.</p></td>
@@ -577,6 +778,11 @@ arguments to pass to `gridExtra::arrangeGrob()`</p></td>
           <p class="section-desc"><p>Colors</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -665,6 +871,11 @@ color representations</p></td>
           <p class="section-desc"><p>Layers</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -973,6 +1184,11 @@ color representations</p></td>
           <p class="section-desc"><p>Glyphs</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1110,9 +1326,14 @@ color representations</p></td>
       <tr>
         <th colspan="2">
           <h2 id="section-bindings" class="hasAnchor"><a href="#section-bindings" class="anchor"></a>Bindings</h2>
-          <p class="section-desc"><p>Bindings</p></p>
+          <p class="section-desc"><p>Binding events</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1349,6 +1570,11 @@ color representations</p></td>
           <p class="section-desc"><p>Graph</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1543,6 +1769,11 @@ color representations</p></td>
           <p class="section-desc"><p>Navigation</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1657,12 +1888,6 @@ color representations</p></td>
           <p><code><a href="l_navigator_walk_path.html">l_navigator_walk_path()</a></code> </p>
         </td>
         <td><p>Have the Navigator Walk a Path on the Graph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_create_handle.html">l_create_handle()</a></code> </p>
-        </td>
-        <td><p>Create a loon object handle</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -1671,6 +1896,11 @@ color representations</p></td>
           <p class="section-desc"><p>Contexts are</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1717,59 +1947,15 @@ color representations</p></td>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-grid-grobs" class="hasAnchor"><a href="#section-grid-grobs" class="anchor"></a>Grid Grobs</h2>
-          <p class="section-desc"><p>Grid Grobs</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="loonGrob.html">loonGrob()</a></code> </p>
-        </td>
-        <td><p>Create a grid grob from a loon widget handle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="grid.loon.html">grid.loon()</a></code> </p>
-        </td>
-        <td><p>Create and optionally draw a grid grob from a loon widget handle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="condGrob.html">condGrob()</a></code> </p>
-        </td>
-        <td><p>Create a named grob or a template grob depending on a test</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_createCompoundGrob.html">l_createCompoundGrob()</a></code> </p>
-        </td>
-        <td><p>For the target compound loon plot, creates the final grob from
-the class of the `target` and the `arrangeGrob.args`</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_get_arrangeGrobArgs.html">l_get_arrangeGrobArgs()</a></code> </p>
-        </td>
-        <td><p>For the target (compound) loon plot, determines all arguments
-(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
-so as to determine the layout in `grid` graphics.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loonGrob_layoutType.html">loonGrob_layoutType()</a></code> </p>
-        </td>
-        <td><p>A generic function used to distinguish whether only the locations
-of plots will be used to arrange them in a grob, or whether
-all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
           <p class="section-desc"><p>data</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1809,6 +1995,11 @@ named in the <code>olive</code> data.</p></td>
           <p class="section-desc"><p>inspectors</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1871,6 +2062,11 @@ named in the <code>olive</code> data.</p></td>
           <p class="section-desc"><p>others</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1922,6 +2118,11 @@ or between column vectors of two matrices.</p></td>
           <p class="section-desc"><p>measures</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1957,26 +2158,10 @@ or between column vectors of two matrices.</p></td>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-package-information">Package Information</a></li>
-      <li><a href="#section-main-plotting-functions">Main Plotting Functions</a></li>
-      <li><a href="#section-access-modify">Access Modify</a></li>
-      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
-      <li><a href="#section-colors">Colors</a></li>
-      <li><a href="#section-layering">Layering</a></li>
-      <li><a href="#section-glyphs">Glyphs</a></li>
-      <li><a href="#section-bindings">Bindings</a></li>
-      <li><a href="#section-graph">Graph</a></li>
-      <li><a href="#section-navigation-graphs">Navigation Graphs</a></li>
-      <li><a href="#section-contexts">Contexts</a></li>
-      <li><a href="#section-grid-grobs">Grid Grobs</a></li>
-      <li><a href="#section-data">Data</a></li>
-      <li><a href="#section-inspectors">Inspectors</a></li>
-      <li><a href="#section-others">Others</a></li>
-      <li><a href="#section-measures">Measures</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -1987,7 +2172,7 @@ or between column vectors of two matrices.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
