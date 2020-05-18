@@ -1,4 +1,4 @@
-# loon 1.2.4
+# loon 1.3.0
 
 * several new features added to loon plots
     - NAs are now accommodated
@@ -6,6 +6,10 @@
 
 * group by and facetting in loon plots
     - l_plot() and l_hist() now accept arguments by and facet
+    
+* improved docuentation
+    - new vignettes
+    - better organized reference manual via l_web()
     
 * in some OSes the function l_image_import_files() has stopped working
     - seems to be a problem with the tcltk function tkimage.create()

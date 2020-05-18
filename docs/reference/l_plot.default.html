@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -111,7 +111,7 @@
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
     </li>
     <li>
-      <a href="../articles/Rmarkdown.html">Using with Rmarkdown</a>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -205,7 +205,7 @@ If supplied separately, they must be of the same length.</p></td>
     </tr>
     <tr>
       <th>by</th>
-      <td><p>loon plot can be separated by some variables into mutiple panels.
+      <td><p>loon plot can be separated by some variables into multiple panels.
 This argument can take a <code>vector</code>, a <code>list</code> of same lengths or a <code>data.frame</code> as input.</p></td>
     </tr>
     <tr>
@@ -393,7 +393,7 @@ order to be displayed. See the examples below.</p></td>
 
 <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='l_plot.default-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Layout facets</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))</div><div class='output co'>#&gt; [1] "linkingGroup: layout109"</div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))</div><div class='output co'>#&gt; [1] "linkingGroup: layout110"</div><div class='input'>
 <span class='co'># Use with other tk widgets</span>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
 <span class='fu'>tktitle</span>(<span class='no'>tt</span>) <span class='kw'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span>
