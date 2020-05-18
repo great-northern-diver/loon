@@ -17,8 +17,8 @@ navbar:
         href: articles/minorities.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
-      - text: Using with Rmarkdown
-        href: articles/Rmarkdown.html
+      - text: Saving loon plots
+        href: articles/savingLoonPlots.html
     - text: Videos
       menu:
       - text: the (not so) humble (interactive) histogram
@@ -36,128 +36,16 @@ development:
 destination: ../docs/
 
 
-
 reference:
+
   - title: Package Information
     desc:  General Information about the package
     contents:
     - loon
-    - l_help
     - l_web
-  - title: Main Plotting Functions
-    desc:  These are the main functions needed to create plots
-    contents:
-    - l_plot_arguments
-    - starts_with("l_plot")
-    - l_hist
-    - l_plot3D
-    - l_pairs
-    - l_serialaxes
-    - plot.loon
-    - plot.loongraph
-  - title: Access Modify
-    desc: Access Modify
-    contents:
-    - l_cget
-    - l_configure
-    - l_info_states
-    - l_state_names
-    - names.loon
-    - l_getLinkedStates
-    - l_setLinkedStates
-    - l_getOption
-    - l_setOption
-    - l_userOptions
-    - l_getOptionNames
-    - l_getPlots
-    - starts_with("l_scale")
-    - starts_with("l_move")
-    - l_redraw
-    - l_size
-    - l_size<-
-    - l_zoom
-    - l_copyStates
-    - l_getSavedStates
-    - l_saveStates
-  - title: Miscellaneous
-    desc: Miscellaneous
-    contents:
-    - l_resize
-    - l_export
-    - l_export_valid_formats
-    - l_aspect<-
-    - l_aspect
-    - l_setAspect
-    - l_subwin
-    - l_widget
-    - l_setTitleFont
-    - l_getLocations
-    - l_userOptionDefault
+    - l_help
 
-  - title: Colors
-    desc: Colors
-    contents:
-    - color_loon
-    - tkcolors
-    - hex12tohex6
-    - l_hexcolor
-    - l_getColorList
-    - loon_palette
-    - l_hexcolor
-    - l_colRemoveAlpha
-    - starts_with("l_setColor")
-  - title: Layering
-    desc: Layers
-    contents:
-    - starts_with("l_layer")
-    - print.l_layer
-  - title: Glyphs
-    desc: Glyphs
-    contents:
-    - starts_with("l_glyph")
-    - l_primitiveGlyphs
-    - starts_with("l_image")
-    - l_make_glyphs
-  - title: Bindings
-    desc: Bindings
-    contents:
-    - starts_with("l_bind")
-    - starts_with("l_current")
-    - l_after_idle
-  - title: Graph
-    desc: Graph
-    contents:
-    - starts_with("l_graph")
-    - as.graph
-    - as.loongraph
-    - complement
-    - complement.loongraph
-    - completegraph
-    - graphreduce
-    - loongraph
-    - linegraph
-    - linegraph.loongraph
-    - l_getGraph
-    - ndtransitiongraph
-  - title: Navigation Graphs
-    desc: Navigation
-    contents:
-    - starts_with("l_ng")
-    - starts_with("l_nav")
-    - l_create_handle
-  - title: Contexts
-    desc: Contexts are
-    contents:
-    - starts_with("l_context")
-  - title: Grid Grobs
-    desc: Grid Grobs
-    contents:
-    - loonGrob
-    - grid.loon
-    - condGrob
-    - l_createCompoundGrob
-    - l_get_arrangeGrobArgs
-    - loonGrob_layoutType
+
   - title: Data
     desc: data
     contents:
@@ -166,28 +54,435 @@ reference:
     - oliveAcids
     - oliveLocations
     - minority
-  - title: Inspectors
-    desc: inspectors
+
+
+
+  - title: Options
+    desc: Options used by many plots
     contents:
-    - ends_with("inspector")
-    - l_hist_inspector_analysis
-    - l_worldview
-  - title: Others
-    desc: others
+    - l_userOptions
+    - l_getOptionNames
+    - l_userOptionDefault
+    - l_getOption
+    - l_setOption
+    - l_setTitleFont
+
+
+
+  - title: Main Plotting Functions
+    desc:  These are the main functions needed to create plots
     contents:
-    - l_Rlist2nestedTclList
-    - l_nestedTclList2Rlist
-    - l_data
-    - l_throwErrorIfNotLoonWidget
-    - l_toR
-    - l_isLoonWidget
-    - L2_distance
-  - title: Measures
-    desc: measures
+    - l_plot_arguments
+    - l_plot
+  - subtitle: scatterplots
+    contents:
+    - l_plot.default
+    - l_plot.map
+  - subtitle: statistical specializations
+    contents:
+    - l_plot.density
+    - l_plot.decomposed.ts
+    - l_plot.stl
+    - l_plot_ts
+  - subtitle: histograms and barplots
+    contents:
+    - l_hist
+    - Extract-Bin-Info
+  - subtitle: facetting existing loon plots
+    desc: many loon plots can be facetted
+    contents:
+    - l_facet
+    - l_plot_arguments
+  - subtitle: multivariate plots
+    contents:
+    - l_scale3D
+    - l_plot3D
+    - l_pairs
+    - l_serialaxes
+    - l_navgraph
+    - l_ng_ranges
+    - l_ng_plots
+  - subtitle: all l_plot methods
+    contents:
+    - starts_with("l_plot")
+
+
+
+  - title:  Snapshots of loon plots
+    desc:  Loon -> Grid
+    contents:
+    - plot.loon
+    - plot.loongraph
+    - loonGrob
+    - grid.loon
+    - condGrob
+    - l_createCompoundGrob
+    - l_get_arrangeGrobArgs
+    - loonGrob_layoutType
+  - subtitle: Exporting via tcl
+    desc: Alternative export to pdf, etc. via tcl and <CTRL>-p
+    contents:
+    - l_export
+    - l_export_valid_formats
+
+
+
+  - title: Facets and compound plots
+    desc:  Compound plot interaction
+    contents:
+    - l_facet
+    - l_plot_arguments
+    - l_getLocations
+    - l_getPlots
+    - facet_grid_layout
+    - facet_separate_layout
+    - facet_wrap_layout
+
+
+
+
+  - title: Querying and changing the plot programmatically
+    desc: Accessing and  modifying loon plots and their internal states
+    contents:
+    - l_redraw
+    - l_zoom
+    - l_size
+    - l_size<-
+    - l_resize
+
+  - subtitle: Accessing the loon plot
+    contents:
+    - l_create_handle
+    - l_getFromPath
+
+  - subtitle: Scaling plots
+    contents:
+    - l_aspect<-
+    - l_aspect
+    - l_setAspect
+    - starts_with("l_scale")
+
+  - subtitle: Moving points
+    contents:
+    - starts_with("l_move")
+
+
+
+
+  - title: Accessing and modifying loon plot states
+    desc:  states from "names()" are also accessible and settable via "[]"
+  - subtitle: general
+    contents:
+    - names.loon
+    - l_cget
+    - l_configure
+    - l_info_states
+    - l_state_names
+    - l_nDimStateNames
+  - subtitle: linked states
+    contents:
+    - l_getLinkedStates
+    - l_setLinkedStates
+  - subtitle: saving and reusing
+    contents:
+    - l_copyStates
+    - l_getSavedStates
+    - l_saveStates
+
+  - title: Glyphs
+    desc: Glyphs as point symbols in scatterplots
+    contents:
+    - l_primitiveGlyphs
+
+  - subtitle: adding glyphs
+    desc: functions to add glyphs to, or delete them from, a scatterplot
+    contents:
+    - starts_with("l_glyph_add")
+    - starts_with("l_glyph_delete")
+
+  - subtitle: identifying glyphs
+    desc: functions to add glyphs to, or delete them from, a scatterplot
+    contents:
+    - l_glyph_ids
+    - l_glyph_getType
+    - l_glyph_getLabel
+    - l_glyph_relabel
+
+  - subtitle: image glyphs
+    desc: creating image glyphs
+    contents:
+    - starts_with("l_image")
+    - l_make_glyphs
+
+  - subtitle: glyph inspector
+    desc: loon inspectors for various type of glyphs
+    contents:
+    - starts_with("l_glyphs_inspector")
+
+
+
+
+  - title: Loon display layers
+    desc: Loon plots have multiple display layers
+    contents:
+    - l_layer
+    - l_layer_hide
+    - l_layer_show
+    - l_layer_group
+    - l_layers_inspector
+    - l_layer_printTree
+    - print.l_layer
+
+  - subtitle: creating layers
+    desc:  functions to create layers of different types
+    contents:
+    - l_layer_contourLines
+    - l_layer_group
+    - l_layer_heatImage
+    - l_layer_line
+    - l_layer_lines
+    - l_layer_oval
+    - l_layer_points
+    - l_layer_polygon
+    - l_layer_polygons
+    - l_layer_rasterImage
+    - l_layer_rectangle
+    - l_layer_rectangles
+    - l_layer_text
+    - l_layer_texts
+
+  - subtitle: the generic l_layer function
+    desc:  various methods to layer particular objects on a loon plot
+    contents:
+    - l_layer
+    - l_layer.density
+    - l_layer.map
+    - l_layer.Line
+    - l_layer.Lines
+    - l_layer.Polygon
+    - l_layer.Polygons
+    - l_layer.SpatialLines
+    - l_layer.SpatialLinesDataFrame
+    - l_layer.SpatialPoints
+    - l_layer.SpatialPointsDataFrame
+    - l_layer.SpatialPolygons
+    - l_layer.SpatialPolygonsDataFrame
+
+
+  - subtitle: layer organization
+    desc:  query the layer organization
+    contents:
+    - l_layer_bbox
+    - l_layer_ids
+    - l_layer_printTree
+
+  - subtitle: individual layers
+    desc:  query an individual layer
+    contents:
+    - l_layer_index
+    - l_layer_getLabel
+    - l_layer_relabel
+    - l_layer_getType
+    - l_layer_getChildren
+    - l_layer_getParent
+    - l_layer_isVisible
+    - l_layer_layerVisibility
+    - l_layer_groupVisibility
+
+  - subtitle: organizing and reordering layers
+    desc:  various methods to organize layers in a plot
+    contents:
+    - l_layer_hide
+    - l_layer_show
+    - l_layer_lower
+    - l_layer_raise
+    - l_layer_move
+    - l_layer_group
+    - l_layer_demote
+    - l_layer_promote
+    - l_layer_delete
+    - l_layer_expunge
+
+
+
+
+  - title: Graph
+    desc: Loon's native graph class and connection to those of the graph package
+    contents:
+    - loongraph
+    - as.loongraph
+    - as.graph
+    - linegraph
+    - linegraph.loongraph
+    - complement
+    - complement.loongraph
+    - completegraph
+    - graphreduce
+    - l_getGraph
+    - ndtransitiongraph
+
+  - subtitle: interactive graphs
+    contents:
+    - l_graph
+    - l_graph.default
+    - l_graph.graph
+    - l_graph.loongraph
+
+  - subtitle: interactive graph switching
+    desc: functions for switching between graphs in the same display
+    contents:
+    - starts_with("l_graphswitch")
+
+  - subtitle: graph inspector
+    desc: loon inspector for graphs
+    contents:
+    - starts_with("l_graph_inspector")
+
+
+
+
+  - title: Navigation Graphs
+    desc: Loon's navigation graphs having two dimensional nodes and 3- or 4-d edges
+    contents:
+    - starts_with("l_nav")
+  - subtitle: Statistical search navigation
+    desc:  navigation configured based on bivariate statistical measures
+    contents:
+    - starts_with("l_ng_ranges")
+    - starts_with("l_ng_plots")
+
+  - subtitle: Navigators
+    desc: the large ball that traverses a graph; action depends on its "context"
+    contents:
+    - starts_with("l_navigator")
+
+  - subtitle: Contexts
+    desc: contexts attach to navigators and react to their state changes
+    contents:
+    - starts_with("l_context")
+
+  - subtitle: Measures
+    desc: statistical measures to define navigation graphs
     contents:
     - measures1d
     - measures2d
     - scagnostics2d
     - print.measures1d
     - print.measures2d
+    - L2_distance
+
+
+
+  - title: Colors
+    desc: Colors
+    contents:
+    - color_loon
+    - l_hexcolor
+    - tkcolors
+    - hex12tohex6
+    - l_colRemoveAlpha
+    - loon_palette
+    - l_getColorList
+    - starts_with("l_setColor")
+
+
+
+  - title: Inspectors
+    desc: loon inspectors attachable to loon plots
+    contents:
+    - l_worldview
+    - l_hist_inspector_analysis
+    - ends_with("inspector")
+
+
+
+  - title: Bindings and new interaction
+    desc: Loon can create new interaction via a variety of bindings.  Each binding has its own id and will evaluate its own user-defined callback function when it is triggered. See l_help("learn_R_bind")
+
+    contents:
+    - l_after_idle
+    - l_currentindex
+    - l_currenttags
+
+  - subtitle: state binding
+    desc:  Bindings which evaluate a callback function when certain plot states change, as specified at binding creation.
+    contents:
+    - l_bind_state
+    - l_bind_state_get
+    - l_bind_state_delete
+    - l_bind_state_ids
+    - l_bind_state_reorder
+
+  - subtitle: glyph binding
+    desc: Bindings which evaluate a callback function for particular changes in the collection of glyphs of a display
+    contents:
+    - l_bind_glyph
+    - l_bind_glyph_get
+    - l_bind_glyph_delete
+    - l_bind_glyph_ids
+    - l_bind_glyph_reorder
+
+  - subtitle: item binding
+    desc: Item bindings are used for evaluating callback functions at certain mouse and/or keyboard gestures events (i.e. X events) on visual items on the canvas. Items on the canvas can have tags and item bindings are specified to be evaluated at certain X events for items with specific tags.
+    contents:
+    - l_bind_item
+    - l_bind_item_get
+    - l_bind_item_delete
+    - l_bind_item_ids
+    - l_bind_item_reorder
+
+  - subtitle: layer binding
+    desc: Bindings which evaluate a callback function for particular changes in the collection of layers of a display.
+    contents:
+    - l_bind_layer
+    - l_bind_layer_get
+    - l_bind_layer_delete
+    - l_bind_layer_ids
+    - l_bind_layer_reorder
+
+  - subtitle: navigator binding
+    desc: Bindings which evaluate a callback function for particular changes in the collection of navigators of a display.
+    contents:
+    - l_bind_navigator
+    - l_bind_navigator_get
+    - l_bind_navigator_delete
+    - l_bind_navigator_ids
+    - l_bind_navigator_reorder
+
+  - subtitle: canvas binding
+    desc: Canvas bindings are triggered by a mouse/keyboard gesture over the plot as a whole.  They evaluate a callback function when triggered.
+    contents:
+    - l_bind_canvas
+    - l_bind_canvas_get
+    - l_bind_canvas_delete
+    - l_bind_canvas_ids
+    - l_bind_canvas_reorder
+
+  - subtitle: context binding
+    desc: Bindings which evaluate a callback function for particular changes in the collection of contexts of a display
+    contents:
+    - l_bind_context
+    - l_bind_context_get
+    - l_bind_context_delete
+    - l_bind_context_ids
+    - l_bind_context_reorder
+
+
+
+
+  - title: R and TCL
+    desc: functions interfacing between R and TCL
+    contents:
+    - l_create_handle
+    - l_getFromPath
+    - l_data
+    - l_widget
+    - l_subwin
+    - l_toR
+    - l_isLoonWidget
+    - l_throwErrorIfNotLoonWidget
+    - l_Rlist2nestedTclList
+    - l_nestedTclList2Rlist
+    - tkcolors
+
 

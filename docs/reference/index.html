@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Function reference" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -105,7 +108,7 @@
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
     </li>
     <li>
-      <a href="../articles/Rmarkdown.html">Using with Rmarkdown</a>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -163,6 +166,11 @@
           <p class="section-desc"><p>General Information about the package</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -172,15 +180,108 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="l_help.html">l_help()</a></code> </p>
-        </td>
-        <td><p>Open a browser with loon's combined (TCL and R) documentation website</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_web.html">l_web()</a></code> </p>
         </td>
         <td><p>Open a browser with loon's R documentation webpage</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_help.html">l_help()</a></code> </p>
+        </td>
+        <td><p>Open a browser with loon's combined (TCL and R) documentation website</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+          <p class="section-desc"><p>data</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="UsAndThem.html">UsAndThem</a></code> </p>
+        </td>
+        <td><p>Data to re-create Hans Rosling's famous "Us and Them" animation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="olive.html">olive</a></code> </p>
+        </td>
+        <td><p>Fatty Acid Composition of Italian Olive Oils</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="oliveAcids.html">oliveAcids</a></code> </p>
+        </td>
+        <td><p>Just the Fatty Acid Composition of Italian Olive Oils</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="oliveLocations.html">oliveLocations</a></code> </p>
+        </td>
+        <td><p>Geographic location of each Italian olive growing area
+named in the <code>olive</code> data.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="minority.html">minority</a></code> </p>
+        </td>
+        <td><p>Canadian Visible Minority Data 2006</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-options" class="hasAnchor"><a href="#section-options" class="anchor"></a>Options</h2>
+          <p class="section-desc"><p>Options used by many plots</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_userOptions.html">l_userOptions()</a></code> </p>
+        </td>
+        <td><p>Get the names of all loon display options that can be set by the user.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getOptionNames.html">l_getOptionNames()</a></code> </p>
+        </td>
+        <td><p>Get the names of all loon display options</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_userOptionDefault.html">l_userOptionDefault()</a></code> </p>
+        </td>
+        <td><p>Get loon's system default value for the named display option.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getOption.html">l_getOption()</a></code> </p>
+        </td>
+        <td><p>Get the value of a loon display option</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setOption.html">l_setOption()</a></code> </p>
+        </td>
+        <td><p>Set the value of a loon display option</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setTitleFont.html">l_setTitleFont()</a></code> </p>
+        </td>
+        <td><p>Set the title font of all loon displays</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -189,6 +290,11 @@
           <p class="section-desc"><p>These are the main functions needed to create plots</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -196,6 +302,194 @@
         </td>
         <td><p>Arguments common to l_plot functions</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot.html">l_plot()</a></code> </p>
+        </td>
+        <td><p>Create an interactive loon plot widget</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-scatterplots" class="hasAnchor"><a href="#section-scatterplots" class="anchor"></a>scatterplots</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_plot.default.html">l_plot(<i>&lt;default&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The default <code>l_plot</code> for plotting data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot.map.html">l_plot(<i>&lt;map&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Create a plot with a map layer</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-statistical-specializations" class="hasAnchor"><a href="#section-statistical-specializations" class="anchor"></a>statistical specializations</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_plot.density.html">l_plot(<i>&lt;density&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The <code>l_plot</code> method for <code>density</code> objects.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot.decomposed.ts.html">l_plot(<i>&lt;decomposed.ts&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The <code>l_plot</code> method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot.stl.html">l_plot(<i>&lt;stl&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The <code>l_plot</code> methods for seasonally decomposed by loess time series objects (i.e. via stl)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot_ts.html">l_plot_ts()</a></code> </p>
+        </td>
+        <td><p>Draw a decomposed time series loon plot</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-histograms-and-barplots" class="hasAnchor"><a href="#section-histograms-and-barplots" class="anchor"></a>histograms and barplots</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_hist.html">l_hist()</a></code> </p>
+        </td>
+        <td><p>Create an interactive histogram</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Extract-Bin-Info.html">getBinData()</a></code> <code><a href="Extract-Bin-Info.html">l_getBinIds()</a></code> <code><a href="Extract-Bin-Info.html">l_breaks()</a></code> <code><a href="Extract-Bin-Info.html">l_binCut()</a></code> </p>
+        </td>
+        <td><p>Some useful <code>loon</code> histogram functions</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-facetting-existing-loon-plots" class="hasAnchor"><a href="#section-facetting-existing-loon-plots" class="anchor"></a>facetting existing loon plots</h3>
+          <p class="section-desc"><p>many loon plots can be facetted</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_facet.html">l_facet()</a></code> </p>
+        </td>
+        <td><p>Layout Facets across multiple panels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot_arguments.html">l_plot_arguments</a></code> </p>
+        </td>
+        <td><p>Arguments common to l_plot functions</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-multivariate-plots" class="hasAnchor"><a href="#section-multivariate-plots" class="anchor"></a>multivariate plots</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_scale3D.html">l_scale3D()</a></code> </p>
+        </td>
+        <td><p>Scale for 3d plotting</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_plot3D.html">l_plot3D()</a></code> </p>
+        </td>
+        <td><p>Create an interactive loon 3d plot widget</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_pairs.html">l_pairs()</a></code> </p>
+        </td>
+        <td><p>An interactive scatterplot matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_serialaxes.html">l_serialaxes()</a></code> </p>
+        </td>
+        <td><p>Create a Serialaxes Widget</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navgraph.html">l_navgraph()</a></code> </p>
+        </td>
+        <td><p>Explore a dataset with the canonical 2d navigation graph setting</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_ranges.html">l_ng_ranges()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a 
+  slider</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.html">l_ng_plots()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a 
+  scatterplot matrix</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-all-l-plot-methods" class="hasAnchor"><a href="#section-all-l-plot-methods" class="anchor"></a>all l_plot methods</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_plot.html">l_plot()</a></code> </p>
@@ -246,6 +540,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="l_plot_arguments.html">l_plot_arguments</a></code> </p>
+        </td>
+        <td><p>Arguments common to l_plot functions</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_plot_inspector.html">l_plot_inspector()</a></code> </p>
         </td>
         <td><p>Create a Scatterplot Inspector</p></td>
@@ -261,25 +561,20 @@
           <p><code><a href="l_plot_ts.html">l_plot_ts()</a></code> </p>
         </td>
         <td><p>Draw a decomposed time series loon plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_hist.html">l_hist()</a></code> </p>
-        </td>
-        <td><p>Create an interactive histogram</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_pairs.html">l_pairs()</a></code> </p>
-        </td>
-        <td><p>An interactive scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_serialaxes.html">l_serialaxes()</a></code> </p>
-        </td>
-        <td><p>Create a Serialaxes Widget</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-snapshots-of-loon-plots" class="hasAnchor"><a href="#section-snapshots-of-loon-plots" class="anchor"></a>Snapshots of loon plots</h2>
+          <p class="section-desc"><p>Loon -&gt; Grid</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="plot.loon.html">plot(<i>&lt;loon&gt;</i>)</a></code> </p>
@@ -291,81 +586,105 @@
           <p><code><a href="plot.loongraph.html">plot(<i>&lt;loongraph&gt;</i>)</a></code> </p>
         </td>
         <td><p>Plot a loon graph object with base R graphics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loonGrob.html">loonGrob()</a></code> </p>
+        </td>
+        <td><p>Create a grid grob from a loon widget handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="grid.loon.html">grid.loon()</a></code> </p>
+        </td>
+        <td><p>Create and optionally draw a grid grob from a loon widget handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="condGrob.html">condGrob()</a></code> </p>
+        </td>
+        <td><p>Create a named grob or a template grob depending on a test</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_createCompoundGrob.html">l_createCompoundGrob()</a></code> </p>
+        </td>
+        <td><p>For the target compound loon plot, creates the final grob from
+the class of the `target` and the `arrangeGrob.args`</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_get_arrangeGrobArgs.html">l_get_arrangeGrobArgs()</a></code> </p>
+        </td>
+        <td><p>For the target (compound) loon plot, determines all arguments
+(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
+so as to determine the layout in `grid` graphics.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loonGrob_layoutType.html">loonGrob_layoutType()</a></code> </p>
+        </td>
+        <td><p>A generic function used to distinguish whether only the locations
+of plots will be used to arrange them in a grob, or whether
+all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-exporting-via-tcl" class="hasAnchor"><a href="#section-exporting-via-tcl" class="anchor"></a>Exporting via tcl</h3>
+          <p class="section-desc"><p>Alternative export to pdf, etc. via tcl and <ctrl>-p</ctrl></p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_export.html">l_export()</a></code> </p>
+        </td>
+        <td><p>Export a loon plot as an image</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_export_valid_formats.html">l_export_valid_formats()</a></code> </p>
+        </td>
+        <td><p>Return a list of the available image formats when exporting a loon
+  plot</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-access-modify" class="hasAnchor"><a href="#section-access-modify" class="anchor"></a>Access Modify</h2>
-          <p class="section-desc"><p>Access Modify</p></p>
+          <h2 id="section-facets-and-compound-plots" class="hasAnchor"><a href="#section-facets-and-compound-plots" class="anchor"></a>Facets and compound plots</h2>
+          <p class="section-desc"><p>Compound plot interaction</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="l_cget.html">l_cget()</a></code> </p>
+          <p><code><a href="l_facet.html">l_facet()</a></code> </p>
         </td>
-        <td><p>Query a Plot State</p></td>
+        <td><p>Layout Facets across multiple panels</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_configure.html">l_configure()</a></code> </p>
+          <p><code><a href="l_plot_arguments.html">l_plot_arguments</a></code> </p>
         </td>
-        <td><p>Modify one or multiple plot states</p></td>
+        <td><p>Arguments common to l_plot functions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_info_states.html">l_info_states()</a></code> </p>
+          <p><code><a href="l_getLocations.html">l_getLocations()</a></code> </p>
         </td>
-        <td><p>Retrieve Information about the States of a Loon Widget</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_state_names.html">l_state_names()</a></code> </p>
-        </td>
-        <td><p>Get State Names of Loon Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="names.loon.html">names(<i>&lt;loon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Get State Names of Loon Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getLinkedStates.html">l_getLinkedStates()</a></code> </p>
-        </td>
-        <td><p>Query the States that are Linked with Loon's Standard Linking Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setLinkedStates.html">l_setLinkedStates()</a></code> </p>
-        </td>
-        <td><p>Modify States of a Plot that are Linked in Loon's Standard Linking 
-  Model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getOption.html">l_getOption()</a></code> </p>
-        </td>
-        <td><p>Get the value of a loon display option</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setOption.html">l_setOption()</a></code> </p>
-        </td>
-        <td><p>Set the value of a loon display option</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_userOptions.html">l_userOptions()</a></code> </p>
-        </td>
-        <td><p>Get the names of all loon display options that can be set by the user.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getOptionNames.html">l_getOptionNames()</a></code> </p>
-        </td>
-        <td><p>Get the names of all loon display options</p></td>
+        <td><p>For the target compound loon plot, determines location (only and excluding the grobs)
+arguments to pass to `gridExtra::arrangeGrob()`</p></td>
       </tr><tr>
         
         <td>
@@ -373,6 +692,123 @@
         </td>
         <td><p>For the target compound loon plot, determines all the loon plots
 in that compound plot.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="facet_grid_layout.html">facet_grid_layout()</a></code> </p>
+        </td>
+        <td><p>Layout as a grid</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="facet_separate_layout.html">facet_separate_layout()</a></code> </p>
+        </td>
+        <td><p>layout separately</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="facet_wrap_layout.html">facet_wrap_layout()</a></code> </p>
+        </td>
+        <td><p>Layout as a wrap</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-querying-and-changing-the-plot-programmatically" class="hasAnchor"><a href="#section-querying-and-changing-the-plot-programmatically" class="anchor"></a>Querying and changing the plot programmatically</h2>
+          <p class="section-desc"><p>Accessing and modifying loon plots and their internal states</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_redraw.html">l_redraw()</a></code> </p>
+        </td>
+        <td><p>Force a Content Redraw of a Plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_zoom.html">l_zoom()</a></code> </p>
+        </td>
+        <td><p>Zoom from and towards the center</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_size.html">l_size()</a></code> </p>
+        </td>
+        <td><p>Query Size of a Plot Display</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_size-set.html">`l_size&lt;-`()</a></code> </p>
+        </td>
+        <td><p>Resize Plot Widget</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_resize.html">l_resize()</a></code> </p>
+        </td>
+        <td><p>Resize Plot Widget</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-accessing-the-loon-plot" class="hasAnchor"><a href="#section-accessing-the-loon-plot" class="anchor"></a>Accessing the loon plot</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_create_handle.html">l_create_handle()</a></code> </p>
+        </td>
+        <td><p>Create a loon object handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getFromPath.html">l_getFromPath()</a></code> </p>
+        </td>
+        <td><p>Create loon objects from path name</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-scaling-plots" class="hasAnchor"><a href="#section-scaling-plots" class="anchor"></a>Scaling plots</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_aspect-set.html">`l_aspect&lt;-`()</a></code> </p>
+        </td>
+        <td><p>Set the aspect ratio of a plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_aspect.html">l_aspect()</a></code> </p>
+        </td>
+        <td><p>Query the aspect ratio of a plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setAspect.html">l_setAspect()</a></code> </p>
+        </td>
+        <td><p>Set the aspect ratio of a plot</p></td>
       </tr><tr>
         
         <td>
@@ -409,7 +845,20 @@ in that compound plot.</p></td>
           <p><code><a href="l_scaleto_world.html">l_scaleto_world()</a></code> </p>
         </td>
         <td><p>Change Plot Region to Display All Plot Data</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-moving-points" class="hasAnchor"><a href="#section-moving-points" class="anchor"></a>Moving points</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_move_grid.html">l_move_grid()</a></code> </p>
@@ -451,31 +900,104 @@ in that compound plot.</p></td>
           <p><code><a href="l_move_vdist.html">l_move_vdist()</a></code> </p>
         </td>
         <td><p>Vertically Distribute Points or Nodes</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-accessing-and-modifying-loon-plot-states" class="hasAnchor"><a href="#section-accessing-and-modifying-loon-plot-states" class="anchor"></a>Accessing and modifying loon plot states</h2>
+          <p class="section-desc"><p>states from “names()” are also accessible and settable via “[]”</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-general" class="hasAnchor"><a href="#section-general" class="anchor"></a>general</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="names.loon.html">names(<i>&lt;loon&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Get State Names of Loon Object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_redraw.html">l_redraw()</a></code> </p>
+          <p><code><a href="l_cget.html">l_cget()</a></code> </p>
         </td>
-        <td><p>Force a Content Redraw of a Plot</p></td>
+        <td><p>Query a Plot State</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_size.html">l_size()</a></code> </p>
+          <p><code><a href="l_configure.html">l_configure()</a></code> </p>
         </td>
-        <td><p>Query Size of a Plot Display</p></td>
+        <td><p>Modify one or multiple plot states</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_size-set.html">`l_size<-`()</a></code> </p>
+          <p><code><a href="l_info_states.html">l_info_states()</a></code> </p>
         </td>
-        <td><p>Resize Plot Widget</p></td>
+        <td><p>Retrieve Information about the States of a Loon Widget</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_zoom.html">l_zoom()</a></code> </p>
+          <p><code><a href="l_state_names.html">l_state_names()</a></code> </p>
         </td>
-        <td><p>Zoom from and towards the center</p></td>
+        <td><p>Get State Names of Loon Object</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="l_nDimStateNames.html">l_nDimStateNames()</a></code> </p>
+        </td>
+        <td><p>N dimensional state names access</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-linked-states" class="hasAnchor"><a href="#section-linked-states" class="anchor"></a>linked states</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_getLinkedStates.html">l_getLinkedStates()</a></code> </p>
+        </td>
+        <td><p>Query the States that are Linked with Loon's Standard Linking Model</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setLinkedStates.html">l_setLinkedStates()</a></code> </p>
+        </td>
+        <td><p>Modify States of a Plot that are Linked in Loon's Standard Linking 
+  Model</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-saving-and-reusing" class="hasAnchor"><a href="#section-saving-and-reusing" class="anchor"></a>saving and reusing</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_copyStates.html">l_copyStates()</a></code> </p>
@@ -497,482 +1019,34 @@ in that compound plot.</p></td>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
-          <p class="section-desc"><p>Miscellaneous</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="l_resize.html">l_resize()</a></code> </p>
-        </td>
-        <td><p>Resize Plot Widget</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_export.html">l_export()</a></code> </p>
-        </td>
-        <td><p>Export a loon plot as an image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_export_valid_formats.html">l_export_valid_formats()</a></code> </p>
-        </td>
-        <td><p>Return a list of the available image formats when exporting a loon
-  plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_aspect-set.html">`l_aspect<-`()</a></code> </p>
-        </td>
-        <td><p>Set the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_aspect.html">l_aspect()</a></code> </p>
-        </td>
-        <td><p>Query the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setAspect.html">l_setAspect()</a></code> </p>
-        </td>
-        <td><p>Set the aspect ratio of a plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_subwin.html">l_subwin()</a></code> </p>
-        </td>
-        <td><p>Create a child widget path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_widget.html">l_widget()</a></code> </p>
-        </td>
-        <td><p>Dummy function to be used in the Roxygen documentation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setTitleFont.html">l_setTitleFont()</a></code> </p>
-        </td>
-        <td><p>Set the title font of all loon displays</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getLocations.html">l_getLocations()</a></code> </p>
-        </td>
-        <td><p>For the target compound loon plot, determines location (only and excluding the grobs)
-arguments to pass to `gridExtra::arrangeGrob()`</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_userOptionDefault.html">l_userOptionDefault()</a></code> </p>
-        </td>
-        <td><p>Get loon's system default value for the named display option.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-colors" class="hasAnchor"><a href="#section-colors" class="anchor"></a>Colors</h2>
-          <p class="section-desc"><p>Colors</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="color_loon.html">color_loon()</a></code> </p>
-        </td>
-        <td><p>Create a palette with loon's color mapping</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tkcolors.html">tkcolors()</a></code> </p>
-        </td>
-        <td><p>List the valid Tk color names</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hex12tohex6.html">hex12tohex6()</a></code> </p>
-        </td>
-        <td><p>Convert 12 hexadecimal digit color representations to 6 hexidecimal digit
-color representations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_hexcolor.html">l_hexcolor()</a></code> </p>
-        </td>
-        <td><p>Convert color names to their 12 digit hexadecimal color representation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getColorList.html">l_getColorList()</a></code> </p>
-        </td>
-        <td><p>Get loon's color mapping list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loon_palette.html">loon_palette()</a></code> </p>
-        </td>
-        <td><p>Loon's color generator for creating color palettes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_colRemoveAlpha.html">l_colRemoveAlpha()</a></code> </p>
-        </td>
-        <td><p>Convert color representations having an alpha transparency level to 6 digit color
-  representations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList.html">l_setColorList()</a></code> </p>
-        </td>
-        <td><p>Use custom colors for mapping nominal values to distinct colors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from ColorBrewer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList_baseR.html">l_setColorList_baseR()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from base R</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList_ggplot2.html">l_setColorList_ggplot2()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from ggplot2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList_hcl.html">l_setColorList_hcl()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from hcl color wheen</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_setColorList_loon.html">l_setColorList_loon()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from loon defaults</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-layering" class="hasAnchor"><a href="#section-layering" class="anchor"></a>Layering</h2>
-          <p class="section-desc"><p>Layers</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="l_layer.Line.html">l_layer(<i>&lt;Line&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer line in Line object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.Lines.html">l_layer(<i>&lt;Lines&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer lines in Lines object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.Polygon.html">l_layer(<i>&lt;Polygon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer polygon in Polygon object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.Polygons.html">l_layer(<i>&lt;Polygons&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer polygons in Polygons object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.html">l_layer()</a></code> </p>
-        </td>
-        <td><p>Loon layers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialLines.html">l_layer(<i>&lt;SpatialLines&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer lines in SpatialLines object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialLinesDataFrame.html">l_layer(<i>&lt;SpatialLinesDataFrame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer lines in SpatialLinesDataFrame object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialPoints.html">l_layer(<i>&lt;SpatialPoints&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer points in SpatialPoints object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialPointsDataFrame.html">l_layer(<i>&lt;SpatialPointsDataFrame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer points in SpatialPointsDataFrame object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialPolygons.html">l_layer(<i>&lt;SpatialPolygons&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer polygons in SpatialPolygons object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.SpatialPolygonsDataFrame.html">l_layer(<i>&lt;SpatialPolygonsDataFrame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer polygons in SpatialPolygonDataFrame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.density.html">l_layer(<i>&lt;density&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Layer Method for Kernel Density Estimation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer.map.html">l_layer(<i>&lt;map&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Add a Map of class map as Drawings to Loon plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_bbox.html">l_layer_bbox()</a></code> </p>
-        </td>
-        <td><p>Get the bounding box of a layer.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_contourLines.html">l_layer_contourLines()</a></code> </p>
-        </td>
-        <td><p>Layer Contour Lines</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_delete.html">l_layer_delete()</a></code> </p>
-        </td>
-        <td><p>Delete a layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_demote.html">l_layer_demote()</a></code> </p>
-        </td>
-        <td><p>Moves the layer to be a child of its right group layer sibling</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_expunge.html">l_layer_expunge()</a></code> </p>
-        </td>
-        <td><p>Delete a layer and all its descendants</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_getChildren.html">l_layer_getChildren()</a></code> </p>
-        </td>
-        <td><p>Get children of a group layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_getLabel.html">l_layer_getLabel()</a></code> </p>
-        </td>
-        <td><p>Get layer label.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_getParent.html">l_layer_getParent()</a></code> </p>
-        </td>
-        <td><p>Get parent layer id of a layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_getType.html">l_layer_getType()</a></code> </p>
-        </td>
-        <td><p>Get layer type</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_group.html">l_layer_group()</a></code> </p>
-        </td>
-        <td><p>layer a group node</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_groupVisibility.html">l_layer_groupVisibility()</a></code> </p>
-        </td>
-        <td><p>Queries visibility status of decendants</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_heatImage.html">l_layer_heatImage()</a></code> </p>
-        </td>
-        <td><p>Display a Heat Image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_hide.html">l_layer_hide()</a></code> </p>
-        </td>
-        <td><p>Hide a Layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_ids.html">l_layer_ids()</a></code> </p>
-        </td>
-        <td><p>List ids of layers in Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_index.html">l_layer_index()</a></code> </p>
-        </td>
-        <td><p>Get the order index of a layer among its siblings</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_isVisible.html">l_layer_isVisible()</a></code> </p>
-        </td>
-        <td><p>Return visibility flag of layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_layerVisibility.html">l_layer_layerVisibility()</a></code> </p>
-        </td>
-        <td><p>Returns logical value for whether layer is actually seen</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_line.html">l_layer_line()</a></code> </p>
-        </td>
-        <td><p>Layer a line</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_lines.html">l_layer_lines()</a></code> </p>
-        </td>
-        <td><p>Layer lines</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_lower.html">l_layer_lower()</a></code> </p>
-        </td>
-        <td><p>Switch the layer place with its sibling to the right</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_move.html">l_layer_move()</a></code> </p>
-        </td>
-        <td><p>Move a layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_oval.html">l_layer_oval()</a></code> </p>
-        </td>
-        <td><p>Layer a oval</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_points.html">l_layer_points()</a></code> </p>
-        </td>
-        <td><p>Layer points</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_polygon.html">l_layer_polygon()</a></code> </p>
-        </td>
-        <td><p>Layer a polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_polygons.html">l_layer_polygons()</a></code> </p>
-        </td>
-        <td><p>Layer polygons</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_printTree.html">l_layer_printTree()</a></code> </p>
-        </td>
-        <td><p>Print the layer tree</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_promote.html">l_layer_promote()</a></code> </p>
-        </td>
-        <td><p>Moves the layer up to be a left sibling of its parent</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_raise.html">l_layer_raise()</a></code> </p>
-        </td>
-        <td><p>Switch the layer place with its sibling to the left</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_rasterImage.html">l_layer_rasterImage()</a></code> </p>
-        </td>
-        <td><p>Layer a Raster Image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_rectangle.html">l_layer_rectangle()</a></code> </p>
-        </td>
-        <td><p>Layer a rectangle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_rectangles.html">l_layer_rectangles()</a></code> </p>
-        </td>
-        <td><p>Layer rectangles</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_relabel.html">l_layer_relabel()</a></code> </p>
-        </td>
-        <td><p>Change layer label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_show.html">l_layer_show()</a></code> </p>
-        </td>
-        <td><p>Show or unhide a Layer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_text.html">l_layer_text()</a></code> </p>
-        </td>
-        <td><p>Layer a text</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layer_texts.html">l_layer_texts()</a></code> </p>
-        </td>
-        <td><p>Layer texts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_layers_inspector.html">l_layers_inspector()</a></code> </p>
-        </td>
-        <td><p>Create a Layers Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.l_layer.html">print(<i>&lt;l_layer&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a summary of a loon layer object</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-glyphs" class="hasAnchor"><a href="#section-glyphs" class="anchor"></a>Glyphs</h2>
-          <p class="section-desc"><p>Glyphs</p></p>
+          <p class="section-desc"><p>Glyphs as point symbols in scatterplots</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_primitiveGlyphs.html">l_primitiveGlyphs()</a></code> </p>
+        </td>
+        <td><p>The primitive glyphs available to a scatterplot or graph display</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-adding-glyphs" class="hasAnchor"><a href="#section-adding-glyphs" class="anchor"></a>adding glyphs</h3>
+          <p class="section-desc"><p>functions to add glyphs to, or delete them from, a scatterplot</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1021,12 +1095,25 @@ color representations</p></td>
           <p><code><a href="l_glyph_delete.html">l_glyph_delete()</a></code> </p>
         </td>
         <td><p>Delete a Glyph</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-identifying-glyphs" class="hasAnchor"><a href="#section-identifying-glyphs" class="anchor"></a>identifying glyphs</h3>
+          <p class="section-desc"><p>functions to add glyphs to, or delete them from, a scatterplot</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="l_glyph_getLabel.html">l_glyph_getLabel()</a></code> </p>
+          <p><code><a href="l_glyph_ids.html">l_glyph_ids()</a></code> </p>
         </td>
-        <td><p>Get Glyph Label</p></td>
+        <td><p>List glyphs ids</p></td>
       </tr><tr>
         
         <td>
@@ -1036,16 +1123,66 @@ color representations</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_glyph_ids.html">l_glyph_ids()</a></code> </p>
+          <p><code><a href="l_glyph_getLabel.html">l_glyph_getLabel()</a></code> </p>
         </td>
-        <td><p>List glyphs ids</p></td>
+        <td><p>Get Glyph Label</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="l_glyph_relabel.html">l_glyph_relabel()</a></code> </p>
         </td>
         <td><p>Relabel Glyph</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-image-glyphs" class="hasAnchor"><a href="#section-image-glyphs" class="anchor"></a>image glyphs</h3>
+          <p class="section-desc"><p>creating image glyphs</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_image_import_array.html">l_image_import_array()</a></code> </p>
+        </td>
+        <td><p>Import Greyscale Images as Tcl images from an Array</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="l_image_import_files.html">l_image_import_files()</a></code> </p>
+        </td>
+        <td><p>Import Image Files as Tk Image Objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_imageviewer.html">l_imageviewer()</a></code> </p>
+        </td>
+        <td><p>Display Tcl Images in a Simple Image Viewer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_make_glyphs.html">l_make_glyphs()</a></code> </p>
+        </td>
+        <td><p>Make arbitrary glyphs with R graphic devices</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-glyph-inspector" class="hasAnchor"><a href="#section-glyph-inspector" class="anchor"></a>glyph inspector</h3>
+          <p class="section-desc"><p>loon inspectors for various type of glyphs</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_glyphs_inspector.html">l_glyphs_inspector()</a></code> </p>
@@ -1075,280 +1212,512 @@ color representations</p></td>
           <p><code><a href="l_glyphs_inspector_text.html">l_glyphs_inspector_text()</a></code> </p>
         </td>
         <td><p>Create a Text Glyph Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_primitiveGlyphs.html">l_primitiveGlyphs()</a></code> </p>
-        </td>
-        <td><p>The primitive glyphs available to a scatterplot or graph display</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_image_import_array.html">l_image_import_array()</a></code> </p>
-        </td>
-        <td><p>Import Greyscale Images as Tcl images from an Array</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_image_import_files.html">l_image_import_files()</a></code> </p>
-        </td>
-        <td><p>Import Image Files as Tk Image Objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_imageviewer.html">l_imageviewer()</a></code> </p>
-        </td>
-        <td><p>Display Tcl Images in a Simple Image Viewer</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_make_glyphs.html">l_make_glyphs()</a></code> </p>
-        </td>
-        <td><p>Make arbitrary glyphs with R graphic devices</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-bindings" class="hasAnchor"><a href="#section-bindings" class="anchor"></a>Bindings</h2>
-          <p class="section-desc"><p>Bindings</p></p>
+          <h2 id="section-loon-display-layers" class="hasAnchor"><a href="#section-loon-display-layers" class="anchor"></a>Loon display layers</h2>
+          <p class="section-desc"><p>Loon plots have multiple display layers</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="l_bind_canvas.html">l_bind_canvas()</a></code> </p>
+          <p><code><a href="l_layer.html">l_layer()</a></code> </p>
         </td>
-        <td><p>Create a Canvas Binding</p></td>
+        <td><p>Loon layers</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_canvas_delete.html">l_bind_canvas_delete()</a></code> </p>
+          <p><code><a href="l_layer_hide.html">l_layer_hide()</a></code> </p>
         </td>
-        <td><p>Delete a canvas binding</p></td>
+        <td><p>Hide a Layer</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_canvas_get.html">l_bind_canvas_get()</a></code> </p>
+          <p><code><a href="l_layer_show.html">l_layer_show()</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a canvas binding</p></td>
+        <td><p>Show or unhide a Layer</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_canvas_ids.html">l_bind_canvas_ids()</a></code> </p>
+          <p><code><a href="l_layer_group.html">l_layer_group()</a></code> </p>
         </td>
-        <td><p>List canvas binding ids</p></td>
+        <td><p>layer a group node</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_canvas_reorder.html">l_bind_canvas_reorder()</a></code> </p>
+          <p><code><a href="l_layers_inspector.html">l_layers_inspector()</a></code> </p>
         </td>
-        <td><p>Reorder the canvas binding evaluation sequence</p></td>
+        <td><p>Create a Layers Inspector</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_context.html">l_bind_context()</a></code> </p>
+          <p><code><a href="l_layer_printTree.html">l_layer_printTree()</a></code> </p>
         </td>
-        <td><p>Add a context binding</p></td>
+        <td><p>Print the layer tree</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_context_delete.html">l_bind_context_delete()</a></code> </p>
+          <p><code><a href="print.l_layer.html">print(<i>&lt;l_layer&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Delete a context binding</p></td>
+        <td><p>Print a summary of a loon layer object</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-creating-layers" class="hasAnchor"><a href="#section-creating-layers" class="anchor"></a>creating layers</h3>
+          <p class="section-desc"><p>functions to create layers of different types</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_layer_contourLines.html">l_layer_contourLines()</a></code> </p>
+        </td>
+        <td><p>Layer Contour Lines</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_context_get.html">l_bind_context_get()</a></code> </p>
+          <p><code><a href="l_layer_group.html">l_layer_group()</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a context binding</p></td>
+        <td><p>layer a group node</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_context_ids.html">l_bind_context_ids()</a></code> </p>
+          <p><code><a href="l_layer_heatImage.html">l_layer_heatImage()</a></code> </p>
         </td>
-        <td><p>List context binding ids</p></td>
+        <td><p>Display a Heat Image</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_context_reorder.html">l_bind_context_reorder()</a></code> </p>
+          <p><code><a href="l_layer_line.html">l_layer_line()</a></code> </p>
         </td>
-        <td><p>Reorder the context binding evaluation sequence</p></td>
+        <td><p>Layer a line</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_glyph.html">l_bind_glyph()</a></code> </p>
+          <p><code><a href="l_layer_lines.html">l_layer_lines()</a></code> </p>
         </td>
-        <td><p>Add a glyph binding</p></td>
+        <td><p>Layer lines</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_glyph_delete.html">l_bind_glyph_delete()</a></code> </p>
+          <p><code><a href="l_layer_oval.html">l_layer_oval()</a></code> </p>
         </td>
-        <td><p>Delete a glyph binding</p></td>
+        <td><p>Layer a oval</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_glyph_get.html">l_bind_glyph_get()</a></code> </p>
+          <p><code><a href="l_layer_points.html">l_layer_points()</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a glyph binding</p></td>
+        <td><p>Layer points</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_glyph_ids.html">l_bind_glyph_ids()</a></code> </p>
+          <p><code><a href="l_layer_polygon.html">l_layer_polygon()</a></code> </p>
         </td>
-        <td><p>List glyph binding ids</p></td>
+        <td><p>Layer a polygon</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_glyph_reorder.html">l_bind_glyph_reorder()</a></code> </p>
+          <p><code><a href="l_layer_polygons.html">l_layer_polygons()</a></code> </p>
         </td>
-        <td><p>Reorder the glyph binding evaluation sequence</p></td>
+        <td><p>Layer polygons</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_item.html">l_bind_item()</a></code> </p>
+          <p><code><a href="l_layer_rasterImage.html">l_layer_rasterImage()</a></code> </p>
         </td>
-        <td><p>Create a Canvas Binding</p></td>
+        <td><p>Layer a Raster Image</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_item_delete.html">l_bind_item_delete()</a></code> </p>
+          <p><code><a href="l_layer_rectangle.html">l_layer_rectangle()</a></code> </p>
         </td>
-        <td><p>Delete a item binding</p></td>
+        <td><p>Layer a rectangle</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_item_get.html">l_bind_item_get()</a></code> </p>
+          <p><code><a href="l_layer_rectangles.html">l_layer_rectangles()</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a item binding</p></td>
+        <td><p>Layer rectangles</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_item_ids.html">l_bind_item_ids()</a></code> </p>
+          <p><code><a href="l_layer_text.html">l_layer_text()</a></code> </p>
         </td>
-        <td><p>List item binding ids</p></td>
+        <td><p>Layer a text</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_item_reorder.html">l_bind_item_reorder()</a></code> </p>
+          <p><code><a href="l_layer_texts.html">l_layer_texts()</a></code> </p>
         </td>
-        <td><p>Reorder the item binding evaluation sequence</p></td>
+        <td><p>Layer texts</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-the-generic-l-layer-function" class="hasAnchor"><a href="#section-the-generic-l-layer-function" class="anchor"></a>the generic l_layer function</h3>
+          <p class="section-desc"><p>various methods to layer particular objects on a loon plot</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_layer.html">l_layer()</a></code> </p>
+        </td>
+        <td><p>Loon layers</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_layer.html">l_bind_layer()</a></code> </p>
+          <p><code><a href="l_layer.density.html">l_layer(<i>&lt;density&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Add a layer binding</p></td>
+        <td><p>Layer Method for Kernel Density Estimation</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_layer_delete.html">l_bind_layer_delete()</a></code> </p>
+          <p><code><a href="l_layer.map.html">l_layer(<i>&lt;map&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Delete a layer binding</p></td>
+        <td><p>Add a Map of class map as Drawings to Loon plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_layer_get.html">l_bind_layer_get()</a></code> </p>
+          <p><code><a href="l_layer.Line.html">l_layer(<i>&lt;Line&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a layer binding</p></td>
+        <td><p>Layer line in Line object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_layer_ids.html">l_bind_layer_ids()</a></code> </p>
+          <p><code><a href="l_layer.Lines.html">l_layer(<i>&lt;Lines&gt;</i>)</a></code> </p>
         </td>
-        <td><p>List layer binding ids</p></td>
+        <td><p>Layer lines in Lines object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_layer_reorder.html">l_bind_layer_reorder()</a></code> </p>
+          <p><code><a href="l_layer.Polygon.html">l_layer(<i>&lt;Polygon&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Reorder the layer binding evaluation sequence</p></td>
+        <td><p>Layer polygon in Polygon object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_navigator.html">l_bind_navigator()</a></code> </p>
+          <p><code><a href="l_layer.Polygons.html">l_layer(<i>&lt;Polygons&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Add a navigator binding</p></td>
+        <td><p>Layer polygons in Polygons object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_navigator_delete.html">l_bind_navigator_delete()</a></code> </p>
+          <p><code><a href="l_layer.SpatialLines.html">l_layer(<i>&lt;SpatialLines&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Delete a navigator binding</p></td>
+        <td><p>Layer lines in SpatialLines object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_navigator_get.html">l_bind_navigator_get()</a></code> </p>
+          <p><code><a href="l_layer.SpatialLinesDataFrame.html">l_layer(<i>&lt;SpatialLinesDataFrame&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a navigator binding</p></td>
+        <td><p>Layer lines in SpatialLinesDataFrame object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_navigator_ids.html">l_bind_navigator_ids()</a></code> </p>
+          <p><code><a href="l_layer.SpatialPoints.html">l_layer(<i>&lt;SpatialPoints&gt;</i>)</a></code> </p>
         </td>
-        <td><p>List navigator binding ids</p></td>
+        <td><p>Layer points in SpatialPoints object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_navigator_reorder.html">l_bind_navigator_reorder()</a></code> </p>
+          <p><code><a href="l_layer.SpatialPointsDataFrame.html">l_layer(<i>&lt;SpatialPointsDataFrame&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Reorder the navigator binding evaluation sequence</p></td>
+        <td><p>Layer points in SpatialPointsDataFrame object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_state.html">l_bind_state()</a></code> </p>
+          <p><code><a href="l_layer.SpatialPolygons.html">l_layer(<i>&lt;SpatialPolygons&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Add a state change binding</p></td>
+        <td><p>Layer polygons in SpatialPolygons object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_state_delete.html">l_bind_state_delete()</a></code> </p>
+          <p><code><a href="l_layer.SpatialPolygonsDataFrame.html">l_layer(<i>&lt;SpatialPolygonsDataFrame&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Delete a state binding</p></td>
+        <td><p>Layer polygons in SpatialPolygonDataFrame</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-layer-organization" class="hasAnchor"><a href="#section-layer-organization" class="anchor"></a>layer organization</h3>
+          <p class="section-desc"><p>query the layer organization</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_layer_bbox.html">l_layer_bbox()</a></code> </p>
+        </td>
+        <td><p>Get the bounding box of a layer.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_state_get.html">l_bind_state_get()</a></code> </p>
+          <p><code><a href="l_layer_ids.html">l_layer_ids()</a></code> </p>
         </td>
-        <td><p>Get the event pattern and callback Tcl code of a state binding</p></td>
+        <td><p>List ids of layers in Plot</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_state_ids.html">l_bind_state_ids()</a></code> </p>
+          <p><code><a href="l_layer_printTree.html">l_layer_printTree()</a></code> </p>
         </td>
-        <td><p>List state binding ids</p></td>
+        <td><p>Print the layer tree</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-individual-layers" class="hasAnchor"><a href="#section-individual-layers" class="anchor"></a>individual layers</h3>
+          <p class="section-desc"><p>query an individual layer</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_layer_index.html">l_layer_index()</a></code> </p>
+        </td>
+        <td><p>Get the order index of a layer among its siblings</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_bind_state_reorder.html">l_bind_state_reorder()</a></code> </p>
+          <p><code><a href="l_layer_getLabel.html">l_layer_getLabel()</a></code> </p>
         </td>
-        <td><p>Reorder the state binding evaluation sequence</p></td>
+        <td><p>Get layer label.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_currentindex.html">l_currentindex()</a></code> </p>
+          <p><code><a href="l_layer_relabel.html">l_layer_relabel()</a></code> </p>
         </td>
-        <td><p>Get layer-relative index of the item below the mouse cursor</p></td>
+        <td><p>Change layer label</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_currenttags.html">l_currenttags()</a></code> </p>
+          <p><code><a href="l_layer_getType.html">l_layer_getType()</a></code> </p>
         </td>
-        <td><p>Get tags of the item below the mouse cursor</p></td>
+        <td><p>Get layer type</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_after_idle.html">l_after_idle()</a></code> </p>
+          <p><code><a href="l_layer_getChildren.html">l_layer_getChildren()</a></code> </p>
         </td>
-        <td><p>Evaluate a function on once the processor is idle</p></td>
+        <td><p>Get children of a group layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_getParent.html">l_layer_getParent()</a></code> </p>
+        </td>
+        <td><p>Get parent layer id of a layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_isVisible.html">l_layer_isVisible()</a></code> </p>
+        </td>
+        <td><p>Return visibility flag of layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_layerVisibility.html">l_layer_layerVisibility()</a></code> </p>
+        </td>
+        <td><p>Returns logical value for whether layer is actually seen</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_groupVisibility.html">l_layer_groupVisibility()</a></code> </p>
+        </td>
+        <td><p>Queries visibility status of decendants</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-organizing-and-reordering-layers" class="hasAnchor"><a href="#section-organizing-and-reordering-layers" class="anchor"></a>organizing and reordering layers</h3>
+          <p class="section-desc"><p>various methods to organize layers in a plot</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_layer_hide.html">l_layer_hide()</a></code> </p>
+        </td>
+        <td><p>Hide a Layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_show.html">l_layer_show()</a></code> </p>
+        </td>
+        <td><p>Show or unhide a Layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_lower.html">l_layer_lower()</a></code> </p>
+        </td>
+        <td><p>Switch the layer place with its sibling to the right</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_raise.html">l_layer_raise()</a></code> </p>
+        </td>
+        <td><p>Switch the layer place with its sibling to the left</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_move.html">l_layer_move()</a></code> </p>
+        </td>
+        <td><p>Move a layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_group.html">l_layer_group()</a></code> </p>
+        </td>
+        <td><p>layer a group node</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_demote.html">l_layer_demote()</a></code> </p>
+        </td>
+        <td><p>Moves the layer to be a child of its right group layer sibling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_promote.html">l_layer_promote()</a></code> </p>
+        </td>
+        <td><p>Moves the layer up to be a left sibling of its parent</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_delete.html">l_layer_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a layer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_layer_expunge.html">l_layer_expunge()</a></code> </p>
+        </td>
+        <td><p>Delete a layer and all its descendants</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-graph" class="hasAnchor"><a href="#section-graph" class="anchor"></a>Graph</h2>
-          <p class="section-desc"><p>Graph</p></p>
+          <p class="section-desc"><p>Loon’s native graph class and connection to those of the graph package</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="loongraph.html">loongraph()</a></code> </p>
+        </td>
+        <td><p>Create a graph object of class loongraph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.loongraph.html">as.loongraph()</a></code> </p>
+        </td>
+        <td><p>Convert a graph object to a loongraph object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.graph.html">as.graph()</a></code> </p>
+        </td>
+        <td><p>Convert a loongraph object to an object of class graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linegraph.html">linegraph()</a></code> </p>
+        </td>
+        <td><p>Create a linegraph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linegraph.loongraph.html">linegraph(<i>&lt;loongraph&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Create a linegraph of a graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="complement.html">complement()</a></code> </p>
+        </td>
+        <td><p>Create the Complement Graph of a Graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="complement.loongraph.html">complement(<i>&lt;loongraph&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Create the Complement Graph of a loon Graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="completegraph.html">completegraph()</a></code> </p>
+        </td>
+        <td><p>Create a complete graph or digraph with a set of nodes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="graphreduce.html">graphreduce()</a></code> </p>
+        </td>
+        <td><p>Make each space in a node apprear only once</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getGraph.html">l_getGraph()</a></code> </p>
+        </td>
+        <td><p>Extract a loongraph or graph object from loon's graph display</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ndtransitiongraph.html">ndtransitiongraph()</a></code> </p>
+        </td>
+        <td><p>Create a n-d transition graph</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-interactive-graphs" class="hasAnchor"><a href="#section-interactive-graphs" class="anchor"></a>interactive graphs</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1373,25 +1742,20 @@ color representations</p></td>
           <p><code><a href="l_graph.loongraph.html">l_graph(<i>&lt;loongraph&gt;</i>)</a></code> </p>
         </td>
         <td><p>Create a graph display based on a loongraph object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_graph_inspector.html">l_graph_inspector()</a></code> </p>
-        </td>
-        <td><p>Create a Graph Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_graph_inspector_analysis.html">l_graph_inspector_analysis()</a></code> </p>
-        </td>
-        <td><p>Create a Graph Analysis Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_graph_inspector_navigators.html">l_graph_inspector_navigators()</a></code> </p>
-        </td>
-        <td><p>Create a Graph Navigator Inspector</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-interactive-graph-switching" class="hasAnchor"><a href="#section-interactive-graph-switching" class="anchor"></a>interactive graph switching</h3>
+          <p class="section-desc"><p>functions for switching between graphs in the same display</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="l_graphswitch.html">l_graphswitch()</a></code> </p>
@@ -1469,135 +1833,51 @@ color representations</p></td>
           <p><code><a href="l_graphswitch_set.html">l_graphswitch_set()</a></code> </p>
         </td>
         <td><p>Change the Graph shown in the Active Graph Widget</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-graph-inspector" class="hasAnchor"><a href="#section-graph-inspector" class="anchor"></a>graph inspector</h3>
+          <p class="section-desc"><p>loon inspector for graphs</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_graph_inspector.html">l_graph_inspector()</a></code> </p>
+        </td>
+        <td><p>Create a Graph Inspector</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.graph.html">as.graph()</a></code> </p>
+          <p><code><a href="l_graph_inspector_analysis.html">l_graph_inspector_analysis()</a></code> </p>
         </td>
-        <td><p>Convert a loongraph object to an object of class graph</p></td>
+        <td><p>Create a Graph Analysis Inspector</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.loongraph.html">as.loongraph()</a></code> </p>
+          <p><code><a href="l_graph_inspector_navigators.html">l_graph_inspector_navigators()</a></code> </p>
         </td>
-        <td><p>Convert a graph object to a loongraph object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="complement.html">complement()</a></code> </p>
-        </td>
-        <td><p>Create the Complement Graph of a Graph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="complement.loongraph.html">complement(<i>&lt;loongraph&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Create the Complement Graph of a loon Graph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="completegraph.html">completegraph()</a></code> </p>
-        </td>
-        <td><p>Create a complete graph or digraph with a set of nodes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="graphreduce.html">graphreduce()</a></code> </p>
-        </td>
-        <td><p>Make each space in a node apprear only once</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="loongraph.html">loongraph()</a></code> </p>
-        </td>
-        <td><p>Create a graph object of class loongraph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linegraph.html">linegraph()</a></code> </p>
-        </td>
-        <td><p>Create a linegraph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linegraph.loongraph.html">linegraph(<i>&lt;loongraph&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Create a linegraph of a graph</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_getGraph.html">l_getGraph()</a></code> </p>
-        </td>
-        <td><p>Extract a loongraph or graph object from loon's graph display</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ndtransitiongraph.html">ndtransitiongraph()</a></code> </p>
-        </td>
-        <td><p>Create a n-d transition graph</p></td>
+        <td><p>Create a Graph Navigator Inspector</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-navigation-graphs" class="hasAnchor"><a href="#section-navigation-graphs" class="anchor"></a>Navigation Graphs</h2>
-          <p class="section-desc"><p>Navigation</p></p>
+          <p class="section-desc"><p>Loon’s navigation graphs having two dimensional nodes and 3- or 4-d edges</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
-        
-        <td>
-          <p><code><a href="l_ng_plots.html">l_ng_plots()</a></code> </p>
-        </td>
-        <td><p>2d navigation graph setup with with dynamic node fitering using a 
-  scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_plots.default.html">l_ng_plots(<i>&lt;default&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Select 2d spaces with variable associated measures displayed in 
-  scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_plots.measures.html">l_ng_plots(<i>&lt;measures&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>2d Navigation Graph Setup with dynamic node fitering using a 
-  scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_plots.scagnostics.html">l_ng_plots(<i>&lt;scagnostics&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>2d Navigation Graph Setup with dynamic node fitering based on 
-  scagnostic measures and by using a scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_ranges.html">l_ng_ranges()</a></code> </p>
-        </td>
-        <td><p>2d navigation graph setup with with dynamic node fitering using a 
-  slider</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_ranges.default.html">l_ng_ranges(<i>&lt;default&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Select 2d spaces with variable associated measures using a slider</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_ranges.measures.html">l_ng_ranges(<i>&lt;measures&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>2d Navigation Graph Setup with dynamic node fitering using a slider</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_ranges.scagnostics.html">l_ng_ranges(<i>&lt;scagnostics&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>2d Navigation Graph Setup with dynamic node fitering based on 
-  scagnostic measures and using a slider</p></td>
-      </tr><tr>
         
         <td>
           <p><code><a href="l_navgraph.html">l_navgraph()</a></code> </p>
@@ -1657,20 +1937,153 @@ color representations</p></td>
           <p><code><a href="l_navigator_walk_path.html">l_navigator_walk_path()</a></code> </p>
         </td>
         <td><p>Have the Navigator Walk a Path on the Graph</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-statistical-search-navigation" class="hasAnchor"><a href="#section-statistical-search-navigation" class="anchor"></a>Statistical search navigation</h3>
+          <p class="section-desc"><p>navigation configured based on bivariate statistical measures</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_ng_ranges.html">l_ng_ranges()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a 
+  slider</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_create_handle.html">l_create_handle()</a></code> </p>
+          <p><code><a href="l_ng_ranges.default.html">l_ng_ranges(<i>&lt;default&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Create a loon object handle</p></td>
+        <td><p>Select 2d spaces with variable associated measures using a slider</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_ranges.measures.html">l_ng_ranges(<i>&lt;measures&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>2d Navigation Graph Setup with dynamic node fitering using a slider</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_ranges.scagnostics.html">l_ng_ranges(<i>&lt;scagnostics&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>2d Navigation Graph Setup with dynamic node fitering based on 
+  scagnostic measures and using a slider</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.html">l_ng_plots()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a 
+  scatterplot matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.default.html">l_ng_plots(<i>&lt;default&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Select 2d spaces with variable associated measures displayed in 
+  scatterplot matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.measures.html">l_ng_plots(<i>&lt;measures&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>2d Navigation Graph Setup with dynamic node fitering using a 
+  scatterplot matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.scagnostics.html">l_ng_plots(<i>&lt;scagnostics&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>2d Navigation Graph Setup with dynamic node fitering based on 
+  scagnostic measures and by using a scatterplot matrix</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-contexts" class="hasAnchor"><a href="#section-contexts" class="anchor"></a>Contexts</h2>
-          <p class="section-desc"><p>Contexts are</p></p>
+          <h3 id="section-navigators" class="hasAnchor"><a href="#section-navigators" class="anchor"></a>Navigators</h3>
+          <p class="section-desc"><p>the large ball that traverses a graph; action depends on its “context”</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_navigator_add.html">l_navigator_add()</a></code> </p>
+        </td>
+        <td><p>Add a Navigator to a Graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_delete.html">l_navigator_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a Navigator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_getLabel.html">l_navigator_getLabel()</a></code> </p>
+        </td>
+        <td><p>Query the Label of a Navigator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_getPath.html">l_navigator_getPath()</a></code> </p>
+        </td>
+        <td><p>Get the sequence of nodes of a navigator's current path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_ids.html">l_navigator_ids()</a></code> </p>
+        </td>
+        <td><p>List Navigators</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_relabel.html">l_navigator_relabel()</a></code> </p>
+        </td>
+        <td><p>Modify the Label of a Navigator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_walk_backward.html">l_navigator_walk_backward()</a></code> </p>
+        </td>
+        <td><p>Have the Navigator Walk Backward on the Current Path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_walk_forward.html">l_navigator_walk_forward()</a></code> </p>
+        </td>
+        <td><p>Have the Navigator Walk Forward on the Current Path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_navigator_walk_path.html">l_navigator_walk_path()</a></code> </p>
+        </td>
+        <td><p>Have the Navigator Walk a Path on the Graph</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-contexts" class="hasAnchor"><a href="#section-contexts" class="anchor"></a>Contexts</h3>
+          <p class="section-desc"><p>contexts attach to navigators and react to their state changes</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -1715,101 +2128,173 @@ color representations</p></td>
         <td><p>Change the label of a context</p></td>
       </tr>
     </tbody><tbody>
+      
       <tr>
         <th colspan="2">
-          <h2 id="section-grid-grobs" class="hasAnchor"><a href="#section-grid-grobs" class="anchor"></a>Grid Grobs</h2>
-          <p class="section-desc"><p>Grid Grobs</p></p>
+          <h3 id="section-measures" class="hasAnchor"><a href="#section-measures" class="anchor"></a>Measures</h3>
+          <p class="section-desc"><p>statistical measures to define navigation graphs</p></p>
         </th>
       </tr>
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="loonGrob.html">loonGrob()</a></code> </p>
+          <p><code><a href="measures1d.html">measures1d()</a></code> </p>
         </td>
-        <td><p>Create a grid grob from a loon widget handle</p></td>
+        <td><p>Closure of One Dimensional Measures</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="grid.loon.html">grid.loon()</a></code> </p>
+          <p><code><a href="measures2d.html">measures2d()</a></code> </p>
         </td>
-        <td><p>Create and optionally draw a grid grob from a loon widget handle</p></td>
+        <td><p>Closure of Two Dimensional Measures</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="condGrob.html">condGrob()</a></code> </p>
+          <p><code><a href="scagnostics2d.html">scagnostics2d()</a></code> </p>
         </td>
-        <td><p>Create a named grob or a template grob depending on a test</p></td>
+        <td><p>Closure of Two Dimensional Scagnostic Measures</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_createCompoundGrob.html">l_createCompoundGrob()</a></code> </p>
+          <p><code><a href="print.measures1d.html">print(<i>&lt;measures1d&gt;</i>)</a></code> </p>
         </td>
-        <td><p>For the target compound loon plot, creates the final grob from
-the class of the `target` and the `arrangeGrob.args`</p></td>
+        <td><p>Print function names from measure1d object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_get_arrangeGrobArgs.html">l_get_arrangeGrobArgs()</a></code> </p>
+          <p><code><a href="print.measures2d.html">print(<i>&lt;measures2d&gt;</i>)</a></code> </p>
         </td>
-        <td><p>For the target (compound) loon plot, determines all arguments
-(i.e. including the grobs) to be passed to `gridExtra::arrangeGrob()`
-so as to determine the layout in `grid` graphics.</p></td>
+        <td><p>Print function names from measure2d object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="loonGrob_layoutType.html">loonGrob_layoutType()</a></code> </p>
+          <p><code><a href="L2_distance.html">L2_distance()</a></code> </p>
         </td>
-        <td><p>A generic function used to distinguish whether only the locations
-of plots will be used to arrange them in a grob, or whether
-all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
+        <td><p>Euclidean distance between two vectors,
+or between column vectors of two matrices.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"><p>data</p></p>
+          <h2 id="section-colors" class="hasAnchor"><a href="#section-colors" class="anchor"></a>Colors</h2>
+          <p class="section-desc"><p>Colors</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="UsAndThem.html">UsAndThem</a></code> </p>
+          <p><code><a href="color_loon.html">color_loon()</a></code> </p>
         </td>
-        <td><p>Data to re-create Hans Rosling's famous "Us and Them" animation</p></td>
+        <td><p>Create a palette with loon's color mapping</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="olive.html">olive</a></code> </p>
+          <p><code><a href="l_hexcolor.html">l_hexcolor()</a></code> </p>
         </td>
-        <td><p>Fatty Acid Composition of Italian Olive Oils</p></td>
+        <td><p>Convert color names to their 12 digit hexadecimal color representation</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="oliveAcids.html">oliveAcids</a></code> </p>
+          <p><code><a href="tkcolors.html">tkcolors()</a></code> </p>
         </td>
-        <td><p>Just the Fatty Acid Composition of Italian Olive Oils</p></td>
+        <td><p>List the valid Tk color names</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="oliveLocations.html">oliveLocations</a></code> </p>
+          <p><code><a href="hex12tohex6.html">hex12tohex6()</a></code> </p>
         </td>
-        <td><p>Geographic location of each Italian olive growing area
-named in the <code>olive</code> data.</p></td>
+        <td><p>Convert 12 hexadecimal digit color representations to 6 hexidecimal digit
+color representations</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="minority.html">minority</a></code> </p>
+          <p><code><a href="l_colRemoveAlpha.html">l_colRemoveAlpha()</a></code> </p>
         </td>
-        <td><p>Canadian Visible Minority Data 2006</p></td>
+        <td><p>Convert color representations having an alpha transparency level to 6 digit color
+  representations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="loon_palette.html">loon_palette()</a></code> </p>
+        </td>
+        <td><p>Loon's color generator for creating color palettes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getColorList.html">l_getColorList()</a></code> </p>
+        </td>
+        <td><p>Get loon's color mapping list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList.html">l_setColorList()</a></code> </p>
+        </td>
+        <td><p>Use custom colors for mapping nominal values to distinct colors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from ColorBrewer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_baseR.html">l_setColorList_baseR()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from base R</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_ggplot2.html">l_setColorList_ggplot2()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from ggplot2</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_hcl.html">l_setColorList_hcl()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from hcl color wheen</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_loon.html">l_setColorList_loon()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from loon defaults</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-inspectors" class="hasAnchor"><a href="#section-inspectors" class="anchor"></a>Inspectors</h2>
-          <p class="section-desc"><p>inspectors</p></p>
+          <p class="section-desc"><p>loon inspectors attachable to loon plots</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
+        
+        <td>
+          <p><code><a href="l_worldview.html">l_worldview()</a></code> </p>
+        </td>
+        <td><p>Create a Worldview Inspector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_hist_inspector_analysis.html">l_hist_inspector_analysis()</a></code> </p>
+        </td>
+        <td><p>Create a Histogram Analysis Inspector</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="l_glyphs_inspector.html">l_glyphs_inspector()</a></code> </p>
@@ -1851,38 +2336,363 @@ named in the <code>olive</code> data.</p></td>
           <p><code><a href="l_serialaxes_inspector.html">l_serialaxes_inspector()</a></code> </p>
         </td>
         <td><p>Create a Serialaxes Analysis Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_hist_inspector_analysis.html">l_hist_inspector_analysis()</a></code> </p>
-        </td>
-        <td><p>Create a Histogram Analysis Inspector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_worldview.html">l_worldview()</a></code> </p>
-        </td>
-        <td><p>Create a Worldview Inspector</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-others" class="hasAnchor"><a href="#section-others" class="anchor"></a>Others</h2>
-          <p class="section-desc"><p>others</p></p>
+          <h2 id="section-bindings-and-new-interaction" class="hasAnchor"><a href="#section-bindings-and-new-interaction" class="anchor"></a>Bindings and new interaction</h2>
+          <p class="section-desc"><p>Loon can create new interaction via a variety of bindings. Each binding has its own id and will evaluate its own user-defined callback function when it is triggered. See l_help(“learn_R_bind”)</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="l_Rlist2nestedTclList.html">l_Rlist2nestedTclList()</a></code> </p>
+          <p><code><a href="l_after_idle.html">l_after_idle()</a></code> </p>
         </td>
-        <td><p>Convert an R list to a nested Tcl list</p></td>
+        <td><p>Evaluate a function on once the processor is idle</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_nestedTclList2Rlist.html">l_nestedTclList2Rlist()</a></code> </p>
+          <p><code><a href="l_currentindex.html">l_currentindex()</a></code> </p>
         </td>
-        <td><p>Convert a Nested Tcl List to an R List</p></td>
+        <td><p>Get layer-relative index of the item below the mouse cursor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_currenttags.html">l_currenttags()</a></code> </p>
+        </td>
+        <td><p>Get tags of the item below the mouse cursor</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-state-binding" class="hasAnchor"><a href="#section-state-binding" class="anchor"></a>state binding</h3>
+          <p class="section-desc"><p>Bindings which evaluate a callback function when certain plot states change, as specified at binding creation.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_state.html">l_bind_state()</a></code> </p>
+        </td>
+        <td><p>Add a state change binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_state_get.html">l_bind_state_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a state binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_state_delete.html">l_bind_state_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a state binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_state_ids.html">l_bind_state_ids()</a></code> </p>
+        </td>
+        <td><p>List state binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_state_reorder.html">l_bind_state_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the state binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-glyph-binding" class="hasAnchor"><a href="#section-glyph-binding" class="anchor"></a>glyph binding</h3>
+          <p class="section-desc"><p>Bindings which evaluate a callback function for particular changes in the collection of glyphs of a display</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_glyph.html">l_bind_glyph()</a></code> </p>
+        </td>
+        <td><p>Add a glyph binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_glyph_get.html">l_bind_glyph_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a glyph binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_glyph_delete.html">l_bind_glyph_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a glyph binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_glyph_ids.html">l_bind_glyph_ids()</a></code> </p>
+        </td>
+        <td><p>List glyph binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_glyph_reorder.html">l_bind_glyph_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the glyph binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-item-binding" class="hasAnchor"><a href="#section-item-binding" class="anchor"></a>item binding</h3>
+          <p class="section-desc"><p>Item bindings are used for evaluating callback functions at certain mouse and/or keyboard gestures events (i.e. X events) on visual items on the canvas. Items on the canvas can have tags and item bindings are specified to be evaluated at certain X events for items with specific tags.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_item.html">l_bind_item()</a></code> </p>
+        </td>
+        <td><p>Create a Canvas Binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_item_get.html">l_bind_item_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a item binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_item_delete.html">l_bind_item_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a item binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_item_ids.html">l_bind_item_ids()</a></code> </p>
+        </td>
+        <td><p>List item binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_item_reorder.html">l_bind_item_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the item binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-layer-binding" class="hasAnchor"><a href="#section-layer-binding" class="anchor"></a>layer binding</h3>
+          <p class="section-desc"><p>Bindings which evaluate a callback function for particular changes in the collection of layers of a display.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_layer.html">l_bind_layer()</a></code> </p>
+        </td>
+        <td><p>Add a layer binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_layer_get.html">l_bind_layer_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a layer binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_layer_delete.html">l_bind_layer_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a layer binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_layer_ids.html">l_bind_layer_ids()</a></code> </p>
+        </td>
+        <td><p>List layer binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_layer_reorder.html">l_bind_layer_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the layer binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-navigator-binding" class="hasAnchor"><a href="#section-navigator-binding" class="anchor"></a>navigator binding</h3>
+          <p class="section-desc"><p>Bindings which evaluate a callback function for particular changes in the collection of navigators of a display.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_navigator.html">l_bind_navigator()</a></code> </p>
+        </td>
+        <td><p>Add a navigator binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_navigator_get.html">l_bind_navigator_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a navigator binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_navigator_delete.html">l_bind_navigator_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a navigator binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_navigator_ids.html">l_bind_navigator_ids()</a></code> </p>
+        </td>
+        <td><p>List navigator binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_navigator_reorder.html">l_bind_navigator_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the navigator binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-canvas-binding" class="hasAnchor"><a href="#section-canvas-binding" class="anchor"></a>canvas binding</h3>
+          <p class="section-desc"><p>Canvas bindings are triggered by a mouse/keyboard gesture over the plot as a whole. They evaluate a callback function when triggered.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_canvas.html">l_bind_canvas()</a></code> </p>
+        </td>
+        <td><p>Create a Canvas Binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_canvas_get.html">l_bind_canvas_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a canvas binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_canvas_delete.html">l_bind_canvas_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a canvas binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_canvas_ids.html">l_bind_canvas_ids()</a></code> </p>
+        </td>
+        <td><p>List canvas binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_canvas_reorder.html">l_bind_canvas_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the canvas binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-context-binding" class="hasAnchor"><a href="#section-context-binding" class="anchor"></a>context binding</h3>
+          <p class="section-desc"><p>Bindings which evaluate a callback function for particular changes in the collection of contexts of a display</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_bind_context.html">l_bind_context()</a></code> </p>
+        </td>
+        <td><p>Add a context binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_context_get.html">l_bind_context_get()</a></code> </p>
+        </td>
+        <td><p>Get the event pattern and callback Tcl code of a context binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_context_delete.html">l_bind_context_delete()</a></code> </p>
+        </td>
+        <td><p>Delete a context binding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_context_ids.html">l_bind_context_ids()</a></code> </p>
+        </td>
+        <td><p>List context binding ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_bind_context_reorder.html">l_bind_context_reorder()</a></code> </p>
+        </td>
+        <td><p>Reorder the context binding evaluation sequence</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-r-and-tcl" class="hasAnchor"><a href="#section-r-and-tcl" class="anchor"></a>R and TCL</h2>
+          <p class="section-desc"><p>functions interfacing between R and TCL</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="l_create_handle.html">l_create_handle()</a></code> </p>
+        </td>
+        <td><p>Create a loon object handle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_getFromPath.html">l_getFromPath()</a></code> </p>
+        </td>
+        <td><p>Create loon objects from path name</p></td>
       </tr><tr>
         
         <td>
@@ -1892,9 +2702,15 @@ named in the <code>olive</code> data.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_throwErrorIfNotLoonWidget.html">l_throwErrorIfNotLoonWidget()</a></code> </p>
+          <p><code><a href="l_widget.html">l_widget()</a></code> </p>
         </td>
-        <td><p>Throw an error if string is not associated with a loon widget</p></td>
+        <td><p>Dummy function to be used in the Roxygen documentation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_subwin.html">l_subwin()</a></code> </p>
+        </td>
+        <td><p>Create a child widget path</p></td>
       </tr><tr>
         
         <td>
@@ -1910,73 +2726,36 @@ named in the <code>olive</code> data.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="L2_distance.html">L2_distance()</a></code> </p>
+          <p><code><a href="l_throwErrorIfNotLoonWidget.html">l_throwErrorIfNotLoonWidget()</a></code> </p>
         </td>
-        <td><p>Euclidean distance between two vectors,
-or between column vectors of two matrices.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-measures" class="hasAnchor"><a href="#section-measures" class="anchor"></a>Measures</h2>
-          <p class="section-desc"><p>measures</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="measures1d.html">measures1d()</a></code> </p>
-        </td>
-        <td><p>Closure of One Dimensional Measures</p></td>
+        <td><p>Throw an error if string is not associated with a loon widget</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="measures2d.html">measures2d()</a></code> </p>
+          <p><code><a href="l_Rlist2nestedTclList.html">l_Rlist2nestedTclList()</a></code> </p>
         </td>
-        <td><p>Closure of Two Dimensional Measures</p></td>
+        <td><p>Convert an R list to a nested Tcl list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="scagnostics2d.html">scagnostics2d()</a></code> </p>
+          <p><code><a href="l_nestedTclList2Rlist.html">l_nestedTclList2Rlist()</a></code> </p>
         </td>
-        <td><p>Closure of Two Dimensional Scagnostic Measures</p></td>
+        <td><p>Convert a Nested Tcl List to an R List</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="print.measures1d.html">print(<i>&lt;measures1d&gt;</i>)</a></code> </p>
+          <p><code><a href="tkcolors.html">tkcolors()</a></code> </p>
         </td>
-        <td><p>Print function names from measure1d object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.measures2d.html">print(<i>&lt;measures2d&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print function names from measure2d object</p></td>
+        <td><p>List the valid Tk color names</p></td>
       </tr>
     </tbody>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-package-information">Package Information</a></li>
-      <li><a href="#section-main-plotting-functions">Main Plotting Functions</a></li>
-      <li><a href="#section-access-modify">Access Modify</a></li>
-      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
-      <li><a href="#section-colors">Colors</a></li>
-      <li><a href="#section-layering">Layering</a></li>
-      <li><a href="#section-glyphs">Glyphs</a></li>
-      <li><a href="#section-bindings">Bindings</a></li>
-      <li><a href="#section-graph">Graph</a></li>
-      <li><a href="#section-navigation-graphs">Navigation Graphs</a></li>
-      <li><a href="#section-contexts">Contexts</a></li>
-      <li><a href="#section-grid-grobs">Grid Grobs</a></li>
-      <li><a href="#section-data">Data</a></li>
-      <li><a href="#section-inspectors">Inspectors</a></li>
-      <li><a href="#section-others">Others</a></li>
-      <li><a href="#section-measures">Measures</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -1987,7 +2766,7 @@ or between column vectors of two matrices.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
