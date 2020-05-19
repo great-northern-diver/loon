@@ -120,7 +120,7 @@ reference:
     - l_get_arrangeGrobArgs
     - loonGrob_layoutType
   - subtitle: Exporting via tcl
-    desc: Alternative export to pdf, etc. via tcl and <CTRL>-p
+    desc: Alternative export to pdf, etc. via tcl and "CTRL-p"
     contents:
     - l_export
     - l_export_valid_formats
