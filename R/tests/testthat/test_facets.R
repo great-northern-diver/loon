@@ -17,7 +17,7 @@ test_that("l_plot facets work with  pointrange glyph", {
     p <- l_plot(x = rep(1:3, 2), color = rep(c('red', 'blue', 'green'), 2), showScales=TRUE)
     g <- l_glyph_add_pointrange(p, ymin=(1:6)-(1:6)/5, ymax=(1:6)+(1:6)/5)
     p['glyph'][1:2] <- g
-    suppressMessages(f <- l_facet(p, layout = "grid", by = "color"))
+    f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_equal(length(f), 3L)
 })
