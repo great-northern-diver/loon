@@ -29,11 +29,11 @@ a grid grob of the loon plot
 Create and optionally draw a grid grob from a loon widget handle
 }
 \examples{
-
+\dontrun{
 library(grid)
 widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 grid.loon(widget)
-
+}
 }
 \seealso{
 \code{\link{loonGrob}}, \code{\link{plot.loon}}

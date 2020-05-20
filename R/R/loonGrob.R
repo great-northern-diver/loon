@@ -20,11 +20,11 @@
 #' @seealso \code{\link{loonGrob}}, \code{\link{plot.loon}}
 #'
 #' @examples
-#'
+#' \dontrun{
 #' library(grid)
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 #' grid.loon(widget)
-#'
+#' }
 #' @export
 grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL) {
 
@@ -94,6 +94,7 @@ plot.loon <- function (x, y = NULL, ...) {
 #'
 #' @examples
 #'
+#' \dontrun{
 #' widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 #'
 #' lgrob <- loonGrob(widget)
@@ -102,7 +103,6 @@ plot.loon <- function (x, y = NULL, ...) {
 #' grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
 #' grid.newpage(); grid.draw(lgrob)
 #'
-#' \dontrun{
 #' p <- demo("l_layers", ask = FALSE)$value
 #'
 #' lgrob <- loonGrob(p)

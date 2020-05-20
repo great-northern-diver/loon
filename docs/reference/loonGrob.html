@@ -219,48 +219,15 @@ This is basically a list of graphical parameter settings.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>widget</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>))
 
 <span class='no'>lgrob</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>widget</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>grid</span>)
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.ls.html'>grid.ls</a></span>(<span class='no'>lgrob</span>, <span class='kw'>viewports</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>fullNames</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; gTree[GRID.gTree.71]
-#&gt;   gTree[l_plot]
-#&gt;     rect[bounding box]
-#&gt;     viewport[plotViewport]
-#&gt;       viewport[dataViewport]
-#&gt;         gTree[loon plot]
-#&gt;           gTree[labels]
-#&gt;             text[x label]
-#&gt;             text[y label]
-#&gt;             grob[title: textGrob arguments]
-#&gt;           gTree[guides]
-#&gt;             rect[guides background]
-#&gt;             lines[guidelines: xaxis (major), x = 4.5]
-#&gt;             lines[guidelines: xaxis (major), x = 5.5]
-#&gt;             lines[guidelines: xaxis (major), x = 6.5]
-#&gt;             lines[guidelines: xaxis (major), x = 7.5]
-#&gt;             lines[guidelines: xaxis (minor), x = 4]
-#&gt;             lines[guidelines: xaxis (minor), x = 5]
-#&gt;             lines[guidelines: xaxis (minor), x = 6]
-#&gt;             lines[guidelines: xaxis (minor), x = 7]
-#&gt;             lines[guidelines: xaxis (minor), x = 8]
-#&gt;             lines[guidelines: yaxis (major), y = 2.5]
-#&gt;             lines[guidelines: yaxis (major), y = 3.5]
-#&gt;             lines[guidelines: yaxis (major), y = 4.5]
-#&gt;             lines[guidelines: yaxis (minor), y = 2]
-#&gt;             lines[guidelines: yaxis (minor), y = 3]
-#&gt;             lines[guidelines: yaxis (minor), y = 4]
-#&gt;           gTree[axes]
-#&gt;             grob[x axis: xaxisGrob arguments]
-#&gt;             grob[y axis: yaxisGrob arguments]
-#&gt;           clip[clipping region]
-#&gt;           gTree[l_plot_layers]
-#&gt;             gTree[scatterplot]
-#&gt;               points[points: primitive glyphs with borders]
-#&gt;           rect[boundary rectangle]
-#&gt;         upViewport[2]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>lgrob</span>)</div><div class='img'><img src='loonGrob-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.ls.html'>grid.ls</a></span>(<span class='no'>lgrob</span>, <span class='kw'>viewports</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>fullNames</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>lgrob</span>)
+
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/demo.html'>demo</a></span>(<span class='st'>"l_layers"</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)$<span class='no'>value</span>
 
 <span class='no'>lgrob</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>p</span>)
@@ -367,18 +334,18 @@ This is basically a list of graphical parameter settings.</p></td>
 <span class='co'>## l_plot scatterplot examples</span>
 
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))
-<span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span>(<span class='no'>p</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))</div><div class='output co'>#&gt; loon layer "rectangle" of type rectangle of plot .l138.plot
+<span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span>(<span class='no'>p</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))</div><div class='output co'>#&gt; loon layer "rectangle" of type rectangle of plot .l132.plot
 #&gt; [1] "layer0"</div><div class='input'>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>p</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>grid</span>)
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>g</span>)</div><div class='img'><img src='loonGrob-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>g</span>)</div><div class='img'><img src='loonGrob-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='st'>"ctriangle"</span>
 <span class='no'>p</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='st'>"blue"</span>
 <span class='no'>p</span>[<span class='st'>'size'</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>20</span>)
 <span class='no'>p</span>[<span class='st'>'selected'</span>] <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>)
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>p</span>)
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>g</span>)</div><div class='img'><img src='loonGrob-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>g</span>)</div><div class='img'><img src='loonGrob-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## navgraph examples</span>
@@ -402,9 +369,9 @@ This is basically a list of graphical parameter settings.</p></td>
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_serialaxes.html'>l_serialaxes</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>oliveAcids</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"olive data"</span>)
 <span class='no'>sGrob_radial</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>s</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>grid</span>)
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>sGrob_radial</span>)</div><div class='img'><img src='loonGrob-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>s</span>[<span class='st'>'axesLayout'</span>] <span class='kw'>&lt;-</span> <span class='st'>'parallel'</span>
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>sGrob_radial</span>)</div><div class='img'><img src='loonGrob-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>s</span>[<span class='st'>'axesLayout'</span>] <span class='kw'>&lt;-</span> <span class='st'>'parallel'</span>
 <span class='no'>sGrob_parallel</span> <span class='kw'>&lt;-</span> <span class='fu'>loonGrob</span>(<span class='no'>s</span>)
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>sGrob_parallel</span>)</div><div class='img'><img src='loonGrob-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>(); <span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='no'>sGrob_parallel</span>)</div><div class='img'><img src='loonGrob-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
