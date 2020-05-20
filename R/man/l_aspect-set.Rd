@@ -18,15 +18,17 @@ The aspect ratio is defined by the ratio of the number of pixels
 }
 \details{
 Changing the aspect ratio with \code{l_aspect<-} changes effectively
-  the \code{zoomY} state to obtain the desired aspect ratio. Note that the 
-  aspect ratio in loon depends on the plot width, plot height and the states 
-  \code{zoomX}, \code{zoomY}, \code{deltaX}, \code{deltaY} and 
+  the \code{zoomY} state to obtain the desired aspect ratio. Note that the
+  aspect ratio in loon depends on the plot width, plot height and the states
+  \code{zoomX}, \code{zoomY}, \code{deltaX}, \code{deltaY} and
   \code{swapAxes}. Hence, the aspect aspect ratio can not be set permanently
   for a loon plot.
 }
 \examples{
+\dontrun{
 p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 
 l_aspect(p)
 l_aspect(p) <- 1
+}
 }
