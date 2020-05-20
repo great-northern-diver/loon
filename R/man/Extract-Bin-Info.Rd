@@ -42,11 +42,6 @@ All rest useful functions in this page are built based on it.
 \code{x} according to which interval they fall. It is very similar to \code{\link{cut}} in \code{base} package.
 }
 \examples{
-# getBinData
-p <- l_hist(mtcars$mpg)
-getBinData(p)
-
-
 # l_binCut
 p <- l_hist(iris)
 binCut <- l_binCut(p)

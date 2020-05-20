@@ -10,13 +10,6 @@
 #' All rest useful functions in this page are built based on it.
 #'
 #' @export
-#'
-#' @examples
-#' # getBinData
-#' p <- l_hist(mtcars$mpg)
-#' getBinData(p)
-#'
-#'
 
 getBinData <- function(widget) {
 
