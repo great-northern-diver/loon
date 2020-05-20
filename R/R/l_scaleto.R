@@ -110,7 +110,7 @@ l_scaleto_selected.l_hist <- function(widget) {
         return(invisible())
     }
 
-    bins <- getBinData(widget)
+    bins <- l_getBinData(widget)
     xlim <- c()
     ylim <- c(0)
 
@@ -167,7 +167,7 @@ l_scaleto_active.l_graph <- function(widget) {
 #' @export
 l_scaleto_active.l_hist <- function(widget) {
 
-    bins <- getBinData(widget)
+    bins <- l_getBinData(widget)
     xlim <- c()
     ylim <- c(0)
 

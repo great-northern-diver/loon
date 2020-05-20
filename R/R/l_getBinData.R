@@ -1,25 +1,25 @@
-#' @title Some useful \code{loon} histogram functions
-#' @name Extract-Bin-Info
-#' @description Here list several useful functions for \code{loon} histograms.
+#' @title Get information on current bins from a histogram
 #'
-#' @param widget A \code{loon} \code{l_hist} widget.
+#' @description Queries the histogram and returns information about all active cases
+#' contained by the histogram's bins.
 #'
-#' @details
-#' \code{getBinData} is utilized to extract \code{loon} bin information,
-#' such as the counts, locations, points id of each colored bin.
-#' All rest useful functions in this page are built based on it.
+#' @param widget A loon histogram widget.
+#'
+#' @return A nested list of the bins in the histogram which contain active points.
+#' Each bin is a list of the counts, the point indices, and the minimum (x0) and maximum (x1)
+#' of that bin.  Loon histogram bins are open  on the left and closed on the right by default, namely "(x0, x1]".
+#' The counts and the points further identify the number and ids of all points,
+#' those which are selected, and those of each colour in that bin (identified by their hex12 colour from tcl).
+#'
+#' @seealso \code{\link{l_getBinIds}}, \code{\link{l_breaks}},
+#'   \code{\link{l_binCut}}
 #'
 #' @export
 #'
-#' @examples
-#' # getBinData
-#' p <- l_hist(mtcars$mpg)
-#' getBinData(p)
 #'
-#'
+l_getBinData <- function(widget) {
 
-getBinData <- function(widget) {
-
+    stopifnot({inherits(widget, "l_hist")})
     l_throwErrorIfNotLoonWidget(widget)
 
     tcl_obj_varname <- function(widget, varname = NULL) {
@@ -65,11 +65,20 @@ getBinData <- function(widget) {
     )
 }
 
-#' @rdname Extract-Bin-Info
+#' @title Gets the ids of the active points in each bin of a histogram
 #'
-#' @details \code{l_getBinIds} returns the ids of each bin
+#' @description Queries the histogram and returns the ids of all active points in each bin that contains active points.
+#'
+#' @param widget A loon histogram widget.
+#'
+#' @return A named list of the bins in the histogram and the ids of their active points.
+#'
+#' @seealso \code{\link{l_getBinData}}, \code{\link{l_breaks}},
+#'   \code{\link{l_binCut}}
 #'
 #' @export
+#'
+#'
 l_getBinIds <- function(widget) {
 
     stopifnot({
@@ -80,7 +89,7 @@ l_getBinIds <- function(widget) {
     len_x <- length(x)
     if(len_x == 0) return(numeric(0))
 
-    bin <- getBinData(widget)
+    bin <- l_getBinData(widget)
 
     lapply(bin,
            function(b) {
@@ -88,11 +97,21 @@ l_getBinIds <- function(widget) {
            })
 }
 
-#' @rdname Extract-Bin-Info
 #'
-#' @details \code{l_breaks} returns the range (breaks) of each bin
+#' @title Gets the boundaries of the histogram bins containing active points.
+#'
+#' @description Queries the histogram and returns the ids of all active points in each bin that contains active points.
+#'
+#' @param widget A loon histogram widget.
+#'
+#' @return A named list of the minimum and maximum values of the boundaries for each active bins in the histogram.
+#'
+#' @seealso \code{\link{l_getBinData}}, \code{\link{l_getBinIds}},
+#'   \code{\link{l_binCut}}
 #'
 #' @export
+#'
+#'
 
 l_breaks <- function(widget) {
 
@@ -104,7 +123,7 @@ l_breaks <- function(widget) {
     len_x <- length(x)
     if(len_x == 0) return(numeric(0))
 
-    bin <- getBinData(widget)
+    bin <- l_getBinData(widget)
 
     lapply(bin,
            function(b) {

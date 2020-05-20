@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an interactive loon 3d plot widget — l_plot3D • loon</title>
+<title>Gets the ids of the active points in each bin of a histogram — l_getBinIds • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Create an interactive loon 3d plot widget — l_plot3D" />
-<meta property="og:description" content="l_plot3D is a generic function for creating interactive
-  visualization environments for R objects." />
+<meta property="og:title" content="Gets the ids of the active points in each bin of a histogram — l_getBinIds" />
+<meta property="og:description" content="Queries the histogram and returns the ids of all active points in each bin that contains active points." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -150,105 +149,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an interactive loon 3d plot widget</h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot3D.R'><code>R/l_plot3D.R</code></a></small>
-    <div class="hidden name"><code>l_plot3D.Rd</code></div>
+    <h1>Gets the ids of the active points in each bin of a histogram</h1>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_getBinData.R'><code>R/l_getBinData.R</code></a></small>
+    <div class="hidden name"><code>l_getBinIds.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>l_plot3D</code> is a generic function for creating interactive
-  visualization environments for <span style="R">R</span> objects.</p>
+    <p>Queries the histogram and returns the ids of all active points in each bin that contains active points.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_plot3D</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>z</span>, <span class='no'>axisScaleFactor</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>l_getBinIds</span>(<span class='no'>widget</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>the x, y and z arguments provide the x, y and z coordinates for the plot.
-         Any reasonable way of defining the coordinates is acceptable.
-         See the function xyz.coords for details.</p>
-<p>If supplied separately, they must be of the same length.</p></td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td><p>the y coordinates of points in the plot,
-optional if x is an appropriate structure.</p></td>
-    </tr>
-    <tr>
-      <th>z</th>
-      <td><p>the z coordinates of points in the plot,
-optional if x is an appropriate structure.</p></td>
-    </tr>
-    <tr>
-      <th>axisScaleFactor</th>
-      <td><p>the amount to scale the axes at the centre of the rotation.
-Default is 1.
-    All numerical values are acceptable (0 removes the axes, &lt; 0 reverses their direction.)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>named arguments to modify plot states.</p></td>
+      <th>widget</th>
+      <td><p>A loon histogram widget.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>widget handle</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
-  which can be accessed via the <code>l_help()</code> function call. </div></p>
-
-<p>The general direct manipulation and interaction gestures are
-  outlined in the following figures.  Rotating  Press 'R' to toggle rotation mode.
-  When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.  <img src='figures/gestures_rotate.png' alt="Rotate gestures" />  The centre of the rotation can be changed by panning the plot.
-  To reset the rotation, use the tripod icon in the plot inspector.  Zooming and Panning  <img src='figures/gestures_zoom_pan.png' alt="Zoom pan gestures" />  Selecting Points/Objects  <img src='figures/gestures_select.png' alt="Select gestures" />  Moving Points on the Scatterplot Display  <img src='figures/gestures_move.png' alt="Move gestures" /></p>
-<p>NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
-  appear as part of the 3D plot's display. There is no provision at present to incorporate
-  rotation of 3D geometric objects other than point glyphs.</p>
+    <p>A named list of the bins in the histogram and the ids of their active points.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_info_states.html'>l_info_states</a></code></p>
-<p>Other three-dimensional plotting functions: 
-<code><a href='l_plot3D.default.html'>l_plot3D.default</a>()</code>,
-<code><a href='l_scale3D.html'>l_scale3D</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='l_getBinData.html'>l_getBinData</a></code>, <code><a href='l_breaks.html'>l_breaks</a></code>,
+  <code><a href='l_binCut.html'>l_binCut</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>quakes</span>,
-     <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l112.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>),
-     <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l113.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-<span class='no'>scaled_quakes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
-     <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l114.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
-     <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l115.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-<span class='co'># Or together:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,{
-     <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-     <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-     }
-)</div><div class='output co'>#&gt; [1] ".l117.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

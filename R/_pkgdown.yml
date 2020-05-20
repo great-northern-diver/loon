@@ -74,25 +74,33 @@ reference:
     contents:
     - l_plot_arguments
     - l_plot
+
   - subtitle: scatterplots
     contents:
     - l_plot.default
     - l_plot.map
+
   - subtitle: statistical specializations
     contents:
     - l_plot.density
     - l_plot.decomposed.ts
     - l_plot.stl
     - l_plot_ts
+
   - subtitle: histograms and barplots
     contents:
     - l_hist
-    - Extract-Bin-Info
+    - l_getBinData
+    - l_getBinIds
+    - l_binCut
+    - l_breaks
+
   - subtitle: facetting existing loon plots
     desc: many loon plots can be facetted
     contents:
     - l_facet
     - l_plot_arguments
+
   - subtitle: multivariate plots
     contents:
     - l_scale3D
@@ -102,6 +110,7 @@ reference:
     - l_navgraph
     - l_ng_ranges
     - l_ng_plots
+
   - subtitle: all l_plot methods
     contents:
     - starts_with("l_plot")
@@ -120,7 +129,7 @@ reference:
     - l_get_arrangeGrobArgs
     - loonGrob_layoutType
   - subtitle: Exporting via tcl
-    desc: Alternative export to pdf, etc. via tcl and <CTRL>-p
+    desc: Alternative export to pdf, etc. via tcl and "CTRL-p"
     contents:
     - l_export
     - l_export_valid_formats

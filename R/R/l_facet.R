@@ -411,7 +411,7 @@ loonranges <- function(widget, f = 0.05) {
     #     yrange <- extendrange(widget["y"], f = f)
     # } else if(inherits(widget, "l_hist")) {
     #
-    #     bins <- getBinData(widget)
+    #     bins <- l_getBinData(widget)
     #     xrange <- c()
     #     yrange <- c(0)
     #

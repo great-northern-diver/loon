@@ -1,5 +1,5 @@
-## as in the rgl package
-
+# testing demos
+#
 library(loon)
 
 # options(demo.ask=FALSE)
@@ -11,7 +11,7 @@ for(demo in demo(package="loon")$results[,"Item"]) {
         # on windows all the image resizing seem to use up too much memory
         # when all the demos are run sequentially
         if (!(is_windows && grepl("^l_ng_", demo))) {
-            demo(demo, package="loon", character.only=TRUE)            
+            demo(demo, package="loon", character.only=TRUE)
         }
     }
 }

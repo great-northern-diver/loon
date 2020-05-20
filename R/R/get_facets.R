@@ -52,7 +52,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
             linkingGroup <- paste0("facet", valid_path())
-        print(paste("linkingGroup:", linkingGroup))
+        message(paste("linkingGroup:", linkingGroup))
     }
 
     # define functions
@@ -331,7 +331,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
         linkingGroup <- widget['linkingGroup']
         if(linkingGroup == "none")
             linkingGroup <- paste0("facet", valid_path())
-        print(paste("linkingGroup:", linkingGroup))
+        message(paste("linkingGroup:", linkingGroup))
     }
 
     # All children will inherit states from parent widget
