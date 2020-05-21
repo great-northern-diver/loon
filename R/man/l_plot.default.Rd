@@ -146,6 +146,8 @@ Creates an interactive 2d scatterplot. Also, if no loon
 }
 }
 \examples{
+if(interactive()){
+
 
 # default use as scatterplot
 
@@ -191,6 +193,7 @@ tkgrid.columnconfigure(tt, 1, weight=1)
 
 tkgrid.rowconfigure(tt, 0, weight=1)
 
+}
 }
 \seealso{
 \code{\link{l_plot_arguments}}

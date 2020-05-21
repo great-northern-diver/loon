@@ -22,8 +22,12 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' ng <- l_navgraph(oliveAcids, color=olive$Area)
 #' ng2 <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
+#'
+#' }
 
 
 

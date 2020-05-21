@@ -32,10 +32,14 @@ Visibile layers are rendered, invisible ones are not. If any
   parent widget).
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
 l_layer_hide(p, l)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_show}},

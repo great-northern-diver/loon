@@ -22,5 +22,7 @@ The loon inspector is a singleton widget that provids an
 For more information run: \code{l_help("learn_R_display_inspectors")}
 }
 \examples{
+if(interactive()){
 i <- l_loon_inspector()
+}
 }

@@ -14,13 +14,16 @@ a character vector with the 12 digit hexadecimal color strings.
 }
 \description{
 Color names in loon will be mapped to colors according to the Tk
-  color specifications and are normalized to a 12 digit hexadecimal color 
+  color specifications and are normalized to a 12 digit hexadecimal color
   representation.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(1:2)
 p['color'] <- 'red'
 p['color']
 
 l_hexcolor('red')
+}
 }

@@ -55,6 +55,7 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
 
 p <- l_plot()
 l <- l_layer_line(p, x=c(1,2,3,4), y=c(1,3,2,4), color='red', linewidth=2)
@@ -64,6 +65,8 @@ l_scaleto_world(p)
 p <- l_plot()
 l <- l_layer_line(p, x=nhtemp)
 l_scaleto_layer(l)
+
+}
 
 }
 \seealso{

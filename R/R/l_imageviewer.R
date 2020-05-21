@@ -16,10 +16,12 @@
 #' The images are resized to fill the viewer window.
 #'
 #' @return the \code{tclimages} vector is returned
-#' 
+#'
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #'
 #' img2 <- tkimage.create('photo', width=200, height=150)
 #' tcl(img2, 'put', 'yellow', '-to', 0, 0, 199, 149)
@@ -27,8 +29,10 @@
 #' img3 <- tkimage.create('photo', width=500, height=100)
 #' tcl(img3, 'put', 'orange', '-to', 0, 0, 499, 99)
 #' tcl(img3, 'put', 'green', '-to', 40, 80, 350, 95)
-#' 
+#'
 #' l_imageviewer(c(tclvalue(img2), tclvalue(img3)))
+#'
+#' }
 
 l_imageviewer <- function(tclimages) {
     tcl("::loon::imageviewer", as.character(tclimages))

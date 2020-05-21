@@ -16,9 +16,13 @@ then the layer argument is not used}
 The toplevel parent is the \code{'root'} layer.
 }
 \examples{
+if(interactive()){
+
 p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 
 l_layer_getParent(p, 'model')
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}

@@ -68,6 +68,8 @@ Creates a decomposed time series plot based on
 objects of class \code{stl}
 }
 \examples{
+if(interactive()){
+
 co2_stl <- stl(co2, "per")
 p <- l_plot(co2_stl, title = "Atmospheric carbon dioxide over Mauna Loa")
 # names of plots in the display
@@ -76,6 +78,8 @@ names(p)
 names(p$seasonal)
 # which can be set
 p$seasonal['color'] <- "steelblue"
+
+}
 }
 \seealso{
 Other time series decomposition plotting functions: 

@@ -244,7 +244,9 @@ fill is transparant</p></td>
     <div class='dont-index'><p><code><a href='l_layer.html'>l_layer</a></code>, <code><a href='l_info_states.html'>l_info_states</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
 
 <span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_rectangles</span>(
      <span class='no'>p</span>,
@@ -255,118 +257,8 @@ fill is transparant</p></td>
 )
 <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
 
-<span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>l</span>)</div><div class='output co'>#&gt; $x
-#&gt; $x$type
-#&gt; [1] "nested_double"
-#&gt; 
-#&gt; $x$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $x$defaultvalue
-#&gt; [1] ""
-#&gt; 
-#&gt; $x$description
-#&gt; [1] "x coordinates"
-#&gt; 
-#&gt; 
-#&gt; $y
-#&gt; $y$type
-#&gt; [1] "nested_double"
-#&gt; 
-#&gt; $y$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $y$defaultvalue
-#&gt; [1] ""
-#&gt; 
-#&gt; $y$description
-#&gt; [1] "y coordinates"
-#&gt; 
-#&gt; 
-#&gt; $tag
-#&gt; $tag$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $tag$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $tag$defaultvalue
-#&gt; [1] ""
-#&gt; 
-#&gt; $tag$description
-#&gt; [1] "tags useful for item bindings"
-#&gt; 
-#&gt; 
-#&gt; $active
-#&gt; $active$type
-#&gt; [1] "boolean"
-#&gt; 
-#&gt; $active$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $active$defaultvalue
-#&gt; [1] "TRUE"
-#&gt; 
-#&gt; $active$description
-#&gt; [1] "if TRUE visual is rendered, otherwise it is not"
-#&gt; 
-#&gt; 
-#&gt; $itemLabel
-#&gt; $itemLabel$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $itemLabel$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $itemLabel$defaultvalue
-#&gt; [1] ""
-#&gt; 
-#&gt; $itemLabel$description
-#&gt; [1] "?"
-#&gt; 
-#&gt; 
-#&gt; $color
-#&gt; $color$type
-#&gt; [1] "colorOrTransparent"
-#&gt; 
-#&gt; $color$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $color$defaultvalue
-#&gt; [1] "black"
-#&gt; 
-#&gt; $color$description
-#&gt; [1] "fill color of rectangles"
-#&gt; 
-#&gt; 
-#&gt; $linecolor
-#&gt; $linecolor$type
-#&gt; [1] "colorOrTransparent"
-#&gt; 
-#&gt; $linecolor$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $linecolor$defaultvalue
-#&gt; [1] ""
-#&gt; 
-#&gt; $linecolor$description
-#&gt; [1] "outline colors of rectangles"
-#&gt; 
-#&gt; 
-#&gt; $linewidth
-#&gt; $linewidth$type
-#&gt; [1] "positive_double"
-#&gt; 
-#&gt; $linewidth$dimension
-#&gt; [1] "n"
-#&gt; 
-#&gt; $linewidth$defaultvalue
-#&gt; [1] "1"
-#&gt; 
-#&gt; $linewidth$description
-#&gt; [1] "linewidths of outlines"
-#&gt; 
-#&gt; </div><div class='input'>
+<span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>l</span>)
+
 <span class='co'># Set groups</span>
 <span class='no'>pp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>6</span>),
              <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>4</span>))
@@ -377,7 +269,9 @@ fill is transparant</p></td>
      <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>, <span class='st'>'green'</span>, <span class='st'>'orange'</span>),
      <span class='kw'>linecolor</span> <span class='kw'>=</span> <span class='st'>"black"</span>
 )
-<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>pp</span>)</div></pre>
+<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>pp</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

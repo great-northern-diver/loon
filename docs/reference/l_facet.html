@@ -309,14 +309,14 @@ of all plots can be accessed from the `l_facet` object via `l_getPlots()`.</p>
 <span class='fu'><a href='l_layer.html'>l_layer</a></span>(<span class='no'>p</span>, <span class='no'>NZFijiMap</span>,
         <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"New Zealand and Fiji"</span>,
         <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"forestgreen"</span>,
-        <span class='kw'>index</span> <span class='kw'>=</span> <span class='st'>"end"</span>)</div><div class='output co'>#&gt; loon layer "New Zealand and Fiji" of type polygons of plot .l11.plot
+        <span class='kw'>index</span> <span class='kw'>=</span> <span class='st'>"end"</span>)</div><div class='output co'>#&gt; loon layer "New Zealand and Fiji" of type polygons of plot .l4.plot
 #&gt; [1] "layer0"</div><div class='input'><span class='no'>fp</span> <span class='kw'>&lt;-</span> <span class='fu'>l_facet</span>(<span class='no'>p</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>"color"</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"grid"</span>,
               <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
 
 <span class='co'># serialaxes facets</span>
 <span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_serialaxes.html'>l_serialaxes</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>,
                   <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"observation"</span>)
-<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'>l_facet</span>(<span class='no'>s</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)</div><div class='output co'>#&gt; <span class='message'>linkingGroup: facet15</span></div><div class='input'><span class='co'># The linkingGroup can be printed or accessed by</span>
+<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'>l_facet</span>(<span class='no'>s</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)</div><div class='output co'>#&gt; <span class='message'>linkingGroup: facet8</span></div><div class='input'><span class='co'># The linkingGroup can be printed or accessed by</span>
 <span class='fu'><a href='l_configure.html'>l_configure</a></span>(<span class='no'>s</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='no'>fs</span><span class='kw'>[[</span><span class='fl'>1</span>]][<span class='st'>'linkingGroup'</span>], <span class='kw'>sync</span> <span class='kw'>=</span> <span class='st'>"pull"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

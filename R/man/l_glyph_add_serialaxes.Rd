@@ -52,9 +52,12 @@ Serialaxes glyph show either a star glyph or a parralel
   coordinate glyph for each point.
 }
 \examples{
+if(interactive()){
+
 p <- with(olive, l_plot(oleic, stearic, color=Area))
 gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 p['glyph'] <- gs
+}
 }
 \seealso{
 Other glyph functions: 

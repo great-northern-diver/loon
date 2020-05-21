@@ -41,6 +41,8 @@ A polygon can be a useful point glyph to visualize arbitrary shapes
   of polygon glyphs which we reuse here.
 }
 \examples{
+if(interactive()){
+
 x_star <-
     c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
       0.474503025064823, 0.586862575626621, -0.000864304235090734,
@@ -75,6 +77,7 @@ gl <- l_glyph_add_polygon(p, x = list(x_star, x_cross, x_hexagon),
 p['glyph'] <- gl
 
 gl['showArea'] <- FALSE
+}
 }
 \seealso{
 \code{\link{l_glyph_add}}

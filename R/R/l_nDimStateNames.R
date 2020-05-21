@@ -4,9 +4,13 @@
 #' @param loon_plot A \code{loon} widget or the class name of a loon plot
 #' @export
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l_nDimStateNames(p)
 #' l_nDimStateNames("l_plot")
+#'
+#' }
 l_nDimStateNames  <- function(loon_plot) {
     UseMethod("l_nDimStateNames", loon_plot)
 }
@@ -41,11 +45,6 @@ l_nDimStateNames.character <- function(loon_plot) {
     result
 }
 
-
-# #' @inherit l_set_nDimStateNames
-# #' @rdname nDimStateNames
-# #' @examples
-# #' @export
 
 n_dim_states_list <- list(
     l_plot.default = c("itemLabel", "x", "y", "color", "xTemp", "yTemp",

@@ -17,10 +17,14 @@ l_resize(widget, width, height)
 Resizes the toplevel widget to a specific size.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris)
 
 l_resize(p, 300, 300)
 l_size(p) <- c(500, 500)
+
+}
 }
 \seealso{
 \code{\link{l_size}}, \code{\link{l_size<-}}

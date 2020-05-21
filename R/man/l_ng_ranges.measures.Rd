@@ -7,7 +7,7 @@
 \method{l_ng_ranges}{measures}(measures, ...)
 }
 \arguments{
-\item{measures}{object of class measures, see \code{\link{measures1d}}, 
+\item{measures}{object of class measures, see \code{\link{measures1d}},
 \code{\link{measures2d}}.}
 
 \item{...}{arguments passed on to configure the scatterplot}

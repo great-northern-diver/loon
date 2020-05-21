@@ -18,12 +18,16 @@ Prints the layer tree (i.e. the layer ids) to the prompt. Group
   listed.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l_layer_rectangle(p, x=0:1, y=0:1)
 g <- l_layer_group(p)
 l_layer_oval(p, x=0:1, y=0:1, parent=g)
 l_layer_line(p, x=0:1, y=0:1, parent=g)
 l_layer_printTree(p)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getChildren}}, \code{\link{l_layer_getParent}}

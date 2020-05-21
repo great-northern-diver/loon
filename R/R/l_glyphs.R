@@ -19,10 +19,13 @@ l_glyph <- function(widget, ...) {
 #'
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(iris, color = iris$Species)
 #' g <- l_glyph_add_text(p, iris$Species, "test_label")
 #' p['glyph'] <- g
 #' l_glyph_relabel(p, g, "Species")
+#' }
 l_glyph_relabel <- function(widget, id, label) {
     l_glyph(widget, "relabel", id, label)
     invisible()
@@ -212,6 +215,8 @@ l_primitiveGlyphs <- function() {
 #' @seealso \code{\link{l_glyph_add_text}}, \code{\link{l_make_glyphs}}
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' # Simple Example with Text Glyphs
 #' p <- with(olive, l_plot(stearic, eicosenoic, color=Region))
 #' g <- l_glyph_add_text(p, text=olive$Area, label="Area")
@@ -231,6 +236,7 @@ l_primitiveGlyphs <- function() {
 #'     'diamond', 'odiamond', 'cdiamond',
 #'     rep(text_glyph, 3)
 #' )
+#' }
 l_glyph_add <- function(widget, type, ...) {
     UseMethod("l_glyph_add", type)
 }
@@ -276,9 +282,12 @@ l_glyph_add.default <- function(widget, type, label="", ...) {
 #' @seealso \code{\link{l_glyph_add}}
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(iris, color = iris$Species)
 #' g <- l_glyph_add_text(p, iris$Species, "test_label")
 #' p['glyph'] <- g
+#' }
 l_glyph_add_text <- function(widget, text, label="", ...) {
 
     if (is.factor(text))
@@ -305,9 +314,12 @@ l_glyph_add_text <- function(widget, text, label="", ...) {
 #' @seealso \code{\link{l_glyph_add}}
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(x = 1:3, color = c('red', 'blue', 'green'), showScales=TRUE)
 #' g <- l_glyph_add_pointrange(p, ymin=(1:3)-(1:3)/5, ymax=(1:3)+(1:3)/5)
 #' p['glyph'] <- g
+#' }
 l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, showArea = TRUE, label="", ...) {
     l_glyph_add.default(widget, "pointrange",
                         ymin=ymin, ymax=ymax, linewidth=linewidth, showArea = showArea,
@@ -339,6 +351,8 @@ l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, showArea = T
 #' @seealso \code{\link{l_glyph_add}}
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' x_star <-
 #'     c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
 #'       0.474503025064823, 0.586862575626621, -0.000864304235090734,
@@ -373,6 +387,7 @@ l_glyph_add_pointrange <- function(widget, ymin, ymax, linewidth=1, showArea = T
 #' p['glyph'] <- gl
 #'
 #' gl['showArea'] <- FALSE
+#' }
 l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, label="", ...) {
 
     if (is.list(x))
@@ -403,9 +418,12 @@ l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, labe
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- with(olive, l_plot(oleic, stearic, color=Area))
 #' gs <- l_glyph_add_serialaxes(p, data=olive[,-c(1,2)], showArea=FALSE)
 #' p['glyph'] <- gs
+#' }
 l_glyph_add_serialaxes <- function(widget,
                                    data,
                                    sequence,

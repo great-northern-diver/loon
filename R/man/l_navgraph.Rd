@@ -30,6 +30,10 @@ Creates a navigation graph, a graphswitch, a navigator and a
 For more information run: \code{l_help("learn_R_display_graph.html#l_navgraph")}
 }
 \examples{
+if(interactive()){
+
 ng <- l_navgraph(oliveAcids, color=olive$Area)
 ng2 <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
+
+}
 }

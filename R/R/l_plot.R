@@ -67,6 +67,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' # ordinary use
 #' p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 #'
@@ -88,7 +90,7 @@
 #'             showScales = TRUE)
 #' plot(p)
 #'
-#'
+#' }
 l_plot <- function(x, y, ...) {
     UseMethod("l_plot")
 }
@@ -200,6 +202,8 @@ l_plot <- function(x, y, ...) {
 #' @export l_plot.default
 #'
 #' @examples
+#' if(interactive()){
+#'
 #'
 #' # default use as scatterplot
 #'
@@ -245,6 +249,7 @@ l_plot <- function(x, y, ...) {
 #'
 #' tkgrid.rowconfigure(tt, 0, weight=1)
 #'
+#'}
 l_plot.default <-  function(x, y = NULL,
                             by = NULL,
                             layout = c("grid", "wrap", "separate"),

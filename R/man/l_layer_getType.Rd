@@ -27,10 +27,14 @@ To see the manual page of \code{\link{l_layer}} for all the
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l <- l_layer_rectangle(p, x=0:1, y=0:1)
 l_layer_getType(p, l)
 l_layer_getType(p, 'model')
+
+}
 }
 \seealso{
 \code{\link{l_layer}}

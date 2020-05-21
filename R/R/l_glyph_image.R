@@ -20,7 +20,8 @@
 #'   \code{\link{l_image_import_files}}, \code{\link{l_make_glyphs}}
 #'
 #' @examples
-#' \dontrun{
+#' if(interactive()){
+#'
 #' p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
 #' img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
 #' imgs <- setNames(l_image_import_files(img_paths),

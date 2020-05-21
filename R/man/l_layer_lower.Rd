@@ -22,6 +22,8 @@ Change the layers position within its parent layer group by
   layer to the right.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l1 <- l_layer_rectangle(p, x=0:1, y=0:1)
@@ -30,6 +32,8 @@ l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle')
 l_aspect(p) <- 1
 
 l_layer_lower(p, l2)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_raise}}, \code{\link{l_layer_move}}

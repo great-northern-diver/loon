@@ -22,12 +22,16 @@ All but the \code{'model'} and the \code{'root'} layer can be
   grandparent group layer.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l1 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='red')
 l_layer_delete(l1)
 
 l2 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='yellow')
 l_layer_delete(p,l2)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

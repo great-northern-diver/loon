@@ -83,6 +83,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' h <- l_hist(iris$Sepal.Length)
 #'
 #' names(h)
@@ -113,6 +115,7 @@
 #' # or to save the grid data structure (grob) for later use
 #' hg <- loonGrob(h)
 #'
+#'}
 
 l_hist <- function(x,
                    yshows = c("frequency", "density"),

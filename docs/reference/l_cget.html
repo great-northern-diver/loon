@@ -190,57 +190,12 @@ objects by their ids.</p></td>
   <code><a href='l_create_handle.html'>l_create_handle</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
-<span class='fu'>l_cget</span>(<span class='no'>p</span>, <span class='st'>"color"</span>)</div><div class='output co'>#&gt;   [1] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;   [5] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;   [9] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [13] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [17] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [21] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [25] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [29] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [33] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [37] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [41] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [45] "#999999999999" "#999999999999" "#999999999999" "#999999999999"
-#&gt;  [49] "#999999999999" "#999999999999" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [53] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [57] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [61] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [65] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [69] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [73] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [77] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [81] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [85] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [89] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [93] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt;  [97] "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3" "#A6A6CECEE3E3"
-#&gt; [101] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [105] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [109] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [113] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [117] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [121] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [125] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [129] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [133] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [137] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [141] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [145] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"
-#&gt; [149] "#FFFFC0C0CBCB" "#FFFFC0C0CBCB"</div><div class='input'><span class='no'>p</span>[<span class='st'>'selected'</span>]</div><div class='output co'>#&gt;   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [73] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [85] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt;  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [109] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [133] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [145] FALSE FALSE FALSE FALSE FALSE FALSE</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
+<span class='fu'>l_cget</span>(<span class='no'>p</span>, <span class='st'>"color"</span>)
+<span class='no'>p</span>[<span class='st'>'selected'</span>]
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

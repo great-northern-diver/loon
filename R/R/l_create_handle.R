@@ -17,6 +17,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #'
 #' # plot handle
 #' p <- l_plot(x=1:3, y=1:3)
@@ -44,6 +46,7 @@
 #' con_new <- l_create_handle(c(as.vector(g), as.vector(nav), as.vector(con)))
 #' con_new['separator']
 #'
+#'}
 #'
 l_create_handle <- function(target) {
 

@@ -74,6 +74,7 @@ To get started with loon it is recommended to read loons website
   rotation of 3D geometric objects other than point glyphs.
 }
 \examples{
+if(interactive()){
 
 with(quakes,
      l_plot3D(long, lat, depth, linkingGroup = "quakes")
@@ -100,6 +101,7 @@ with(scaled_quakes,{
      }
 )
 
+}
 }
 \seealso{
 \code{\link{l_info_states}}

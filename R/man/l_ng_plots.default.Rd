@@ -2,18 +2,18 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots.default}
 \alias{l_ng_plots.default}
-\title{Select 2d spaces with variable associated measures displayed in 
+\title{Select 2d spaces with variable associated measures displayed in
   scatterplot matrix}
 \usage{
 \method{l_ng_plots}{default}(measures, data, separator = ":", ...)
 }
 \arguments{
-\item{measures}{matrix or data.frame with measures (columns) for variable 
+\item{measures}{matrix or data.frame with measures (columns) for variable
 pairs (rows) and rownames of the two variates separated by separator}
 
 \item{data}{data frame for scatterplot}
 
-\item{separator}{a string that separates the variable pair string into the 
+\item{separator}{a string that separates the variable pair string into the
 individual variables}
 
 \item{...}{arguments passed on to configure the scatterplot}
@@ -24,14 +24,16 @@ named list with plots-, graph-, plot-, navigator-, and context
   \code{env}.
 }
 \description{
-Measures object is a matrix or data.frame with measures 
-  (columns) for variable pairs (rows) and rownames of the two variates 
+Measures object is a matrix or data.frame with measures
+  (columns) for variable pairs (rows) and rownames of the two variates
   separated by separator
 }
 \details{
 For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
 }
 \examples{
+
+if(interactive()){
 
 \dontrun{
 n <- 100
@@ -66,19 +68,21 @@ m1d <- data.frame(
      row.names = names(dat)
 )
 
-nav <- l_ng_plots(m1d, dat) 
+nav <- l_ng_plots(m1d, dat)
 
 ## more involved
 q1 <- function(x)as.vector(quantile(x, probs=0.25))
 
-# be carful that the vector names are correct
+# be careful that the vector names are correct
 nav <- l_ng_plots(sapply(oliveAcids, q1), oliveAcids)
 }
 
 }
+
+}
 \seealso{
-\code{\link{l_ng_plots}}, \code{\link{l_ng_plots.measures}}, 
-  \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}}, 
-  \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+\code{\link{l_ng_plots}}, \code{\link{l_ng_plots.measures}},
+  \code{\link{l_ng_plots.scagnostics}}, \code{\link{measures1d}},
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}},
   \code{\link{l_ng_ranges}}
 }

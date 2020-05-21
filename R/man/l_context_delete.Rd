@@ -12,14 +12,14 @@ l_context_delete(navigator, id)
 \item{id}{context id}
 }
 \description{
-Navigators can have multiple contexts. This function removes a 
+Navigators can have multiple contexts. This function removes a
   context from a navigator.
 }
 \details{
 For more information run: \code{l_help("learn_R_display_graph.html#contexts")}
 }
 \seealso{
-\code{\link{l_context_ids}}, \code{\link{l_context_add_context2d}}, 
+\code{\link{l_context_ids}}, \code{\link{l_context_add_context2d}},
   \code{\link{l_context_add_geodesic2d}},
   \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}},
   \code{\link{l_context_relabel}}

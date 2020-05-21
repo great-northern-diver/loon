@@ -221,15 +221,19 @@ other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># ordinary use</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='co'># ordinary use</span>
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_plot</span>(<span class='no'>Sepal.Width</span>, <span class='no'>Petal.Length</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>))
 
 <span class='no'>versi</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>
 <span class='no'>p</span>[<span class='st'>"glyph"</span>][<span class='no'>versi</span>] <span class='kw'>&lt;-</span> <span class='st'>"ctriangle"</span>
 
 <span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>p</span>)</div><div class='input'><span class='co'># or with more control about grid parameters</span>
-<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='l_plot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># or to save the grid data structure (grob) for later use</span>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>p</span>)
+<span class='co'># or with more control about grid parameters</span>
+<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>p</span>)
+<span class='co'># or to save the grid data structure (grob) for later use</span>
 <span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p</span>)
 
 <span class='co'># plot a density estimate</span>
@@ -238,9 +242,9 @@ other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>l_plot</span>(<span class='no'>ds</span>,  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"density estimate"</span>,
             <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='st'>"x"</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='st'>"density"</span>,
             <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>p</span>)</div><div class='img'><img src='l_plot-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>p</span>)
 
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -20,9 +20,12 @@ then the labels get extracted with \code{\link{as.character}}.}
 Each text glyph can be a multiline string.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris, color = iris$Species)
 g <- l_glyph_add_text(p, iris$Species, "test_label")
 p['glyph'] <- g
+}
 }
 \seealso{
 \code{\link{l_glyph_add}}

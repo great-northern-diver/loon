@@ -28,6 +28,8 @@ The postition of a layer in the layer tree determines the
   \code{'root'}.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
@@ -39,6 +41,8 @@ l_layer_printTree(p)
 
 l_layer_move(p, 'model', parent=g)
 l_layer_printTree(p)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_printTree}},

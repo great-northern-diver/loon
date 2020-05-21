@@ -270,6 +270,8 @@ l_colRemoveAlpha <- function (col) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #'
 #' l_plot(1:3, color=1:3) # loon's default mapping
 #'
@@ -283,6 +285,7 @@ l_colRemoveAlpha <- function (col) {
 #'
 #' # reset to default
 #' l_setColorList(cols)
+#' }
 #'
 #' \dontrun{
 #' # you can also perform the color mapping yourself, for example with

@@ -7,10 +7,10 @@
 l_make_glyphs(data, draw_fun, width = 50, height = 50, ...)
 }
 \arguments{
-\item{data}{list where each element contains a data object used for the 
+\item{data}{list where each element contains a data object used for the
 \code{draw_fun}}
 
-\item{draw_fun}{function that draws a glyph using \R base graphics or the 
+\item{draw_fun}{function that draws a glyph using \R base graphics or the
 grid (including ggplot2 and lattice) engine}
 
 \item{width}{width of each glyph in pixel}
@@ -23,21 +23,23 @@ grid (including ggplot2 and lattice) engine}
 vector with tk img object references
 }
 \description{
-Loon's primitive glyph types are limited in terms of compound 
-  shapes. With this function you can create each point glyph as a png and 
+Loon's primitive glyph types are limited in terms of compound
+  shapes. With this function you can create each point glyph as a png and
   re-import it as a tk img object to be used as point glyphs in loon. See the
   examples.
 }
 \examples{
+if(interactive()){
+
 \dontrun{
 if (requireNamespace("maps", quietly = TRUE)) {
   data(minority)
   p <- l_plot(minority$long, minority$lat)
-  
+
   canada <- maps::map("world",  "Canada", fill=TRUE, plot=FALSE)
   l_map <- l_layer(p, canada, asSingleLayer=TRUE)
   l_scaleto_world(p)
-  
+
   img <- l_make_glyphs(lapply(1:nrow(minority), function(i)minority[i,]), function(m) {
       par(mar=c(1,1,1,1)*.5)
       mat <- as.matrix(m[1,1:10]/max(m[1:10]))
@@ -47,9 +49,9 @@ if (requireNamespace("maps", quietly = TRUE)) {
               axes= FALSE,
               axisnames=FALSE)
   }, width=120, height=120)
-  
+
   l_imageviewer(img)
-  
+
   g <- l_glyph_add_image(p, img, "barplot")
   p['glyph'] <- g
 
@@ -57,7 +59,7 @@ if (requireNamespace("maps", quietly = TRUE)) {
 
 ## with grid
 if (requireNamespace("grid", quietly = TRUE)) {
-  
+
   li <- l_make_glyphs(runif(6), function(x) {
       if(any(x>1 | x<0))
           stop("out of range")
@@ -66,13 +68,14 @@ if (requireNamespace("grid", quietly = TRUE)) {
       grid::grid.rect(0, 0, height = grid::unit(x, "npc"), just = c("left", "bottom"),
                 gp=grid::gpar(col=NA, fill="steelblue"))
   })
-  
+
   l_imageviewer(li)
-  
+
   p <- l_plot(1:6)
   g <- l_glyph_add_image(p, li, "bars")
   p['glyph'] <- g
 }
 
+}
 }
 }

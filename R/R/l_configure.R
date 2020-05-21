@@ -19,9 +19,12 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(iris, color = iris$Species)
 #' l_configure(p, color='red')
 #' p['size'] <- ifelse(iris$Species == "versicolor", 2, 8)
+#' }
 l_configure <- function(target, ...) {
     UseMethod("l_configure", target)
 }

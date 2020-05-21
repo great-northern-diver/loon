@@ -59,6 +59,8 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l <- l_layer_polygons(
@@ -80,6 +82,8 @@ l_layer_polygons(p,
                  y = c(1, 1, 2, 1, 1.5, 1, 4, 2, 3, 5, 6, 4),
                  group = c(rep(1,3), rep(2,5), rep(3, 4)))
 l_scaleto_world(p)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}
