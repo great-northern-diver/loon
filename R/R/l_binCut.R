@@ -48,7 +48,7 @@
 #'}
 l_binCut <- function(widget, labels, digits = 2, inactive) {
 
-    stopifnot({inherits(widget, "_hist")})
+    stopifnot({inherits(widget, "l_hist")})
 
     if(missing(labels)) labels <- NULL
     x <- widget['x']
