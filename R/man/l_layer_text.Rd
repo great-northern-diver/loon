@@ -60,8 +60,12 @@ As a side effect of \code{Tcl}'s text-based design, it is best to
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l <- l_layer_text(p, 0, 0, "Hello World")
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

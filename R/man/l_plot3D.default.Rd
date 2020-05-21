@@ -154,6 +154,7 @@ The scatterplot displays a number of direct interactions with the
   for more details about the interaction gestures.
 }
 \examples{
+if(interactive()){
 
 # default use as scatterplot
 
@@ -169,6 +170,7 @@ p2 <- with(quakes,
 l_configure(p1, linkingGroup = "quakes", sync = "push")
 l_configure(p2, linkingGroup = "quakes", sync = "push")
 
+}
 }
 \seealso{
 Other three-dimensional plotting functions: 

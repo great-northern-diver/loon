@@ -97,6 +97,8 @@ There are two commonly used mapping schemes of data values to
   diverging and sequential values.
 }
 \examples{
+if(interactive()){
+
 
 l_plot(1:3, color=1:3) # loon's default mapping
 
@@ -110,6 +112,7 @@ l_plot(1:10, color=1:10) # use loons default color mapping as color list is too 
 
 # reset to default
 l_setColorList(cols)
+}
 
 \dontrun{
 # you can also perform the color mapping yourself, for example with

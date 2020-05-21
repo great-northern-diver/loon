@@ -20,6 +20,8 @@ Moves the layer down the layer tree (towards the root layer) if
   the parent layer is not the root layer.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 g1 <- l_layer_group(p)
@@ -31,4 +33,6 @@ l_layer_promote(p, l1)
 l_layer_printTree(p)
 l_layer_promote(p, l1)
 l_layer_printTree(p)
+
+}
 }

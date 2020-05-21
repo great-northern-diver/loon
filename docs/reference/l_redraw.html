@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Force a Content Redraw of a Plot — l_redraw" />
-<meta property="og:description" content="Force redraw the plot to make sure that all the visual elements 
+<meta property="og:description" content="Force redraw the plot to make sure that all the visual elements
   are placed correctly." />
 <meta property="og:image" content="/logo.png" />
 
@@ -156,7 +156,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Force redraw the plot to make sure that all the visual elements 
+    <p>Force redraw the plot to make sure that all the visual elements
   are placed correctly.</p>
     </div>
 
@@ -173,13 +173,17 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that this function is intended for debugging. If you find that 
+    <p>Note that this function is intended for debugging. If you find that
   the display does not display the data according to its plot states then
   please contact loon's package maintainer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>)
-<span class='fu'>l_redraw</span>(<span class='no'>p</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>)
+<span class='fu'>l_redraw</span>(<span class='no'>p</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

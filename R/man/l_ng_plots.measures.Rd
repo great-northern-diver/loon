@@ -2,13 +2,13 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots.measures}
 \alias{l_ng_plots.measures}
-\title{2d Navigation Graph Setup with dynamic node fitering using a 
+\title{2d Navigation Graph Setup with dynamic node fitering using a
   scatterplot matrix}
 \usage{
 \method{l_ng_plots}{measures}(measures, ...)
 }
 \arguments{
-\item{measures}{object of class measures, see \code{\link{measures1d}}, 
+\item{measures}{object of class measures, see \code{\link{measures1d}},
 \code{\link{measures2d}}.}
 
 \item{...}{arguments passed on to configure the scatterplot}
@@ -20,16 +20,18 @@ named list with plots-, graph-, plot-, navigator-, and context
 }
 \description{
 Measures object is of class measures. When using measure objects
-  then the measures can be dynamically re-calculated for a subset of the 
+  then the measures can be dynamically re-calculated for a subset of the
   data.
 }
 \details{
-Note that we provide the \code{\link{scagnostics2d}} function to 
+Note that we provide the \code{\link{scagnostics2d}} function to
   create a measures object for the scagnostics measures.
 
 For more information run: \code{l_help("learn_R_display_graph.html#l_ng_plots")}
 }
 \examples{
+if(interactive()){
+
 \dontrun{
 # 2d measures
 scags <- scagnostics2d(oliveAcids, separator='**')
@@ -53,9 +55,11 @@ nav <- l_ng_plots(measures1d(oliveAcids, sd))
 # with two measures
 nav <- l_ng_plots(measures1d(oliveAcids, sd=sd, mean=mean))
 }
+
+}
 }
 \seealso{
-\code{\link{measures1d}}, \code{\link{measures2d}}, 
+\code{\link{measures1d}}, \code{\link{measures2d}},
   \code{\link{scagnostics2d}}, \code{\link{l_ng_plots}},
   \code{\link{l_ng_ranges}}
 }

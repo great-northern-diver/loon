@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>2d Navigation Graph Setup with dynamic node fitering using a 
+<title>2d Navigation Graph Setup with dynamic node fitering using a
   scatterplot matrix — l_ng_plots.measures • loon</title>
 
 <!-- favicons -->
@@ -47,10 +47,10 @@
 
 
 
-<meta property="og:title" content="2d Navigation Graph Setup with dynamic node fitering using a 
+<meta property="og:title" content="2d Navigation Graph Setup with dynamic node fitering using a
   scatterplot matrix — l_ng_plots.measures" />
 <meta property="og:description" content="Measures object is of class measures. When using measure objects
-  then the measures can be dynamically re-calculated for a subset of the 
+  then the measures can be dynamically re-calculated for a subset of the
   data." />
 <meta property="og:image" content="/logo.png" />
 
@@ -153,7 +153,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>2d Navigation Graph Setup with dynamic node fitering using a 
+    <h1>2d Navigation Graph Setup with dynamic node fitering using a
   scatterplot matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_ng_plots.R'><code>R/l_ng_plots.R</code></a></small>
     <div class="hidden name"><code>l_ng_plots.measures.Rd</code></div>
@@ -161,7 +161,7 @@
 
     <div class="ref-description">
     <p>Measures object is of class measures. When using measure objects
-  then the measures can be dynamically re-calculated for a subset of the 
+  then the measures can be dynamically re-calculated for a subset of the
   data.</p>
     </div>
 
@@ -173,7 +173,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>measures</th>
-      <td><p>object of class measures, see <code><a href='measures1d.html'>measures1d</a></code>, 
+      <td><p>object of class measures, see <code><a href='measures1d.html'>measures1d</a></code>,
 <code><a href='measures2d.html'>measures2d</a></code>.</p></td>
     </tr>
     <tr>
@@ -189,17 +189,19 @@
   <code>env</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that we provide the <code><a href='scagnostics2d.html'>scagnostics2d</a></code> function to 
+    <p>Note that we provide the <code><a href='scagnostics2d.html'>scagnostics2d</a></code> function to
   create a measures object for the scagnostics measures.</p>
 <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html#l_ng_plots")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='measures1d.html'>measures1d</a></code>, <code><a href='measures2d.html'>measures2d</a></code>, 
+    <div class='dont-index'><p><code><a href='measures1d.html'>measures1d</a></code>, <code><a href='measures2d.html'>measures2d</a></code>,
   <code><a href='scagnostics2d.html'>scagnostics2d</a></code>, <code><a href='l_ng_plots.html'>l_ng_plots</a></code>,
   <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># 2d measures</span>
 <span class='no'>scags</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='scagnostics2d.html'>scagnostics2d</a></span>(<span class='no'>oliveAcids</span>, <span class='kw'>separator</span><span class='kw'>=</span><span class='st'>'**'</span>)
 <span class='fu'>scags</span>()
@@ -221,6 +223,8 @@
 
 <span class='co'># with two measures</span>
 <span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_plots.html'>l_ng_plots</a></span>(<span class='fu'><a href='measures1d.html'>measures1d</a></span>(<span class='no'>oliveAcids</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='no'>sd</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='no'>mean</span>))
+}
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

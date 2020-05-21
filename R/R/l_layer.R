@@ -95,6 +95,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' # l_layer is a generic method
 #' newFoo <- function(x, y, ...) {
 #'   r <- list(x=x, y=y, ...)
@@ -115,6 +117,8 @@
 #' id <- l_layer(p, obj)
 #'
 #' l_scaleto_world(p)
+#'
+#' }
 l_layer <- function(widget, x, ...) {
     UseMethod("l_layer", x)
 }
@@ -135,9 +139,13 @@ l_layer <- function(widget, x, ...) {
 #' @export l_layer.density
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' d <- density(faithful$eruptions, bw = "sj")
 #' h <- l_hist(x = faithful$eruptions, yshows="density")
 #' l <- l_layer.density(h, d, color="steelblue", linewidth=3)
+#'
+#' }
 #'
 l_layer.density <- function(widget, x, ...) {
     l_layer_line(widget, x$x, x$y, ...)
@@ -291,6 +299,8 @@ l_layer_polygon <- function(widget, x, y,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_polygons(
@@ -312,6 +322,8 @@ l_layer_polygon <- function(widget, x, y,
 #'                  y = c(1, 1, 2, 1, 1.5, 1, 4, 2, 3, 5, 6, 4),
 #'                  group = c(rep(1,3), rep(2,5), rep(3, 4)))
 #' l_scaleto_world(p)
+#'
+#' }
 l_layer_polygons <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="polygons", parent="root", index=0,
@@ -381,9 +393,13 @@ l_layer_polygons <- function(widget, x, y,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_rectangle(p, x=c(2,3), y=c(1,10), color='steelblue')
 #' l_scaleto_layer(l)
+#'
+#' }
 l_layer_rectangle <- function(widget, x, y,
                               color="gray80", linecolor="black", linewidth=1,
                               label="rectangle", parent="root", index=0, ...) {
@@ -426,6 +442,8 @@ l_layer_rectangle <- function(widget, x, y,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangles(
@@ -450,6 +468,8 @@ l_layer_rectangle <- function(widget, x, y,
 #'      linecolor = "black"
 #' )
 #' l_scaleto_world(pp)
+#'
+#' }
 l_layer_rectangles <- function(widget, x, y,
                              color="gray80", linecolor="black", linewidth=1,
                              label="rectangles", parent="root", index=0,
@@ -530,6 +550,7 @@ l_layer_rectangles <- function(widget, x, y,
 #'
 #'
 #' @examples
+#' if(interactive()){
 #'
 #' p <- l_plot()
 #' l <- l_layer_line(p, x=c(1,2,3,4), y=c(1,3,2,4), color='red', linewidth=2)
@@ -539,6 +560,8 @@ l_layer_rectangles <- function(widget, x, y,
 #' p <- l_plot()
 #' l <- l_layer_line(p, x=nhtemp)
 #' l_scaleto_layer(l)
+#'
+#'}
 #'
 l_layer_line <- function(widget, x, y=NULL, color="black",
                          linewidth=1, dash="",
@@ -620,6 +643,8 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' s <- Filter(function(df)nrow(df) > 1, split(UsAndThem, UsAndThem$Country))
 #' sUaT <- Map(function(country){country[order(country$Year),]} , s)
 #' xcoords <- Map(function(x)x$Year, sUaT)
@@ -639,6 +664,8 @@ l_layer_line <- function(widget, x, y=NULL, color="black",
 #'                    linewidth = 4,
 #'                    col = l_getColorList()[1:5])
 #' l_scaleto_layer(l)
+#'
+#' }
 l_layer_lines <- function(widget, x, y,
                           color="black", linewidth=1,
                           label="lines", parent="root", index=0,
@@ -705,9 +732,13 @@ l_layer_lines <- function(widget, x, y,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_oval(p, c(1,5), c(2,12), color='steelblue')
 #' l_configure(p, panX=0, panY=0, deltaX=20, deltaY=20)
+#'
+#' }
 l_layer_oval <- function(widget, x, y,
                          color="gray80", linecolor="black", linewidth=1,
                          label="oval", parent="root", index=0, ...) {
@@ -811,8 +842,12 @@ l_layer_points <- function(widget, x, y = NULL, color="gray60", size=6,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_text(p, 0, 0, "Hello World")
+#'
+#' }
 l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                          label="text", parent="root", index=0, ...) {
 
@@ -868,9 +903,12 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #' @template seealso_layers
 #' @export
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_texts(p, x=1:3, y=3:1, text=c("This is", "a", "test"), size=20)
 #' l_scaleto_world(p)
+#' }
 l_layer_texts <- function(widget, x, y, text, color="gray60", size=6, angle=0,
                           anchor = "center", justify = "center", label="texts",
                           parent="root", index=0, active = TRUE, ...) {
@@ -945,12 +983,16 @@ layer_cmd <- function(widget, layer, cmd, ...) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l1 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='red')
 #' l_layer_delete(l1)
 #'
 #' l2 <- l_layer_rectangle(p, x = 0:1, y = 0:1, color='yellow')
 #' l_layer_delete(p,l2)
+#'
+#' }
 l_layer_delete <- function(widget, layer) {
     layer_cmd(widget, layer, 'delete')
 }
@@ -967,6 +1009,7 @@ l_layer_delete <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
 #'
 #' p <- l_plot()
 #' g <- l_layer_group(p)
@@ -976,6 +1019,8 @@ l_layer_delete <- function(widget, layer) {
 #' l_layer_expunge(p, g)
 #'
 #' # or l_layer_expunge(g)
+#'
+#' }
 l_layer_expunge <- function(widget, layer) {
     layer_cmd(widget, layer, 'expunge')
 }
@@ -999,6 +1044,8 @@ l_layer_expunge <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
@@ -1010,6 +1057,8 @@ l_layer_expunge <- function(widget, layer) {
 #'
 #' l_layer_move(p, 'model', parent=g)
 #' l_layer_printTree(p)
+#'
+#' }
 l_layer_move <- function(widget, layer, parent, index="0") {
 
     if(missing(parent))
@@ -1035,10 +1084,14 @@ l_layer_move <- function(widget, layer, parent, index="0") {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
 #' l_layer_hide(p, l)
+#'
+#' }
 l_layer_hide <- function(widget, layer) {
     layer_cmd(widget, layer, 'hide')
 }
@@ -1059,12 +1112,16 @@ l_layer_hide <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1, color="steelblue")
 #' l_layer_hide(p, l)
 #'
 #' l_layer_show(p, l)
+#'
+#' }
 l_layer_show <- function(widget, layer) {
     layer_cmd(widget, layer, 'show')
 }
@@ -1084,6 +1141,8 @@ l_layer_show <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1, label="A rectangle")
@@ -1091,6 +1150,8 @@ l_layer_show <- function(widget, layer) {
 #'
 #' l_layer_relabel(p, l, label="A relabelled rectangle")
 #' l_layer_getLabel(p, l)
+#'
+#' }
 l_layer_relabel <- function(widget, layer, label) {
     layer_cmd(widget, layer, 'relabel', label)
 }
@@ -1109,6 +1170,8 @@ l_layer_relabel <- function(widget, layer, label) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l1 <- l_layer_rectangle(p, x=0:1, y=0:1)
@@ -1117,6 +1180,8 @@ l_layer_relabel <- function(widget, layer, label) {
 #' l_aspect(p) <- 1
 #'
 #' l_layer_raise(p, l1)
+#'
+#' }
 l_layer_raise <- function(widget, layer) {
     layer_cmd(widget, layer, 'raise')
 }
@@ -1135,6 +1200,8 @@ l_layer_raise <- function(widget, layer) {
 #'
 #' @export
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' l1 <- l_layer_rectangle(p, x=0:1, y=0:1)
@@ -1143,6 +1210,8 @@ l_layer_raise <- function(widget, layer) {
 #' l_aspect(p) <- 1
 #'
 #' l_layer_lower(p, l2)
+#'
+#' }
 l_layer_lower <- function(widget, layer) {
     layer_cmd(widget, layer, 'lower')
 }
@@ -1160,6 +1229,8 @@ l_layer_lower <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' g1 <- l_layer_group(p)
@@ -1171,6 +1242,8 @@ l_layer_lower <- function(widget, layer) {
 #' l_layer_printTree(p)
 #' l_layer_promote(p, l1)
 #' l_layer_printTree(p)
+#'
+#' }
 l_layer_promote <- function(widget, layer) {
     layer_cmd(widget, layer, 'promote')
 }
@@ -1186,6 +1259,8 @@ l_layer_promote <- function(widget, layer) {
 #'
 #' @export
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' g1 <- l_layer_group(p)
@@ -1197,6 +1272,8 @@ l_layer_promote <- function(widget, layer) {
 #' l_layer_printTree(p)
 #' l_layer_demote(p, l1)
 #' l_layer_printTree(p)
+#'
+#' }
 l_layer_demote <- function(widget, layer) {
     layer_cmd(widget, layer, 'demote')
 }
@@ -1227,6 +1304,8 @@ layer_get <- function(widget, layer, what, convert=as.character){
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 #' l_layer_bbox(p, layer='model')
 #'
@@ -1234,6 +1313,8 @@ layer_get <- function(widget, layer, what, convert=as.character){
 #' l_layer_bbox(p, l)
 #'
 #' l_layer_bbox(p, 'root')
+#'
+#' }
 l_layer_bbox <- function(widget, layer="root") {
     layer_get(widget, layer, 'bbox', as.numeric)
 }
@@ -1254,10 +1335,14 @@ l_layer_bbox <- function(widget, layer="root") {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l1 <- l_layer_rectangle(p, x=0:1, y=0:1, label="a rectangle")
 #' l_layer_getLabel(p, 'model')
 #' l_layer_getLabel(p, l1)
+#'
+#' }
 l_layer_getLabel <- function(widget, layer) {
     sapply(layer, FUN=function(l){
         paste(layer_get(widget, layer, 'getLabel'), collapse=' ')
@@ -1280,6 +1365,8 @@ l_layer_getLabel <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' g <- l_layer_group(p)
@@ -1287,6 +1374,8 @@ l_layer_getLabel <- function(widget, layer) {
 #' l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle', parent=g)
 #'
 #' l_layer_getChildren(p, g)
+#'
+#' }
 l_layer_getChildren <- function(widget, layer='root') {
     layer_get(widget, layer, 'getChildren')
 }
@@ -1302,9 +1391,13 @@ l_layer_getChildren <- function(widget, layer='root') {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 #'
 #' l_layer_getParent(p, 'model')
+#'
+#' }
 l_layer_getParent <- function(widget, layer) {
     layer_get(widget, layer, 'getParent')
 }
@@ -1324,12 +1417,16 @@ l_layer_getParent <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l_layer_rectangle(p, x=0:1, y=0:1)
 #' g <- l_layer_group(p)
 #' l_layer_oval(p, x=0:1, y=0:1, parent=g)
 #' l_layer_line(p, x=0:1, y=0:1, parent=g)
 #' l_layer_printTree(p)
+#'
+#' }
 l_layer_printTree <- function(widget) {
     l_throwErrorIfNotLoonWidget(widget)
     tcl(widget, 'layer', 'printTree')
@@ -1354,11 +1451,15 @@ l_layer_printTree <- function(widget) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1)
 #' l_layer_isVisible(p, l)
 #' l_layer_hide(p, l)
 #' l_layer_isVisible(p, l)
+#'
+#' }
 l_layer_isVisible <- function(widget, layer) {
     layer_get(widget, layer, 'isVisible', function(x)as.logical(as.character(x)))
 }
@@ -1383,10 +1484,14 @@ l_layer_isVisible <- function(widget, layer) {
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #' l <- l_layer_rectangle(p, x=0:1, y=0:1)
 #' l_layer_getType(p, l)
 #' l_layer_getType(p, 'model')
+#'
+#' }
 l_layer_getType <- function(widget, layer) {
     layer_get(widget, layer, 'getType')
 }
@@ -1451,6 +1556,8 @@ l_layer_layerVisibility <- function(widget, layer) {
 #'
 #' @examples
 #'
+#' if(interactive()){
+#'
 #' p <- l_plot()
 #'
 #' g <- l_layer_group(p)
@@ -1464,6 +1571,8 @@ l_layer_layerVisibility <- function(widget, layer) {
 #' l_layer_groupVisibility(p, g)
 #' l_layer_hide(p, g)
 #' l_layer_groupVisibility(p, g)
+#'
+#' }
 l_layer_groupVisibility <- function(widget, layer) {
     layer_get(widget, layer, 'groupVisibility')
 }

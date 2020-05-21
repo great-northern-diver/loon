@@ -34,6 +34,8 @@ Visibile layers are rendered, invisible ones are not. If any
 }
 \examples{
 
+if(interactive()){
+
 p <- l_plot()
 
 g <- l_layer_group(p)
@@ -47,6 +49,8 @@ l_layer_hide(p, l1)
 l_layer_groupVisibility(p, g)
 l_layer_hide(p, g)
 l_layer_groupVisibility(p, g)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_show}},

@@ -1,13 +1,4 @@
 
-.onAttach <- function(libname, pkgname) {
-
-#    packageStartupMessage("\nloon Version ",
-#                          utils::packageDescription(pkg = pkgname,
-#                                                    lib.loc = libname,
-#                                                    field="Version"),
-#                          ", for documentation run l_help()")
-}
-
 
 .withTclImg <- FALSE
 .withCorrectTclImg <- TRUE # OS X might load system Img package

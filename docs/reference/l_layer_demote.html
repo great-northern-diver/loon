@@ -181,7 +181,9 @@ then the layer argument is not used</p></td>
     <p>0 if success otherwise the function throws an error</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
 
 <span class='no'>g1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span>(<span class='no'>p</span>)
 <span class='no'>g2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span>(<span class='no'>p</span>, <span class='kw'>parent</span><span class='kw'>=</span><span class='no'>g1</span>)
@@ -191,7 +193,9 @@ then the layer argument is not used</p></td>
 <span class='fu'>l_layer_demote</span>(<span class='no'>p</span>, <span class='no'>l1</span>)
 <span class='fu'><a href='l_layer_printTree.html'>l_layer_printTree</a></span>(<span class='no'>p</span>)
 <span class='fu'>l_layer_demote</span>(<span class='no'>p</span>, <span class='no'>l1</span>)
-<span class='fu'><a href='l_layer_printTree.html'>l_layer_printTree</a></span>(<span class='no'>p</span>)</div></pre>
+<span class='fu'><a href='l_layer_printTree.html'>l_layer_printTree</a></span>(<span class='no'>p</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

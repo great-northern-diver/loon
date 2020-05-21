@@ -17,9 +17,12 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(iris, color = iris$Species)
 #' l_cget(p, "color")
 #' p['selected']
+#' }
 l_cget <- function(target, state) {
     UseMethod("l_cget", target)
 }

@@ -196,10 +196,13 @@
 <code><a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>)
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_text.html'>l_glyph_add_text</a></span>(<span class='no'>p</span>, <span class='no'>iris</span>$<span class='no'>Species</span>, <span class='st'>"test_label"</span>)
 <span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>g</span>
-<span class='fu'>l_glyph_relabel</span>(<span class='no'>p</span>, <span class='no'>g</span>, <span class='st'>"Species"</span>)</div></pre>
+<span class='fu'>l_glyph_relabel</span>(<span class='no'>p</span>, <span class='no'>g</span>, <span class='st'>"Species"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

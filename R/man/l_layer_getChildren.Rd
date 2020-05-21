@@ -21,6 +21,8 @@ Character vector with ids of the childrens. To create layer handles
 Returns the ids of a group layer's children.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 g <- l_layer_group(p)
@@ -28,6 +30,8 @@ l1 <- l_layer_rectangle(p, x=0:1, y=0:1, parent=g)
 l2 <- l_layer_oval(p, x=0:1, y=0:1, color='thistle', parent=g)
 
 l_layer_getChildren(p, g)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getParent}}

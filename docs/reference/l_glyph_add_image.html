@@ -206,7 +206,8 @@ and <code><a href='l_image_import_files.html'>l_image_import_files</a></code> he
 <code><a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>olive</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>palmitic</span> ~ <span class='no'>stearic</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Region</span>))
 <span class='no'>img_paths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/find.package.html'>find.package</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>'loon'</span>), <span class='st'>"images"</span>), <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>imgs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span>(<span class='fu'><a href='l_image_import_files.html'>l_image_import_files</a></span>(<span class='no'>img_paths</span>),

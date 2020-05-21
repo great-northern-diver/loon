@@ -217,38 +217,34 @@ Default is 1.
 <code><a href='l_scale3D.html'>l_scale3D</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>quakes</span>,
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l108.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
+)
+
 
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>),
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l109.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
+)
+
 <span class='no'>scaled_quakes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_scale3D.html'>l_scale3D</a></span>(<span class='no'>quakes</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l110.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
+)
+
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,
      <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
-)</div><div class='output co'>#&gt; [1] ".l111.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
+)
+
 <span class='co'># Or together:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>scaled_quakes</span>,{
      <span class='fu'>l_plot3D</span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
      <span class='fu'>l_plot3D</span>(<span class='no'>mag</span>, <span class='no'>stations</span>, <span class='no'>depth</span>, <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"quakes"</span>)
      }
-)</div><div class='output co'>#&gt; [1] ".l113.plot3D"
-#&gt; attr(,"class")
-#&gt; [1] "l_plot3D" "l_plot"   "loon"    </div><div class='input'>
-</div></pre>
+)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

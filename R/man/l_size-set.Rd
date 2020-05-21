@@ -16,10 +16,14 @@ Resizes the toplevel widget to a specific size. This setter
   function uses \code{\link{l_resize}}.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris)
 
 l_resize(p, 300, 300)
 l_size(p) <- c(500, 500)
+
+}
 }
 \seealso{
 \code{\link{l_resize}}, \code{\link{l_size}}

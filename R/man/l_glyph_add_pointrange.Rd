@@ -34,9 +34,12 @@ Pointrange glyphs show a filled circle at the x-y location and
   also a y-range.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(x = 1:3, color = c('red', 'blue', 'green'), showScales=TRUE)
 g <- l_glyph_add_pointrange(p, ymin=(1:3)-(1:3)/5, ymax=(1:3)+(1:3)/5)
 p['glyph'] <- g
+}
 }
 \seealso{
 \code{\link{l_glyph_add}}

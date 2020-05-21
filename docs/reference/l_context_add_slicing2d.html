@@ -186,7 +186,9 @@ l_help(&quot;learn_R_display_graph.html#contexts&quot;)." />
     <p>context handle</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>oliveAcids</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'p'</span>,<span class='st'>'p1'</span>,<span class='st'>'s'</span>,<span class='st'>'o'</span>,<span class='st'>'l'</span>,<span class='st'>'l1'</span>,<span class='st'>'a'</span>,<span class='st'>'e'</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>oliveAcids</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'p'</span>,<span class='st'>'p1'</span>,<span class='st'>'s'</span>,<span class='st'>'o'</span>,<span class='st'>'l'</span>,<span class='st'>'l1'</span>,<span class='st'>'a'</span>,<span class='st'>'e'</span>)
 <span class='no'>nodes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/combn.html'>combn</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>oliveAcids</span>),<span class='fl'>2</span>),<span class='fl'>2</span>,
               <span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>x</span>, <span class='kw'>collapse</span><span class='kw'>=</span><span class='st'>':'</span>))
 <span class='no'>G</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='completegraph.html'>completegraph</a></span>(<span class='no'>nodes</span>)
@@ -198,7 +200,8 @@ l_help(&quot;learn_R_display_graph.html#contexts&quot;)." />
 <span class='no'>con</span>[<span class='st'>'proportion'</span>] <span class='kw'>&lt;-</span> <span class='fl'>0.2</span>
 
 <span class='no'>con</span>[<span class='st'>'conditioning4d'</span>] <span class='kw'>&lt;-</span> <span class='st'>"union"</span>
-<span class='no'>con</span>[<span class='st'>'conditioning4d'</span>] <span class='kw'>&lt;-</span> <span class='st'>"intersection"</span></div></pre>
+<span class='no'>con</span>[<span class='st'>'conditioning4d'</span>] <span class='kw'>&lt;-</span> <span class='st'>"intersection"</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

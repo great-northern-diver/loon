@@ -19,7 +19,10 @@ Inpectors provide graphical user interfaces to oversee and
   modify plot states
 }
 \examples{
+if(interactive()){
+
 i <- l_serialaxes_inspector()
+}
 }
 \seealso{
 \code{\link{l_create_handle}}

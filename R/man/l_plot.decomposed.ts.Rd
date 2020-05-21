@@ -67,6 +67,8 @@ Creates a decomposed time series plot based on
 objects of class \code{decomposed.ts}
 }
 \examples{
+if(interactive()){
+
 decompose <- decompose(co2)
 p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
 # names of plots in the display
@@ -75,6 +77,8 @@ names(p)
 names(p$seasonal)
 # which can be set
 p$seasonal['color'] <- "steelblue"
+
+}
 }
 \seealso{
 Other two-dimensional plotting functions: 

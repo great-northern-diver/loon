@@ -68,6 +68,8 @@ Function creates a scatterplot matrix using loon's scatterplot
   widgets
 }
 \examples{
+if(interactive()){
+
 p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris")
 
 p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris",
@@ -81,6 +83,8 @@ names(p)
 for (plot in l_getPlots(p)) {
       if (is(plot, "l_plot")) {
           plot["glyph"] <- "ocircle"}
+}
+
 }
 }
 \seealso{

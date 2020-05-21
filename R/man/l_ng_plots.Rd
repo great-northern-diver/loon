@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots}
 \alias{l_ng_plots}
-\title{2d navigation graph setup with with dynamic node fitering using a 
+\title{2d navigation graph setup with with dynamic node fitering using a
   scatterplot matrix}
 \usage{
 l_ng_plots(measures, ...)
@@ -13,8 +13,8 @@ l_ng_plots(measures, ...)
 \item{...}{argument passed on to methods}
 }
 \description{
-Generic function to create a navigation graph environment where 
-  user can filter graph nodes by selecting 2d spaces based on 2d measures 
+Generic function to create a navigation graph environment where
+  user can filter graph nodes by selecting 2d spaces based on 2d measures
   displayed in a scatterplot matrix.
 }
 \details{

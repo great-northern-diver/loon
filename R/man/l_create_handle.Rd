@@ -21,6 +21,8 @@ loon's plot handles are useful to query and modify plot states
 For more information run: \code{l_help("learn_R_intro.html#re-creating-object-handles")}
 }
 \examples{
+if(interactive()){
+
 
 # plot handle
 p <- l_plot(x=1:3, y=1:3)
@@ -48,6 +50,7 @@ con <- l_context_add_context2d(nav)
 con_new <- l_create_handle(c(as.vector(g), as.vector(nav), as.vector(con)))
 con_new['separator']
 
+}
 
 }
 \seealso{

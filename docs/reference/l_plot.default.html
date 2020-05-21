@@ -358,7 +358,9 @@ order to be displayed. See the examples below.</p></td>
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+
 <span class='co'># default use as scatterplot</span>
 
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>,
@@ -367,16 +369,8 @@ order to be displayed. See the examples below.</p></td>
 <span class='co'># The names of the info states that can be</span>
 <span class='co'># accessed or set.  They can also be given values as</span>
 <span class='co'># arguments to l_plot.default()</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p1</span>)</div><div class='output co'>#&gt;  [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"    
-#&gt;  [5] "linkingKey"       "zoomX"            "zoomY"            "panX"            
-#&gt;  [9] "panY"             "deltaX"           "deltaY"           "xlabel"          
-#&gt; [13] "ylabel"           "title"            "showLabels"       "showScales"      
-#&gt; [17] "swapAxes"         "showGuides"       "background"       "foreground"      
-#&gt; [21] "guidesBackground" "guidelines"       "minimumMargins"   "labelMargins"    
-#&gt; [25] "scalesMargins"    "x"                "y"                "xTemp"           
-#&gt; [29] "yTemp"            "color"            "selected"         "active"          
-#&gt; [33] "size"             "tag"              "useLoonInspector" "selectBy"        
-#&gt; [37] "selectionLogic"  </div><div class='input'><span class='no'>p1</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p1</span>)
+<span class='no'>p1</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
 
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Petal.Length</span> ~ <span class='no'>Petal.Width</span>,
                         <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris_data"</span>,
@@ -391,9 +385,11 @@ order to be displayed. See the examples below.</p></td>
 <span class='no'>p1</span>[<span class='st'>'selected'</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>
 <span class='no'>p2</span>[<span class='st'>"glyph"</span>][<span class='no'>p1</span>[<span class='st'>'selected'</span>]] <span class='kw'>&lt;-</span> <span class='st'>"cdiamond"</span>
 
-<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='l_plot.default-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
 <span class='co'># Layout facets</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))</div><div class='output co'>#&gt; <span class='message'>linkingGroup: layout105</span></div><div class='input'>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))
+
 <span class='co'># Use with other tk widgets</span>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
 <span class='fu'>tktitle</span>(<span class='no'>tt</span>) <span class='kw'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span>
@@ -401,10 +397,15 @@ order to be displayed. See the examples below.</p></td>
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>1</span>))
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>parent</span><span class='kw'>=</span><span class='no'>tt</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>8</span>,<span class='fl'>4</span>))
 
-<span class='fu'>tkgrid</span>(<span class='no'>p1</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid</span>(<span class='no'>p2</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
-<span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'><span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>1</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
-<span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; &lt;Tcl&gt;  </div><div class='input'>
-</div></pre>
+<span class='fu'>tkgrid</span>(<span class='no'>p1</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)
+<span class='fu'>tkgrid</span>(<span class='no'>p2</span>, <span class='kw'>row</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>column</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>sticky</span><span class='kw'>=</span><span class='st'>"nesw"</span>)
+
+<span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
+<span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>1</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
+
+<span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

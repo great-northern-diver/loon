@@ -238,7 +238,9 @@
     <div class='dont-index'><p><code><a href='l_layer.html'>l_layer</a></code>, <code><a href='l_info_states.html'>l_info_states</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Filter</a></span>(<span class='kw'>function</span>(<span class='no'>df</span>)<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>df</span>) <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span>(<span class='no'>UsAndThem</span>, <span class='no'>UsAndThem</span>$<span class='no'>Country</span>))
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Filter</a></span>(<span class='kw'>function</span>(<span class='no'>df</span>)<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>df</span>) <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span>(<span class='no'>UsAndThem</span>, <span class='no'>UsAndThem</span>$<span class='no'>Country</span>))
 <span class='no'>sUaT</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Map</a></span>(<span class='kw'>function</span>(<span class='no'>country</span>){<span class='no'>country</span>[<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(<span class='no'>country</span>$<span class='no'>Year</span>),]} , <span class='no'>s</span>)
 <span class='no'>xcoords</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Map</a></span>(<span class='kw'>function</span>(<span class='no'>x</span>)<span class='no'>x</span>$<span class='no'>Year</span>, <span class='no'>sUaT</span>)
 <span class='no'>ycoords</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Map</a></span>(<span class='kw'>function</span>(<span class='no'>x</span>)<span class='no'>x</span>$<span class='no'>LifeExpectancy</span>, <span class='no'>sUaT</span>)
@@ -256,7 +258,9 @@
                    <span class='kw'>group</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>4</span>),
                    <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>4</span>,
                    <span class='kw'>col</span> <span class='kw'>=</span> <span class='fu'><a href='l_getColorList.html'>l_getColorList</a></span>()[<span class='fl'>1</span>:<span class='fl'>5</span>])
-<span class='fu'><a href='l_scaleto_layer.html'>l_scaleto_layer</a></span>(<span class='no'>l</span>)</div></pre>
+<span class='fu'><a href='l_scaleto_layer.html'>l_scaleto_layer</a></span>(<span class='no'>l</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

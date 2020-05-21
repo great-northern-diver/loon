@@ -10,15 +10,19 @@ l_redraw(widget)
 \item{widget}{widget path as a string or as an object handle}
 }
 \description{
-Force redraw the plot to make sure that all the visual elements 
+Force redraw the plot to make sure that all the visual elements
   are placed correctly.
 }
 \details{
-Note that this function is intended for debugging. If you find that 
+Note that this function is intended for debugging. If you find that
   the display does not display the data according to its plot states then
   please contact loon's package maintainer.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris)
 l_redraw(p)
+
+}
 }

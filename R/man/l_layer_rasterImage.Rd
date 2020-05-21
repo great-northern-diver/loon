@@ -49,7 +49,7 @@ l_layer_rasterImage(
 layer id of group or rectangles layer
 }
 \description{
-This function is very similar to the 
+This function is very similar to the
   \code{\link[graphics]{rasterImage}} function. It works with every loon plot
   which is based on the cartesian coordinate system.
 }
@@ -57,6 +57,8 @@ This function is very similar to the
 For more information run: \code{l_help("learn_R_layer.html#countourlines-heatimage-rasterimage")}
 }
 \examples{
+if(interactive()){
+
 plot(1,1, xlim = c(0,1), ylim=c(0,1))
 mat <- matrix(c(0,0,0,0, 1,1), ncol=2)
 rasterImage(mat, 0,0,1,1, interpolate = FALSE)
@@ -82,4 +84,6 @@ rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
 rasterImage(image, 100, 400, 150, 450)
 rasterImage(image, 200, 300, 200 + 10, 300 + 10,
            interpolate = FALSE)
+
+}
 }

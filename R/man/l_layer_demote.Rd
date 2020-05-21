@@ -20,6 +20,8 @@ Moves the layer up the layer tree (away from the root layer) if
   there is a sibling group layer to the right of the layer.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 g1 <- l_layer_group(p)
@@ -31,4 +33,6 @@ l_layer_demote(p, l1)
 l_layer_printTree(p)
 l_layer_demote(p, l1)
 l_layer_printTree(p)
+
+}
 }

@@ -28,6 +28,8 @@ Note that the layer label is not a state of the layer itself,
   parent widget).
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l <- l_layer_rectangle(p, x=0:1, y=0:1, label="A rectangle")
@@ -35,6 +37,8 @@ l_layer_getLabel(p, l)
 
 l_layer_relabel(p, l, label="A relabelled rectangle")
 l_layer_getLabel(p, l)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_getLabel}}

@@ -59,6 +59,8 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 
 l <- l_layer_rectangles(
@@ -83,6 +85,8 @@ ll <- l_layer_rectangles(
      linecolor = "black"
 )
 l_scaleto_world(pp)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

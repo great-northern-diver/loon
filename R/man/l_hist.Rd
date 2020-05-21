@@ -117,6 +117,8 @@ widget handle
 For more information run: \code{l_help("learn_R_display_hist")}
 }
 \examples{
+if(interactive()){
+
 h <- l_hist(iris$Sepal.Length)
 
 names(h)
@@ -147,6 +149,7 @@ grid.loon(h)
 # or to save the grid data structure (grob) for later use
 hg <- loonGrob(h)
 
+}
 }
 \seealso{
 \code{\link{l_plot}}

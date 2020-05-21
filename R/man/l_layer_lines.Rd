@@ -55,6 +55,8 @@ Loon's displays that are based on Cartesian coordinates (i.e.
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 s <- Filter(function(df)nrow(df) > 1, split(UsAndThem, UsAndThem$Country))
 sUaT <- Map(function(country){country[order(country$Year),]} , s)
 xcoords <- Map(function(x)x$Year, sUaT)
@@ -74,6 +76,8 @@ l <- l_layer_lines(p,
                    linewidth = 4,
                    col = l_getColorList()[1:5])
 l_scaleto_layer(l)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

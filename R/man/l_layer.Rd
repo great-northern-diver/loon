@@ -99,6 +99,8 @@ loon's displays that use the main graphics model (i.e. histogram,
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 # l_layer is a generic method
 newFoo <- function(x, y, ...) {
   r <- list(x=x, y=y, ...)
@@ -119,6 +121,8 @@ obj <- newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color='yellow')
 id <- l_layer(p, obj)
 
 l_scaleto_world(p)
+
+}
 }
 \seealso{
 \code{\link{l_info_states}}, \code{\link{l_scaleto_layer}},

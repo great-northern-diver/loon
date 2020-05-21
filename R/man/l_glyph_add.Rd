@@ -69,6 +69,8 @@ re-import them as as image glyphs using \code{\link{l_glyph_add_image}}.
 For more information run: \code{l_help("learn_R_display_plot.html#glyphs")}
 }
 \examples{
+if(interactive()){
+
 # Simple Example with Text Glyphs
 p <- with(olive, l_plot(stearic, eicosenoic, color=Region))
 g <- l_glyph_add_text(p, text=olive$Area, label="Area")
@@ -88,6 +90,7 @@ p['glyph'] <- c(
     'diamond', 'odiamond', 'cdiamond',
     rep(text_glyph, 3)
 )
+}
 }
 \seealso{
 \code{\link{l_glyph_add_text}}, \code{\link{l_make_glyphs}}

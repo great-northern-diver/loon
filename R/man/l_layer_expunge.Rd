@@ -20,6 +20,7 @@ Delete a group layer and all it's descendants. Note that the
   \code{'model'} layer cannot be deleted.
 }
 \examples{
+if(interactive()){
 
 p <- l_plot()
 g <- l_layer_group(p)
@@ -29,6 +30,8 @@ l2 <- l_layer_line(p, x=c(0,.5,1), y=c(0,1,0), parent=g, color="blue")
 l_layer_expunge(p, g)
 
 # or l_layer_expunge(g)
+
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_layer_delete}}

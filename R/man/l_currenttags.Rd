@@ -20,6 +20,8 @@ Retrieves the tags of the visual item that at the time of the
 For more details see \code{l_help("learn_R_bind.html#item-bindings")}
 }
 \examples{
+if(interactive()){
+
 printTags <- function(W) {
     print(l_currenttags(W))
 }
@@ -27,6 +29,7 @@ printTags <- function(W) {
 p <- l_plot(x=1:3, y=1:3, title='Query Visual Item Tags')
 
 l_bind_item(p, 'all', '<ButtonPress>', function(W)printTags(W))
+}
 }
 \seealso{
 \code{\link{l_bind_item}}, \code{\link{l_currentindex}}
