@@ -76,7 +76,7 @@ this is used for z.}
 layer id of group or rectangles layer
 }
 \description{
-This function is very similar to the 
+This function is very similar to the
   \code{\link[graphics]{image}} function. It works with every loon plot which
   is based on the cartesian coordinate system.
 }
@@ -85,14 +85,16 @@ For more information run: \code{l_help("learn_R_layer.html#countourlines-heatima
 }
 \examples{
 
+if(interactive()){
+
 if (requireNamespace("MASS", quietly = TRUE)) {
   kest <- with(iris, MASS::kde2d(Sepal.Width,Sepal.Length))
   image(kest)
   contour(kest, add=TRUE)
-  
+
   p <- l_plot()
   lcl <- l_layer_contourLines(p, kest, label='contour lines')
-  limg <- l_layer_heatImage(p, kest, label='heatmap') 
+  limg <- l_layer_heatImage(p, kest, label='heatmap')
   l_scaleto_world(p)
 }
 
@@ -104,4 +106,6 @@ l_layer_heatImage(p1, z = z <- cos(r^2)*exp(-r/6), col  = gray((0:32)/32))
 l_scaleto_world(p1)
 
 image(z = z <- cos(r^2)*exp(-r/6), col  = gray((0:32)/32))
+
+}
 }

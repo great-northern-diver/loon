@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Make arbitrary glyphs with R graphic devices — l_make_glyphs" />
-<meta property="og:description" content="Loon's primitive glyph types are limited in terms of compound 
-  shapes. With this function you can create each point glyph as a png and 
+<meta property="og:description" content="Loon's primitive glyph types are limited in terms of compound
+  shapes. With this function you can create each point glyph as a png and
   re-import it as a tk img object to be used as point glyphs in loon. See the
   examples." />
 <meta property="og:image" content="/logo.png" />
@@ -158,8 +158,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Loon's primitive glyph types are limited in terms of compound 
-  shapes. With this function you can create each point glyph as a png and 
+    <p>Loon's primitive glyph types are limited in terms of compound
+  shapes. With this function you can create each point glyph as a png and
   re-import it as a tk img object to be used as point glyphs in loon. See the
   examples.</p>
     </div>
@@ -171,12 +171,12 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>list where each element contains a data object used for the 
+      <td><p>list where each element contains a data object used for the
 <code>draw_fun</code></p></td>
     </tr>
     <tr>
       <th>draw_fun</th>
-      <td><p>function that draws a glyph using <span style="R">R</span> base graphics or the 
+      <td><p>function that draws a glyph using <span style="R">R</span> base graphics or the
 grid (including ggplot2 and lattice) engine</p></td>
     </tr>
     <tr>
@@ -198,7 +198,9 @@ grid (including ggplot2 and lattice) engine</p></td>
     <p>vector with tk img object references</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"maps"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>minority</span>)
   <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>minority</span>$<span class='no'>long</span>, <span class='no'>minority</span>$<span class='no'>lat</span>)
@@ -243,6 +245,7 @@ grid (including ggplot2 and lattice) engine</p></td>
   <span class='no'>p</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>g</span>
 }
 
+}
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

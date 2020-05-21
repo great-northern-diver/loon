@@ -53,6 +53,8 @@ The maps library provides some map data in polygon which can be
   drawings.
 }
 \examples{
+if(interactive()){
+
 if (requireNamespace("maps", quietly = TRUE)) {
   canada <- maps::map("world",  "Canada",
                       fill=TRUE, plot=FALSE)
@@ -65,5 +67,7 @@ if (requireNamespace("maps", quietly = TRUE)) {
   l_map['active'] <- FALSE
   l_map['active'] <- TRUE
   l_map['tag']
+}
+
 }
 }

@@ -265,15 +265,13 @@ and which are not (<code>FALSE</code>).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>oliveAcids</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"olive data"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>oliveAcids</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>, <span class='kw'>title</span><span class='kw'>=</span><span class='st'>"olive data"</span>)
 <span class='no'>s</span>[<span class='st'>'axesLayout'</span>] <span class='kw'>&lt;-</span> <span class='st'>'parallel'</span>
 <span class='no'>states</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>s</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>states</span>)</div><div class='output co'>#&gt;  [1] "linkingGroup"     "linkingKey"       "itemLabel"        "showItemLabels"  
-#&gt;  [5] "showAxes"         "showAxesLabels"   "linewidth"        "scaling"         
-#&gt;  [9] "axesLayout"       "showArea"         "axesLabels"       "data"            
-#&gt; [13] "sequence"         "active"           "color"            "selected"        
-#&gt; [17] "showGuides"       "showLabels"       "useLoonInspector" "title"           
-#&gt; [21] "tag"             </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>states</span>)
+
 <span class='co'>#######</span>
 <span class='co'>#</span>
 <span class='co'># Effect of the choice of the argument "scaling"</span>
@@ -435,7 +433,9 @@ and which are not (<code>FALSE</code>).</p></td>
 <span class='co'>#  NOTE: rescaling the data so that all values are within [0,1] is perhaps</span>
 <span class='co'>#        the best way to proceed (especially if there are natural lower and</span>
 <span class='co'>#        upper limits for each variable).</span>
-<span class='co'>#        Then scaling can always be changed via the inspector.</span></div></pre>
+<span class='co'>#        Then scaling can always be changed via the inspector.</span>
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

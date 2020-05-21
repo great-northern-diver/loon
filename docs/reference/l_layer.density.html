@@ -187,9 +187,13 @@ layering function</p></td>
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/density.html'>density</a></code>, <code><a href='l_layer.html'>l_layer</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/density.html'>density</a></span>(<span class='no'>faithful</span>$<span class='no'>eruptions</span>, <span class='kw'>bw</span> <span class='kw'>=</span> <span class='st'>"sj"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/density.html'>density</a></span>(<span class='no'>faithful</span>$<span class='no'>eruptions</span>, <span class='kw'>bw</span> <span class='kw'>=</span> <span class='st'>"sj"</span>)
 <span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_hist.html'>l_hist</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>faithful</span>$<span class='no'>eruptions</span>, <span class='kw'>yshows</span><span class='kw'>=</span><span class='st'>"density"</span>)
-<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer.density</span>(<span class='no'>h</span>, <span class='no'>d</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"steelblue"</span>, <span class='kw'>linewidth</span><span class='kw'>=</span><span class='fl'>3</span>)</div></pre>
+<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer.density</span>(<span class='no'>h</span>, <span class='no'>d</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"steelblue"</span>, <span class='kw'>linewidth</span><span class='kw'>=</span><span class='fl'>3</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

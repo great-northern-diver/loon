@@ -10,7 +10,7 @@ l_context_ids(navigator)
 \item{navigator}{navigator hanlde}
 }
 \description{
-Navigators can have multiple contexts. This function list the 
+Navigators can have multiple contexts. This function list the
   context ids of a navigator.
 }
 \details{
@@ -18,7 +18,7 @@ For more information run: \code{l_help("learn_R_display_graph.html#contexts")}
 }
 \seealso{
 \code{\link{l_context_delete}},
-  \code{\link{l_context_add_context2d}}, 
+  \code{\link{l_context_add_context2d}},
   \code{\link{l_context_add_geodesic2d}},
   \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}},
   \code{\link{l_context_relabel}}

@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Layer a Raster Image — l_layer_rasterImage" />
-<meta property="og:description" content="This function is very similar to the 
+<meta property="og:description" content="This function is very similar to the
   rasterImage function. It works with every loon plot
   which is based on the cartesian coordinate system." />
 <meta property="og:image" content="/logo.png" />
@@ -157,7 +157,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function is very similar to the 
+    <p>This function is very similar to the
   <code><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></code> function. It works with every loon plot
   which is based on the cartesian coordinate system.</p>
     </div>
@@ -237,25 +237,35 @@
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer.html#countourlines-heatimage-rasterimage")</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))</div><div class='input'><span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>, <span class='fl'>1</span>,<span class='fl'>1</span>), <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>mat</span>, <span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='l_layer_rasterImage-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
-<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>mat</span>, <span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>)</div><div class='output co'>#&gt; loon layer "rectangles" of type rectangles of plot .l81.plot
-#&gt; [1] "layer0"</div><div class='input'><span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 
-<span class='no'>image</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/as.raster.html'>as.raster</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: data length [2] is not a sub-multiple or multiple of the number of rows [3]</span></div><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>showScales</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>background</span><span class='kw'>=</span><span class='st'>"thistle"</span>, <span class='kw'>useLoonInspector</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>300</span>, <span class='fl'>150</span>, <span class='fl'>350</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; loon layer "rectangles" of type rectangles of plot .l82.plot
-#&gt; [1] "layer0"</div><div class='input'><span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>400</span>, <span class='fl'>150</span>, <span class='fl'>450</span>)</div><div class='output co'>#&gt; loon layer "rectangles" of type rectangles of plot .l82.plot
-#&gt; [1] "layer1"</div><div class='input'><span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>200</span>, <span class='fl'>300</span>, <span class='fl'>200</span> + <span class='fl'>10</span>, <span class='fl'>300</span> + <span class='fl'>10</span>,
-   <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; loon layer "rectangles" of type rectangles of plot .l82.plot
-#&gt; [1] "layer2"</div><div class='input'><span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>ylim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>))
+<span class='no'>mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>0</span>, <span class='fl'>1</span>,<span class='fl'>1</span>), <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>mat</span>, <span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>mat</span>, <span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>)
+<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
+
+<span class='no'>image</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/as.raster.html'>as.raster</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>3</span>))
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>showScales</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>background</span><span class='kw'>=</span><span class='st'>"thistle"</span>, <span class='kw'>useLoonInspector</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
+<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>300</span>, <span class='fl'>150</span>, <span class='fl'>350</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>400</span>, <span class='fl'>150</span>, <span class='fl'>450</span>)
+<span class='fu'>l_layer_rasterImage</span>(<span class='no'>p</span>, <span class='no'>image</span>, <span class='fl'>200</span>, <span class='fl'>300</span>, <span class='fl'>200</span> + <span class='fl'>10</span>, <span class='fl'>300</span> + <span class='fl'>10</span>,
+   <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
 
 <span class='co'># from examples(rasterImage)</span>
 
 <span class='co'># set up the plot region:</span>
 <span class='no'>op</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"thistle"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>250</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>300</span>, <span class='fl'>450</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"n"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>""</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>300</span>, <span class='fl'>150</span>, <span class='fl'>350</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>400</span>, <span class='fl'>150</span>, <span class='fl'>450</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>200</span>, <span class='fl'>300</span>, <span class='fl'>200</span> + <span class='fl'>10</span>, <span class='fl'>300</span> + <span class='fl'>10</span>,
-           <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='l_layer_rasterImage-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>250</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>300</span>, <span class='fl'>450</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"n"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>""</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>300</span>, <span class='fl'>150</span>, <span class='fl'>350</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>100</span>, <span class='fl'>400</span>, <span class='fl'>150</span>, <span class='fl'>450</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/rasterImage.html'>rasterImage</a></span>(<span class='no'>image</span>, <span class='fl'>200</span>, <span class='fl'>300</span>, <span class='fl'>200</span> + <span class='fl'>10</span>, <span class='fl'>300</span> + <span class='fl'>10</span>,
+           <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

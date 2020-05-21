@@ -78,9 +78,12 @@ As a side effect of \code{Tcl}'s text-based design, it is best to
 For more information run: \code{l_help("learn_R_layer")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l <- l_layer_texts(p, x=1:3, y=3:1, text=c("This is", "a", "test"), size=20)
 l_scaleto_world(p)
+}
 }
 \seealso{
 \code{\link{l_layer}}, \code{\link{l_info_states}}

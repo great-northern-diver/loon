@@ -16,7 +16,7 @@ context handle
 }
 \description{
 A context2d maps every location on a 2d space graph to a list of
-  xvars and a list of yvars such that, while moving the navigator along the 
+  xvars and a list of yvars such that, while moving the navigator along the
   graph, as few changes as possible take place in xvars and yvars.
 
 Contexts are in more detail explained in the webmanual accessible with 
@@ -24,8 +24,8 @@ Contexts are in more detail explained in the webmanual accessible with
 \code{l_help("learn_R_display_graph.html#contexts")}.
 }
 \seealso{
-\code{\link{l_info_states}}, \code{\link{l_context_ids}}, 
-  \code{\link{l_context_add_geodesic2d}}, 
-  \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}}, 
+\code{\link{l_info_states}}, \code{\link{l_context_ids}},
+  \code{\link{l_context_add_geodesic2d}},
+  \code{\link{l_context_add_slicing2d}}, \code{\link{l_context_getLabel}},
   \code{\link{l_context_relabel}}
 }

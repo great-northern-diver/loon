@@ -18,8 +18,12 @@
 #' @param ... named arguments being states passed to l_plot()
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' ds <- density(faithful$eruptions)
 #' p <- l_plot(ds, color = "steelblue")
+#'
+#' }
 #'
 #' @seealso \code{\link{l_layer.density}}
 #' @export

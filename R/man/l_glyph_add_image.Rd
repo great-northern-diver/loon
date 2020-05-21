@@ -24,7 +24,8 @@ Image glyphs are useful to show pictures or other sophisticated
 For more information run: \code{l_help("learn_R_display_plot.html#images")}
 }
 \examples{
-\dontrun{
+if(interactive()){
+
 p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
 img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
 imgs <- setNames(l_image_import_files(img_paths),

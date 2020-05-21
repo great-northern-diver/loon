@@ -35,6 +35,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' decompose <- decompose(co2)
 #' p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
 #' # names of plots in the display
@@ -43,6 +45,8 @@
 #' names(p$seasonal)
 #' # which can be set
 #' p$seasonal['color'] <- "steelblue"
+#'
+#' }
 
 
 l_plot.decomposed.ts <- function(x, y = NULL,

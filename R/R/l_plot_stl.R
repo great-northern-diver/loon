@@ -34,6 +34,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' co2_stl <- stl(co2, "per")
 #' p <- l_plot(co2_stl, title = "Atmospheric carbon dioxide over Mauna Loa")
 #' # names of plots in the display
@@ -42,6 +44,8 @@
 #' names(p$seasonal)
 #' # which can be set
 #' p$seasonal['color'] <- "steelblue"
+#'
+#' }
 
 
 

@@ -69,6 +69,8 @@ To get started with loon it is recommended to follow the introductory loon vigne
   }
 }
 \examples{
+if(interactive()){
+
 # ordinary use
 p <- with(iris, l_plot(Sepal.Width, Petal.Length, color=Species))
 
@@ -90,7 +92,7 @@ p <- l_plot(ds,  title = "density estimate",
             showScales = TRUE)
 plot(p)
 
-
+}
 }
 \seealso{
 \code{\link{l_plot_arguments}} and \code{\link{l_plot.default}}.

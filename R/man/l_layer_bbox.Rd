@@ -21,6 +21,8 @@ The bounding box of a layer returns the coordinates of the
   smallest rectangle that encloses all the elements of the layer.
 }
 \examples{
+if(interactive()){
+
 p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 l_layer_bbox(p, layer='model')
 
@@ -28,4 +30,6 @@ l <- l_layer_rectangle(p, x=0:1, y=30:31)
 l_layer_bbox(p, l)
 
 l_layer_bbox(p, 'root')
+
+}
 }

@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Layer Contour Lines — l_layer_contourLines" />
-<meta property="og:description" content="This function is a wrapper around 
+<meta property="og:description" content="This function is a wrapper around
   contourLines that adds the countourlines to a loon
   plot which is based on the cartesian coordinate system." />
 <meta property="og:image" content="/logo.png" />
@@ -157,7 +157,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function is a wrapper around 
+    <p>This function is a wrapper around
   <code><a href='https://rdrr.io/r/grDevices/contourLines.html'>contourLines</a></code> that adds the countourlines to a loon
   plot which is based on the cartesian coordinate system.</p>
     </div>
@@ -240,7 +240,9 @@ created</p></td>
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer.html#countourlines-heatimage-rasterimage")</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>*<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>volcano</span>)
 <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>*<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>volcano</span>)
 <span class='no'>lcl</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_contourLines</span>(<span class='no'>p</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>volcano</span>)
@@ -257,6 +259,8 @@ created</p></td>
        <span class='fu'>l_layer_contourLines</span>(<span class='no'>p2</span>, <span class='no'>kest</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>dat</span>$<span class='no'>color</span>[<span class='fl'>1</span>]), <span class='kw'>linewidth</span><span class='kw'>=</span><span class='fl'>2</span>,
             <span class='kw'>label</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='no'>dat</span>$<span class='no'>Species</span>[<span class='fl'>1</span>]), <span class='st'>" contours"</span>))
   })
+}
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

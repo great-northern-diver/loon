@@ -7,12 +7,12 @@
 \method{l_ng_ranges}{default}(measures, data, separator = ":", ...)
 }
 \arguments{
-\item{measures}{matrix or data.frame with measures (columns) for variable 
+\item{measures}{matrix or data.frame with measures (columns) for variable
 pairs (rows) and rownames of the two variates separated by separator}
 
 \item{data}{data frame for scatterplot}
 
-\item{separator}{a string that separates the variable pair string into the 
+\item{separator}{a string that separates the variable pair string into the
 individual variables}
 
 \item{...}{arguments passed on to configure the scatterplot}

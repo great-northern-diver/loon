@@ -13,7 +13,11 @@ l_nDimStateNames(loon_plot)
 Get all n dimensional state names
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 l_nDimStateNames(p)
 l_nDimStateNames("l_plot")
+
+}
 }

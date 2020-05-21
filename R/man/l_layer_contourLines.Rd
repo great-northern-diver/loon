@@ -54,7 +54,7 @@ created}
 layer id of group or lines layer
 }
 \description{
-This function is a wrapper around 
+This function is a wrapper around
   \code{\link[grDevices]{contourLines}} that adds the countourlines to a loon
   plot which is based on the cartesian coordinate system.
 }
@@ -62,6 +62,8 @@ This function is a wrapper around
 For more information run: \code{l_help("learn_R_layer.html#countourlines-heatimage-rasterimage")}
 }
 \examples{
+if(interactive()){
+
 p <- l_plot()
 x <- 10*1:nrow(volcano)
 y <- 10*1:ncol(volcano)
@@ -69,15 +71,17 @@ lcl <- l_layer_contourLines(p, x, y, volcano)
 l_scaleto_world(p)
 
 if (requireNamespace("MASS", quietly = TRUE)) {
-  
+
   p1 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
   lcl <- with(iris, l_layer_contourLines(p1, MASS::kde2d(Sepal.Width,Sepal.Length)))
-  
+
   p2 <- with(iris, l_plot(Sepal.Length~Sepal.Width, color=Species))
   layers <- sapply(split(cbind(iris, color=p2['color']), iris$Species), function(dat) {
        kest <- with(dat, MASS::kde2d(Sepal.Width,Sepal.Length))
        l_layer_contourLines(p2, kest, color=as.character(dat$color[1]), linewidth=2,
             label=paste0(as.character(dat$Species[1]), " contours"))
   })
+}
+
 }
 }

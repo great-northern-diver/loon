@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select 2d spaces with variable associated measures displayed in 
+<title>Select 2d spaces with variable associated measures displayed in
   scatterplot matrix — l_ng_plots.default • loon</title>
 
 <!-- favicons -->
@@ -47,10 +47,10 @@
 
 
 
-<meta property="og:title" content="Select 2d spaces with variable associated measures displayed in 
+<meta property="og:title" content="Select 2d spaces with variable associated measures displayed in
   scatterplot matrix — l_ng_plots.default" />
-<meta property="og:description" content="Measures object is a matrix or data.frame with measures 
-  (columns) for variable pairs (rows) and rownames of the two variates 
+<meta property="og:description" content="Measures object is a matrix or data.frame with measures
+  (columns) for variable pairs (rows) and rownames of the two variates
   separated by separator" />
 <meta property="og:image" content="/logo.png" />
 
@@ -153,15 +153,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select 2d spaces with variable associated measures displayed in 
+    <h1>Select 2d spaces with variable associated measures displayed in
   scatterplot matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_ng_plots.R'><code>R/l_ng_plots.R</code></a></small>
     <div class="hidden name"><code>l_ng_plots.default.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Measures object is a matrix or data.frame with measures 
-  (columns) for variable pairs (rows) and rownames of the two variates 
+    <p>Measures object is a matrix or data.frame with measures
+  (columns) for variable pairs (rows) and rownames of the two variates
   separated by separator</p>
     </div>
 
@@ -173,7 +173,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>measures</th>
-      <td><p>matrix or data.frame with measures (columns) for variable 
+      <td><p>matrix or data.frame with measures (columns) for variable
 pairs (rows) and rownames of the two variates separated by separator</p></td>
     </tr>
     <tr>
@@ -182,7 +182,7 @@ pairs (rows) and rownames of the two variates separated by separator</p></td>
     </tr>
     <tr>
       <th>separator</th>
-      <td><p>a string that separates the variable pair string into the 
+      <td><p>a string that separates the variable pair string into the
 individual variables</p></td>
     </tr>
     <tr>
@@ -201,13 +201,15 @@ individual variables</p></td>
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html#l_ng_plots")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_ng_plots.html'>l_ng_plots</a></code>, <code><a href='l_ng_plots.measures.html'>l_ng_plots.measures</a></code>, 
-  <code><a href='l_ng_plots.scagnostics.html'>l_ng_plots.scagnostics</a></code>, <code><a href='measures1d.html'>measures1d</a></code>, 
-  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>, 
+    <div class='dont-index'><p><code><a href='l_ng_plots.html'>l_ng_plots</a></code>, <code><a href='l_ng_plots.measures.html'>l_ng_plots.measures</a></code>,
+  <code><a href='l_ng_plots.scagnostics.html'>l_ng_plots.scagnostics</a></code>, <code><a href='measures1d.html'>measures1d</a></code>,
+  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>,
   <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>100</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
@@ -246,8 +248,10 @@ individual variables</p></td>
 <span class='co'>## more involved</span>
 <span class='no'>q1</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>x</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fl'>0.25</span>))
 
-<span class='co'># be carful that the vector names are correct</span>
+<span class='co'># be careful that the vector names are correct</span>
 <span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_plots.html'>l_ng_plots</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(<span class='no'>oliveAcids</span>, <span class='no'>q1</span>), <span class='no'>oliveAcids</span>)
+}
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

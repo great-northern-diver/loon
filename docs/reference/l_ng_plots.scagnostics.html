@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>2d Navigation Graph Setup with dynamic node fitering based on 
+<title>2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and by using a scatterplot matrix — l_ng_plots.scagnostics • loon</title>
 
 <!-- favicons -->
@@ -47,12 +47,12 @@
 
 
 
-<meta property="og:title" content="2d Navigation Graph Setup with dynamic node fitering based on 
+<meta property="og:title" content="2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and by using a scatterplot matrix — l_ng_plots.scagnostics" />
-<meta property="og:description" content="This method is useful when working with objects from the 
-  scagnostics function from the scagnostics R 
-  package. In order to dynamically re-calcultate the scagnostic measures for 
-  a subset of the data use the scagnostics2d measures creature 
+<meta property="og:description" content="This method is useful when working with objects from the
+  scagnostics function from the scagnostics R
+  package. In order to dynamically re-calcultate the scagnostic measures for
+  a subset of the data use the scagnostics2d measures creature
   function." />
 <meta property="og:image" content="/logo.png" />
 
@@ -155,17 +155,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>2d Navigation Graph Setup with dynamic node fitering based on 
+    <h1>2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and by using a scatterplot matrix</h1>
     <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_ng_plots.R'><code>R/l_ng_plots.R</code></a></small>
     <div class="hidden name"><code>l_ng_plots.scagnostics.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This method is useful when working with objects from the 
-  <code><a href='https://rdrr.io/pkg/scagnostics/man/scagnostics.html'>scagnostics</a></code> function from the scagnostics <span style="R">R</span> 
-  package. In order to dynamically re-calcultate the scagnostic measures for 
-  a subset of the data use the <code><a href='scagnostics2d.html'>scagnostics2d</a></code> measures creature 
+    <p>This method is useful when working with objects from the
+  <code><a href='https://rdrr.io/pkg/scagnostics/man/scagnostics.html'>scagnostics</a></code> function from the scagnostics <span style="R">R</span>
+  package. In order to dynamically re-calcultate the scagnostic measures for
+  a subset of the data use the <code><a href='scagnostics2d.html'>scagnostics2d</a></code> measures creature
   function.</p>
     </div>
 
@@ -177,7 +177,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>measures</th>
-      <td><p>objects from the <code><a href='https://rdrr.io/pkg/scagnostics/man/scagnostics.html'>scagnostics</a></code> 
+      <td><p>objects from the <code><a href='https://rdrr.io/pkg/scagnostics/man/scagnostics.html'>scagnostics</a></code>
 function from the scagnostics <span style="R">R</span> package</p></td>
     </tr>
     <tr>
@@ -186,7 +186,7 @@ function from the scagnostics <span style="R">R</span> package</p></td>
     </tr>
     <tr>
       <th>separator</th>
-      <td><p>a string that separates the variable pair string into the 
+      <td><p>a string that separates the variable pair string into the
 individual variables</p></td>
     </tr>
     <tr>
@@ -202,17 +202,21 @@ individual variables</p></td>
   <code>env</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_ng_plots.html'>l_ng_plots</a></code>, <code><a href='l_ng_plots.default.html'>l_ng_plots.default</a></code>, 
-  <code><a href='l_ng_plots.measures.html'>l_ng_plots.measures</a></code>, <code><a href='measures1d.html'>measures1d</a></code>, 
-  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>, 
+    <div class='dont-index'><p><code><a href='l_ng_plots.html'>l_ng_plots</a></code>, <code><a href='l_ng_plots.default.html'>l_ng_plots.default</a></code>,
+  <code><a href='l_ng_plots.measures.html'>l_ng_plots.measures</a></code>, <code><a href='measures1d.html'>measures1d</a></code>,
+  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>,
   <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>scagnostics</span>)
   <span class='no'>scags</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>scagnostics</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/scagnostics/man/scagnostics.html'>scagnostics</a></span>(<span class='no'>oliveAcids</span>)
   <span class='fu'><a href='l_ng_plots.html'>l_ng_plots</a></span>(<span class='no'>scags</span>, <span class='no'>oliveAcids</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>olive</span>$<span class='no'>Area</span>)
+}
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

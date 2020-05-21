@@ -42,8 +42,12 @@ Creates an loon plot displaying contours
              of the supplied (kernel) density estimate
 }
 \examples{
+if(interactive()){
+
 ds <- density(faithful$eruptions)
 p <- l_plot(ds, color = "steelblue")
+
+}
 
 }
 \seealso{

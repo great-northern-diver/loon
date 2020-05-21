@@ -23,9 +23,12 @@ All of loon's displays have plot states. Plot states specify
   state.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris, color = iris$Species)
 l_cget(p, "color")
 p['selected']
+}
 }
 \seealso{
 \code{\link{l_configure}}, \code{\link{l_info_states}},

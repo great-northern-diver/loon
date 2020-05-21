@@ -2,18 +2,18 @@
 % Please edit documentation in R/l_ng_plots.R
 \name{l_ng_plots.scagnostics}
 \alias{l_ng_plots.scagnostics}
-\title{2d Navigation Graph Setup with dynamic node fitering based on 
+\title{2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and by using a scatterplot matrix}
 \usage{
 \method{l_ng_plots}{scagnostics}(measures, data, separator = ":", ...)
 }
 \arguments{
-\item{measures}{objects from the \code{\link[scagnostics]{scagnostics}} 
+\item{measures}{objects from the \code{\link[scagnostics]{scagnostics}}
 function from the scagnostics \R package}
 
 \item{data}{data frame for scatterplot}
 
-\item{separator}{a string that separates the variable pair string into the 
+\item{separator}{a string that separates the variable pair string into the
 individual variables}
 
 \item{...}{arguments passed on to configure the scatterplot}
@@ -24,23 +24,27 @@ named list with plots-, graph-, plot-, navigator-, and context
   \code{env}.
 }
 \description{
-This method is useful when working with objects from the 
-  \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R 
-  package. In order to dynamically re-calcultate the scagnostic measures for 
-  a subset of the data use the \code{\link{scagnostics2d}} measures creature 
+This method is useful when working with objects from the
+  \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R
+  package. In order to dynamically re-calcultate the scagnostic measures for
+  a subset of the data use the \code{\link{scagnostics2d}} measures creature
   function.
 }
 \examples{
+
+if(interactive()){
 
 \dontrun{
 library(scagnostics)
   scags <- scagnostics::scagnostics(oliveAcids)
   l_ng_plots(scags, oliveAcids, color=olive$Area)
 }
+
+}
 }
 \seealso{
-\code{\link{l_ng_plots}}, \code{\link{l_ng_plots.default}}, 
-  \code{\link{l_ng_plots.measures}}, \code{\link{measures1d}}, 
-  \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+\code{\link{l_ng_plots}}, \code{\link{l_ng_plots.default}},
+  \code{\link{l_ng_plots.measures}}, \code{\link{measures1d}},
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}},
   \code{\link{l_ng_ranges}}
 }

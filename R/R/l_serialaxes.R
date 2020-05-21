@@ -52,6 +52,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
 #' s['axesLayout'] <- 'parallel'
 #' states <- l_info_states(s)
@@ -219,6 +221,8 @@
 #' #        the best way to proceed (especially if there are natural lower and
 #' #        upper limits for each variable).
 #' #        Then scaling can always be changed via the inspector.
+#'
+#' }
 
 l_serialaxes <- function(data,
                          sequence,

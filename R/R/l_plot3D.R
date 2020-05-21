@@ -224,6 +224,7 @@ l_scale3D <- function(x,
 #' @export
 #'
 #' @examples
+#' if(interactive()){
 #'
 #' with(quakes,
 #'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
@@ -250,6 +251,7 @@ l_scale3D <- function(x,
 #'      }
 #' )
 #'
+#'}
 l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
     UseMethod("l_plot3D")
 }
@@ -361,6 +363,7 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #' @export l_plot3D.default
 #'
 #' @examples
+#' if(interactive()){
 #'
 #' # default use as scatterplot
 #'
@@ -376,6 +379,7 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #' l_configure(p1, linkingGroup = "quakes", sync = "push")
 #' l_configure(p2, linkingGroup = "quakes", sync = "push")
 #'
+#'}
 l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               axisScaleFactor = 1,
                               by = NULL,

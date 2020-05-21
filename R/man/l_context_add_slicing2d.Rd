@@ -23,6 +23,8 @@ Contexts are in more detail explained in the webmanual accessible with
 \code{l_help("learn_R_display_graph.html#contexts")}.
 }
 \examples{
+if(interactive()){
+
 names(oliveAcids) <- c('p','p1','s','o','l','l1','a','e')
 nodes <- apply(combn(names(oliveAcids),2),2,
               function(x)paste(x, collapse=':'))
@@ -36,5 +38,6 @@ con['proportion'] <- 0.2
 
 con['conditioning4d'] <- "union"
 con['conditioning4d'] <- "intersection"
+}
 
 }

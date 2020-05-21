@@ -38,6 +38,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris")
 #'
 #' p <- l_pairs(iris[,-5], color=iris$Species, linkingGroup = "iris",
@@ -51,6 +53,8 @@
 #' for (plot in l_getPlots(p)) {
 #'       if (is(plot, "l_plot")) {
 #'           plot["glyph"] <- "ocircle"}
+#' }
+#'
 #' }
 
 l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,

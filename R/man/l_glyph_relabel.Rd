@@ -18,10 +18,13 @@ Change the label of a glyph. Note that the label is only
   displayed in the glyph inspector.
 }
 \examples{
+if(interactive()){
+
 p <- l_plot(iris, color = iris$Species)
 g <- l_glyph_add_text(p, iris$Species, "test_label")
 p['glyph'] <- g
 l_glyph_relabel(p, g, "Species")
+}
 }
 \seealso{
 Other glyph functions: 
