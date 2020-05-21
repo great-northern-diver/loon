@@ -1,6 +1,12 @@
+#
+# if (requireNamespace("testthat", quietly = TRUE)) {
+#
+#     library(testthat)
+library(loon)
+library(grid)
+context("test_loonGrob")
 
-test_that("test_loonGrob", {
-    ############################################ 1. l_plot layers ############################################
+test_that("plot layers have correct grid structure", {
     p <- with(olive,
               l_plot(x=linoleic, y=oleic,
                      color=Region, title="Olive Data"))
@@ -75,8 +81,10 @@ test_that("test_loonGrob", {
     lgrob <- loonGrob(p)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
     expect_equal(class(lgrob$children), c("gList"))
+})
 
-    ############################################ 2. scatterplot l_glyph ############################################
+test_that("plots with different glyphs have correct structure", {
+
     # Plot glyphsizes for different glyphs
     sizes <- c(0:10) # seq(15,25,by=5)
     ns <- length(sizes)
@@ -126,7 +134,7 @@ test_that("test_loonGrob", {
     ## Images
     data(faces, package = "loon.data")
     faces.imgs <- l_image_import_array(faces, 64, 64, img_in_row = FALSE)
-    faces.imgs[1]
+
     g_image <- l_glyph_add_image(p, image=rep(faces.imgs[1], p['n']), label='frey faces')
     l_configure(p, glyph=g_image, which=i_image)
 
@@ -154,7 +162,8 @@ test_that("test_loonGrob", {
                          63.3,44.6,53.2,20.7,61.2,11.6,57.5,34,44.2)
     x_ap <- airplane_coords[seq(1, length(airplane_coords), by=2)]
     y_ap <- airplane_coords[seq(2, length(airplane_coords), by=2)]
-    ## center-scale
+
+    ## centre-scale
     d_ap <- diff(range(x_ap, y_ap))/5 # 5 is min width or height of airplane if size <= 1
     x_aps <- (x_ap-mean(x_ap))/d_ap
     y_aps <- (y_ap-mean(y_ap))/d_ap
@@ -178,12 +187,14 @@ test_that("test_loonGrob", {
 
     l_configure(p, glyph=g_row, color='black', which=i_rowlabels)
     lgrob <- loonGrob(p)
-    grid.newpage()
-    grid.draw(lgrob)
+    # grid.newpage()
+    # grid.draw(lgrob)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
     expect_equal(class(lgrob$children), c("gList"))
 
-    ############################################ 3. l_graph ############################################
+})
+
+test_that("graphs have correct structure", {
     G <- completegraph(names(iris[,-5]))
     LG <- linegraph(G)
     g <- l_graph(LG)
@@ -202,59 +213,67 @@ test_that("test_loonGrob", {
     l_configure(nav2, label = 2)
     con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
     lgrob <- loonGrob(g)
-    grid.newpage(); grid.draw(lgrob)
+    #grid.newpage(); grid.draw(lgrob)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
 
-    ########################################### 4. l_hist ############################################
+})
+
+test_that("histograms have correct structure", {
     h <- l_hist(iris$Sepal.Length, color=iris$Species)
     g <- loonGrob(h)
-    grid.newpage(); grid.draw(g)
+    #grid.newpage(); grid.draw(g)
     expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     h['showStackedColors'] <- TRUE
     g <- loonGrob(h)
-    grid.newpage(); grid.draw(g)
+    #grid.newpage(); grid.draw(g)
     expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     h['colorStackingOrder'] <- c("selected", unique(h['color']))
     g <- loonGrob(h)
-    grid.newpage(); grid.draw(g)
+    #grid.newpage(); grid.draw(g)
     expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     h['colorStackingOrder'] <- rev(h['colorStackingOrder'])
     g <- loonGrob(h)
-    grid.newpage(); grid.draw(g)
+    #grid.newpage(); grid.draw(g)
     expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
-    ########################################## 5. navgraph ############################################
+})
+
+test_that("navgation graphs have correct structure", {
     ng <- l_navgraph(oliveAcids, separator='-', color=olive$Area)
 
-    lgrob <- grid.loon(ng)
+    lgrob <- grid.loon(ng, draw = FALSE)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
 
-    ######################################## 6. l_pairs ############################################
+})
+
+test_that("l_pairs have correct structure", {
     p <- l_pairs(iris[,-5], color=iris$Species)
-
     lgrob <- loonGrob(p)
-    grid.newpage()
-    grid.draw(lgrob)
+    #grid.newpage()
+    #grid.draw(lgrob)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
+})
 
-    ###################################### 7. l_serialaxes ############################################
+test_that("l_serialaxes have correct structure", {
     s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-    lgrob <- grid.loon(s)
+    lgrob <- grid.loon(s, draw = FALSE)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
 
     s['axesLayout'] <- 'parallel'
-    lgrob <- grid.loon(s)
+    lgrob <- grid.loon(s, draw = FALSE)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
+})
 
-    ###################################### 8. l_ts ############################################
+test_that("l_ts has correct structure", {
     decompose <- decompose(co2)
     # or decompose <- stl(co2, "per")
     p <- l_plot(decompose, title = "Atmospheric carbon dioxide over Mauna Loa")
     lgrob <- loonGrob(p)
-    grid.newpage()
-    grid.draw(lgrob)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
 })
+
+
+#}

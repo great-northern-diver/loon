@@ -18,7 +18,7 @@ Character vector of length two. First element is the event pattern,
 \description{
 This function returns the registered event pattern and the Tcl
   callback code that the Tcl interpreter evaluates after a event occurs that
-  machtches the event pattern.
+  matches the event pattern.
 }
 \details{
 Bindings, callbacks, and binding substitutions are described in detail in

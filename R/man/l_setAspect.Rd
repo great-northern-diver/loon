@@ -9,11 +9,11 @@ l_setAspect(widget, aspect, x, y)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{aspect}{aspect ratio, optional, if omitted then the \code{x} and 
+\item{aspect}{aspect ratio, optional, if omitted then the \code{x} and
 \code{y} arguments have to be specified.}
 
 \item{x}{optional, if the \code{aspect} argument is missing then \code{x} and
-\code{y} can be specified and the aspect ratio is calculted usding 
+\code{y} can be specified and the aspect ratio is calculted usding
 \code{y/x}.}
 
 \item{y}{see description for \code{x} argument above}
@@ -24,8 +24,10 @@ The aspect ratio is defined by the ratio of the number of pixels
   on the x axes.
 }
 \examples{
+\dontrun{
 p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 
 l_aspect(p)
-l_setAspect(p, x = 1, y = 2) 
+l_setAspect(p, x = 1, y = 2)
+}
 }

@@ -1,5 +1,7 @@
-test_that("test facet l_plot glyphs: serialaxes glyph", {
-    ########## l_glyph_add_serialaxes ##########
+library(loon)
+context("test_facets")
+
+test_that("l_plot facets work with serialaxes glyph", {
     p <- with(quakes, l_plot(long, lat, linkingGroup = "quakes"))
     p["color"][quakes$mag < 5 & quakes$mag >= 4] <- "lightgreen"
     p["color"][quakes$mag < 6 & quakes$mag >= 5] <- "lightblue"
@@ -11,8 +13,7 @@ test_that("test facet l_plot glyphs: serialaxes glyph", {
     expect_equal(length(f), 3L)
 })
 
-test_that("test facet l_plot glyphs: pointrange glyph", {
-    ########## l_glyph_add_pointrange ##########
+test_that("l_plot facets work with  pointrange glyph", {
     p <- l_plot(x = rep(1:3, 2), color = rep(c('red', 'blue', 'green'), 2), showScales=TRUE)
     g <- l_glyph_add_pointrange(p, ymin=(1:6)-(1:6)/5, ymax=(1:6)+(1:6)/5)
     p['glyph'][1:2] <- g
@@ -20,23 +21,22 @@ test_that("test facet l_plot glyphs: pointrange glyph", {
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_equal(length(f), 3L)
 })
+#
+# test_that("l_plot facets work with  image glyph", {
+#     p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
+#     img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
+#     imgs <- setNames(l_image_import_files(img_paths),
+#                      tools::file_path_sans_ext(basename(img_paths)))
+#     i <- pmatch(gsub("^[[:alpha:]]+-","", olive$Area), names(imgs), duplicates.ok = TRUE)
+#
+#     g <- l_glyph_add_image(p, imgs[i], label="Flags")
+#     p['glyph'] <- g
+#     f <- l_facet(p, layout = "grid", by = "color")
+#     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+#     expect_equal(length(f), 3L)
+# })
 
-test_that("test facet l_plot glyphs: image glyph", {
-    ########## l_glyph_add_image ##########
-    p <- with(olive, l_plot(palmitic ~ stearic, color = Region))
-    img_paths <- list.files(file.path(find.package(package = 'loon'), "images"), full.names = TRUE)
-    imgs <- setNames(l_image_import_files(img_paths),
-                     tools::file_path_sans_ext(basename(img_paths)))
-    i <- pmatch(gsub("^[[:alpha:]]+-","", olive$Area), names(imgs), duplicates.ok = TRUE)
-
-    g <- l_glyph_add_image(p, imgs[i], label="Flags")
-    p['glyph'] <- g
-    f <- l_facet(p, layout = "grid", by = "color")
-    expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    expect_equal(length(f), 3L)
-})
-
-test_that("test facet l_plot glyphs: polygon glyph", {
+test_that("l_plot facets work with  polygon glyph", {
     ########## l_glyph_add_polygon ##########
     x_star <-
         c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
@@ -74,7 +74,7 @@ test_that("test facet l_plot glyphs: polygon glyph", {
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 })
 
-test_that("test facet l_plot glyphs: text glyph", {
+test_that("l_plot facets work with  text glyph", {
     ########## l_glyph_add_text ##########
     p <- l_plot(iris, color = iris$Species)
     g <- l_glyph_add_text(p, iris$Species, "test_label")

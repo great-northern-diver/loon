@@ -1,4 +1,9 @@
-test_that("R and Tcl data conversion", {
+
+
+context('R and Tcl data conversion')
+library(loon)
+
+test_that("nested double is identical to 5 significant digits", {
     x_star <-
         c(-0.000864304235090734, 0.292999135695765, 0.949870354364736,
           0.474503025064823, 0.586862575626621, -0.000864304235090734,

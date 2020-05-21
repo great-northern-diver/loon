@@ -18,8 +18,10 @@ The aspect ratio is defined by the ratio of the number of pixels
   on the x axes.
 }
 \examples{
+\dontrun{
 p <- with(iris, l_plot(Sepal.Length ~ Sepal.Width, color=Species))
 
 l_aspect(p)
 l_aspect(p) <- 1
+}
 }

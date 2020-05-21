@@ -1,0 +1,20 @@
+library(loon)
+context("test_aspect")
+
+test_that("changing aspect ratios work", {
+    p <- l_plot(x=rnorm(10), y=runif(10))
+    ar <- l_aspect(p)
+    expect_is(ar, "numeric")
+    l_setAspect(p, x = 2, y = 4)
+    ar <- l_aspect(p)
+    expect_equal(ar, 2)
+    l_setAspect(p, 4)
+    ar <- l_aspect(p)
+    expect_equal(ar, 4)
+    l_setAspect(p, aspect = 10, x = 2, y = 4)
+    ar <- l_aspect(p)
+    expect_equal(ar, 10)
+    l_aspect(p) <- 5
+    ar <- l_aspect(p)
+    expect_equal(ar, 5)
+})

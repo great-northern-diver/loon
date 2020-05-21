@@ -49,7 +49,7 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
     yshows <- widget['yshows']
     swapAxes <- widget['swapAxes']
 
-    bins <- getBinData(widget)
+    bins <- l_getBinData(widget)
 
     sel_color <- l_getOption("select-color")
 

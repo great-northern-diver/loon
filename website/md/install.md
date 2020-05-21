@@ -131,7 +131,7 @@ install.packages(c(
   'PairViz', 'scagnostics',
   'kernlab', 'testthat',
   'knitr', 'rmarkdown',
-  'formatR', 'ElemStatLearn'
+  'formatR'
 ))
 ~~~
 

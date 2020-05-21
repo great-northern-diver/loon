@@ -1,63 +1,57 @@
-test_that("test_linking", {
+# if (requireNamespace("testthat", quietly = TRUE)) {
+#
+#     library(testthat)
+    library(loon)
+    context("test_linking")
 
-    ########################################## l_plot ##########################################
-    p <- l_plot(iris, color = iris$Species, linkingGroup = "iris")
-    color <- p['color']
-    ########## l_plot ##########
-    pp <- l_plot(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_plot3D ##########
-    pp <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_hist ##########
-    pp <- l_hist(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_serialaxes ##########
-    pp <- l_serialaxes(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########################################## l_plot3D ##########################################
-    p <- l_plot3D(iris, color = iris$Species, linkingGroup = "iris")
-    color <- p['color']
-    ########## l_plot ##########
-    pp <- l_plot(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_plot3D ##########
-    pp <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_hist ##########
-    pp <- l_hist(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_serialaxes ##########
-    pp <- l_serialaxes(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########################################## l_hist ##########################################
-    p <- l_hist(iris, color = iris$Species, linkingGroup = "iris")
-    color <- p['color']
-    ########## l_plot ##########
-    pp <- l_plot(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_plot3D ##########
-    pp <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_hist ##########
-    pp <- l_hist(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_serialaxes ##########
-    pp <- l_serialaxes(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########################################## l_serialaxes ##########################################
-    p <- l_serialaxes(iris, color = iris$Species, linkingGroup = "iris")
-    color <- p['color']
-    ########## l_plot ##########
-    pp <- l_plot(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_plot3D ##########
-    pp <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_hist ##########
-    pp <- l_hist(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-    ########## l_serialaxes ##########
-    pp <- l_serialaxes(iris, linkingGroup = "iris")
-    expect_equal(pp['color'], color)
-})
+    test_that("linking on size and color works", {
+
+        n <- nrow(iris)
+        p1 <- l_plot(iris,
+                     color = iris$Species,
+                     size = sample(c(2, 4, 8), n, replace = TRUE),
+                     linkingGroup = "iris")
+        p2 <- l_plot(iris, linkingGroup = "iris")
+        p3 <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
+        h <- l_hist(iris, linkingGroup = "iris")
+        sa <- l_serialaxes(iris, linkingGroup = "iris")
+
+        color <- p1['color']
+        expect_equal(p2['color'], color)
+        expect_equal(p3['color'], color)
+        expect_equal(h['color'], color)
+        expect_equal(sa['color'], color)
+
+        size <- p1['size']
+        expect_equal(p2['size'], size)
+        expect_equal(p3['size'], size)
+
+        p3["color"] <- sample(c("red", "green", "blue", "magenta"), n, replace = TRUE)
+
+        expect_equal(p1['color'], p3['color'])
+        expect_equal(p2['color'], p3['color'])
+        expect_equal(h['color'], p3['color'])
+        expect_equal(sa['color'], p3['color'])
+
+
+        h["color"] <- sample(c("red", "green", "blue", "magenta"), n, replace = TRUE)
+
+        expect_equal(p1['color'], h['color'])
+        expect_equal(p2['color'], h['color'])
+        expect_equal(p3['color'], h['color'])
+        expect_equal(sa['color'], h['color'])
+
+        sa["color"] <- sample(c("red", "green", "blue", "magenta"), n, replace = TRUE)
+
+        expect_equal(p1['color'], sa['color'])
+        expect_equal(p2['color'], sa['color'])
+        expect_equal(p3['color'], sa['color'])
+        expect_equal(h['color'], sa['color'])
+
+        p2["size"] <-  sample(c(2, 4, 8), n, replace = TRUE)
+        expect_equal(p1['size'], p2['size'])
+        expect_equal(p3['size'], p2['size'])
+    })
+
+
+#}

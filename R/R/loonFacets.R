@@ -102,7 +102,7 @@ loonFacets.default <- function(type,
     # linkingGroup
     if(is.null(linkingGroup)) {
         linkingGroup <- paste0("layout", valid_path())
-        print(paste("linkingGroup:", linkingGroup))
+        message(paste("linkingGroup:", linkingGroup))
     }
 
     plots <- lapply(splitted_data,
@@ -384,7 +384,7 @@ loonFacets.l_serialaxes <- function(type,
     # linkingGroup
     if(is.null(linkingGroup)) {
         linkingGroup <- paste0("layout", valid_path())
-        print(paste("linkingGroup:", linkingGroup))
+        message(paste("linkingGroup:", linkingGroup))
     }
 
     plots <- lapply(splitted_data,

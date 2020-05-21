@@ -55,6 +55,7 @@ Grid grobs are useful to create publication quality graphics.
 }
 \examples{
 
+\dontrun{
 widget <- with(iris, l_plot(Sepal.Length, Sepal.Width))
 
 lgrob <- loonGrob(widget)
@@ -63,7 +64,6 @@ library(grid)
 grid.ls(lgrob, viewports=TRUE, fullNames=TRUE)
 grid.newpage(); grid.draw(lgrob)
 
-\dontrun{
 p <- demo("l_layers", ask = FALSE)$value
 
 lgrob <- loonGrob(p)
