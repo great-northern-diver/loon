@@ -120,19 +120,21 @@ It takes a loon widget and forms a matrix of loon widget
 facets.
 }
 \examples{
-library(maps)
-p <- with(quakes, l_plot(long, lat, linkingGroup = "quakes"))
-p["color"][quakes$mag < 5 & quakes$mag >= 4] <- "lightgreen"
-p["color"][quakes$mag < 6 & quakes$mag >= 5] <- "lightblue"
-p["color"][quakes$mag >= 6] <- "firebrick"
-# A Fiji map
-NZFijiMap <- map("world2", regions = c("New Zealand", "Fiji"), plot = FALSE)
-l_layer(p, NZFijiMap,
-        label = "New Zealand and Fiji",
-        color = "forestgreen",
-        index = "end")
-fp <- l_facet(p, by = "color", layout = "grid",
-              linkingGroup = "quakes")
+if(interactive()) {
+  library(maps)
+  p <- with(quakes, l_plot(long, lat, linkingGroup = "quakes"))
+  p["color"][quakes$mag < 5 & quakes$mag >= 4] <- "lightgreen"
+  p["color"][quakes$mag < 6 & quakes$mag >= 5] <- "lightblue"
+  p["color"][quakes$mag >= 6] <- "firebrick"
+  # A Fiji map
+  NZFijiMap <- map("world2", regions = c("New Zealand", "Fiji"), plot = FALSE)
+  l_layer(p, NZFijiMap,
+          label = "New Zealand and Fiji",
+          color = "forestgreen",
+          index = "end")
+  fp <- l_facet(p, by = "color", layout = "grid",
+                linkingGroup = "quakes")
+}
 
 # serialaxes facets
 s <- l_serialaxes(iris, color = iris$Species,

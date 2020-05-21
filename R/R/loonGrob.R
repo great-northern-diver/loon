@@ -54,13 +54,14 @@ grid.loon <- function (target, name = NULL, gp = gpar(), draw = TRUE, vp = NULL)
 #' @seealso \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{l_export}}
 #'
 #' @examples
-#'
-#' loonPlot <- with(iris, l_plot(Sepal.Length, Sepal.Width))
-#' loonPlot['color'] <- iris$Species
-#' loonPlot['selected'] <- iris$Species == "versicolor"
-#' l_scaleto_selected(loonPlot)
-#' loonPlot['showGuides'] <- TRUE
-#' plot(loonPlot)
+#' if(interactive()) {
+#'   loonPlot <- with(iris, l_plot(Sepal.Length, Sepal.Width))
+#'   loonPlot['color'] <- iris$Species
+#'   loonPlot['selected'] <- iris$Species == "versicolor"
+#'   l_scaleto_selected(loonPlot)
+#'   loonPlot['showGuides'] <- TRUE
+#'   plot(loonPlot)
+#' }
 #'
 #' @export
 plot.loon <- function (x, y = NULL, ...) {

@@ -3,14 +3,15 @@
 #' @examples
 #'
 #' ## Serial axes (radial and parallel coordinate) examples
-#'
-#' s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-#' sGrob_radial <- loonGrob(s)
-#' library(grid)
-#' grid.newpage(); grid.draw(sGrob_radial)
-#' s['axesLayout'] <- 'parallel'
-#' sGrob_parallel <- loonGrob(s)
-#' grid.newpage(); grid.draw(sGrob_parallel)
+#' if(interactive()) {
+#'   s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
+#'   sGrob_radial <- loonGrob(s)
+#'   library(grid)
+#'   grid.newpage(); grid.draw(sGrob_radial)
+#'   s['axesLayout'] <- 'parallel'
+#'   sGrob_parallel <- loonGrob(s)
+#'   grid.newpage(); grid.draw(sGrob_parallel)
+#' }
 #'
 #' @export
 
