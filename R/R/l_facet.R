@@ -267,13 +267,15 @@ l_facet.loon <- function(widget,
 #' @rdname l_facet
 #' @export
 #' @examples
+#' if(interactive()) {
+#'
 #' # serialaxes facets
 #' s <- l_serialaxes(iris, color = iris$Species,
 #'                   scaling = "observation")
 #' fs <- l_facet(s, layout = "wrap", by = iris$Species)
 #' # The linkingGroup can be printed or accessed by
 #' l_configure(s, linkingGroup = fs[[1]]['linkingGroup'], sync = "pull")
-#'
+#' }
 l_facet.l_serialaxes <- function(widget,
                                  by,
                                  layout = c("grid", "wrap", "separate"),
