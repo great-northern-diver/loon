@@ -1,7 +1,7 @@
 library(loon)
 context("test_userSettableOptions")
 
-test_that("linking on size and color works", {
+test_that("user settable options work", {
     userSettable <- l_userOptions()
     otherOptions <- setdiff(l_getOptionNames(), userSettable)
     for(optName in userSettable) {
