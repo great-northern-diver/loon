@@ -1,7 +1,7 @@
 # if (requireNamespace("testthat", quietly = TRUE)) {
 #
 #     library(testthat)
-    library(loon)
+    # library(loon)
     context("test_linking")
 
     test_that("linking on size and color works", {

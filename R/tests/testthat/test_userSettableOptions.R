@@ -1,7 +1,7 @@
 library(loon)
-context("test_options")
+context("test_userSettableOptions")
 
-test_that("changing options works", {
+test_that("user settable options work", {
     userSettable <- l_userOptions()
     otherOptions <- setdiff(l_getOptionNames(), userSettable)
     for(optName in userSettable) {
@@ -16,5 +16,6 @@ test_that("changing options works", {
         expect_error(l_setOption(optName, "fubar"))
         expect_equal(l_getOption(optName), opt)
     }
-}
-)
+})
+
+
