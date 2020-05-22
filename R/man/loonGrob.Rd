@@ -166,6 +166,7 @@ plot(h)
 grid.loon(h)
 }
 
+if(interactive()) {
 
 ## l_plot scatterplot examples
 
@@ -184,6 +185,7 @@ p['selected'] <- c(TRUE, FALSE)
 g <- loonGrob(p)
 grid.newpage(); grid.draw(g)
 
+}
 
 \dontrun{
 ## navgraph examples
