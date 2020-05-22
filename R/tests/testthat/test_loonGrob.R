@@ -162,6 +162,7 @@ test_that("plots with different glyphs have correct structure", {
                          63.3,44.6,53.2,20.7,61.2,11.6,57.5,34,44.2)
     x_ap <- airplane_coords[seq(1, length(airplane_coords), by=2)]
     y_ap <- airplane_coords[seq(2, length(airplane_coords), by=2)]
+
     ## centre-scale
     d_ap <- diff(range(x_ap, y_ap))/5 # 5 is min width or height of airplane if size <= 1
     x_aps <- (x_ap-mean(x_ap))/d_ap

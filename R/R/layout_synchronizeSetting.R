@@ -11,6 +11,8 @@ layout_synchronizeSetting <- function(plots, child,
                     zoomY = zoomY)
     }
 
+    if(connectedScales == "none") return(NULL)
+
     layout_position <- layout_position(plots)
     plotsHash <- list()
     for (i in 1:length(plots)) {
@@ -63,7 +65,6 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
         },
         "row" = {
             synchronizeBindings <- function(W) {
@@ -92,7 +93,6 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
         },
         "column" = {
             synchronizeBindings <- function(W) {
@@ -121,7 +121,6 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
         },
         "both" = {
 
@@ -157,7 +156,6 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
         },
         "y" = {
 
@@ -186,7 +184,6 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
 
         },
         "x" = {
@@ -215,9 +212,9 @@ layout_synchronizeSetting <- function(plots, child,
                            synchronizeBindings)
                    }
             )
-            callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
-        },
-        "none" = NULL
+
+        }
     )
+    callbackFunctions$state[[paste(child,"synchronizeBindings", sep="_")]] <- synchronizeBindings
 }
 

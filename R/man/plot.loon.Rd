@@ -22,13 +22,14 @@ loon plots on any device.  Frequent users are recommended to use
 \code{grid.loon()} for more control.
 }
 \examples{
-
-loonPlot <- with(iris, l_plot(Sepal.Length, Sepal.Width))
-loonPlot['color'] <- iris$Species
-loonPlot['selected'] <- iris$Species == "versicolor"
-l_scaleto_selected(loonPlot)
-loonPlot['showGuides'] <- TRUE
-plot(loonPlot)
+if(interactive()) {
+  loonPlot <- with(iris, l_plot(Sepal.Length, Sepal.Width))
+  loonPlot['color'] <- iris$Species
+  loonPlot['selected'] <- iris$Species == "versicolor"
+  l_scaleto_selected(loonPlot)
+  loonPlot['showGuides'] <- TRUE
+  plot(loonPlot)
+}
 
 }
 \seealso{
