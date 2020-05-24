@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_ng_ranges.R
 \name{l_ng_ranges}
 \alias{l_ng_ranges}
-\title{2d navigation graph setup with with dynamic node fitering using a 
+\title{2d navigation graph setup with with dynamic node fitering using a
   slider}
 \usage{
 l_ng_ranges(measures, ...)
@@ -13,7 +13,7 @@ l_ng_ranges(measures, ...)
 \item{...}{argument passed on to methods}
 }
 \description{
-Generic function to create a navigation graph environment where 
+Generic function to create a navigation graph environment where
   user can filter graph nodes using as slider to select 2d spaces based on 2d
   measures.
 }

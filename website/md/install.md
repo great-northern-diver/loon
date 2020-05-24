@@ -36,10 +36,10 @@ want to install `loon` for `Tcl` then follow the instructions
   [Issue tracker on github](https://github.com/great-northern-diver/loon/issues).
 * If you have difficulties with exporting images with the `l_export`
   function then take screenshots:
-	  * On OSX press Command + Shift + 4 and then press space and
-		select the window
-	  * On Linux install a program called [Shutter](http://shutter-project.org/)
-	  * For Windows use [Greenshot](http://getgreenshot.org/)
+    * On OSX press Command + Shift + 4 and then press space and
+	  select the window
+	* On Linux install a program called [Shutter](http://shutter-project.org/)
+	* For Windows use [Greenshot](http://getgreenshot.org/)
 * If you need to install `loon` manually on a Windows machine with an
   R version that is less than `3.4.0` then you need install `Tcl`
   version 8.6 and link R against it, see the
@@ -49,9 +49,9 @@ want to install `loon` for `Tcl` then follow the instructions
 
 ## Installing the loon package
 
-The `loon` package is on
-[CRAN](https://cran.r-project.org/web/packages/loon/index.html)
-available. To install the package start your `R` and run
+The `loon` package is available on
+[CRAN](https://cran.r-project.org/web/packages/loon/index.html).
+To install the package start your `R` and run
 
 ~~~{r}
 install.packages('loon')

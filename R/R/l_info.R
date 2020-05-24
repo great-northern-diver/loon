@@ -16,6 +16,8 @@
 #' @export
 #'
 #' @examples
+#' if(interactive()){
+#'
 #' p <- l_plot(iris, linkingGroup="iris")
 #' i <- l_info_states(p)
 #' names(p)
@@ -28,6 +30,8 @@
 #'
 #' h <- l_hist(iris$Sepal.Length, linkingGroup="iris")
 #' l_info_states(h)
+#'
+#' }
 l_info_states <- function(target, states='all') {
     UseMethod("l_info_states", target)
 }

@@ -333,6 +333,8 @@ l_getColorList <- function() {
 #'
 #' @examples
 #'
+#' if (interactive()){
+#'
 #' \dontrun{
 #' if (requireNamespace("RColorBrewer", quietly = TRUE)) {
 #'   RColorBrewer::display.brewer.all()
@@ -341,6 +343,8 @@ l_getColorList <- function() {
 #'
 #' l_setColorList_ColorBrewer("Set1")
 #' p <- l_plot(iris)
+#'
+#' }
 l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
                                                  "Pastel1", "Pastel2", "Paired",
                                                  "Dark2", "Accent")) {

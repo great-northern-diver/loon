@@ -19,16 +19,18 @@ named list with plots-, graph-, plot-, navigator-, and context
 }
 \description{
 Measures object is of class measures. When using measure objects
-  then the measures can be dynamically re-calculated for a subset of the 
+  then the measures can be dynamically re-calculated for a subset of the
   data.
 }
 \details{
-Note that we provide the \code{\link{scagnostics2d}} function to 
+Note that we provide the \code{\link{scagnostics2d}} function to
   create a measures object for the scagnostics measures.
 
 For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")}
 }
 \examples{
+if (interactive()){
+
 # 2d measures
 # s <- scagnostics2d(oliveAcids)
 # nav <- l_ng_ranges(s, color=olive$Area)
@@ -43,9 +45,11 @@ m1d <- measures1d(sapply(iris[,-5], scale01),
 m1d()
 
 nav <- l_ng_ranges(m1d, color=iris$Species)
+
+}
 }
 \seealso{
-\code{\link{measures1d}}, \code{\link{measures2d}}, 
+\code{\link{measures1d}}, \code{\link{measures2d}},
   \code{\link{scagnostics2d}}, \code{\link{l_ng_ranges}},
   \code{\link{l_ng_plots}}
 }

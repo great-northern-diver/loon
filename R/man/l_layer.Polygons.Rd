@@ -29,6 +29,8 @@ Note that currently loon does neither support holes and ring
 }
 \examples{
 
+if (interactive()) {
+
 if (requireNamespace("rworldmap", quietly = TRUE)) {
     world <- rworldmap::getMap(resolution = "coarse")
     p <- l_plot()
@@ -36,6 +38,7 @@ if (requireNamespace("rworldmap", quietly = TRUE)) {
     l_scaleto_world(p)
     attr(lmap,'hole')
     attr(lmap,'NAME')
+}
 }
 }
 \references{
