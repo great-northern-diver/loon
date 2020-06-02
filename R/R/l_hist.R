@@ -365,15 +365,6 @@ l_hist.default <-  function(x,
                  call. = FALSE)
         sync <- args$sync
 
-        if(is.null(sync)) {
-            sync <- "pull"
-            if(length(color) > 1) {
-                sync <- "push"
-            } else {
-                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
-            }
-        }
-
         n <- length(x)
         len_color <- length(color)
         if (len_color > 1) {
@@ -453,6 +444,11 @@ l_hist.default <-  function(x,
             )
 
             if(!is.null(linkingGroup)) {
+
+                sync <- l_setDefaultSync(p = plot,
+                                         sync = sync,
+                                         color = args$color)
+
                 l_configure(plot,
                             linkingGroup = linkingGroup,
                             sync = sync)

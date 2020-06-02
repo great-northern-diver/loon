@@ -232,7 +232,7 @@ l_serialaxes <- function(data,
                          layout = c("grid", "wrap", "separate"),
                          showAxes=TRUE,
                          linewidth = 1,
-                         color = "steelblue",
+                         color = "grey60",
                          active = TRUE,
                          selected = FALSE,
                          parent=NULL, ... ){
@@ -250,21 +250,6 @@ l_serialaxes <- function(data,
     }
 
     sync <- args$sync
-
-    if(is.null(sync)) {
-        sync <- "pull"
-        if(length(color) > 1) {
-            sync <- "push"
-        } else {
-            if(length(color) == 1 && !is.na(color) && color != "steelblue") sync <- "push"
-        }
-
-        if(length(linewidth) != 1) {
-            sync <- "push"
-        } else {
-            if(length(linewidth) == 1 && !is.na(linewidth) && linewidth != 1) sync <- "push"
-        }
-    }
 
     n <- dim(data)[1]
     len_color <- length(color)
@@ -336,6 +321,12 @@ l_serialaxes <- function(data,
         )
 
         if(!is.null(linkingGroup)) {
+
+            sync <- l_setDefaultSync(p = plot,
+                                     sync = sync,
+                                     color = args$color,
+                                     linewidth = args$linewidth)
+
             l_configure(plot,
                         linkingGroup = linkingGroup,
                         sync = sync)

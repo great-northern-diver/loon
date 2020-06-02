@@ -321,27 +321,6 @@ l_plot.default <-  function(x, y = NULL,
 
         sync <- args$sync
 
-        if(is.null(sync)) {
-            sync <- "pull"
-            if(length(color) > 1) {
-                sync <- "push"
-            } else {
-                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
-            }
-
-            if(length(size) != 1) {
-                sync <- "push"
-            } else {
-                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
-            }
-
-            if(length(glyph) != 1) {
-                sync <- "push"
-            } else {
-                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
-            }
-        }
-
         ## Get x, y, xlab, ylab
         ## similar to plot.default use of xy.coords
         xlab <- deparse(substitute(x))
@@ -445,11 +424,17 @@ l_plot.default <-  function(x, y = NULL,
             )
 
             if(!is.null(linkingGroup)) {
+
+                sync <- l_setDefaultSync(p = plot,
+                                         sync = sync,
+                                         color = args$color,
+                                         size = args$size,
+                                         glyph = args$glyph)
+
                 l_configure(plot,
                             linkingGroup = linkingGroup,
                             sync = sync)
             }
-
 
             class(plot) <- c("l_plot", class(plot))
             return(plot)

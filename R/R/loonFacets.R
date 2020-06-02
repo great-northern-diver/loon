@@ -67,6 +67,13 @@ loonFacets.default <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            sync <- l_setDefaultSync(p = plot,
+                                     sync = sync,
+                                     color = args$color,
+                                     size = args$size,
+                                     glyph = args$glyph)
+
             l_configure(plot,
                         linkingGroup = linkingGroup,
                         sync = sync)
@@ -161,14 +168,6 @@ loonFacets.default <- function(type,
                         p
                     })
 
-    # set linkingGroup for each plot
-    plots <- lapply(plots,
-                    function(plot) {
-                        l_configure(plot,
-                                    linkingGroup = linkingGroup,
-                                    sync = sync)
-                    })
-
     xrange <- c()
     yrange <- c()
     lapply(plots,
@@ -183,11 +182,11 @@ loonFacets.default <- function(type,
 
     if(swapAxes) {
         connectedScales <- switch(connectedScales,
-               "x" = "y",
-               "y" = "x",
-               {
-                   connectedScales
-               })
+                                  "x" = "y",
+                                  "y" = "x",
+                                  {
+                                      connectedScales
+                                  })
     }
 
     if(separate) {
@@ -205,84 +204,99 @@ loonFacets.default <- function(type,
                               ylabel = ylabel,
                               labelMargins = args$labelMargins)
 
-        p <- structure(
+        plots <- structure(
             plots,
             class = c("l_facet", "l_compound", "loon")
         )
-        return(p)
+
+    } else {
+        if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+
+        # forbidden swapAxes
+        swap_forbiddenSetting(plots,
+                              child = child,
+                              swapAxes = swapAxes)
+
+        # synchronize scales
+        linkOneDimensionalStates(plots,
+                                 oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
+
+        if(layout == "grid") {
+
+            ## Two major objectives here
+            # 1. pack plots and labels
+            # 2. rename and reorder plots
+            plots <- do.call(
+                facet_grid_layout,
+                c(
+                    by_args,
+                    list(plots = plots,
+                         subtitles = subtitles,
+                         parent = child,
+                         xlabel = xlabel,
+                         ylabel = ylabel,
+                         title = title,
+                         swapAxes = swapAxes
+                    )
+                )
+            )
+
+            layout_synchronizeSetting(plots,
+                                      connectedScales = connectedScales,
+                                      xrange = xrange,
+                                      yrange = yrange,
+                                      child = child)
+
+            plots <- structure(
+                plots,
+                class = c("l_facet_grid", "l_facet", "l_compound", "loon")
+            )
+
+        } else if(layout == "wrap") {
+
+            plots <- do.call(
+                facet_wrap_layout,
+                c(
+                    by_args,
+                    list(plots = plots,
+                         subtitles = subtitles,
+                         parent = child,
+                         xlabel = xlabel,
+                         ylabel = ylabel,
+                         title =  title,
+                         swapAxes = swapAxes
+                    )
+                )
+            )
+
+            layout_synchronizeSetting(plots,
+                                      connectedScales = connectedScales,
+                                      xrange = xrange,
+                                      yrange = yrange,
+                                      child = child)
+
+            plots <- structure(
+                plots,
+                class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+            )
+        } else stop("Unknown layouts")
     }
 
-    if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
+    sync <- l_setDefaultSync(p = plots,
+                             sync = sync,
+                             color = args$color,
+                             size = args$size,
+                             glyph = args$glyph)
 
-    # forbidden swapAxes
-    swap_forbiddenSetting(plots,
-                          child = child,
-                          swapAxes = swapAxes)
+    # set linkingGroup for each plot
+    lapply(plots,
+           function(plot) {
+               l_configure(plot,
+                           linkingGroup = linkingGroup,
+                           sync = sync)
+           })
 
-    # synchronize scales
-    linkOneDimensionalStates(plots,
-                             oneDimensionalStates = c("showScales", "showLabels", "showGuides"))
-
-    if(layout == "grid") {
-
-        ## Two major objectives here
-        # 1. pack plots and labels
-        # 2. rename and reorder plots
-        plots <- do.call(
-            facet_grid_layout,
-            c(
-                by_args,
-                list(plots = plots,
-                     subtitles = subtitles,
-                     parent = child,
-                     xlabel = xlabel,
-                     ylabel = ylabel,
-                     title = title,
-                     swapAxes = swapAxes
-                )
-            )
-        )
-
-        layout_synchronizeSetting(plots,
-                                  connectedScales = connectedScales,
-                                  xrange = xrange,
-                                  yrange = yrange,
-                                  child = child)
-
-        structure(
-            plots,
-            class = c("l_facet_grid", "l_facet", "l_compound", "loon")
-        )
-
-    } else if(layout == "wrap") {
-
-        plots <- do.call(
-            facet_wrap_layout,
-            c(
-                by_args,
-                list(plots = plots,
-                     subtitles = subtitles,
-                     parent = child,
-                     xlabel = xlabel,
-                     ylabel = ylabel,
-                     title =  title,
-                     swapAxes = swapAxes
-                )
-            )
-        )
-
-        layout_synchronizeSetting(plots,
-                                  connectedScales = connectedScales,
-                                  xrange = xrange,
-                                  yrange = yrange,
-                                  child = child)
-
-        structure(
-            plots,
-            class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
-        )
-    } else
-        stop("Unknown layouts")
+    return(plots)
 }
 
 loonFacets.l_serialaxes <- function(type,
@@ -348,6 +362,12 @@ loonFacets.l_serialaxes <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            sync <- l_setDefaultSync(p = plot,
+                                     sync = sync,
+                                     color = args$color,
+                                     linewidth = args$linewidth)
+
             l_configure(plot,
                         linkingGroup = linkingGroup,
                         sync = sync)
@@ -438,75 +458,71 @@ loonFacets.l_serialaxes <- function(type,
                               subtitles = subtitles,
                               title = title)
 
-        # scale to plot
-        return(
-            structure(
-                plots,
-                class = c("l_facet", "l_compound", "loon")
-            )
+        plots <- structure(
+            plots,
+            class = c("l_facet", "l_compound", "loon")
         )
+
+    } else {
+
+        if(layout == "grid") {
+
+            ## Two major objectives here
+            # 1. pack plots and labels
+            # 2. rename and reorder plots
+            plots <- do.call(
+                facet_grid_layout,
+                c(
+                    by_args,
+                    list(plots = plots,
+                         subtitles = subtitles,
+                         parent = child,
+                         xlabel = xlabel,
+                         ylabel = ylabel,
+                         title = title
+                    )
+                )
+            )
+
+            plots <- structure(
+                plots,
+                class = c("l_facet_grid", "l_facet", "l_compound", "loon")
+            )
+
+        } else if(layout == "wrap") {
+
+            plots <- do.call(
+                facet_wrap_layout,
+                c(
+                    by_args,
+                    list(plots = plots,
+                         subtitles = subtitles,
+                         parent = child,
+                         xlabel = xlabel,
+                         ylabel = ylabel,
+                         title =  title
+                    )
+                )
+            )
+
+            plots <- structure(
+                plots,
+                class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
+            )
+        } else stop("Unknown layouts")
     }
 
-    if(layout == "grid") {
+    sync <- l_setDefaultSync(p = plots,
+                             sync = sync,
+                             color = args$color,
+                             linewidth = args$linewidth)
 
-        ## Two major objectives here
-        # 1. pack plots and labels
-        # 2. rename and reorder plots
-        plots <- do.call(
-            facet_grid_layout,
-            c(
-                by_args,
-                list(plots = plots,
-                     subtitles = subtitles,
-                     parent = child,
-                     xlabel = xlabel,
-                     ylabel = ylabel,
-                     title = title
-                )
-            )
-        )
+    lapply(plots,
+           function(plot) {
+               l_configure(plot,
+                           linkingGroup = linkingGroup,
+                           sync = sync)
+           })
 
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
-
-        structure(
-            plots,
-            class = c("l_facet_grid", "l_facet", "l_compound", "loon")
-        )
-
-    } else if(layout == "wrap") {
-
-        plots <- do.call(
-            facet_wrap_layout,
-            c(
-                by_args,
-                list(plots = plots,
-                     subtitles = subtitles,
-                     parent = child,
-                     xlabel = xlabel,
-                     ylabel = ylabel,
-                     title =  title
-                )
-            )
-        )
-
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
-
-        structure(
-            plots,
-            class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
-        )
-    } else
-        stop("Unknown layouts")
+    return(plots)
 }

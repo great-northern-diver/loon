@@ -85,8 +85,6 @@ l_scale3D <- function(x,
             stop("x must be a data.frame or a numeric matrix")
         }
     }
-    #
-
 
     method = match.arg(method)
     if (method == "box") {
@@ -481,27 +479,6 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
 
         sync <- args$sync
 
-        if(is.null(sync)) {
-            sync <- "pull"
-            if(length(color) > 1) {
-                sync <- "push"
-            } else {
-                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
-            }
-
-            if(length(size) != 1) {
-                sync <- "push"
-            } else {
-                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
-            }
-
-            if(length(glyph) != 1) {
-                sync <- "push"
-            } else {
-                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
-            }
-        }
-
         n <- length(x)
         len_color <- length(color)
         if (len_color > 1) {
@@ -591,6 +568,13 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             )
 
             if(!is.null(linkingGroup)) {
+
+                sync <- l_setDefaultSync(p = plot,
+                                         sync = sync,
+                                         color = args$color,
+                                         size = args$size,
+                                         glyph = args$glyph)
+
                 l_configure(plot,
                             linkingGroup = linkingGroup,
                             sync = sync)
