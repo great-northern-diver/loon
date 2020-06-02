@@ -13,7 +13,7 @@ l_serialaxes(
   layout = c("grid", "wrap", "separate"),
   showAxes = TRUE,
   linewidth = 1,
-  color = "steelblue",
+  color = "grey60",
   active = TRUE,
   selected = FALSE,
   parent = NULL,
