@@ -9,14 +9,14 @@ l_setOption(option, value)
 \arguments{
 \item{option}{the name of the option being set}
 
-\item{value}{the value to be assigned to the option.  If value == "default", 
+\item{value}{the value to be assigned to the option.  If value == "default",
 then the option is set to loon's default value for it.}
 }
 \value{
 the new value
 }
 \description{
-All of loon's displays access a set of common options.  
+All of loon's displays access a set of common options.
 This function assigns the value to the named option.
 }
 \examples{

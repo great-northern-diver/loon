@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The <code>l_plot</code> method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose) — l_plot.decomposed.ts • loon</title>
+<title>The <code><a href='l_plot.html'>l_plot</a></code> method for classical seasonal decomposition of a time series by moving averages (i.e. via <code>decompose()</code>) — l_plot.decomposed.ts • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="The <code>l_plot</code> method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose) — l_plot.decomposed.ts" />
+<meta property="og:title" content="The <code><a href='l_plot.html'>l_plot</a></code> method for classical seasonal decomposition of a time series by moving averages (i.e. via <code>decompose()</code>) — l_plot.decomposed.ts" />
 <meta property="og:description" content="Creates a decomposed time series plot based on
 objects of class decomposed.ts" />
 <meta property="og:image" content="/logo.png" />
@@ -81,7 +81,7 @@ objects of class decomposed.ts" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@ objects of class decomposed.ts" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The <code>l_plot</code> method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)</h1>
+    <h1>The <code><a href='l_plot.html'>l_plot</a></code> method for classical seasonal decomposition of a time series by moving averages (i.e. via <code>decompose()</code>)</h1>
     <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot_decomposed_ts.R'><code>R/l_plot_decomposed_ts.R</code></a></small>
     <div class="hidden name"><code>l_plot.decomposed.ts.Rd</code></div>
     </div>
@@ -168,10 +168,10 @@ objects of class <code>decomposed.ts</code></p>
   <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tk_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"size"</span>),
+  <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"linewidth"</span>),
   <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -211,20 +211,23 @@ time series, the trend component, the seasonality component, and the remainder. 
     </tr>
     <tr>
       <th>color</th>
-      <td><p>points colour of all time series. If <code>NULL</code> (the default)
-<code>color</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+      <td><p>points colour of all time series.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>points size of all time series. Default value is 1.</p></td>
+      <td><p>points size of all time series.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
     </tr>
     <tr>
       <th>lcolor</th>
-      <td><p>line colour of all time series. If <code>NULL</code> (the default) <code>lcolor</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+      <td><p>line colour of all time series.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>linewidth</th>
-      <td><p>line width of all time series (incl. original and decomposed components. Default is 1.</p></td>
+      <td><p>line width of all time series (incl. original and decomposed components.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</code>.</p></td>
     </tr>
     <tr>
       <th>linkingGroup</th>
@@ -245,7 +248,7 @@ If <code>NULL</code>, one is created from the data name and class associated wit
     </tr>
     <tr>
       <th>...</th>
-      <td><p>keyword value pairs passed off to <code><a href='l_plot.html'>l_plot()</a></code> which constructs each loon scatterplot component.</p></td>
+      <td><p>keyword value pairs passed off to <code><a href='l_plot.html'>l_plot</a>()</code> which constructs each loon scatterplot component.</p></td>
     </tr>
     </table>
 

@@ -1,4 +1,4 @@
-#' @title The \code{l_plot} method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)
+#' @title The \code{\link{l_plot}} method for classical seasonal decomposition of a time series by moving averages (i.e. via \code{decompose()})
 #'
 #' @description Creates a decomposed time series plot based on
 #' objects of class \code{decomposed.ts}
@@ -15,17 +15,20 @@
 #' \code{ylabel} will be \code{c("data", "trend", "seasonality", "remainder")}; if a character vector of length 1, the label is repeated four times.
 #' @param title an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".
 #' @param tk_title provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.
-#' @param color points colour of all time series. If \code{NULL} (the default)
-#'        \code{color} will be \code{l_getOption("foreground")}.
-#' @param size points size of all time series. Default value is 1.
-#' @param lcolor line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
-#' @param linewidth line width of all time series (incl. original and decomposed components. Default is 1.
+#' @param color points colour of all time series.
+#'   Default given by \code{\link{l_getOption}("color")}.
+#' @param size points size of all time series.
+#'   Default given by \code{\link{l_getOption}("size")}.
+#' @param lcolor line colour of all time series.
+#'   Default given by \code{\link{l_getOption}("color")}.
+#' @param linewidth line width of all time series (incl. original and decomposed components.
+#'   Default given by \code{\link{l_getOption}("linewidth")}.
 #' @param linkingGroup name of linking group.
 #'        If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
-#' @param ... keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.
+#' @param ... keyword value pairs passed off to \code{\link{l_plot}()} which constructs each loon scatterplot component.
 #'
 #'
 #'
@@ -52,8 +55,10 @@
 l_plot.decomposed.ts <- function(x, y = NULL,
                                  xlabel = NULL,  ylabel = NULL,
                                  title = NULL, tk_title = NULL,
-                                 color = NULL, size = 1,
-                                 lcolor = NULL, linewidth = 1,
+                                 color = l_getOption("color"),
+                                 size = l_getOption("size"),
+                                 lcolor = l_getOption("color"),
+                                 linewidth = l_getOption("linewidth"),
                                  linkingGroup = NULL,
                                  showScales = TRUE,
                                  showGuides = TRUE,
@@ -62,8 +67,8 @@ l_plot.decomposed.ts <- function(x, y = NULL,
                                   ){
 
     if (!is.null(y)) warning("value of y argument is ignored")
-    if (is.null(lcolor)) lcolor <- l_getOption("foreground")
-    if (is.null(color)) color <- l_getOption("foreground")
+    if (is.null(lcolor)) lcolor <- l_getOption("color")
+    if (is.null(color)) color <- l_getOption("color")
     l_plot_ts(x,
               xlabel = xlabel,  ylabel = ylabel,
               title = title, tk_title = tk_title,

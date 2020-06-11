@@ -7,14 +7,14 @@
 l_userOptionDefault(option)
 }
 \arguments{
-\item{option}{the name of the user changeable loon display option 
+\item{option}{the name of the user changeable loon display option
 whose default value is to be determined.}
 }
 \value{
 the default value for the named option
 }
 \description{
-All of loon's displays access a set of common options.  
+All of loon's displays access a set of common options.
 This function accesses and returns the default value for the named option.
 }
 \examples{

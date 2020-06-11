@@ -21,7 +21,7 @@ optional if x is an appropriate structure.}
 
 \item{axisScaleFactor}{the amount to scale the axes at the centre of the rotation.
 Default is 1.
-    All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)}
+All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)}
 
 \item{...}{named arguments to modify plot states.}
 }

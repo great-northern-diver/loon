@@ -45,8 +45,9 @@
 #'   is a factor or a character vector (coerced to factor).
 #' @param showBinHandle If \code{TRUE}, then an interactive "bin handle" appears on the plot
 #'   whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}
-#' @param color colour fills of bins (default "grey60"); colours are repeated
+#' @param color colour fills of bins; colours are repeated
 #'  until matching the number x.
+#'  Default is found using \code{\link{l_getOption}("color")}.
 #' @param active a logical determining whether x appears or not
 #' (default is \code{TRUE} for all x). If a logical vector is given of length
 #' equal to the number of x, then it identifies which x appears (\code{TRUE})
@@ -126,7 +127,7 @@ l_hist <- function(x,
                    origin = NULL,
                    binwidth=NULL,
                    showBinHandle = FALSE,
-                   color = "grey60",
+                   color = l_getOption("color"),
                    active = TRUE,
                    selected = FALSE,
                    xlabel = NULL,
@@ -144,7 +145,7 @@ l_hist.factor <-  function(x,
                            origin = NULL,
                            binwidth=NULL,
                            showBinHandle = FALSE,
-                           color = "grey60",
+                           color = l_getOption("color"),
                            active = TRUE,
                            selected = FALSE,
                            xlabel = NULL,
@@ -256,7 +257,7 @@ l_hist.character <-  function(x,
                               origin = NULL,
                               binwidth = NULL,
                               showBinHandle = FALSE,
-                              color = "grey60",
+                              color = l_getOption("color"),
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
@@ -308,7 +309,7 @@ l_hist.default <-  function(x,
                             origin = NULL,
                             binwidth = NULL,
                             showBinHandle = FALSE,
-                            color = "grey60",
+                            color = l_getOption("color"),
                             active = TRUE,
                             selected = FALSE,
                             xlabel = NULL,
@@ -317,9 +318,9 @@ l_hist.default <-  function(x,
 
     args <- list(...)
     # set by args, used for facetting
-    by_args <- args[byArgs]
+    by_args <- args[l_byArgs()]
     # args passed into loonPlotFactory
-    args[byArgs] <- NULL
+    args[l_byArgs()] <- NULL
 
     if(missing(x)) {
 
@@ -582,7 +583,7 @@ l_hist.matrix <- function(x,
                           origin = NULL,
                           binwidth=NULL,
                           showBinHandle = FALSE,
-                          color = "grey60",
+                          color = l_getOption("color"),
                           active = TRUE,
                           selected = FALSE,
                           xlabel = NULL,
@@ -614,7 +615,7 @@ l_hist.list <- function(x,
                         origin = NULL,
                         binwidth=NULL,
                         showBinHandle = FALSE,
-                        color = "grey60",
+                        color = l_getOption("color"),
                         active = TRUE,
                         selected = FALSE,
                         xlabel = NULL,
@@ -646,7 +647,7 @@ l_hist.table <- function(x,
                          origin = NULL,
                          binwidth=NULL,
                          showBinHandle = FALSE,
-                         color = "grey60",
+                         color = l_getOption("color"),
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,
@@ -696,7 +697,7 @@ l_hist.array <- function(x,
                          origin = NULL,
                          binwidth=NULL,
                          showBinHandle = FALSE,
-                         color = "grey60",
+                         color = l_getOption("color"),
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,

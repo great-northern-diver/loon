@@ -83,7 +83,7 @@ loonFacets.default <- function(type,
         if(is.null(parent)) {
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'layout')
+            subwin <- l_subwin(parent, 'facet')
             tktitle <- if(!is.null(by_names))
                 paste("loon layouts on",
                       deparse(substitute(by_names)), "--path:", subwin)

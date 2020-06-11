@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -171,9 +171,9 @@
   <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span>),
   <span class='kw'>connectedScales</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>,
-  <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='st'>"ccircle"</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"glyph"</span>),
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"size"</span>),
   <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='no'>xlabel</span>,
@@ -183,10 +183,10 @@
   <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='st'>"grey92"</span>,
-  <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"guidelines"</span>),
+  <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"guidesBackground"</span>),
+  <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"foreground"</span>),
+  <span class='kw'>background</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"background"</span>),
   <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>...</span>
 )</pre>
@@ -254,7 +254,8 @@ as follows:</p><ul>
     </tr>
     <tr>
       <th>color</th>
-      <td><p>colours of points; colours are repeated until matching the number points.</p></td>
+      <td><p>colours of points; colours are repeated until matching the number points.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>glyph</th>
@@ -262,13 +263,14 @@ as follows:</p><ul>
              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
              "otriangle", "diamond", "cdiamond", or "odiamond".</p>
 <p>Prefixes "c" and "o" mean closed and open, respectively.
-             Default is "ccircle" meaning a closed circle glyph.</p>
+             Default is given by <code><a href='l_getOption.html'>l_getOption</a>("glyph")</code>.</p>
 <p>Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
              serial axes glyphs may be added, but only after the plot has been created.</p></td>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>size of the symbol (roughly in terms of area)</p></td>
+      <td><p>size of the symbol (roughly in terms of area).
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
     </tr>
     <tr>
       <th>active</th>
@@ -319,20 +321,24 @@ to help determine locations.</p></td>
     </tr>
     <tr>
       <th>guidelines</th>
-      <td><p>colour of the guidelines shown when <code>showGuides = TRUE</code> (default "white").</p></td>
+      <td><p>colour of the guidelines shown when <code>showGuides = TRUE</code>.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("guidelines")</code>.</p></td>
     </tr>
     <tr>
       <th>guidesBackground</th>
       <td><p>colour of the background to the guidelines shown when
-<code>showGuides = TRUE</code> (default "grey92").</p></td>
+          <code>showGuides = TRUE</code>.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("guidesBackground")</code>.</p></td>
     </tr>
     <tr>
       <th>foreground</th>
-      <td><p>foreground colour used by all other drawing (default "black").</p></td>
+      <td><p>foreground colour used by all other drawing.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("foreground")</code>.</p></td>
     </tr>
     <tr>
       <th>background</th>
-      <td><p>background colour used for the plot (default "white")</p></td>
+      <td><p>background colour used for the plot.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("background")</code>.</p></td>
     </tr>
     <tr>
       <th>parent</th>

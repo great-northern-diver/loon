@@ -13,8 +13,10 @@
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
 #' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
 #' @param showAxes boolean to indicate whether axes should be shown or not
-#' @param linewidth vector with line widths
-#' @param color vector with line colors
+#' @param linewidth vector with line widths.
+#' Default is given by \code{\link{l_getOption}("linewidth")}.
+#' @param color vector with line colors.
+#' Default is given by \code{\link{l_getOption}("color")}.
 #' @param active a logical determining whether items appear or not
 #' (default is \code{TRUE} for all items). If a logical vector is given of length
 #' equal to the number of items, then it identifies which items appear (\code{TRUE})
@@ -231,17 +233,17 @@ l_serialaxes <- function(data,
                          by = NULL,
                          layout = c("grid", "wrap", "separate"),
                          showAxes=TRUE,
-                         linewidth = 1,
-                         color = "steelblue",
+                         linewidth = l_getOption("linewidth"),
+                         color = l_getOption("color"),
                          active = TRUE,
                          selected = FALSE,
                          parent=NULL, ... ){
 
     args <- list(...)
     # set by args, used for facetting
-    by_args <- args[byArgs]
+    by_args <- args[l_byArgs()]
     # args passed into loonPlotFactory
-    args[byArgs] <- NULL
+    args[l_byArgs()] <- NULL
 
     data <- as.data.frame(data)
 
@@ -273,7 +275,7 @@ l_serialaxes <- function(data,
             color <- rep_len(color, n)
         }
     } else {
-        if(is.na(color)) color <- "steelblue"
+        if(is.na(color)) color <- l_getOption("color")
     }
 
     len_linewidth <- length(linewidth)

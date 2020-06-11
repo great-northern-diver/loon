@@ -171,7 +171,7 @@ l_scale3D <- function(x,
 #'          optional if x is an appropriate structure.
 #' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
 #'          Default is 1.
-#'              All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)
+#'          All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)
 #' @param ... named arguments to modify plot states.
 #'
 #' @details
@@ -310,16 +310,19 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #'    }
 #'  }
 #' @param color colours of points; colours are repeated until matching the number points.
+#'     Default is given by \code{\link{l_getOption}("color")}.
 #' @param glyph shape of point; must be one of the primitive glyphs
 #'              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
 #'              "otriangle", "diamond", "cdiamond", or "odiamond".
 #'
 #'              Prefixes "c" and "o" mean closed and open, respectively.
-#'              Default is "ccircle" meaning a closed circle glyph.
+#'              Default is given by \code{\link{l_getOption}("glyph")}.
 #'
 #'              Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
 #'              serial axes glyphs may be added, but only after the plot has been created.
-#' @param size size of the symbol (roughly in terms of area)
+#'
+#' @param size size of the symbol (roughly in terms of area).
+#'     Default is given by \code{\link{l_getOption}("size")}.
 #' @param active a logical determining whether points appear or not
 #' (default is \code{TRUE} for all points). If a logical vector is given of length
 #' equal to the number of points, then it identifies which points appear (\code{TRUE})
@@ -340,11 +343,15 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #'               be presented on both axes.
 #' @param showGuides logical to determine whether to present background guidelines
 #'               to help determine locations.
-#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE} (default "white").
+#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE}.
+#'     Default is given by \code{\link{l_getOption}("guidelines")}.
 #' @param guidesBackground  colour of the background to the guidelines shown when
-#'               \code{showGuides = TRUE} (default "grey92").
-#' @param foreground foreground colour used by all other drawing (default "black").
-#' @param background background colour used for the plot (default "white")
+#'               \code{showGuides = TRUE}.
+#'     Default is given by \code{\link{l_getOption}("guidesBackground")}.
+#' @param foreground foreground colour used by all other drawing.
+#'     Default is given by \code{\link{l_getOption}("foreground")}.
+#' @param background background colour used for the plot.
+#'     Default is given by \code{\link{l_getOption}("background")}.
 #' @param parent a valid Tk parent widget path. When the parent widget is
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
@@ -385,9 +392,9 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               by = NULL,
                               layout = c("grid", "wrap", "separate"),
                               connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                              color = "grey60",
-                              glyph = "ccircle",
-                              size = 4,
+                              color = l_getOption("color"),
+                              glyph = l_getOption("glyph"),
+                              size = l_getOption("size"),
                               active = TRUE,
                               selected = FALSE,
                               xlabel, ylabel, zlabel,
@@ -395,17 +402,17 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               showLabels = TRUE,
                               showScales = FALSE,
                               showGuides = TRUE,
-                              guidelines = "white",
-                              guidesBackground = "grey92",
-                              foreground = "black",
-                              background = "white",
+                              guidelines = l_getOption("guidelines"),
+                              guidesBackground = l_getOption("guidesBackground"),
+                              foreground = l_getOption("foreground"),
+                              background = l_getOption("background"),
                               parent = NULL, ...) {
 
     args <- list(...)
     # set by args, used for facetting
-    by_args <- args[byArgs]
+    by_args <- args[l_byArgs()]
     # args passed into loonPlotFactory
-    args[byArgs] <- NULL
+    args[l_byArgs()] <- NULL
 
     if (missing(title)) { title <- "" }
 

@@ -1,3 +1,14 @@
+# loon 1.3.1
+
+* A minor bug fix with respect to facet labels
+
+* "color", "size", "linewidth", "glyph", added to 'l_userOptions()' 
+    - default "color", "size", "linewidth", "glyph", etc. now set to
+      look up default 'l_getOption("linewidth")' etc. 
+    - this allows the user to change the default look of all plots
+      simply by using 'l_setOption("color", "black")' for example.
+
+
 # loon 1.3.0
 
 * several new features added to loon plots

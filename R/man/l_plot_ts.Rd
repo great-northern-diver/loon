@@ -6,10 +6,10 @@
 \usage{
 l_plot_ts(
   x,
-  color = NULL,
-  size = 1,
-  lcolor = NULL,
-  linewidth = 1,
+  color = l_getOption("color"),
+  size = l_getOption("size"),
+  lcolor = l_getOption("color"),
+  linewidth = l_getOption("linewidth"),
   xlabel = NULL,
   ylabel = NULL,
   title = NULL,
@@ -25,13 +25,16 @@ l_plot_ts(
 \item{x}{Either an \code{stl} object or a \code{decomposed.ts} object.}
 
 \item{color}{points colour of all time series.
-If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.}
+Default is given by \code{\link{l_getOption}("color")}.}
 
-\item{size}{points size of all time series. Default value is 1.}
+\item{size}{points size of all time series.
+Default is given by \code{\link{l_getOption}("size")}.}
 
-\item{lcolor}{line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
+\item{lcolor}{line colour of all time series.
+Default is given by \code{\link{l_getOption}("color")}.}
 
-\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
+\item{linewidth}{line width of all time series (incl. original and decomposed components.
+Default is given by \code{\link{l_getOption}("linewidth")}.}
 
 \item{xlabel}{the labels for the x axes.  This is a length four character vector one for each: of the original
 time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if \code{NULL}, \code{xlabel} is "time".}

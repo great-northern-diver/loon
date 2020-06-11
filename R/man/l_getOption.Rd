@@ -13,7 +13,7 @@ l_getOption(option)
 the value of the named option.
 }
 \description{
-All of loon's displays access a set of common options.  
+All of loon's displays access a set of common options.
 This function accesses and returns the current value of the named option.
 }
 \examples{

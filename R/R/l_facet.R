@@ -123,7 +123,8 @@ l_facet.loon <- function(widget,
                          ncol = NULL,
                          inheritLayers = TRUE,
                          labelLocation = c("top", "right"),
-                         labelBackground = "gray80", labelForeground = "black",
+                         labelBackground = "gray80",
+                         labelForeground = "black",
                          labelBorderwidth = 2,
                          labelRelief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
                          parent = NULL, ...) {
@@ -406,6 +407,17 @@ l_getPlots.l_facet <- function(target){
 
 
 loonGrob_layoutType.l_facet <- function(target) "locations"
+
+l_byArgs <- function(){
+    c("nrow",
+      "ncol",
+      "labelLocation",
+      "labelBackground",
+      "labelForeground",
+      "labelBorderwidth",
+      "labelRelief")
+}
+
 
 ######################################## facets helper function ########################################
 # get widget ranges

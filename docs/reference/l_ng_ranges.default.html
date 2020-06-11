@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Select 2d spaces with variable associated measures using a slider — l_ng_ranges.default" />
-<meta property="og:description" content="Measures object is a matrix or data.frame with measures 
-  (columns) for variable pairs (rows) and rownames of the two variates 
+<meta property="og:description" content="Measures object is a matrix or data.frame with measures
+  (columns) for variable pairs (rows) and rownames of the two variates
   separated by separator" />
 <meta property="og:image" content="/logo.png" />
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -157,8 +157,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Measures object is a matrix or data.frame with measures 
-  (columns) for variable pairs (rows) and rownames of the two variates 
+    <p>Measures object is a matrix or data.frame with measures
+  (columns) for variable pairs (rows) and rownames of the two variates
   separated by separator</p>
     </div>
 
@@ -198,13 +198,15 @@ individual variables</p></td>
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html#l_ng_ranges")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_ng_ranges.html'>l_ng_ranges</a></code>, <code><a href='l_ng_ranges.measures.html'>l_ng_ranges.measures</a></code>, 
-  <code><a href='l_ng_ranges.scagnostics.html'>l_ng_ranges.scagnostics</a></code>, <code><a href='measures1d.html'>measures1d</a></code>, 
-  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>, 
+    <div class='dont-index'><p><code><a href='l_ng_ranges.html'>l_ng_ranges</a></code>, <code><a href='l_ng_ranges.measures.html'>l_ng_ranges.measures</a></code>,
+  <code><a href='l_ng_ranges.scagnostics.html'>l_ng_ranges.scagnostics</a></code>, <code><a href='measures1d.html'>measures1d</a></code>,
+  <code><a href='measures2d.html'>measures2d</a></code>, <code><a href='scagnostics2d.html'>scagnostics2d</a></code>,
   <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Simple example with generated data</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+
+<span class='co'># Simple example with generated data</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>100</span>
 <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
    <span class='kw'>A</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>), <span class='kw'>B</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>), <span class='kw'>C</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>),
@@ -230,7 +232,9 @@ individual variables</p></td>
      <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>dat</span>)
 )
 
-<span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_ranges.html'>l_ng_ranges</a></span>(<span class='no'>m1d</span>, <span class='no'>dat</span>)</div></pre>
+<span class='no'>nav</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_ng_ranges.html'>l_ng_ranges</a></span>(<span class='no'>m1d</span>, <span class='no'>dat</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

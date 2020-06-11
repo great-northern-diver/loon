@@ -14,7 +14,7 @@ l_hist(
   origin = NULL,
   binwidth = NULL,
   showBinHandle = FALSE,
-  color = "grey60",
+  color = l_getOption("color"),
   active = TRUE,
   selected = FALSE,
   xlabel = NULL,
@@ -73,8 +73,9 @@ is a factor or a character vector (coerced to factor).}
 \item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
 whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
 
-\item{color}{colour fills of bins (default "grey60"); colours are repeated
-until matching the number x.}
+\item{color}{colour fills of bins; colours are repeated
+until matching the number x.
+Default is found using \code{\link{l_getOption}("color")}.}
 
 \item{active}{a logical determining whether x appears or not
 (default is \code{TRUE} for all x). If a logical vector is given of length

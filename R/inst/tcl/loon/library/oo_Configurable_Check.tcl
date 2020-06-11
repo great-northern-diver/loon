@@ -51,6 +51,7 @@
 
     method Check_color {var values dim args} {
 
+
 	## remove alpha part from hex6 string
 	set col {}
 	foreach c $values {
