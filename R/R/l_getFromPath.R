@@ -9,7 +9,7 @@
 #' @template see_l_help
 #'
 #' @param target loon object specification (e.g. \code{".l0.plot"})
-#' @seealso \code{\link{l_create_handle}}
+#' @seealso \code{\link{l_create_handle}} \code{\link{l_loonWidgets}}
 #' @export
 #'
 #' @examples

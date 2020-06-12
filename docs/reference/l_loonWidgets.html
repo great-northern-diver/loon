@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create loon objects from path name — l_getFromPath • loon</title>
+<title>Get all active top level loon plots. — l_loonWidgets • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,12 @@
 
 
 
-<meta property="og:title" content="Create loon objects from path name — l_getFromPath" />
-<meta property="og:description" content="This function can be used to create the loon objects from
-  a valid widget path name. The main difference from l_create_handle is that l_getFromPath can
-  take a loon compound widget path but l_create_handle cannot." />
+<meta property="og:title" content="Get all active top level loon plots. — l_loonWidgets" />
+<meta property="og:description" content="Loon's plots are constructed in TCL and identified with
+a path string appearing in the window containing the plot.
+If the plots were not saved on a variable, this function will
+look for all loon plots displayed and return their values in a list whose
+elements may then be assigned to R variables." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -151,42 +153,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create loon objects from path name</h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_getFromPath.R'><code>R/l_getFromPath.R</code></a></small>
-    <div class="hidden name"><code>l_getFromPath.Rd</code></div>
+    <h1>Get all active top level loon plots.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_loonWidgets.R'><code>R/l_loonWidgets.R</code></a></small>
+    <div class="hidden name"><code>l_loonWidgets.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function can be used to create the loon objects from
-  a valid widget path name. The main difference from <code>l_create_handle</code> is that <code>l_getFromPath</code> can
-  take a loon compound widget path but <code>l_create_handle</code> cannot.</p>
+    <p>Loon's plots are constructed in TCL and identified with
+a path string appearing in the window containing the plot.</p>
+<p>If the plots were not saved on a variable, this function will
+look for all loon plots displayed and return their values in a list whose
+elements may then be assigned to R variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_getFromPath</span>(<span class='no'>target</span>)</pre>
+    <pre class="usage"><span class='fu'>l_loonWidgets</span>(<span class='no'>pathTypes</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>target</th>
-      <td><p>loon object specification (e.g. <code>".l0.plot"</code>)</p></td>
+      <th>pathTypes</th>
+      <td><p>an optional argument identifying the collection of path types that
+are to be returned (if displayed).</p>
+<p>This must be a subset of the union of
+<code><a href='l_basePaths.html'>l_basePaths</a>()</code> and <code><a href='l_compoundPaths.html'>l_compoundPaths</a>()</code>.</p>
+<p>If it is missing,
+all <code><a href='l_basePaths.html'>l_basePaths</a>()</code> and <code><a href='l_compoundPaths.html'>l_compoundPaths</a>()</code> will be returned.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_intro.html#re-creating-object-handles")</a></code></p>
+    <p>list whose elements are named by, and contain the values of, the
+loon plot widgets.  The list can be nested when loon plots (like <code><a href='l_pairs.html'>l_pairs</a></code>)
+are compound in that they consist of more than one base loon plot.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_create_handle.html'>l_create_handle</a></code> <code><a href='l_loonWidgets.html'>l_loonWidgets</a></code></p></div>
+    <div class='dont-index'><p><code><a href='l_basePaths.html'>l_basePaths</a></code><code><a href='l_compoundPaths.html'>l_compoundPaths</a></code> <code><a href='l_getFromPath.html'>l_getFromPath</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
- <span class='fu'><a href='l_pairs.html'>l_pairs</a></span>(<span class='no'>iris</span>, <span class='kw'>showHistogram</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
- <span class='co'># The path can be found at the top of tk title</span>
- <span class='co'># Suppose it is the first loon widget, this path should be ".l0.pairs"</span>
- <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_create_handle.html'>l_create_handle</a></span>(<span class='st'>".l0.pairs"</span>) <span class='co'># error</span>
- <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>l_getFromPath</span>(<span class='st'>".l0.pairs"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+<span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>)
+<span class='fu'><a href='l_hist.html'>l_hist</a></span>(<span class='no'>iris</span>)
+<span class='fu'><a href='l_hist.html'>l_hist</a></span>(<span class='no'>mtcars</span>)
+<span class='fu'><a href='l_pairs.html'>l_pairs</a></span>(<span class='no'>iris</span>)
+<span class='co'># The following will not be loonWidgets (neither is the inspector)</span>
+<span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
+<span class='fu'>tkpack</span>(<span class='no'>l1</span> <span class='kw'>&lt;-</span> <span class='fu'>tklabel</span>(<span class='no'>tt</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Heave"</span>), <span class='no'>l2</span><span class='kw'>&lt;-</span> <span class='fu'>tklabel</span>(<span class='no'>tt</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Ho"</span>))
+<span class='co'>#</span>
+<span class='co'># This will return loon widgets corresponding to plots</span>
+<span class='no'>loonPlots</span> <span class='kw'>&lt;-</span> <span class='fu'>l_loonWidgets</span>()
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>loonPlots</span>)
+<span class='no'>firstPlot</span> <span class='kw'>&lt;-</span> <span class='no'>loonPlots</span><span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='no'>firstPlot</span>[<span class='st'>"color"</span>] <span class='kw'>&lt;-</span> <span class='st'>"red"</span>
+<span class='no'>histograms</span> <span class='kw'>&lt;-</span> <span class='fu'>l_loonWidgets</span>(<span class='st'>"hist"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>histograms</span>,
+       <span class='kw'>FUN</span>  <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>hist</span>) {
+                <span class='no'>hist</span>[<span class='st'>"binwidth"</span>] <span class='kw'>&lt;-</span> <span class='no'>hist</span>[<span class='st'>"binwidth"</span>]/<span class='fl'>2</span>
+                <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>hist</span>)
+             }
+             )
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

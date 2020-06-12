@@ -168,6 +168,7 @@ package ifneeded loon 1.2.3 "
    [list source [file join $dir library/oo_Scatterplot3D_Controller.tcl]]
    [list source [file join $dir library/oo_Plot3DInspector.tcl]]
    [list source [file join $dir library/oo_TextWorldviewVisual.tcl]]
+   [list source [file join $dir library/listTopWidgets.tcl]]
    [list source [file join $dir library/oo_GraphInspectorNodesAnalysis.tcl]]
    [list source [file join $dir library/x_resize.tcl]]
    [list source [file join $dir library/applySelectionLogic.tcl]]
