@@ -55,7 +55,9 @@ if (requireNamespace("grid", quietly = TRUE)) {
   grid::grid.newpage()
   grid::pushViewport(grid::plotViewport())
   grid::grid.rect()
-  n <- 2^(1:5)
+  n <- c(2,4,8,16, 21)
+  # beyond this, colors are generated algorithmically
+  # generating a warning
   grid::pushViewport(grid::dataViewport(xscale=c(0, max(n)+1),
                      yscale=c(0, length(n)+1)))
   grid::grid.yaxis(at=c(1:length(n)), label=paste("n =", n))
@@ -65,7 +67,7 @@ if (requireNamespace("grid", quietly = TRUE)) {
                      default.units = "native", pch=15,
                      gp=grid::gpar(col=cols))
   }
-  grid::grid.text("note the fist i colors are shared for each n",
+  grid::grid.text("note the first i colors are shared for each n",
                   y = grid::unit(1,"npc") + grid::unit(1, "line"))
 }
 

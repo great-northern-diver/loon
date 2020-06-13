@@ -159,7 +159,7 @@ l_loonWidgets <- function(pathTypes) {
     #
     # Get all the top most widgets from tcl
     #
-    widgets <-  as.character(tcl("loon:::listTopWidgets"))
+    widgets <-  as.character(tcl("loon::listTopWidgets"))
     #
     # Collect up the loon plots
     #
