@@ -24,7 +24,7 @@ cache: packages
 
 r:
   - release
-  - bioc-devel
+  - devel
 
 after_success:
   - Rscript -e 'covr::codecov()'
