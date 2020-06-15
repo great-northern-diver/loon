@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -189,7 +189,8 @@ grid (including ggplot2 and lattice) engine</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed on to the <code><a href='https://rdrr.io/r/grDevices/png.html'>png</a></code> function</p></td>
+      <td><p>additional arguments passed on to the <code><a href='https://rdrr.io/r/grDevices/png.html'>png</a></code> function
+Note: type is not allowed in this list.</p></td>
     </tr>
     </table>
 
@@ -246,6 +247,109 @@ grid (including ggplot2 and lattice) engine</p></td>
 }
 
 }
+
+<span class='co'>##  A more familiar example?</span>
+<span class='co'>##  The periodic table</span>
+
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"elements"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"loon.data"</span>)
+
+<span class='co'># A draw function for each element</span>
+<span class='no'>draw_element_box</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>symbol</span>,
+                             <span class='no'>name</span>, <span class='no'>number</span>,
+                             <span class='no'>mass_number</span>,
+                             <span class='no'>mass</span>, <span class='no'>col</span>) {
+   <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/missing.html'>missing</a></span>(<span class='no'>col</span>)) <span class='no'>col</span> <span class='kw'>&lt;-</span> <span class='st'>"white"</span>
+   <span class='no'>oldPar</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>bg</span> <span class='kw'>=</span> <span class='no'>col</span>, <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>))
+
+   <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='fl'>NA</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>), <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>), <span class='kw'>axes</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>ann</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.6</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>symbol</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>18</span>)
+   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fl'>0.15</span>, <span class='fl'>1</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>number</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>adj</span><span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.5</span>,<span class='fl'>1</span>))
+   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.25</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>name</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>6</span>)
+   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.11</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>mass_number</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.01</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='no'>mass</span>, <span class='kw'>cex</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+   <span class='fu'><a href='https://rdrr.io/r/graphics/box.html'>box</a></span>()
+
+   <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>oldPar</span>)
+   }
+
+<span class='co'># Get the categories</span>
+<span class='no'>colIDs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>elements</span>$<span class='no'>Category</span>, <span class='no'>elements</span>$<span class='no'>Subcategory</span>)
+<span class='co'># Get a loon palette function</span>
+<span class='no'>colFn</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='color_loon.html'>color_loon</a></span>()
+<span class='co'># Get colors identified with categories</span>
+<span class='no'>tableCols</span> <span class='kw'>&lt;-</span> <span class='fu'>colFn</span>(<span class='no'>colIDs</span>)
+<span class='co'>#</span>
+<span class='co'># A function to an element box image for each element.</span>
+
+<span class='no'>make_element_boxes</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>elements</span>, <span class='no'>cols</span>, <span class='no'>width</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='no'>height</span> <span class='kw'>=</span> <span class='fl'>500</span>) {
+   <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/missing.html'>missing</a></span>(<span class='no'>cols</span>)) <span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"white"</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>elements</span>))
+   <span class='no'>listOfElements</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>elements</span>),
+                            <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>i</span>) {
+                                <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>vals</span> <span class='kw'>=</span> <span class='no'>elements</span>[<span class='no'>i</span>,],
+                                     <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>cols</span>[<span class='no'>i</span>])
+                            })
+   <span class='co'># glyphs created here</span>
+   <span class='fu'>l_make_glyphs</span>(<span class='no'>listOfElements</span>,
+                 <span class='kw'>draw_fun</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>element</span>){
+                     <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>element</span>$<span class='no'>vals</span>
+                     <span class='no'>col</span> <span class='kw'>&lt;-</span> <span class='no'>element</span>$<span class='no'>col</span>
+                     <span class='fu'>draw_element_box</span>(<span class='kw'>symbol</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Symbol</span>,
+                                      <span class='kw'>name</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Name</span>,
+                                      <span class='kw'>number</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Number</span>,
+                                      <span class='kw'>mass_number</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Mass_number</span>,
+                                      <span class='kw'>mass</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Mass</span>,
+                                      <span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>col</span>)
+                 },
+                 <span class='kw'>width</span> <span class='kw'>=</span> <span class='no'>width</span>,
+                 <span class='kw'>height</span> <span class='kw'>=</span> <span class='no'>height</span>)
+   }
+
+<span class='co'># Construct the glyphs</span>
+<span class='no'>boxGlyphs</span> <span class='kw'>&lt;-</span> <span class='fu'>make_element_boxes</span>(<span class='no'>elements</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='no'>tableCols</span>)
+
+<span class='co'># Get a couple of plots</span>
+<span class='no'>periodicTable</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>elements</span>$<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>elements</span>$<span class='no'>y</span>,
+                        <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='st'>""</span>,
+                        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Periodic Table of the Elements"</span>,
+                        <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"elements"</span>,
+                        <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>tableCols</span>)
+
+<span class='co'># Add the images as possible glyphs</span>
+
+<span class='no'>bg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_image.html'>l_glyph_add_image</a></span>(<span class='no'>periodicTable</span>,
+                        <span class='kw'>images</span> <span class='kw'>=</span> <span class='no'>boxGlyphs</span>,
+                        <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Symbol boxes"</span>)
+
+<span class='co'># Set this to be the glyph</span>
+<span class='no'>periodicTable</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>bg</span>
+<span class='co'>#</span>
+<span class='co'># Get a second plot that shows the periodicity</span>
+<span class='co'>#</span>
+<span class='co'># First some itemlabels</span>
+<span class='no'>elementLabels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>elements</span>,
+                      <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"   "</span>, <span class='no'>Number</span>, <span class='no'>Symbol</span>, <span class='st'>"\n"</span>,
+                            <span class='st'>"   "</span>, <span class='no'>Name</span>, <span class='st'>"\n"</span>,
+                            <span class='st'>"   "</span>, <span class='no'>Mass</span>
+                            )
+                      )
+
+<span class='no'>periodicPlot</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>elements</span>$<span class='no'>Mass</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>elements</span>$<span class='no'>Density</span>,
+                        <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='st'>"Mass"</span>, <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='st'>"Density"</span>,
+                        <span class='kw'>itemLabel</span> <span class='kw'>=</span> <span class='no'>elementLabels</span>,
+                        <span class='kw'>showItemLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                        <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"elements"</span>,
+                        <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>tableCols</span>)
+
+<span class='co'># Add the images as possible glyphs to this plot as well</span>
+
+<span class='no'>bg2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_glyph_add_image.html'>l_glyph_add_image</a></span>(<span class='no'>periodicPlot</span>,
+                         <span class='kw'>images</span> <span class='kw'>=</span> <span class='no'>boxGlyphs</span>,
+                         <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Symbol boxes"</span>)
+
+<span class='co'># Could set this to be the glyph</span>
+<span class='no'>periodicPlot</span>[<span class='st'>'glyph'</span>] <span class='kw'>&lt;-</span> <span class='no'>bg2</span>
+
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

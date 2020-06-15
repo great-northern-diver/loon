@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -89,23 +81,26 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">serialaxes display - loon</h1>
-</header>
-<nav id="TOC" role="doc-toc">
+</div>
+<div id="TOC">
 <ul>
 <li><a href="#serialaxes">Serialaxes</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
 <li><a href="#data-scaling">Data Scaling</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_serialaxes").className += " selected";
     setLearnUrl("display_serialaxes");
 }
 </script>
-<p><img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" /></p>
+
+<div class="figure">
+<img src="images/display_serialaxes_star.png" title="loon serialaxes display showing radial coordinates" />
+</div>
 <pre><code>namespace import loon::*        
 set Area [dict get $loon::data::olive Area]; puts &quot;create Area variable&quot;
 set oliveacids [dict filter $loon::data::olive script {key value} {
@@ -113,26 +108,30 @@ set oliveacids [dict filter $loon::data::olive script {key value} {
 }]; puts &quot;filter data&quot;
 
 set s [serialaxes -data $oliveacids -color $Area -title &quot;olive data&quot;]</code></pre>
-<p><img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" /></p>
+<div class="figure">
+<img src="images/display_serialaxes_parallel.png" title="loon serialaxes display showing parallel coordinates" />
+</div>
 <pre><code>$s configure -axesLayout parallel</code></pre>
 <h1 id="serialaxes">Serialaxes</h1>
 <ul>
 <li><p>Get the state names with</p>
-<pre><code>  set states [$s info states]
-  dict keys $states</code></pre></li>
+<pre><code>set states [$s info states]
+dict keys $states</code></pre></li>
 <li><p>Query a state, say <code>sequence</code>, as follows</p>
-<pre><code>  $s cget -sequence</code></pre></li>
+<pre><code>$s cget -sequence</code></pre></li>
 <li><p>Change a state, say again <code>sequence</code>, as follows</p>
-<pre><code>  $s configure -sequence {stearic linoleic palmitic arachidic}</code></pre>
-<p><img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" /></p></li>
+<pre><code>$s configure -sequence {stearic linoleic palmitic arachidic}</code></pre>
+<div class="figure">
+<img src="images/display_serialaxes_parallel_sequence.png" title="loon serialaxes display" />
+</div></li>
 <li><p>When creating a plot you may specify any state at plot creation</p>
-<pre><code>  set s1 [serialaxes -data $olive -color $Area -title &quot;olive data&quot;\
-      -sequence [lrange [dict keys $olive] 2 end]]</code></pre></li>
+<pre><code>set s1 [serialaxes -data $olive -color $Area -title &quot;olive data&quot;\
+    -sequence [lrange [dict keys $olive] 2 end]]</code></pre></li>
 <li><p>details on a state, say <code>sequence</code>, is easily had with</p>
-<pre><code>  set states [$s info states]
-  dict get $states sequence</code></pre>
+<pre><code>set states [$s info states]
+dict get $states sequence</code></pre>
 <p>and a particular field</p>
-<pre><code>  dict get $states sequence description</code></pre></li>
+<pre><code>dict get $states sequence description</code></pre></li>
 </ul>
 <h1 id="good-to-know">Good To Know</h1>
 <ul>

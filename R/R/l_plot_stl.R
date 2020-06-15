@@ -17,10 +17,13 @@
 #'       the title will be "Seasonal Trend Analysis".
 #' @param tk_title provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.
 #' @param color points colour of all time series.
-#'        If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.
-#' @param size points size of all time series. Default value is 1.
-#' @param lcolor line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
-#' @param linewidth line width of all time series (incl. original and decomposed components. Default is 1.
+#'        Default is given by \code{\link{l_getOption}("color")}.
+#' @param size points size of all time series.
+#'        Default is given by \code{\link{l_getOption}("size")}.
+#' @param lcolor line colour of all time series.
+#'        Default is given by \code{\link{l_getOption}("color")}.
+#' @param linewidth line width of all time series (incl. original and decomposed components.
+#'        Default is given by \code{\link{l_getOption}("linewidth")}.
 #' @param linkingGroup name of linking group.
 #'        If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
@@ -52,16 +55,18 @@
 l_plot.stl <- function(x, y = NULL,
                        xlabel = NULL,  ylabel = NULL,
                        title = NULL, tk_title = NULL,
-                       color = NULL, size = 1,
-                       lcolor = NULL, linewidth = 1,
+                       color = l_getOption("color"),
+                       size = l_getOption("size"),
+                       lcolor = l_getOption("color"),
+                       linewidth = l_getOption("linewidth"),
                        linkingGroup = NULL,
                        showScales = TRUE,
                        showGuides = TRUE,
                        showLabels = TRUE,
                        ...){
     if (!is.null(y)) warning("value of y argument is ignored")
-    if (is.null(lcolor)) lcolor <- l_getOption("foreground")
-    if (is.null(color)) color <- l_getOption("foreground")
+    if (is.null(lcolor)) lcolor <- l_getOption("color")
+    if (is.null(color)) color <- l_getOption("color")
     l_plot_ts(x,
               color = color, size = size,
               lcolor = lcolor, linewidth = linewidth,

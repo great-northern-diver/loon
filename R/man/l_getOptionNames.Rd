@@ -10,7 +10,7 @@ l_getOptionNames()
 a vector of all loon display option names.
 }
 \description{
-All of loon's displays access a set of common options.  
+All of loon's displays access a set of common options.
 This function accesses and returns the names of all loon options.
 }
 \examples{

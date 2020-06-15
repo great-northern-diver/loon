@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -67,12 +59,12 @@ document.getElementById("learn_R").className += " selected";
 var language = "R";
 </script>
 </div>
-<nav id="TOC" role="doc-toc">
+<div id="TOC">
 <ul>
 <li><a href="#a-short-overview-of-tcl-and-r">A short overview of Tcl and R</a></li>
 <li><a href="#a-short-overview-of-tk-and-r">A short overview of Tk and R</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_R_tcltk").className += " selected";
@@ -80,6 +72,8 @@ window.onload = function() {
     document.getElementById("learn_Tcl").firstChild.href = "learn_Tcl_Tk.html";
 }
 </script>
+
+
 <h3 id="a-short-overview-of-tcl-and-r">A short overview of Tcl and R</h3>
 <p>A short comparison of the <code>R</code> and <code>Tcl</code> language is shown in the following two sessions that do exactly the same.</p>
 <div class="twocolumn">
@@ -110,7 +104,7 @@ proc factorial {n} {
 }
 puts [factorial 7]</code></pre>
 </div>
-<p>The backslash <code>\</code> in <code>Tcl</code> can be used to write an expression on multiple lines. A general introduction to <code>Tcl</code> written by Adrian Waddell can be found <a href="http://adrian.waddell.ch/EssentialSoftware/Rtcltk_tcl.pdf">here</a>. An introduction to the <code>tcltk</code> <code>R</code> package by the package author Peter Dalgaard’s can be found found on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2001-3.pdf">page 27 in R News volume 1/3</a> and on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2002-3.pdf">page 25 in R News volume 2/3</a>.</p>
+<p>The backslash <code>\</code> in <code>Tcl</code> can be used to write an expression on multiple lines. A general introduction to <code>Tcl</code> written by Adrian Waddell can be found <a href="http://adrian.waddell.ch/EssentialSoftware/Rtcltk_tcl.pdf">here</a>. An introduction to the <code>tcltk</code> <code>R</code> package by the package author Peter Dalgaard's can be found found on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2001-3.pdf">page 27 in R News volume 1/3</a> and on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2002-3.pdf">page 25 in R News volume 2/3</a>.</p>
 <p>In <code>R</code>, <code>Tcl</code> code can be sent to the <code>Tcl</code> interpreter with the <code>tcl()</code> and <code>.Tcl()</code> functions.</p>
 <pre><code>library(tcltk)
 .Tcl(&#39;set a 1&#39;)
@@ -129,7 +123,7 @@ tclvalue(a) &lt;- &quot;Hello World&quot;
 <p>Since every <code>Tcl</code> object has a string representation the <code>tclvalue()</code> accessor might not be as expected, as for example in</p>
 <pre><code>tclvalue(a) &lt;- c(1,2,3) # set Tcl variable hold the list {1 2 3}
 tclvalue(a)</code></pre>
-<p>the latter function will return <code>"1 2 3"</code>, the string representation in <code>Tcl</code> for the list <code>[list 1 2 3]</code>. A workaround to this “quoting problem” is to use <code>tclObj()</code> as an alternate accessor function in combination with <code>as.character()</code>, <code>as.double()</code>, or <code>as.integer()</code> function. For example, the following <code>R</code> command</p>
+<p>the latter function will return <code>&quot;1 2 3&quot;</code>, the string representation in <code>Tcl</code> for the list <code>[list 1 2 3]</code>. A workaround to this &quot;quoting problem&quot; is to use <code>tclObj()</code> as an alternate accessor function in combination with <code>as.character()</code>, <code>as.double()</code>, or <code>as.integer()</code> function. For example, the following <code>R</code> command</p>
 <pre><code>as.integer(tclObj(a))</code></pre>
 <p>will return the desired <code>R</code> vector of length 3.</p>
 <p>Data structures passed to the <code>tcl()</code> function will be converted with <code>as.tclObj()</code> to a <code>Tcl</code> object. Valid <code>R</code> data structures that can be converted to <code>Tcl</code> objects need a <code>storage.mode()</code> of one of <code>character</code>, <code>integer</code>, <code>logical</code>, and <code>raw</code>. Other objects will throw an error. This means vectors (also of length one) can be converted to <code>Tcl</code> lists but other <code>R</code> data structures such as lists or data.frames can not be converted to <code>Tcl</code> objects. Note that matrices and arrays of numbers have a storage mode <code>double</code> and can hence be converted to <code>Tcl</code> lists of dimension <code>1xn</code>. Here two valid examples</p>
@@ -142,13 +136,13 @@ tcl(&#39;set&#39;,&#39;b&#39;, c(1, 2, &quot;a&quot;))</code></pre>
     print(x^2-y)
 }
 .Tcl.callback(foo)</code></pre>
-<p>will return the string <code>"R_call 0x16dca38 %x %y"</code>. Hence, to call <code>foo()</code> from the <code>Tcl</code> interpreter one can run</p>
+<p>will return the string <code>&quot;R_call 0x16dca38 %x %y&quot;</code>. Hence, to call <code>foo()</code> from the <code>Tcl</code> interpreter one can run</p>
 <pre><code>.Tcl(&#39;R_call 0x16dca38 4 6&#39;)</code></pre>
 <p>Note that the <code>as.numeric()</code> conversation in <code>foo()</code> is necessary since the function call from the <code>Tcl</code> interpreter passes strings as arguments to <code>foo()</code>. Also, if <code>foo()</code> were to return an <code>R</code> object it would be lost as the <code>R_call</code> will not convert <code>R</code> objects to <code>Tcl</code> objects.</p>
 <h3 id="a-short-overview-of-tk-and-r">A short overview of Tk and R</h3>
 <p><code>Tk</code> is a graphical user interface toolkit. GUI elements are called <em>widgets</em>. Widgets are arranged in a window with <em>geometry managers</em> (such as <code>pack</code> and <code>grid</code>). Hence, the general workflow of creating a GUI with <code>Tk</code> is to create <em>widgets</em>, <em>bind</em> them to events such as mouse- or key- press and place them into a window.</p>
-<p>A detailed introduction to the <code>tcltk</code> <code>R</code> package by the package author Peter Dalgaard’s can be found found on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2001-3.pdf">page 27 in R News volume 1/3</a> and on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2002-3.pdf">page 25 in R News volume 2/3</a>. A good <code>Tk</code> overview with many examples can be found on <a href="http://www.tkdocs.com/">TkDocs</a>.</p>
-<p>The following <code>R</code> and <code>Tcl</code> code create the same GUI with a button that says “Click Me” and when clicked will output “Hello World” to the prompt.</p>
+<p>A detailed introduction to the <code>tcltk</code> <code>R</code> package by the package author Peter Dalgaard's can be found found on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2001-3.pdf">page 27 in R News volume 1/3</a> and on <a href="http://cran.r-project.org/doc/Rnews/Rnews_2002-3.pdf">page 25 in R News volume 2/3</a>. A good <code>Tk</code> overview with many examples can be found on <a href="http://www.tkdocs.com/">TkDocs</a>.</p>
+<p>The following <code>R</code> and <code>Tcl</code> code create the same GUI with a button that says &quot;Click Me&quot; and when clicked will output &quot;Hello World&quot; to the prompt.</p>
 <div class="twocolumn">
 <pre class="left"><code># Session in R
 tt &lt;- tktoplevel()
@@ -178,6 +172,6 @@ $b configure -command foo</code></pre>
 <pre><code>ls(name=&quot;package:tcltk&quot;)</code></pre>
 <p>If, for example, one wants to see the <code>Tcl</code> equivalent of an <code>R</code> wrapper function, say the <code>tkwm.geometry()</code> function, one can often see the <code>tcl()</code> call with</p>
 <pre><code>getAnywhere(&#39;tkwm.geometry&#39;)</code></pre>
-<p>which is in this case <code>tcl("wm", "geometry", ...)</code>, hence the <code>geometry</code> sub-command of <code>wm</code>.</p>
+<p>which is in this case <code>tcl(&quot;wm&quot;, &quot;geometry&quot;, ...)</code>, hence the <code>geometry</code> sub-command of <code>wm</code>.</p>
 </body>
 </html>

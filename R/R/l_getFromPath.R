@@ -9,7 +9,7 @@
 #' @template see_l_help
 #'
 #' @param target loon object specification (e.g. \code{".l0.plot"})
-#' @seealso \code{\link{l_create_handle}}
+#' @seealso \code{\link{l_create_handle}} \code{\link{l_loonWidgets}}
 #' @export
 #'
 #' @examples
@@ -98,6 +98,7 @@ l_getFromPath <- function(target) {
             wcl <- switch(
                 cl,
                 "::loon::classes::Scatterplot_Widget" = "l_plot",
+                "::loon::classes::Scatterplot3D_Widget" = c("l_plot3D", "l_plot"),
                 "::loon::classes::Histogram_Widget" = "l_hist",
                 "::loon::classes::Serialaxes_Widget" = "l_serialaxes",
                 "::loon::classes::Graph_Widget" = "l_graph",
@@ -111,7 +112,8 @@ l_getFromPath <- function(target) {
             if ( spec_2_short == "layer" || spec_2 == "model") {
                 structure(as.vector(spec_2),
                           widget = widget,
-                          class = c(paste0("l_layer_", l_layer_getType(widget, specifier[2])), 'l_layer', 'loon'))
+                          class = c(paste0("l_layer_", l_layer_getType(widget, specifier[2])),
+                                    'l_layer', 'loon'))
             } else if (spec_2 == "root") {
                 structure("root", widget=as.vector(widget), class=c("l_layer_group", "l_layer", "loon"))
             } else if (spec_2_short == "glyph") {

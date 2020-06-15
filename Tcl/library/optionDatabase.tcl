@@ -62,6 +62,11 @@ namespace eval loon {
     ## pre-calculated sizes
     set ::loon::Options(image_sizes) {1 2 3 4 5 6 7 8 9 10 15 20 40}
 
+    ## Default foreground and background color
+    set Options(color) gray60
+    set Options(size) 4
+    set Options(glyph) "ccircle"
+    set Options(linewidth) 1
 
     ## Default foreground and background color
     set Options(background) white

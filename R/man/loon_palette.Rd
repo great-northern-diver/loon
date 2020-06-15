@@ -7,10 +7,10 @@
 loon_palette(n)
 }
 \arguments{
-\item{n}{numer of different colors in the palette}
+\item{n}{number of different colors in the palette}
 }
 \value{
-vector with hexencoded color values
+vector with hex-encoded color values
 }
 \description{
 Loon has a color sequence generator implemented  creates a color

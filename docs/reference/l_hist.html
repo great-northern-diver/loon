@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -170,7 +170,7 @@
   <span class='kw'>origin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>showBinHandle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey60"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
   <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -248,8 +248,9 @@ whose movement resets the <code>origin</code> and the <code>binwidth</code>.  De
     </tr>
     <tr>
       <th>color</th>
-      <td><p>colour fills of bins (default "grey60"); colours are repeated
-until matching the number x.</p></td>
+      <td><p>colour fills of bins; colours are repeated
+until matching the number x.
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>active</th>

@@ -10,9 +10,9 @@
   xlabel = NULL,
   ylabel = NULL,
   title = NULL,
-  linewidth = 2,
-  color = NULL,
-  size = 0.5,
+  linewidth = l_getOption("linewidth"),
+  color = l_getOption("color"),
+  size = l_getOption("size"),
   ...
 )
 }
@@ -29,11 +29,14 @@ based on the combination of data name and "density".}
 
 \item{title}{providing a title for the plot. If \code{NULL} (the default), the title will be the call which produced the result.}
 
-\item{linewidth}{line width, default value is 2.}
+\item{linewidth}{line width.
+Default is given by \code{\link{l_getOption}("linewidth")}.}
 
-\item{color}{line colour.  If \code{NULL} (the default) colour will be taken from \code{l_getOption("foreground")}.}
+\item{color}{line colour.
+Default is given by \code{\link{l_getOption}("color")}.}
 
-\item{size}{points size, default value is 0.5}
+\item{size}{points size.
+Default is given by \code{\link{l_getOption}("size")}.}
 
 \item{...}{named arguments being states passed to l_plot()}
 }

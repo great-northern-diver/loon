@@ -1,3 +1,25 @@
+# loon 1.3.1
+
+* Added new functions l_loonWidgets() which returns widgets of all 
+  displayed loon plots.  Related functions include
+    - l_basePaths() and l_compoundPaths
+    - l_getFromPath()
+    
+* Fixed bug so that l_make_glyphs() again works in Mac OS Catalina
+  (Thanks to Brian Ripley and Simon Urbanek)
+    - Cool new example there which produces the Periodic Table of the Elements
+      as a scatterplot (data "elements" from loon.data package).  
+      Actually see the periodicity by brushing.
+  
+* A minor bug fix with respect to facet label layout
+
+* "color", "size", "linewidth", "glyph", added to 'l_userOptions()' 
+    - default "color", "size", "linewidth", "glyph", etc. now set to
+      look up default 'l_getOption("linewidth")' etc. 
+    - this allows the user to change the default look of all plots
+      simply by using 'l_setOption("color", "black")' for example.
+
+
 # loon 1.3.0
 
 * several new features added to loon plots

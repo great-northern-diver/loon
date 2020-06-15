@@ -25,13 +25,13 @@ dataDirectory <- "data"
 path_concat <- function(path1, path2, sep="/") {paste(path1, path2, sep = sep)}
 ```
 
+> "Exposure, the effective laying open of the data to display the unanticipated, 
+> is to us a major portion of data analysis."  ... John Tukey and Martin Wilk (1966) 
+
 
 ```{r library_loon, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 4, out.width = "75%", warning=FALSE, message=FALSE}
 library(loon)
 ```
-
-> "Exposure, the effective laying open of the data to display the unanticipated, 
-> is to us a major portion of data analysis."  ... John Tukey and Martin Wilk (1966) 
 
 Because loon is an interactive visualization system, this introduction is meant as a "hands on" tutorial.
 Not all interactions are from the command line (programmatic).
@@ -60,10 +60,11 @@ l_plot(x = quakes$long,
        xlabel = "longitude", 
        ylabel = "latitude",
        title = "Tonga trench earthquakes")
-
-## [1] ".l0.plot"
-## attr(,"class")
-## [1] "l_plot" "loon"
+```
+```{r OUT first loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy=FALSE}
+[1] ".l0.plot"
+attr(,"class")
+[1] "l_plot" "loon"  
 ```
 
 This prints the above information on the loon plot (more on this later) and causes 
@@ -315,9 +316,13 @@ the inspector palette of colours
 
 The loon system **default** list of colours get be found programmatically:
 
-```{r l_getColorList, eval = TRUE, tidy = TRUE}
-l_getColorList()
+```{r l_getColorList, eval = FALSE, tidy = TRUE}
+head(l_getColorList())
 ```
+
+`
+ [1] "gray60"    "#A6CEE3"   "pink"      "#B2DF8A"   "#FDBF6F"   "#FFFF99" 
+`
 
 Note:
 
@@ -325,10 +330,14 @@ Note:
 - being constrained to tcl/tk colours, no alpha level is available at this time in loon
 - `R` has a similar set of base colours that is default for all its graphics devices:
 
-    ```{r grDevices palette, eval = TRUE, tidy =TRUE}
-    palette()
+    ```{r grDevices palette, eval = FALSE, tidy =TRUE}
+    head(palette())
     ```
 
+    `
+[1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC"
+    `
+    
 - like the `R` palette, the loon inspector palette persists.
 
 
@@ -372,7 +381,7 @@ The plot itself is a (tcl) data structure and can be assigned to an `R` variable
 
 Either at construction (the preferable way):
 
-```{r assign loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r assign loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 # loon graphics (note that the result is assigned to p)
 p <- l_plot(x = quakes$long, y = quakes$lat, 
             xlabel = "longitude", ylabel = "latitude",
@@ -398,8 +407,14 @@ Do this and assign your plot to `p`.  You might have to look at the window to ge
 
 Were we to now print `p`
 
-```{r printed representation loon plot, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r printed representation loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 p 
+```
+
+```{r OUT printed representation loon plot, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+[1] ".l0.plot"
+attr(,"class")
+[1] "l_plot" "loon" 
 ```
 
 we get the string name of the plot, but with a class attribute.  This is the **value** of `p` and provides us access to a  very rich data structure,  but one whose values reside in `tcl`. 
@@ -424,22 +439,30 @@ This allows the visual representation of a `loon` plot to be displayed at any ti
 
 There are `names` associated with a loon plot indicating its contents or **states**:
 
-```{r names, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
-names(p)
+```{r names, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
+head(names(p))
 ```
+
+`
+ [1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"     "linkingKey"       "zoomX" 
+`
 
 These features of `p` can be directly accessed the `[]` function.
 
 For example, 
 
-```{r showGuides, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
+```{r showGuides, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = TRUE}
 p["showGuides"]
 ```
+
+`
+[1] TRUE
+`
 
 A more meaningful example might be identify groups with the colours of the points.  
 This could be done simply as follows 
 
-```{r set up group cols, eval = TRUE, echo = FALSE}
+```{r set up group cols, eval = FALSE, echo = FALSE}
 cols_saved <- c("red", "red", "orange", "red", "red", "orange", 
 "black", "orange", "orange", "red", "red", "black", 
 "red", "red", "black", "orange", "black", "red", 
@@ -612,18 +635,32 @@ p["color"] <- cols_saved
 
 ```
 
-```{r group by colour, eval = TRUE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+```{r IN 1 group by colour, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
 unique_cols <- unique(p['color'])
 group1 <- p['color'] == unique_cols[1]
 # Number in group 1 (e.g. as you might have -- here from saved colours)
 sum(group1)
+```
+```{r OUT 1 group by colour, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+[1] 425
+```
+```{r IN 2 group by colour, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
 # Data on first few quakes in group 1.
 head(quakes[group1,])
+```
+```{r OUT 2 group by colour, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+      lat   long depth mag stations
+1  -20.42 181.62   562 4.8       41
+2  -20.62 181.03   650 4.2       15
+4  -17.97 181.66   626 4.1       19
+5  -20.42 181.96   649 4.0       11
+10 -17.47 179.59   622 4.3       19
+11 -21.44 180.69   583 4.4       13
 ```
 
 Alternatively, a function could be written to save the groups as a list of logical vectors (one for each group):
 
-```{r getGroups, eval = TRUE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
+```{r getGroups, eval = FALSE, echo = TRUE, tidy = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE}
 getGroups <- function(loonplot){
     # make sure it is an "l_plot"
     if (!is(loonplot, "l_plot")) stop("loonplot must be an l_plot")
@@ -693,7 +730,7 @@ For example, we can add a map to the current loon plot `p`.
 First get the relevant map:
 
 
-```{r gettingAMap}
+```{r gettingAMap, eval = FALSE}
 library(maps)
 NZFijiMap <- map("world2", 
                  regions=c("New Zealand", "Fiji"),
@@ -704,11 +741,13 @@ NZFijiMap <- map("world2",
 It is added as a "layer" to the loon plot
 
 
-```{r addingAMap,  eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r addingAMap,  eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 l_layer(p, NZFijiMap, 
         label = "New Zealand and Fiji",
         color = "forestgreen",
         index = "end")
+loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
+[1] "layer0"
 ```
 
 
@@ -802,7 +841,7 @@ Before starting, make sure that you have the four groups coloured in the loon pl
 Let's consider a histogram of the `depth` of each earthquake.
 
 
-```{r histogram of magnitude,  eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r histogram of magnitude,  eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 h <- l_hist(quakes$depth, 
             xlabel = "depth", 
             title = "Tonga trench earthquakes")
@@ -846,7 +885,7 @@ The principal feature of loon plots which effect the linking of displays is the 
     but **this would have resulted in an error**.  The problem is that the synchronization must be set at the same time to determine where the linked states are to be drawn from. 
     To effect this, the loon command `l_confiure()` must be used whenever **two or more states are to be set simultaneously**.
     The correct programmatic setting of the "linkingGroup" is 
-    ```{r fix colors again, eval = TRUE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
+    ```{r fix colors again, eval = FALSE, fig.align="center", fig.width = 6, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
     l_configure(h, linkingGroup = "quakes", sync = "push")
     l_configure(p, linkingGroup = "quakes", sync = "pull")
     ```
@@ -861,7 +900,7 @@ The principal feature of loon plots which effect the linking of displays is the 
     
 - could also set colours programmatically on the histogram. Here we colour the histogram bars so that those earthquakes that are deepest are darkest.
 
-    ```{r histogram blues, fig.align="center", fig.width = 7, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
+    ```{r histogram blues, eval = FALSE, fig.align="center", fig.width = 7, fig.height = 5, out.width = "60%", warning=FALSE, message=FALSE, tidy = FALSE}
     blues5 <- blues9[c(2,4,6,8,9)] # select 5 from light blue to dark
     h["color"] <- blues5[cut(quakes$depth, breaks=5)] # assign colours by depth
     p["glyph"] <- "ccircle"
@@ -878,7 +917,7 @@ Arbitrarily many plots may be created and linked in loon.
 Consider, for example, adding two more histograms to the same `linkingGroup`.  Note that the linking is done at creation and that the synchronization is by default a "pull".
 
 
-```{r final quakes histograms, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r final quakes histograms, eval = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 h_mag <- l_hist(x = quakes$mag, 
                 linkingGroup = "quakes", 
                 showStackedColors = TRUE,
@@ -898,7 +937,7 @@ Brush to show the relationship between magnitude of the earthquake and the numbe
 
 Alternatively, we could look at a linked scatterplot of these two variates and explore their relationship conditional on `depth`
 
-```{r final quakes plot, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r final quakes plot, eval = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 p_mag_stations <- l_plot(x = quakes$mag, 
                          y = quakes$stations, 
                          showGuides = TRUE,
@@ -949,7 +988,7 @@ Rather than the default values, the `linkingKey` can be any vector of unique str
 
 Given that the `quakes` data has three spatial dimensions (`long`, `lat`, and `depth`), it would be natural to view this in a three dimensional scatterplot.
 
-```{r plot_3D,  fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r plot_3D,  eval = FALSE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 # First, scale the data
 scaled_quakes <- l_scale3D(quakes)
 
@@ -988,11 +1027,11 @@ There are of course many smaller examples available through the `loon`'s `R` doc
 ```{r, eval=FALSE}
 help(package = "loon")
 ```
-and more complex examples and more general discussion via `loon`'s online help
+and more complex examples and more general discussion via `loon`'s online web documentation
 ```{r, eval=FALSE}
-l_help()
-# or more simply via the online manual
 l_web()
+# or more generally via the online loon (with complex examples)
+l_help()
 ```
 
 ---
@@ -1035,7 +1074,7 @@ The range is quite broad.  For example,
 demo("l_regression", 
      package = "loon")  # lots using the Old Faithful geyser
 demo("l_regression_influential", 
-     package = "loon")  # move and recolor points to change the regression fit
+     package = "loon")  # change points change the regression fit
 
 ### gapminder
 demo("l_us_and_them", 
@@ -1106,9 +1145,12 @@ In `loon`, the functions `grid.loon()` and `loonGrob()` construct `grobs` from l
 For example, when transformed to `grid`,  the loon plot `p` structure becomes a `gTree` in `grid`.
 
 
-```{r grid grob, eval = TRUE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+```{r grid grob, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
 gp <- loonGrob(p)
 gp
+```
+```{r OUT grid grob, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 5, fig.height = 5, out.width = "75%", warning=FALSE, message=FALSE, tidy = FALSE}
+gTree[GRID.gTree.33] 
 ```
 
 This simply produces the grid data structure corresponding to the current state of the loon plot `p`, as can be seen from listing its contents:

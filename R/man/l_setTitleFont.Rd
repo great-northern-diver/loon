@@ -17,11 +17,8 @@ l_setTitleFont(size = "16", weight = "bold", family = "Helvetica")
 the value of the named option.
 }
 \description{
-All of loon's displays access a set of common options.  
+All of loon's displays access a set of common options.
 This function sets the font for the title bar of the displays.
-}
-\examples{
-loon:::l_setTitleFont(14)
 }
 \seealso{
 \code{\link{l_getOptionNames}}, \code{\link{l_userOptions}},

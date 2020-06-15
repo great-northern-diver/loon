@@ -27,5 +27,5 @@ For more information run: \code{l_help("learn_R_intro.html#re-creating-object-ha
 }
 }
 \seealso{
-\code{\link{l_create_handle}}
+\code{\link{l_create_handle}} \code{\link{l_loonWidgets}}
 }

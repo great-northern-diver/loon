@@ -81,7 +81,7 @@ objects of class stl" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -168,10 +168,10 @@ objects of class <code>stl</code></p>
   <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tk_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"size"</span>),
+  <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"linewidth"</span>),
   <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -213,19 +213,22 @@ the title will be "Seasonal Trend Analysis".</p></td>
     <tr>
       <th>color</th>
       <td><p>points colour of all time series.
-If <code>NULL</code> (the default) <code>color</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>size</th>
-      <td><p>points size of all time series. Default value is 1.</p></td>
+      <td><p>points size of all time series.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
     </tr>
     <tr>
       <th>lcolor</th>
-      <td><p>line colour of all time series. If <code>NULL</code> (the default) <code>lcolor</code> will be <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>.</p></td>
+      <td><p>line colour of all time series.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>linewidth</th>
-      <td><p>line width of all time series (incl. original and decomposed components. Default is 1.</p></td>
+      <td><p>line width of all time series (incl. original and decomposed components.
+Default is given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</code>.</p></td>
     </tr>
     <tr>
       <th>linkingGroup</th>

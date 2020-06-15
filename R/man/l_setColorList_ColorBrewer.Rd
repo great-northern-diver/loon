@@ -24,6 +24,8 @@ Only the following palettes in ColorBrewer are available: Set1,
 }
 \examples{
 
+if (interactive()){
+
 \dontrun{
 if (requireNamespace("RColorBrewer", quietly = TRUE)) {
   RColorBrewer::display.brewer.all()
@@ -32,6 +34,8 @@ if (requireNamespace("RColorBrewer", quietly = TRUE)) {
 
 l_setColorList_ColorBrewer("Set1")
 p <- l_plot(iris)
+
+}
 }
 \seealso{
 \code{\link{l_setColorList}}, \code{\link{l_setColorList_loon}},

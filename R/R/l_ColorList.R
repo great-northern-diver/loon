@@ -54,7 +54,9 @@
 #'   grid::grid.newpage()
 #'   grid::pushViewport(grid::plotViewport())
 #'   grid::grid.rect()
-#'   n <- 2^(1:5)
+#'   n <- c(2,4,8,16, 21)
+#'   # beyond this, colors are generated algorithmically
+#'   # generating a warning
 #'   grid::pushViewport(grid::dataViewport(xscale=c(0, max(n)+1),
 #'                      yscale=c(0, length(n)+1)))
 #'   grid::grid.yaxis(at=c(1:length(n)), label=paste("n =", n))
@@ -64,7 +66,7 @@
 #'                      default.units = "native", pch=15,
 #'                      gp=grid::gpar(col=cols))
 #'   }
-#'   grid::grid.text("note the fist i colors are shared for each n",
+#'   grid::grid.text("note the first i colors are shared for each n",
 #'                   y = grid::unit(1,"npc") + grid::unit(1, "line"))
 #' }
 #'
@@ -90,9 +92,9 @@ color_loon <- function() {
 #'   for all positive natural numbers \code{m}. See the details in the
 #'   \code{\link{l_setColorList}} documentation.
 #'
-#' @param n numer of different colors in the palette
+#' @param n number of different colors in the palette
 #'
-#' @return vector with hexencoded color values
+#' @return vector with hex-encoded color values
 #'
 #' @export
 #'
@@ -333,6 +335,8 @@ l_getColorList <- function() {
 #'
 #' @examples
 #'
+#' if (interactive()){
+#'
 #' \dontrun{
 #' if (requireNamespace("RColorBrewer", quietly = TRUE)) {
 #'   RColorBrewer::display.brewer.all()
@@ -341,6 +345,8 @@ l_getColorList <- function() {
 #'
 #' l_setColorList_ColorBrewer("Set1")
 #' p <- l_plot(iris)
+#'
+#' }
 l_setColorList_ColorBrewer <- function(palette=c("Set1", "Set2", "Set3",
                                                  "Pastel1", "Pastel2", "Paired",
                                                  "Dark2", "Accent")) {

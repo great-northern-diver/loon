@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -200,7 +200,8 @@ loon's documentation webpage, i.e. run <code><a href='l_help.html'>l_help("learn
   <code><a href='l_bind_canvas_delete.html'>l_bind_canvas_delete</a></code>, <code><a href='l_bind_canvas_reorder.html'>l_bind_canvas_reorder</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># binding for when plot is resized </span>
+    <pre class="examples"><div class='input'><span class='co'># binding for when plot is resized</span>
+<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='kw'>color</span><span class='kw'>=</span><span class='no'>iris</span>$<span class='no'>Species</span>)
 
 <span class='no'>printSize</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>p</span>) {
@@ -209,10 +210,14 @@ loon's documentation webpage, i.e. run <code><a href='l_help.html'>l_help("learn
               <span class='no'>size</span>[<span class='fl'>1</span>], <span class='st'>'x'</span>, <span class='no'>size</span>[<span class='fl'>2</span>], <span class='st'>' pixels\n'</span>, <span class='kw'>sep</span><span class='kw'>=</span><span class='st'>''</span>))
 }
 
-<span class='fu'>l_bind_canvas</span>(<span class='no'>p</span>, <span class='kw'>event</span><span class='kw'>=</span><span class='st'>'&lt;Configure&gt;'</span>, <span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printSize</span>(<span class='no'>W</span>)})</div><div class='output co'>#&gt; [1] "canvasBinding0"</div><div class='input'>
+<span class='fu'>l_bind_canvas</span>(<span class='no'>p</span>, <span class='kw'>event</span><span class='kw'>=</span><span class='st'>'&lt;Configure&gt;'</span>, <span class='kw'>function</span>(<span class='no'>W</span>) {<span class='fu'>printSize</span>(<span class='no'>W</span>)})
+
 <span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_bind_canvas_ids.html'>l_bind_canvas_ids</a></span>(<span class='no'>p</span>)
-<span class='no'>id</span></div><div class='output co'>#&gt; [1] "canvasBinding0"</div><div class='input'>
-<span class='fu'><a href='l_bind_canvas_get.html'>l_bind_canvas_get</a></span>(<span class='no'>p</span>, <span class='no'>id</span>)</div><div class='output co'>#&gt; [1] "&lt;Configure&gt;"              "R_call 0x7fa7781b9bd8 %W"</div></pre>
+<span class='no'>id</span>
+
+<span class='fu'><a href='l_bind_canvas_get.html'>l_bind_canvas_get</a></span>(<span class='no'>p</span>, <span class='no'>id</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

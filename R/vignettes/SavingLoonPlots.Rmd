@@ -48,7 +48,7 @@ When carrying out an interactive analysis, you might want to save some pictures 
 
 To illustrate how to do this, consider the classic data set `iris`.  Here are three different **linked** plots that might be displayed.
 
-```{r basic plots}
+```{r basic plots, eval = FALSE}
 library(loon)
 # First, make sure you always assign a loon plot to a variable
 # at the same time that you create it.  This will give you access
@@ -77,10 +77,10 @@ That plot will simply just appear (**as it is**) in the processed `RMarkdown` fi
 
 If you have the `grid` and `gridExtra` packages loaded, you could arrange to see several such plots in one place.
 
-```{r grid packages, fig.width = 16, fig.height = 5}
+```{r grid packages, fig.width = 16, fig.height = 5, eval=FALSE}
 library(grid); library(gridExtra)
 ```
-```{r several plots, fig.width = 16, fig.height = 5}
+```{r several plots, fig.width = 16, fig.height = 5, eval = FALSE}
 # First get the data stuctures corresponding to the static snapshots
 # of the current plots.  Because we want to arrange them, we don't
 # draw them at first.
@@ -95,7 +95,7 @@ grid.arrange(plot_h, plot_p, plot_sa, nrow = 1)
 
 This works fine when what you want to display has been entirely determined by programming done inside the `RMarkdown` code.  For example, if the colours had been changed programmatically,  the linked plots would change and plotting them again would reflect that change.
 
-```{r several plots changed, fig.width = 16, fig.height = 5}
+```{r several plots changed, fig.width = 16, fig.height = 5, eval = FALSE}
 # Change the colour by changing it *programmatically* on the plot
 # 
 h["color"] <- iris$Species  # use species to determine the colours
@@ -119,7 +119,7 @@ Finally, there are numerous `states` that **can be programmatically accessed and
 
 Knowing the state names provides the user a programmatic means to access and/or to set their values.  The values can be queried at any time, whether they were set programmatically or interactively.  For example, 
 
-```{r plot states}
+```{r plot states,eval=FALSE}
 # Accessing values
 head(sa["color"])  # will show the current colours of sa
 # Note that these colours are expressed as 12 hexadecimal digits 
@@ -199,7 +199,7 @@ knitr::include_graphics("myplot_via_l_export.pdf")
 knitr::include_graphics("myplot_via_R.png")
 ```
 
-```{r load the saved plots, echo = FALSE}
+```{r load the saved plots, echo = FALSE, eval=FALSE}
 # The one exported from RStudio
 knitr::include_graphics(path_concat(imageDirectory, "myplot_via_RStudio.png"))
 # Followed by the one saved using l_export 
@@ -273,18 +273,18 @@ Later, when we construct a new plot (perhaps for a report), the states are recov
 p_savedStates <- l_getSavedStates(file = "p_savedStates")
 ```
 
-```{r get p states back, echo = TRUE}
+```{r get p states back, echo = FALSE}
 p_savedStates <- l_getSavedStates(file = path_concat(dataDirectory, "p_savedStates"))
 ```
 
 A new plot is constructed and the saved states transferred to it.
-```{r new plot and copy}
+```{r new plot and copy, eval = FALSE}
 new_p <- l_plot(iris$Petal.Width, iris$Petal.Length)
 l_copyStates(source = p_savedStates, target = new_p)
 ```
 and can be programmatically incorporated into a report as
 
-```{r plot new_p}
+```{r plot new_p, eval = FALSE}
 plot(new_p)
 ```
 
@@ -298,11 +298,13 @@ Again, by default, only the following states related to linking are saved
 names(p_savedStates)
 ```
 
+`[1] "color"        "active"       "selected"     "linkingKey"   "linkingGroup"`
+
 Sometimes, the interactive analysis will have been more involved. 
 It could, for example, have involved panning and zooming, changing of glyphs, particular choices for labels and titles, and so on.
 
 For example, through direct manipulation of the loon plot and inspector, the scatterplot `p` might at some point look something like this:
-```{r zoom and change glyphs on p, echo = FALSE}
+```{r zoom and change glyphs on p, echo = FALSE, eval = FALSE}
 p["selected"] <- iris$Species == "versicolor"
 l_move_jitter(p, which = "selected")
 l_scaleto_selected(p)
@@ -332,7 +334,7 @@ p_focusOnVersicolor <- l_getSavedStates(file = path_concat(dataDirectory, "p_foc
 ```
 
 When it comes to transferring the states to a new plot there are many choices.  We could go with a large collection of display states (more than the default states but still excluding more "basic" states about panning and zooming for example).  To see which states, we add the argument `returnNames = TRUE`:
-```{r copy all but basic states, eval = TRUE}
+```{r copy all but basic states, eval = FALSE}
 l_copyStates(source = p_focusOnVersicolor, 
              target = new_p, 
              returnNames = TRUE)
@@ -344,14 +346,14 @@ More, or different, states could be excluded by using the argument `exclude` to 
 Alternatively, the only states to be transferred could be made explicit by naming them in the value of the argument `states`.
 
 Because the "basic" states were excluded by default, the new plot now looks like
-```{r a changed new_p}
+```{r a changed new_p, eval = FALSE}
 plot(new_p)
 ```
 
 As can be seen, the glyph sizes and shapes were transferred but not the zooming or the jittering.
 To ensure we get an exact copy, we need to include all of the states, that is to exclude none of them.
 
-```{r copy all states, eval = TRUE}
+```{r copy all states, eval = FALSE}
 l_copyStates(source = p_focusOnVersicolor, 
              target = new_p, 
              excludeBasicStates = FALSE)
@@ -359,7 +361,7 @@ l_copyStates(source = p_focusOnVersicolor,
 
 Now the `new_p` should look much like the original interactive plot did when it was saved.
 
-```{r final plot focus on versicolor}
+```{r final plot focus on versicolor, eval = FALSE}
 plot(new_p)
 ```
 

@@ -76,8 +76,8 @@ facet_grid_layout <- function(plots,
             colsLabel <- subtitles
             rowsLabel <- list()
         } else {
-            rowsLabel <- subtitles[seq(len) > (len/2)]
-            colsLabel <- subtitles[seq(len) <= (len/2)]
+            rowsLabel <- subtitles[seq(len) <= (len/2)]
+            colsLabel <- subtitles[seq(len) > (len/2)]
         }
     } else {
 
@@ -85,8 +85,8 @@ facet_grid_layout <- function(plots,
             colsLabel <- list()
             rowsLabel <- subtitles
         } else {
-            rowsLabel <- subtitles[seq(len) <= (len/2)]
-            colsLabel <- subtitles[seq(len) > (len/2)]
+            rowsLabel <- subtitles[seq(len) >= (len/2)]
+            colsLabel <- subtitles[seq(len) < (len/2)]
         }
         rowGoesFirst <- TRUE
     }
@@ -104,9 +104,7 @@ facet_grid_layout <- function(plots,
     len_colsLabel <- length(colsLabel)
 
     if(length(labelLocation) != 2) {
-        warning("Layout 'grid' accept two positions.\n
-        The first one is used to determine the postion of column labels.\n
-        The second one is used to determine the postion of row labels.")
+        warning("Layout 'grid' accept two positions.\nThe first one is used to determine the postion of column labels.\nThe second one is used to determine the postion of row labels.")
         labelLocation <- rep_len(labelLocation, 2)
     }
 
@@ -134,50 +132,6 @@ facet_grid_layout <- function(plots,
     title_pos <- ifelse(title == "", 0, title_span)
     ylabel_pos <- ifelse(ylabel == "", 0, 1)
 
-    # layout_orders <- apply(do.call(expand.grid,
-    #                                lapply(if(rowGoesFirst) c(rowsLabel, colsLabel) else c(colsLabel, rowsLabel),
-    #                                       function(x) x)), 1,
-    #                        paste, collapse="*")
-
-    # get_plot_id <- function(string, matched_string, sep = "*") {
-    #
-    #     if(string %in% matched_string) {
-    #         # perfect match
-    #         ## string is "a * b",
-    #         ## matched_string is c("a * a", "a * b", "a * c")
-    #
-    #         # This case fails if
-    #         ## string is "b * a",
-    #         ## matched_string is c("a * a", "a * b", "a * c")
-    #
-    #         plot_id <- which(matched_string == string)
-    #         if(length(plot_id) == 1) return(plot_id)
-    #     }
-    #
-    #     # The following code should be deprecated
-    #     split <- paste0("[", sep, "]")
-    #     string <- strsplit(string, split = split)[[1]]
-    #     plot_id <- which(
-    #         sapply(strsplit(matched_string, split = split),
-    #                function(str) {
-    #
-    #                    all(
-    #                        vapply(string,
-    #                               function(s) {
-    #                                   isIn <- s %in% str
-    #                                   str[which(str %in% s)[1]] <- NA
-    #                                   str <<- str
-    #                                   isIn
-    #                               },
-    #                               logical(1))
-    #                    )
-    #                })
-    #     )
-    #     if(length(plot_id) != 1) stop("The length of plot id is not equal to 1")
-    #     plot_id
-    # }
-
-    # plot_id <- c()
     new_names <- c()
 
     if(rowGoesFirst) {
@@ -504,10 +458,29 @@ facet_wrap_layout <- function(plots,
         ncol <- ceiling(N/nrow)
     }
     stopifnot(nrow * ncol >= N)
+
     if (is.null(nrow) && is.null(ncol)) {
         nm <- grDevices::n2mfrow(N)
         nrow <- nm[2]
         ncol <- nm[1]
+    }
+
+    # ** respect to the number of columns **
+    ## No matter rows, if the number of columns is larger than the number of plots,
+    ## give a warning to modify the ncol
+    if(ncol > N) {
+        ncol <- N
+        warning(paste("Too many spots to accommodate the plots.\nThe argument `ncol` will be modified to", ncol),
+                call. = FALSE)
+    }
+
+    ## if the nrow is too large, then, to modify it to the minimum requirement.
+    if(nrow > ceiling(N/ncol)) {
+
+        nrow <- ceiling(N/ncol)
+        warning(paste("Too many spots to accommodate the plots.\nThe argument `nrows` will be modified to", nrow),
+                call. = FALSE)
+
     }
 
     if(swapAxes) {

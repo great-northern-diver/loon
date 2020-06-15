@@ -163,6 +163,9 @@ reference:
     contents:
     - l_create_handle
     - l_getFromPath
+    - l_loonWidgets
+    - l_basePaths
+    - l_compoundPaths
 
   - subtitle: Scaling plots
     contents:
@@ -202,6 +205,7 @@ reference:
     desc: Glyphs as point symbols in scatterplots
     contents:
     - l_primitiveGlyphs
+    - l_make_glyphs
 
   - subtitle: adding glyphs
     desc: functions to add glyphs to, or delete them from, a scatterplot
@@ -220,8 +224,8 @@ reference:
   - subtitle: image glyphs
     desc: creating image glyphs
     contents:
-    - starts_with("l_image")
     - l_make_glyphs
+    - starts_with("l_image")
 
   - subtitle: glyph inspector
     desc: loon inspectors for various type of glyphs
@@ -489,6 +493,9 @@ reference:
     - l_subwin
     - l_toR
     - l_isLoonWidget
+    - l_loonWidgets
+    - l_basePaths
+    - l_compoundPaths
     - l_throwErrorIfNotLoonWidget
     - l_Rlist2nestedTclList
     - l_nestedTclList2Rlist

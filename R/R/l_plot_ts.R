@@ -5,10 +5,13 @@
 #' @family time series decomposition plotting functions
 #' @param x Either an \code{stl} object or a \code{decomposed.ts} object.
 #' @param color points colour of all time series.
-#'        If \code{NULL} (the default) \code{color} will be \code{l_getOption("foreground")}.
-#' @param size points size of all time series. Default value is 1.
-#' @param lcolor line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.
-#' @param linewidth line width of all time series (incl. original and decomposed components. Default is 1.
+#'        Default is given by \code{\link{l_getOption}("color")}.
+#' @param size points size of all time series.
+#'        Default is given by \code{\link{l_getOption}("size")}.
+#' @param lcolor line colour of all time series.
+#'        Default is given by \code{\link{l_getOption}("color")}.
+#' @param linewidth line width of all time series (incl. original and decomposed components.
+#'        Default is given by \code{\link{l_getOption}("linewidth")}.
 #' @param xlabel the labels for the x axes.  This is a length four character vector one for each: of the original
 #' time series, the trend component, the seasonality component, and the remainder. If of length 1, the label is repeated; if \code{NULL}, \code{xlabel} is "time".
 #' @param ylabel the labels for the vertical axes.  This is a length four character vector one for each: of the original
@@ -33,8 +36,10 @@
 #'
 
 l_plot_ts <- function(x,
-                      color = NULL, size = 1,
-                      lcolor = NULL, linewidth = 1,
+                      color = l_getOption("color"),
+                      size = l_getOption("size"),
+                      lcolor = l_getOption("color"),
+                      linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
                       linkingGroup = NULL,
@@ -43,8 +48,8 @@ l_plot_ts <- function(x,
                       showLabels=TRUE,
                       ...){
 
-    if (is.null(lcolor)) lcolor <- getOption("foreground")
-    if (is.null(color)) color <- getOption("foreground")
+    if (is.null(lcolor)) lcolor <- getOption("color")
+    if (is.null(color)) color <- getOption("color")
 
     stlOrDecomposedTS <- x  # Just to remind us about what x is
 

@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -67,10 +59,10 @@ document.getElementById("learn_R").className += " selected";
 var language = "R";
 </script>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">event bindings - loon</h1>
-</header>
-<nav id="TOC" role="doc-toc">
+</div>
+<div id="TOC">
 <ul>
 <li><a href="#event-bindings">Event Bindings</a><ul>
 <li><a href="#r-callbacks">R Callbacks</a></li>
@@ -89,13 +81,14 @@ var language = "R";
 <li><a href="#content-bindings">Content Bindings</a></li>
 </ul></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_bind").className += " selected";
     setLearnUrl("bind");
 }
 </script>
+
 <h1 id="event-bindings">Event Bindings</h1>
 <p>Event bindings provide the functionality of binding code to specific event types. The bound code is called a <em>callback</em>. In <code>loon</code>, we distinguish between four classes of events: state change events, item events, canvas events and content events. Examples of each type of event (in the same order as mentioned before) include: a selected state modification of a plot, moving the mouse cursor over a point glyph, re-sizing the plot window and adding a layer.</p>
 <p>For example, a state binding is triggered on particular state changes</p>
@@ -187,26 +180,26 @@ p[&#39;selected&#39;] &lt;- TRUE</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">argument name</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>W</code></td>
-<td style="text-align: left;">widget path name</td>
+<td align="center"><code>W</code></td>
+<td align="left">widget path name</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>e</code></td>
-<td style="text-align: left;">states that got changed</td>
+<td align="center"><code>e</code></td>
+<td align="left">states that got changed</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>b</code></td>
-<td style="text-align: left;">binding id</td>
+<td align="center"><code>b</code></td>
+<td align="left">binding id</td>
 </tr>
 </tbody>
 </table>
-<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
+<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
 <h3 id="list-reorder-delete-bindings">List, Reorder &amp; Delete Bindings</h3>
 <p>Assume the following plot and bindings</p>
 <pre><code>p &lt;- l_plot(1:3, 1:3)
@@ -228,7 +221,7 @@ l_bind_state(p, c(&#39;zoomX&#39;, &#39;panX&#39;, &#39;selected&#39;), function
 <p>Finally, to delete a binding use</p>
 <pre><code>l_bind_state_delete(p, &#39;stateBinding0&#39;)</code></pre>
 <h3 id="other-state-bindings">Other State Bindings</h3>
-<p>Next to a <code>loon</code>’s displays the layers, glyphs, navigators and contexts support state bindings too. We now demonstrate this with a layer state binding (note that this it will work with all the other types the same).</p>
+<p>Next to a <code>loon</code>'s displays the layers, glyphs, navigators and contexts support state bindings too. We now demonstrate this with a layer state binding (note that this it will work with all the other types the same).</p>
 <pre><code>p &lt;- l_plot(1:3,1:3)
 l &lt;- l_layer_rectangle(p, x=c(1,3), y=c(1,3), color=&#39;blue&#39;)
 l_bind_state(l, &#39;color&#39;, function(){cat(&#39;layer color has changed\n&#39;)})
@@ -237,7 +230,7 @@ l[&#39;color&#39;] &lt;- &#39;green&#39;
 #&gt; layer color has changed</code></pre>
 <h2 id="item-bindings">Item Bindings</h2>
 <p>Item bindings are triggered by a mouse/keyboard gesture over a visual item in a plot. Visual items include point glyphs, layers, axes and labels. Every visual item has a set of tags as outlined in the <a href="#visual-item-tags">Visual Item Tags</a> section. In addition, displays and layers have a <code>tag</code> state for user specified tags.</p>
-<p>Note that item bindings are <code>Tk</code> canvas bindings with one level of indirection in order to support loon’s context specific substitutions instead of the standard <code>Tk</code> substitutions.</p>
+<p>Note that item bindings are <code>Tk</code> canvas bindings with one level of indirection in order to support loon's context specific substitutions instead of the standard <code>Tk</code> substitutions.</p>
 <p>Valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5"><code>Tk</code> bindings</a>. The tag specification for item bindings allow for logical expressions of <a href="#visual-item-tags">Visual Item Tags</a> using the operators <code>&amp;&amp;</code>, <code>||</code>, <code>^</code>,<code>!</code>, and parenthesized subexpressions (see the <a href="https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M16"><code>Tk</code> canvas manual</a>).</p>
 <p>To get the tags for the item that lies below the mouse cursor use the <code>l_currenttags</code> function. To get the index (in relation to the abstract dimension) of the visual item below the mouse cursor (if there is an index) use the <code>l_currentindex</code> function.</p>
 <p>For example, say we wish to print out the point number in a scatterplot on leaving and entering the point</p>
@@ -262,32 +255,32 @@ l_bind_item(p, tags=&#39;model&amp;&amp;point&#39;, event=&#39;&lt;Leave&gt;&#39
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">argument name</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>W</code></td>
-<td style="text-align: left;">widget path name</td>
+<td align="center"><code>W</code></td>
+<td align="left">widget path name</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>b</code></td>
-<td style="text-align: left;">binding id</td>
+<td align="center"><code>b</code></td>
+<td align="left">binding id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>x</code></td>
-<td style="text-align: left;">x coordinate</td>
+<td align="center"><code>x</code></td>
+<td align="left">x coordinate</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>y</code></td>
-<td style="text-align: left;">y coordinate</td>
+<td align="center"><code>y</code></td>
+<td align="left">y coordinate</td>
 </tr>
 </tbody>
 </table>
-<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
+<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
 <h3 id="visual-item-tags">Visual Item Tags</h3>
-<p>Visual items have tags. It is possible to add user defined tags with the <code>tag</code> state for the relative object (i.e. plot and layer). There are, however, also tags that we use which are listed in the table below.</p>
+<p>Visual items have tags. It is possible to add user defined tags with the <code>tag</code> state for the relative object (i.e. plot and layer). There are, however, also tags that we use which are listed in the table below.</p>
 <ul>
 <li><strong>Note:</strong> numbers are not valid tags! Tags must start with a alphabetic character.</li>
 </ul>
@@ -303,7 +296,9 @@ l_bind_item(p, &#39;all&#39;, &#39;&lt;ButtonPress&gt;&#39;, function(W)printTag
 <li><code>all</code>, <code>current</code> and <code>selected</code> are reserved tags used by <code>Tk</code></li>
 </ul>
 <p>The current tagging scheme for the histogram, scatterplot and graph displays is</p>
-<p><img src="images/item_tags.png" title="Item Tags" /></p>
+<div class="figure">
+<img src="images/item_tags.png" title="Item Tags" />
+</div>
 <h2 id="canvas-bindings">Canvas Bindings</h2>
 <p>Canvas bindings are in contrast to the item bindings triggered by a mouse/keyboard gesture over the plot as a whole. Canvas bindings are for example useful if one wants to capture plot resize events or a mouse moving events.</p>
 <p>As for item bindings the valid event patterns for mouse/keyboard gestures are taken from the <a href="http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M7"><code>Tk</code> bindings</a>.</p>
@@ -334,38 +329,38 @@ l_bind_canvas(p, event=&#39;&lt;Motion&gt;&#39;, printLocation)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">argument name</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>W</code></td>
-<td style="text-align: left;">widget path name</td>
+<td align="center"><code>W</code></td>
+<td align="left">widget path name</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>b</code></td>
-<td style="text-align: left;">binding id</td>
+<td align="center"><code>b</code></td>
+<td align="left">binding id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>x</code></td>
-<td style="text-align: left;">x coordinate</td>
+<td align="center"><code>x</code></td>
+<td align="left">x coordinate</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>y</code></td>
-<td style="text-align: left;">y coordinate</td>
+<td align="center"><code>y</code></td>
+<td align="left">y coordinate</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>w</code></td>
-<td style="text-align: left;">plot width in pixel</td>
+<td align="center"><code>w</code></td>
+<td align="left">plot width in pixel</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>h</code></td>
-<td style="text-align: left;">plot height in pixel</td>
+<td align="center"><code>h</code></td>
+<td align="left">plot height in pixel</td>
 </tr>
 </tbody>
 </table>
-<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
+<p>Remember that these substitutions get passed to the <code>R</code> function as a <code>Tcl</code> object, hence you need to convert them to the desired type before using them in your code (e.g. with <code>l_toR</code> or <code>as.numeric</code>).</p>
 <h2 id="content-bindings">Content Bindings</h2>
 <p>There are also layer, glyph, navigator and context bindings. These bindings get evaluated if the collection of one of those changes. For example</p>
 <pre><code>p &lt;- l_plot(x=1:3, y=1:3)

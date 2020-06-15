@@ -12,8 +12,8 @@ l_serialaxes(
   by = NULL,
   layout = c("grid", "wrap", "separate"),
   showAxes = TRUE,
-  linewidth = 1,
-  color = "steelblue",
+  linewidth = l_getOption("linewidth"),
+  color = l_getOption("color"),
   active = TRUE,
   selected = FALSE,
   parent = NULL,
@@ -37,9 +37,11 @@ This argument can take a \code{vector}, a \code{list} of same lengths or a \code
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 
-\item{linewidth}{vector with line widths}
+\item{linewidth}{vector with line widths.
+Default is given by \code{\link{l_getOption}("linewidth")}.}
 
-\item{color}{vector with line colors}
+\item{color}{vector with line colors.
+Default is given by \code{\link{l_getOption}("color")}.}
 
 \item{active}{a logical determining whether items appear or not
 (default is \code{TRUE} for all items). If a logical vector is given of length

@@ -13,6 +13,7 @@
 
 	set ids "noinit"
 	set isIdsL1 "" ;# is ids length 1?
+
 	## cache glyph, size and screen coordinates
 	set curGlyph ""
 	set curX ""
@@ -28,6 +29,7 @@
 			   glyph glyphZoomSensitivity foreground} {
 	    set ${state}_var [uplevel #0 [list ${modelns}::my varname $state]]
 	}
+
 
 	next $Layerobj {*}$args
 
@@ -118,6 +120,7 @@
 		my updateCoords
 	    }
 	}
+
     }
 
     method glyphupdate {glyph event} {
@@ -150,6 +153,7 @@
 	if {$glyph in $curGlyph} {
 	    my redraw
 	}
+
     }
 
     method glyphconfigured {glyph events} {
@@ -245,6 +249,7 @@
     ## updateCoords updates the coordinates of all canvas items on the
     method updateCoords {} {
 	my variable canvas isVisible
+
 	if {!$isVisible || [set $n_var] eq 0} { return }
 
 	if {[llength $ids] ne [set $n_var]} {
@@ -255,7 +260,6 @@
 	my updateCurXY
 
 	set i 0
-
 	if {[llength $isIdsL1] eq 0} {
 	    set isIdsL1 TRUE
 	}
@@ -263,7 +267,6 @@
 	if {[llength $curGlyph] eq 0} {
 	    set curGlyph ccircle
 	}
-
 	foreach id $ids isL1 $isIdsL1\
 	    x $curX y $curY \
 	    glyph $curGlyph\
@@ -546,6 +549,7 @@
 	} else {
 	    return {}
 	}
+
     }
 
     method indecesWithinRect {x0 y0 x1 y1} {

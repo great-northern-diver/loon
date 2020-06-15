@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_plot_decomposed_ts.R
 \name{l_plot.decomposed.ts}
 \alias{l_plot.decomposed.ts}
-\title{The \code{l_plot} method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose)}
+\title{The \code{\link{l_plot}} method for classical seasonal decomposition of a time series by moving averages (i.e. via \code{decompose()})}
 \usage{
 \method{l_plot}{decomposed.ts}(
   x,
@@ -11,10 +11,10 @@
   ylabel = NULL,
   title = NULL,
   tk_title = NULL,
-  color = NULL,
-  size = 1,
-  lcolor = NULL,
-  linewidth = 1,
+  color = l_getOption("color"),
+  size = l_getOption("size"),
+  lcolor = l_getOption("color"),
+  linewidth = l_getOption("linewidth"),
   linkingGroup = NULL,
   showScales = TRUE,
   showGuides = TRUE,
@@ -38,14 +38,17 @@ time series, the trend component, the seasonality component, and the remainder. 
 
 \item{tk_title}{provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.}
 
-\item{color}{points colour of all time series. If \code{NULL} (the default)
-\code{color} will be \code{l_getOption("foreground")}.}
+\item{color}{points colour of all time series.
+Default given by \code{\link{l_getOption}("color")}.}
 
-\item{size}{points size of all time series. Default value is 1.}
+\item{size}{points size of all time series.
+Default given by \code{\link{l_getOption}("size")}.}
 
-\item{lcolor}{line colour of all time series. If \code{NULL} (the default) \code{lcolor} will be \code{l_getOption("foreground")}.}
+\item{lcolor}{line colour of all time series.
+Default given by \code{\link{l_getOption}("color")}.}
 
-\item{linewidth}{line width of all time series (incl. original and decomposed components. Default is 1.}
+\item{linewidth}{line width of all time series (incl. original and decomposed components.
+Default given by \code{\link{l_getOption}("linewidth")}.}
 
 \item{linkingGroup}{name of linking group.
 If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
@@ -56,7 +59,7 @@ If \code{NULL}, one is created from the data name and class associated with \cod
 
 \item{showLabels}{a logical as to whether to display axes labels on all plots, default is TRUE.}
 
-\item{...}{keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.}
+\item{...}{keyword value pairs passed off to \code{\link{l_plot}()} which constructs each loon scatterplot component.}
 }
 \value{
 A structure of class \code{"l_ts"} containing four loon plots each representing a part of the decomposition

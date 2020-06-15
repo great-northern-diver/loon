@@ -136,11 +136,13 @@ if(interactive()) {
                 linkingGroup = "quakes")
 }
 
+if(interactive()) {
+
 # serialaxes facets
 s <- l_serialaxes(iris, color = iris$Species,
                   scaling = "observation")
 fs <- l_facet(s, layout = "wrap", by = iris$Species)
 # The linkingGroup can be printed or accessed by
 l_configure(s, linkingGroup = fs[[1]]['linkingGroup'], sync = "pull")
-
+}
 }

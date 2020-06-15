@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -89,10 +81,10 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">graph display - loon</h1>
-</header>
-<nav id="TOC" role="doc-toc">
+</div>
+<div id="TOC">
 <ul>
 <li><a href="#graph">Graph</a></li>
 <li><a href="#good-to-know">Good To Know</a></li>
@@ -112,14 +104,17 @@ displays.forEach(function(display) {
 </ul></li>
 <li><a href="#graph-utilities">Graph Utilities</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_graph").className += " selected";
     setLearnUrl("display_graph");
 }
 </script>
-<p><img src="images/display_graph.png" title="loon graph display" /></p>
+
+<div class="figure">
+<img src="images/display_graph.png" title="loon graph display" />
+</div>
 <pre><code>set nodes [list A B C D E]
 set G [completegraph $nodes]
 set LG [linegraph {*}$G]
@@ -133,38 +128,38 @@ $g navigator add </code></pre>
 <li><p>A (mathematical) graph in <code>loon</code> is defined by a list of node names, the from-to list of node names that define the edges and a Boolean value whether the graph is directed or not. This translates into the states <code>nodes</code>, <code>from</code>, <code>to</code> and <code>isDirected</code>.</p></li>
 <li><p>The graph layout is defined with the <code>x</code> and <code>y</code> states.</p></li>
 <li><p>Get the state names with</p>
-<pre><code>  set states [$g info states]
-  dict keys $states</code></pre></li>
+<pre><code>set states [$g info states]
+dict keys $states</code></pre></li>
 <li><p>Query a state, say <code>background</code>, as follows</p>
-<pre><code>  $g cget -background</code></pre></li>
+<pre><code>$g cget -background</code></pre></li>
 <li><p>Change a state, say again <code>background</code>, <code>foreground</code>, and <code>colorEdge</code>, as follows</p>
-<pre><code>  $g configure -background gray20 -foreground gray90 -colorEdge red</code></pre></li>
+<pre><code>$g configure -background gray20 -foreground gray90 -colorEdge red</code></pre></li>
 <li><p>When creating a graph display you may specify any state at plot creation</p>
-<pre><code>  set nodes [list a b c]
-  set G [completegraph $nodes]
-  set LG [linegraph {*}$G]
-  set g1 [graph -nodes [lindex $LG 0] -from [lindex $LG 1]\
-      -to [lindex $LG 2] -isDirected [lindex $LG 3]] -colorEdge red</code></pre></li>
+<pre><code>set nodes [list a b c]
+set G [completegraph $nodes]
+set LG [linegraph {*}$G]
+set g1 [graph -nodes [lindex $LG 0] -from [lindex $LG 1]\
+    -to [lindex $LG 2] -isDirected [lindex $LG 3]] -colorEdge red</code></pre></li>
 <li><p>details on a state, say <code>background</code>, is easily had with</p>
-<pre><code>  set states [$g info states]
-  dict get $states background</code></pre>
+<pre><code>set states [$g info states]
+dict get $states background</code></pre>
 <p>and a particular field</p>
-<pre><code>  dict get $states background description</code></pre></li>
+<pre><code>dict get $states background description</code></pre></li>
 </ul>
 <h1 id="good-to-know">Good To Know</h1>
 <ul>
-<li><p>The graph and scatterplot display are closely related and share most of the scatterplot states.</p></li>
+<li>The graph and scatterplot display are closely related and share most of the scatterplot states.</li>
 <li><p>The graph has <code>n</code> dimensional states that are associated to nodes and <code>p</code> dimensional states that are associated with edges. To query which states are <code>p</code> dimensional use</p>
-<pre><code>  set states [$g info states]
-  set pstates [dict filter $states script {k v} {
-      set dim [dict get $v dimension]
-      expr {$dim eq &quot;p&quot;}
-  }]
-  dict keys $pstates  </code></pre></li>
+<pre><code>set states [$g info states]
+set pstates [dict filter $states script {k v} {
+    set dim [dict get $v dimension]
+    expr {$dim eq &quot;p&quot;}
+}]
+dict keys $pstates  </code></pre></li>
 <li><p>To change the layout of the graph use a graph layout algorithm and set the <code>x</code> and <code>y</code> states of the <code>loon</code> graph accordingly. <code>loon</code> supports straight lines for edges only.</p></li>
 </ul>
 <h1 id="navigation-graphs">Navigation Graphs</h1>
-<p>To turn a graph into a navigation graph you need to add one or more navigators. Navigators have their own set of states such as <code>from</code>, <code>to</code> and <code>proportion</code>. You can create state bindings for the navigator that call a function when a navigator changes its position on the graph. States and state bindings for navigators provide the facility to implement any graph semantic. However, certain graph semantics (e.g. the default semantic with 2d projection along a geodesic path between spaces) involve lots of logic and control over plots and, hence, it makes sense to en encapsulate them. We do this by providing <em>contexts</em>. A context is added to a navigator and will do a specific task if the navigator’s position on the graph changes.</p>
+<p>To turn a graph into a navigation graph you need to add one or more navigators. Navigators have their own set of states such as <code>from</code>, <code>to</code> and <code>proportion</code>. You can create state bindings for the navigator that call a function when a navigator changes its position on the graph. States and state bindings for navigators provide the facility to implement any graph semantic. However, certain graph semantics (e.g. the default semantic with 2d projection along a geodesic path between spaces) involve lots of logic and control over plots and, hence, it makes sense to en encapsulate them. We do this by providing <em>contexts</em>. A context is added to a navigator and will do a specific task if the navigator's position on the graph changes.</p>
 <h2 id="navigators">Navigators</h2>
 <p>We use the example at the beginning of this section:</p>
 <pre><code>set nodes [list A B C D E]
@@ -175,7 +170,9 @@ set g [graph -nodes [lindex $LG 0] -from [lindex $LG 1]\
   -to [lindex $LG 2] -isDirected [lindex $LG 3]]</code></pre>
 <p>The following code ads a navigator to the graph <code>g</code></p>
 <pre><code>set nav [$g navigator add -color orange]</code></pre>
-<p><img src="images/display_graph_navigator1.png" title="loon graph display" /></p>
+<div class="figure">
+<img src="images/display_graph_navigator1.png" title="loon graph display" />
+</div>
 <p>The navigator with the id stored in the <code>nav</code> has its own states that can be listed as follows</p>
 <pre><code>set nstates [$g navigator use $nav info states]
 dict keys $nstates</code></pre>
@@ -185,7 +182,9 @@ dict keys $nstates</code></pre>
 <pre><code>$g navigator use $nav configure\
     -from {A:B B:C C:D A:D} -to {D:E B:E}\
     -proportion 0.2</code></pre>
-<p><img src="images/display_graph_navigator2.png" title="navigator path" /></p>
+<div class="figure">
+<img src="images/display_graph_navigator2.png" title="navigator path" />
+</div>
 <p>The elements related to the navigator you see in the plot above are</p>
 <ul>
 <li><strong>Navigator:</strong> wich is <code>proprtion</code> between the last node in <code>from</code> and the first node in <code>to</code>. If <code>to</code> is empty then the navigator sits on the last node of <code>from</code>.</li>
@@ -194,11 +193,13 @@ dict keys $nstates</code></pre>
 <li><strong>Path End:</strong> which looks like the navigator (but smaller) and is located on the last node in <code>to</code>.</li>
 </ul>
 <p>The graph display supports direct interaction with the navigator and navigator path using the mouse and keyboard. To move the navigator with the mouse you must first click on it to select it which will set the <code>activeNavigator</code> graph state to the navigator id and causes the navigator to be highlighted with the navigator outline in the selection color.</p>
-<p><img src="images/display_graph_navigator_select.png" title="navigator selected" /></p>
+<div class="figure">
+<img src="images/display_graph_navigator_select.png" title="navigator selected" />
+</div>
 <p>In this state the following interactions are possible</p>
 <ul>
 <li>Drag the navigator along the path.</li>
-<li>When the navigator is at the path end (i.e. <code>to=''</code>) then you can extend the path by dragging the navigator towards a new connected node. Note that
+<li>When the navigator is at the path end (i.e. <code>to=''</code>) then you can extend the path by dragging the navigator towards a new connected node. Note that
 <ul>
 <li>the gray circle is the decision boundary to select an adjoining edge.</li>
 <li>all the adjoining nodes are highlighted <img src="images/display_graph_navigator_addtopath.png" title="add to path" /></li>
@@ -246,38 +247,40 @@ $g navigator use $nav bind state add {from to proportion}\
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">argument name</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">argument name</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>%W</code></td>
-<td style="text-align: left;">widget path name</td>
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%nav</code></td>
-<td style="text-align: left;">navigator id</td>
+<td align="center"><code>%nav</code></td>
+<td align="left">navigator id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%e</code></td>
-<td style="text-align: left;">events (states changed)</td>
+<td align="center"><code>%e</code></td>
+<td align="left">events (states changed)</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%b</code></td>
-<td style="text-align: left;">binding id</td>
+<td align="center"><code>%b</code></td>
+<td align="left">binding id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%O</code></td>
-<td style="text-align: left;">canvas path, useful for debugging</td>
+<td align="center"><code>%O</code></td>
+<td align="left">canvas path, useful for debugging</td>
 </tr>
 </tbody>
 </table>
 <h2 id="contexts">Contexts</h2>
-<p>Contexts implement standard graph semantics. Common to all contexts is that they sign up to the navigators state changes and will evaluate its (i.e. the context’s) <code>command</code> state. The contexts add substitution in the command evaluation that are meaningful for the particular context. Currently the following contexts are implemented:</p>
+<p>Contexts implement standard graph semantics. Common to all contexts is that they sign up to the navigators state changes and will evaluate its (i.e. the context's) <code>command</code> state. The contexts add substitution in the command evaluation that are meaningful for the particular context. Currently the following contexts are implemented:</p>
 <ul>
 <li><p><strong>Context2d</strong> maps every location on a 2d space graph to a list of <code>xvars</code> and a list of <code>yvars</code> such that, while moving the navigator along the graph, as few changes as possible take place in <code>xvars</code> and <code>yvars</code>, see the image:</p>
-<p><img src="images/context2d.png" /></p></li>
+<div class="figure">
+<img src="images/context2d.png" />
+</div></li>
 <li><p><strong>Geodesic2d</strong> maps every location on the graph as an orthogonal projection of the data onto a two-dimensional subspace. The nodes then represent the sub-space spanned by a pair of variates and the edges either a 3d- or 4d-transition of one scatterplot into another, depending on how many variates the two nodes connected by the edge share (see <a href="http://link.springer.com/article/10.1007%2Fs00180-011-0228-6">Hurley and Oldford 2011</a>). The <code>geodesic2d</code> context inherits from the <code>context2d</code> context.</p></li>
 </ul>
 <h3 id="geodesic-2d">Geodesic 2d</h3>
@@ -299,50 +302,50 @@ set con [$g navigator use $nav context add geodesic2d\
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">string</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">string</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>%W</code></td>
-<td style="text-align: left;">widget path name (i.e. the graph)</td>
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name (i.e. the graph)</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%nav</code></td>
-<td style="text-align: left;">navigator id</td>
+<td align="center"><code>%nav</code></td>
+<td align="left">navigator id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%con</code></td>
-<td style="text-align: left;">context id</td>
+<td align="center"><code>%con</code></td>
+<td align="left">context id</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%x</code></td>
-<td style="text-align: left;">x coordinates of projection</td>
+<td align="center"><code>%x</code></td>
+<td align="left">x coordinates of projection</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%y</code></td>
-<td style="text-align: left;">y coordinates of projection</td>
+<td align="center"><code>%y</code></td>
+<td align="left">y coordinates of projection</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%xlabel</code></td>
-<td style="text-align: left;">suitable x label for projection</td>
+<td align="center"><code>%xlabel</code></td>
+<td align="left">suitable x label for projection</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%ylabel</code></td>
-<td style="text-align: left;">suitable y label for projection</td>
+<td align="center"><code>%ylabel</code></td>
+<td align="left">suitable y label for projection</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%from</code></td>
-<td style="text-align: left;">from state of navigator</td>
+<td align="center"><code>%from</code></td>
+<td align="left">from state of navigator</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%to</code></td>
-<td style="text-align: left;">to state of navigator</td>
+<td align="center"><code>%to</code></td>
+<td align="left">to state of navigator</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%p</code></td>
-<td style="text-align: left;">proportion state of navigator</td>
+<td align="center"><code>%p</code></td>
+<td align="left">proportion state of navigator</td>
 </tr>
 </tbody>
 </table>
@@ -357,47 +360,47 @@ dict get $statesInfo scaling</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">string</th>
-<th style="text-align: left;">substituted value</th>
+<th align="center">string</th>
+<th align="left">substituted value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><code>%W</code></td>
-<td style="text-align: left;">widget path name (i.e. the graph)</td>
+<td align="center"><code>%W</code></td>
+<td align="left">widget path name (i.e. the graph)</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%nav</code></td>
-<td style="text-align: left;">navigator id</td>
+<td align="center"><code>%nav</code></td>
+<td align="left">navigator id</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%con</code></td>
-<td style="text-align: left;">context id</td>
+<td align="center"><code>%con</code></td>
+<td align="left">context id</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%xvars</code></td>
-<td style="text-align: left;">x variables</td>
+<td align="center"><code>%xvars</code></td>
+<td align="left">x variables</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%yvars</code></td>
-<td style="text-align: left;">y variables</td>
+<td align="center"><code>%yvars</code></td>
+<td align="left">y variables</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%from</code></td>
-<td style="text-align: left;">from state of navigator</td>
+<td align="center"><code>%from</code></td>
+<td align="left">from state of navigator</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><code>%to</code></td>
-<td style="text-align: left;">to state of navigator</td>
+<td align="center"><code>%to</code></td>
+<td align="left">to state of navigator</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><code>%p</code></td>
-<td style="text-align: left;">proportion state of navigator</td>
+<td align="center"><code>%p</code></td>
+<td align="left">proportion state of navigator</td>
 </tr>
 </tbody>
 </table>
 <p>If the context2d description <a
-href="learn_Tcl_display_graph.html#contexts">above</a> wasn’t clear enough use the following code to get a sense of how <code>xvars</code> and <code>yvars</code> change.</p>
+href="learn_Tcl_display_graph.html#contexts">above</a> wasn't clear enough use the following code to get a sense of how <code>xvars</code> and <code>yvars</code> change.</p>
 <pre><code>set G [completegraph {A B C D E F G}]
 set LG [linegraph {*}$G &quot;-&quot;]
 
@@ -430,7 +433,9 @@ set gs [graphswitch .example.graphswitch -activewidget $g]
 
 pack $g -side left -fill both -expand TRUE
 pack $gs -side left -fill y</code></pre>
-<p><img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" /></p>
+<div class="figure">
+<img src="images/display_graphswitch_empty.png" title="loon graph and graphswitch" />
+</div>
 <p>Graphs are added to the graph switch as follows</p>
 <pre><code>set G1 [completegraph {A B C D}]
 set G2 [list {a b c} {a a} {b c} FALSE]
@@ -443,7 +448,9 @@ set idG3 [$gs add $G3 &quot;G3=linegraph(G1)&quot;]
 set idG4 [$gs add $G4 &quot;complement(G3)&quot;]
 
 $gs set $idG3</code></pre>
-<p><img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" /></p>
+<div class="figure">
+<img src="images/display_graphswitch_selected.png" title="loon graph and graphswitch" />
+</div>
 <ul>
 <li>To switch a graph select it in the list. Layout, selection, and active states are not stored in the graph switch, only the graph information.</li>
 </ul>
@@ -455,7 +462,7 @@ $gs set $idG3</code></pre>
 set graphId [$gs add &lt;graph&gt; &lt;label&gt; &lt;index&gt;]</code></pre>
 <p>where <code>index</code> is the position in the list. The arguments for <code>&lt;label&gt;</code> and <code>&lt;index&gt;</code> are optional.</p>
 <p>The <code>add</code> method returns an id for the added graph.</p>
-<p>Currently the <code>activewidget</code> state of <code>gs</code> is not set to any graph widget. Selecting a graph will throw an error saying that the graphswitch has no activewidget set. To set an activewidget (i.e. a graph widget) use</p>
+<p>Currently the <code>activewidget</code> state of <code>gs</code> is not set to any graph widget. Selecting a graph will throw an error saying that the graphswitch has no activewidget set. To set an activewidget (i.e. a graph widget) use</p>
 <pre><code>set g [graph]
 
 $gs configure -activewidget $g</code></pre>

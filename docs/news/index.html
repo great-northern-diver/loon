@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -152,9 +152,35 @@
       <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-1-3-1" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.1">
+<a href="#loon-1-3-1" class="anchor"></a>loon 1.3.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added new functions l_loonWidgets() which returns widgets of all displayed loon plots. Related functions include
+<ul>
+<li>l_basePaths() and l_compoundPaths</li>
+<li>l_getFromPath()</li>
+</ul>
+</li>
+<li>Fixed bug so that l_make_glyphs() again works in Mac OS Catalina (Thanks to Brian Ripley and Simon Urbanek)
+<ul>
+<li>Cool new example there which produces the Periodic Table of the Elements as a scatterplot (data “elements” from loon.data package).<br>
+Actually see the periodicity by brushing.</li>
+</ul>
+</li>
+<li><p>A minor bug fix with respect to facet label layout</p></li>
+<li>“color”, “size”, “linewidth”, “glyph”, added to ‘l_userOptions()’
+<ul>
+<li>default “color”, “size”, “linewidth”, “glyph”, etc. now set to look up default ‘l_getOption(“linewidth”)’ etc.</li>
+<li>this allows the user to change the default look of all plots simply by using ‘l_setOption(“color”, “black”)’ for example.</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="loon-1-3-0" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.0">
-<a href="#loon-1-3-0" class="anchor"></a>loon 1.3.0<small> Unreleased </small>
+<a href="#loon-1-3-0" class="anchor"></a>loon 1.3.0<small> 2020-05-24 </small>
 </h1>
 <ul>
 <li>several new features added to loon plots

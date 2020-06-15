@@ -2,7 +2,7 @@
 % Please edit documentation in R/l_ng_ranges.R
 \name{l_ng_ranges.scagnostics}
 \alias{l_ng_ranges.scagnostics}
-\title{2d Navigation Graph Setup with dynamic node fitering based on 
+\title{2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and using a slider}
 \usage{
 \method{l_ng_ranges}{scagnostics}(measures, data, separator = ":", ...)
@@ -24,10 +24,10 @@ named list with plots-, graph-, plot-, navigator-, and context
   \code{env}.
 }
 \description{
-This method is useful when working with objects from the 
-  \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R 
-  package. In order to dynamically re-calcultate the scagnostic measures for 
-  a subset of the data use the \code{\link{scagnostics2d}} measures creature 
+This method is useful when working with objects from the
+  \code{\link[scagnostics]{scagnostics}} function from the scagnostics \R
+  package. In order to dynamically re-calcultate the scagnostic measures for
+  a subset of the data use the \code{\link{scagnostics2d}} measures creature
   function.
 }
 \details{
@@ -37,13 +37,13 @@ For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")
 \dontrun{
 if (requireNamespace("scagnostics", quietly = TRUE)) {
   s <- scahnostics::scagnostics(oliveAcids)
-  ng <- l_ng_ranges(s, oliveAcids, color=olive$Area) 
-} 
+  ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
+}
 }
 }
 \seealso{
-\code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.default}}, 
-  \code{\link{l_ng_ranges.measures}}, \code{\link{measures1d}}, 
-  \code{\link{measures2d}}, \code{\link{scagnostics2d}}, 
+\code{\link{l_ng_ranges}}, \code{\link{l_ng_ranges.default}},
+  \code{\link{l_ng_ranges.measures}}, \code{\link{measures1d}},
+  \code{\link{measures2d}}, \code{\link{scagnostics2d}},
   \code{\link{l_ng_ranges}}
 }

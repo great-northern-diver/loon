@@ -3,19 +3,28 @@ context("test_userSettableOptions")
 
 test_that("user settable options work", {
     userSettable <- l_userOptions()
-    otherOptions <- setdiff(l_getOptionNames(), userSettable)
-    for(optName in userSettable) {
-        opt <- l_getOption(optName)
-        l_setOption(optName, "fubar")
-        expect_equal(l_getOption(optName), "fubar")
-        l_setOption(optName, opt)
-        expect_equal(l_getOption(optName), opt)
+    colorOpts <- c("color", "select-color",
+                   "brush_color", "brush_color_handle",
+                   "background", "foreground",
+                   "guidesBackground", "guidelines")
+    expect_setequal(intersect(colorOpts, userSettable),
+                    colorOpts)
+
+    for (colorOpt in colorOpts) {
+        oldCol <- l_getOption(colorOpt)
+        newCol <- "steelblue"
+        l_setOption(colorOpt, newCol)
+        expect_equal(l_getOption(colorOpt), newCol)
+        l_setOption(colorOpt, oldCol)
+        expect_equal(l_getOption(colorOpt), oldCol)
     }
-    for(optName in otherOptions) {
-        opt <- l_getOption(optName)
-        expect_error(l_setOption(optName, "fubar"))
-        expect_equal(l_getOption(optName), opt)
-    }
+
+    default_glyph <- l_getOption("glyph")
+    new_glyph <- "otriangle"
+    l_setOption("glyph", new_glyph)
+    expect_equal(l_getOption("glyph"), new_glyph)
+    l_setOption("glyph", default_glyph)
+
 })
 
 

@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>loon</title>
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <link rel="stylesheet" href="style.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div id="title">
@@ -89,93 +81,94 @@ displays.forEach(function(display) {
 });
 </script>
 </div>
-<header id="title-block-header">
+<div id="header">
 <h1 class="title">inspectors - loon</h1>
-</header>
-<nav id="TOC" role="doc-toc">
+</div>
+<div id="TOC">
 <ul>
 <li><a href="#inspectors">Inspectors</a></li>
 </ul>
-</nav>
+</div>
 <script type="text/javascript">
 window.onload = function() {
     document.getElementById("learn_display_inspectors").className += " selected";
     setLearnUrl("display_inspectors");
 }
 </script>
+
 <h1 id="inspectors">Inspectors</h1>
 <p>Here a list of all inspector creator functions</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;"><code>Tcl</code> creator function</th>
+<th align="left">Name</th>
+<th align="left"><code>Tcl</code> creator function</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>loon</code> inspector</td>
-<td style="text-align: left;"><code>loon_inspector</code></td>
+<td align="left"><code>loon</code> inspector</td>
+<td align="left"><code>loon_inspector</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Worldview Inspector</td>
-<td style="text-align: left;"><code>worldview</code></td>
+<td align="left">Worldview Inspector</td>
+<td align="left"><code>worldview</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Layers Inspector</td>
-<td style="text-align: left;"><code>layers_inspector</code></td>
+<td align="left">Layers Inspector</td>
+<td align="left"><code>layers_inspector</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Scatterplot Inspector</td>
-<td style="text-align: left;"><code>plot_inspector</code></td>
+<td align="left">Scatterplot Inspector</td>
+<td align="left"><code>plot_inspector</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Scatterplot Analysis Inspector</td>
-<td style="text-align: left;"><code>plot_inspector_analysis</code></td>
+<td align="left">Scatterplot Analysis Inspector</td>
+<td align="left"><code>plot_inspector_analysis</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Glyphs Inspector</td>
-<td style="text-align: left;"><code>glyphs_inspector</code></td>
+<td align="left">Glyphs Inspector</td>
+<td align="left"><code>glyphs_inspector</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Serialaxes Glyph Inspector</td>
-<td style="text-align: left;"><code>glyphs_inspector_serialaxes</code></td>
+<td align="left">Serialaxes Glyph Inspector</td>
+<td align="left"><code>glyphs_inspector_serialaxes</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Pointrange Glyph Inspector</td>
-<td style="text-align: left;"><code>glyphs_inspector_pointrange</code></td>
+<td align="left">Pointrange Glyph Inspector</td>
+<td align="left"><code>glyphs_inspector_pointrange</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Text Glyph Inspector</td>
-<td style="text-align: left;"><code>glyphs_inspector_text</code></td>
+<td align="left">Text Glyph Inspector</td>
+<td align="left"><code>glyphs_inspector_text</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Image Glyph Inspector</td>
-<td style="text-align: left;"><code>glyphs_inspector_image</code></td>
+<td align="left">Image Glyph Inspector</td>
+<td align="left"><code>glyphs_inspector_image</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Histogram Inspector</td>
-<td style="text-align: left;"><code>hist_inspector</code></td>
+<td align="left">Histogram Inspector</td>
+<td align="left"><code>hist_inspector</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Histogram Analysis Inspector</td>
-<td style="text-align: left;"><code>hist_inspector_analysis</code></td>
+<td align="left">Histogram Analysis Inspector</td>
+<td align="left"><code>hist_inspector_analysis</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Serialaxes (Analysis) Inspector</td>
-<td style="text-align: left;"><code>serialaxes_inspector</code></td>
+<td align="left">Serialaxes (Analysis) Inspector</td>
+<td align="left"><code>serialaxes_inspector</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Graph Inspector</td>
-<td style="text-align: left;"><code>graph_inspector</code></td>
+<td align="left">Graph Inspector</td>
+<td align="left"><code>graph_inspector</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Graph Analysis Inspector</td>
-<td style="text-align: left;"><code>graph_inspector_analysis</code></td>
+<td align="left">Graph Analysis Inspector</td>
+<td align="left"><code>graph_inspector_analysis</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Graph Navigators Inspector</td>
-<td style="text-align: left;"><code>graph_inspector_navigators</code></td>
+<td align="left">Graph Navigators Inspector</td>
+<td align="left"><code>graph_inspector_navigators</code></td>
 </tr>
 </tbody>
 </table>
