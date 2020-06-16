@@ -31,7 +31,6 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
 #' h <- l_hist(iris)
 #' h["active"] <- iris$Species != "setosa"
 #' binCut <- l_binCut(h)
@@ -45,7 +44,6 @@
 #' }
 #' h['color'] <- l_binCut(h, labels = gg_color_hue(nBins), inactive = "firebrick")
 #' h["active"] <- TRUE
-#'}
 l_binCut <- function(widget, labels, digits = 2, inactive) {
 
     stopifnot({inherits(widget, "l_hist")})

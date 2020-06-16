@@ -25,8 +25,8 @@
 #'
 #'   }
 #'
-#'   For other mappings see the \code{\link[scales]{col_numeric}} and
-#'   \code{\link[scales]{col_factor}} functions from the scales package.
+#'   For other mappings see the \code{\link[scales:col_numeric]{col_numeric}} and
+#'   \code{\link[scales:col_numeric]{col_factor}} functions from the scales package.
 #'
 #'
 #' @return A function that takes a vector with values and maps them to a vector
@@ -258,7 +258,7 @@ l_colRemoveAlpha <- function (col) {
 #'   inspector these new colors show up in the modify color list.
 #'
 #'   When other color mappings of data values are required (e.g. numerical data
-#'   to a color gradient) then the functions in the \code{\link[scales]{scales}}
+#'   to a color gradient) then the functions in the \code{\link[scales:scales-package]{scales}}
 #'   R package provide various mappings including mappings for qualitative,
 #'   diverging and sequential values.
 #'

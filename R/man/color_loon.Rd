@@ -40,8 +40,8 @@ This is the function that loon uses by default to map values to
 
   }
 
-  For other mappings see the \code{\link[scales]{col_numeric}} and
-  \code{\link[scales]{col_factor}} functions from the scales package.
+  For other mappings see the \code{\link[scales:col_numeric]{col_numeric}} and
+  \code{\link[scales:col_numeric]{col_factor}} functions from the scales package.
 }
 \examples{
 

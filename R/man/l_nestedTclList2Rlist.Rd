@@ -9,8 +9,8 @@ l_nestedTclList2Rlist(tclobj, transform = function(x) {
 })
 }
 \arguments{
-\item{tclobj}{a tcl object as returned by \code{\link[tcltk]{tcl}} and 
-\code{\link[tcltk]{.Tcl}}}
+\item{tclobj}{a tcl object as returned by \code{\link[tcltk:TkCommands]{tcl}} or
+\code{\link[tcltk:TclInterface]{.Tcl}}.}
 
 \item{transform}{a function to transfrom the string output to another data
 type}
