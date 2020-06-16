@@ -2,7 +2,7 @@
 #'   package
 #'
 #' @param widget widget widget path as a string or as an object handle
-#' @param x an object defined in the class \code{\link[sp:sp]{sp}}
+#' @param x an object defined in the \code{sp} class
 #' @param ... arguments forwarded to the relative \code{\link{l_layer}} function
 #'
 #' @details Note that currently loon does neither support holes and ring
@@ -14,7 +14,7 @@
 #'
 #' @return layer id
 #'
-#' @seealso \code{\link[sp:sp]{sp}}, \code{\link{l_layer}}
+#' @seealso  \code{\link{l_layer}}
 #'
 #' @examples
 #'
