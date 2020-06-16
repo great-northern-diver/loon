@@ -236,7 +236,7 @@ reference:
 
 
 
-  - title: Loon display layers
+  - title: Layers
     desc: Loon plots have multiple display layers
     contents:
     - l_layer

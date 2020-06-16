@@ -9,7 +9,7 @@
 \arguments{
 \item{widget}{widget widget path as a string or as an object handle}
 
-\item{x}{an object defined in the class \code{\link[sp:sp]{sp}}}
+\item{x}{an object defined in the \code{sp} class}
 
 \item{asSingleLayer}{If \code{TRUE} then prefer a single layer over groups
 with nested 1-dimensinal layers}
@@ -46,5 +46,5 @@ Applied Spatial Data Analysis with R by Bivand, Roger S. and
   Pebesma, Edzer and Gomez-Rubio and Virgilio
 }
 \seealso{
-\code{\link[sp:sp]{sp}}, \code{\link{l_layer}}
+\code{\link{l_layer}}
 }
