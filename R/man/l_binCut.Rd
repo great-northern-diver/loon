@@ -36,7 +36,6 @@ The value of \code{active} denotes the bin name for the inactive cases.
 \code{x} according to which interval they fall (if active). It is modelled on \code{\link{cut}} in \code{base} package.
 }
 \examples{
-if (interactive()) {
 h <- l_hist(iris)
 h["active"] <- iris$Species != "setosa"
 binCut <- l_binCut(h)
@@ -50,7 +49,6 @@ gg_color_hue <- function(n) {
 }
 h['color'] <- l_binCut(h, labels = gg_color_hue(nBins), inactive = "firebrick")
 h["active"] <- TRUE
-}
 }
 \seealso{
 \code{\link{l_getBinData}}, \code{\link{l_getBinIds}}, \code{\link{l_breaks}}

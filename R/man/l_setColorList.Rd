@@ -92,7 +92,7 @@ There are two commonly used mapping schemes of data values to
   inspector these new colors show up in the modify color list.
 
   When other color mappings of data values are required (e.g. numerical data
-  to a color gradient) then the functions in the \code{\link[scales]{scales}}
+  to a color gradient) then the functions in the \code{\link[scales:scales-package]{scales}}
   R package provide various mappings including mappings for qualitative,
   diverging and sequential values.
 }

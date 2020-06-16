@@ -9,7 +9,7 @@
 \arguments{
 \item{widget}{widget widget path as a string or as an object handle}
 
-\item{x}{an object defined in the class \code{\link[sp]{sp}}}
+\item{x}{an object defined in the class \code{\link[sp:sp]{sp}}}
 
 \item{...}{arguments forwarded to the relative \code{\link{l_layer}} function}
 }
@@ -17,7 +17,7 @@
 layer id
 }
 \description{
-Methods to plot map data defined in the \code{\link[sp]{sp}}
+Methods to plot map data defined in the \code{sp}
   package
 }
 \details{
@@ -43,5 +43,5 @@ Applied Spatial Data Analysis with R by Bivand, Roger S. and
   Pebesma, Edzer and Gomez-Rubio and Virgilio
 }
 \seealso{
-\code{\link[sp]{sp}}, \code{\link{l_layer}}
+\code{\link[sp:sp]{sp}}, \code{\link{l_layer}}
 }

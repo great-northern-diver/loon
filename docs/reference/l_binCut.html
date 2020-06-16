@@ -204,8 +204,7 @@ The value of <code>active</code> denotes the bin name for the inactive cases.</p
     <div class='dont-index'><p><code><a href='l_getBinData.html'>l_getBinData</a></code>, <code><a href='l_getBinIds.html'>l_getBinIds</a></code>, <code><a href='l_breaks.html'>l_breaks</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
-<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_hist.html'>l_hist</a></span>(<span class='no'>iris</span>)
+    <pre class="examples"><div class='input'><span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_hist.html'>l_hist</a></span>(<span class='no'>iris</span>)
 <span class='no'>h</span>[<span class='st'>"active"</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>!=</span> <span class='st'>"setosa"</span>
 <span class='no'>binCut</span> <span class='kw'>&lt;-</span> <span class='fu'>l_binCut</span>(<span class='no'>h</span>)
 <span class='no'>h</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='no'>binCut</span>
@@ -217,8 +216,7 @@ The value of <code>active</code> denotes the bin name for the inactive cases.</p
   <span class='fu'><a href='https://rdrr.io/r/grDevices/hcl.html'>hcl</a></span>(<span class='kw'>h</span> <span class='kw'>=</span> <span class='no'>hues</span>, <span class='kw'>l</span> <span class='kw'>=</span> <span class='fl'>65</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>100</span>)[<span class='fl'>1</span>:<span class='no'>n</span>]
 }
 <span class='no'>h</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='fu'>l_binCut</span>(<span class='no'>h</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>gg_color_hue</span>(<span class='no'>nBins</span>), <span class='kw'>inactive</span> <span class='kw'>=</span> <span class='st'>"firebrick"</span>)
-<span class='no'>h</span>[<span class='st'>"active"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-}</div></pre>
+<span class='no'>h</span>[<span class='st'>"active"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
