@@ -333,19 +333,19 @@ l_plot.default <-  function(x, y = NULL,
             if(length(color) > 1) {
                 sync <- "push"
             } else {
-                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+                if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
             }
 
             if(length(size) != 1) {
                 sync <- "push"
             } else {
-                if(length(size) == 1 && !is.na(size) && size != 4) sync <- "push"
+                if(length(size) == 1 && !is.na(size) && size != l_getOption("size")) sync <- "push"
             }
 
             if(length(glyph) != 1) {
                 sync <- "push"
             } else {
-                if(length(glyph) == 1 && !is.na(glyph) && glyph != "ccircle") sync <- "push"
+                if(length(glyph) == 1 && !is.na(glyph) && glyph != l_getOption("glyph")) sync <- "push"
             }
         }
 
@@ -374,7 +374,7 @@ l_plot.default <-  function(x, y = NULL,
                 color <- rep_len(color, n)
             }
         } else {
-            if(is.na(color)) color <- "grey60"
+            if(is.na(color)) color <- l_getOption("color")
         }
 
         len_size <- length(size)
@@ -383,7 +383,7 @@ l_plot.default <-  function(x, y = NULL,
                 size <- rep_len(size, n)
             }
         } else {
-            if(is.na(size)) size <- 4
+            if(is.na(size)) size <- l_getOption("size")
         }
 
         len_active <- length(active)
@@ -413,7 +413,7 @@ l_plot.default <-  function(x, y = NULL,
                             n)
                 )
         } else {
-            if(is.na(glyph)) glyph <- "ccircle"
+            if(is.na(glyph)) glyph <- l_getOption("glyph")
         }
         # linkingGroup is set after the plot is created
         linkingGroup <- args[["linkingGroup"]]

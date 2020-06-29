@@ -258,13 +258,13 @@ l_serialaxes <- function(data,
         if(length(color) > 1) {
             sync <- "push"
         } else {
-            if(length(color) == 1 && !is.na(color) && color != "steelblue") sync <- "push"
+            if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
         }
 
         if(length(linewidth) != 1) {
             sync <- "push"
         } else {
-            if(length(linewidth) == 1 && !is.na(linewidth) && linewidth != 1) sync <- "push"
+            if(length(linewidth) == 1 && !is.na(linewidth) && linewidth != l_getOption("linewidth")) sync <- "push"
         }
     }
 
@@ -284,7 +284,7 @@ l_serialaxes <- function(data,
             linewidth <- rep_len(linewidth, n)
         }
     } else {
-        if(is.na(linewidth)) linewidth <- 1
+        if(is.na(linewidth)) linewidth <- l_getOption("linewidth")
     }
 
     len_active <- length(active)
