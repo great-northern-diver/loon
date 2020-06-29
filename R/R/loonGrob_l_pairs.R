@@ -47,7 +47,6 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     scatter_histGrobs <- lapply(1:(nScatterplots + nHistograms),
                                 function(i){
                                     pi <- scatter_hist[[i]]
-                                    pi['foreground'] <- l_getOption("background")
                                     pi['minimumMargins'] <- rep(2,4)
                                     if(i <= nScatterplots) {
                                         loonGrob(pi, name = paste("scatterplot", i))
