@@ -1,7 +1,4 @@
-# if (requireNamespace("testthat", quietly = TRUE)) {
-#
-#     library(testthat)
-# library(loon)
+
 context("test_widgetPaths")
 
 test_that("we can find unnamed loon widgets", {
@@ -12,8 +9,5 @@ test_that("we can find unnamed loon widgets", {
 
     widgets <- l_loonWidgets()
     hists <- l_loonWidgets("hist")
-    expect_true(h1 %in% hists)
+    expect_true(as.character(h1) %in% names(hists))
 })
-
-
-#}
