@@ -37,15 +37,15 @@ get_facets.loon <- function(widget, by, parent = NULL,
            })
 
     # TODO by is a formula
-    splited <- splitedFun(data = data,
-                          by = by,
-                          column_names = column_names,
-                          byDeparse = byDeparse)
-    splitted_data <- splited$splitted_data
+    splited <- splitFun(data = data,
+                        by = by,
+                        column_names = column_names,
+                        byDeparse = byDeparse)
+    split_data <- splited$split_data
     subtitles <- splited$subtitles
     by <- splited$by
 
-    if(length(splitted_data) == 1) return(widget)
+    if(length(split_data) == 1) return(widget)
 
     # linkingGroup
     if(missing(linkingGroup)) {
@@ -133,7 +133,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
     }
 
     plots <- setNames(
-        lapply(splitted_data,
+        lapply(split_data,
                function(d) {
                    if(dim(d)[1] == 0) {
 
@@ -244,7 +244,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                    }
                    p
                }),
-        names(splitted_data)
+        names(split_data)
     )
 
     list(
@@ -291,15 +291,15 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
            })
 
     # TODO by is a formula
-    splited <- splitedFun(data = data,
-                          by = by,
-                          column_names = column_names,
-                          byDeparse = byDeparse)
-    splitted_data <- splited$splitted_data
+    splited <- splitFun(data = data,
+                        by = by,
+                        column_names = column_names,
+                        byDeparse = byDeparse)
+    split_data <- splited$split_data
     subtitles <- splited$subtitles
     by <- splited$by
 
-    if(length(splitted_data) == 1) return(widget)
+    if(length(split_data) == 1) return(widget)
 
     if(separate) {
         child <- parent
@@ -346,7 +346,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
 
     # build loon plot
     plots <- setNames(
-        lapply(splitted_data,
+        lapply(split_data,
                function(d) {
                    if(dim(d)[1] == 0)
                        return(
@@ -369,7 +369,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                        )
                    )
                }),
-        names(splitted_data)
+        names(split_data)
     )
 
     list(
@@ -379,9 +379,9 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     )
 }
 
-splitedFun <- function(data, by, column_names = NULL,
-                       byDeparse = "by", sep = "*",
-                       N = nrow(data)) {
+splitFun <- function(data, by, column_names = NULL,
+                     byDeparse = "by", sep = "*",
+                     N = nrow(data)) {
 
     if(is.atomic(by)) {
         if(length(by) == N) {
@@ -390,24 +390,27 @@ splitedFun <- function(data, by, column_names = NULL,
                 list(levels(factor(by))),
                 byDeparse
             )
-            splitted_data <- split(data,
-                                   f = by,
-                                   drop = FALSE,
-                                   sep = sep)
+            split_data <- split(data,
+                                f = by,
+                                drop = FALSE,
+                                sep = sep)
         } else {
 
             # some aesthetics (e.g. color, glyph, size, etc) char
             byOriginal <- by
             by <- intersect(by, column_names)
             if(length(by) == 0) {
-                stop(byOriginal, " is not a valid setting")
+                split_data <- list(data)
+                subtitles <- NULL
+            } else {
+                subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
+                # split data by "by"
+                split_data <- split(data,
+                                    f = lapply(by, function(b) data[[b]]),
+                                    drop = FALSE,
+                                    sep = sep)
             }
-            subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
-            # split data by "by"
-            splitted_data <- split(data,
-                                   f = lapply(by, function(b) data[[b]]),
-                                   drop = FALSE,
-                                   sep = sep)
+
         }
     } else {
         # by is a data.frame or a list
@@ -434,15 +437,15 @@ splitedFun <- function(data, by, column_names = NULL,
         }
 
         # split data by "by"
-        splitted_data <- split(data,
-                               f = by,
-                               drop = FALSE,
-                               sep = sep)
+        split_data <- split(data,
+                            f = by,
+                            drop = FALSE,
+                            sep = sep)
     }
 
     list(
         subtitles = subtitles,
-        splitted_data = splitted_data,
+        split_data = split_data,
         by = by
     )
 }

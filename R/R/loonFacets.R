@@ -50,9 +50,9 @@ loonFacets.default <- function(type,
                           by_names)
 
     # split data by "by"
-    splitted_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
+    split_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
 
-    if(length(splitted_data) == 1) {
+    if(length(split_data) == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -105,7 +105,7 @@ loonFacets.default <- function(type,
         message(paste("linkingGroup:", linkingGroup))
     }
 
-    plots <- lapply(splitted_data,
+    plots <- lapply(split_data,
                     function(d) {
 
                         if(dim(d)[1] == 0) {
@@ -330,9 +330,9 @@ loonFacets.l_serialaxes <- function(type,
     subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(b)))), by_names)
 
     # split data by "by"
-    splitted_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
+    split_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
 
-    if(length(splitted_data) == 1) {
+    if(length(split_data) == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -387,7 +387,7 @@ loonFacets.l_serialaxes <- function(type,
         message(paste("linkingGroup:", linkingGroup))
     }
 
-    plots <- lapply(splitted_data,
+    plots <- lapply(split_data,
                     function(d) {
 
                         if(dim(d)[1] == 0) {

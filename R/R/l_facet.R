@@ -143,6 +143,11 @@ l_facet.loon <- function(widget,
                          separate = separate,
                          ...)
 
+    if(!is.list(facets)) {
+      message(deparse(substitute(widget)), " cannot be divided into multiple facets by ", deparse(substitute(by)))
+      return(facets)
+    }
+
     # synchronize
     connectedScales <- match.arg(connectedScales)
     swapAxes <- widget['swapAxes']
