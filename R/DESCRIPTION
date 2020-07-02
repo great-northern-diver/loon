@@ -2,7 +2,7 @@ Package: loon
 Type: Package
 Title: Interactive Statistical Data Visualization
 Version: 1.3.1.1
-Date: 2020-06-13
+Date: 2020-07-02
 Authors@R: c(person(given = "Adrian", family = "Waddell", 
                     email = "adrian@waddell.ch", 
                     role = c("aut")),
