@@ -371,7 +371,7 @@ l_hist.default <-  function(x,
             if(length(color) > 1) {
                 sync <- "push"
             } else {
-                if(length(color) == 1 && !is.na(color) && color != "grey60") sync <- "push"
+                if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
             }
         }
 
@@ -382,7 +382,7 @@ l_hist.default <-  function(x,
                 color <- rep_len(color, n)
             }
         } else {
-            if(is.na(color)) color <- "grey60"
+            if(is.na(color)) color <- l_getOption("color")
         }
 
         len_active <- length(active)
@@ -521,7 +521,7 @@ l_hist.data.frame <- function(x,
                               origin = NULL,
                               binwidth=NULL,
                               showBinHandle = FALSE,
-                              color = "grey60",
+                              color = l_getOption("color"),
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
