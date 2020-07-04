@@ -72,6 +72,15 @@ test_that("l_plot facets work with  polygon glyph", {
     p['glyph'] <- gl
     f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # test hidden glyphs
+    p['glyph'] <- "triangle"
+    gl <- l_glyph_add_pointrange(p, ymin = 1:6 - 1/2,
+                                 ymax = 1:6 + 1/2)
+    f <- l_facet(p, by = "color")
+    expect_equal(l_glyph_ids(f[[1]]), c("glyph0", "glyph1"))
+    expect_equal(l_glyph_ids(f[[2]]), c("glyph0", "glyph1"))
+    expect_equal(l_glyph_ids(f[[3]]), c("glyph0", "glyph1"))
 })
 
 test_that("l_plot facets work with  text glyph", {
@@ -201,14 +210,26 @@ test_that("test some facet args in l_serialaxes", {
 
 test_that("test all possible 'by's", {
     p <- l_plot(iris)
+
     # by is a data.frame
     fp <- l_facet(p, layout = "grid", by = data.frame(iris$Species, iris$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+
     # by is a list
     fp <- l_facet(p, layout = "grid", by = list(iris$Species, iris$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    h <- l_hist(iris)
+    p['color'][sample(1:150, 70)] <- "red"
+    fp <- l_facet(p, by = list("color", iris = iris$Species))
+    expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    p['size'][sample(1:150, 70)] <- 8
+    fp <- l_facet(p, by = list("color", "size"))
+    expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    expect_error(l_facet(p, by = list("color", 1:10)))
+    expect_warning(l_facet(p, by = list("foo", "color")))
+
     # by is a vector
+    h <- l_hist(iris)
     fp <- l_facet(h, layout = "wrap", by = iris$Species)
     expect_equal(class(fp), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
 })

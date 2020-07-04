@@ -135,13 +135,20 @@ l_facet.loon <- function(widget,
 
     separate <- layout == "separate"
 
+
+
     facets <- get_facets(widget, by,
                          parent = parent,
                          linkingGroup,
                          inheritLayers = inheritLayers,
-                         byDeparse = deparse(substitute(by)),
+                         by_substitute = substitute(by),
                          separate = separate,
                          ...)
+
+    if(!is.list(facets)) {
+      message(deparse(substitute(widget)), " cannot be divided into multiple facets by ", deparse(substitute(by)))
+      return(facets)
+    }
 
     # synchronize
     connectedScales <- match.arg(connectedScales)
@@ -298,7 +305,7 @@ l_facet.l_serialaxes <- function(widget,
     facets <- get_facets(widget, by,
                          parent = parent,
                          linkingGroup,
-                         byDeparse = deparse(substitute(by)),
+                         by_substitute = substitute(by),
                          separate = separate,
                          ...)
 

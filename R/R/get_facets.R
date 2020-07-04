@@ -4,7 +4,7 @@ get_facets <- function(widget, ...) {
 
 get_facets.loon <- function(widget, by, parent = NULL,
                             linkingGroup, inheritLayers = TRUE, separate = FALSE,
-                            byDeparse = "by", ...) {
+                            by_substitute, ...) {
 
     nDimStates <- l_nDimStateNames(widget)
     states <- names(l_info_states(widget))
@@ -37,15 +37,16 @@ get_facets.loon <- function(widget, by, parent = NULL,
            })
 
     # TODO by is a formula
-    splited <- splitedFun(data = data,
-                          by = by,
-                          column_names = column_names,
-                          byDeparse = byDeparse)
-    splitted_data <- splited$splitted_data
+    splited <- splitFun(widget = widget,
+                        data = data,
+                        by = by,
+                        column_names = column_names,
+                        by_substitute = by_substitute)
+    split_data <- splited$split_data
     subtitles <- splited$subtitles
     by <- splited$by
 
-    if(length(splitted_data) == 1) return(widget)
+    if(length(split_data) == 1) return(widget)
 
     # linkingGroup
     if(missing(linkingGroup)) {
@@ -86,7 +87,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                       deparse(substitute(by_names)), "--path:", subwin)
             else
                 paste("loon layouts on",
-                      byDeparse, "--path:", subwin)
+                      deparse(by_substitute), "--path:", subwin)
             tktitle(parent) <- tktitle
 
             # create child
@@ -123,7 +124,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                                             l_create_handle(c(widget, layerid))
                                     })
 
-    glyphIndex <- function(widget, glyph) {
+    displayed_glyph_index <- function(widget, glyph) {
         if(inherits(widget, "l_plot")) {
             valid_glyph <- c("ccircle", "ctriangle", "csquare",
                              "ocircle", "otriangle", "osquare",
@@ -133,7 +134,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
     }
 
     plots <- setNames(
-        lapply(splitted_data,
+        lapply(split_data,
                function(d) {
                    if(dim(d)[1] == 0) {
 
@@ -156,7 +157,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                    index <- args$index
                    args$index <- NULL
                    # l_plot or l_plot3D
-                   glyph_index <- glyphIndex(widget, glyph)
+                   glyph_index <- displayed_glyph_index(widget, glyph)
                    if(length(glyph_index) > 0) {
                        # default glyph
                        args$glyph[glyph_index] <- "ccircle"
@@ -200,51 +201,12 @@ get_facets.loon <- function(widget, by, parent = NULL,
                        }
                    }
 
-                   if(length(glyph_index) > 0) {
+                   draw_displayed_glyph(p, widget, glyph, glyph_index, index, N)
+                   draw_hidden_glyph(p, widget, glyph, index, N)
 
-                       glyph4child <- function(widget, glyph, index, N) {
-
-                           glyphStateNames <- names(glyph)
-
-                           states <- setNames(
-                               lapply(glyphStateNames,
-                                      function(g) {
-                                          if(g == "data")
-                                              char2num.data.frame(glyph[g][index, ])
-                                          else {
-                                              if(length(glyph[g]) == N)
-                                                  glyph[g][index]
-                                              else
-                                                  glyph[g]
-                                          }
-
-                                      }),
-                               glyphStateNames
-                           )
-
-                           args <- c(widget = widget, states)
-                           switch(class(glyph)[1],
-                                  "l_glyph_serialaxes" = do.call(l_glyph_add_serialaxes, args),
-                                  "l_glyph_image" = do.call(l_glyph_add_image, args),
-                                  "l_glyph_polygon" = do.call(l_glyph_add_polygon, args),
-                                  "l_glyph_pointrange" = do.call(l_glyph_add_pointrange, args),
-                                  "l_glyph_text" = do.call(l_glyph_add_text, args)
-                           )
-                       }
-
-                       unique_glyph <- unique(glyph[glyph_index])
-                       lapply(unique_glyph,
-                              function(g) {
-                                  gh_child <- glyph4child(widget = p,
-                                                          glyph = l_create_handle(c(widget, g)),
-                                                          index = index,
-                                                          N = N)
-                                  p['glyph'][which(glyph == unique_glyph)] <- gh_child
-                              })
-                   }
                    p
                }),
-        names(splitted_data)
+        names(split_data)
     )
 
     list(
@@ -256,7 +218,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
 
 get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                                     inheritLayers = TRUE, separate = FALSE,
-                                    byDeparse = "by") {
+                                    by_substitute) {
 
     nDimStates <- setdiff(l_nDimStateNames(widget), "data")
     states <- names(l_info_states(widget))
@@ -291,15 +253,16 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
            })
 
     # TODO by is a formula
-    splited <- splitedFun(data = data,
-                          by = by,
-                          column_names = column_names,
-                          byDeparse = byDeparse)
-    splitted_data <- splited$splitted_data
+    splited <- splitFun(widget = widget,
+                        data = data,
+                        by = by,
+                        column_names = column_names,
+                        by_substitute = by_substitute)
+    split_data <- splited$split_data
     subtitles <- splited$subtitles
     by <- splited$by
 
-    if(length(splitted_data) == 1) return(widget)
+    if(length(split_data) == 1) return(widget)
 
     if(separate) {
         child <- parent
@@ -316,7 +279,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                       deparse(substitute(by_names)), "--path:", subwin)
             else
                 paste("loon layouts on",
-                      byDeparse, "--path:", subwin)
+                      deparse(by_substitute), "--path:", subwin)
             tktitle(parent) <- tktitle
 
             # create child
@@ -346,7 +309,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
 
     # build loon plot
     plots <- setNames(
-        lapply(splitted_data,
+        lapply(split_data,
                function(d) {
                    if(dim(d)[1] == 0)
                        return(
@@ -369,7 +332,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                        )
                    )
                }),
-        names(splitted_data)
+        names(split_data)
     )
 
     list(
@@ -379,70 +342,199 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     )
 }
 
-splitedFun <- function(data, by, column_names = NULL,
-                       byDeparse = "by", sep = "*",
-                       N = nrow(data)) {
+splitFun <- function(widget, data, by, column_names = NULL,
+                     by_substitute, sep = "*",
+                     N = nrow(data)) {
 
     if(is.atomic(by)) {
         if(length(by) == N) {
             # a vector
             subtitles <- setNames(
                 list(levels(factor(by))),
-                byDeparse
+                deparse(by_substitute)
             )
-            splitted_data <- split(data,
-                                   f = by,
-                                   drop = FALSE,
-                                   sep = sep)
+            split_data <- split(data,
+                                f = by,
+                                drop = FALSE,
+                                sep = sep)
         } else {
 
             # some aesthetics (e.g. color, glyph, size, etc) char
-            byOriginal <- by
-            by <- intersect(by, column_names)
-            if(length(by) == 0) {
-                stop(byOriginal, " is not a valid setting")
+            not_recognized <- which(!by %in% l_nDimStateNames(widget))
+            if(length(not_recognized) > 0) {
+                warning("c(", vapply(not_recognized,
+                               function(i) {
+                                   deparse(by_substitute[[i + 1]])
+                               }, character(1L)),
+                        ") is not recognized and removed", call. = FALSE)
             }
+            by <- intersect(by, column_names)
+            if(length(by) == 0)
+                return(
+                    list(
+                        subtitles = NULL,
+                        split_data = list(data),
+                        by = by
+                    )
+                )
+
             subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
             # split data by "by"
-            splitted_data <- split(data,
-                                   f = lapply(by, function(b) data[[b]]),
-                                   drop = FALSE,
-                                   sep = sep)
+            split_data <- split(data,
+                                f = lapply(by, function(b) data[[b]]),
+                                drop = FALSE,
+                                sep = sep)
+
         }
     } else {
         # by is a data.frame or a list
         ## as.data.frame
+        by_names <- names(by)
 
-        if(is.null(names(by))) {
+        by <- standardizedBy(by, by_substitute, data)
 
-            by <- as.data.frame(by, stringsAsFactors = FALSE)
+        if(dim(by)[1] == 0) {
+            return(
+                list(
+                    subtitles = NULL,
+                    split_data = list(data),
+                    by = by
+                )
+            )
+        }
+
+        if(is.null(by_names) || ("" %in% by_names)) {
+
             names(by) <- NULL
 
             subtitles <- lapply(seq(ncol(by)),
                                 function(i)
                                     as.character(levels(factor(by[[i]]))))
         } else {
-            by <- as.data.frame(by, stringsAsFactors = FALSE)
-            by_column_names <- colnames(by)
 
             subtitles <- setNames(
-                lapply(by_column_names,
+                lapply(by_names,
                        function(b)
                            as.character(levels(factor(by[[b]])))),
-                by_column_names
+                by_names
             )
         }
 
         # split data by "by"
-        splitted_data <- split(data,
-                               f = by,
-                               drop = FALSE,
-                               sep = sep)
+        split_data <- split(data,
+                            f = by,
+                            drop = FALSE,
+                            sep = sep)
     }
 
     list(
         subtitles = subtitles,
-        splitted_data = splitted_data,
+        split_data = split_data,
         by = by
     )
+}
+
+standardizedBy <- function(by, by_substitute, data) {
+
+    n <- nrow(data)
+    i <- 0
+
+    by <- lapply(by,
+                 function(b) {
+
+                     i <<- i + 1
+
+                     if(length(b) == 1) {
+
+                         return(
+                             tryCatch(
+                                 data[, b],
+                                 error = function(e) {
+                                     # by_substitute[[1]] is "list"
+                                     warning(deparse(by_substitute[[i + 1]]),
+                                             " is not recognized and removed", call. = FALSE)
+                                     NULL
+                                 }
+                             )
+                         )
+                     }
+
+                     if(length(b) == n) return(b)
+
+                     stop("The ", deparse(substitute(b)),
+                          " is neither a valid state nor a valid vector (the length does not match the number of observations)", call. = FALSE)
+
+                 })
+
+    as.data.frame(Filter(Negate(is.null), by), stringsAsFactors = FALSE)
+}
+
+glyph4child <- function(widget, glyph, index, N) {
+
+    glyphStateNames <- names(glyph)
+
+    states <- setNames(
+        lapply(glyphStateNames,
+               function(g) {
+                   if(g == "data")
+                       char2num.data.frame(glyph[g][index, ])
+                   else {
+                       if(length(glyph[g]) == N)
+                           glyph[g][index]
+                       else
+                           glyph[g]
+                   }
+
+               }),
+        glyphStateNames
+    )
+
+    args <- c(widget = widget, states)
+    switch(class(glyph)[1],
+           "l_glyph_serialaxes" = do.call(l_glyph_add_serialaxes, args),
+           "l_glyph_image" = do.call(l_glyph_add_image, args),
+           "l_glyph_polygon" = do.call(l_glyph_add_polygon, args),
+           "l_glyph_pointrange" = do.call(l_glyph_add_pointrange, args),
+           "l_glyph_text" = do.call(l_glyph_add_text, args)
+    )
+}
+
+draw_displayed_glyph <- function(p, widget, glyph, glyph_index, index, N) {
+
+    if(length(glyph_index) > 0) {
+
+        unique_glyph <- unique(glyph[glyph_index])
+        lapply(unique_glyph,
+               function(g) {
+                   gh_child <- glyph4child(widget = p,
+                                           glyph = l_create_handle(c(widget, g)),
+                                           index = index,
+                                           N = N)
+                   p['glyph'][which(glyph == unique_glyph)] <- gh_child
+               })
+    }
+}
+
+draw_hidden_glyph <- function(p, widget, glyph, index, N) {
+
+    if(inherits(p, "l_plot")) {
+
+        all_glyph <- l_glyph_ids(widget)
+
+        if(length(all_glyph) > 0) {
+
+            unique_glyph <- unique(glyph)
+            hidden_glyph <- all_glyph[!all_glyph %in% unique_glyph]
+
+            if(length(hidden_glyph) > 0) {
+                lapply(hidden_glyph,
+                       function(g) {
+                           glyph4child(widget = p,
+                                       glyph = l_create_handle(c(widget, g)),
+                                       index = index,
+                                       N = N)
+                       })
+            }
+        }
+    }
 }
