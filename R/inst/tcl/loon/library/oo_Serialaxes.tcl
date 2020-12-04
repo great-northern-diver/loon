@@ -17,12 +17,21 @@ oo::class create ::loon::classes::Serialaxes {
 
 	my New_state linewidth positive_double n 1
 
+	# default length.out
+	# if we set it as 20, the lines are too bumpier
+	# if we set it as 100, the computation time would be too long
+	# if you can speed the code, try to increase this value
+
+	my New_state andrewsSeriesLength positive_double 1 40
+
 	my New_state scaling factor 1 variable\
 	    [list "variable" "data" "observation" "none"]
 
 	my New_state axesLayout factor 1 radial {"radial" "parallel"}
 
 	my New_state showArea boolean 1 FALSE
+
+	my New_state  andrews boolean 1 FALSE
 
 	my SetStateInfo data data n ""
 
@@ -40,6 +49,8 @@ oo::class create ::loon::classes::Serialaxes {
 	    "boolean to specify whether to display the axes or not"
 	my SetStateDescription showAxesLabels\
 	    "boolean to specify whether to display axes labels and title or not"
+    my SetStateDescription andrews\
+	    "boolean to specify whether to do the Fourier transformation"
 	my SetStateDescription linewidth\
 	    "linewidth of glyphs"
 	my SetStateDescription scaling\
@@ -136,13 +147,13 @@ oo::class create ::loon::classes::Serialaxes {
 	set has_new_scaling [expr {"scaling" in $changedStates}]
 	set has_new_sequence [expr {"sequence" in $changedStates}]
 
-
 	if {$has_new_data || $has_new_scaling} {
 	    if {$data eq ""} {
 		set numeric_data {}
 		set scaled_data {}
 		set axesLabelsForSequence {}
 	    } else {
+
 		if {$has_new_data} {
 		    set numeric_data $data
 		    foreach var [dict keys $numeric_data] {
