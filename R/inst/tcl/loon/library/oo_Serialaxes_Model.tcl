@@ -13,7 +13,7 @@ oo::class create ::loon::classes::Serialaxes_Model {
 
 	# method New_state {name type dim init args} ...
 	my New_state active       boolean n TRUE
-	my New_state color        color n steelblue
+	my New_state color        color n [lindex  $::loon::Options(colors) 0]
 	my New_state selected     boolean n FALSE
 
 	my New_state showGuides   boolean 1 TRUE
@@ -55,9 +55,9 @@ oo::class create ::loon::classes::Serialaxes_Model {
 	my SetStateDescription tag\
 	    "point glyphs have tags associated that can be used for item bindings"
 
-    my AddLayer model "serialaxes"\
-	    [::loon::classes::SerialaxesLayer new [self]] root 0 "Serialaxes"
-
+    #my AddLayer model "serialaxes"\
+	#    [::loon::classes::SerialaxesLayer new [self]] root 0 "Serialaxes"
+    #
     }
 
 
