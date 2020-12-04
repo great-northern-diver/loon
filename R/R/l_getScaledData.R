@@ -9,6 +9,50 @@
 #' else only return the variables defined in \code{sequence}.
 #' @param as.data.frame Return a matrix or a data.frame
 #' @export
+l_getScaledData <- function(data,
+                            sequence = NULL,
+                            scaling = c("variable", "observation", "data", "none"),
+                            displayOrder = NULL,
+                            reserve = FALSE,
+                            as.data.frame = FALSE) {
+
+    data <- as.data.frame(data)
+
+    if(missing(data)) return(NULL)
+
+    scaling <- match.arg(scaling)
+    displayOrder <- displayOrder %||% seq(nrow(data))
+
+    if(reserve && !is.null(sequence)) {
+
+        colNames <- colnames(data)
+        leftNames <- setdiff(colNames, sequence)
+
+        leftData <- data[, leftNames]
+        scaledData <- data[, sequence]
+
+        d <- get_scaledData(data = scaledData,
+                            sequence = sequence,
+                            scaling = scaling,
+                            displayOrder = displayOrder)
+        rightNames <- colnames(d)
+
+        # f return a matrix
+        d <- cbind(leftData, d)
+        colnames(d) <- c(leftNames, rightNames)
+    } else {
+        d <- get_scaledData(data = data,
+                            sequence = sequence,
+                            scaling = scaling,
+                            displayOrder = displayOrder)
+    }
+
+    if(as.data.frame)
+        as.data.frame(d, stringsAsFactors = FALSE)
+    else
+        as.matrix(d)
+}
+
 get_scaledData <- function(data,
                            sequence = NULL,
                            scaling = c("variable", "observation", "data", "none"),
