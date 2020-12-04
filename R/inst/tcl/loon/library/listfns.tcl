@@ -108,7 +108,6 @@ namespace eval loon::listfns {
         return [dict keys $d]
     }
 
-
     ## map input to colors
     proc mapColor {vec} {
 	set groups [unique $vec]
@@ -643,6 +642,115 @@ namespace eval loon::listfns {
 	return [split [string map [list $splitStr $mc] $str] $mc]
     }
 
+    # fourier transformation
+    proc fourierTrans {vec n} {
 
+      set k [llength $vec]
+      set indices [::loon::listfns::lseq 1 $k]
+      set pi 3.141592653
+      set ts [::loon::listfns::lseq2  -$pi $pi $n]
+
+      set fourier {}
+
+      foreach t $ts {
+
+        set series {}
+
+        foreach i $indices {
+
+          if {$i == 1} {
+            set at [expr 1/[tcl::mathfunc::sqrt 2]]
+          } else {
+            set floor  [expr [tcl::mathfunc::floor [expr $i / 2] ] - 1]
+            set coef [tcl::mathfunc::pow 2 $floor]
+            if {[expr $i % 2]} {
+               # cos
+               set at [tcl::mathfunc::cos [expr $coef * $t]]
+            } else {
+               # sin
+               set at [tcl::mathfunc::sin [expr $coef * $t]]
+            }
+
+          }
+
+          set v [lindex $vec [expr $i - 1]]
+
+          lappend series [expr $at * $v]
+       }
+
+       lappend fourier [::loon::listfns::sum $series]
+    }
+
+  return $fourier
+  }
+
+  # keep two decimals
+  # e.g. [round2 {1.234 23.2345}]
+  # return 1.23, 23.23
+  proc round2 {vec} {
+
+    set xs {}
+
+	foreach v $vec {
+	  # keep two decimals
+	  set x [expr {double(round(100*$v))/100}]
+	  lappend xs $x
+	}
+
+	return $xs
+  }
+
+  # get the odd index of a vector
+  # e.g. [getOdd {11 12 13 14 15 16}]
+  # will return 11 13 15
+  proc getOdd {vec} {
+
+      set newvec {}
+      set l [llength $vec]
+      for {set i 0} {$i < $l} {incr i} {
+
+        if {$i % 2 == 0} {
+          lappend newvec [lindex $vec $i]
+        }
+      }
+
+      return $newvec
+  }
+
+  # get the even index of a vector
+  # e.g. [getEven {11 12 13 14 15 16}]
+  # will return 12 14 16
+  proc getEven {vec} {
+
+      set newvec {}
+      set l [llength $vec]
+      for {set i 0} {$i < $l} {incr i} {
+
+        if {$i % 2 == 1} {
+          lappend newvec [lindex $vec $i]
+        }
+      }
+
+      return $newvec
+  }
+
+  proc coordsSumOfSquare {vec} {
+
+    set newvec {}
+    set l [llength $vec]
+
+    if {$l % 2 == 1} {
+       error "the length of coords is odd"
+    }
+
+    set n [expr $l/2]
+    for {set i 0} {$i < $n} {incr i} {
+      set x [lindex $vec [expr $i * 2]]
+      set y [lindex $vec [expr $i * 2 + 1]]
+      lappend newvec [tcl::mathfunc::sqrt [expr $x**2 + $y**2]]
+    }
+
+    return $newvec
+  }
 }
 
