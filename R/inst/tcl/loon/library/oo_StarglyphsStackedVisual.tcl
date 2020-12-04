@@ -1,12 +1,12 @@
 
 oo::class create loon::classes::StarglyphsStackedVisual {
-    
+
     superclass ::loon::classes::SerialaxesAbstractVisual
-    
-    variable angles xdirs ydirs pi model
-    
+
+    variable angles xdirs ydirs pi modelns
+
     constructor {args}  {
-	
+
 	## hash angles and directions
 	set angles {}
 	set xdirs {}
@@ -14,34 +14,34 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 	set pi 3.1415926535897931
 
 	next {*}$args
-		
-    }
-    
-    
-    
-    method redraw {} {
-	my variable canvas visualid id model
 
-	if {$id ne "noinit"} {
+    }
+
+
+
+    method redraw {} {
+	my variable canvas visualid ids modelns
+
+	if {$ids ne "noinit"} {
 	    my clear
 	}
-	
-	if {[llength [set ${model}::glyphs]] eq 0} {
+
+	if {[llength [set ${modelns}::glyphs]] eq 0} {
 	    return
 	}
 	set width [winfo width $canvas]
 	set height [winfo height $canvas]
 
-	
+
 	set font "Arial 14"
 	set margin 200
-	
-	set radius [expr {(min($width,$height)-$margin)/2.0}]       	
+
+	set radius [expr {(min($width,$height)-$margin)/2.0}]
 
 	if {$radius < 20} {
-	    
+
 	    my clear
-	    set id [$canvas create text [expr {$width/2.0}] [expr {$height/2.0}]\
+	    set ids [$canvas create text [expr {$width/2.0}] [expr {$height/2.0}]\
 			-anchor center\
 			-justify center\
 			-text "Window is\ntoo small"\
@@ -49,44 +49,44 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 			-font $font]
 	    return
 	}
-	
-	set p [llength [set ${model}::sequence]]
-	
+
+	set p [llength [set ${modelns}::sequence]]
+
 	## angles and directions
 	if {[llength $angles] ne $p} {
 	    set angles {}; set xdirs {}; set ydirs {}
-	    if {$p > 0} { 
+	    if {$p > 0} {
 		for {set i 0} {$i < $p} {incr i} {
 		    set angle [expr {2*$pi*(1-double($i)/$p)}]
 		    lappend angles $angle
 		    lappend xdirs [expr {double(cos($angle))}]
 		    lappend ydirs [expr {double(sin($angle))}]
 		}
-	    }	    
+	    }
 	}
-	
-	
-	## Get widget options from model
-	
+
+
+	## Get widget options from modelns
+
 	foreach state {showGuides showAxes showAxesLabels showLabels showArea color} {
-	    set $state [set ${model}::$state] 
+	    set $state [set ${modelns}::$state]
 	}
-	
+
 	set sel_color $::loon::Options(select-color)
-	
+
 	set i 0
-	foreach s [set ${model}::selected] {
+	foreach s [set ${modelns}::selected] {
 	    if {$s} {
 		lset color $i $sel_color
-	    } 
+	    }
 	    incr i
 	}
-	
+
 
 	# Guides
 	if {$showGuides} {
 	    $canvas configure -bg $::loon::Options(canvas_bg_guides)
-	    
+
 	    set minGuideDist $::loon::Options(fixed_guide_distance)
 	    set ng [expr {int($radius/$minGuideDist)}]
 	    set gd [expr {double($radius/$ng)}]
@@ -97,7 +97,7 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 		lappend rgs [expr {$i * $gd}]
 	    }
 	    lappend rgs $radius
-	    
+
 	    foreach rg $rgs {
 		$canvas create oval -$rg -$rg $rg $rg -fill "" -outline white\
 		    -width 2 -tag $visualid
@@ -105,15 +105,15 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 	} else {
 	    $canvas configure -bg white
 	}
-	
-	
-	# Axes 
+
+
+	# Axes
 	if {$showAxes} {
 	    if {$showGuides} {
 		set axesCol white
 	    } else {
 		set axesCol black
-	    } 
+	    }
 	    set i 0
 	    foreach xdir $xdirs ydir $ydirs {
 		$canvas create line 0 0\
@@ -123,26 +123,26 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 		incr i
 	    }
 	}
-	
+
 	set direction 1
-	
-	set id {}
+
+	set ids {}
 	set i 0
 	## Draw Glyphs
-	
-	foreach active [set ${model}::active]\
+
+	foreach active [set ${modelns}::active]\
 	    col $color\
-	    glyph [set ${model}::glyphs]\
-	    tag [set ${model}::tag]\
-	    linewidth [set ${model}::linewidth] {
-		
-		
-		
+	    glyph [set ${modelns}::glyphs]\
+	    tag [set ${modelns}::tag]\
+	    linewidth [set ${modelns}::linewidth] {
+
+
+
 		#puts "--- $i"
 		#foreach v {glyph xdirs ydirs direction linewidth} {
 		#    puts [format "%s: %s" $v [llength [set $v]]]
 		#}
-		
+
 		if {$active} {
 		    set coords {}
 		    foreach g $glyph xdir $xdirs ydir $ydirs {
@@ -155,28 +155,28 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 			}
 		    }
 		    if {$showArea} {
-			lappend id [$canvas create polygon $coords\
+			lappend ids [$canvas create polygon $coords\
 					-fill $col -outline $col -width $linewidth\
 					-tag [concat layer $visualid radial item$i $tag]]
 		    } else {
 			lappend coords {*}[lrange $coords 0 1]
-			
-			lappend id [$canvas create line $coords\
+
+			lappend ids [$canvas create line $coords\
 					-fill $col -width $linewidth\
 					-tag [concat layer $visualid radial item$i $tag]]
 		    }
 		} else {
-		    lappend id -1
+		    lappend ids -1
 		}
 		incr i
 	    }
-	
-	
+
+
 	## Show Axes Labels
 	if {$showAxesLabels} {
-	        
-	    set labels [set ${model}::axesLabelsForSequence]
-	    
+
+	    set labels [set ${modelns}::axesLabelsForSequence]
+
 	    foreach label $labels angle $angles xdir $xdirs ydir $ydirs {
 		if {$angle > 0 && $angle < 1.570796} {
 		    ## in +-
@@ -191,7 +191,7 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 		    ## in ++
 		    set anchor "sw"
 		}
-		
+
 		$canvas create text\
 		    [expr {$xdir*($radius+25)}]\
 		    [expr {$ydir*($radius+25)}]\
@@ -200,20 +200,20 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 	}
 
 	$canvas move all [expr {$width/2.0}] [expr {$height/2.0}]
-	
+
 	if {$showLabels} {
 	    $canvas create text\
 		[expr {$width/2.0}] 20\
-		-text [set ${model}::title] -anchor c -font {Arial 18 bold}\
+		-text [set ${modelns}::title] -anchor c -font {Arial 18 bold}\
 		-tag $visualid
 	}
-	
+
 	$canvas move all 0 20
-	
+
 	my selectedAbove
-	
+
     }
-    
-    
-        
+
+
+
 }
