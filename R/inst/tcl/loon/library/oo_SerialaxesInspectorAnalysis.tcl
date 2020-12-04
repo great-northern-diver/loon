@@ -61,7 +61,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    set args {*}$args
 	}
 
-	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea} {
+	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea andrews} {
 	    my variable cb_$state
 	    set cb_$state [uplevel #0 [list $activewidget cget -$state]]
 	}
@@ -92,7 +92,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    -side top -fill x -padx 5 -pady 2.5 -anchor w
 
 
-	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea} {
+	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea andrews} {
 	    my variable cb_${state}
 	    set var [my varname cb_$state]; # need absolute path
 	    checkbutton ${pplot}.$state -text $state\
