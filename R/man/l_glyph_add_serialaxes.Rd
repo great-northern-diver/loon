@@ -12,6 +12,7 @@ l_glyph_add_serialaxes(
   scaling = "variable",
   axesLayout = "radial",
   showAxes = FALSE,
+  andrews = FALSE,
   axesColor = "gray70",
   showEnclosing = FALSE,
   bboxColor = "gray70",
@@ -34,6 +35,8 @@ how the data is scaled. See Details and Examples for more information.}
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
+
+\item{andrews}{Andrew's curve (a 'Fourier' transformation)}
 
 \item{axesColor}{color of axes}
 
