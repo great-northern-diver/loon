@@ -136,21 +136,31 @@ namespace eval loon {
 	return [WidgetFactory Serialaxes serialaxes {*}$args]
     }
 
-    proc serialaxes_inspector {args} {
-	set widget [WidgetFactory\
-			SerialaxesInspector\
-			serialaxesInspector\
-			{*}$args]
-	return  $widget
-    }
+    # Once the layers are allowed, consider uncomment it.
+    #proc serialaxes_inspector {args} {
+	#set widget [WidgetFactory\
+	#		SerialaxesInspector\
+	#		serialaxesInspector\
+	#		{*}$args]
+	#return  $widget
+    #}
 
-    proc serialaxes_inspector_analysis {args} {
+    #proc serialaxes_inspector_analysis {args} {
+	#set widget [WidgetFactory\
+	#		SerialaxesInspectorAnalysis\
+	#		serialaxesInspectorAnalysis\
+	#		{*}$args]
+	#return  $widget
+    #}
+
+    proc serialaxes_inspector {args} {
 	set widget [WidgetFactory\
 			SerialaxesInspectorAnalysis\
 			serialaxesInspectorAnalysis\
 			{*}$args]
 	return  $widget
     }
+
 
     proc loon_inspector {args} {
 	variable loonInspector
