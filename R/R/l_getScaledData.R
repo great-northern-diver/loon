@@ -21,7 +21,6 @@ l_getScaledData <- function(data,
     if(missing(data)) return(NULL)
 
     scaling <- match.arg(scaling)
-    displayOrder <- displayOrder %||% seq(nrow(data))
 
     if(reserve && !is.null(sequence)) {
 
