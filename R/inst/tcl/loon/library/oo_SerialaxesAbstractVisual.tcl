@@ -3,12 +3,12 @@ oo::class create loon::classes::SerialaxesAbstractVisual {
 
     superclass ::loon::classes::Visual
 
-    variable modelns ids
+    variable model ids
 
     constructor {Model args} {
 	set ids "noinit"
 
-	set modelns $Model
+	set model $Model
 
 	next {*}$args
     }
@@ -16,7 +16,7 @@ oo::class create loon::classes::SerialaxesAbstractVisual {
     method selectedAbove {} {
 	my variable canvas ids visualid
 
-	foreach i [::loon::listfns::subsetLogical $ids [set ${modelns}::selected]] {
+	foreach i [::loon::listfns::subsetLogical $ids [set ${model}::selected]] {
 	    $canvas raise $i $visualid
 	}
 
@@ -27,18 +27,18 @@ oo::class create loon::classes::SerialaxesAbstractVisual {
 
 	my variable canvas ids visualid
 
-	set colors [set ${modelns}::color]
+	set colors [set ${model}::color]
 	set sel_color $::loon::Options(select-color)
 
 	set i 0
-	foreach s [set ${modelns}::selected] {
+	foreach s [set ${model}::selected] {
 	    if {$s} {
 		lset colors $i $sel_color
 	    }
 	    incr i
 	}
 
-	if {[set ${modelns}::showArea]} {
+	if {[set ${model}::showArea]} {
 	    foreach color $colors i $ids {
 		if {$i ne "-1"} {
 		    $canvas itemconfigure $i -fill $color -outline $color
