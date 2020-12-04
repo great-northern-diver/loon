@@ -240,6 +240,8 @@ l_serialaxes_inspector <- function(parent=NULL, ...) {
                          "Serialaxes inspector", parent, ...)
 }
 
+# As layers are accommodated in serialaxes plot,
+# uncomment the following code
 # #' @templateVar type Serialaxes Analysis
 # #' @template man_inspector
 # #'
