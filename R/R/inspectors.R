@@ -225,7 +225,7 @@ l_hist_inspector_analysis <- function(parent=NULL, ...) {
 }
 
 
-#' @templateVar type Serialaxes Analysis
+#' @templateVar type Serialaxes
 #' @template man_inspector
 #'
 #' @export
@@ -239,6 +239,21 @@ l_serialaxes_inspector <- function(parent=NULL, ...) {
     loonInspectorFactory("::loon::serialaxes_inspector", "serialaxesinspector",
                          "Serialaxes inspector", parent, ...)
 }
+
+# #' @templateVar type Serialaxes Analysis
+# #' @template man_inspector
+# #'
+# #' @export
+# #'
+# #' @examples
+# #' if(interactive()){
+# #'
+# #' i <- l_serialaxes_inspector_analysis()
+# #' }
+# l_serialaxes_inspector_analysis <- function(parent=NULL, ...) {
+#    loonInspectorFactory("::loon::serialaxes_inspector_analysis", "serialaxesinspectoranalysis",
+#                         "Serialaxes analysis inspector", parent, ...)
+# }
 
 
 #' @templateVar type Graph
