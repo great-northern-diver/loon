@@ -3,13 +3,13 @@
     superclass\
 	::loon::classes::withStateBindings\
 	::loon::classes::Linkable
-    
+
 
     constructor {} {
-	
-	next 
 
-	
+	next
+
+
 	my New_state zoomX positive_double 1 1
 	my New_state zoomY positive_double 1 1
 	my New_state panX double 1 0
@@ -17,10 +17,10 @@
 	my New_state deltaX positive_double 1 1
 	my New_state deltaY positive_double 1 1
 
-	my New_state xlabel string 1 ""	
+	my New_state xlabel string 1 ""
 	my New_state ylabel string 1 ""
 	my New_state title string 1 ""
-	
+
 	my New_state showLabels boolean 1 TRUE
 	my New_state showScales boolean 1 FALSE
 	my New_state swapAxes boolean 1 FALSE
@@ -31,7 +31,7 @@
 
 	my New_state guidesBackground color 1 $::loon::Options(guidesBackground)
 	my New_state guidelines color 1 $::loon::Options(guidelines)
-	
+
 	## in R usually bottom left top right: s w n e
 	my New_state minimumMargins positive_integer 4 [lrepeat 4 20]
 	my New_state labelMargins positive_integer 4 {30 30 60 0}
@@ -53,7 +53,7 @@
 	    "panY is the visible y-axis origin"
 
 	my SetStateDescription xLabel\
-	    "x axis label"	
+	    "x axis label"
 	my SetStateDescription yLabel\
 	    "y axis label"
 	my SetStateDescription title\
@@ -65,7 +65,7 @@
 	    "boolean to specify whether to display the scales or not"
 	my SetStateDescription swapAxes\
 	    "boolean for swapping the x and y axes"
-	
+
 	my SetStateDescription showGuides\
 	    "guides a horizontal and vertical lines for visual guidance "
 
@@ -73,31 +73,31 @@
 	    "background color of plot"
 	my SetStateDescription foreground\
 	    "foreground color of plot including label, axes and scales color"
-	
+
 	my SetStateDescription guidesBackground\
 	    "background color if showGuides=TRUE"
-	
+
 	my SetStateDescription guidelines\
 	    "guidelines color"
-	
+
 	my SetStateDescription minimumMargins\
 	    "bottom, left, top, right minimum margin in pixels"
 	my SetStateDescription labelMargins\
 	    "bottom, left, top, right margins for labels in pixels"
 	my SetStateDescription scalesMargins\
 	    "bottom, left, top, right margins for scales in pixels"
-	
+
     }
-    
+
     destructor {
 	next
     }
 
-    
+
     ## Check that deltaX and deltaY are not too small
     method EvalConfigure {} {
 	my variable confDict
-	
+
 	next
 
 	if {[dict exists $confDict new_deltaX]} {
@@ -113,9 +113,9 @@
 		dict set confDict new_deltaY 0.0005
 	    }
 	}
-		
+
     }
-    
+
     method isWidget {} {
 	return FALSE
     }

@@ -11,6 +11,7 @@ l_serialaxes(
   axesLayout = "radial",
   by = NULL,
   layout = c("grid", "wrap", "separate"),
+  andrews = FALSE,
   showAxes = TRUE,
   linewidth = l_getOption("linewidth"),
   color = l_getOption("color"),
@@ -34,6 +35,8 @@ how the data is scaled. See Details and Examples for more information.}
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
 \item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
+
+\item{andrews}{Andrew's plot (a 'Fourier' transformation)}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/inspectors.R
 \name{l_serialaxes_inspector}
 \alias{l_serialaxes_inspector}
-\title{Create a Serialaxes Analysis Inspector}
+\title{Create a Serialaxes Inspector}
 \usage{
 l_serialaxes_inspector(parent = NULL, ...)
 }

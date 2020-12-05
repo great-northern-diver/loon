@@ -366,6 +366,9 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     scaledData <- glyph_info$scaleInfo
     dimension <- dim(scaledData)[2]
 
+    p <- length(gh['sequence'])
+    andrews <- gh['andrews']
+
     # position
     xpos <- glyph_info$x
     ypos <- glyph_info$y
@@ -374,8 +377,14 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
         scaleX <- as_r_serialaxesGlyph_size(size, "x", "parallel")
         scaleY <- as_r_serialaxesGlyph_size(size, "y", "parallel")
 
-        xaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
-        yaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
+        lineXaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
+        lineYaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
+
+        xaxis <- if(andrews) {
+            pth(lineXaxis, p)
+        } else {
+            lineXaxis
+        }
 
         gTree (
             children = gList(
@@ -393,18 +402,18 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
                     grobFun = polylineGrob,
                     name = "axes",
                     x = xpos + rep(unit(xaxis, "mm"), each = 2),
-                    y = ypos + rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), dimension),
-                    id = rep(1:dimension, each = 2),
+                    y = ypos + rep(unit(c(- 0.5 * scaleY, 0.5 * scaleY), "mm"), p),
+                    id = rep(1:p, each = 2),
                     gp = gpar(col = axesColor)
                 ),
                 if(showArea) {
-                    polygonGrob(x = xpos + unit(c(xaxis, rev(xaxis)), "mm"),
-                                y = ypos + unit(c(yaxis, rep(-0.5 * scaleY, dimension)), "mm"),
+                    polygonGrob(x = xpos + unit(c(lineXaxis, rev(lineXaxis)), "mm"),
+                                y = ypos + unit(c(lineYaxis, rep(-0.5 * scaleY, dimension)), "mm"),
                                 gp = gpar(fill = color, col = NA),
                                 name = "polyline: showArea")
                 } else {
-                    linesGrob(x = xpos + unit(xaxis, "mm"),
-                              y = ypos + unit(yaxis, "mm"),
+                    linesGrob(x = xpos + unit(lineXaxis, "mm"),
+                              y = ypos + unit(lineYaxis, "mm"),
                               gp = gpar(col = color),
                               name = "polyline")
                 }
@@ -415,19 +424,32 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
         scaleY <- as_r_serialaxesGlyph_size(size, "y", "radial")
 
         angle <- seq(0, 2*pi, length.out = dimension + 1)[1:dimension]
-        radialxais <- scaleX * scaledData[glyph_info$index,] * cos(angle)
-        radialyais <- scaleY * scaledData[glyph_info$index,] * sin(angle)
+        radialxaxis <- scaleX * scaledData[glyph_info$index,] * cos(angle)
+        radialyaxis <- scaleY * scaledData[glyph_info$index,] * sin(angle)
+
+        if (showEnclosing) {
+            xaxis <- scaleX * cos(angle)
+            yaxis <- scaleY * sin(angle)
+        } else {
+            xaxis <- radialxaxis
+            yaxis <- radialyaxis
+        }
+
+        if(andrews) {
+            xaxis <- pth(xaxis, p, TRUE)
+            yaxis <- pth(yaxis, p, TRUE)
+        }
 
         gTree(
             children = gList(
                 if(showArea) {
-                    polygonGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
-                                y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
+                    polygonGrob(x = xpos + unit(c(radialxaxis, radialxaxis[1]), "mm"),
+                                y = ypos + unit(c(radialyaxis, radialyaxis[1]), "mm"),
                                 gp = gpar(fill = color, col = NA),
                                 name = "polyline: showArea")
                 } else {
-                    linesGrob(x = xpos + unit(c(radialxais, radialxais[1]), "mm"),
-                              y = ypos + unit(c(radialyais, radialyais[1]), "mm"),
+                    linesGrob(x = xpos + unit(c(radialxaxis, radialxaxis[1]), "mm"),
+                              y = ypos + unit(c(radialyaxis, radialyaxis[1]), "mm"),
                               gp = gpar(col = color),
                               name = "polyline")
                 },
@@ -443,14 +465,25 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
                     test = showAxes,
                     grobFun = polylineGrob,
                     name = "axes",
-                    x = xpos + unit(c(rep(0, dimension), radialxais), "mm"),
-                    y = ypos + unit(c(rep(0, dimension), radialyais), "mm"),
-                    id = rep(1:dimension, 2),
+                    x = xpos + unit(c(rep(0, p), xaxis), "mm"),
+                    y = ypos + unit(c(rep(0, p), yaxis), "mm"),
+                    id = rep(1:p, 2),
                     gp = gpar(col = axesColor)
                 )
             ),
             name = paste0("serialaxes_glyph: radial ", glyph_info$index)
         )
+    }
+}
+
+pth <- function(x, p, circle = FALSE) {
+    len <- length(x)
+    if(len == p) return(x)
+    # In a circle, the first one and the last one are identical
+    if(circle) {
+        x[round(seq(1, len, length.out = p + 1))][- (p + 1)]
+    } else {
+        x[round(seq(1, len, length.out = p))]
     }
 }
 
@@ -470,12 +503,27 @@ get_glyph_scale_info <- function(widget){
             if(name[i] == "serialaxes" ) {
 
                 dat <- char2num.data.frame(gh['data'])
+                seqName <- gh['sequence']
+                andrews <- gh['andrews']
+                andrewsSeriesLength <-  gh['andrewsSeriesLength']
 
-                get_scaledData(
+                scaledActiveData <- get_scaledData(
                     data = dat, # convert to numeric
-                    sequence = gh['sequence'],
+                    sequence = seqName,
                     scaling = gh['scaling'],
                     displayOrder = 1:dim(dat)[1])
+
+                if(andrews) {
+                    fourierTrans <- andrews(k = length(seqName), length.out = andrewsSeriesLength)
+                    scaledActiveData <- as.matrix(scaledActiveData) %*% fourierTrans$matrix
+
+                    dataRange <- range(scaledActiveData)
+                    d <- if(diff(dataRange) == 0) 1 else diff(dataRange)
+
+                    scaledActiveData <- (scaledActiveData - min(scaledActiveData))/d
+                }
+
+                scaledActiveData
 
             } else if (name[i] == "polygon") {
                 # to be general
