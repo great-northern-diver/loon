@@ -39,6 +39,7 @@ Suggests:
     RColorBrewer,
     loon.data,
     rworldmap,
+    mgcv,
     rgl,
     Rgraphviz,
     RDRToolbox,
