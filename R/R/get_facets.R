@@ -181,7 +181,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                        if(length(l_children_layers) > 0) {
                            lapply(l_children_layers,
                                   function(layer) {
-                                      l_copy_layer(p, widget, layer)
+                                      l_copyLayers(p, widget, layer)
                                   }
                            )
                        }
@@ -527,7 +527,7 @@ draw_hidden_glyph <- function(p, widget, glyph, index, N) {
 
 
 # copy layer from loon 'widget' to loon 'p'
-l_copy_layer <- function(p, widget, layer, parent = "root") {
+l_copyLayers <- function(p, widget, layer, parent = "root") {
 
     # input is a char
     if(!inherits(layer, "loon")) layer <- l_create_handle(c(widget, layer))
@@ -548,7 +548,7 @@ l_copy_layer <- function(p, widget, layer, parent = "root") {
 
         lapply(children,
                function(child) {
-                   l_copy_layer(p, widget, child,
+                   l_copyLayers(p, widget, child,
                                 parent = group)
                })
 
