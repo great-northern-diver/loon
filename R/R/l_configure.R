@@ -76,7 +76,7 @@ l_configure.loon <- function(target, ...) {
 
     tryCatch(
         expr = {do.call('obj_eval', args)},
-        error = function(e) {}
+        error = function(e) {warning(e)}
     )
 
     invisible(target)
