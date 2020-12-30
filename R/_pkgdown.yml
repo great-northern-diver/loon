@@ -253,6 +253,7 @@ reference:
     - l_layer_contourLines
     - l_layer_group
     - l_layer_heatImage
+    - l_layer_smooth
     - l_layer_line
     - l_layer_lines
     - l_layer_oval

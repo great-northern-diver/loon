@@ -73,9 +73,7 @@ l_configure.loon <- function(target, ...) {
             }
         }
     }
-
     do.call('obj_eval', args)
-
     invisible(target)
 }
 

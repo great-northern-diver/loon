@@ -248,3 +248,23 @@ test_that("test separate layouts", {
                       layout = "separate")
     expect_equal(class(s), c("l_facet",    "l_compound", "loon" ))
 })
+
+test_that("test layers inherits", {
+    p <- l_plot(rnorm(10), rnorm(10))
+    p['color'][1:5] <- "red"
+    group <- l_layer_group(p)
+    line <- l_layer_line(p, 1:5, c(1:3, 3,4), parent = group)
+    rect <- l_layer_rectangle(p, x = c(2,3), y = c(3,4))
+    l_layer_hide(p, rect)
+    fp <- l_facet(p, by = "color")
+    layers <- l_layer_getChildren(fp[[1]])
+    expect_equal(length(layers), 3)
+    layer1 <- l_create_handle(c(p, layers[1]))
+    expect_equal(class(layer1)[1], "l_layer_rectangle")
+    expect_false(l_layer_isVisible(layer1))
+    layer2 <- l_create_handle(c(p, layers[2]))
+    expect_equal(class(layer2)[1], "l_layer_group")
+    expect_equal(length(l_layer_getChildren(layer2)), 1)
+})
+
+

@@ -181,21 +181,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                        if(length(l_children_layers) > 0) {
                            lapply(l_children_layers,
                                   function(layer) {
-                                      isVisible <- l_layer_isVisible(widget, layer)
-                                      layer_major_class <- class(layer)[1]
-                                      layer_name <- names(l_info_states(layer))
-                                      do.call(
-                                          what = eval(parse(text = layer_major_class)),
-                                          args = c(
-                                              list(widget = p),
-                                              setNames(
-                                                  lapply(layer_name,
-                                                         function(l) layer[l]),
-                                                  layer_name
-                                              )
-                                          )
-                                      )
-                                      if(!isVisible) l_layer_hide(p, layer)
+                                      l_copyLayers(p, widget, layer)
                                   }
                            )
                        }
@@ -536,5 +522,49 @@ draw_hidden_glyph <- function(p, widget, glyph, index, N) {
                        })
             }
         }
+    }
+}
+
+
+# copy layer from loon 'widget' to loon 'p'
+l_copyLayers <- function(p, widget, layer, parent = "root") {
+
+    # input is a char
+    if(!inherits(layer, "loon")) layer <- l_create_handle(c(widget, layer))
+
+    layerType <- class(layer)[1]
+
+    isVisible <- l_layer_isVisible(widget, layer)
+
+
+    if(layerType == "l_layer_group") {
+
+        group <- l_layer_group(p, parent = parent)
+        if(!isVisible) l_layer_hide(p, group)
+
+        children <- l_layer_getChildren(widget, layer)
+
+        if(length(children) == 0) return(invisible())
+
+        lapply(children,
+               function(child) {
+                   l_copyLayers(p, widget, child,
+                                parent = group)
+               })
+
+    } else {
+        layer_name <- names(l_info_states(layer))
+        l <- do.call(
+            what = eval(parse(text = layerType)),
+            args = c(list(widget = p,
+                          parent = parent),
+                     setNames(
+                         lapply(layer_name,
+                                function(l) layer[l]),
+                         layer_name
+                     )
+            )
+        )
+        if(!isVisible) l_layer_hide(p, l)
     }
 }
