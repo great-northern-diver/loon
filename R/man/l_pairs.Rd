@@ -17,6 +17,7 @@ l_pairs(
   showSerialAxes = FALSE,
   serialAxesArgs = list(),
   parent = NULL,
+  span = 10L,
   ...
 )
 }
@@ -51,6 +52,8 @@ in the bottom left of the pairs plot (or not)}
 \item{serialAxesArgs}{additional arguments to modify the `l_serialaxes` states}
 
 \item{parent}{parent widget path}
+
+\item{span}{How many column/row occupies for each widget}
 
 \item{...}{named arguments to modify the `l_plot` states of the scatterplots}
 }
