@@ -469,7 +469,10 @@ l_hist.default <-  function(x,
 
             if(is.atomic(by)) {
                 if(length(by) == n) {
-                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)
+                    by <- tryCatch(
+                        expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
+                        error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
+                    )
                 } else {
                     stop("Unknown 'by' type")
                 }
