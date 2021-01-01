@@ -23,6 +23,7 @@
 #' in the bottom left of the pairs plot (or not)
 #' @param serialAxesArgs additional arguments to modify the `l_serialaxes` states
 #' @template param_parent
+#' @param span How many column/row occupies for each widget
 #' @param ... named arguments to modify the `l_plot` states of the scatterplots
 #'
 #' @return an `l_pairs` object (an `l_compound` object), being a list with named elements,
@@ -60,7 +61,8 @@
 l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
                     showHistograms = FALSE, histLocation = c("edge", "diag"),
                     histHeightProp = 1, histArgs = list(),
-                    showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL, ...) {
+                    showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
+                    span = 10L, ...) {
 
   args <- list(...)
 
@@ -139,11 +141,9 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   ## pair is
   ##  1  1  1  2  2  3
   ##  2  3  4  3  4  4
-  cells <- nvar - 1
-  text_adjustValue <- 1
   scatter_adjustValue <- 0
-  span <- 1
   histLocation <- match.arg(histLocation)
+  histspan <- 0L
 
   if (showHistograms) {
     if(is.null(histArgs[['showStackedColors']])) histArgs[['showStackedColors']] <- TRUE
@@ -162,101 +162,104 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     histArgs[['linkingKey']] <- args[['linkingKey']]
     histograms <- list()
 
-    if(histLocation == "edge") {
-      span <- ifelse(round(1/histHeightProp) >= 1, 1, round(1/histHeightProp))
-      # The first half are top hists, the second half are right hists
-      index <- 2:(2*nvar - 1)
-      for(i in index) {
-        if (i <= nvar) {
-          histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
-          histArgs[['xlabel']] <- varnames[i]
-          # top level histograms
-          histArgs[['swapAxes']] <- FALSE
-          ix <- i
-          iy <- 1
-        } else {
-          histArgs[['x']] <- data[[varnames[i - nvar]]] # as.numeric(data[[varnames[i - nvar]]])
-          histArgs[['xlabel']] <- varnames[i - nvar]
-          # right level histograms
-          histArgs[['swapAxes']] <- TRUE
-          ix <- nvar + 1
-          iy <- i - nvar + 1
-        }
-        histograms[[i]] <- do.call(l_hist, histArgs)
-        names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
-      }
-      # throw errors
-      if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
-        if(new.toplevel) tkdestroy(parent)
-        stop("histogram could not be created.")
-      }
-      sapply(index,
-             function(i) {
-               h <- histograms[[i]]
-               if(i <= nvar){
-                 tkconfigure(paste(h,'.canvas',sep=''),
-                             width=50,
-                             height=50 * histHeightProp)
+    switch(histLocation,
+           "edge" = {
+             histspan <- round(histHeightProp * span)
+             # The first half are top hists, the second half are right hists
+             index <- 2:(2*nvar - 1)
+             for(i in index) {
+               if (i <= nvar) {
+                 histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
+                 histArgs[['xlabel']] <- varnames[i]
+                 # top level histograms
+                 histArgs[['swapAxes']] <- FALSE
+                 ix <- i
+                 iy <- 1
                } else {
-                 tkconfigure(paste(h,'.canvas',sep=''),
-                             width=50 * histHeightProp,
-                             height=50)
+                 histArgs[['x']] <- data[[varnames[i - nvar]]] # as.numeric(data[[varnames[i - nvar]]])
+                 histArgs[['xlabel']] <- varnames[i - nvar]
+                 # right level histograms
+                 histArgs[['swapAxes']] <- TRUE
+                 ix <- nvar + 1
+                 iy <- i - nvar + 1
                }
+               histograms[[i]] <- do.call(l_hist, histArgs)
+               names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
              }
-      )
-      # grid layout
-      lapply(index,
-             function(i){
-               if(i <= nvar) {
-                 tkgrid(histograms[[i]], row = 0,
-                        column = (i-1) * span,
-                        rowspan = 1, columnspan = span,
-                        sticky="nesw")
-               } else {
-                 tkgrid(histograms[[i]], row = 1 + (i - nvar - 1)* span,
-                        column = nvar * span,
-                        rowspan = span, columnspan = 1,
-                        sticky="nesw")
-               }
+             # throw errors
+             if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
+               if(new.toplevel) tkdestroy(parent)
+               stop("histogram could not be created.")
              }
-      )
+             sapply(index,
+                    function(i) {
+                      h <- histograms[[i]]
+                      if(i <= nvar){
+                        tkconfigure(paste(h,'.canvas',sep=''),
+                                    width=50,
+                                    height=50 * histHeightProp)
+                      } else {
+                        tkconfigure(paste(h,'.canvas',sep=''),
+                                    width=50 * histHeightProp,
+                                    height=50)
+                      }
+                    }
+             )
+             # grid layout
+             lapply(index,
+                    function(i){
+                      if(i <= nvar) {
+                        tkgrid(histograms[[i]], row = 0,
+                               column = (i-1) * span,
+                               rowspan = histspan, columnspan = span,
+                               sticky="nesw")
+                      } else {
+                        tkgrid(histograms[[i]], row = histspan + (i - nvar - 1)* span,
+                               column = nvar * span,
+                               rowspan = span, columnspan = histspan,
+                               sticky="nesw")
+                      }
+                    }
+             )
 
-      cells <- nvar
-      text_adjustValue <- 0
-      scatter_adjustValue <- 1
-    } else {
-      if(histHeightProp != 1) warning("histHeightProp must be 1 when histograms are placed on diagonal")
-      for(i in 1:nvar){
-        histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
-        histArgs[['xlabel']] <- varnames[i]
-        histArgs[['swapAxes']] <- FALSE
-        histograms[[i]] <- do.call(l_hist, histArgs)
-        xText <- histograms[[i]]['panX'] + histograms[[i]]['deltaX']/(2*histograms[[i]]['zoomX'])
-        yText <- histograms[[i]]['panY'] + histograms[[i]]['deltaY']/(2*histograms[[i]]['zoomY'])
-        layerText <- l_layer_text(histograms[[i]], xText, yText, text = names(data)[i],
-                                  color = "black", size = 8)
-        names(histograms)[i] <- paste('x',i,'y',i, sep="")
-      }
-      # throw errors
-      if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
-        if(new.toplevel) tkdestroy(parent)
-        stop("histogram could not be created.")
-      }
-      sapply(seq_len(nvar),
-             function(i) {
-               h <- histograms[[i]]
-               tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
+             scatter_adjustValue <- 1
+           },
+           "diag" = {
+             if(histHeightProp != 1) {
+               warning("histHeightProp must be 1 when histograms are placed on diagonal")
+               histHeightProp <- 1
              }
-      )
-      # grid layout
-      lapply(seq_len(nvar),
-             function(i){
-               tkgrid(histograms[[i]], row = (i-1), column = (i-1),
-                      rowspan = span, columnspan = span,
-                      sticky="nesw")
+             for(i in 1:nvar){
+               histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
+               histArgs[['xlabel']] <- varnames[i]
+               histArgs[['swapAxes']] <- FALSE
+               histograms[[i]] <- do.call(l_hist, histArgs)
+               xText <- histograms[[i]]['panX'] + histograms[[i]]['deltaX']/(2*histograms[[i]]['zoomX'])
+               yText <- histograms[[i]]['panY'] + histograms[[i]]['deltaY']/(2*histograms[[i]]['zoomY'])
+               layerText <- l_layer_text(histograms[[i]], xText, yText, text = names(data)[i],
+                                         color = "black", size = 8)
+               names(histograms)[i] <- paste('x',i,'y',i, sep="")
              }
-      )
-    }
+             # throw errors
+             if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
+               if(new.toplevel) tkdestroy(parent)
+               stop("histogram could not be created.")
+             }
+             sapply(seq_len(nvar),
+                    function(i) {
+                      h <- histograms[[i]]
+                      tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
+                    }
+             )
+             # grid layout
+             lapply(seq_len(nvar),
+                    function(i){
+                      tkgrid(histograms[[i]], row = (i-1) * span, column = (i-1) * span,
+                             rowspan = span, columnspan = span,
+                             sticky="nesw")
+                    }
+             )
+           })
   }
 
   if (showSerialAxes) {
@@ -280,7 +283,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
                 width= serialAxesSpan * 50,
                 height = serialAxesSpan * 50)
     tkgrid(serialAxes,
-           row = (cells - serialAxesSpan) * span + 1, column = 0,
+           row = (nvar - serialAxesSpan) * span + histspan, column = 0,
            rowspan = serialAxesSpan * span, columnspan = serialAxesSpan * span,
            sticky="nesw")
   }
@@ -322,7 +325,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   apply(rbind(unlist(scatterplots), pair - 1), 2,
         function(obj) {
           tkgrid(obj[1],
-                 row= as.numeric(obj[2]) * span + scatter_adjustValue,
+                 row= as.numeric(obj[2]) * span + scatter_adjustValue * histspan,
                  column = as.numeric(obj[3]) * span,
                  rowspan = span,
                  columnspan = span,
@@ -331,7 +334,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
   )
 
   ## Column and Row weight such that the cells expand
-  for (i in seq(0, cells)) {
+  for (i in seq(0, nvar * span + histspan - 1)) {
     tkgrid.columnconfigure(child, i, weight = 1)
     tkgrid.rowconfigure(child, i, weight = 1)
   }
@@ -345,7 +348,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
                               as.character(l_subwin(child,'label')),
                               text= sprintf(strf, names(data)[i])))
       tkgrid(lab,
-             row = (i - text_adjustValue - 1) * span + 1,
+             row = (i - 1) * span + histspan,
              column = (i - 1) * span,
              rowspan = span,
              columnspan = span)
