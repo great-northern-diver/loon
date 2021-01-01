@@ -356,7 +356,10 @@ l_serialaxes <- function(data,
 
         if(is.atomic(by)) {
             if(length(by) == n) {
-                by <- setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)
+                by <- tryCatch(
+                    expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
+                    error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
+                )
             } else {
                 warning("Set 'by' as variables is not recommended")
                 by <- data[by]

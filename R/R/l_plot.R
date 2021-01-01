@@ -468,7 +468,10 @@ l_plot.default <-  function(x, y = NULL,
 
             if(is.atomic(by)) {
                 if(length(by) == n) {
-                    by <- setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)
+                    by <- tryCatch(
+                        expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
+                        error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
+                    )
                 } else {
                     # 'by' is a char vector
                     # 'x' should be a data.frame
