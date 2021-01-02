@@ -464,31 +464,10 @@ l_hist.default <-  function(x,
 
         } else {
 
-            # convert all types of 'by' to a data frame
             byDeparse <- deparse(substitute(by))
 
-            if(is.atomic(by)) {
-                if(length(by) == n) {
-                    by <- tryCatch(
-                        expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
-                        error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
-                    )
-                } else {
-                    stop("Unknown 'by' type")
-                }
-            } else {
-
-                if(is.null(names(by))) {
-
-                    by <- as.data.frame(by, stringsAsFactors = FALSE)
-                    names(by) <- NULL
-                } else {
-                    by <- as.data.frame(by, stringsAsFactors = FALSE)
-                }
-            }
-
             plots <- loonFacets(type = "l_hist",
-                                by,
+                                valid_by(by, byDeparse, x, xlabel, n),
                                 args,
                                 byDeparse = byDeparse,
                                 layout = match.arg(layout),

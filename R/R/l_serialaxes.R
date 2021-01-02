@@ -351,32 +351,10 @@ l_serialaxes <- function(data,
 
     } else {
 
-        # convert all types of 'by' to a data frame
         byDeparse <- deparse(substitute(by))
 
-        if(is.atomic(by)) {
-            if(length(by) == n) {
-                by <- tryCatch(
-                    expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
-                    error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
-                )
-            } else {
-                warning("Set 'by' as variables is not recommended")
-                by <- data[by]
-            }
-        } else {
-
-            if(is.null(names(by))) {
-
-                by <- as.data.frame(by, stringsAsFactors = FALSE)
-                names(by) <- NULL
-            } else {
-                by <- as.data.frame(by, stringsAsFactors = FALSE)
-            }
-        }
-
         plots <- loonFacets(type = "l_serialaxes",
-                            by,
+                            valid_by(by, byDeparse, data, n = n),
                             args,
                             byDeparse = byDeparse,
                             layout = match.arg(layout),
