@@ -73,28 +73,27 @@ get_facets.loon <- function(widget, by, parent = NULL,
                                        "deltaX", "deltaY", "parent", "linkingGroup"))
 
     # set parent
+    new.toplevel <- FALSE
     if(separate) {
         child <- parent
     } else {
         if(is.null(parent)) {
+            new.toplevel <- TRUE
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'facet')
-
-            by_names <- names(subtitles)
-            tktitle <- if(!is.null(by_names))
-                paste("loon layouts on",
-                      deparse(substitute(by_names)), "--path:", subwin)
-            else
-                paste("loon layouts on",
-                      deparse(by_substitute), "--path:", subwin)
-            tktitle(parent) <- tktitle
-
-            # create child
-            child <- as.character(tcl('frame', subwin))
-        } else {
-            child <- parent
         }
+
+        subwin <- l_subwin(parent, 'facet')
+        by_names <- names(subtitles)
+        tktitle(parent) <- if(!is.null(by_names))
+            paste("loon layouts on",
+                  deparse(substitute(by_names)), "--path:", subwin)
+        else
+            paste("loon layouts on",
+                  deparse(by_substitute), "--path:", subwin)
+
+        # create child
+        child <- as.character(tcl('frame', subwin))
     }
 
     inheritArgs <- setNames(
@@ -198,7 +197,8 @@ get_facets.loon <- function(widget, by, parent = NULL,
     list(
         plots = plots,
         subtitles = subtitles,
-        child = child
+        child = child,
+        new.toplevel = new.toplevel
     )
 }
 
@@ -250,29 +250,28 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
 
     if(length(split_data) == 1) return(widget)
 
+    new.toplevel <- FALSE
     if(separate) {
         child <- parent
     } else {
         # set parent
         if(is.null(parent)) {
+            new.toplevel <- TRUE
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'facet')
-
-            by_names <- names(subtitles)
-            tktitle <- if(!is.null(by_names))
-                paste("loon layouts on",
-                      deparse(substitute(by_names)), "--path:", subwin)
-            else
-                paste("loon layouts on",
-                      deparse(by_substitute), "--path:", subwin)
-            tktitle(parent) <- tktitle
-
-            # create child
-            child <- as.character(tcl('frame', subwin))
-        } else {
-            child <- parent
         }
+
+        subwin <- l_subwin(parent, 'facet')
+        by_names <- names(subtitles)
+        tktitle(parent) <- if(!is.null(by_names))
+            paste("loon layouts on",
+                  deparse(substitute(by_names)), "--path:", subwin)
+        else
+            paste("loon layouts on",
+                  deparse(by_substitute), "--path:", subwin)
+
+        # create child
+        child <- as.character(tcl('frame', subwin))
     }
 
     # linkingGroup
@@ -324,7 +323,8 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     list(
         plots = plots,
         subtitles = subtitles,
-        child = child
+        child = child,
+        new.toplevel = new.toplevel
     )
 }
 

@@ -135,8 +135,6 @@ l_facet.loon <- function(widget,
 
     separate <- layout == "separate"
 
-
-
     facets <- get_facets(widget, by,
                          parent = parent,
                          linkingGroup,
@@ -209,7 +207,8 @@ l_facet.loon <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         layout_synchronizeSetting(plots,
                                   connectedScales = connectedScales,
@@ -241,7 +240,8 @@ l_facet.loon <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         if(swapAxes) {
             connectedScales <- switch(connectedScales,
@@ -339,7 +339,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         plots <- structure(
             plots,
@@ -363,7 +364,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         plots <- structure(
             plots,
