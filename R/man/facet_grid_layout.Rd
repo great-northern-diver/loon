@@ -21,6 +21,7 @@ facet_grid_layout(
   labelRelief = "groove",
   sep = "*",
   maxCharInOneRow = 15,
+  new.toplevel = TRUE,
   ...
 )
 }
@@ -70,6 +71,9 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 \item{sep}{The character string to separate or combine a vector}
 
 \item{maxCharInOneRow}{Max char in one row. If it exceeds the max, then a char will be displayed into two rows}
+
+\item{new.toplevel}{determine whether the parent is a new top level.
+If it is not a new window, the widgets will not be packed}
 
 \item{...}{named arguments to modify plot states.
 See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.}
