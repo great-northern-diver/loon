@@ -6,6 +6,7 @@
 \usage{
 l_pairs(
   data,
+  connectedScales = c("cross", "none"),
   linkingGroup,
   linkingKey,
   showItemLabels = TRUE,
@@ -23,6 +24,12 @@ l_pairs(
 }
 \arguments{
 \item{data}{a data.frame with numerical data to create the scatterplot matrix}
+
+\item{connectedScales}{Determines how the scales of the panels are to be connected.
+\itemize{
+\item{\code{"cross"}: only the scales in the same row and the same column are connected;}
+\item{\code{"none"}: neither "x" nor "y" scales are connected in any panels.}
+}}
 
 \item{linkingGroup}{string giving the linkingGroup for all plots.  If missing,
 a default \code{linkingGroup} will be determined from deparsing the \code{data}.}
