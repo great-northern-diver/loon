@@ -122,26 +122,38 @@ l_plot_ts <- function(x,
 
     decompType <- if(inherits(stlOrDecomposedTS, "stl")) "loess" else "moving averages"
     if(is.null(tk_title)){tk_title <- paste0(decompType, " decomposition of ", nameOfData)}
-    if(is.null(title)){title <- paste0("Decomposition (", decompType,") of ", nameOfData)
+    if(is.null(title)){title <- paste0("Decomposition (", decompType,") of ", nameOfData)}
+
+    args <- list(...)
+    parent <- args$parent
+    new.toplevel <- FALSE
+    if(is.null(parent)) {
+        new.toplevel <- TRUE
+        parent <- l_toplevel()
     }
 
-    parent <- l_toplevel()
     subwin <- l_subwin(parent, 'ts')
     tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
 
-    p1 <- l_plot(parent = child,
-                 x = xy.raw$x,
-                 y = xy.raw$y,
-                 color = color, size = size,
-                 ylabel = ylabel[1],
-                 xlabel = xlabel[1],
-                 title = title,
-                 linkingGroup = linkingGroup,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 showLabels = showLabels,
-                 ... )
+    args$parent <- child
+
+    p1 <- do.call(l_plot,
+                  c(
+                      list(
+                          x = xy.raw$x,
+                          y = xy.raw$y,
+                          color = color, size = size,
+                          ylabel = ylabel[1],
+                          xlabel = xlabel[1],
+                          title = title,
+                          linkingGroup = linkingGroup,
+                          showScales = showScales,
+                          showGuides = showGuides,
+                          showLabels = showLabels
+                      ),
+                      args
+                  ))
 
     l1 <- l_layer_line(p1,
                        x = xy.raw$x,
@@ -149,17 +161,22 @@ l_plot_ts <- function(x,
                        color= lcolor,
                        linewidth = linewidth, index="end")
 
-    p2 <- l_plot(parent = child,
-                 x = xy.trend$x,
-                 y = xy.trend$y,
-                 color = color, size = size,
-                 ylabel = ylabel[2],
-                 xlabel = xlabel[2],
-                 linkingGroup = linkingGroup,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 showLabels = showLabels,
-                 ...)
+
+    p2 <- do.call(l_plot,
+                  c(
+                      list(
+                          x = xy.trend$x,
+                          y = xy.trend$y,
+                          color = color, size = size,
+                          ylabel = ylabel[2],
+                          xlabel = xlabel[2],
+                          linkingGroup = linkingGroup,
+                          showScales = showScales,
+                          showGuides = showGuides,
+                          showLabels = showLabels
+                      ),
+                      args
+                  ))
 
     l2 <- l_layer_line(p2,
                        x= xy.trend$x,
@@ -167,17 +184,21 @@ l_plot_ts <- function(x,
                        color=lcolor, linewidth = linewidth,
                        index="end")
 
-    p3 <- l_plot(parent = child,
-                 x = xy.seasonal$x,
-                 y = xy.seasonal$y,
-                 color = color, size=size,
-                 ylabel = ylabel[3],
-                 xlabel = xlabel[3],
-                 linkingGroup = linkingGroup,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 showLabels = showLabels,
-                 ...)
+    p3 <- do.call(l_plot,
+                  c(
+                      list(
+                          x = xy.seasonal$x,
+                          y = xy.seasonal$y,
+                          color = color, size=size,
+                          ylabel = ylabel[3],
+                          xlabel = xlabel[3],
+                          linkingGroup = linkingGroup,
+                          showScales = showScales,
+                          showGuides = showGuides,
+                          showLabels = showLabels
+                      ),
+                      args
+                  ))
 
     l3 <- l_layer_line(p3,
                        x = xy.seasonal$x,
@@ -185,17 +206,22 @@ l_plot_ts <- function(x,
                        color = lcolor, linewidth = linewidth ,
                        index="end")
 
-    p4 <- l_plot(parent = child,
-                 x = xy.remainder$x,
-                 y = xy.remainder$y,
-                 color = color, size=size,
-                 ylabel = ylabel[4],
-                 xlabel = xlabel[4],
-                 linkingGroup = linkingGroup,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 showLabels = showLabels,
-                 ...)
+    p4 <- do.call(l_plot,
+                  c(
+                      list(
+                          x = xy.remainder$x,
+                          y = xy.remainder$y,
+                          color = color, size=size,
+                          ylabel = ylabel[4],
+                          xlabel = xlabel[4],
+                          linkingGroup = linkingGroup,
+                          showScales = showScales,
+                          showGuides = showGuides,
+                          showLabels = showLabels
+                      ),
+                      args
+                  ))
+
     l4 <- l_layer_line(p4,
                        x = xy.remainder$x,
                        y = xy.remainder$y,
@@ -222,8 +248,9 @@ l_plot_ts <- function(x,
                tkgrid.rowconfigure(child, i - 1, weight=1)
            })
     tkgrid.columnconfigure(child, 0, weight=1)
-    tkpack(child, fill="both", expand=TRUE)
-    # tkpack(p1, p2, p3, p4,  expand = TRUE, fill = "both")
+
+    if(new.toplevel)
+        tkpack(child, fill="both", expand=TRUE)
 
 
     ## Bind so that they show the same x range

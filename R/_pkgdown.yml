@@ -501,6 +501,7 @@ reference:
     - l_throwErrorIfNotLoonWidget
     - l_Rlist2nestedTclList
     - l_nestedTclList2Rlist
+    - l_toplevel
     - tkcolors
 
 

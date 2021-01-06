@@ -76,27 +76,27 @@ loonFacets.default <- function(type,
         return(plot)
     }
 
+    new.toplevel <- FALSE
     if(separate) {
         child <- parent
     } else {
         # set parent
         if(is.null(parent)) {
+            new.toplevel <- TRUE
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'facet')
-            tktitle <- if(!is.null(by_names))
-                paste("loon layouts on",
-                      deparse(substitute(by_names)), "--path:", subwin)
-            else
-                paste("loon layouts on",
-                      byDeparse, "--path:", subwin)
-            tktitle(parent) <- tktitle
-
-            # create child
-            child <- as.character(tcl('frame', subwin))
-        } else {
-            child <- parent
         }
+
+        subwin <- l_subwin(parent, 'facet')
+        tktitle(parent) <- if(!is.null(by_names))
+            paste("loon layouts on",
+                  deparse(substitute(by_names)), "--path:", subwin)
+        else
+            paste("loon layouts on",
+                  byDeparse, "--path:", subwin)
+
+        # create child
+        child <- as.character(tcl('frame', subwin))
     }
 
     # linkingGroup
@@ -238,7 +238,8 @@ loonFacets.default <- function(type,
                      xlabel = xlabel,
                      ylabel = ylabel,
                      title = title,
-                     swapAxes = swapAxes
+                     swapAxes = swapAxes,
+                     new.toplevel = new.toplevel
                 )
             )
         )
@@ -266,7 +267,8 @@ loonFacets.default <- function(type,
                      xlabel = xlabel,
                      ylabel = ylabel,
                      title =  title,
-                     swapAxes = swapAxes
+                     swapAxes = swapAxes,
+                     new.toplevel = new.toplevel
                 )
             )
         )
@@ -357,28 +359,27 @@ loonFacets.l_serialaxes <- function(type,
         return(plot)
     }
 
+    new.toplevel <- FALSE
     if(separate) {
         child <- parent
     } else {
         # set parent
         if(is.null(parent)) {
+            new.toplevel <- TRUE
             # create parent
             parent <- l_toplevel()
-            subwin <- l_subwin(parent, 'layout')
-
-            tktitle <- if(!is.null(by_names))
-                paste("loon layouts on",
-                      deparse(substitute(by_names)), "--path:", subwin)
-            else
-                paste("loon layouts on",
-                      byDeparse, "--path:", subwin)
-            tktitle(parent) <- tktitle
-
-            # create child
-            child <- as.character(tcl('frame', subwin))
-        } else {
-            child <- parent
         }
+
+        subwin <- l_subwin(parent, 'facet')
+        tktitle(parent) <- if(!is.null(by_names))
+            paste("loon layouts on",
+                  deparse(substitute(by_names)), "--path:", subwin)
+        else
+            paste("loon layouts on",
+                  byDeparse, "--path:", subwin)
+
+        # create child
+        child <- as.character(tcl('frame', subwin))
     }
 
     # linkingGroup
@@ -461,7 +462,8 @@ loonFacets.l_serialaxes <- function(type,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
-                     title = title
+                     title = title,
+                     new.toplevel = new.toplevel
                 )
             )
         )
@@ -490,7 +492,8 @@ loonFacets.l_serialaxes <- function(type,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
-                     title =  title
+                     title =  title,
+                     new.toplevel = new.toplevel
                 )
             )
         )

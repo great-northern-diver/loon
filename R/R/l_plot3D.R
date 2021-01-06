@@ -608,37 +608,10 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
 
         } else {
 
-            # convert all types of 'by' to a data frame
             byDeparse <- deparse(substitute(by))
 
-            if(is.atomic(by)) {
-                if(length(by) == n) {
-                    by <- tryCatch(
-                        expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
-                        error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
-                    )
-                } else {
-                    # 'by' is a char vector
-                    # 'x' should be a data.frame
-                    if(!is.data.frame(xOrigin))
-                        stop("If 'by' are variable names, ",
-                             xlab,
-                             " should be a data frame")
-                    by <- xOrigin[by]
-                }
-            } else {
-
-                if(is.null(names(by))) {
-
-                    by <- as.data.frame(by, stringsAsFactors = FALSE)
-                    names(by) <- NULL
-                } else {
-                    by <- as.data.frame(by, stringsAsFactors = FALSE)
-                }
-            }
-
             plots <- loonFacets(type = c("l_plot3D", "l_plot"),
-                                by,
+                                valid_by(by, byDeparse, xOrigin, xlab, n),
                                 args,
                                 byDeparse = byDeparse,
                                 layout = match.arg(layout),

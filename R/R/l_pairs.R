@@ -5,6 +5,11 @@
 #'   widgets
 #'
 #' @param data a data.frame with numerical data to create the scatterplot matrix
+#' @param connectedScales Determines how the scales of the panels are to be connected.
+#' \itemize{
+#' \item{\code{"cross"}: only the scales in the same row and the same column are connected;}
+#' \item{\code{"none"}: neither "x" nor "y" scales are connected in any panels.}
+#' }
 #' @param linkingGroup string giving the linkingGroup for all plots.  If missing,
 #' a default \code{linkingGroup} will be determined from deparsing the \code{data}.
 #' @param linkingKey a vector of strings to provide a linking identity for each row of the
@@ -57,7 +62,9 @@
 #' }
 #'
 #' }
-l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
+l_pairs <- function(data,
+                    connectedScales = c("cross", "none"),
+                    linkingGroup, linkingKey, showItemLabels = TRUE, itemLabel,
                     showHistograms = FALSE, histLocation = c("edge", "diag"),
                     histHeightProp = 1, histArgs = list(),
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
@@ -79,7 +86,7 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     warning("itemLabel length not equal to number of observations, using row.names(data) instead")
     itemLabel <- row.names(data)
   }
-
+  connectedScales <- match.arg(connectedScales)
 
   args[['x']] <- NULL
   args[['y']] <- NULL
@@ -419,13 +426,15 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
     }
   }
 
-  lapply(scatterplots,
-         function(p) {
-           tcl(p, 'systembind', 'state', 'add',
-               c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-               synchronizeScatterBindings)
-         }
-  )
+  if(connectedScales == "cross") {
+    lapply(scatterplots,
+           function(p) {
+             tcl(p, 'systembind', 'state', 'add',
+                 c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
+                 synchronizeScatterBindings)
+           }
+    )
+  }
 
   # forbidden scatter plots
   lapply(scatterplots,
@@ -505,14 +514,17 @@ l_pairs <- function(data, linkingGroup, linkingKey, showItemLabels = TRUE, itemL
         ##assign("busy", FALSE, envir=parent.env(environment()))
       }
     }
-    # synchronize
-    lapply(histograms,
-           function(h) {
-             if(!is.null(h))
-               tcl(h, 'systembind', 'state', 'add',
-                   c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-                   synchronizeHistBindings)
-           })
+
+    if(connectedScales == "cross") {
+      # synchronize
+      lapply(histograms,
+             function(h) {
+               if(!is.null(h))
+                 tcl(h, 'systembind', 'state', 'add',
+                     c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
+                     synchronizeHistBindings)
+             })
+    }
     # forbidden
     lapply(histograms,
            function(h) {
