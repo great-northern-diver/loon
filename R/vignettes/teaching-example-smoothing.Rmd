@@ -4,20 +4,45 @@ author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Teaching: Smoothers and Bone Mineral Density}
+  %\VignetteIndexEntry{Smoothers and Bone Mineral Density}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{splines}
 ---
 
-```{r knitr_setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center", 
+                      fig.width = 6, 
+                      fig.height = 5,
+                      out.width = "80%", 
+                      collapse = TRUE,
+                      comment = "#>",
+                      tidy.opts = list(width.cutoff = 65),
+                      tidy = FALSE)
+
+set.seed(12314159)
+library(loon.data)
+library(loon)
+library(knitr)
+
+imageDirectory <- "./images/teaching-example-smoothing"
+dataDirectory <- "./data/teaching-example-smoothing"
+path_concat <- function(path1, ..., sep="/") {
+    # The "/" is standard unix directory separator and so will
+    # work on Macs and Linux.
+    # In windows the separator might have to be sep = "\" or 
+    # even sep = "\\" or possibly something else. 
+    paste(path1, ..., sep = sep)
+    }
 ```
 
 
 ### Illustrates:
 
-```{r setup, warning=FALSE, message=FALSE, error=FALSE}
+```{r library loon, warning=FALSE, message=FALSE, error=FALSE}
 library(loon)
 ```
 
@@ -127,7 +152,7 @@ Try selecting the points in the scatterplot and making various modifications.  N
 
 Note that with **shift sweeping** (sweeping while the shift key pressed), multiple selections can be made.  Couple this with `dynamic` selection that `deselect`s or `invert`s and very complex patterns of selected points can be constructed.
 
-To return the displays to their original configuration, from the inspector reactivate all of the points, then select `all` from the `Select` part of the `Analysis` panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour `+` will pop up a colour picker).  To return to the original colour execute `p["color"] <- "darkgrey"`.
+To return the displays to their original configuration, from the inspector reactivate all of the points, then select `all` from the `Select` part of the `Analysis` panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour `+` will pop up a colour picker) To return to the original colour execute `p["color"] <- "darkgrey"`.
 
 ## Panning and brushing
 
@@ -228,7 +253,7 @@ updateSmooth <- function(myPlot, minpts, df, color="blue") {
 
 Now, we would like to have this update called whenever any interesting change in state occurs.  There are numerous such possible states (see `names(p)`, `names(l_info_states(p))`, or `l_help("learn_R_bind")` ).  Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of `p` contained in its `selected` state.  This means that the function is called if any point in `p` is selected or deselected.  
 
-Note also that the smooth is based on the **temporary** `x` and `y` values. Points in a **scatterplot may be moved** by selecting them with the control button depressed (as well as shift for multiple selection).  Alternatively, **selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered** by selecting the corresponding `move` button from the `Modify` panel of the inspector.  **All points can be returned to their original position by
+Note also that the smooth is based on the **temporary** `x` and `y` values. Points in a **scatterplot may be moved** by selecting them with the control button depressed (as well as shift for multiple selection).  Alternatively, **selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered** by selecting the corresponding `move` button from the `Modify` panel of the inspector.  All points can be returned to their original position by clicking the recover button
 
 ```{r bindSmooth, eval=FALSE}
 # Here we "bind" the anonymous to the named state changes of p
