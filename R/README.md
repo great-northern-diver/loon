@@ -99,7 +99,7 @@ h <- l_hist(quakes$depth,
             linkingGroup = "quakes")
 ```
 
-![](images/histDemo.gif)
+![](man/figures/histDemo.gif)
 
 #### Scatterplot
 
@@ -112,13 +112,13 @@ p <- l_plot(x = quakes$long, y = quakes$lat,
             title = "Tonga trench earthquakes")
 ```
 
-![](images/zooming_panning.gif)
+![](man/figures/zooming_panning.gif)
 
 #### Linking and Brushing
 
 Two plots are linked that the change on one change can affect changes on the other.
 
-![](images/brushing.gif)
+![](man/figures/brushing.gif)
 
 #### 3D rotation
 
@@ -128,7 +128,7 @@ with(l_scale3D(quakes),
 )
 ```
 
-![](images/plot3D.gif)
+![](man/figures/plot3D.gif)
 
 #### Facetting
 
@@ -150,18 +150,7 @@ l_facet(p, by = levels,
         linkingGroup = "quakes")
 ```
 
-![](images/facetting.gif)
-
-#### Scagnostics Matrix
-
-Navgraph with scagnostics matrix
-
-```r
-scags <- scagnostics::scagnostics(quakes[, -5])
-l_ng_plots(scags, quakes[, -5])
-```
-
-![](images/scagnostics.gif)
+![](man/figures/facetting.png)
 
 ## On the name
 
