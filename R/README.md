@@ -92,6 +92,8 @@ The binsize can be modified by the graphical element at the bottom of this histo
 
 ```r
 h <- l_hist(quakes$depth,
+            yshows = "density",
+            showBinHandle = TRUE,
             xlabel = "depth",
             title = "Tonga trench earthquakes",
             linkingGroup = "quakes")
@@ -117,6 +119,16 @@ p <- l_plot(x = quakes$long, y = quakes$lat,
 Two plots are linked that the change on one change can affect changes on the other.
 
 ![](images/brushing.gif)
+
+#### 3D rotation
+
+```r
+with(l_scale3D(quakes),
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+```
+
+![](images/plot3D.gif)
 
 #### Facetting
 
