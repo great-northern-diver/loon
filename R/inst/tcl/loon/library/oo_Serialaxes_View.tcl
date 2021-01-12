@@ -2,7 +2,7 @@
 oo::class create ::loon::classes::Serialaxes_View {
 
     superclass ::loon::classes::withCanvasAndItemBindings\
-	::loon::classes::Plot_View
+	::loon::classes::Layered_View
 
     ## Plot_View is more for zooming
 
