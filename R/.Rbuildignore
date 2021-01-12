@@ -18,4 +18,3 @@ cran-comments.md
 ^Meta$
 ^\.travis\.yml$
 ^codecov\.yml$
-^images$
