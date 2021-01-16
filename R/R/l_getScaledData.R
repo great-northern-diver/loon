@@ -1,13 +1,24 @@
-#' @title scale data
-#' @description It is mainly used in serial axes
+#' @title Data Scaling
+#' @description Scaling the data set
 #' @param data A data frame
-#' @param sequence vector with variable names that defines the axes sequence.
-#' If \code{NULL}, it will be set as the column names automatically.
-#' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify how the data is scaled.
+#' @param sequence vector with variable names that are scaled.
+#' If \code{NULL}, it will be set as the whole column names (all data set will be scaled).
+#' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify how the data is scaled. See details
 #' @param displayOrder the order of the display
 #' @param reserve If \code{TRUE}, return the variables not shown in \code{sequence} as well;
 #' else only return the variables defined in \code{sequence}.
 #' @param as.data.frame Return a matrix or a data.frame
+#' @details The \code{scaling} state defines how the data is scaled. The axes
+#' display 0 at one end and 1 at the other. For the following explanation
+#' assume that the data is in a nxp dimensional matrix. The scaling options
+#' are then
+#' \tabular{ll}{
+#' variable \tab per column scaling\cr
+#' observation \tab per row scaling\cr
+#' data \tab whole matrix scaling\cr
+#' none \tab do not scale
+#' }
+#' @seealso \code{\link{l_serialaxes}}
 #' @export
 l_getScaledData <- function(data,
                             sequence = NULL,

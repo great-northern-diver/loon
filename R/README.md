@@ -82,6 +82,75 @@ vignette("introduction", package = "loon")
 l_web("introduction", directory = "articles")
 ```
 
+### Demos
+
+The data used in this demo is `quakes` giving the locations, depth, Richter magnitude of earthquakes of Fiji since 1964. 
+
+#### Histogram
+
+The binsize can be modified by the graphical element at the bottom of this histogram.
+
+```r
+h <- l_hist(quakes$depth,
+            yshows = "density",
+            showBinHandle = TRUE,
+            xlabel = "depth",
+            title = "Tonga trench earthquakes",
+            linkingGroup = "quakes")
+```
+
+![](man/figures/histDemo.gif)
+
+#### Scatterplot
+
+Scrolling the mouse to zoom the plot. To pan the plot, press the right mouse button and move the mouse
+
+```r
+p <- l_plot(x = quakes$long, y = quakes$lat,
+            xlabel = "longitude", ylabel = "latitude",
+            linkingGroup = "quakes",
+            title = "Tonga trench earthquakes")
+```
+
+![](man/figures/zooming_panning.gif)
+
+#### Linking and Brushing
+
+Two plots are linked that the change on one change can affect changes on the other.
+
+![](man/figures/brushing.gif)
+
+#### 3D rotation
+
+```r
+with(l_scale3D(quakes),
+     l_plot3D(long, lat, depth, linkingGroup = "quakes")
+)
+```
+
+![](man/figures/plot3D.gif)
+
+#### Facetting
+
+The plot is splited into three panels by the level of Richter magnitude.
+
+```r
+# add a map layer
+NZFijiMap <- maps::map("world2", regions = c("New Zealand", "Fiji"), plot = FALSE)
+l_layer(p, NZFijiMap,
+        label = "New Zealand and Fiji",
+        color = "forestgreen",
+        index = "end")
+# facet `p`
+levels <- rep(NA, nrow(quakes))
+levels[quakes$mag < 5 & quakes$mag >= 4] <- "Light"
+levels[quakes$mag < 6 & quakes$mag >= 5] <- "Moderate"
+levels[quakes$mag >= 6] <- "Strong"
+l_facet(p, by = levels, 
+        linkingGroup = "quakes")
+```
+
+![](man/figures/facetting.png)
 
 ## On the name
 

@@ -173,6 +173,7 @@ reference:
     - l_aspect
     - l_setAspect
     - starts_with("l_scale")
+    - l_getScaledData
 
   - subtitle: Moving points
     contents:

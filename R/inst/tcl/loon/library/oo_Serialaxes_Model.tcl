@@ -55,9 +55,8 @@ oo::class create ::loon::classes::Serialaxes_Model {
 	my SetStateDescription tag\
 	    "point glyphs have tags associated that can be used for item bindings"
 
-    #my AddLayer model "serialaxes"\
-	#    [::loon::classes::SerialaxesLayer new [self]] root 0 "Serialaxes"
-    #
+    my AddLayer model "serialaxes"\
+	    [::loon::classes::SerialaxesLayer new [self]] root 0 "Serialaxes"
     }
 
 

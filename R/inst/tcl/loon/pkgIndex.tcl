@@ -199,6 +199,6 @@ package ifneeded loon 1.2.3 "
    [list source [file join $dir library/oo_GraphInspectorAnalysis.tcl]]
    [list source [file join $dir library/oo_GraphInspectorEdgesAnalysis.tcl]]
    [list source [file join $dir library/x_LoonInspector.tcl]]
-   # [list source [file join $dir library/oo_SerialaxesInspector.tcl]]
-   # [list source [file join $dir library/oo_SerialaxesLayer.tcl]]
+   [list source [file join $dir library/oo_SerialaxesInspector.tcl]]
+   [list source [file join $dir library/oo_SerialaxesLayer.tcl]]
 "

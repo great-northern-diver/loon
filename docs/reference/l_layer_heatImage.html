@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -162,22 +162,22 @@
   is based on the cartesian coordinate system.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_layer_heatImage</span>(
-  <span class='no'>widget</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>z</span>)),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>z</span>)),
-  <span class='no'>z</span>,
-  <span class='kw'>zlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>z</span>[<span class='fu'><a href='https://rdrr.io/r/base/is.finite.html'>is.finite</a></span>(<span class='no'>z</span>)]),
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>x</span>),
-  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>y</span>),
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>heat.colors</a></span>(<span class='fl'>12</span>),
-  <span class='no'>breaks</span>,
-  <span class='kw'>oldstyle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>useRaster</span>,
-  <span class='kw'>index</span> <span class='kw'>=</span> <span class='st'>"end"</span>,
-  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='st'>"root"</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>l_layer_heatImage</span><span class='op'>(</span>
+  <span class='va'>widget</span>,
+  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, length.out <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>,
+  y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, length.out <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='va'>z</span>,
+  zlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/is.finite.html'>is.finite</a></span><span class='op'>(</span><span class='va'>z</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>,
+  xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>,
+  ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>)</span>,
+  col <span class='op'>=</span> <span class='fu'>grDevices</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>heat.colors</a></span><span class='op'>(</span><span class='fl'>12</span><span class='op'>)</span>,
+  <span class='va'>breaks</span>,
+  oldstyle <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>useRaster</span>,
+  index <span class='op'>=</span> <span class='st'>"end"</span>,
+  parent <span class='op'>=</span> <span class='st'>"root"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -271,29 +271,30 @@ this is used for z.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+<span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"MASS"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>kest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='kw pkg'>MASS</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/kde2d.html'>kde2d</a></span>(<span class='no'>Sepal.Width</span>,<span class='no'>Sepal.Length</span>))
-  <span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>kest</span>)
-  <span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span>(<span class='no'>kest</span>, <span class='kw'>add</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"MASS"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>kest</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>MASS</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/kde2d.html'>kde2d</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span>,<span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>kest</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span><span class='op'>(</span><span class='va'>kest</span>, add<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 
-  <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
-  <span class='no'>lcl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_contourLines.html'>l_layer_contourLines</a></span>(<span class='no'>p</span>, <span class='no'>kest</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>'contour lines'</span>)
-  <span class='no'>limg</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer_heatImage</span>(<span class='no'>p</span>, <span class='no'>kest</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>'heatmap'</span>)
-  <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
-}
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='va'>lcl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_contourLines.html'>l_layer_contourLines</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>kest</span>, label<span class='op'>=</span><span class='st'>'contour lines'</span><span class='op'>)</span>
+  <span class='va'>limg</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_heatImage</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>kest</span>, label<span class='op'>=</span><span class='st'>'heatmap'</span><span class='op'>)</span>
+  <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 <span class='co'># from examples(image)</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(-<span class='fl'>4</span>*<span class='no'>pi</span>, <span class='fl'>4</span>*<span class='no'>pi</span>, <span class='kw'>len</span> <span class='kw'>=</span> <span class='fl'>27</span>)
-<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span>(<span class='no'>x</span>^<span class='fl'>2</span>, <span class='no'>y</span>^<span class='fl'>2</span>, <span class='st'>"+"</span>))
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
-<span class='fu'>l_layer_heatImage</span>(<span class='no'>p1</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span>(<span class='no'>r</span>^<span class='fl'>2</span>)*<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(-<span class='no'>r</span>/<span class='fl'>6</span>), <span class='kw'>col</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>gray</a></span>((<span class='fl'>0</span>:<span class='fl'>32</span>)/<span class='fl'>32</span>))
-<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p1</span>)
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span>, <span class='fl'>4</span><span class='op'>*</span><span class='va'>pi</span>, len <span class='op'>=</span> <span class='fl'>27</span><span class='op'>)</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span>, <span class='va'>y</span><span class='op'>^</span><span class='fl'>2</span>, <span class='st'>"+"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>l_layer_heatImage</span><span class='op'>(</span><span class='va'>p1</span>, z <span class='op'>=</span> <span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>r</span><span class='op'>/</span><span class='fl'>6</span><span class='op'>)</span>, col  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>gray</a></span><span class='op'>(</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>32</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>32</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span>(<span class='no'>r</span>^<span class='fl'>2</span>)*<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span>(-<span class='no'>r</span>/<span class='fl'>6</span>), <span class='kw'>col</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>gray</a></span>((<span class='fl'>0</span>:<span class='fl'>32</span>)/<span class='fl'>32</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>r</span><span class='op'>/</span><span class='fl'>6</span><span class='op'>)</span>, col  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/grDevices/gray.html'>gray</a></span><span class='op'>(</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>32</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>32</span><span class='op'>)</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -309,7 +310,7 @@ this is used for z.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

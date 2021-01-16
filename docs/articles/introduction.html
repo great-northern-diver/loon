@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -104,13 +104,14 @@
 
       
 
-      </header><div class="row">
+      </header><script src="introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="introduction_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="introduction_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to loon</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2020-06-16</h4>
+            <h4 class="date">2021-01-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/introduction.Rmd"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="hidden name"><code>introduction.Rmd</code></div>
@@ -122,13 +123,14 @@
 <blockquote>
 <p>“Exposure, the effective laying open of the data to display the unanticipated, is to us a major portion of data analysis.” … John Tukey and Martin Wilk (1966)</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">loon</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://great-northern-diver.github.io/loon/">loon</a></span><span class="op">)</span></code></pre></div>
 <p>Because loon is an interactive visualization system, this introduction is meant as a “hands on” tutorial. Not all interactions are from the command line (programmatic). Suggestions for interactions will also be given and questions that draw attention to the outcome of interactions.</p>
 <p>After completing the tutorial, there are numerous other examples of using loon which can be explored. These include</p>
 <ul>
 <li>many of the common arguments to <code><a href="../reference/l_plot.html">l_plot()</a></code> are described in the help topic <code><a href="../reference/l_plot_arguments.html">?l_plot_arguments</a></code>
 </li>
-<li>the <code>R</code> <code><a href="https://rdrr.io/pkg/loon/man">help(package = "loon")</a></code> pages for <code>loon</code>, or alternatively online via as <code><a href="../reference/l_web.html">l_web()</a></code>
+<li>the <code>R</code> <code><a href="http://great-northern-diver.github.io/loon/reference">help(package = "loon")</a></code> pages for <code>loon</code>, or alternatively online via as <code><a href="../reference/l_web.html">l_web()</a></code>
 </li>
 <li>other vignettes,</li>
 <li>demos on particular topics given by <code><a href="https://rdrr.io/r/utils/demo.html">demo(package = "loon")</a></code>. These are especially useful because the source code for creating them appears in the console, and</li>
@@ -140,14 +142,15 @@
 <h1 class="hasAnchor">
 <a href="#l_plot-the-basic-loon-plot" class="anchor"></a><code>l_plot()</code> the basic <code>loon</code> plot</h1>
 <p>Begin with a simple scatterplot of the <code>quakes</code> data from <code>R</code></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">long</span>,
-       <span class="kw">y</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">lat</span>,
-       <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"longitude"</span>,
-       <span class="kw">ylabel</span> <span class="kw">=</span> <span class="st">"latitude"</span>,
-       <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Tonga trench earthquakes"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">[1] ".l0.plot"
-attr(,"class")
-[1] "l_plot" "loon"  </pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, 
+       y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
+       xlabel <span class="op">=</span> <span class="st">"longitude"</span>, 
+       ylabel <span class="op">=</span> <span class="st">"latitude"</span>,
+       title <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>[<span class="dv">1</span>] <span class="st">".l0.plot"</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">attr</span>(,<span class="st">"class"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>[<span class="dv">1</span>] <span class="st">"l_plot"</span> <span class="st">"loon"</span>  </span></code></pre></div>
 <p>This prints the above information on the loon plot (more on this later) and causes two windows to appear.</p>
 <p>One is the scatterplot:</p>
 <p><img src="images/intro/quakesOriginal.png" width="60%" style="display: block; margin: auto;"></p>
@@ -350,15 +353,17 @@ attr(,"class")
 <li>these colours will persist with the inspector for every loon scatterplot the inspector palette of colours</li>
 </ul>
 <p>The loon system <strong>default</strong> list of colours get be found programmatically:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="../reference/l_getColorList.html">l_getColorList</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_getColorList.html">l_getColorList</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "gray60"    "#A6CEE3"   "pink"      "#B2DF8A"   "#FDBF6F"   "#FFFF99"</code></p>
 <p>Note:</p>
 <ul>
-<li>loon colours are 6 hexadecimal digits in length and can be a named <code>R</code> colour</li>
-<li>being constrained to tcl/tk colours, no alpha level is available at this time in loon</li>
+<li><p>loon colours are 6 hexadecimal digits in length and can be a named <code>R</code> colour</p></li>
+<li><p>being constrained to tcl/tk colours, no alpha level is available at this time in loon</p></li>
 <li>
 <p><code>R</code> has a similar set of base colours that is default for all its graphics devices:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC"</code></p>
 </li>
 <li><p>like the <code>R</code> palette, the loon inspector palette persists.</p></li>
@@ -368,15 +373,16 @@ attr(,"class")
 <div id="changing-the-inspector-palette-of-colours" class="section level3">
 <h3 class="hasAnchor">
 <a href="#changing-the-inspector-palette-of-colours" class="anchor"></a>changing the inspector palette of colours</h3>
-<p>At the <strong>beginning of a loon session</strong> (that is, immediately after executing <code><a href="https://rdrr.io/pkg/loon/man">library(loon)</a></code>) you might choose to change the default palette for the inspector to something that suits your tastes/problem.</p>
+<p>At the <strong>beginning of a loon session</strong> (that is, immediately after executing <code><a href="http://great-northern-diver.github.io/loon/">library(loon)</a></code>) you might choose to change the default palette for the inspector to something that suits your tastes/problem.</p>
 <p><strong>Note</strong>: There may be unintended side effects to changing the inspector colours after a plot (and hence the inspector) has been created so this should be avoided.</p>
 <p>A variety of functions exist to change an inspector’s palette of colours:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/l_setColorList_baseR.html">l_setColorList_baseR</a></span>()  <span class="co"># base R palette</span>
-<span class="fu"><a href="../reference/l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer</a></span>(<span class="st">"Set2"</span>)  <span class="co"># colorblind friendly choice from ColorBrewer</span>
-<span class="fu"><a href="../reference/l_setColorList_hcl.html">l_setColorList_hcl</a></span>(<span class="kw">luminance</span> <span class="kw">=</span> <span class="fl">80</span>)  <span class="co"># set of hcl colours</span>
-<span class="fu"><a href="../reference/l_setColorList_ggplot2.html">l_setColorList_ggplot2</a></span>()  <span class="co"># ggplot2's palette </span>
-<span class="fu"><a href="../reference/l_setColorList_loon.html">l_setColorList_loon</a></span>()  <span class="co"># default loon palette</span>
-<span class="fu"><a href="../reference/l_setColorList.html">l_setColorList</a></span>(<span class="fu"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span>(<span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span>(<span class="fl">5</span>)))  <span class="co"># any set of colours without alpha</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/l_setColorList_baseR.html">l_setColorList_baseR</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># base R palette</span>
+<span class="fu"><a href="../reference/l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer</a></span><span class="op">(</span><span class="st">"Set2"</span><span class="op">)</span>  <span class="co"># colorblind friendly choice from ColorBrewer</span>
+<span class="fu"><a href="../reference/l_setColorList_hcl.html">l_setColorList_hcl</a></span><span class="op">(</span>luminance <span class="op">=</span> <span class="fl">80</span><span class="op">)</span>  <span class="co"># set of hcl colours</span>
+<span class="fu"><a href="../reference/l_setColorList_ggplot2.html">l_setColorList_ggplot2</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># ggplot2's palette </span>
+<span class="fu"><a href="../reference/l_setColorList_loon.html">l_setColorList_loon</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># default loon palette</span>
+<span class="fu"><a href="../reference/l_setColorList.html">l_setColorList</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># any set of colours without alpha</span></code></pre></div>
 <p>To change the palette</p>
 <ul>
 <li>execute one of these functions</li>
@@ -394,13 +400,15 @@ attr(,"class")
 <a href="#accessing-the-plot" class="anchor"></a>accessing the plot</h3>
 <p>The plot itself is a (tcl) data structure and can be assigned to an <code>R</code> variable.</p>
 <p>Either at construction (the preferable way):</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># loon graphics (note that the result is assigned to p)</span>
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">long</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">lat</span>,
-            <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"longitude"</span>, <span class="kw">ylabel</span> <span class="kw">=</span> <span class="st">"latitude"</span>,
-            <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Tonga trench earthquakes"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># loon graphics (note that the result is assigned to p)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
+            xlabel <span class="op">=</span> <span class="st">"longitude"</span>, ylabel <span class="op">=</span> <span class="st">"latitude"</span>,
+            title <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span></code></pre></div>
 <p>or, if (as we did) you forgot to do that or reassigned something else to that variable (more likely), by accessing the plot from its <code>tcl</code> string:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># accessing the plot from its string representation</span>
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_create_handle.html">l_create_handle</a></span>(<span class="st">".l0.plot"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># accessing the plot from its string representation</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_create_handle.html">l_create_handle</a></span><span class="op">(</span><span class="st">".l0.plot"</span><span class="op">)</span></code></pre></div>
 <p>Note that this string <code>".l0.plot"</code> appears on the right side of the window title of an <code>l_plot</code>.</p>
 <p>Do this and assign your plot to <code>p</code>. You might have to look at the window to get the string if you have created more than one <code><a href="../reference/l_plot.html">l_plot()</a></code>.</p>
 <hr>
@@ -409,14 +417,16 @@ attr(,"class")
 <h3 class="hasAnchor">
 <a href="#printing-the-plot" class="anchor"></a>printing the plot</h3>
 <p>Were we to now print <code>p</code></p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">p</span></pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r">[1] ".l0.plot"
-attr(,"class")
-[1] "l_plot" "loon" </pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span> </code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>[<span class="dv">1</span>] <span class="st">".l0.plot"</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">attr</span>(,<span class="st">"class"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>[<span class="dv">1</span>] <span class="st">"l_plot"</span> <span class="st">"loon"</span> </span></code></pre></div>
 <p>we get the string name of the plot, but with a class attribute. This is the <strong>value</strong> of <code>p</code> and provides us access to a very rich data structure, but one whose values reside in <code>tcl</code>.</p>
 <p>For example, we can access this value and, like plots from <code>lattice</code> or <code>ggplot2</code> produce a <code>grid</code> data structure that can then be displayed as a <code>grid</code> graphic in <code>R</code>.</p>
-<p>The simplest way to achieve this is to use the generic <code>R</code> function <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">p</span>)</pre></body></html></div>
+<p>The simplest way to achieve this is to use the generic <code>R</code> function <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <p>Note that this will always reflect the <em>current state of the loon plot</em>. In this way, you can get snapshots of the loon plot after any interaction.</p>
 <p><strong>Exercise</strong>: Try this. Change <code>p</code> by direct manipulation in <code>loon</code> and repeat.</p>
 <p>This allows the visual representation of a <code>loon</code> plot to be displayed at any time.</p>
@@ -426,76 +436,82 @@ attr(,"class")
 <h3 class="hasAnchor">
 <a href="#getting-plot-contents" class="anchor"></a>getting plot contents</h3>
 <p>There are <code>names</code> associated with a loon plot indicating its contents or <strong>states</strong>:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">p</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"     "linkingKey"       "zoomX"</code></p>
 <p>These features of <code>p</code> can be directly accessed the <code>[]</code> function.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">p</span>[<span class="st">"showGuides"</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span></code></pre></div>
 <p><code>[1] TRUE</code></p>
 <p>A more meaningful example might be identify groups with the colours of the points.<br>
 This could be done simply as follows</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">unique_cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">p</span>[<span class="st">'color'</span>])
-<span class="no">group1</span> <span class="kw">&lt;-</span> <span class="no">p</span>[<span class="st">'color'</span>] <span class="kw">==</span> <span class="no">unique_cols</span>[<span class="fl">1</span>]
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
+<span class="va">group1</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span> <span class="op">==</span> <span class="va">unique_cols</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="co"># Number in group 1 (e.g. as you might have -- here from saved colours)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">group1</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb15"><html><body><pre class="r">[1] 425</pre></body></html></div>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Data on first few quakes in group 1.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">quakes</span>[<span class="no">group1</span>,])</pre></body></html></div>
-<div class="sourceCode" id="cb17"><html><body><pre class="r">      lat   long depth mag stations
-1  -20.42 181.62   562 4.8       41
-2  -20.62 181.03   650 4.2       15
-4  -17.97 181.66   626 4.1       19
-5  -20.42 181.96   649 4.0       11
-10 -17.47 179.59   622 4.3       19
-11 -21.44 180.69   583 4.4       13</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">group1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>[<span class="dv">1</span>] <span class="dv">425</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Data on first few quakes in group 1.</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">group1</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>      lat   long depth mag stations</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="dv">1</span>  <span class="fl">-20.42</span> <span class="fl">181.62</span>   <span class="dv">562</span> <span class="fl">4.8</span>       <span class="dv">41</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="dv">2</span>  <span class="fl">-20.62</span> <span class="fl">181.03</span>   <span class="dv">650</span> <span class="fl">4.2</span>       <span class="dv">15</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="dv">4</span>  <span class="fl">-17.97</span> <span class="fl">181.66</span>   <span class="dv">626</span> <span class="fl">4.1</span>       <span class="dv">19</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="dv">5</span>  <span class="fl">-20.42</span> <span class="fl">181.96</span>   <span class="dv">649</span> <span class="fl">4.0</span>       <span class="dv">11</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="dv">10</span> <span class="fl">-17.47</span> <span class="fl">179.59</span>   <span class="dv">622</span> <span class="fl">4.3</span>       <span class="dv">19</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="dv">11</span> <span class="fl">-21.44</span> <span class="fl">180.69</span>   <span class="dv">583</span> <span class="fl">4.4</span>       <span class="dv">13</span></span></code></pre></div>
 <p>Alternatively, a function could be written to save the groups as a list of logical vectors (one for each group):</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">getGroups</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">loonplot</span>){
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">getGroups</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">loonplot</span><span class="op">)</span><span class="op">{</span>
     <span class="co"># make sure it is an "l_plot"</span>
-    <span class="kw">if</span> (!<span class="fu">is</span>(<span class="no">loonplot</span>, <span class="st">"l_plot"</span>)) <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"loonplot must be an l_plot"</span>)
-
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">is</span><span class="op">(</span><span class="va">loonplot</span>, <span class="st">"l_plot"</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"loonplot must be an l_plot"</span><span class="op">)</span>
+    
     <span class="co"># use color to identify groups</span>
-    <span class="no">unique_cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span>(<span class="no">loonplot</span>[<span class="st">'color'</span>])
-    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="no">unique_cols</span>,
-           <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">col</span>){<span class="no">loonplot</span>[<span class="st">'color'</span>] <span class="kw">==</span> <span class="no">col</span>}
-           )
-}
+    <span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">loonplot</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">unique_cols</span>,
+           FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">col</span><span class="op">)</span><span class="op">{</span><span class="va">loonplot</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span> <span class="op">==</span> <span class="va">col</span><span class="op">}</span>
+           <span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">myGroups</span> <span class="kw">&lt;-</span> <span class="fu">getGroups</span>(<span class="no">p</span>)    <span class="co"># returns groups identified by unique colour in p</span>
-<span class="no">nGroups</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">myGroups</span>) <span class="co"># number of groups</span>
-<span class="no">group1</span> <span class="kw">&lt;-</span> <span class="no">myGroups</span><span class="kw">[[</span><span class="fl">1</span>]]     <span class="co"># each group is an element of the list myGroups</span></pre></body></html></div>
-<p>Similarly, other point symbol characteristics (e.g. <code>size</code>, <code>glyph</code>) might be used to define groups. This is particularly handy when these are first determined interactively.</p>
+<span class="va">myGroups</span> <span class="op">&lt;-</span> <span class="fu">getGroups</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>    <span class="co"># returns groups identified by unique colour in p</span>
+<span class="va">nGroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span> <span class="co"># number of groups</span>
+<span class="va">group1</span> <span class="op">&lt;-</span> <span class="va">myGroups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>     <span class="co"># each group is an element of the list myGroups</span></code></pre></div>
+<p>Similarly, other point symbol characteristics (e.g. <code>size</code>, <code>glyph</code>) might be used to define groups. This is particularly handy when these are first determined interactively.</p>
 <hr>
 </div>
 <div id="setting-plot-contents" class="section level3">
 <h3 class="hasAnchor">
 <a href="#setting-plot-contents" class="anchor"></a>setting plot contents</h3>
 <p>In addition to accessing the state values of a loon plot using <code>[]</code>, its values may also be set using <code>[]</code>. For example, try these:</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">p</span>[<span class="st">"showGuides"</span>] <span class="kw">&lt;-</span> <span class="fl">TRUE</span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
 
-<span class="no">p</span>[<span class="st">"size"</span>] <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fl">30</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">p</span>[<span class="st">"x"</span>]), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="va">p</span><span class="op">[</span><span class="st">"size"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">myGroups</span>))  {
-    <span class="no">p</span>[<span class="st">"selected"</span>] <span class="kw">&lt;-</span> <span class="no">myGroups</span><span class="kw">[[</span><span class="no">i</span>]]
-    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span>(<span class="fl">1</span>)
-}
-<span class="no">p</span>[<span class="st">"selected"</span>] <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span>  <span class="op">{</span>
+    <span class="va">p</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">myGroups</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
 
 <span class="co"># something a little more involved for up to 6 groups</span>
-<span class="no">myCols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="st">"purple"</span>,
-            <span class="st">"orange"</span>, <span class="st">"grey10"</span>, <span class="st">"grey80"</span>)
-<span class="kw">for</span> (<span class="no">i</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">myGroups</span>)) {
-    <span class="no">p</span>[<span class="st">"color"</span>][<span class="no">myGroups</span><span class="kw">[[</span><span class="no">i</span>]]] <span class="kw">&lt;-</span> <span class="no">myCols</span>[<span class="no">i</span>]
-}
+<span class="va">myCols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="st">"purple"</span>, 
+            <span class="st">"orange"</span>, <span class="st">"grey10"</span>, <span class="st">"grey80"</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">p</span><span class="op">[</span><span class="st">"color"</span><span class="op">]</span><span class="op">[</span><span class="va">myGroups</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">myCols</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
+<span class="op">}</span>
 
 <span class="co"># something crazy</span>
-<span class="kw">for</span> (<span class="no">j</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fl">10</span>) {
-  <span class="no">p</span>[<span class="st">"xTemp"</span>] <span class="kw">&lt;-</span> <span class="no">p</span>[<span class="st">"x"</span>] + <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">p</span>[<span class="st">"x"</span>]), <span class="kw">min</span> <span class="kw">=</span> -<span class="fl">0.5</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">0.5</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span>(<span class="fl">0.1</span>)
-}
+<span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">p</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, max <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># putting locations and size back</span>
-<span class="no">p</span>[<span class="st">"xTemp"</span>] <span class="kw">&lt;-</span> <span class="no">p</span>[<span class="st">"x"</span>]
-<span class="no">p</span>[<span class="st">"size"</span>] <span class="kw">&lt;-</span> <span class="fl">4</span></pre></body></html></div>
+<span class="va">p</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"size"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span></code></pre></div>
 <hr>
 </div>
 </div>
@@ -509,15 +525,16 @@ This could be done simply as follows</p>
 <a href="#example-adding-maps" class="anchor"></a>Example: adding maps</h3>
 <p>For example, we can add a map to the current loon plot <code>p</code>.</p>
 <p>First get the relevant map:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">maps</span>)
-<span class="no">NZFijiMap</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span>(<span class="st">"world2"</span>, <span class="kw">regions</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span>), <span class="kw">plot</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>
+<span class="va">NZFijiMap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>It is added as a “layer” to the loon plot</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r">l_layer(p, NZFijiMap, 
-        label = "New Zealand and Fiji",
-        color = "forestgreen",
-        index = "end")
-loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
-[1] "layer0"</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">l_layer</span>(p, NZFijiMap, </span>
+<span id="cb21-2"><a href="#cb21-2"></a>        <span class="dt">label =</span> <span class="st">"New Zealand and Fiji"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>        <span class="dt">color =</span> <span class="st">"forestgreen"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>        <span class="dt">index =</span> <span class="st">"end"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5"></a>loon layer <span class="st">"New Zealand and Fiji"</span> of type polygons of plot .l0.plot</span>
+<span id="cb21-6"><a href="#cb21-6"></a>[<span class="dv">1</span>] <span class="st">"layer0"</span></span></code></pre></div>
 <p>Try this out.</p>
 <p><img src="images/intro/quakesGuidesMapInspector.png" width="30%" style="display: block; margin: auto;"></p>
 <p><img src="images/intro/quakesGuidesMap.png" width="50%" style="display: block; margin: auto;"></p>
@@ -547,23 +564,24 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 <h2 class="hasAnchor">
 <a href="#syntax-loons-l_plot-is-like-base-graphics-plot" class="anchor"></a>Syntax: loon’s <code>l_plot()</code> is like base graphics <code>plot()</code>
 </h2>
-<p><code>loon</code>’s <code><a href="../reference/l_plot.html">l_plot()</a></code> syntax <strong>intentionally resembles</strong> that of <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> from the base <code>graphics</code> package:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="co"># Base graphics</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">long</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">lat</span>,
-     <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"longitude"</span>, <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"latitude"</span>,
-     <span class="kw">main</span> <span class="kw">=</span> <span class="st">"Tonga trench earthquakes"</span>)
+<p><code>loon</code>’s <code><a href="../reference/l_plot.html">l_plot()</a></code> syntax <strong>intentionally resembles</strong> that of <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> from the base <code>graphics</code> package:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Base graphics</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
+     xlab <span class="op">=</span> <span class="st">"longitude"</span>, ylab <span class="op">=</span> <span class="st">"latitude"</span>,
+     main <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span>
 
 <span class="co"># loon graphics</span>
-<span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">long</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">lat</span>,
-       <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"longitude"</span>, <span class="kw">ylabel</span> <span class="kw">=</span> <span class="st">"latitude"</span>,
-       <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Tonga trench earthquakes"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
+       xlabel <span class="op">=</span> <span class="st">"longitude"</span>, ylabel <span class="op">=</span> <span class="st">"latitude"</span>,
+       title <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span></code></pre></div>
 <p>The arguments to <code><a href="../reference/l_plot.html">l_plot()</a></code> provide initial values to each named state. Note that the argument names in <code>l_plot</code> are slightly different.</p>
 <p>In result, however, loon plots are quite different</p>
 <ul>
 <li>displays <strong>look different</strong>
 </li>
 <li>
-<code><a href="../reference/l_plot.html">l_plot()</a></code> <strong>returns a data structure</strong>; <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> does not
+<code><a href="../reference/l_plot.html">l_plot()</a></code> <strong>returns a data structure</strong>; <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> does not
 <ul>
 <li>a rich data structure with many states</li>
 <li>can be transformed to a grob</li>
@@ -576,7 +594,7 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 </ul>
 </li>
 </ul>
-<p>In loon, the function <code><a href="../reference/plot.loon.html">plot.loon()</a></code> is a <strong>method</strong> of the base <code><a href="https://rdrr.io/r/base/plot.html">plot()</a></code> generic function that turns the loon plot (as the first argument of <code><a href="../reference/plot.loon.html">plot.loon()</a></code>) into a grid object and plots it on the current <code>R</code> graphics device.</p>
+<p>In loon, the function <code><a href="../reference/plot.loon.html">plot.loon()</a></code> is a <strong>method</strong> of the base <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> generic function that turns the loon plot (as the first argument of <code><a href="../reference/plot.loon.html">plot.loon()</a></code>) into a grid object and plots it on the current <code>R</code> graphics device.</p>
 <hr>
 </div>
 </div>
@@ -586,9 +604,10 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 <p>As seen earlier, the <code>quakes</code> data has some other variates in addition to the latitude and longitude of the quakes.</p>
 <p>Before starting, make sure that you have the four groups coloured in the loon plot <code>p</code> as described earlier. If you don’t, then colour them again now.</p>
 <p>Let’s consider a histogram of the <code>depth</code> of each earthquake.</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">h</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span>(<span class="no">quakes</span>$<span class="no">depth</span>,
-            <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"depth"</span>,
-            <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Tonga trench earthquakes"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">$</span><span class="va">depth</span>, 
+            xlabel <span class="op">=</span> <span class="st">"depth"</span>, 
+            title <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span></code></pre></div>
 <p>Note that the inspector has changed. There is a different inspector for each type of base loon plot.</p>
 <p><strong>Exercise</strong>:</p>
 <ul>
@@ -620,15 +639,18 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 <li><p>On the scatterplot inspector, if you do the same you will now be prompted to either “push” or “pull”. Select “push”.</p></li>
 <li>
 <p><strong>NOTE</strong>: Programmatically, we might have tried to set the linking group directly on the plot as</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">h</span>[<span class="st">"linkingGroup"</span>] <span class="kw">&lt;-</span> <span class="st">"quakes"</span>
-<span class="no">p</span>[<span class="st">"linkingGroup"</span>] <span class="kw">&lt;-</span> <span class="st">"quakes"</span></pre></body></html></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">h</span><span class="op">[</span><span class="st">"linkingGroup"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"quakes"</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"linkingGroup"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"quakes"</span></code></pre></div>
 <p>but <strong>this would have resulted in an error</strong>. The problem is that the synchronization must be set at the same time to determine where the linked states are to be drawn from. To effect this, the loon command <code>l_confiure()</code> must be used whenever <strong>two or more states are to be set simultaneously</strong>. The correct programmatic setting of the “linkingGroup” is</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="../reference/l_configure.html">l_configure</a></span>(<span class="no">h</span>, <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>, <span class="kw">sync</span> <span class="kw">=</span> <span class="st">"push"</span>)
-<span class="fu"><a href="../reference/l_configure.html">l_configure</a></span>(<span class="no">p</span>, <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>, <span class="kw">sync</span> <span class="kw">=</span> <span class="st">"pull"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/l_configure.html">l_configure</a></span><span class="op">(</span><span class="va">h</span>, linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, sync <span class="op">=</span> <span class="st">"push"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/l_configure.html">l_configure</a></span><span class="op">(</span><span class="va">p</span>, linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, sync <span class="op">=</span> <span class="st">"pull"</span><span class="op">)</span></code></pre></div>
 <p>This causes <code>h</code> to push its linked states to the “quakes” group and <code>p</code> to pull them from the “quakes” group. (In this example, “pull” could have been used in both cases and is generally recommended.)</p>
 </li>
 <li><p>brush the scatterplot and observe the effects in the histogram</p></li>
-<li>brush the histogram and observe the effects in the scatterplot
+<li>
+<p>brush the histogram and observe the effects in the scatterplot</p>
 <ul>
 <li>shape the brush so that it is tall and thin</li>
 <li>brush from left to right and right to left (i.e. from shallow to deeper earthquake depths)</li>
@@ -636,11 +658,12 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 </li>
 <li>
 <p>could also set colours programmatically on the histogram. Here we colour the histogram bars so that those earthquakes that are deepest are darkest.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">blues5</span> <span class="kw">&lt;-</span> <span class="no">blues9</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>)] <span class="co"># select 5 from light blue to dark</span>
-<span class="no">h</span>[<span class="st">"color"</span>] <span class="kw">&lt;-</span> <span class="no">blues5</span>[<span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">quakes</span>$<span class="no">depth</span>, <span class="kw">breaks</span><span class="kw">=</span><span class="fl">5</span>)] <span class="co"># assign colours by depth</span>
-<span class="no">p</span>[<span class="st">"glyph"</span>] <span class="kw">&lt;-</span> <span class="st">"ccircle"</span>
-<span class="no">p</span>[<span class="st">"showGuides"</span>] <span class="kw">&lt;-</span> <span class="fl">TRUE</span>
-<span class="co"># plot(p) # will print the plot</span></pre></body></html></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">blues5</span> <span class="op">&lt;-</span> <span class="va">blues9</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span> <span class="co"># select 5 from light blue to dark</span>
+<span class="va">h</span><span class="op">[</span><span class="st">"color"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">blues5</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">$</span><span class="va">depth</span>, breaks<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span> <span class="co"># assign colours by depth</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"glyph"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"ccircle"</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
+<span class="co"># plot(p) # will print the plot</span></code></pre></div>
 </li>
 </ul>
 <hr>
@@ -650,26 +673,28 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 <a href="#linking-many-plots" class="anchor"></a>linking many plots</h2>
 <p>Arbitrarily many plots may be created and linked in loon.</p>
 <p>Consider, for example, adding two more histograms to the same <code>linkingGroup</code>. Note that the linking is done at creation and that the synchronization is by default a “pull”.</p>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">h_mag</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">mag</span>,
-                <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>,
-                <span class="kw">showStackedColors</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                <span class="kw">yshows</span> <span class="kw">=</span> <span class="st">"density"</span>,
-                <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"magnitude"</span>)
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">h_mag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">mag</span>, 
+                linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, 
+                showStackedColors <span class="op">=</span> <span class="cn">TRUE</span>,
+                yshows <span class="op">=</span> <span class="st">"density"</span>,
+                xlabel <span class="op">=</span> <span class="st">"magnitude"</span><span class="op">)</span>
 
-<span class="no">h_stations</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">stations</span>,
-                     <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>,
-                     <span class="kw">showStackedColors</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                     <span class="kw">yshows</span> <span class="kw">=</span> <span class="st">"density"</span>,
-                     <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"Number of stations reporting"</span>)</pre></body></html></div>
+<span class="va">h_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">stations</span>, 
+                     linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, 
+                     showStackedColors <span class="op">=</span> <span class="cn">TRUE</span>,
+                     yshows <span class="op">=</span> <span class="st">"density"</span>,
+                     xlabel <span class="op">=</span> <span class="st">"Number of stations reporting"</span><span class="op">)</span></code></pre></div>
 <p>Brush to show the relationship between magnitude of the earthquake and the number of stations reporting.</p>
 <p>Alternatively, we could look at a linked scatterplot of these two variates and explore their relationship conditional on <code>depth</code></p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">p_mag_stations</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">mag</span>,
-                         <span class="kw">y</span> <span class="kw">=</span> <span class="no">quakes</span>$<span class="no">stations</span>,
-                         <span class="kw">showGuides</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                         <span class="kw">glyph</span> <span class="kw">=</span> <span class="st">"ccircle"</span>,
-                         <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>,
-                         <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"Magnitude"</span>,
-                         <span class="kw">ylabel</span> <span class="kw">=</span> <span class="st">"Number of stations reporting"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p_mag_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">mag</span>, 
+                         y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">stations</span>, 
+                         showGuides <span class="op">=</span> <span class="cn">TRUE</span>,
+                         glyph <span class="op">=</span> <span class="st">"ccircle"</span>,
+                         linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, 
+                         xlabel <span class="op">=</span> <span class="st">"Magnitude"</span>, 
+                         ylabel <span class="op">=</span> <span class="st">"Number of stations reporting"</span><span class="op">)</span></code></pre></div>
 <p>Brushing any one of these plots will cause the other plots to highlight in response.</p>
 <p>Note that selection effectively shows the relations in one plot <strong>conditional</strong> upon the values actively being selected (e.g. brushed) in another.</p>
 </div>
@@ -682,13 +707,14 @@ loon layer "New Zealand and Fiji" of type polygons of plot .l0.plot
 Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows so not match row for row. For example, one <code>data.frame</code> might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.</p>
 <p>In either case, to have linking work properly the <code>linkingKey</code> of the plots associated with the two data frames need to be managed.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">new_order</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">quakes</span>), <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">quakes</span>), <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">some_quakes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">quakes</span>), <span class="fl">100</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">quakes_linkingKey</span> <span class="kw">&lt;-</span> <span class="no">p</span>[<span class="st">"linkingKey"</span>]
-<span class="no">p_new</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">quakes</span>[<span class="no">new_order</span>, ], <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="no">long</span>, <span class="no">lat</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">"quakes reordered"</span>,
-    <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>, <span class="kw">linkingKey</span> <span class="kw">=</span> <span class="no">quakes_linkingKey</span>[<span class="no">new_order</span>]))
-<span class="no">p_subset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">quakes</span>[<span class="no">some_quakes</span>, ], <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="no">long</span>, <span class="no">lat</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">"quakes reordered"</span>,
-    <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>, <span class="kw">linkingKey</span> <span class="kw">=</span> <span class="no">quakes_linkingKey</span>[<span class="no">some_quakes</span>]))</pre></body></html></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">new_order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">some_quakes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">quakes_linkingKey</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"linkingKey"</span><span class="op">]</span>
+<span class="va">p_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">new_order</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>, 
+    linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">new_order</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="va">p_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">some_quakes</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>, 
+    linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">some_quakes</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The new plots <code>p_new</code> and <code>p_subset</code> will link correctly with all the rest.</p>
 <p>Rather than the default values, the <code>linkingKey</code> can be any vector of unique strings used in any newly created plot as above. Of course, not using the default linking keys from <code>loon</code> may require a little more care in management from the user.</p>
 <hr>
@@ -699,15 +725,16 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <a href="#three-dimensional-plots---l_plot3d" class="anchor"></a>Three dimensional plots - <code>l_plot3D</code>
 </h1>
 <p>Given that the <code>quakes</code> data has three spatial dimensions (<code>long</code>, <code>lat</code>, and <code>depth</code>), it would be natural to view this in a three dimensional scatterplot.</p>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="co"># First, scale the data</span>
-<span class="no">scaled_quakes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_scale3D.html">l_scale3D</a></span>(<span class="no">quakes</span>)
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First, scale the data</span>
+<span class="va">scaled_quakes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_scale3D.html">l_scale3D</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>
 
-<span class="no">p_mag_stations</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_plot3D.html">l_plot3D</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">scaled_quakes</span>$<span class="no">long</span>,
-                           <span class="kw">y</span> <span class="kw">=</span> <span class="no">scaled_quakes</span>$<span class="no">lat</span>,
-                           <span class="kw">z</span> <span class="kw">=</span> <span class="no">scaled_quakes</span>$<span class="no">depth</span>,
-                           <span class="kw">showGuides</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                           <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"quakes"</span>,
-                           <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Three dimensional plot of quakes"</span>)</pre></body></html></div>
+<span class="va">p_mag_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_plot3D.html">l_plot3D</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scaled_quakes</span><span class="op">$</span><span class="va">long</span>,  
+                           y <span class="op">=</span> <span class="va">scaled_quakes</span><span class="op">$</span><span class="va">lat</span>, 
+                           z <span class="op">=</span> <span class="va">scaled_quakes</span><span class="op">$</span><span class="va">depth</span>, 
+                           showGuides <span class="op">=</span> <span class="cn">TRUE</span>,
+                           linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, 
+                           title <span class="op">=</span> <span class="st">"Three dimensional plot of quakes"</span><span class="op">)</span></code></pre></div>
 <p>Select the plot, type <code>r</code> to turn on the <code>rotation mode</code>. Press the down arrow on the keyboard until the darkest points (deepest quakes) are at the bottom of the display. Press <code>r</code> again to turn off the rotation mode.</p>
 <p>Selecting the plot, the key <code>r</code> toggles the rotation mode; arrow keys rotate the plot vertically and horizontally. In <code>rotation mode</code> the plot may also be rotated free hand using the mouse. When <code>rotation mode</code> is toggled off (with the key <code>r</code>), the plot can again be brushed et cetera as with any <code>l_plot</code>. See <code><a href="../reference/l_plot3D.html">help("l_plot3D")</a></code> for more details.</p>
 <p><strong>NOTE</strong> Many methods exist for visualizing higher dimensional data in <code>loon</code>. For e.g. see <code><a href="../reference/l_navgraph.html">help("l_navgraph")</a></code>, <code><a href="../reference/l_pairs.html">help("l_pairs")</a></code>, or <code><a href="../reference/l_serialaxes.html">help("l_serialaxes")</a></code>. See also the online manual <code><a href="../reference/l_web.html">l_web()</a></code>.</p>
@@ -723,11 +750,13 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <a href="#more-examples" class="anchor"></a>More examples</h2>
 <p>Being able to get and set the plot contents means that it is possible to capture different plot states as <code>grobs</code>. There are a variety of ways to see how you might put <code>loon</code> to use.</p>
 <p>There are of course many smaller examples available through the <code>loon</code>’s <code>R</code> documentation available via</p>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>and more complex examples and more general discussion via <code>loon</code>’s online web documentation</p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="../reference/l_web.html">l_web</a></span>()
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/l_web.html">l_web</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># or more generally via the online loon (with complex examples)</span>
-<span class="fu"><a href="../reference/l_help.html">l_help</a></span>()</pre></body></html></div>
+<span class="fu"><a href="../reference/l_help.html">l_help</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <hr>
 <div id="other-vignettes" class="section level3">
 <h3 class="hasAnchor">
@@ -736,17 +765,20 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <ul>
 <li>
 <p>An example exploratory analysis: “Visible minorities in Canadian cities” available via</p>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"minorities"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"minorities"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>This illustrates a variety of <code>loon</code> features including map layers, parallel coordinate axes, and radial axes glyphs in the context of an exploratory analysis of the distribution of visible minorities in 33 Canadian cities.</p>
 </li>
 <li>
 <p>New interactive graphics in <code>loon</code> in a teaching example: “Smoothers and Bone Mineral Density” available via</p>
-<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"teaching-example-smoothing"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"teaching-example-smoothing"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>This illustrates how to create new interactions in <code>loon</code> through more general bindings. This is done by developing a teaching tool for explaining how smoothing works. The example data set is <code>bone</code> from the <code>loon.data</code> package.</p>
 </li>
 <li>
 <p>Some suggestions on integrating <code>loon</code> plots into an Rmarkdown document: “Loon in RMarkdown” via</p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"Rmarkdown"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Rmarkdown"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 </li>
 </ul>
 <hr>
@@ -755,32 +787,34 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <h3 class="hasAnchor">
 <a href="#loon-demos" class="anchor"></a>loon demos</h3>
 <p>There are numerous demos in loon whose source code might be examined for more examples of using <code>loon</code>. To see them all</p>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># list all demos</span></pre></body></html></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># list all demos</span></code></pre></div>
 <p>The range is quite broad. For example,</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="co">### teaching demos</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># lots using the Old Faithful geyser</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_regression_influential"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># change points change the regression fit</span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">### teaching demos</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_regression"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># lots using the Old Faithful geyser</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_regression_influential"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># change points change the regression fit</span>
 
 <span class="co">### gapminder</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co">#  basic demo</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_slider"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># year selected on a slider</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_choropleth"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># world map and linked with a scatterplot</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co">#  basic demo</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_slider"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># year selected on a slider</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># world map and linked with a scatterplot</span>
 
 <span class="co">### the spatial package sp</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_polygons_sp"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)  <span class="co"># layer polygons with class sp </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_polygons_sp"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># layer polygons with class sp </span>
 
 <span class="co">### layering and custom layouts</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_layers"</span>)  <span class="co"># demonstrate layer types   </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_layout"</span>)  <span class="co"># custom layout widgets      </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_widgets"</span>)  <span class="co"># inspector and plot in one window</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_layers"</span><span class="op">)</span>  <span class="co"># demonstrate layer types   </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_layout"</span><span class="op">)</span>  <span class="co"># custom layout widgets      </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_widgets"</span><span class="op">)</span>  <span class="co"># inspector and plot in one window</span>
 
 <span class="co">### novel brushing and linking</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_knn"</span>)  <span class="co"># brushing by k nearest points in some subspace</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_us_and_them_choropleth"</span>)  <span class="co"># many to one linking </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_knn"</span><span class="op">)</span>  <span class="co"># brushing by k nearest points in some subspace</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span><span class="op">)</span>  <span class="co"># many to one linking </span>
 
 <span class="co">### high dimensional data and dimensionality reduction</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_images_frey_LLE"</span>)  <span class="co"># navigation graphs, image data, LLE</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span>(<span class="st">"l_ng_dimred"</span>)  <span class="co"># comparing dimension reduction methods</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_ng_images_frey_LLE"</span><span class="op">)</span>  <span class="co"># navigation graphs, image data, LLE</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_ng_dimred"</span><span class="op">)</span>  <span class="co"># comparing dimension reduction methods</span></code></pre></div>
 <p>The code that appears in the console after the demo can be examined and reused to create your own loony <code>loon</code> code.</p>
 <hr>
 </div>
@@ -793,8 +827,9 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <a href="#zenplots" class="anchor"></a><code>zenplots</code>
 </h3>
 <p>This package is available on CRAN.</p>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"zenplots"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"intro"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"zenplots"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"zenplots"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"intro"</span>, package <span class="op">=</span> <span class="st">"zenplots"</span><span class="op">)</span></code></pre></div>
 <p>Provides a means for compact layout of alternating 1d (e.g. histograms) and 2d (e.g. scatterplots) plots. In will layout base <code>graphics</code> plots, <code>grid</code> graphics plots, and <code>loon</code> plots.</p>
 <p>It is similar to <code>pairs</code> plots but allows many many more plots to be displayed. From the introductory vignette:</p>
 <blockquote>
@@ -805,7 +840,7 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <div id="specialty-loon-extensions---loon-specialty-packages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#specialty-loon-extensions---loon-specialty-packages" class="anchor"></a>Specialty <code>loon</code> extensions - <code>loon.&lt;specialty&gt;</code> packages</h3>
-<p>There are/will be other packages available which build on <code>loon</code>. Those developed by us are typically prefixed with <code>loon</code> (e.g. <code>loon.ggplot</code>)</p>
+<p>There are/will be other packages available which build on <code>loon</code>. Those developed by us are typically prefixed with <code>loon</code> (e.g. <code>loon.ggplot</code>)</p>
 <p>These will typically be on CRAN when ready, but development versions are accessible from our <strong>great northern diver</strong> <code>github</code> repositories. For example,</p>
 <ul>
 <li><a href="https://github.com/great-northern-diver">https://github.com/great-northern-diver</a></li>
@@ -820,18 +855,22 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <p>Graphics in the <code>grid</code> package are built up from graphical objects or <code>grobs</code>.</p>
 <p>In <code>loon</code>, the functions <code><a href="../reference/grid.loon.html">grid.loon()</a></code> and <code><a href="../reference/loonGrob.html">loonGrob()</a></code> construct <code>grobs</code> from loon plots which can then be used as any other <code>grob</code> in <code>grid</code></p>
 <p>For example, when transformed to <code>grid</code>, the loon plot <code>p</code> structure becomes a <code>gTree</code> in <code>grid</code>.</p>
-<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">gp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/loonGrob.html">loonGrob</a></span>(<span class="no">p</span>)
-<span class="no">gp</span></pre></body></html></div>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">gTree</span>[<span class="no">GRID.gTree.33</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrob.html">loonGrob</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
+<span class="va">gp</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gTree</span><span class="op">[</span><span class="va">GRID.gTree.33</span><span class="op">]</span> </code></pre></div>
 <p>This simply produces the grid data structure corresponding to the current state of the loon plot <code>p</code>, as can be seen from listing its contents:</p>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">grid</span>)
-<span class="fu"><a href="https://rdrr.io/r/grid/grid.ls.html">grid.ls</a></span>(<span class="no">gp</span>)  <span class="co"># lists the contents of the grob</span></pre></body></html></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.ls.html">grid.ls</a></span><span class="op">(</span><span class="va">gp</span><span class="op">)</span>  <span class="co"># lists the contents of the grob</span></code></pre></div>
 <p>The grob <code>gp</code> could now be used with all the functionality of the <code>grid</code> package.</p>
 <p>Note that all of the elements of a loon plot appear in the grob, either explicitly or, if they were not drawn in the loon plot, as an empty <code>grob</code> containing the relevant arguments to drawing them.</p>
 <p>Another function in loon to help that is the <code><a href="../reference/grid.loon.html">grid.loon()</a></code> function</p>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">grid</span>)
-<span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span>()
-<span class="fu"><a href="../reference/grid.loon.html">grid.loon</a></span>(<span class="no">p</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/grid.loon.html">grid.loon</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <p>will display <code>p</code> as a <code>grid</code> graphic … and all that entails.</p>
 </div>
 </div>
@@ -852,7 +891,7 @@ Trouble may arise, however, if you want to link two different plots that were cr
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

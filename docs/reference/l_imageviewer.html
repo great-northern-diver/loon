@@ -85,7 +85,7 @@ The images are resized to fill the viewer window." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ in the specified image vector.</p>
 <p>The images are resized to fill the viewer window.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_imageviewer</span>(<span class='no'>tclimages</span>)</pre>
+    <pre class="usage"><span class='fu'>l_imageviewer</span><span class='op'>(</span><span class='va'>tclimages</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,19 +184,20 @@ in the specified image vector.</p>
     <p>the <code>tclimages</code> vector is returned</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
 
-<span class='no'>img2</span> <span class='kw'>&lt;-</span> <span class='fu'>tkimage.create</span>(<span class='st'>'photo'</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>200</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>150</span>)
-<span class='fu'>tcl</span>(<span class='no'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'yellow'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>199</span>, <span class='fl'>149</span>)
-<span class='fu'>tcl</span>(<span class='no'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>20</span>, <span class='fl'>130</span>, <span class='fl'>40</span>)
-<span class='no'>img3</span> <span class='kw'>&lt;-</span> <span class='fu'>tkimage.create</span>(<span class='st'>'photo'</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>100</span>)
-<span class='fu'>tcl</span>(<span class='no'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'orange'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>499</span>, <span class='fl'>99</span>)
-<span class='fu'>tcl</span>(<span class='no'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>80</span>, <span class='fl'>350</span>, <span class='fl'>95</span>)
+<span class='va'>img2</span> <span class='op'>&lt;-</span> <span class='fu'>tkimage.create</span><span class='op'>(</span><span class='st'>'photo'</span>, width<span class='op'>=</span><span class='fl'>200</span>, height<span class='op'>=</span><span class='fl'>150</span><span class='op'>)</span>
+<span class='fu'>tcl</span><span class='op'>(</span><span class='va'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'yellow'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>199</span>, <span class='fl'>149</span><span class='op'>)</span>
+<span class='fu'>tcl</span><span class='op'>(</span><span class='va'>img2</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>20</span>, <span class='fl'>130</span>, <span class='fl'>40</span><span class='op'>)</span>
+<span class='va'>img3</span> <span class='op'>&lt;-</span> <span class='fu'>tkimage.create</span><span class='op'>(</span><span class='st'>'photo'</span>, width<span class='op'>=</span><span class='fl'>500</span>, height<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='fu'>tcl</span><span class='op'>(</span><span class='va'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'orange'</span>, <span class='st'>'-to'</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>499</span>, <span class='fl'>99</span><span class='op'>)</span>
+<span class='fu'>tcl</span><span class='op'>(</span><span class='va'>img3</span>, <span class='st'>'put'</span>, <span class='st'>'green'</span>, <span class='st'>'-to'</span>, <span class='fl'>40</span>, <span class='fl'>80</span>, <span class='fl'>350</span>, <span class='fl'>95</span><span class='op'>)</span>
 
-<span class='fu'>l_imageviewer</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'>tclvalue</span>(<span class='no'>img2</span>), <span class='fu'>tclvalue</span>(<span class='no'>img3</span>)))
+<span class='fu'>l_imageviewer</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'>tclvalue</span><span class='op'>(</span><span class='va'>img2</span><span class='op'>)</span>, <span class='fu'>tclvalue</span><span class='op'>(</span><span class='va'>img3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +213,7 @@ in the specified image vector.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
