@@ -20,7 +20,7 @@
 #' @param title an overall title for the entire display. If \code{NULL} (the default), the title will be "Seasonal Trend Analysis".
 #' @param tk_title provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.
 #' @param linkingGroup name of linking group.
-#'        If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
+#'        If missing, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
@@ -42,25 +42,28 @@ l_plot_ts <- function(x,
                       linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
-                      linkingGroup = NULL,
+                      linkingGroup,
                       showScales=TRUE,
                       showGuides=TRUE,
                       showLabels=TRUE,
-                      ...){
-
-    if (is.null(lcolor)) lcolor <- getOption("color")
-    if (is.null(color)) color <- getOption("color")
+                      ...) {
 
     stlOrDecomposedTS <- x  # Just to remind us about what x is
 
     nameOfData <- strsplit(toString(stlOrDecomposedTS$call), ", ")[[1]][2]
     if (is.na(nameOfData)) nameOfData <- "a time series"
-    if (is.null(linkingGroup)) linkingGroup <- paste(nameOfData, class(stlOrDecomposedTS))
 
-    if(inherits(stlOrDecomposedTS, "decomposed.ts")){
+    new.linkingGroup <- FALSE
+    if (missing(linkingGroup)) {
+        new.linkingGroup <- TRUE
+        linkingGroup <- paste(nameOfData, class(stlOrDecomposedTS))
+    }
+
+    if(inherits(stlOrDecomposedTS, "decomposed.ts")) {
+
         data <- stlOrDecomposedTS$x
 
-        if(is.null(data)){
+        if(is.null(data)) {
             data <- with(stlOrDecomposedTS,
                          if (type == "additive") {
                              random + trend + seasonal
@@ -79,7 +82,9 @@ l_plot_ts <- function(x,
         xy.trend <- list(x = xy.raw$x[index.trend], y = stlOrDecomposedTS$trend[index.trend])
         xy.remainder <- list(x = xy.raw$x[index.random], y = stlOrDecomposedTS$random[index.random])
         xy.seasonal <- list(x = xy.raw$x[index.seasonal], y = stlOrDecomposedTS$seasonal[index.seasonal])
-    } else if(inherits(stlOrDecomposedTS, "stl")){
+
+    } else if(inherits(stlOrDecomposedTS, "stl")) {
+
         stl <- stlOrDecomposedTS$time.series
 
         # extract trend, seasonal and remainder
@@ -94,13 +99,13 @@ l_plot_ts <- function(x,
 
     }
 
-    if(is.null(xlabel) == TRUE ){
+    if(is.null(xlabel) == TRUE) {
         xlabel <- rep("time", 4)
     } else {
         if(length(xlabel) == 1) {
             xlabel <- rep(xlabel, 4)
         } else {
-            if(length(xlabel) != 4){
+            if(length(xlabel) != 4) {
                 warning("The length of xlabel should be 4, see Arguments xlabel and ylabel")
             }
         }
@@ -124,8 +129,8 @@ l_plot_ts <- function(x,
     if(is.null(tk_title)){tk_title <- paste0(decompType, " decomposition of ", nameOfData)}
     if(is.null(title)){title <- paste0("Decomposition (", decompType,") of ", nameOfData)}
 
-    args <- list(...)
-    parent <- args$parent
+    dotArgs <- list(...)
+    parent <- dotArgs$parent
     new.toplevel <- FALSE
     if(is.null(parent)) {
         new.toplevel <- TRUE
@@ -136,7 +141,12 @@ l_plot_ts <- function(x,
     tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
 
-    args$parent <- child
+    dotArgs$parent <- child
+
+    sync <- dotArgs[['sync']]
+    # if null, it is always **pull**
+    if(is.null(sync)) sync <- "pull"
+    dotArgs[['sync']] <- NULL
 
     p1 <- do.call(l_plot,
                   c(
@@ -147,12 +157,11 @@ l_plot_ts <- function(x,
                           ylabel = ylabel[1],
                           xlabel = xlabel[1],
                           title = title,
-                          linkingGroup = linkingGroup,
                           showScales = showScales,
                           showGuides = showGuides,
                           showLabels = showLabels
                       ),
-                      args
+                      dotArgs
                   ))
 
     l1 <- l_layer_line(p1,
@@ -170,12 +179,11 @@ l_plot_ts <- function(x,
                           color = color, size = size,
                           ylabel = ylabel[2],
                           xlabel = xlabel[2],
-                          linkingGroup = linkingGroup,
                           showScales = showScales,
                           showGuides = showGuides,
                           showLabels = showLabels
                       ),
-                      args
+                      dotArgs
                   ))
 
     l2 <- l_layer_line(p2,
@@ -192,18 +200,18 @@ l_plot_ts <- function(x,
                           color = color, size=size,
                           ylabel = ylabel[3],
                           xlabel = xlabel[3],
-                          linkingGroup = linkingGroup,
                           showScales = showScales,
                           showGuides = showGuides,
                           showLabels = showLabels
                       ),
-                      args
+                      dotArgs
                   ))
 
     l3 <- l_layer_line(p3,
                        x = xy.seasonal$x,
                        y = xy.seasonal$y,
-                       color = lcolor, linewidth = linewidth ,
+                       color = lcolor,
+                       linewidth = linewidth ,
                        index="end")
 
     p4 <- do.call(l_plot,
@@ -214,12 +222,11 @@ l_plot_ts <- function(x,
                           color = color, size=size,
                           ylabel = ylabel[4],
                           xlabel = xlabel[4],
-                          linkingGroup = linkingGroup,
                           showScales = showScales,
                           showGuides = showGuides,
                           showLabels = showLabels
                       ),
-                      args
+                      dotArgs
                   ))
 
     l4 <- l_layer_line(p4,
@@ -237,7 +244,16 @@ l_plot_ts <- function(x,
                } else {
                    tkconfigure(paste(p,".canvas", sep=''), width=500, height=150)
                }
+
+               l_configure(p,
+                           linkingGroup = linkingGroup,
+                           sync = sync)
            })
+
+    dotArgs$color <- color
+    dotArgs$size <- size
+    if(!new.linkingGroup)
+        l_linkingWarning(plots, sync, dotArgs)
 
     lapply(seq(length(plots)),
            function(i) {
@@ -251,7 +267,6 @@ l_plot_ts <- function(x,
 
     if(new.toplevel)
         tkpack(child, fill="both", expand=TRUE)
-
 
     ## Bind so that they show the same x range
     l_bind_state(p1, c("panX", "zoomX"), function(W)updateZoomPan(W))
