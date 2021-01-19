@@ -11,15 +11,14 @@
 #' @param target loon object specification (e.g. \code{".l0.plot"})
 #' @seealso \code{\link{l_create_handle}} \code{\link{l_loonWidgets}}
 #' @export
-#'
 #' @examples
-#'\dontrun {
+#' \dontrun{
 #'  l_pairs(iris, showHistogram = TRUE)
 #'  # The path can be found at the top of tk title
 #'  # Suppose it is the first loon widget, this path should be ".l0.pairs"
 #'  p <- l_create_handle(".l0.pairs") # error
 #'  p <- l_getFromPath(".l0.pairs")
-#'}
+#' }
 
 l_getFromPath <- function(target) {
 
