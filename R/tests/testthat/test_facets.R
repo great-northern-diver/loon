@@ -115,10 +115,10 @@ test_that("test facet l_facet class:l_plot3D", {
     p['size'][41:60] <- 16
     f <- l_facet(p, layout = "wrap", by = c("color", "size"))
     expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-    f <- l_facet(p, layout = "grid", by = c("color", "size"))
-    expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    f <- l_facet(p, layout = "separate", by = c("color", "selected"))
-    expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(p, layout = "grid", by = c("color", "size"))
+    # expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(p, layout = "separate", by = c("color", "selected"))
+    # expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test facet l_facet class:l_hist", {
@@ -126,12 +126,12 @@ test_that("test facet l_facet class:l_hist", {
     h <- l_hist(iris, color = iris$Species)
     h['selected'][1:30] <- TRUE
     h['selected'][31:60] <- TRUE
-    f <- l_facet(h, layout = "wrap", by = c("color", "selected"))
-    expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(h, layout = "wrap", by = c("color", "selected"))
+    # expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
     f <- l_facet(h, layout = "grid", by = c("color", "selected"))
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    f <- l_facet(h, layout = "separate", by = c("color", "selected"))
-    expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(h, layout = "separate", by = c("color", "selected"))
+    # expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test facet l_facet class:l_serialaxes", {
@@ -139,20 +139,20 @@ test_that("test facet l_facet class:l_serialaxes", {
     s <- l_serialaxes(iris, color = iris$Species)
     s['selected'][1:30] <- TRUE
     s['selected'][31:60] <- TRUE
-    f <- l_facet(s, layout = "wrap", by = c("color", "selected"))
-    expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-    f <- l_facet(s, layout = "grid", by = c("color", "selected"))
-    expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(s, layout = "wrap", by = c("color", "selected"))
+    # expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+    # f <- l_facet(s, layout = "grid", by = c("color", "selected"))
+    # expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     f <- l_facet(s, layout = "separate", by = c("color", "selected"))
     expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test some facet args in l_plot", {
-    p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl, vs = vs),
-                             labelLocation = c("bottom", "left"),
-                             labelBackground = "lightblue", labelForeground = "red",
-                             labelBorderwidth = 5, labelRelief = "flat"))
-    expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    # p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl, vs = vs),
+    #                          labelLocation = c("bottom", "left"),
+    #                          labelBackground = "lightblue", labelForeground = "red",
+    #                          labelBorderwidth = 5, labelRelief = "flat"))
+    # expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
                              color = "blue",
                              layout = "wrap",
@@ -160,13 +160,13 @@ test_that("test some facet args in l_plot", {
                              labelBackground = "lightblue", labelForeground = "red",
                              labelBorderwidth = 5, labelRelief = "flat"))
     expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
-    p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
-                             color = "blue",
-                             layout = "separate",
-                             labelLocation = c("bottom"),
-                             labelBackground = "lightblue", labelForeground = "red",
-                             labelBorderwidth = 5, labelRelief = "flat"))
-    expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
+    # p <- with(mtcars, l_plot(wt, mpg, by = data.frame(am = am, gear = gear, cyl  = cyl),
+    #                          color = "blue",
+    #                          layout = "separate",
+    #                          labelLocation = c("bottom"),
+    #                          labelBackground = "lightblue", labelForeground = "red",
+    #                          labelBorderwidth = 5, labelRelief = "flat"))
+    # expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
 })
 
 
