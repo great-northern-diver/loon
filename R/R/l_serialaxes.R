@@ -241,11 +241,13 @@ l_serialaxes <- function(data,
                          selected = FALSE,
                          parent=NULL, ... ) {
 
-    args <- list(...)
-    # set by args, used for facetting
-    by_args <- args[l_byArgs()]
-    # args passed into loonPlotFactory
-    args[l_byArgs()] <- NULL
+    dotArgs <- list(...)
+    # set by dotArgs, used for facetting
+    byArgs <- dotArgs[l_byArgs()]
+    # dotArgs passed into loonPlotFactory
+    dotArgs[l_byArgs()] <- NULL
+
+    l_className <- "l_serialaxes"
 
     data <- as.data.frame(data)
 
@@ -253,79 +255,37 @@ l_serialaxes <- function(data,
         sequence <- names(data)
     }
 
-    sync <- args$sync
-
-    if(is.null(sync)) {
-        sync <- "pull"
-        if(length(color) > 1) {
-            sync <- "push"
-        } else {
-            if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
-        }
-
-        if(length(linewidth) != 1) {
-            sync <- "push"
-        } else {
-            if(length(linewidth) == 1 && !is.na(linewidth) && linewidth != l_getOption("linewidth")) sync <- "push"
-        }
-    }
-
     n <- dim(data)[1]
-    len_color <- length(color)
-    if (len_color > 1) {
-        if (len_color != n) {
-            color <- rep_len(color, n)
-        }
-    } else {
-        if(is.na(color)) color <- l_getOption("color")
-    }
 
-    len_linewidth <- length(linewidth)
-    if (len_linewidth > 1) {
-        if (len_linewidth != n) {
-            linewidth <- rep_len(linewidth, n)
-        }
-    } else {
-        if(is.na(linewidth)) linewidth <- l_getOption("linewidth")
-    }
+    color <- aes_settings(color, n, ifNoStop = FALSE)
+    linewidth <- aes_settings(linewidth, n, ifNoStop = FALSE)
+    active <- aes_settings(active, n, ifNoStop = TRUE)
+    selected <- aes_settings(selected, n, ifNoStop = TRUE)
 
-    len_active <- length(active)
-    if (len_active > 1) {
-        if (len_active != n)
-            stop(paste0("When more than length 1, length of active must match number of points:",
-                        n)
-            )
-    } else {
-        if(is.na(active)) active <- TRUE
-    }
+    # `sync` and `linkingGroup` is set after the plot is created
+    # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
+    linkingGroup <- dotArgs[["linkingGroup"]]
+    dotArgs$linkingGroup <- NULL
+    sync <- dotArgs[["sync"]]
+    # if null, it is always **pull**
+    if(is.null(sync)) sync <- "pull"
+    dotArgs$sync <- NULL
 
-    len_selected <- length(selected)
-    if (len_selected > 1) {
-        if (len_selected != n)
-            stop(paste0("When more than length 1, length of selected must match number of points:",
-                        n)
-            )
-    } else {
-        if(is.na(selected)) selected <- FALSE
-    }
-
-    linkingGroup <- args[["linkingGroup"]]
-    args$linkingGroup <- NULL
     # n dimensional states NA check
-    args$data <- data
-    args$color <- color
-    args$linewidth <- linewidth
-    args$active <- active
-    args$selected <- selected
+    dotArgs$data <- data
+    dotArgs$color <- color
+    dotArgs$linewidth <- linewidth
+    dotArgs$active <- active
+    dotArgs$selected <- selected
 
     if(is.null(by)) {
-        args <- l_na_omit("l_serialaxes", args)
-        args$data <- l_data(args$data)
+        dotArgs <- l_na_omit(l_className, dotArgs)
+        dotArgs$data <- l_data(dotArgs$data)
 
         plot <- do.call(
             loonPlotFactory,
             c(
-                args,
+                dotArgs,
                 list(
                     factory_tclcmd = '::loon::serialaxes',
                     factory_path = 'serialaxes',
@@ -344,21 +304,23 @@ l_serialaxes <- function(data,
             l_configure(plot,
                         linkingGroup = linkingGroup,
                         sync = sync)
+
+            l_linkingWarning(plot, sync, dotArgs, l_className)
         }
 
-        class(plot) <- c("l_serialaxes", class(plot))
+        class(plot) <- c(l_className, class(plot))
         return(plot)
 
     } else {
 
         byDeparse <- deparse(substitute(by))
 
-        plots <- loonFacets(type = "l_serialaxes",
+        plots <- loonFacets(type = l_className,
                             valid_by(by, byDeparse, data, n = n),
-                            args,
+                            dotArgs,
                             byDeparse = byDeparse,
                             layout = match.arg(layout),
-                            by_args = Filter(Negate(is.null), by_args),
+                            byArgs = Filter(Negate(is.null), byArgs),
                             linkingGroup = linkingGroup,
                             sync = sync,
                             parent = parent,

@@ -99,14 +99,45 @@ l_graph.loongraph <- function(nodes,...) {
 #' @export l_graph.default
 l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 
-    plot <- loonPlotFactory('::loon::graph', 'graph', 'loon graph', parent,
-                            nodes = na.omit(as.character(nodes)),
-                            from = na.omit(as.character(from)),
-                            to = na.omit(as.character(to)), ...)
+    dotArgs <- list(...)
 
-    class(plot) <- c("l_graph", class(plot))
+    l_className <- "l_graph"
+
+    # `sync` and `linkingGroup` is set after the plot is created
+    # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
+    linkingGroup <- dotArgs[["linkingGroup"]]
+    dotArgs$linkingGroup <- NULL
+    sync <- dotArgs[["sync"]]
+    # if null, it is always **pull**
+    if(is.null(sync)) sync <- "pull"
+    dotArgs$sync <- NULL
+
+    plot <- do.call(
+        loonPlotFactory,
+        c(
+            dotArgs,
+            list(factory_tclcmd = '::loon::graph',
+                 factory_path = 'graph',
+                 factory_window_title = 'loon graph',
+                 parent = parent,
+                 nodes = na.omit(as.character(nodes)),
+                 from = na.omit(as.character(from)),
+                 to = na.omit(as.character(to)))
+        )
+    )
+
+    if(!is.null(linkingGroup)) {
+
+        # configure plot (linking)
+        l_configure(plot,
+                    linkingGroup = linkingGroup,
+                    sync = sync)
+
+        l_linkingWarning(plot, sync, dotArgs, l_className)
+    }
+
+    class(plot) <- c(l_className, class(plot))
 
     plot
-
 }
 

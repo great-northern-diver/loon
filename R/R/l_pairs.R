@@ -70,9 +70,11 @@ l_pairs <- function(data,
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
                     span = 10L, ...) {
 
-  args <- list(...)
+  dotArgs <- list(...)
 
+  new.linkingGroup <- FALSE
   if (missing(linkingGroup)) {
+    new.linkingGroup <- TRUE
     linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
   }
   # Use default as in tcl/tk
@@ -88,32 +90,35 @@ l_pairs <- function(data,
   }
   connectedScales <- match.arg(connectedScales)
 
-  args[['x']] <- NULL
-  args[['y']] <- NULL
-  args[['linkingGroup']] <- linkingGroup
-  args[['linkingKey']] <- linkingKey
-  args[['itemLabel']] <- itemLabel
-  args[['showItemLabels']] <- showItemLabels
-  if(!is.null(args[['by']])) {
+  sync <- dotArgs[['sync']]
+  # if null, it is always **pull**
+  if(is.null(sync)) sync <- "pull"
+  dotArgs[['sync']] <- NULL
+  dotArgs[['x']] <- NULL
+  dotArgs[['y']] <- NULL
+  dotArgs[['linkingKey']] <- linkingKey
+  dotArgs[['itemLabel']] <- itemLabel
+  dotArgs[['showItemLabels']] <- showItemLabels
+  if(!is.null(dotArgs[['by']])) {
     warning("'l_pairs' does not support facetting layouts")
-    args[['by']] <- NULL
+    dotArgs[['by']] <- NULL
   }
 
   if (dim(data)[2] < 2) {
-    args[['x']] <- data
-    args[['parent']] <- parent
-    return(do.call(l_plot, args))
+    dotArgs[['x']] <- data
+    dotArgs[['parent']] <- parent
+    return(do.call(l_plot, dotArgs))
   }
 
   # if (dim(data)[2] == 2) {
-  #     args[['x']] <- data
-  #     args[['parent']] <- parent
-  #     return(do.call(l_plot, args))
+  #     dotArgs[['x']] <- data
+  #     dotArgs[['parent']] <- parent
+  #     return(do.call(l_plot, dotArgs))
   # }
 
-  args[['showLabels']] <- FALSE
-  args[['showScales']] <- FALSE
-  args[['swapAxes']] <- FALSE
+  dotArgs[['showLabels']] <- FALSE
+  dotArgs[['showScales']] <- FALSE
+  dotArgs[['swapAxes']] <- FALSE
 
   new.toplevel <- FALSE
   if(is.null(parent)) {
@@ -128,7 +133,7 @@ l_pairs <- function(data,
                  deparse(substitute(data)), "data", "--path:", subwin)
   tktitle(parent) <- title
   ## parent for individual scatterplots
-  args[['parent']] <- child
+  dotArgs[['parent']] <- child
 
   nvar <- dim(data)[2]
   pair <- utils::combn(nvar, 2)
@@ -151,22 +156,22 @@ l_pairs <- function(data,
   histLocation <- match.arg(histLocation)
   histspan <- 0L
 
+  histograms <- list()
   if (showHistograms) {
     if(is.null(histArgs[['showStackedColors']])) histArgs[['showStackedColors']] <- TRUE
     if(is.null(histArgs[['showOutlines']])) histArgs[['showOutlines']] <- FALSE
     if(is.null(histArgs[['yshows']])) histArgs[['yshows']] <- "density"
     if(is.null(histArgs[['showBinHandle']])) histArgs[['showBinHandle']] <- FALSE
     if(!is.null(histArgs[['by']])) {
-      warning("'l_pairs' does not support facetting layouts")
+      warning("'l_pairs' does not support facetting layouts", call. = FALSE)
       histArgs[['by']] <- NULL
     }
-    # histArgs is consistent with args
-    histArgs[['showLabels']] <- args[['showLabels']]
-    histArgs[['showScales']] <- args[['showScales']]
-    histArgs[['parent']] <- args[['parent']]
-    histArgs[['linkingGroup']] <- args[['linkingGroup']]
-    histArgs[['linkingKey']] <- args[['linkingKey']]
-    histograms <- list()
+    # histArgs is consistent with dotArgs
+    histArgs[['showLabels']] <- dotArgs[['showLabels']]
+    histArgs[['showScales']] <- dotArgs[['showScales']]
+    histArgs[['parent']] <- dotArgs[['parent']]
+    histArgs[['linkingGroup']] <- NULL
+    histArgs[['linkingKey']] <- dotArgs[['linkingKey']]
 
     switch(histLocation,
            "edge" = {
@@ -266,6 +271,15 @@ l_pairs <- function(data,
                     }
              )
            })
+
+    histograms <- Filter(Negate(is.null), histograms)
+    # configure `linkingGroup` and `sync`
+    lapply(histograms,
+           function(h) {
+             l_configure(h,
+                         linkingGroup = linkingGroup,
+                         sync = sync)
+           })
   }
 
   if (showSerialAxes) {
@@ -273,18 +287,24 @@ l_pairs <- function(data,
     serialAxesArgs[['showScales']] <- NULL
     serialAxesArgs[['swapAxes']] <- NULL
     serialAxesArgs[['axesLayout']] <- "parallel"
-    serialAxesArgs[['showLabels']] <- args[['showLabels']]
-    serialAxesArgs[['parent']] <- args[['parent']]
-    serialAxesArgs[['linkingGroup']] <- args[['linkingGroup']]
-    serialAxesArgs[['linkingKey']] <- args[['linkingKey']]
-    serialAxesArgs[['itemLabel']] <- args[['itemLabel']]
-    serialAxesArgs[['showItemLabels']] <- args[['showItemLabels']]
+    serialAxesArgs[['showLabels']] <- dotArgs[['showLabels']]
+    serialAxesArgs[['parent']] <- dotArgs[['parent']]
+    serialAxesArgs[['linkingGroup']] <- NULL
+    serialAxesArgs[['linkingKey']] <- dotArgs[['linkingKey']]
+    serialAxesArgs[['itemLabel']] <- dotArgs[['itemLabel']]
+    serialAxesArgs[['showItemLabels']] <- dotArgs[['showItemLabels']]
     if(!is.null(serialAxesArgs[['by']])) {
       warning("'l_pairs' does not support facetting layouts")
-      histArgs[['by']] <- NULL
+      serialAxesArgs[['by']] <- NULL
     }
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
+
+    # configure `linkingGroup` and `sync`
+    l_configure(serialAxes,
+                linkingGroup = linkingGroup,
+                sync = sync)
+
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
                 width= serialAxesSpan * 50,
                 height = serialAxesSpan * 50)
@@ -293,6 +313,7 @@ l_pairs <- function(data,
            rowspan = serialAxesSpan * span, columnspan = serialAxesSpan * span,
            sticky="nesw")
   }
+
   scatterplots <- vector(mode="list", dim(pair)[2])
 
   ## create first plot
@@ -300,13 +321,13 @@ l_pairs <- function(data,
     ix <- pair[2,i]
     iy <- pair[1,i]
 
-    args[['xlabel']] <- varnames[ix]
-    args[['ylabel']] <- varnames[iy]
+    dotArgs[['xlabel']] <- varnames[ix]
+    dotArgs[['ylabel']] <- varnames[iy]
 
-    args[['x']] <- data[[varnames[ix]]]
-    args[['y']] <- data[[varnames[iy]]]
+    dotArgs[['x']] <- data[[varnames[ix]]]
+    dotArgs[['y']] <- data[[varnames[iy]]]
 
-    scatterplots[[i]] <- do.call(l_plot, args)
+    scatterplots[[i]] <- do.call(l_plot, dotArgs)
     # reset names (if showHistograms)
     if (showHistograms & histLocation == "edge") {
       names(scatterplots)[i] <- paste('x',ix,'y',iy + 1, sep="")
@@ -314,6 +335,14 @@ l_pairs <- function(data,
       names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")
     }
   }
+
+  # configure `linkingGroup` and `sync`
+  lapply(scatterplots,
+         function(s) {
+           l_configure(s,
+                       linkingGroup = linkingGroup,
+                       sync = sync)
+         })
 
   if (any(sapply(scatterplots, function(p) {is(p, 'try-error')}))) {
     if(new.toplevel) tkdestroy(parent)
@@ -534,17 +563,17 @@ l_pairs <- function(data,
                    undoHistStateChanges)
            })
 
-    if(histLocation == "edge") {
-      plots<- c(plots, histograms[2:(2*nvar-1)])
-    } else {
-      plots<- c(plots, histograms)
-    }
+    plots<- c(plots, histograms)
 
     callbackFunctions$state[[paste(child,"synchronizeHist", sep="_")]] <- synchronizeHistBindings
     callbackFunctions$state[[paste(child,"undoHistStateChanges", sep="_")]] <- undoHistStateChanges
   }
   if(showSerialAxes) {
     plots <- c(plots, list(serialAxes = serialAxes))
+  }
+
+  if(!new.linkingGroup) {
+    l_linkingWarning(plots, sync, dotArgs)
   }
 
   ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector

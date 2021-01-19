@@ -316,11 +316,13 @@ l_hist.default <-  function(x,
                             parent = NULL,
                             ...) {
 
-    args <- list(...)
-    # set by args, used for facetting
-    by_args <- args[l_byArgs()]
-    # args passed into loonPlotFactory
-    args[l_byArgs()] <- NULL
+    dotArgs <- list(...)
+    # set by dotArgs, used for facetting
+    byArgs <- dotArgs[l_byArgs()]
+    # dotArgs passed into loonPlotFactory
+    dotArgs[l_byArgs()] <- NULL
+
+    l_className <- "l_hist"
 
     if(missing(x)) {
 
@@ -338,7 +340,7 @@ l_hist.default <-  function(x,
         plot <- do.call(
             loonPlotFactory,
             c(
-                args,
+                dotArgs,
                 list(
                     factory_tclcmd = '::loon::histogram',
                     factory_path = 'hist',
@@ -354,7 +356,7 @@ l_hist.default <-  function(x,
             )
         )
 
-        class(plot) <- c("l_hist", class(plot))
+        class(plot) <- c(l_className, class(plot))
         return(plot)
 
     } else {
@@ -364,46 +366,12 @@ l_hist.default <-  function(x,
         if(!is.null(dim_x))
             stop("Unkown data structure",
                  call. = FALSE)
-        sync <- args$sync
-
-        if(is.null(sync)) {
-            sync <- "pull"
-            if(length(color) > 1) {
-                sync <- "push"
-            } else {
-                if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
-            }
-        }
 
         n <- length(x)
-        len_color <- length(color)
-        if (len_color > 1) {
-            if (len_color != n) {
-                color <- rep_len(color, n)
-            }
-        } else {
-            if(is.na(color)) color <- l_getOption("color")
-        }
 
-        len_active <- length(active)
-        if (len_active > 1) {
-            if (len_active != n)
-                stop(paste0("When more than length 1, length of active must match number of points:",
-                            n)
-                )
-        } else {
-            if(is.na(active)) active <- TRUE
-        }
-
-        len_selected <- length(selected)
-        if (len_selected > 1) {
-            if (len_selected != n)
-                stop(paste0("When more than length 1, length of selected must match number of points:",
-                            n)
-                )
-        } else {
-            if(is.na(selected)) selected <- FALSE
-        }
+        color <- aes_settings(color, n, ifNoStop = FALSE)
+        active <- aes_settings(active, n, ifNoStop = TRUE)
+        selected <- aes_settings(selected, n, ifNoStop = TRUE)
 
         if (is.null(xlabel))
             xlabel <- gsub("\"", "", deparse(substitute(x)))
@@ -422,22 +390,30 @@ l_hist.default <-  function(x,
             binwidth <- if (sd == 0 || is.na(sd)) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
-        linkingGroup <- args[["linkingGroup"]]
-        args$linkingGroup <- NULL
+
+        # `sync` and `linkingGroup` is set after the plot is created
+        # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
+        linkingGroup <- dotArgs[["linkingGroup"]]
+        dotArgs$linkingGroup <- NULL
+        sync <- dotArgs[["sync"]]
+        # if null, it is always **pull**
+        if(is.null(sync)) sync <- "pull"
+        dotArgs$sync <- NULL
+
         # n dimensional states NA check
-        args$x <- x
-        args$color <- color
-        args$active <- active
-        args$selected <- selected
+        dotArgs$x <- x
+        dotArgs$color <- color
+        dotArgs$active <- active
+        dotArgs$selected <- selected
 
         if(is.null(by)) {
 
-            args <- l_na_omit("l_hist", args)
+            dotArgs <- l_na_omit(l_className, dotArgs)
 
             plot <- do.call(
                 loonPlotFactory,
                 c(
-                    args,
+                    dotArgs,
                     list(
                         factory_tclcmd = '::loon::histogram',
                         factory_path = 'hist',
@@ -454,12 +430,15 @@ l_hist.default <-  function(x,
             )
 
             if(!is.null(linkingGroup)) {
+
                 l_configure(plot,
                             linkingGroup = linkingGroup,
                             sync = sync)
+
+                l_linkingWarning(plot, sync, dotArgs, l_className)
             }
 
-            class(plot) <- c("l_hist", class(plot))
+            class(plot) <- c(l_className, class(plot))
             return(plot)
 
         } else {
@@ -468,11 +447,11 @@ l_hist.default <-  function(x,
 
             plots <- loonFacets(type = "l_hist",
                                 valid_by(by, byDeparse, x, xlabel, n),
-                                args,
+                                dotArgs,
                                 byDeparse = byDeparse,
                                 layout = match.arg(layout),
                                 connectedScales = match.arg(connectedScales),
-                                by_args = Filter(Negate(is.null), by_args),
+                                byArgs = Filter(Negate(is.null), byArgs),
                                 linkingGroup = linkingGroup,
                                 sync = sync,
                                 parent = parent,
