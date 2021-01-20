@@ -120,34 +120,34 @@ l_loonWidgets <- function(pathTypes, inspector = FALSE) {
     names <- rep(NA, len)
 
     loonPlots <- lapply(seq(len),
-                   function(i) {
-                       w <- widgets[i]
-                       child <- tryCatch(
-                           expr = {
-                               as.character(tkwinfo("child", w))
-                           },
-                           error = function(e) NULL
-                       )
-                       if(is.null(child)) return(NULL)
-                       if(l_isLoonWidget(child)) {
+                        function(i) {
+                            w <- widgets[i]
+                            child <- tryCatch(
+                                expr = {
+                                    as.character(tkwinfo("child", w))
+                                },
+                                error = function(e) NULL
+                            )
+                            if(is.null(child)) return(NULL)
+                            if(l_isLoonWidget(child)) {
 
-                           if(!inspector) {
-                               if(grepl("looninspector", child))
-                                   return(NULL)
-                           }
+                                if(!inspector) {
+                                    if(grepl("looninspector", child))
+                                        return(NULL)
+                                }
 
-                           names[i] <<- child
-                           return(l_create_handle(child))
-                       }
+                                names[i] <<- child
+                                return(l_create_handle(child))
+                            }
 
-                       compound <- l_getFromPath(child)
+                            compound <- l_getFromPath(child)
 
-                       if(length(compound) == 0)
-                           return(NULL)
+                            if(length(compound) == 0)
+                                return(NULL)
 
-                       names[i] <<- child
-                       compound
-                   })
+                            names[i] <<- child
+                            compound
+                        })
 
     loonPlots <- Filter(Negate(is.null), loonPlots)
     names <- na.omit(names)
