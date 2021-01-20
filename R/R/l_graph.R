@@ -103,7 +103,7 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 
     l_className <- "l_graph"
 
-    # `sync` and `linkingGroup` is set after the plot is created
+    # `sync` and `linkingGroup` are set after the plot is created
     # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
     linkingGroup <- dotArgs[["linkingGroup"]]
     dotArgs$linkingGroup <- NULL

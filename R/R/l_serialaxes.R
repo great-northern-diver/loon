@@ -262,7 +262,7 @@ l_serialaxes <- function(data,
     active <- aes_settings(active, n, ifNoStop = TRUE)
     selected <- aes_settings(selected, n, ifNoStop = TRUE)
 
-    # `sync` and `linkingGroup` is set after the plot is created
+    # `sync` and `linkingGroup` are set after the plot is created
     # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
     linkingGroup <- dotArgs[["linkingGroup"]]
     dotArgs$linkingGroup <- NULL
