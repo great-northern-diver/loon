@@ -172,7 +172,7 @@ objects of class <code>stl</code></p>
   size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
   lcolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
   linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
-  linkingGroup <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>linkingGroup</span>,
   showScales <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -233,7 +233,7 @@ Default is given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth"
     <tr>
       <th>linkingGroup</th>
       <td><p>name of linking group.
-If <code>NULL</code>, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
+If missing, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
     </tr>
     <tr>
       <th>showScales</th>
