@@ -4,27 +4,27 @@ oo::class create loon::classes::SerialaxesGlyphInspector {
     superclass ::loon::classes::GlyphInspector
 
     variable axesLayout scaling
-      
-    
+
+
     method Make {} {
 	my variable path
-	
+
 	frame $path -class SerialaxesGlyphInspector
-	
-	foreach state {showEnclosing showAxes showArea} {
+
+	foreach state {showEnclosing showAxes showArea andrews} {
 	    my variable cb_${state}
 	    set var [my varname cb_$state]; # need absolute path
 	    checkbutton ${path}.$state -text $state\
 		-variable $var -onvalue TRUE -offvalue FALSE\
 		-command "[self namespace]::my PlotCommands $state"
-	    pack ${path}.$state -side top -anchor w 
-	} 
-	
+	    pack ${path}.$state -side top -anchor w
+	}
+
 	## axes layout
 	set axesLayout "radial"
 	set lvar [my varname axesLayout]
 	set playout ${path}.axesLayout
-	pack [frame $playout] -side top -anchor w	
+	pack [frame $playout] -side top -anchor w
 	pack [label ${playout}.label -text "axes layout:"]\
 	    [radiobutton ${playout}.radial -text "radial"\
 		 -variable $lvar -value "radial"\
@@ -38,7 +38,7 @@ oo::class create loon::classes::SerialaxesGlyphInspector {
 	pack [label ${path}.l_scaling -text "scaling:"] -side top -anchor w
 	set pscl [frame ${path}.f_scaling]
 	pack $pscl -side top -anchor w
-	
+
 	set scl [list variable observation data none]
 	set wscl {}
 	set vscl [my varname scaling]
@@ -49,8 +49,8 @@ oo::class create loon::classes::SerialaxesGlyphInspector {
 			      -command "[self namespace]::my ChangeScaling"]
 	}
 	pack {*}$wscl -side top -anchor w
-	
-	
+
+
 	# pack  [label ${ppath}.l2 -text "showAxes"]\
 	#     [label ${ppath}.l3 -text "axesColor"]\
 	#     [label ${ppath}.l5 -text "linewidth"]\
@@ -58,19 +58,19 @@ oo::class create loon::classes::SerialaxesGlyphInspector {
 	#     [label ${ppath}.l7 -text "axes layout"]\
 	#     [label ${ppath}.l8 -text "showArea"]\
 	    #     -side top -anchor w
-    } 
+    }
 
     method ActiveglyphEvents {events} {
 	my variable activewidget activeglyph
-	
+
 	## for now always update all
-	foreach state {showEnclosing showAxes showArea} {
+	foreach state {showEnclosing showAxes showArea andrews} {
 	    my variable cb_$state
 	    set cb_$state [uplevel #0 [list $activewidget glyph use $activeglyph cget -$state]]
 	}
-	
-	set axesLayout [uplevel #0 [list $activewidget glyph use $activeglyph cget -axesLayout]]	
-	set scaling [uplevel #0 [list $activewidget  glyph use $activeglyph cget -scaling]]	
+
+	set axesLayout [uplevel #0 [list $activewidget glyph use $activeglyph cget -axesLayout]]
+	set scaling [uplevel #0 [list $activewidget  glyph use $activeglyph cget -scaling]]
     }
 
 
@@ -87,7 +87,7 @@ oo::class create loon::classes::SerialaxesGlyphInspector {
 	if {$activewidget ne "" && $activeglyph ne ""} {
 	    uplevel #0 [list $activewidget glyph use $activeglyph configure -axesLayout $axesLayout]
 	}
-	
+
     }
     method ChangeScaling {} {
 	my variable activewidget activeglyph
