@@ -58,6 +58,12 @@
 #' and which is not (\code{FALSE}).
 #' @param xlabel label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 #'   inferred from \code{x} will be made.
+#' @param showLabels logical to determine whether axes label (and title) should
+#' be presented.
+#' @param showScales logical to determine whether numerical scales should
+#' be presented on both axes.
+#' @param showGuides logical to determine whether to present background guidelines
+#' to help determine locations.
 #' @template param_parent
 #' @param ... named arguments to modify the histogram plot states or layouts, see details.
 #'
@@ -100,7 +106,7 @@
 #' h['color'] <- iris$Species
 #' h["showStackedColors"] <- FALSE
 #' h["showOutlines"] <- TRUE
-#' h["showGuides"] <- TRUE
+#' h["showGuides"] <- FALSE
 #'
 #' # link another plot with the previous plot
 #' h['linkingGroup'] <- "iris_data"
@@ -131,6 +137,9 @@ l_hist <- function(x,
                    active = TRUE,
                    selected = FALSE,
                    xlabel = NULL,
+                   showLabels = TRUE,
+                   showScales = FALSE,
+                   showGuides = TRUE,
                    parent=NULL, ...) {
     UseMethod("l_hist")
 }
@@ -149,6 +158,9 @@ l_hist.factor <-  function(x,
                            active = TRUE,
                            selected = FALSE,
                            xlabel = NULL,
+                           showLabels = TRUE,
+                           showScales = FALSE,
+                           showGuides = TRUE,
                            parent=NULL, ...) {
 
     if(missing(x))
@@ -166,6 +178,9 @@ l_hist.factor <-  function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -203,6 +218,9 @@ l_hist.factor <-  function(x,
                  active = active,
                  selected = selected,
                  xlabel = xlabel,
+                 showLabels = showLabels,
+                 showScales = showScales,
+                 showGuides = showGuides,
                  parent=parent, ...)
 
     # Add level names to plot
@@ -261,6 +279,9 @@ l_hist.character <-  function(x,
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
+                              showLabels = TRUE,
+                              showScales = FALSE,
+                              showGuides = TRUE,
                               parent=NULL, ...) {
 
     if(missing(x))
@@ -278,6 +299,9 @@ l_hist.character <-  function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -296,6 +320,9 @@ l_hist.character <-  function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -313,6 +340,9 @@ l_hist.default <-  function(x,
                             active = TRUE,
                             selected = FALSE,
                             xlabel = NULL,
+                            showLabels = TRUE,
+                            showScales = FALSE,
+                            showGuides = TRUE,
                             parent = NULL,
                             ...) {
 
@@ -351,6 +381,9 @@ l_hist.default <-  function(x,
                     origin = origin,
                     binwidth = binwidth,
                     showBinHandle = showBinHandle,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
                     xlabel = xlabel
                 )
             )
@@ -424,6 +457,9 @@ l_hist.default <-  function(x,
                         origin = origin,
                         binwidth=binwidth,
                         showBinHandle = showBinHandle,
+                        showLabels = showLabels,
+                        showScales = showScales,
+                        showGuides = showGuides,
                         xlabel = xlabel
                     )
                 )
@@ -458,6 +494,9 @@ l_hist.default <-  function(x,
                                 factory_tclcmd = '::loon::histogram',
                                 factory_path = 'hist',
                                 factory_window_title = 'loon histogram',
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
                                 yshows = yshows,
                                 showStackedColors = showStackedColors,
                                 origin = origin,
@@ -486,6 +525,9 @@ l_hist.data.frame <- function(x,
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
+                              showLabels = TRUE,
+                              showScales = FALSE,
+                              showGuides = TRUE,
                               parent=NULL, ...) {
 
     if(missing(x))
@@ -503,6 +545,9 @@ l_hist.data.frame <- function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -531,6 +576,9 @@ l_hist.data.frame <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -548,6 +596,9 @@ l_hist.matrix <- function(x,
                           active = TRUE,
                           selected = FALSE,
                           xlabel = NULL,
+                          showLabels = TRUE,
+                          showScales = FALSE,
+                          showGuides = TRUE,
                           parent=NULL, ...) {
 
     l_hist(c(x),
@@ -563,6 +614,9 @@ l_hist.matrix <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -580,7 +634,15 @@ l_hist.list <- function(x,
                         active = TRUE,
                         selected = FALSE,
                         xlabel = NULL,
+                        showLabels = TRUE,
+                        showScales = FALSE,
+                        showGuides = TRUE,
                         parent=NULL, ...) {
+
+    if(is.null(by)) {
+        message("The default argument `by` is set based on the list")
+        by <- rep(seq(length(x)), lengths(x))
+    }
 
     l_hist(unlist(x),
            by = by,
@@ -595,6 +657,9 @@ l_hist.list <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -612,6 +677,9 @@ l_hist.table <- function(x,
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,
+                         showLabels = TRUE,
+                         showScales = FALSE,
+                         showGuides = TRUE,
                          parent=NULL, ...) {
 
     dim_x <- dim(x)
@@ -645,6 +713,9 @@ l_hist.table <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -662,6 +733,9 @@ l_hist.array <- function(x,
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,
+                         showLabels = TRUE,
+                         showScales = FALSE,
+                         showGuides = TRUE,
                          parent=NULL, ...) {
 
     l_hist.table(x = x,
@@ -677,5 +751,8 @@ l_hist.array <- function(x,
                  active = active,
                  selected = selected,
                  xlabel = xlabel,
+                 showLabels = showLabels,
+                 showScales = showScales,
+                 showGuides = showGuides,
                  parent=parent, ...)
 }

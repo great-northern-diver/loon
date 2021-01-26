@@ -18,6 +18,9 @@ l_hist(
   active = TRUE,
   selected = FALSE,
   xlabel = NULL,
+  showLabels = TRUE,
+  showScales = FALSE,
+  showGuides = TRUE,
   parent = NULL,
   ...
 )
@@ -90,6 +93,15 @@ and which is not (\code{FALSE}).}
 \item{xlabel}{label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 inferred from \code{x} will be made.}
 
+\item{showLabels}{logical to determine whether axes label (and title) should
+be presented.}
+
+\item{showScales}{logical to determine whether numerical scales should
+be presented on both axes.}
+
+\item{showGuides}{logical to determine whether to present background guidelines
+to help determine locations.}
+
 \item{parent}{parent widget path}
 
 \item{...}{named arguments to modify the histogram plot states or layouts, see details.}
@@ -134,7 +146,7 @@ h["showStackedColors"] <- TRUE
 h['color'] <- iris$Species
 h["showStackedColors"] <- FALSE
 h["showOutlines"] <- TRUE
-h["showGuides"] <- TRUE
+h["showGuides"] <- FALSE
 
 # link another plot with the previous plot
 h['linkingGroup'] <- "iris_data"
