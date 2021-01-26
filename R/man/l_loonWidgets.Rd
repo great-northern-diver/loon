@@ -4,11 +4,13 @@
 \alias{l_loonWidgets}
 \title{Get all active top level loon plots.}
 \usage{
-l_loonWidgets(pathTypes)
+l_loonWidgets(pathTypes, inspector = FALSE)
 }
 \arguments{
 \item{pathTypes}{an optional argument identifying the collection of path types that
-are to be returned (if displayed).
+are to be returned (if displayed).}
+
+\item{inspector}{whether to return the loon inspector widget or not
 
 This must be a subset of the union of
 \code{\link{l_basePaths}()} and \code{\link{l_compoundPaths}()}.

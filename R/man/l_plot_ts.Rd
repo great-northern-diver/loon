@@ -14,7 +14,7 @@ l_plot_ts(
   ylabel = NULL,
   title = NULL,
   tk_title = NULL,
-  linkingGroup = NULL,
+  linkingGroup,
   showScales = TRUE,
   showGuides = TRUE,
   showLabels = TRUE,
@@ -48,7 +48,7 @@ time series, the trend component, the seasonality component, and the remainder. 
 \item{tk_title}{provides an alternative window name to Tk's \code{wm title}.  If \code{NULL}, \code{stl} will be used.}
 
 \item{linkingGroup}{name of linking group.
-If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
+If missing, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
 
 \item{showScales}{a logical as to whether to display the scales on all axes, default is TRUE.}
 

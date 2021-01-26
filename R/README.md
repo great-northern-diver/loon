@@ -150,7 +150,7 @@ l_facet(p, by = levels,
         linkingGroup = "quakes")
 ```
 
-![](man/figures/facetting.png)
+![](man/figures/facetting.PNG)
 
 ## On the name
 

@@ -1,5 +1,5 @@
 loonFacets <- function(type, by, args, layout = "grid", byDeparse = "",
-                       connectedScales = "both", by_args, linkingGroup, sync, parent,
+                       connectedScales = "both", byArgs, linkingGroup, sync, parent,
                        factory_tclcmd, factory_path, factory_window_title,
                        xlabel = "", ylabel = "", title = "", ...) {
     class(type) <- type[1]
@@ -12,7 +12,7 @@ loonFacets.default <- function(type,
                                byDeparse = "",
                                layout = "grid",
                                connectedScales = "both",
-                               by_args,
+                               byArgs,
                                linkingGroup, sync, parent,
                                factory_tclcmd, factory_path,
                                factory_window_title,
@@ -40,7 +40,7 @@ loonFacets.default <- function(type,
         length(x)
     }
     # N dim args
-    data <- as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE)
+    nDimArgs <- as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE)
     # 1 dim args
     oneDimArgs <- args[which(lengths(args) != N)]
 
@@ -49,10 +49,10 @@ loonFacets.default <- function(type,
                                      as.character(levels(factor(b)))),
                           by_names)
 
-    # split data by "by"
-    split_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
+    # split nDimArgs by "by"
+    splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
 
-    if(length(split_data) == 1) {
+    if(length(splitNDimArgs) == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -70,6 +70,8 @@ loonFacets.default <- function(type,
             l_configure(plot,
                         linkingGroup = linkingGroup,
                         sync = sync)
+
+            l_linkingWarning(plot, sync, nDimArgs)
         }
 
         class(plot) <- c(type, class(plot))
@@ -100,12 +102,14 @@ loonFacets.default <- function(type,
     }
 
     # linkingGroup
+    new.linkingGroup <- FALSE
     if(is.null(linkingGroup)) {
         linkingGroup <- paste0("layout", valid_path())
         message(paste("linkingGroup:", linkingGroup))
+        new.linkingGroup <- TRUE
     }
 
-    plots <- lapply(split_data,
+    plots <- lapply(splitNDimArgs,
                     function(d) {
 
                         if(dim(d)[1] == 0) {
@@ -162,12 +166,16 @@ loonFacets.default <- function(type,
                     })
 
     # set linkingGroup for each plot
-    plots <- lapply(plots,
-                    function(plot) {
-                        l_configure(plot,
-                                    linkingGroup = linkingGroup,
-                                    sync = sync)
-                    })
+    lapply(plots,
+           function(plot) {
+               l_configure(plot,
+                           linkingGroup = linkingGroup,
+                           sync = sync)
+           })
+
+    # give warning if linked plot has been
+    if(!new.linkingGroup)
+        l_linkingWarning(plots, sync, nDimArgs)
 
     xrange <- c()
     yrange <- c()
@@ -231,7 +239,7 @@ loonFacets.default <- function(type,
         plots <- do.call(
             facet_grid_layout,
             c(
-                by_args,
+                byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
                      parent = child,
@@ -260,7 +268,7 @@ loonFacets.default <- function(type,
         plots <- do.call(
             facet_wrap_layout,
             c(
-                by_args,
+                byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
                      parent = child,
@@ -293,7 +301,7 @@ loonFacets.l_serialaxes <- function(type,
                                     byDeparse = "",
                                     layout = "grid",
                                     connectedScales = "both",
-                                    by_args, linkingGroup, sync, parent,
+                                    byArgs, linkingGroup, sync, parent,
                                     factory_tclcmd, factory_path,
                                     factory_window_title,
                                     xlabel = "", ylabel = "", title = "", ...) {
@@ -322,7 +330,7 @@ loonFacets.l_serialaxes <- function(type,
         length(x)
     }
     # N dim args
-    data <- cbind(index = 1:N, as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE))
+    nDimArgs <- cbind(index = 1:N, as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE))
 
     serialaxesData <- args$data
     # 1 dim args
@@ -332,9 +340,9 @@ loonFacets.l_serialaxes <- function(type,
     subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(b)))), by_names)
 
     # split data by "by"
-    split_data <- split(data, f = as.list(by), drop = FALSE, sep = "*")
+    splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
 
-    if(length(split_data) == 1) {
+    if(length(splitNDimArgs) == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -383,12 +391,14 @@ loonFacets.l_serialaxes <- function(type,
     }
 
     # linkingGroup
+    new.linkingGroup <- FALSE
     if(is.null(linkingGroup)) {
         linkingGroup <- paste0("layout", valid_path())
         message(paste("linkingGroup:", linkingGroup))
+        new.linkingGroup <- TRUE
     }
 
-    plots <- lapply(split_data,
+    plots <- lapply(splitNDimArgs,
                     function(d) {
 
                         if(dim(d)[1] == 0) {
@@ -456,7 +466,7 @@ loonFacets.l_serialaxes <- function(type,
         plots <- do.call(
             facet_grid_layout,
             c(
-                by_args,
+                byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
                      parent = child,
@@ -486,7 +496,7 @@ loonFacets.l_serialaxes <- function(type,
         plots <- do.call(
             facet_wrap_layout,
             c(
-                by_args,
+                byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
                      parent = child,

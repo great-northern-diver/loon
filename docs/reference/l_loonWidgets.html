@@ -166,7 +166,7 @@ look for all loon plots displayed and return their values in a list whose
 elements may then be assigned to R variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_loonWidgets</span><span class='op'>(</span><span class='va'>pathTypes</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_loonWidgets</span><span class='op'>(</span><span class='va'>pathTypes</span>, inspector <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +174,11 @@ elements may then be assigned to R variables.</p>
     <tr>
       <th>pathTypes</th>
       <td><p>an optional argument identifying the collection of path types that
-are to be returned (if displayed).</p>
+are to be returned (if displayed).</p></td>
+    </tr>
+    <tr>
+      <th>inspector</th>
+      <td><p>whether to return the loon inspector widget or not</p>
 <p>This must be a subset of the union of
 <code><a href='l_basePaths.html'>l_basePaths</a>()</code> and <code><a href='l_compoundPaths.html'>l_compoundPaths</a>()</code>.</p>
 <p>If it is missing,

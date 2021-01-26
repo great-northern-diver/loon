@@ -58,6 +58,12 @@
 #' and which is not (\code{FALSE}).
 #' @param xlabel label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 #'   inferred from \code{x} will be made.
+#' @param showLabels logical to determine whether axes label (and title) should
+#' be presented.
+#' @param showScales logical to determine whether numerical scales should
+#' be presented on both axes.
+#' @param showGuides logical to determine whether to present background guidelines
+#' to help determine locations.
 #' @template param_parent
 #' @param ... named arguments to modify the histogram plot states or layouts, see details.
 #'
@@ -100,7 +106,7 @@
 #' h['color'] <- iris$Species
 #' h["showStackedColors"] <- FALSE
 #' h["showOutlines"] <- TRUE
-#' h["showGuides"] <- TRUE
+#' h["showGuides"] <- FALSE
 #'
 #' # link another plot with the previous plot
 #' h['linkingGroup'] <- "iris_data"
@@ -131,6 +137,9 @@ l_hist <- function(x,
                    active = TRUE,
                    selected = FALSE,
                    xlabel = NULL,
+                   showLabels = TRUE,
+                   showScales = FALSE,
+                   showGuides = TRUE,
                    parent=NULL, ...) {
     UseMethod("l_hist")
 }
@@ -149,6 +158,9 @@ l_hist.factor <-  function(x,
                            active = TRUE,
                            selected = FALSE,
                            xlabel = NULL,
+                           showLabels = TRUE,
+                           showScales = FALSE,
+                           showGuides = TRUE,
                            parent=NULL, ...) {
 
     if(missing(x))
@@ -166,6 +178,9 @@ l_hist.factor <-  function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -203,6 +218,9 @@ l_hist.factor <-  function(x,
                  active = active,
                  selected = selected,
                  xlabel = xlabel,
+                 showLabels = showLabels,
+                 showScales = showScales,
+                 showGuides = showGuides,
                  parent=parent, ...)
 
     # Add level names to plot
@@ -261,6 +279,9 @@ l_hist.character <-  function(x,
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
+                              showLabels = TRUE,
+                              showScales = FALSE,
+                              showGuides = TRUE,
                               parent=NULL, ...) {
 
     if(missing(x))
@@ -278,6 +299,9 @@ l_hist.character <-  function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -296,6 +320,9 @@ l_hist.character <-  function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -313,14 +340,19 @@ l_hist.default <-  function(x,
                             active = TRUE,
                             selected = FALSE,
                             xlabel = NULL,
+                            showLabels = TRUE,
+                            showScales = FALSE,
+                            showGuides = TRUE,
                             parent = NULL,
                             ...) {
 
-    args <- list(...)
-    # set by args, used for facetting
-    by_args <- args[l_byArgs()]
-    # args passed into loonPlotFactory
-    args[l_byArgs()] <- NULL
+    dotArgs <- list(...)
+    # set by dotArgs, used for facetting
+    byArgs <- dotArgs[l_byArgs()]
+    # dotArgs passed into loonPlotFactory
+    dotArgs[l_byArgs()] <- NULL
+
+    l_className <- "l_hist"
 
     if(missing(x)) {
 
@@ -338,7 +370,7 @@ l_hist.default <-  function(x,
         plot <- do.call(
             loonPlotFactory,
             c(
-                args,
+                dotArgs,
                 list(
                     factory_tclcmd = '::loon::histogram',
                     factory_path = 'hist',
@@ -349,12 +381,15 @@ l_hist.default <-  function(x,
                     origin = origin,
                     binwidth = binwidth,
                     showBinHandle = showBinHandle,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
                     xlabel = xlabel
                 )
             )
         )
 
-        class(plot) <- c("l_hist", class(plot))
+        class(plot) <- c(l_className, class(plot))
         return(plot)
 
     } else {
@@ -364,46 +399,12 @@ l_hist.default <-  function(x,
         if(!is.null(dim_x))
             stop("Unkown data structure",
                  call. = FALSE)
-        sync <- args$sync
-
-        if(is.null(sync)) {
-            sync <- "pull"
-            if(length(color) > 1) {
-                sync <- "push"
-            } else {
-                if(length(color) == 1 && !is.na(color) && color != l_getOption("color")) sync <- "push"
-            }
-        }
 
         n <- length(x)
-        len_color <- length(color)
-        if (len_color > 1) {
-            if (len_color != n) {
-                color <- rep_len(color, n)
-            }
-        } else {
-            if(is.na(color)) color <- l_getOption("color")
-        }
 
-        len_active <- length(active)
-        if (len_active > 1) {
-            if (len_active != n)
-                stop(paste0("When more than length 1, length of active must match number of points:",
-                            n)
-                )
-        } else {
-            if(is.na(active)) active <- TRUE
-        }
-
-        len_selected <- length(selected)
-        if (len_selected > 1) {
-            if (len_selected != n)
-                stop(paste0("When more than length 1, length of selected must match number of points:",
-                            n)
-                )
-        } else {
-            if(is.na(selected)) selected <- FALSE
-        }
+        color <- aes_settings(color, n, ifNoStop = FALSE)
+        active <- aes_settings(active, n, ifNoStop = TRUE)
+        selected <- aes_settings(selected, n, ifNoStop = TRUE)
 
         if (is.null(xlabel))
             xlabel <- gsub("\"", "", deparse(substitute(x)))
@@ -422,22 +423,30 @@ l_hist.default <-  function(x,
             binwidth <- if (sd == 0 || is.na(sd)) {1} else  {3.49 * sd/(n ^(1/3))}
         }
 
-        linkingGroup <- args[["linkingGroup"]]
-        args$linkingGroup <- NULL
+
+        # `sync` and `linkingGroup` are set after the plot is created
+        # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
+        linkingGroup <- dotArgs[["linkingGroup"]]
+        dotArgs$linkingGroup <- NULL
+        sync <- dotArgs[["sync"]]
+        # if null, it is always **pull**
+        if(is.null(sync)) sync <- "pull"
+        dotArgs$sync <- NULL
+
         # n dimensional states NA check
-        args$x <- x
-        args$color <- color
-        args$active <- active
-        args$selected <- selected
+        dotArgs$x <- x
+        dotArgs$color <- color
+        dotArgs$active <- active
+        dotArgs$selected <- selected
 
         if(is.null(by)) {
 
-            args <- l_na_omit("l_hist", args)
+            dotArgs <- l_na_omit(l_className, dotArgs)
 
             plot <- do.call(
                 loonPlotFactory,
                 c(
-                    args,
+                    dotArgs,
                     list(
                         factory_tclcmd = '::loon::histogram',
                         factory_path = 'hist',
@@ -448,18 +457,24 @@ l_hist.default <-  function(x,
                         origin = origin,
                         binwidth=binwidth,
                         showBinHandle = showBinHandle,
+                        showLabels = showLabels,
+                        showScales = showScales,
+                        showGuides = showGuides,
                         xlabel = xlabel
                     )
                 )
             )
 
             if(!is.null(linkingGroup)) {
+
                 l_configure(plot,
                             linkingGroup = linkingGroup,
                             sync = sync)
+
+                l_linkingWarning(plot, sync, dotArgs, l_className)
             }
 
-            class(plot) <- c("l_hist", class(plot))
+            class(plot) <- c(l_className, class(plot))
             return(plot)
 
         } else {
@@ -468,17 +483,20 @@ l_hist.default <-  function(x,
 
             plots <- loonFacets(type = "l_hist",
                                 valid_by(by, byDeparse, x, xlabel, n),
-                                args,
+                                dotArgs,
                                 byDeparse = byDeparse,
                                 layout = match.arg(layout),
                                 connectedScales = match.arg(connectedScales),
-                                by_args = Filter(Negate(is.null), by_args),
+                                byArgs = Filter(Negate(is.null), byArgs),
                                 linkingGroup = linkingGroup,
                                 sync = sync,
                                 parent = parent,
                                 factory_tclcmd = '::loon::histogram',
                                 factory_path = 'hist',
                                 factory_window_title = 'loon histogram',
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
                                 yshows = yshows,
                                 showStackedColors = showStackedColors,
                                 origin = origin,
@@ -507,6 +525,9 @@ l_hist.data.frame <- function(x,
                               active = TRUE,
                               selected = FALSE,
                               xlabel = NULL,
+                              showLabels = TRUE,
+                              showScales = FALSE,
+                              showGuides = TRUE,
                               parent=NULL, ...) {
 
     if(missing(x))
@@ -524,6 +545,9 @@ l_hist.data.frame <- function(x,
                            active = active,
                            selected = selected,
                            xlabel = xlabel,
+                           showLabels = showLabels,
+                           showScales = showScales,
+                           showGuides = showGuides,
                            parent=parent, ...)
         )
 
@@ -552,6 +576,9 @@ l_hist.data.frame <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -569,6 +596,9 @@ l_hist.matrix <- function(x,
                           active = TRUE,
                           selected = FALSE,
                           xlabel = NULL,
+                          showLabels = TRUE,
+                          showScales = FALSE,
+                          showGuides = TRUE,
                           parent=NULL, ...) {
 
     l_hist(c(x),
@@ -584,6 +614,9 @@ l_hist.matrix <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -601,7 +634,15 @@ l_hist.list <- function(x,
                         active = TRUE,
                         selected = FALSE,
                         xlabel = NULL,
+                        showLabels = TRUE,
+                        showScales = FALSE,
+                        showGuides = TRUE,
                         parent=NULL, ...) {
+
+    if(is.null(by)) {
+        message("The default argument `by` is set based on the list")
+        by <- rep(seq(length(x)), lengths(x))
+    }
 
     l_hist(unlist(x),
            by = by,
@@ -616,6 +657,9 @@ l_hist.list <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -633,6 +677,9 @@ l_hist.table <- function(x,
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,
+                         showLabels = TRUE,
+                         showScales = FALSE,
+                         showGuides = TRUE,
                          parent=NULL, ...) {
 
     dim_x <- dim(x)
@@ -666,6 +713,9 @@ l_hist.table <- function(x,
            active = active,
            selected = selected,
            xlabel = xlabel,
+           showLabels = showLabels,
+           showScales = showScales,
+           showGuides = showGuides,
            parent=parent, ...)
 }
 
@@ -683,6 +733,9 @@ l_hist.array <- function(x,
                          active = TRUE,
                          selected = FALSE,
                          xlabel = NULL,
+                         showLabels = TRUE,
+                         showScales = FALSE,
+                         showGuides = TRUE,
                          parent=NULL, ...) {
 
     l_hist.table(x = x,
@@ -698,5 +751,8 @@ l_hist.array <- function(x,
                  active = active,
                  selected = selected,
                  xlabel = xlabel,
+                 showLabels = showLabels,
+                 showScales = showScales,
+                 showGuides = showGuides,
                  parent=parent, ...)
 }

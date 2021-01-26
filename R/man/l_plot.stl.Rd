@@ -15,7 +15,7 @@
   size = l_getOption("size"),
   lcolor = l_getOption("color"),
   linewidth = l_getOption("linewidth"),
-  linkingGroup = NULL,
+  linkingGroup,
   showScales = TRUE,
   showGuides = TRUE,
   showLabels = TRUE,
@@ -52,7 +52,7 @@ Default is given by \code{\link{l_getOption}("color")}.}
 Default is given by \code{\link{l_getOption}("linewidth")}.}
 
 \item{linkingGroup}{name of linking group.
-If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
+If missing, one is created from the data name and class associated with \code{stlOrDecomposedTS}.}
 
 \item{showScales}{a logical as to whether to display the scales on all axes, default is TRUE.}
 

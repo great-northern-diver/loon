@@ -72,6 +72,7 @@ l_path2class <- function(path) {
 #'
 #' @param pathTypes an optional argument identifying the collection of path types that
 #' are to be returned (if displayed).
+#' @param inspector whether to return the loon inspector widget or not
 #'
 #' This must be a subset of the union of
 #' \code{\link{l_basePaths}()} and \code{\link{l_compoundPaths}()}.
@@ -112,103 +113,156 @@ l_path2class <- function(path) {
 #'              )
 #' }
 #'
-l_loonWidgets <- function(pathTypes) {
+l_loonWidgets <- function(pathTypes, inspector = FALSE) {
 
-    #
-    # Internal helper function
-    #
-    create_handles <- function(target, plots, type) {
-        i <- 0
-        hasRecognized <- TRUE
-        while(hasRecognized) {
+    widgets <- as.character(tkwinfo("child", "."))
+    len <- length(widgets)
+    names <- rep(NA, len)
 
-            path <- compound_path(target = target, type = type, index = i)
+    loonPlots <- lapply(seq(len),
+                        function(i) {
+                            w <- widgets[i]
+                            child <- tryCatch(
+                                expr = {
+                                    as.character(tkwinfo("child", w))
+                                },
+                                error = function(e) NULL
+                            )
+                            if(is.null(child)) return(NULL)
+                            if(l_isLoonWidget(child)) {
 
-            hasRecognized <- l_isLoonWidget(path)
-            i <- i + 1
-            if(hasRecognized) {
-                plots[[length(plots) + 1]] <- l_create_handle(path)
-            }
-        }
-        return(plots)
+                                if(!inspector) {
+                                    if(grepl("looninspector", child))
+                                        return(NULL)
+                                }
+
+                                names[i] <<- child
+                                return(l_create_handle(child))
+                            }
+
+                            compound <- l_getFromPath(child)
+
+                            if(length(compound) == 0)
+                                return(NULL)
+
+                            names[i] <<- child
+                            compound
+                        })
+
+    loonPlots <- Filter(Negate(is.null), loonPlots)
+    names <- na.omit(names)
+    names(loonPlots) <- names
+
+    if(!missing(pathTypes)) {
+
+        pnames <- unlist(
+            lapply(pathTypes,
+                   function(type) {
+                       names[grepl(type, names)]
+                   })
+        )
+
+        loonPlots <- loonPlots[pnames]
     }
 
-    #
-    # Legitimate loon paths to look over
-    #
-    loonBasePaths <- l_basePaths()
-    loonCompoundPaths <-  l_compoundPaths()
-
-    #
-    # Make sure pathTypes are legit
-    #
-    if (!missing(pathTypes)) {
-        loonBasePaths <- intersect(loonBasePaths, pathTypes)
-        loonCompoundPaths <- intersect(loonCompoundPaths, pathTypes)
-
-        nonLoonPaths <- setdiff(pathTypes, c(loonBasePaths, loonCompoundPaths))
-        #
-        # Warn user about unknown path types
-        #
-        if (length(nonLoonPaths) > 0) {
-            warning(paste0(nonLoonPaths,
-                           " is not a path extension in loonPaths(). \n"))
-        }
-    }
-
-    #
-    # Get all the top most widgets from tcl
-    #
-    widgets <-  as.character(tcl("loon::listTopWidgets"))
-    #
-    # Collect up the loon plots
-    #
-    loonPlots <- c()
-    #
-    # Easy ones
-    #
-    for (path in loonBasePaths) {
-        for (w in widgets) {
-            w_loon <- paste0(w, ".", path)
-            if (l_isLoonWidget(w_loon)) {
-                class(w_loon)  <- l_path2class(path)
-                loonPlots[[w_loon]] <- w_loon
-            }
-        }
-    }
-    #
-    # Compound ones are more complicated since they
-    # are really a list of a lot of separate base plots
-    #
-    # Haven't really considered the case where
-    # one of the list might itself be a compound plot.
-    #
-    for (c_path in loonCompoundPaths) {
-        for (w in widgets) {
-            root_path <- paste0(w, ".", c_path)
-            plotList <- list()
-            for (plot_path in loonBasePaths) {
-                plotList <- create_handles(target = root_path,
-                                           plots = plotList,
-                                           type = plot_path)
-            }
-            #
-            # Compound widgets contain lots of plots
-            #
-            nPlots <- length(plotList)
-            #
-            if (nPlots > 0){
-                if (nPlots == 1) {
-                    loonPlot <- plotList[[1]]
-                } else {
-                    loonPlot <- plotList
-                    class(loonPlot)  <- l_path2class(c_path)
-                }
-                loonPlots[[root_path]] <- loonPlot
-            }
-
-
-        }
-    }
     loonPlots
 }
+
+# l_loonWidgets <- function(pathTypes) {
+#
+#     #
+#     # Internal helper function
+#     #
+#     create_handles <- function(target, plots, type) {
+#         i <- 0
+#         hasRecognized <- TRUE
+#         while(hasRecognized) {
+#
+#             path <- compound_path(target = target, type = type, index = i)
+#
+#             hasRecognized <- l_isLoonWidget(path)
+#             i <- i + 1
+#             if(hasRecognized) {
+#                 plots[[length(plots) + 1]] <- l_create_handle(path)
+#             }
+#         }
+#         return(plots)
+#     }
+#
+#
+#     loonBasePaths <- l_basePaths()
+#     loonCompoundPaths <- l_compoundPaths()
+#
+#     #
+#     # Make sure pathTypes are legit
+#     #
+#     if (!missing(pathTypes)) {
+#         loonBasePaths <- intersect(loonBasePaths, pathTypes)
+#         loonCompoundPaths <- intersect(loonCompoundPaths, pathTypes)
+#
+#         nonLoonPaths <- setdiff(pathTypes, c(loonBasePaths, loonCompoundPaths))
+#         #
+#         # Warn user about unknown path types
+#         #
+#         if (length(nonLoonPaths) > 0) {
+#             warning(paste0(nonLoonPaths,
+#                            " is not a path extension in loonPaths(). \n"))
+#         }
+#     }
+#
+#     #
+#     # Get all the top most widgets from tcl
+#     #
+#     widgets <-  as.character(tcl("loon::listTopWidgets"))
+#     #
+#     # Collect up the loon plots
+#     #
+#     loonPlots <- c()
+#     #
+#     # Easy ones
+#     #
+#     for (path in loonBasePaths) {
+#         for (w in widgets) {
+#             w_loon <- paste0(w, ".", path)
+#             if (l_isLoonWidget(w_loon)) {
+#                 class(w_loon)  <- l_path2class(path)
+#                 loonPlots[[w_loon]] <- w_loon
+#             }
+#         }
+#     }
+#     #
+#     # Compound ones are more complicated since they
+#     # are really a list of a lot of separate base plots
+#     #
+#     # Haven't really considered the case where
+#     # one of the list might itself be a compound plot.
+#     #
+#     for (c_path in loonCompoundPaths) {
+#         for (w in widgets) {
+#             root_path <- paste0(w, ".", c_path)
+#             plotList <- list()
+#             for (plot_path in loonBasePaths) {
+#                 plotList <- create_handles(target = root_path,
+#                                            plots = plotList,
+#                                            type = plot_path)
+#             }
+#             #
+#             # Compound widgets contain lots of plots
+#             #
+#             nPlots <- length(plotList)
+#             #
+#             if (nPlots > 0){
+#                 if (nPlots == 1) {
+#                     loonPlot <- plotList[[1]]
+#                 } else {
+#                     loonPlot <- plotList
+#                     class(loonPlot)  <- l_path2class(c_path)
+#                 }
+#                 loonPlots[[root_path]] <- loonPlot
+#             }
+#
+#
+#         }
+#     }
+#     loonPlots
+# }
