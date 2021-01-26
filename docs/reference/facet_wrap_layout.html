@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -158,27 +158,28 @@
     <p>Layout as a wrap</p>
     </div>
 
-    <pre class="usage"><span class='fu'>facet_wrap_layout</span>(
-  <span class='no'>plots</span>,
-  <span class='no'>subtitles</span>,
-  <span class='kw'>prop</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>labelLocation</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>swapAxes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelBackground</span> <span class='kw'>=</span> <span class='st'>"gray80"</span>,
-  <span class='kw'>labelForeground</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>labelBorderwidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>labelRelief</span> <span class='kw'>=</span> <span class='st'>"groove"</span>,
-  <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>maxCharInOneRow</span> <span class='kw'>=</span> <span class='fl'>15</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>facet_wrap_layout</span><span class='op'>(</span>
+  <span class='va'>plots</span>,
+  <span class='va'>subtitles</span>,
+  prop <span class='op'>=</span> <span class='fl'>10</span>,
+  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  xlabel <span class='op'>=</span> <span class='st'>""</span>,
+  ylabel <span class='op'>=</span> <span class='st'>""</span>,
+  nrow <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  labelLocation <span class='op'>=</span> <span class='st'>"top"</span>,
+  byrow <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  swapAxes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  labelBackground <span class='op'>=</span> <span class='st'>"gray80"</span>,
+  labelForeground <span class='op'>=</span> <span class='st'>"black"</span>,
+  labelBorderwidth <span class='op'>=</span> <span class='fl'>2</span>,
+  labelRelief <span class='op'>=</span> <span class='st'>"groove"</span>,
+  sep <span class='op'>=</span> <span class='st'>"*"</span>,
+  maxCharInOneRow <span class='op'>=</span> <span class='fl'>15</span>,
+  new.toplevel <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -265,6 +266,11 @@ The second one is used to determine the position of row labels ('right' or 'left
       <td><p>Max char in one row. If it exceeds the max, then a char will be displayed into two rows</p></td>
     </tr>
     <tr>
+      <th>new.toplevel</th>
+      <td><p>determine whether the parent is a new top level.
+If it is not a new window, the widgets will not be packed</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>named arguments to modify plot states.
 See <code><a href='l_info_states.html'>l_info_states</a></code> of any instantiated l_plot for examples of names and values.</p></td>
@@ -287,7 +293,7 @@ See <code><a href='l_info_states.html'>l_info_states</a></code> of any instantia
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

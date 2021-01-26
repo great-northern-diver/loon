@@ -22,7 +22,8 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
 
     # sequences
     seqName <- widget['sequence']
-
+    andrews <- widget['andrews']
+    andrewsSeriesLength <-  widget['andrewsSeriesLength']
     displayOrder <- get_model_display_order(widget)
     active <- widget['active'][displayOrder]
     active_displayOrder <- displayOrder[active]
@@ -33,15 +34,27 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
         scaling = widget['scaling'],
         displayOrder = active_displayOrder)
 
+    if(andrews) {
+        fourierTrans <- andrews(k = length(seqName), length.out = andrewsSeriesLength)
+        scaledActiveData <- as.matrix(scaledActiveData) %*% fourierTrans$matrix
+
+        dataRange <- range(scaledActiveData)
+        d <- if(diff(dataRange) == 0) 1 else diff(dataRange)
+
+        scaledActiveData <- (scaledActiveData - min(scaledActiveData))/d
+    }
+
     layout <- widget['axesLayout']
 
     # different limits for different axes layout
     if(layout == "parallel") {
-        xlim <- c(-0.1, 1.12)
-        ylim <- c(-0.1, 1.12)
+        delta <- 0.1
+        xlim <- grDevices::extendrange(c(0, 1), f = delta)
+        ylim <- grDevices::extendrange(c(0, 1), f = delta)
     } else {
-        xlim <- c(-0.2, 1.2)
-        ylim <- c(-0.2, 1.2)
+        delta <- 0.2
+        xlim <- grDevices::extendrange(c(0, 1), f = delta)
+        ylim <- grDevices::extendrange(c(0, 1), f = delta)
     }
 
     gT <- gTree(
@@ -53,12 +66,15 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
             labelsGrobTree(showLabels = widget['showLabels'],
                            title =  widget['title']),
             axesLabelsGrobTree(showAxesLabels = widget['showAxesLabels'],
+                               andrews = andrews,
                                seqName = seqName,
                                layout = layout),
             clipGrob(name = "clip"),
             axesGrobTree(data = scaledActiveData,
                          showArea = widget['showArea'],
-                         len.xaxis = length(seqName),
+                         len.xaxis = ifelse(andrews,
+                                            andrewsSeriesLength,
+                                            length(seqName)),
                          colour = get_display_color(as_hex6color(widget['color'][active_displayOrder]),
                                                     widget['selected'][active_displayOrder]),
                          lineWidth = widget['linewidth'][active_displayOrder],
@@ -218,12 +234,17 @@ labelsGrobTree <- function(showLabels = TRUE,
 }
 
 axesLabelsGrobTree <- function(showAxesLabels = TRUE,
+                               andrews = FALSE,
                                seqName = NULL,
                                layout = c("parallel", "radial")) {
 
     if(is.null(seqName)) return(grob(name = "labels"))
     layout <- match.arg(layout)
     len.xaxis <- length(seqName)
+
+    if(andrews) seqName <- round(seq(-base::pi, base::pi,
+                                     length.out = len.xaxis),
+                                 2)
 
     switch(
         layout,
@@ -320,7 +341,7 @@ axesGrobTree <- function(data = NULL,
                                function(i){
                                    if (showArea) {
                                        polygonGrob(
-                                           x = unit(c(xaxis, rev(xaxis) ), "native"),
+                                           x = unit(c(xaxis, rev(xaxis)), "native"),
                                            y = unit(c(data[i, ], rep(0, len.xaxis)), "native"),
                                            name = paste("polyline: showArea", i),
                                            gp = gpar(fill = colour[i],
@@ -407,87 +428,45 @@ char2num.data.frame <- function(chardataframe){
     } else dat
 }
 
-get_scaledData <- function(data,
-                           sequence = NULL,
-                           scaling = c("variable", "observation", "data", "none"),
-                           displayOrder = NULL) {
-
-    # data is the original data set
-    # since "variable" scaling is based on the original data
-    if(missing(data) || is.null(data) || is.null(displayOrder)) return(NULL)
-
-    if(!is.null(sequence)) {
-
-        col_name <- make.names(colnames(data))
-        # sequence names may involve invalid chars
-        # such as `(`, `)`, ` ` space, etc.
-        # call function `make.names` can remove all these chars to match data column names
-        sequence <- make.names(sequence)
-
-        if(!all(sequence %in% col_name)) {
-            warning("unknown variable names in sequence")
-            sequence <- intersect(sequence, col_name)
-        }
-        data <-  data[, sequence]
-    }
-
-    scaling <- match.arg(scaling)
-
-    is_char <- FALSE
-    is_factor <- FALSE
-    is_logical <- FALSE
-
-    dat <- sapply(data,
-                  function(x) {
-                      if(is.numeric(x)) x
-                      else if(is.character(x)) {
-                          is_char <<- TRUE
-                          as.numeric(as.factor(x))
-                      } else if (is.factor(x)) {
-                          is_factor <<- TRUE
-                          as.numeric(x)
-                      } else if(is.logical(x)) {
-                          is_logical <<- TRUE
-                          as.numeric(x)
-                      } else stop("unknown data structure")
-                  })
-    # give warning once
-    if(is_char || is_factor || is_logical)
-        warning("No numerical columns exist", call. = FALSE)
-
-    if(length(displayOrder) == 1) {
-        dat <- setNames(as.data.frame(matrix(dat, nrow = 1)), names(dat))
-        if(scaling == "variable") {
-            warning("Only one observation in serialAxesData, 'scaling' will be set as 'data' by default")
-            scaling <- 'data'
-        }
-    }
-
-    switch(scaling,
-           "variable" = {
-               minV <- apply(dat, 2, "min")
-               maxV <- apply(dat, 2, "max")
-               dat <- dat[displayOrder, ]
-               t(
-                   (t(dat) - minV) / (maxV  - minV)
-               )
-           },
-           "observation" = {
-               minO <- apply(dat, 1, "min")
-               maxO <- apply(dat, 1, "max")
-               dat <- (dat - minO) / (maxO - minO)
-               dat[displayOrder, ]
-           },
-           "data" = {
-               minD <- min(dat)
-               maxD <- max(dat)
-               dat <- dat[displayOrder, ]
-               (dat - minD)/ (maxD - minD)
-           },
-           "none" = {
-               dat[displayOrder, ]
-           })
-
-}
 
 default_radius <- function() 0.2
+
+### From ggmulti
+### For less dependency
+andrews <- function(k = 4,
+                    length.out = 50 * (k - 1),
+                    ...) {
+
+    stopifnot(
+        {
+            is.numeric(length.out)
+            is.numeric(k)
+        }
+    )
+
+    k <- as.integer(k)
+    length.out <- as.integer(length.out)
+
+    t <- seq(-base::pi, base::pi, length.out = length.out)
+
+    values <- sapply(seq(k),
+                     function(i) {
+                         if(i == 1) return(rep(1/sqrt(2), length.out))
+                         fun <- if((i %% 2) == 0) {
+                             # even
+                             base::sin
+                         } else {
+                             # odd
+                             base::cos
+                         }
+
+                         fun(2^(floor(i/2) - 1) * t)
+                     })
+    # return a list
+    # with defined period and matrix
+    list(
+        series = t,
+        matrix = matrix(values, nrow = k, byrow = TRUE)
+    )
+}
+

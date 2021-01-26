@@ -29,6 +29,8 @@
 #' @param labelRelief Label relief
 #' @param sep The character string to separate or combine a vector
 #' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param new.toplevel determine whether the parent is a new top level.
+#' If it is not a new window, the widgets will not be packed
 #' @param ... named arguments to modify plot states.
 #' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
 #'
@@ -47,6 +49,7 @@ facet_grid_layout <- function(plots,
                               labelRelief = "groove",
                               sep = "*",
                               maxCharInOneRow = 15,
+                              new.toplevel = TRUE,
                               ...) {
 
     len <- length(subtitles)
@@ -387,7 +390,9 @@ facet_grid_layout <- function(plots,
     for (i in seq(nrowsLabel*span) - 1 + row_start_pos + title_pos) {
         tkgrid.rowconfigure(parent, i, weight=1)
     }
-    tkpack(parent, fill="both", expand=TRUE)
+
+    if(new.toplevel)
+        tkpack(parent, fill="both", expand=TRUE)
 
     # plots <- plots[plot_id]
     names(plots) <- new_names
@@ -427,6 +432,8 @@ facet_grid_layout <- function(plots,
 #' @param labelRelief Label relief
 #' @param sep The character string to separate or combine a vector
 #' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param new.toplevel determine whether the parent is a new top level.
+#' If it is not a new window, the widgets will not be packed
 #' @param ... named arguments to modify plot states.
 #' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
 #'
@@ -447,6 +454,7 @@ facet_wrap_layout <- function(plots,
                               labelRelief = "groove",
                               sep = "*",
                               maxCharInOneRow = 15,
+                              new.toplevel = TRUE,
                               ...) {
 
     N <- length(plots)
@@ -804,7 +812,9 @@ facet_wrap_layout <- function(plots,
     for (i in seq(ncol * plots_span) - 1 + ylabel_pos) {
         tkgrid.columnconfigure(parent, i, weight=1)
     }
-    tkpack(parent, fill="both", expand=TRUE)
+
+    if(new.toplevel)
+        tkpack(parent, fill="both", expand=TRUE)
 
     names(plots) <- new_names
     return(plots)

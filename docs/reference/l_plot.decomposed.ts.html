@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The <code><a href='l_plot.html'>l_plot</a></code> method for classical seasonal decomposition of a time series by moving averages (i.e. via <code>decompose()</code>) — l_plot.decomposed.ts • loon</title>
+<title>The l_plot method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose()) — l_plot.decomposed.ts • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="The <code><a href='l_plot.html'>l_plot</a></code> method for classical seasonal decomposition of a time series by moving averages (i.e. via <code>decompose()</code>) — l_plot.decomposed.ts" />
+<meta property="og:title" content="The l_plot method for classical seasonal decomposition of a time series by moving averages (i.e. via decompose()) — l_plot.decomposed.ts" />
 <meta property="og:description" content="Creates a decomposed time series plot based on
 objects of class decomposed.ts" />
 <meta property="og:image" content="/logo.png" />
@@ -81,7 +81,7 @@ objects of class decomposed.ts" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
       </span>
     </div>
 
@@ -161,23 +161,23 @@ objects of class <code>decomposed.ts</code></p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for decomposed.ts</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tk_title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"size"</span>),
-  <span class='kw'>lcolor</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
-  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"linewidth"</span>),
-  <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tk_title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  lcolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
+  <span class='va'>linkingGroup</span>,
+  showScales <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -232,7 +232,7 @@ Default given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</
     <tr>
       <th>linkingGroup</th>
       <td><p>name of linking group.
-If <code>NULL</code>, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
+If missing, one is created from the data name and class associated with <code>stlOrDecomposedTS</code>.</p></td>
     </tr>
     <tr>
       <th>showScales</th>
@@ -268,18 +268,19 @@ by name: "original", "trend", "seasonal", and "remainder".</p>
 <code><a href='l_plot_ts.html'>l_plot_ts</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
-<span class='no'>decompose</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></span>(<span class='no'>co2</span>)
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>decompose</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Atmospheric carbon dioxide over Mauna Loa"</span>)
+<span class='va'>decompose</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></span><span class='op'>(</span><span class='va'>co2</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>decompose</span>, title <span class='op'>=</span> <span class='st'>"Atmospheric carbon dioxide over Mauna Loa"</span><span class='op'>)</span>
 <span class='co'># names of plots in the display</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 <span class='co'># names of states associated with the seasonality plot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p</span>$<span class='no'>seasonal</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>)</span>
 <span class='co'># which can be set</span>
-<span class='no'>p</span>$<span class='no'>seasonal</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='st'>"steelblue"</span>
+<span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"steelblue"</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -295,7 +296,7 @@ by name: "original", "trend", "seasonal", and "remainder".</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

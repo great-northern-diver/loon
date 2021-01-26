@@ -24,7 +24,7 @@
 #' @param linewidth line width of all time series (incl. original and decomposed components.
 #'   Default given by \code{\link{l_getOption}("linewidth")}.
 #' @param linkingGroup name of linking group.
-#'        If \code{NULL}, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
+#'        If missing, one is created from the data name and class associated with \code{stlOrDecomposedTS}.
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
@@ -59,7 +59,7 @@ l_plot.decomposed.ts <- function(x, y = NULL,
                                  size = l_getOption("size"),
                                  lcolor = l_getOption("color"),
                                  linewidth = l_getOption("linewidth"),
-                                 linkingGroup = NULL,
+                                 linkingGroup,
                                  showScales = TRUE,
                                  showGuides = TRUE,
                                  showLabels = TRUE,
@@ -74,7 +74,7 @@ l_plot.decomposed.ts <- function(x, y = NULL,
               title = title, tk_title = tk_title,
               color = color, size = size,
               lcolor = lcolor, linewidth = linewidth,
-              linkingGroup = linkingGroup,
+              linkingGroup,
               showScales = showScales,
               showGuides = showGuides,
               showLabels = showLabels,

@@ -11,8 +11,9 @@ l_getFromPath(target)
 }
 \description{
 This function can be used to create the loon objects from
-  a valid widget path name. The main difference from \code{l_create_handle} is that \code{l_getFromPath} can
-  take a loon compound widget path but \code{l_create_handle} cannot.
+  a valid widget path name. The main difference from \code{l_create_handle} is that
+  \code{l_getFromPath} can take a loon compound widget path
+  but \code{l_create_handle} cannot.
 }
 \details{
 For more information run: \code{l_help("learn_R_intro.html#re-creating-object-handles")}

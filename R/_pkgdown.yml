@@ -173,6 +173,7 @@ reference:
     - l_aspect
     - l_setAspect
     - starts_with("l_scale")
+    - l_getScaledData
 
   - subtitle: Moving points
     contents:
@@ -253,6 +254,7 @@ reference:
     - l_layer_contourLines
     - l_layer_group
     - l_layer_heatImage
+    - l_layer_smooth
     - l_layer_line
     - l_layer_lines
     - l_layer_oval
@@ -500,6 +502,7 @@ reference:
     - l_throwErrorIfNotLoonWidget
     - l_Rlist2nestedTclList
     - l_nestedTclList2Rlist
+    - l_toplevel
     - tkcolors
 
 

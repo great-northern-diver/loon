@@ -139,9 +139,14 @@ l_facet.loon <- function(widget,
                          parent = parent,
                          linkingGroup,
                          inheritLayers = inheritLayers,
-                         byDeparse = deparse(substitute(by)),
+                         by_substitute = substitute(by),
                          separate = separate,
                          ...)
+
+    if(!is.list(facets)) {
+      message(deparse(substitute(widget)), " cannot be divided into multiple facets by ", deparse(substitute(by)))
+      return(facets)
+    }
 
     # synchronize
     connectedScales <- match.arg(connectedScales)
@@ -202,7 +207,8 @@ l_facet.loon <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         layout_synchronizeSetting(plots,
                                   connectedScales = connectedScales,
@@ -234,7 +240,8 @@ l_facet.loon <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         if(swapAxes) {
             connectedScales <- switch(connectedScales,
@@ -298,7 +305,7 @@ l_facet.l_serialaxes <- function(widget,
     facets <- get_facets(widget, by,
                          parent = parent,
                          linkingGroup,
-                         byDeparse = deparse(substitute(by)),
+                         by_substitute = substitute(by),
                          separate = separate,
                          ...)
 
@@ -332,7 +339,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         plots <- structure(
             plots,
@@ -356,7 +364,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelBackground = labelBackground,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
-                                   labelRelief = match.arg(labelRelief))
+                                   labelRelief = match.arg(labelRelief),
+                                   new.toplevel = facets$new.toplevel)
 
         plots <- structure(
             plots,

@@ -1,7 +1,7 @@
 
 # Create closure to evaluate code for a loon object
 #
-# Returns a closure that evaluates code for a partiular part of a
+# Returns a closure that evaluates code for a particular part of a
 # loon plot widget such as a: the widget itself, layer, glyph,
 # navigator, or context.
 #
