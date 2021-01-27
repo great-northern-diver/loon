@@ -1,10 +1,11 @@
+
 oo::class create loon::classes::SerialaxesInspectorAnalysis {
 
     superclass ::loon::classes::Inspector2
-    
+
     variable imgPlus imgMinus scaling\
 	colorMenuSelect colorMenuModify lwd axesLayout linkingGroupWidget
-    
+
     constructor {Path} {
 
 	set imgPlus [image create bitmap\
@@ -13,21 +14,21 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	set imgMinus [image create bitmap\
 			  -file [file join $::env(LOON_LIBRARY)\
 				     images minus.xbm]]
-	
+
 	set scaling observation
 	set axesLayout radial
-	
+
 	next $Path
-	
+
 	my New_state modifycolor color any\
 	    [::loon::listfns::toHexcolor $::loon::Options(colors)]
-	
+
 	my variable modifycolor
 	$colorMenuModify configure -color $modifycolor
 
 	my SetStateDescription modifycolor\
 	    "color boxes shown in the modify color inspector part"
-	
+
     }
 
 
@@ -37,9 +38,11 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    error "$widget is not a Serialaxes Widget."
 	}
     }
+
+
     method RegisterActivewidget {} {
 	my variable activewidget
-	
+
 	next
 	## update inspector
 	if {$activewidget ne ""} {
@@ -48,38 +51,38 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	$linkingGroupWidget configure -activewidget $activewidget
     }
 
-    
+
     method ActivewidgetEvents {args} {
 	## args is events
 	my variable activewidget
-	
+
 	## TODO: fix, sometimes the events come nested
 	if {[llength $args] eq 1} {
 	    set args {*}$args
 	}
-	
-	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea} {
+
+	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea andrews} {
 	    my variable cb_$state
 	    set cb_$state [uplevel #0 [list $activewidget cget -$state]]
 	}
-	
-	set axesLayout [uplevel #0 [list $activewidget cget -axesLayout]]	
-	set scaling [uplevel #0 [list $activewidget cget -scaling]]	
-	
+
+	set axesLayout [uplevel #0 [list $activewidget cget -axesLayout]]
+	set scaling [uplevel #0 [list $activewidget cget -scaling]]
+
 	if {"color" in $args} {
 	    set cols [uplevel #0 [list $activewidget cget -color]]
 	    $colorMenuSelect configure -color\
 		[lsort -unique $cols]
 	}
-	
+
     }
 
-    
+
     method Make {} {
 	my variable path
 
 	frame $path -class LoonStarsInspectorAnalysis
-	
+
 	set pplot ${path}.plot
 	set pselect ${path}.select
 	set pmodify ${path}.modify
@@ -87,22 +90,22 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    [labelframe $pselect -text "Select"]\
 	    [labelframe $pmodify -text "Modify"]\
 	    -side top -fill x -padx 5 -pady 2.5 -anchor w
-	
 
-	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea} {
+
+	foreach state {showGuides showAxes showAxesLabels showLabels showItemLabels showArea andrews} {
 	    my variable cb_${state}
 	    set var [my varname cb_$state]; # need absolute path
 	    checkbutton ${pplot}.$state -text $state\
 		-variable $var -onvalue TRUE -offvalue FALSE\
 		-command "[self namespace]::my PlotCommands $state"
-	    pack ${pplot}.$state -side top -anchor w 
-	} 
-	
-	
+	    pack ${pplot}.$state -side top -anchor w
+	}
+
+
 	## axes layout
 	set lvar [my varname axesLayout]
 	set playout [frame ${path}.plot.f_layout]
-	
+
 	pack $playout -side top -anchor w
 	pack [label ${playout}.label -text "axes layout:"]\
 	    [radiobutton ${playout}.radial -text "radial"\
@@ -117,7 +120,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	pack [label ${path}.plot.l_scaling -text "scaling:"] -side top -anchor w
 	set pscl [frame ${path}.plot.f_scaling]
 	pack $pscl -side top -anchor w
-	
+
 	set scl [list variable observation data none]
 	set wscl {}
 	set vscl [my varname scaling]
@@ -127,7 +130,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 			      -command "[self namespace]::my ChangeScaling $s"]
 	}
 	pack {*}$wscl -side top -anchor w
-	
+
 	set plinking [frame ${path}.plot.linking]
 	set linkingGroupWidget ${plinking}.lgwidget
 	pack $plinking -side top -anchor w
@@ -138,27 +141,27 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	## Selection
 	set ssel ${path}.select.static
 	pack [frame $ssel] -side top -anchor w
-	
-	set btns {} 
+
+	set btns {}
 
 	foreach b {all none invert} {
 	    lappend btns [button ${ssel}.$b\
 			      -text $b -command "[self namespace]::my SelectStatic $b"]
 	}
 	pack {*}$btns -side left
-	
+
 	pack [label ${path}.select.l_bycolor -text "by color:"] -side top -anchor nw
 	set colorMenuSelect [::loon::colormenu ${path}.select.bycolor -color {}\
-				 -hasAddColor FALSE]  
+				 -hasAddColor FALSE]
 	pack $colorMenuSelect -fill x -side top
-	
+
 	${colorMenuSelect}.canvas bind "color" <Button-1>\
 	    [list [self namespace]::my SelectByColor FALSE]
 	${colorMenuSelect}.canvas bind "color" <Shift-Button-1>\
 	    [list [self namespace]::my SelectByColor TRUE]
 
 
-	
+
 	## Modify
 	set mactive ${path}.modify.active
 	pack [frame $mactive] -side top -anchor w
@@ -167,7 +170,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    [button ${mactive}.reactivate -text "reactivate"\
 		 -command "[self namespace]::my ChangeActive reactivate"]\
 	    -side left
-	
+
 	set colorMenuModify [::loon::colormenu ${path}.modify.color -command\
 				 "[self namespace]::my ModifyColor %c"]
 	pack $colorMenuModify -fill x -side top
@@ -176,31 +179,31 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	set mlwd ${path}.modify.f_lwd
 	pack [frame $mlwd] -side top -anchor w -pady 5
 	pack [label ${mlwd}.l_lwd -text "linewidth:"] -side left -padx {0 5}
-	
-	
+
+
 	label  ${mlwd}.absLabel -text "abs:"
 	button ${mlwd}.absm1 -image $imgMinus\
 	    -command "[self namespace]::my ChangeLinewidth abs-1"
 	button ${mlwd}.absp1 -image $imgPlus\
 	    -command "[self namespace]::my ChangeLinewidth abs+1"
-	
+
 	label  ${mlwd}.relLabel -text "rel:"
 	button ${mlwd}.relm1 -image $imgMinus\
 	    -command "[self namespace]::my ChangeLinewidth rel-1"
 	button ${mlwd}.relp1 -image $imgPlus\
 	    -command "[self namespace]::my ChangeLinewidth rel+1"
 
-	
+
 	pack ${mlwd}.absLabel\
 	    ${mlwd}.absm1\
 	    ${mlwd}.absp1\
 	    -side left
-	
+
 	pack ${mlwd}.relLabel\
 	    ${mlwd}.relm1\
 	    ${mlwd}.relp1\
 	    -side left -padx {5 0}
-	
+
     }
 
     method PlotCommands {state} {
@@ -209,28 +212,28 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    uplevel #0 [list $activewidget configure -$state [set cb_${state}]]
 	}
     }
-    
+
     method ChangeScaling {what} {
 	my variable activewidget
 	if {$activewidget ne ""} {
 	    uplevel #0 [list $activewidget configure -scaling $scaling]
 	}
     }
-    
+
     method ChangeLinewidth {how} {
 	my variable activewidget
 	if {$activewidget ne ""} {
-	    set lwd {} 
+	    set lwd {}
 	    set oldLwd [::loon::listfns::subsetLogical\
 			     [$activewidget cget -linewidth]\
 			     [$activewidget cget -selected]]
-	    
+
 	    if {[llength $oldLwd] eq 0} {
 		return
 	    }
 
 	    set n [llength $oldLwd]
-	    
+
 	    switch -- $how {
 		abs+1 {
 		    set min [::loon::listfns::min $oldLwd]
@@ -248,7 +251,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 		rel+1 {
 		    foreach e $oldLwd {
 			lappend lwd [expr {$e+1}]
-		    }		    
+		    }
 		}
 		rel-1 {
 		    set min [::loon::listfns::min $oldLwd]
@@ -258,15 +261,15 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 		    } else {
 			foreach e $oldLwd {
 			    lappend lwd [expr {$e-1}]
-			}	
+			}
 		    }
 		}
-	    }	 
+	    }
 	    uplevel #0 [list $activewidget configure -linewidth $lwd -which selected]
-	}	
+	}
     }
-    
-    
+
+
     method SelectStatic {what} {
 	my variable activewidget
 	if {$activewidget ne ""} {
@@ -283,7 +286,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 				    [::loon::listfns::booleanNot $sel]]
 		}
 	    }
-	    
+
 	}
     }
 
@@ -295,26 +298,26 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	set canvas ${colorMenuSelect}.canvas
 	set i [lindex [$canvas gettags current] 2]
 	set sel_color [$canvas itemcget "color && inner && $i" -fill]
-	
+
 	set color [uplevel #0 [list $activewidget cget -color]]
-	
+
 	if {$add} {
 	    set selected [uplevel #0 [list $activewidget cget -selected]]
 	} else {
 	    set selected [lrepeat [llength $color] FALSE]
 	}
-	
+
 	set i 0
 	foreach c $color {
 	    if {$c eq $sel_color} {
 		lset selected $i TRUE
-	    } 
+	    }
 	    incr i
 	}
 
 	uplevel #0 [list $activewidget configure -selected $selected]
     }
-    
+
     method ChangeActive {what} {
 	my variable activewidget
 	if {$activewidget ne ""} {
@@ -340,7 +343,7 @@ oo::class create loon::classes::SerialaxesInspectorAnalysis {
 	    uplevel #0 [list $activewidget configure -color $color -which "selected"]
 	}
     }
-    
+
 
     method HookAfterStatesSet {} {
 	my variable changedStates modifycolor
