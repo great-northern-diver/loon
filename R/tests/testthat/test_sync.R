@@ -1,6 +1,6 @@
 context("test_sync")
 
-test_that("test default sync", {
+test_that("test pull", {
 
     p <- l_plot(as.character(iris$Species), color = "#FF0000") # red
     col <- hex12tohex6(unique(p['color']))
@@ -103,35 +103,63 @@ test_that("test default sync", {
     )
     col <- hex12tohex6(unique(pts[[1]]['color'][1:150]))
     expect_equal(col, "#FF0000")
+})
 
-    ########################### "push" ###########################
-    q1 <- l_plot(iris$Petal.Length, linkingGroup = "iris",
-                 sync = "push",
-                 color = "#008000", # green
-                 size = 8,
-                 glyph = "ocircle")
 
-    col <- hex12tohex6(unique(q['color']))
-    expect_equal(col, "#008000")
+test_that("test push", {
 
-    size <- unique(q['size'])
-    expect_equal(size, 8)
+    color <- sample(c("red", "blue", "green"),
+                    size = 150,
+                    replace = TRUE)
+    size <- sample(2:10, size = 150, replace = TRUE)
+    p <- l_plot(iris, linkingGroup = "iris1")
+    p['color'] <- color
+    p["size"] <- size
 
-    glyph <- unique(q['glyph'])
-    expect_true(glyph != "ocircle")
-    expect_true(glyph == "triangle")
+    q <- l_plot(iris, by = iris$Species,
+                color = "black",
+                linkingGroup = "iris1", sync = "push")
+    # only the color is modified
+    expect_true(all(q[[1]]['color'] == "#000000000000"))
+    # the size of each plot should be the same with the random sample
+    expect_true(all(q[[1]]['size'] == size[1:50]))
+    expect_true(all(q[[2]]['size'] == size[51:100]))
+    expect_true(all(q[[3]]['size'] == size[101:150]))
 
-    ###################### test function `l_getDeprecatedLinkedVar`
-    getDeprecatedLinkedVar <- l_getDeprecatedLinkedVar(q1,
-                                                       args = list(
-                                                           color = rep("green", 150),
-                                                           selected = sample(c(T, F), size = 150,
-                                                                             replace = TRUE),
-                                                           active = rep(FALSE, 150),
-                                                           size = rep(6, 150)
-                                                       )
-    )
+    expect_message(p1 <- l_plot(iris, linkingGroup = "iris1", sync = "push"))
+    expect_true(all(p['size'] == p1['size']))
+    expect_false(all(p['size'] == size))
 
-    expect_equal(getDeprecatedLinkedVar,
-                 c("selected", "active", "size"))
+    p['size'] <- size
+    q1 <- l_plot(iris, by = rep(1, 150),
+                 select = TRUE,
+                 linkingGroup = "iris1",
+                 sync = "push")
+    expect_true(all(p['selected']))
+    expect_true(all(p['size'] == size))
+
+    # serialaxes
+    s <- l_serialaxes(iris, color = color,
+                      linewidth = size,
+                      selected = FALSE, # default setting it will not be pushed
+                      linkingGroup = "iris1",
+                      sync = "push")
+
+    expect_true(all(p['size'] == size))
+    expect_true(all(as_hex6color(p['color']) == as_hex6color(color)))
+
+    s1 <- l_serialaxes(iris, by = iris$Species,
+                       linkingGroup = "iris1",
+                       color = "black",
+                       sync = "push")
+
+
+    expect_true(all(s['color'] == "#000000000000"))
+    expect_true(all(s['linewidth'] == size))
+
+    pair <- l_pairs(iris[, 1:3], linkingGroup = "iris1", sync = "push",
+                    color = "red")
+
+    expect_true(all(s['linewidth'] == size))
+    expect_true(all(s['color'] == "#FFFF00000000"))
 })
