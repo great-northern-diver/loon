@@ -1,7 +1,7 @@
 package ifneeded loon 1.2.3 "
-   package provide loon 1.2.3
-   package require Tcl 8.6
-   package require Tk 8.6
+   package provide loon 1.2.3 
+   package require Tcl 8.6 
+   package require Tk 8.6 
    [list set ::env(LOON_VERSION) 1.1.0]
    [list set ::env(LOON_LIBRARY) [file dirname [info script]]]
    [list source [file join $dir library/init.tcl]]
@@ -172,12 +172,14 @@ package ifneeded loon 1.2.3 "
    [list source [file join $dir library/oo_GraphInspectorNodesAnalysis.tcl]]
    [list source [file join $dir library/x_resize.tcl]]
    [list source [file join $dir library/applySelectionLogic.tcl]]
+   [list source [file join $dir library/oo_SerialaxesLayer.tcl]]
    [list source [file join $dir library/x_context.tcl]]
    [list source [file join $dir library/x_map.tcl]]
    [list source [file join $dir library/data.tcl]]
    [list source [file join $dir library/x_synchronize.tcl]]
    [list source [file join $dir library/setMetaKeys.tcl]]
    [list source [file join $dir library/oo_GraphInspector.tcl]]
+   [list source [file join $dir library/oo_SerialaxesInspector.tcl]]
    [list source [file join $dir library/x_graphutils.tcl]]
    [list source [file join $dir library/oo_Serialaxes_Widget.tcl]]
    [list source [file join $dir library/toplevel.tcl]]
@@ -199,6 +201,4 @@ package ifneeded loon 1.2.3 "
    [list source [file join $dir library/oo_GraphInspectorAnalysis.tcl]]
    [list source [file join $dir library/oo_GraphInspectorEdgesAnalysis.tcl]]
    [list source [file join $dir library/x_LoonInspector.tcl]]
-   [list source [file join $dir library/oo_SerialaxesInspector.tcl]]
-   [list source [file join $dir library/oo_SerialaxesLayer.tcl]]
 "
