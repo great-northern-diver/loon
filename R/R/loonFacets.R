@@ -2,7 +2,7 @@ loonFacets <- function(type, by, args, layout = "grid", byDeparse = "",
                        connectedScales = "both", byArgs, linkingGroup, sync, parent,
                        factory_tclcmd, factory_path, factory_window_title,
                        xlabel = "", ylabel = "", title = "", ...) {
-    class(type) <- type[1]
+    class(type) <- type
     UseMethod("loonFacets", type)
 }
 
@@ -21,7 +21,7 @@ loonFacets.default <- function(type,
     by_names <- colnames(by)
 
     args$by <- by
-    args <- l_na_omit(type[1], args, n_dim_states = c(l_nDimStateNames(type[1]), "by"))
+    args <- l_na_omit(type[1L], args, n_dim_states = c(l_nDimStateNames(type[1L]), "by"))
     # remove 'by' from args
     by <- setNames(as.data.frame(args$by, stringsAsFactors = FALSE), by_names)
     args$by <- NULL
@@ -51,8 +51,8 @@ loonFacets.default <- function(type,
 
     # split nDimArgs by "by"
     splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
-
-    if(length(splitNDimArgs) == 1) {
+    len <- length(splitNDimArgs)
+    if(len == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -67,11 +67,33 @@ loonFacets.default <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            modifiedLinkedStates <- l_modifiedLinkedStates(type[1L], nDimArgs)
+            syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+            if(syncTemp == "push")
+                message("The modification of linked states is not detected",
+                        " so that the default settings will be pushed to all plots")
+            # configure plot (linking)
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = sync)
+                        sync = syncTemp)
 
-            l_linkingWarning(plot, sync, nDimArgs)
+            if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                do.call(l_configure,
+                        c(
+                            list(
+                                target = plot,
+                                linkingGroup = linkingGroup,
+                                sync = sync
+                            ),
+                            nDimArgs[modifiedLinkedStates]
+                        )
+                )
+            } else {
+                l_linkingWarning(plot, sync, args = nDimArgs,
+                                 l_className = type[1L])
+            }
         }
 
         class(plot) <- c(type, class(plot))
@@ -166,16 +188,49 @@ loonFacets.default <- function(type,
                     })
 
     # set linkingGroup for each plot
-    lapply(plots,
-           function(plot) {
-               l_configure(plot,
-                           linkingGroup = linkingGroup,
-                           sync = sync)
-           })
 
-    # give warning if linked plot has been
-    if(!new.linkingGroup)
-        l_linkingWarning(plots, sync, nDimArgs)
+    lapply(seq(len),
+           function(i) {
+
+               plot <- plots[[i]]
+
+               if(!new.linkingGroup) {
+
+                   modifiedLinkedStates <- l_modifiedLinkedStates(type[1L],
+                                                                  splitNDimArgs[[i]])
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   splitNDimArgs[[i]][modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+                       l_linkingWarning(plots, sync, splitNDimArgs[[i]])
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
 
     xrange <- c()
     yrange <- c()
@@ -191,11 +246,11 @@ loonFacets.default <- function(type,
 
     if(swapAxes) {
         connectedScales <- switch(connectedScales,
-               "x" = "y",
-               "y" = "x",
-               {
-                   connectedScales
-               })
+                                  "x" = "y",
+                                  "y" = "x",
+                                  {
+                                      connectedScales
+                                  })
     }
 
     if(separate) {
@@ -341,8 +396,8 @@ loonFacets.l_serialaxes <- function(type,
 
     # split data by "by"
     splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
-
-    if(length(splitNDimArgs) == 1) {
+len <- length(splitNDimArgs)
+    if(len == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -358,9 +413,33 @@ loonFacets.l_serialaxes <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            modifiedLinkedStates <- l_modifiedLinkedStates(type[1L], nDimArgs)
+            syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+            if(syncTemp == "push")
+                message("The modification of linked states is not detected",
+                        " so that the default settings will be pushed to all plots")
+            # configure plot (linking)
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = sync)
+                        sync = syncTemp)
+
+            if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                do.call(l_configure,
+                        c(
+                            list(
+                                target = plot,
+                                linkingGroup = linkingGroup,
+                                sync = sync
+                            ),
+                            nDimArgs[modifiedLinkedStates]
+                        )
+                )
+            } else {
+                l_linkingWarning(plot, sync, args = nDimArgs,
+                                 l_className = type[1L])
+            }
         }
 
         class(plot) <- c(type, class(plot))
@@ -441,6 +520,50 @@ loonFacets.l_serialaxes <- function(type,
                         p
                     })
 
+
+    lapply(seq(len),
+           function(i) {
+
+               plot <- plots[[i]]
+
+               if(!new.linkingGroup) {
+
+                   modifiedLinkedStates <- l_modifiedLinkedStates(type[1L],
+                                                                  splitNDimArgs[[i]])
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   splitNDimArgs[[i]][modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+                       l_linkingWarning(plots, sync, splitNDimArgs[[i]])
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
+
     if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
 
     if(separate) {
@@ -478,14 +601,6 @@ loonFacets.l_serialaxes <- function(type,
             )
         )
 
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
-
         structure(
             plots,
             class = c("l_facet_grid", "l_facet", "l_compound", "loon")
@@ -507,14 +622,6 @@ loonFacets.l_serialaxes <- function(type,
                 )
             )
         )
-
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
 
         structure(
             plots,

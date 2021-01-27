@@ -244,18 +244,57 @@ l_plot_ts <- function(x,
                } else {
                    tkconfigure(paste(p,".canvas", sep=''), width=500, height=150)
                }
-
-               l_configure(p,
-                           linkingGroup = linkingGroup,
-                           sync = sync)
            })
 
     dotArgs$color <- color
     dotArgs$size <- size
-    if(!new.linkingGroup)
-        l_linkingWarning(plots, sync, dotArgs)
 
-    lapply(seq(length(plots)),
+    # configure sync
+    len <- length(plots)
+    lapply(seq(len),
+           function(i) {
+
+               plot <- plots[[i]]
+               type <- class(plot)[1L]
+
+               if(!new.linkingGroup) {
+
+                   modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   dotArgs[modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+                       l_linkingWarning(plots, sync, dotArgs)
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
+
+    lapply(seq(len),
            function(i) {
                tkgrid(plots[[i]],
                       row = i - 1,

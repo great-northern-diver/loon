@@ -1,5 +1,6 @@
 .defaultLinkableStates_l_hist <- c("selected", "color", "active")
 .defaultLinkableStates_l_plot <- c("selected", "color", "active", "size")
+.defaultLinkableStates_l_plot3D <- c("selected", "color", "active", "size")
 .defaultLinkableStates_l_serialaxes <- c("selected", "color", "active")
 .defaultLinkableStates_l_graph <- c("selected", "color", "active", "size")
 

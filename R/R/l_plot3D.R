@@ -414,6 +414,8 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
     # dotArgs passed into loonPlotFactory
     dotArgs[l_byArgs()] <- NULL
 
+    l_className <- c("l_plot3D", "l_plot")
+
     if(missing(title)) { title <- "" }
 
     if(missing(x)) {
@@ -457,7 +459,7 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             )
         )
 
-        class(plot) <- c("l_plot3D", "l_plot", class(plot))
+        class(plot) <- c(l_className, class(plot))
         return(plot)
 
     } else {
@@ -513,7 +515,7 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         dotArgs$selected <- selected
 
         if(is.null(by)) {
-            dotArgs <- l_na_omit("l_plot3D", dotArgs)
+            dotArgs <- l_na_omit(l_className[1L], dotArgs)
 
             plot <- do.call(
                 loonPlotFactory,
@@ -540,21 +542,42 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             )
 
             if(!is.null(linkingGroup)) {
+
+                modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], dotArgs)
+                syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                if(syncTemp == "push")
+                    message("The modification of linked states is not detected",
+                            " so that the default settings will be pushed to all plots")
+                # configure plot (linking)
                 l_configure(plot,
                             linkingGroup = linkingGroup,
-                            sync = sync)
+                            sync = syncTemp)
 
-                l_linkingWarning(plot, sync, dotArgs, "l_plot")
+                if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                    do.call(l_configure,
+                            c(
+                                list(
+                                    target = plot,
+                                    linkingGroup = linkingGroup,
+                                    sync = sync
+                                ),
+                                dotArgs[modifiedLinkedStates]
+                            )
+                    )
+                } else {
+                    l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className[1L])
+                }
             }
 
-            class(plot) <- c("l_plot3D", "l_plot", class(plot))
+            class(plot) <- c(l_className, class(plot))
             return(plot)
 
         } else {
 
             byDeparse <- deparse(substitute(by))
 
-            plots <- loonFacets(type = c("l_plot3D", "l_plot"),
+            plots <- loonFacets(type = l_className,
                                 valid_by(by, byDeparse, xOrigin, xlab, n),
                                 dotArgs,
                                 byDeparse = byDeparse,
