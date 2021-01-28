@@ -1,6 +1,5 @@
 l_linkingWarning <- function(widget, sync = "pull", args, l_className = NULL) {
 
-    # If "sync" is push, no need to give warnings
     if(sync == "push") return(invisible())
 
     deprecatedLinkedVar <- l_getDeprecatedLinkedVar(widget, args, l_className)

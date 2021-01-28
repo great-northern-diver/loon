@@ -69,6 +69,8 @@ l_pairs <- function(data,
                     histHeightProp = 1, histArgs = list(),
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
                     span = 10L, ...) {
+  # matrix input
+  data <- as.data.frame(data)
 
   dotArgs <- list(...)
 
@@ -273,13 +275,6 @@ l_pairs <- function(data,
            })
 
     histograms <- Filter(Negate(is.null), histograms)
-    # configure `linkingGroup` and `sync`
-    lapply(histograms,
-           function(h) {
-             l_configure(h,
-                         linkingGroup = linkingGroup,
-                         sync = sync)
-           })
   }
 
   if (showSerialAxes) {
@@ -299,11 +294,6 @@ l_pairs <- function(data,
     }
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
-
-    # configure `linkingGroup` and `sync`
-    l_configure(serialAxes,
-                linkingGroup = linkingGroup,
-                sync = sync)
 
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
                 width= serialAxesSpan * 50,
@@ -335,14 +325,6 @@ l_pairs <- function(data,
       names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")
     }
   }
-
-  # configure `linkingGroup` and `sync`
-  lapply(scatterplots,
-         function(s) {
-           l_configure(s,
-                       linkingGroup = linkingGroup,
-                       sync = sync)
-         })
 
   if (any(sapply(scatterplots, function(p) {is(p, 'try-error')}))) {
     if(new.toplevel) tkdestroy(parent)
@@ -485,10 +467,13 @@ l_pairs <- function(data,
     scatterX <- scatterLayout$x
     scatterY <- scatterLayout$y
 
+    lenHist <- length(histograms)
+
     if(histLocation == "edge") {
-      for(i in 1:length(histograms)) {
+
+      for(i in 1:lenHist) {
         nameHist <- namesHist[i]
-        if(i != 1 & i != length(histograms)) {
+        if(i != 1 & i != lenHist) {
           if(i <= nvar) {
             histX <- xy_layout(nameHist)$x
             shareX <- which(scatterX %in% histX == TRUE)
@@ -504,7 +489,7 @@ l_pairs <- function(data,
       }
 
     } else {
-      for(i in 1:length(histograms)){
+      for(i in 1:lenHist) {
         nameHist <- namesHist[i]
         histLayout <- xy_layout(nameHist)
         histX <- histLayout$x
@@ -572,9 +557,50 @@ l_pairs <- function(data,
     plots <- c(plots, list(serialAxes = serialAxes))
   }
 
-  if(!new.linkingGroup) {
-    l_linkingWarning(plots, sync, dotArgs)
-  }
+  # configure sync
+  len <- length(plots)
+  lapply(seq(len),
+         function(i) {
+
+           plot <- plots[[i]]
+           type <- class(plot)[1L]
+
+           if(!new.linkingGroup) {
+
+             modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
+             syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+             # give message once
+             if(i == 1L && syncTemp == "push") {
+               message("The modification of linked states is not detected",
+                       " so that the default settings will be pushed to all plots")
+             }
+             l_configure(plot,
+                         linkingGroup = linkingGroup,
+                         sync = syncTemp)
+
+             if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+               do.call(l_configure,
+                       c(
+                         list(
+                           target = plot,
+                           linkingGroup = linkingGroup,
+                           sync = sync
+                         ),
+                         dotArgs[modifiedLinkedStates]
+                       )
+               )
+             } else {
+               l_linkingWarning(plots, sync, dotArgs)
+             }
+
+           } else {
+
+             l_configure(plot,
+                         linkingGroup = linkingGroup,
+                         sync = sync)
+           }
+         })
 
   ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
   callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings

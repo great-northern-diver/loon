@@ -301,11 +301,32 @@ l_serialaxes <- function(data,
         )
 
         if(!is.null(linkingGroup)) {
+
+            modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+            syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+            if(syncTemp == "push")
+                message("The modification of linked states is not detected",
+                        " so that the default settings will be pushed to all plots")
+            # configure plot (linking)
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = sync)
+                        sync = syncTemp)
 
-            l_linkingWarning(plot, sync, dotArgs, l_className)
+            if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                do.call(l_configure,
+                        c(
+                            list(
+                                target = plot,
+                                linkingGroup = linkingGroup,
+                                sync = sync
+                            ),
+                            dotArgs[modifiedLinkedStates]
+                        )
+                )
+            } else {
+                l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className)
+            }
         }
 
         class(plot) <- c(l_className, class(plot))
