@@ -9,7 +9,8 @@ test_that("linking on size and color works", {
                  size = sample(c(2, 4, 8), n, replace = TRUE),
                  linkingGroup = "iris")
     p2 <- l_plot(iris, linkingGroup = "iris")
-    p3 <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, linkingGroup = "iris")
+    p3 <- l_plot3D(iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length,
+                   linkingGroup = "iris")
     h <- l_hist(iris, linkingGroup = "iris")
     sa <- l_serialaxes(iris, linkingGroup = "iris")
 

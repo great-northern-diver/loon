@@ -392,11 +392,11 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               by = NULL,
                               layout = c("grid", "wrap", "separate"),
                               connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                              color = l_getOption("color"),
-                              glyph = l_getOption("glyph"),
-                              size = l_getOption("size"),
-                              active = TRUE,
-                              selected = FALSE,
+                              color = NULL,
+                              glyph = NULL,
+                              size = NULL,
+                              active = NULL,
+                              selected = NULL,
                               xlabel, ylabel, zlabel,
                               title,
                               showLabels = TRUE,
@@ -488,6 +488,13 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
             zlabel <- if (is.null(xyz$zlab)) zlab else xyz$zlab
         }
 
+        dotArgs$color <- color
+        dotArgs$size <- size
+        dotArgs$glyph <- glyph
+        dotArgs$active <- active
+        dotArgs$selected <- selected
+        modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], dotArgs)
+
         n <- length(x)
         color <- aes_settings(color, n, ifNoStop = FALSE)
         size <- aes_settings(size, n, ifNoStop = FALSE)
@@ -543,7 +550,6 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
 
             if(!is.null(linkingGroup)) {
 
-                modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], dotArgs)
                 syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
                 if(syncTemp == "push")
                     message("The modification of linked states is not detected",
@@ -566,7 +572,9 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                             )
                     )
                 } else {
-                    l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className[1L])
+                    l_linkingWarning(plot, sync, args = dotArgs,
+                                     modifiedLinkedStates = modifiedLinkedStates,
+                                     l_className = l_className[1L])
                 }
             }
 

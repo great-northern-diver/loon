@@ -430,7 +430,9 @@ l_plot.default <-  function(x, y = NULL,
                             )
                     )
                 } else {
-                    l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className)
+                    l_linkingWarning(plot, sync, args = dotArgs,
+                                     modifiedLinkedStates = modifiedLinkedStates,
+                                     l_className = l_className)
                 }
             }
 

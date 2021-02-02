@@ -570,9 +570,11 @@ l_pairs <- function(data,
            plot <- plots[[i]]
            type <- class(plot)[1L]
 
+           modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
+
            if(!new.linkingGroup) {
 
-             modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
+
              syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
              # give message once
              if(i == 1L && syncTemp == "push") {
@@ -596,7 +598,7 @@ l_pairs <- function(data,
                        )
                )
              } else {
-               l_linkingWarning(plots, sync, dotArgs)
+               l_linkingWarning(plot, sync, args = dotArgs, modifiedLinkedStates = modifiedLinkedStates)
              }
 
            } else {

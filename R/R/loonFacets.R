@@ -93,6 +93,7 @@ loonFacets.default <- function(type,
                 )
             } else {
                 l_linkingWarning(plot, sync, args = nDimArgs,
+                                 modifiedLinkedStates = modifiedLinkedStates,
                                  l_className = type[1L])
             }
         }
@@ -220,7 +221,9 @@ loonFacets.default <- function(type,
                                )
                        )
                    } else {
-                       l_linkingWarning(plots, sync, splitNDimArgs[[i]])
+                       l_linkingWarning(plots, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
                    }
 
                } else {
@@ -437,6 +440,7 @@ len <- length(splitNDimArgs)
                 )
             } else {
                 l_linkingWarning(plot, sync, args = nDimArgs,
+                                 modifiedLinkedStates = modifiedLinkedStates,
                                  l_className = type[1L])
             }
         }
@@ -550,7 +554,9 @@ len <- length(splitNDimArgs)
                                )
                        )
                    } else {
-                       l_linkingWarning(plots, sync, splitNDimArgs[[i]])
+                       l_linkingWarning(plots, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
                    }
 
                } else {

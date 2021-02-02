@@ -330,7 +330,9 @@ l_serialaxes <- function(data,
                         )
                 )
             } else {
-                l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className)
+                l_linkingWarning(plot, sync, args = dotArgs,
+                                 modifiedLinkedStates = modifiedLinkedStates,
+                                 l_className = l_className)
             }
         }
 

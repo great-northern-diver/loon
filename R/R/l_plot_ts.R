@@ -137,6 +137,10 @@ l_plot_ts <- function(x,
         parent <- l_toplevel()
     }
 
+    dotArgs$color <- color
+    dotArgs$size <- size
+    modifiedLinkedStates <- l_modifiedLinkedStates("l_plot", dotArgs)
+
     subwin <- l_subwin(parent, 'ts')
     tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
@@ -153,7 +157,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.raw$x,
                           y = xy.raw$y,
-                          color = color, size = size,
                           ylabel = ylabel[1],
                           xlabel = xlabel[1],
                           title = title,
@@ -176,7 +179,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.trend$x,
                           y = xy.trend$y,
-                          color = color, size = size,
                           ylabel = ylabel[2],
                           xlabel = xlabel[2],
                           showScales = showScales,
@@ -197,7 +199,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.seasonal$x,
                           y = xy.seasonal$y,
-                          color = color, size=size,
                           ylabel = ylabel[3],
                           xlabel = xlabel[3],
                           showScales = showScales,
@@ -219,7 +220,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.remainder$x,
                           y = xy.remainder$y,
-                          color = color, size=size,
                           ylabel = ylabel[4],
                           xlabel = xlabel[4],
                           showScales = showScales,
@@ -246,9 +246,6 @@ l_plot_ts <- function(x,
                }
            })
 
-    dotArgs$color <- color
-    dotArgs$size <- size
-
     # configure sync
     len <- length(plots)
     lapply(seq(len),
@@ -259,7 +256,6 @@ l_plot_ts <- function(x,
 
                if(!new.linkingGroup) {
 
-                   modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
                    syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
                    # give message once
                    if(i == 1L && syncTemp == "push") {
@@ -283,7 +279,13 @@ l_plot_ts <- function(x,
                                )
                        )
                    } else {
-                       l_linkingWarning(plots, sync, dotArgs)
+
+                       # all four plots are the same type
+                       # so give warnings once
+                       if(i == 1L)
+                           l_linkingWarning(plot, sync,
+                                            args = dotArgs,
+                                            modifiedLinkedStates = modifiedLinkedStates)
                    }
 
                } else {
