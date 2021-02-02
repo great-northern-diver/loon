@@ -16,12 +16,13 @@ aes_settings <- function(aes, n, ifNoStop = FALSE) {
         } else aes
     } else {
 
-        if(is.na(aes)) {
-            switch(aes,
+        if(is.na(aes) || is.null(aes)) {
+            aesChar <- deparse(substitute(aes))
+            switch(aesChar,
                    "selected" = FALSE,
                    "active" = TRUE,
                    {
-                       rep(l_getOption(deparse(substitute(aes))), n)
+                       rep(l_getOption(aesChar), n)
                    })
         } else rep(aes, n)
     }

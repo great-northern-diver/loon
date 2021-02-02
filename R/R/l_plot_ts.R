@@ -36,8 +36,8 @@
 #'
 
 l_plot_ts <- function(x,
-                      color = l_getOption("color"),
-                      size = l_getOption("size"),
+                      color = NULL,
+                      size = NULL,
                       lcolor = l_getOption("color"),
                       linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,

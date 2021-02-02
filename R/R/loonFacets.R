@@ -1,7 +1,8 @@
 loonFacets <- function(type, by, args, layout = "grid", byDeparse = "",
                        connectedScales = "both", byArgs, linkingGroup, sync, parent,
                        factory_tclcmd, factory_path, factory_window_title,
-                       xlabel = "", ylabel = "", title = "", ...) {
+                       xlabel = "", ylabel = "", title = "",
+                       modifiedLinkedStates = character(0L), ...) {
     class(type) <- type
     UseMethod("loonFacets", type)
 }
@@ -16,7 +17,8 @@ loonFacets.default <- function(type,
                                linkingGroup, sync, parent,
                                factory_tclcmd, factory_path,
                                factory_window_title,
-                               xlabel = "", ylabel = "", title = "", ...) {
+                               xlabel = "", ylabel = "", title = "",
+                               modifiedLinkedStates = character(0L), ...) {
 
     by_names <- colnames(by)
 
@@ -68,7 +70,6 @@ loonFacets.default <- function(type,
 
         if(!is.null(linkingGroup)) {
 
-            modifiedLinkedStates <- l_modifiedLinkedStates(type[1L], nDimArgs)
             syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
             if(syncTemp == "push")
                 message("The modification of linked states is not detected",
@@ -196,8 +197,6 @@ loonFacets.default <- function(type,
 
                if(!new.linkingGroup) {
 
-                   modifiedLinkedStates <- l_modifiedLinkedStates(type[1L],
-                                                                  splitNDimArgs[[i]])
                    syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
                    # give message once
                    if(i == 1L && syncTemp == "push") {
@@ -359,7 +358,8 @@ loonFacets.l_serialaxes <- function(type,
                                     byArgs, linkingGroup, sync, parent,
                                     factory_tclcmd, factory_path,
                                     factory_window_title,
-                                    xlabel = "", ylabel = "", title = "", ...) {
+                                    xlabel = "", ylabel = "", title = "",
+                                    modifiedLinkedStates = character(0L), ...) {
 
     by_names <- colnames(by)
 
@@ -414,7 +414,6 @@ len <- length(splitNDimArgs)
 
         if(!is.null(linkingGroup)) {
 
-            modifiedLinkedStates <- l_modifiedLinkedStates(type[1L], nDimArgs)
             syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
             if(syncTemp == "push")
                 message("The modification of linked states is not detected",
@@ -528,8 +527,6 @@ len <- length(splitNDimArgs)
 
                if(!new.linkingGroup) {
 
-                   modifiedLinkedStates <- l_modifiedLinkedStates(type[1L],
-                                                                  splitNDimArgs[[i]])
                    syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
                    # give message once
                    if(i == 1L && syncTemp == "push") {

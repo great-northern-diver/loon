@@ -69,6 +69,8 @@ l_pairs <- function(data,
                     histHeightProp = 1, histArgs = list(),
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
                     span = 10L, ...) {
+
+  substitueData <- deparse(substitute(data))
   # matrix input
   data <- as.data.frame(data)
 
@@ -77,8 +79,11 @@ l_pairs <- function(data,
   new.linkingGroup <- FALSE
   if (missing(linkingGroup)) {
     new.linkingGroup <- TRUE
-    linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
+    linkingGroup <- paste0("l_pairs_", substitueData)
   }
+
+
+
   # Use default as in tcl/tk
   if (missing(linkingKey)) {
     linkingKey <- NULL
@@ -132,7 +137,7 @@ l_pairs <- function(data,
   child <- as.character(tcl('frame', subwin))
 
   title <- paste("loon scatterplot matrix for",
-                 deparse(substitute(data)), "data", "--path:", subwin)
+                 substitueData, "data", "--path:", subwin)
   tktitle(parent) <- title
   ## parent for individual scatterplots
   dotArgs[['parent']] <- child

@@ -235,10 +235,10 @@ l_serialaxes <- function(data,
                          layout = c("grid", "wrap", "separate"),
                          andrews = FALSE,
                          showAxes=TRUE,
-                         linewidth = l_getOption("linewidth"),
-                         color = l_getOption("color"),
-                         active = TRUE,
-                         selected = FALSE,
+                         linewidth = NULL,
+                         color = NULL,
+                         active = NULL,
+                         selected = NULL,
                          parent=NULL, ... ) {
 
     dotArgs <- list(...)
@@ -256,6 +256,12 @@ l_serialaxes <- function(data,
     }
 
     n <- dim(data)[1]
+
+    dotArgs$color <- color
+    dotArgs$linewidth <- linewidth
+    dotArgs$active <- active
+    dotArgs$selected <- selected
+    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
 
     color <- aes_settings(color, n, ifNoStop = FALSE)
     linewidth <- aes_settings(linewidth, n, ifNoStop = FALSE)
@@ -302,7 +308,6 @@ l_serialaxes <- function(data,
 
         if(!is.null(linkingGroup)) {
 
-            modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
             syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
             if(syncTemp == "push")
                 message("The modification of linked states is not detected",
@@ -348,6 +353,7 @@ l_serialaxes <- function(data,
                             factory_tclcmd = '::loon::serialaxes',
                             factory_path = 'serialaxes',
                             factory_window_title = 'loon serialaxes plot',
+                            modifiedLinkedStates = modifiedLinkedStates,
                             sequence = sequence,
                             showAxes = showAxes,
                             scaling = scaling,

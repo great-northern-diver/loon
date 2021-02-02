@@ -261,11 +261,11 @@ l_plot.default <-  function(x, y = NULL,
                             by = NULL,
                             layout = c("grid", "wrap", "separate"),
                             connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                            color = l_getOption("color"),
-                            glyph = l_getOption("glyph"),
-                            size = l_getOption("size"),
-                            active = TRUE,
-                            selected = FALSE,
+                            color = NULL,
+                            glyph = NULL,
+                            size = NULL,
+                            active = NULL,
+                            selected = NULL,
                             xlabel, ylabel, title,
                             showLabels = TRUE,
                             showScales = FALSE,
@@ -351,6 +351,13 @@ l_plot.default <-  function(x, y = NULL,
         ## make sure points parameters are right
         n <- length(x)
 
+        dotArgs$color <- color
+        dotArgs$size <- size
+        dotArgs$glyph <- glyph
+        dotArgs$active <- active
+        dotArgs$selected <- selected
+        modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+
         color <- aes_settings(color, n, ifNoStop = FALSE)
         size <- aes_settings(size, n, ifNoStop = FALSE)
         glyph <- aes_settings(glyph, n, ifNoStop = FALSE)
@@ -401,7 +408,6 @@ l_plot.default <-  function(x, y = NULL,
 
             if(!is.null(linkingGroup)) {
 
-                modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
                 syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
                 if(syncTemp == "push")
                     message("The modification of linked states is not detected",
@@ -451,6 +457,7 @@ l_plot.default <-  function(x, y = NULL,
                                 factory_tclcmd = '::loon::plot',
                                 factory_path = 'plot',
                                 factory_window_title = 'loon scatterplot',
+                                modifiedLinkedStates = modifiedLinkedStates,
                                 showLabels = showLabels,
                                 showScales = showScales,
                                 showGuides = showGuides,
