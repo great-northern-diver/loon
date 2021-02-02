@@ -13,10 +13,10 @@ l_serialaxes(
   layout = c("grid", "wrap", "separate"),
   andrews = FALSE,
   showAxes = TRUE,
-  linewidth = l_getOption("linewidth"),
-  color = l_getOption("color"),
-  active = TRUE,
-  selected = FALSE,
+  linewidth = NULL,
+  color = NULL,
+  active = NULL,
+  selected = NULL,
   parent = NULL,
   ...
 )
