@@ -103,6 +103,8 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 
     l_className <- "l_graph"
 
+    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+
     # `sync` and `linkingGroup` are set after the plot is created
     # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
     linkingGroup <- dotArgs[["linkingGroup"]]
@@ -128,7 +130,6 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
 
     if(!is.null(linkingGroup)) {
 
-        modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
         syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
         if(syncTemp == "push")
             message("The modification of linked states is not detected",
@@ -151,7 +152,9 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
                     )
             )
         } else {
-            l_linkingWarning(plot, sync, args = dotArgs, l_className = l_className)
+            l_linkingWarning(plot, sync, args = dotArgs,
+                             modifiedLinkedStates = modifiedLinkedStates,
+                             l_className = l_className)
         }
     }
 

@@ -146,6 +146,7 @@ test_that("test push", {
                       sync = "push")
 
     expect_true(all(p['size'] == size))
+    expect_false(all(p['selected']))
     expect_true(all(as_hex6color(p['color']) == as_hex6color(color)))
 
     s1 <- l_serialaxes(iris, by = iris$Species,
@@ -162,4 +163,22 @@ test_that("test push", {
 
     expect_true(all(s['linewidth'] == size))
     expect_true(all(s['color'] == "#FFFF00000000"))
+
+    # push test
+    # the states of the new plot are the default
+    p1 <- l_plot(1:10,
+                 color = "red",
+                 linkingGroup = "group1",
+                 size = 10,
+                 selected = TRUE)
+    p2 <- l_plot(1:10,
+                 color = l_getOption("color"),
+                 linkingGroup = "group1",
+                 size = l_getOption("size"),
+                 sync = "push",
+                 selected = FALSE)
+
+    expect_true(all(p1['color'] == "#999999999999"))
+    expect_true(all(p1['size'] == 4))
+    expect_false(any(p1['selected']))
 })

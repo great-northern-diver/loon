@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -170,10 +170,13 @@
   origin <span class='op'>=</span> <span class='cn'>NULL</span>,
   binwidth <span class='op'>=</span> <span class='cn'>NULL</span>,
   showBinHandle <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
-  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  active <span class='op'>=</span> <span class='cn'>NULL</span>,
+  selected <span class='op'>=</span> <span class='cn'>NULL</span>,
   xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showScales <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
   parent <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -272,6 +275,21 @@ and which is not (<code>FALSE</code>).</p></td>
 inferred from <code>x</code> will be made.</p></td>
     </tr>
     <tr>
+      <th>showLabels</th>
+      <td><p>logical to determine whether axes label (and title) should
+be presented.</p></td>
+    </tr>
+    <tr>
+      <th>showScales</th>
+      <td><p>logical to determine whether numerical scales should
+be presented on both axes.</p></td>
+    </tr>
+    <tr>
+      <th>showGuides</th>
+      <td><p>logical to determine whether to present background guidelines
+to help determine locations.</p></td>
+    </tr>
+    <tr>
       <th>parent</th>
       <td><p>parent widget path</p></td>
     </tr>
@@ -319,7 +337,7 @@ inferred from <code>x</code> will be made.</p></td>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
-<span class='va'>h</span><span class='op'>[</span><span class='st'>"showGuides"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showGuides"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 
 <span class='co'># link another plot with the previous plot</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>'linkingGroup'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"iris_data"</span>

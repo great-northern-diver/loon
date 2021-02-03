@@ -6,8 +6,8 @@
 \usage{
 l_plot_ts(
   x,
-  color = l_getOption("color"),
-  size = l_getOption("size"),
+  color = NULL,
+  size = NULL,
   lcolor = l_getOption("color"),
   linewidth = l_getOption("linewidth"),
   xlabel = NULL,
