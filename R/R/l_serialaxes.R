@@ -11,6 +11,9 @@
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+#' typically the environment from which the function is called.
 #' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
 #' @param andrews Andrew's plot (a 'Fourier' transformation)
 #' @param showAxes boolean to indicate whether axes should be shown or not
@@ -28,6 +31,7 @@
 #' and which are not (\code{FALSE}).
 #' @template param_parent
 #' @template param_dots_state_args
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify the serialaxes states or layouts, see details.
 #'
 #' @details \itemize{
@@ -232,14 +236,17 @@ l_serialaxes <- function(data,
                          scaling="variable",
                          axesLayout='radial',
                          by = NULL,
+                         on,
                          layout = c("grid", "wrap", "separate"),
                          andrews = FALSE,
                          showAxes=TRUE,
-                         linewidth = NULL,
-                         color = NULL,
-                         active = NULL,
-                         selected = NULL,
-                         parent=NULL, ... ) {
+                         color = l_getOption("color"),
+                         active = TRUE,
+                         selected = FALSE,
+                         linewidth = l_getOption("linewidth"),
+                         parent=NULL,
+                         call = match.call(),
+                         ...) {
 
     dotArgs <- list(...)
     # set by dotArgs, used for facetting
@@ -257,11 +264,7 @@ l_serialaxes <- function(data,
 
     n <- dim(data)[1]
 
-    dotArgs$color <- color
-    dotArgs$linewidth <- linewidth
-    dotArgs$active <- active
-    dotArgs$selected <- selected
-    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
     color <- aes_settings(color, n, ifNoStop = FALSE)
     linewidth <- aes_settings(linewidth, n, ifNoStop = FALSE)
@@ -341,12 +344,11 @@ l_serialaxes <- function(data,
 
     } else {
 
-        byDeparse <- deparse(substitute(by))
-
         plots <- loonFacets(type = l_className,
-                            valid_by(by, byDeparse, data, n = n),
-                            dotArgs,
-                            byDeparse = byDeparse,
+                            by = by,
+                            args = dotArgs,
+                            on = on,
+                            bySubstitute = substitute(by), # for warning or error generations
                             layout = match.arg(layout),
                             byArgs = Filter(Negate(is.null), byArgs),
                             linkingGroup = linkingGroup,

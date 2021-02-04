@@ -24,6 +24,7 @@
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.
 #'
 #'
@@ -36,8 +37,8 @@
 #'
 
 l_plot_ts <- function(x,
-                      color = NULL,
-                      size = NULL,
+                      color = l_getOption("color"),
+                      size = l_getOption("size"),
                       lcolor = l_getOption("color"),
                       linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,
@@ -46,6 +47,7 @@ l_plot_ts <- function(x,
                       showScales=TRUE,
                       showGuides=TRUE,
                       showLabels=TRUE,
+                      call = match.call(),
                       ...) {
 
     stlOrDecomposedTS <- x  # Just to remind us about what x is
@@ -137,15 +139,16 @@ l_plot_ts <- function(x,
         parent <- l_toplevel()
     }
 
-    dotArgs$color <- color
-    dotArgs$size <- size
-    modifiedLinkedStates <- l_modifiedLinkedStates("l_plot", dotArgs)
+
+    modifiedLinkedStates <- l_modifiedLinkedStates("l_plot", names(call))
 
     subwin <- l_subwin(parent, 'ts')
     tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
 
     dotArgs$parent <- child
+    dotArgs$color <- color
+    dotArgs$size <- size
 
     sync <- dotArgs[['sync']]
     # if null, it is always **pull**

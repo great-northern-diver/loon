@@ -28,6 +28,7 @@
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... keyword value pairs passed off to \code{\link{l_plot}()} which constructs each loon scatterplot component.
 #'
 #'
@@ -55,14 +56,15 @@
 l_plot.decomposed.ts <- function(x, y = NULL,
                                  xlabel = NULL,  ylabel = NULL,
                                  title = NULL, tk_title = NULL,
-                                 color = NULL,
-                                 size = NULL,
+                                 color = l_getOption("color"),
+                                 size = l_getOption("size"),
                                  lcolor = l_getOption("color"),
                                  linewidth = l_getOption("linewidth"),
                                  linkingGroup,
                                  showScales = TRUE,
                                  showGuides = TRUE,
                                  showLabels = TRUE,
+                                 call = match.call(),
                                  ...
                                   ){
 
@@ -77,6 +79,7 @@ l_plot.decomposed.ts <- function(x, y = NULL,
               showScales = showScales,
               showGuides = showGuides,
               showLabels = showLabels,
+              call = call,
               ...
     )
 }

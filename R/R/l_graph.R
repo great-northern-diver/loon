@@ -85,7 +85,7 @@ l_graph.loongraph <- function(nodes,...) {
 #' @param from vector with node names of the from-to pairs for edges
 #' @param to vector with node names of the from-to pairs for edges
 #' @param parent parent widget of graph display
-#'
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @templateVar page  learn_R_display_graph
 #' @templateVar section graph
 #' @template see_l_help
@@ -97,13 +97,13 @@ l_graph.loongraph <- function(nodes,...) {
 #'
 #' @export
 #' @export l_graph.default
-l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
+l_graph.default <- function(nodes="", from="", to="",  parent=NULL, call = match.call(), ...) {
 
     dotArgs <- list(...)
 
     l_className <- "l_graph"
 
-    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
     # `sync` and `linkingGroup` are set after the plot is created
     # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)

@@ -82,7 +82,7 @@ l_pairs <- function(data,
     linkingGroup <- paste0("l_pairs_", substitueData)
   }
 
-
+  call <- match.call()
 
   # Use default as in tcl/tk
   if (missing(linkingKey)) {
@@ -570,7 +570,7 @@ l_pairs <- function(data,
            plot <- plots[[i]]
            type <- class(plot)[1L]
 
-           modifiedLinkedStates <- l_modifiedLinkedStates(type, dotArgs)
+           modifiedLinkedStates <- l_modifiedLinkedStates(type, names(call))
 
            if(!new.linkingGroup) {
 

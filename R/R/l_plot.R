@@ -113,6 +113,9 @@ l_plot <- function(x, y, ...) {
 #' @param y argument description is as for the \code{x} argument above.
 #' @param by loon plot can be separated by some variables into multiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+#' typically the environment from which the function is called.
 #' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
 #' @param connectedScales Determines how the scales of the facets are to be connected depending
 #' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
@@ -184,6 +187,7 @@ l_plot <- function(x, y, ...) {
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 #'   order to be displayed. See the examples below.
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify plot states or layouts, see details.
 #'
 #'
@@ -239,7 +243,14 @@ l_plot <- function(x, y, ...) {
 #' gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 #'
 #' # Layout facets
+#' ### facet wrap
 #' p <- with(mtcars, l_plot(wt, mpg, by = cyl, layout = "wrap"))
+#'
+#' ### facet grid
+#' p <- l_plot(x = 1:6, y = 1:6,
+#'             by = size ~ color,
+#'             size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+#'             color = c(rep("red", 3), rep("green", 3)))
 #'
 #' # Use with other tk widgets
 #' tt <- tktoplevel()
@@ -255,17 +266,17 @@ l_plot <- function(x, y, ...) {
 #' tkgrid.columnconfigure(tt, 1, weight=1)
 #'
 #' tkgrid.rowconfigure(tt, 0, weight=1)
-#'
 #'}
 l_plot.default <-  function(x, y = NULL,
                             by = NULL,
+                            on,
                             layout = c("grid", "wrap", "separate"),
                             connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                            color = NULL,
-                            glyph = NULL,
-                            size = NULL,
-                            active = NULL,
-                            selected = NULL,
+                            color = l_getOption("color"),
+                            glyph = l_getOption("glyph"),
+                            size = l_getOption("size"),
+                            active = TRUE,
+                            selected = FALSE,
                             xlabel, ylabel, title,
                             showLabels = TRUE,
                             showScales = FALSE,
@@ -274,7 +285,8 @@ l_plot.default <-  function(x, y = NULL,
                             guidesBackground = l_getOption("guidesBackground"),
                             foreground = l_getOption("foreground"),
                             background = l_getOption("background"),
-                            parent = NULL, ...) {
+                            parent = NULL,
+                            call = match.call(), ...) {
 
     dotArgs <- list(...)
     # set by args, used for facetting
@@ -351,12 +363,8 @@ l_plot.default <-  function(x, y = NULL,
         ## make sure points parameters are right
         n <- length(x)
 
-        dotArgs$color <- color
-        dotArgs$size <- size
-        dotArgs$glyph <- glyph
-        dotArgs$active <- active
-        dotArgs$selected <- selected
-        modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+        # check which states are modified
+        modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
         color <- aes_settings(color, n, ifNoStop = FALSE)
         size <- aes_settings(size, n, ifNoStop = FALSE)
@@ -441,12 +449,11 @@ l_plot.default <-  function(x, y = NULL,
 
         } else {
 
-            byDeparse <- deparse(substitute(by))
-
             plots <- loonFacets(type = l_className,
-                                by = valid_by(by, byDeparse, xOrigin, xlab, n),
+                                by = by,
                                 args = dotArgs,
-                                byDeparse = byDeparse,
+                                on = on,
+                                bySubstitute = substitute(by), # for warning or error generations
                                 layout = match.arg(layout),
                                 connectedScales = match.arg(connectedScales),
                                 byArgs = Filter(Negate(is.null), byArgs),
@@ -473,34 +480,3 @@ l_plot.default <-  function(x, y = NULL,
     }
 }
 
-# convert all types of 'by' to a data frame
-valid_by <- function(by, byDeparse, x = NULL, xlab = "x", n = length(x)) {
-
-    if(is.atomic(by)) {
-        if(length(by) == n) {
-            by <- tryCatch(
-                expr = {setNames(data.frame(by, stringsAsFactors = FALSE), byDeparse)},
-                error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
-            )
-        } else {
-            # 'by' is a char vector
-            # 'x' should be a data.frame
-            if(!is.data.frame(x))
-                stop("If 'by' are variable names, ",
-                     xlab,
-                     " should be a data frame")
-            by <- x[by]
-        }
-    } else {
-
-        if(is.null(names(by))) {
-
-            by <- as.data.frame(by, stringsAsFactors = FALSE)
-            names(by) <- NULL
-        } else {
-            by <- as.data.frame(by, stringsAsFactors = FALSE)
-        }
-    }
-
-    return(by)
-}
