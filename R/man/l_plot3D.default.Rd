@@ -10,13 +10,14 @@
   z = NULL,
   axisScaleFactor = 1,
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-  color = NULL,
-  glyph = NULL,
-  size = NULL,
-  active = NULL,
-  selected = NULL,
+  color = l_getOption("color"),
+  glyph = l_getOption("glyph"),
+  size = l_getOption("size"),
+  active = TRUE,
+  selected = FALSE,
   xlabel,
   ylabel,
   zlabel,
@@ -29,6 +30,7 @@
   foreground = l_getOption("foreground"),
   background = l_getOption("background"),
   parent = NULL,
+  call = match.call(),
   ...
 )
 }
@@ -52,6 +54,10 @@ Default is 1.
 
 \item{by}{loon plot can be separated by some variables into multiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{on}{if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.}
 
 \item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
@@ -143,6 +149,8 @@ Default is given by \code{\link{l_getOption}("background")}.}
 specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
+
+\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{named arguments to modify plot states.}
 }

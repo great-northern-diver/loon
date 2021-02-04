@@ -8,13 +8,14 @@
   x,
   y = NULL,
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-  color = NULL,
-  glyph = NULL,
-  size = NULL,
-  active = NULL,
-  selected = NULL,
+  color = l_getOption("color"),
+  glyph = l_getOption("glyph"),
+  size = l_getOption("size"),
+  active = TRUE,
+  selected = FALSE,
   xlabel,
   ylabel,
   title,
@@ -26,6 +27,7 @@
   foreground = l_getOption("foreground"),
   background = l_getOption("background"),
   parent = NULL,
+  call = match.call(),
   ...
 )
 }
@@ -40,6 +42,10 @@ If supplied separately, they must be of the same length.}
 
 \item{by}{loon plot can be separated by some variables into multiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{on}{if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.}
 
 \item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
@@ -130,6 +136,8 @@ specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
 
+\item{call}{a call in which all of the specified arguments are specified by their full names}
+
 \item{...}{named arguments to modify plot states or layouts, see details.}
 }
 \description{
@@ -183,7 +191,14 @@ p2["glyph"][p1['selected']] <- "cdiamond"
 gridExtra::grid.arrange(loonGrob(p1), loonGrob(p2), nrow = 1)
 
 # Layout facets
+### facet wrap
 p <- with(mtcars, l_plot(wt, mpg, by = cyl, layout = "wrap"))
+
+### facet grid
+p <- l_plot(x = 1:6, y = 1:6,
+            by = size ~ color,
+            size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+            color = c(rep("red", 3), rep("green", 3)))
 
 # Use with other tk widgets
 tt <- tktoplevel()
@@ -199,7 +214,6 @@ tkgrid.columnconfigure(tt, 0, weight=1)
 tkgrid.columnconfigure(tt, 1, weight=1)
 
 tkgrid.rowconfigure(tt, 0, weight=1)
-
 }
 }
 \seealso{

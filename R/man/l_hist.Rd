@@ -8,20 +8,22 @@ l_hist(
   x,
   yshows = c("frequency", "density"),
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
   showStackedColors = TRUE,
   origin = NULL,
   binwidth = NULL,
   showBinHandle = FALSE,
-  color = NULL,
-  active = NULL,
-  selected = NULL,
+  color = l_getOption("color"),
+  active = TRUE,
+  selected = FALSE,
   xlabel = NULL,
   showLabels = TRUE,
   showScales = FALSE,
   showGuides = TRUE,
   parent = NULL,
+  call = match.call(),
   ...
 )
 }
@@ -32,6 +34,10 @@ l_hist(
 
 \item{by}{loon plot can be separated by some variables into multiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{on}{if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.}
 
 \item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
@@ -103,6 +109,8 @@ be presented on both axes.}
 to help determine locations.}
 
 \item{parent}{parent widget path}
+
+\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{named arguments to modify the histogram plot states or layouts, see details.}
 }

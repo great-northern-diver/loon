@@ -10,14 +10,16 @@ l_serialaxes(
   scaling = "variable",
   axesLayout = "radial",
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   andrews = FALSE,
   showAxes = TRUE,
-  linewidth = NULL,
-  color = NULL,
-  active = NULL,
-  selected = NULL,
+  color = l_getOption("color"),
+  active = TRUE,
+  selected = FALSE,
+  linewidth = l_getOption("linewidth"),
   parent = NULL,
+  call = match.call(),
   ...
 )
 }
@@ -34,14 +36,15 @@ how the data is scaled. See Details and Examples for more information.}
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
 
+\item{on}{if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.}
+
 \item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
 
 \item{andrews}{Andrew's plot (a 'Fourier' transformation)}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
-
-\item{linewidth}{vector with line widths.
-Default is given by \code{\link{l_getOption}("linewidth")}.}
 
 \item{color}{vector with line colors.
 Default is given by \code{\link{l_getOption}("color")}.}
@@ -56,7 +59,12 @@ and which do not (\code{FALSE}).}
 equal to the number of items, then it identifies which items are (\code{TRUE})
 and which are not (\code{FALSE}).}
 
+\item{linewidth}{vector with line widths.
+Default is given by \code{\link{l_getOption}("linewidth")}.}
+
 \item{parent}{parent widget path}
+
+\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{named arguments to modify the serialaxes states or layouts, see details.}
 }
