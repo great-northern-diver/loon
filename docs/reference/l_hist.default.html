@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The default l_plot method to create 3d interactive scatterplot — l_plot3D.default • loon</title>
+<title>The default l_hist — l_hist.default • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="The default l_plot method to create 3d interactive scatterplot — l_plot3D.default" />
-<meta property="og:description" content="Creates an interactive 3d scatterplot. Also, if no loon
-  inspector is open then the l_plot3D call will also open a loon
-  inspector." />
+<meta property="og:title" content="The default l_hist — l_hist.default" />
+<meta property="og:description" content="Creates an interactive histogram display that can be linked with
+  loon's other displays" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -151,43 +150,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The default <code>l_plot</code> method to create 3d interactive scatterplot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot3D.R'><code>R/l_plot3D.R</code></a></small>
-    <div class="hidden name"><code>l_plot3D.default.Rd</code></div>
+    <h1>The default <code>l_hist</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_hist.R'><code>R/l_hist.R</code></a></small>
+    <div class="hidden name"><code>l_hist.default.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates an interactive 3d scatterplot. Also, if no loon
-  inspector is open then the <code>l_plot3D</code> call will also open a loon
-  inspector.</p>
+    <p>Creates an interactive histogram display that can be linked with
+  loon's other displays</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='l_plot3D.html'>l_plot3D</a></span><span class='op'>(</span>
+<span class='fu'><a href='l_hist.html'>l_hist</a></span><span class='op'>(</span>
   <span class='va'>x</span>,
-  y <span class='op'>=</span> <span class='cn'>NULL</span>,
-  z <span class='op'>=</span> <span class='cn'>NULL</span>,
-  axisScaleFactor <span class='op'>=</span> <span class='fl'>1</span>,
+  yshows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"frequency"</span>, <span class='st'>"density"</span><span class='op'>)</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>on</span>,
   layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
   connectedScales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  origin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  binwidth <span class='op'>=</span> <span class='cn'>NULL</span>,
+  showStackedColors <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showBinHandle <span class='op'>=</span> <span class='cn'>FALSE</span>,
   color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
-  glyph <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"glyph"</span><span class='op'>)</span>,
-  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
   active <span class='op'>=</span> <span class='cn'>TRUE</span>,
   selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>xlabel</span>,
-  <span class='va'>ylabel</span>,
-  <span class='va'>zlabel</span>,
-  <span class='va'>title</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
   showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showScales <span class='op'>=</span> <span class='cn'>FALSE</span>,
   showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  guidelines <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidelines"</span><span class='op'>)</span>,
-  guidesBackground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidesBackground"</span><span class='op'>)</span>,
-  foreground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
-  background <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"background"</span><span class='op'>)</span>,
   parent <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -197,27 +188,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the x, y and z arguments provide the x, y and z coordinates for the plot.
-         Any reasonable way of defining the coordinates is acceptable.
-         See the function xyz.coords for details.</p>
-<p>If supplied separately, they must be of the same length.</p></td>
+      <td><p>vector with numerical data to perform the binning on x</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>the y coordinates of points in the plot,
-optional if x is an appropriate structure.</p></td>
-    </tr>
-    <tr>
-      <th>z</th>
-      <td><p>the z coordinates of points in the plot,
-optional if x is an appropriate structure.</p></td>
-    </tr>
-    <tr>
-      <th>axisScaleFactor</th>
-      <td><p>the amount to scale the axes at the centre of the rotation.
-Default is 1.
-    All numerical values are acceptable (0 removes the axes, &lt; 0 inverts the direction of
-    all axes.)</p></td>
+      <th>yshows</th>
+      <td><p>one of "frequency" (default) or  "density"</p></td>
     </tr>
     <tr>
       <th>by</th>
@@ -260,61 +235,57 @@ as follows:</p><ul>
 </ul></td>
     </tr>
     <tr>
+      <th>origin</th>
+      <td><p>numeric scalar to define the binning origin</p></td>
+    </tr>
+    <tr>
+      <th>binwidth</th>
+      <td><p>a numeric scalar to specify the binwidth
+If NULL <code>binwidth</code> is set using David Scott's rule when <code>x</code> is numeric
+(namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) &gt; 0 and 1 if sd(x) == 0)
+and using the minumum numerical difference between factor levels when <code>x</code>
+is a factor or a character vector (coerced to factor).</p></td>
+    </tr>
+    <tr>
+      <th>showStackedColors</th>
+      <td><p>if TRUE (default) then bars will be coloured according to
+colours of the points; if FALSE, then the bars will be a uniform colour
+except for highlighted points.</p></td>
+    </tr>
+    <tr>
+      <th>showBinHandle</th>
+      <td><p>If <code>TRUE</code>, then an interactive "bin handle" appears on the plot
+whose movement resets the <code>origin</code> and the <code>binwidth</code>.  Default is <code>FALSE</code></p></td>
+    </tr>
+    <tr>
       <th>color</th>
-      <td><p>colours of points; colours are repeated until matching the number points.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
-    </tr>
-    <tr>
-      <th>glyph</th>
-      <td><p>shape of point; must be one of the primitive glyphs
-             "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-             "otriangle", "diamond", "cdiamond", or "odiamond".</p>
-<p>Prefixes "c" and "o" mean closed and open, respectively.
-             Default is given by <code><a href='l_getOption.html'>l_getOption</a>("glyph")</code>.</p>
-<p>Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
-             serial axes glyphs may be added, but only after the plot has been created.</p></td>
-    </tr>
-    <tr>
-      <th>size</th>
-      <td><p>size of the symbol (roughly in terms of area).
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
+      <td><p>colour fills of bins; colours are repeated
+until matching the number x.
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>active</th>
-      <td><p>a logical determining whether points appear or not
-(default is <code>TRUE</code> for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points appear (<code>TRUE</code>)
-and which do not (<code>FALSE</code>).</p></td>
+      <td><p>a logical determining whether x appears or not
+(default is <code>TRUE</code> for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x appears (<code>TRUE</code>)
+and which does not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>selected</th>
-      <td><p>a logical determining whether points appear selected at first
-(default is <code>FALSE</code> for all points). If a logical vector is given of length
-equal to the number of points, then it identifies which points are (<code>TRUE</code>)
-and which are not (<code>FALSE</code>).</p></td>
+      <td><p>a logical determining whether x appears selected at first
+(default is <code>FALSE</code> for all x). If a logical vector is given of length
+equal to the number of x, then it identifies which x is (<code>TRUE</code>)
+and which is not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>xlabel</th>
-      <td><p>Label for the horizontal (x) axis. If missing,
-one will be inferred from <code>x</code> if possible.</p></td>
-    </tr>
-    <tr>
-      <th>ylabel</th>
-      <td><p>Label for the vertical (y) axis. If missing,
-one will be inferred from <code>y</code> (or <code>x</code>) if possible.</p></td>
-    </tr>
-    <tr>
-      <th>zlabel</th>
-      <td><p>Label for the third (perpendicular to the screen) (z) axis. If missing,
-one will be inferred from <code>z</code> (or <code>x</code>) if possible.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>Title for the plot, default is an empty string.</p></td>
+      <td><p>label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
+inferred from <code>x</code> will be made.</p></td>
     </tr>
     <tr>
       <th>showLabels</th>
-      <td><p>logical to determine whether axes label (and title) should be presented.</p></td>
+      <td><p>logical to determine whether axes label (and title) should
+be presented.</p></td>
     </tr>
     <tr>
       <th>showScales</th>
@@ -327,69 +298,68 @@ be presented on both axes.</p></td>
 to help determine locations.</p></td>
     </tr>
     <tr>
-      <th>guidelines</th>
-      <td><p>colour of the guidelines shown when <code>showGuides = TRUE</code>.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("guidelines")</code>.</p></td>
-    </tr>
-    <tr>
-      <th>guidesBackground</th>
-      <td><p>colour of the background to the guidelines shown when
-          <code>showGuides = TRUE</code>.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("guidesBackground")</code>.</p></td>
-    </tr>
-    <tr>
-      <th>foreground</th>
-      <td><p>foreground colour used by all other drawing.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("foreground")</code>.</p></td>
-    </tr>
-    <tr>
-      <th>background</th>
-      <td><p>background colour used for the plot.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("background")</code>.</p></td>
-    </tr>
-    <tr>
       <th>parent</th>
-      <td><p>a valid Tk parent widget path. When the parent widget is
-specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
-some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
-order to be displayed. See the examples below.</p></td>
+      <td><p>parent widget path</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>named arguments to modify plot states.</p></td>
+      <td><p>named arguments to modify the histogram plot states or layouts, see details.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>widget handle</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The scatterplot displays a number of direct interactions with the
-  mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
-  the mouse wheel, panning by right-click dragging and various selection
-  methods using the left mouse button such as sweeping, brushing and
-  individual point selection. See the documentation for <code><a href='l_plot3D.html'>l_plot3D</a></code>
-  for more details about the interaction gestures.</p>
+    
+<ul>
+<li><p>Note that when changing the <code>yshows</code> state from
+  <code>'frequency'</code> to <code>'density'</code> you might have to use
+  <code><a href='l_scaleto_world.html'>l_scaleto_world</a></code> to show the complete histogram in the plotting
+  region.</p></li>
+<li><p>Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc.
+  Check <code><a href='l_facet.html'>l_facet</a></code> to see how these arguments work.</p></li>
+</ul>
+
+<p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_hist")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other three-dimensional plotting functions: 
-<code><a href='l_plot3D.html'>l_plot3D</a>()</code>,
-<code><a href='l_scale3D.html'>l_scale3D</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='l_plot.default.html'>l_plot.default</a></code>, <code><a href='l_hist.html'>l_hist</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
-<span class='co'># default use as scatterplot</span>
+<span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_hist.html'>l_hist</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span>
 
-<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>quakes</span>,
-           <span class='fu'><a href='l_plot3D.html'>l_plot3D</a></span><span class='op'>(</span><span class='va'>long</span>, <span class='va'>lat</span>, <span class='va'>depth</span><span class='op'>)</span>
-           <span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"xlabel"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"Sepal length"</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 
-<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>quakes</span>,
-           <span class='fu'><a href='l_plot3D.html'>l_plot3D</a></span><span class='op'>(</span><span class='va'>mag</span>, <span class='va'>stations</span>, <span class='va'>depth</span><span class='op'>)</span>
-           <span class='op'>)</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"density"</span>
+<span class='fu'><a href='l_scaleto_plot.html'>l_scaleto_plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 
-<span class='co'># link the two plots p1 and p2</span>
-<span class='fu'><a href='l_configure.html'>l_configure</a></span><span class='op'>(</span><span class='va'>p1</span>, linkingGroup <span class='op'>=</span> <span class='st'>"quakes"</span>, sync <span class='op'>=</span> <span class='st'>"push"</span><span class='op'>)</span>
-<span class='fu'><a href='l_configure.html'>l_configure</a></span><span class='op'>(</span><span class='va'>p2</span>, linkingGroup <span class='op'>=</span> <span class='st'>"quakes"</span>, sync <span class='op'>=</span> <span class='st'>"push"</span><span class='op'>)</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showGuides"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+
+<span class='co'># link another plot with the previous plot</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>'linkingGroup'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"iris_data"</span>
+<span class='va'>h2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='l_hist.html'>l_hist</a></span><span class='op'>(</span><span class='va'>Petal.Width</span>,
+                        linkingGroup<span class='op'>=</span><span class='st'>"iris_data"</span>,
+                        showStackedColors <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+
+
+<span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='co'># or with more control about grid parameters</span>
+<span class='fu'><a href='grid.loon.html'>grid.loon</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='co'># or to save the grid data structure (grob) for later use</span>
+<span class='va'>hg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 
 <span class='op'>}</span>
 </div></pre>
