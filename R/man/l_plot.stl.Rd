@@ -19,7 +19,6 @@
   showScales = TRUE,
   showGuides = TRUE,
   showLabels = TRUE,
-  call = match.call(),
   ...
 )
 }
@@ -60,8 +59,6 @@ If missing, one is created from the data name and class associated with \code{st
 \item{showGuides}{a logical as to whether to display background guide lines on all plots, default is TRUE.}
 
 \item{showLabels}{a logical as to whether to display axes labels on all plots, default is TRUE.}
-
-\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.}
 }

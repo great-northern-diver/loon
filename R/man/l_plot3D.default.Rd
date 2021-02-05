@@ -30,7 +30,6 @@
   foreground = l_getOption("foreground"),
   background = l_getOption("background"),
   parent = NULL,
-  call = match.call(),
   ...
 )
 }
@@ -149,8 +148,6 @@ Default is given by \code{\link{l_getOption}("background")}.}
 specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
-
-\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{named arguments to modify plot states.}
 }

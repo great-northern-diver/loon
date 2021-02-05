@@ -27,7 +27,6 @@
   foreground = l_getOption("foreground"),
   background = l_getOption("background"),
   parent = NULL,
-  call = match.call(),
   ...
 )
 }
@@ -136,8 +135,6 @@ specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
 
-\item{call}{a call in which all of the specified arguments are specified by their full names}
-
 \item{...}{named arguments to modify plot states or layouts, see details.}
 }
 \description{
@@ -155,15 +152,13 @@ Creates an interactive 2d scatterplot. Also, if no loon
   for more details about the interaction gestures.
   }
   \item {Some arguments to modify layouts can be passed through,
-  e.g. "separate", "byrow", etc. Check \code{\link{l_facet}}
+  e.g. "separate", "ncol", "nrow", etc. Check \code{\link{l_facet}}
   to see how these arguments work.
   }
 }
 }
 \examples{
-if(interactive()){
-
-
+if(interactive()) {
 # default use as scatterplot
 
 p1 <- with(iris, l_plot(Sepal.Length, Sepal.Width, color=Species,

@@ -4,14 +4,7 @@
 \alias{l_graph.default}
 \title{Create a graph display based on node names and from-to edges list}
 \usage{
-\method{l_graph}{default}(
-  nodes = "",
-  from = "",
-  to = "",
-  parent = NULL,
-  call = match.call(),
-  ...
-)
+\method{l_graph}{default}(nodes = "", from = "", to = "", parent = NULL, ...)
 }
 \arguments{
 \item{nodes}{vector with nodenames}
@@ -21,8 +14,6 @@
 \item{to}{vector with node names of the from-to pairs for edges}
 
 \item{parent}{parent widget of graph display}
-
-\item{call}{a call in which all of the specified arguments are specified by their full names}
 
 \item{...}{arguments to modify the graph display state}
 }
