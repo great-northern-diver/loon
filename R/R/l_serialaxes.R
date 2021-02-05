@@ -1,4 +1,30 @@
-#' @title Create a Serialaxes Widget
+#' @title Create an interactive serialaxes (parallel axes or radial axes) plot
+#'
+#' @description \code{l_serialaxes} is a generic function for creating interactive visualization environments for R objects.
+#'
+#' @param data a data frame with numerical data only
+#' @param ... named arguments to modify the serialaxes plot states or layouts
+#'
+#' @templateVar page  learn_R_display_hist
+#' @template see_l_help_page
+#'
+#' @template return_widget_handle
+#'
+#' @seealso \code{\link{l_serialaxes.default}}
+#'
+#' @export
+#' @examples
+#' if(interactive()) {
+#'    s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
+#'    s['axesLayout'] <- 'parallel'
+#'    states <- l_info_states(s)
+#'    names(states)
+#' }
+l_serialaxes <- function(data, ...) {
+    UseMethod("l_serialaxes")
+}
+
+#' @title The default \code{l_serialaxes} for displaying data
 #'
 #' @description The serialaxes widget displays multivariate data either as a
 #'   stacked star glyph plot, or as a parallel coordinate plot.
@@ -31,7 +57,6 @@
 #' and which are not (\code{FALSE}).
 #' @template param_parent
 #' @template param_dots_state_args
-#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify the serialaxes states or layouts, see details.
 #'
 #' @details \itemize{
@@ -60,11 +85,6 @@
 #'
 #' @examples
 #' if(interactive()){
-#'
-#' s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-#' s['axesLayout'] <- 'parallel'
-#' states <- l_info_states(s)
-#' names(states)
 #'
 #' #######
 #' #
@@ -231,22 +251,21 @@
 #'
 #' }
 
-l_serialaxes <- function(data,
-                         sequence,
-                         scaling="variable",
-                         axesLayout='radial',
-                         by = NULL,
-                         on,
-                         layout = c("grid", "wrap", "separate"),
-                         andrews = FALSE,
-                         showAxes=TRUE,
-                         color = l_getOption("color"),
-                         active = TRUE,
-                         selected = FALSE,
-                         linewidth = l_getOption("linewidth"),
-                         parent=NULL,
-                         call = match.call(),
-                         ...) {
+l_serialaxes.default <- function(data,
+                                 sequence,
+                                 scaling="variable",
+                                 axesLayout='radial',
+                                 by = NULL,
+                                 on,
+                                 layout = c("grid", "wrap", "separate"),
+                                 andrews = FALSE,
+                                 showAxes=TRUE,
+                                 color = l_getOption("color"),
+                                 active = TRUE,
+                                 selected = FALSE,
+                                 linewidth = l_getOption("linewidth"),
+                                 parent=NULL,
+                                 ...) {
 
     dotArgs <- list(...)
     # set by dotArgs, used for facetting
@@ -264,6 +283,7 @@ l_serialaxes <- function(data,
 
     n <- dim(data)[1]
 
+    call <- match.call()
     modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
     color <- aes_settings(color, n, ifNoStop = FALSE)

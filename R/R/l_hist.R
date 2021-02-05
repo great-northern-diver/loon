@@ -1,10 +1,40 @@
 
 #' @title Create an interactive histogram
 #'
-#' @description \code{l_hist} is a generic function for creating an interactive histogram display that can be linked with
-#'   loon's other displays
+#' @description \code{l_hist} is a generic function for creating interactive visualization environments for R objects.
 #'
 #' @param x vector with numerical data to perform the binning on x,
+#' @param ... named arguments to modify the histogram plot states or layouts, see details.
+#'
+#' @templateVar page  learn_R_display_hist
+#' @template see_l_help_page
+#'
+#' @template return_widget_handle
+#'
+#' @seealso \code{\link{l_hist.default}}, \code{\link{l_plot}}
+#'
+#' @export
+#' @examples
+#' if(interactive()) {
+#'   # numerical data
+#'   x <- rnorm(100)
+#'   h <- l_hist(x)
+#'
+#'   # categorical data
+#'   x <- factor(mtcars$cyl)
+#'   h <- l_hist(x)
+#' }
+
+l_hist <- function(x, ...) {
+    UseMethod("l_hist")
+}
+
+#' @title The default \code{l_hist}
+#'
+#' @description Creates an interactive histogram display that can be linked with
+#'   loon's other displays
+#'
+#' @param x vector with numerical data to perform the binning on x
 #' @param yshows one of "frequency" (default) or  "density"
 #' @param by loon plot can be separated by some variables into multiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
@@ -37,15 +67,15 @@
 #'    }
 #'    }
 #'  }
-#' @param showStackedColors  if TRUE (default) then bars will be coloured according to
-#'    colours of the points; if FALSE, then the bars will be a uniform colour
-#'    except for highlighted points.
 #' @param origin numeric scalar to define the binning origin
 #' @param binwidth a numeric scalar to specify the binwidth
 #'   If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
 #'   (namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) > 0 and 1 if sd(x) == 0)
 #'   and using the minumum numerical difference between factor levels when \code{x}
 #'   is a factor or a character vector (coerced to factor).
+#' @param showStackedColors  if TRUE (default) then bars will be coloured according to
+#'    colours of the points; if FALSE, then the bars will be a uniform colour
+#'    except for highlighted points.
 #' @param showBinHandle If \code{TRUE}, then an interactive "bin handle" appears on the plot
 #'   whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}
 #' @param color colour fills of bins; colours are repeated
@@ -68,7 +98,6 @@
 #' @param showGuides logical to determine whether to present background guidelines
 #' to help determine locations.
 #' @template param_parent
-#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify the histogram plot states or layouts, see details.
 #'
 #' @details \itemize{
@@ -89,7 +118,7 @@
 #'
 #' @template return_widget_handle
 #'
-#' @seealso \code{\link{l_plot}}
+#' @seealso \code{\link{l_plot.default}}, \code{\link{l_hist}}
 #'
 #' @export
 #'
@@ -127,226 +156,6 @@
 #' hg <- loonGrob(h)
 #'
 #'}
-
-l_hist <- function(x,
-                   yshows = c("frequency", "density"),
-                   by = NULL,
-                   on,
-                   layout = c("grid", "wrap", "separate"),
-                   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                   showStackedColors = TRUE,
-                   origin = NULL,
-                   binwidth=NULL,
-                   showBinHandle = FALSE,
-                   color = l_getOption("color"),
-                   active = TRUE,
-                   selected = FALSE,
-                   xlabel = NULL,
-                   showLabels = TRUE,
-                   showScales = FALSE,
-                   showGuides = TRUE,
-                   parent=NULL,
-                   call = match.call(), ...) {
-    UseMethod("l_hist")
-}
-
-#' @export
-l_hist.factor <-  function(x,
-                           yshows = c("frequency", "density"),
-                           by = NULL,
-                           on,
-                           layout = c("grid", "wrap", "separate"),
-                           connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                           showStackedColors = TRUE,
-                           origin = NULL,
-                           binwidth=NULL,
-                           showBinHandle = FALSE,
-                           color = l_getOption("color"),
-                           active = TRUE,
-                           selected = FALSE,
-                           xlabel = NULL,
-                           showLabels = TRUE,
-                           showScales = FALSE,
-                           showGuides = TRUE,
-                           parent=NULL,
-                           call = match.call(), ...) {
-
-    if(missing(x))
-        return(
-            l_hist.default(x,
-                           by = by,
-                           layout = match.arg(layout),
-                           on = on,
-                           connectedScales = match.arg(connectedScales),
-                           yshows = yshows,
-                           showStackedColors = showStackedColors,
-                           origin = origin,
-                           binwidth=binwidth,
-                           showBinHandle = showBinHandle,
-                           color = color,
-                           active = active,
-                           selected = selected,
-                           xlabel = xlabel,
-                           showLabels = showLabels,
-                           showScales = showScales,
-                           showGuides = showGuides,
-                           parent=parent,
-                           call = call, ...)
-        )
-
-    if (is.null(xlabel)){
-        xlabel <-  gsub("\"", "", deparse(substitute(x)))
-    }
-
-    levelNames <- levels(x)
-    nlevels <- length(levelNames)
-    x <-  unclass(x)  # Get the level numbers as numeric values
-    if (is.null(origin) | !is.numeric(origin)) {
-        origin <- min(x, na.rm = TRUE)
-    }
-    if (is.null(binwidth) | !is.numeric(binwidth)) {
-        uni_x <- unique(x)
-        binwidth <- if(length(uni_x) == 1) {
-            # This is a single bin histogram
-            # the binwidth can be set as any non-negtive value
-            0.1
-        } else {
-            min(diff(sort(uni_x)))
-        }
-    }
-
-    h <-  l_hist(x,
-                 yshows = yshows,
-                 by = by,
-                 layout = match.arg(layout),
-                 on = on,
-                 connectedScales = match.arg(connectedScales),
-                 showStackedColors = showStackedColors,
-                 origin = origin,
-                 binwidth=binwidth,
-                 showBinHandle = showBinHandle,
-                 color = color,
-                 active = active,
-                 selected = selected,
-                 xlabel = xlabel,
-                 showLabels = showLabels,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 parent=parent,
-                 call = call,
-                 ...)
-
-    # Add level names to plot
-    ## Adjust text coords
-    ## The reason to do so is to make sure that
-    ## `labels` always lay down the corresponding bins no matter how origin shifts
-
-    if(inherits(h, "l_compound")) {
-
-        lapply(h,
-               function(p) {
-                   text_adjust <- p['origin']
-                   if(text_adjust > 1 || text_adjust <= 0) {
-                       text_adjust <- text_adjust - as.integer(text_adjust)
-                       if(text_adjust <= 0) text_adjust <- text_adjust + 1
-                   }
-
-                   text_adjust <- text_adjust - 0.5
-
-                   l_layer_texts(p, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
-                                 text = levelNames, label = "Factor levels",
-                                 angle = 0,
-                                 size = 12, color = l_getOption("foreground"))
-               })
-
-    } else {
-        text_adjust <- h['origin']
-        if(text_adjust > 1 || text_adjust <= 0) {
-            text_adjust <- text_adjust - as.integer(text_adjust)
-            if(text_adjust <= 0) text_adjust <- text_adjust + 1
-        }
-
-        text_adjust <- text_adjust - 0.5
-
-        l_layer_texts(h, x = 1:nlevels + text_adjust, y = rep(-1, nlevels),
-                      text = levelNames, label = "Factor levels",
-                      angle = 0,
-                      size = 12, color = l_getOption("foreground"))
-    }
-
-    h
-}
-
-
-#' @export
-l_hist.character <-  function(x,
-                              yshows = c("frequency", "density"),
-                              by = NULL,
-                              on,
-                              layout = c("grid", "wrap", "separate"),
-                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                              showStackedColors = TRUE,
-                              origin = NULL,
-                              binwidth = NULL,
-                              showBinHandle = FALSE,
-                              color = l_getOption("color"),
-                              active = TRUE,
-                              selected = FALSE,
-                              xlabel = NULL,
-                              showLabels = TRUE,
-                              showScales = FALSE,
-                              showGuides = TRUE,
-                              parent=NULL,
-                              call = match.call(), ...) {
-
-    if(missing(x))
-        return(
-            l_hist.default(x,
-                           by = by,
-                           layout = match.arg(layout),
-                           on = on,
-                           connectedScales = match.arg(connectedScales),
-                           yshows = yshows,
-                           showStackedColors = showStackedColors,
-                           origin = origin,
-                           binwidth=binwidth,
-                           showBinHandle = showBinHandle,
-                           color = color,
-                           active = active,
-                           selected = selected,
-                           xlabel = xlabel,
-                           showLabels = showLabels,
-                           showScales = showScales,
-                           showGuides = showGuides,
-                           parent=parent,
-                           call = call,
-                           ...)
-        )
-
-    x <- factor(x)
-
-    l_hist(x,
-           by = by,
-           layout = match.arg(layout),
-           on = on,
-           connectedScales = match.arg(connectedScales),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           showLabels = showLabels,
-           showScales = showScales,
-           showGuides = showGuides,
-           parent=parent,
-           call = call,
-           ...)
-}
-
 #' @export
 l_hist.default <-  function(x,
                             yshows = c("frequency", "density"),
@@ -354,9 +163,9 @@ l_hist.default <-  function(x,
                             on,
                             layout = c("grid", "wrap", "separate"),
                             connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                            showStackedColors = TRUE,
                             origin = NULL,
                             binwidth = NULL,
+                            showStackedColors = TRUE,
                             showBinHandle = FALSE,
                             color = l_getOption("color"),
                             active = TRUE,
@@ -366,7 +175,6 @@ l_hist.default <-  function(x,
                             showScales = FALSE,
                             showGuides = TRUE,
                             parent = NULL,
-                            call = match.call(),
                             ...) {
 
     dotArgs <- list(...)
@@ -390,7 +198,7 @@ l_hist.default <-  function(x,
             xlabel <- gsub("\"", "", deparse(substitute(x)))
         }
 
-        plot <- do.call(
+        hist <- do.call(
             loonPlotFactory,
             c(
                 dotArgs,
@@ -412,8 +220,8 @@ l_hist.default <-  function(x,
             )
         )
 
-        class(plot) <- c(l_className, class(plot))
-        return(plot)
+        class(hist) <- c(l_className, class(hist))
+        return(hist)
 
     } else {
 
@@ -425,6 +233,7 @@ l_hist.default <-  function(x,
 
         n <- length(x)
 
+        call <- match.call()
         modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
         color <- aes_settings(color, n, ifNoStop = FALSE)
@@ -468,7 +277,7 @@ l_hist.default <-  function(x,
 
             dotArgs <- l_na_omit(l_className, dotArgs)
 
-            plot <- do.call(
+            hist <- do.call(
                 loonPlotFactory,
                 c(
                     dotArgs,
@@ -496,8 +305,8 @@ l_hist.default <-  function(x,
                 if(syncTemp == "push")
                     message("The modification of linked states is not detected",
                             " so that the default settings will be pushed to all plots")
-                # configure plot (linking)
-                l_configure(plot,
+                # configure hist (linking)
+                l_configure(hist,
                             linkingGroup = linkingGroup,
                             sync = syncTemp)
 
@@ -506,7 +315,7 @@ l_hist.default <-  function(x,
                     do.call(l_configure,
                             c(
                                 list(
-                                    target = plot,
+                                    target = hist,
                                     linkingGroup = linkingGroup,
                                     sync = sync
                                 ),
@@ -514,18 +323,18 @@ l_hist.default <-  function(x,
                             )
                     )
                 } else {
-                    l_linkingWarning(plot, sync, args = dotArgs,
+                    l_linkingWarning(hist, sync, args = dotArgs,
                                      modifiedLinkedStates = modifiedLinkedStates,
                                      l_className = l_className)
                 }
             }
 
-            class(plot) <- c(l_className, class(plot))
-            return(plot)
+            class(hist) <- c(l_className, class(hist))
+            return(hist)
 
         } else {
 
-            plots <- loonFacets(type = l_className,
+            hists <- loonFacets(type = l_className,
                                 by = by,
                                 args = dotArgs,
                                 on = on,
@@ -551,276 +360,183 @@ l_hist.default <-  function(x,
                                 xlabel = xlabel,
                                 ylabel = yshows)
 
-            return(plots)
+            return(hists)
         }
     }
 }
 
 #' @export
-l_hist.data.frame <- function(x,
-                              yshows = c("frequency", "density"),
-                              by = NULL,
-                              on,
-                              layout = c("grid", "wrap", "separate"),
-                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                              showStackedColors = TRUE,
-                              origin = NULL,
-                              binwidth=NULL,
-                              showBinHandle = FALSE,
-                              color = l_getOption("color"),
-                              active = TRUE,
-                              selected = FALSE,
-                              xlabel = NULL,
-                              showLabels = TRUE,
-                              showScales = FALSE,
-                              showGuides = TRUE,
-                              parent=NULL,
-                              call = match.call(), ...) {
+l_hist.factor <-  function(x, ...) {
 
     if(missing(x))
         return(
-            l_hist.default(x,
-                           by = by,
-                           layout = match.arg(layout),
-                           on = on,
-                           connectedScales = match.arg(connectedScales),
-                           yshows = yshows,
-                           showStackedColors = showStackedColors,
-                           origin = origin,
-                           binwidth=binwidth,
-                           showBinHandle = showBinHandle,
-                           color = color,
-                           active = active,
-                           selected = selected,
-                           xlabel = xlabel,
-                           showLabels = showLabels,
-                           showScales = showScales,
-                           showGuides = showGuides,
-                           parent=parent,
-                           call = call,
-                           ...)
+            l_hist.default(x, ...)
         )
 
+    dotArgs <- list(...)
+
+    if (is.null(dotArgs$xlabel)) {
+        dotArgs$xlabel <-  gsub("\"", "", deparse(substitute(x)))
+    }
+
+    levelNames <- levels(x)
+    nlevels <- length(levelNames)
+    x <-  unclass(x)  # Get the level numbers as numeric values
+    dotArgs$x <- x
+
+    # check origin
+    origin <- dotArgs$origin
+    if (is.null(origin) || !is.numeric(origin)) {
+        dotArgs$origin <- min(x, na.rm = TRUE)
+    }
+
+    # check binwidth
+    binwidth <- dotArgs$binwidth
+    if (is.null(binwidth) || !is.numeric(binwidth)) {
+        uni_x <- unique(x)
+        binwidth <- if(length(uni_x) == 1) {
+            # This is a single bin histogram
+            # the binwidth can be set as any non-negtive value
+            0.1
+        } else {
+            min(diff(sort(uni_x)))
+        }
+
+        dotArgs$binwidth <- binwidth
+    }
+
+    hist <- do.call(l_hist.default, dotArgs)
+
+    # Add level names to plot
+    ## Adjust text coords
+    ## The reason to do so is to make sure that
+    ## `labels` always lay down the corresponding bins no matter how origin shifts
+
+    if(inherits(hist, "l_compound")) {
+
+        lapply(hist,
+               function(h) {
+                   text_adjust <- h['origin']
+                   if(text_adjust > 1 || text_adjust <= 0) {
+                       text_adjust <- text_adjust - as.integer(text_adjust)
+                       if(text_adjust <= 0) text_adjust <- text_adjust + 1
+                   }
+
+                   text_adjust <- text_adjust - 0.5
+
+                   l_layer_texts(h, x = seq(nlevels) + text_adjust, y = rep(-1, nlevels),
+                                 text = levelNames, label = "Factor levels",
+                                 angle = 0,
+                                 size = 12, color = l_getOption("foreground"))
+               })
+
+    } else {
+        text_adjust <- hist['origin']
+        if(text_adjust > 1 || text_adjust <= 0) {
+            text_adjust <- text_adjust - as.integer(text_adjust)
+            if(text_adjust <= 0) text_adjust <- text_adjust + 1
+        }
+
+        text_adjust <- text_adjust - 0.5
+
+        l_layer_texts(hist, x = seq(nlevels) + text_adjust, y = rep(-1, nlevels),
+                      text = levelNames, label = "Factor levels",
+                      angle = 0,
+                      size = 12, color = l_getOption("foreground"))
+    }
+
+    hist
+}
+
+#' @export
+l_hist.character <- function(x, ...) {
+
+    if(missing(x))
+        return(
+            l_hist.default(x, ...)
+        )
+
+    l_hist(factor(x), ...)
+}
+
+#' @export
+l_hist.data.frame <- function(x, ...) {
+
+    if(missing(x))
+        return(
+            l_hist.default(x, ...)
+        )
+
+    dotArgs <- list(...)
+    xlabel <- dotArgs$xlabel
+
     # get a relatively informative xlabel
+    if (is.null(xlabel)){
+
+        name <- colnames(x)
+        if (is.null(name)) {
+            name <- "column 1"
+        }
+        name <- name[1L]
+        dataname <- gsub("\"", "", deparse(substitute(x)))
+        dotArgs$xlabel <- paste(name, "from", dataname)
+    }
+
+    # the first column
+    dotArgs$x <- x[, 1L]
+
+    do.call(l_hist, dotArgs)
+}
+
+#' @export
+l_hist.matrix <- function(x, ...) {
+
+    l_hist(c(x), ...)
+}
+
+#' @export
+l_hist.list <- function(x, ...) {
+
+    dotArgs <- list(...)
+    by <- dotArgs$by
+
+    if(is.null(by)) {
+        message("The default argument `by` is set based on the list")
+        dotArgs$by <- rep(seq(length(x)), lengths(x))
+    }
+
+    dotArgs$x <- unlist(x)
+
+    do.call(l_hist, dotArgs)
+}
+
+#' @export
+l_hist.table <- function(x, ...) {
+
+    dim_x <- dim(x)
+    if(length(dim_x) > 2L)
+        stop(x,
+             "should have at most two dimensions",
+             call. = FALSE)
+
+    dotArgs <- list(...)
+    xlabel <- dotArgs$xlabel
+
     if (is.null(xlabel)){
         name <- colnames(x)
         if (is.null(name)) {
             name <- "column 1"
         }
-        name <- name[1]
+        name <- name[1L]
         dataname <- gsub("\"", "", deparse(substitute(x)))
-        xlabel <- paste(name, "from", dataname)
+        dotArgs$xlabel <- paste(name, "from", dataname)
     }
-    x <- x[, 1]
-
-    l_hist(x,
-           by = by,
-           layout = match.arg(layout),
-           on = on,
-           connectedScales = match.arg(connectedScales),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           showLabels = showLabels,
-           showScales = showScales,
-           showGuides = showGuides,
-           parent=parent,
-           call = call, ...)
+    dotArgs$x <- x[, 1L]
+    do.call(l_hist, dotArgs)
 }
 
 #' @export
-l_hist.matrix <- function(x,
-                          yshows = c("frequency", "density"),
-                          by = NULL,
-                          on,
-                          layout = c("grid", "wrap", "separate"),
-                          connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                          showStackedColors = TRUE,
-                          origin = NULL,
-                          binwidth=NULL,
-                          showBinHandle = FALSE,
-                          color = l_getOption("color"),
-                          active = TRUE,
-                          selected = FALSE,
-                          xlabel = NULL,
-                          showLabels = TRUE,
-                          showScales = FALSE,
-                          showGuides = TRUE,
-                          parent=NULL,
-                          call = match.call(), ...) {
+l_hist.array <- function(x, ...) {
 
-    l_hist(c(x),
-           by = by,
-           layout = match.arg(layout),
-           on = on,
-           connectedScales = match.arg(connectedScales),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           showLabels = showLabels,
-           showScales = showScales,
-           showGuides = showGuides,
-           parent=parent,
-           call = call, ...)
-}
-
-#' @export
-l_hist.list <- function(x,
-                        yshows = c("frequency", "density"),
-                        by = NULL,
-                        on,
-                        layout = c("grid", "wrap", "separate"),
-                        connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                        showStackedColors = TRUE,
-                        origin = NULL,
-                        binwidth=NULL,
-                        showBinHandle = FALSE,
-                        color = l_getOption("color"),
-                        active = TRUE,
-                        selected = FALSE,
-                        xlabel = NULL,
-                        showLabels = TRUE,
-                        showScales = FALSE,
-                        showGuides = TRUE,
-                        parent=NULL, call = match.call(), ...) {
-
-    if(is.null(by)) {
-        message("The default argument `by` is set based on the list")
-        by <- rep(seq(length(x)), lengths(x))
-    }
-
-    l_hist(unlist(x),
-           by = by,
-           layout = match.arg(layout),
-           on = on,
-           connectedScales = match.arg(connectedScales),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           showLabels = showLabels,
-           showScales = showScales,
-           showGuides = showGuides,
-           parent=parent,
-           call = call, ...)
-}
-
-#' @export
-l_hist.table <- function(x,
-                         yshows = c("frequency", "density"),
-                         by = NULL,
-                         on,
-                         layout = c("grid", "wrap", "separate"),
-                         connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                         showStackedColors = TRUE,
-                         origin = NULL,
-                         binwidth=NULL,
-                         showBinHandle = FALSE,
-                         color = l_getOption("color"),
-                         active = TRUE,
-                         selected = FALSE,
-                         xlabel = NULL,
-                         showLabels = TRUE,
-                         showScales = FALSE,
-                         showGuides = TRUE,
-                         parent=NULL,
-                         call = match.call(),
-                         ...) {
-
-    dim_x <- dim(x)
-    if(length(dim_x) > 2)
-        stop(x,
-             "should have at most two dimensions",
-             call. = FALSE)
-    else {
-        if (is.null(xlabel)){
-            name <- colnames(x)
-            if (is.null(name)) {
-                name <- "column 1"
-            }
-            name <- name[1]
-            dataname <- gsub("\"", "", deparse(substitute(x)))
-            xlabel <- paste(name, "from", dataname)
-        }
-        x <- x[,1]
-    }
-
-    l_hist(x,
-           by = by,
-           layout = match.arg(layout),
-           on = on,
-           connectedScales = match.arg(connectedScales),
-           yshows = yshows,
-           showStackedColors = showStackedColors,
-           origin = origin,
-           binwidth=binwidth,
-           showBinHandle = showBinHandle,
-           color = color,
-           active = active,
-           selected = selected,
-           xlabel = xlabel,
-           showLabels = showLabels,
-           showScales = showScales,
-           showGuides = showGuides,
-           parent=parent,
-           call = call, ...)
-}
-
-#' @export
-l_hist.array <- function(x,
-                         yshows = c("frequency", "density"),
-                         by = NULL,
-                         on,
-                         layout = c("grid", "wrap", "separate"),
-                         connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                         showStackedColors = TRUE,
-                         origin = NULL,
-                         binwidth=NULL,
-                         showBinHandle = FALSE,
-                         color = l_getOption("color"),
-                         active = TRUE,
-                         selected = FALSE,
-                         xlabel = NULL,
-                         showLabels = TRUE,
-                         showScales = FALSE,
-                         showGuides = TRUE,
-                         parent=NULL,
-                         call = match.call(), ...) {
-
-    l_hist.table(x = x,
-                 by = by,
-                 layout = match.arg(layout),
-                 on = on,
-                 connectedScales = match.arg(connectedScales),
-                 yshows = yshows,
-                 showStackedColors = showStackedColors,
-                 origin = origin,
-                 binwidth=binwidth,
-                 showBinHandle = showBinHandle,
-                 color = color,
-                 active = active,
-                 selected = selected,
-                 xlabel = xlabel,
-                 showLabels = showLabels,
-                 showScales = showScales,
-                 showGuides = showGuides,
-                 parent=parent,
-                 call = call, ...)
+    l_hist.table(x, ...)
 }

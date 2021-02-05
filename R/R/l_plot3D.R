@@ -169,9 +169,6 @@ l_scale3D <- function(x,
 #'          optional if x is an appropriate structure.
 #' @param z the z coordinates of points in the plot,
 #'          optional if x is an appropriate structure.
-#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
-#'          Default is 1.
-#'          All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)
 #' @param ... named arguments to modify plot states.
 #'
 #' @details
@@ -252,7 +249,7 @@ l_scale3D <- function(x,
 #' )
 #'
 #'}
-l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
+l_plot3D <- function(x, y, z, ...) {
     UseMethod("l_plot3D")
 }
 
@@ -359,7 +356,6 @@ l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 #'   order to be displayed. See the examples below.
-#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify plot states.
 #'
 #'
@@ -412,7 +408,6 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
                               foreground = l_getOption("foreground"),
                               background = l_getOption("background"),
                               parent = NULL,
-                              call = match.call(),
                               ...) {
 
     dotArgs <- list(...)
@@ -496,6 +491,7 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
         }
 
         # check which states are modified
+        call <- match.call()
         modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], names(call))
 
         n <- length(x)

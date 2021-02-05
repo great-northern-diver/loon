@@ -187,7 +187,6 @@ l_plot <- function(x, y, ...) {
 #'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 #'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 #'   order to be displayed. See the examples below.
-#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... named arguments to modify plot states or layouts, see details.
 #'
 #'
@@ -200,22 +199,17 @@ l_plot <- function(x, y, ...) {
 #'   for more details about the interaction gestures.
 #'   }
 #'   \item {Some arguments to modify layouts can be passed through,
-#'   e.g. "separate", "byrow", etc. Check \code{\link{l_facet}}
+#'   e.g. "separate", "ncol", "nrow", etc. Check \code{\link{l_facet}}
 #'   to see how these arguments work.
 #'   }
 #' }
-#'
-#'
-#'
 #'
 #' @seealso  \code{\link{l_plot_arguments}}
 #' @export
 #' @export l_plot.default
 #'
 #' @examples
-#' if(interactive()){
-#'
-#'
+#' if(interactive()) {
 #' # default use as scatterplot
 #'
 #' p1 <- with(iris, l_plot(Sepal.Length, Sepal.Width, color=Species,
@@ -286,7 +280,7 @@ l_plot.default <-  function(x, y = NULL,
                             foreground = l_getOption("foreground"),
                             background = l_getOption("background"),
                             parent = NULL,
-                            call = match.call(), ...) {
+                            ...) {
 
     dotArgs <- list(...)
     # set by args, used for facetting
@@ -364,6 +358,7 @@ l_plot.default <-  function(x, y = NULL,
         n <- length(x)
 
         # check which states are modified
+        call <- match.call()
         modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
         color <- aes_settings(color, n, ifNoStop = FALSE)
