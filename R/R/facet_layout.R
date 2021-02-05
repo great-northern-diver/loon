@@ -229,7 +229,7 @@ facet_grid_layout <- function(plots,
                    label <- if(is.null(name)) {
                        col
                    } else {
-                       if(name == "color") {
+                       if(grepl("color", name)) {
                            paste(name, color.id(col), sep = ":")
                        } else {
                            tt <- paste(name, col, sep = ":")
@@ -302,7 +302,7 @@ facet_grid_layout <- function(plots,
                        text <- if(is.null(name)) {
                            label
                        } else {
-                           ifelse(name == "color",
+                           ifelse(grepl("color", name),
                                   paste(name, color.id(label), sep = ":"),
                                   paste(name, label, sep = ":"))
                        }
@@ -587,7 +587,7 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(name == "color",
+                                   ifelse(grepl("color", name),
                                           paste(name, color.id(l), sep = ":"),
                                           paste(name, l, sep = ":"))
                                }
@@ -625,7 +625,7 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(name == "color",
+                                   ifelse(grepl("color", name),
                                           paste(name, color.id(l), sep = ":"),
                                           paste(name, l, sep = ":"))
                                }
@@ -683,7 +683,7 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(name == "color",
+                                   ifelse(grepl("color", name),
                                           paste(name, color.id(l), sep = ":"),
                                           paste(name, l, sep = ":"))
                                }
@@ -721,7 +721,7 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(name == "color",
+                                   ifelse(grepl("color", name),
                                           paste(name, color.id(l), sep = ":"),
                                           paste(name, l, sep = ":"))
                                }
@@ -922,11 +922,18 @@ color.id <- function(col) {
                # hex code color
                # hex12to6 will give warnings if the hex code is not 12
                # as_hex6color can accommodate 6 digits and 12 digits code
-               color <- as_hex6color(color)
+               tryCatch(
+                   expr = {
+                       color <- as_hex6color(color)
+                       c2 <- grDevices::col2rgb(color)
+                       coltab <- grDevices::col2rgb(colors())
+                       cdist <- apply(coltab, 2, function(z) sum((z - c2)^2))
+                       colors()[which(cdist == min(cdist))][1]
+                   },
+                   error = function(e) {
+                       color
+                   }
+               )
 
-               c2 <- grDevices::col2rgb(color)
-               coltab <- grDevices::col2rgb(colors())
-               cdist <- apply(coltab, 2, function(z) sum((z - c2)^2))
-               colors()[which(cdist == min(cdist))][1]
            }, character(1))
 }
