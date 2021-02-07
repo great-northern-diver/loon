@@ -10,16 +10,16 @@ completegraph(nodes, isDirected = FALSE)
 \item{nodes}{a character vector with node names, each element defines a node
 hence the elements need to be unique}
 
-\item{isDirected}{a boolean scalar to indicate wheter the returned object is 
+\item{isDirected}{a boolean scalar to indicate wheter the returned object is
 a complete graph (undirected) or a complete digraph (directed).}
 }
 \value{
 graph object of class loongraph
 }
 \description{
-From Wikipedia: "a complete graph is a simple undirected graph 
-  in which every pair of distinct vertices is connected by a unique edge. A 
-  complete digraph is a directed graph in which every pair of distinct 
+From Wikipedia: "a complete graph is a simple undirected graph
+  in which every pair of distinct vertices is connected by a unique edge. A
+  complete digraph is a directed graph in which every pair of distinct
   vertices is connected by a pair of unique edges (one in each direction
 }
 \details{

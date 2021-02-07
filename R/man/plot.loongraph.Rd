@@ -12,7 +12,7 @@
 \item{...}{arguments forwarded to method}
 }
 \description{
-This function converts the loongraph object to one of class 
+This function converts the loongraph object to one of class
   graph and the plots it with its respective plot method.
 }
 \examples{
