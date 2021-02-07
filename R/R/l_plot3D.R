@@ -1,158 +1,5 @@
-#' @title Scale for 3d plotting
-#'
-#' @description \code{l_scale3D} scales its argument in a variety of ways
-#' used for 3D visualization.
-#' @family three-dimensional plotting functions
-#' @param x the matrix or data.frame whose columns are to be scaled.
-#' Any \code{NA} entries will be preserved but ignored in calculations.
-#' \code{x} must have exactly 3 columns for \code{method = "sphere"}.
-#' @param center either a logical value or numeric-alike vector of length equal
-#' to the number of columns of \code{x}, where ‘numeric-alike’ means that
-#' \code{as.numeric(.)}
-#' will be applied successfully if \code{is.numeric(.)} is not true.
-#' @param method the scaling method to use.
-#' If \code{method = "box"} (the default) then the columns are scaled to
-#' have equal ranges and, when \code{center = TRUE}, to be centred by the
-#' average of the min and max;
-#' If \code{method = "sphere"} then \code{x} must be three dimensional.
-#' For sphering, on each of the original 3 dimensions \code{x} is first centred
-#' (mean centred when \code{center = TRUE}) and scaled to equal standard deviation on.
-#' The V matrix of the singular value decomposition (svd) is applied to the right
-#' resulting in uncorrelated variables. Coordinates are then divided by (non-zero as
-#' tested by \code{!all.equal(0, .)}) singular values.
-#' If \code{x} contains no \code{NA}s, the resulting coordinates are simply the
-#' U matrix of the svd.
-#'
-#' @seealso \code{\link{l_plot3D}}, \code{\link{scale}}, and \code{\link{prcomp}}.
-#'
-#' @return a data.frame whose columns are centred and scaled according to
-#' the given arguments. For \code{method = "sphere")}, the three variable names are
-#' \code{x1},  \code{x2}, and  \code{x3}.
-#'
-#' @examples
-#'
-#' ##### Iris data
-#' #
-#' # All variables (including Species as a factor)
-#' result_box <- l_scale3D(iris)
-#' head(result_box, n = 3)
-#' apply(result_box, 2, FUN = range)
-#' # Note mean is not zero.
-#' apply(result_box, 2, FUN = mean)
-#'
-#'
-#' # Sphering only on 3D data.
-#' result_sphere <- l_scale3D(iris[, 1:3], method = "sphere")
-#' head(result_sphere, n = 3)
-#' apply(result_sphere, 2, FUN = range)
-#' # Note mean is numerically zero.
-#' apply(result_sphere, 2, FUN = mean)
-#'
-#'
-#' #  With NAs
-#' x <- iris
-#' x[c(1, 3), 1] <- NA
-#' x[2, 3] <- NA
-#'
-#' result_box <- l_scale3D(x)
-#' head(result_box, n = 5)
-#' apply(result_box, 2, FUN = function(x) {range(x, na.rm = TRUE)})
-#'
-#' # Sphering only on 3D data.
-#' result_sphere <- l_scale3D(x[, 1:3], method = "sphere")
-#' # Rows having had any NA are all NA after sphering.
-#' head(result_sphere, n = 5)
-#' # Note with NAs mean is no longer numerically zero.
-#' # because centring was based on all non-NAs in each column
-#' apply(result_sphere, 2, FUN = function(x) {mean(x, na.rm = TRUE)})
-#'
-#'
-#' @export
-#'
-l_scale3D <- function(x,
-                      center = TRUE,
-                      method = c("box", "sphere")){
-    if (is.data.frame(x)) {
-        if (sum(sapply(x, FUN = function(v) !is.numeric(v))) > 0){
-            x <- data.frame(lapply(x, as.numeric))
-        }
-    } else {
-        if (is.matrix(x)) {
-            if (!is.numeric(x)) {
-                stop("A matrix x must be numeric")
-            }
-        } else {
-            stop("x must be a data.frame or a numeric matrix")
-        }
-    }
-    #
-
-
-    method = match.arg(method)
-    if (method == "box") {
-        ranges <- apply(x, 2, FUN = function(x) range(x, na.rm =TRUE))
-        width <- apply(ranges, 2, FUN = diff)
-
-        if (is.logical(center)) {
-            if (center){
-                center <- apply(ranges, 2, FUN = mean)
-            }
-        }
-
-        scaled_x <- as.data.frame(scale(x, center = center, scale = width))
-
-        result <- scaled_x
-    } else {
-        if (method == "sphere") {
-            # Only allow sphering for 3D data.
-            # If the user wants more dimensions (or fewer)
-            # then they can do principal components themselves.
-            #
-            if(ncol(x) != 3) {
-                stop(
-                    paste0("The sphere method is only to be used on three dimensional data, not ncol(x) = ",
-                           ncol(x), ".") )
-            }
-            sds <- apply(x, 2, FUN = function(xi) sd(xi, na.rm =TRUE))
-
-            if (is.logical(center)) {
-                if (center){
-                    center <- apply(x, 2, FUN = function(xi) mean(xi, na.rm =TRUE))
-                }
-            }
-
-            scaled_x <- as.data.frame(scale(x, center = center, scale = sds))
-
-            if (sum(is.na(scaled_x)) == 0) {
-                # No NAs
-                result <- svd(scaled_x)$u
-            } else # there are NAs
-            {   # Need to preserve all rows in result
-                # but use only complete rows for svd.
-                svd_result <- svd(na.omit(scaled_x))
-                # Note some rows in result will become all NA
-                result <- as.matrix(scaled_x) %*% svd_result$v
-                d <- svd_result$d
-                for (i in 1:3) {
-                    if (!is.logical(all.equal(d[i],  0))) {
-                        result[, i] <- result[, i] / d[i]
-                    } else {
-                        warning(paste0("Singular value ", 3, " was ", d[i],
-                                       " suggesting a singular matrix.",
-                                       "  No scaling done on x", i, "."))
-                    }
-                }
-            }
-            result  <- as.data.frame(result)
-            names(result) <- paste0("x", 1:ncol(result))
-        } else {
-            stop("Unknown method")
-        }
-    }
-    result
-}
-
 #' @title Create an interactive loon 3d plot widget
+#' @name l_plot3D
 #'
 #' @description \code{l_plot3D} is a generic function for creating interactive
 #'   visualization environments for \R objects.
@@ -216,7 +63,7 @@ l_scale3D <- function(x,
 #'
 #' @template return_widget_handle
 #'
-#' @seealso \code{\link{l_info_states}}
+#' @seealso Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
 #'
 #' @export
 #'
@@ -254,109 +101,33 @@ l_plot3D <- function(x, y, z, ...) {
 }
 
 
-#' @title The default \code{l_plot} method to create 3d interactive scatterplot
-#'
-#' @description Creates an interactive 3d scatterplot. Also, if no loon
-#'   inspector is open then the \code{l_plot3D} call will also open a loon
-#'   inspector.
-#'
-#' @method l_plot3D default
-#'
-#' @family three-dimensional plotting functions
-#'
-#' @param x the x, y and z arguments provide the x, y and z coordinates for the plot.
-#'          Any reasonable way of defining the coordinates is acceptable.
-#'          See the function xyz.coords for details.
-#'
-#'          If supplied separately, they must be of the same length.
-#'
-#' @param y the y coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
-#' @param z the z coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
+#' @rdname l_plot3D
 #' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
 #'          Default is 1.
 #'              All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
 #'              all axes.)
-#' @param by loon plot can be separated by some variables into multiple panels.
-#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
-#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
-#' typically the environment from which the function is called.
-#' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
-#' @param connectedScales Determines how the scales of the facets are to be connected depending
-#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-#' as follows:
-#' \itemize{
-#' \item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"x"}, then  only the "x"  scales are connected}
-#'    \item{\code{"y"}, then only the "y" scales are connected}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    For any other value, only the "y" scale is connected.
-#'    }
-#'    }
-#' \item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
-#'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
-#'    \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
-#'    \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
-#'    \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
-#'    }
-#'    }
-#'  }
-#' @param color colours of points; colours are repeated until matching the number points.
-#'     Default is given by \code{\link{l_getOption}("color")}.
-#' @param glyph shape of point; must be one of the primitive glyphs
-#'              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-#'              "otriangle", "diamond", "cdiamond", or "odiamond".
-#'
-#'              Prefixes "c" and "o" mean closed and open, respectively.
-#'              Default is given by \code{\link{l_getOption}("glyph")}.
-#'
-#'              Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
-#'              serial axes glyphs may be added, but only after the plot has been created.
-#'
-#' @param size size of the symbol (roughly in terms of area).
-#'     Default is given by \code{\link{l_getOption}("size")}.
-#' @param active a logical determining whether points appear or not
-#' (default is \code{TRUE} for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points appear (\code{TRUE})
-#' and which do not (\code{FALSE}).
-#' @param selected a logical determining whether points appear selected at first
-#' (default is \code{FALSE} for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points are (\code{TRUE})
-#' and which are not (\code{FALSE}).
-#' @param xlabel Label for the horizontal (x) axis. If missing,
-#'               one will be inferred from \code{x} if possible.
-#' @param ylabel Label for the vertical (y) axis. If missing,
-#'               one will be inferred from \code{y} (or \code{x}) if possible.
+#' @template param_by
+#' @template param_on
+#' @template param_layout
+#' @template param_connectedScales
+#' @template param_pointcolor
+#' @template param_glyph
+#' @template param_pointsize
+#' @template param_active
+#' @template param_selected
+#' @template param_xlabel
+#' @template param_ylabel
 #' @param zlabel Label for the third (perpendicular to the screen) (z) axis. If missing,
 #'               one will be inferred from \code{z} (or \code{x}) if possible.
-#' @param title Title for the plot, default is an empty string.
-#' @param showLabels logical to determine whether axes label (and title) should be presented.
-#' @param showScales logical to determine whether numerical scales should
-#'               be presented on both axes.
-#' @param showGuides logical to determine whether to present background guidelines
-#'               to help determine locations.
-#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE}.
-#'     Default is given by \code{\link{l_getOption}("guidelines")}.
-#' @param guidesBackground  colour of the background to the guidelines shown when
-#'               \code{showGuides = TRUE}.
-#'     Default is given by \code{\link{l_getOption}("guidesBackground")}.
-#' @param foreground foreground colour used by all other drawing.
-#'     Default is given by \code{\link{l_getOption}("foreground")}.
-#' @param background background colour used for the plot.
-#'     Default is given by \code{\link{l_getOption}("background")}.
-#' @param parent a valid Tk parent widget path. When the parent widget is
-#'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
-#'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
-#'   order to be displayed. See the examples below.
-#' @param ... named arguments to modify plot states.
+#' @template param_title
+#' @template param_showLabels
+#' @template param_showScales
+#' @template param_showGuides
+#' @template param_guidelines
+#' @template param_guidesBackground
+#' @template param_foreground
+#' @template param_background
+#' @template param_parent
 #'
 #'
 #' @details The scatterplot displays a number of direct interactions with the
@@ -367,7 +138,6 @@ l_plot3D <- function(x, y, z, ...) {
 #'   for more details about the interaction gestures.
 #'
 #' @export
-#' @export l_plot3D.default
 #'
 #' @examples
 #' if(interactive()){
@@ -614,4 +384,156 @@ l_plot3D.default <-  function(x,  y = NULL, z = NULL,
 }
 
 
+#' @title Scale for 3d plotting
+#'
+#' @description \code{l_scale3D} scales its argument in a variety of ways
+#' used for 3D visualization.
+#' @family three-dimensional plotting functions
+#' @param x the matrix or data.frame whose columns are to be scaled.
+#' Any \code{NA} entries will be preserved but ignored in calculations.
+#' \code{x} must have exactly 3 columns for \code{method = "sphere"}.
+#' @param center either a logical value or numeric-alike vector of length equal
+#' to the number of columns of \code{x}, where ‘numeric-alike’ means that
+#' \code{as.numeric(.)}
+#' will be applied successfully if \code{is.numeric(.)} is not true.
+#' @param method the scaling method to use.
+#' If \code{method = "box"} (the default) then the columns are scaled to
+#' have equal ranges and, when \code{center = TRUE}, to be centred by the
+#' average of the min and max;
+#' If \code{method = "sphere"} then \code{x} must be three dimensional.
+#' For sphering, on each of the original 3 dimensions \code{x} is first centred
+#' (mean centred when \code{center = TRUE}) and scaled to equal standard deviation on.
+#' The V matrix of the singular value decomposition (svd) is applied to the right
+#' resulting in uncorrelated variables. Coordinates are then divided by (non-zero as
+#' tested by \code{!all.equal(0, .)}) singular values.
+#' If \code{x} contains no \code{NA}s, the resulting coordinates are simply the
+#' U matrix of the svd.
+#'
+#' @seealso \code{\link{l_plot3D}}, \code{\link{scale}}, and \code{\link{prcomp}}.
+#'
+#' @return a data.frame whose columns are centred and scaled according to
+#' the given arguments. For \code{method = "sphere")}, the three variable names are
+#' \code{x1},  \code{x2}, and  \code{x3}.
+#'
+#' @examples
+#'
+#' ##### Iris data
+#' #
+#' # All variables (including Species as a factor)
+#' result_box <- l_scale3D(iris)
+#' head(result_box, n = 3)
+#' apply(result_box, 2, FUN = range)
+#' # Note mean is not zero.
+#' apply(result_box, 2, FUN = mean)
+#'
+#'
+#' # Sphering only on 3D data.
+#' result_sphere <- l_scale3D(iris[, 1:3], method = "sphere")
+#' head(result_sphere, n = 3)
+#' apply(result_sphere, 2, FUN = range)
+#' # Note mean is numerically zero.
+#' apply(result_sphere, 2, FUN = mean)
+#'
+#'
+#' #  With NAs
+#' x <- iris
+#' x[c(1, 3), 1] <- NA
+#' x[2, 3] <- NA
+#'
+#' result_box <- l_scale3D(x)
+#' head(result_box, n = 5)
+#' apply(result_box, 2, FUN = function(x) {range(x, na.rm = TRUE)})
+#'
+#' # Sphering only on 3D data.
+#' result_sphere <- l_scale3D(x[, 1:3], method = "sphere")
+#' # Rows having had any NA are all NA after sphering.
+#' head(result_sphere, n = 5)
+#' # Note with NAs mean is no longer numerically zero.
+#' # because centring was based on all non-NAs in each column
+#' apply(result_sphere, 2, FUN = function(x) {mean(x, na.rm = TRUE)})
+#'
+#'
+#' @export
+#'
+l_scale3D <- function(x,
+                      center = TRUE,
+                      method = c("box", "sphere")){
+    if (is.data.frame(x)) {
+        if (sum(sapply(x, FUN = function(v) !is.numeric(v))) > 0){
+            x <- data.frame(lapply(x, as.numeric))
+        }
+    } else {
+        if (is.matrix(x)) {
+            if (!is.numeric(x)) {
+                stop("A matrix x must be numeric")
+            }
+        } else {
+            stop("x must be a data.frame or a numeric matrix")
+        }
+    }
+    #
 
+
+    method = match.arg(method)
+    if (method == "box") {
+        ranges <- apply(x, 2, FUN = function(x) range(x, na.rm =TRUE))
+        width <- apply(ranges, 2, FUN = diff)
+
+        if (is.logical(center)) {
+            if (center){
+                center <- apply(ranges, 2, FUN = mean)
+            }
+        }
+
+        scaled_x <- as.data.frame(scale(x, center = center, scale = width))
+
+        result <- scaled_x
+    } else {
+        if (method == "sphere") {
+            # Only allow sphering for 3D data.
+            # If the user wants more dimensions (or fewer)
+            # then they can do principal components themselves.
+            #
+            if(ncol(x) != 3) {
+                stop(
+                    paste0("The sphere method is only to be used on three dimensional data, not ncol(x) = ",
+                           ncol(x), ".") )
+            }
+            sds <- apply(x, 2, FUN = function(xi) sd(xi, na.rm =TRUE))
+
+            if (is.logical(center)) {
+                if (center){
+                    center <- apply(x, 2, FUN = function(xi) mean(xi, na.rm =TRUE))
+                }
+            }
+
+            scaled_x <- as.data.frame(scale(x, center = center, scale = sds))
+
+            if (sum(is.na(scaled_x)) == 0) {
+                # No NAs
+                result <- svd(scaled_x)$u
+            } else # there are NAs
+            {   # Need to preserve all rows in result
+                # but use only complete rows for svd.
+                svd_result <- svd(na.omit(scaled_x))
+                # Note some rows in result will become all NA
+                result <- as.matrix(scaled_x) %*% svd_result$v
+                d <- svd_result$d
+                for (i in 1:3) {
+                    if (!is.logical(all.equal(d[i],  0))) {
+                        result[, i] <- result[, i] / d[i]
+                    } else {
+                        warning(paste0("Singular value ", 3, " was ", d[i],
+                                       " suggesting a singular matrix.",
+                                       "  No scaling done on x", i, "."))
+                    }
+                }
+            }
+            result  <- as.data.frame(result)
+            names(result) <- paste0("x", 1:ncol(result))
+        } else {
+            stop("Unknown method")
+        }
+    }
+    result
+}

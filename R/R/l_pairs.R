@@ -10,7 +10,7 @@
 #' \item{\code{"cross"}: only the scales in the same row and the same column are connected;}
 #' \item{\code{"none"}: neither "x" nor "y" scales are connected in any panels.}
 #' }
-#' @param linkingGroup string giving the linkingGroup for all plots.  If missing,
+#' @param linkingGroup string giving the linkingGroup for all plots. If missing,
 #' a default \code{linkingGroup} will be determined from deparsing the \code{data}.
 #' @param linkingKey a vector of strings to provide a linking identity for each row of the
 #' \code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{0:(nrows(data)-1)}.
@@ -380,7 +380,7 @@ l_pairs <- function(data,
   if(new.toplevel) {
     tkpack(child, fill="both", expand=TRUE)
   }
-  plotsHash <- vector(mode="list", dim(pair)[2])
+  plotsHash <- list()
   for (i in 1:dim(pair)[2]) {
     ix <- pair[2,i]
     iy <- pair[1,i]
@@ -393,14 +393,16 @@ l_pairs <- function(data,
     plotsHash[[paste("scatter_y_",
                      scatterplots[i],
                      sep="")]] <- scatterplots[shareY]
+
     if(showHistograms) {
+
       plotsHash[[paste("scatter_x_",
                        scatterplots[i],
-                       sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i]])
+                       sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i] - 1])
       if(histLocation == "edge") {
         plotsHash[[paste("swap_hist_",
                          scatterplots[i],
-                         sep="")]] <- histograms[pair[1,i] + nvar]
+                         sep="")]] <- histograms[pair[1,i] + nvar - 1]
       } else {
         plotsHash[[paste("swap_hist_",
                          scatterplots[i],
@@ -462,6 +464,7 @@ l_pairs <- function(data,
   )
 
   plots <- scatterplots
+
   if (showHistograms) {
     # synchronize hist bindings
     histsHash <- list()
@@ -477,34 +480,38 @@ l_pairs <- function(data,
     if(histLocation == "edge") {
 
       for(i in 1:lenHist) {
+
         nameHist <- namesHist[i]
-        if(i != 1 & i != lenHist) {
-          if(i <= nvar) {
-            histX <- xy_layout(nameHist)$x
-            shareX <- which(scatterX %in% histX == TRUE)
-            histsHash[[paste("hist_x_",
-                             histograms[i],sep="")]] <- c(scatterplots[shareX])
-          } else {
-            histY <- xy_layout(nameHist)$y
-            shareY <- which(scatterY %in% histY == TRUE)
-            histsHash[[paste("hist_y_",
-                             histograms[i],sep="")]] <- c(scatterplots[shareY])
-          }
+
+        if(i <= (nvar - 1)) {
+          histX <- xy_layout(nameHist)$x
+          shareX <- which(scatterX %in% histX == TRUE)
+          histsHash[[paste("hist_x_",
+                           histograms[i],sep="")]] <- c(scatterplots[shareX])
+        } else {
+          histY <- xy_layout(nameHist)$y
+          shareY <- which(scatterY %in% histY == TRUE)
+          histsHash[[paste("hist_y_",
+                           histograms[i],sep="")]] <- c(scatterplots[shareY])
         }
       }
 
     } else {
+
       for(i in 1:lenHist) {
+
         nameHist <- namesHist[i]
         histLayout <- xy_layout(nameHist)
         histX <- histLayout$x
         histY <- histLayout$y
         shareX <- which(scatterX %in% histX == TRUE)
         shareY <- which(scatterY %in% histY == TRUE)
+
         if(length(shareX) > 0) {
           histsHash[[paste0("hist_x_",
                             histograms[i])]] <- c(scatterplots[shareX])
         }
+
         if(length(shareY) > 0) {
           histsHash[[paste0("hist_y_",
                             histograms[i])]] <- c(scatterplots[shareY])

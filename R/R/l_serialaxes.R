@@ -1,7 +1,8 @@
 #' @title Create an interactive serialaxes (parallel axes or radial axes) plot
-#'
-#' @description \code{l_serialaxes} is a generic function for creating interactive visualization environments for R objects.
-#'
+#' @name l_serialaxes
+#' @family loon interactive states
+#' @description \code{l_serialaxes} is a generic function for displaying multivariate data either as a
+#' stacked star glyph plot, or as a parallel coordinate plot.
 #' @param data a data frame with numerical data only
 #' @param ... named arguments to modify the serialaxes plot states or layouts
 #'
@@ -10,51 +11,27 @@
 #'
 #' @template return_widget_handle
 #'
-#' @seealso \code{\link{l_serialaxes.default}}
 #'
 #' @export
-#' @examples
-#' if(interactive()) {
-#'    s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-#'    s['axesLayout'] <- 'parallel'
-#'    states <- l_info_states(s)
-#'    names(states)
-#' }
 l_serialaxes <- function(data, ...) {
     UseMethod("l_serialaxes")
 }
 
-#' @title The default \code{l_serialaxes} for displaying data
-#'
-#' @description The serialaxes widget displays multivariate data either as a
-#'   stacked star glyph plot, or as a parallel coordinate plot.
-#'
-#'
-#' @param data a data frame with numerical data only
+
+#' @rdname l_serialaxes
 #' @param sequence vector with variable names that defines the axes sequence
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
 #'   how the data is scaled. See Details and Examples for more information.
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
-#' @param by loon plot can be separated by some variables into mutiple panels.
-#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
-#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
-#' typically the environment from which the function is called.
-#' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
+#' @template param_by
+#' @template param_on
+#' @template param_layout
 #' @param andrews Andrew's plot (a 'Fourier' transformation)
 #' @param showAxes boolean to indicate whether axes should be shown or not
-#' @param linewidth vector with line widths.
-#' Default is given by \code{\link{l_getOption}("linewidth")}.
-#' @param color vector with line colors.
-#' Default is given by \code{\link{l_getOption}("color")}.
-#' @param active a logical determining whether items appear or not
-#' (default is \code{TRUE} for all items). If a logical vector is given of length
-#' equal to the number of items, then it identifies which items appear (\code{TRUE})
-#' and which do not (\code{FALSE}).
-#' @param selected a logical determining whether items appear selected at first
-#' (default is \code{FALSE} for all items). If a logical vector is given of length
-#' equal to the number of items, then it identifies which items are (\code{TRUE})
-#' and which are not (\code{FALSE}).
+#' @param linewidth vector with line widths. Default is given by \code{\link{l_getOption}("linewidth")}.
+#' @param color vector with line colors. Default is given by \code{\link{l_getOption}("color")}.
+#' @template param_active
+#' @template param_selected
 #' @template param_parent
 #' @template param_dots_state_args
 #' @param ... named arguments to modify the serialaxes states or layouts, see details.
@@ -78,9 +55,7 @@ l_serialaxes <- function(data, ...) {
 #'   }
 #' }
 #'
-#'
-#' @return plot handle object
-#'
+#' @seealso Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
 #' @export
 #'
 #' @examples
