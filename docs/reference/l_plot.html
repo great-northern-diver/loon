@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Create an interactive loon plot widget — l_plot" />
-<meta property="og:description" content="l_plot is a generic function for creating interactive
+<meta property="og:description" content="l_plot is a generic function for creating an interactive
   visualization environments for R objects." />
 <meta property="og:image" content="/logo.png" />
 
@@ -151,16 +151,96 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create an interactive loon plot widget</h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot.R'><code>R/l_plot.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot.R'><code>R/l_plot.R</code></a>, <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot_decomposed_ts.R'><code>R/l_plot_decomposed_ts.R</code></a>, <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_plot_density.R'><code>R/l_plot_density.R</code></a>, and 2 more</small>
     <div class="hidden name"><code>l_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>l_plot</code> is a generic function for creating interactive
-  visualization environments for <span style="R">R</span> objects.</p>
+    <p><code>l_plot</code> is a generic function for creating an interactive
+  visualization environments for R objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>l_plot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>on</span>,
+  layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
+  connectedScales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  glyph <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"glyph"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>xlabel</span>,
+  <span class='va'>ylabel</span>,
+  <span class='va'>title</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showScales <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  guidelines <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidelines"</span><span class='op'>)</span>,
+  guidesBackground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidesBackground"</span><span class='op'>)</span>,
+  foreground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
+  background <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"background"</span><span class='op'>)</span>,
+  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for decomposed.ts</span>
+<span class='fu'>l_plot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tk_title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  linecolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
+  <span class='va'>linkingGroup</span>,
+  showScales <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for density</span>
+<span class='fu'>l_plot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
+  linecolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for map</span>
+<span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>x</span>, y <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for stl</span>
+<span class='fu'>l_plot</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tk_title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  linecolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
+  <span class='va'>linkingGroup</span>,
+  showScales <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,8 +248,9 @@
     <tr>
       <th>x</th>
       <td><p>the coordinates of points in the <code>l_plot</code>.
-Alternatively, a single plotting structure, function, or any R object having an <code>l_plot</code>
-method can be provided.</p></td>
+Alternatively, a single plotting structure (see the function <code><a href='https://rdrr.io/r/grDevices/xy.coords.html'>xy.coords</a></code> for details),
+<code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>, or any <span style="R">R</span> object (e.g. <code><a href='https://rdrr.io/r/stats/density.html'>density</a></code>,<code><a href='https://rdrr.io/r/stats/stl.html'>stl</a></code>, etc)
+is accommodated.</p></td>
     </tr>
     <tr>
       <th>y</th>
@@ -181,24 +262,201 @@ appropriate structure.</p></td>
       <td><p>named arguments to modify plot states. See <code><a href='l_info_states.html'>l_info_states</a></code>
 of any instantiated <code>l_plot</code> for examples of names and values.</p></td>
     </tr>
+    <tr>
+      <th>by</th>
+      <td><p>loon plot can be separated by some variables into multiple panels.
+This argument can take a <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>,
+<code>n</code> dimensional state names (see <code><a href='l_nDimStateNames.html'>l_nDimStateNames</a></code>)
+an <code>n</code>-dimensional <code>vector</code> and <code>data.frame</code> or
+a <code>list</code> of same lengths <code>n</code> as input.</p></td>
+    </tr>
+    <tr>
+      <th>on</th>
+      <td><p>if the <code>x</code> or <code>by</code> is a formula,
+an optional data frame containing the variables in the <code>x</code> or <code>by</code>.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.</p></td>
+    </tr>
+    <tr>
+      <th>layout</th>
+      <td><p>layout facets as <code>'grid'</code>, <code>'wrap'</code> or <code>'separate'</code></p></td>
+    </tr>
+    <tr>
+      <th>connectedScales</th>
+      <td><p>Determines how the scales of the facets are to be connected depending
+on which <code>layout</code> is used.  For each value of <code>layout</code>, the scales are connected
+as follows:</p><ul>
+<li><p><code>layout = "wrap":</code>  Across all facets, when <code>connectedScales</code> is
+   <ul>
+<li><p><code>"x"</code>, then  only the "x"  scales are connected</p></li>
+<li><p><code>"y"</code>, then only the "y" scales are connected</p></li>
+<li><p><code>"both"</code>,  both "x" and "y" scales are connected</p></li>
+<li><p><code>"none"</code>,  neither "x" nor "y" scales are connected.
+   For any other value, only the "y" scale is connected.</p></li>
+</ul></p></li>
+<li><p><code>layout = "grid":</code>  Across all facets, when <code>connectedScales</code> is
+   <ul>
+<li><p><code>"cross"</code>, then only the scales in the same row and the same column are connected</p></li>
+<li><p><code>"row"</code>, then both "x" and "y" scales of facets in the same row are connected</p></li>
+<li><p><code>"column"</code>, then both "x" and "y" scales of facets in the same column are connected</p></li>
+<li><p><code>"x"</code>, then all of the "x"  scales are connected (regardless of column)</p></li>
+<li><p><code>"y"</code>, then all of the "y" scales are connected (regardless of row)</p></li>
+<li><p><code>"both"</code>,  both "x" and "y" scales are connected in all facets</p></li>
+<li><p><code>"none"</code>,  neither "x" nor "y" scales are connected in any facets.</p></li>
+</ul></p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>colours of points; colours are repeated
+until matching the number points. Default is found using <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>glyph</th>
+      <td><p>the visual representation of the point. Argument values can be any of</p><ul>
+<li><p>the string names of primitive glyphs:
+   <ul>
+<li><p><code>circles</code>: "circle", "ccircle", "ocircle";</p></li>
+<li><p><code>squares or boxes</code>: "square", "csquare", "osquare";</p></li>
+<li><p><code>triangles</code>: "triangle", "ctriangle", "otriangle";</p></li>
+<li><p><code>diamonds</code>: "diamond", "cdiamond", or "odiamond".</p></li>
+</ul>
+   Note that prefixes "c" and "o" may be thought of as closed and open, respectively.
+   The set of values are returned by <code><a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a>()</code>.</p></li>
+<li><p>the string names of constructed glyphs:
+   <ul>
+<li><p><code>text as glyphs</code>: see <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a>()</code></p></li>
+<li><p><code>point ranges</code>: see <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a>()</code></p></li>
+<li><p><code>polygons</code>: see <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a>()</code></p></li>
+<li><p><code>parallel coordinates</code>: see <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a>()</code></p></li>
+<li><p><code>star or radial axes</code>: see <code><a href='l_glyph_add_serialaxes.html'>l_glyph_add_serialaxes</a>()</code></p></li>
+<li><p><code>or any plot created using R</code>: see <code><a href='l_make_glyphs.html'>l_make_glyphs</a>()</code></p></li>
+</ul>
+   Note that glyphs are constructed and given a stringname to be used in the inspector.</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td><p>size of the symbol (roughly in terms of area).
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>a logical determining whether points appear or not
+(default is <code>TRUE</code> for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (<code>TRUE</code>)
+and which do not (<code>FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>selected</th>
+      <td><p>a logical determining whether points appear selected at first
+(default is <code>FALSE</code> for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (<code>TRUE</code>)
+and which are not (<code>FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>xlabel</th>
+      <td><p>Label for the horizontal (x) axis. If missing,
+one will be inferred from <code>x</code> if possible.</p></td>
+    </tr>
+    <tr>
+      <th>ylabel</th>
+      <td><p>Label for the vertical (y) axis. If missing,
+one will be inferred from <code>y</code> (or <code>x</code>) if possible.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Title for the plot, default is an empty string.</p></td>
+    </tr>
+    <tr>
+      <th>showLabels</th>
+      <td><p>logical to determine whether axes label (and title) should
+be presented.</p></td>
+    </tr>
+    <tr>
+      <th>showScales</th>
+      <td><p>logical to determine whether numerical scales should be presented on both axes.</p></td>
+    </tr>
+    <tr>
+      <th>showGuides</th>
+      <td><p>logical to determine whether to present background guidelines to help determine locations.</p></td>
+    </tr>
+    <tr>
+      <th>guidelines</th>
+      <td><p>colour of the guidelines shown when <code>showGuides = TRUE</code>.
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("guidelines")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>guidesBackground</th>
+      <td><p>colour of the background to the guidelines shown when
+<code>showGuides = TRUE</code>. Default is found using <code><a href='l_getOption.html'>l_getOption</a>("guidesBackground")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>foreground</th>
+      <td><p>foreground colour used by all other drawing.
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("foreground")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>background colour used for the plot.
+Default is found using <code><a href='l_getOption.html'>l_getOption</a>("background")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>parent</th>
+      <td><p>a valid Tk parent widget path. When the parent widget is
+specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
+some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
+order to be displayed. See the examples below.</p></td>
+    </tr>
+    <tr>
+      <th>tk_title</th>
+      <td><p>provides an alternative window name to Tk's <code>wm title</code>. If <code>NULL</code>, <code>stl</code> will be used.</p></td>
+    </tr>
+    <tr>
+      <th>linecolor</th>
+      <td><p>line colour of all time series.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>linewidth</th>
+      <td><p>line width of all time series (incl. original and decomposed components.
+Default given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>linkingGroup</th>
+      <td><p>string giving the linkingGroup for all plots. If missing,
+a default <code>linkingGroup</code> will be determined from deparsing the input <code>x</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>widget handle</p>
+    
+<ul>
+<li><p>The input is a <code>stl</code> or a <code>decomposed.ts</code> object,
+a structure of class <code>"l_ts"</code> containing four loon plots
+each representing a part of the decomposition
+by name: "original", "trend", "seasonal", and "remainder"</p></li>
+<li><p>The input is a vector, formula, data.frame, ...
+<ul>
+<li><p><code>by = NULL</code>: a <code>loon</code> widget will be returned</p></li>
+<li><p><code>by</code> is not <code>NULL</code>: an <code>l_facet</code> object (a list) will be returned and
+each element is a <code>loon</code> widget displaying a subset of interest.</p></li>
+</ul></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Like <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></code> in <span style="R">R</span>, <code>l_plot</code> is
 the generic plotting function for objects in loon.
-The default method <code><a href='l_plot.default.html'>l_plot.default</a></code> produces the interactive
+The default method <code>l_plot.default</code> produces the interactive
 scatterplot in loon.
 This is the workhorse of `loon` and is often a key part of many
 other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><a href='l_navgraph.html'>l_navgraph</a></code>).</p>
-<p>For example, the  methods include <code><a href='l_plot.default.html'>l_plot.default</a></code> (the basic interactive scatterplot),
-<code><a href='l_plot.density.html'>l_plot.density</a></code> (layers output of <code><a href='https://rdrr.io/r/stats/density.html'>density</a></code> in an empty scatterplot),
- <code><a href='l_plot.map.html'>l_plot.map</a></code>  (layers a map in an empty scatterplot), and
-<code><a href='l_plot.stl.html'>l_plot.stl</a></code> (a compound display of the output of <code><a href='https://rdrr.io/r/stats/stl.html'>stl</a></code>).</p>
-
+<p>For example, the  methods include <code>l_plot.default</code> (the basic interactive scatterplot),
+<code>l_plot.density</code> (layers output of <code><a href='https://rdrr.io/r/stats/density.html'>density</a></code> in an empty scatterplot),
+ <code>l_plot.map</code> (layers a map in an empty scatterplot), and
+<code>l_plot.stl</code> (a compound display of the output of <code><a href='https://rdrr.io/r/stats/stl.html'>stl</a></code>).</p>
 <p>A complete list is had from <code><a href='https://rdrr.io/r/utils/methods.html'>methods(l_plot)</a></code>.</p>
 <p><div style="background: #dff0d8; padding: 15px;"> To get started with loon
   it is recommended to follow the introductory loon vignette <code>vignette(topic = "introduction", package  = "loon")</code>
@@ -206,45 +464,117 @@ other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><
 
 <p>The general direct manipulation and interaction gestures are
   outlined in the following figures.  Zooming and Panning  <img src='figures/gestures_zoom_pan.png' alt="Zoom pan gestures" />  Selecting Points/Objects  <img src='figures/gestures_select.png' alt="Select gestures" />  Moving Points on the Scatterplot Display  <img src='figures/gestures_move.png' alt="Move gestures" /></p>
+<p>The scatterplot displays a number of direct interactions with the
+mouse and keyboard, these include: zooming towards the mouse cursor using
+the mouse wheel, panning by right-click dragging and various selection
+methods using the left mouse button such as sweeping, brushing and
+individual point selection. See the documentation for <code>l_plot</code>
+for more details about the interaction gestures.</p>
+
+<p>Some arguments to modify layouts can be passed through,
+e.g. "separate", "ncol", "nrow", etc. Check <code><a href='l_facet.html'>l_facet</a></code>
+to see how these arguments work.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_plot_arguments.html'>l_plot_arguments</a></code> and <code><a href='l_plot.default.html'>l_plot.default</a></code>.</p>
-<p>Other two-dimensional plotting functions: 
-<code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a>()</code>,
-<code><a href='l_plot.default.html'>l_plot.default</a>()</code>,
-<code><a href='l_plot.density.html'>l_plot.density</a>()</code>,
-<code><a href='l_plot.stl.html'>l_plot.stl</a>()</code></p>
+    <div class='dont-index'><p>Turn interactive loon plot static <code><a href='loonGrob.html'>loonGrob</a></code>, <code><a href='grid.loon.html'>grid.loon</a></code>, <code><a href='plot.loon.html'>plot.loon</a></code>.</p>
+<p>Density layer <code><a href='l_layer.density.html'>l_layer.density</a></code></p>
+<p>Map layer <code><a href='l_layer.html'>l_layer</a></code>, <code><a href='l_layer.map.html'>l_layer.map</a></code>,
+  <code><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></code></p>
 <p>Other loon interactive states: 
+<code><a href='l_hist.html'>l_hist</a>()</code>,
 <code><a href='l_info_states.html'>l_info_states</a>()</code>,
-<code><a href='l_plot.default.html'>l_plot.default</a>()</code>,
+<code><a href='l_serialaxes.html'>l_serialaxes</a>()</code>,
 <code><a href='l_state_names.html'>l_state_names</a>()</code>,
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'>########################## l_plot.default ##########################</span>
+<span class='co'># default use as scatterplot</span>
 
-<span class='co'># ordinary use</span>
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>Sepal.Width</span>, <span class='va'>Petal.Length</span>, color<span class='op'>=</span><span class='va'>Species</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>Sepal.Length</span>, <span class='va'>Sepal.Width</span>, color<span class='op'>=</span><span class='va'>Species</span>,
+                        title <span class='op'>=</span> <span class='st'>"First plot"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>versi</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span> <span class='op'>==</span> <span class='st'>"versicolor"</span>
-<span class='va'>p</span><span class='op'>[</span><span class='st'>"glyph"</span><span class='op'>]</span><span class='op'>[</span><span class='va'>versi</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"ctriangle"</span>
+<span class='co'># The names of the info states that can be</span>
+<span class='co'># accessed or set.  They can also be given values as</span>
+<span class='co'># arguments to l_plot.default()</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span>
+<span class='va'>p1</span><span class='op'>[</span><span class='st'>"size"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
 
-<span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
-<span class='co'># or with more control about grid parameters</span>
-<span class='fu'><a href='grid.loon.html'>grid.loon</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
-<span class='co'># or to save the grid data structure (grob) for later use</span>
-<span class='va'>pg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>Petal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Width</span>,
+                        linkingGroup<span class='op'>=</span><span class='st'>"iris_data"</span>,
+                        title <span class='op'>=</span> <span class='st'>"Second plot"</span>,
+                        showGuides <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p2</span><span class='op'>[</span><span class='st'>"showScales"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
 
+<span class='co'># link first plot with the second plot requires</span>
+<span class='co'># l_configure to coordinate the synchroniztion</span>
+<span class='fu'><a href='l_configure.html'>l_configure</a></span><span class='op'>(</span><span class='va'>p1</span>, linkingGroup <span class='op'>=</span> <span class='st'>"iris_data"</span>, sync <span class='op'>=</span> <span class='st'>"push"</span><span class='op'>)</span>
+
+<span class='va'>p1</span><span class='op'>[</span><span class='st'>'selected'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span> <span class='op'>==</span> <span class='st'>"versicolor"</span>
+<span class='va'>p2</span><span class='op'>[</span><span class='st'>"glyph"</span><span class='op'>]</span><span class='op'>[</span><span class='va'>p1</span><span class='op'>[</span><span class='st'>'selected'</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"cdiamond"</span>
+
+<span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span><span class='op'>(</span><span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span>, <span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>p2</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+
+<span class='co'># Layout facets</span>
+<span class='co'>### facet wrap</span>
+<span class='va'>p3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>mpg</span>, by <span class='op'>=</span> <span class='va'>cyl</span>, layout <span class='op'>=</span> <span class='st'>"wrap"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># it is equivalent to</span>
+<span class='co'># p3 &lt;- l_plot(mpg~wt, by = ~cyl, layout = "wrap", on = mtcars)</span>
+
+<span class='co'>### facet grid</span>
+<span class='va'>p4</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>,
+             by <span class='op'>=</span> <span class='va'>size</span> <span class='op'>~</span> <span class='va'>color</span>,
+             size <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
+             color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"red"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"green"</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Use with other tk widgets</span>
+<span class='va'>tt</span> <span class='op'>&lt;-</span> <span class='fu'>tktoplevel</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>tktitle</span><span class='op'>(</span><span class='va'>tt</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>"Loon plots with custom layout"</span>
+
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span>parent<span class='op'>=</span><span class='va'>tt</span>, x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>2</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span>parent<span class='op'>=</span><span class='va'>tt</span>, x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>3</span>,<span class='fl'>1</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>,<span class='fl'>8</span>,<span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>tkgrid</span><span class='op'>(</span><span class='va'>p1</span>, row<span class='op'>=</span><span class='fl'>0</span>, column<span class='op'>=</span><span class='fl'>0</span>, sticky<span class='op'>=</span><span class='st'>"nesw"</span><span class='op'>)</span>
+<span class='fu'>tkgrid</span><span class='op'>(</span><span class='va'>p2</span>, row<span class='op'>=</span><span class='fl'>0</span>, column<span class='op'>=</span><span class='fl'>1</span>, sticky<span class='op'>=</span><span class='st'>"nesw"</span><span class='op'>)</span>
+
+<span class='fu'>tkgrid.columnconfigure</span><span class='op'>(</span><span class='va'>tt</span>, <span class='fl'>0</span>, weight<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'>tkgrid.columnconfigure</span><span class='op'>(</span><span class='va'>tt</span>, <span class='fl'>1</span>, weight<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+
+<span class='fu'>tkgrid.rowconfigure</span><span class='op'>(</span><span class='va'>tt</span>, <span class='fl'>0</span>, weight<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='co'>########################## l_plot.decomposed.ts ##########################</span>
+<span class='va'>decompose</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></span><span class='op'>(</span><span class='va'>co2</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>decompose</span>, title <span class='op'>=</span> <span class='st'>"Atmospheric carbon dioxide over Mauna Loa"</span><span class='op'>)</span>
+<span class='co'># names of plots in the display</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='co'># names of states associated with the seasonality plot</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>)</span>
+<span class='co'># which can be set</span>
+<span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"steelblue"</span>
+
+<span class='co'>########################## l_plot.stl ##########################</span>
+<span class='va'>co2_stl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/stl.html'>stl</a></span><span class='op'>(</span><span class='va'>co2</span>, <span class='st'>"per"</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>co2_stl</span>, title <span class='op'>=</span> <span class='st'>"Atmospheric carbon dioxide over Mauna Loa"</span><span class='op'>)</span>
+<span class='co'># names of plots in the display</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='co'># names of states associated with the seasonality plot</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>)</span>
+<span class='co'># which can be set</span>
+<span class='va'>p</span><span class='op'>$</span><span class='va'>seasonal</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"steelblue"</span>
+<span class='co'>########################## l_plot.density ##########################</span>
 <span class='co'># plot a density estimate</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>314159</span><span class='op'>)</span>
 <span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/density.html'>density</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span><span class='va'>ds</span>,  title <span class='op'>=</span> <span class='st'>"density estimate"</span>,
             xlabel <span class='op'>=</span> <span class='st'>"x"</span>, ylabel <span class='op'>=</span> <span class='st'>"density"</span>,
             showScales <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 
+<span class='co'>########################## l_plot.map ##########################</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"maps"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>l_plot</span><span class='op'>(</span><span class='fu'>maps</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/maps/man/map.html'>map</a></span><span class='op'>(</span><span class='st'>'world'</span>, fill<span class='op'>=</span><span class='cn'>TRUE</span>, plot<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
