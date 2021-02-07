@@ -19,7 +19,7 @@
 #' @export
 #'
 l_graph <- function(nodes, ...) {
-    UseMethod("l_graph", nodes)
+    UseMethod("l_graph")
 }
 
 
@@ -33,18 +33,30 @@ l_graph.graph <- function(nodes, ...) {
 #' @rdname l_graph
 #' @export
 l_graph.loongraph <- function(nodes,...) {
+
     graph <- nodes
 
-    plot <- l_graph.default(nodes=graph$nodes, from=graph$from, to=graph$to,
-                            isDirected=graph$isDirected, ...)
+    dotArgs <- list(...)
+    dotArgs$nodes <- graph$nodes
 
-    plot
+    if(is.null(dotArgs$isDirected)) {
+        dotArgs$isDirected <- graph$isDirected
+    }
+    if(is.null(dotArgs$from)) {
+        dotArgs$from <- graph$from
+    }
+    if(is.null(dotArgs$to)) {
+        dotArgs$to <- graph$to
+    }
+
+    do.call(l_graph.default, dotArgs)
 }
 
 
 #' @rdname l_graph
 #' @param from vector with node names of the from-to pairs for edges
 #' @param to vector with node names of the from-to pairs for edges
+#' @param isDirected a boolean state to specify whether these edges have directions
 #' @param parent parent widget of graph display
 #' @export
 #'
@@ -58,7 +70,8 @@ l_graph.loongraph <- function(nodes,...) {
 #'  g <- l_graph(LG)
 #' }
 
-l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
+l_graph.default <- function(nodes="", from="", to="",  isDirected = FALSE,
+                            parent=NULL, ...) {
 
     dotArgs <- list(...)
 
@@ -85,7 +98,8 @@ l_graph.default <- function(nodes="", from="", to="",  parent=NULL, ...) {
                  parent = parent,
                  nodes = na.omit(as.character(nodes)),
                  from = na.omit(as.character(from)),
-                 to = na.omit(as.character(to)))
+                 to = na.omit(as.character(to)),
+                 isDirected = isDirected)
         )
     )
 

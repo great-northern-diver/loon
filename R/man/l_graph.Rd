@@ -13,7 +13,7 @@ l_graph(nodes, ...)
 
 \method{l_graph}{loongraph}(nodes, ...)
 
-\method{l_graph}{default}(nodes = "", from = "", to = "", parent = NULL, ...)
+\method{l_graph}{default}(nodes = "", from = "", to = "", isDirected = FALSE, parent = NULL, ...)
 }
 \arguments{
 \item{nodes}{object for method dispatch}
@@ -23,6 +23,8 @@ l_graph(nodes, ...)
 \item{from}{vector with node names of the from-to pairs for edges}
 
 \item{to}{vector with node names of the from-to pairs for edges}
+
+\item{isDirected}{a boolean state to specify whether these edges have directions}
 
 \item{parent}{parent widget of graph display}
 }
