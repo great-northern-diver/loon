@@ -1,7 +1,10 @@
 
 #' @title Create an interactive histogram
+#' @name l_hist
+#' @description \code{l_hist} is a generic function for creating interactive histogram displays
+#' that can be linked with loon's other displays.
 #'
-#' @description \code{l_hist} is a generic function for creating interactive visualization environments for R objects.
+#' @family loon interactive states
 #'
 #' @param x vector with numerical data to perform the binning on x,
 #' @param ... named arguments to modify the histogram plot states or layouts, see details.
@@ -11,62 +14,17 @@
 #'
 #' @template return_widget_handle
 #'
-#' @seealso \code{\link{l_hist.default}}, \code{\link{l_plot}}
-#'
 #' @export
-#' @examples
-#' if(interactive()) {
-#'   # numerical data
-#'   x <- rnorm(100)
-#'   h <- l_hist(x)
-#'
-#'   # categorical data
-#'   x <- factor(mtcars$cyl)
-#'   h <- l_hist(x)
-#' }
-
 l_hist <- function(x, ...) {
     UseMethod("l_hist")
 }
 
-#' @title The default \code{l_hist}
-#'
-#' @description Creates an interactive histogram display that can be linked with
-#'   loon's other displays
-#'
-#' @param x vector with numerical data to perform the binning on x
+#' @rdname l_hist
 #' @param yshows one of "frequency" (default) or  "density"
-#' @param by loon plot can be separated by some variables into multiple panels.
-#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
-#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
-#' typically the environment from which the function is called.
-#' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
-#' @param connectedScales Determines how the scales of the facets are to be connected depending
-#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-#' as follows:
-#' \itemize{
-#' \item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"x"}, then  only the "x"  scales are connected}
-#'    \item{\code{"y"}, then only the "y" scales are connected}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    For any other value, only the "y" scale is connected.
-#'    }
-#'    }
-#' \item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
-#'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
-#'    \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
-#'    \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
-#'    \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
-#'    }
-#'    }
-#'  }
+#' @template param_by
+#' @template param_on
+#' @template param_layout
+#' @template param_connectedScales
 #' @param origin numeric scalar to define the binning origin
 #' @param binwidth a numeric scalar to specify the binwidth
 #'   If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
@@ -81,22 +39,13 @@ l_hist <- function(x, ...) {
 #' @param color colour fills of bins; colours are repeated
 #'  until matching the number x.
 #'  Default is found using \code{\link{l_getOption}("color")}.
-#' @param active a logical determining whether x appears or not
-#' (default is \code{TRUE} for all x). If a logical vector is given of length
-#' equal to the number of x, then it identifies which x appears (\code{TRUE})
-#' and which does not (\code{FALSE}).
-#' @param selected a logical determining whether x appears selected at first
-#' (default is \code{FALSE} for all x). If a logical vector is given of length
-#' equal to the number of x, then it identifies which x is (\code{TRUE})
-#' and which is not (\code{FALSE}).
+#' @template param_active
+#' @template param_selected
 #' @param xlabel label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 #'   inferred from \code{x} will be made.
-#' @param showLabels logical to determine whether axes label (and title) should
-#' be presented.
-#' @param showScales logical to determine whether numerical scales should
-#' be presented on both axes.
-#' @param showGuides logical to determine whether to present background guidelines
-#' to help determine locations.
+#' @template param_showLabels
+#' @template param_showScales
+#' @template param_showGuides
 #' @template param_parent
 #' @param ... named arguments to modify the histogram plot states or layouts, see details.
 #'
@@ -113,15 +62,9 @@ l_hist <- function(x, ...) {
 #'   }
 #' }
 #'
-#' @templateVar page  learn_R_display_hist
-#' @template see_l_help_page
-#'
-#' @template return_widget_handle
-#'
-#' @seealso \code{\link{l_plot.default}}, \code{\link{l_hist}}
+#' @seealso Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
 #'
 #' @export
-#'
 #' @examples
 #' if(interactive()){
 #'
@@ -156,7 +99,6 @@ l_hist <- function(x, ...) {
 #' hg <- loonGrob(h)
 #'
 #'}
-#' @export
 l_hist.default <-  function(x,
                             yshows = c("frequency", "density"),
                             by = NULL,
@@ -365,8 +307,10 @@ l_hist.default <-  function(x,
     }
 }
 
+#' @rdname l_hist
+#' @param showFactors whether to draw the factor names
 #' @export
-l_hist.factor <-  function(x, ...) {
+l_hist.factor <-  function(x, showFactors = length(unique(x)) < 10L, ...) {
 
     if(missing(x))
         return(
@@ -378,6 +322,8 @@ l_hist.factor <-  function(x, ...) {
     if (is.null(dotArgs$xlabel)) {
         dotArgs$xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
+
+    x <- as.factor(x)
 
     levelNames <- levels(x)
     nlevels <- length(levelNames)
@@ -411,6 +357,8 @@ l_hist.factor <-  function(x, ...) {
     ## Adjust text coords
     ## The reason to do so is to make sure that
     ## `labels` always lay down the corresponding bins no matter how origin shifts
+
+    if(!showFactors) return(hist)
 
     if(inherits(hist, "l_compound")) {
 
@@ -448,17 +396,19 @@ l_hist.factor <-  function(x, ...) {
     hist
 }
 
+#' @rdname l_hist
 #' @export
-l_hist.character <- function(x, ...) {
+l_hist.character <- function(x, showFactors = length(unique(x)) < 10L, ...) {
 
     if(missing(x))
         return(
             l_hist.default(x, ...)
         )
 
-    l_hist(factor(x), ...)
+    l_hist.factor(x, showFactors = showFactors, ...)
 }
 
+#' @rdname l_hist
 #' @export
 l_hist.data.frame <- function(x, ...) {
 
@@ -488,12 +438,14 @@ l_hist.data.frame <- function(x, ...) {
     do.call(l_hist, dotArgs)
 }
 
+#' @rdname l_hist
 #' @export
 l_hist.matrix <- function(x, ...) {
 
     l_hist(c(x), ...)
 }
 
+#' @rdname l_hist
 #' @export
 l_hist.list <- function(x, ...) {
 
@@ -510,6 +462,7 @@ l_hist.list <- function(x, ...) {
     do.call(l_hist, dotArgs)
 }
 
+#' @rdname l_hist
 #' @export
 l_hist.table <- function(x, ...) {
 
@@ -535,6 +488,7 @@ l_hist.table <- function(x, ...) {
     do.call(l_hist, dotArgs)
 }
 
+#' @rdname l_hist
 #' @export
 l_hist.array <- function(x, ...) {
 
