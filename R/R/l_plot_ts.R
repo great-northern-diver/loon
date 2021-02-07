@@ -8,7 +8,7 @@
 #'        Default is given by \code{\link{l_getOption}("color")}.
 #' @param size points size of all time series.
 #'        Default is given by \code{\link{l_getOption}("size")}.
-#' @param lcolor line colour of all time series.
+#' @param linecolor line colour of all time series.
 #'        Default is given by \code{\link{l_getOption}("color")}.
 #' @param linewidth line width of all time series (incl. original and decomposed components.
 #'        Default is given by \code{\link{l_getOption}("linewidth")}.
@@ -39,7 +39,7 @@
 l_plot_ts <- function(x,
                       color = l_getOption("color"),
                       size = l_getOption("size"),
-                      lcolor = l_getOption("color"),
+                      linecolor = l_getOption("color"),
                       linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
@@ -173,7 +173,7 @@ l_plot_ts <- function(x,
     l1 <- l_layer_line(p1,
                        x = xy.raw$x,
                        y= xy.raw$y,
-                       color= lcolor,
+                       color= linecolor,
                        linewidth = linewidth, index="end")
 
 
@@ -194,7 +194,7 @@ l_plot_ts <- function(x,
     l2 <- l_layer_line(p2,
                        x= xy.trend$x,
                        y= xy.trend$y,
-                       color=lcolor, linewidth = linewidth,
+                       color=linecolor, linewidth = linewidth,
                        index="end")
 
     p3 <- do.call(l_plot,
@@ -214,7 +214,7 @@ l_plot_ts <- function(x,
     l3 <- l_layer_line(p3,
                        x = xy.seasonal$x,
                        y = xy.seasonal$y,
-                       color = lcolor,
+                       color = linecolor,
                        linewidth = linewidth ,
                        index="end")
 
@@ -235,7 +235,7 @@ l_plot_ts <- function(x,
     l4 <- l_layer_line(p4,
                        x = xy.remainder$x,
                        y = xy.remainder$y,
-                       color = lcolor, linewidth = linewidth,
+                       color = linecolor, linewidth = linewidth,
                        index="end")
 
     ## make the canvas resize to fairly small
