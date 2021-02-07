@@ -250,6 +250,24 @@ l_serialaxes.default <- function(data,
 
     l_className <- "l_serialaxes"
 
+    if(missing(data)) {
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                dotArgs,
+                list(
+                    factory_tclcmd = '::loon::serialaxes',
+                    factory_path = 'serialaxes',
+                    factory_window_title = 'loon serialaxes plot',
+                    parent = parent,
+                    showAxes = showAxes
+                )
+            )
+        )
+
+        return(plot)
+    }
+
     data <- as.data.frame(data)
 
     if (missing(sequence)) {
