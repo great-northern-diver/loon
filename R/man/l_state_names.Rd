@@ -27,9 +27,10 @@ In order to access values of a states use \code{\link{l_info_states}}.
 \code{\link{l_info_states}}, \code{\link{l_cget}}, \code{\link{l_configure}}
 
 Other loon interactive states: 
+\code{\link{l_hist}()},
 \code{\link{l_info_states}()},
-\code{\link{l_plot.default}()},
 \code{\link{l_plot}()},
+\code{\link{l_serialaxes}()},
 \code{\link{names.loon}()}
 }
 \concept{loon interactive states}

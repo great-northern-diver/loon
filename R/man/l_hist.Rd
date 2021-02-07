@@ -2,35 +2,214 @@
 % Please edit documentation in R/l_hist.R
 \name{l_hist}
 \alias{l_hist}
+\alias{l_hist.default}
+\alias{l_hist.factor}
+\alias{l_hist.character}
+\alias{l_hist.data.frame}
+\alias{l_hist.matrix}
+\alias{l_hist.list}
+\alias{l_hist.table}
+\alias{l_hist.array}
 \title{Create an interactive histogram}
 \usage{
 l_hist(x, ...)
+
+\method{l_hist}{default}(
+  x,
+  yshows = c("frequency", "density"),
+  by = NULL,
+  on,
+  layout = c("grid", "wrap", "separate"),
+  connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
+  origin = NULL,
+  binwidth = NULL,
+  showStackedColors = TRUE,
+  showBinHandle = FALSE,
+  color = l_getOption("color"),
+  active = TRUE,
+  selected = FALSE,
+  xlabel = NULL,
+  showLabels = TRUE,
+  showScales = FALSE,
+  showGuides = TRUE,
+  parent = NULL,
+  ...
+)
+
+\method{l_hist}{factor}(x, showFactors = length(unique(x)) < 10L, ...)
+
+\method{l_hist}{character}(x, showFactors = length(unique(x)) < 10L, ...)
+
+\method{l_hist}{data.frame}(x, ...)
+
+\method{l_hist}{matrix}(x, ...)
+
+\method{l_hist}{list}(x, ...)
+
+\method{l_hist}{table}(x, ...)
+
+\method{l_hist}{array}(x, ...)
 }
 \arguments{
 \item{x}{vector with numerical data to perform the binning on x,}
 
 \item{...}{named arguments to modify the histogram plot states or layouts, see details.}
+
+\item{yshows}{one of "frequency" (default) or  "density"}
+
+\item{by}{loon plot can be separated by some variables into multiple panels.
+This argument can take a \code{\link{formula}},
+\code{n} dimensional state names (see \code{\link{l_nDimStateNames}})
+an \code{n}-dimensional \code{vector} and \code{data.frame} or
+a \code{list} of same lengths \code{n} as input.}
+
+\item{on}{if the \code{x} or \code{by} is a formula,
+an optional data frame containing the variables in the \code{x} or \code{by}.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.}
+
+\item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
+
+\item{connectedScales}{Determines how the scales of the facets are to be connected depending
+on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
+as follows:
+\itemize{
+\item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
+   \itemize{
+   \item{\code{"x"}, then  only the "x"  scales are connected}
+   \item{\code{"y"}, then only the "y" scales are connected}
+   \item{\code{"both"},  both "x" and "y" scales are connected}
+   \item{\code{"none"},  neither "x" nor "y" scales are connected.}
+   For any other value, only the "y" scale is connected.
+   }
+   }
+\item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
+   \itemize{
+   \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
+   \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
+   \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
+   \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
+   \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
+   \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
+   \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
+   }
+   }
+ }}
+
+\item{origin}{numeric scalar to define the binning origin}
+
+\item{binwidth}{a numeric scalar to specify the binwidth
+If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
+(namely 3.49 * sd(x)/(n ^(1/3)) if sd(x) > 0 and 1 if sd(x) == 0)
+and using the minumum numerical difference between factor levels when \code{x}
+is a factor or a character vector (coerced to factor).}
+
+\item{showStackedColors}{if TRUE (default) then bars will be coloured according to
+colours of the points; if FALSE, then the bars will be a uniform colour
+except for highlighted points.}
+
+\item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
+whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
+
+\item{color}{colour fills of bins; colours are repeated
+until matching the number x.
+Default is found using \code{\link{l_getOption}("color")}.}
+
+\item{active}{a logical determining whether points appear or not
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
+and which do not (\code{FALSE}).}
+
+\item{selected}{a logical determining whether points appear selected at first
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
+and which are not (\code{FALSE}).}
+
+\item{xlabel}{label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
+inferred from \code{x} will be made.}
+
+\item{showLabels}{logical to determine whether axes label (and title) should
+be presented.}
+
+\item{showScales}{logical to determine whether numerical scales should be presented on both axes.}
+
+\item{showGuides}{logical to determine whether to present background guidelines to help determine locations.}
+
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
+
+\item{showFactors}{whether to draw the factor names}
 }
 \value{
-widget handle
+if the argument \code{by} is not set, a \code{loon} widget will be returned;
+else an \code{l_facet} object (a list) will be returned and each element is
+a \code{loon} widget displaying a subset of interest.
 }
 \description{
-\code{l_hist} is a generic function for creating interactive visualization environments for R objects.
+\code{l_hist} is a generic function for creating interactive histogram displays
+that can be linked with loon's other displays.
 }
 \details{
 For more information run: \code{l_help("learn_R_display_hist")}
+
+\itemize{
+  \item {
+  Note that when changing the \code{yshows} state from
+  \code{'frequency'} to \code{'density'} you might have to use
+  \code{\link{l_scaleto_world}} to show the complete histogram in the plotting
+  region.
+  }
+  \item {Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc.
+  Check \code{\link{l_facet}} to see how these arguments work.
+  }
+}
 }
 \examples{
-if(interactive()) {
-  # numerical data
-  x <- rnorm(100)
-  h <- l_hist(x)
+if(interactive()){
 
-  # categorical data
-  x <- factor(mtcars$cyl)
-  h <- l_hist(x)
+h <- l_hist(iris$Sepal.Length)
+
+names(h)
+h["xlabel"] <- "Sepal length"
+h["showOutlines"] <- FALSE
+
+h["yshows"]
+h["yshows"] <- "density"
+l_scaleto_plot(h)
+
+h["showStackedColors"] <- TRUE
+h['color'] <- iris$Species
+h["showStackedColors"] <- FALSE
+h["showOutlines"] <- TRUE
+h["showGuides"] <- FALSE
+
+# link another plot with the previous plot
+h['linkingGroup'] <- "iris_data"
+h2 <- with(iris, l_hist(Petal.Width,
+                        linkingGroup="iris_data",
+                        showStackedColors = TRUE))
+
+
+# Get an R (grid) graphics plot of the current loon plot
+plot(h)
+# or with more control about grid parameters
+grid.loon(h)
+# or to save the grid data structure (grob) for later use
+hg <- loonGrob(h)
+
 }
 }
 \seealso{
-\code{\link{l_hist.default}}, \code{\link{l_plot}}
+Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
+
+Other loon interactive states: 
+\code{\link{l_info_states}()},
+\code{\link{l_plot}()},
+\code{\link{l_serialaxes}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
 }
+\concept{loon interactive states}

@@ -2,32 +2,284 @@
 % Please edit documentation in R/l_serialaxes.R
 \name{l_serialaxes}
 \alias{l_serialaxes}
+\alias{l_serialaxes.default}
 \title{Create an interactive serialaxes (parallel axes or radial axes) plot}
 \usage{
 l_serialaxes(data, ...)
+
+\method{l_serialaxes}{default}(
+  data,
+  sequence,
+  scaling = "variable",
+  axesLayout = "radial",
+  by = NULL,
+  on,
+  layout = c("grid", "wrap", "separate"),
+  andrews = FALSE,
+  showAxes = TRUE,
+  color = l_getOption("color"),
+  active = TRUE,
+  selected = FALSE,
+  linewidth = l_getOption("linewidth"),
+  parent = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
 
-\item{...}{named arguments to modify the serialaxes plot states or layouts}
+\item{...}{named arguments to modify the serialaxes states or layouts, see details.}
+
+\item{sequence}{vector with variable names that defines the axes sequence}
+
+\item{scaling}{one of 'variable', 'data', 'observation' or 'none' to specify
+how the data is scaled. See Details and Examples for more information.}
+
+\item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
+
+\item{by}{loon plot can be separated by some variables into multiple panels.
+This argument can take a \code{\link{formula}},
+\code{n} dimensional state names (see \code{\link{l_nDimStateNames}})
+an \code{n}-dimensional \code{vector} and \code{data.frame} or
+a \code{list} of same lengths \code{n} as input.}
+
+\item{on}{if the \code{x} or \code{by} is a formula,
+an optional data frame containing the variables in the \code{x} or \code{by}.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.}
+
+\item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
+
+\item{andrews}{Andrew's plot (a 'Fourier' transformation)}
+
+\item{showAxes}{boolean to indicate whether axes should be shown or not}
+
+\item{color}{vector with line colors. Default is given by \code{\link{l_getOption}("color")}.}
+
+\item{active}{a logical determining whether points appear or not
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
+and which do not (\code{FALSE}).}
+
+\item{selected}{a logical determining whether points appear selected at first
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
+and which are not (\code{FALSE}).}
+
+\item{linewidth}{vector with line widths. Default is given by \code{\link{l_getOption}("linewidth")}.}
+
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 }
 \value{
-widget handle
+if the argument \code{by} is not set, a \code{loon} widget will be returned;
+else an \code{l_facet} object (a list) will be returned and each element is
+a \code{loon} widget displaying a subset of interest.
 }
 \description{
-\code{l_serialaxes} is a generic function for creating interactive visualization environments for R objects.
+\code{l_serialaxes} is a generic function for displaying multivariate data either as a
+stacked star glyph plot, or as a parallel coordinate plot.
 }
 \details{
 For more information run: \code{l_help("learn_R_display_hist")}
+
+\itemize{
+  \item {
+  The \code{scaling} state defines how the data is scaled. The axes
+  display 0 at one end and 1 at the other. For the following explanation
+  assume that the data is in a nxp dimensional matrix. The scaling options
+  are then
+\tabular{ll}{
+variable \tab per column scaling\cr
+observation \tab per row scaling\cr
+data \tab whole matrix scaling\cr
+none \tab do not scale
+}
+  }
+  \item {Some arguments to modify layouts can be passed through,
+  e.g. "separate", "byrow", etc.
+  Check \code{\link{l_facet}} to see how these arguments work.
+  }
+}
 }
 \examples{
-if(interactive()) {
-   s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-   s['axesLayout'] <- 'parallel'
-   states <- l_info_states(s)
-   names(states)
+if(interactive()){
+
+#######
+#
+# Effect of the choice of the argument "scaling"
+#
+# To illustrate we will look at the four measurements of
+# 150 iris flowers from the iris data of Edgar Anderson made
+# famous by R.A. Fisher.
+#
+# First separate the measurements
+irisFlowers <- iris[, 1:4]
+# from their species
+species <- iris[,5]
+# and get some identifiers for the individual flowers
+flowerIDs <- paste(species, 1:50)
+#
+# Now create parallel axes plots of the measurements
+# using different scaling values.
+
+#
+# scaling = "variable"
+#
+# This is the standard scaling of most serial axes plots,
+# scaling each axis from the minimum to the maximum of that variable.
+# Hence it is the default scaling.
+#
+# More precisely, it maps the minimum value in each column (variable) to
+# zero and the maximum to one.  The result is every parallel
+# axis will have a point at 0 and a point at 1.
+#
+# This scaling highlights the relationships (e.g. correlations)
+# between the variables (removes the effect of the location and scale of
+# each variable).
+#
+# For the iris data, ignoring species we see for example that
+# Sepal.Length and Sepal.Width are negatively correlated (lots of
+# crossings) across species but more positively correlated (mostly
+# parallel lines) within each species (colour).
+#
+sa_var <- l_serialaxes(irisFlowers,
+                       scaling = "variable",    # scale within column
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = variable (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+# scaling = "observation"
+#
+# This maps the minimum value in each row (observation) to
+# zero and the maximum value in each row to one.
+#
+# The result is that every observation (curve in the parallel
+# coordinate plot) will touch 0 on at least one axis and touch
+# 1 on another.
+#
+# This scaling highlights the differences between observations (rows)
+# in terms of the relative measurements across the variables for each
+# observation.
+#
+# For example, for the iris data we can see that for every flower (row)
+# the Sepal.Length is the largest measurement and the Petal.Width
+# is the smallest.  Each curve gives some sense of the *shape* of each
+# flower without regard to its size.  Two species (versicolor and
+# virginica) have similar shaped flowers (relatively long but narrow
+# sepals and petals), whereas the third (setosa) has relatively large
+# sepals compared to small petals.
+#
+sa_obs <- l_serialaxes(irisFlowers,
+                       scaling = "observation", # scale within row
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = observation (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+# scaling = "data"
+#
+# This maps the minimum value in the whole dataset (over all elements)
+# to zero and the maximum value in the whole dataset to one.
+#
+# The result is that every measurement is on the same numeric (if not
+# measurement) scale.  Highlighting the relative magnitudes of all
+# numerical values in the data set, each curve shows the relative magnitudes
+# without rescaling by variable.
+#
+# This is most sensible data such as the iris flower where all four measurements
+# appear to have been taken on the same measuring scale.
+#
+# For example, for the iris data full data scaling preserves the size
+# and shape of each flower.  Again virginica is of roughly the same
+# shape as versicolor but has distinctly larger petals.
+# Setosa in contrast is quite differently shaped in both sepals and petals
+# but with sepals more similar in size to the two other flowers and
+# with significantly smaller petals.
+sa_dat <- l_serialaxes(irisFlowers,
+                       scaling = "data",        # scale using all data
+                       axesLayout = "parallel",
+                       color = species,
+                       linewidth = 2,
+                       itemLabel = flowerIDs,
+                       showItemLabels = TRUE,
+                       title = "scaling = data (initially)",
+                       linkingGroup = "irisFlowers data")
+
+#
+#  scaling = "none"
+#
+#  Sometimes we might wish to choose a min and max to use
+#  for the whole data set; or perhaps a separate min and max
+#  for each variable.
+
+#  This would be done outside of the construction of the plot
+#  and displayed by having scaling = "none" in the plot.
+#
+#  For example, for the iris data, we might choose scales so that
+#  the minimum and the maximum values within the data set do not
+#  appear at the end points 0 and 1 of the axes but instead inside.
+#
+#  Suppose we choose the following limits for all variables
+lower_lim <- -3 ; upper_lim <- max(irisFlowers) + 1
+
+#  These are the limits we want to use to define the end points of
+#  the axes for all variables.
+#  We need only scale the data as
+irisFlowers_0_1 <- (irisFlowers - lower_lim)/(upper_lim - lower_lim)
+#  Or alternatively using the built-in scale function
+#  (which allows different scaling for each variable)
+irisFlowers_0_1 <- scale(irisFlowers,
+                         center = rep(lower_lim, 4),
+                         scale = rep((upper_lim - lower_lim), 4))
+
+# Different scales for different
+# And instruct the plot to not scale the data but plot it on the 0-1 scale
+# for all axes.  (Note any rescaled date outside of [0,1] will not appear.)
+#
+sa_none <- l_serialaxes(irisFlowers_0_1,
+                        scaling = "none",        # do not scale
+                        axesLayout = "parallel",
+                        color = species,
+                        linewidth = 2,
+                        itemLabel = flowerIDs,
+                        showItemLabels = TRUE,
+                        title = "scaling = none (initially)",
+                        linkingGroup = "irisFlowers data")
+
+# This is particularly useful for "radial" axes to keep the polygons away from
+# the centre of the display.
+# For example
+sa_none["axesLayout"] <- "radial"
+# now displays each flower as a polygon where shapes and sizes are easily
+# compared.
+#
+#  NOTE: rescaling the data so that all values are within [0,1] is perhaps
+#        the best way to proceed (especially if there are natural lower and
+#        upper limits for each variable).
+#        Then scaling can always be changed via the inspector.
+
 }
 }
 \seealso{
-\code{\link{l_serialaxes.default}}
+Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
+
+Other loon interactive states: 
+\code{\link{l_hist}()},
+\code{\link{l_info_states}()},
+\code{\link{l_plot}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
 }
+\concept{loon interactive states}

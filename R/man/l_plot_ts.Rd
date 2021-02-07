@@ -8,7 +8,7 @@ l_plot_ts(
   x,
   color = l_getOption("color"),
   size = l_getOption("size"),
-  lcolor = l_getOption("color"),
+  linecolor = l_getOption("color"),
   linewidth = l_getOption("linewidth"),
   xlabel = NULL,
   ylabel = NULL,
@@ -31,7 +31,7 @@ Default is given by \code{\link{l_getOption}("color")}.}
 \item{size}{points size of all time series.
 Default is given by \code{\link{l_getOption}("size")}.}
 
-\item{lcolor}{line colour of all time series.
+\item{linecolor}{line colour of all time series.
 Default is given by \code{\link{l_getOption}("color")}.}
 
 \item{linewidth}{line width of all time series (incl. original and decomposed components.
@@ -72,9 +72,5 @@ is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
 \seealso{
 \code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
 \code{\link{stl}}, or \code{\link{decompose}}.
-
-Other time series decomposition plotting functions: 
-\code{\link{l_plot.decomposed.ts}()},
-\code{\link{l_plot.stl}()}
 }
 \concept{time series decomposition plotting functions}

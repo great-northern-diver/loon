@@ -113,7 +113,10 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 
 \item{labelRelief}{Label relief}
 
-\item{parent}{parent widget path}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 }
 \value{
 an `l_facet` object (an `l_compound` object), being a list with named elements,
