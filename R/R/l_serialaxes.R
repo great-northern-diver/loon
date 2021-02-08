@@ -265,6 +265,7 @@ l_serialaxes.default <- function(data,
             )
         )
 
+        class(plot) <- c(l_className, class(plot))
         return(plot)
     }
 
