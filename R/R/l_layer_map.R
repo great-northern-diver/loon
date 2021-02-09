@@ -1,36 +1,3 @@
-#' @title Create a plot with a map layer
-#'
-#' @description Creates a scatterplot widget and layers the map in front.
-#'
-#' @param x object of class map (defined in the maps library)
-#' @param ... arguments forwarded to \code{\link{l_layer.map}}
-#'
-#' @return Scatterplot widget plot handle
-#'
-#' @export
-#' @export l_plot.map
-#'
-#' @seealso \code{\link{l_layer}}, \code{\link{l_layer.map}},
-#'   \code{\link[maps]{map}}
-#'
-#' @examples
-#' if(interactive()){
-#'
-#' if (requireNamespace("maps", quietly = TRUE)) {
-#'    p <- l_plot(maps::map('world', fill=TRUE, plot=FALSE))
-#' }
-#'
-#' }
-
-
-l_plot.map <-  function(x, ...) {
-
-    p <- l_plot.default()
-    l_layer.map(p, x, label="Map",  ...)
-    l_scaleto_world(p)
-    p
-}
-
 #' @title Add a Map of class map as Drawings to Loon plot
 #'
 #' @description The maps library provides some map data in polygon which can be

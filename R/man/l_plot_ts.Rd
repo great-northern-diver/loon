@@ -6,9 +6,9 @@
 \usage{
 l_plot_ts(
   x,
-  color = NULL,
-  size = NULL,
-  lcolor = l_getOption("color"),
+  color = l_getOption("color"),
+  size = l_getOption("size"),
+  linecolor = l_getOption("color"),
   linewidth = l_getOption("linewidth"),
   xlabel = NULL,
   ylabel = NULL,
@@ -18,6 +18,7 @@ l_plot_ts(
   showScales = TRUE,
   showGuides = TRUE,
   showLabels = TRUE,
+  call = match.call(),
   ...
 )
 }
@@ -30,7 +31,7 @@ Default is given by \code{\link{l_getOption}("color")}.}
 \item{size}{points size of all time series.
 Default is given by \code{\link{l_getOption}("size")}.}
 
-\item{lcolor}{line colour of all time series.
+\item{linecolor}{line colour of all time series.
 Default is given by \code{\link{l_getOption}("color")}.}
 
 \item{linewidth}{line width of all time series (incl. original and decomposed components.
@@ -56,6 +57,8 @@ If missing, one is created from the data name and class associated with \code{st
 
 \item{showLabels}{a logical as to whether to display axes labels on all plots, default is TRUE.}
 
+\item{call}{a call in which all of the specified arguments are specified by their full names}
+
 \item{...}{keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.}
 }
 \value{
@@ -69,9 +72,5 @@ is mainly used in \code{l_plot.decomposed.ts} and \code{l_plot.stl}
 \seealso{
 \code{\link{l_plot.stl}}, \code{\link{l_plot.decomposed.ts}},
 \code{\link{stl}}, or \code{\link{decompose}}.
-
-Other time series decomposition plotting functions: 
-\code{\link{l_plot.decomposed.ts}()},
-\code{\link{l_plot.stl}()}
 }
 \concept{time series decomposition plotting functions}

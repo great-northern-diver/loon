@@ -162,9 +162,9 @@ is mainly used in <code>l_plot.decomposed.ts</code> and <code>l_plot.stl</code><
 
     <pre class="usage"><span class='fu'>l_plot_ts</span><span class='op'>(</span>
   <span class='va'>x</span>,
-  color <span class='op'>=</span> <span class='cn'>NULL</span>,
-  size <span class='op'>=</span> <span class='cn'>NULL</span>,
-  lcolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  linecolor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
   linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
   xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
   ylabel <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -174,6 +174,7 @@ is mainly used in <code>l_plot.decomposed.ts</code> and <code>l_plot.stl</code><
   showScales <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  call <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/match.call.html'>match.call</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -195,7 +196,7 @@ Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</c
 Default is given by <code><a href='l_getOption.html'>l_getOption</a>("size")</code>.</p></td>
     </tr>
     <tr>
-      <th>lcolor</th>
+      <th>linecolor</th>
       <td><p>line colour of all time series.
 Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
@@ -241,6 +242,10 @@ If missing, one is created from the data name and class associated with <code>st
       <td><p>a logical as to whether to display axes labels on all plots, default is TRUE.</p></td>
     </tr>
     <tr>
+      <th>call</th>
+      <td><p>a call in which all of the specified arguments are specified by their full names</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>keyword value pairs passed off to <code><a href='l_plot.html'>l_plot()</a></code> which constructs each loon scatterplot component.</p></td>
     </tr>
@@ -252,11 +257,8 @@ If missing, one is created from the data name and class associated with <code>st
 by name: "original", "trend", "seasonal", and "remainder".</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_plot.stl.html'>l_plot.stl</a></code>, <code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a></code>,
-<code><a href='https://rdrr.io/r/stats/stl.html'>stl</a></code>, or <code><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></code>.</p>
-<p>Other time series decomposition plotting functions: 
-<code><a href='l_plot.decomposed.ts.html'>l_plot.decomposed.ts</a>()</code>,
-<code><a href='l_plot.stl.html'>l_plot.stl</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='l_plot.html'>l_plot.stl</a></code>, <code><a href='l_plot.html'>l_plot.decomposed.ts</a></code>,
+<code><a href='https://rdrr.io/r/stats/stl.html'>stl</a></code>, or <code><a href='https://rdrr.io/r/stats/decompose.html'>decompose</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

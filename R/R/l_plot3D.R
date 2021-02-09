@@ -1,3 +1,389 @@
+#' @title Create an interactive loon 3d plot widget
+#' @name l_plot3D
+#'
+#' @description \code{l_plot3D} is a generic function for creating interactive
+#'   visualization environments for \R objects.
+#'
+#' @family three-dimensional plotting functions
+#'
+#' @param x the x, y and z arguments provide the x, y and z coordinates for the plot.
+#'          Any reasonable way of defining the coordinates is acceptable.
+#'          See the function xyz.coords for details.
+#'
+#'          If supplied separately, they must be of the same length.
+#'
+#' @param y the y coordinates of points in the plot,
+#'          optional if x is an appropriate structure.
+#' @param z the z coordinates of points in the plot,
+#'          optional if x is an appropriate structure.
+#' @param ... named arguments to modify plot states.
+#'
+#' @details
+#'
+#' \ifelse{html}{
+#' \out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
+#'   which can be accessed via the <code>l_help()</code> function call. </div>
+#' }}{
+#' To get started with loon it is recommended to read loons website
+#'   which can be accessed via the \code{l_help()} function call.
+#' }
+#'
+#'
+#'   \if{html}{ The general direct manipulation and interaction gestures are
+#'   outlined in the following figures.
+#'
+#'   Rotating
+#'
+#'   Press 'R' to toggle rotation mode.
+#'   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
+#'
+#'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
+#'
+#'   The centre of the rotation can be changed by panning the plot.
+#'   To reset the rotation, use the tripod icon in the plot inspector.
+#'
+#'   Zooming and Panning
+#'
+#'   \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
+#'
+#'   Selecting Points/Objects
+#'
+#'   \figure{gestures_select.png}{options: alt="Select gestures"}
+#'
+#'   Moving Points on the Scatterplot Display
+#'
+#'   \figure{gestures_move.png}{options: alt="Move gestures"}
+#'
+#'   }
+#'
+#'   NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
+#'   appear as part of the 3D plot's display. There is no provision at present to incorporate
+#'   rotation of 3D geometric objects other than point glyphs.
+#'
+#'
+#' @template return_widget_handle
+#'
+#' @seealso Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
+#'
+#' @export
+#'
+#' @examples
+#' if(interactive()){
+#'
+#' with(quakes,
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#'
+#' with(l_scale3D(quakes),
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#' scaled_quakes <- l_scale3D(quakes)
+#' with(scaled_quakes,
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#' )
+#'
+#' with(scaled_quakes,
+#'      l_plot3D(mag, stations, depth, linkingGroup = "quakes")
+#' )
+#'
+#' # Or together:
+#' with(scaled_quakes,{
+#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
+#'      l_plot3D(mag, stations, depth, linkingGroup = "quakes")
+#'      }
+#' )
+#'
+#'}
+l_plot3D <- function(x, y, z, ...) {
+    UseMethod("l_plot3D")
+}
+
+
+#' @rdname l_plot3D
+#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
+#'          Default is 1.
+#'              All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
+#'              all axes.)
+#' @template param_by
+#' @template param_on
+#' @template param_layout
+#' @template param_connectedScales
+#' @template param_pointcolor
+#' @template param_glyph
+#' @template param_pointsize
+#' @template param_active
+#' @template param_selected
+#' @template param_xlabel
+#' @template param_ylabel
+#' @param zlabel Label for the third (perpendicular to the screen) (z) axis. If missing,
+#'               one will be inferred from \code{z} (or \code{x}) if possible.
+#' @template param_title
+#' @template param_showLabels
+#' @template param_showScales
+#' @template param_showGuides
+#' @template param_guidelines
+#' @template param_guidesBackground
+#' @template param_foreground
+#' @template param_background
+#' @template param_parent
+#'
+#'
+#' @details The scatterplot displays a number of direct interactions with the
+#'   mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
+#'   the mouse wheel, panning by right-click dragging and various selection
+#'   methods using the left mouse button such as sweeping, brushing and
+#'   individual point selection. See the documentation for \code{\link{l_plot3D}}
+#'   for more details about the interaction gestures.
+#'
+#' @export
+#'
+#' @examples
+#' if(interactive()){
+#'
+#' # default use as scatterplot
+#'
+#' p1 <- with(quakes,
+#'            l_plot3D(long, lat, depth)
+#'            )
+#'
+#' p2 <- with(quakes,
+#'            l_plot3D(mag, stations, depth)
+#'            )
+#'
+#' # link the two plots p1 and p2
+#' l_configure(p1, linkingGroup = "quakes", sync = "push")
+#' l_configure(p2, linkingGroup = "quakes", sync = "push")
+#'
+#'}
+l_plot3D.default <-  function(x,  y = NULL, z = NULL,
+                              axisScaleFactor = 1,
+                              by = NULL,
+                              on,
+                              layout = c("grid", "wrap", "separate"),
+                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
+                              color = l_getOption("color"),
+                              glyph = l_getOption("glyph"),
+                              size = l_getOption("size"),
+                              active = TRUE,
+                              selected = FALSE,
+                              xlabel, ylabel, zlabel,
+                              title,
+                              showLabels = TRUE,
+                              showScales = FALSE,
+                              showGuides = TRUE,
+                              guidelines = l_getOption("guidelines"),
+                              guidesBackground = l_getOption("guidesBackground"),
+                              foreground = l_getOption("foreground"),
+                              background = l_getOption("background"),
+                              parent = NULL,
+                              ...) {
+
+    dotArgs <- list(...)
+    # set by dotArgs, used for facetting
+    byArgs <- dotArgs[l_byArgs()]
+    # dotArgs passed into loonPlotFactory
+    dotArgs[l_byArgs()] <- NULL
+
+    l_className <- c("l_plot3D", "l_plot")
+
+    if(missing(title)) { title <- "" }
+
+    if(missing(x)) {
+
+        ## Get x, y, z, xlab, ylab, zlab
+        ## similar as in plot.default use xyz.coords
+        if (missing(xlabel)){
+            xlabel <- ""
+        }
+
+        if (missing(ylabel)) {
+            ylabel <- ""
+        }
+
+        if (missing(zlabel)) {
+            zlabel <- ""
+        }
+
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                dotArgs,
+                list(
+                    factory_tclcmd = '::loon::plot3D',
+                    factory_path = 'plot3D',
+                    factory_window_title = 'loon scatterplot3D',
+                    parent = parent,
+                    axisScaleFactor = axisScaleFactor,
+                    xlabel = xlabel,
+                    ylabel = ylabel,
+                    zlabel = zlabel,
+                    title = title,
+                    showLabels = showLabels,
+                    showScales = showScales,
+                    showGuides = showGuides,
+                    guidelines = guidelines,
+                    guidesBackground = guidesBackground,
+                    foreground = foreground,
+                    background = background
+                )
+            )
+        )
+
+        class(plot) <- c(l_className, class(plot))
+        return(plot)
+
+    } else {
+
+        xOrigin <- x
+        xlab <- deparse(substitute(x))
+        ylab <- deparse(substitute(y))
+        zlab <- deparse(substitute(z))
+
+        xyz <- xyz.coords(x, y, z)
+        x <- xyz$x
+        y <- xyz$y
+        z <- xyz$z
+
+        ## Get x, y, z, xlab, ylab, zlab
+        ## similar as in plot.default use xyz.coords
+        if (missing(xlabel)){
+            xlabel <- if (is.null(xyz$xlab)) xlab else xyz$xlab
+        }
+
+        if (missing(ylabel)) {
+            ylabel <- if (is.null(xyz$ylab)) ylab else xyz$ylab
+        }
+
+        if (missing(zlabel)) {
+            zlabel <- if (is.null(xyz$zlab)) zlab else xyz$zlab
+        }
+
+        # check which states are modified
+        call <- match.call()
+        modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], names(call))
+
+        n <- length(x)
+        color <- aes_settings(color, n, ifNoStop = FALSE)
+        size <- aes_settings(size, n, ifNoStop = FALSE)
+        glyph <- aes_settings(glyph, n, ifNoStop = FALSE)
+        active <- aes_settings(active, n, ifNoStop = TRUE)
+        selected <- aes_settings(selected, n, ifNoStop = TRUE)
+
+        # `sync` and `linkingGroup` are set after the plot is created
+        # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
+        linkingGroup <- dotArgs[["linkingGroup"]]
+        dotArgs$linkingGroup <- NULL
+        sync <- dotArgs[["sync"]]
+        # if null, it is always **pull**
+        if(is.null(sync)) sync <- "pull"
+        dotArgs$sync <- NULL
+
+        # n dimensional states NA check
+        dotArgs$x <- x
+        dotArgs$y <- y
+        dotArgs$z <- z
+        dotArgs$color <- color
+        dotArgs$glyph <- glyph
+        dotArgs$size <- size
+        dotArgs$active <- active
+        dotArgs$selected <- selected
+
+        if(is.null(by)) {
+            dotArgs <- l_na_omit(l_className[1L], dotArgs)
+
+            plot <- do.call(
+                loonPlotFactory,
+                c(
+                    dotArgs,
+                    list(
+                        factory_tclcmd = '::loon::plot3D',
+                        factory_path = 'plot3D',
+                        factory_window_title = 'loon scatterplot3D',
+                        parent = parent,
+                        xlabel = xlabel,
+                        ylabel = ylabel,
+                        zlabel = zlabel,
+                        title = title,
+                        showLabels = showLabels,
+                        showScales = showScales,
+                        showGuides = showGuides,
+                        guidelines = guidelines,
+                        guidesBackground = guidesBackground,
+                        foreground = foreground,
+                        background = background
+                    )
+                )
+            )
+
+            if(!is.null(linkingGroup)) {
+
+                syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                if(syncTemp == "push")
+                    message("The modification of linked states is not detected",
+                            " so that the default settings will be pushed to all plots")
+                # configure plot (linking)
+                l_configure(plot,
+                            linkingGroup = linkingGroup,
+                            sync = syncTemp)
+
+                if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                    do.call(l_configure,
+                            c(
+                                list(
+                                    target = plot,
+                                    linkingGroup = linkingGroup,
+                                    sync = sync
+                                ),
+                                dotArgs[modifiedLinkedStates]
+                            )
+                    )
+                } else {
+                    l_linkingWarning(plot, sync, args = dotArgs,
+                                     modifiedLinkedStates = modifiedLinkedStates,
+                                     l_className = l_className[1L])
+                }
+            }
+
+            class(plot) <- c(l_className, class(plot))
+            return(plot)
+
+        } else {
+
+            plots <- loonFacets(type = l_className,
+                                by = by,
+                                args = dotArgs,
+                                on = on,
+                                bySubstitute = substitute(by), # for warning or error generations
+                                layout = match.arg(layout),
+                                connectedScales = match.arg(connectedScales),
+                                byArgs = Filter(Negate(is.null), byArgs),
+                                factory_tclcmd = '::loon::plot3D',
+                                factory_path = 'plot3D',
+                                factory_window_title = 'loon scatterplot3D',
+                                modifiedLinkedStates = modifiedLinkedStates,
+                                linkingGroup = linkingGroup,
+                                sync = sync,
+                                parent = parent,
+                                xlabel = xlabel,
+                                ylabel = ylabel,
+                                title = title,
+                                showLabels = showLabels,
+                                showScales = showScales,
+                                showGuides = showGuides,
+                                guidelines = guidelines,
+                                guidesBackground = guidesBackground,
+                                foreground = foreground,
+                                background = background)
+
+            return(plots)
+        }
+    }
+}
+
+
 #' @title Scale for 3d plotting
 #'
 #' @description \code{l_scale3D} scales its argument in a variety of ways
@@ -151,469 +537,3 @@ l_scale3D <- function(x,
     }
     result
 }
-
-#' @title Create an interactive loon 3d plot widget
-#'
-#' @description \code{l_plot3D} is a generic function for creating interactive
-#'   visualization environments for \R objects.
-#'
-#' @family three-dimensional plotting functions
-#'
-#' @param x the x, y and z arguments provide the x, y and z coordinates for the plot.
-#'          Any reasonable way of defining the coordinates is acceptable.
-#'          See the function xyz.coords for details.
-#'
-#'          If supplied separately, they must be of the same length.
-#'
-#' @param y the y coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
-#' @param z the z coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
-#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
-#'          Default is 1.
-#'          All numerical values are acceptable (0 removes the axes, < 0 reverses their direction.)
-#' @param ... named arguments to modify plot states.
-#'
-#' @details
-#'
-#' \ifelse{html}{
-#' \out{<div style="background: #dff0d8; padding: 15px;"> To get started with loon it is recommended to read loons website
-#'   which can be accessed via the <code>l_help()</code> function call. </div>
-#' }}{
-#' To get started with loon it is recommended to read loons website
-#'   which can be accessed via the \code{l_help()} function call.
-#' }
-#'
-#'
-#'   \if{html}{ The general direct manipulation and interaction gestures are
-#'   outlined in the following figures.
-#'
-#'   Rotating
-#'
-#'   Press 'R' to toggle rotation mode.
-#'   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
-#'
-#'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
-#'
-#'   The centre of the rotation can be changed by panning the plot.
-#'   To reset the rotation, use the tripod icon in the plot inspector.
-#'
-#'   Zooming and Panning
-#'
-#'   \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
-#'
-#'   Selecting Points/Objects
-#'
-#'   \figure{gestures_select.png}{options: alt="Select gestures"}
-#'
-#'   Moving Points on the Scatterplot Display
-#'
-#'   \figure{gestures_move.png}{options: alt="Move gestures"}
-#'
-#'   }
-#'
-#'   NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
-#'   appear as part of the 3D plot's display. There is no provision at present to incorporate
-#'   rotation of 3D geometric objects other than point glyphs.
-#'
-#'
-#' @template return_widget_handle
-#'
-#' @seealso \code{\link{l_info_states}}
-#'
-#' @export
-#'
-#' @examples
-#' if(interactive()){
-#'
-#' with(quakes,
-#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#' )
-#'
-#'
-#' with(l_scale3D(quakes),
-#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#' )
-#'
-#' scaled_quakes <- l_scale3D(quakes)
-#' with(scaled_quakes,
-#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#' )
-#'
-#' with(scaled_quakes,
-#'      l_plot3D(mag, stations, depth, linkingGroup = "quakes")
-#' )
-#'
-#' # Or together:
-#' with(scaled_quakes,{
-#'      l_plot3D(long, lat, depth, linkingGroup = "quakes")
-#'      l_plot3D(mag, stations, depth, linkingGroup = "quakes")
-#'      }
-#' )
-#'
-#'}
-l_plot3D <- function(x, y, z, axisScaleFactor, ...) {
-    UseMethod("l_plot3D")
-}
-
-
-#' @title The default \code{l_plot} method to create 3d interactive scatterplot
-#'
-#' @description Creates an interactive 3d scatterplot. Also, if no loon
-#'   inspector is open then the \code{l_plot3D} call will also open a loon
-#'   inspector.
-#'
-#' @method l_plot3D default
-#'
-#' @family three-dimensional plotting functions
-#'
-#' @param x the x, y and z arguments provide the x, y and z coordinates for the plot.
-#'          Any reasonable way of defining the coordinates is acceptable.
-#'          See the function xyz.coords for details.
-#'
-#'          If supplied separately, they must be of the same length.
-#'
-#' @param y the y coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
-#' @param z the z coordinates of points in the plot,
-#'          optional if x is an appropriate structure.
-#' @param axisScaleFactor the amount to scale the axes at the centre of the rotation.
-#'          Default is 1.
-#'              All numerical values are acceptable (0 removes the axes, < 0 inverts the direction of
-#'              all axes.)
-#' @param by loon plot can be separated by some variables into multiple panels.
-#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
-#' @param connectedScales Determines how the scales of the facets are to be connected depending
-#' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
-#' as follows:
-#' \itemize{
-#' \item{\code{layout = "wrap":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"x"}, then  only the "x"  scales are connected}
-#'    \item{\code{"y"}, then only the "y" scales are connected}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected.}
-#'    For any other value, only the "y" scale is connected.
-#'    }
-#'    }
-#' \item{\code{layout = "grid":}  Across all facets, when \code{connectedScales} is
-#'    \itemize{
-#'    \item{\code{"cross"}, then only the scales in the same row and the same column are connected}
-#'    \item{\code{"row"}, then both "x" and "y" scales of facets in the same row are connected}
-#'    \item{\code{"column"}, then both "x" and "y" scales of facets in the same column are connected}
-#'    \item{\code{"x"}, then all of the "x"  scales are connected (regardless of column)}
-#'    \item{\code{"y"}, then all of the "y" scales are connected (regardless of row)}
-#'    \item{\code{"both"},  both "x" and "y" scales are connected in all facets}
-#'    \item{\code{"none"},  neither "x" nor "y" scales are connected in any facets.}
-#'    }
-#'    }
-#'  }
-#' @param color colours of points; colours are repeated until matching the number points.
-#'     Default is given by \code{\link{l_getOption}("color")}.
-#' @param glyph shape of point; must be one of the primitive glyphs
-#'              "circle", "ccircle", "ocircle", "square", "csquare", "osquare", "triangle", "ctriangle",
-#'              "otriangle", "diamond", "cdiamond", or "odiamond".
-#'
-#'              Prefixes "c" and "o" mean closed and open, respectively.
-#'              Default is given by \code{\link{l_getOption}("glyph")}.
-#'
-#'              Non-primitive glyphs such as polygons, images, text, point ranges, and even interactive glyphs like
-#'              serial axes glyphs may be added, but only after the plot has been created.
-#'
-#' @param size size of the symbol (roughly in terms of area).
-#'     Default is given by \code{\link{l_getOption}("size")}.
-#' @param active a logical determining whether points appear or not
-#' (default is \code{TRUE} for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points appear (\code{TRUE})
-#' and which do not (\code{FALSE}).
-#' @param selected a logical determining whether points appear selected at first
-#' (default is \code{FALSE} for all points). If a logical vector is given of length
-#' equal to the number of points, then it identifies which points are (\code{TRUE})
-#' and which are not (\code{FALSE}).
-#' @param xlabel Label for the horizontal (x) axis. If missing,
-#'               one will be inferred from \code{x} if possible.
-#' @param ylabel Label for the vertical (y) axis. If missing,
-#'               one will be inferred from \code{y} (or \code{x}) if possible.
-#' @param zlabel Label for the third (perpendicular to the screen) (z) axis. If missing,
-#'               one will be inferred from \code{z} (or \code{x}) if possible.
-#' @param title Title for the plot, default is an empty string.
-#' @param showLabels logical to determine whether axes label (and title) should be presented.
-#' @param showScales logical to determine whether numerical scales should
-#'               be presented on both axes.
-#' @param showGuides logical to determine whether to present background guidelines
-#'               to help determine locations.
-#' @param guidelines colour of the guidelines shown when \code{showGuides = TRUE}.
-#'     Default is given by \code{\link{l_getOption}("guidelines")}.
-#' @param guidesBackground  colour of the background to the guidelines shown when
-#'               \code{showGuides = TRUE}.
-#'     Default is given by \code{\link{l_getOption}("guidesBackground")}.
-#' @param foreground foreground colour used by all other drawing.
-#'     Default is given by \code{\link{l_getOption}("foreground")}.
-#' @param background background colour used for the plot.
-#'     Default is given by \code{\link{l_getOption}("background")}.
-#' @param parent a valid Tk parent widget path. When the parent widget is
-#'   specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
-#'   some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
-#'   order to be displayed. See the examples below.
-#' @param ... named arguments to modify plot states.
-#'
-#'
-#' @details The scatterplot displays a number of direct interactions with the
-#'   mouse and keyboard, these include: rotating, zooming towards the mouse cursor using
-#'   the mouse wheel, panning by right-click dragging and various selection
-#'   methods using the left mouse button such as sweeping, brushing and
-#'   individual point selection. See the documentation for \code{\link{l_plot3D}}
-#'   for more details about the interaction gestures.
-#'
-#' @export
-#' @export l_plot3D.default
-#'
-#' @examples
-#' if(interactive()){
-#'
-#' # default use as scatterplot
-#'
-#' p1 <- with(quakes,
-#'            l_plot3D(long, lat, depth)
-#'            )
-#'
-#' p2 <- with(quakes,
-#'            l_plot3D(mag, stations, depth)
-#'            )
-#'
-#' # link the two plots p1 and p2
-#' l_configure(p1, linkingGroup = "quakes", sync = "push")
-#' l_configure(p2, linkingGroup = "quakes", sync = "push")
-#'
-#'}
-l_plot3D.default <-  function(x,  y = NULL, z = NULL,
-                              axisScaleFactor = 1,
-                              by = NULL,
-                              layout = c("grid", "wrap", "separate"),
-                              connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-                              color = NULL,
-                              glyph = NULL,
-                              size = NULL,
-                              active = NULL,
-                              selected = NULL,
-                              xlabel, ylabel, zlabel,
-                              title,
-                              showLabels = TRUE,
-                              showScales = FALSE,
-                              showGuides = TRUE,
-                              guidelines = l_getOption("guidelines"),
-                              guidesBackground = l_getOption("guidesBackground"),
-                              foreground = l_getOption("foreground"),
-                              background = l_getOption("background"),
-                              parent = NULL, ...) {
-
-    dotArgs <- list(...)
-    # set by dotArgs, used for facetting
-    byArgs <- dotArgs[l_byArgs()]
-    # dotArgs passed into loonPlotFactory
-    dotArgs[l_byArgs()] <- NULL
-
-    l_className <- c("l_plot3D", "l_plot")
-
-    if(missing(title)) { title <- "" }
-
-    if(missing(x)) {
-
-        ## Get x, y, z, xlab, ylab, zlab
-        ## similar as in plot.default use xyz.coords
-        if (missing(xlabel)){
-            xlabel <- ""
-        }
-
-        if (missing(ylabel)) {
-            ylabel <- ""
-        }
-
-        if (missing(zlabel)) {
-            zlabel <- ""
-        }
-
-        plot <- do.call(
-            loonPlotFactory,
-            c(
-                dotArgs,
-                list(
-                    factory_tclcmd = '::loon::plot3D',
-                    factory_path = 'plot3D',
-                    factory_window_title = 'loon scatterplot3D',
-                    parent = parent,
-                    axisScaleFactor = axisScaleFactor,
-                    xlabel = xlabel,
-                    ylabel = ylabel,
-                    zlabel = zlabel,
-                    title = title,
-                    showLabels = showLabels,
-                    showScales = showScales,
-                    showGuides = showGuides,
-                    guidelines = guidelines,
-                    guidesBackground = guidesBackground,
-                    foreground = foreground,
-                    background = background
-                )
-            )
-        )
-
-        class(plot) <- c(l_className, class(plot))
-        return(plot)
-
-    } else {
-
-        xOrigin <- x
-        xlab <- deparse(substitute(x))
-        ylab <- deparse(substitute(y))
-        zlab <- deparse(substitute(z))
-
-        xyz <- xyz.coords(x, y, z)
-        x <- xyz$x
-        y <- xyz$y
-        z <- xyz$z
-
-        ## Get x, y, z, xlab, ylab, zlab
-        ## similar as in plot.default use xyz.coords
-        if (missing(xlabel)){
-            xlabel <- if (is.null(xyz$xlab)) xlab else xyz$xlab
-        }
-
-        if (missing(ylabel)) {
-            ylabel <- if (is.null(xyz$ylab)) ylab else xyz$ylab
-        }
-
-        if (missing(zlabel)) {
-            zlabel <- if (is.null(xyz$zlab)) zlab else xyz$zlab
-        }
-
-        dotArgs$color <- color
-        dotArgs$size <- size
-        dotArgs$glyph <- glyph
-        dotArgs$active <- active
-        dotArgs$selected <- selected
-        modifiedLinkedStates <- l_modifiedLinkedStates(l_className[1L], dotArgs)
-
-        n <- length(x)
-        color <- aes_settings(color, n, ifNoStop = FALSE)
-        size <- aes_settings(size, n, ifNoStop = FALSE)
-        glyph <- aes_settings(glyph, n, ifNoStop = FALSE)
-        active <- aes_settings(active, n, ifNoStop = TRUE)
-        selected <- aes_settings(selected, n, ifNoStop = TRUE)
-
-        # `sync` and `linkingGroup` are set after the plot is created
-        # reason: set aesthetics first, then pull aesthetics from other plots (if they exist)
-        linkingGroup <- dotArgs[["linkingGroup"]]
-        dotArgs$linkingGroup <- NULL
-        sync <- dotArgs[["sync"]]
-        # if null, it is always **pull**
-        if(is.null(sync)) sync <- "pull"
-        dotArgs$sync <- NULL
-
-        # n dimensional states NA check
-        dotArgs$x <- x
-        dotArgs$y <- y
-        dotArgs$z <- z
-        dotArgs$color <- color
-        dotArgs$glyph <- glyph
-        dotArgs$size <- size
-        dotArgs$active <- active
-        dotArgs$selected <- selected
-
-        if(is.null(by)) {
-            dotArgs <- l_na_omit(l_className[1L], dotArgs)
-
-            plot <- do.call(
-                loonPlotFactory,
-                c(
-                    dotArgs,
-                    list(
-                        factory_tclcmd = '::loon::plot3D',
-                        factory_path = 'plot3D',
-                        factory_window_title = 'loon scatterplot3D',
-                        parent = parent,
-                        xlabel = xlabel,
-                        ylabel = ylabel,
-                        zlabel = zlabel,
-                        title = title,
-                        showLabels = showLabels,
-                        showScales = showScales,
-                        showGuides = showGuides,
-                        guidelines = guidelines,
-                        guidesBackground = guidesBackground,
-                        foreground = foreground,
-                        background = background
-                    )
-                )
-            )
-
-            if(!is.null(linkingGroup)) {
-
-                syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
-                if(syncTemp == "push")
-                    message("The modification of linked states is not detected",
-                            " so that the default settings will be pushed to all plots")
-                # configure plot (linking)
-                l_configure(plot,
-                            linkingGroup = linkingGroup,
-                            sync = syncTemp)
-
-                if(sync == "push" && length(modifiedLinkedStates) > 0) {
-
-                    do.call(l_configure,
-                            c(
-                                list(
-                                    target = plot,
-                                    linkingGroup = linkingGroup,
-                                    sync = sync
-                                ),
-                                dotArgs[modifiedLinkedStates]
-                            )
-                    )
-                } else {
-                    l_linkingWarning(plot, sync, args = dotArgs,
-                                     modifiedLinkedStates = modifiedLinkedStates,
-                                     l_className = l_className[1L])
-                }
-            }
-
-            class(plot) <- c(l_className, class(plot))
-            return(plot)
-
-        } else {
-
-            byDeparse <- deparse(substitute(by))
-
-            plots <- loonFacets(type = l_className,
-                                valid_by(by, byDeparse, xOrigin, xlab, n),
-                                dotArgs,
-                                byDeparse = byDeparse,
-                                layout = match.arg(layout),
-                                connectedScales = match.arg(connectedScales),
-                                byArgs = Filter(Negate(is.null), byArgs),
-                                factory_tclcmd = '::loon::plot3D',
-                                factory_path = 'plot3D',
-                                factory_window_title = 'loon scatterplot3D',
-                                modifiedLinkedStates = modifiedLinkedStates,
-                                linkingGroup = linkingGroup,
-                                sync = sync,
-                                parent = parent,
-                                xlabel = xlabel,
-                                ylabel = ylabel,
-                                title = title,
-                                showLabels = showLabels,
-                                showScales = showScales,
-                                showGuides = showGuides,
-                                guidelines = guidelines,
-                                guidesBackground = guidesBackground,
-                                foreground = foreground,
-                                background = background)
-
-            return(plots)
-        }
-    }
-}
-
-
-

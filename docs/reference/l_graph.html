@@ -160,7 +160,16 @@
   navigation graphs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_graph</span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_graph</span><span class='op'>(</span><span class='va'>nodes</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for graph</span>
+<span class='fu'>l_graph</span><span class='op'>(</span><span class='va'>nodes</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for loongraph</span>
+<span class='fu'>l_graph</span><span class='op'>(</span><span class='va'>nodes</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>l_graph</span><span class='op'>(</span>nodes <span class='op'>=</span> <span class='st'>""</span>, from <span class='op'>=</span> <span class='st'>""</span>, to <span class='op'>=</span> <span class='st'>""</span>, isDirected <span class='op'>=</span> <span class='cn'>FALSE</span>, parent <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,6 +182,22 @@
       <th>...</th>
       <td><p>arguments passed on to methods</p></td>
     </tr>
+    <tr>
+      <th>from</th>
+      <td><p>vector with node names of the from-to pairs for edges</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p>vector with node names of the from-to pairs for edges</p></td>
+    </tr>
+    <tr>
+      <th>isDirected</th>
+      <td><p>a boolean state to specify whether these edges have directions</p></td>
+    </tr>
+    <tr>
+      <th>parent</th>
+      <td><p>parent widget of graph display</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -183,9 +208,19 @@
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html#graph")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_graph.graph.html'>l_graph.graph</a></code>, <code><a href='l_graph.loongraph.html'>l_graph.loongraph</a></code>,
-  <code><a href='l_graph.default.html'>l_graph.default</a></code></p></div>
+    <div class='dont-index'><p>Other related graph objects, <code><a href='loongraph.html'>loongraph</a></code>,
+<code><a href='completegraph.html'>completegraph</a></code>, <code><a href='linegraph.html'>linegraph</a></code>,
+<code><a href='complement.html'>complement</a></code>, <code><a href='as.graph.html'>as.graph</a></code></p>
+<p>Advanced usage <code><a href='l_navgraph.html'>l_navgraph</a></code>,
+<code><a href='l_ng_plots.html'>l_ng_plots</a></code>, <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+ <span class='va'>G</span> <span class='op'>&lt;-</span> <span class='fu'><a href='completegraph.html'>completegraph</a></span><span class='op'>(</span>nodes<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='va'>LG</span> <span class='op'>&lt;-</span> <span class='fu'><a href='linegraph.html'>linegraph</a></span><span class='op'>(</span><span class='va'>G</span>, sep<span class='op'>=</span><span class='st'>":"</span><span class='op'>)</span>
+ <span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>l_graph</span><span class='op'>(</span><span class='va'>LG</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -81,7 +81,6 @@ apply(result_sphere, 2, FUN = function(x) {mean(x, na.rm = TRUE)})
 \code{\link{l_plot3D}}, \code{\link{scale}}, and \code{\link{prcomp}}.
 
 Other three-dimensional plotting functions: 
-\code{\link{l_plot3D.default}()},
 \code{\link{l_plot3D}()}
 }
 \concept{three-dimensional plotting functions}

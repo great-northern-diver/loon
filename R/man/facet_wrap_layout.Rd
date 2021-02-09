@@ -15,7 +15,7 @@ facet_wrap_layout(
   nrow = NULL,
   ncol = NULL,
   labelLocation = "top",
-  byrow = TRUE,
+  byrow = FALSE,
   swapAxes = FALSE,
   labelBackground = "gray80",
   labelForeground = "black",

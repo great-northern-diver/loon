@@ -7,13 +7,14 @@
 facet_grid_layout(
   plots,
   subtitles,
+  by = NULL,
   prop = 10,
   parent = NULL,
   title = "",
   xlabel = "",
   ylabel = "",
   labelLocation = c("top", "right"),
-  byrow = TRUE,
+  byrow = FALSE,
   swapAxes = FALSE,
   labelBackground = "gray80",
   labelForeground = "black",
@@ -30,6 +31,9 @@ facet_grid_layout(
 
 \item{subtitles}{The subtitles of the layout. It is a list and the length is equal to
 the number of \code{by} variables. Each element in a list is the unique values of such \code{by} variable.}
+
+\item{by}{an object of class "formula" (or one that can be coerced to that class):
+a symbolic description of the plots separated by}
 
 \item{prop}{The proportion of the label height and widget height}
 

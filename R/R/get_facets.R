@@ -2,9 +2,10 @@ get_facets <- function(widget, ...) {
     UseMethod("get_facets")
 }
 
-get_facets.loon <- function(widget, by, parent = NULL,
+get_facets.loon <- function(widget, by, on,
+                            parent = NULL,
                             linkingGroup, inheritLayers = TRUE, separate = FALSE,
-                            by_substitute, ...) {
+                            bySubstitute, ...) {
 
     nDimStates <- l_nDimStateNames(widget)
     states <- names(l_info_states(widget))
@@ -36,15 +37,14 @@ get_facets.loon <- function(widget, by, parent = NULL,
                }
            })
 
-    # TODO by is a formula
     splited <- splitFun(widget = widget,
                         data = data,
                         by = by,
+                        on = on,
                         column_names = column_names,
-                        by_substitute = by_substitute)
+                        bySubstitute = bySubstitute)
     split_data <- splited$split_data
     subtitles <- splited$subtitles
-    by <- splited$by
 
     if(length(split_data) == 1) return(widget)
 
@@ -90,7 +90,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
                   deparse(substitute(by_names)), "--path:", subwin)
         else
             paste("loon layouts on",
-                  deparse(by_substitute), "--path:", subwin)
+                  deparse(bySubstitute), "--path:", subwin)
 
         # create child
         child <- as.character(tcl('frame', subwin))
@@ -204,7 +204,7 @@ get_facets.loon <- function(widget, by, parent = NULL,
 
 get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                                     inheritLayers = TRUE, separate = FALSE,
-                                    by_substitute) {
+                                    bySubstitute) {
 
     nDimStates <- setdiff(l_nDimStateNames(widget), "data")
     states <- names(l_info_states(widget))
@@ -243,10 +243,9 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                         data = data,
                         by = by,
                         column_names = column_names,
-                        by_substitute = by_substitute)
+                        bySubstitute = bySubstitute)
     split_data <- splited$split_data
     subtitles <- splited$subtitles
-    by <- splited$by
 
     if(length(split_data) == 1) return(widget)
 
@@ -268,7 +267,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
                   deparse(substitute(by_names)), "--path:", subwin)
         else
             paste("loon layouts on",
-                  deparse(by_substitute), "--path:", subwin)
+                  deparse(bySubstitute), "--path:", subwin)
 
         # create child
         child <- as.character(tcl('frame', subwin))
@@ -328,131 +327,122 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     )
 }
 
-splitFun <- function(widget, data, by, column_names = NULL,
-                     by_substitute, sep = "*",
+splitFun <- function(widget, data, by, on,
+                     column_names = NULL,
+                     bySubstitute, sep = "*",
                      N = nrow(data)) {
 
-    if(is.atomic(by)) {
-        if(length(by) == N) {
-            # a vector
-            subtitles <- setNames(
-                list(levels(factor(by))),
-                deparse(by_substitute)
+    byDataFrame <- by2Data(by, on,
+                           bySubstitute = bySubstitute,
+                           n = N, args = data,
+                           l_className = class(widget)[1L])
+
+    if(length(byDataFrame) == 0)
+        return(
+            list(
+                subtitles = NULL,
+                split_data = list(data)
             )
-            split_data <- split(data,
-                                f = by,
-                                drop = FALSE,
-                                sep = sep)
-        } else {
+        )
 
-            # some aesthetics (e.g. color, glyph, size, etc) char
-            not_recognized <- which(!by %in% l_nDimStateNames(widget))
-            if(length(not_recognized) > 0) {
-                warning("c(", vapply(not_recognized,
-                               function(i) {
-                                   deparse(by_substitute[[i + 1]])
-                               }, character(1L)),
-                        ") is not recognized and removed", call. = FALSE)
-            }
-            by <- intersect(by, column_names)
-            if(length(by) == 0)
-                return(
-                    list(
-                        subtitles = NULL,
-                        split_data = list(data),
-                        by = by
-                    )
-                )
+    byNames <- colnames(byDataFrame)
 
-            subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
-            # split data by "by"
-            split_data <- split(data,
-                                f = lapply(by, function(b) data[[b]]),
-                                drop = FALSE,
-                                sep = sep)
+    subtitles <- setNames(lapply(byDataFrame,
+                                 function(b)
+                                     as.character(levels(factor(b)))),
+                          byNames)
 
-        }
-    } else {
-        # by is a data.frame or a list
-        ## as.data.frame
-        by_names <- names(by)
+    split_data <- split(data,
+                        f = as.list(byDataFrame),
+                        drop = FALSE,
+                        sep = sep)
 
-        by <- standardizedBy(by, by_substitute, data)
 
-        if(dim(by)[1] == 0) {
-            return(
-                list(
-                    subtitles = NULL,
-                    split_data = list(data),
-                    by = by
-                )
-            )
-        }
-
-        if(is.null(by_names) || ("" %in% by_names)) {
-
-            names(by) <- NULL
-
-            subtitles <- lapply(seq(ncol(by)),
-                                function(i)
-                                    as.character(levels(factor(by[[i]]))))
-        } else {
-
-            subtitles <- setNames(
-                lapply(by_names,
-                       function(b)
-                           as.character(levels(factor(by[[b]])))),
-                by_names
-            )
-        }
-
-        # split data by "by"
-        split_data <- split(data,
-                            f = by,
-                            drop = FALSE,
-                            sep = sep)
-    }
+    # if(is.atomic(by)) {
+    #     if(length(by) == N) {
+    #         # a vector
+    #         subtitles <- setNames(
+    #             list(levels(factor(by))),
+    #             deparse(bySubstitute)
+    #         )
+    #         split_data <- split(data,
+    #                             f = by,
+    #                             drop = FALSE,
+    #                             sep = sep)
+    #     } else {
+    #
+    #         # some aesthetics (e.g. color, glyph, size, etc) char
+    #         not_recognized <- which(!by %in% l_nDimStateNames(widget))
+    #         if(length(not_recognized) > 0) {
+    #             warning("c(", vapply(not_recognized,
+    #                            function(i) {
+    #                                deparse(bySubstitute[[i + 1]])
+    #                            }, character(1L)),
+    #                     ") is not recognized and removed", call. = FALSE)
+    #         }
+    #         by <- intersect(by, column_names)
+    #         if(length(by) == 0)
+    #             return(
+    #                 list(
+    #                     subtitles = NULL,
+    #                     split_data = list(data),
+    #                     by = by
+    #                 )
+    #             )
+    #
+    #         subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(data[[b]])))), by)
+    #         # split data by "by"
+    #         split_data <- split(data,
+    #                             f = lapply(by, function(b) data[[b]]),
+    #                             drop = FALSE,
+    #                             sep = sep)
+    #
+    #     }
+    # } else {
+    #     # by is a data.frame or a list
+    #     ## as.data.frame
+    #     by_names <- names(by)
+    #
+    #     by <- standardizedBy(by, bySubstitute, data)
+    #
+    #     if(dim(by)[1] == 0) {
+    #         return(
+    #             list(
+    #                 subtitles = NULL,
+    #                 split_data = list(data),
+    #                 by = by
+    #             )
+    #         )
+    #     }
+    #
+    #     if(is.null(by_names) || ("" %in% by_names)) {
+    #
+    #         names(by) <- NULL
+    #
+    #         subtitles <- lapply(seq(ncol(by)),
+    #                             function(i)
+    #                                 as.character(levels(factor(by[[i]]))))
+    #     } else {
+    #
+    #         subtitles <- setNames(
+    #             lapply(by_names,
+    #                    function(b)
+    #                        as.character(levels(factor(by[[b]])))),
+    #             by_names
+    #         )
+    #     }
+    #
+    #     # split data by "by"
+    #     split_data <- split(data,
+    #                         f = by,
+    #                         drop = FALSE,
+    #                         sep = sep)
+    # }
 
     list(
         subtitles = subtitles,
-        split_data = split_data,
-        by = by
+        split_data = split_data
     )
-}
-
-standardizedBy <- function(by, by_substitute, data) {
-
-    n <- nrow(data)
-    i <- 0
-
-    by <- lapply(by,
-                 function(b) {
-
-                     i <<- i + 1
-
-                     if(length(b) == 1) {
-
-                         return(
-                             tryCatch(
-                                 data[, b],
-                                 error = function(e) {
-                                     # by_substitute[[1]] is "list"
-                                     warning(deparse(by_substitute[[i + 1]]),
-                                             " is not recognized and removed", call. = FALSE)
-                                     NULL
-                                 }
-                             )
-                         )
-                     }
-
-                     if(length(b) == n) return(b)
-
-                     stop("The ", deparse(substitute(b)),
-                          " is neither a valid state nor a valid vector (the length does not match the number of observations)", call. = FALSE)
-
-                 })
-
-    as.data.frame(Filter(Negate(is.null), by), stringsAsFactors = FALSE)
 }
 
 glyph4child <- function(widget, glyph, index, N) {

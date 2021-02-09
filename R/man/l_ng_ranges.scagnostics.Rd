@@ -36,7 +36,7 @@ For more information run: \code{l_help("learn_R_display_graph.html#l_ng_ranges")
 \examples{
 \dontrun{
 if (requireNamespace("scagnostics", quietly = TRUE)) {
-  s <- scahnostics::scagnostics(oliveAcids)
+  s <- scagnostics::scagnostics(oliveAcids)
   ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
 }
 }

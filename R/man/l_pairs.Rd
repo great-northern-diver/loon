@@ -31,7 +31,7 @@ l_pairs(
 \item{\code{"none"}: neither "x" nor "y" scales are connected in any panels.}
 }}
 
-\item{linkingGroup}{string giving the linkingGroup for all plots.  If missing,
+\item{linkingGroup}{string giving the linkingGroup for all plots. If missing,
 a default \code{linkingGroup} will be determined from deparsing the \code{data}.}
 
 \item{linkingKey}{a vector of strings to provide a linking identity for each row of the
@@ -58,7 +58,10 @@ in the bottom left of the pairs plot (or not)}
 
 \item{serialAxesArgs}{additional arguments to modify the `l_serialaxes` states}
 
-\item{parent}{parent widget path}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 
 \item{span}{How many column/row occupies for each widget}
 

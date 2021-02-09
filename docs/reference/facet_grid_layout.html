@@ -161,13 +161,14 @@
     <pre class="usage"><span class='fu'>facet_grid_layout</span><span class='op'>(</span>
   <span class='va'>plots</span>,
   <span class='va'>subtitles</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
   prop <span class='op'>=</span> <span class='fl'>10</span>,
   parent <span class='op'>=</span> <span class='cn'>NULL</span>,
   title <span class='op'>=</span> <span class='st'>""</span>,
   xlabel <span class='op'>=</span> <span class='st'>""</span>,
   ylabel <span class='op'>=</span> <span class='st'>""</span>,
   labelLocation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"top"</span>, <span class='st'>"right"</span><span class='op'>)</span>,
-  byrow <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  byrow <span class='op'>=</span> <span class='cn'>FALSE</span>,
   swapAxes <span class='op'>=</span> <span class='cn'>FALSE</span>,
   labelBackground <span class='op'>=</span> <span class='st'>"gray80"</span>,
   labelForeground <span class='op'>=</span> <span class='st'>"black"</span>,
@@ -190,6 +191,11 @@
       <th>subtitles</th>
       <td><p>The subtitles of the layout. It is a list and the length is equal to
 the number of <code>by</code> variables. Each element in a list is the unique values of such <code>by</code> variable.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>an object of class "formula" (or one that can be coerced to that class):
+a symbolic description of the plots separated by</p></td>
     </tr>
     <tr>
       <th>prop</th>

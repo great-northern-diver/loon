@@ -2,14 +2,31 @@
 % Please edit documentation in R/l_graph.R
 \name{l_graph}
 \alias{l_graph}
+\alias{l_graph.graph}
+\alias{l_graph.loongraph}
+\alias{l_graph.default}
 \title{Generic funtction to create an interactive graph display}
 \usage{
-l_graph(nodes = NULL, ...)
+l_graph(nodes, ...)
+
+\method{l_graph}{graph}(nodes, ...)
+
+\method{l_graph}{loongraph}(nodes, ...)
+
+\method{l_graph}{default}(nodes = "", from = "", to = "", isDirected = FALSE, parent = NULL, ...)
 }
 \arguments{
 \item{nodes}{object for method dispatch}
 
 \item{...}{arguments passed on to methods}
+
+\item{from}{vector with node names of the from-to pairs for edges}
+
+\item{to}{vector with node names of the from-to pairs for edges}
+
+\item{isDirected}{a boolean state to specify whether these edges have directions}
+
+\item{parent}{parent widget of graph display}
 }
 \value{
 graph handle
@@ -21,7 +38,18 @@ Interactive graphs in loon are currently most often used for
 \details{
 For more information run: \code{l_help("learn_R_display_graph.html#graph")}
 }
+\examples{
+if(interactive()) {
+ G <- completegraph(nodes=names(iris))
+ LG <- linegraph(G, sep=":")
+ g <- l_graph(LG)
+}
+}
 \seealso{
-\code{\link{l_graph.graph}}, \code{\link{l_graph.loongraph}},
-  \code{\link{l_graph.default}}
+Other related graph objects, \code{\link{loongraph}},
+\code{\link{completegraph}}, \code{\link{linegraph}},
+\code{\link{complement}}, \code{\link{as.graph}}
+
+Advanced usage \code{\link{l_navgraph}},
+\code{\link{l_ng_plots}}, \code{\link{l_ng_ranges}}
 }

@@ -15,8 +15,8 @@ linegraph(x, ...)
 graph object
 }
 \description{
-The line graph of G, here denoted L(G), is the graph whose nodes 
-  correspond to the edges of G and whose edges correspond to nodes of G such 
-  that nodes of L(G) are joined if and only if the corresponding edges of G 
+The line graph of G, here denoted L(G), is the graph whose nodes
+  correspond to the edges of G and whose edges correspond to nodes of G such
+  that nodes of L(G) are joined if and only if the corresponding edges of G
   are adjacent in G.
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Serialaxes Widget — l_serialaxes • loon</title>
+<title>Create an interactive serialaxes (parallel axes or radial axes) plot — l_serialaxes • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Create a Serialaxes Widget — l_serialaxes" />
-<meta property="og:description" content="The serialaxes widget displays multivariate data either as a
-  stacked star glyph plot, or as a parallel coordinate plot." />
+<meta property="og:title" content="Create an interactive serialaxes (parallel axes or radial axes) plot — l_serialaxes" />
+<meta property="og:description" content="l_serialaxes is a generic function for displaying multivariate data either as a
+stacked star glyph plot, or as a parallel coordinate plot." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -150,29 +150,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Serialaxes Widget</h1>
+    <h1>Create an interactive serialaxes (parallel axes or radial axes) plot</h1>
     <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_serialaxes.R'><code>R/l_serialaxes.R</code></a></small>
     <div class="hidden name"><code>l_serialaxes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The serialaxes widget displays multivariate data either as a
-  stacked star glyph plot, or as a parallel coordinate plot.</p>
+    <p><code>l_serialaxes</code> is a generic function for displaying multivariate data either as a
+stacked star glyph plot, or as a parallel coordinate plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_serialaxes</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>l_serialaxes</span><span class='op'>(</span>
   <span class='va'>data</span>,
   <span class='va'>sequence</span>,
   scaling <span class='op'>=</span> <span class='st'>"variable"</span>,
   axesLayout <span class='op'>=</span> <span class='st'>"radial"</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>on</span>,
   layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
   andrews <span class='op'>=</span> <span class='cn'>FALSE</span>,
   showAxes <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  linewidth <span class='op'>=</span> <span class='cn'>NULL</span>,
-  color <span class='op'>=</span> <span class='cn'>NULL</span>,
-  active <span class='op'>=</span> <span class='cn'>NULL</span>,
-  selected <span class='op'>=</span> <span class='cn'>NULL</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
   parent <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -183,6 +187,10 @@
     <tr>
       <th>data</th>
       <td><p>a data frame with numerical data only</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>named arguments to modify the serialaxes states or layouts, see details.</p></td>
     </tr>
     <tr>
       <th>sequence</th>
@@ -199,12 +207,22 @@ how the data is scaled. See Details and Examples for more information.</p></td>
     </tr>
     <tr>
       <th>by</th>
-      <td><p>loon plot can be separated by some variables into mutiple panels.
-This argument can take a <code>vector</code>, a <code>list</code> of same lengths or a <code>data.frame</code> as input.</p></td>
+      <td><p>loon plot can be separated by some variables into multiple panels.
+This argument can take a <code><a href='https://rdrr.io/r/stats/formula.html'>formula</a></code>,
+<code>n</code> dimensional state names (see <code><a href='l_nDimStateNames.html'>l_nDimStateNames</a></code>)
+an <code>n</code>-dimensional <code>vector</code> and <code>data.frame</code> or
+a <code>list</code> of same lengths <code>n</code> as input.</p></td>
+    </tr>
+    <tr>
+      <th>on</th>
+      <td><p>if the <code>x</code> or <code>by</code> is a formula,
+an optional data frame containing the variables in the <code>x</code> or <code>by</code>.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.</p></td>
     </tr>
     <tr>
       <th>layout</th>
-      <td><p>layouts in a <code>'grid'</code> or a <code>'wrap'</code></p></td>
+      <td><p>layout facets as <code>'grid'</code>, <code>'wrap'</code> or <code>'separate'</code></p></td>
     </tr>
     <tr>
       <th>andrews</th>
@@ -215,45 +233,44 @@ This argument can take a <code>vector</code>, a <code>list</code> of same length
       <td><p>boolean to indicate whether axes should be shown or not</p></td>
     </tr>
     <tr>
-      <th>linewidth</th>
-      <td><p>vector with line widths.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</code>.</p></td>
-    </tr>
-    <tr>
       <th>color</th>
-      <td><p>vector with line colors.
-Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
+      <td><p>vector with line colors. Default is given by <code><a href='l_getOption.html'>l_getOption</a>("color")</code>.</p></td>
     </tr>
     <tr>
       <th>active</th>
-      <td><p>a logical determining whether items appear or not
-(default is <code>TRUE</code> for all items). If a logical vector is given of length
-equal to the number of items, then it identifies which items appear (<code>TRUE</code>)
+      <td><p>a logical determining whether points appear or not
+(default is <code>TRUE</code> for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (<code>TRUE</code>)
 and which do not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>selected</th>
-      <td><p>a logical determining whether items appear selected at first
-(default is <code>FALSE</code> for all items). If a logical vector is given of length
-equal to the number of items, then it identifies which items are (<code>TRUE</code>)
+      <td><p>a logical determining whether points appear selected at first
+(default is <code>FALSE</code> for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (<code>TRUE</code>)
 and which are not (<code>FALSE</code>).</p></td>
     </tr>
     <tr>
-      <th>parent</th>
-      <td><p>parent widget path</p></td>
+      <th>linewidth</th>
+      <td><p>vector with line widths. Default is given by <code><a href='l_getOption.html'>l_getOption</a>("linewidth")</code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>named arguments to modify the serialaxes states or layouts, see details.</p></td>
+      <th>parent</th>
+      <td><p>a valid Tk parent widget path. When the parent widget is
+specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
+some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
+order to be displayed. See the examples below.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>plot handle object</p>
+    <p>if the argument <code>by</code> is not set, a <code>loon</code> widget will be returned;
+else an <code>l_facet</code> object (a list) will be returned and each element is
+a <code>loon</code> widget displaying a subset of interest.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
+    <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_hist")</a></code></p>
 <ul>
 <li><p>The <code>scaling</code> state defines how the data is scaled. The axes
   display 0 at one end and 1 at the other. For the following explanation
@@ -270,14 +287,18 @@ and which are not (<code>FALSE</code>).</p></td>
   Check <code><a href='l_facet.html'>l_facet</a></code> to see how these arguments work.</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Turn interactive loon plot static <code><a href='loonGrob.html'>loonGrob</a></code>, <code><a href='grid.loon.html'>grid.loon</a></code>, <code><a href='plot.loon.html'>plot.loon</a></code>.</p>
+<p>Other loon interactive states: 
+<code><a href='l_hist.html'>l_hist</a>()</code>,
+<code><a href='l_info_states.html'>l_info_states</a>()</code>,
+<code><a href='l_plot.html'>l_plot</a>()</code>,
+<code><a href='l_state_names.html'>l_state_names</a>()</code>,
+<code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
-
-<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'>l_serialaxes</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>oliveAcids</span>, color<span class='op'>=</span><span class='va'>olive</span><span class='op'>$</span><span class='va'>Area</span>, title<span class='op'>=</span><span class='st'>"olive data"</span><span class='op'>)</span>
-<span class='va'>s</span><span class='op'>[</span><span class='st'>'axesLayout'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>'parallel'</span>
-<span class='va'>states</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_info_states.html'>l_info_states</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>states</span><span class='op'>)</span>
 
 <span class='co'>#######</span>
 <span class='co'>#</span>

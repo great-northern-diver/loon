@@ -1,31 +1,37 @@
-#' @title Create a Serialaxes Widget
-#'
-#' @description The serialaxes widget displays multivariate data either as a
-#'   stacked star glyph plot, or as a parallel coordinate plot.
-#'
-#'
+#' @title Create an interactive serialaxes (parallel axes or radial axes) plot
+#' @name l_serialaxes
+#' @family loon interactive states
+#' @description \code{l_serialaxes} is a generic function for displaying multivariate data either as a
+#' stacked star glyph plot, or as a parallel coordinate plot.
 #' @param data a data frame with numerical data only
+#' @param ... named arguments to modify the serialaxes plot states or layouts
+#'
+#' @templateVar page  learn_R_display_hist
+#' @template see_l_help_page
+#'
+#' @template return_widget_handle
+#'
+#'
+#' @export
+l_serialaxes <- function(data, ...) {
+    UseMethod("l_serialaxes")
+}
+
+
+#' @rdname l_serialaxes
 #' @param sequence vector with variable names that defines the axes sequence
 #' @param scaling one of 'variable', 'data', 'observation' or 'none' to specify
 #'   how the data is scaled. See Details and Examples for more information.
 #' @param axesLayout either \code{"radial"} or \code{"parallel"}
-#' @param by loon plot can be separated by some variables into mutiple panels.
-#' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
-#' @param layout layouts in a \code{'grid'} or a \code{'wrap'}
+#' @template param_by
+#' @template param_on
+#' @template param_layout
 #' @param andrews Andrew's plot (a 'Fourier' transformation)
 #' @param showAxes boolean to indicate whether axes should be shown or not
-#' @param linewidth vector with line widths.
-#' Default is given by \code{\link{l_getOption}("linewidth")}.
-#' @param color vector with line colors.
-#' Default is given by \code{\link{l_getOption}("color")}.
-#' @param active a logical determining whether items appear or not
-#' (default is \code{TRUE} for all items). If a logical vector is given of length
-#' equal to the number of items, then it identifies which items appear (\code{TRUE})
-#' and which do not (\code{FALSE}).
-#' @param selected a logical determining whether items appear selected at first
-#' (default is \code{FALSE} for all items). If a logical vector is given of length
-#' equal to the number of items, then it identifies which items are (\code{TRUE})
-#' and which are not (\code{FALSE}).
+#' @param linewidth vector with line widths. Default is given by \code{\link{l_getOption}("linewidth")}.
+#' @param color vector with line colors. Default is given by \code{\link{l_getOption}("color")}.
+#' @template param_active
+#' @template param_selected
 #' @template param_parent
 #' @template param_dots_state_args
 #' @param ... named arguments to modify the serialaxes states or layouts, see details.
@@ -49,18 +55,11 @@
 #'   }
 #' }
 #'
-#'
-#' @return plot handle object
-#'
+#' @seealso Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
 #' @export
 #'
 #' @examples
 #' if(interactive()){
-#'
-#' s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-#' s['axesLayout'] <- 'parallel'
-#' states <- l_info_states(s)
-#' names(states)
 #'
 #' #######
 #' #
@@ -227,19 +226,21 @@
 #'
 #' }
 
-l_serialaxes <- function(data,
-                         sequence,
-                         scaling="variable",
-                         axesLayout='radial',
-                         by = NULL,
-                         layout = c("grid", "wrap", "separate"),
-                         andrews = FALSE,
-                         showAxes=TRUE,
-                         linewidth = NULL,
-                         color = NULL,
-                         active = NULL,
-                         selected = NULL,
-                         parent=NULL, ... ) {
+l_serialaxes.default <- function(data,
+                                 sequence,
+                                 scaling="variable",
+                                 axesLayout='radial',
+                                 by = NULL,
+                                 on,
+                                 layout = c("grid", "wrap", "separate"),
+                                 andrews = FALSE,
+                                 showAxes=TRUE,
+                                 color = l_getOption("color"),
+                                 active = TRUE,
+                                 selected = FALSE,
+                                 linewidth = l_getOption("linewidth"),
+                                 parent=NULL,
+                                 ...) {
 
     dotArgs <- list(...)
     # set by dotArgs, used for facetting
@@ -249,6 +250,25 @@ l_serialaxes <- function(data,
 
     l_className <- "l_serialaxes"
 
+    if(missing(data)) {
+        plot <- do.call(
+            loonPlotFactory,
+            c(
+                dotArgs,
+                list(
+                    factory_tclcmd = '::loon::serialaxes',
+                    factory_path = 'serialaxes',
+                    factory_window_title = 'loon serialaxes plot',
+                    parent = parent,
+                    showAxes = showAxes
+                )
+            )
+        )
+
+        class(plot) <- c(l_className, class(plot))
+        return(plot)
+    }
+
     data <- as.data.frame(data)
 
     if (missing(sequence)) {
@@ -257,11 +277,8 @@ l_serialaxes <- function(data,
 
     n <- dim(data)[1]
 
-    dotArgs$color <- color
-    dotArgs$linewidth <- linewidth
-    dotArgs$active <- active
-    dotArgs$selected <- selected
-    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, dotArgs)
+    call <- match.call()
+    modifiedLinkedStates <- l_modifiedLinkedStates(l_className, names(call))
 
     color <- aes_settings(color, n, ifNoStop = FALSE)
     linewidth <- aes_settings(linewidth, n, ifNoStop = FALSE)
@@ -341,12 +358,11 @@ l_serialaxes <- function(data,
 
     } else {
 
-        byDeparse <- deparse(substitute(by))
-
         plots <- loonFacets(type = l_className,
-                            valid_by(by, byDeparse, data, n = n),
-                            dotArgs,
-                            byDeparse = byDeparse,
+                            by = by,
+                            args = dotArgs,
+                            on = on,
+                            bySubstitute = substitute(by), # for warning or error generations
                             layout = match.arg(layout),
                             byArgs = Filter(Negate(is.null), byArgs),
                             linkingGroup = linkingGroup,

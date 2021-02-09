@@ -6,11 +6,12 @@
 \alias{l_facet.l_serialaxes}
 \title{Layout Facets across multiple panels}
 \usage{
-l_facet(widget, by, layout = c("grid", "wrap", "separate"), ...)
+l_facet(widget, by, on, layout = c("grid", "wrap", "separate"), ...)
 
 \method{l_facet}{loon}(
   widget,
   by,
+  on,
   layout = c("grid", "wrap", "separate"),
   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
   linkingGroup,
@@ -29,6 +30,7 @@ l_facet(widget, by, layout = c("grid", "wrap", "separate"), ...)
 \method{l_facet}{l_serialaxes}(
   widget,
   by,
+  on,
   layout = c("grid", "wrap", "separate"),
   linkingGroup,
   nrow = NULL,
@@ -47,6 +49,10 @@ l_facet(widget, by, layout = c("grid", "wrap", "separate"), ...)
 
 \item{by}{loon plot can be separated by some variables into mutiple panels.
 This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+
+\item{on}{if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.}
 
 \item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
@@ -107,7 +113,10 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 
 \item{labelRelief}{Label relief}
 
-\item{parent}{parent widget path}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 }
 \value{
 an `l_facet` object (an `l_compound` object), being a list with named elements,
@@ -134,12 +143,24 @@ if(interactive()) {
           index = "end")
   fp <- l_facet(p, by = "color", layout = "grid",
                 linkingGroup = "quakes")
+
+  size <- c(rep(50, 2), rep(25, 2), rep(50, 2))
+  color <- c(rep("red", 3), rep("green", 3))
+  p <- l_plot(x = 1:6, y = 1:6,
+              size = size,
+              color = color)
+  g <- l_glyph_add_text(p, text = 1:6)
+  p['glyph'] <- g
+  on <- data.frame(Factor1 = c(rep("A", 3), rep("B", 3)),
+                   Factor2 = rep(c("C", "D"), 3))
+  cbind(on, size = size, color = color)
+  fp <- l_facet(p, by = Factor1 ~ Factor2, on = on)
 }
 
 if(interactive()) {
 
 # serialaxes facets
-s <- l_serialaxes(iris, color = iris$Species,
+s <- l_serialaxes(iris[, -5], color = iris$Species,
                   scaling = "observation")
 fs <- l_facet(s, layout = "wrap", by = iris$Species)
 # The linkingGroup can be printed or accessed by

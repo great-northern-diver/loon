@@ -2,27 +2,33 @@
 % Please edit documentation in R/l_serialaxes.R
 \name{l_serialaxes}
 \alias{l_serialaxes}
-\title{Create a Serialaxes Widget}
+\alias{l_serialaxes.default}
+\title{Create an interactive serialaxes (parallel axes or radial axes) plot}
 \usage{
-l_serialaxes(
+l_serialaxes(data, ...)
+
+\method{l_serialaxes}{default}(
   data,
   sequence,
   scaling = "variable",
   axesLayout = "radial",
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   andrews = FALSE,
   showAxes = TRUE,
-  linewidth = NULL,
-  color = NULL,
-  active = NULL,
-  selected = NULL,
+  color = l_getOption("color"),
+  active = TRUE,
+  selected = FALSE,
+  linewidth = l_getOption("linewidth"),
   parent = NULL,
   ...
 )
 }
 \arguments{
 \item{data}{a data frame with numerical data only}
+
+\item{...}{named arguments to modify the serialaxes states or layouts, see details.}
 
 \item{sequence}{vector with variable names that defines the axes sequence}
 
@@ -31,43 +37,54 @@ how the data is scaled. See Details and Examples for more information.}
 
 \item{axesLayout}{either \code{"radial"} or \code{"parallel"}}
 
-\item{by}{loon plot can be separated by some variables into mutiple panels.
-This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+\item{by}{loon plot can be separated by some variables into multiple panels.
+This argument can take a \code{\link{formula}},
+\code{n} dimensional state names (see \code{\link{l_nDimStateNames}})
+an \code{n}-dimensional \code{vector} and \code{data.frame} or
+a \code{list} of same lengths \code{n} as input.}
 
-\item{layout}{layouts in a \code{'grid'} or a \code{'wrap'}}
+\item{on}{if the \code{x} or \code{by} is a formula,
+an optional data frame containing the variables in the \code{x} or \code{by}.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.}
+
+\item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
 \item{andrews}{Andrew's plot (a 'Fourier' transformation)}
 
 \item{showAxes}{boolean to indicate whether axes should be shown or not}
 
-\item{linewidth}{vector with line widths.
-Default is given by \code{\link{l_getOption}("linewidth")}.}
+\item{color}{vector with line colors. Default is given by \code{\link{l_getOption}("color")}.}
 
-\item{color}{vector with line colors.
-Default is given by \code{\link{l_getOption}("color")}.}
-
-\item{active}{a logical determining whether items appear or not
-(default is \code{TRUE} for all items). If a logical vector is given of length
-equal to the number of items, then it identifies which items appear (\code{TRUE})
+\item{active}{a logical determining whether points appear or not
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
 and which do not (\code{FALSE}).}
 
-\item{selected}{a logical determining whether items appear selected at first
-(default is \code{FALSE} for all items). If a logical vector is given of length
-equal to the number of items, then it identifies which items are (\code{TRUE})
+\item{selected}{a logical determining whether points appear selected at first
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
 and which are not (\code{FALSE}).}
 
-\item{parent}{parent widget path}
+\item{linewidth}{vector with line widths. Default is given by \code{\link{l_getOption}("linewidth")}.}
 
-\item{...}{named arguments to modify the serialaxes states or layouts, see details.}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 }
 \value{
-plot handle object
+if the argument \code{by} is not set, a \code{loon} widget will be returned;
+else an \code{l_facet} object (a list) will be returned and each element is
+a \code{loon} widget displaying a subset of interest.
 }
 \description{
-The serialaxes widget displays multivariate data either as a
-  stacked star glyph plot, or as a parallel coordinate plot.
+\code{l_serialaxes} is a generic function for displaying multivariate data either as a
+stacked star glyph plot, or as a parallel coordinate plot.
 }
 \details{
+For more information run: \code{l_help("learn_R_display_hist")}
+
 \itemize{
   \item {
   The \code{scaling} state defines how the data is scaled. The axes
@@ -89,11 +106,6 @@ none \tab do not scale
 }
 \examples{
 if(interactive()){
-
-s <- l_serialaxes(data=oliveAcids, color=olive$Area, title="olive data")
-s['axesLayout'] <- 'parallel'
-states <- l_info_states(s)
-names(states)
 
 #######
 #
@@ -260,3 +272,14 @@ sa_none["axesLayout"] <- "radial"
 
 }
 }
+\seealso{
+Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
+
+Other loon interactive states: 
+\code{\link{l_hist}()},
+\code{\link{l_info_states}()},
+\code{\link{l_plot}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
+}
+\concept{loon interactive states}

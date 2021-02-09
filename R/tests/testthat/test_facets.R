@@ -176,12 +176,12 @@ test_that("test some facet args in l_plot3D", {
                                labelBackground = "lightblue", labelForeground = "red",
                                labelBorderwidth = 5, labelRelief = "flat"))
     expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl),
-                               color = "blue",
-                               layout = "wrap", labelLocation = c("bottom"),
-                               labelBackground = "lightblue", labelForeground = "red",
-                               labelBorderwidth = 5, labelRelief = "flat"))
-    expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+    # p <- with(mtcars, l_plot3D(wt, mpg, hp, by = data.frame(am = am, gear = gear, cyl  = cyl),
+    #                            color = "blue",
+    #                            layout = "wrap", labelLocation = c("bottom"),
+    #                            labelBackground = "lightblue", labelForeground = "red",
+    #                            labelBorderwidth = 5, labelRelief = "flat"))
+    # expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
 })
 
 
@@ -223,9 +223,9 @@ test_that("test all possible 'by's", {
     fp <- l_facet(p, by = list("color", iris = iris$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     p['size'][sample(1:150, 70)] <- 8
-    fp <- l_facet(p, by = list("color", "size"))
+    fp <- l_facet(p, by = c("color", "size"))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    expect_error(l_facet(p, by = list("color", 1:10)))
+    expect_warning(l_facet(p, by = list("color", 1:10)))
     expect_warning(l_facet(p, by = list("foo", "color")))
 
     # by is a vector
@@ -267,4 +267,73 @@ test_that("test layers inherits", {
     expect_equal(length(l_layer_getChildren(layer2)), 1)
 })
 
+test_that("test formula by", {
 
+    on <- data.frame(size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                     color = c(rep("red", 3), rep("green", 3)),
+                     glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"))
+
+    p <- l_plot(x = 1:6, y = 1:6,
+                glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"),
+                size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                color = c(rep("red", 3), rep("green", 3)),
+                by = size ~ color,
+                on = on)
+
+    expect_equal(p[[1]]['color'], "#000080800000") # green
+    expect_equal(p[[1]]['size'], 25)
+
+    expect_equal(p[[2]]['color'], c("#000080800000", "#000080800000")) # green
+    expect_equal(p[[2]]['size'], c(50, 50))
+
+
+    size <- c(rep(50, 2), rep(25, 2), rep(50, 2))
+    color <- c(rep("red", 3), rep("green", 3))
+    glyph <- c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle")
+
+    p <- l_plot(x = 1:6, y = 1:6,
+                glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"),
+                size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                color = c(rep("red", 3), rep("green", 3)),
+                by = size ~ color + glyph)
+
+    expect_equal(p[[1]]['color'], "#000080800000") # green
+    expect_equal(p[[1]]['size'], 25)
+    expect_equal(p[[1]]['glyph'], "ccircle")
+
+
+    expect_equal(p[[8]]['color'], "#FFFF00000000") # red
+    expect_equal(p[[8]]['size'], 50)
+    expect_equal(p[[8]]['glyph'], "ocircle")
+
+
+    p <- l_plot(x = 1:6, y = 1:6,
+                glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"),
+                size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                color = c(rep("red", 3), rep("green", 3)))
+
+    g <- l_glyph_add_text(p, text = 1:6)
+    p['glyph'] <- g
+    f <- l_facet(p, by = color ~ size, layout = "wrap")
+
+    expect_equal(f[[1]]['size'], 25)
+    expect_equal(f[[1]]['color'], "#000080800000") # green
+
+    expect_equal(f[[2]]['size'], 25)
+    expect_equal(f[[2]]['color'], "#FFFF00000000") # red
+
+    f <- l_facet(p, by = color ~ size)
+
+    expect_equal(f[[1]]['size'], 25)
+    expect_equal(f[[1]]['color'], "#000080800000") # green
+
+    expect_equal(f[[2]]['size'], 25)
+    expect_equal(f[[2]]['color'], "#FFFF00000000") # red
+
+
+    on <- data.frame(Factor1 = c(rep("A", 3), rep("B", 3)),
+                     Factor2 = rep(c("C", "D"), 3))
+
+    f <- l_facet(p, by = Factor1 ~ Factor2, on = on)
+    expect_true(all(c("l_facet",    "l_compound", "loon" ) %in% class(f)))
+})

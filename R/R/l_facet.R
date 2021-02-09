@@ -6,6 +6,9 @@
 #' @param widget A loon widget
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+#' typically the environment from which the function is called.
 #' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
 #' @param connectedScales Determines how the scales of the facets are to be connected depending
 #' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
@@ -35,6 +38,7 @@
 #' @param ... named arguments to modify the `loon` widget states
 l_facet <- function(widget,
                     by,
+                    on,
                     layout = c("grid", "wrap", "separate"),
                     ...) {
     UseMethod("l_facet", widget)
@@ -43,6 +47,9 @@ l_facet <- function(widget,
 #' @rdname l_facet
 #' @param by loon plot can be separated by some variables into mutiple panels.
 #' This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.
+#' @param on if the \code{by} is a formula, an optional data frame containing the variables in the \code{by}.
+#' If variables in \code{by} is not found in data, the variables are taken from environment(formula),
+#' typically the environment from which the function is called.
 #' @param layout layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}
 #' @param connectedScales Determines how the scales of the facets are to be connected depending
 #' on which \code{layout} is used.  For each value of \code{layout}, the scales are connected
@@ -112,10 +119,23 @@ l_facet <- function(widget,
 #'           index = "end")
 #'   fp <- l_facet(p, by = "color", layout = "grid",
 #'                 linkingGroup = "quakes")
+#'
+#'   size <- c(rep(50, 2), rep(25, 2), rep(50, 2))
+#'   color <- c(rep("red", 3), rep("green", 3))
+#'   p <- l_plot(x = 1:6, y = 1:6,
+#'               size = size,
+#'               color = color)
+#'   g <- l_glyph_add_text(p, text = 1:6)
+#'   p['glyph'] <- g
+#'   on <- data.frame(Factor1 = c(rep("A", 3), rep("B", 3)),
+#'                    Factor2 = rep(c("C", "D"), 3))
+#'   cbind(on, size = size, color = color)
+#'   fp <- l_facet(p, by = Factor1 ~ Factor2, on = on)
 #' }
 #'
 l_facet.loon <- function(widget,
                          by,
+                         on,
                          layout = c("grid", "wrap", "separate"),
                          connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
                          linkingGroup,
@@ -127,7 +147,8 @@ l_facet.loon <- function(widget,
                          labelForeground = "black",
                          labelBorderwidth = 2,
                          labelRelief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
-                         parent = NULL, ...) {
+                         parent = NULL,
+                         ...) {
 
     loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
     if(missing(by)) return(widget)
@@ -135,16 +156,18 @@ l_facet.loon <- function(widget,
 
     separate <- layout == "separate"
 
-    facets <- get_facets(widget, by,
+    facets <- get_facets(widget, by, on,
                          parent = parent,
                          linkingGroup,
                          inheritLayers = inheritLayers,
-                         by_substitute = substitute(by),
+                         bySubstitute = substitute(by),
                          separate = separate,
                          ...)
 
     if(!is.list(facets)) {
-      message(deparse(substitute(widget)), " cannot be divided into multiple facets by ", deparse(substitute(by)))
+      message(deparse(substitute(widget)),
+              " cannot be divided into multiple facets by ",
+              deparse(substitute(by)))
       return(facets)
     }
 
@@ -198,6 +221,7 @@ l_facet.loon <- function(widget,
 
         plots <- facet_grid_layout(plots = facets$plots,
                                    subtitles = facets$subtitles,
+                                   by = by,
                                    parent = child,
                                    xlabel = widget['xlabel'],
                                    ylabel = widget['ylabel'],
@@ -278,7 +302,7 @@ l_facet.loon <- function(widget,
 #' if(interactive()) {
 #'
 #' # serialaxes facets
-#' s <- l_serialaxes(iris, color = iris$Species,
+#' s <- l_serialaxes(iris[, -5], color = iris$Species,
 #'                   scaling = "observation")
 #' fs <- l_facet(s, layout = "wrap", by = iris$Species)
 #' # The linkingGroup can be printed or accessed by
@@ -286,6 +310,7 @@ l_facet.loon <- function(widget,
 #' }
 l_facet.l_serialaxes <- function(widget,
                                  by,
+                                 on,
                                  layout = c("grid", "wrap", "separate"),
                                  linkingGroup,
                                  nrow = NULL,
@@ -302,10 +327,10 @@ l_facet.l_serialaxes <- function(widget,
 
     separate <- layout == "separate"
 
-    facets <- get_facets(widget, by,
+    facets <- get_facets(widget, by, on,
                          parent = parent,
                          linkingGroup,
-                         by_substitute = substitute(by),
+                         bySubstitute = substitute(by),
                          separate = separate,
                          ...)
 
@@ -331,6 +356,7 @@ l_facet.l_serialaxes <- function(widget,
 
         plots <- facet_grid_layout(plots = facets$plots,
                                    subtitles = facets$subtitles,
+                                   by = by,
                                    parent = child,
                                    xlabel = "",
                                    ylabel = "",
@@ -417,9 +443,10 @@ l_getPlots.l_facet <- function(target){
 
 loonGrob_layoutType.l_facet <- function(target) "locations"
 
-l_byArgs <- function(){
+l_byArgs <- function() {
     c("nrow",
       "ncol",
+      "byrow",
       "labelLocation",
       "labelBackground",
       "labelForeground",

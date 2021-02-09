@@ -38,7 +38,10 @@ l_layer_rasterImage(
 \item{interpolate}{a logical vector (or scalar) indicating
     whether to apply linear interpolation to the image when drawing. }
 
-\item{parent}{parent widget path}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 
 \item{index}{position among its siblings. valid values are 0, 1, 2, ...,
 'end'}
