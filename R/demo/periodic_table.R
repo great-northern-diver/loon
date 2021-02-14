@@ -141,10 +141,55 @@ if(requireNamespace("loon.data", quietly = TRUE)) {
                        "     - On the table brushing whole rows or whole columns is interesting. \n",
                        "     - Try selecting by colour and setting the glyph to the symbol boxes. \n",
                        "     - So activating only selected colours and panning and zooming in the Mass/Density plot. \n",
-                       "     - Activate only selected colours and then try panning and zooming in the Mass/Density plot. \n"))
+                       "     - Activate only selected colours and then try panning and zooming in the Mass/Density plot. \n\n\n\n"))
 
-        message()
 
+        readline(paste0("Some suggest that the periodic table should be inverted \n",
+                         "so that electron shells are added from bottom to top. \n",
+                        "Make the table visible, then hit <Return> to invert the periodic table. \n")
+        )
+
+
+        # Inverting the table
+        invertTable <- function(ptable, nsteps){
+
+            interpolate <- function(xfrom, xto, nsteps = 100) {
+                if (length(xfrom) != length(xto)) stop("must be the same lengths")
+                x <- matrix(xfrom, nrow = nsteps, ncol = length(xfrom))
+                for (i in 1:nsteps){
+                    x[i,] <- ((nsteps - i) * xfrom + i * xto)/ nsteps
+                }
+                x
+            }
+
+
+            n <- length(ptable["x"])
+            if (length(ptable["xTemp"]) == 0) {
+                ptable["xTemp"] <- ptable["x"]
+                ptable["yTemp"] <- ptable["y"]
+            }
+            xpaths <- lapply(1:n,
+                             FUN = function(i){
+                                 xfrom <- c(ptable["x"][i], ptable["y"][i])
+                                 xto <- c(ptable["x"][i], max(ptable["y"])
+                                          + min(ptable["y"])
+                                          - ptable["y"][i])
+                                 xpath <- interpolate(xfrom, xto, nsteps)
+                                 xpath
+                             }
+            )
+
+            for(j in 1:nsteps){
+                for (i in 1:n){
+                    newx <- xpaths[[i]][j,]
+                    ptable["xTemp"][i] <- newx[1]
+                    ptable["yTemp"][i] <- newx[2]
+                }
+            }
+        }
+
+
+        invertTable(periodicTable, nsteps = 5)
 
     }) # End local
 }

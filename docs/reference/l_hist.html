@@ -320,11 +320,21 @@ be presented.</p></td>
     </tr>
     <tr>
       <th>showScales</th>
+<<<<<<< HEAD
+      <td><p>logical to determine whether numerical scales should
+be presented on both axes.</p></td>
+    </tr>
+    <tr>
+      <th>showGuides</th>
+      <td><p>logical to determine whether to present background guidelines
+to help determine locations.</p></td>
+=======
       <td><p>logical to determine whether numerical scales should be presented on both axes.</p></td>
     </tr>
     <tr>
       <th>showGuides</th>
       <td><p>logical to determine whether to present background guidelines to help determine locations.</p></td>
+>>>>>>> upstream/master
     </tr>
     <tr>
       <th>parent</th>
@@ -368,40 +378,47 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 
-<span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span>
+<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>l_hist</span>(<span class='no'>iris</span>$<span class='no'>Sepal.Length</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
-<span class='va'>h</span><span class='op'>[</span><span class='st'>"xlabel"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"Sepal length"</span>
-<span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>h</span>)
+<span class='no'>h</span>[<span class='st'>"xlabel"</span>] <span class='kw'>&lt;-</span> <span class='st'>"Sepal length"</span>
+<span class='no'>h</span>[<span class='st'>"showOutlines"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
 
-<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span>
-<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"density"</span>
-<span class='fu'><a href='l_scaleto_plot.html'>l_scaleto_plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='no'>h</span>[<span class='st'>"yshows"</span>]
+<span class='no'>h</span>[<span class='st'>"yshows"</span>] <span class='kw'>&lt;-</span> <span class='st'>"density"</span>
+<span class='fu'><a href='l_scaleto_plot.html'>l_scaleto_plot</a></span>(<span class='no'>h</span>)
 
+<<<<<<< HEAD
+<span class='no'>h</span>[<span class='st'>"showStackedColors"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='no'>h</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span>
+<span class='no'>h</span>[<span class='st'>"showStackedColors"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='no'>h</span>[<span class='st'>"showOutlines"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
+<span class='no'>h</span>[<span class='st'>"showGuides"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+=======
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
 <span class='va'>h</span><span class='op'>[</span><span class='st'>"showGuides"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+>>>>>>> upstream/master
 
 <span class='co'># link another plot with the previous plot</span>
-<span class='va'>h</span><span class='op'>[</span><span class='st'>'linkingGroup'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"iris_data"</span>
-<span class='va'>h2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>Petal.Width</span>,
-                        linkingGroup<span class='op'>=</span><span class='st'>"iris_data"</span>,
-                        showStackedColors <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+<span class='no'>h</span>[<span class='st'>'linkingGroup'</span>] <span class='kw'>&lt;-</span> <span class='st'>"iris_data"</span>
+<span class='no'>h2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_hist</span>(<span class='no'>Petal.Width</span>,
+                        <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris_data"</span>,
+                        <span class='kw'>showStackedColors</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 
 
 <span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>h</span>)
 <span class='co'># or with more control about grid parameters</span>
-<span class='fu'><a href='grid.loon.html'>grid.loon</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>h</span>)
 <span class='co'># or to save the grid data structure (grob) for later use</span>
-<span class='va'>hg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='no'>hg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>h</span>)
 
-<span class='op'>}</span>
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -417,7 +434,7 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

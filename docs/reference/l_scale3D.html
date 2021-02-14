@@ -160,7 +160,7 @@ used for 3D visualization." />
 used for 3D visualization.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_scale3D</span><span class='op'>(</span><span class='va'>x</span>, center <span class='op'>=</span> <span class='cn'>TRUE</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"box"</span>, <span class='st'>"sphere"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_scale3D</span>(<span class='no'>x</span>, <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"box"</span>, <span class='st'>"sphere"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,62 +211,52 @@ the given arguments. For <code>method = "sphere")</code>, the three variable nam
 <span class='co'>##### Iris data</span>
 <span class='co'>#</span>
 <span class='co'># All variables (including Species as a factor)</span>
-<span class='va'>result_box</span> <span class='op'>&lt;-</span> <span class='fu'>l_scale3D</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>result_box</span>, n <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+<span class='no'>result_box</span> <span class='kw'>&lt;-</span> <span class='fu'>l_scale3D</span>(<span class='no'>iris</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>result_box</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1   -0.2777778  0.12500000   -0.4322034  -0.4583333    -0.5
 #&gt; 2   -0.3333333 -0.08333333   -0.4322034  -0.4583333    -0.5
-#&gt; 3   -0.3888889  0.00000000   -0.4491525  -0.4583333    -0.5</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_box</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='va'>range</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 3   -0.3888889  0.00000000   -0.4491525  -0.4583333    -0.5</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_box</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>range</span>)</div><div class='output co'>#&gt;      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; [1,]         -0.5        -0.5         -0.5        -0.5    -0.5
 #&gt; [2,]          0.5         0.5          0.5         0.5     0.5</div><div class='input'><span class='co'># Note mean is not zero.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_box</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='va'>mean</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_box</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>)</div><div class='output co'>#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
 #&gt;  -0.07129630  -0.05944444  -0.03254237  -0.04194444   0.00000000 </div><div class='input'>
 
 <span class='co'># Sphering only on 3D data.</span>
-<span class='va'>result_sphere</span> <span class='op'>&lt;-</span> <span class='fu'>l_scale3D</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>, method <span class='op'>=</span> <span class='st'>"sphere"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>result_sphere</span>, n <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            x1          x2           x3
+<span class='no'>result_sphere</span> <span class='kw'>&lt;-</span> <span class='fu'>l_scale3D</span>(<span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"sphere"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>result_sphere</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt;            x1          x2           x3
 #&gt; 1 -0.10665359 -0.03635358 -0.039744517
 #&gt; 2 -0.09153699  0.06124692 -0.080344512
-#&gt; 3 -0.11208702  0.03517574 -0.009633385</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_sphere</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='va'>range</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;              x1         x2         x3
+#&gt; 3 -0.11208702  0.03517574 -0.009633385</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_sphere</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>range</span>)</div><div class='output co'>#&gt;              x1         x2         x3
 #&gt; [1,] -0.1423020 -0.2338372 -0.1627308
 #&gt; [2,]  0.1737036  0.2262592  0.2203348</div><div class='input'><span class='co'># Note mean is numerically zero.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_sphere</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='va'>mean</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            x1            x2            x3 
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_sphere</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>mean</span>)</div><div class='output co'>#&gt;            x1            x2            x3 
 #&gt; -2.074395e-17  3.842760e-18  1.056550e-16 </div><div class='input'>
 
 <span class='co'>#  With NAs</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>iris</span>
-<span class='va'>x</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
-<span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>NA</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
+<span class='no'>x</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>), <span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
+<span class='no'>x</span>[<span class='fl'>2</span>, <span class='fl'>3</span>] <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
 
-<span class='va'>result_box</span> <span class='op'>&lt;-</span> <span class='fu'>l_scale3D</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>result_box</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+<span class='no'>result_box</span> <span class='kw'>&lt;-</span> <span class='fu'>l_scale3D</span>(<span class='no'>x</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>result_box</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1           NA  0.12500000   -0.4322034  -0.4583333    -0.5
 #&gt; 2   -0.3333333 -0.08333333           NA  -0.4583333    -0.5
 #&gt; 3           NA  0.00000000   -0.4491525  -0.4583333    -0.5
 #&gt; 4   -0.4166667 -0.04166667   -0.4152542  -0.4583333    -0.5
-#&gt; 5   -0.3055556  0.16666667   -0.4322034  -0.4583333    -0.5</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_box</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>x</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 5   -0.3055556  0.16666667   -0.4322034  -0.4583333    -0.5</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_box</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)})</div><div class='output co'>#&gt;      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; [1,]         -0.5        -0.5         -0.5        -0.5    -0.5
 #&gt; [2,]          0.5         0.5          0.5         0.5     0.5</div><div class='input'>
 <span class='co'># Sphering only on 3D data.</span>
-<span class='va'>result_sphere</span> <span class='op'>&lt;-</span> <span class='fu'>l_scale3D</span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>, method <span class='op'>=</span> <span class='st'>"sphere"</span><span class='op'>)</span>
+<span class='no'>result_sphere</span> <span class='kw'>&lt;-</span> <span class='fu'>l_scale3D</span>(<span class='no'>x</span>[, <span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"sphere"</span>)
 <span class='co'># Rows having had any NA are all NA after sphering.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>result_sphere</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           x1          x2          x3
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>result_sphere</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt;           x1          x2          x3
 #&gt; 1         NA          NA          NA
 #&gt; 2         NA          NA          NA
 #&gt; 3         NA          NA          NA
 #&gt; 4 -0.1097604 -0.05847447 0.021141688
 #&gt; 5 -0.1188225  0.04803699 0.001622979</div><div class='input'><span class='co'># Note with NAs mean is no longer numerically zero.</span>
 <span class='co'># because centring was based on all non-NAs in each column</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>result_sphere</span>, <span class='fl'>2</span>, FUN <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>x</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            x1            x2            x3 
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>result_sphere</span>, <span class='fl'>2</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>x</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)})</div><div class='output co'>#&gt;            x1            x2            x3 
 #&gt;  0.0012171739 -0.0002142758  0.0019700846 </div><div class='input'>
 
 </div></pre>
@@ -285,7 +275,7 @@ the given arguments. For <code>method = "sphere")</code>, the three variable nam
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

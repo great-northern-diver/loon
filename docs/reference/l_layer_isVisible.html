@@ -160,7 +160,7 @@
   queries whether a layer is visible/rendered or not.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_layer_isVisible</span><span class='op'>(</span><span class='va'>widget</span>, <span class='va'>layer</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_layer_isVisible</span>(<span class='no'>widget</span>, <span class='no'>layer</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,16 +198,15 @@ then the layer argument is not used</p></td>
   <code><a href='l_layer_groupVisibility.html'>l_layer_groupVisibility</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span><span class='op'>(</span><span class='va'>p</span>, x<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span>, y<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='fu'>l_layer_isVisible</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>l</span><span class='op'>)</span>
-<span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>l</span><span class='op'>)</span>
-<span class='fu'>l_layer_isVisible</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>l</span><span class='op'>)</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span>(<span class='no'>p</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>1</span>)
+<span class='fu'>l_layer_isVisible</span>(<span class='no'>p</span>, <span class='no'>l</span>)
+<span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span>(<span class='no'>p</span>, <span class='no'>l</span>)
+<span class='fu'>l_layer_isVisible</span>(<span class='no'>p</span>, <span class='no'>l</span>)
 
-<span class='op'>}</span>
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -223,7 +222,7 @@ then the layer argument is not used</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
