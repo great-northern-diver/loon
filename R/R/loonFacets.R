@@ -1,58 +1,67 @@
-loonFacets <- function(type, by, args, layout = "grid", byDeparse = "",
+loonFacets <- function(type, by, args, on, bySubstitute, layout = "grid",
                        connectedScales = "both", byArgs, linkingGroup, sync, parent,
                        factory_tclcmd, factory_path, factory_window_title,
-                       xlabel = "", ylabel = "", title = "", ...) {
-    class(type) <- type[1]
+                       xlabel = "", ylabel = "", title = "",
+                       modifiedLinkedStates = character(0L), ...) {
+    class(type) <- type
     UseMethod("loonFacets", type)
 }
 
 loonFacets.default <- function(type,
                                by,
                                args,
-                               byDeparse = "",
+                               on,
+                               bySubstitute,
                                layout = "grid",
                                connectedScales = "both",
                                byArgs,
                                linkingGroup, sync, parent,
                                factory_tclcmd, factory_path,
                                factory_window_title,
-                               xlabel = "", ylabel = "", title = "", ...) {
-
-    by_names <- colnames(by)
-
-    args$by <- by
-    args <- l_na_omit(type[1], args, n_dim_states = c(l_nDimStateNames(type[1]), "by"))
-    # remove 'by' from args
-    by <- setNames(as.data.frame(args$by, stringsAsFactors = FALSE), by_names)
-    args$by <- NULL
-
-    # separate windows or not
-    separate <- layout == "separate"
+                               xlabel = "", ylabel = "", title = "",
+                               modifiedLinkedStates = character(0L), ...) {
 
     ## get N dimensional data frame
     # what is the n?
     x <- args[["x"]]
-    N <- if(is.null(x)) {
-        # serialaxes?
-        x <- args[["data"]]
-        if(is.null(x)) integer(0) else dim(x)[1]
-    } else {
-        length(x)
-    }
+    N <- length(x)
+
+    # in case: `by` is a formula
+    byDataFrame <- by2Data(by, on, bySubstitute = bySubstitute, n = N, args = args,
+                           l_className = type[1L])
+
+    # byDataFrame is a data frame
+    byNames <- colnames(byDataFrame)
+
+    args$byDataFrame <- byDataFrame
+    args <- l_na_omit(type[1L], args, n_dim_states = c(l_nDimStateNames(type[1L]), "byDataFrame"))
+    # remove NAs
+    byDataFrame <- setNames(as.data.frame(args$byDataFrame, stringsAsFactors = FALSE),
+                            byNames)
+    # remove 'byDataFrame' from args
+    args$byDataFrame <- NULL
+
+    # separate windows or not
+    separate <- layout == "separate"
+
     # N dim args
-    nDimArgs <- as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE)
+    nDimArgs <- as.data.frame(args[which(lengths(args) == N)],
+                              stringsAsFactors = FALSE)
     # 1 dim args
     oneDimArgs <- args[which(lengths(args) != N)]
 
-    subtitles <- setNames(lapply(by,
+    subtitles <- setNames(lapply(byDataFrame,
                                  function(b)
                                      as.character(levels(factor(b)))),
-                          by_names)
+                          byNames)
 
-    # split nDimArgs by "by"
-    splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
-
-    if(length(splitNDimArgs) == 1) {
+    # split nDimArgs by "byDataFrame"
+    splitNDimArgs <- split(nDimArgs,
+                           f = as.list(byDataFrame),
+                           drop = FALSE,
+                           sep = "*")
+    len <- length(splitNDimArgs)
+    if(len == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -67,11 +76,33 @@ loonFacets.default <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+            if(syncTemp == "push")
+                message("The modification of linked states is not detected",
+                        " so that the default settings will be pushed to all plots")
+            # configure plot (linking)
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = sync)
+                        sync = syncTemp)
 
-            l_linkingWarning(plot, sync, nDimArgs)
+            if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                do.call(l_configure,
+                        c(
+                            list(
+                                target = plot,
+                                linkingGroup = linkingGroup,
+                                sync = sync
+                            ),
+                            nDimArgs[modifiedLinkedStates]
+                        )
+                )
+            } else {
+                l_linkingWarning(plot, sync, args = nDimArgs,
+                                 modifiedLinkedStates = modifiedLinkedStates,
+                                 l_className = type[1L])
+            }
         }
 
         class(plot) <- c(type, class(plot))
@@ -90,12 +121,12 @@ loonFacets.default <- function(type,
         }
 
         subwin <- l_subwin(parent, 'facet')
-        tktitle(parent) <- if(!is.null(by_names))
+        tktitle(parent) <- if(!is.null(byNames))
             paste("loon layouts on",
-                  deparse(substitute(by_names)), "--path:", subwin)
+                  deparse(substitute(byNames)), "--path:", subwin)
         else
             paste("loon layouts on",
-                  byDeparse, "--path:", subwin)
+                  deparse(bySubstitute), "--path:", subwin)
 
         # create child
         child <- as.character(tcl('frame', subwin))
@@ -166,16 +197,49 @@ loonFacets.default <- function(type,
                     })
 
     # set linkingGroup for each plot
-    lapply(plots,
-           function(plot) {
-               l_configure(plot,
-                           linkingGroup = linkingGroup,
-                           sync = sync)
-           })
 
-    # give warning if linked plot has been
-    if(!new.linkingGroup)
-        l_linkingWarning(plots, sync, nDimArgs)
+    lapply(seq(len),
+           function(i) {
+
+               plot <- plots[[i]]
+
+               if(!new.linkingGroup) {
+
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   splitNDimArgs[[i]][modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+                       l_linkingWarning(plots, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
 
     xrange <- c()
     yrange <- c()
@@ -191,11 +255,11 @@ loonFacets.default <- function(type,
 
     if(swapAxes) {
         connectedScales <- switch(connectedScales,
-               "x" = "y",
-               "y" = "x",
-               {
-                   connectedScales
-               })
+                                  "x" = "y",
+                                  "y" = "x",
+                                  {
+                                      connectedScales
+                                  })
     }
 
     if(separate) {
@@ -242,6 +306,7 @@ loonFacets.default <- function(type,
                 byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
+                     by = by,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
@@ -298,51 +363,61 @@ loonFacets.default <- function(type,
 loonFacets.l_serialaxes <- function(type,
                                     by,
                                     args,
-                                    byDeparse = "",
+                                    on,
+                                    bySubstitute,
                                     layout = "grid",
                                     connectedScales = "both",
                                     byArgs, linkingGroup, sync, parent,
                                     factory_tclcmd, factory_path,
                                     factory_window_title,
-                                    xlabel = "", ylabel = "", title = "", ...) {
+                                    xlabel = "", ylabel = "", title = "",
+                                    modifiedLinkedStates = character(0L), ...) {
 
-    by_names <- colnames(by)
+    ## get N dimensional data frame
+    # what is the n?
+    x <- args[["data"]]
+    N <- dim(x)[1]
 
-    args$by <- by
+    # in case: `by` is a formula
+    byDataFrame <- by2Data(by, on,
+                           bySubstitute = bySubstitute,
+                           n = N, args = args,
+                           l_className = type[1L])
+
+    byNames <- colnames(byDataFrame)
+
+    args$byDataFrame <- byDataFrame
     args <- l_na_omit(type[1], args,
                       n_dim_states = c(l_nDimStateNames(type[1]),
-                                       "by"))
-    # remove 'by' from args
-    by <- setNames(as.data.frame(args$by, stringsAsFactors = FALSE), by_names)
-    args$by <- NULL
+                                       "byDataFrame"))
+    # remove 'byDataFrame' from args
+    byDataFrame <- setNames(as.data.frame(args$byDataFrame,
+                                          stringsAsFactors = FALSE),
+                            byNames)
+    args$byDataFrame <- NULL
 
     # separate windows or not
     separate <- layout == "separate"
 
-    ## get N dimensional data frame
-    # what is the n?
-    x <- args[["x"]]
-    N <- if(is.null(x)) {
-        # serialaxes?
-        x <- args[["data"]]
-        if(is.null(x)) integer(0) else dim(x)[1]
-    } else {
-        length(x)
-    }
     # N dim args
-    nDimArgs <- cbind(index = 1:N, as.data.frame(args[which(lengths(args) == N)], stringsAsFactors = FALSE))
+    nDimArgs <- cbind(index = 1:N,
+                      as.data.frame(args[which(lengths(args) == N)],
+                                    stringsAsFactors = FALSE))
 
     serialaxesData <- args$data
     # 1 dim args
     args$data <- NULL
     oneDimArgs <- args[which(lengths(args) != N)]
 
-    subtitles <- setNames(lapply(by, function(b) as.character(levels(factor(b)))), by_names)
+    subtitles <- setNames(lapply(byDataFrame, function(b) as.character(levels(factor(b)))), byNames)
 
-    # split data by "by"
-    splitNDimArgs <- split(nDimArgs, f = as.list(by), drop = FALSE, sep = "*")
+    # split data by "byDataFrame"
+    splitNDimArgs <- split(nDimArgs,
+                           f = as.list(byDataFrame),
+                           drop = FALSE, sep = "*")
+    len <- length(splitNDimArgs)
 
-    if(length(splitNDimArgs) == 1) {
+    if(len == 1) {
 
         plot <- do.call(
             loonPlotFactory,
@@ -358,9 +433,33 @@ loonFacets.l_serialaxes <- function(type,
         )
 
         if(!is.null(linkingGroup)) {
+
+            syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+            if(syncTemp == "push")
+                message("The modification of linked states is not detected",
+                        " so that the default settings will be pushed to all plots")
+            # configure plot (linking)
             l_configure(plot,
                         linkingGroup = linkingGroup,
-                        sync = sync)
+                        sync = syncTemp)
+
+            if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                do.call(l_configure,
+                        c(
+                            list(
+                                target = plot,
+                                linkingGroup = linkingGroup,
+                                sync = sync
+                            ),
+                            nDimArgs[modifiedLinkedStates]
+                        )
+                )
+            } else {
+                l_linkingWarning(plot, sync, args = nDimArgs,
+                                 modifiedLinkedStates = modifiedLinkedStates,
+                                 l_className = type[1L])
+            }
         }
 
         class(plot) <- c(type, class(plot))
@@ -379,12 +478,12 @@ loonFacets.l_serialaxes <- function(type,
         }
 
         subwin <- l_subwin(parent, 'facet')
-        tktitle(parent) <- if(!is.null(by_names))
+        tktitle(parent) <- if(!is.null(byNames))
             paste("loon layouts on",
-                  deparse(substitute(by_names)), "--path:", subwin)
+                  deparse(substitute(byNames)), "--path:", subwin)
         else
             paste("loon layouts on",
-                  byDeparse, "--path:", subwin)
+                  deparse(bySubstitute), "--path:", subwin)
 
         # create child
         child <- as.character(tcl('frame', subwin))
@@ -441,6 +540,50 @@ loonFacets.l_serialaxes <- function(type,
                         p
                     })
 
+
+    lapply(seq(len),
+           function(i) {
+
+               plot <- plots[[i]]
+
+               if(!new.linkingGroup) {
+
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   splitNDimArgs[[i]][modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+                       l_linkingWarning(plots, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
+
     if(!is.null(oneDimArgs$title)) title <- oneDimArgs$title
 
     if(separate) {
@@ -469,6 +612,7 @@ loonFacets.l_serialaxes <- function(type,
                 byArgs,
                 list(plots = plots,
                      subtitles = subtitles,
+                     by = by,
                      parent = child,
                      xlabel = xlabel,
                      ylabel = ylabel,
@@ -477,14 +621,6 @@ loonFacets.l_serialaxes <- function(type,
                 )
             )
         )
-
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
 
         structure(
             plots,
@@ -508,18 +644,104 @@ loonFacets.l_serialaxes <- function(type,
             )
         )
 
-        # set class and linkingGroup for each plot
-        plots <- lapply(plots,
-                        function(plot) {
-                            l_configure(plot,
-                                        linkingGroup = linkingGroup,
-                                        sync = sync)
-                        })
-
         structure(
             plots,
             class = c("l_facet_wrap", "l_facet", "l_compound", "loon")
         )
     } else
         stop("Unknown layouts")
+}
+
+# convert all types of 'by' to a data frame
+by2Data <- function(by, on, bySubstitute,
+                    n, args, l_className) {
+
+    if(inherits(by, "formula")) {
+
+        by <- if(missing(on)) {
+            model.frame(by)
+        } else {
+
+            tryCatch(
+                expr = {
+                    model.frame(by, data = on)
+                },
+                error = function(e) {
+                    on[, all.vars(by)]
+                }
+            )
+
+        }
+
+    } else {
+
+        standardizedBy <- function(by, bySubstitute, args, n) {
+
+            if(is.atomic(by)) {
+                names <- by
+            } else {
+                names <- names(by)
+                if(is.null(names)) {
+                    names <- vapply(2:length(bySubstitute),
+                                    function(i) {
+                                        deparse(bySubstitute[[i]])
+                                    }, character(1L))
+                }
+            }
+
+            i <- 0
+            by <- lapply(by,
+                         function(b) {
+
+                             i <<- i + 1
+
+                             if(length(b) == 1) {
+
+                                 state <- args[[b]]
+
+                                 if(!b %in% l_nDimStateNames(l_className)) {
+                                     warning(deparse(bySubstitute[[i + 1]]),
+                                             " is not recognized and removed", call. = FALSE)
+                                 }
+
+                                 return(state)
+                             }
+
+                             if(length(b) == n) return(b)
+
+                             warning("The ", deparse(bySubstitute[[i + 1]]),
+                                     " is neither a valid state nor a valid vector", call. = FALSE)
+
+                             NULL
+
+                         })
+
+            isNotNULL <- unlist(Map(Negate(is.null), by))
+            by <- by[isNotNULL]
+            names <- names[isNotNULL]
+            setNames(as.data.frame(by, stringsAsFactors = FALSE),
+                     names)
+        }
+
+        if(is.atomic(by)) {
+            if(length(by) == n) {
+                by <- tryCatch(
+                    expr = {setNames(data.frame(by, stringsAsFactors = FALSE), deparse(bySubstitute))},
+                    error = function(e) {setNames(data.frame(by, stringsAsFactors = FALSE), "by")}
+                )
+            } else {
+                # by is a char
+                # aesthetics states, e.g. "color", "size", etc
+                by <- standardizedBy(by, bySubstitute, args, n)
+            }
+        } else {
+
+            by <- standardizedBy(by, bySubstitute, args, n)
+        }
+    }
+
+    if(nrow(by) != n)
+        stop("'by' must be an n-dimensional data")
+
+    return(by)
 }

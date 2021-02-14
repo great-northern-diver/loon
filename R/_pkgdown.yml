@@ -90,6 +90,7 @@ reference:
   - subtitle: histograms and barplots
     contents:
     - l_hist
+    - l_hist.default
     - l_getBinData
     - l_getBinIds
     - l_binCut
@@ -105,8 +106,10 @@ reference:
     contents:
     - l_scale3D
     - l_plot3D
+    - l_plot3D.default
     - l_pairs
     - l_serialaxes
+    - l_serialaxes.default
     - l_navgraph
     - l_ng_ranges
     - l_ng_plots

@@ -134,7 +134,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,30 +163,31 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='l_plot.html'>l_plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span>),
-  <span class='kw'>connectedScales</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
-  <span class='kw'>glyph</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"glyph"</span>),
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"size"</span>),
-  <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>xlabel</span>,
-  <span class='no'>ylabel</span>,
-  <span class='no'>title</span>,
-  <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guidelines</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"guidelines"</span>),
-  <span class='kw'>guidesBackground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"guidesBackground"</span>),
-  <span class='kw'>foreground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"foreground"</span>),
-  <span class='kw'>background</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"background"</span>),
-  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>on</span>,
+  layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
+  connectedScales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  glyph <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"glyph"</span><span class='op'>)</span>,
+  size <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"size"</span><span class='op'>)</span>,
+  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>xlabel</span>,
+  <span class='va'>ylabel</span>,
+  <span class='va'>title</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showScales <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  guidelines <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidelines"</span><span class='op'>)</span>,
+  guidesBackground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"guidesBackground"</span><span class='op'>)</span>,
+  foreground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
+  background <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"background"</span><span class='op'>)</span>,
+  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,6 +208,12 @@ If supplied separately, they must be of the same length.</p></td>
       <th>by</th>
       <td><p>loon plot can be separated by some variables into multiple panels.
 This argument can take a <code>vector</code>, a <code>list</code> of same lengths or a <code>data.frame</code> as input.</p></td>
+    </tr>
+    <tr>
+      <th>on</th>
+      <td><p>if the <code>by</code> is a formula, an optional data frame containing the variables in the <code>by</code>.
+If variables in <code>by</code> is not found in data, the variables are taken from environment(formula),
+typically the environment from which the function is called.</p></td>
     </tr>
     <tr>
       <th>layout</th>
@@ -346,7 +353,7 @@ order to be displayed. See the examples below.</p></td>
   individual point selection. See the documentation for <code><a href='l_plot.html'>l_plot</a></code>
   for more details about the interaction gestures.</p></li>
 <li><p>Some arguments to modify layouts can be passed through,
-  e.g. "separate", "byrow", etc. Check <code><a href='l_facet.html'>l_facet</a></code>
+  e.g. "separate", "ncol", "nrow", etc. Check <code><a href='l_facet.html'>l_facet</a></code>
   to see how these arguments work.</p></li>
 </ul>
 
@@ -365,9 +372,13 @@ order to be displayed. See the examples below.</p></td>
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+<<<<<<< HEAD
     <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 
 
+=======
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+>>>>>>> upstream/master
 <span class='co'># default use as scatterplot</span>
 
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>,
@@ -395,7 +406,18 @@ order to be displayed. See the examples below.</p></td>
 <span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>grid.arrange</a></span>(<span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p1</span>), <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>p2</span>), <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
 <span class='co'># Layout facets</span>
+<<<<<<< HEAD
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>wt</span>, <span class='no'>mpg</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"wrap"</span>))
+=======
+<span class='co'>### facet wrap</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>wt</span>, <span class='va'>mpg</span>, by <span class='op'>=</span> <span class='va'>cyl</span>, layout <span class='op'>=</span> <span class='st'>"wrap"</span><span class='op'>)</span><span class='op'>)</span>
+>>>>>>> upstream/master
+
+<span class='co'>### facet grid</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>,
+            by <span class='op'>=</span> <span class='va'>size</span> <span class='op'>~</span> <span class='va'>color</span>,
+            size <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>50</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
+            color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"red"</span>, <span class='fl'>3</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"green"</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Use with other tk widgets</span>
 <span class='no'>tt</span> <span class='kw'>&lt;-</span> <span class='fu'>tktoplevel</span>()
@@ -410,9 +432,15 @@ order to be displayed. See the examples below.</p></td>
 <span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
 <span class='fu'>tkgrid.columnconfigure</span>(<span class='no'>tt</span>, <span class='fl'>1</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
 
+<<<<<<< HEAD
 <span class='fu'>tkgrid.rowconfigure</span>(<span class='no'>tt</span>, <span class='fl'>0</span>, <span class='kw'>weight</span><span class='kw'>=</span><span class='fl'>1</span>)
 
 }</div></pre>
+=======
+<span class='fu'>tkgrid.rowconfigure</span><span class='op'>(</span><span class='va'>tt</span>, <span class='fl'>0</span>, weight<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+>>>>>>> upstream/master
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

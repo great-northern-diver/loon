@@ -21,12 +21,12 @@ edges}
 graph object of class loongraph
 }
 \description{
-The loongraph class provides a simple alternative to the graph 
+The loongraph class provides a simple alternative to the graph
   class to create common graphs that are useful for use as navigation graphs.
 }
 \details{
 loongraph objects can be converted to graph objects (i.e. objects of
-class graph which is defined in the graph package) with the as.graph 
+class graph which is defined in the graph package) with the as.graph
 function.
 
 For more information run: \code{l_help("learn_R_display_graph.html.html#graph-utilities")}
@@ -46,6 +46,6 @@ p <- l_graph(g)
 lg <- linegraph(g)
 }
 \seealso{
-\code{\link{completegraph}}, \code{\link{linegraph}}, 
+\code{\link{completegraph}}, \code{\link{linegraph}},
   \code{\link{complement}}, \code{\link{as.graph}}
 }

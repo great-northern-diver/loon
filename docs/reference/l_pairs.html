@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -194,7 +194,7 @@
     </tr>
     <tr>
       <th>linkingGroup</th>
-      <td><p>string giving the linkingGroup for all plots.  If missing,
+      <td><p>string giving the linkingGroup for all plots. If missing,
 a default <code>linkingGroup</code> will be determined from deparsing the <code>data</code>.</p></td>
     </tr>
     <tr>
@@ -241,7 +241,10 @@ in the bottom left of the pairs plot (or not)</p></td>
     </tr>
     <tr>
       <th>parent</th>
-      <td><p>parent widget path</p></td>
+      <td><p>a valid Tk parent widget path. When the parent widget is
+specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
+some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
+order to be displayed. See the examples below.</p></td>
     </tr>
     <tr>
       <th>span</th>

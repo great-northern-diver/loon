@@ -39,7 +39,7 @@ loonInspectorFactory <- function(factory_tclcmd, factory_path, factory_window_ti
 #' @templateVar section graph-utilities
 #' @template see_l_help_page
 #'
-#' @template return_widget_handle
+#' @return a loon widget
 #'
 #' @export
 #'

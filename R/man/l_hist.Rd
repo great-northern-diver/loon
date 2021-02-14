@@ -2,17 +2,28 @@
 % Please edit documentation in R/l_hist.R
 \name{l_hist}
 \alias{l_hist}
+\alias{l_hist.default}
+\alias{l_hist.factor}
+\alias{l_hist.character}
+\alias{l_hist.data.frame}
+\alias{l_hist.matrix}
+\alias{l_hist.list}
+\alias{l_hist.table}
+\alias{l_hist.array}
 \title{Create an interactive histogram}
 \usage{
-l_hist(
+l_hist(x, ...)
+
+\method{l_hist}{default}(
   x,
   yshows = c("frequency", "density"),
   by = NULL,
+  on,
   layout = c("grid", "wrap", "separate"),
   connectedScales = c("cross", "row", "column", "both", "x", "y", "none"),
-  showStackedColors = TRUE,
   origin = NULL,
   binwidth = NULL,
+  showStackedColors = TRUE,
   showBinHandle = FALSE,
   color = l_getOption("color"),
   active = TRUE,
@@ -24,14 +35,38 @@ l_hist(
   parent = NULL,
   ...
 )
+
+\method{l_hist}{factor}(x, showFactors = length(unique(x)) < 10L, ...)
+
+\method{l_hist}{character}(x, showFactors = length(unique(x)) < 10L, ...)
+
+\method{l_hist}{data.frame}(x, ...)
+
+\method{l_hist}{matrix}(x, ...)
+
+\method{l_hist}{list}(x, ...)
+
+\method{l_hist}{table}(x, ...)
+
+\method{l_hist}{array}(x, ...)
 }
 \arguments{
 \item{x}{vector with numerical data to perform the binning on x,}
 
+\item{...}{named arguments to modify the histogram plot states or layouts, see details.}
+
 \item{yshows}{one of "frequency" (default) or  "density"}
 
 \item{by}{loon plot can be separated by some variables into multiple panels.
-This argument can take a \code{vector}, a \code{list} of same lengths or a \code{data.frame} as input.}
+This argument can take a \code{\link{formula}},
+\code{n} dimensional state names (see \code{\link{l_nDimStateNames}})
+an \code{n}-dimensional \code{vector} and \code{data.frame} or
+a \code{list} of same lengths \code{n} as input.}
+
+\item{on}{if the \code{x} or \code{by} is a formula,
+an optional data frame containing the variables in the \code{x} or \code{by}.
+If the variables are not found in data, they are taken from environment,
+typically the environment from which the function is called.}
 
 \item{layout}{layout facets as \code{'grid'}, \code{'wrap'} or \code{'separate'}}
 
@@ -61,10 +96,6 @@ as follows:
    }
  }}
 
-\item{showStackedColors}{if TRUE (default) then bars will be coloured according to
-colours of the points; if FALSE, then the bars will be a uniform colour
-except for highlighted points.}
-
 \item{origin}{numeric scalar to define the binning origin}
 
 \item{binwidth}{a numeric scalar to specify the binwidth
@@ -73,6 +104,10 @@ If NULL \code{binwidth} is set using David Scott's rule when \code{x} is numeric
 and using the minumum numerical difference between factor levels when \code{x}
 is a factor or a character vector (coerced to factor).}
 
+\item{showStackedColors}{if TRUE (default) then bars will be coloured according to
+colours of the points; if FALSE, then the bars will be a uniform colour
+except for highlighted points.}
+
 \item{showBinHandle}{If \code{TRUE}, then an interactive "bin handle" appears on the plot
 whose movement resets the \code{origin} and the \code{binwidth}.  Default is \code{FALSE}}
 
@@ -80,15 +115,15 @@ whose movement resets the \code{origin} and the \code{binwidth}.  Default is \co
 until matching the number x.
 Default is found using \code{\link{l_getOption}("color")}.}
 
-\item{active}{a logical determining whether x appears or not
-(default is \code{TRUE} for all x). If a logical vector is given of length
-equal to the number of x, then it identifies which x appears (\code{TRUE})
-and which does not (\code{FALSE}).}
+\item{active}{a logical determining whether points appear or not
+(default is \code{TRUE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points appear (\code{TRUE})
+and which do not (\code{FALSE}).}
 
-\item{selected}{a logical determining whether x appears selected at first
-(default is \code{FALSE} for all x). If a logical vector is given of length
-equal to the number of x, then it identifies which x is (\code{TRUE})
-and which is not (\code{FALSE}).}
+\item{selected}{a logical determining whether points appear selected at first
+(default is \code{FALSE} for all points). If a logical vector is given of length
+equal to the number of points, then it identifies which points are (\code{TRUE})
+and which are not (\code{FALSE}).}
 
 \item{xlabel}{label to be used on the horizontal axis. If NULL, an attempt at a meaningful label
 inferred from \code{x} will be made.}
@@ -96,24 +131,29 @@ inferred from \code{x} will be made.}
 \item{showLabels}{logical to determine whether axes label (and title) should
 be presented.}
 
-\item{showScales}{logical to determine whether numerical scales should
-be presented on both axes.}
+\item{showScales}{logical to determine whether numerical scales should be presented on both axes.}
 
-\item{showGuides}{logical to determine whether to present background guidelines
-to help determine locations.}
+\item{showGuides}{logical to determine whether to present background guidelines to help determine locations.}
 
-\item{parent}{parent widget path}
+\item{parent}{a valid Tk parent widget path. When the parent widget is
+specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
+some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
+order to be displayed. See the examples below.}
 
-\item{...}{named arguments to modify the histogram plot states or layouts, see details.}
+\item{showFactors}{whether to draw the factor names}
 }
 \value{
-widget handle
+if the argument \code{by} is not set, a \code{loon} widget will be returned;
+else an \code{l_facet} object (a list) will be returned and each element is
+a \code{loon} widget displaying a subset of interest.
 }
 \description{
-\code{l_hist} is a generic function for creating an interactive histogram display that can be linked with
-  loon's other displays
+\code{l_hist} is a generic function for creating interactive histogram displays
+that can be linked with loon's other displays.
 }
 \details{
+For more information run: \code{l_help("learn_R_display_hist")}
+
 \itemize{
   \item {
   Note that when changing the \code{yshows} state from
@@ -126,8 +166,6 @@ widget handle
   Check \code{\link{l_facet}} to see how these arguments work.
   }
 }
-
-For more information run: \code{l_help("learn_R_display_hist")}
 }
 \examples{
 if(interactive()){
@@ -165,5 +203,13 @@ hg <- loonGrob(h)
 }
 }
 \seealso{
-\code{\link{l_plot}}
+Turn interactive loon plot static \code{\link{loonGrob}}, \code{\link{grid.loon}}, \code{\link{plot.loon}}.
+
+Other loon interactive states: 
+\code{\link{l_info_states}()},
+\code{\link{l_plot}()},
+\code{\link{l_serialaxes}()},
+\code{\link{l_state_names}()},
+\code{\link{names.loon}()}
 }
+\concept{loon interactive states}

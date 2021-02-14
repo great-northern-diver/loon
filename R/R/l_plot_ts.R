@@ -8,7 +8,7 @@
 #'        Default is given by \code{\link{l_getOption}("color")}.
 #' @param size points size of all time series.
 #'        Default is given by \code{\link{l_getOption}("size")}.
-#' @param lcolor line colour of all time series.
+#' @param linecolor line colour of all time series.
 #'        Default is given by \code{\link{l_getOption}("color")}.
 #' @param linewidth line width of all time series (incl. original and decomposed components.
 #'        Default is given by \code{\link{l_getOption}("linewidth")}.
@@ -24,6 +24,7 @@
 #' @param showScales a logical as to whether to display the scales on all axes, default is TRUE.
 #' @param showGuides a logical as to whether to display background guide lines on all plots, default is TRUE.
 #' @param showLabels a logical as to whether to display axes labels on all plots, default is TRUE.
+#' @param call a call in which all of the specified arguments are specified by their full names
 #' @param ... keyword value pairs passed off to \code{l_plot()} which constructs each loon scatterplot component.
 #'
 #'
@@ -38,7 +39,7 @@
 l_plot_ts <- function(x,
                       color = l_getOption("color"),
                       size = l_getOption("size"),
-                      lcolor = l_getOption("color"),
+                      linecolor = l_getOption("color"),
                       linewidth = l_getOption("linewidth"),
                       xlabel = NULL,  ylabel = NULL,
                       title = NULL, tk_title = NULL,
@@ -46,6 +47,7 @@ l_plot_ts <- function(x,
                       showScales=TRUE,
                       showGuides=TRUE,
                       showLabels=TRUE,
+                      call = match.call(),
                       ...) {
 
     stlOrDecomposedTS <- x  # Just to remind us about what x is
@@ -137,11 +139,16 @@ l_plot_ts <- function(x,
         parent <- l_toplevel()
     }
 
+
+    modifiedLinkedStates <- l_modifiedLinkedStates("l_plot", names(call))
+
     subwin <- l_subwin(parent, 'ts')
     tktitle(parent) <- paste(tk_title, "--path:", subwin)
     child <- as.character(tcl('frame', subwin))
 
     dotArgs$parent <- child
+    dotArgs$color <- color
+    dotArgs$size <- size
 
     sync <- dotArgs[['sync']]
     # if null, it is always **pull**
@@ -153,7 +160,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.raw$x,
                           y = xy.raw$y,
-                          color = color, size = size,
                           ylabel = ylabel[1],
                           xlabel = xlabel[1],
                           title = title,
@@ -167,7 +173,7 @@ l_plot_ts <- function(x,
     l1 <- l_layer_line(p1,
                        x = xy.raw$x,
                        y= xy.raw$y,
-                       color= lcolor,
+                       color= linecolor,
                        linewidth = linewidth, index="end")
 
 
@@ -176,7 +182,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.trend$x,
                           y = xy.trend$y,
-                          color = color, size = size,
                           ylabel = ylabel[2],
                           xlabel = xlabel[2],
                           showScales = showScales,
@@ -189,7 +194,7 @@ l_plot_ts <- function(x,
     l2 <- l_layer_line(p2,
                        x= xy.trend$x,
                        y= xy.trend$y,
-                       color=lcolor, linewidth = linewidth,
+                       color=linecolor, linewidth = linewidth,
                        index="end")
 
     p3 <- do.call(l_plot,
@@ -197,7 +202,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.seasonal$x,
                           y = xy.seasonal$y,
-                          color = color, size=size,
                           ylabel = ylabel[3],
                           xlabel = xlabel[3],
                           showScales = showScales,
@@ -210,7 +214,7 @@ l_plot_ts <- function(x,
     l3 <- l_layer_line(p3,
                        x = xy.seasonal$x,
                        y = xy.seasonal$y,
-                       color = lcolor,
+                       color = linecolor,
                        linewidth = linewidth ,
                        index="end")
 
@@ -219,7 +223,6 @@ l_plot_ts <- function(x,
                       list(
                           x = xy.remainder$x,
                           y = xy.remainder$y,
-                          color = color, size=size,
                           ylabel = ylabel[4],
                           xlabel = xlabel[4],
                           showScales = showScales,
@@ -232,7 +235,7 @@ l_plot_ts <- function(x,
     l4 <- l_layer_line(p4,
                        x = xy.remainder$x,
                        y = xy.remainder$y,
-                       color = lcolor, linewidth = linewidth,
+                       color = linecolor, linewidth = linewidth,
                        index="end")
 
     ## make the canvas resize to fairly small
@@ -244,18 +247,59 @@ l_plot_ts <- function(x,
                } else {
                    tkconfigure(paste(p,".canvas", sep=''), width=500, height=150)
                }
-
-               l_configure(p,
-                           linkingGroup = linkingGroup,
-                           sync = sync)
            })
 
-    dotArgs$color <- color
-    dotArgs$size <- size
-    if(!new.linkingGroup)
-        l_linkingWarning(plots, sync, dotArgs)
+    # configure sync
+    len <- length(plots)
+    lapply(seq(len),
+           function(i) {
 
-    lapply(seq(length(plots)),
+               plot <- plots[[i]]
+               type <- class(plot)[1L]
+
+               if(!new.linkingGroup) {
+
+                   syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+                   # give message once
+                   if(i == 1L && syncTemp == "push") {
+                       message("The modification of linked states is not detected",
+                               " so that the default settings will be pushed to all plots")
+                   }
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = syncTemp)
+
+                   if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+                       do.call(l_configure,
+                               c(
+                                   list(
+                                       target = plot,
+                                       linkingGroup = linkingGroup,
+                                       sync = sync
+                                   ),
+                                   dotArgs[modifiedLinkedStates]
+                               )
+                       )
+                   } else {
+
+                       # all four plots are the same type
+                       # so give warnings once
+                       if(i == 1L)
+                           l_linkingWarning(plot, sync,
+                                            args = dotArgs,
+                                            modifiedLinkedStates = modifiedLinkedStates)
+                   }
+
+               } else {
+
+                   l_configure(plot,
+                               linkingGroup = linkingGroup,
+                               sync = sync)
+               }
+           })
+
+    lapply(seq(len),
            function(i) {
                tkgrid(plots[[i]],
                       row = i - 1,

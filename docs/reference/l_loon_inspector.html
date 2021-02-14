@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -167,7 +167,10 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>parent</th>
-      <td><p>parent widget path</p></td>
+      <td><p>a valid Tk parent widget path. When the parent widget is
+specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
+some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
+order to be displayed. See the examples below.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -177,7 +180,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>widget handle</p>
+    <p>a loon widget</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_inspectors")</a></code></p>

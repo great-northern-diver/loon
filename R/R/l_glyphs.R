@@ -407,7 +407,7 @@ l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, labe
 #'
 #' @family glyph functions
 #' @inheritParams l_glyph_add.default
-#' @inheritParams l_serialaxes
+#' @inheritParams l_serialaxes.default
 #' @param andrews Andrew's curve (a 'Fourier' transformation)
 #' @param linewidth linewidth of outline
 #' @param axesColor color of axes

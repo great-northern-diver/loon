@@ -10,7 +10,7 @@
 #' \item{\code{"cross"}: only the scales in the same row and the same column are connected;}
 #' \item{\code{"none"}: neither "x" nor "y" scales are connected in any panels.}
 #' }
-#' @param linkingGroup string giving the linkingGroup for all plots.  If missing,
+#' @param linkingGroup string giving the linkingGroup for all plots. If missing,
 #' a default \code{linkingGroup} will be determined from deparsing the \code{data}.
 #' @param linkingKey a vector of strings to provide a linking identity for each row of the
 #' \code{data} data.frame.  If missing, a default \code{linkingKey} will be \code{0:(nrows(data)-1)}.
@@ -70,13 +70,20 @@ l_pairs <- function(data,
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
                     span = 10L, ...) {
 
+  substitueData <- deparse(substitute(data))
+  # matrix input
+  data <- as.data.frame(data)
+
   dotArgs <- list(...)
 
   new.linkingGroup <- FALSE
   if (missing(linkingGroup)) {
     new.linkingGroup <- TRUE
-    linkingGroup <- paste0("l_pairs_", deparse(substitute(data)))
+    linkingGroup <- paste0("l_pairs_", substitueData)
   }
+
+  call <- match.call()
+
   # Use default as in tcl/tk
   if (missing(linkingKey)) {
     linkingKey <- NULL
@@ -130,7 +137,7 @@ l_pairs <- function(data,
   child <- as.character(tcl('frame', subwin))
 
   title <- paste("loon scatterplot matrix for",
-                 deparse(substitute(data)), "data", "--path:", subwin)
+                 substitueData, "data", "--path:", subwin)
   tktitle(parent) <- title
   ## parent for individual scatterplots
   dotArgs[['parent']] <- child
@@ -273,13 +280,6 @@ l_pairs <- function(data,
            })
 
     histograms <- Filter(Negate(is.null), histograms)
-    # configure `linkingGroup` and `sync`
-    lapply(histograms,
-           function(h) {
-             l_configure(h,
-                         linkingGroup = linkingGroup,
-                         sync = sync)
-           })
   }
 
   if (showSerialAxes) {
@@ -299,11 +299,6 @@ l_pairs <- function(data,
     }
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
-
-    # configure `linkingGroup` and `sync`
-    l_configure(serialAxes,
-                linkingGroup = linkingGroup,
-                sync = sync)
 
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
                 width= serialAxesSpan * 50,
@@ -335,14 +330,6 @@ l_pairs <- function(data,
       names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")
     }
   }
-
-  # configure `linkingGroup` and `sync`
-  lapply(scatterplots,
-         function(s) {
-           l_configure(s,
-                       linkingGroup = linkingGroup,
-                       sync = sync)
-         })
 
   if (any(sapply(scatterplots, function(p) {is(p, 'try-error')}))) {
     if(new.toplevel) tkdestroy(parent)
@@ -393,7 +380,7 @@ l_pairs <- function(data,
   if(new.toplevel) {
     tkpack(child, fill="both", expand=TRUE)
   }
-  plotsHash <- vector(mode="list", dim(pair)[2])
+  plotsHash <- list()
   for (i in 1:dim(pair)[2]) {
     ix <- pair[2,i]
     iy <- pair[1,i]
@@ -406,14 +393,16 @@ l_pairs <- function(data,
     plotsHash[[paste("scatter_y_",
                      scatterplots[i],
                      sep="")]] <- scatterplots[shareY]
+
     if(showHistograms) {
+
       plotsHash[[paste("scatter_x_",
                        scatterplots[i],
-                       sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i]])
+                       sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i] - 1])
       if(histLocation == "edge") {
         plotsHash[[paste("swap_hist_",
                          scatterplots[i],
-                         sep="")]] <- histograms[pair[1,i] + nvar]
+                         sep="")]] <- histograms[pair[1,i] + nvar - 1]
       } else {
         plotsHash[[paste("swap_hist_",
                          scatterplots[i],
@@ -475,6 +464,7 @@ l_pairs <- function(data,
   )
 
   plots <- scatterplots
+
   if (showHistograms) {
     # synchronize hist bindings
     histsHash <- list()
@@ -485,36 +475,43 @@ l_pairs <- function(data,
     scatterX <- scatterLayout$x
     scatterY <- scatterLayout$y
 
+    lenHist <- length(histograms)
+
     if(histLocation == "edge") {
-      for(i in 1:length(histograms)) {
+
+      for(i in 1:lenHist) {
+
         nameHist <- namesHist[i]
-        if(i != 1 & i != length(histograms)) {
-          if(i <= nvar) {
-            histX <- xy_layout(nameHist)$x
-            shareX <- which(scatterX %in% histX == TRUE)
-            histsHash[[paste("hist_x_",
-                             histograms[i],sep="")]] <- c(scatterplots[shareX])
-          } else {
-            histY <- xy_layout(nameHist)$y
-            shareY <- which(scatterY %in% histY == TRUE)
-            histsHash[[paste("hist_y_",
-                             histograms[i],sep="")]] <- c(scatterplots[shareY])
-          }
+
+        if(i <= (nvar - 1)) {
+          histX <- xy_layout(nameHist)$x
+          shareX <- which(scatterX %in% histX == TRUE)
+          histsHash[[paste("hist_x_",
+                           histograms[i],sep="")]] <- c(scatterplots[shareX])
+        } else {
+          histY <- xy_layout(nameHist)$y
+          shareY <- which(scatterY %in% histY == TRUE)
+          histsHash[[paste("hist_y_",
+                           histograms[i],sep="")]] <- c(scatterplots[shareY])
         }
       }
 
     } else {
-      for(i in 1:length(histograms)){
+
+      for(i in 1:lenHist) {
+
         nameHist <- namesHist[i]
         histLayout <- xy_layout(nameHist)
         histX <- histLayout$x
         histY <- histLayout$y
         shareX <- which(scatterX %in% histX == TRUE)
         shareY <- which(scatterY %in% histY == TRUE)
+
         if(length(shareX) > 0) {
           histsHash[[paste0("hist_x_",
                             histograms[i])]] <- c(scatterplots[shareX])
         }
+
         if(length(shareY) > 0) {
           histsHash[[paste0("hist_y_",
                             histograms[i])]] <- c(scatterplots[shareY])
@@ -572,9 +569,52 @@ l_pairs <- function(data,
     plots <- c(plots, list(serialAxes = serialAxes))
   }
 
-  if(!new.linkingGroup) {
-    l_linkingWarning(plots, sync, dotArgs)
-  }
+  # configure sync
+  len <- length(plots)
+  lapply(seq(len),
+         function(i) {
+
+           plot <- plots[[i]]
+           type <- class(plot)[1L]
+
+           modifiedLinkedStates <- l_modifiedLinkedStates(type, names(call))
+
+           if(!new.linkingGroup) {
+
+
+             syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
+             # give message once
+             if(i == 1L && syncTemp == "push") {
+               message("The modification of linked states is not detected",
+                       " so that the default settings will be pushed to all plots")
+             }
+             l_configure(plot,
+                         linkingGroup = linkingGroup,
+                         sync = syncTemp)
+
+             if(sync == "push" && length(modifiedLinkedStates) > 0) {
+
+               do.call(l_configure,
+                       c(
+                         list(
+                           target = plot,
+                           linkingGroup = linkingGroup,
+                           sync = sync
+                         ),
+                         dotArgs[modifiedLinkedStates]
+                       )
+               )
+             } else {
+               l_linkingWarning(plot, sync, args = dotArgs, modifiedLinkedStates = modifiedLinkedStates)
+             }
+
+           } else {
+
+             l_configure(plot,
+                         linkingGroup = linkingGroup,
+                         sync = sync)
+           }
+         })
 
   ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
   callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings

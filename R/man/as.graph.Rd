@@ -14,22 +14,22 @@ graph object of class loongraph
 }
 \description{
 Loon's native graph class is fairly basic. The graph package (on
-  bioconductor) provides a more powerful alternative to create and work with 
-  graphs. Also, many other graph theoretic algorithms such as the complement 
-  function and some graph layout and visualization methods are implemented 
-  for the graph objects in the RBGL and Rgraphviz R packages. For more 
+  bioconductor) provides a more powerful alternative to create and work with
+  graphs. Also, many other graph theoretic algorithms such as the complement
+  function and some graph layout and visualization methods are implemented
+  for the graph objects in the RBGL and Rgraphviz R packages. For more
   information on packages that are useful to work with graphs see the
   \emph{gRaphical Models in R} CRAN Task View at
   \url{https://CRAN.R-project.org/view=gR}.
 }
 \details{
-See 
+See
   \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
   more information about the graph R package.
 }
 \examples{
 if (requireNamespace("graph", quietly = TRUE)) {
   g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-  g1 <- as.graph(g) 
+  g1 <- as.graph(g)
 }
 }

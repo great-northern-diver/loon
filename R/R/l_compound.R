@@ -27,7 +27,7 @@ l_getPlots.l_compound <- function(target){
 #' @export
 l_getPlots.loon <- function(target) {
     if(l_isLoonWidget(target)) {
-        list(target)
+        target
     } else {
         l_throwErrorIfNotLoonWidget(target)
     }

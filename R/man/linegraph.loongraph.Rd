@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{loongraph object}
 
-\item{separator}{one character - node names in x get concatenated with this 
+\item{separator}{one character - node names in x get concatenated with this
 character}
 
 \item{...}{additional arguments are not used for this methiod}

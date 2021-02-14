@@ -363,7 +363,7 @@ l_ng_ranges.default <- function(measures, data, separator=':', ...) {
 #' @examples
 #' \dontrun{
 #' if (requireNamespace("scagnostics", quietly = TRUE)) {
-#'   s <- scahnostics::scagnostics(oliveAcids)
+#'   s <- scagnostics::scagnostics(oliveAcids)
 #'   ng <- l_ng_ranges(s, oliveAcids, color=olive$Area)
 #' }
 #' }
