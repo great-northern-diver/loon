@@ -327,72 +327,72 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                name = "bounding box"),
       gTree(
         children = gList(
+          gTree(
+            children = gList(
+              # background
+              condGrob(test = showGuides,
+                       grobFun = rectGrob,
+                       name = "guides background",
+                       gp = gpar(col = NA,
+                                 fill = as_hex6color(widget['guidesBackground'])
+                       )),
+              # x major lines
+              do.call(gList,
+                      lapply(xaxis.major,
+                             function(xaxis) {
+                               condGrob(test =  showGuides,
+                                        grobFun = linesGrob,
+                                        name = paste0("guidelines: xaxis (major), x = ", xaxis),
+                                        x = unit(rep(xaxis, 2), "native"),
+                                        y =  unit(c(0, 1), "npc"),
+                                        gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
+                             })),
+              # x minor lines
+              do.call(gList,
+                      lapply(xaxis.minor,
+                             function(xaxis) {
+                               condGrob(test =  showGuides,
+                                        grobFun = linesGrob,
+                                        name = paste0("guidelines: xaxis (minor), x = ", xaxis),
+                                        x = unit(rep(xaxis,2 ), "native"),
+                                        y =  unit(c(0, 1), "npc"),
+                                        gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+
+                             })),
+              # y major lines
+              do.call(gList,
+                      lapply(yaxis.major,
+                             function(yaxis) {
+                               condGrob(test =  showGuides,
+                                        grobFun = linesGrob,
+                                        name = paste0("guidelines: yaxis (major), y = ", yaxis),
+                                        x = unit(c(0, 1), "npc") ,
+                                        y =  unit(rep(yaxis,2), "native"),
+                                        gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
+
+                             })),
+              # y minor lines
+              do.call(
+                gList,
+                lapply(yaxis.minor,
+                       function(yaxis) {
+                         condGrob(test =  showGuides,
+                                  grobFun = linesGrob,
+                                  name = paste0("guidelines: yaxis (minor), y = ", yaxis),
+                                  x = unit(c(0, 1), "npc") ,
+                                  y =  unit(rep(yaxis,2 ), "native"),
+                                  gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
+
+                       }
+                )
+              )
+            ),
+            name = "guides"),
           gTree(children = gList(xlabelGrob,
                                  ylabelGrob,
                                  titleGrob),
                 name = "labels"
           ),
-          gTree(children = gList(
-            # background
-            condGrob(test = showGuides,
-                     grobFun = rectGrob,
-                     name = "guides background",
-                     gp = gpar(col = NA,
-                               fill = as_hex6color(widget['guidesBackground'])
-                     )),
-            # x major lines
-            do.call(gList,
-                    lapply(xaxis.major,
-                           function(xaxis) {
-                             condGrob(test =  showGuides,
-                                      grobFun = linesGrob,
-                                      name = paste0("guidelines: xaxis (major), x = ", xaxis),
-                                      x = unit(rep(xaxis, 2), "native"),
-                                      y =  unit(c(0, 1), "npc"),
-                                      gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
-                           })),
-            # x minor lines
-            do.call(gList,
-                    lapply(xaxis.minor,
-                           function(xaxis) {
-                             condGrob(test =  showGuides,
-                                      grobFun = linesGrob,
-                                      name = paste0("guidelines: xaxis (minor), x = ", xaxis),
-                                      x = unit(rep(xaxis,2 ), "native"),
-                                      y =  unit(c(0, 1), "npc"),
-                                      gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
-
-                           })),
-            # y major lines
-            do.call(gList,
-                    lapply(yaxis.major,
-                           function(yaxis) {
-                             condGrob(test =  showGuides,
-                                      grobFun = linesGrob,
-                                      name = paste0("guidelines: yaxis (major), y = ", yaxis),
-                                      x = unit(c(0, 1), "npc") ,
-                                      y =  unit(rep(yaxis,2), "native"),
-                                      gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 2))
-
-                           })),
-            # y minor lines
-            do.call(
-              gList,
-              lapply(yaxis.minor,
-                     function(yaxis) {
-                       condGrob(test =  showGuides,
-                                grobFun = linesGrob,
-                                name = paste0("guidelines: yaxis (minor), y = ", yaxis),
-                                x = unit(c(0, 1), "npc") ,
-                                y =  unit(rep(yaxis,2 ), "native"),
-                                gp = gpar(col = as_hex6color(widget['guidelines']), lwd = 1))
-
-                     }
-              )
-            )
-          ),
-          name = "guides"),
-
           # Axes
           gTree(children = gList(condGrob(test =  showScales,
                                           grobFun = xaxisGrob,
