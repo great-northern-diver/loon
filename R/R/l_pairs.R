@@ -70,6 +70,11 @@ l_pairs <- function(data,
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
                     span = 10L, ...) {
 
+  ### as the number of plots rises, the running time increases dramatically
+  ### so we provide a progress bar to give the progress information
+  # the minimum length of plots to give the progress bar
+  minLenToGivePb <- 10L
+
   substitueData <- deparse(substitute(data))
   # matrix input
   data <- as.data.frame(data)
@@ -163,6 +168,30 @@ l_pairs <- function(data,
   histLocation <- match.arg(histLocation)
   histspan <- 0L
 
+  totalNumPlots <- 0L
+  numScatterPlots <- dim(pair)[2]
+  numHistPlots <- 0L
+  numSerialaxesPlot <- 0L
+
+  totalNumPlots <- totalNumPlots + numScatterPlots
+  if(showHistograms) {
+    numHistPlots <- if(histLocation == "edge") {
+      2*nvar - 2
+    } else {
+      # diag
+      nvar
+    }
+    totalNumPlots <- totalNumPlots + numHistPlots
+  }
+  if(showSerialAxes) {
+    numSerialaxesPlot <- 1
+    totalNumPlots <- totalNumPlots + numSerialaxesPlot
+  }
+
+  pbPlots <- l_txtProgressBar(min = 0, max = totalNumPlots,
+                              minLenToGivePb = minLenToGivePb,
+                              message = "Prepare Plots:")
+
   histograms <- list()
   if (showHistograms) {
     if(is.null(histArgs[['showStackedColors']])) histArgs[['showStackedColors']] <- TRUE
@@ -184,7 +213,7 @@ l_pairs <- function(data,
            "edge" = {
              histspan <- round(histHeightProp * span)
              # The first half are top hists, the second half are right hists
-             index <- 2:(2*nvar - 1)
+             index <- seq(numHistPlots) + 1
              for(i in index) {
                if (i <= nvar) {
                  histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
@@ -203,6 +232,8 @@ l_pairs <- function(data,
                }
                histograms[[i]] <- do.call(l_hist, histArgs)
                names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
+
+               l_setTxtProgressBar(pbPlots, i - 1)
              }
              # throw errors
              if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
@@ -247,7 +278,7 @@ l_pairs <- function(data,
                warning("histHeightProp must be 1 when histograms are placed on diagonal")
                histHeightProp <- 1
              }
-             for(i in 1:nvar){
+             for(i in seq(numHistPlots)) {
                histArgs[['x']] <- data[[varnames[i]]] # as.numeric(data[[varnames[i]]])
                histArgs[['xlabel']] <- varnames[i]
                histArgs[['swapAxes']] <- FALSE
@@ -257,20 +288,22 @@ l_pairs <- function(data,
                layerText <- l_layer_text(histograms[[i]], xText, yText, text = names(data)[i],
                                          color = "black", size = 8)
                names(histograms)[i] <- paste('x',i,'y',i, sep="")
+
+               l_setTxtProgressBar(pbPlots, i)
              }
              # throw errors
              if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
                if(new.toplevel) tkdestroy(parent)
                stop("histogram could not be created.")
              }
-             sapply(seq_len(nvar),
+             sapply(seq_len(numHistPlots),
                     function(i) {
                       h <- histograms[[i]]
                       tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
                     }
              )
              # grid layout
-             lapply(seq_len(nvar),
+             lapply(seq_len(numHistPlots),
                     function(i){
                       tkgrid(histograms[[i]], row = (i-1) * span, column = (i-1) * span,
                              rowspan = span, columnspan = span,
@@ -304,6 +337,9 @@ l_pairs <- function(data,
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
 
+    # give progress bar
+    l_setTxtProgressBar(pbPlots, numHistPlots + 1)
+
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
                 width= serialAxesSpan * 50,
                 height = serialAxesSpan * 50)
@@ -327,6 +363,10 @@ l_pairs <- function(data,
     dotArgs[['y']] <- data[[varnames[iy]]]
 
     scatterplots[[i]] <- do.call(l_plot, dotArgs)
+
+    # give progress bar
+    l_setTxtProgressBar(pbPlots, i + numHistPlots + numSerialaxesPlot)
+
     # reset names (if showHistograms)
     if (showHistograms & histLocation == "edge") {
       names(scatterplots)[i] <- paste('x',ix,'y',iy + 1, sep="")
@@ -334,6 +374,10 @@ l_pairs <- function(data,
       names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")
     }
   }
+
+  # close the pb
+  l_close(pbPlots)
+
   namesScatter <- names(scatterplots)
   scatterLayout <- xy_layout(namesScatter)
   scatterX <- scatterLayout$x
@@ -347,7 +391,9 @@ l_pairs <- function(data,
   ## resize the min canvas size
   sapply(scatterplots,
          function(p) {
-           tkconfigure(paste(p,'.canvas',sep=''), width=50, height=50)
+           tkconfigure(paste(p,'.canvas',sep=''),
+                       width=50,
+                       height=50)
          }
   )
 
@@ -388,8 +434,12 @@ l_pairs <- function(data,
   if(new.toplevel) {
     tkpack(child, fill="both", expand=TRUE)
   }
+
+  pbScales <- l_txtProgressBar(min = 0, max = numScatterPlots,
+                               minLenToGivePb = minLenToGivePb,
+                               message = "Bind Scales:")
   plotsHash <- list()
-  for (i in 1:dim(pair)[2]) {
+  for (i in seq(numScatterPlots)) {
     ix <- pair[2,i]
     iy <- pair[1,i]
 
@@ -398,21 +448,16 @@ l_pairs <- function(data,
 
     tmpY <- which(pair[1,] == iy)
     shareY <- tmpY[tmpY != i]
-    plotsHash[[paste("scatter_y_",
-                     scatterplots[i],
-                     sep="")]] <- scatterplots[shareY]
+    plotsHash[[paste0("scatter_y_", scatterplots[i])]] <- scatterplots[shareY]
 
     if(showHistograms) {
 
       histShareX <- which(histX %in% scatterX[i])
       histShareY <- which(histY %in% scatterY[i])
 
-      plotsHash[[paste0("scatter_x_",
-                        scatterplots[i])]] <- c(scatterplots[shareX],
-                                                histograms[histShareX])
+      plotsHash[[paste0("scatter_x_", scatterplots[i])]] <- c(scatterplots[shareX], histograms[histShareX])
 
-      plotsHash[[paste0("swap_hist_",
-                        scatterplots[i])]] <- histograms[histShareY]
+      plotsHash[[paste0("swap_hist_", scatterplots[i])]] <- histograms[histShareY]
 
       if(histLocation == "diag") {
         plotsHash[[paste0("hist_sync_y", scatterplots[i])]] <- c(scatterplots[scatterY %in% histShareX])
@@ -423,7 +468,10 @@ l_pairs <- function(data,
                        scatterplots[i],
                        sep="")]] <- scatterplots[shareX]
     }
+
+    l_setTxtProgressBar(pbScales, i)
   }
+  l_close(pbScales)
 
   ## Make bindings for scatter synchronizing zoom and pan
   busy <- FALSE
@@ -471,65 +519,55 @@ l_pairs <- function(data,
     }
   }
 
-  if(connectedScales == "cross") {
-    lapply(scatterplots,
-           function(p) {
+  lapply(scatterplots,
+         function(p) {
+
+           if(connectedScales == "cross") {
              tcl(p, 'systembind', 'state', 'add',
                  c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
                  synchronizeScatterBindings)
            }
-    )
-  }
-
-  # forbidden scatter plots
-  lapply(scatterplots,
-         function(p) {
            tcl(p, 'systembind', 'state', 'add',
                c('showLabels', 'showScales', 'swapAxes'),
                undoScatterStateChanges)
          }
   )
 
-  plots <- scatterplots
 
+  plots <- scatterplots
   if (showHistograms) {
     # synchronize hist bindings
     histsHash <- list()
 
-    lenHist <- length(histograms)
-
+    setHistScalesStartTime <- Sys.time()
     if(histLocation == "edge") {
 
-      for(i in seq(lenHist)) {
+      for(i in seq(numHistPlots)) {
 
         if(i <= (nvar - 1)) {
 
-          shareX <- which(scatterX %in% histX[i] == TRUE)
-          histsHash[[paste("hist_x_",
-                           histograms[i],sep="")]] <- c(scatterplots[shareX])
+          shareX <- which(scatterX %in% histX[i])
+          histsHash[[paste0("hist_x_", histograms[i])]] <- c(scatterplots[shareX])
         } else {
 
-          shareY <- which(scatterY %in% histY[i] == TRUE)
-          histsHash[[paste("hist_y_",
-                           histograms[i],sep="")]] <- c(scatterplots[shareY])
+          shareY <- which(scatterY %in% histY[i])
+          histsHash[[paste0("hist_y_", histograms[i])]] <- c(scatterplots[shareY])
         }
       }
 
     } else {
 
-      for(i in seq(lenHist)) {
+      for(i in seq(numHistPlots)) {
 
-        shareX <- which(scatterX %in% histX[i] == TRUE)
-        shareY <- which(scatterY %in% histY[i] == TRUE)
+        shareX <- which(scatterX %in% histX[i])
+        shareY <- which(scatterY %in% histY[i])
 
         if(length(shareX) > 0) {
-          histsHash[[paste0("hist_x_",
-                            histograms[i])]] <- c(scatterplots[shareX])
+          histsHash[[paste0("hist_x_", histograms[i])]] <- c(scatterplots[shareX])
         }
 
         if(length(shareY) > 0) {
-          histsHash[[paste0("hist_y_",
-                            histograms[i])]] <- c(scatterplots[shareY])
+          histsHash[[paste0("hist_y_", histograms[i])]] <- c(scatterplots[shareY])
         }
       }
     }
@@ -558,24 +596,25 @@ l_pairs <- function(data,
       }
     }
 
-    if(connectedScales == "cross") {
-      # synchronize
-      lapply(histograms,
-             function(h) {
-               if(!is.null(h))
-                 tcl(h, 'systembind', 'state', 'add',
-                     c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
-                     synchronizeHistBindings)
-             })
-    }
     # forbidden
     lapply(histograms,
            function(h) {
-             if(!is.null(h))
+
+             if(is.null(h)) return(NULL)
+
+             if(connectedScales == "cross") {
+
                tcl(h, 'systembind', 'state', 'add',
-                   c('showLabels', 'showScales'),
-                   undoHistStateChanges)
+                   c('zoomX', 'panX', 'zoomY', 'panY', 'deltaX', 'deltaY'),
+                   synchronizeHistBindings)
+             }
+
+
+             tcl(h, 'systembind', 'state', 'add',
+                 c('showLabels', 'showScales'),
+                 undoHistStateChanges)
            })
+
 
     plots<- c(plots, histograms)
 
@@ -587,8 +626,11 @@ l_pairs <- function(data,
   }
 
   # configure sync
-  len <- length(plots)
-  lapply(seq(len),
+  pbLinking <- l_txtProgressBar(min = 0, max = totalNumPlots,
+                                minLenToGivePb = minLenToGivePb,
+                                message = "Configure plot linking:")
+
+  lapply(seq(totalNumPlots),
          function(i) {
 
            plot <- plots[[i]]
@@ -633,7 +675,9 @@ l_pairs <- function(data,
                          linkingGroup = linkingGroup,
                          sync = sync)
            }
+           l_setTxtProgressBar(pbLinking, i)
          })
+  l_close(pbLinking)
 
   ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
   callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings
@@ -764,3 +808,19 @@ l_getLocations.l_pairs <- function(target) {
   )
 }
 
+l_txtProgressBar <- function(min = 0, max, minLenToGivePb, style = 3, message = "") {
+  if(max > minLenToGivePb) {
+    message(message)
+    txtProgressBar(min = min, max = max, style = style)
+  } else return(NULL)
+}
+
+l_setTxtProgressBar <- function(pb, value) {
+  if(is.null(pb)) return(NULL)
+  setTxtProgressBar(pb, value)
+}
+
+l_close <- function(con, ...) {
+  if(is.null(con)) return(NULL)
+  close(con, ...)
+}
