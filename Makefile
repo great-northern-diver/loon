@@ -17,9 +17,9 @@ endif
 
 ## Make sure that make does not think
 ## that the rules are associated to an actual file
-.PHONY: all Tcl R website clean debug
+.PHONY: all Tcl R Python website clean debug
 
-all: Tcl R website
+all: Tcl R Python website
 
 Tcl:
 	echo "Make Tcl Package\n-----------"  && \
@@ -27,8 +27,13 @@ Tcl:
 
 R: copyTcl2R rdoc rbuild rinst
 
+Python: copyTcl2Python
+
 copyTcl2R:
 	./copyTcl2R.sh
+	
+copyTcl2Python:
+	./copyTcl2Python.sh
 
 rdoc:
 	cd R && \
@@ -39,7 +44,7 @@ rbuild:
 	R CMD build R --no-build-vignettes
 
 rinst:
-	$(RINSTCMD) loon_1.2.3.tar.gz
+	$(RINSTCMD) loon_1.3.2.tar.gz
 
 website:
 	rsync -av --delete R/vignettes/images/ ./docs/articles/images && \
