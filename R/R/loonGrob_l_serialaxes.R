@@ -63,13 +63,13 @@ loonGrob.l_serialaxes <- function(target, name = NULL, gp = NULL, vp = NULL) {
                            showAxes = widget['showAxes'],
                            len.xaxis = length(seqName),
                            layout = layout),
-            labelsGrobTree(showLabels = widget['showLabels'],
-                           title =  widget['title']),
-            axesLabelsGrobTree(showAxesLabels = widget['showAxesLabels'],
-                               andrews = andrews,
-                               seqName = seqName,
-                               layout = layout),
-            clipGrob(name = "clip"),
+            labelsGrobTree(showAxesLabels = widget['showAxesLabels'],
+                           showLabels = widget['showLabels'],
+                           title =  widget['title'],
+                           andrews = andrews,
+                           seqName = seqName,
+                           layout = layout),
+            clipGrob(name = "clipping region"),
             axesGrobTree(data = scaledActiveData,
                          showArea = widget['showArea'],
                          len.xaxis = ifelse(andrews,
@@ -219,24 +219,12 @@ guidesGrobTree <- function(showGuides = TRUE,
     return(gT)
 }
 
-labelsGrobTree <- function(showLabels = TRUE,
-                           title = "") {
-
-    condGrob(
-        test = showLabels & title != "",
-        grobFun = textGrob,
-        label = title,
-        name = "title",
-        y = unit(1, "npc") - unit(.8, "lines"),
-        gp = gpar(fontsize = 18, fontface="bold"),
-        vjust = .5
-    )
-}
-
-axesLabelsGrobTree <- function(showAxesLabels = TRUE,
-                               andrews = FALSE,
-                               seqName = NULL,
-                               layout = c("parallel", "radial")) {
+labelsGrobTree <- function(showAxesLabels = TRUE,
+                           showLabels = TRUE,
+                           title = "",
+                           andrews = FALSE,
+                           seqName = NULL,
+                           layout = c("parallel", "radial")) {
 
     if(is.null(seqName)) return(grob(name = "labels"))
     layout <- match.arg(layout)
@@ -246,30 +234,41 @@ axesLabelsGrobTree <- function(showAxesLabels = TRUE,
                                      length.out = len.xaxis),
                                  2)
 
-    switch(
+    titleGrob <- condGrob(
+        test = showLabels & title != "",
+        grobFun = textGrob,
+        label = title,
+        name = "title",
+        y = unit(1, "npc") - unit(.8, "lines"),
+        gp = gpar(fontsize = 18, fontface="bold"),
+        vjust = .5
+    )
+
+    axesLabelsGrob <- switch(
         layout,
         "parallel" = {
 
             xaxis <- seq(0, 1, length.out = len.xaxis)
 
-            gT <- gTree(
-                children = do.call(
-                    gList,
-                    lapply(1:(len.xaxis),
-                           function(i) {
-                               condGrob(
-                                   test = showAxesLabels,
-                                   grobFun = textGrob,
-                                   label = seqName[i],
-                                   name = paste("label", i),
-                                   x = unit(xaxis[i], "native"),
-                                   y = unit(0, "npc") + unit(1.2, "lines"),
-                                   gp = gpar(fontsize = 9), vjust = 1
-                               )
-                           }
-                    )
-                ),
-                name = "labels"
+            gTree(
+                children =
+                    do.call(
+                        gList,
+                        lapply(1:(len.xaxis),
+                               function(i) {
+                                   condGrob(
+                                       test = showAxesLabels,
+                                       grobFun = textGrob,
+                                       label = seqName[i],
+                                       name = paste("label", i),
+                                       x = unit(xaxis[i], "native"),
+                                       y = unit(0, "npc") + unit(1.2, "lines"),
+                                       gp = gpar(fontsize = 9), vjust = 1
+                                   )
+                               }
+                        )
+                    ),
+                name = "axesLabels"
             )
         },
         "radial" = {
@@ -280,7 +279,7 @@ axesLabelsGrobTree <- function(showAxesLabels = TRUE,
             xpos <- unit(0.5, "native")
             ypos <- unit(0.5, "native")
 
-            gT <- gTree(
+            gTree(
                 children = do.call(
                     gList,
                     lapply(1:(len.xaxis),
@@ -297,9 +296,17 @@ axesLabelsGrobTree <- function(showAxesLabels = TRUE,
                            }
                     )
                 ),
-                name = "labels"
+                name = "axesLabels"
             )
         })
+
+    gT <- gTree(
+        children = gList(
+            titleGrob,
+            axesLabelsGrob
+        ),
+        name = "labels"
+    )
 
     return(gT)
 }

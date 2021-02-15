@@ -402,7 +402,7 @@ l_glyph_add_polygon <- function(widget, x, y, linewidth = 1, showArea=TRUE, labe
 
 #' @title Add a Serialaxes Glyph
 #'
-#' @description Serialaxes glyph show either a star glyph or a parralel
+#' @description Serialaxes glyph show either a star glyph or a parallel
 #'   coordinate glyph for each point.
 #'
 #' @family glyph functions

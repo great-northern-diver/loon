@@ -73,7 +73,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
                                    function(nav_id){
                                        navPathGrob(states,
                                                    navigator = l_create_handle(c(widget, nav_id)),
-                                                   name = paste0("navigation path edges", nav_id))
+                                                   name = paste0("navpath ", nav_id))
                                    })
                     ),
                     nodeGlyphGrob,
@@ -84,7 +84,7 @@ loonGrob.l_layer_graph  <- function(target, name = NULL, gp = NULL, vp = NULL) {
                                        navPointsGrob(activeNavigator,
                                                      states,
                                                      navigator = l_create_handle(c(widget, nav_id)),
-                                                     name = paste0("navigation points edges", nav_id))
+                                                     name = paste0("navpoints ", nav_id))
                                    })
                     )
                 ),

@@ -51,7 +51,7 @@ unit circle or rectangle with height 1 if scaling=none)}
 \item{...}{state arguments}
 }
 \description{
-Serialaxes glyph show either a star glyph or a parralel
+Serialaxes glyph show either a star glyph or a parallel
   coordinate glyph for each point.
 }
 \examples{
