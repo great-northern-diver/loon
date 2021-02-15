@@ -280,6 +280,10 @@ l_pairs <- function(data,
            })
 
     histograms <- Filter(Negate(is.null), histograms)
+    namesHist <- names(histograms)
+    histLayout <- xy_layout(namesHist)
+    histX <- histLayout$x
+    histY <- histLayout$y
   }
 
   if (showSerialAxes) {
@@ -330,6 +334,10 @@ l_pairs <- function(data,
       names(scatterplots)[i] <- paste('x',ix,'y',iy, sep="")
     }
   }
+  namesScatter <- names(scatterplots)
+  scatterLayout <- xy_layout(namesScatter)
+  scatterX <- scatterLayout$x
+  scatterY <- scatterLayout$y
 
   if (any(sapply(scatterplots, function(p) {is(p, 'try-error')}))) {
     if(new.toplevel) tkdestroy(parent)
@@ -396,17 +404,19 @@ l_pairs <- function(data,
 
     if(showHistograms) {
 
-      plotsHash[[paste("scatter_x_",
-                       scatterplots[i],
-                       sep="")]] <- c(scatterplots[shareX], histograms[pair[2,i] - 1])
-      if(histLocation == "edge") {
-        plotsHash[[paste("swap_hist_",
-                         scatterplots[i],
-                         sep="")]] <- histograms[pair[1,i] + nvar - 1]
-      } else {
-        plotsHash[[paste("swap_hist_",
-                         scatterplots[i],
-                         sep="")]] <- histograms[pair[1,i]]
+      histShareX <- which(histX %in% scatterX[i])
+      histShareY <- which(histY %in% scatterY[i])
+
+      plotsHash[[paste0("scatter_x_",
+                        scatterplots[i])]] <- c(scatterplots[shareX],
+                                                histograms[histShareX])
+
+      plotsHash[[paste0("swap_hist_",
+                        scatterplots[i])]] <- histograms[histShareY]
+
+      if(histLocation == "diag") {
+        plotsHash[[paste0("hist_sync_y", scatterplots[i])]] <- c(scatterplots[scatterY %in% histShareX])
+        plotsHash[[paste0("hist_sync_x", scatterplots[i])]] <- c(scatterplots[scatterX %in% histShareY])
       }
     } else {
       plotsHash[[paste("scatter_x_",
@@ -427,16 +437,33 @@ l_pairs <- function(data,
       panX <- W['panX']; panY <- W['panY']
       deltaX <- W['deltaX']; deltaY <- W['deltaY']
 
-      lapply(plotsHash[[paste("scatter_x_",W,sep="")]], function(p) {
+      lapply(plotsHash[[paste0("scatter_x_",W)]], function(p) {
+        if(is.null(p)) return(NULL)
         l_configure(p, zoomX=zoomX, panX=panX, deltaX=deltaX)
       })
-      lapply(plotsHash[[paste("scatter_y_",W,sep="")]], function(p) {
+      lapply(plotsHash[[paste0("scatter_y_",W)]], function(p) {
+        if(is.null(p)) return(NULL)
         l_configure(p, zoomY=zoomY, panY=panY, deltaY=deltaY)
       })
       if (showHistograms) {
-        lapply(plotsHash[[paste("swap_hist_",W,sep="")]], function(p) {
+        lapply(plotsHash[[paste0("swap_hist_",W)]], function(p) {
+          if(is.null(p)) return(NULL)
           l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY)
         })
+
+        if(histLocation == "diag") {
+          lapply(plotsHash[[paste0("hist_sync_x",W)]],
+                 function(p) {
+                   if(is.null(p)) return(NULL)
+                   l_configure(p, zoomX=zoomY, panX=panY, deltaX=deltaY)
+                 })
+
+          lapply(plotsHash[[paste0("hist_sync_y",W)]],
+                 function(p) {
+                   if(is.null(p)) return(NULL)
+                   l_configure(p, zoomY=zoomX, panY=panX, deltaY=deltaX)
+                 })
+        }
       }
       busy <<- FALSE
       tcl('update', 'idletasks')
@@ -468,29 +495,21 @@ l_pairs <- function(data,
   if (showHistograms) {
     # synchronize hist bindings
     histsHash <- list()
-    namesHist <- names(histograms)
-    namesScatter <- names(scatterplots)
-
-    scatterLayout <- xy_layout(namesScatter)
-    scatterX <- scatterLayout$x
-    scatterY <- scatterLayout$y
 
     lenHist <- length(histograms)
 
     if(histLocation == "edge") {
 
-      for(i in 1:lenHist) {
-
-        nameHist <- namesHist[i]
+      for(i in seq(lenHist)) {
 
         if(i <= (nvar - 1)) {
-          histX <- xy_layout(nameHist)$x
-          shareX <- which(scatterX %in% histX == TRUE)
+
+          shareX <- which(scatterX %in% histX[i] == TRUE)
           histsHash[[paste("hist_x_",
                            histograms[i],sep="")]] <- c(scatterplots[shareX])
         } else {
-          histY <- xy_layout(nameHist)$y
-          shareY <- which(scatterY %in% histY == TRUE)
+
+          shareY <- which(scatterY %in% histY[i] == TRUE)
           histsHash[[paste("hist_y_",
                            histograms[i],sep="")]] <- c(scatterplots[shareY])
         }
@@ -498,14 +517,10 @@ l_pairs <- function(data,
 
     } else {
 
-      for(i in 1:lenHist) {
+      for(i in seq(lenHist)) {
 
-        nameHist <- namesHist[i]
-        histLayout <- xy_layout(nameHist)
-        histX <- histLayout$x
-        histY <- histLayout$y
-        shareX <- which(scatterX %in% histX == TRUE)
-        shareY <- which(scatterY %in% histY == TRUE)
+        shareX <- which(scatterX %in% histX[i] == TRUE)
+        shareY <- which(scatterY %in% histY[i] == TRUE)
 
         if(length(shareX) > 0) {
           histsHash[[paste0("hist_x_",
@@ -529,10 +544,12 @@ l_pairs <- function(data,
         deltaX <- W['deltaX']; deltaY <- W['deltaY']
 
         lapply(histsHash[[paste("hist_x_",W,sep="")]], function(h) {
+          if(is.null(h)) return(NULL)
           l_configure(h, zoomX=zoomX, panX=panX, deltaX=deltaX)
         })
 
         lapply(histsHash[[paste("hist_y_",W,sep="")]], function(h) {
+          if(is.null(h)) return(NULL)
           l_configure(h, zoomY=zoomX, panY=panX, deltaY=deltaX)
         })
         busy <<- FALSE
@@ -581,7 +598,6 @@ l_pairs <- function(data,
 
            if(!new.linkingGroup) {
 
-
              syncTemp <- ifelse(length(modifiedLinkedStates) == 0,  sync, "pull")
              # give message once
              if(i == 1L && syncTemp == "push") {
@@ -605,7 +621,10 @@ l_pairs <- function(data,
                        )
                )
              } else {
-               l_linkingWarning(plot, sync, args = dotArgs, modifiedLinkedStates = modifiedLinkedStates)
+               if(i == 1L) {
+                 l_linkingWarning(plot, sync, args = dotArgs,
+                                  modifiedLinkedStates = modifiedLinkedStates)
+               }
              }
 
            } else {
