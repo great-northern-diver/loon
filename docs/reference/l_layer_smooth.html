@@ -160,10 +160,10 @@
 
     <pre class="usage"><span class='fu'>l_layer_smooth</span><span class='op'>(</span>
   <span class='va'>widget</span>,
-  <span class='va'>x</span>,
+  x <span class='op'>=</span> <span class='cn'>NULL</span>,
   y <span class='op'>=</span> <span class='cn'>NULL</span>,
   method <span class='op'>=</span> <span class='st'>"loess"</span>,
-  group_by <span class='op'>=</span> <span class='st'>"color"</span>,
+  group <span class='op'>=</span> <span class='st'>""</span>,
   formula <span class='op'>=</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>,
   se <span class='op'>=</span> <span class='cn'>TRUE</span>,
   n <span class='op'>=</span> <span class='fl'>80</span>,
@@ -171,9 +171,11 @@
   level <span class='op'>=</span> <span class='fl'>0.95</span>,
   method.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
   linecolor <span class='op'>=</span> <span class='st'>"steelblue"</span>,
-  se_color <span class='op'>=</span> <span class='st'>"gray80"</span>,
+  secolor <span class='op'>=</span> <span class='st'>"gray80"</span>,
   linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-  se_width <span class='op'>=</span> <span class='fl'>4</span>,
+  sewidth <span class='op'>=</span> <span class='fl'>4</span>,
+  linedash <span class='op'>=</span> <span class='st'>""</span>,
+  sedash <span class='op'>=</span> <span class='st'>""</span>,
   label <span class='op'>=</span> <span class='st'>"smooth"</span>,
   parent <span class='op'>=</span> <span class='st'>"root"</span>,
   index <span class='op'>=</span> <span class='fl'>0</span>,
@@ -201,10 +203,10 @@
 e.g. "lm", "glm", "loess" or a function, e.g. MASS::rlm or mgcv::gam, stats::lm, or stats::loess.</p></td>
     </tr>
     <tr>
-      <th>group_by</th>
+      <th>group</th>
       <td><p>Coordinates can be grouped by aesthetics attributes, e.g. "color".
-If <code>x</code> and <code>y</code> are inherited from widget, <code>group_by</code> can be set as any N
-dimensional states of corresponding widget; if not, <code>group_by</code> can only be set as either "linecolor" or "linewidth"</p></td>
+If <code>x</code> and <code>y</code> are inherited from widget, <code>group</code> can be set as any N
+dimensional states of corresponding widget; if not, <code>group</code> can only be set as either "linecolor" or "linewidth"</p></td>
     </tr>
     <tr>
       <th>formula</th>
@@ -236,16 +238,24 @@ dimensional states of corresponding widget; if not, <code>group_by</code> can on
 If coordinates are inherited from widget, the linecolor can only be set via <code><a href='l_configure.html'>l_configure</a></code></p></td>
     </tr>
     <tr>
-      <th>se_color</th>
-      <td><p>fitted standard deviation polyline color</p></td>
+      <th>secolor</th>
+      <td><p>fitted standard deviation line color</p></td>
     </tr>
     <tr>
       <th>linewidth</th>
       <td><p>fitted line width</p></td>
     </tr>
     <tr>
-      <th>se_width</th>
-      <td><p>fitted standard deviation polyline width</p></td>
+      <th>sewidth</th>
+      <td><p>fitted standard deviation line width</p></td>
+    </tr>
+    <tr>
+      <th>linedash</th>
+      <td><p>fitted line dash</p></td>
+    </tr>
+    <tr>
+      <th>sedash</th>
+      <td><p>fitted standard deviation line dash</p></td>
     </tr>
     <tr>
       <th>label</th>
@@ -268,12 +278,13 @@ If coordinates are inherited from widget, the linecolor can only be set via <cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>iris</span>, color <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>
-<span class='co'># the fits are grouped by points color</span>
+<span class='co'>#' # the fitted line is based on all active points</span>
 <span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
 <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l1</span><span class='op'>)</span>
-<span class='co'># the fitted line is based on all points</span>
-<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>, group_by <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+<span class='co'># the fits are grouped by points color</span>
+<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>, group <span class='op'>=</span> <span class='st'>"color"</span><span class='op'>)</span>
 <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>
 
 <span class='co'># Draw a fitted line based on a new data set</span>
@@ -285,21 +296,21 @@ If coordinates are inherited from widget, the linecolor can only be set via <cod
                      linecolor <span class='op'>=</span> <span class='st'>"firebrick"</span><span class='op'>)</span>
 
 <span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>mgcv</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+  <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l3</span><span class='op'>)</span>
   <span class='co'># a full tensor product smooth</span>
   <span class='co'>## linecolor is the same with the points color</span>
-  <span class='va'>l4</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p1</span>,
+  <span class='va'>l4</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>,
                        method <span class='op'>=</span> <span class='st'>"gam"</span>,
                        formula <span class='op'>=</span> <span class='va'>y</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/te.html'>te</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
   <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l4</span><span class='op'>)</span>
-  <span class='co'>## linecolor is set as the default input color 'steelblue'</span>
-  <span class='va'>l5</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p1</span>,
-                       x <span class='op'>=</span> <span class='va'>p1</span><span class='op'>[</span><span class='st'>'x'</span><span class='op'>]</span>,
-                       y <span class='op'>=</span> <span class='va'>p1</span><span class='op'>[</span><span class='st'>'y'</span><span class='op'>]</span>,
-                       method <span class='op'>=</span> <span class='st'>"gam"</span>,
-                       formula <span class='op'>=</span> <span class='va'>y</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/pkg/mgcv/man/te.html'>te</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
+
+<span class='co'># facets</span>
+<span class='va'>fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_facet.html'>l_facet</a></span><span class='op'>(</span><span class='va'>p</span>, by <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>, inheritLayers <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>l5</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>fp</span>, method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span>
 <span class='op'>}</span>
+
+
 
 </div></pre>
   </div>
