@@ -1,3 +1,61 @@
+# loon 1.3.2
+
+* Updated linking to once again be more natural
+
+  **Problem**: If a plot `p1` say already exists and participates in
+  some linking group, say "mylinkingGroup", then creating a new plot in the same linking group
+  via the command line console (that is not using the inspector) then some decisions on syncing the new plot's linked states need to be made.  
+  
+  To this end, the new plot can make decisions via the argument `sync` as in
+  
+  `p2 <- l_plot(x, linkingGroup = "myLinkingGroup", sync = "pull", ...)`
+  
+  or
+  
+  `p2 <- l_plot(x, linkingGroup = "myLinkingGroup", sync = "push", ...)`
+  
+  If a value for `sync` is not given, it will default to `sync = "pull"`, the idea being that the user intends to pull all linkable state values because they indicated having `p2` join the group at the time of its creation.
+  
+  What has to be considered is what happens if, in the remaining `...` arguments, the user simultaneously includes values for some of the linkable states such as `color = "red"`.  
+  
+  The solution below tries to infer some of the intention of the user, when it can, and warn when it cannot.
+  
+  
+  **Solution**:  Suppose that `p1` exists as a plot in `linkingGroup = "myLinkingGroup"` and the user is now creating a new plot, say `p2`, with argument `linkingGroup = "myLinkingGroup"` given in the call to create `p2`.
+  
+  If  
+  
+  1. the argument `sync = "push"` is given in the call, then 
+  
+     a. if **any** linkable states are explicitly given as part of the call:
+     
+        - those **explicitly given** will have their values **pushed** to all members of the group; 
+        - those **not explicitly given** explicitly will **not be pushed**.
+    		
+     b. if **no**  linkable states are explicitly given as part of the call:
+     
+        - **all** linkable states will have their **default values pushed** to the group **and** a warning given.
+    		
+	2. the argument is `sync = "pull"` (either by default or explicitly given to be `"pull"`) **and** the values are explicitly specified for some linkable states, then 
+	   - these are ignored, and
+	   - if they are different from the values of those states shared by the group, a warning is given.
+	   
+
+* For a `loon` histogram, if the input is a list, the histogram will be split into multiple panels. The `x` of each facet corresponds to an element in that list
+
+*  A new feature has been added to `l_serialaxes(..., andrews = TRUE)` that will produce Andrews's Fourier functional curves for the data.
+
+* A new statistical layer `l_layer_smooth` will generate a smooth for the active points and add it as a layer
+
+
+*  Minor bugs were fixed/improvements made such as 
+
+   - allowing a single point plot to be drawn with polygon glyph
+   - having the pairs pan and zoom work when histograms are shown on the diagonal
+   - progress bars added for pairs (and other l_compounds) when there are a lot of plots to be constructed.
+   - compound plots (e.g. pairs plots) now accept any parent so that they can be later packed as part of some more complex user defined plot
+
+
 # loon 1.3.1
 
 * Added new functions l_loonWidgets() which returns widgets of all 
