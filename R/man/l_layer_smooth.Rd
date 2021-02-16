@@ -6,10 +6,10 @@
 \usage{
 l_layer_smooth(
   widget,
-  x,
+  x = NULL,
   y = NULL,
   method = "loess",
-  group_by = "color",
+  group = "",
   formula = y ~ x,
   se = TRUE,
   n = 80,
@@ -17,9 +17,11 @@ l_layer_smooth(
   level = 0.95,
   method.args = list(),
   linecolor = "steelblue",
-  se_color = "gray80",
+  secolor = "gray80",
   linewidth = 2,
-  se_width = 4,
+  sewidth = 4,
+  linedash = "",
+  sedash = "",
   label = "smooth",
   parent = "root",
   index = 0,
@@ -36,9 +38,9 @@ l_layer_smooth(
 \item{method}{Smoothing method (function) to use, accepts either a character vector,
 e.g. "lm", "glm", "loess" or a function, e.g. MASS::rlm or mgcv::gam, stats::lm, or stats::loess.}
 
-\item{group_by}{Coordinates can be grouped by aesthetics attributes, e.g. "color".
-If \code{x} and \code{y} are inherited from widget, \code{group_by} can be set as any N
-dimensional states of corresponding widget; if not, \code{group_by} can only be set as either "linecolor" or "linewidth"}
+\item{group}{Coordinates can be grouped by aesthetics attributes, e.g. "color".
+If \code{x} and \code{y} are inherited from widget, \code{group} can be set as any N
+dimensional states of corresponding widget; if not, \code{group} can only be set as either "linecolor" or "linewidth"}
 
 \item{formula}{Formula to use in smoothing function, eg. y ~ x, y ~ poly(x, 2), y ~ log(x)}
 
@@ -55,11 +57,15 @@ dimensional states of corresponding widget; if not, \code{group_by} can only be 
 \item{linecolor}{fitted line color. Note that the \code{linecolor} of fitted lines are respect to whether \code{x} and \code{y} are provided.
 If coordinates are inherited from widget, the linecolor can only be set via \code{\link{l_configure}}}
 
-\item{se_color}{fitted standard deviation polyline color}
+\item{secolor}{fitted standard deviation line color}
 
 \item{linewidth}{fitted line width}
 
-\item{se_width}{fitted standard deviation polyline width}
+\item{sewidth}{fitted standard deviation line width}
+
+\item{linedash}{fitted line dash}
+
+\item{sedash}{fitted standard deviation line dash}
 
 \item{label}{label used in the layers inspector}
 
@@ -74,12 +80,13 @@ Display a smooth line layer
 }
 \examples{
 if(interactive()) {
+
 p <- l_plot(iris, color = iris$Species)
-# the fits are grouped by points color
+#' # the fitted line is based on all active points
 l1 <- l_layer_smooth(p)
 l_layer_hide(l1)
-# the fitted line is based on all points
-l2 <- l_layer_smooth(p, group_by = "")
+# the fits are grouped by points color
+l2 <- l_layer_smooth(p, group = "color")
 l_layer_hide(l2)
 
 # Draw a fitted line based on a new data set
@@ -91,20 +98,20 @@ l3 <- l_layer_smooth(p,
                      linecolor = "firebrick")
 
 if(require(mgcv)) {
-  p1 <- l_plot(iris)
+  l_layer_hide(l3)
   # a full tensor product smooth
   ## linecolor is the same with the points color
-  l4 <- l_layer_smooth(p1,
+  l4 <- l_layer_smooth(p,
                        method = "gam",
                        formula = y~te(x))
   l_layer_hide(l4)
-  ## linecolor is set as the default input color 'steelblue'
-  l5 <- l_layer_smooth(p1,
-                       x = p1['x'],
-                       y = p1['y'],
-                       method = "gam",
-                       formula = y~te(x))
 }
+
+# facets
+fp <- l_facet(p, by = iris$Species, inheritLayers = FALSE)
+l5 <- l_layer_smooth(fp, method = "lm")
 }
+
+
 
 }

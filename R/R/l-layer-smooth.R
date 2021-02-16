@@ -5,9 +5,9 @@
 #' @param y The \code{y} coordinates of line. If it is not provided, \code{y} will be inherited from widget
 #' @param method Smoothing method (function) to use, accepts either a character vector,
 #' e.g. "lm", "glm", "loess" or a function, e.g. MASS::rlm or mgcv::gam, stats::lm, or stats::loess.
-#' @param group_by Coordinates can be grouped by aesthetics attributes, e.g. "color".
-#' If \code{x} and \code{y} are inherited from widget, \code{group_by} can be set as any N
-#' dimensional states of corresponding widget; if not, \code{group_by} can only be set as either "linecolor" or "linewidth"
+#' @param group Coordinates can be grouped by aesthetics attributes, e.g. "color".
+#' If \code{x} and \code{y} are inherited from widget, \code{group} can be set as any N
+#' dimensional states of corresponding widget; if not, \code{group} can only be set as either "linecolor" or "linewidth"
 #' @param formula Formula to use in smoothing function, eg. y ~ x, y ~ poly(x, 2), y ~ log(x)
 #' @param se Display confidence interval around smooth? (TRUE by default, see level to control.)
 #' @param n Number of points at which to evaluate smoother.
@@ -16,26 +16,27 @@
 #' @param method.args List of additional arguments passed on to the modelling function defined by method.
 #' @param linecolor fitted line color. Note that the \code{linecolor} of fitted lines are respect to whether \code{x} and \code{y} are provided.
 #' If coordinates are inherited from widget, the linecolor can only be set via \code{\link{l_configure}}
-#' @param se_color fitted standard deviation polyline color
+#' @param secolor fitted standard deviation line color
 #' @param linewidth fitted line width
-#' @param se_width fitted standard deviation polyline width
+#' @param sewidth fitted standard deviation line width
+#' @param linedash fitted line dash
+#' @param sedash fitted standard deviation line dash
 #' @param label label used in the layers inspector
 #' @param parent group layer
 #' @param index index of the newly added layer in its parent group
 #' @param ... additional state initialization arguments, see \code{\link{l_info_states}}
 #'
-#' @importFrom grDevices xy.coords
-#'
 #' @export
 #'
 #' @examples
 #' if(interactive()) {
+#'
 #' p <- l_plot(iris, color = iris$Species)
-#' # the fits are grouped by points color
+#' #' # the fitted line is based on all active points
 #' l1 <- l_layer_smooth(p)
 #' l_layer_hide(l1)
-#' # the fitted line is based on all points
-#' l2 <- l_layer_smooth(p, group_by = "")
+#' # the fits are grouped by points color
+#' l2 <- l_layer_smooth(p, group = "color")
 #' l_layer_hide(l2)
 #'
 #' # Draw a fitted line based on a new data set
@@ -47,52 +48,49 @@
 #'                      linecolor = "firebrick")
 #'
 #' if(require(mgcv)) {
-#'   p1 <- l_plot(iris)
+#'   l_layer_hide(l3)
 #'   # a full tensor product smooth
 #'   ## linecolor is the same with the points color
-#'   l4 <- l_layer_smooth(p1,
+#'   l4 <- l_layer_smooth(p,
 #'                        method = "gam",
 #'                        formula = y~te(x))
 #'   l_layer_hide(l4)
-#'   ## linecolor is set as the default input color 'steelblue'
-#'   l5 <- l_layer_smooth(p1,
-#'                        x = p1['x'],
-#'                        y = p1['y'],
-#'                        method = "gam",
-#'                        formula = y~te(x))
-#' }
 #' }
 #'
-l_layer_smooth <- function(widget, x, y = NULL, method = "loess", group_by = "color",
+#' # facets
+#' fp <- l_facet(p, by = iris$Species, inheritLayers = FALSE)
+#' l5 <- l_layer_smooth(fp, method = "lm")
+#' }
+#'
+#'
+#'
+
+l_layer_smooth <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
                            formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
-                           linecolor="steelblue", se_color = "gray80", linewidth=2, se_width = 4,
+                           linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                           linedash = "", sedash = "",
                            label="smooth", parent="root", index=0, ...) {
 
-  l_throwErrorIfNotLoonWidget(widget)
-
-  data <- l_layer_smooth_data(widget = widget, x, y = y, group_by = group_by, linecolor = linecolor, linewidth=linewidth)
-  model <- l_layer_smooth_model(data = data, method = method,
-                                formula, span, method.args)
-
-  l_layer_smooth_group(widget = widget,
-                       data = data, model = model, se = se, n = n, level = level,
-                       linecolor = linecolor, se_color = se_color, linewidth = linewidth, se_width = se_width,
-                       label = label, parent = parent, index = index, ...)
+  UseMethod("l_layer_smooth")
 }
 
-# get data
-l_layer_smooth_data <- function(widget, x, y = NULL, group_by = "color", linecolor="steelblue", linewidth=2) {
+#' @export
+l_layer_smooth.l_plot <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
+                                  formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
+                                  linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                                  linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
 
   l_throwErrorIfNotLoonWidget(widget)
 
   # inherits coords from widget
   inherit <- FALSE
-  if(missing(x)) {
-    x <- widget['x']
+  active <- widget['active']
+  if(is.null(x)) {
+    x <- widget['x'][active]
     inherit <- TRUE
   }
   if(is.null(y)) {
-    y <- try(widget['y'])
+    y <- try(widget['y'][active])
     if(length(y) != length(x))
       y <- NULL
   }
@@ -101,47 +99,97 @@ l_layer_smooth_data <- function(widget, x, y = NULL, group_by = "color", linecol
   x <- xy$x
   y <- xy$y
 
-  if(inherit) {
+  N <- length(x)
 
-    group_by <- valid_group_by(widget, group_by)
+  if(N <= 1) {
+    warning("Not enough points to fit the line")
+    return(
+      l_layer_group(widget,
+                    label = label,
+                    parent = parent,
+                    index = index)
+    )
+  }
 
-    data <- data.frame(x = x,
-                       y = y, stringsAsFactors = FALSE)
+  originalData <- data.frame(x = x,
+                             y = y,
+                             stringsAsFactors = FALSE)
 
-    if(length(group_by) == 0) return(list(data))
-    if(length(group_by) == 1 && group_by == "") return(list(data))
-
-    data <- cbind(data,
-                  groupedStates(widget,
-                                group_by = group_by),
-                  stringsAsFactors = FALSE)
-    split(data,
-          f = lapply(group_by, function(by) data[[by]]),
-          drop = TRUE)
-
+  if(length(group) == 0 || (length(group) == 1 && group == "") || is.na(group)) {
+    data <- list(originalData)
   } else {
 
-    data <- data.frame(x = x,
-                       y = y,
-                       color = linecolor,
-                       width = linewidth, stringsAsFactors = FALSE)
-    if(length(group_by) == 0) return(list(data))
-    if(length(group_by) == 1 && group_by == "") return(list(data))
+    stateNames <- l_nDimStateNames(widget)
+    states <- setNames(lapply(stateNames, function(x) widget[x]), stateNames)
 
-    split(data,
-          f = lapply(group_by,
-                     function(by) {
-                       if(grepl("color", by)) {
-                         data[["color"]]
-                       } else if(grepl("width", by)) {
-                         data[["width"]]
-                       } else NULL
-                     }),
-          drop = TRUE)
+    group <- by2Data(by = group,
+                     bySubstitute = substitute(group),
+                     n = N, args = states, l_className = "l_plot")
+
+    data <- split(originalData,
+                  f = as.list(group),
+                  drop = TRUE)
   }
+
+  model <- l_layer_smooth_model(data = data, method = method,
+                                formula, span, method.args)
+
+  l_layer_smooth_group(widget = widget, data = data, model = model,
+                       se = se, n = n, level = level,
+                       linecolor = linecolor, secolor = secolor,
+                       linewidth = linewidth, sewidth = sewidth,
+                       linedash = linedash, sedash = sedash,
+                       label = label, parent = parent, index = index, ...)
 }
 
-# get data
+#' @export
+l_layer_smooth.l_graph <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
+                                   formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
+                                   linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                                   linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
+  l_layer_smooth.l_plot(w, x = x, y = y, method = method, group = group,
+                        formula = formula, se = se, n = n, span = span,
+                        level = level, method.args = method.args,
+                        linecolor=linecolor, secolor = secolor,
+                        linewidth=linewidth, sewidth = sewidth,
+                        linedash = linedash, sedash = sedash,
+                        label=label, parent=parent, index=index, ...)
+}
+
+#' @export
+l_layer_smooth.l_hist <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
+                                  formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
+                                  linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                                  linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
+  stop("Smooth line for histogram?")
+}
+
+#' @export
+l_layer_smooth.l_serialaxes <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
+                                        formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
+                                        linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                                        linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
+  stop("Smooth line for serial axes?")
+}
+
+
+#' @export
+l_layer_smooth.l_compound <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
+                                      formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
+                                      linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
+                                      linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
+  lapply(widget,
+         function(w) {
+           if(inherits(w, "l_plot") || inherits(w, "l_graph"))
+             l_layer_smooth(w, x = x, y = y, method = method, group = group,
+                            formula = formula, se = se, n = n, span = span,
+                            level = level, method.args = method.args,
+                            linecolor=linecolor, secolor = secolor,
+                            linewidth=linewidth, sewidth = sewidth,
+                            label=label, parent=parent, index=index, ...)
+         })
+}
+
 l_layer_smooth_model <- function(data, method = "loess",
                                  formula = y ~ x, span = 0.75, method.args = list()) {
 
@@ -176,8 +224,8 @@ l_layer_smooth_model <- function(data, method = "loess",
 }
 
 l_layer_smooth_group <- function(widget, data, model, se = TRUE, n = 80, level = 0.95,
-                                 linecolor="steelblue", se_color="gray80", linewidth=2, se_width = 4,
-                                 label="smooth", parent="root", index=0, ...) {
+                                 linecolor="steelblue", secolor="gray80", linewidth=2, sewidth = 4,
+                                 linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
 
   l_throwErrorIfNotLoonWidget(widget)
 
@@ -186,53 +234,57 @@ l_layer_smooth_group <- function(widget, data, model, se = TRUE, n = 80, level =
                                 parent = parent,
                                 index = index)
 
+  len_model <- length(model)
+
   stopifnot(
-    length(data) == length(model)
+    length(data) == len_model
   )
 
-  i <- 1
-  lapply(model,
-         function(m) {
+  linewidth <- rep_len(linewidth, len_model)
+  sewidth <- rep_len(sewidth, len_model)
+  linecolor <- rep_len(linecolor, len_model)
+  secolor <- rep_len(secolor, len_model)
+  linedash <- rep_len(linedash, len_model)
+  sedash <- rep_len(sedash, len_model)
 
-           d <- data[[i]]
+  for(i in seq(len_model)) {
 
-           range <- range(d$x, na.rm = TRUE)
+    d <- data[[i]]
+    m <- model[[i]]
 
-           pre <- l_predict(m, xseq = seq(range[1], range[2], length.out = n),
-                            se, level)
+    range <- range(d$x, na.rm = TRUE)
 
-           s <- l_layer_group(widget,
-                              label = paste0("line ", i),
-                              parent = smooth_group)
+    pre <- l_predict(m, xseq = seq(range[1], range[2], length.out = n),
+                     se, level)
 
-           unique_color <- if(is.null(d$color)) unique(linecolor) else unique(d$color)
-           color <- if(length(unique_color) == 1) {
-             unique_color
-           } else linecolor
+    s <- l_layer_group(widget,
+                       label = paste0("line ", i),
+                       parent = smooth_group)
 
-           if(se) {
-             # standard deviation
-             l_layer_line(widget,
-                          x = c(pre$x, rev(pre$x), pre$x[1]),
-                          y = c(pre$ymin, rev(pre$ymax), pre$ymin[1]),
-                          linewidth = se_width,
-                          color = se_color,
-                          tag = "CI",
-                          label = paste0("confidence interval ", i),
-                          parent = s,
-                          ...)
-           }
-           l_layer_line(widget,
-                        x = pre$x,
-                        y = pre$y,
-                        linewidth = linewidth,
-                        color = color,
-                        tag = "model",
-                        label = paste0("fitted line ", i),
-                        parent = s,
-                        ...)
-           i <<- i + 1
-         })
+    if(se) {
+      # standard deviation
+      l_layer_line(widget,
+                   x = c(pre$x, rev(pre$x), pre$x[1]),
+                   y = c(pre$ymin, rev(pre$ymax), pre$ymin[1]),
+                   linewidth = sewidth[i],
+                   color = secolor[i],
+                   dash = sedash[i],
+                   tag = "CI",
+                   label = paste0("confidence interval ", i),
+                   parent = s,
+                   ...)
+    }
+    l_layer_line(widget,
+                 x = pre$x,
+                 y = pre$y,
+                 linewidth = linewidth[i],
+                 color = linecolor[i],
+                 dash = linedash[i],
+                 tag = "model",
+                 label = paste0("fitted line ", i),
+                 parent = s,
+                 ...)
+  }
 
   smooth_group
 }
@@ -262,31 +314,31 @@ method_adjustification <- function(method, method.args, span = 0.75) {
   )
 }
 
-groupedStates <- function(widget, group_by) {
-
-  states <- stats::setNames(
-    lapply(group_by,
-           function(g) {
-             state <- tryCatch(
-               {
-                 if(g == "color")
-                   hex12tohex6(widget[g])
-                 else widget[g]
-               },
-               error = function(e) {
-                 NULL
-               })
-           }),
-    group_by
-  )
-
-  Filter(Negate(is.null), states)
-}
-
-valid_group_by <- function(widget, group_by) {
-  nDimStates <- l_nDimStateNames(widget)
-
-  if(length(group_by) == 0) return(NULL)
-  if(!group_by %in% nDimStates) return(NULL)
-  else intersect(group_by, nDimStates)
-}
+# groupedStates <- function(widget, group) {
+#
+#   states <- stats::setNames(
+#     lapply(group,
+#            function(g) {
+#              state <- tryCatch(
+#                {
+#                  if(g == "color")
+#                    hex12tohex6(widget[g])
+#                  else widget[g]
+#                },
+#                error = function(e) {
+#                  NULL
+#                })
+#            }),
+#     group
+#   )
+#
+#   Filter(Negate(is.null), states)
+# }
+#
+# valid_group_by <- function(widget, group) {
+#   nDimStates <- l_nDimStateNames(widget)
+#
+#   if(length(group) == 0) return(NULL)
+#   if(!group %in% nDimStates) return(NULL)
+#   else intersect(group, nDimStates)
+# }
