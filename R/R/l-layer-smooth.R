@@ -115,7 +115,8 @@ l_layer_smooth.l_plot <- function(widget, x = NULL, y = NULL, method = "loess", 
                              y = y,
                              stringsAsFactors = FALSE)
 
-  if(length(group) == 0 || (length(group) == 1 && group == "") || is.na(group)) {
+  if(length(group) == 0 || (length(group) == 1 && group == "") ||
+     (length(group) == 1 && is.na(group))) {
     data <- list(originalData)
   } else {
 
