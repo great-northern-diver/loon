@@ -147,7 +147,7 @@ l_layer_smooth.l_graph <- function(widget, x = NULL, y = NULL, method = "loess",
                                    formula = y ~ x, se = TRUE, n = 80, span = 0.75, level = 0.95, method.args = list(),
                                    linecolor="steelblue", secolor = "gray80", linewidth=2, sewidth = 4,
                                    linedash = "", sedash = "", label="smooth", parent="root", index=0, ...) {
-  l_layer_smooth.l_plot(w, x = x, y = y, method = method, group = group,
+  l_layer_smooth.l_plot(widget, x = x, y = y, method = method, group = group,
                         formula = formula, se = se, n = n, span = span,
                         level = level, method.args = method.args,
                         linecolor=linecolor, secolor = secolor,
