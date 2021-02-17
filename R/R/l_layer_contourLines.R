@@ -12,7 +12,7 @@
 #'   created
 #' @template param_parent
 #' @template param_index
-#' @param ... argumnets forwarded to \code{\link{l_layer_line}}
+#' @param ... arguments forwarded to \code{\link{l_layer_line}}
 #'
 #' @templateVar page learn_R_layer
 #' @templateVar section countourlines-heatimage-rasterimage
