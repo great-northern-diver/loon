@@ -43,6 +43,8 @@
 #'
 #' @export
 #'
+#' @importFrom utils setTxtProgressBar txtProgressBar
+#'
 #' @examples
 #' if(interactive()){
 #'
