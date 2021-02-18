@@ -152,6 +152,60 @@
       <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-132" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.2">
+<a href="#loon-132" class="anchor"></a>loon 1.3.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>Updated linking to once again be more natural</p>
+<p><strong>Problem</strong>: If a plot <code>p1</code> say already exists and participates in some linking group, say “mylinkingGroup”, then creating a new plot in the same linking group via the command line console (that is not using the inspector) then some decisions on syncing the new plot’s linked states need to be made.</p>
+<p>To this end, the new plot can make decisions via the argument <code>sync</code> as in</p>
+<p><code>p2 &lt;- l_plot(x, linkingGroup = "myLinkingGroup", sync = "pull", ...)</code></p>
+<p>or</p>
+<p><code>p2 &lt;- l_plot(x, linkingGroup = "myLinkingGroup", sync = "push", ...)</code></p>
+<p>If a value for <code>sync</code> is not given, it will default to <code>sync = "pull"</code>, the idea being that the user intends to pull all linkable state values because they indicated having <code>p2</code> join the group at the time of its creation.</p>
+<p>What has to be considered is what happens if, in the remaining <code>...</code> arguments, the user simultaneously includes values for some of the linkable states such as <code>color = "red"</code>.</p>
+<p>The solution below tries to infer some of the intention of the user, when it can, and warn when it cannot.</p>
+<p><strong>Solution</strong>: Suppose that <code>p1</code> exists as a plot in <code>linkingGroup = "myLinkingGroup"</code> and the user is now creating a new plot, say <code>p2</code>, with argument <code>linkingGroup = "myLinkingGroup"</code> given in the call to create <code>p2</code>.</p>
+<p>If</p>
+<ol>
+<li>
+<p>the argument <code>sync = "push"</code> is given in the call, then</p>
+<p>a. if <strong>any</strong> linkable states are explicitly given as part of the call:</p>
+<ul>
+<li>those <strong>explicitly given</strong> will have their values <strong>pushed</strong> to all members of the group;</li>
+<li>those <strong>not explicitly given</strong> explicitly will <strong>not be pushed</strong>.</li>
+</ul>
+<p>b. if <strong>no</strong> linkable states are explicitly given as part of the call:</p>
+<ul>
+<li>
+<strong>all</strong> linkable states will have their <strong>default values pushed</strong> to the group <strong>and</strong> a warning given.</li>
+</ul>
+</li>
+<li>
+<p>the argument is <code>sync = "pull"</code> (either by default or explicitly given to be <code>"pull"</code>) <strong>and</strong> the values are explicitly specified for some linkable states, then</p>
+<ul>
+<li>these are ignored, and</li>
+<li>if they are different from the values of those states shared by the group, a warning is given.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>For a <code>loon</code> histogram, if the input is a list, the histogram will be split into multiple panels. The <code>x</code> of each facet corresponds to an element in that list</p></li>
+<li><p>A new feature has been added to <code><a href="../reference/l_serialaxes.html">l_serialaxes(..., andrews = TRUE)</a></code> that will produce Andrews’s Fourier functional curves for the data.</p></li>
+<li><p>A new statistical layer <code>l_layer_smooth</code> will generate a smooth for the active points and add it as a layer</p></li>
+<li>
+<p>Minor bugs were fixed/improvements made such as</p>
+<ul>
+<li>allowing a single point plot to be drawn with polygon glyph</li>
+<li>having the pairs pan and zoom work when histograms are shown on the diagonal</li>
+<li>progress bars added for pairs (and other l_compounds) when there are a lot of plots to be constructed.</li>
+<li>compound plots (e.g. pairs plots) now accept any parent so that they can be later packed as part of some more complex user defined plot</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="loon-131" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.1">
 <a href="#loon-131" class="anchor"></a>loon 1.3.1<small> 2020-06-17 </small>
