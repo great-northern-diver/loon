@@ -51,7 +51,7 @@ order to be displayed. See the examples below.}
 \item{index}{position among its siblings. valid values are 0, 1, 2, ...,
 'end'}
 
-\item{...}{argumnets forwarded to \code{\link{l_layer_line}}}
+\item{...}{arguments forwarded to \code{\link{l_layer_line}}}
 }
 \value{
 layer id of group or lines layer

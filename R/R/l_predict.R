@@ -43,6 +43,8 @@
 l_predict <- function(model, ...)
   UseMethod("l_predict")
 
+#' @export
+#' @rdname l_predict
 l_predict.default <- function(model, ...) {
   stop("Unknown method")
 }

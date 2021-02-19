@@ -2,6 +2,7 @@
 % Please edit documentation in R/l_predict.R
 \name{l_predict}
 \alias{l_predict}
+\alias{l_predict.default}
 \alias{l_predict.lm}
 \alias{l_predict.nls}
 \alias{l_predict.glm}
@@ -9,6 +10,8 @@
 \title{Model Prediction}
 \usage{
 l_predict(model, ...)
+
+\method{l_predict}{default}(model, ...)
 
 \method{l_predict}{lm}(
   model,
