@@ -150,7 +150,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Layer a smooth line for <code>loon</code></h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l-layer-smooth.R'><code>R/l-layer-smooth.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/l_layer_smooth.R'><code>R/l_layer_smooth.R</code></a></small>
     <div class="hidden name"><code>l_layer_smooth.Rd</code></div>
     </div>
 
@@ -165,17 +165,16 @@
   method <span class='op'>=</span> <span class='st'>"loess"</span>,
   group <span class='op'>=</span> <span class='st'>""</span>,
   formula <span class='op'>=</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>,
-  se <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  interval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span><span class='op'>)</span>,
   n <span class='op'>=</span> <span class='fl'>80</span>,
   span <span class='op'>=</span> <span class='fl'>0.75</span>,
   level <span class='op'>=</span> <span class='fl'>0.95</span>,
-  method.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
+  methodArgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
   linecolor <span class='op'>=</span> <span class='st'>"steelblue"</span>,
-  secolor <span class='op'>=</span> <span class='st'>"gray80"</span>,
   linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-  sewidth <span class='op'>=</span> <span class='fl'>4</span>,
   linedash <span class='op'>=</span> <span class='st'>""</span>,
-  sedash <span class='op'>=</span> <span class='st'>""</span>,
+  confidenceIntervalArgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>linecolor <span class='op'>=</span> <span class='st'>"gray80"</span>, linewidth <span class='op'>=</span> <span class='fl'>4</span>, linedash <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>,
+  predictionIntervalArgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>linecolor <span class='op'>=</span> <span class='st'>"gray50"</span>, linewidth <span class='op'>=</span> <span class='fl'>3</span>, linedash <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>,
   label <span class='op'>=</span> <span class='st'>"smooth"</span>,
   parent <span class='op'>=</span> <span class='st'>"root"</span>,
   index <span class='op'>=</span> <span class='fl'>0</span>,
@@ -204,17 +203,16 @@ e.g. "lm", "glm", "loess" or a function, e.g. MASS::rlm or mgcv::gam, stats::lm,
     </tr>
     <tr>
       <th>group</th>
-      <td><p>Coordinates can be grouped by aesthetics attributes, e.g. "color".
-If <code>x</code> and <code>y</code> are inherited from widget, <code>group</code> can be set as any N
-dimensional states of corresponding widget; if not, <code>group</code> can only be set as either "linecolor" or "linewidth"</p></td>
+      <td><p>Data can be grouped by n dimensional aesthetics attributes, e.g. "color", "size".
+In addition, any length n vector or data.frame is accommodated.</p></td>
     </tr>
     <tr>
       <th>formula</th>
       <td><p>Formula to use in smoothing function, eg. y ~ x, y ~ poly(x, 2), y ~ log(x)</p></td>
     </tr>
     <tr>
-      <th>se</th>
-      <td><p>Display confidence interval around smooth? (TRUE by default, see level to control.)</p></td>
+      <th>interval</th>
+      <td><p>type of interval, could be "none", "confidence" or "prediction" (not for <code>glm</code>)</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -222,40 +220,36 @@ dimensional states of corresponding widget; if not, <code>group</code> can only 
     </tr>
     <tr>
       <th>span</th>
-      <td><p>Controls the amount of smoothing for the default loess smoother. Smaller numbers produce wigglier lines, larger numbers produce smoother lines.</p></td>
+      <td><p>Controls the amount of smoothing for the default <code>loess</code> smoother.
+Smaller numbers produce wigglier lines, larger numbers produce smoother lines.</p></td>
     </tr>
     <tr>
       <th>level</th>
       <td><p>Level of confidence interval to use (0.95 by default).</p></td>
     </tr>
     <tr>
-      <th>method.args</th>
+      <th>methodArgs</th>
       <td><p>List of additional arguments passed on to the modelling function defined by method.</p></td>
     </tr>
     <tr>
       <th>linecolor</th>
-      <td><p>fitted line color. Note that the <code>linecolor</code> of fitted lines are respect to whether <code>x</code> and <code>y</code> are provided.
-If coordinates are inherited from widget, the linecolor can only be set via <code><a href='l_configure.html'>l_configure</a></code></p></td>
-    </tr>
-    <tr>
-      <th>secolor</th>
-      <td><p>fitted standard deviation line color</p></td>
+      <td><p>fitted line color.</p></td>
     </tr>
     <tr>
       <th>linewidth</th>
       <td><p>fitted line width</p></td>
     </tr>
     <tr>
-      <th>sewidth</th>
-      <td><p>fitted standard deviation line width</p></td>
-    </tr>
-    <tr>
       <th>linedash</th>
       <td><p>fitted line dash</p></td>
     </tr>
     <tr>
-      <th>sedash</th>
-      <td><p>fitted standard deviation line dash</p></td>
+      <th>confidenceIntervalArgs</th>
+      <td><p>the line color, width and dash for confidence interval</p></td>
+    </tr>
+    <tr>
+      <th>predictionIntervalArgs</th>
+      <td><p>the line color, width and dash for prediction interval</p></td>
     </tr>
     <tr>
       <th>label</th>
@@ -278,13 +272,24 @@ If coordinates are inherited from widget, the linecolor can only be set via <cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
+<span class='co'># loess fit</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>iris</span>, color <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>
-<span class='co'>#' # the fitted line is based on all active points</span>
-<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>, interval <span class='op'>=</span> <span class='st'>"confidence"</span><span class='op'>)</span>
 <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l1</span><span class='op'>)</span>
+
 <span class='co'># the fits are grouped by points color</span>
-<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>, group <span class='op'>=</span> <span class='st'>"color"</span><span class='op'>)</span>
+<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>, group <span class='op'>=</span> <span class='st'>"color"</span>,
+                     method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span>
+
+<span class='co'># so far, all intervals are hidden</span>
+<span class='va'>ls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_getChildren.html'>l_layer_getChildren</a></span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>
+<span class='va'>intervals</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_getChildren.html'>l_layer_getChildren</a></span><span class='op'>(</span><span class='fu'><a href='l_create_handle.html'>l_create_handle</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>p</span>,<span class='va'>ls</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>ci</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_create_handle.html'>l_create_handle</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>p</span>,<span class='va'>intervals</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='l_layer_show.html'>l_layer_show</a></span><span class='op'>(</span><span class='va'>ci</span><span class='op'>)</span>
+<span class='co'># show prediction interval</span>
+<span class='va'>pi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_create_handle.html'>l_create_handle</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>p</span>,<span class='va'>intervals</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='l_layer_show.html'>l_layer_show</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>)</span>
+<span class='co'># hide all</span>
 <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l2</span><span class='op'>)</span>
 
 <span class='co'># Draw a fitted line based on a new data set</span>
@@ -293,10 +298,11 @@ If coordinates are inherited from widget, the linecolor can only be set via <cod
                      x <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>[</span><span class='va'>shortSepalLength</span><span class='op'>]</span>,
                      y <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span><span class='op'>[</span><span class='va'>shortSepalLength</span><span class='op'>]</span>,
                      method <span class='op'>=</span> <span class='st'>"lm"</span>,
-                     linecolor <span class='op'>=</span> <span class='st'>"firebrick"</span><span class='op'>)</span>
+                     linecolor <span class='op'>=</span> <span class='st'>"firebrick"</span>,
+                     interval <span class='op'>=</span> <span class='st'>"prediction"</span><span class='op'>)</span>
+<span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l3</span><span class='op'>)</span>
 
 <span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>mgcv</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'><a href='l_layer_hide.html'>l_layer_hide</a></span><span class='op'>(</span><span class='va'>l3</span><span class='op'>)</span>
   <span class='co'># a full tensor product smooth</span>
   <span class='co'>## linecolor is the same with the points color</span>
   <span class='va'>l4</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p</span>,
@@ -308,10 +314,31 @@ If coordinates are inherited from widget, the linecolor can only be set via <cod
 <span class='co'># facets</span>
 <span class='va'>fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_facet.html'>l_facet</a></span><span class='op'>(</span><span class='va'>p</span>, by <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>, inheritLayers <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='va'>l5</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>fp</span>, method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span>
+
+<span class='co'># generalized linear model</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://great-northern-diver.github.io/loon.data/'>"loon.data"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"SAheart"</span><span class='op'>)</span>
+  <span class='co'># logit regression</span>
+  <span class='va'>chd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>SAheart</span><span class='op'>$</span><span class='va'>chd</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>1</span>
+  <span class='va'>age</span> <span class='op'>&lt;-</span> <span class='va'>SAheart</span><span class='op'>$</span><span class='va'>age</span>
+  <span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>chd</span>,
+               title <span class='op'>=</span> <span class='st'>"logit regression"</span><span class='op'>)</span>
+  <span class='va'>gl1</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p1</span>,
+                        method <span class='op'>=</span> <span class='st'>"glm"</span>,
+                        methodArgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>binomial</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>,
+                        interval <span class='op'>=</span> <span class='st'>"conf"</span><span class='op'>)</span>
+
+  <span class='co'># log linear regression</span>
+  <span class='va'>counts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>18</span>,<span class='fl'>17</span>,<span class='fl'>15</span>,<span class='fl'>20</span>,<span class='fl'>10</span>,<span class='fl'>20</span>,<span class='fl'>25</span>,<span class='fl'>13</span>,<span class='fl'>12</span><span class='op'>)</span>
+  <span class='va'>age</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>40</span>,<span class='fl'>35</span>,<span class='fl'>53</span>,<span class='fl'>46</span>,<span class='fl'>20</span>,<span class='fl'>33</span>,<span class='fl'>48</span>,<span class='fl'>25</span>,<span class='fl'>23</span><span class='op'>)</span>
+  <span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>counts</span>,
+               title <span class='op'>=</span> <span class='st'>"log-linear regression"</span><span class='op'>)</span>
+  <span class='va'>gl2</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer_smooth</span><span class='op'>(</span><span class='va'>p2</span>,
+                        method <span class='op'>=</span> <span class='st'>"glm"</span>,
+                        methodArgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>poisson</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>,
+                        interval <span class='op'>=</span> <span class='st'>"conf"</span><span class='op'>)</span>
 <span class='op'>}</span>
-
-
-
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

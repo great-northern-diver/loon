@@ -257,7 +257,6 @@ reference:
     - l_layer_contourLines
     - l_layer_group
     - l_layer_heatImage
-    - l_layer_smooth
     - l_layer_line
     - l_layer_lines
     - l_layer_oval
@@ -269,6 +268,8 @@ reference:
     - l_layer_rectangles
     - l_layer_text
     - l_layer_texts
+    - l_layer_smooth
+    - l_predict
 
   - subtitle: the generic l_layer function
     desc:  various methods to layer particular objects on a loon plot

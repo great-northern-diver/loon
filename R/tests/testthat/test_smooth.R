@@ -42,4 +42,14 @@ test_that("test smooth", {
     l <- l_layer_smooth(p, group = iris$Species[51:150],
                         linecolor = unique(p['color'][p['active']]))
     expect_equal(length(l_layer_getChildren(p, l)), 2)
+
+
+    # test some arguments
+    p <- l_plot(iris, color = iris$Species)
+    l1 <- l_layer_smooth(p, group = c(rep(1, 100), rep(2, 50)),
+                         level = 0.9, method = "lm", weights = ~x^5,
+                         confidenceIntervalArgs = list(linecolor="blue", linewidth=2, linedash = 1),
+                         predictionIntervalArgs = list(linecolor="red", linewidth=5, linedash = "")
+                         )
+    expect_equal(length(l_layer_getChildren(p, l1)), 2)
 })
