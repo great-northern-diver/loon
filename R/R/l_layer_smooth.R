@@ -77,7 +77,8 @@
 #'   # logit regression
 #'   chd <- as.numeric(SAheart$chd) - 1
 #'   age <- SAheart$age
-#'   p1 <- l_plot(age, chd)
+#'   p1 <- l_plot(age, chd,
+#'                title = "logit regression")
 #'   gl1 <- l_layer_smooth(p1,
 #'                         method = "glm",
 #'                         methodArgs = list(family = binomial()),
@@ -87,7 +88,7 @@
 #'   counts <- c(18,17,15,20,10,20,25,13,12)
 #'   age <- c(40,35,53,46,20,33,48,25,23)
 #'   p2 <- l_plot(age, counts,
-#'                title = "Log-linear regression")
+#'                title = "log-linear regression")
 #'   gl2 <- l_layer_smooth(p2,
 #'                         method = "glm",
 #'                         methodArgs = list(family = poisson()),
