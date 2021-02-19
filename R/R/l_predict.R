@@ -15,17 +15,37 @@
 #' y <- rnorm(10)
 #' x <- rnorm(10)
 #' model1 <- lm(y ~ x)
+#' # formal output
 #' pre <- l_predict(model1, newdata = data.frame(x = sort(x)),
 #'                  interval = "conf")
+#' head(pre)
 #'
-#' model2 <- loess(dist ~ speed, cars)
-#' pre <- l_predict(model2,
-#'                  newdata = data.frame(speed = sort(cars$speed)),
-#'                  interval = "pred")
+#' if(interactive()) {
+#' p <- with(cars, l_plot(speed, dist))
+#' l_predict.smooth.spline <- function(model, interval = c("confidence", "none"),
+#'                                     level = 0.95, ...) {
+#' # confidence interval of `smooth.spline`
+#' # https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline
+#'   interval <- match.arg(interval)
+#'
+#'   res <- (model$yin - model$y)/(1 - model$lev)     # jackknife residuals
+#'   sigma <- sqrt(var(res))                          # estimate sd
+#'   std <- stats::qnorm(level / 2 + 0.5)
+#'   upper <- model$y + std * sigma * sqrt(model$lev) # upper 95% conf. band
+#'   lower <- model$y - std * sigma * sqrt(model$lev) # lower 95% conf. band
+#'
+#'   data.frame(y = model$yin, lower = lower, upper = upper)
+#' }
+#' l <- l_layer_smooth(p, method = "smooth.spline", interval = "confidence")
+#' }
 #'
 #' @export
 l_predict <- function(model, ...)
   UseMethod("l_predict")
+
+l_predict.default <- function(model, ...) {
+  stop("Unknown method")
+}
 
 #' @export
 #' @rdname l_predict
@@ -35,7 +55,7 @@ l_predict <- function(model, ...)
 #' @param level confidence level
 #' @param ... arguments passed in \code{predict}
 l_predict.lm <- function(model, newdata = NULL,
-                         interval = c("confidence", "none",  "prediction"),
+                         interval = c("none", "confidence", "prediction"),
                          level = 0.95, ...) {
 
   interval <- match.arg(interval)
@@ -72,7 +92,7 @@ l_predict.lm <- function(model, newdata = NULL,
 #' @rdname l_predict
 #' @export
 l_predict.nls <- function(model, newdata = NULL,
-                          interval = c("confidence", "none",  "prediction"),
+                          interval = c("none", "confidence", "prediction"),
                           level = 0.95, ...) {
 
   l_predict.lm(model, newdata,
@@ -83,7 +103,7 @@ l_predict.nls <- function(model, newdata = NULL,
 #' @rdname l_predict
 #' @export
 l_predict.glm <- function(model, newdata = NULL,
-                          interval = c("confidence", "none",  "prediction"),
+                          interval = c("none", "confidence"),
                           level = 0.95, ...) {
 
   interval <- match.arg(interval)
@@ -135,7 +155,7 @@ l_predict.glm <- function(model, newdata = NULL,
 #' @rdname l_predict
 #' @export
 l_predict.loess <- function(model, newdata = NULL,
-                            interval = c("confidence", "none",  "prediction"),
+                            interval = c("none", "confidence", "prediction"),
                             level = 0.95, ...) {
 
   interval <- match.arg(interval)
@@ -183,11 +203,18 @@ l_predict.loess <- function(model, newdata = NULL,
 #   pred <- stats::predict(model, newdata, se.fit = se)
 #
 #   if (se) {
-#     y = pred$fit
-#     lower = y - pred$se.fit
-#     upper = y + pred$se.fit
-#     data.frame(newdata, y, lower, upper, se = pred$se.fit)
+#     y <- pred$fit
+#     lower <- y - pred$se.fit
+#     upper <- y + pred$se.fit
+#
+#     if(is.null(newdata)) {
+#        data.frame(y, lower, upper)
+#     } else {
+#        data.frame(newdata, y, lower, upper)
+#     }
+#
 #   } else {
-#     data.frame(newdata, y = as.vector(pred))
+#     if(is.null(newdata)) {data.frame(y = as.vector(pred))}
+#     else {data.frame(newdata, y = as.vector(pred))}
 #   }
 # }

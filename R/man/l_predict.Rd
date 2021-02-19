@@ -13,7 +13,7 @@ l_predict(model, ...)
 \method{l_predict}{lm}(
   model,
   newdata = NULL,
-  interval = c("confidence", "none", "prediction"),
+  interval = c("none", "confidence", "prediction"),
   level = 0.95,
   ...
 )
@@ -21,7 +21,7 @@ l_predict(model, ...)
 \method{l_predict}{nls}(
   model,
   newdata = NULL,
-  interval = c("confidence", "none", "prediction"),
+  interval = c("none", "confidence", "prediction"),
   level = 0.95,
   ...
 )
@@ -29,7 +29,7 @@ l_predict(model, ...)
 \method{l_predict}{glm}(
   model,
   newdata = NULL,
-  interval = c("confidence", "none", "prediction"),
+  interval = c("none", "confidence"),
   level = 0.95,
   ...
 )
@@ -37,7 +37,7 @@ l_predict(model, ...)
 \method{l_predict}{loess}(
   model,
   newdata = NULL,
-  interval = c("confidence", "none", "prediction"),
+  interval = c("none", "confidence", "prediction"),
   level = 0.95,
   ...
 )
@@ -68,12 +68,28 @@ However, the output is unified.
 y <- rnorm(10)
 x <- rnorm(10)
 model1 <- lm(y ~ x)
+# formal output
 pre <- l_predict(model1, newdata = data.frame(x = sort(x)),
                  interval = "conf")
+head(pre)
 
-model2 <- loess(dist ~ speed, cars)
-pre <- l_predict(model2,
-                 newdata = data.frame(speed = sort(cars$speed)),
-                 interval = "pred")
+if(interactive()) {
+p <- with(cars, l_plot(speed, dist))
+l_predict.smooth.spline <- function(model, interval = c("confidence", "none"),
+                                    level = 0.95, ...) {
+# confidence interval of `smooth.spline`
+# https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline
+  interval <- match.arg(interval)
+
+  res <- (model$yin - model$y)/(1 - model$lev)     # jackknife residuals
+  sigma <- sqrt(var(res))                          # estimate sd
+  std <- stats::qnorm(level / 2 + 0.5)
+  upper <- model$y + std * sigma * sqrt(model$lev) # upper 95\% conf. band
+  lower <- model$y - std * sigma * sqrt(model$lev) # lower 95\% conf. band
+
+  data.frame(y = model$yin, lower = lower, upper = upper)
+}
+l <- l_layer_smooth(p, method = "smooth.spline", interval = "confidence")
+}
 
 }

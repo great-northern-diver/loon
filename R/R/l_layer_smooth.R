@@ -209,17 +209,6 @@ l_layer_smooth.l_graph <- function(widget, x = NULL, y = NULL, method = "loess",
 }
 
 #' @export
-l_layer_smooth.l_hist <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
-                                  formula = y ~ x, interval = c("none", "confidence","prediction"),
-                                  n = 80, span = 0.75, level = 0.95,
-                                  methodArgs = list(), linecolor="steelblue", linewidth=2, linedash = "",
-                                  confidenceIntervalArgs =  list(linecolor="gray80", linewidth=4, linedash = ""),
-                                  predictionIntervalArgs = list(linecolor="gray50", linewidth=3, linedash = 1),
-                                  label="smooth", parent="root", index=0, ...) {
-  stop("Smooth line for histogram?")
-}
-
-#' @export
 l_layer_smooth.l_compound <- function(widget, x = NULL, y = NULL, method = "loess", group = "",
                                       formula = y ~ x, interval = c("none", "confidence","prediction"),
                                       n = 80, span = 0.75, level = 0.95,
@@ -263,8 +252,8 @@ l_layer_smooth_model <- function(data, method = "loess",
                          do.call(method, c(base.args, methodArgs))
                        },
                        error = function(e) {
-                         formula <- y~x
-                         base.args <- list(quote(formula), data = quote(d))
+                         # no formula
+                         base.args <- as.list(d)
                          do.call(method, c(base.args, methodArgs))
                        }
                      )
@@ -323,13 +312,22 @@ l_layer_smooth_group <- function(widget, data, model, method = "loess", formula 
     # display both intervals
     lapply(c("confidence", "prediction"),
            function(int) {
-             if(int == "prediction" && method == "glm") return(NULL)
-             pre <- l_predict(m, newdata = data.frame(x = seq(range[1], range[2], length.out = n)),
-                              interval = int, level = level, ...)
+
+             pre <- tryCatch(
+               expr = {
+                 l_predict(model = m, newdata = data.frame(x = seq(range[1], range[2], length.out = n)),
+                           interval = int, level = level, ...)
+               },
+               error = function(e) {
+                 return(NULL)
+               }
+             )
+
+             # prediction interval (or confidence interval) is not implemented in
+             # `l_predict.xx` function
+             if(is.null(pre)) return(NULL)
 
              len <- length(pre$x)
-
-             pred <<- pre
 
              i <- l_layer_group(widget,
                                 label = paste(level, int, "interval"),
@@ -346,9 +344,17 @@ l_layer_smooth_group <- function(widget, data, model, method = "loess", formula 
                sedash <- p.sedash[j]
              }
 
+             if(is.null(pre$x)) {
+               x <- m$x
+               pred <<- data.frame(x = m$x, y = m$y)
+             } else {
+               x <- pre$x
+               pred <<- pre
+             }
+
              # intervals
              il <- l_layer_line(widget,
-                                x = pre$x,
+                                x = x,
                                 y = pre$lower,
                                 linewidth = sewidth,
                                 color = secolor,
@@ -357,7 +363,7 @@ l_layer_smooth_group <- function(widget, data, model, method = "loess", formula 
                                 parent = i)
 
              iu <- l_layer_line(widget,
-                               x = pre$x,
+                               x = x,
                                y = pre$upper,
                                linewidth = sewidth,
                                color = secolor,
