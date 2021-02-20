@@ -184,7 +184,6 @@ p['size'] <- c(10, 20)
 p['selected'] <- c(TRUE, FALSE)
 g <- loonGrob(p)
 grid.newpage(); grid.draw(g)
-
 }
 
 \dontrun{

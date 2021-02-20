@@ -113,7 +113,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
         locations,
         list(
             grobs = c(scatter_histGrobs, serialAxesGrob, if(showTexts) textGrobs else NULL),
-            name = "pairs"
+            name = "l_pairs"
         )
     )
 }
