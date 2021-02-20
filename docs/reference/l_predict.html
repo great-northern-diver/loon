@@ -254,7 +254,6 @@ two more columns, <code>lower</code> (lower interval) and <code>upper</code> (up
 <span class='no'>l_predict.smooth.spline</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>model</span>, <span class='no'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"confidence"</span>, <span class='st'>"none"</span>),
                                     <span class='no'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>) {
 <span class='co'># confidence interval of `smooth.spline`</span>
-<span class='co'># https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline</span>
   <span class='no'>interval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/match.arg.html'>match.arg</a></span>(<span class='no'>interval</span>)
 
   <span class='no'>res</span> <span class='kw'>&lt;-</span> (<span class='no'>model</span>$<span class='no'>yin</span> - <span class='no'>model</span>$<span class='no'>y</span>)/(<span class='fl'>1</span> - <span class='no'>model</span>$<span class='no'>lev</span>)     <span class='co'># jackknife residuals</span>
