@@ -19,11 +19,9 @@
 #' p['selected'] <- c(TRUE, FALSE)
 #' g <- loonGrob(p)
 #' grid.newpage(); grid.draw(g)
-#'
 #'}
 #' @export
 loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NULL) {
-
 
     widget <- l_create_handle(attr(target, "widget"))
     states <- get_layer_states(widget)
