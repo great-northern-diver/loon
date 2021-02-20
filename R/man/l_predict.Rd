@@ -81,7 +81,6 @@ p <- with(cars, l_plot(speed, dist))
 l_predict.smooth.spline <- function(model, interval = c("confidence", "none"),
                                     level = 0.95, ...) {
 # confidence interval of `smooth.spline`
-# https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline
   interval <- match.arg(interval)
 
   res <- (model$yin - model$y)/(1 - model$lev)     # jackknife residuals

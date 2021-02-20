@@ -263,6 +263,7 @@ reference:
     - l_layer_points
     - l_layer_polygon
     - l_layer_polygons
+    - l_layer_smooth
     - l_layer_rasterImage
     - l_layer_rectangle
     - l_layer_rectangles

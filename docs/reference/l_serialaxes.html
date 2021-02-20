@@ -133,7 +133,7 @@ stacked star glyph plot, or as a parallel coordinate plot." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,26 +160,26 @@ stacked star glyph plot, or as a parallel coordinate plot." />
 stacked star glyph plot, or as a parallel coordinate plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>l_serialaxes</span>(<span class='no'>data</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>l_serialaxes</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  <span class='va'>sequence</span>,
-  scaling <span class='op'>=</span> <span class='st'>"variable"</span>,
-  axesLayout <span class='op'>=</span> <span class='st'>"radial"</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>on</span>,
-  layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
-  andrews <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  showAxes <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
-  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  linewidth <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"linewidth"</span><span class='op'>)</span>,
-  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='fu'>l_serialaxes</span>(
+  <span class='no'>data</span>,
+  <span class='no'>sequence</span>,
+  <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"variable"</span>,
+  <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"radial"</span>,
+  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>on</span>,
+  <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span>),
+  <span class='kw'>andrews</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>showAxes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
+  <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"linewidth"</span>),
+  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -298,7 +298,7 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
 
 <span class='co'>#######</span>
 <span class='co'>#</span>
@@ -309,11 +309,11 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'># famous by R.A. Fisher.</span>
 <span class='co'>#</span>
 <span class='co'># First separate the measurements</span>
-<span class='va'>irisFlowers</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>
+<span class='no'>irisFlowers</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[, <span class='fl'>1</span>:<span class='fl'>4</span>]
 <span class='co'># from their species</span>
-<span class='va'>species</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span>
+<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>[,<span class='fl'>5</span>]
 <span class='co'># and get some identifiers for the individual flowers</span>
-<span class='va'>flowerIDs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>species</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span><span class='op'>)</span>
+<span class='no'>flowerIDs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>species</span>, <span class='fl'>1</span>:<span class='fl'>50</span>)
 <span class='co'>#</span>
 <span class='co'># Now create parallel axes plots of the measurements</span>
 <span class='co'># using different scaling values.</span>
@@ -338,15 +338,15 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'># crossings) across species but more positively correlated (mostly</span>
 <span class='co'># parallel lines) within each species (colour).</span>
 <span class='co'>#</span>
-<span class='va'>sa_var</span> <span class='op'>&lt;-</span> <span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>irisFlowers</span>,
-                       scaling <span class='op'>=</span> <span class='st'>"variable"</span>,    <span class='co'># scale within column</span>
-                       axesLayout <span class='op'>=</span> <span class='st'>"parallel"</span>,
-                       color <span class='op'>=</span> <span class='va'>species</span>,
-                       linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-                       itemLabel <span class='op'>=</span> <span class='va'>flowerIDs</span>,
-                       showItemLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
-                       title <span class='op'>=</span> <span class='st'>"scaling = variable (initially)"</span>,
-                       linkingGroup <span class='op'>=</span> <span class='st'>"irisFlowers data"</span><span class='op'>)</span>
+<span class='no'>sa_var</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='no'>irisFlowers</span>,
+                       <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"variable"</span>,    <span class='co'># scale within column</span>
+                       <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"parallel"</span>,
+                       <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>,
+                       <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>itemLabel</span> <span class='kw'>=</span> <span class='no'>flowerIDs</span>,
+                       <span class='kw'>showItemLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                       <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"scaling = variable (initially)"</span>,
+                       <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"irisFlowers data"</span>)
 
 <span class='co'>#</span>
 <span class='co'># scaling = "observation"</span>
@@ -370,15 +370,15 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'># sepals and petals), whereas the third (setosa) has relatively large</span>
 <span class='co'># sepals compared to small petals.</span>
 <span class='co'>#</span>
-<span class='va'>sa_obs</span> <span class='op'>&lt;-</span> <span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>irisFlowers</span>,
-                       scaling <span class='op'>=</span> <span class='st'>"observation"</span>, <span class='co'># scale within row</span>
-                       axesLayout <span class='op'>=</span> <span class='st'>"parallel"</span>,
-                       color <span class='op'>=</span> <span class='va'>species</span>,
-                       linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-                       itemLabel <span class='op'>=</span> <span class='va'>flowerIDs</span>,
-                       showItemLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
-                       title <span class='op'>=</span> <span class='st'>"scaling = observation (initially)"</span>,
-                       linkingGroup <span class='op'>=</span> <span class='st'>"irisFlowers data"</span><span class='op'>)</span>
+<span class='no'>sa_obs</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='no'>irisFlowers</span>,
+                       <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"observation"</span>, <span class='co'># scale within row</span>
+                       <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"parallel"</span>,
+                       <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>,
+                       <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>itemLabel</span> <span class='kw'>=</span> <span class='no'>flowerIDs</span>,
+                       <span class='kw'>showItemLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                       <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"scaling = observation (initially)"</span>,
+                       <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"irisFlowers data"</span>)
 
 <span class='co'>#</span>
 <span class='co'># scaling = "data"</span>
@@ -400,15 +400,15 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'># Setosa in contrast is quite differently shaped in both sepals and petals</span>
 <span class='co'># but with sepals more similar in size to the two other flowers and</span>
 <span class='co'># with significantly smaller petals.</span>
-<span class='va'>sa_dat</span> <span class='op'>&lt;-</span> <span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>irisFlowers</span>,
-                       scaling <span class='op'>=</span> <span class='st'>"data"</span>,        <span class='co'># scale using all data</span>
-                       axesLayout <span class='op'>=</span> <span class='st'>"parallel"</span>,
-                       color <span class='op'>=</span> <span class='va'>species</span>,
-                       linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-                       itemLabel <span class='op'>=</span> <span class='va'>flowerIDs</span>,
-                       showItemLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
-                       title <span class='op'>=</span> <span class='st'>"scaling = data (initially)"</span>,
-                       linkingGroup <span class='op'>=</span> <span class='st'>"irisFlowers data"</span><span class='op'>)</span>
+<span class='no'>sa_dat</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='no'>irisFlowers</span>,
+                       <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"data"</span>,        <span class='co'># scale using all data</span>
+                       <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"parallel"</span>,
+                       <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>,
+                       <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>itemLabel</span> <span class='kw'>=</span> <span class='no'>flowerIDs</span>,
+                       <span class='kw'>showItemLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                       <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"scaling = data (initially)"</span>,
+                       <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"irisFlowers data"</span>)
 
 <span class='co'>#</span>
 <span class='co'>#  scaling = "none"</span>
@@ -425,36 +425,36 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'>#  appear at the end points 0 and 1 of the axes but instead inside.</span>
 <span class='co'>#</span>
 <span class='co'>#  Suppose we choose the following limits for all variables</span>
-<span class='va'>lower_lim</span> <span class='op'>&lt;-</span> <span class='op'>-</span><span class='fl'>3</span> ; <span class='va'>upper_lim</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>irisFlowers</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>1</span>
+<span class='no'>lower_lim</span> <span class='kw'>&lt;-</span> -<span class='fl'>3</span> ; <span class='no'>upper_lim</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>irisFlowers</span>) + <span class='fl'>1</span>
 
 <span class='co'>#  These are the limits we want to use to define the end points of</span>
 <span class='co'>#  the axes for all variables.</span>
 <span class='co'>#  We need only scale the data as</span>
-<span class='va'>irisFlowers_0_1</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>irisFlowers</span> <span class='op'>-</span> <span class='va'>lower_lim</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='va'>upper_lim</span> <span class='op'>-</span> <span class='va'>lower_lim</span><span class='op'>)</span>
+<span class='no'>irisFlowers_0_1</span> <span class='kw'>&lt;-</span> (<span class='no'>irisFlowers</span> - <span class='no'>lower_lim</span>)/(<span class='no'>upper_lim</span> - <span class='no'>lower_lim</span>)
 <span class='co'>#  Or alternatively using the built-in scale function</span>
 <span class='co'>#  (which allows different scaling for each variable)</span>
-<span class='va'>irisFlowers_0_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>irisFlowers</span>,
-                         center <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>lower_lim</span>, <span class='fl'>4</span><span class='op'>)</span>,
-                         scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>upper_lim</span> <span class='op'>-</span> <span class='va'>lower_lim</span><span class='op'>)</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='no'>irisFlowers_0_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>irisFlowers</span>,
+                         <span class='kw'>center</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>lower_lim</span>, <span class='fl'>4</span>),
+                         <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>((<span class='no'>upper_lim</span> - <span class='no'>lower_lim</span>), <span class='fl'>4</span>))
 
 <span class='co'># Different scales for different</span>
 <span class='co'># And instruct the plot to not scale the data but plot it on the 0-1 scale</span>
 <span class='co'># for all axes.  (Note any rescaled date outside of [0,1] will not appear.)</span>
 <span class='co'>#</span>
-<span class='va'>sa_none</span> <span class='op'>&lt;-</span> <span class='fu'>l_serialaxes</span><span class='op'>(</span><span class='va'>irisFlowers_0_1</span>,
-                        scaling <span class='op'>=</span> <span class='st'>"none"</span>,        <span class='co'># do not scale</span>
-                        axesLayout <span class='op'>=</span> <span class='st'>"parallel"</span>,
-                        color <span class='op'>=</span> <span class='va'>species</span>,
-                        linewidth <span class='op'>=</span> <span class='fl'>2</span>,
-                        itemLabel <span class='op'>=</span> <span class='va'>flowerIDs</span>,
-                        showItemLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
-                        title <span class='op'>=</span> <span class='st'>"scaling = none (initially)"</span>,
-                        linkingGroup <span class='op'>=</span> <span class='st'>"irisFlowers data"</span><span class='op'>)</span>
+<span class='no'>sa_none</span> <span class='kw'>&lt;-</span> <span class='fu'>l_serialaxes</span>(<span class='no'>irisFlowers_0_1</span>,
+                        <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='st'>"none"</span>,        <span class='co'># do not scale</span>
+                        <span class='kw'>axesLayout</span> <span class='kw'>=</span> <span class='st'>"parallel"</span>,
+                        <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>,
+                        <span class='kw'>linewidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                        <span class='kw'>itemLabel</span> <span class='kw'>=</span> <span class='no'>flowerIDs</span>,
+                        <span class='kw'>showItemLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+                        <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"scaling = none (initially)"</span>,
+                        <span class='kw'>linkingGroup</span> <span class='kw'>=</span> <span class='st'>"irisFlowers data"</span>)
 
 <span class='co'># This is particularly useful for "radial" axes to keep the polygons away from</span>
 <span class='co'># the centre of the display.</span>
 <span class='co'># For example</span>
-<span class='va'>sa_none</span><span class='op'>[</span><span class='st'>"axesLayout"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"radial"</span>
+<span class='no'>sa_none</span>[<span class='st'>"axesLayout"</span>] <span class='kw'>&lt;-</span> <span class='st'>"radial"</span>
 <span class='co'># now displays each flower as a polygon where shapes and sizes are easily</span>
 <span class='co'># compared.</span>
 <span class='co'>#</span>
@@ -463,8 +463,7 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <span class='co'>#        upper limits for each variable).</span>
 <span class='co'>#        Then scaling can always be changed via the inspector.</span>
 
-<span class='op'>}</span>
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -480,7 +479,7 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
