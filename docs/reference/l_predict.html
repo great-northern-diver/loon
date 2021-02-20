@@ -251,6 +251,10 @@ two more columns, <code>lower</code> (lower interval) and <code>upper</code> (up
 #&gt; 6 -0.08441358  0.027229706 -0.7996783 0.8541377</div><div class='input'>
 <span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>cars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>speed</span>, <span class='no'>dist</span>))
+
+<span class='co'># Example taken from</span>
+<span class='co'># https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline</span>
+<span class='co'>#</span>
 <span class='no'>l_predict.smooth.spline</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>model</span>, <span class='no'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"confidence"</span>, <span class='st'>"none"</span>),
                                     <span class='no'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>) {
 <span class='co'># confidence interval of `smooth.spline`</span>
