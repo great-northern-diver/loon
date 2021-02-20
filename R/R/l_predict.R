@@ -22,6 +22,10 @@
 #'
 #' if(interactive()) {
 #' p <- with(cars, l_plot(speed, dist))
+#'
+#' # Example taken from
+#' # https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline
+#' #
 #' l_predict.smooth.spline <- function(model, interval = c("confidence", "none"),
 #'                                     level = 0.95, ...) {
 #' # confidence interval of `smooth.spline`
