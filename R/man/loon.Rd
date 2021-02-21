@@ -29,12 +29,12 @@ interactive exploratory data analysis, sensitivity analysis, animation,
 teaching, and creating new graphical user interfaces.
 
 To get started using loon read the package vignettes or visit the loon
-website at \url{http://great-northern-diver.github.io/loon/}.
+website at \url{https://great-northern-diver.github.io/loon/}.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://great-northern-diver.github.io/loon/}
+  \item \url{https://great-northern-diver.github.io/loon/}
   \item Report bugs at \url{https://github.com/great-northern-diver/loon/issues}
 }
 

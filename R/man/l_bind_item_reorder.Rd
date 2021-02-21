@@ -20,7 +20,7 @@ vector with binding id evaluation order (same as the \code{id} argument)
 The order the item bindings defines how they get evaluated 
   once an event matches event patterns of multiple item bindings.
 
-Reordering item bindings has currently no effect. Item bindings 
+Reordering item bindings has currently no effect. Item bindings
   are evaluated in the order in which they have been added.
 }
 \details{

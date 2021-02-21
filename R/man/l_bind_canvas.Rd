@@ -10,7 +10,7 @@ l_bind_canvas(widget, event, callback)
 \item{widget}{widget path as a string or as an object handle}
 
 \item{event}{event patterns as defined for Tk canvas widget
-\url{http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.}
+\url{https://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.}
 
 \item{callback}{callback function is an R function which is called by the Tcl
 interpreter if the event of interest happens. Note that in loon the 
@@ -25,7 +25,7 @@ Canvas bindings are triggered by a mouse/keyboard gesture over
   the plot as a whole.
 }
 \details{
-Canvas bindings are used to evaluate callbacks at certain X events on the 
+Canvas bindings are used to evaluate callbacks at certain X events on the
 canvas widget (underlying widget for all of loon's plot widgets). Such X
 events include re-sizing of the canvas and entering the canvas with the
 mouse.

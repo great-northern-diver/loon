@@ -11,7 +11,7 @@ l_web(page = "index", directory = c("home", "reference", "articles"), ...)
 
 \item{directory}{if \code{"home"} then \code{page} is ignored and the
 browser will open at the home page of the official loon documentation website at
-  \url{http://great-northern-diver.github.io/loon/}.  If \code{page} refers to a \code{loon}
+  \url{https://great-northern-diver.github.io/loon/}.  If \code{page} refers to a \code{loon}
   manual reference, then directory must be \code{"reference"}; if \code{page} refers to the name
   of a vignette file, then directory should be \code{"articles"}}
 
@@ -20,7 +20,7 @@ browser will open at the home page of the official loon documentation website at
 \description{
 \code{l_web} opens a browser with the relevant page on the
   official loon documentation website at
-  \url{http://great-northern-diver.github.io/loon/}.
+  \url{https://great-northern-diver.github.io/loon/}.
 }
 \examples{
 
