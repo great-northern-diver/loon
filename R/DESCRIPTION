@@ -16,7 +16,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
                     email = "martin.gauch@student.kit.edu", 
                     role = "ctb")
              )
-URL: http://great-northern-diver.github.io/loon/
+URL: https://great-northern-diver.github.io/loon/
 Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2
 Depends:

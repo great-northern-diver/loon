@@ -4,7 +4,7 @@
 #'
 #' @description \code{l_help} opens a browser with the relevant page on the
 #'   official combined loon documentation website at
-#'   \url{http://great-northern-diver.github.io/loon/}.
+#'   \url{https://great-northern-diver.github.io/loon/}.
 #'
 #' @param page relative path to a page, the .html part may be omitted
 #' @param ... arguments forwarded to browseURL, e.g. to specify a browser
@@ -31,7 +31,7 @@ l_help <- function(page="index", ...) {
             page <- paste0(page, ".html")
     }
 
-    browseURL(paste0("http://great-northern-diver.github.io/loon/l_help/",
+    browseURL(paste0("https://great-northern-diver.github.io/loon/l_help/",
                      page), ...)
 
 }

@@ -22,7 +22,7 @@
 #' teaching, and creating new graphical user interfaces.
 #'
 #' To get started using loon read the package vignettes or visit the loon
-#' website at \url{http://great-northern-diver.github.io/loon/}.
+#' website at \url{https://great-northern-diver.github.io/loon/}.
 #'
 #'
 #' @docType package

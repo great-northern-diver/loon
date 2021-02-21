@@ -104,7 +104,7 @@ L2_distance <- function(a, b, df = 0){
   aa <- matrix(apply(a*a,2,sum)); bb <- matrix(apply(b*b,2,sum)); ab <- t(a)%*%b
 
 
-  ## copied from: http://haky-functions.blogspot.com/search/label/matlab2R
+  ## copied from: https://haky-functions.blogspot.com/search/label/matlab2R
   repmat = function(X,m,n){
     ##R equivalent of repmat (matlab)
     mx = dim(X)[1]
