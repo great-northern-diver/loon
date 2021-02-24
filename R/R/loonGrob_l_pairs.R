@@ -13,7 +13,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     scatterplots <- histograms <- serialAxes <- list()
     plotNames <- names(target)
 
-    for(i in 1:nPlots) {
+    for(i in seq(nPlots)) {
         if(inherits(target[[i]], "l_plot")) {
             nScatterplots <- nScatterplots + 1
             scatterplots[[nScatterplots]] <- target[[i]]
@@ -44,7 +44,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
     } else showTexts <- TRUE
 
     scatter_hist <- c(scatterplots, histograms)
-    scatter_histGrobs <- lapply(1:(nScatterplots + nHistograms),
+    scatter_histGrobs <- lapply(seq(nScatterplots + nHistograms),
                                 function(i){
                                     pi <- scatter_hist[[i]]
                                     pi['minimumMargins'] <- rep(2,4)
@@ -81,7 +81,7 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
             )
         )
 
-        textGrobs <- lapply(1:length(texts),
+        textGrobs <- lapply(seq(length(texts)),
                             function(i) {
                                 textGrob(texts[i], gp = gpar(fontsize = 9), name = paste("text", i))
                             }
@@ -109,10 +109,22 @@ l_get_arrangeGrobArgs.l_pairs <- function(target) {
         locations$layout_matrix <- layout_matrix
     }
 
+    if(showTexts) {
+        grobs <- setNames(c(scatter_histGrobs, serialAxesGrob, textGrobs),
+                          c(as.character(scatter_hist), as.character(serialAxes),
+                            texts))
+
+    } else {
+        grobs <- setNames(c(scatter_histGrobs, serialAxesGrob),
+                          c(as.character(scatter_hist), as.character(serialAxes)))
+    }
+
+
+
     c(
         locations,
         list(
-            grobs = c(scatter_histGrobs, serialAxesGrob, if(showTexts) textGrobs else NULL),
+            grobs = grobs,
             name = "l_pairs"
         )
     )
@@ -125,7 +137,7 @@ l_createCompoundGrob.l_pairs <- function(target, arrangeGrob.args){
         rectGrob(gp  = gpar(fill = backgroundCol, col = NA),
                  name = "bounding box"),
         do.call(gridExtra::arrangeGrob,  arrangeGrob.args),
-        name = "l_pairs"
+        name = "pairs"
     )
 }
 

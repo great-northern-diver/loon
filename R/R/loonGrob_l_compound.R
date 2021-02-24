@@ -35,7 +35,7 @@ loonGrob.l_compound <- function(target, name = NULL, gp = NULL, vp = NULL){
     arrangeGrob.args <- switch(loonGrob_layoutType(target),
                                locations = {
                                    plots <- l_getPlots(target)
-                                   grobs <- lapply(plots, function(w){loonGrob(w)})
+                                   grobs <- setNames(lapply(plots, function(p){loonGrob(p)}), as.character(plots))
                                    locations <- l_getLocations(target)
                                    is_locationNames <- names(locations) %in% c("ncol", "nrow",
                                                                                "layout_matrix",
