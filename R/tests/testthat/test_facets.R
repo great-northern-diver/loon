@@ -280,10 +280,13 @@ test_that("test formula by", {
                 by = size ~ color,
                 on = on)
 
-    expect_equal(p[[1]]['color'], "#000080800000") # green
+    # avoid hex code in tests
+    # it is because, in solaris X64 system, the 12 digit hex code is slightly different from that in
+    # windows and mac
+    expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
     expect_equal(p[[1]]['size'], 25)
 
-    expect_equal(p[[2]]['color'], c("#000080800000", "#000080800000")) # green
+    expect_equal(p[[2]]['color'], c(l_hexcolor("green"), l_hexcolor("green"))) # green
     expect_equal(p[[2]]['size'], c(50, 50))
 
 
@@ -297,12 +300,12 @@ test_that("test formula by", {
                 color = c(rep("red", 3), rep("green", 3)),
                 by = size ~ color + glyph)
 
-    expect_equal(p[[1]]['color'], "#000080800000") # green
+    expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
     expect_equal(p[[1]]['size'], 25)
     expect_equal(p[[1]]['glyph'], "ccircle")
 
 
-    expect_equal(p[[8]]['color'], "#FFFF00000000") # red
+    expect_equal(p[[8]]['color'], l_hexcolor("red")) # red
     expect_equal(p[[8]]['size'], 50)
     expect_equal(p[[8]]['glyph'], "ocircle")
 
@@ -317,18 +320,18 @@ test_that("test formula by", {
     f <- l_facet(p, by = color ~ size, layout = "wrap")
 
     expect_equal(f[[1]]['size'], 25)
-    expect_equal(f[[1]]['color'], "#000080800000") # green
+    expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
     expect_equal(f[[2]]['size'], 25)
-    expect_equal(f[[2]]['color'], "#FFFF00000000") # red
+    expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
     f <- l_facet(p, by = color ~ size)
 
     expect_equal(f[[1]]['size'], 25)
-    expect_equal(f[[1]]['color'], "#000080800000") # green
+    expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
     expect_equal(f[[2]]['size'], 25)
-    expect_equal(f[[2]]['color'], "#FFFF00000000") # red
+    expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
 
     on <- data.frame(Factor1 = c(rep("A", 3), rep("B", 3)),
