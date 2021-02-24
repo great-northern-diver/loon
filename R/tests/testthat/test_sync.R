@@ -2,9 +2,8 @@ context("test_sync")
 
 test_that("test pull", {
 
-    p <- l_plot(as.character(iris$Species), color = "#FF0000") # red
-    col <- hex12tohex6(unique(p['color']))
-    expect_equal(col, "#FF0000")
+    p <- l_plot(as.character(iris$Species), color = "red") # red
+    expect_equal(unique(p['color']), l_hexcolor("red"))
 
     l_configure(p, linkingGroup = "iris", sync = "push")
 
@@ -12,15 +11,14 @@ test_that("test pull", {
     expect_warning(
         q <- l_plot(iris$Petal.Width,
                     linkingGroup = "iris",
-                    color = "#008000", # green
+                    color = "green", # green
                     size = 6,
                     selected = TRUE,
                     active = sample(c(T, F), size = 150, replace = TRUE),
                     glyph = "triangle")
     )
     # color, size, selected and active are linked
-    col <- hex12tohex6(unique(q['color']))
-    expect_equal(col, "#FF0000")
+    expect_equal(unique(q['color']), l_hexcolor("red"))
 
     size <- unique(q['size'])
     expect_equal(as.character(size), l_getOption("size"))
@@ -38,26 +36,24 @@ test_that("test pull", {
     ################## histogram
     expect_warning(h <- l_hist(iris$Petal.Length,
                                linkingGroup = "iris",
-                               color = "#FF0000", # red
+                               color = "red", # red
                                selected = TRUE))
 
     selected <- all(!h['selected'])
     expect_true(selected)
 
-    col <- hex12tohex6(unique(h['color']))
-    expect_equal(col, "#FF0000")
+    expect_equal(unique(h['color']), l_hexcolor("red"))
 
     ################## serialaxes
     expect_warning(s <- l_serialaxes(iris[, -5],
                                      linkingGroup = "iris",
-                                     color = "#008000", # green
+                                     color = "green", # green
                                      active = FALSE))
 
     active <- all(s['active'])
     expect_true(active)
 
-    col <- hex12tohex6(unique(s['color']))
-    expect_equal(col, "#FF0000")
+    expect_equal(unique(s['color']), l_hexcolor("red"))
 
     ################## graph
     pp <- l_plot(1:4, linkingGroup = "foo", sync = "pull",
@@ -90,19 +86,18 @@ test_that("test pull", {
                           showHistograms = TRUE,
                           showSerialAxes = TRUE,
                           linkingGroup = "iris",
-                          color = "#008000") # green
+                          color = "green") # green
     )
-    col <- hex12tohex6(unique(unlist(ppairs['color'])))
-    expect_equal(col, "#FF0000")
+
+    expect_equal(unique(unlist(ppairs['color'])), l_hexcolor("red"))
 
     ### ts
     expect_warning(
         pts <- l_plot(decompose(co2),
                       linkingGroup = "iris",
-                      color = "#008000") # green
+                      color = "green") # green
     )
-    col <- hex12tohex6(unique(pts[[1]]['color'][1:150]))
-    expect_equal(col, "#FF0000")
+    expect_equal(unique(pts[[1]]['color'][1:150]), l_hexcolor("red"))
 })
 
 
@@ -120,7 +115,7 @@ test_that("test push", {
                 color = "black",
                 linkingGroup = "iris1", sync = "push")
     # only the color is modified
-    expect_true(all(q[[1]]['color'] == "#000000000000"))
+    expect_true(all(q[[1]]['color'] == l_hexcolor("black")))
     # the size of each plot should be the same with the random sample
     expect_true(all(q[[1]]['size'] == size[1:50]))
     expect_true(all(q[[2]]['size'] == size[51:100]))
@@ -147,7 +142,7 @@ test_that("test push", {
 
     expect_true(all(p['size'] == size))
     expect_false(all(p['selected']))
-    expect_true(all(as_hex6color(p['color']) == as_hex6color(color)))
+    expect_true(all(p['color'] == l_hexcolor(color)))
 
     s1 <- l_serialaxes(iris, by = iris$Species,
                        linkingGroup = "iris1",
@@ -155,14 +150,14 @@ test_that("test push", {
                        sync = "push")
 
 
-    expect_true(all(s['color'] == "#000000000000"))
+    expect_true(all(s['color'] == l_hexcolor("black")))
     expect_true(all(s['linewidth'] == size))
 
     pair <- l_pairs(iris[, 1:3], linkingGroup = "iris1", sync = "push",
                     color = "red")
 
     expect_true(all(s['linewidth'] == size))
-    expect_true(all(s['color'] == "#FFFF00000000"))
+    expect_true(all(s['color'] == l_hexcolor("red")))
 
     # push test
     # the states of the new plot are the default
@@ -178,7 +173,7 @@ test_that("test push", {
                  sync = "push",
                  selected = FALSE)
 
-    expect_true(all(p1['color'] == "#999999999999"))
+    expect_true(all(p1['color'] == l_hexcolor("gray60")))
     expect_true(all(p1['size'] == 4))
     expect_false(any(p1['selected']))
 })
