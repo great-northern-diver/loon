@@ -13,7 +13,7 @@ l_bind_item(widget, tags, event, callback)
 \code{l_help("learn_R_bind.html#item-bindings")}}
 
 \item{event}{event patterns as defined for Tk canvas widget
-\url{http://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.}
+\url{https://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.}
 
 \item{callback}{callback function is an R function which is called by the Tcl
 interpreter if the event of interest happens. Note that in loon the 

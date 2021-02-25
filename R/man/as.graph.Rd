@@ -24,7 +24,7 @@ Loon's native graph class is fairly basic. The graph package (on
 }
 \details{
 See
-  \url{http://www.bioconductor.org/packages/release/bioc/html/graph.html} for
+  \url{https://www.bioconductor.org/packages/release/bioc/html/graph.html} for
   more information about the graph R package.
 }
 \examples{

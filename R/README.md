@@ -1,18 +1,18 @@
 
 ## loon  <img src="man/figures/logo.png" align="right" width="120" />
 
-[![Build Status](https://travis-ci.org/great-northern-diver/loon.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
+[![Build Status](https://travis-ci.org/great-northern-diver/loon.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
 
 loon is an extendible interactive data visualization system designed for exploratory visualization.
 
 Though primarily for exploratory data analysis, it can also be used to develop new interactive analysis and teaching tools. Some sense of the breadth of application and possible extensions can be seen in the various vignettes, demos, and examples in the documentation. 
 
-Some sense of the use of loon can be had from the articles, especially the introduction, available [here](http://great-northern-diver.github.io/loon/articles/introduction.html).
+Some sense of the use of loon can be had from the articles, especially the introduction, available [here](https://great-northern-diver.github.io/loon/articles/introduction.html).
 
 
 ## Web Documentation
 
-In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](http://great-northern-diver.github.io/loon/l_help/).
+In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](https://great-northern-diver.github.io/loon/l_help/).
 
 Once in R, these are accessible from loon as
 ```r

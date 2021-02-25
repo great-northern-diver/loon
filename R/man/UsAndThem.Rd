@@ -19,7 +19,7 @@ A data frame with 9855 rows and 8 variables
 }
 }
 \source{
-\url{http://www.gapminder.org/}
+\url{https://www.gapminder.org/}
 }
 \usage{
 UsAndThem
