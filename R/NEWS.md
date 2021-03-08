@@ -1,3 +1,23 @@
+# loon 1.3.3
+
+* an extremely minor update
+
+  - test functions were changed to accommodate possibly inconsistent hex colours on Solaris OS.
+    
+    For example, in Solaris only, the hex12 for the color "red" appears both as "#FFFF00000000" and "#FF0000000000".  This can lead to failures of testing equality on the hex12 strings (though both appeared
+    by creating the hex12 version of R's "red" in TCL, as in `l_hexcolor("red")`)
+    
+    Both hex 12 representations convert to hex 6 as "#FF0000".  That is, `hex12tohex6("#FFFF00000000")` and
+    `hex12tohex6("#FF0000000000")` return `"#FF0000"` except that the second also generates a warning.
+
+  - also took the opportunity to 
+    
+    - give more meaningful names to grobs when `loonGrob()` is called on an `l_compound`
+    
+    - update the documentation summary `l_plot_arguments` to include arguments `by`, `on`, `layout`, and `connectedScales` all of which are related to facetting plots at creation.
+    
+    - wrap the examples in  `Bin_cut` with `if (interactive()) {}`
+
 # loon 1.3.2
 
 * Updated linking to once again be more natural

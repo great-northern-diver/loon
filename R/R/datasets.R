@@ -16,7 +16,7 @@
 #'  \item{Geographic.Region}{one of six large global regions}
 #'  \item{Geographic.Region.ID}{two letter identification of country}
 #' }
-#' @source \url{http://www.gapminder.org/}
+#' @source \url{https://www.gapminder.org/}
 "UsAndThem"
 
 

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -152,9 +152,34 @@
       <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-133" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.3">
+<a href="#loon-133" class="anchor"></a>loon 1.3.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>an extremely minor update</p>
+<ul>
+<li>
+<p>test functions were changed to accommodate possibly inconsistent hex colours on Solaris OS.</p>
+<p>For example, in Solaris only, the hex12 for the color “red” appears both as “#FFFF00000000” and “#FF0000000000”. This can lead to failures of testing equality on the hex12 strings (though both appeared by creating the hex12 version of R’s “red” in TCL, as in <code><a href="../reference/l_hexcolor.html">l_hexcolor("red")</a></code>)</p>
+<p>Both hex 12 representations convert to hex 6 as “#FF0000”. That is, <code><a href="../reference/hex12tohex6.html">hex12tohex6("#FFFF00000000")</a></code> and <code><a href="../reference/hex12tohex6.html">hex12tohex6("#FF0000000000")</a></code> return <code>"#FF0000"</code> except that the second also generates a warning.</p>
+</li>
+<li>
+<p>also took the opportunity to</p>
+<ul>
+<li><p>give more meaningful names to grobs when <code><a href="../reference/loonGrob.html">loonGrob()</a></code> is called on an <code>l_compound</code></p></li>
+<li><p>update the documentation summary <code>l_plot_arguments</code> to include arguments <code>by</code>, <code>on</code>, <code>layout</code>, and <code>connectedScales</code> all of which are related to facetting plots at creation.</p></li>
+<li><p>wrap the examples in <code>Bin_cut</code> with <code>if (interactive()) {}</code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="loon-132" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.2">
-<a href="#loon-132" class="anchor"></a>loon 1.3.2<small> Unreleased </small>
+<a href="#loon-132" class="anchor"></a>loon 1.3.2<small> 2021-02-23 </small>
 </h1>
 <ul>
 <li>
@@ -335,7 +360,7 @@ Actually see the periodicity by brushing.</li>
 <li>added <code><a href="../reference/condGrob.html">condGrob()</a></code> to effect the conditional construction of either the desired grob (if it is visible in the loon plot) or the empty grob as placeholder containing relevant arguments</li>
 </ul>
 </li>
-<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
+<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/base/plot.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
 </ul>
 </div>
     <div id="loon-120" class="section level1">
@@ -447,7 +472,7 @@ Actually see the periodicity by brushing.</li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

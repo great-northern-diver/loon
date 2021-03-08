@@ -27,6 +27,14 @@ As arguments many of the common ones are desribed below.
 
     \item{y}{argument description is as for the \code{x} argument above.}
 
+    \item{by}{loon plots can be separated by some variables into multiple panels. This argument can take a \code{\link{formula}}, n dimensional state names (see \code{\link{l_nDimStateNames}}) an n-dimensional vector and data.frame or a list of same lengths n as input.}
+
+    \item{on}{if the \code{x} or \code{y} is a formula, an optional data frame containing the variables in the \code{x} or \code{by}. If the variables are not found in data, they are taken from environment, typically the environment from which the function is called.}
+
+    \item{layout}{layout facets as 'grid', 'wrap' or 'separate'}
+
+    \item{connectedScales}{Determines how the scales of the facets are to be connected depending on which layout is used.}
+
     \item{linkingGroup}{a string naming a group of plots to be linked.
     All plots with the same \code{linkingGroup} will have the same values of their
     linked states (see \code{\link{l_getLinkedStates}()}

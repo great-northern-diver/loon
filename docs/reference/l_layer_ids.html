@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,7 +160,7 @@
   returns a list of all the layer ids for a widget.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_layer_ids</span><span class='op'>(</span><span class='va'>widget</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_layer_ids</span>(<span class='no'>widget</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,49 +187,48 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>500</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>30</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>3</span><span class='op'>*</span><span class='va'>x</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>30</span><span class='op'>)</span>
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>~</span><span class='va'>x</span><span class='op'>)</span>
-<span class='va'>xseq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span>, length.out <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span>
-<span class='va'>fit_line</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>xseq</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>ci</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>xseq</span><span class='op'>)</span>,
-              interval<span class='op'>=</span><span class='st'>"confidence"</span>, level<span class='op'>=</span><span class='fl'>0.95</span><span class='op'>)</span>
-<span class='va'>pi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>xseq</span><span class='op'>)</span>,
-              interval<span class='op'>=</span><span class='st'>"prediction"</span>, level<span class='op'>=</span><span class='fl'>0.95</span><span class='op'>)</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>500</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>30</span>)
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fl'>4</span> + <span class='fl'>3</span>*<span class='no'>x</span> + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>30</span>)
+<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span>~<span class='no'>x</span>)
+<span class='no'>xseq</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>x</span>)-<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>x</span>)+<span class='fl'>1</span>, <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='no'>fit_line</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>xseq</span>)))
+<span class='no'>ci</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>xseq</span>),
+              <span class='kw'>interval</span><span class='kw'>=</span><span class='st'>"confidence"</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='fl'>0.95</span>)
+<span class='no'>pi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>fit</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>xseq</span>),
+              <span class='kw'>interval</span><span class='kw'>=</span><span class='st'>"prediction"</span>, <span class='kw'>level</span><span class='kw'>=</span><span class='fl'>0.95</span>)
 
 
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>y</span><span class='op'>~</span><span class='va'>x</span>, color<span class='op'>=</span><span class='st'>'black'</span>, showScales<span class='op'>=</span><span class='cn'>TRUE</span>, showGuides<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>gLayer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span><span class='op'>(</span>
-    <span class='va'>p</span>, label<span class='op'>=</span><span class='st'>"simple linear regression"</span>,
-    parent<span class='op'>=</span><span class='st'>"root"</span>, index<span class='op'>=</span><span class='st'>"end"</span>
-<span class='op'>)</span>
-<span class='va'>fitLayer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_line.html'>l_layer_line</a></span><span class='op'>(</span>
-    <span class='va'>p</span>, x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span><span class='op'>(</span><span class='va'>xseq</span><span class='op'>)</span>, y<span class='op'>=</span><span class='va'>fit_line</span>, color<span class='op'>=</span><span class='st'>"#04327F"</span>,
-    linewidth<span class='op'>=</span><span class='fl'>4</span>, label<span class='op'>=</span><span class='st'>"fit"</span>, parent<span class='op'>=</span><span class='va'>gLayer</span>
-<span class='op'>)</span>
-<span class='va'>ciLayer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_polygon.html'>l_layer_polygon</a></span><span class='op'>(</span>
-    <span class='va'>p</span>,
-    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>xseq</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='va'>xseq</span><span class='op'>)</span><span class='op'>)</span>,
-    y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>ci</span><span class='op'>[</span>,<span class='st'>'lwr'</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='va'>ci</span><span class='op'>[</span>,<span class='st'>'upr'</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
-    color <span class='op'>=</span> <span class='st'>"#96BDFF"</span>, linecolor<span class='op'>=</span><span class='st'>""</span>,
-    label <span class='op'>=</span> <span class='st'>"95 % confidence interval"</span>,
-    parent <span class='op'>=</span> <span class='va'>gLayer</span>, index<span class='op'>=</span><span class='st'>'end'</span>
-<span class='op'>)</span>
-<span class='va'>piLayer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_polygon.html'>l_layer_polygon</a></span><span class='op'>(</span>
-    <span class='va'>p</span>,
-    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>xseq</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='va'>xseq</span><span class='op'>)</span><span class='op'>)</span>,
-    y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>[</span>,<span class='st'>'lwr'</span><span class='op'>]</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='va'>pi</span><span class='op'>[</span>,<span class='st'>'upr'</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>,
-    color <span class='op'>=</span> <span class='st'>"#E2EDFF"</span>, linecolor<span class='op'>=</span><span class='st'>""</span>,
-    label <span class='op'>=</span> <span class='st'>"95 % prediction interval"</span>,
-    parent <span class='op'>=</span> <span class='va'>gLayer</span>, index<span class='op'>=</span><span class='st'>'end'</span>
-<span class='op'>)</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>y</span>~<span class='no'>x</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>'black'</span>, <span class='kw'>showScales</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>showGuides</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>gLayer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span>(
+    <span class='no'>p</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>"simple linear regression"</span>,
+    <span class='kw'>parent</span><span class='kw'>=</span><span class='st'>"root"</span>, <span class='kw'>index</span><span class='kw'>=</span><span class='st'>"end"</span>
+)
+<span class='no'>fitLayer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_line.html'>l_layer_line</a></span>(
+    <span class='no'>p</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>xseq</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='no'>fit_line</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"#04327F"</span>,
+    <span class='kw'>linewidth</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>label</span><span class='kw'>=</span><span class='st'>"fit"</span>, <span class='kw'>parent</span><span class='kw'>=</span><span class='no'>gLayer</span>
+)
+<span class='no'>ciLayer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_polygon.html'>l_layer_polygon</a></span>(
+    <span class='no'>p</span>,
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>xseq</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>xseq</span>)),
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>ci</span>[,<span class='st'>'lwr'</span>], <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>ci</span>[,<span class='st'>'upr'</span>])),
+    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#96BDFF"</span>, <span class='kw'>linecolor</span><span class='kw'>=</span><span class='st'>""</span>,
+    <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"95 % confidence interval"</span>,
+    <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>gLayer</span>, <span class='kw'>index</span><span class='kw'>=</span><span class='st'>'end'</span>
+)
+<span class='no'>piLayer</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_polygon.html'>l_layer_polygon</a></span>(
+    <span class='no'>p</span>,
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>xseq</span>, <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>xseq</span>)),
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>pi</span>[,<span class='st'>'lwr'</span>], <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='no'>pi</span>[,<span class='st'>'upr'</span>])),
+    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#E2EDFF"</span>, <span class='kw'>linecolor</span><span class='kw'>=</span><span class='st'>""</span>,
+    <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"95 % prediction interval"</span>,
+    <span class='kw'>parent</span> <span class='kw'>=</span> <span class='no'>gLayer</span>, <span class='kw'>index</span><span class='kw'>=</span><span class='st'>'end'</span>
+)
 
-<span class='fu'><a href='l_info_states.html'>l_info_states</a></span><span class='op'>(</span><span class='va'>piLayer</span><span class='op'>)</span>
+<span class='fu'><a href='l_info_states.html'>l_info_states</a></span>(<span class='no'>piLayer</span>)
 
-<span class='op'>}</span>
-</div></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -245,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
