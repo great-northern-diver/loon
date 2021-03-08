@@ -41,7 +41,12 @@ l_getFromPath <- function(target) {
                                    )
                                })
             # return a compound widget
-            return(Filter(Negate(is.null), loon_obj))
+            loon_obj <- Filter(Negate(is.null), loon_obj)
+            if(length(loon_obj) == 1) {
+                # unwrap the list
+                return(loon_obj[[1L]])
+            } else
+                return(loon_obj) # a list (l_compound object)
         }
 
         loon_obj <- if (length(specifier) == 1) {
