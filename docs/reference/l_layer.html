@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,7 +160,7 @@
   <code>l_layer</code> function is a generic method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_layer</span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>l_layer</span><span class='op'>(</span><span class='va'>widget</span>, <span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,7 +171,7 @@
     </tr>
     <tr>
       <th>x</th>
-      <td><p>object that should be layered</p></td>
+      <td><p>for <code><a href='https://rdrr.io/r/base/UseMethod.html'>UseMethod</a></code>: an object whose class will determine the method to be dispatched.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -203,8 +203,11 @@ layering function</p></td>
 <tr><td>texts</td><td>n text strings</td><td><code><a href='l_layer_text.html'>l_layer_text</a></code></td></tr>
 <tr><td>polygons</td><td>n polygons</td><td><code><a href='l_layer_polygons.html'>l_layer_polygons</a></code></td></tr>
 <tr><td>rectangles</td><td>n rectangles</td><td><code><a href='l_layer_rectangles.html'>l_layer_rectangles</a></code></td></tr>
-<tr><td>lines</td><td>n sets of connected line
-  segments</td><td><code><a href='l_layer_lines.html'>l_layer_lines</a></code></td></tr>
+<tr><td>lines</td><td>n sets of connected line segments</td><td><code><a href='l_layer_lines.html'>l_layer_lines</a></code></td></tr>
+<tr><td>smooth</td><td>fitted smooth line</td><td><code><a href='l_layer_smooth.html'>l_layer_smooth</a></code></td></tr>
+<tr><td>rasterImage</td><td>one raster image</td><td><code><a href='l_layer_rasterImage.html'>l_layer_rasterImage</a></code></td></tr>
+<tr><td>heatImage</td><td>one heat image</td><td><code><a href='l_layer_heatImage.html'>l_layer_heatImage</a></code></td></tr>
+<tr><td>contourLines</td><td>contour lines</td><td><code><a href='l_layer_contourLines.html'>l_layer_contourLines</a></code></td></tr>
 </table>
 
 
@@ -276,34 +279,39 @@ layering function</p></td>
 <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_layer")</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='l_info_states.html'>l_info_states</a></code>, <code><a href='l_scaleto_layer.html'>l_scaleto_layer</a></code>,
-  <code><a href='l_scaleto_world.html'>l_scaleto_world</a></code></p></div>
+    <div class='dont-index'><p><code><a href='l_info_states.html'>l_info_states</a></code>, <code><a href='l_scaleto_layer.html'>l_scaleto_layer</a></code>, <code><a href='l_scaleto_world.html'>l_scaleto_world</a></code>;</p>
+<p>some <code>l_layer</code> S3 methods:
+  <code><a href='l_layer.density.html'>l_layer.density</a></code>, <code><a href='l_layer.map.html'>l_layer.map</a></code>,
+  <code><a href='l_layer.SpatialPolygonsDataFrame.html'>l_layer.SpatialPolygonsDataFrame</a></code>, <code><a href='l_layer.SpatialPolygons.html'>l_layer.SpatialPolygons</a></code>,
+  <code><a href='l_layer.Polygons.html'>l_layer.Polygons</a></code>, <code><a href='l_layer.Polygon.html'>l_layer.Polygon</a></code>, <code><a href='l_layer.SpatialLinesDataFrame.html'>l_layer.SpatialLinesDataFrame</a></code>,
+  <code><a href='l_layer.SpatialLines.html'>l_layer.SpatialLines</a></code>, <code><a href='l_layer.Lines.html'>l_layer.Lines</a></code>, <code><a href='l_layer.Line.html'>l_layer.Line</a></code>,
+  <code><a href='l_layer.SpatialPointsDataFrame.html'>l_layer.SpatialPointsDataFrame</a></code>, <code><a href='l_layer.SpatialPoints.html'>l_layer.SpatialPoints</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
 <span class='co'># l_layer is a generic method</span>
-<span class='no'>newFoo</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>) {
-  <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>x</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>y</span>, <span class='no'>...</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>r</span>) <span class='kw'>&lt;-</span> <span class='st'>'foo'</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>r</span>)
-}
+<span class='va'>newFoo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='va'>x</span>, y<span class='op'>=</span><span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='st'>'foo'</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>l_layer.foo</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>widget</span>, <span class='no'>x</span>) {
-    <span class='no'>x</span>$<span class='no'>widget</span> <span class='kw'>&lt;-</span> <span class='no'>widget</span>
-    <span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span>(<span class='st'>'l_layer_polygon'</span>, <span class='no'>x</span>)
-    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='no'>id</span>)
-}
+<span class='va'>l_layer.foo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>widget</span>, <span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>x</span><span class='op'>$</span><span class='va'>widget</span> <span class='op'>&lt;-</span> <span class='va'>widget</span>
+    <span class='va'>id</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='st'>'l_layer_polygon'</span>, <span class='va'>x</span><span class='op'>)</span>
+    <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>id</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'>newFoo</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>6</span>,<span class='fl'>6</span>:<span class='fl'>2</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>6</span>,<span class='fl'>5</span>), <span class='kw'>color</span><span class='kw'>=</span><span class='st'>'yellow'</span>)
+<span class='va'>obj</span> <span class='op'>&lt;-</span> <span class='fu'>newFoo</span><span class='op'>(</span>x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>,<span class='fl'>6</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>6</span>,<span class='fl'>6</span>,<span class='fl'>5</span><span class='op'>)</span>, color<span class='op'>=</span><span class='st'>'yellow'</span><span class='op'>)</span>
 
-<span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='fu'>l_layer</span>(<span class='no'>p</span>, <span class='no'>obj</span>)
+<span class='va'>id</span> <span class='op'>&lt;-</span> <span class='fu'>l_layer</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>obj</span><span class='op'>)</span>
 
-<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
-
-}</div></pre>
+<span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -319,7 +327,7 @@ layering function</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
