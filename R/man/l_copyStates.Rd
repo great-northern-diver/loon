@@ -103,7 +103,7 @@ if(interactive()){
    l_copyStates(p, sa)
 
    pp <- l_pairs(iris, showHistograms = TRUE)
-   l_copyStates(p, pp)  # makes no copy (not one to one)
+   suppressWarnings(l_copyStates(p, pp))
 
    pp2 <- l_pairs(iris,
                   color = iris$Species,

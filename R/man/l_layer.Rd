@@ -9,7 +9,7 @@ l_layer(widget, x, ...)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{x}{object that should be layered}
+\item{x}{for \code{\link{UseMethod}}: an object whose class will determine the method to be dispatched.}
 
 \item{...}{additional arguments, often state definition for the basic
 layering function}
@@ -38,8 +38,12 @@ loon's displays that use the main graphics model (i.e. histogram,
   \code{\link{l_layer_points}}\cr texts \tab n text strings \tab
   \code{\link{l_layer_text}}\cr polygons \tab n polygons \tab
   \code{\link{l_layer_polygons}}\cr rectangles \tab n rectangles \tab
-  \code{\link{l_layer_rectangles}}\cr lines \tab n sets of connected line
-  segments \tab \code{\link{l_layer_lines}}\cr }
+  \code{\link{l_layer_rectangles}}\cr
+  lines \tab n sets of connected line segments \tab \code{\link{l_layer_lines}}\cr
+  smooth \tab fitted smooth line \tab \code{\link{l_layer_smooth}}\cr
+  rasterImage \tab one raster image \tab \code{\link{l_layer_rasterImage}}\cr
+  heatImage \tab one heat image \tab \code{\link{l_layer_heatImage}}\cr
+  contourLines \tab contour lines \tab \code{\link{l_layer_contourLines}}\cr}
 
   Every layer within a display has a unique id. The visuals of the data in a
   display present the default layer of that display and has the layer id
@@ -121,10 +125,15 @@ obj <- newFoo(x=c(1:6,6:2), y=c(3,1,0,0,1,3,3,5,6,6,5), color='yellow')
 id <- l_layer(p, obj)
 
 l_scaleto_world(p)
-
 }
 }
 \seealso{
-\code{\link{l_info_states}}, \code{\link{l_scaleto_layer}},
-  \code{\link{l_scaleto_world}}
+\code{\link{l_info_states}}, \code{\link{l_scaleto_layer}}, \code{\link{l_scaleto_world}};
+
+some \code{l_layer} S3 methods:
+  \code{\link{l_layer.density}}, \code{\link{l_layer.map}},
+  \code{\link{l_layer.SpatialPolygonsDataFrame}}, \code{\link{l_layer.SpatialPolygons}},
+  \code{\link{l_layer.Polygons}}, \code{\link{l_layer.Polygon}}, \code{\link{l_layer.SpatialLinesDataFrame}},
+  \code{\link{l_layer.SpatialLines}}, \code{\link{l_layer.Lines}}, \code{\link{l_layer.Line}},
+  \code{\link{l_layer.SpatialPointsDataFrame}}, \code{\link{l_layer.SpatialPoints}}
 }

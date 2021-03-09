@@ -160,8 +160,7 @@ if(interactive()) {
 if(interactive()) {
 
 # serialaxes facets
-s <- l_serialaxes(iris[, -5], color = iris$Species,
-                  scaling = "observation")
+s <- l_serialaxes(iris[, -5], color = iris$Species)
 fs <- l_facet(s, layout = "wrap", by = iris$Species)
 # The linkingGroup can be printed or accessed by
 l_configure(s, linkingGroup = fs[[1]]['linkingGroup'], sync = "pull")
