@@ -269,6 +269,19 @@ test_that("test layers inherits", {
 
 test_that("test formula by", {
 
+    ps <- l_serialaxes(iris,
+                       by = linewidth ~ color,
+                       linewidth = sample(c(1,3), size = 150, replace = TRUE),
+                       color = sample(c("red", "green"), size = 150, replace = TRUE))
+    expect_equal(length(ps), 4)
+
+    pp <- l_plot(x = 1:6, y = 1:6,
+                 by = size ~ color,
+                 size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                 color = c(rep("red", 3), rep("green", 3)))
+    expect_equal(length(pp), 4)
+
+
     on <- data.frame(size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
                      color = c(rep("red", 3), rep("green", 3)),
                      glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"))
@@ -339,4 +352,17 @@ test_that("test formula by", {
 
     f <- l_facet(p, by = Factor1 ~ Factor2, on = on)
     expect_true(all(c("l_facet",    "l_compound", "loon" ) %in% class(f)))
+
+
+    # by with NA
+    by <- iris$Species
+    by[1:10] <- NA
+    expect_warning(
+        p <- l_plot(iris, by = by)
+    )
+    expect_equal(length(p$x1y1['x']), 40)
+    expect_warning(
+        s <- l_serialaxes(iris, by = by)
+    )
+    expect_equal(nrow(s$x1y1['data']), 40)
 })
