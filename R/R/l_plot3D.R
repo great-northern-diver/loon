@@ -37,7 +37,7 @@
 #'   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
 #'
 #'
-#'   \figure{gestures_rotate.png}{options: alt="Rotate gestures"}
+#'  \if{html}{\figure{gestures_rotate.png}{options: alt="Rotate gestures"}}
 #'
 #'
 #'   The centre of the rotation can be changed by panning the plot.
@@ -47,24 +47,23 @@
 #'   Zooming and Panning
 #'
 #'
-#'   \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
+#'   \if{html}{\figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}}
 #'
 #'
 #'   Selecting Points/Objects
 #'
 #'
-#'   \figure{gestures_select.png}{options: alt="Select gestures"}
+#'   \if{html}{\figure{gestures_select.png}{options: alt="Select gestures"}}
 #'
 #'
 #'   Moving Points on the Scatterplot Display
 #'
 #'
-#'   \figure{gestures_move.png}{options: alt="Move gestures"}
+#'   \if{html}{\figure{gestures_move.png}{options: alt="Move gestures"}}
 #'
 #'   NOTE: Although it is possible to programmatically add layers to an l_plot3D, these will not
 #'   appear as part of the 3D plot's display. There is no provision at present to incorporate
 #'   rotation of 3D geometric objects other than point glyphs.
-#'
 #'
 #' @template return_widget_handle
 #'
