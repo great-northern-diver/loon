@@ -27,7 +27,8 @@ loonFacets.default <- function(type,
     N <- length(x)
 
     # in case: `by` is a formula
-    byDataFrame <- by2Data(by, on, bySubstitute = bySubstitute, n = N, args = args,
+    byDataFrame <- by2Data(by, on, bySubstitute = bySubstitute,
+                           n = N, args = args,
                            l_className = type[1L])
 
     # byDataFrame is a data frame
@@ -43,6 +44,9 @@ loonFacets.default <- function(type,
 
     # separate windows or not
     separate <- layout == "separate"
+
+    # `by` includes NAs so that the length may vary
+    N <- nrow(byDataFrame)
 
     # N dim args
     nDimArgs <- as.data.frame(args[which(lengths(args) == N)],
@@ -401,8 +405,11 @@ loonFacets.l_serialaxes <- function(type,
     # separate windows or not
     separate <- layout == "separate"
 
+    # `by` includes NAs so that the length may vary
+    N <- nrow(byDataFrame)
+
     # N dim args
-    nDimArgs <- cbind(index = 1:N,
+    nDimArgs <- cbind(index = seq(N),
                       as.data.frame(args[which(lengths(args) == N)],
                                     stringsAsFactors = FALSE))
 
@@ -662,7 +669,15 @@ by2Data <- function(by, on, bySubstitute,
     if(inherits(by, "formula")) {
 
         by <- if(missing(on)) {
-            model.frame(by)
+
+            tryCatch(
+                model.frame(by),
+                error = function(e) {
+                    model.frame(by, data = args)
+                }
+            )
+
+
         } else {
 
             tryCatch(
