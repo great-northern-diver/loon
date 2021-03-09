@@ -41,7 +41,7 @@
 #' }
 #'
 #'
-#'   \if{html}{ The general direct manipulation and interaction gestures are
+#'   The general direct manipulation and interaction gestures are
 #'   outlined in the following figures.
 #'
 #'   Zooming and Panning
@@ -56,7 +56,6 @@
 #'
 #'   \figure{gestures_move.png}{options: alt="Move gestures"}
 #'
-#'   }
 #'
 #' @return \itemize{
 #' \item{
