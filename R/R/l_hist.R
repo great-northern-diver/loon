@@ -310,7 +310,7 @@ l_hist.default <-  function(x,
 #' @rdname l_hist
 #' @param showFactors whether to draw the factor names
 #' @export
-l_hist.factor <-  function(x, showFactors = length(unique(x)) < 10L, ...) {
+l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
 
     if(missing(x))
         return(
@@ -398,7 +398,7 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 10L, ...) {
 
 #' @rdname l_hist
 #' @export
-l_hist.character <- function(x, showFactors = length(unique(x)) < 10L, ...) {
+l_hist.character <- function(x, showFactors = length(unique(x)) < 25L, ...) {
 
     if(missing(x))
         return(
