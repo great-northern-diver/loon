@@ -269,6 +269,19 @@ test_that("test layers inherits", {
 
 test_that("test formula by", {
 
+    ps <- l_serialaxes(iris,
+                       by = linewidth ~ color,
+                       linewidth = sample(c(1,3), size = 150, replace = TRUE),
+                       color = sample(c("red", "green"), size = 150, replace = TRUE))
+    expect_equal(length(ps), 4)
+
+    pp <- l_plot(x = 1:6, y = 1:6,
+                 by = size ~ color,
+                 size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
+                 color = c(rep("red", 3), rep("green", 3)))
+    expect_equal(length(pp), 4)
+
+
     on <- data.frame(size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
                      color = c(rep("red", 3), rep("green", 3)),
                      glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"))
@@ -283,10 +296,10 @@ test_that("test formula by", {
     # avoid hex code in tests
     # it is because, in solaris X64 system, the 12 digit hex code is slightly different from that in
     # windows and mac
-    expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
+    # expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
     expect_equal(p[[1]]['size'], 25)
 
-    expect_equal(p[[2]]['color'], c(l_hexcolor("green"), l_hexcolor("green"))) # green
+    # expect_equal(p[[2]]['color'], c(l_hexcolor("green"), l_hexcolor("green"))) # green
     expect_equal(p[[2]]['size'], c(50, 50))
 
 
@@ -300,12 +313,12 @@ test_that("test formula by", {
                 color = c(rep("red", 3), rep("green", 3)),
                 by = size ~ color + glyph)
 
-    expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
+    # expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
     expect_equal(p[[1]]['size'], 25)
     expect_equal(p[[1]]['glyph'], "ccircle")
 
 
-    expect_equal(p[[8]]['color'], l_hexcolor("red")) # red
+    # expect_equal(p[[8]]['color'], l_hexcolor("red")) # red
     expect_equal(p[[8]]['size'], 50)
     expect_equal(p[[8]]['glyph'], "ocircle")
 
@@ -320,18 +333,18 @@ test_that("test formula by", {
     f <- l_facet(p, by = color ~ size, layout = "wrap")
 
     expect_equal(f[[1]]['size'], 25)
-    expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
+    # expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
     expect_equal(f[[2]]['size'], 25)
-    expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
+    # expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
     f <- l_facet(p, by = color ~ size)
 
     expect_equal(f[[1]]['size'], 25)
-    expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
+    # expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
     expect_equal(f[[2]]['size'], 25)
-    expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
+    # expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
 
     on <- data.frame(Factor1 = c(rep("A", 3), rep("B", 3)),
@@ -339,4 +352,17 @@ test_that("test formula by", {
 
     f <- l_facet(p, by = Factor1 ~ Factor2, on = on)
     expect_true(all(c("l_facet",    "l_compound", "loon" ) %in% class(f)))
+
+
+    # by with NA
+    by <- iris$Species
+    by[1:10] <- NA
+    expect_warning(
+        p <- l_plot(iris, by = by)
+    )
+    expect_equal(length(p$x1y1['x']), 40)
+    expect_warning(
+        s <- l_serialaxes(iris, by = by)
+    )
+    expect_equal(nrow(s$x1y1['data']), 40)
 })

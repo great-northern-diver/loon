@@ -1,5 +1,5 @@
 #' @title Loon layers
-#'
+#' @name l_layer
 #' @description Loon supports layering of visuals and groups of visuals. The
 #'   \code{l_layer} function is a generic method.
 #'
@@ -19,8 +19,12 @@
 #'   \code{\link{l_layer_points}}\cr texts \tab n text strings \tab
 #'   \code{\link{l_layer_text}}\cr polygons \tab n polygons \tab
 #'   \code{\link{l_layer_polygons}}\cr rectangles \tab n rectangles \tab
-#'   \code{\link{l_layer_rectangles}}\cr lines \tab n sets of connected line
-#'   segments \tab \code{\link{l_layer_lines}}\cr }
+#'   \code{\link{l_layer_rectangles}}\cr
+#'   lines \tab n sets of connected line segments \tab \code{\link{l_layer_lines}}\cr
+#'   smooth \tab fitted smooth line \tab \code{\link{l_layer_smooth}}\cr
+#'   rasterImage \tab one raster image \tab \code{\link{l_layer_rasterImage}}\cr
+#'   heatImage \tab one heat image \tab \code{\link{l_layer_heatImage}}\cr
+#'   contourLines \tab contour lines \tab \code{\link{l_layer_contourLines}}\cr}
 #'
 #'   Every layer within a display has a unique id. The visuals of the data in a
 #'   display present the default layer of that display and has the layer id
@@ -77,18 +81,22 @@
 #'   model layer has a \emph{selected} state, responds to selection gestures and
 #'   supports linking.
 #'
-#'
-#'
 #' @templateVar page learn_R_layer
 #' @template see_l_help_page
 #'
 #' @template param_widget
-#' @param x object that should be layered
+#' @param x for \code{\link{UseMethod}}: an object whose class will determine the method to be dispatched.
 #' @param ... additional arguments, often state definition for the basic
 #'   layering function
 #'
-#' @seealso \code{\link{l_info_states}}, \code{\link{l_scaleto_layer}},
-#'   \code{\link{l_scaleto_world}}
+#' @seealso \code{\link{l_info_states}}, \code{\link{l_scaleto_layer}}, \code{\link{l_scaleto_world}};
+#'
+#' some \code{l_layer} S3 methods:
+#'   \code{\link{l_layer.density}}, \code{\link{l_layer.map}},
+#'   \code{\link{l_layer.SpatialPolygonsDataFrame}}, \code{\link{l_layer.SpatialPolygons}},
+#'   \code{\link{l_layer.Polygons}}, \code{\link{l_layer.Polygon}}, \code{\link{l_layer.SpatialLinesDataFrame}},
+#'   \code{\link{l_layer.SpatialLines}}, \code{\link{l_layer.Lines}}, \code{\link{l_layer.Line}},
+#'   \code{\link{l_layer.SpatialPointsDataFrame}}, \code{\link{l_layer.SpatialPoints}}
 #'
 #' @template return_layerid
 #'
@@ -117,7 +125,6 @@
 #' id <- l_layer(p, obj)
 #'
 #' l_scaleto_world(p)
-#'
 #' }
 l_layer <- function(widget, x, ...) {
     UseMethod("l_layer", x)
@@ -125,33 +132,26 @@ l_layer <- function(widget, x, ...) {
 
 
 #' @title Layer Method for Kernel Density Estimation
-#'
+
 #' @description Layer a line that represents a kernel density estimate.
-#'
+
 #' @inheritParams l_layer
 #' @param x object from \code{\link{density}} of class \code{"density"}
-#'
+
 #' @template return_layerid
-#'
-#' @seealso \code{\link[stats]{density}}, \code{\link{l_layer}}
-#'
+#
+#' @seealso \code{\link[stats]{density}}
 #' @export
 #' @export l_layer.density
-#'
-#' @examples
-#' if(interactive()){
-#'
-#' d <- density(faithful$eruptions, bw = "sj")
-#' h <- l_hist(x = faithful$eruptions, yshows="density")
-#' l <- l_layer.density(h, d, color="steelblue", linewidth=3)
-#'
+#' @examples {
+#'   d <- density(faithful$eruptions, bw = "sj")
+#'   h <- l_hist(x = faithful$eruptions, yshows="density")
+#'   l <- l_layer.density(h, d, color="steelblue", linewidth=3)
+#'   # or l <- l_layer(h, d, color="steelblue", linewidth=3)
 #' }
-#'
 l_layer.density <- function(widget, x, ...) {
     l_layer_line(widget, x$x, x$y, ...)
 }
-
-
 
 # helper function to add a layer
 l_layer_add <- function(widget, type, ...) {

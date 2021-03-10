@@ -21,15 +21,13 @@ layer object handle, layer id
 Layer a line that represents a kernel density estimate.
 }
 \examples{
-if(interactive()){
-
-d <- density(faithful$eruptions, bw = "sj")
-h <- l_hist(x = faithful$eruptions, yshows="density")
-l <- l_layer.density(h, d, color="steelblue", linewidth=3)
-
+{
+  d <- density(faithful$eruptions, bw = "sj")
+  h <- l_hist(x = faithful$eruptions, yshows="density")
+  l <- l_layer.density(h, d, color="steelblue", linewidth=3)
+  # or l <- l_layer(h, d, color="steelblue", linewidth=3)
 }
-
 }
 \seealso{
-\code{\link[stats]{density}}, \code{\link{l_layer}}
+\code{\link[stats]{density}}
 }

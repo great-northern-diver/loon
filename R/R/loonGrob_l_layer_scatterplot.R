@@ -182,7 +182,7 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
 #' gr <- loonGrob(p)
 #' grid.newpage(); grid.draw(gr)
 #'
-#' g2 <- removeGrob(gr, "image_glyph_border", global=TRUE)
+#' g2 <- removeGrob(gr, "image_border", global=TRUE)
 #' grid.newpage(); grid.draw(g2)
 #' }
 loonGlyphGrob.image <-  function(widget, x, glyph_info) {

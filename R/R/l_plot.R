@@ -40,23 +40,20 @@
 #'   and to explore loon's website accessible via \code{l_help()}.
 #' }
 #'
-#'
-#'   \if{html}{ The general direct manipulation and interaction gestures are
+#'   The general direct manipulation and interaction gestures are
 #'   outlined in the following figures.
 #'
 #'   Zooming and Panning
 #'
-#'   \figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}
+#'   \if{html}{\figure{gestures_zoom_pan.png}{options: alt="Zoom pan gestures"}}
 #'
 #'   Selecting Points/Objects
 #'
-#'   \figure{gestures_select.png}{options: alt="Select gestures"}
+#'   \if{html}{\figure{gestures_select.png}{options: alt="Select gestures"}}
 #'
 #'   Moving Points on the Scatterplot Display
 #'
-#'   \figure{gestures_move.png}{options: alt="Move gestures"}
-#'
-#'   }
+#'   \if{html}{\figure{gestures_move.png}{options: alt="Move gestures"}}
 #'
 #' @return \itemize{
 #' \item{

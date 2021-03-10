@@ -133,7 +133,7 @@ that can be linked with loon's other displays." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,51 +160,51 @@ that can be linked with loon's other displays." />
 that can be linked with loon's other displays.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>l_hist</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>yshows</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"frequency"</span>, <span class='st'>"density"</span>),
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>on</span>,
-  <span class='kw'>layout</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span>),
-  <span class='kw'>connectedScales</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>origin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>binwidth</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>showStackedColors</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showBinHandle</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"color"</span>),
-  <span class='kw'>active</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>selected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>xlabel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>showLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>showScales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>showGuides</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>l_hist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  yshows <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"frequency"</span>, <span class='st'>"density"</span><span class='op'>)</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>on</span>,
+  layout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grid"</span>, <span class='st'>"wrap"</span>, <span class='st'>"separate"</span><span class='op'>)</span>,
+  connectedScales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cross"</span>, <span class='st'>"row"</span>, <span class='st'>"column"</span>, <span class='st'>"both"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  origin <span class='op'>=</span> <span class='cn'>NULL</span>,
+  binwidth <span class='op'>=</span> <span class='cn'>NULL</span>,
+  showStackedColors <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showBinHandle <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  color <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"color"</span><span class='op'>)</span>,
+  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  xlabel <span class='op'>=</span> <span class='cn'>NULL</span>,
+  showLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showScales <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showGuides <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for factor</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='kw'>showFactors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>x</span>)) <span class='kw'>&lt;</span> <span class='fl'>10L</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>10L</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='kw'>showFactors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>x</span>)) <span class='kw'>&lt;</span> <span class='fl'>10L</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>10L</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for table</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for array</span>
-<span class='fu'>l_hist</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -368,39 +368,40 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 <code><a href='names.loon.html'>names.loon</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
-<span class='no'>h</span> <span class='kw'>&lt;-</span> <span class='fu'>l_hist</span>(<span class='no'>iris</span>$<span class='no'>Sepal.Length</span>)
+<span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>h</span>)
-<span class='no'>h</span>[<span class='st'>"xlabel"</span>] <span class='kw'>&lt;-</span> <span class='st'>"Sepal length"</span>
-<span class='no'>h</span>[<span class='st'>"showOutlines"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"xlabel"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"Sepal length"</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 
-<span class='no'>h</span>[<span class='st'>"yshows"</span>]
-<span class='no'>h</span>[<span class='st'>"yshows"</span>] <span class='kw'>&lt;-</span> <span class='st'>"density"</span>
-<span class='fu'><a href='l_scaleto_plot.html'>l_scaleto_plot</a></span>(<span class='no'>h</span>)
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"yshows"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"density"</span>
+<span class='fu'><a href='l_scaleto_plot.html'>l_scaleto_plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 
-<span class='no'>h</span>[<span class='st'>"showStackedColors"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>h</span>[<span class='st'>'color'</span>] <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span>
-<span class='no'>h</span>[<span class='st'>"showStackedColors"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
-<span class='no'>h</span>[<span class='st'>"showOutlines"</span>] <span class='kw'>&lt;-</span> <span class='fl'>TRUE</span>
-<span class='no'>h</span>[<span class='st'>"showGuides"</span>] <span class='kw'>&lt;-</span> <span class='fl'>FALSE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>'color'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showStackedColors"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showOutlines"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+<span class='va'>h</span><span class='op'>[</span><span class='st'>"showGuides"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>FALSE</span>
 
 <span class='co'># link another plot with the previous plot</span>
-<span class='no'>h</span>[<span class='st'>'linkingGroup'</span>] <span class='kw'>&lt;-</span> <span class='st'>"iris_data"</span>
-<span class='no'>h2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'>l_hist</span>(<span class='no'>Petal.Width</span>,
-                        <span class='kw'>linkingGroup</span><span class='kw'>=</span><span class='st'>"iris_data"</span>,
-                        <span class='kw'>showStackedColors</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='va'>h</span><span class='op'>[</span><span class='st'>'linkingGroup'</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"iris_data"</span>
+<span class='va'>h2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>Petal.Width</span>,
+                        linkingGroup<span class='op'>=</span><span class='st'>"iris_data"</span>,
+                        showStackedColors <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 
 
 <span class='co'># Get an R (grid) graphics plot of the current loon plot</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>h</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 <span class='co'># or with more control about grid parameters</span>
-<span class='fu'><a href='grid.loon.html'>grid.loon</a></span>(<span class='no'>h</span>)
+<span class='fu'><a href='grid.loon.html'>grid.loon</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 <span class='co'># or to save the grid data structure (grob) for later use</span>
-<span class='no'>hg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span>(<span class='no'>h</span>)
+<span class='va'>hg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='loonGrob.html'>loonGrob</a></span><span class='op'>(</span><span class='va'>h</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -416,7 +417,7 @@ a <code>loon</code> widget displaying a subset of interest.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -41,7 +41,7 @@ ll <- l_getLocations(pp)
 nplots <- length(l_getPlots(pp))
 # the plots returned by l_getPlots(pp) are positioned
 # in order by the layout_matrix
-# ll$layout_matrix TODO
+ll$layout_matrix
 }
 
 }

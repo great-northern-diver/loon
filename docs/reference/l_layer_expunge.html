@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,7 +160,7 @@
   <code>'model'</code> layer cannot be deleted.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_layer_expunge</span>(<span class='no'>widget</span>, <span class='no'>layer</span>)</pre>
+    <pre class="usage"><span class='fu'>l_layer_expunge</span><span class='op'>(</span><span class='va'>widget</span>, <span class='va'>layer</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,18 +184,19 @@ then the layer argument is not used</p></td>
     <div class='dont-index'><p><code><a href='l_layer.html'>l_layer</a></code>, <code><a href='l_layer_delete.html'>l_layer_delete</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span>(<span class='no'>p</span>)
-<span class='no'>l1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span>(<span class='no'>p</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='fl'>0</span>:<span class='fl'>1</span>, <span class='kw'>parent</span><span class='kw'>=</span><span class='no'>g</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>""</span>, <span class='kw'>linecolor</span><span class='kw'>=</span><span class='st'>"orange"</span>, <span class='kw'>linewidth</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>l2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_line.html'>l_layer_line</a></span>(<span class='no'>p</span>, <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>.5</span>,<span class='fl'>1</span>), <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>), <span class='kw'>parent</span><span class='kw'>=</span><span class='no'>g</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"blue"</span>)
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_group.html'>l_layer_group</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='va'>l1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_rectangle.html'>l_layer_rectangle</a></span><span class='op'>(</span><span class='va'>p</span>, x<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span>, y<span class='op'>=</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>1</span>, parent<span class='op'>=</span><span class='va'>g</span>, color<span class='op'>=</span><span class='st'>""</span>, linecolor<span class='op'>=</span><span class='st'>"orange"</span>, linewidth<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>l2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_line.html'>l_layer_line</a></span><span class='op'>(</span><span class='va'>p</span>, x<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>.5</span>,<span class='fl'>1</span><span class='op'>)</span>, y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span><span class='op'>)</span>, parent<span class='op'>=</span><span class='va'>g</span>, color<span class='op'>=</span><span class='st'>"blue"</span><span class='op'>)</span>
 
-<span class='fu'>l_layer_expunge</span>(<span class='no'>p</span>, <span class='no'>g</span>)
+<span class='fu'>l_layer_expunge</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>g</span><span class='op'>)</span>
 
 <span class='co'># or l_layer_expunge(g)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -211,7 +212,7 @@ then the layer argument is not used</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
