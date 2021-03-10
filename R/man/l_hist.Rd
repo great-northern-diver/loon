@@ -36,9 +36,9 @@ l_hist(x, ...)
   ...
 )
 
-\method{l_hist}{factor}(x, showFactors = length(unique(x)) < 10L, ...)
+\method{l_hist}{factor}(x, showFactors = length(unique(x)) < 25L, ...)
 
-\method{l_hist}{character}(x, showFactors = length(unique(x)) < 10L, ...)
+\method{l_hist}{character}(x, showFactors = length(unique(x)) < 25L, ...)
 
 \method{l_hist}{data.frame}(x, ...)
 

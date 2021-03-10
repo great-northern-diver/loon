@@ -19,6 +19,7 @@ l_pairs(
   serialAxesArgs = list(),
   parent = NULL,
   span = 10L,
+  showProgressBar = TRUE,
   ...
 )
 }
@@ -64,6 +65,8 @@ some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
 
 \item{span}{How many column/row occupies for each widget}
+
+\item{showProgressBar}{Logical; show progress bar or not}
 
 \item{...}{named arguments to modify the `l_plot` states of the scatterplots}
 }
