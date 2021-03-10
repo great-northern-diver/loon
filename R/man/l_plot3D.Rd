@@ -198,7 +198,7 @@ To get started with loon it is recommended to read loons website
   When rotation mode is active, either use the below mouse gestures or arrow keys to rotate the plot.
 
 
- \if{html}{ \figure{gestures_rotate.png}{options: alt="Rotate gestures"}}
+ \if{html}{\figure{gestures_rotate.png}{options: alt="Rotate gestures"}}
 
 
   The centre of the rotation can be changed by panning the plot.
