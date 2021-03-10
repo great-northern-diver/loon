@@ -1,20 +1,21 @@
 context("test_sync")
 
 test_that("test pull", {
-
-    p <- l_plot(as.character(iris$Species), color = "red") # red
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    p <- l_plot(as.character(iris_$Species), color = "red") # red
     # expect_equal(unique(p['color']), l_hexcolor("red"))
 
-    l_configure(p, linkingGroup = "iris", sync = "push")
+    l_configure(p, linkingGroup = "iris_", sync = "push")
 
     ########################### "pull" (default sync) ###########################
     expect_warning(
-        q <- l_plot(iris$Petal.Width,
-                    linkingGroup = "iris",
+        q <- l_plot(iris_$Petal.Width,
+                    linkingGroup = "iris_",
                     color = "green", # green
                     size = 6,
                     selected = TRUE,
-                    active = sample(c(T, F), size = 150, replace = TRUE),
+                    active = sample(c(T, F), size = n, replace = TRUE),
                     glyph = "triangle")
     )
     # color, size, selected and active are linked
@@ -34,8 +35,8 @@ test_that("test pull", {
     expect_true(glyph != l_getOption("glyph"))
 
     ################## histogram
-    expect_warning(h <- l_hist(iris$Petal.Length,
-                               linkingGroup = "iris",
+    expect_warning(h <- l_hist(iris_$Petal.Length,
+                               linkingGroup = "iris_",
                                color = "red", # red
                                selected = TRUE))
 
@@ -45,8 +46,8 @@ test_that("test pull", {
     # expect_equal(unique(h['color']), l_hexcolor("red"))
 
     ################## serialaxes
-    expect_warning(s <- l_serialaxes(iris[, -5],
-                                     linkingGroup = "iris",
+    expect_warning(s <- l_serialaxes(iris_[, -5],
+                                     linkingGroup = "iris_",
                                      color = "green", # green
                                      active = FALSE))
 
@@ -72,9 +73,9 @@ test_that("test pull", {
     ################## facets
     ### facets
     expect_warning(
-        pf <- l_plot(iris$Sepal.Length, iris$Petal.Length,
-                     linkingGroup = "iris",
-                     by = iris$Species,
+        pf <- l_plot(iris_$Sepal.Length, iris_$Petal.Length,
+                     linkingGroup = "iris_",
+                     by = iris_$Species,
                      size = 10)
     )
     size <- unique(unlist(pf['size']))
@@ -82,10 +83,10 @@ test_that("test pull", {
 
     ### pairs
     expect_warning(
-        ppairs <- l_pairs(iris[, 1:3],
+        ppairs <- l_pairs(iris_[, 1:3],
                           showHistograms = TRUE,
                           showSerialAxes = TRUE,
-                          linkingGroup = "iris",
+                          linkingGroup = "iris_",
                           color = "green") # green
     )
 
@@ -94,58 +95,59 @@ test_that("test pull", {
     ### ts
     expect_warning(
         pts <- l_plot(decompose(co2),
-                      linkingGroup = "iris",
+                      linkingGroup = "iris_",
                       color = "green") # green
     )
-    # expect_equal(unique(pts[[1]]['color'][1:150]), l_hexcolor("red"))
+    # expect_equal(unique(pts[[1]]['color'][1:n]), l_hexcolor("red"))
 })
 
 
 test_that("test push", {
-
+    n <- 149
+    iris_ <- iris[seq(n), ]
     color <- sample(c("red", "blue", "green"),
-                    size = 150,
+                    size = n,
                     replace = TRUE)
-    size <- sample(2:10, size = 150, replace = TRUE)
-    p <- l_plot(iris, linkingGroup = "iris1")
+    size <- sample(2:10, size = n, replace = TRUE)
+    p <- l_plot(iris_, linkingGroup = "iris_1")
     p['color'] <- color
     p["size"] <- size
 
-    q <- l_plot(iris, by = iris$Species,
+    q <- l_plot(iris_, by = iris_$Species,
                 color = "black",
-                linkingGroup = "iris1", sync = "push")
+                linkingGroup = "iris_1", sync = "push")
     # only the color is modified
     # expect_true(all(q[[1]]['color'] == l_hexcolor("black")))
     # the size of each plot should be the same with the random sample
     expect_true(all(q[[1]]['size'] == size[1:50]))
     expect_true(all(q[[2]]['size'] == size[51:100]))
-    expect_true(all(q[[3]]['size'] == size[101:150]))
+    expect_true(all(q[[3]]['size'] == size[101:n]))
 
-    expect_message(p1 <- l_plot(iris, linkingGroup = "iris1", sync = "push"))
+    expect_message(p1 <- l_plot(iris_, linkingGroup = "iris_1", sync = "push"))
     expect_true(all(p['size'] == p1['size']))
     expect_false(all(p['size'] == size))
 
     p['size'] <- size
-    q1 <- l_plot(iris, by = rep(1, 150),
+    q1 <- l_plot(iris_, by = rep(1, n),
                  select = TRUE,
-                 linkingGroup = "iris1",
+                 linkingGroup = "iris_1",
                  sync = "push")
     expect_true(all(p['selected']))
     expect_true(all(p['size'] == size))
 
     # serialaxes
-    s <- l_serialaxes(iris, color = color,
+    s <- l_serialaxes(iris_, color = color,
                       linewidth = size,
                       selected = FALSE, # default setting it will not be pushed
-                      linkingGroup = "iris1",
+                      linkingGroup = "iris_1",
                       sync = "push")
 
     expect_true(all(p['size'] == size))
     expect_false(all(p['selected']))
     # expect_true(all(p['color'] == l_hexcolor(color)))
 
-    s1 <- l_serialaxes(iris, by = iris$Species,
-                       linkingGroup = "iris1",
+    s1 <- l_serialaxes(iris_, by = iris_$Species,
+                       linkingGroup = "iris_1",
                        color = "black",
                        sync = "push")
 
@@ -153,7 +155,7 @@ test_that("test push", {
     # expect_true(all(s['color'] == l_hexcolor("black")))
     expect_true(all(s['linewidth'] == size))
 
-    pair <- l_pairs(iris[, 1:3], linkingGroup = "iris1", sync = "push",
+    pair <- l_pairs(iris_[, 1:3], linkingGroup = "iris_1", sync = "push",
                     color = "red")
 
     expect_true(all(s['linewidth'] == size))

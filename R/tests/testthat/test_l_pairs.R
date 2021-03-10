@@ -5,7 +5,7 @@
     context("test_l_pairs")
 
     test_that("l_pairs logicals work", {
-        data <- iris[, -5]
+        data <- iris[seq(149), -5]
         nVars <- length(data)
         p <- l_pairs(data,
                      histArgs = list(showStackedColors = FALSE,
