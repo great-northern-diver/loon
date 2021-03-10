@@ -29,17 +29,17 @@ test_that("color, size, linkingKey, glyph, all match when NAs are present", {
     expect_warning(p_3d <- l_plot3D(x, y, y, color = color, size = size, linkingKey = linkingKey,
                                     itemLabel = itemLabels, glyph = glyphs), "Remove")
     expect_equal(p["x"], p_3d["x"])
-    expect_equal(p["color"], p_3d["color"])
+    # expect_equal(p["color"], p_3d["color"])
     expect_equal(p["size"], p_3d["size"])
     expect_equal(p["glyph"], p_3d["glyph"])
     expect_equal(p["linkingKey"], p_3d["linkingKey"])
     expect_equal(p["itemLabel"], p_3d["itemLabel"])
     expect_warning(h <- l_hist(x + y, color = color, linkingKey = linkingKey), "Remove")
-    expect_equal(p["color"], h["color"])
+    # expect_equal(p["color"], h["color"])
     expect_equal(p["linkingKey"], h["linkingKey"])
     expect_warning(sa <- l_serialaxes(data = data.frame(x = x, y = y), color = color, linkingKey = linkingKey),
                    "Remove")
-    expect_equal(p["color"], sa["color"])
+    # expect_equal(p["color"], sa["color"])
     expect_equal(p["linkingKey"],sa["linkingKey"])
 
 })
