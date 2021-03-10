@@ -195,23 +195,24 @@ test_that("plots with different glyphs have correct structure", {
 })
 
 test_that("graphs have correct structure", {
-    G <- completegraph(names(iris[,-5]))
+    iris_ <- iris[seq(149), ]
+    G <- completegraph(names(iris_[,-5]))
     LG <- linegraph(G)
     g <- l_graph(LG)
 
     nav0 <- l_navigator_add(g)
     l_configure(nav0, label = 0)
-    con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris[,-5])
+    con0 <- l_context_add_geodesic2d(navigator=nav0, data=iris_[,-5])
 
     nav1 <- l_navigator_add(g, from = "Sepal.Length:Petal.Width",
                             to = "Petal.Length:Petal.Width", proportion = 0.6)
     l_configure(nav1, label = 1)
-    con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris[,-5])
+    con1 <- l_context_add_geodesic2d(navigator=nav1, data=iris_[,-5])
 
     nav2 <- l_navigator_add(g, from = "Sepal.Length:Petal.Length",
                             to = "Sepal.Width:Petal.Length", proportion = 0.5)
     l_configure(nav2, label = 2)
-    con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris[,-5])
+    con2 <- l_context_add_geodesic2d(navigator=nav2, data=iris_[,-5])
     lgrob <- loonGrob(g)
     #grid.newpage(); grid.draw(lgrob)
     expect_equal(class(lgrob), c("gTree", "grob", "gDesc"))
@@ -219,7 +220,8 @@ test_that("graphs have correct structure", {
 })
 
 test_that("histograms have correct structure", {
-    h <- l_hist(iris$Sepal.Length, color=iris$Species)
+    iris_ <- iris[seq(149), ]
+    h <- l_hist(iris_$Sepal.Length, color=iris_$Species)
     g <- loonGrob(h)
     #grid.newpage(); grid.draw(g)
     expect_equal(class(g), c("gTree", "grob", "gDesc"))
@@ -250,7 +252,8 @@ test_that("navgation graphs have correct structure", {
 })
 
 test_that("l_pairs have correct structure", {
-    p <- l_pairs(iris[,-5], color=iris$Species)
+    iris_ <- iris[seq(149), ]
+    p <- l_pairs(iris_[,-5], color=iris_$Species)
     lgrob <- loonGrob(p)
     #grid.newpage()
     #grid.draw(lgrob)

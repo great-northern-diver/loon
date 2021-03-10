@@ -2,12 +2,14 @@ library(loon)
 context("test_smooth")
 
 test_that("test smooth", {
-    p <- l_plot(iris, color = iris$Species)
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    p <- l_plot(iris_, color = iris_$Species)
     l <- l_layer_smooth(p)
     expect_equal(length(l_layer_getChildren(p, l)),
                  1)
     l_layer_expunge(p, l)
-    l <- l_layer_smooth(p, group = iris$Species)
+    l <- l_layer_smooth(p, group = iris_$Species)
     expect_equal(length(l_layer_getChildren(p, l)),
                  3)
     l_layer_expunge(p, l)
@@ -17,7 +19,7 @@ test_that("test smooth", {
     expect_equal(length(l_layer_getChildren(p, l)),
                  1)
     l_layer_expunge(p, l)
-    p['selected'] <- sample(c(TRUE, FALSE), size = 150, replace = TRUE)
+    p['selected'] <- sample(c(TRUE, FALSE), size = n, replace = TRUE)
     l <- l_layer_smooth(p,
                         group = "selected")
     expect_equal(length(l_layer_getChildren(p, l)),
@@ -39,14 +41,14 @@ test_that("test smooth", {
     expect_equal(length(l_layer_getChildren(p, l)), 1)
     l_layer_expunge(p, l)
 
-    l <- l_layer_smooth(p, group = iris$Species[51:150],
+    l <- l_layer_smooth(p, group = iris_$Species[51:n],
                         linecolor = unique(p['color'][p['active']]))
     expect_equal(length(l_layer_getChildren(p, l)), 2)
 
 
     # test some arguments
-    p <- l_plot(iris, color = iris$Species)
-    l1 <- l_layer_smooth(p, group = c(rep(1, 100), rep(2, 50)),
+    p <- l_plot(iris_, color = iris_$Species)
+    l1 <- l_layer_smooth(p, group = c(rep(1, 100), rep(2, n - 100)),
                          level = 0.9, method = "lm", weights = ~x^5,
                          confidenceIntervalArgs = list(linecolor="blue", linewidth=2, linedash = 1),
                          predictionIntervalArgs = list(linecolor="red", linewidth=5, linedash = "")

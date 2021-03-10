@@ -84,17 +84,21 @@ test_that("l_plot facets work with  polygon glyph", {
 })
 
 test_that("l_plot facets work with  text glyph", {
+    n <- 149
     ########## l_glyph_add_text ##########
-    p <- l_plot(iris, color = iris$Species)
-    g <- l_glyph_add_text(p, iris$Species, "test_label")
+    iris_ <- iris[seq(n), ]
+    p <- l_plot(iris_, color = iris_$Species)
+    g <- l_glyph_add_text(p, iris_$Species, "test_label")
     p['glyph'][1:100] <- g
     f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test facet l_facet class:l_plot", {
+    n <- 149
+    iris_ <- iris[seq(n), ]
     ########## l_plot ##########
-    p <- l_plot(iris, color = iris$Species)
+    p <- l_plot(iris_, color = iris_$Species)
     p['size'][1:20] <- 8
     p['size'][21:40] <- 12
     p['size'][41:60] <- 16
@@ -108,8 +112,10 @@ test_that("test facet l_facet class:l_plot", {
 })
 
 test_that("test facet l_facet class:l_plot3D", {
+    n <- 149
+    iris_ <- iris[seq(n), ]
     ########## l_plot3D ##########
-    p <-  l_plot3D(iris, color = iris$Species)
+    p <-  l_plot3D(iris_, color = iris_$Species)
     p['size'][1:20] <- 8
     p['size'][21:40] <- 12
     p['size'][41:60] <- 16
@@ -122,8 +128,10 @@ test_that("test facet l_facet class:l_plot3D", {
 })
 
 test_that("test facet l_facet class:l_hist", {
+    n <- 149
+    iris_ <- iris[seq(n), ]
     ########## l_hist ##########
-    h <- l_hist(iris, color = iris$Species)
+    h <- l_hist(iris_, color = iris_$Species)
     h['selected'][1:30] <- TRUE
     h['selected'][31:60] <- TRUE
     # f <- l_facet(h, layout = "wrap", by = c("color", "selected"))
@@ -135,8 +143,10 @@ test_that("test facet l_facet class:l_hist", {
 })
 
 test_that("test facet l_facet class:l_serialaxes", {
+    n <- 149
+    iris_ <- iris[seq(n), ]
     ########## l_serialaxes ##########
-    s <- l_serialaxes(iris, color = iris$Species)
+    s <- l_serialaxes(iris_, color = iris_$Species)
     s['selected'][1:30] <- TRUE
     s['selected'][31:60] <- TRUE
     # f <- l_facet(s, layout = "wrap", by = c("color", "selected"))
@@ -199,52 +209,58 @@ test_that("test some facet args in l_hist", {
 })
 
 test_that("test some facet args in l_serialaxes", {
-    s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
-                      by = iris$Species, scaling = "observation")
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    s <- l_serialaxes(iris_, sequence = sample(colnames(iris_), 10, replace = TRUE),
+                      by = iris_$Species, scaling = "observation")
     expect_equal(class(s), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    s <- l_serialaxes(iris, sequence = sample(colnames(iris), 10, replace = TRUE),
-                      by = iris$Species, scaling = "observation", axesLayout = "parallel",
+    s <- l_serialaxes(iris_, sequence = sample(colnames(iris_), 10, replace = TRUE),
+                      by = iris_$Species, scaling = "observation", axesLayout = "parallel",
                       layout = "wrap")
     expect_equal(class(s), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test all possible 'by's", {
-    p <- l_plot(iris)
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    p <- l_plot(iris_)
 
     # by is a data.frame
-    fp <- l_facet(p, layout = "grid", by = data.frame(iris$Species, iris$Species))
+    fp <- l_facet(p, layout = "grid", by = data.frame(iris_$Species, iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 
 
     # by is a list
-    fp <- l_facet(p, layout = "grid", by = list(iris$Species, iris$Species))
+    fp <- l_facet(p, layout = "grid", by = list(iris_$Species, iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    p['color'][sample(1:150, 70)] <- "red"
-    fp <- l_facet(p, by = list("color", iris = iris$Species))
+    p['color'][sample(1:n, 70)] <- "red"
+    fp <- l_facet(p, by = list("color", iris_ = iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
-    p['size'][sample(1:150, 70)] <- 8
+    p['size'][sample(1:n, 70)] <- 8
     fp <- l_facet(p, by = c("color", "size"))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_warning(l_facet(p, by = list("color", 1:10)))
     expect_warning(l_facet(p, by = list("foo", "color")))
 
     # by is a vector
-    h <- l_hist(iris)
-    fp <- l_facet(h, layout = "wrap", by = iris$Species)
+    h <- l_hist(iris_)
+    fp <- l_facet(h, layout = "wrap", by = iris_$Species)
     expect_equal(class(fp), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
 })
 
 test_that("test separate layouts", {
-    p <- l_plot(iris, by = iris$Species,
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    p <- l_plot(iris_, by = iris_$Species,
                 layout = "separate")
     expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
-    p <- l_plot3D(iris, by = iris$Species,
+    p <- l_plot3D(iris_, by = iris_$Species,
                   layout = "separate")
     expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
-    p <- l_hist(iris, by = iris$Species,
+    p <- l_hist(iris_, by = iris_$Species,
                 layout = "separate")
     expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
-    s <- l_serialaxes(iris, by = iris$Species,
+    s <- l_serialaxes(iris_, by = iris_$Species,
                       layout = "separate")
     expect_equal(class(s), c("l_facet",    "l_compound", "loon" ))
 })
@@ -268,11 +284,12 @@ test_that("test layers inherits", {
 })
 
 test_that("test formula by", {
-
-    ps <- l_serialaxes(iris,
+    n <- 149
+    iris_ <- iris[seq(n), ]
+    ps <- l_serialaxes(iris_,
                        by = linewidth ~ color,
-                       linewidth = sample(c(1,3), size = 150, replace = TRUE),
-                       color = sample(c("red", "green"), size = 150, replace = TRUE))
+                       linewidth = sample(c(1,3), size = n, replace = TRUE),
+                       color = sample(c("red", "green"), size = n, replace = TRUE))
     expect_equal(length(ps), 4)
 
     pp <- l_plot(x = 1:6, y = 1:6,
@@ -355,14 +372,14 @@ test_that("test formula by", {
 
 
     # by with NA
-    by <- iris$Species
+    by <- iris_$Species
     by[1:10] <- NA
     expect_warning(
-        p <- l_plot(iris, by = by)
+        p <- l_plot(iris_, by = by, linkingGroup = "foo")
     )
     expect_equal(length(p$x1y1['x']), 40)
     expect_warning(
-        s <- l_serialaxes(iris, by = by)
+        s <- l_serialaxes(iris_, by = by)
     )
     expect_equal(nrow(s$x1y1['data']), 40)
 })

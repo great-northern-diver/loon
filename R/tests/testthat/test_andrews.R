@@ -2,15 +2,15 @@ library(loon)
 context("test_andrews")
 
 test_that("test andrews glyphs", {
-    sam <- sample(1:150, 50)
+    sam <- sample(1:149, 50)
     p <- l_plot(iris[sam, ])
     gs <- l_glyph_add_serialaxes(p, data=iris[sam, -5],
                                  andrews = TRUE)
     p['glyph'] <- gs
     expect_true(gs['andrews'])
     # test layout sequence
-    gs['sequence'] <- c(colnames(iris[, -5]), "Sepal.Length")
-    expect_equal(gs['sequence'], c(colnames(iris[, -5]), "Sepal.Length"))
+    gs['sequence'] <- c(colnames(iris[1:149, -5]), "Sepal.Length")
+    expect_equal(gs['sequence'], c(colnames(iris[1:149, -5]), "Sepal.Length"))
 
     # test scaling
     gs['scaling'] <- "observation"
@@ -36,8 +36,8 @@ test_that("test andrews glyphs", {
     expect_equal(gs['axesLayout'], "parallel")
 
     # test layout sequence
-    gs['sequence'] <- c(colnames(iris[, -5]))
-    expect_equal(gs['sequence'], c(colnames(iris[, -5])))
+    gs['sequence'] <- c(colnames(iris[1:149, -5]))
+    expect_equal(gs['sequence'], c(colnames(iris[1:149, -5])))
 
     # test scaling
     gs['scaling'] <- "data"
@@ -59,7 +59,7 @@ test_that("test andrews glyphs", {
 
 test_that("test andrews plot", {
     set.seed(12345)
-    sam <- sample(1:150, 50)
+    sam <- sample(1:149, 50)
     s <- l_serialaxes(iris[sam, ], andrews = TRUE)
     expect_true(s['andrews'])
 

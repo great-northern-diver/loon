@@ -232,11 +232,10 @@ loonFacets.default <- function(type,
                                )
                        )
                    } else {
-                       if(i == 1L) {
-                           l_linkingWarning(plots, sync,
-                                            args = splitNDimArgs[[i]],
-                                            modifiedLinkedStates = modifiedLinkedStates)
-                       }
+
+                       l_linkingWarning(plot, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
                    }
 
                } else {
@@ -580,10 +579,9 @@ loonFacets.l_serialaxes <- function(type,
                                )
                        )
                    } else {
-                       if(i == 1L)
-                           l_linkingWarning(plots, sync,
-                                            args = splitNDimArgs[[i]],
-                                            modifiedLinkedStates = modifiedLinkedStates)
+                       l_linkingWarning(plot, sync,
+                                        args = splitNDimArgs[[i]],
+                                        modifiedLinkedStates = modifiedLinkedStates)
                    }
 
                } else {
