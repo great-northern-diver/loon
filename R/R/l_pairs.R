@@ -29,6 +29,7 @@
 #' @param serialAxesArgs additional arguments to modify the `l_serialaxes` states
 #' @template param_parent
 #' @param span How many column/row occupies for each widget
+#' @param showProgressBar Logical; show progress bar or not
 #' @param ... named arguments to modify the `l_plot` states of the scatterplots
 #'
 #' @return an `l_pairs` object (an `l_compound` object), being a list with named elements,
@@ -70,7 +71,7 @@ l_pairs <- function(data,
                     showHistograms = FALSE, histLocation = c("edge", "diag"),
                     histHeightProp = 1, histArgs = list(),
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
-                    span = 10L, ...) {
+                    span = 10L, showProgressBar = TRUE, ...) {
 
   ### as the number of plots rises, the running time increases dramatically
   ### so we provide a progress bar to give the progress information
@@ -190,9 +191,10 @@ l_pairs <- function(data,
     totalNumPlots <- totalNumPlots + numSerialaxesPlot
   }
 
-  pbPlots <- l_txtProgressBar(min = 0, max = totalNumPlots,
-                              minLenToGivePb = minLenToGivePb,
-                              message = "Prepare Plots:")
+  if(showProgressBar)
+    pbPlots <- l_txtProgressBar(min = 0, max = totalNumPlots,
+                                minLenToGivePb = minLenToGivePb,
+                                message = "Prepare Plots:")
 
   histograms <- list()
   if (showHistograms) {
@@ -234,8 +236,8 @@ l_pairs <- function(data,
                }
                histograms[[i]] <- do.call(l_hist, histArgs)
                names(histograms)[i] <- paste('x',ix,'y',iy, sep="")
-
-               l_setTxtProgressBar(pbPlots, i - 1)
+               if(showProgressBar)
+                 l_setTxtProgressBar(pbPlots, i - 1)
              }
              # throw errors
              if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
@@ -290,8 +292,8 @@ l_pairs <- function(data,
                layerText <- l_layer_text(histograms[[i]], xText, yText, text = names(data)[i],
                                          color = "black", size = 8)
                names(histograms)[i] <- paste('x',i,'y',i, sep="")
-
-               l_setTxtProgressBar(pbPlots, i)
+               if(showProgressBar)
+                 l_setTxtProgressBar(pbPlots, i)
              }
              # throw errors
              if (any(sapply(histograms, function(p) {is(p, 'try-error')}))) {
@@ -339,8 +341,9 @@ l_pairs <- function(data,
     serialAxesSpan <- floor(nvar/2)
     serialAxes <- do.call(l_serialaxes, serialAxesArgs)
 
-    # give progress bar
-    l_setTxtProgressBar(pbPlots, numHistPlots + 1)
+    if(showProgressBar)
+      # give progress bar
+      l_setTxtProgressBar(pbPlots, numHistPlots + 1)
 
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
                 width= serialAxesSpan * 50,
@@ -366,8 +369,9 @@ l_pairs <- function(data,
 
     scatterplots[[i]] <- do.call(l_plot, dotArgs)
 
-    # give progress bar
-    l_setTxtProgressBar(pbPlots, i + numHistPlots + numSerialaxesPlot)
+    if(showProgressBar)
+      # give progress bar
+      l_setTxtProgressBar(pbPlots, i + numHistPlots + numSerialaxesPlot)
 
     # reset names (if showHistograms)
     if (showHistograms & histLocation == "edge") {
@@ -377,8 +381,9 @@ l_pairs <- function(data,
     }
   }
 
-  # close the pb
-  l_close(pbPlots)
+  if(showProgressBar)
+    # close the pb
+    l_close(pbPlots)
 
   namesScatter <- names(scatterplots)
   scatterLayout <- xy_layout(namesScatter)
@@ -437,9 +442,10 @@ l_pairs <- function(data,
     tkpack(child, fill="both", expand=TRUE)
   }
 
-  pbScales <- l_txtProgressBar(min = 0, max = numScatterPlots,
-                               minLenToGivePb = minLenToGivePb,
-                               message = "Bind Scales:")
+  if(showProgressBar)
+    pbScales <- l_txtProgressBar(min = 0, max = numScatterPlots,
+                                 minLenToGivePb = minLenToGivePb,
+                                 message = "Bind Scales:")
   plotsHash <- list()
   for (i in seq(numScatterPlots)) {
     ix <- pair[2,i]
@@ -471,9 +477,12 @@ l_pairs <- function(data,
                        sep="")]] <- scatterplots[shareX]
     }
 
-    l_setTxtProgressBar(pbScales, i)
+    if(showProgressBar)
+      l_setTxtProgressBar(pbScales, i)
   }
-  l_close(pbScales)
+
+  if(showProgressBar)
+    l_close(pbScales)
 
   ## Make bindings for scatter synchronizing zoom and pan
   busy <- FALSE
@@ -627,10 +636,11 @@ l_pairs <- function(data,
     plots <- c(plots, list(serialAxes = serialAxes))
   }
 
-  # configure sync
-  pbLinking <- l_txtProgressBar(min = 0, max = totalNumPlots,
-                                minLenToGivePb = minLenToGivePb,
-                                message = "Configure plot linking:")
+  if(showProgressBar)
+    # configure sync
+    pbLinking <- l_txtProgressBar(min = 0, max = totalNumPlots,
+                                  minLenToGivePb = minLenToGivePb,
+                                  message = "Configure plot linking:")
 
   lapply(seq(totalNumPlots),
          function(i) {
@@ -677,9 +687,13 @@ l_pairs <- function(data,
                          linkingGroup = linkingGroup,
                          sync = sync)
            }
-           l_setTxtProgressBar(pbLinking, i)
+
+           if(showProgressBar)
+             l_setTxtProgressBar(pbLinking, i)
          })
-  l_close(pbLinking)
+
+  if(showProgressBar)
+    l_close(pbLinking)
 
   ## beware undoScatterStateChanges and synchronizeScatterBindings from garbage collector
   callbackFunctions$state[[paste(child,"synchronizeScatter", sep="_")]] <- synchronizeScatterBindings
