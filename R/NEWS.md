@@ -1,3 +1,23 @@
+# loon 1.3.4
+
+* minor update
+  - fix a bug for facets when the `by` variable contained `NA`s
+  - `l_pairs()` has a progress bar for constructing, linking, and connecting the scales of the plots.
+  
+    there is now a new argument `showProgressBar` that allows this to be suppressed (e.g. in RMarkdown files)
+    
+  - for histograms of factors and character vectors, the default setting of the argument `showFactors` has been changed to be `TRUE` whenever the number of factors is `< 25`.  Previously, this had been `< 10` but was increased to accomodate some common factors like `month` or the 24 hours in a day.
+  
+    
+* testing
+
+  - hexadecimal colours seem to get slightly (generally ignorable) different  hexadecimal values for  colours in `tcltk` on Solaris (see 1.3.3 comments).  this caused problems in testing for exact colours on Solaris.
+  
+    Until this is sorted out, the testing for colour hex values in the test suite were commented out to prevent loon from being unnecessarily archived on CRAN.  (The colours are correct, but our previous solution generated warnings, which may cause problems for CRAN acceptance.)  Likely, in the future, we suppress the warning from `l_hexcolor()` when testing.
+    
+
+   - for iris dataset in tests, we drop an observation so that for each species, the number of observations are different.
+
 # loon 1.3.3
 
 * an extremely minor update
