@@ -52,6 +52,7 @@ Suggests:
     png,
     formatR,
     covr
+Additional_repositories: https://bioconductor.org/packages
 BugReports: https://github.com/great-northern-diver/loon/issues
 Encoding: UTF-8
 LazyData: true

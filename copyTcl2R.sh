@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -d "R/inst"]; then
+if [ -d "R/inst" ]; then
     echo "Delete inst folder"
     rm -R R/inst
 fi

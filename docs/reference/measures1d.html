@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,7 +160,7 @@
   <code><a href='l_ng_plots.html'>l_ng_plots</a></code> and <code><a href='l_ng_ranges.html'>l_ng_ranges</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>measures1d</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>measures1d</span>(<span class='no'>data</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,13 +188,11 @@ function to calculate the measure for each variable.</p></td>
   <code><a href='measures2d.html'>measures2d</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'>measures1d</span><span class='op'>(</span><span class='va'>oliveAcids</span>, mean<span class='op'>=</span><span class='va'>mean</span>, median<span class='op'>=</span><span class='va'>median</span>,
-     sd<span class='op'>=</span><span class='va'>sd</span>, q1<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>x</span>, probs<span class='op'>=</span><span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span>,
-     q3<span class='op'>=</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>x</span>, probs<span class='op'>=</span><span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-     
-<span class='va'>m1</span>
-</div><div class='output co'>#&gt; [1] "1d measure closure with measures: mean, median, sd, q1, q3 \n"</div><div class='input'><span class='fu'>m1</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   mean median        sd      q1      q3
+    <pre class="examples"><div class='input'><span class='no'>m1</span> <span class='kw'>&lt;-</span> <span class='fu'>measures1d</span>(<span class='no'>oliveAcids</span>, <span class='kw'>mean</span><span class='kw'>=</span><span class='no'>mean</span>, <span class='kw'>median</span><span class='kw'>=</span><span class='no'>median</span>,
+     <span class='kw'>sd</span><span class='kw'>=</span><span class='no'>sd</span>, <span class='kw'>q1</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>x</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fl'>0.25</span>)),
+     <span class='kw'>q3</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>)<span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></span>(<span class='no'>x</span>, <span class='kw'>probs</span><span class='kw'>=</span><span class='fl'>0.75</span>)))
+
+<span class='no'>m1</span></div><div class='output co'>#&gt; [1] "1d measure closure with measures: mean, median, sd, q1, q3 \n"</div><div class='input'><span class='fu'>m1</span>()</div><div class='output co'>#&gt;                   mean median        sd      q1      q3
 #&gt; palmitic    1231.74126 1201.0 168.59226 1095.00 1360.00
 #&gt; palmitoleic  126.09441  110.0  52.49436   87.75  169.25
 #&gt; stearic      228.86538  223.0  36.74494  205.00  249.00
@@ -202,8 +200,7 @@ function to calculate the measure for each variable.</p></td>
 #&gt; linoleic     980.52797 1030.0 242.79922  770.75 1180.75
 #&gt; linolenic     31.88811   33.0  12.96870   26.00   40.25
 #&gt; arachidic     58.09790   61.0  22.03025   50.00   70.00
-#&gt; eicosenoic    16.28147   17.0  14.08330    2.00   28.00</div><div class='input'><span class='fu'>m1</span><span class='op'>(</span><span class='va'>olive</span><span class='op'>$</span><span class='va'>palmitoleic</span><span class='op'>&gt;</span><span class='fl'>100</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   mean median        sd      q1      q3
+#&gt; eicosenoic    16.28147   17.0  14.08330    2.00   28.00</div><div class='input'><span class='fu'>m1</span>(<span class='no'>olive</span>$<span class='no'>palmitoleic</span><span class='kw'>&gt;</span><span class='fl'>100</span>)</div><div class='output co'>#&gt;                   mean median        sd      q1      q3
 #&gt; palmitic    1331.49693 1345.5 144.92782 1254.25 1419.00
 #&gt; palmitoleic  162.35890  163.0  39.13201  130.00  185.00
 #&gt; stearic      224.03374  220.0  33.35324  203.00  242.00
@@ -211,8 +208,7 @@ function to calculate the measure for each variable.</p></td>
 #&gt; linoleic    1090.95399 1134.0 177.25662  950.00 1215.50
 #&gt; linolenic     33.86196   34.0  10.89852   29.00   40.75
 #&gt; arachidic     59.93252   61.0  17.65329   53.00   68.00
-#&gt; eicosenoic    21.59816   23.5  11.18355   16.00   29.00</div><div class='input'><span class='fu'>m1</span><span class='op'>(</span><span class='st'>'data'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     palmitic palmitoleic stearic oleic linoleic linolenic arachidic eicosenoic
+#&gt; eicosenoic    21.59816   23.5  11.18355   16.00   29.00</div><div class='input'><span class='fu'>m1</span>(<span class='st'>'data'</span>)</div><div class='output co'>#&gt;     palmitic palmitoleic stearic oleic linoleic linolenic arachidic eicosenoic
 #&gt; 1       1075          75     226  7823      672        36        60         29
 #&gt; 2       1088          73     224  7709      781        31        61         29
 #&gt; 3        911          54     246  8113      549        31        63         29
@@ -784,8 +780,7 @@ function to calculate the measure for each variable.</p></td>
 #&gt; 569     1060         100     270  7740      810        10        10          3
 #&gt; 570     1010          90     210  7720      970         0         0          2
 #&gt; 571      990         120     250  7750      870        10        10          2
-#&gt; 572      960          80     240  7950      740        10        20          2</div><div class='input'><span class='fu'>m1</span><span class='op'>(</span><span class='st'>'measures'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "mean"   "median" "sd"     "q1"     "q3"    </div></pre>
+#&gt; 572      960          80     240  7950      740        10        20          2</div><div class='input'><span class='fu'>m1</span>(<span class='st'>'measures'</span>)</div><div class='output co'>#&gt; [1] "mean"   "median" "sd"     "q1"     "q3"    </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -801,7 +796,7 @@ function to calculate the measure for each variable.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

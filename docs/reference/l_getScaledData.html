@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -158,14 +158,14 @@
     <p>Scaling the data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_getScaledData</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  sequence <span class='op'>=</span> <span class='cn'>NULL</span>,
-  scaling <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"variable"</span>, <span class='st'>"observation"</span>, <span class='st'>"data"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
-  displayOrder <span class='op'>=</span> <span class='cn'>NULL</span>,
-  reserve <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  as.data.frame <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>l_getScaledData</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>sequence</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scaling</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"variable"</span>, <span class='st'>"observation"</span>, <span class='st'>"data"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>displayOrder</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>reserve</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>as.data.frame</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,7 +230,7 @@ are then</p><table class='table'>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

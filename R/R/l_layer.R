@@ -143,7 +143,8 @@ l_layer <- function(widget, x, ...) {
 #' @seealso \code{\link[stats]{density}}
 #' @export
 #' @export l_layer.density
-#' @examples {
+#' @examples
+#' if(interactive()){
 #'   d <- density(faithful$eruptions, bw = "sj")
 #'   h <- l_hist(x = faithful$eruptions, yshows="density")
 #'   l <- l_layer.density(h, d, color="steelblue", linewidth=3)

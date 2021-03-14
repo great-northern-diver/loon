@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -160,7 +160,7 @@
   two nodes that from a n-d subspace</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ndtransitiongraph</span><span class='op'>(</span><span class='va'>nodes</span>, <span class='va'>n</span>, separator <span class='op'>=</span> <span class='st'>":"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ndtransitiongraph</span>(<span class='no'>nodes</span>, <span class='no'>n</span>, <span class='kw'>separator</span> <span class='kw'>=</span> <span class='st'>":"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,8 +189,7 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>ndtransitiongraph</span><span class='op'>(</span>nodes<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'A:B'</span>, <span class='st'>'A:F'</span>, <span class='st'>'B:C'</span>, <span class='st'>'B:F'</span><span class='op'>)</span>, n<span class='op'>=</span><span class='fl'>3</span>, separator<span class='op'>=</span><span class='st'>':'</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>ndtransitiongraph</span>(<span class='kw'>nodes</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A:B'</span>, <span class='st'>'A:F'</span>, <span class='st'>'B:C'</span>, <span class='st'>'B:F'</span>), <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>separator</span><span class='kw'>=</span><span class='st'>':'</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +205,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

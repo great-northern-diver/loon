@@ -957,7 +957,7 @@ Note that selection effectively shows the relations in one plot  **conditional**
 Observations in a `loon` plot are uniquely identified (for the purpose of linking) by their `linkingKey`. Pardon the pun but this is the key to linking in `loon`.
 
 For the most part, the default linking is all that you ever need do.  
-Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows so not match row for row. For example, one `data.frame` might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.
+Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows do not match row for row. For example, one `data.frame` might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.
 
 In either case, to have linking work properly the `linkingKey` of the plots associated with the two data frames need to be managed.
 

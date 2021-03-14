@@ -29,8 +29,8 @@ LLG <- linegraph(LG)
 
 graphreduce(LLG)
 
-if (requireNamespace("Rgraphviz", quietly = TRUE)) {
-  plot(graphreduce(LLG))
-}
+#if (requireNamespace("Rgraphviz", quietly = TRUE)) {
+#  plot(graphreduce(LLG))
+#}
 
 }
