@@ -178,11 +178,8 @@ as.graph <- function(loongraph) {
 #' @export
 #'
 #' @examples
-#' #if (requireNamespace("Rgraphviz", quietly = TRUE)) {
 #'   g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
 #'   g
-#' #  plot(g)
-#' #}
 plot.loongraph <- function(x, ...) {
 
     requireNamespace("Rgraphviz", quietly = TRUE) || stop("Rgraphviz library required")
@@ -446,9 +443,6 @@ graphproduct <- function(U,V, type=c("product", "tensor", "strong"), separator='
 #'
 #' graphreduce(LLG)
 #'
-#' #if (requireNamespace("Rgraphviz", quietly = TRUE)) {
-#' #  plot(graphreduce(LLG))
-#' #}
 #'
 graphreduce <- function(graph, separator) {
 
