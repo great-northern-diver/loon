@@ -310,7 +310,7 @@ For the sake of illustration, some enrichment of the variables and their values 
 <li>
 <p>Construct the plots and take care in mapping the logical outcomes on <code>data</code> to that subset of points peculiar to each plot.</p>
 <p>To help manage this, the <code>linkingKey</code> of each plot can be used. Its default value for each plot is a character vector with entries inclusively between <code>"0"</code> and <code>"n-1"</code> where <code>n =</code>nrow(data)`.</p>
-<p>The row numbers of <code>data</code> that correspong to the points in <code>p_test</code> are simply</p>
+<p>The row numbers of <code>data</code> that correspond to the points in <code>p_test</code> are simply</p>
 <p><code>1 + as.numeric(p_test["linkingKey"])</code></p>
 <p>Similarly for <code>h_test</code>.</p>
 <p>These indices can then be used to select the correct values resulting from any logical operation on <code>data</code>.</p>
