@@ -27,7 +27,7 @@ LG <- linegraph(G)
 
 LLG <- linegraph(LG)
 
-graphreduce(LLG)
+R_LLG <- graphreduce(LLG)
 
 
 }

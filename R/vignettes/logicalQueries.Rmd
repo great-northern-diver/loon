@@ -1,0 +1,289 @@
+---
+title: "Logical queries in interactive graphics"
+author: "R.W. Oldford"
+date: "`r Sys.Date()`"
+output:
+  html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Logical queries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = TRUE, 
+    tidy.opts = list(width.cutoff = 65),
+    tidy = FALSE)
+
+set.seed(12314159)
+
+imageDirectory <- "./images/logic"
+dataDirectory <- "data"
+```
+
+One of the principal strengths of linked plots is the ease with which one can form complex logical queries on the data.
+
+```{r library_loon, eval = FALSE, echo = TRUE, fig.align="center", fig.width = 6, fig.height = 4, out.width = "75%", warning=FALSE, message=FALSE}
+library(loon)
+```
+
+## The cars of the 1974 Motor Trends magazine
+
+Begin with a classic data set in `R` -- `mtcars`.  
+For the sake of illustration, some enrichment of the variables and their values will be made:
+
+```{r new variates}
+data(mtcars, package = "datasets")
+
+mtcars$country <- c("Japan", "Japan", "Japan", "USA", "USA", "USA", "USA", 
+                    "Germany", "Germany", "Germany", "Germany", "Germany", 
+                    "Germany", "Germany", "USA", "USA", "USA", "Italy", 
+                    "Japan", "Japan", "Japan", "USA", "USA", "USA", "USA", 
+                    "Italy", "Germany", "UK", "USA", "Italy", "italy", "Sweden")
+mtcars$continent <- c("Asia", "Asia", "Asia", "North America", "North America", 
+                      "North America", "North America", "Europe", "Europe", 
+                      "Europe", "Europe", "Europe", "Europe", "Europe",  
+                      "North America", "North America", "North America", 
+                      "Europe", "Asia", "Asia", "Asia", "North America", 
+                      "North America", "North America", "North America", 
+                      "Europe", "Europe", "Europe", "North America", 
+                      "Europe", "Europe", "Europe" )
+mtcars$company <- c("Mazda", "Mazda", "Nissan", "AMC", "AMC", "Chrysler", 
+                    "Chrysler", "Mercedes", "Mercedes", "Mercedes", "Mercedes",
+                    "Mercedes", "Mercedes", "Mercedes", "GM", "Ford", 
+                    "Chrysler", "Fiat", "Honda", "Toyota", "Toyota", "Chrysler", 
+                    "AMC", "GM", "GM", "Fiat", "Porsche", "Lotus", "Ford", 
+                    "Ferrari", "Maserati", "Volvo")
+
+mtcars$Engine <- factor(c("V-shaped", "Straight")[mtcars$vs +1], 
+                        levels = c("V-shaped", "Straight"))
+mtcars$Transmission <- factor(c("automatic", "manual")[mtcars$am +1], 
+                              levels = c("automatic", "manual"))
+
+mtcars$vs <- NULL  # These are redundant now
+mtcars$am <- NULL  # 
+```
+
+For this illustration, it will be convenient to separate categorical from continuous data. 
+
+```{r define variable types}
+varTypes <- split(names(mtcars), 
+                  sapply(mtcars, 
+                         FUN = function(x){
+                             if(is.factor(x)|is.character(x)){ 
+                                 "categorical"
+                                  } else {"numeric"} } ))
+```
+
+`varTypes` is a list with two named components: `categorical` and `numeric`.
+
+## Some interactive plots
+
+To explore the data, several interactive plots will likely have been constructed.
+Typically, these will have been constructed one at a time and assigned to the same linking group (perhaps via the inspector).
+Below, histograms/barplots are constructed for each categorical variable and assigned to that variable name now prefixed by `h_` for "histogram".
+
+```{r histograms of categorical variates, eval = FALSE}
+for (varName in varTypes$categorical) {
+    assign(paste0("h_", varName),
+           l_hist(mtcars[ , varName], showFactors = TRUE,  
+                  xlabel = varName, title = varName, 
+                  linkingGroup = "Motor Trend"))
+}
+```
+
+These are not evaluated in this vignette.  Note that all are in the same `linkingGroup`.
+
+Other linked plots might exist as well -- for example, a scatterplot of `gear` (the number of forward gears) versus `disp` (the engine displacement in cubic inches).
+
+```{r, eval = FALSE}
+p <- with(mtcars, l_plot(disp, cyl, 
+                         xlabel = "engine displacement", ylabel = "number of cylinders",
+                         title = "1974 Motor Trend cars", 
+                         linkingGroup = "Motor Trend",
+                         size = 10, showScales = TRUE,
+                         itemLabel = rownames(mtcars), showItemLabels = TRUE
+                         ))
+```
+
+Note that each car's name now appears as the `itemLabel` for that point in the plot (revealed as a "tooltip" style pop up), and that the plot `p` is in the same linking group as the histograms.
+
+Through a combination of selection, inversion, deactivation, and reactivation, logical queries may be made interactively on the data.
+
+For simplicity, the basic logical operators are illustrated below using only the histograms.
+More generally, these apply to any interactive `loon` graphic.
+
+
+
+## Interactive logical operations
+
+Five logical conditions/operations illustrated here are the basic ones:
+
+1. `A` is `TRUE`
+2. Negation: (NOT `A`) is `TRUE`
+3. Inclusive OR:  (`A` OR `B`) is `TRUE` (one or the other or both),
+4. Conjunction: (`A` AND `B`) are both `TRUE`
+5. Exclusive OR: (`A` XOR `B`) meaning (`A` is `TRUE`) or (`B` is `TRUE`) but (`A` AND `B`) is FALSE
+
+
+Each of these corresponds to a sequence of actions on the plots and/or inspector.
+Whatever is highlighted in the end corresponds to the result.
+
+Again, for simplicity all operations are illustrated by interacting with values of categorical variates in the various histograms.
+Any of the logical elements could also have been that satisfying numerical constraints by undertaking the corresponding actions on a scatterplot (or histogram of continuous values).
+
+Each logical operator is illustrated in turn:
+
+1. `A` ($= A$) 
+
+   *on the plot* select `A`, 
+
+   - e.g., click on `"manual"` bar from the `Transmission` histogram 
+   
+   - highlighted $\iff$ `Transmission == "manual"` is `TRUE` 
+   
+
+2. **NOT** `A` ($= \overline{A}~~$ or $~~\neg A$) 
+
+   *on a plot* select `A`, 
+   
+   *from the inspector* click `invert` 
+
+   - e.g., click on `"North America"` bar from the `continent` histogram,
+   
+     then invert 
+         
+   - highlighted $\iff$ `continent == "North America"` is `FALSE`
+   
+   - all that is highlighted is **not** `"North America"`, namely `"Asia"` or `"Europe"`
+   
+3. `A` **OR** `B` ($= A \cup B~~$ or $~~A \lor B$), 
+
+   *on a plot* select `A`, 
+   
+   *on the same (or a different but linked) plot* `<SHIFT>`- select `B`
+
+   - e.g., click on `"manual"` bar from `Transmission` histogram, 
+   
+     then while holding down the `<SHIFT>` key, 
+     
+     click on the `Mercedes` bar in the `company` histogram
+     
+         
+   - highlighted $\iff$ `Transmission == "manual"` is `TRUE` 
+     **OR** `company = "Mercedes"` is `TRUE` (or both) 
+
+     
+4. `A` **AND**  `B` ($= A \cap B$ or $A \land B$) 
+
+   lots of solutions, here is one that always works 
+   
+   *on a plot* select `A`,
+   
+   *from the inspector*, `invert` then `deactivate` (only `A` remains), 
+     
+   *from a plot of the remaining* select `B`, 
+     
+   *from the inspector* `reactivate` all
+   
+   - elements are highlighted $\iff A \cap B$ 
+   
+   - e.g. try highlighting all European cars with manual transmissions.
+      
+  
+
+5. `A` **XOR** `B` ($= (A \cup B) \cap (\overline{A \cap B})$ or $(A \lor B) \land \neg({A \land B})$)   
+
+   *following steps in 4*,  select `A` **AND** `B`,
+   
+   *from the inspector* `invert` then `deactivate` (only $\neg({A \land B})$ remains)
+   
+   *following steps in 3*,  select `A` **OR** `B`,
+   
+   *from the inspector* `reactivate` (only `A` **XOR** `B` is highlighted)
+   
+
+Other logical conditions (including numerical ones such as `disp > 300` on the scatterplot `p`) are constructed as a combination of the above (as in exclusive or).  These can be quite complex and it may help, after some number of steps, to mark intermediary results by colour (or also glyph in scatterplots).
+
+## Missing data and linking keys
+
+The `mtcars` data is an example of a complete data set.
+Had there been missing values, then these would not appear in loon plots that require them.
+
+For example, suppose `data` has  four variables `A`, `B`, `C`, and `D`, and
+```{r, eval = FALSE}
+data <- data.frame(A = sample(c(rnorm(10), NA), 10, replace = FALSE),
+                   B = sample(c(rnorm(10), NA), 10, replace = FALSE),
+                   C = sample(c("firebrick", "steelblue", NA), 10, replace = TRUE),
+                   D = sample(c(1:10, NA), 10, replace = FALSE))
+p_test <- l_plot(x = data$A, y = data$B, color = data$C, linkingGroup = "test missing")
+h_test <- l_hist(x = data$D, color = data$C, linkingGroup = "test missing")
+```
+
+Then 
+
+- wherever an `NA` appears in any of `A`, `B`, or `C`, that point will be missing from `p_test`
+
+
+- wherever an `NA` appears in either of `C` or `D`, that point will be missing from `h_test`
+
+Using logical operations on the original `data` to apply change plot properties (e.g. select values) can be challenging when data values are missing in the plot (since what is missing depends on what was missing at the time of its construction).
+For example,
+```{r, eval = FALSE}
+p_test["selected"] <- (data$A > 0)
+```
+**may not work**!  The logical operation on the data (`data$A > 0`)  will typically be longer than the corresponding x value `p_test["x"]` in the plot and so will not work.
+
+Even if the logical vector is of the right length (and contains only `TRUE` or `FALSE`), the values may not be for the same data points.
+
+There are four solutions when `data` contains `NA`s.
+
+- The simplest is to constrain any logical queries to be on the plot itself, either 
+
+  - interactively as described above or 
+  - programmatically as in `p_test["x"] > 0` in place of `data$A > 0`.  
+  
+  This is straightforward and recommended for exploratory data analysis.
+
+  This works because all linking is done through the `linkingKey` of that plot, a character vector whose values uniquely identify each point in the plot (no duplicates).  
+  
+  Points appearing in different plots (in the same `linkingGroup`) are matched on the value of their `linkingKey`.
+   
+  E.g., compare `p_test["linkingKey"]` and `h_test["linkingKey]".
+
+- Build plots  using **only complete data**.  That is, replace `data` by `c_data <- na.omit(data)`.  
+
+  Then any logic on `c_data` will match that on plots made from `c_data`.  
+
+  Unfortunately, depending on the amount and pattern of missing data, this could critically reduce the amount of data in the analysis.
+  
+
+- Construct all logical operations on the `data` **before** any plotting, adding variables as appropriate to `data` to capture the results.
+
+  This requires knowing what those logical queries are to be before looking at the data, the very antithesis to adaptive and interactive exploratory analysis.
+
+
+- Construct the plots and take care in mapping the logical outcomes on `data` to that subset of points peculiar to each plot.
+  
+  To help manage this, the `linkingKey` of each plot can be used.  Its default value for each plot is a character vector with entries inclusively between `"0"` and `"n-1"` where `n = `nrow(data)`.
+  
+  The row numbers of  `data` that correspond to the points in `p_test` are simply
+  
+  `1 + as.numeric(p_test["linkingKey"])`
+  
+  Similarly for `h_test`.  
+  
+  These indices can then be used to select the correct values resulting from any logical operation on `data`.
+  
+  **Note** however, that the user could provide their own special `linkingKey` for their plots.  
+  
+  - For example, `linkingKey = rownames(data)`.  
+  - If this is the case, a little greater care will be needed to translate these user defined linking keys into rows of `data` and hence the correct values of any logical operation on `data`.
+
+
+**Of the four proposed solutions, the first and last are recommended when data are missing.**  
+
+Of course, if there is **no** missing data, there is no problem.

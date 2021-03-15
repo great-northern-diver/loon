@@ -3,7 +3,8 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   introduction: introduction.html
+  logicalQueries: logicalQueries.html
   savingLoonPlots: savingLoonPlots.html
   teaching-example-smoothing: teaching-example-smoothing.html
-last_built: 2021-03-14T22:38Z
+last_built: 2021-03-15T19:08Z
 

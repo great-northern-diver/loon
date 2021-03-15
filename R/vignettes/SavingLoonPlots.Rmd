@@ -29,15 +29,8 @@ library(loon.data)
 library(loon)
 library(gridExtra)
 
-imageDirectory <- "./images/savingLoonPlots"
-dataDirectory <- "./data/savingLoonPlots"
-path_concat <- function(path1, ..., sep="/") {
-    # The "/" is standard unix directory separator and so will
-    # work on Macs and Linux.
-    # In windows the separator might have to be sep = "\" or 
-    # even sep = "\\" or possibly something else. 
-    paste(path1, ..., sep = sep)
-    }
+imageDirectory <- file.path(".", "images", "savingLoonPlots")
+dataDirectory <- file.path(".", "data", "savingLoonPlots")
 ```
 
 ---
@@ -201,12 +194,12 @@ knitr::include_graphics("myplot_via_R.png")
 
 ```{r load the saved plots, echo = FALSE, eval=FALSE}
 # The one exported from RStudio
-knitr::include_graphics(path_concat(imageDirectory, "myplot_via_RStudio.png"))
+knitr::include_graphics(file.path(imageDirectory, "myplot_via_RStudio.png"))
 # Followed by the one saved using l_export 
 # (note that background grid is missing)
-knitr::include_graphics(path_concat(imageDirectory, "myplot_via_l_export.pdf"))
+knitr::include_graphics(file.path(imageDirectory, "myplot_via_l_export.pdf"))
 # And finally, the one saved using R's png device
-knitr::include_graphics(path_concat(imageDirectory, "myplot_via_R.png"))
+knitr::include_graphics(file.path(imageDirectory, "myplot_via_R.png"))
 ```
 
 Alternatively, you could use **LaTeX** if you want more control.  For example, the following 
@@ -274,7 +267,7 @@ p_savedStates <- l_getSavedStates(file = "p_savedStates")
 ```
 
 ```{r get p states back, echo = FALSE}
-p_savedStates <- l_getSavedStates(file = path_concat(dataDirectory, "p_savedStates"))
+p_savedStates <- l_getSavedStates(file = file.path(dataDirectory, "p_savedStates"))
 ```
 
 A new plot is constructed and the saved states transferred to it.
@@ -330,7 +323,7 @@ Now all of the states are available when this file is read back in.
 p_focusOnVersicolor <- l_getSavedStates(file = "p_focusOnVersicolor")
 ```
 ```{r, echo = FALSE}
-p_focusOnVersicolor <- l_getSavedStates(file = path_concat(dataDirectory, "p_focusOnVersicolor"))
+p_focusOnVersicolor <- l_getSavedStates(file = file.path(dataDirectory, "p_focusOnVersicolor"))
 ```
 
 When it comes to transferring the states to a new plot there are many choices.  We could go with a large collection of display states (more than the default states but still excluding more "basic" states about panning and zooming for example).  To see which states, we add the argument `returnNames = TRUE`:

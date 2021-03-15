@@ -17,5 +17,5 @@ This function converts the loongraph object to one of class
 }
 \examples{
   g <- loongraph(letters[1:4], letters[1:3], letters[2:4], FALSE)
-  g
+
 }

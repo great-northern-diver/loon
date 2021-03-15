@@ -1,6 +1,18 @@
 # loon 1.3.4
 
-* minor update
+* A new vignette
+
+  - "Logical queries in interactive graphics"
+  
+    Explains how to use loon's interactive plots and inspector to construct logical
+    queries on the displayed data.
+    
+    An *enriched* version of `mtcars` is used for illustration.
+    
+    How a plot's `linkingKey` (from Loon's linking model) can be used to access the correct
+    elements of any logical operation is also described.
+    
+* minor bug fixes and improvements
 
   - Three minor bug fixes on **facets**
   
