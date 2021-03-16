@@ -82,7 +82,7 @@ However, the output is unified." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -105,13 +105,16 @@ However, the output is unified." />
       <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
+    </li>
+    <li>
+      <a href="../articles/logicalQueries.html">Logical queries in interactive graphics</a>
+    </li>
+    <li>
       <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
-    </li>
-    <li>
-      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -134,7 +137,7 @@ However, the output is unified." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -162,46 +165,46 @@ It is a generic function to predict models for <code>loon</code> smooth layer (a
 However, the output is unified.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>l_predict</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>l_predict</span>(<span class='no'>model</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>l_predict</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>l_predict</span>(<span class='no'>model</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'>l_predict</span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
-  interval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span><span class='op'>)</span>,
-  level <span class='op'>=</span> <span class='fl'>0.95</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
+<span class='fu'>l_predict</span>(
+  <span class='no'>model</span>,
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span>),
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='no'>...</span>
+)
 
 <span class='co'># S3 method for nls</span>
-<span class='fu'>l_predict</span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
-  interval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span><span class='op'>)</span>,
-  level <span class='op'>=</span> <span class='fl'>0.95</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
+<span class='fu'>l_predict</span>(
+  <span class='no'>model</span>,
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span>),
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='no'>...</span>
+)
 
 <span class='co'># S3 method for glm</span>
-<span class='fu'>l_predict</span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
-  interval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"confidence"</span><span class='op'>)</span>,
-  level <span class='op'>=</span> <span class='fl'>0.95</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
+<span class='fu'>l_predict</span>(
+  <span class='no'>model</span>,
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"confidence"</span>),
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='no'>...</span>
+)
 
 <span class='co'># S3 method for loess</span>
-<span class='fu'>l_predict</span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  newdata <span class='op'>=</span> <span class='cn'>NULL</span>,
-  interval <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span><span class='op'>)</span>,
-  level <span class='op'>=</span> <span class='fl'>0.95</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='fu'>l_predict</span>(
+  <span class='no'>model</span>,
+  <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"confidence"</span>, <span class='st'>"prediction"</span>),
+  <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,43 +239,40 @@ If the <code>interval</code> is not <code>none</code>,
 two more columns, <code>lower</code> (lower interval) and <code>upper</code> (upper interval) will be returned.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>model1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>)
+<span class='no'>model1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>y</span> ~ <span class='no'>x</span>)
 <span class='co'># formal output</span>
-<span class='va'>pre</span> <span class='op'>&lt;-</span> <span class='fu'>l_predict</span><span class='op'>(</span><span class='va'>model1</span>, newdata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>,
-                 interval <span class='op'>=</span> <span class='st'>"conf"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>pre</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            x         y      lower     upper
-#&gt; 1 -1.3189259 0.5765009 -0.1009026 1.2539045
-#&gt; 2 -1.2895577 0.5628749 -0.1002272 1.2259771
-#&gt; 3 -0.9818526 0.4201082 -0.1080509 0.9482673
-#&gt; 4 -0.9211751 0.3919555 -0.1139075 0.8978185
-#&gt; 5 -0.5851407 0.2360447 -0.1879557 0.6600452
-#&gt; 6 -0.3166412 0.1114683 -0.3148288 0.5377654</div><div class='input'>
-<span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>cars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>speed</span>, <span class='va'>dist</span><span class='op'>)</span><span class='op'>)</span>
+<span class='no'>pre</span> <span class='kw'>&lt;-</span> <span class='fu'>l_predict</span>(<span class='no'>model1</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='no'>x</span>)),
+                 <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"conf"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>pre</span>)</div><div class='output co'>#&gt;             x            y      lower     upper
+#&gt; 1 -1.47615111 -0.193835067 -1.7666154 1.3789453
+#&gt; 2 -1.26047622 -0.159577084 -1.5549521 1.2357979
+#&gt; 3 -0.82054972 -0.089698785 -1.1650372 0.9856396
+#&gt; 4 -0.22545194  0.004827053 -0.8269545 0.8366086
+#&gt; 5 -0.11465603  0.022425969 -0.8035391 0.8483910
+#&gt; 6 -0.08441358  0.027229706 -0.7996783 0.8541377</div><div class='input'>
+<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>cars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='no'>speed</span>, <span class='no'>dist</span>))
 
 <span class='co'># Example taken from</span>
 <span class='co'># https://stackoverflow.com/questions/23852505/how-to-get-confidence-interval-for-smooth-spline</span>
 <span class='co'>#</span>
-<span class='va'>l_predict.smooth.spline</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>interval</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"confidence"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
-                                    <span class='va'>level</span> <span class='op'>=</span> <span class='fl'>0.95</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='no'>l_predict.smooth.spline</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>model</span>, <span class='no'>interval</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"confidence"</span>, <span class='st'>"none"</span>),
+                                    <span class='no'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>) {
 <span class='co'># confidence interval of `smooth.spline`</span>
-  <span class='va'>interval</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/match.arg.html'>match.arg</a></span><span class='op'>(</span><span class='va'>interval</span><span class='op'>)</span>
+  <span class='no'>interval</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/match.arg.html'>match.arg</a></span>(<span class='no'>interval</span>)
 
-  <span class='va'>res</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>model</span><span class='op'>$</span><span class='va'>yin</span> <span class='op'>-</span> <span class='va'>model</span><span class='op'>$</span><span class='va'>y</span><span class='op'>)</span><span class='op'>/</span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>model</span><span class='op'>$</span><span class='va'>lev</span><span class='op'>)</span>     <span class='co'># jackknife residuals</span>
-  <span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span><span class='op'>)</span>                          <span class='co'># estimate sd</span>
-  <span class='va'>std</span> <span class='op'>&lt;-</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>qnorm</a></span><span class='op'>(</span><span class='va'>level</span> <span class='op'>/</span> <span class='fl'>2</span> <span class='op'>+</span> <span class='fl'>0.5</span><span class='op'>)</span>
-  <span class='va'>upper</span> <span class='op'>&lt;-</span> <span class='va'>model</span><span class='op'>$</span><span class='va'>y</span> <span class='op'>+</span> <span class='va'>std</span> <span class='op'>*</span> <span class='va'>sigma</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>$</span><span class='va'>lev</span><span class='op'>)</span> <span class='co'># upper 95% conf. band</span>
-  <span class='va'>lower</span> <span class='op'>&lt;-</span> <span class='va'>model</span><span class='op'>$</span><span class='va'>y</span> <span class='op'>-</span> <span class='va'>std</span> <span class='op'>*</span> <span class='va'>sigma</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>$</span><span class='va'>lev</span><span class='op'>)</span> <span class='co'># lower 95% conf. band</span>
+  <span class='no'>res</span> <span class='kw'>&lt;-</span> (<span class='no'>model</span>$<span class='no'>yin</span> - <span class='no'>model</span>$<span class='no'>y</span>)/(<span class='fl'>1</span> - <span class='no'>model</span>$<span class='no'>lev</span>)     <span class='co'># jackknife residuals</span>
+  <span class='no'>sigma</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span>(<span class='no'>res</span>))                          <span class='co'># estimate sd</span>
+  <span class='no'>std</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>qnorm</a></span>(<span class='no'>level</span> / <span class='fl'>2</span> + <span class='fl'>0.5</span>)
+  <span class='no'>upper</span> <span class='kw'>&lt;-</span> <span class='no'>model</span>$<span class='no'>y</span> + <span class='no'>std</span> * <span class='no'>sigma</span> * <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>model</span>$<span class='no'>lev</span>) <span class='co'># upper 95% conf. band</span>
+  <span class='no'>lower</span> <span class='kw'>&lt;-</span> <span class='no'>model</span>$<span class='no'>y</span> - <span class='no'>std</span> * <span class='no'>sigma</span> * <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>model</span>$<span class='no'>lev</span>) <span class='co'># lower 95% conf. band</span>
 
-  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>y <span class='op'>=</span> <span class='va'>model</span><span class='op'>$</span><span class='va'>yin</span>, lower <span class='op'>=</span> <span class='va'>lower</span>, upper <span class='op'>=</span> <span class='va'>upper</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer_smooth.html'>l_layer_smooth</a></span><span class='op'>(</span><span class='va'>p</span>, method <span class='op'>=</span> <span class='st'>"smooth.spline"</span>, interval <span class='op'>=</span> <span class='st'>"confidence"</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>model</span>$<span class='no'>yin</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='no'>lower</span>, <span class='kw'>upper</span> <span class='kw'>=</span> <span class='no'>upper</span>)
+}
+<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer_smooth.html'>l_layer_smooth</a></span>(<span class='no'>p</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"smooth.spline"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"confidence"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -288,7 +288,7 @@ two more columns, <code>lower</code> (lower interval) and <code>upper</code> (up
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

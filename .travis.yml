@@ -12,6 +12,9 @@ addons:
 
 sudo: false
 
+os:
+  - linux
+  
 apt_packages:
   - r-cran-rjava
 

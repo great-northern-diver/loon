@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -106,13 +106,16 @@
       <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
+    </li>
+    <li>
+      <a href="../articles/logicalQueries.html">Logical queries in interactive graphics</a>
+    </li>
+    <li>
       <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
-    </li>
-    <li>
-      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -135,7 +138,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,7 +167,7 @@
   vertices is connected by a pair of unique edges (one in each direction</p>
     </div>
 
-    <pre class="usage"><span class='fu'>completegraph</span><span class='op'>(</span><span class='va'>nodes</span>, isDirected <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>completegraph</span>(<span class='no'>nodes</span>, <span class='kw'>isDirected</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,8 +195,7 @@ a complete graph (undirected) or a complete digraph (directed).</p></td>
 <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html.html#graph-utilities")</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>g</span> <span class='op'>&lt;-</span> <span class='fu'>loon</span><span class='fu'>::</span><span class='fu'>completegraph</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>loon</span><span class='kw ns'>::</span><span class='fu'>completegraph</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>])</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -209,7 +211,7 @@ a complete graph (undirected) or a complete digraph (directed).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

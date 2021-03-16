@@ -20,9 +20,8 @@ knitr::opts_chunk$set(
 
 set.seed(12314159)
 
-imageDirectory <- "./images/intro"
-dataDirectory <- "data"
-path_concat <- function(path1, path2, sep="/") {paste(path1, path2, sep = sep)}
+imageDirectory <- file.path(".", "images", "intro")
+# dataDirectory <- file.path(".", "data", "intro")
 ```
 
 > "Exposure, the effective laying open of the data to display the unanticipated, 
@@ -73,13 +72,13 @@ two windows to appear.
 One is the scatterplot:
 
 ```{r loonQuakeOriginal, out.width= "60%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "quakesOriginal.png"))
+knitr::include_graphics(file.path(imageDirectory, "quakesOriginal.png"))
 ```
 
 and the other a "loon inspector":
 
 ```{r looninspectorQuakeOriginal, out.width= "30%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "inspectorQuakesOriginal.png"))
+knitr::include_graphics(file.path(imageDirectory, "inspectorQuakesOriginal.png"))
 ```
 
 
@@ -106,7 +105,7 @@ To pan the plot, select the plot interior with the right (or secondary) mouse bu
 \vspace{-0.05\textheight}
 
 ```{r panning, out.width= "40%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "panning.png"))
+knitr::include_graphics(file.path(imageDirectory, "panning.png"))
 ```
 
 Try it. Select anywhere on the scatterplot and move it
@@ -130,7 +129,7 @@ Another way to dynamically focus on different parts of the plot is by zooming, u
 \vspace{-0.05\textheight}
 
 ```{r zooming, out.width= "40%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "zooming.png"))
+knitr::include_graphics(file.path(imageDirectory, "zooming.png"))
 ```
 
 To try it, note that there is a small cluster of 16 points towards the top left of the scatterplot. 
@@ -157,7 +156,7 @@ Using zooming and panning on the "World View"
 There are two ways to directly select points on the scatterplot using the mouse: either by selection (one at a time or multiple selections) or by "sweep selection" as shown below:
 
 ```{r point selection, out.width= "40%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "selecting.png"))
+knitr::include_graphics(file.path(imageDirectory, "selecting.png"))
 ```
 
 To try this out, on the scatterplot (which should contain only 16 points)
@@ -254,7 +253,7 @@ You should now have four different coloured groups or clusters.
 When done, turn the selection back to the defaults:
 
 ```{r select defaults, out.width= "40%", fig.align="left", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "inspectorSelectDefaults.png"))
+knitr::include_graphics(file.path(imageDirectory, "inspectorSelectDefaults.png"))
 ```
 
 That is,
@@ -305,7 +304,7 @@ For example:
 ### adding colours to the inspector
 
 ```{r looninspector plus 10 cols, out.width= "30%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "inspectorQuakesPlus10Cols.png"))
+knitr::include_graphics(file.path(imageDirectory, "inspectorQuakesPlus10Cols.png"))
 ```
 
 More colours can be added directly by clicking on the `+` or the `+5` in the colour modification section of the inspector.
@@ -755,11 +754,11 @@ Try this out.
 
 
 ```{r quakesGuidesMapInspector, out.width= "30%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "quakesGuidesMapInspector.png"))
+knitr::include_graphics(file.path(imageDirectory, "quakesGuidesMapInspector.png"))
 ```
 
 ```{r quakesGuidesMap, out.width= "50%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "quakesGuidesMap.png"))
+knitr::include_graphics(file.path(imageDirectory, "quakesGuidesMap.png"))
 ```
 
 As can be seen in the world view, much of the map is outside of the plot display (shown as the black-bordered rectangle in the world view).
@@ -776,7 +775,7 @@ Adding the map allows us to see the effect of all three plot scaling choices ava
 The effect is best seen on the world view:
 
 ```{r worldViewScaling, out.width= "90%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "quakesWorldViewScaling.png"))
+knitr::include_graphics(file.path(imageDirectory, "quakesWorldViewScaling.png"))
 ```
 
 Note that the plot in the world view matches that of the actual plot.  Also the aspect ratio changes with the scaling.
@@ -789,7 +788,7 @@ Note that the plot in the world view matches that of the actual plot.  Also the 
 The map is added as a layer, which can be seen by selecting the "Layers" tab in the inspector:
 
 ```{r quakesLayersInspector, out.width= "70%", fig.align="center", echo=FALSE}
-knitr::include_graphics(path_concat(imageDirectory, "quakesLayersInspector.png"))
+knitr::include_graphics(file.path(imageDirectory, "quakesLayersInspector.png"))
 ```
 
 This allows a lot of interaction with the layers - for example changing their display order, making some of them invisible, grouping layers, and so on.
@@ -957,7 +956,7 @@ Note that selection effectively shows the relations in one plot  **conditional**
 Observations in a `loon` plot are uniquely identified (for the purpose of linking) by their `linkingKey`. Pardon the pun but this is the key to linking in `loon`.
 
 For the most part, the default linking is all that you ever need do.  
-Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows so not match row for row. For example, one `data.frame` might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.
+Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows do not match row for row. For example, one `data.frame` might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.
 
 In either case, to have linking work properly the `linkingKey` of the plots associated with the two data frames need to be managed.
 

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -102,13 +102,16 @@
       <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
+    </li>
+    <li>
+      <a href="../articles/logicalQueries.html">Logical queries in interactive graphics</a>
+    </li>
+    <li>
       <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
-    </li>
-    <li>
-      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -131,7 +134,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -152,6 +155,63 @@
       <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-134" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.4">
+<a href="#loon-134" class="anchor"></a>loon 1.3.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>A new vignette</p>
+<ul>
+<li>
+<p>“Logical queries in interactive graphics”</p>
+<p>Explains how to use loon’s interactive plots and inspector to construct logical queries on the displayed data.</p>
+<p>An <em>enriched</em> version of <code>mtcars</code> is used for illustration.</p>
+<p>How a plot’s <code>linkingKey</code> (from Loon’s linking model) can be used to access the correct elements of any logical operation is also described.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>minor bug fixes and improvements</p>
+<ul>
+<li>
+<p>Three minor bug fixes on <strong>facets</strong></p>
+<ul>
+<li><p>If the <code>by</code> is a formula with <code>loon</code> n-dimensional states, no need to provide additional data, the formula should be able to be converted to a data frame given by the states info.</p></li>
+<li>
+<p>When <code>by</code> has missing values, it is treated as other n-dimensional states:</p>
+<p>drop NAs, leave warnings (which one are removed)</p>
+</li>
+<li><p>Removed unnecessary warnings.</p></li>
+</ul>
+</li>
+<li>
+<p><code><a href="../reference/l_pairs.html">l_pairs()</a></code> has a progress bar for constructing, linking, and connecting the scales of the plots.</p>
+<p>there is now a new argument <code>showProgressBar</code> that allows this to be suppressed (e.g. in RMarkdown files)</p>
+</li>
+<li>
+<p>for histograms of factors and character vectors: default setting of arg <code>showFactors</code></p>
+<ul>
+<li>previously: <code>TRUE</code> whenever number of factor levels (or equivalent unique strings) &lt; 10</li>
+<li>now: <code>TRUE</code> whenever &lt; 25 to accomodate common factors like <code>month</code> or the 24 hours in a day.</li>
+</ul>
+</li>
+<li><p>updated documentation on <code><a href="../reference/l_layer.html">l_layer()</a></code></p></li>
+</ul>
+</li>
+<li>
+<p>testing</p>
+<ul>
+<li><p>As all examples are wrapped in <code>if(interactive)</code>, check all interactive examples to ensure they work well</p></li>
+<li>
+<p>hexadecimal colours seem to get slightly (generally ignorable) different hexadecimal values for colours in <code>tcltk</code> on Solaris (see 1.3.3 comments). this caused problems in testing for exact colours on Solaris.</p>
+<p>Until this is sorted out, the testing for colour hex values in the test suite were commented out to prevent loon from being unnecessarily archived on CRAN. (The colours are correct, but our previous solution generated warnings, which may cause problems for CRAN acceptance.) Likely, in the future, we suppress the warning from <code><a href="../reference/l_hexcolor.html">l_hexcolor()</a></code> when testing.</p>
+</li>
+<li><p>for iris dataset in tests, we drop an observation so that for each species, the number of observations are different.</p></li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="loon-133" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.3">
 <a href="#loon-133" class="anchor"></a>loon 1.3.3<small> 2021-02-25 </small>
@@ -360,7 +420,7 @@ Actually see the periodicity by brushing.</li>
 <li>added <code><a href="../reference/condGrob.html">condGrob()</a></code> to effect the conditional construction of either the desired grob (if it is visible in the loon plot) or the empty grob as placeholder containing relevant arguments</li>
 </ul>
 </li>
-<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
+<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/base/plot.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
 </ul>
 </div>
     <div id="loon-120" class="section level1">
@@ -472,7 +532,7 @@ Actually see the periodicity by brushing.</li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

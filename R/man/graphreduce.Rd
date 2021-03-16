@@ -27,10 +27,7 @@ LG <- linegraph(G)
 
 LLG <- linegraph(LG)
 
-graphreduce(LLG)
+R_LLG <- graphreduce(LLG)
 
-if (requireNamespace("Rgraphviz", quietly = TRUE)) {
-  plot(graphreduce(LLG))
-}
 
 }

@@ -1,11 +1,11 @@
 #!/bin/sh
 
-if [ -d "Python/diver/Tcl/images"]; then
+if [ -d "Python/diver/Tcl/images" ]; then
     echo "Delete Python Tcl images folder"
     rm -R Python/diver/Tcl/images
 fi
 
-if [ -d "Python/diver/Tcl/library"]; then
+if [ -d "Python/diver/Tcl/library" ]; then
     echo "Delete Python Tcl library folder"
     rm -R Python/diver/Tcl/library
 fi

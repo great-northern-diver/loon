@@ -1,3 +1,52 @@
+# loon 1.3.4
+
+* A new vignette
+
+  - "Logical queries in interactive graphics"
+  
+    Explains how to use loon's interactive plots and inspector to construct logical
+    queries on the displayed data.
+    
+    An *enriched* version of `mtcars` is used for illustration.
+    
+    How a plot's `linkingKey` (from Loon's linking model) can be used to access the correct
+    elements of any logical operation is also described.
+    
+* minor bug fixes and improvements
+
+  - Three minor bug fixes on **facets**
+  
+    - If the `by` is a formula with `loon` n-dimensional states, no need to provide additional data, 
+      the formula should be able to be converted to a data frame given by the states info.
+      
+    - When `by` has missing values, it is treated as other n-dimensional states: 
+    
+      drop NAs, leave warnings (which one are removed)
+      
+    - Removed unnecessary warnings.
+  
+  - `l_pairs()` has a progress bar for constructing, linking, and connecting the scales of the plots.
+  
+    there is now a new argument `showProgressBar` that allows this to be suppressed (e.g. in RMarkdown files)
+    
+  - for histograms of factors and character vectors:  default setting of arg `showFactors`
+    
+    - previously: `TRUE` whenever number of factor levels (or equivalent unique strings) < 10
+    - now: `TRUE` whenever < 25 to accomodate common factors like `month` or the 24 hours in a day.
+  
+  - updated documentation on `l_layer()`
+  
+    
+* testing
+  
+  - As all examples are wrapped in `if(interactive)`, check all interactive examples to ensure they work well
+  
+  - hexadecimal colours seem to get slightly (generally ignorable) different  hexadecimal values for  colours in `tcltk` on Solaris (see 1.3.3 comments).  this caused problems in testing for exact colours on Solaris.
+  
+    Until this is sorted out, the testing for colour hex values in the test suite were commented out to prevent loon from being unnecessarily archived on CRAN.  (The colours are correct, but our previous solution generated warnings, which may cause problems for CRAN acceptance.)  Likely, in the future, we suppress the warning from `l_hexcolor()` when testing.
+
+   - for iris dataset in tests, we drop an observation so that for each species, the number of observations are different.
+
 # loon 1.3.3
 
 * an extremely minor update

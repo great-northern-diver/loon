@@ -87,7 +87,7 @@ As arguments many of the common ones are desribed below." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -110,13 +110,16 @@ As arguments many of the common ones are desribed below." />
       <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
+    </li>
+    <li>
+      <a href="../articles/logicalQueries.html">Logical queries in interactive graphics</a>
+    </li>
+    <li>
       <a href="../articles/minorities.html">Analysis example</a>
     </li>
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
-    </li>
-    <li>
-      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
   </ul>
 </li>
@@ -139,7 +142,7 @@ As arguments many of the common ones are desribed below." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -162,7 +165,7 @@ As arguments many of the common ones are desribed below." />
     </div>
 
     <div class="ref-description">
-    <p>Like <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></code> in <span style="R">R</span>, <code><a href='l_plot.html'>l_plot</a></code> is
+    <p>Like <code><a href='https://rdrr.io/r/base/plot.html'>plot</a></code> in <span style="R">R</span>, <code><a href='l_plot.html'>l_plot</a></code> is
 the generic plotting function for objects in <code>loon</code>.</p>
 <p>This is the workhorse of <code>loon</code> and is often a key part of many
 other displays (e.g. <code><a href='l_pairs.html'>l_pairs</a></code> and <code><a href='l_navgraph.html'>l_navgraph</a></code>)</p>
@@ -233,11 +236,11 @@ As arguments many of the common ones are desribed below.</p>
     </tr>
     <tr>
       <th>glyph</th>
-      <td><dl>
-    <dt>the string names of primitive glyphs:</dt><dd><p><dl>
+      <td><dl'>
+    <dt>the string names of primitive glyphs:</dt><dd><p><dl'>
 <dt>squares or boxes</dt><dd><p>"square", "csquare", "osquare",</p></dd><dt>triangles</dt><dd><p>"triangle", "ctriangle", "otriangle",</p></dd><dt>diamonds</dt><dd><p>"diamond", "cdiamond", or "odiamond".</p></dd> Note that prefixes "c" and "o" may be thought of as closed and open, respectively. The set of values are returned by <a href='l_primitiveGlyphs.html'>l_primitiveGlyphs</a>(). 
 </dl></p></dd>
-    <dt>the string names of constructed glyphs</dt><dd><p><dl>
+    <dt>the string names of constructed glyphs</dt><dd><p><dl'>
         <dt>text as glyphs</dt><dd><p>see <code><a href='l_glyph_add_text.html'>l_glyph_add_text</a>()</code></p></dd>
         <dt>point ranges</dt><dd><p>see <code><a href='l_glyph_add_pointrange.html'>l_glyph_add_pointrange</a>()</code></p></dd>
         <dt>polygons</dt><dd><p>see <code><a href='l_glyph_add_polygon.html'>l_glyph_add_polygon</a>()</code></p></dd>
@@ -343,24 +346,23 @@ As arguments many of the common ones are desribed below.</p>
     and <code><a href='https://rdrr.io/r/utils/demo.html'>demo(l_make_glyphs, package = "loon")</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>   <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'>   <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
     <span class='co'># default use as scatterplot</span>
 
-    <span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Sepal.Length</span>,
-                            y <span class='op'>=</span> <span class='va'>Sepal.Width</span>,
-                            color<span class='op'>=</span><span class='va'>Species</span>,
-                            title <span class='op'>=</span> <span class='st'>"Sepal sizes"</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>,
+                            <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Width</span>,
+                            <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>,
+                            <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Sepal sizes"</span>))
 
     <span class='co'># The names of the info states that can be</span>
     <span class='co'># accessed or set.  They can also be given values as</span>
     <span class='co'># arguments to l_plot.default()</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>p1</span><span class='op'>)</span>
-    <span class='va'>versicolor</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span> <span class='op'>==</span> <span class='st'>"versicolor"</span><span class='op'>)</span>
-    <span class='va'>p1</span><span class='op'>[</span><span class='st'>"size"</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
-    <span class='va'>p1</span><span class='op'>[</span><span class='st'>"glyph"</span><span class='op'>]</span><span class='op'>[</span><span class='va'>versicolor</span><span class='op'>]</span><span class='op'>&lt;-</span> <span class='st'>"csquare"</span>
-    <span class='va'>p1</span><span class='op'>[</span><span class='st'>"minimumMargins"</span><span class='op'>]</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
-  <span class='op'>}</span>
-</div></pre>
+    <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p1</span>)
+    <span class='no'>versicolor</span> <span class='kw'>&lt;-</span> (<span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>==</span> <span class='st'>"versicolor"</span>)
+    <span class='no'>p1</span>[<span class='st'>"size"</span>] <span class='kw'>&lt;-</span> <span class='fl'>10</span>
+    <span class='no'>p1</span>[<span class='st'>"glyph"</span>][<span class='no'>versicolor</span>]<span class='kw'>&lt;-</span> <span class='st'>"csquare"</span>
+    <span class='no'>p1</span>[<span class='st'>"minimumMargins"</span>][<span class='fl'>1</span>] <span class='kw'>&lt;-</span> <span class='fl'>100</span>
+  }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -376,7 +378,7 @@ As arguments many of the common ones are desribed below.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

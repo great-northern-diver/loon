@@ -21,7 +21,7 @@ layer object handle, layer id
 Layer a line that represents a kernel density estimate.
 }
 \examples{
-{
+if(interactive()){
   d <- density(faithful$eruptions, bw = "sj")
   h <- l_hist(x = faithful$eruptions, yshows="density")
   l <- l_layer.density(h, d, color="steelblue", linewidth=3)
