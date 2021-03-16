@@ -64,7 +64,6 @@
 #'   Research and Data Analysis (Martens, H., Russwurm, H., eds.), p. 189,
 #'   Applied Science Publ., Barking.
 #'
-#'   Wikipedia \url{https://en.wikipedia.org/}
 #'
 #'
 "olive"
