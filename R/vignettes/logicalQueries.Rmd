@@ -84,6 +84,7 @@ varTypes <- split(names(mtcars),
 
 To explore the data, several interactive plots will likely have been constructed.
 Typically, these will have been constructed one at a time and assigned to the same linking group (perhaps via the inspector).
+
 Below, histograms/barplots are constructed for each categorical variable and assigned to that variable name now prefixed by `h_` for "histogram".
 
 ```{r histograms of categorical variates, eval = FALSE}
@@ -109,7 +110,9 @@ p <- with(mtcars, l_plot(disp, cyl,
                          ))
 ```
 
-Note that each car's name now appears as the `itemLabel` for that point in the plot (revealed as a "tooltip" style pop up), and that the plot `p` is in the same linking group as the histograms.
+Note that 
+- each car's name appears as the `itemLabel` for that point in the plot (to be revealed as a "tooltip" style pop up), and that 
+- the plot `p` is in the same linking group as the histograms.
 
 Through a combination of selection, inversion, deactivation, and reactivation, logical queries may be made interactively on the data.
 
@@ -206,7 +209,11 @@ Each logical operator is illustrated in turn:
    *from the inspector* `reactivate` (only `A` **XOR** `B` is highlighted)
    
 
-Other logical conditions (including numerical ones such as `disp > 300` on the scatterplot `p`) are constructed as a combination of the above (as in exclusive or).  These can be quite complex and it may help, after some number of steps, to mark intermediary results by colour (or also glyph in scatterplots).
+Other logical conditions (including numerical ones such as `disp > 300` on the scatterplot `p`) are constructed as a combination of the above (as in exclusive or).  
+
+These can be quite complex and it may help, after some number of steps, to mark intermediary results by colour (or also glyph in scatterplots).
+
+**Note** that because of possibly missing data, not all linked plots may share the same set of observations. 
 
 ## Missing data and linking keys
 
@@ -227,63 +234,85 @@ Then
 
 - wherever an `NA` appears in any of `A`, `B`, or `C`, that point will be missing from `p_test`
 
+  Note that it is generally *not a good idea* to use `C` for any simple display characteristic like `color` if indeed `C` has missing values since this will remove non-missing `x` and `y` values from the plot.  Not all values of  `x` and `y` would then be accessible from the plot for logical queries,
+
 
 - wherever an `NA` appears in either of `C` or `D`, that point will be missing from `h_test`
 
-Using logical operations on the original `data` to apply change plot properties (e.g. select values) can be challenging when data values are missing in the plot (since what is missing depends on what was missing at the time of its construction).
+Using logical operations on the original `data` to change plot properties (e.g. select values) can be challenging when data values are missing in the plot (since what is missing depends on what was missing at the time of its construction).
+
 For example,
 ```{r, eval = FALSE}
 p_test["selected"] <- (data$A > 0)
 ```
-**may not work**!  The logical operation on the data (`data$A > 0`)  will typically be longer than the corresponding x value `p_test["x"]` in the plot and so will not work.
+**may not work**!  
 
-Even if the logical vector is of the right length (and contains only `TRUE` or `FALSE`), the values may not be for the same data points.
+- The logical operation on the data (`data$A > 0`)  will typically be longer than the corresponding x value `p_test["x"]` in the plot and so will not work.
 
-There are four solutions when `data` contains `NA`s.
+- Even if the logical vector is of the right length (and contains no `NA`s itself), the values may not correctly match the data points.
 
-- The simplest is to constrain any logical queries to be on the plot itself, either 
+There are **two general approaches** to logical queries when `data` contains `NA`s.
 
-  - interactively as described above or 
-  - programmatically as in `p_test["x"] > 0` in place of `data$A > 0`.  
-  
-  This is straightforward and recommended for exploratory data analysis.
+1. Using  **complete data**
 
-  This works because all linking is done through the `linkingKey` of that plot, a character vector whose values uniquely identify each point in the plot (no duplicates).  
-  
-  Points appearing in different plots (in the same `linkingGroup`) are matched on the value of their `linkingKey`.
+   If, like `mtcars`, the data being used contains no `NA`s then conducting logical queries on the plot will be identical to conducting them on the data.
    
-  E.g., compare `p_test["linkingKey"]` and `h_test["linkingKey]".
-
-- Build plots  using **only complete data**.  That is, replace `data` by `c_data <- na.omit(data)`.  
-
-  Then any logic on `c_data` will match that on plots made from `c_data`.  
-
-  Unfortunately, depending on the amount and pattern of missing data, this could critically reduce the amount of data in the analysis.
+   If the data is not complete (contains one or more `NA`), it can be made complete by removing all observations (rows) that contain an `NA`.  E.g. replacing `data` by `c_data <- na.omit(data)`.
+   
+   - any logic on `c_data` will match that on plots made from `c_data`. 
   
-
-- Construct all logical operations on the `data` **before** any plotting, adding variables as appropriate to `data` to capture the results.
-
-  This requires knowing what those logical queries are to be before looking at the data, the very antithesis to adaptive and interactive exploratory analysis.
-
-
-- Construct the plots and take care in mapping the logical outcomes on `data` to that subset of points peculiar to each plot.
+   - depending on the amount and pattern of missing data, *this could critically reduce the amount of data in the analysis*.
   
-  To help manage this, the `linkingKey` of each plot can be used.  Its default value for each plot is a character vector with entries inclusively between `"0"` and `"n-1"` where `n = `nrow(data)`.
+2. Using **the information in the loon plots**.  Of course, this is the **recommended** approach when data is missing.
   
-  The row numbers of  `data` that correspond to the points in `p_test` are simply
-  
-  `1 + as.numeric(p_test["linkingKey"])`
-  
-  Similarly for `h_test`.  
-  
-  These indices can then be used to select the correct values resulting from any logical operation on `data`.
-  
-  **Note** however, that the user could provide their own special `linkingKey` for their plots.  
-  
-  - For example, `linkingKey = rownames(data)`.  
-  - If this is the case, a little greater care will be needed to translate these user defined linking keys into rows of `data` and hence the correct values of any logical operation on `data`.
+   Logical queries can then be made
 
+   a. **directly on the plots**, either 
 
-**Of the four proposed solutions, the first and last are recommended when data are missing.**  
+      - interactively as described in the previous sections, or, 
+      - programmatically as in `p_test["x"] > 0` in place of `data$A > 0`.  
+  
+      or
+      
+   b. **directly on the data and applied to the plots** 
+    
+      To help manage this, the `linkingKey` *of each plot* can be used.  
+      
+      - the default value for each plot is a character vector with entries  
+      
+        from `"0"` to `"n-1"` where `n = `nrow(data)`.
+      
+        These are easily turned into the row numbers for the original data.
+  
+        E.g. in `p_test` the row numbers of `data` that correspond to the points is
+  
+        `1 + as.numeric(p_test["linkingKey"])`
+        
+        Logical values for the rows of `data` can then select points in `p` as follows
+  
+        ```{r, eval = FALSE}
+        LogVal <- data$A > data$B
+        p["selected"] <- logVal[1 + as.numeric(p_test["linkingKey"])]
+        ```
+        
+        Similarly for `h_test`.  E.g., compare `p_test["linkingKey"]` and `h_test["linkingKey]"`.
+  
+     - **Note**: the user can always provide their own character vector `linkingKey` for their plots.  
+      
+       - E.g., `linkingKey = rownames(data)`
+       
+       If so, then more care may be needed to use these to identify rows in a logical vector.
 
-Of course, if there is **no** missing data, there is no problem.
+### loon's linking model 
+
+Loon's linking model has the following three parts
+   
+- a `linkingGroup` which identifies which plots are linked
+- a `linkingKey`, a character vector where each element is a key uniquely identifying a single observation in the plot (no two observations in the same plot can have the same value in the linking key), and
+- the *linked display states* each plot has declared (e.g. see `l_getlinkedStates()`).
+   
+Observations in different plots (in the same linking group) are linked (in that their linked states change together) if and only if they have the same linking linking key.  
+  
+Points appearing in different plots (in the same `linkingGroup`) which matched on the value of their `linkingKey` will share the same value for their linked states.
+   
+  

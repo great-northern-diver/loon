@@ -23,7 +23,6 @@ Depends:
     R (>= 3.5.0),
     methods,
     tcltk
-biocViews:
 Imports:
     tools,
     graphics,
