@@ -1,4 +1,5 @@
 library(loon)
+library(grid)
 context("test_facets")
 
 test_that("l_plot facets work with serialaxes glyph", {
@@ -11,6 +12,11 @@ test_that("l_plot facets work with serialaxes glyph", {
     f <- l_facet(p, by = "color", layout = "grid", linkingGroup = "quakes")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_equal(length(f), 3L)
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("l_plot facets work with  pointrange glyph", {
@@ -20,6 +26,11 @@ test_that("l_plot facets work with  pointrange glyph", {
     f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_equal(length(f), 3L)
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 #
 # test_that("l_plot facets work with  image glyph", {
@@ -73,6 +84,11 @@ test_that("l_plot facets work with  polygon glyph", {
     f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     # test hidden glyphs
     p['glyph'] <- "triangle"
     gl <- l_glyph_add_pointrange(p, ymin = 1:6 - 1/2,
@@ -81,6 +97,11 @@ test_that("l_plot facets work with  polygon glyph", {
     expect_equal(l_glyph_ids(f[[1]]), c("glyph0", "glyph1"))
     expect_equal(l_glyph_ids(f[[2]]), c("glyph0", "glyph1"))
     expect_equal(l_glyph_ids(f[[3]]), c("glyph0", "glyph1"))
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("l_plot facets work with  text glyph", {
@@ -92,6 +113,11 @@ test_that("l_plot facets work with  text glyph", {
     p['glyph'][1:100] <- g
     f <- l_facet(p, layout = "grid", by = "color")
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("test facet l_facet class:l_plot", {
@@ -105,8 +131,20 @@ test_that("test facet l_facet class:l_plot", {
     f <- l_facet(p, layout = "wrap", by = c("color", "size"))
     expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
     expect_equal(length(f), 12L)
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     f <- l_facet(p, layout = "grid", by = c("color", "size"))
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     f <- l_facet(p, layout = "separate", by = c("color", "size"))
     expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
 })
@@ -121,6 +159,12 @@ test_that("test facet l_facet class:l_plot3D", {
     p['size'][41:60] <- 16
     f <- l_facet(p, layout = "wrap", by = c("color", "size"))
     expect_equal(class(f), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     # f <- l_facet(p, layout = "grid", by = c("color", "size"))
     # expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     # f <- l_facet(p, layout = "separate", by = c("color", "selected"))
@@ -140,6 +184,11 @@ test_that("test facet l_facet class:l_hist", {
     expect_equal(class(f), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     # f <- l_facet(h, layout = "separate", by = c("color", "selected"))
     # expect_equal(class(f), c("l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("test facet l_facet class:l_serialaxes", {
@@ -177,6 +226,11 @@ test_that("test some facet args in l_plot", {
     #                          labelBackground = "lightblue", labelForeground = "red",
     #                          labelBorderwidth = 5, labelRelief = "flat"))
     # expect_equal(class(p), c("l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 
@@ -192,6 +246,11 @@ test_that("test some facet args in l_plot3D", {
     #                            labelBackground = "lightblue", labelForeground = "red",
     #                            labelBorderwidth = 5, labelRelief = "flat"))
     # expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 
@@ -201,11 +260,22 @@ test_that("test some facet args in l_hist", {
                              labelBackground = "lightblue", labelForeground = "red",
                              labelBorderwidth = 5, labelRelief = "flat"))
     expect_equal(class(p), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     p <- with(mtcars, l_hist(mpg, by = data.frame(am = am, gear = gear, cyl  = cyl), layout = "wrap",
                              labelLocation = c("bottom"),
                              labelBackground = "lightblue", labelForeground = "red",
                              labelBorderwidth = 5, labelRelief = "flat"))
     expect_equal(class(p), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("test some facet args in l_serialaxes", {
@@ -214,10 +284,21 @@ test_that("test some facet args in l_serialaxes", {
     s <- l_serialaxes(iris_, sequence = sample(colnames(iris_), 10, replace = TRUE),
                       by = iris_$Species, scaling = "observation")
     expect_equal(class(s), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(s)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     s <- l_serialaxes(iris_, sequence = sample(colnames(iris_), 10, replace = TRUE),
                       by = iris_$Species, scaling = "observation", axesLayout = "parallel",
                       layout = "wrap")
     expect_equal(class(s), c("l_facet_wrap", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(s)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 })
 
 test_that("test all possible 'by's", {
@@ -229,15 +310,37 @@ test_that("test all possible 'by's", {
     fp <- l_facet(p, layout = "grid", by = data.frame(iris_$Species, iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
 
+    # loonGrob
+    g <- loonGrob(fp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     # by is a list
     fp <- l_facet(p, layout = "grid", by = list(iris_$Species, iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(fp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     p['color'][sample(1:n, 70)] <- "red"
     fp <- l_facet(p, by = list("color", iris_ = iris_$Species))
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+
+    # loonGrob
+    g <- loonGrob(fp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     p['size'][sample(1:n, 70)] <- 8
     fp <- l_facet(p, by = c("color", "size"))
+
+    # loonGrob
+    g <- loonGrob(fp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
     expect_warning(l_facet(p, by = list("color", 1:10)))
     expect_warning(l_facet(p, by = list("foo", "color")))
@@ -273,6 +376,12 @@ test_that("test layers inherits", {
     rect <- l_layer_rectangle(p, x = c(2,3), y = c(3,4))
     l_layer_hide(p, rect)
     fp <- l_facet(p, by = "color")
+
+    # loonGrob
+    g <- loonGrob(fp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     layers <- l_layer_getChildren(fp[[1]])
     expect_equal(length(layers), 3)
     layer1 <- l_create_handle(c(p, layers[1]))
@@ -292,11 +401,22 @@ test_that("test formula by", {
                        color = sample(c("red", "green"), size = n, replace = TRUE))
     expect_equal(length(ps), 4)
 
+
+    # loonGrob
+    g <- loonGrob(ps)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     pp <- l_plot(x = 1:6, y = 1:6,
                  by = size ~ color,
                  size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
                  color = c(rep("red", 3), rep("green", 3)))
     expect_equal(length(pp), 4)
+
+    # loonGrob
+    g <- loonGrob(pp)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
 
     on <- data.frame(size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
@@ -309,6 +429,11 @@ test_that("test formula by", {
                 color = c(rep("red", 3), rep("green", 3)),
                 by = size ~ color,
                 on = on)
+
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     # avoid hex code in tests
     # it is because, in solaris X64 system, the 12 digit hex code is slightly different from that in
@@ -330,6 +455,11 @@ test_that("test formula by", {
                 color = c(rep("red", 3), rep("green", 3)),
                 by = size ~ color + glyph)
 
+    # loonGrob
+    g <- loonGrob(p)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     # expect_equal(p[[1]]['color'], l_hexcolor("green")) # green
     expect_equal(p[[1]]['size'], 25)
     expect_equal(p[[1]]['glyph'], "ccircle")
@@ -349,6 +479,11 @@ test_that("test formula by", {
     p['glyph'] <- g
     f <- l_facet(p, by = color ~ size, layout = "wrap")
 
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
+
     expect_equal(f[[1]]['size'], 25)
     # expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
@@ -356,6 +491,11 @@ test_that("test formula by", {
     # expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
     f <- l_facet(p, by = color ~ size)
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     expect_equal(f[[1]]['size'], 25)
     # expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
@@ -370,6 +510,11 @@ test_that("test formula by", {
     f <- l_facet(p, by = Factor1 ~ Factor2, on = on)
     expect_true(all(c("l_facet",    "l_compound", "loon" ) %in% class(f)))
 
+
+    # loonGrob
+    g <- loonGrob(f)
+    grid.draw(g)
+    expect_equal(class(g), c("gTree", "grob", "gDesc"))
 
     # by with NA
     by <- iris_$Species
