@@ -68,7 +68,7 @@ if(interactive()) {
   tcltk::tkconfigure(refresh_button,
                      command = update)
   # configure canvas size
-  tcltk::tkconfigure(paste(p,".canvas", sep=''), width=200, height=200)
+  tcltk::tkconfigure(paste(p,".canvas", sep=''), width=500, height=500)
 
   # pack widgets
   tkpack(parent, fill="both", expand=TRUE)

@@ -48,6 +48,16 @@ loonGrob.l_layer_histogram <- function(target, name = NULL, gp = NULL, vp = NULL
 
     yshows <- widget['yshows']
     swapAxes <- widget['swapAxes']
+    x <- widget['x']
+
+    if(length(x) == 0)
+        return(
+            gTree(
+                children = gList(),
+                name = if(is.null(name)) "histogram" else name,
+                gp = gp, vp = vp
+            )
+        )
 
     bins <- l_getBinData(widget)
 

@@ -21,6 +21,8 @@ facet_wrap_layout(
   labelForeground = "black",
   labelBorderwidth = 2,
   labelRelief = "groove",
+  plotWidth = 200,
+  plotHeight = 200,
   sep = "*",
   maxCharInOneRow = 15,
   new.toplevel = TRUE,
@@ -73,6 +75,10 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 \item{labelBorderwidth}{Label border width}
 
 \item{labelRelief}{Label relief}
+
+\item{plotWidth}{default plot width (in pixel)}
+
+\item{plotHeight}{default plot height (in pixel)}
 
 \item{sep}{The character string to separate or combine a vector}
 

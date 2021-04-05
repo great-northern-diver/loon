@@ -18,6 +18,8 @@ l_pairs(
   showSerialAxes = FALSE,
   serialAxesArgs = list(),
   parent = NULL,
+  plotWidth = 100,
+  plotHeight = 100,
   span = 10L,
   showProgressBar = TRUE,
   ...
@@ -63,6 +65,10 @@ in the bottom left of the pairs plot (or not)}
 specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
+
+\item{plotWidth}{default plot width (in pixel)}
+
+\item{plotHeight}{default plot height (in pixel)}
 
 \item{span}{How many column/row occupies for each widget}
 

@@ -28,6 +28,8 @@
 #' in the bottom left of the pairs plot (or not)
 #' @param serialAxesArgs additional arguments to modify the `l_serialaxes` states
 #' @template param_parent
+#' @param plotWidth default plot width (in pixel)
+#' @param plotHeight default plot height (in pixel)
 #' @param span How many column/row occupies for each widget
 #' @param showProgressBar Logical; show progress bar or not
 #' @param ... named arguments to modify the `l_plot` states of the scatterplots
@@ -71,7 +73,7 @@ l_pairs <- function(data,
                     showHistograms = FALSE, histLocation = c("edge", "diag"),
                     histHeightProp = 1, histArgs = list(),
                     showSerialAxes = FALSE, serialAxesArgs = list(), parent=NULL,
-                    span = 10L, showProgressBar = TRUE, ...) {
+                    plotWidth = 100, plotHeight = 100, span = 10L, showProgressBar = TRUE, ...) {
 
   ### as the number of plots rises, the running time increases dramatically
   ### so we provide a progress bar to give the progress information
@@ -249,12 +251,12 @@ l_pairs <- function(data,
                       h <- histograms[[i]]
                       if(i <= nvar){
                         tkconfigure(paste(h,'.canvas',sep=''),
-                                    width=50,
-                                    height=50 * histHeightProp)
+                                    width=plotWidth,
+                                    height=plotHeight * histHeightProp)
                       } else {
                         tkconfigure(paste(h,'.canvas',sep=''),
-                                    width=50 * histHeightProp,
-                                    height=50)
+                                    width=plotWidth * histHeightProp,
+                                    height=plotHeight)
                       }
                     }
              )
@@ -303,7 +305,7 @@ l_pairs <- function(data,
              sapply(seq_len(numHistPlots),
                     function(i) {
                       h <- histograms[[i]]
-                      tkconfigure(paste(h,'.canvas',sep=''), width=50, height=50)
+                      tkconfigure(paste(h,'.canvas',sep=''), width=plotWidth, height=plotHeight)
                     }
              )
              # grid layout
@@ -346,8 +348,8 @@ l_pairs <- function(data,
       l_setTxtProgressBar(pbPlots, numHistPlots + 1)
 
     tkconfigure(paste(serialAxes,'.canvas',sep=''),
-                width= serialAxesSpan * 50,
-                height = serialAxesSpan * 50)
+                width= serialAxesSpan * plotWidth,
+                height = serialAxesSpan * plotHeight)
     tkgrid(serialAxes,
            row = (nvar - serialAxesSpan) * span + histspan, column = 0,
            rowspan = serialAxesSpan * span, columnspan = serialAxesSpan * span,
@@ -399,8 +401,8 @@ l_pairs <- function(data,
   sapply(scatterplots,
          function(p) {
            tkconfigure(paste(p,'.canvas',sep=''),
-                       width=50,
-                       height=50)
+                       width=plotWidth,
+                       height=plotHeight)
          }
   )
 
