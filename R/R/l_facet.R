@@ -96,6 +96,8 @@ l_facet <- function(widget,
 #' @param labelForeground Label foreground color
 #' @param labelBorderwidth Label border width
 #' @param labelRelief Label relief
+#' @param plotWidth default plot width (in pixel)
+#' @param plotHeight default plot height (in pixel)
 #' @template param_parent
 #' @export
 #'
@@ -147,6 +149,8 @@ l_facet.loon <- function(widget,
                          labelForeground = "black",
                          labelBorderwidth = 2,
                          labelRelief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                         plotWidth = 200,
+                         plotHeight = 200,
                          parent = NULL,
                          ...) {
 
@@ -232,6 +236,8 @@ l_facet.loon <- function(widget,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief),
+                                   plotWidth = plotWidth,
+                                   plotHeight = plotHeight,
                                    new.toplevel = facets$new.toplevel)
 
         layout_synchronizeSetting(plots,
@@ -265,6 +271,8 @@ l_facet.loon <- function(widget,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief),
+                                   plotWidth = plotWidth,
+                                   plotHeight = plotHeight,
                                    new.toplevel = facets$new.toplevel)
 
         if(swapAxes) {
@@ -318,6 +326,8 @@ l_facet.l_serialaxes <- function(widget,
                                  labelBackground = "gray80", labelForeground = "black",
                                  labelBorderwidth = 2,
                                  labelRelief = c("groove", "flat", "raised", "sunken", "ridge", "solid"),
+                                 plotWidth = 200,
+                                 plotHeight = 200,
                                  parent = NULL, ...) {
 
     loon::l_isLoonWidget(widget) || stop(widget, " does not exist")
@@ -365,6 +375,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief),
+                                   plotWidth = plotWidth,
+                                   plotHeight = plotHeight,
                                    new.toplevel = facets$new.toplevel)
 
         plots <- structure(
@@ -390,6 +402,8 @@ l_facet.l_serialaxes <- function(widget,
                                    labelForeground = labelForeground,
                                    labelBorderwidth = labelBorderwidth,
                                    labelRelief = match.arg(labelRelief),
+                                   plotWidth = plotWidth,
+                                   plotHeight = plotHeight,
                                    new.toplevel = facets$new.toplevel)
 
         plots <- structure(
@@ -407,50 +421,63 @@ l_facet.l_serialaxes <- function(widget,
 #' @export
 l_getLocations.l_facet <- function(target) {
 
-    nPlots <- length(target)
-    plotNames <- names(target)
+  nPlots <- length(target)
+  plotNames <- names(target)
 
-    layout_position <- layout_position(target)
-    dims <- apply(layout_position, 2, max)
-    nrow <- dims[1]
-    ncol <- dims[2]
+  layout_position <- layout_position(target)
+  dims <- apply(layout_position, 2, max)
+  nrow <- dims[1]
+  ncol <- dims[2]
 
-    layout_matrix <- matrix(rep(NA, nrow * ncol), nrow = nrow)
-    for(i in seq(dim(layout_position)[1])) {
-        layout_matrix[layout_position[i, 1], layout_position[i, 2]] <- i
-    }
+  layout_matrix <- matrix(rep(NA, nrow * ncol), nrow = nrow)
+  for(i in seq(dim(layout_position)[1])) {
+    layout_matrix[layout_position[i, 1], layout_position[i, 2]] <- i
+  }
 
-    list(
-        nrow = dims[1],
-        ncol = dims[2],
-        layout_matrix = layout_matrix,
-        heights = NULL,
-        widths = NULL
-    )
+  list(
+    nrow = dims[1],
+    ncol = dims[2],
+    layout_matrix = layout_matrix,
+    heights = NULL,
+    widths = NULL
+  )
 }
 #' @rdname l_getPlots
 #'
 #' @export
 l_getPlots.l_facet <- function(target){
-    # throw errors if elements of compound are a not loon widget
-    lapply(target,
-           function(tar){l_throwErrorIfNotLoonWidget(tar) }
-    )
-    target
+  # throw errors if elements of compound are a not loon widget
+  lapply(target,
+         function(tar){l_throwErrorIfNotLoonWidget(tar) }
+  )
+  target
 }
 
 
 loonGrob_layoutType.l_facet <- function(target) "locations"
 
 l_byArgs <- function() {
-    c("nrow",
-      "ncol",
-      "byrow",
-      "labelLocation",
-      "labelBackground",
-      "labelForeground",
-      "labelBorderwidth",
-      "labelRelief")
+
+  byArgs <- unique(c(formalArgs(l_facet.loon),
+                     formalArgs(l_facet.l_serialaxes)))
+
+  plotArgs <- unique(c(formalArgs(l_plot.default),
+                       formalArgs(l_hist.default),
+                       formalArgs(l_serialaxes.default),
+                       "widget", "linkingGroup"))
+
+  setdiff(
+    byArgs, plotArgs
+  )
+
+  # c("nrow",
+  #   "ncol",
+  #   "byrow",
+  #   "labelLocation",
+  #   "labelBackground",
+  #   "labelForeground",
+  #   "labelBorderwidth",
+  #   "labelRelief")
 }
 
 
