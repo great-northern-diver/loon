@@ -17,7 +17,8 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
     tkLabelPathNames <- children[grepl("label", children)]
 
     span <- 10L
-    fontsize <- 15
+    fontsize <- 12
+    labelcm <- 0.6
 
     # xlabel, ylabel and title
     xl <- which(grepl("xlabel", tkLabelPathNames))
@@ -70,12 +71,14 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                                 character(1L))
 
                 lenTexts <- length(texts)
+                labelcmAdj <- labelcm/sqrt(lenTexts)
 
                 label.gList <- do.call(grid::gList,
                                        lapply(texts,
                                               function(text) {
 
-                                                  ribbonGrob(rectCol = "white", rectFill = bg, label = text,
+                                                  ribbonGrob(height = unit(labelcmAdj, "cm"),
+                                                             rectFill = bg, label = text,
                                                              textCol = fg, fontsize = fontsize/sqrt(lenTexts),
                                                              name = paste0("facet label:", text))
                                               })
@@ -83,8 +86,9 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
 
                 spanAdj <- round(span /sqrt(lenTexts))
 
-                grobs[[(i - 1) * ncol + j]] <- if(labelLocation == "top") {
-                    gridExtra::arrangeGrob(
+                if(labelLocation == "top") {
+
+                    args <- list(
                         grobs = gList(
                             label.gList,
                             lgrobij
@@ -92,11 +96,14 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                         layout_matrix = matrix(c(rep(seq(lenTexts), each = spanAdj),
                                                  rep(lenTexts + 1, spanAdj * spanAdj)),
                                                ncol = spanAdj,
-                                               byrow = TRUE)
+                                               byrow = TRUE),
+                        heights = unit(c(rep(labelcmAdj, lenTexts), rep(1, spanAdj)),
+                                       c(rep("cm", lenTexts), rep("null", spanAdj)))
                     )
+
                 } else {
-                    # bottom
-                    gridExtra::arrangeGrob(
+
+                    args <- list(
                         grobs = gList(
                             label.gList,
                             lgrobij
@@ -104,98 +111,34 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                         layout_matrix = matrix(c(rep(lenTexts + 1, spanAdj * spanAdj),
                                                  rep(seq(lenTexts), each = spanAdj)),
                                                ncol = spanAdj,
-                                               byrow = TRUE)
+                                               byrow = TRUE),
+                        heights = unit(c(rep(1, spanAdj), rep(labelcmAdj, lenTexts)),
+                                       c(rep("null", spanAdj), rep("cm", lenTexts)))
                     )
                 }
+
+                grobs[[(i - 1) * ncol + j]] <- do.call(gridExtra::arrangeGrob, args)
             }
         }
     }
 
-    outputGrob <- gridExtra::arrangeGrob(
+    args <- list(
         grobs = grobs,
         layout_matrix = locations$layout_matrix
     )
-    k <- 1L
-    outputLayoutMatrix <- matrix(rep(k, span * nrow * ncol * span), nrow = span * nrow)
 
-    if(length(c(titlePathName, xLabelPathName, yLabelPathName)) == 0) {
-        return(list(grobs = list(outputGrob)))
-    }
-
-    # pack xlabel, ylabel, title
+    # pack xlabel, title
     if(length(titlePathName) > 0) {
-
-        title <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
-
-        k <- k + 1L
-
-        outputLayoutMatrix <- rbind(
-            rep(k, ncol(outputLayoutMatrix)),
-            outputLayoutMatrix
-        )
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            # the k th object
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(titlePathName, "-bg")),
-                       label = title, textCol = as.character(tkcget(titlePathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenTexts),
-                       name = paste0("facet title:", title))
-        )
-
+        args$title <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
     }
-
     if(length(xLabelPathName) > 0) {
-
-        xlabel <- paste0(as.character(tkcget(xLabelPathName, "-text")), collapse = " ")
-
-        k <- k + 1L
-
-        outputLayoutMatrix <- rbind(
-            outputLayoutMatrix,
-            rep(k, ncol(outputLayoutMatrix))
-        )
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            # the kth object
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(xLabelPathName, "-bg")),
-                       label = xlabel, textCol = as.character(tkcget(xLabelPathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenTexts),
-                       name = paste0("facet xlabel:", xlabel))
-        )
-
+        args$bottom <- paste0(as.character(tkcget(xLabelPathName, "-text")), collapse = " ")
     }
-
+    # pack ylabel
     if(length(yLabelPathName) > 0) {
-
         # the collapse is set as ""
         # it is not a typo, since the ylabel for tk widget is split and layout vertically.
-        ylabel <- paste0(as.character(tkcget(yLabelPathName, "-text")), collapse = "")
-
-        k <- k + 1L
-
-        outputLayoutMatrix <- cbind(
-            rep(k, nrow(outputLayoutMatrix)),
-            outputLayoutMatrix
-        )
-
-
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(yLabelPathName, "-bg")),
-                       label = ylabel, rot = 90,
-                       textCol = as.character(tkcget(yLabelPathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenTexts),
-                       name = paste0("facet ylabel:", ylabel))
-        )
-
+        args$left <- paste0(as.character(tkcget(yLabelPathName, "-text")), collapse = "")
     }
-
-    list(
-        grobs = outputGrob,
-        layout_matrix = outputLayoutMatrix
-    )
+    args
 }
-
