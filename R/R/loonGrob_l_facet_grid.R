@@ -223,8 +223,11 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
 
 ribbonGrob <- function(x = unit(0.5, "npc"), y = unit(0.5, "npc"),
                        width = unit(1, "npc"), height = unit(1, "npc"),
-                       rectCol = "white", rectFill = "grey92", label = "",
-                       rot = 0, textCol = "black", fontsize = 10, name = label) {
+                       rectCol = l_getOption("background"),
+                       rectFill = l_getOption("facetLabelBackground"),
+                       label = "", rot = 0,
+                       textCol = l_getOption("foreground"),
+                       fontsize = 10, name = label) {
     grid::gTree(
         children = grid::gList(rectGrob(x = x, y = y,
                                         width = width, height = height,
