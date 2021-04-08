@@ -99,7 +99,7 @@ namespace eval loon {
     set Options(ticks_density) 1
     set Options(tick_length) 8
 
-    set Options(canvas_bg_guides) gray92
+    set Options(canvas_bg_guides) gray93
 
     set Options(brush_color) lightgray
     set Options(brush_color_handle) gray
