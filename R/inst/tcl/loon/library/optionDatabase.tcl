@@ -73,6 +73,7 @@ namespace eval loon {
     set Options(foreground) black
     set Options(guidesBackground) gray92
     set Options(guidelines) white
+    set Options(facetLabelBackground) gray80
 
     #set Options(font) "Lucidia"
     set Options(font) "Helvetica"
