@@ -2,6 +2,7 @@ library(loon)
 library(grid)
 context("test_facets")
 
+pdf(NULL)
 test_that("l_plot facets work with serialaxes glyph", {
     p <- with(quakes, l_plot(long, lat, linkingGroup = "quakes"))
     p["color"][quakes$mag < 5 & quakes$mag >= 4] <- "lightgreen"
