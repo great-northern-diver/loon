@@ -19,6 +19,7 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
 
     span <- 8L
     fontsize <- 10L
+    labelcm <- 0.6
 
     # xlabel, ylabel and title
     xLabelPathName <- children[grepl("xlabel", children)]
@@ -52,8 +53,8 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
         layout_matrix = locations$layout_matrix
     )
 
-    # find the number of a string that right after the letter "ex" (extend)
-    pat <- "^.*ex.*?([0-9]+)"
+    # find the number of a string that right after the letter "extent"
+    pat <- "^.*extent.*?([0-9]+)"
 
     expendCol <- as.numeric(gsub(pat, "\\1", tkColumnlabelPathNames))
     lenCol <- length(unique(expendCol))
@@ -77,14 +78,14 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                                                                decreasing = labelLocation[1L] == "top")]
 
         expendCol <- sort(expendCol, decreasing = labelLocation[1L] == "top")
-        uniExpend <- unique(expendCol)
+        uniExtent <- unique(expendCol)
 
         columnLabelMatrix <- matrix(NA, nrow = lenCol, ncol = ncol * spanAdj)
 
         for(i in seq(lenCol)) {
 
-            ex <- uniExpend[i]
-            columnPathNames <- tkColumnlabelPathNames[expendCol == ex]
+            extent <- uniExtent[i]
+            columnPathNames <- tkColumnlabelPathNames[expendCol == extent]
 
             for(j in seq(length(columnPathNames))) {
 
@@ -92,14 +93,15 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                 # its index
                 k <- k + 1L
 
-                columnLabelMatrix[i, (seq(ex * spanAdj) + (j - 1) * ex * spanAdj)] <- rep(k, ex * spanAdj)
+                columnLabelMatrix[i, (seq(extent * spanAdj) + (j - 1) * extent * spanAdj)] <- rep(k, extent * spanAdj)
 
                 label <- paste0(as.character(tkcget(columnPathName, "-text")), collapse = " ")
 
                 outputGrob <- grid::gList(
                     outputGrob,
                     # the k th object
-                    ribbonGrob(rectCol = "white", rectFill = bg, label = label,
+                    ribbonGrob(height = unit(labelcm, "cm"),
+                               rectCol = "white", rectFill = bg, label = label,
                                textCol = fg, fontsize = fontsize/sqrt(lenColRow),
                                name = paste0("facet columnlabel:", label))
                 )
@@ -122,52 +124,6 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
         }
     }
 
-    # pack xlabel, title
-    if(length(titlePathName) > 0) {
-
-        title <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
-
-        k <- k + 1L
-        columnAdj <- columnAdj + 1L
-
-        outputLayoutMatrix <- rbind(
-            rep(k, ncol(outputLayoutMatrix)),
-            outputLayoutMatrix
-        )
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            # the k th object
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(titlePathName, "-bg")),
-                       label = title, textCol = as.character(tkcget(titlePathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenColRow),
-                       name = paste0("facet title:", title))
-        )
-
-    }
-
-    if(length(xLabelPathName) > 0) {
-
-        xlabel <- paste0(as.character(tkcget(xLabelPathName, "-text")), collapse = " ")
-
-        k <- k + 1L
-
-        outputLayoutMatrix <- rbind(
-            outputLayoutMatrix,
-            rep(k, ncol(outputLayoutMatrix))
-        )
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            # the kth object
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(xLabelPathName, "-bg")),
-                       label = xlabel, textCol = as.character(tkcget(xLabelPathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenColRow),
-                       name = paste0("facet xlabel:", xlabel))
-        )
-
-    }
-
     if(length(tkRowlabelPathNames) > 0) {
 
         rot <- ifelse(labelLocation[2L] == "left", 90, -90)
@@ -177,14 +133,14 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                                                          decreasing = labelLocation[2L] == "left")]
 
         expendRow <- sort(expendRow, decreasing = labelLocation[2L] == "left")
-        uniExpend <- unique(expendRow)
+        uniExtent <- unique(expendRow)
 
         rowLabelMatrix <- matrix(NA, ncol = lenRow, nrow = nrow(outputLayoutMatrix))
 
         for(i in seq(lenRow)) {
 
-            ex <- uniExpend[i]
-            rowPathNames <- tkRowlabelPathNames[expendRow == ex]
+            extent <- uniExtent[i]
+            rowPathNames <- tkRowlabelPathNames[expendRow == extent]
 
             for(j in seq(length(rowPathNames))) {
 
@@ -192,14 +148,15 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                 # its index
                 k <- k + 1L
 
-                rowLabelMatrix[(seq(ex * spanAdj) + (j - 1) * ex * spanAdj) + columnAdj, i] <- rep(k, ex * spanAdj)
+                rowLabelMatrix[(seq(extent * spanAdj) + (j - 1) * extent * spanAdj) + columnAdj, i] <- rep(k, extent * spanAdj)
 
                 label <- paste0(as.character(tkcget(rowPathName, "-text")), collapse = "")
 
                 outputGrob <- grid::gList(
                     outputGrob,
                     # the k th object
-                    ribbonGrob(rectCol = "white", rectFill = bg, label = label, rot = rot,
+                    ribbonGrob(width = unit(labelcm, "cm"),
+                               rectCol = "white", rectFill = bg, label = label, rot = rot,
                                textCol = fg, fontsize = fontsize/sqrt(lenColRow),
                                name = paste0("facet rowlabel:", label))
                 )
@@ -219,46 +176,64 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
         }
     }
 
-    # pack ylabel
-    if(length(yLabelPathName) > 0) {
-
-        # the collapse is set as ""
-        # it is not a typo, since the ylabel for tk widget is split and layout vertically.
-        ylabel <- paste0(as.character(tkcget(yLabelPathName, "-text")), collapse = "")
-
-        k <- k + 1L
-
-        yLabelRow <- rep(NA, nrow(outputLayoutMatrix))
-        yLabelRow[columnAdj + seq(nrow * spanAdj)] <- k
-
-        outputLayoutMatrix <- cbind(
-            yLabelRow,
-            outputLayoutMatrix
-        )
-
-        outputGrob <- grid::gList(
-            outputGrob,
-            ribbonGrob(rectCol = "white", rectFill = as.character(tkcget(yLabelPathName, "-bg")),
-                       label = ylabel, rot = 90,
-                       textCol = as.character(tkcget(yLabelPathName, "-fg")),
-                       fontsize = fontsize/sqrt(lenColRow),
-                       name = paste0("facet ylabel:", ylabel))
-        )
-
-    }
-
-    list(
+    args <- list(
         grobs = outputGrob,
         layout_matrix = outputLayoutMatrix
     )
+
+    nrowM <- nrow(outputLayoutMatrix)
+    ncolM <- ncol(outputLayoutMatrix)
+
+    anchorCol <- if(labelLocation[2L] == "right") {
+        outputLayoutMatrix[, 1L]
+    } else {
+        outputLayoutMatrix[, ncolM]
+    }
+
+    heights <- unit(rep(1, nrowM), "null")
+    heights[anchorCol != 1] <- unit(labelcm, "cm")
+    args$heights <- heights
+
+    anchorRow <- if(labelLocation[1L] == "top") {
+        outputLayoutMatrix[nrowM, ]
+    } else {
+        outputLayoutMatrix[1L, ]
+    }
+
+    widths <- unit(rep(1, ncolM), "null")
+    widths[anchorRow != 1] <- unit(labelcm, "cm")
+    args$widths <- widths
+
+    # pack xlabel, title
+    if(length(titlePathName) > 0) {
+        args$title <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
+    }
+    if(length(xLabelPathName) > 0) {
+        args$bottom <- paste0(as.character(tkcget(xLabelPathName, "-text")), collapse = " ")
+    }
+    # pack ylabel
+    if(length(yLabelPathName) > 0) {
+        # the collapse is set as ""
+        # it is not a typo, since the ylabel for tk widget is split and layout vertically.
+        args$left <- paste0(as.character(tkcget(yLabelPathName, "-text")), collapse = "")
+    }
+    args
 }
 
 
-ribbonGrob <- function(rectCol = "white", rectFill = "grey92", label = "",
-                       rot = 0, textCol = "black", fontsize = 10, name = label) {
+ribbonGrob <- function(x = unit(0.5, "npc"), y = unit(0.5, "npc"),
+                       width = unit(1, "npc"), height = unit(1, "npc"),
+                       rectCol = l_getOption("background"),
+                       rectFill = l_getOption("facetLabelBackground"),
+                       label = "", rot = 0,
+                       textCol = l_getOption("foreground"),
+                       fontsize = 10, name = label) {
     grid::gTree(
-        children = grid::gList(rectGrob(gp = gpar(col = rectCol, fill = rectFill)),
-                               textGrob(label = label,
+        children = grid::gList(rectGrob(x = x, y = y,
+                                        width = width, height = height,
+                                        gp = gpar(col = rectCol, fill = rectFill)),
+                               textGrob(x = x, y = y,
+                                        label = label,
                                         rot = rot,
                                         gp = gpar(col = textCol,
                                                   fontsize = fontsize))),

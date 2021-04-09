@@ -73,6 +73,7 @@ namespace eval loon {
     set Options(foreground) black
     set Options(guidesBackground) gray92
     set Options(guidelines) white
+    set Options(facetLabelBackground) gray80
 
     #set Options(font) "Lucidia"
     set Options(font) "Helvetica"
@@ -98,7 +99,7 @@ namespace eval loon {
     set Options(ticks_density) 1
     set Options(tick_length) 8
 
-    set Options(canvas_bg_guides) gray92
+    set Options(canvas_bg_guides) gray93
 
     set Options(brush_color) lightgray
     set Options(brush_color_handle) gray

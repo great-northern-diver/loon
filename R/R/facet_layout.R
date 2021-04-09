@@ -49,9 +49,10 @@ facet_grid_layout <- function(plots,
                               labelLocation = c("top", "right"),
                               byrow = FALSE,
                               swapAxes = FALSE,
-                              labelBackground = "gray80", labelForeground = "black",
+                              labelBackground = l_getOption("facetLabelBackground"),
+                              labelForeground = l_getOption("foreground"),
                               labelBorderwidth = 2,
-                              labelRelief = "groove",
+                              labelRelief = "ridge",
                               plotWidth = 200,
                               plotHeight = 200,
                               sep = "*",
@@ -227,8 +228,8 @@ facet_grid_layout <- function(plots,
                        rep(fluid_colsLabel[[fluid_colsLabel_name]], prod(lengths(colsLabel[1:(j - 1)])))
                    }
                    fluid_colsLabel[fluid_colsLabel_name] <<- NULL
-                   ex <- prod(lengths(fluid_colsLabel))
-                   columnspan <- ex * span
+                   extent <- prod(lengths(fluid_colsLabel))
+                   columnspan <- extent * span
 
                    name <- column_names[j]
                    label <- if(is.null(name)) {
@@ -251,7 +252,7 @@ facet_grid_layout <- function(plots,
                        tkcolname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,
                                                                                   paste0('columnlabel-', columnLabelLocation, '-',
-                                                                                         'x', j, 'y', i, 'ex', ex))),
+                                                                                         'x', j, 'y', i, 'extent', extent))),
                                                             text = text,
                                                             bg = labelBackground,
                                                             fg = labelForeground,
@@ -302,8 +303,9 @@ facet_grid_layout <- function(plots,
                    fluid_rowsLabel[fluid_rowsLabel_name] <<- NULL
 
                    name <- row_names[i]
-                   ex <- prod(lengths(fluid_rowsLabel))
-                   rowspan <- ex * span
+
+                   extent <- prod(lengths(fluid_rowsLabel))
+                   rowspan <- extent * span
                    for(j in seq(length(row))) {
                        # row index
                        label <- row[j]
@@ -314,11 +316,10 @@ facet_grid_layout <- function(plots,
                                   paste(name, color.id(label), sep = ":"),
                                   paste(name, label, sep = ":"))
                        }
-
                        tkrowname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,
                                                                                   paste0('rowlabel-', rowLabelLocation, '-',
-                                                                                         'x', j, 'y', i, 'ex', ex))),
+                                                                                         'x', j, 'y', i, 'extent', extent))),
                                                             text = paste(paste0(" ", strsplit(text, "")[[1]], " "), collapse = "\n"),
                                                             bg = labelBackground,
                                                             fg = labelForeground,
@@ -342,17 +343,16 @@ facet_grid_layout <- function(plots,
                })
     }
 
-    labelBG <- "grey70"
     # pack title
     if(title != "") {
 
         title <- as.character(tcltk::tcl('label',
                                          as.character(l_subwin(parent,'title')),
                                          text = title,
-                                         bg = labelBG,
+                                         bg = l_getOption("canvas_bg_guides"),
                                          fg = labelForeground,
                                          borderwidth = labelBorderwidth,
-                                         relief = "raised"))
+                                         relief = "flat"))
 
         tkgrid(title,
                row = 0,
@@ -368,10 +368,10 @@ facet_grid_layout <- function(plots,
         tkXlabel <- as.character(tcltk::tcl('label',
                                             as.character(l_subwin(parent,'xlabel')),
                                             text = xlabel,
-                                            bg = labelBG,
+                                            bg = l_getOption("canvas_bg_guides"),
                                             fg = labelForeground,
                                             borderwidth = labelBorderwidth,
-                                            relief = "raised"))
+                                            relief = "flat"))
 
         tkgrid(tkXlabel,
                row = len_rowsLabel + title_pos + nrowsLabel * span + len_colsLabel,
@@ -388,10 +388,10 @@ facet_grid_layout <- function(plots,
         tkYlabel <- as.character(tcltk::tcl('label',
                                             as.character(l_subwin(parent,'ylabel')),
                                             text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
-                                            bg = labelBG,
+                                            bg = l_getOption("canvas_bg_guides"),
                                             fg = labelForeground,
                                             borderwidth = labelBorderwidth,
-                                            relief = "raised"))
+                                            relief = "flat"))
 
         tkgrid(tkYlabel,
                row = title_pos + row_start_pos,
@@ -480,9 +480,10 @@ facet_wrap_layout <- function(plots,
                               labelLocation = "top",
                               byrow = FALSE,
                               swapAxes = FALSE,
-                              labelBackground = "gray80", labelForeground = "black",
+                              labelBackground = l_getOption("facetLabelBackground"),
+                              labelForeground = l_getOption("foreground"),
                               labelBorderwidth = 2,
-                              labelRelief = "groove",
+                              labelRelief = "ridge",
                               plotWidth = 200,
                               plotHeight = 200,
                               sep = "*",
@@ -772,10 +773,10 @@ facet_wrap_layout <- function(plots,
         title <- as.character(tcltk::tcl('label',
                                          as.character(l_subwin(parent,'title')),
                                          text = title,
-                                         bg = labelBackground,
+                                         bg = l_getOption("canvas_bg_guides"),
                                          fg = labelForeground,
                                          borderwidth = labelBorderwidth,
-                                         relief = "raised"))
+                                         relief = "flat"))
 
         tkgrid(title,
                row = 0,
@@ -791,10 +792,10 @@ facet_wrap_layout <- function(plots,
         tkXlabel <- as.character(tcltk::tcl('label',
                                             as.character(l_subwin(parent,'xlabel')),
                                             text = xlabel,
-                                            bg = labelBackground,
+                                            bg = l_getOption("canvas_bg_guides"),
                                             fg = labelForeground,
                                             borderwidth = labelBorderwidth,
-                                            relief = "raised"))
+                                            relief = "flat"))
 
         tkgrid(tkXlabel,
                row = title_pos + nrow * span,
@@ -811,10 +812,10 @@ facet_wrap_layout <- function(plots,
         tkYlabel <- as.character(tcltk::tcl('label',
                                             as.character(l_subwin(parent,'ylabel')),
                                             text = paste(paste0(" ", strsplit(ylabel, "")[[1]], " "), collapse = "\n"),
-                                            bg = labelBackground,
+                                            bg = l_getOption("canvas_bg_guides"),
                                             fg = labelForeground,
                                             borderwidth = labelBorderwidth,
-                                            relief = "raised"))
+                                            relief = "flat"))
 
         tkgrid(tkYlabel,
                row = title_pos,
