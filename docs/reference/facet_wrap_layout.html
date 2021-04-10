@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5.999</span>
       </span>
     </div>
 
@@ -174,10 +174,12 @@
   <span class='kw'>labelLocation</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
   <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>swapAxes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>labelBackground</span> <span class='kw'>=</span> <span class='st'>"gray80"</span>,
-  <span class='kw'>labelForeground</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>labelBackground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"facetLabelBackground"</span>),
+  <span class='kw'>labelForeground</span> <span class='kw'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span>(<span class='st'>"foreground"</span>),
   <span class='kw'>labelBorderwidth</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>labelRelief</span> <span class='kw'>=</span> <span class='st'>"groove"</span>,
+  <span class='kw'>labelRelief</span> <span class='kw'>=</span> <span class='st'>"ridge"</span>,
+  <span class='kw'>plotWidth</span> <span class='kw'>=</span> <span class='fl'>200</span>,
+  <span class='kw'>plotHeight</span> <span class='kw'>=</span> <span class='fl'>200</span>,
   <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
   <span class='kw'>maxCharInOneRow</span> <span class='kw'>=</span> <span class='fl'>15</span>,
   <span class='kw'>new.toplevel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -259,6 +261,14 @@ The second one is used to determine the position of row labels ('right' or 'left
     <tr>
       <th>labelRelief</th>
       <td><p>Label relief</p></td>
+    </tr>
+    <tr>
+      <th>plotWidth</th>
+      <td><p>default plot width (in pixel)</p></td>
+    </tr>
+    <tr>
+      <th>plotHeight</th>
+      <td><p>default plot height (in pixel)</p></td>
     </tr>
     <tr>
       <th>sep</th>
