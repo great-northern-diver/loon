@@ -49,7 +49,12 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
     grobs <- list()
 
     outputGrob <- gridExtra::arrangeGrob(
-        grobs = lapply(target, loonGrob),
+        grobs = lapply(target,
+                       function(w) {
+                           lg <- loonGrob(w)
+                           lg$name <- as.character(w)
+                           lg
+                       }),
         layout_matrix = locations$layout_matrix
     )
 

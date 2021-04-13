@@ -50,7 +50,12 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
     bg <- as.character(tkcget(labelPathNames[1L], "-bg"))
     fg <- as.character(tkcget(labelPathNames[1L], "-fg"))
 
-    lgrob <- lapply(target, loonGrob)
+    lgrob <- lapply(target,
+                    function(w) {
+                        lg <- loonGrob(w)
+                        lg$name <- as.character(w)
+                        lg
+                    })
 
     # label layouts
     # initial settings
@@ -91,7 +96,7 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                     args <- list(
                         grobs = gList(
                             label.gList,
-                            lgrobij
+                            do.call(gList, setNames(list(lgrobij), lgrobij$name))
                         ),
                         layout_matrix = matrix(c(rep(seq(lenTexts), each = spanAdj),
                                                  rep(lenTexts + 1, spanAdj * spanAdj)),
@@ -106,7 +111,7 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                     args <- list(
                         grobs = gList(
                             label.gList,
-                            lgrobij
+                            do.call(gList, setNames(list(lgrobij), lgrobij$name))
                         ),
                         layout_matrix = matrix(c(rep(lenTexts + 1, spanAdj * spanAdj),
                                                  rep(seq(lenTexts), each = spanAdj)),
