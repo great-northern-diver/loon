@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -165,7 +165,7 @@
   highlight the different groups)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>color_loon</span>()</pre>
+    <pre class="usage"><span class='fu'>color_loon</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -193,8 +193,8 @@
   <code><a href='l_setColorList.html'>l_setColorList</a></code>.</p></li>
 </ol>
 
-<p>For other mappings see the <code><a href='https://scales.r-lib.org//reference/col_numeric.html'>col_numeric</a></code> and
-  <code><a href='https://scales.r-lib.org//reference/col_numeric.html'>col_factor</a></code> functions from the scales package.</p>
+<p>For other mappings see the <code><a href='https://scales.r-lib.org/reference/col_numeric.html'>col_numeric</a></code> and
+  <code><a href='https://scales.r-lib.org/reference/col_numeric.html'>col_factor</a></code> functions from the scales package.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='l_setColorList.html'>l_setColorList</a></code>, <code><a href='l_getColorList.html'>l_getColorList</a></code>,
@@ -202,28 +202,32 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'>color_loon</span>()
-<span class='fu'>pal</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])</div><div class='output co'>#&gt; [1] "#999999" "#A6CEE3" "#FFC0CB" "#B2DF8A"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>))</div><div class='output co'>#&gt; [1] "#999999" "#999999" "#A6CEE3" "#FFC0CB"</div><div class='input'><span class='fu'>pal</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'green'</span>, <span class='st'>'yellow'</span>))</div><div class='output co'>#&gt; [1] "#008000" "#FFFF00"</div><div class='input'>
+<span class='va'>pal</span> <span class='op'>&lt;-</span> <span class='fu'>color_loon</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>pal</span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "#999999" "#A6CEE3" "#FFC0CB" "#B2DF8A"</div><div class='input'><span class='fu'>pal</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'a'</span>,<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "#999999" "#999999" "#A6CEE3" "#FFC0CB"</div><div class='input'><span class='fu'>pal</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'green'</span>, <span class='st'>'yellow'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "#008000" "#FFFF00"</div><div class='input'>
 <span class='co'># show color choices for different n's</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"grid"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>()
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/viewports.html'>pushViewport</a></span>(<span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/plotViewport.html'>plotViewport</a></span>())
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.rect.html'>grid.rect</a></span>()
-  <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>4</span>,<span class='fl'>8</span>,<span class='fl'>16</span>, <span class='fl'>21</span>)
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"grid"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/viewports.html'>pushViewport</a></span><span class='op'>(</span><span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/plotViewport.html'>plotViewport</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.rect.html'>grid.rect</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='va'>n</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>4</span>,<span class='fl'>8</span>,<span class='fl'>16</span>, <span class='fl'>21</span><span class='op'>)</span>
   <span class='co'># beyond this, colors are generated algorithmically</span>
   <span class='co'># generating a warning</span>
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/viewports.html'>pushViewport</a></span>(<span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/dataViewport.html'>dataViewport</a></span>(<span class='kw'>xscale</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>n</span>)+<span class='fl'>1</span>),
-                     <span class='kw'>yscale</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>n</span>)+<span class='fl'>1</span>)))
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.yaxis.html'>grid.yaxis</a></span>(<span class='kw'>at</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>n</span>)), <span class='kw'>label</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"n ="</span>, <span class='no'>n</span>))
-  <span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='no'>n</span>))) {
-   <span class='no'>cols</span> <span class='kw'>&lt;-</span> <span class='fu'>pal</span>(<span class='fl'>1</span>:<span class='no'>n</span>[<span class='no'>i</span>])
-   <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.points.html'>grid.points</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='no'>n</span>[<span class='no'>i</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='no'>i</span>, <span class='no'>n</span>[<span class='no'>i</span>]),
-                     <span class='kw'>default.units</span> <span class='kw'>=</span> <span class='st'>"native"</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>15</span>,
-                     <span class='kw'>gp</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>col</span><span class='kw'>=</span><span class='no'>cols</span>))
-  }
-  <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span>(<span class='st'>"note the first i colors are shared for each n"</span>,
-                  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>,<span class='st'>"npc"</span>) + <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"line"</span>))
-}</div><div class='img'><img src='color_loon-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/viewports.html'>pushViewport</a></span><span class='op'>(</span><span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/dataViewport.html'>dataViewport</a></span><span class='op'>(</span>xscale<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span>,
+                     yscale<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.yaxis.html'>grid.yaxis</a></span><span class='op'>(</span>at<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span>, label<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"n ="</span>, <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/rev.html'>rev</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+   <span class='va'>cols</span> <span class='op'>&lt;-</span> <span class='fu'>pal</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span>
+   <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.points.html'>grid.points</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>n</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>n</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span>,
+                     default.units <span class='op'>=</span> <span class='st'>"native"</span>, pch<span class='op'>=</span><span class='fl'>15</span>,
+                     gp<span class='op'>=</span><span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span><span class='op'>(</span>col<span class='op'>=</span><span class='va'>cols</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.text.html'>grid.text</a></span><span class='op'>(</span><span class='st'>"note the first i colors are shared for each n"</span>,
+                  y <span class='op'>=</span> <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='st'>"npc"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>grid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='st'>"line"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='img'><img src='color_loon-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -240,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
