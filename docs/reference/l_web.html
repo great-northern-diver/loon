@@ -170,10 +170,10 @@ Default would be the documentation found at
     </div>
 
     <pre class="usage"><span class='fu'>l_web</span>(
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"loon"</span>, <span class='st'>"loon.data"</span>, <span class='st'>"loon.ggplot"</span>, <span class='st'>"loon.tourr"</span>, <span class='st'>"ggmulti"</span>, <span class='st'>"zenplots"</span>,
-    <span class='st'>"diveR"</span>),
   <span class='kw'>page</span> <span class='kw'>=</span> <span class='st'>"index"</span>,
   <span class='kw'>directory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"home"</span>, <span class='st'>"reference"</span>, <span class='st'>"articles"</span>),
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"loon"</span>, <span class='st'>"loon.data"</span>, <span class='st'>"loon.ggplot"</span>, <span class='st'>"loon.tourr"</span>, <span class='st'>"ggmulti"</span>, <span class='st'>"zenplots"</span>,
+    <span class='st'>"diveR"</span>),
   <span class='kw'>site</span> <span class='kw'>=</span> <span class='st'>"https://great-northern-diver.github.io"</span>,
   <span class='no'>...</span>
 )</pre>
@@ -181,11 +181,6 @@ Default would be the documentation found at
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>package</th>
-      <td><p>a string identifying the package name having an online documentation
-(default <code>"loon"</code>).</p></td>
-    </tr>
     <tr>
       <th>page</th>
       <td><p>relative path to a page (the ".html" part may be omitted)</p></td>
@@ -196,6 +191,11 @@ Default would be the documentation found at
 browser will open at the home page of the official documentation website.  If <code>page</code> refers to a <code>package</code>
   manual reference, then directory must be <code>"reference"</code>; if <code>page</code> refers to the name
   of a vignette file, then directory should be <code>"articles"</code></p></td>
+    </tr>
+    <tr>
+      <th>package</th>
+      <td><p>a string identifying the package name having an online documentation
+(default <code>"loon"</code>).</p></td>
     </tr>
     <tr>
       <th>site</th>

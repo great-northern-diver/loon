@@ -5,24 +5,24 @@
 \title{Open a browser with loon's R documentation webpage}
 \usage{
 l_web(
-  package = c("loon", "loon.data", "loon.ggplot", "loon.tourr", "ggmulti", "zenplots",
-    "diveR"),
   page = "index",
   directory = c("home", "reference", "articles"),
+  package = c("loon", "loon.data", "loon.ggplot", "loon.tourr", "ggmulti", "zenplots",
+    "diveR"),
   site = "https://great-northern-diver.github.io",
   ...
 )
 }
 \arguments{
-\item{package}{a string identifying the package name having an online documentation
-(default \code{"loon"}).}
-
 \item{page}{relative path to a page (the ".html" part may be omitted)}
 
 \item{directory}{if \code{"home"} (the default) then \code{page} is ignored and the
 browser will open at the home page of the official documentation website.  If \code{page} refers to a \code{package}
   manual reference, then directory must be \code{"reference"}; if \code{page} refers to the name
   of a vignette file, then directory should be \code{"articles"}}
+
+\item{package}{a string identifying the package name having an online documentation
+(default \code{"loon"}).}
 
 \item{site}{the URL of the site (default \code{"https://great-northern-diver.github.io"}) prefixing
 the path to the requested documentation.}

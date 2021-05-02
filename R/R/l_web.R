@@ -9,13 +9,13 @@
 #'   Default would be the documentation found at
 #'   \url{https://great-northern-diver.github.io/loon/}.
 #'
-#' @param package a string identifying the package name having an online documentation
-#'        (default \code{"loon"}).
 #' @param page relative path to a page (the ".html" part may be omitted)
 #' @param directory if \code{"home"} (the default) then \code{page} is ignored and the
 #' browser will open at the home page of the official documentation website.  If \code{page} refers to a \code{package}
 #'   manual reference, then directory must be \code{"reference"}; if \code{page} refers to the name
 #'   of a vignette file, then directory should be \code{"articles"}
+#' @param package a string identifying the package name having an online documentation
+#'        (default \code{"loon"}).
 #' @param site the URL of the site (default \code{"https://great-northern-diver.github.io"}) prefixing
 #'  the path to the requested documentation.
 #' @param ... arguments forwarded to \code{browseURL()}, e.g. to specify a browser
@@ -38,10 +38,10 @@
 #' help(l_hist)
 #' l_web(page = "l_hist", directory = "reference")
 #' }
-l_web <- function(package = c("loon", "loon.data", "loon.ggplot",
-                              "loon.tourr", "ggmulti", "zenplots", "diveR"),
-                  page = "index",
+l_web <- function(page = "index",
                   directory = c("home", "reference", "articles"),
+                  package = c("loon", "loon.data", "loon.ggplot",
+                              "loon.tourr", "ggmulti", "zenplots", "diveR"),
                   site = "https://great-northern-diver.github.io",
                   ...) {
     pkg = match.arg(package)

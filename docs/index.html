@@ -183,7 +183,7 @@ demo(package = "loon")</pre></div>
 <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"introduction"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon"</span>)
 <span class="co">#</span>
 <span class="co"># or via the web</span>
-<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="st">"introduction"</span>, <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"articles"</span>)</pre></div>
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">page</span> <span class="kw">=</span> <span class="st">"introduction"</span>, <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"articles"</span>)</pre></div>
 <div id="demos" class="section level3">
 <h3 class="hasAnchor">
 <a href="#demos" class="anchor"></a>Demos</h3>
@@ -252,6 +252,14 @@ demo(package = "loon")</pre></div>
 <p>The loon is a visual predator, diving deep beneath the surface, there chasing its prey with speed and remarkable maneuvrability. Once apprehended, the prey are either swallowed immediately or, when large, at least brought to the surface to be dealt with there.</p>
 <p>This seemed an excellent metaphor for an agile, interactive, and exploratory visualization system; one which empowered an analyst to chase, and perhaps discover, whatever features might be revealed in the data by quickly diving below its surface. The goal is to provide such a system in loon.</p>
 <p>As an acronym “loon” does not fare so well (<strong>l</strong>east <strong>o</strong>bvious <strong>o</strong>stensive <strong>n</strong>ame) and perhaps its synonym “diver” would be better (<strong>d</strong>irect <strong>i</strong>nteractive <strong>v</strong>isual <strong>e</strong>xploration in <strong>R</strong>). But, then, “loon” is funnier … <strong>diveR</strong> will be the name of a collection of “loon” related packages.</p>
+<p>You can find documentation on some of these related packages via <code><a href="reference/l_web.html">l_web()</a></code></p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">loon</span>)
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon.data"</span>, <span class="kw">directory</span> <span class="kw">=</span> <span class="st">"reference"</span>)
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"zenplots"</span>)     <span class="co"># become one with your data</span>
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"ggmulti"</span>)      <span class="co"># high dimensional graphics extending the ggplot2 package</span>
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon.ggplot"</span>)  <span class="co"># interactive grammar of graphics via ggplot2 package</span>
+<span class="fu"><a href="reference/l_web.html">l_web</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"loon.tourr"</span>)   <span class="co"># interactive high dimensional tours via tourr package</span>
+<span class="co"># And more coming ..</span></pre></div>
 <p>Enjoy!</p>
 </div>
 
