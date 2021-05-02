@@ -1,3 +1,20 @@
+# loon 1.3.5
+
+* `l_web()` now expanded to provide access to other `loon` related package documentation from the 
+  `great-northern-diver` github organization's set of repositories (in anticipation of putting `diveR` on CRAN)
+  
+* Improved look of compound displays. (A lot of this is a result of changes to `loon.ggplot` package).
+  
+  Includes
+
+  - new arguments `plotWidth` and `plotHeight` to `l_facet()` and `l_pairs()`
+  - look of labels (identifying facetted rows and columns)
+  - facetted displays now more loon consistent default argument look up; 
+    i.e. now standardized via `l_getOption()`  (e.g. `bg = l_getOption("canvas_bg_guides")`)
+  - more meaningful names given to `grobs` for facets. (as in `loonGrob()`)
+    
+* initial `tk` window sizes are now larger (`500 x 500` instead of `200 x 200`)
+
 # loon 1.3.4
 
 * A new vignette
