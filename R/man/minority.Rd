@@ -31,7 +31,7 @@ A data frame with 33 rows and 18 variates
 \code{rownames(minority)} are the names of the metropolitan areas or cities.
 }
 \source{
-\url{https://www.statcan.gc.ca/}
+Statistics Canada
 }
 \usage{
 minority
