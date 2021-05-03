@@ -93,7 +93,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -107,13 +107,13 @@
 
       
 
-      </header><script src="logicalQueries_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Logical queries in interactive graphics</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-04-17</h4>
+            <h4 class="date">2021-05-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/logicalQueries.Rmd"><code>vignettes/logicalQueries.Rmd</code></a></small>
       <div class="hidden name"><code>logicalQueries.Rmd</code></div>
@@ -123,51 +123,48 @@
     
     
 <p>One of the principal strengths of linked plots is the ease with which one can form complex logical queries on the data.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://great-northern-diver.github.io/loon/">loon</a></span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">loon</span>)</pre></body></html></div>
 <div id="the-cars-of-the-1974-motor-trends-magazine" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-cars-of-the-1974-motor-trends-magazine" class="anchor"></a>The cars of the 1974 Motor Trends magazine</h2>
 <p>Begin with a classic data set in <code>R</code> – <code>mtcars</code>.<br>
 For the sake of illustration, some enrichment of the variables and their values will be made:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span>, package <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">mtcars</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"datasets"</span>)
 
-<span class="va">mtcars</span><span class="op">$</span><span class="va">country</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, 
-                    <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, 
-                    <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"Italy"</span>, 
-                    <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, 
-                    <span class="st">"Italy"</span>, <span class="st">"Germany"</span>, <span class="st">"UK"</span>, <span class="st">"USA"</span>, <span class="st">"Italy"</span>, <span class="st">"italy"</span>, <span class="st">"Sweden"</span><span class="op">)</span>
-<span class="va">mtcars</span><span class="op">$</span><span class="va">continent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>, 
-                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, 
-                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>,  
-                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>, 
-                      <span class="st">"Europe"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"North America"</span>, 
-                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>, 
-                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"North America"</span>, 
-                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span> <span class="op">)</span>
-<span class="va">mtcars</span><span class="op">$</span><span class="va">company</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mazda"</span>, <span class="st">"Mazda"</span>, <span class="st">"Nissan"</span>, <span class="st">"AMC"</span>, <span class="st">"AMC"</span>, <span class="st">"Chrysler"</span>, 
+<span class="no">mtcars</span>$<span class="no">country</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>,
+                    <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"Germany"</span>,
+                    <span class="st">"Germany"</span>, <span class="st">"Germany"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"Italy"</span>,
+                    <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"Japan"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>,
+                    <span class="st">"Italy"</span>, <span class="st">"Germany"</span>, <span class="st">"UK"</span>, <span class="st">"USA"</span>, <span class="st">"Italy"</span>, <span class="st">"italy"</span>, <span class="st">"Sweden"</span>)
+<span class="no">mtcars</span>$<span class="no">continent</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>,
+                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>,
+                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>,
+                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>,
+                      <span class="st">"Europe"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"Asia"</span>, <span class="st">"North America"</span>,
+                      <span class="st">"North America"</span>, <span class="st">"North America"</span>, <span class="st">"North America"</span>,
+                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"North America"</span>,
+                      <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span> )
+<span class="no">mtcars</span>$<span class="no">company</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Mazda"</span>, <span class="st">"Mazda"</span>, <span class="st">"Nissan"</span>, <span class="st">"AMC"</span>, <span class="st">"AMC"</span>, <span class="st">"Chrysler"</span>,
                     <span class="st">"Chrysler"</span>, <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>,
-                    <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"GM"</span>, <span class="st">"Ford"</span>, 
-                    <span class="st">"Chrysler"</span>, <span class="st">"Fiat"</span>, <span class="st">"Honda"</span>, <span class="st">"Toyota"</span>, <span class="st">"Toyota"</span>, <span class="st">"Chrysler"</span>, 
-                    <span class="st">"AMC"</span>, <span class="st">"GM"</span>, <span class="st">"GM"</span>, <span class="st">"Fiat"</span>, <span class="st">"Porsche"</span>, <span class="st">"Lotus"</span>, <span class="st">"Ford"</span>, 
-                    <span class="st">"Ferrari"</span>, <span class="st">"Maserati"</span>, <span class="st">"Volvo"</span><span class="op">)</span>
+                    <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"Mercedes"</span>, <span class="st">"GM"</span>, <span class="st">"Ford"</span>,
+                    <span class="st">"Chrysler"</span>, <span class="st">"Fiat"</span>, <span class="st">"Honda"</span>, <span class="st">"Toyota"</span>, <span class="st">"Toyota"</span>, <span class="st">"Chrysler"</span>,
+                    <span class="st">"AMC"</span>, <span class="st">"GM"</span>, <span class="st">"GM"</span>, <span class="st">"Fiat"</span>, <span class="st">"Porsche"</span>, <span class="st">"Lotus"</span>, <span class="st">"Ford"</span>,
+                    <span class="st">"Ferrari"</span>, <span class="st">"Maserati"</span>, <span class="st">"Volvo"</span>)
 
-<span class="va">mtcars</span><span class="op">$</span><span class="va">Engine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"V-shaped"</span>, <span class="st">"Straight"</span><span class="op">)</span><span class="op">[</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span> <span class="op">+</span><span class="fl">1</span><span class="op">]</span>, 
-                        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"V-shaped"</span>, <span class="st">"Straight"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">mtcars</span><span class="op">$</span><span class="va">Transmission</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"automatic"</span>, <span class="st">"manual"</span><span class="op">)</span><span class="op">[</span><span class="va">mtcars</span><span class="op">$</span><span class="va">am</span> <span class="op">+</span><span class="fl">1</span><span class="op">]</span>, 
-                              levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"automatic"</span>, <span class="st">"manual"</span><span class="op">)</span><span class="op">)</span>
+<span class="no">mtcars</span>$<span class="no">Engine</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"V-shaped"</span>, <span class="st">"Straight"</span>)[<span class="no">mtcars</span>$<span class="no">vs</span> +<span class="fl">1</span>],
+                        <span class="kw">levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"V-shaped"</span>, <span class="st">"Straight"</span>))
+<span class="no">mtcars</span>$<span class="no">Transmission</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"automatic"</span>, <span class="st">"manual"</span>)[<span class="no">mtcars</span>$<span class="no">am</span> +<span class="fl">1</span>],
+                              <span class="kw">levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"automatic"</span>, <span class="st">"manual"</span>))
 
-<span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># These are redundant now</span>
-<span class="va">mtcars</span><span class="op">$</span><span class="va">am</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># </span></code></pre></div>
+<span class="no">mtcars</span>$<span class="no">vs</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>  <span class="co"># These are redundant now</span>
+<span class="no">mtcars</span>$<span class="no">am</span> <span class="kw">&lt;-</span> <span class="kw">NULL</span>  <span class="co"># </span></pre></body></html></div>
 <p>For this illustration, it will be convenient to separate categorical from continuous data.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">varTypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, 
-                  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">mtcars</span>, 
-                         FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-                             <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">is.factor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">|</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">{</span> 
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">varTypes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">mtcars</span>),
+                  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="no">mtcars</span>,
+                         <span class="kw">FUN</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>){
+                             <span class="kw">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">is.factor</a></span>(<span class="no">x</span>)<span class="kw">|</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">x</span>)){
                                  <span class="st">"categorical"</span>
-                                  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span><span class="st">"numeric"</span><span class="op">}</span> <span class="op">}</span> <span class="op">)</span><span class="op">)</span></code></pre></div>
+                                  } <span class="kw">else</span> {<span class="st">"numeric"</span>} } ))</pre></body></html></div>
 <p><code>varTypes</code> is a list with two named components: <code>categorical</code> and <code>numeric</code>.</p>
 </div>
 <div id="some-interactive-plots" class="section level2">
@@ -175,23 +172,21 @@ For the sake of illustration, some enrichment of the variables and their values 
 <a href="#some-interactive-plots" class="anchor"></a>Some interactive plots</h2>
 <p>To explore the data, several interactive plots will likely have been constructed. Typically, these will have been constructed one at a time and assigned to the same linking group (perhaps via the inspector).</p>
 <p>Below, histograms/barplots are constructed for each categorical variable and assigned to that variable name now prefixed by <code>h_</code> for “histogram”.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">varName</span> <span class="kw">in</span> <span class="va">varTypes</span><span class="op">$</span><span class="va">categorical</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"h_"</span>, <span class="va">varName</span><span class="op">)</span>,
-           <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span> , <span class="va">varName</span><span class="op">]</span>, showFactors <span class="op">=</span> <span class="cn">TRUE</span>,  
-                  xlabel <span class="op">=</span> <span class="va">varName</span>, title <span class="op">=</span> <span class="va">varName</span>, 
-                  linkingGroup <span class="op">=</span> <span class="st">"Motor Trend"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw">for</span> (<span class="no">varName</span> <span class="kw">in</span> <span class="no">varTypes</span>$<span class="no">categorical</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"h_"</span>, <span class="no">varName</span>),
+           <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span>(<span class="no">mtcars</span>[ , <span class="no">varName</span>], <span class="kw">showFactors</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                  <span class="kw">xlabel</span> <span class="kw">=</span> <span class="no">varName</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="no">varName</span>,
+                  <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"Motor Trend"</span>))
+}</pre></body></html></div>
 <p>These are not evaluated in this vignette. Note that all are in the same <code>linkingGroup</code>.</p>
 <p>Other linked plots might exist as well – for example, a scatterplot of <code>gear</code> (the number of forward gears) versus <code>disp</code> (the engine displacement in cubic inches).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">disp</span>, <span class="va">cyl</span>, 
-                         xlabel <span class="op">=</span> <span class="st">"engine displacement"</span>, ylabel <span class="op">=</span> <span class="st">"number of cylinders"</span>,
-                         title <span class="op">=</span> <span class="st">"1974 Motor Trend cars"</span>, 
-                         linkingGroup <span class="op">=</span> <span class="st">"Motor Trend"</span>,
-                         size <span class="op">=</span> <span class="fl">10</span>, showScales <span class="op">=</span> <span class="cn">TRUE</span>,
-                         itemLabel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, showItemLabels <span class="op">=</span> <span class="cn">TRUE</span>
-                         <span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="no">disp</span>, <span class="no">cyl</span>,
+                         <span class="kw">xlabel</span> <span class="kw">=</span> <span class="st">"engine displacement"</span>, <span class="kw">ylabel</span> <span class="kw">=</span> <span class="st">"number of cylinders"</span>,
+                         <span class="kw">title</span> <span class="kw">=</span> <span class="st">"1974 Motor Trend cars"</span>,
+                         <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"Motor Trend"</span>,
+                         <span class="kw">size</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">showScales</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                         <span class="kw">itemLabel</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">mtcars</span>), <span class="kw">showItemLabels</span> <span class="kw">=</span> <span class="fl">TRUE</span>
+                         ))</pre></body></html></div>
 <p>Note that - each car’s name appears as the <code>itemLabel</code> for that point in the plot (to be revealed as a “tooltip” style pop up), and that - the plot <code>p</code> is in the same linking group as the histograms.</p>
 <p>Through a combination of selection, inversion, deactivation, and reactivation, logical queries may be made interactively on the data.</p>
 <p>For simplicity, the basic logical operators are illustrated below using only the histograms. More generally, these apply to any interactive <code>loon</code> graphic.</p>
@@ -278,13 +273,12 @@ For the sake of illustration, some enrichment of the variables and their values 
 <a href="#missing-data-and-linking-keys" class="anchor"></a>Missing data and linking keys</h2>
 <p>The <code>mtcars</code> data is an example of a complete data set. Had there been missing values, then these would not appear in loon plots that require them.</p>
 <p>For example, suppose <code>data</code> has four variables <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code>, and</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
-                   B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
-                   C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
-                   D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
-<span class="va">p_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">A</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">B</span>, color <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">C</span>, linkingGroup <span class="op">=</span> <span class="st">"test missing"</span><span class="op">)</span>
-<span class="va">h_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">D</span>, color <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">C</span>, linkingGroup <span class="op">=</span> <span class="st">"test missing"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">A</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">10</span>), <span class="fl">NA</span>), <span class="fl">10</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
+                   <span class="kw">B</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">10</span>), <span class="fl">NA</span>), <span class="fl">10</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>),
+                   <span class="kw">C</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="fl">NA</span>), <span class="fl">10</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
+                   <span class="kw">D</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">10</span>, <span class="fl">NA</span>), <span class="fl">10</span>, <span class="kw">replace</span> <span class="kw">=</span> <span class="fl">FALSE</span>))
+<span class="no">p_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">data</span>$<span class="no">A</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">data</span>$<span class="no">B</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">data</span>$<span class="no">C</span>, <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"test missing"</span>)
+<span class="no">h_test</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">data</span>$<span class="no">D</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">data</span>$<span class="no">C</span>, <span class="kw">linkingGroup</span> <span class="kw">=</span> <span class="st">"test missing"</span>)</pre></body></html></div>
 <p>Then</p>
 <ul>
 <li>
@@ -295,8 +289,7 @@ For the sake of illustration, some enrichment of the variables and their values 
 </ul>
 <p>Using logical operations on the original <code>data</code> to change plot properties (e.g. select values) can be challenging when data values are missing in the plot (since what is missing depends on what was missing at the time of its construction).</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p_test</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">A</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">p_test</span>[<span class="st">"selected"</span>] <span class="kw">&lt;-</span> (<span class="no">data</span>$<span class="no">A</span> <span class="kw">&gt;</span> <span class="fl">0</span>)</pre></body></html></div>
 <p><strong>may not work</strong>!</p>
 <ul>
 <li><p>The logical operation on the data (<code>data$A &gt; 0</code>) will typically be longer than the corresponding x value <code>p_test["x"]</code> in the plot and so will not work.</p></li>
@@ -336,9 +329,8 @@ For the sake of illustration, some enrichment of the variables and their values 
 <p>E.g. in <code>p_test</code> the row numbers of <code>data</code> that correspond to the points is</p>
 <p><code>1 + as.numeric(p_test["linkingKey"])</code></p>
 <p>Logical values for the rows of <code>data</code> can then select points in <code>p</code> as follows</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">LogVal</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">A</span> <span class="op">&gt;</span> <span class="va">data</span><span class="op">$</span><span class="va">B</span>
-<span class="va">p</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">logVal</span><span class="op">[</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">p_test</span><span class="op">[</span><span class="st">"linkingKey"</span><span class="op">]</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">LogVal</span> <span class="kw">&lt;-</span> <span class="no">data</span>$<span class="no">A</span> <span class="kw">&gt;</span> <span class="no">data</span>$<span class="no">B</span>
+<span class="no">p</span>[<span class="st">"selected"</span>] <span class="kw">&lt;-</span> <span class="no">logVal</span>[<span class="fl">1</span> + <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">p_test</span>[<span class="st">"linkingKey"</span>])]</pre></body></html></div>
 <p>Similarly for <code>h_test</code>. E.g., compare <code>p_test["linkingKey"]</code> and <code>h_test["linkingKey]"</code>.</p>
 </li>
 </ul>
@@ -386,7 +378,7 @@ For the sake of illustration, some enrichment of the variables and their values 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

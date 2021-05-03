@@ -136,7 +136,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,7 +164,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for SpatialPoints</span>
-<span class='fu'><a href='l_layer.html'>l_layer</a></span><span class='op'>(</span><span class='va'>widget</span>, <span class='va'>x</span>, asMainLayer <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='l_layer.html'>l_layer</a></span>(<span class='no'>widget</span>, <span class='no'>x</span>, <span class='kw'>asMainLayer</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,18 +205,17 @@ then points can be chosen to be added to the <code>'model'</code> layer</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
 
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"rworldmap"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>world</span> <span class='op'>&lt;-</span> <span class='fu'>rworldmap</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rworldmap/man/getMap.html'>getMap</a></span><span class='op'>(</span>resolution <span class='op'>=</span> <span class='st'>"coarse"</span><span class='op'>)</span>
-    <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='op'>)</span>
-    <span class='va'>lmap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_layer.html'>l_layer</a></span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>world</span>, asSingleLayer<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-    <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>lmap</span>,<span class='st'>'hole'</span><span class='op'>)</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>lmap</span>,<span class='st'>'NAME'</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='op'>}</span>
-</div></pre>
+<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"rworldmap"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+    <span class='no'>world</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rworldmap</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rworldmap/man/getMap.html'>getMap</a></span>(<span class='kw'>resolution</span> <span class='kw'>=</span> <span class='st'>"coarse"</span>)
+    <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span>()
+    <span class='no'>lmap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='l_layer.html'>l_layer</a></span>(<span class='no'>p</span>, <span class='no'>world</span>, <span class='kw'>asSingleLayer</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+    <span class='fu'><a href='l_scaleto_world.html'>l_scaleto_world</a></span>(<span class='no'>p</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>lmap</span>,<span class='st'>'hole'</span>)
+    <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span>(<span class='no'>lmap</span>,<span class='st'>'NAME'</span>)
+}
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -232,7 +231,7 @@ then points can be chosen to be added to the <code>'model'</code> layer</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

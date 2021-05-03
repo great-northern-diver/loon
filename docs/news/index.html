@@ -134,7 +134,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -155,6 +155,26 @@
       <small>Source: <a href='https://github.com/great-northern-diver/loon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="loon-135" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.5">
+<a href="#loon-135" class="anchor"></a>loon 1.3.5<small> Unreleased </small>
+</h1>
+<ul>
+<li><p><code><a href="../reference/l_web.html">l_web()</a></code> now expanded to provide access to other <code>loon</code> related package documentation from the <code>great-northern-diver</code> github organization’s set of repositories (in anticipation of putting <code>diveR</code> on CRAN)</p></li>
+<li>
+<p>Improved look of compound displays. (A lot of this is a result of changes to <code>loon.ggplot</code> package).</p>
+<p>Includes</p>
+<ul>
+<li>new arguments <code>plotWidth</code> and <code>plotHeight</code> to <code><a href="../reference/l_facet.html">l_facet()</a></code> and <code><a href="../reference/l_pairs.html">l_pairs()</a></code>
+</li>
+<li>look of labels (identifying facetted rows and columns)</li>
+<li>facetted displays now more loon consistent default argument look up; i.e. now standardized via <code><a href="../reference/l_getOption.html">l_getOption()</a></code> (e.g. <code>bg = l_getOption("canvas_bg_guides")</code>)</li>
+<li>more meaningful names given to <code>grobs</code> for facets. (as in <code><a href="../reference/loonGrob.html">loonGrob()</a></code>)</li>
+</ul>
+</li>
+<li><p>initial <code>tk</code> window sizes are now larger (<code>500 x 500</code> instead of <code>200 x 200</code>)</p></li>
+</ul>
+</div>
     <div id="loon-134" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.4">
 <a href="#loon-134" class="anchor"></a>loon 1.3.4<small> 2021-03-16 </small>
@@ -420,7 +440,7 @@ Actually see the periodicity by brushing.</li>
 <li>added <code><a href="../reference/condGrob.html">condGrob()</a></code> to effect the conditional construction of either the desired grob (if it is visible in the loon plot) or the empty grob as placeholder containing relevant arguments</li>
 </ul>
 </li>
-<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
+<li>introduced the method <code><a href="../reference/plot.loon.html">plot.loon()</a></code> so that <code><a href="https://rdrr.io/r/base/plot.html">plot(p)</a></code> of a loon plot <code>p</code> will now draw the corresponding grid object on the current device</li>
 </ul>
 </div>
     <div id="loon-120" class="section level1">
@@ -532,7 +552,7 @@ Actually see the periodicity by brushing.</li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

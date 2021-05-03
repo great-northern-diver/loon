@@ -92,12 +92,12 @@ l_facet <- function(widget,
 #' Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 #' }
 #' }
-#' @param labelBackground Label background color
-#' @param labelForeground Label foreground color
+#' @param labelBackground Label background colour
+#' @param labelForeground Label foreground colour
 #' @param labelBorderwidth Label border width
 #' @param labelRelief Label relief
-#' @param plotWidth default plot width (in pixel)
-#' @param plotHeight default plot height (in pixel)
+#' @param plotWidth default plot width (in pixels)
+#' @param plotHeight default plot height (in pixels)
 #' @template param_parent
 #' @export
 #'

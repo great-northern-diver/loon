@@ -4,22 +4,37 @@
 \alias{l_web}
 \title{Open a browser with loon's R documentation webpage}
 \usage{
-l_web(page = "index", directory = c("home", "reference", "articles"), ...)
+l_web(
+  page = "index",
+  directory = c("home", "reference", "articles"),
+  package = c("loon", "loon.data", "loon.ggplot", "loon.tourr", "ggmulti", "zenplots",
+    "diveR"),
+  site = "https://great-northern-diver.github.io",
+  ...
+)
 }
 \arguments{
-\item{page}{relative path to a page, the .html part may be omitted}
+\item{page}{relative path to a page (the ".html" part may be omitted)}
 
-\item{directory}{if \code{"home"} then \code{page} is ignored and the
-browser will open at the home page of the official loon documentation website at
-  \url{https://great-northern-diver.github.io/loon/}.  If \code{page} refers to a \code{loon}
+\item{directory}{if \code{"home"} (the default) then \code{page} is ignored and the
+browser will open at the home page of the official documentation website.  If \code{page} refers to a \code{package}
   manual reference, then directory must be \code{"reference"}; if \code{page} refers to the name
   of a vignette file, then directory should be \code{"articles"}}
 
-\item{...}{arguments forwarded to browseURL, e.g. to specify a browser}
+\item{package}{a string identifying the package name having an online documentation
+(default \code{"loon"}).}
+
+\item{site}{the URL of the site (default \code{"https://great-northern-diver.github.io"}) prefixing
+the path to the requested documentation.}
+
+\item{...}{arguments forwarded to \code{browseURL()}, e.g. to specify a browser}
 }
 \description{
 \code{l_web} opens a browser with the relevant page on the
-  official loon documentation website at
+  official loon documentation website.  This is constructed by joining together
+  the information provided by the arguments \code{site}/\code{package}/\code{directory}/\code{page}.
+
+  Default would be the documentation found at
   \url{https://great-northern-diver.github.io/loon/}.
 }
 \examples{
@@ -30,6 +45,8 @@ l_web()
 vignette("introduction", package = "loon")
 # or
 l_web(page = "introduction", directory = "articles")
+# or
+l_web(package = "loon.data", directory = "reference")
 #
 help(l_hist)
 l_web(page = "l_hist", directory = "reference")

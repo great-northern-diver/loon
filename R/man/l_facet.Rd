@@ -109,17 +109,17 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 }
 }}
 
-\item{labelBackground}{Label background color}
+\item{labelBackground}{Label background colour}
 
-\item{labelForeground}{Label foreground color}
+\item{labelForeground}{Label foreground colour}
 
 \item{labelBorderwidth}{Label border width}
 
 \item{labelRelief}{Label relief}
 
-\item{plotWidth}{default plot width (in pixel)}
+\item{plotWidth}{default plot width (in pixels)}
 
-\item{plotHeight}{default plot height (in pixel)}
+\item{plotHeight}{default plot height (in pixels)}
 
 \item{parent}{a valid Tk parent widget path. When the parent widget is
 specified (i.e. not \code{NULL}) then the plot widget needs to be placed using

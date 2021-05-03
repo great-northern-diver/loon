@@ -81,7 +81,7 @@ library(loon)
 vignette("introduction", package = "loon")
 #
 # or via the web
-l_web("introduction", directory = "articles")
+l_web(page = "introduction", directory = "articles")
 ```
 
 ### Demos
@@ -164,6 +164,18 @@ are either swallowed immediately or, when large, at least brought to the surface
 This seemed an excellent metaphor for an agile, interactive, and exploratory visualization system; one which empowered an analyst to chase, and perhaps discover, whatever features might be revealed in the data by quickly diving below its surface.  The goal is to provide such a system in loon.
 
 As an acronym "loon" does not fare so well (**l**east **o**bvious **o**stensive **n**ame) and perhaps its synonym "diver" would be better  (**d**irect **i**nteractive **v**isual **e**xploration in **R**).  But, then,  "loon" is funnier ...  **diveR** will be the name of a collection of "loon" related packages.
+
+You can find documentation on some of these related packages via `l_web()`
+
+```r
+library(loon)
+l_web(package = "loon.data", directory = "reference")
+l_web(package = "zenplots")     # become one with your data
+l_web(package = "ggmulti")      # high dimensional graphics extending the ggplot2 package
+l_web(package = "loon.ggplot")  # interactive grammar of graphics via ggplot2 package
+l_web(package = "loon.tourr")   # interactive high dimensional tours via tourr package
+# And more coming ..
+```
 
 Enjoy!
 
