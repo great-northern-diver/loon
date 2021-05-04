@@ -926,26 +926,6 @@ glyph_to_pch <- function(glyph) {
 
 }
 
-
-# see optionDatabase.tcl
-as_r_point_size <- function(size) {
-
-  if (is.numeric(size)) {
-    # trial and error to choose scale for size
-    size <- sqrt(size / 12)
-    size[size < 0.1] <- 0.1
-  }
-  size
-}
-
-as_r_text_size <- function(size){
-  if (is.numeric(size)) {
-    # trial and error to choose scale for size
-    size <- 1 + 1.2 * (1 + size)^0.88
-  }
-  size
-}
-
 pixels_2_lines <- function(x) {
   x / 20
 }

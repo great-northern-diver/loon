@@ -417,7 +417,17 @@ axesGrobTree <- function(data = NULL,
 # returned by widget['data'] from characters to numeric.
 char2num.data.frame <- function(chardataframe){
 
-    dat <- as.data.frame(suppressWarnings(sapply(chardataframe, as.numeric)))
+    if(nrow(chardataframe) == 1) {
+        cols <- colnames(chardataframe)
+        dat <- as.data.frame(
+            matrix(suppressWarnings(sapply(chardataframe, as.numeric)),
+                   nrow = 1)
+        )
+        colnames(dat) <- cols
+    } else {
+        dat <- as.data.frame(suppressWarnings(sapply(chardataframe, as.numeric)))
+    }
+
     NAcolumn <- which(
         apply(dat, 2,
               function(column){

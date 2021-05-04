@@ -192,7 +192,6 @@ loonGlyphGrob.image <-  function(widget, x, glyph_info) {
     tcl_img_i <- gh['images'][glyph_info$index]
     size_i <- glyph_info$size
 
-
     # get the scaled_image
     height <- as.numeric(tcl("image", "height", tcl_img_i))
     width <- as.numeric(tcl("image", "width", tcl_img_i))
@@ -211,10 +210,8 @@ loonGlyphGrob.image <-  function(widget, x, glyph_info) {
 
     tcl("image", "delete", scaled_img)
 
-
-
-    width_p = unit(image_w/40, "cm")
-    height_p = unit(image_h/40, "cm")
+    width_p <- unit(as_r_image_size(image_w), "mm")
+    height_p <- unit(as_r_image_size(image_h), "mm")
 
     gTree(
         children = gList(
@@ -274,9 +271,7 @@ loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
                        gp = gpar(col = glyph_info$color,
                                  cex = as_r_point_size(glyph_info$size)),
                        pch = if (showArea) 21 else 19,
-                       name = "point"
-
-            ),
+                       name = "point"),
             linesGrob(x = rep(glyph_info$x, 2),
                       y = unit(c(gh['ymin'][glyph_info$index],
                                  gh['ymax'][glyph_info$index]),
@@ -299,8 +294,8 @@ loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
     color <- glyph_info$color
     size <- glyph_info$size
 
-    poly_x <- gh['x'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
-    poly_y <- - gh['y'][[glyph_info$index]] * as_r_polygonGlyph_size(size)
+    poly_x <- gh['x'][[glyph_info$index]] * as_r_polygon_size(size)
+    poly_y <- - gh['y'][[glyph_info$index]] * as_r_polygon_size(size)
 
     x <- glyph_info$x
     y <- glyph_info$y
@@ -328,15 +323,7 @@ loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
     }
 }
 
-as_r_polygonGlyph_size <- function(size){
-    if (is.numeric(size)) {
-        # trial and error to choose scale for size
-        size <- size/1.25
-        size[size < 0.01] <- 0.01
-        size
-    }
-    size
-}
+
 
 loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
 
@@ -372,8 +359,8 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
     ypos <- glyph_info$y
 
     if(axesLayout == "parallel"){
-        scaleX <- as_r_serialaxesGlyph_size(size, "x", "parallel")
-        scaleY <- as_r_serialaxesGlyph_size(size, "y", "parallel")
+        scaleX <- as_r_serialaxes_size(size, "x", "parallel")
+        scaleY <- as_r_serialaxes_size(size, "y", "parallel")
 
         lineXaxis <- seq(-0.5 * scaleX, 0.5 * scaleX, length.out = dimension)
         lineYaxis <- (scaledData[glyph_info$index, ] - 0.5) * scaleY
@@ -418,8 +405,8 @@ loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
             ), name = paste0("serialaxes_glyph: parallel ",  glyph_info$index)
         )
     } else {
-        scaleX <- as_r_serialaxesGlyph_size(size, "x", "radial")
-        scaleY <- as_r_serialaxesGlyph_size(size, "y", "radial")
+        scaleX <- as_r_serialaxes_size(size, "x", "radial")
+        scaleY <- as_r_serialaxes_size(size, "y", "radial")
 
         angle <- seq(0, 2*pi, length.out = dimension + 1)[1:dimension]
         radialxaxis <- scaleX * scaledData[glyph_info$index,] * cos(angle)
@@ -540,22 +527,4 @@ get_glyph_scale_info <- function(widget){
     })
     names(scaleInfo) <- paste(name, unique_glyph)
     scaleInfo
-}
-
-
-as_r_serialaxesGlyph_size <- function(size, coord, axesLayout){
-    if (is.numeric(size)) {
-        # trial and error to choose scale for size
-        if (axesLayout == "radial") {
-            size <- sqrt(size) * 5
-        } else if (axesLayout == "parallel"){
-            if (coord == "x") {
-                size <- sqrt(size) * 6.4
-            } else if (coord == "y"){
-                size <- sqrt(size) * 3.2
-            } else size <- NA
-        } else size <- NA
-        size[size == 0] <- 0.01
-    }
-    size
 }
