@@ -1,4 +1,4 @@
-## Test environments
+## Test environments  1.3.5
 
 * local OSX, Big Sur 11.2.1,  R 4.0.2
 * Ubuntu Xenial 16.04  (on travis-ci)
@@ -7,30 +7,42 @@
   - using platform: x86_64-w64-mingw32 (64-bit)
   - using session charset: ISO8859-1
   
-* Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-* Ubuntu Linux 20.04.1 LTS, R-release, GCC
-* Fedora Linux, R-devel, clang, gfortran
-* Solaris, 
+* Using
 
-  `rhub::check_on_solaris(env_vars = c(R_CHECK_FORCE_SUGGESTS = "FALSE"))`
+  `devtools::check_rhub(env_vars=c(R_COMPILE_AND_INSTALL_PACKAGES = "always"))`
   
-  6487#> * checking package dependencies ... ERROR
+  - Windows Server 2008 R2 SP1, R-devel, 32/64 bit ... OK
+  - linux-x86_64-fedora-clang & Ubuntu ... PREPERROR:
   
-  6488#> Packages suggested but not available: 'rgl', 'Rgraphviz', 'RDRToolbox'
+    Errors involve not finding bioconductor files and tcktk not loading
+    
+    
+     Error : Bioconductor version '3.13' requires R version '4.1'; 
+    
+     R version is too new; see https://bioconductor.org/install`
+    
   
-  6489#> The suggested packages are required for a complete check.
+     AND 
+   
+     library(loon)
+   
+     Loading required package: tcltk
+   
+     Error: package or namespace load failed for ‘loon’:
+   
+     .onLoad failed in loadNamespace() for 'loon', details:
+   
+     call: structure(.External(.C_dotTcl, ...), class = "tclObj")
+   
+     error: [tcl] no display name and no $DISPLAY environment variable.
+   
+     In addition: Warning message:
+   
+     no DISPLAY variable so Tk is not available
+   
+     Execution halted`
   
-  6490#> Checking can be attempted without them by setting the environment
   
-  6491#> variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-  
-  6492#> See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-  
-  6493#> manual.
-  
-  6494#> * DONE
-  
-  6495#> Status: 1 ERROR
 
 ## R CMD check results
 
@@ -41,53 +53,3 @@
   ... NOTE
   Maintainer: 'R. Wayne Oldford <rwoldford@uwaterloo.ca>'
 
-### Solaris and bioconductor package RgraphViz
-
-**rhub::check_on_solaris(env_vars = c(R_CHECK_FORCE_SUGGESTS = "FALSE"))**:
-
-1 Error (cannot find/install suggested package `Rgraphviz)`
-
-  - Unable to determine a solution.  (have tried adding BiocViews: to DESCRIPTION with no luck)
-
-- Preparing build, see status at
-
-  https://builder.r-hub.io/status/loon_1.3.4.tar.gz-a8636ac65fcf46899d204dc1c39bafce
-
-...
-
-  E  checking package dependencies (3.5s)
-     Package suggested but not available: ‘Rgraphviz’
-   
-     The suggested packages are required for a complete check.
-     Checking can be attempted without them by setting the environment
-     variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-   
-     See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-     manual.
-   
-
-**Relevant Snippet from Rhub**:
-
-- Installing package dependencies\
-
-- Running R CMD check
-
-  setting _R_CHECK_FORCE_SUGGESTS_ to false
-   
-  setting R_COMPILE_AND_INSTALL_PACKAGES to never
-   
-  setting _R_CHECK_THINGS_IN_CHECK_DIR_ to false
-   
-  setting R_REMOTES_STANDALONE to true
-   
-  setting R_REMOTES_NO_ERRORS_FROM_WARNINGS to true
-   
-  setting _R_CHECK_FORCE_SUGGESTS_ to true
-   
-  setting _R_CHECK_CRAN_INCOMING_USE_ASPELL_ to true
-   
--  using log directory 'C:/Users/USERzVBgqDuhyS/loon.Rcheck'
--  using R Under development (unstable) (2021-02-15 r80013)
--  using platform: x86_64-w64-mingw32 (64-bit)
-
-## Downstream dependencies
