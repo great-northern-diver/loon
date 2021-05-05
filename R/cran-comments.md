@@ -1,4 +1,4 @@
-## Test evironments
+## Test environments
 
 * local OSX, Big Sur 11.2.1,  R 4.0.2
 * Ubuntu Xenial 16.04  (on travis-ci)
@@ -10,6 +10,27 @@
 * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
 * Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * Fedora Linux, R-devel, clang, gfortran
+* Solaris, 
+
+  `rhub::check_on_solaris(env_vars = c(R_CHECK_FORCE_SUGGESTS = "FALSE"))`
+  
+  6487#> * checking package dependencies ... ERROR
+  
+  6488#> Packages suggested but not available: 'rgl', 'Rgraphviz', 'RDRToolbox'
+  
+  6489#> The suggested packages are required for a complete check.
+  
+  6490#> Checking can be attempted without them by setting the environment
+  
+  6491#> variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+  
+  6492#> See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+  
+  6493#> manual.
+  
+  6494#> * DONE
+  
+  6495#> Status: 1 ERROR
 
 ## R CMD check results
 
@@ -22,7 +43,7 @@
 
 ### Solaris and bioconductor package RgraphViz
 
-**rhub::check_on_solaris()**:
+**rhub::check_on_solaris(env_vars = c(R_CHECK_FORCE_SUGGESTS = "FALSE"))**:
 
 1 Error (cannot find/install suggested package `Rgraphviz)`
 
