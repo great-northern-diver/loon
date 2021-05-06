@@ -132,7 +132,7 @@
 #' \code{rownames(minority)} are the names of the metropolitan areas or cities.
 #'
 #'
-#' @source \url{https://www.statcan.gc.ca/}
+#' @source  Statistics Canada
 "minority"
 
 
