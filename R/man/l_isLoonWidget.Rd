@@ -10,7 +10,7 @@ l_isLoonWidget(widget)
 \item{widget}{widget path as a string or as an object handle}
 }
 \value{
-boolean, TRUE if the argument is a valid loon widget path, FALSE 
+boolean, TRUE if the argument is a valid loon widget path, FALSE
   otherwise
 }
 \description{
