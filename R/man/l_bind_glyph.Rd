@@ -9,7 +9,7 @@ l_bind_glyph(widget, event, callback)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{event}{a vector with one or more of the following evnets: \code{'add'},
+\item{event}{a vector with one or more of the following events: \code{'add'},
 \code{'delete'}, \code{'relabel'}}
 
 \item{callback}{callback function is an R function which is called by the Tcl

@@ -9,7 +9,7 @@ l_bind_layer(widget, event, callback)
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{event}{a vector with one or more of the following evnets: \code{'add'},
+\item{event}{a vector with one or more of the following events: \code{'add'},
 \code{'delete'}, \code{'move'}, \code{'hide'}, \code{'show'},
 \code{'relabel'}}
 
