@@ -134,7 +134,7 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
 
     # pack xlabel, title
     if(length(titlePathName) > 0) {
-        args$title <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
+        args$top <- paste0(as.character(tkcget(titlePathName, "-text")), collapse = " ")
     }
     if(length(xLabelPathName) > 0) {
         args$bottom <- paste0(as.character(tkcget(xLabelPathName, "-text")), collapse = " ")
