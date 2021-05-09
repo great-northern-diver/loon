@@ -4,7 +4,11 @@ context("test_facets")
 
 pdf(NULL)
 test_that("l_plot facets work with serialaxes glyph", {
-    p <- with(quakes, l_plot(long, lat, linkingGroup = "quakes"))
+    p <- with(quakes, l_plot(long, lat,
+                             xlab = "long",
+                             ylab = "lat",
+                             linkingGroup = "quakes",
+                             title = "earthquakes"))
     p["color"][quakes$mag < 5 & quakes$mag >= 4] <- "lightgreen"
     p["color"][quakes$mag < 6 & quakes$mag >= 5] <- "lightblue"
     p["color"][quakes$mag >= 6] <- "firebrick"
@@ -21,7 +25,9 @@ test_that("l_plot facets work with serialaxes glyph", {
 })
 
 test_that("l_plot facets work with  pointrange glyph", {
-    p <- l_plot(x = rep(1:3, 2), color = rep(c('red', 'blue', 'green'), 2), showScales=TRUE)
+    p <- l_plot(x = rep(1:3, 2),
+                color = rep(c('red', 'blue', 'green'), 2),
+                showScales=TRUE)
     g <- l_glyph_add_pointrange(p, ymin=(1:6)-(1:6)/5, ymax=(1:6)+(1:6)/5)
     p['glyph'][1:2] <- g
     f <- l_facet(p, layout = "grid", by = "color")
