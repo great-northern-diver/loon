@@ -1,3 +1,7 @@
+# loon 1.3.6
+
+* fixed printing bug just introduced by change to facets. 
+
 # loon 1.3.5
 
 * `l_web()` now expanded to provide access to other `loon` related package documentation from the 
