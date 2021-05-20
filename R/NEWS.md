@@ -1,3 +1,15 @@
+# loon 1.3.7
+
+* A new function `l_colorName` is exported which returns the build-in color names based on the 12 or 6 hex code. 
+
+# loon 1.3.6
+
+* Fix a bug (emergency update)
+
+  Bug description: if the "title" is set for an `l_facet` object, to create a static plot, an error is given. 
+  
+  Reason: for an `arrangeGrob`, the argument to set the title is "top" not "title".
+
 # loon 1.3.5
 
 * `l_web()` now expanded to provide access to other `loon` related package documentation from the 
