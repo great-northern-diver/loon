@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
       </span>
     </div>
 
@@ -132,11 +132,14 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -163,7 +166,7 @@
   than to work with object of class graph.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.loongraph</span>(<span class='no'>graph</span>)</pre>
+    <pre class="usage"><span class='fu'>as.loongraph</span><span class='op'>(</span><span class='va'>graph</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,10 +188,11 @@
 <p>For more information run: <code><a href='l_help.html'>l_help("learn_R_display_graph.html.html#graph-utilities")</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"graph"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='no'>graph_graph</span>  <span class='kw'>=</span> <span class='kw pkg'>graph</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/graph/man/randomEGraph.html'>randomEGraph</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>15</span>], <span class='kw'>edges</span><span class='kw'>=</span><span class='fl'>100</span>)
-  <span class='no'>loon_graph</span> <span class='kw'>&lt;-</span> <span class='fu'>as.loongraph</span>(<span class='no'>graph_graph</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"graph"</span>, quietly <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>graph_graph</span>  <span class='op'>=</span> <span class='fu'>graph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/graph/man/randomEGraph.html'>randomEGraph</a></span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span>, edges<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
+  <span class='va'>loon_graph</span> <span class='op'>&lt;-</span> <span class='fu'>as.loongraph</span><span class='op'>(</span><span class='va'>graph_graph</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,7 +208,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
