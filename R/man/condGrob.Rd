@@ -4,7 +4,7 @@
 \alias{condGrob}
 \title{Create a named grob or a template grob depending on a test}
 \usage{
-condGrob(test = TRUE, grobFun = grob, name = "grob name", ...)
+condGrob(test = TRUE, grobFun = grid::grob, name = "grob name", ...)
 }
 \arguments{
 \item{test}{Either `TRUE` or `FALSE` to indicate whether `grobFun` is to be used (default `TRUE`) or not.}

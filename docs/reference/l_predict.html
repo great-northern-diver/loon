@@ -82,7 +82,7 @@ However, the output is unified." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
       </span>
     </div>
 
@@ -132,6 +132,9 @@ However, the output is unified." />
       <a href="https://youtu.be/mMJllGOuDLY">3D interactive scatterplots</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -246,13 +249,13 @@ two more columns, <code>lower</code> (lower interval) and <code>upper</code> (up
 <span class='va'>pre</span> <span class='op'>&lt;-</span> <span class='fu'>l_predict</span><span class='op'>(</span><span class='va'>model1</span>, newdata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>,
                  interval <span class='op'>=</span> <span class='st'>"conf"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>pre</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             x            y      lower     upper
-#&gt; 1 -1.47615111 -0.193835067 -1.7666154 1.3789453
-#&gt; 2 -1.26047622 -0.159577084 -1.5549521 1.2357979
-#&gt; 3 -0.82054972 -0.089698785 -1.1650372 0.9856396
-#&gt; 4 -0.22545194  0.004827053 -0.8269545 0.8366086
-#&gt; 5 -0.11465603  0.022425969 -0.8035391 0.8483910
-#&gt; 6 -0.08441358  0.027229706 -0.7996783 0.8541377</div><div class='input'>
+</div><div class='output co'>#&gt;            x         y      lower     upper
+#&gt; 1 -1.3189259 0.5765009 -0.1009026 1.2539045
+#&gt; 2 -1.2895577 0.5628749 -0.1002272 1.2259771
+#&gt; 3 -0.9818526 0.4201082 -0.1080509 0.9482673
+#&gt; 4 -0.9211751 0.3919555 -0.1139075 0.8978185
+#&gt; 5 -0.5851407 0.2360447 -0.1879557 0.6600452
+#&gt; 6 -0.3166412 0.1114683 -0.3148288 0.5377654</div><div class='input'>
 <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>cars</span>, <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='va'>speed</span>, <span class='va'>dist</span><span class='op'>)</span><span class='op'>)</span>
 

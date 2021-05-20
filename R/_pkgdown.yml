@@ -27,6 +27,9 @@ navbar:
         href: https://youtu.be/JFJcg855HcQ
       - text: 3D interactive scatterplots
         href: https://youtu.be/mMJllGOuDLY
+    - text: Changelog
+      href: news/index.html
+
 
   right:
     - icon: fa-github fa-lg
@@ -407,6 +410,7 @@ reference:
     - loon_palette
     - l_getColorList
     - starts_with("l_setColor")
+    - l_colorName
 
 
 
