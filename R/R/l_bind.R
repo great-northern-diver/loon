@@ -118,7 +118,7 @@ l_bind_canvas_reorder <- function(widget, ids) {
 #'
 #' @template param_widget
 #'
-#' @param event a vector with one or more of the following evnets: \code{'add'},
+#' @param event a vector with one or more of the following events: \code{'add'},
 #'   \code{'delete'}, \code{'move'}, \code{'hide'}, \code{'show'},
 #'   \code{'relabel'}
 #'
@@ -349,7 +349,7 @@ l_bind_item_reorder <- function(widget, ids) {
 #'
 #' @template param_widget
 #'
-#' @param event a vector with one or more of the following evnets: \code{'add'},
+#' @param event a vector with one or more of the following events: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
 #'
 #' @export
@@ -408,7 +408,7 @@ l_bind_glyph_reorder <- function(widget, ids) {
 #' @template templ_bind_collection
 #'
 #' @template param_widget
-#' @param event a vector with one or more of the following evnets: \code{'add'},
+#' @param event a vector with one or more of the following events: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
 #'
 #' @export
@@ -468,7 +468,7 @@ l_bind_navigator_reorder <- function(widget, ids) {
 #'
 #' @template param_widget
 #'
-#' @param event a vector with one or more of the following evnets: \code{'add'},
+#' @param event a vector with one or more of the following events: \code{'add'},
 #'   \code{'delete'}, \code{'relabel'}
 #'
 #' @export

@@ -4,11 +4,7 @@
 
 # loon 1.3.6
 
-* Fix a bug (emergency update)
-
-  Bug description: if the "title" is set for an `l_facet` object, to create a static plot, an error is given. 
-  
-  Reason: for an `arrangeGrob`, the argument to set the title is "top" not "title".
+* fixed printing bug just introduced by change to facets. 
 
 # loon 1.3.5
 
