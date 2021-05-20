@@ -394,7 +394,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
           ),
           # Axes
           gTree(children = gList(condGrob(test =  showScales,
-                                          grobFun = xaxisGrob,
+                                          grobFun = .xaxisGrob,
                                           name = "x axis",
                                           at = xaxis.major,
                                           gp = gpar(fontfamily = scalesFont$family,
@@ -402,7 +402,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                                     fontface = scalesFont$face
                                           )),
                                  condGrob(test =  showScales,
-                                          grobFun = yaxisGrob,
+                                          grobFun = .yaxisGrob,
                                           name = "y axis",
                                           at = yaxis.major,
                                           gp = gpar(fontfamily = scalesFont$family,
@@ -1311,7 +1311,7 @@ loon.pretty <- function(widget, digits = 3) {
 #' @export
 
 condGrob <- function (test = TRUE,
-                      grobFun = grob,
+                      grobFun = grid::grob,
                       name = "grob name",
                       ...){
   if (test){
@@ -1323,6 +1323,40 @@ condGrob <- function (test = TRUE,
                        " arguments"),
          ...)
   }
+}
+
+.xaxisGrob <- function(at = NULL, label = TRUE, main = TRUE,
+                       edits = NULL, name = NULL,
+                       gp = gpar(), vp = NULL) {
+
+  xaxis <- grid::xaxisGrob(at = at, label = label, main = main,
+                           edits = edits, name = name,
+                           gp = gp, vp = vp)
+
+  if(is.null(at)) return(xaxis)
+  # extract the name
+  major <- grid::getGrob(xaxis, "major")
+  # remove the major (remove the line at the base of the tick marks)
+  grid::setGrob(xaxis,
+                "major",
+                grid::nullGrob(name = major$name))
+}
+
+.yaxisGrob <- function(at = NULL, label = TRUE, main = TRUE,
+                       edits = NULL, name = NULL,
+                       gp = gpar(), vp = NULL) {
+
+  yaxis <- grid::yaxisGrob(at = at, label = label, main = main,
+                           edits = edits, name = name,
+                           gp = gp, vp = vp)
+
+  if(is.null(at)) return(yaxis)
+  # extract the name
+  major <- grid::getGrob(yaxis, "major")
+  # remove the major (remove the line at the base of the tick marks)
+  grid::setGrob(yaxis,
+                "major",
+                grid::nullGrob(name = major$name))
 }
 
 
