@@ -1333,13 +1333,19 @@ condGrob <- function (test = TRUE,
                            edits = edits, name = name,
                            gp = gp, vp = vp)
 
-  if(is.null(at)) return(xaxis)
-  # extract the name
-  major <- grid::getGrob(xaxis, "major")
-  # remove the major (remove the line at the base of the tick marks)
-  grid::setGrob(xaxis,
-                "major",
-                grid::nullGrob(name = major$name))
+  tryCatch(
+    {
+      # extract the name
+      major <- grid::getGrob(xaxis, "major")
+      # remove the major (remove the line at the base of the tick marks)
+      grid::setGrob(xaxis,
+                    "major",
+                    grid::nullGrob(name = major$name))
+    },
+    error = function(e) {
+      xaxis
+    }
+  )
 }
 
 .yaxisGrob <- function(at = NULL, label = TRUE, main = TRUE,
@@ -1350,13 +1356,19 @@ condGrob <- function (test = TRUE,
                            edits = edits, name = name,
                            gp = gp, vp = vp)
 
-  if(is.null(at)) return(yaxis)
-  # extract the name
-  major <- grid::getGrob(yaxis, "major")
-  # remove the major (remove the line at the base of the tick marks)
-  grid::setGrob(yaxis,
-                "major",
-                grid::nullGrob(name = major$name))
+  tryCatch(
+    {
+      # extract the name
+      major <- grid::getGrob(yaxis, "major")
+      # remove the major (remove the line at the base of the tick marks)
+      grid::setGrob(yaxis,
+                    "major",
+                    grid::nullGrob(name = major$name))
+    },
+    error = function(e) {
+      yaxis
+    }
+  )
 }
 
 
