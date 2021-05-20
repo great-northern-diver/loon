@@ -965,20 +965,6 @@ get_font_info_from_tk <- function(tkFont) {
   list(family = fontFamily, face = fontFace, size = fontSize)
 }
 
-as_hex6color <- function(color) {
-
-  if(length(color) > 0){
-    col <- vapply(color, function(x) {
-      if (x == "") "" else l_hexcolor(x)
-    }, character(1))
-    col <- suppressWarnings(hex12tohex6(col))
-    col[color == ""] <- NA
-    col
-  } else {
-    NA
-  }
-}
-
 
 
 

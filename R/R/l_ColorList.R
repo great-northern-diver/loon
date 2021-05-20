@@ -146,6 +146,90 @@ hex12tohex6 <- function(x) {
     col1
 }
 
+as_hex6color <- function(color) {
+
+    if(length(color) > 0){
+        col <- vapply(color, function(x) {
+            if (x == "") "" else l_hexcolor(x)
+        }, character(1))
+        col <- suppressWarnings(hex12tohex6(col))
+        col[color == ""] <- NA
+        col
+    } else {
+        NA
+    }
+}
+
+#' @title Get Color Names from the Hex Code
+#' @description Return the built-in color names by the given hex code.
+#' @param color A vector of 12 digit (tcl) or 6 (8 with transparency) digit
+#' color hex code, e.g. "#FFFF00000000", "#FF0000"
+#' @param error Suppose the input is not a valid color, if \code{TRUE},
+#' an error will be returned; else the input vector will be returned.
+#' @return A vector of built-in color names
+#' @export
+#' @examples
+#' l_colorName(c("#FFFF00000000", "#FF00FF", "blue"))
+#'
+#' \dontrun{
+#' # an error will be returned
+#' l_colorName(c("foo", "bar", "red"))
+#'
+#' # c("foo", "bar", "red") will be returned
+#' l_colorName(c("foo", "bar", "#FFFF00000000"), error = FALSE)
+#' }
+l_colorName <- function(color, error = TRUE) {
+
+    color.id <- function(x, error = TRUE, env = environment()) {
+
+        invalid.color <- c()
+
+        colors <- vapply(x,
+                         function(color) {
+
+                             # hex code color
+                             # hex12to6 will give warnings if the hex code is not 12
+                             # as_hex6color can accommodate 6 digits and 12 digits code
+                             tryCatch(
+                                 expr = {
+                                     color <- as_hex6color(color)
+                                     c2 <- grDevices::col2rgb(color)
+                                     coltab <- grDevices::col2rgb(colors())
+                                     cdist <- apply(coltab, 2, function(z) sum((z - c2)^2))
+                                     colors()[which(cdist == min(cdist))][1]
+                                 },
+                                 error = function(e) {
+
+                                     assign("invalid.color",
+                                            c(invalid.color, color),
+                                            envir = env)
+
+                                     return(color)
+
+                                 }
+                             )
+
+                         }, character(1))
+
+        if(error && length(invalid.color) > 0) {
+            stop("The input " ,
+                 paste(invalid.color, collapse = ", "),
+                 " are not valid color names", call. = FALSE)
+        }
+        colors
+    }
+
+    # the input colors are 6/12 digits hex code
+    uniColor <- unique(color)
+    colorName <- color.id(uniColor, error = error)
+    len <- length(colorName)
+
+    for(i in seq(len)) {
+        color[color == uniColor[i]] <- colorName[i]
+    }
+    color
+}
+
 
 #' @title Convert color representations having an alpha transparency level to 6 digit color
 #'   representations
