@@ -128,21 +128,32 @@ get_scaledData <- function(data,
                minV <- apply(dat, 2, "min")
                maxV <- apply(dat, 2, "max")
                dat <- dat[displayOrder, ]
+               denominator <- (maxV  - minV)
+               denominator[denominator == 0] <- 1
+
                t(
-                   (t(dat) - minV) / (maxV  - minV)
+                   (t(dat) - minV) / denominator
                )
            },
            "observation" = {
+
+               denominator <- (maxO - minO)
+               denominator[denominator == 0] <- 1
+
                minO <- apply(dat, 1, "min")
                maxO <- apply(dat, 1, "max")
-               dat <- (dat - minO) / (maxO - minO)
+               dat <- (dat - minO) / denominator
                dat[displayOrder, ]
            },
            "data" = {
+
+               denominator <- (maxD - minD)
+               denominator[denominator == 0] <- 1
+
                minD <- min(dat)
                maxD <- max(dat)
                dat <- dat[displayOrder, ]
-               (dat - minD)/ (maxD - minD)
+               (dat - minD)/ denominator
            },
            "none" = {
                dat[displayOrder, ]
