@@ -1,5 +1,5 @@
 ---
-title: "Logical queries in interactive graphics"
+title: "Logical queries"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
 output:
