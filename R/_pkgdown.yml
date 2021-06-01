@@ -403,6 +403,7 @@ reference:
     desc: Colors
     contents:
     - color_loon
+    - l_colorName
     - l_hexcolor
     - tkcolors
     - hex12tohex6
@@ -410,7 +411,6 @@ reference:
     - loon_palette
     - l_getColorList
     - starts_with("l_setColor")
-    - l_colorName
 
 
 
