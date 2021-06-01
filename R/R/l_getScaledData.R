@@ -125,24 +125,40 @@ get_scaledData <- function(data,
 
     switch(scaling,
            "variable" = {
+
                minV <- apply(dat, 2, "min")
                maxV <- apply(dat, 2, "max")
                dat <- dat[displayOrder, ]
+
+               denominator <- (maxV  - minV)
+               denominator[denominator == 0] <- 1
+
                t(
-                   (t(dat) - minV) / (maxV  - minV)
+                   (t(dat) - minV) / denominator
                )
            },
            "observation" = {
+
                minO <- apply(dat, 1, "min")
                maxO <- apply(dat, 1, "max")
-               dat <- (dat - minO) / (maxO - minO)
+
+
+               denominator <- (maxO - minO)
+               denominator[denominator == 0] <- 1
+
+               dat <- (dat - minO) / denominator
                dat[displayOrder, ]
            },
            "data" = {
+
                minD <- min(dat)
                maxD <- max(dat)
+
+               denominator <- (maxD - minD)
+               denominator[denominator == 0] <- 1
+
                dat <- dat[displayOrder, ]
-               (dat - minD)/ (maxD - minD)
+               (dat - minD)/ denominator
            },
            "none" = {
                dat[displayOrder, ]
