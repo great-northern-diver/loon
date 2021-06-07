@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layout as a grid — facet_grid_layout • loon</title>
+<title>Get the Order of the Display — get_model_display_order • loon</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Layout as a grid — facet_grid_layout" />
-<meta property="og:description" content="Layout as a grid" />
+<meta property="og:title" content="Get the Order of the Display — get_model_display_order" />
+<meta property="og:description" content="In loon, if points (in scatter plot) or lines
+(in parallel or radial coordinate) are highlighted, the displayed order will be changed.
+This function always reflects the current displayed order" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -155,141 +157,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Layout as a grid</h1>
-    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/facet_layout.R'><code>R/facet_layout.R</code></a></small>
-    <div class="hidden name"><code>facet_grid_layout.Rd</code></div>
+    <h1>Get the Order of the Display</h1>
+    <small class="dont-index">Source: <a href='https://github.com/great-northern-diver/loon/blob/master/R/loonGrob.R'><code>R/loonGrob.R</code></a></small>
+    <div class="hidden name"><code>get_model_display_order.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Layout as a grid</p>
+    <p>In <code>loon</code>, if points (in scatter plot) or lines
+(in parallel or radial coordinate) are highlighted, the displayed order will be changed.
+This function always reflects the current displayed order</p>
     </div>
 
-    <pre class="usage"><span class='fu'>facet_grid_layout</span><span class='op'>(</span>
-  <span class='va'>plots</span>,
-  <span class='va'>subtitles</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  prop <span class='op'>=</span> <span class='fl'>10</span>,
-  parent <span class='op'>=</span> <span class='cn'>NULL</span>,
-  title <span class='op'>=</span> <span class='st'>""</span>,
-  xlabel <span class='op'>=</span> <span class='st'>""</span>,
-  ylabel <span class='op'>=</span> <span class='st'>""</span>,
-  labelLocation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"top"</span>, <span class='st'>"right"</span><span class='op'>)</span>,
-  byrow <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  swapAxes <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  labelBackground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"facetLabelBackground"</span><span class='op'>)</span>,
-  labelForeground <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
-  labelBorderwidth <span class='op'>=</span> <span class='fl'>2</span>,
-  labelRelief <span class='op'>=</span> <span class='st'>"ridge"</span>,
-  plotWidth <span class='op'>=</span> <span class='fl'>200</span>,
-  plotHeight <span class='op'>=</span> <span class='fl'>200</span>,
-  sep <span class='op'>=</span> <span class='st'>"*"</span>,
-  maxCharInOneRow <span class='op'>=</span> <span class='fl'>10</span>,
-  new.toplevel <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_model_display_order</span><span class='op'>(</span><span class='va'>widget</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>plots</th>
-      <td><p>A list of <code>loon</code> plots</p></td>
-    </tr>
-    <tr>
-      <th>subtitles</th>
-      <td><p>The subtitles of the layout. It is a list and the length is equal to
-the number of <code>by</code> variables. Each element in a list is the unique values of such <code>by</code> variable.</p></td>
-    </tr>
-    <tr>
-      <th>by</th>
-      <td><p>an object of class "formula" (or one that can be coerced to that class):
-a symbolic description of the plots separated by</p></td>
-    </tr>
-    <tr>
-      <th>prop</th>
-      <td><p>The proportion of the label height and widget height</p></td>
-    </tr>
-    <tr>
-      <th>parent</th>
-      <td><p>a valid Tk parent widget path. When the parent widget is
-specified (i.e. not <code>NULL</code>) then the plot widget needs to be placed using
-some geometry manager like <code>tkpack</code> or <code>tkplace</code> in
-order to be displayed. See the examples below.</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>The title of the widget</p></td>
-    </tr>
-    <tr>
-      <th>xlabel</th>
-      <td><p>The xlabel of the widget</p></td>
-    </tr>
-    <tr>
-      <th>ylabel</th>
-      <td><p>The ylabel of the widget</p></td>
-    </tr>
-    <tr>
-      <th>labelLocation</th>
-      <td><p>Labels location.</p><ul>
-<li><p>Length two vector for layout <code>grid</code>.
-The first one is used to determine the position of column labels ('top' or 'bottom').
-The second one is used to determine the position of row labels ('right' or 'left').</p></li>
-<li><p>Length one vector for layout <code>wrap</code>, 'top' or 'bottom'.</p></li>
-</ul></td>
-    </tr>
-    <tr>
-      <th>byrow</th>
-      <td><p>Place widget by row or by column</p></td>
-    </tr>
-    <tr>
-      <th>swapAxes</th>
-      <td><p>swap axes, <code>TRUE</code> or <code>FALSE</code></p></td>
-    </tr>
-    <tr>
-      <th>labelBackground</th>
-      <td><p>Label background color</p></td>
-    </tr>
-    <tr>
-      <th>labelForeground</th>
-      <td><p>Label foreground color</p></td>
-    </tr>
-    <tr>
-      <th>labelBorderwidth</th>
-      <td><p>Label border width</p></td>
-    </tr>
-    <tr>
-      <th>labelRelief</th>
-      <td><p>Label relief</p></td>
-    </tr>
-    <tr>
-      <th>plotWidth</th>
-      <td><p>default plot width (in pixel)</p></td>
-    </tr>
-    <tr>
-      <th>plotHeight</th>
-      <td><p>default plot height (in pixel)</p></td>
-    </tr>
-    <tr>
-      <th>sep</th>
-      <td><p>The character string to separate or combine a vector</p></td>
-    </tr>
-    <tr>
-      <th>maxCharInOneRow</th>
-      <td><p>deprecated</p></td>
-    </tr>
-    <tr>
-      <th>new.toplevel</th>
-      <td><p>determine whether the parent is a new top level.
-If it is not a new window, the widgets will not be packed</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>named arguments to modify plot states.
-See <code><a href='l_info_states.html'>l_info_states</a></code> of any instantiated l_plot for examples of names and values.</p></td>
+      <th>widget</th>
+      <td><p>An <code>l_plot</code> or <code>l_serialaxes</code> widget</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='l_plot.html'>l_plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='fu'>get_model_display_order</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+  <span class='va'>p</span><span class='op'>[</span><span class='st'>'selected'</span><span class='op'>]</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>5</span>,<span class='fl'>7</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='cn'>TRUE</span>
+  <span class='co'># The 1st, 3rd, 5th, 7th points will be drawn afterwards</span>
+  <span class='co'># to make sure that they are displayed on top</span>
+  <span class='fu'>get_model_display_order</span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
