@@ -11,7 +11,7 @@ facet_separate_layout(
   xlabel = "",
   ylabel = "",
   sep = "*",
-  maxCharInOneRow = 15,
+  maxCharInOneRow = 10,
   ...
 )
 }
@@ -29,7 +29,7 @@ the number of \code{by} variables. Each element in a list is the unique values o
 
 \item{sep}{The character string to separate or combine a vector}
 
-\item{maxCharInOneRow}{Max char in one row. If it exceeds the max, then a char will be displayed into two rows}
+\item{maxCharInOneRow}{deprecated}
 
 \item{...}{named arguments to modify plot states.
 See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.}

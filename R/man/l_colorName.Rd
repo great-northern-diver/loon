@@ -30,3 +30,7 @@ l_colorName(c("foo", "bar", "red"))
 l_colorName(c("foo", "bar", "#FFFF00000000"), error = FALSE)
 }
 }
+\seealso{
+\code{\link{l_hexcolor}}, \code{\link{hex12tohex6}},
+\code{\link{as_hex6color}}
+}

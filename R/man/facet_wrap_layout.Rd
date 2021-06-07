@@ -24,7 +24,7 @@ facet_wrap_layout(
   plotWidth = 200,
   plotHeight = 200,
   sep = "*",
-  maxCharInOneRow = 15,
+  maxCharInOneRow = 10,
   new.toplevel = TRUE,
   ...
 )
@@ -82,7 +82,7 @@ Length one vector for layout \code{wrap}, 'top' or 'bottom'.
 
 \item{sep}{The character string to separate or combine a vector}
 
-\item{maxCharInOneRow}{Max char in one row. If it exceeds the max, then a char will be displayed into two rows}
+\item{maxCharInOneRow}{deprecated}
 
 \item{new.toplevel}{determine whether the parent is a new top level.
 If it is not a new window, the widgets will not be packed}
