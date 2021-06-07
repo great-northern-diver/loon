@@ -410,6 +410,7 @@ reference:
     - l_colRemoveAlpha
     - loon_palette
     - l_getColorList
+    - as_hex6color
     - starts_with("l_setColor")
 
 
@@ -515,5 +516,18 @@ reference:
     - l_nestedTclList2Rlist
     - l_toplevel
     - tkcolors
+    - glyph_to_pch
+    - get_font_info_from_tk
+    - tcl_img_2_r_raster
+
+  - title: Accessories
+    desc: some handy functions to query the loon plot states
+    contents:
+    - get_display_color
+    - get_layer_states
+    - get_model_display_order
+    - char2num.data.frame
+
+
 
 
