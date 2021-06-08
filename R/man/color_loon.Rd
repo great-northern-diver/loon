@@ -74,5 +74,6 @@ if (requireNamespace("grid", quietly = TRUE)) {
 }
 \seealso{
 \code{\link{l_setColorList}}, \code{\link{l_getColorList}},
-  \code{\link{loon_palette}}
+\code{\link{loon_palette}}, \code{\link{l_hexcolor}}, \code{\link{l_colorName}},
+\code{\link{as_hex6color}}
 }

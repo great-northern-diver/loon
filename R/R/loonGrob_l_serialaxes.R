@@ -415,6 +415,31 @@ axesGrobTree <- function(data = NULL,
 
 # Little helper function to convert the data frame
 # returned by widget['data'] from characters to numeric.
+
+
+#' @title A Character Data Frame to a Numerical Data Frame
+#' @description Turn a data frame of characters to a data frame
+#' of numerical values. If the character cannot be converted to
+#' numerical in direct, it will be turned to factor first, then to numerical data
+#' @param chardataframe A char data frame
+#' @export
+#' @examples
+#' data <- data.frame(x = c("1", "2", "3"),
+#'                    y = c("foo", "bar", "foo"),
+#'                    z = 4:6)
+#' # ERROR
+#' # data + 1
+#' numData <- char2num.data.frame(data)
+#' numData + 1
+#'
+#' if(interactive()) {
+#'   s <- l_serialaxes(iris)
+#'   data <- s["data"]
+#'   # it is a character data frame
+#'   data[1,1]
+#'   numData <- char2num.data.frame(data)
+#'   numData[1,1]
+#' }
 char2num.data.frame <- function(chardataframe){
 
     if(nrow(chardataframe) == 1) {

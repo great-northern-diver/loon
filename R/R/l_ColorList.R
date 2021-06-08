@@ -38,7 +38,8 @@
 #'   mapping algorithm.
 #'
 #' @seealso \code{\link{l_setColorList}}, \code{\link{l_getColorList}},
-#'   \code{\link{loon_palette}}
+#' \code{\link{loon_palette}}, \code{\link{l_hexcolor}}, \code{\link{l_colorName}},
+#' \code{\link{as_hex6color}}
 #'
 #' @export
 #'
@@ -146,6 +147,24 @@ hex12tohex6 <- function(x) {
     col1
 }
 
+#' @title Return a 6 hexidecimal digit color representations
+#' @param color input color
+#' @details Compared with \code{hex12tohex6()}, it could accommodate 6 digit code, 12 digit code or
+#' real color names.
+#' @seealso \code{\link{l_hexcolor}}, \code{\link{hex12tohex6}},
+#' \code{\link{l_colorName}}
+#' @export
+#' @examples
+#' color <- c("#FF00FF", "#999999999999", "red")
+#' # return 12 hexidecimal digit color
+#' loon:::l_hexcolor(color)
+#' # return 6 hexidecimal digit color
+#' as_hex6color(color)
+#' # return color names
+#' l_colorName(color)
+#'
+#' \dontrun{# WRONG COLORS
+#' hex12tohex6(color)}
 as_hex6color <- function(color) {
 
     if(length(color) > 0){
@@ -168,6 +187,10 @@ as_hex6color <- function(color) {
 #' an error will be returned; else the input vector will be returned.
 #' @return A vector of built-in color names
 #' @export
+#'
+#' @seealso \code{\link{l_hexcolor}}, \code{\link{hex12tohex6}},
+#' \code{\link{as_hex6color}}
+#'
 #' @examples
 #' l_colorName(c("#FFFF00000000", "#FF00FF", "blue"))
 #'
@@ -229,6 +252,35 @@ l_colorName <- function(color, error = TRUE) {
     }
     color
 }
+
+#' @title Convert color names to their 12 digit hexadecimal color representation
+#'
+#' @aliases l_hexcolor
+#'
+#' @description Color names in loon will be mapped to colors according to the Tk
+#'   color specifications and are normalized to a 12 digit hexadecimal color
+#'   representation.
+#'
+#' @param color a vector with color names
+#'
+#' @return a character vector with the 12 digit hexadecimal color strings.
+#' @seealso \code{\link{as_hex6color}}, \code{\link{hex12tohex6}},
+#' \code{\link{l_colorName}}
+#' @export
+#'
+#' @examples
+#' if(interactive()){
+#'
+#' p <- l_plot(1:2)
+#' p['color'] <- 'red'
+#' p['color']
+#'
+#' l_hexcolor('red')
+#' }
+l_hexcolor <- function(color) {
+    as.character(tcl('::loon::listfns::toHexcolor', color))
+}
+
 
 
 #' @title Convert color representations having an alpha transparency level to 6 digit color

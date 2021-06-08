@@ -333,7 +333,7 @@ test_that("test all possible 'by's", {
 
     p['color'][sample(1:n, 70)] <- "red"
     fp <- l_facet(p, by = list("color", iris_ = iris_$Species))
-    expect_equal(class(fp), c("l_facet_grid", "l_facet",    "l_compound", "loon" ))
+    expect_equal(class(fp), c("l_facet_grid", "l_facet", "l_compound", "loon" ))
 
     # loonGrob
     g <- loonGrob(fp)

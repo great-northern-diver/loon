@@ -231,6 +231,22 @@ loonGlyphGrob.image <-  function(widget, x, glyph_info) {
 
 }
 
+#' @title A tk Image Object to a Raster Object
+#' @description Turn a tk image object to an R \code{raster} object
+#' @param img a tk image object
+#' @export
+#' @examples
+#' if(requireNamespace("grid")) {
+#' puglia <- list.files(file.path(find.package(package = 'loon'), "images"),
+#'                      full.names = TRUE)[1L]
+#' # `img` is a tk image object
+#' img <- setNames(l_image_import_files(puglia),
+#'                 tools::file_path_sans_ext(basename(puglia)))
+#' raster <- tcl_img_2_r_raster(img)
+#' grid::grid.newpage()
+#' grid::grid.raster(raster)
+#' }
+
 tcl_img_2_r_raster <- function(img) {
     if (!(img %in% as.character(tcl("image", "names"))))
         stop("image does not exist")

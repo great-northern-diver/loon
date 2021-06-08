@@ -696,12 +696,20 @@ by2Data <- function(by, on, bySubstitute,
             if(is.atomic(by)) {
                 names <- by
             } else {
+
                 names <- names(by)
-                if(is.null(names)) {
-                    names <- vapply(2:length(bySubstitute),
+                whichIsEmpty <- names == ""
+
+                if(is.null(names) || any(whichIsEmpty)) {
+                    possibleNames <- vapply(2:length(bySubstitute),
                                     function(i) {
                                         deparse(bySubstitute[[i]])
                                     }, character(1L))
+                    if(any(whichIsEmpty)) {
+                        names[whichIsEmpty] <- possibleNames[whichIsEmpty]
+                    } else {
+                        names <- possibleNames
+                    }
                 }
             }
 

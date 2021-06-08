@@ -32,7 +32,7 @@
 #' @param plotWidth default plot width (in pixel)
 #' @param plotHeight default plot height (in pixel)
 #' @param sep The character string to separate or combine a vector
-#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param maxCharInOneRow deprecated
 #' @param new.toplevel determine whether the parent is a new top level.
 #' If it is not a new window, the widgets will not be packed
 #' @param ... named arguments to modify plot states.
@@ -56,7 +56,7 @@ facet_grid_layout <- function(plots,
                               plotWidth = 200,
                               plotHeight = 200,
                               sep = "*",
-                              maxCharInOneRow = 15,
+                              maxCharInOneRow = 10,
                               new.toplevel = TRUE,
                               ...) {
 
@@ -212,7 +212,7 @@ facet_grid_layout <- function(plots,
         column_names <- names(fluid_colsLabel)
         fluid_colsLabel_names <- column_names
 
-        if(is.null(fluid_colsLabel_names)) {
+        if(is.null(fluid_colsLabel_names) || any("" %in% fluid_colsLabel_names)) {
             fluid_colsLabel_names <- as.character(seq(length(fluid_colsLabel)))
             names(fluid_colsLabel) <- fluid_colsLabel_names
         }
@@ -236,13 +236,9 @@ facet_grid_layout <- function(plots,
                        col
                    } else {
                        if(grepl("color", name)) {
-                           paste(name, l_colorName(col, error = FALSE), sep = ":")
+                           l_colorName(col, error = FALSE)
                        } else {
-                           tt <- paste(name, col, sep = ":")
-                           if(any(nchar(tt) >= maxCharInOneRow))
-                               paste(name, col, sep = ":\n")
-                           else
-                               tt
+                           col
                        }
                    }
 
@@ -285,7 +281,7 @@ facet_grid_layout <- function(plots,
         row_names <- names(fluid_rowsLabel)
         fluid_rowsLabel_names <- row_names
 
-        if(is.null(fluid_rowsLabel_names)) {
+        if(is.null(fluid_rowsLabel_names) || any("" %in% fluid_rowsLabel_names)) {
             fluid_rowsLabel_names <- as.character(seq(length(fluid_rowsLabel)))
             names(fluid_rowsLabel) <- fluid_rowsLabel_names
         }
@@ -312,9 +308,14 @@ facet_grid_layout <- function(plots,
                        text <- if(is.null(name)) {
                            label
                        } else {
-                           ifelse(grepl("color", name),
-                                  paste(name, l_colorName(label, error = FALSE), sep = ":"),
-                                  paste(name, label, sep = ":"))
+                           ifelse(
+                               grepl("color", name),
+                               {
+                                   l_colorName(label, error = FALSE)
+                               },
+                               {
+                                   label
+                               })
                        }
                        tkrowname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,
@@ -462,7 +463,7 @@ facet_grid_layout <- function(plots,
 #' @param plotWidth default plot width (in pixel)
 #' @param plotHeight default plot height (in pixel)
 #' @param sep The character string to separate or combine a vector
-#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param maxCharInOneRow deprecated
 #' @param new.toplevel determine whether the parent is a new top level.
 #' If it is not a new window, the widgets will not be packed
 #' @param ... named arguments to modify plot states.
@@ -487,7 +488,7 @@ facet_wrap_layout <- function(plots,
                               plotWidth = 200,
                               plotHeight = 200,
                               sep = "*",
-                              maxCharInOneRow = 15,
+                              maxCharInOneRow = 10,
                               new.toplevel = TRUE,
                               ...) {
 
@@ -557,15 +558,15 @@ facet_wrap_layout <- function(plots,
     if(plots_span <= 0) {
         span <- label_span + 10
         plots_span <- span - label_span
-        warning("Span is too small. Automatically set span = ", span)
+        warning("Span is too small. Automatically set span = ", span, call. = FALSE)
     }
 
     if(length(labelLocation) > 1) {
-        warning("Layout 'wrap' only accepts one position")
+        warning("Layout 'wrap' only accepts one position", call. = FALSE)
         labelLocation <- labelLocation[1]
     }
     if(!labelLocation %in% c("top", "bottom")) {
-        warning("labels can only be located at the 'top' or 'bottom' when layout is 'wrap'")
+        warning("labels can only be located at the 'top' or 'bottom' when layout is 'wrap'", call. = FALSE)
         labelLocation <- "top"
     }
 
@@ -582,9 +583,8 @@ facet_wrap_layout <- function(plots,
                 new_names <- c(new_names, paste0("x", i, "y", j))
 
                 label <- strsplit(plot_names[plotid], split = split)[[1]]
-                stopifnot(
-                    length(label) == label_span
-                )
+                stopifnot(length(label) == label_span)
+
                 if(labelLocation == "top") {
                     # pack plots
                     tkgrid(plots[[plotid]],
@@ -602,9 +602,13 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(grepl("color", name),
-                                          paste(name, l_colorName(l, error = FALSE), sep = ":"),
-                                          paste(name, l, sep = ":"))
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE)
+
+                                       }, {
+                                           l
+                                       })
                                }
 
                                tklabel <- as.character(tcltk::tcl('label',
@@ -641,9 +645,13 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(grepl("color", name),
-                                          paste(name, l_colorName(l, error = FALSE), sep = ":"),
-                                          paste(name, l, sep = ":"))
+
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE)
+                                       }, {
+                                           l
+                                       })
                                }
 
                                tklabel <- as.character(tcltk::tcl('label',
@@ -700,9 +708,13 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(grepl("color", name),
-                                          paste(name, l_colorName(l, error = FALSE), sep = ":"),
-                                          paste(name, l, sep = ":"))
+
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE)
+                                       }, {
+                                           l
+                                       })
                                }
 
                                tklabel <- as.character(tcltk::tcl('label',
@@ -739,9 +751,13 @@ facet_wrap_layout <- function(plots,
                                text <- if(is.null(name)) {
                                    l
                                } else {
-                                   ifelse(grepl("color", name),
-                                          paste(name, l_colorName(l, error = FALSE), sep = ":"),
-                                          paste(name, l, sep = ":"))
+
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE)
+                                       }, {
+                                           l
+                                       })
                                }
 
                                tklabel <- as.character(tcltk::tcl('label',
@@ -866,7 +882,7 @@ facet_wrap_layout <- function(plots,
 #' @param xlabel The xlabel of the widget
 #' @param ylabel The ylabel of the widget
 #' @param sep The character string to separate or combine a vector
-#' @param maxCharInOneRow Max char in one row. If it exceeds the max, then a char will be displayed into two rows
+#' @param maxCharInOneRow deprecated
 #' @param ... named arguments to modify plot states.
 #' See \code{\link{l_info_states}} of any instantiated l_plot for examples of names and values.
 #'
@@ -876,7 +892,7 @@ facet_separate_layout <- function(plots,
                                   xlabel = "",
                                   ylabel = "",
                                   sep = "*",
-                                  maxCharInOneRow = 15, # to be consistent
+                                  maxCharInOneRow = 10, # to be consistent
                                   ...) {
 
     # pack title
@@ -887,14 +903,16 @@ facet_separate_layout <- function(plots,
     if(is.null(by_names)) {
         titles <- vapply(names(plots),
                          function(name) {
-                             paste(c(title, strsplit(name, split = split)[[1]]), collapse = "\n")
+                             paste(c(title, strsplit(name, split = split)[[1]]),
+                                   collapse = "\n")
                          }, character(1))
     } else {
         titles <- vapply(names(plots),
                          function(name) {
 
-                             subtitle <- strsplit(name, split = split)[[1]]
-                             paste(c(title, paste(by_names, subtitle, sep = ":")), collapse = "\n")
+                             subtitle <- l_colorName(strsplit(name, split = split)[[1]],
+                                                     error = FALSE)
+                             paste(c(title, subtitle), collapse = "\n")
                          }, character(1))
     }
 
