@@ -1,3 +1,23 @@
+# loon 1.3.8
+
+* Export some useful helper functions:
+
+    - `glyph_to_pch`: turn a loon point glyph to an R `graphics` plotting "character".
+    
+    - `get_display_color`: return the displayed color.
+    
+    - `as_hex6color`: return a 6 hexidecimal digit color representations.
+    
+    - `get_font_info_from_tk`: return font information.
+    
+    - `get_layer_states`: get layer states
+    
+    - `get_model_display_order`: get the order of the displayed elements, e.g., points in scatterplot and lines in serialaxes.
+    
+    - `tcl_img_2_r_raster`: turn a tk image object to an R raster object.
+    
+    - `char2num.data.frame`: a character data frame to a numerical data frame.
+
 # loon 1.3.7
 
 * A new function `l_colorName` is exported which returns the build-in color names based on the 12 or 6 hex code. 
