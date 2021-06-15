@@ -116,7 +116,7 @@
       <h1 data-toc-skip>Analysis: Visible minorities in Canadian cities</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-06-14</h4>
+            <h4 class="date">2021-06-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/minorities.Rmd"><code>vignettes/minorities.Rmd</code></a></small>
       <div class="hidden name"><code>minorities.Rmd</code></div>
@@ -862,8 +862,8 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <span class="va">o_near</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span><span class="op">(</span><span class="va">VarDistance</span><span class="op">)</span>
 <span class="co"># The order of minorities:</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">minority_star_percent</span><span class="op">)</span><span class="op">[</span><span class="va">o_near</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] "Black"    "Arab"     "Latino"   "SE.Asian" "Multiple" "Other"   
-##  [7] "Japanese" "Korean"   "Filipino" "Chinese"  "S.Asian"</code></pre>
+<pre><code>##  [1] "Filipino" "Other"    "Japanese" "Korean"   "Multiple" "SE.Asian"
+##  [7] "Latino"   "Arab"     "Black"    "Chinese"  "S.Asian"</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Alternatively, placing distant variates beside each</span>
 <span class="co"># other should produce less convex shaped glyphs.</span>
@@ -871,8 +871,8 @@ First create a new scatterplot, then add serial axes as alternative glyphs for t
 <span class="va">o_far</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/PairViz/man/order_tsp.html">order_tsp</a></span><span class="op">(</span><span class="op">-</span><span class="va">VarDistance</span><span class="op">)</span>
 <span class="co"># The order of minorities:</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">minority_star_percent</span><span class="op">)</span><span class="op">[</span><span class="va">o_far</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] "Latino"   "Black"    "Korean"   "Chinese"  "Other"    "S.Asian" 
-##  [7] "Japanese" "Arab"     "Multiple" "Filipino" "SE.Asian"</code></pre>
+<pre><code>##  [1] "Latino"   "Other"    "S.Asian"  "Multiple" "Chinese"  "Japanese"
+##  [7] "Black"    "SE.Asian" "Filipino" "Arab"     "Korean"</code></pre>
 <p>We will try both of these orderings and add them to existing plots.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Now construct the serial axes display so that </span>
