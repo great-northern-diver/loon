@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@
       <h1 data-toc-skip>Introduction to loon</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-06-14</h4>
+            <h4 class="date">2021-06-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/introduction.Rmd"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="hidden name"><code>introduction.Rmd</code></div>
@@ -714,9 +714,9 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <code class="sourceCode R"><span class="va">new_order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">some_quakes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">quakes_linkingKey</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"linkingKey"</span><span class="op">]</span>
-<span class="va">p_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">new_order</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
+<span class="va">p_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">new_order</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>, 
     linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">new_order</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="va">p_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">some_quakes</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
+<span class="va">p_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">some_quakes</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>, 
     linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">some_quakes</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The new plots <code>p_new</code> and <code>p_subset</code> will link correctly with all the rest.</p>
 <p>Rather than the default values, the <code>linkingKey</code> can be any vector of unique strings used in any newly created plot as above. Of course, not using the default linking keys from <code>loon</code> may require a little more care in management from the user.</p>
