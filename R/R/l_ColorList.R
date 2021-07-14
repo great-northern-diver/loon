@@ -185,22 +185,24 @@ as_hex6color <- function(color) {
 #' color hex code, e.g. "#FFFF00000000", "#FF0000"
 #' @param error Suppose the input is not a valid color, if \code{TRUE},
 #' an error will be returned; else the input vector will be returned.
-#' @param precise Logical; See details
+#' @param precise Logical; When \code{precise = FALSE},
+#' the name of the nearest built-in colour is returned.
+#' When \code{precise = TRUE}, the name is returned
+#' only if the minimum Euclidean distance is zero;
+#' otherwise the hex code of the colour is returned. See details.
+#'
 #' @return A vector of built-in color names
 #' @export
 #'
 #' @details Function \code{\link{colors}} returns the built-in color names
 #' which \code{R} knows about. To convert a hex code to a real color name,
-#' we first convert these built-in colors and the hex code to RGB (red/green/blue) values
-#' (e.g., "black" --> [0, 0, 0]). Then, based on RGB values,
-#' among all these built-in colors, we try to find the minimum Euclidean distance.
+#' we first convert these built-in colours and the hex code to RGB (red/green/blue) values
+#' (e.g., "black" --> [0, 0, 0]). Then, using this RGB vector value,
+#' the closest (Euclidean distance) built-in colour is determined.
 #'
-#' If minimum Euclidean distance is 0, it is a "precise" matching; else it is a "rough" matching
-#' or "nearest neighborhood" matching.
-#' If argument \code{precise} is set to be \code{FALSE}, it is a "rough" matching.
-#' Suppose argument \code{precise} is set to be \code{TRUE}, a real color name will be returned
-#' only if the minimum Euclidean distance is 0. If it is not 0, the original hex code will be
-#' returned.
+#' Matching is "precise" whenever the minimum distance is zero;
+#' otherwise it is "approximate",
+#' locating the nearest \code{R} colour.
 #'
 #' @seealso \code{\link{l_hexcolor}}, \code{\link{hex12tohex6}},
 #' \code{\link{as_hex6color}}
