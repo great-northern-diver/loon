@@ -14,7 +14,7 @@ as_grid_size <- function(size,
         # pixel(unit)
         diameter.px <- sqrt(area/pi) * 2
         # pixel(unit) to pt(unit)
-        diameter.pt <- diameter.px * px2pt() * adjust
+        diameter.pt <- diameter.px * px2pt(adjust = adjust)
 
         warning(
             "The class of the `size` is ",
@@ -38,7 +38,7 @@ as_grid_size <- function(size,
             # pixel(unit)
             diameter.px <- sqrt(area/pi) * 2
             # pixel(unit) to pt(unit)
-            diameter.px * px2pt() * adjust
+            diameter.px * px2pt(adjust = adjust)
         },
         texts = {
             ## Text Glyph
@@ -46,7 +46,7 @@ as_grid_size <- function(size,
             ## size >= 1 --> 2 + size (area in pixel)
             area <- ifelse(size < 1, 2, 2 + size)
             # pixel(unit) to pt(unit)
-            area * px2pt() * adjust
+            area * px2pt(adjust = adjust)
         },
         images = {
             args <- list(...)
@@ -59,18 +59,18 @@ as_grid_size <- function(size,
             # height
             height.px <- sqrt(area * ratio)
             # output unit is cm
-            height.px * px2cm() * adjust
+            height.px * px2cm(adjust = adjust)
         },
         polygon = {
             # output unit is cm
-            ifelse(size < 1, 4, 6 * sqrt(size)) * px2cm() * adjust
+            ifelse(size < 1, 4, 6 * sqrt(size)) * px2cm(adjust = adjust)
         },
         radial = {
             area <- ifelse(size < 1, 25, 400 * size)
             # pixel(unit)
             diameter.px <- sqrt(area/pi) * 2
             # output unit is cm
-            diameter.px * px2cm() * adjust
+            diameter.px * px2cm(adjust = adjust)
         },
         parallel = {
             args <- list(...)
@@ -79,25 +79,25 @@ as_grid_size <- function(size,
             area <- ifelse(size < 1, 9 * (p - 1), 64 * (p - 1) * size)
             # height:width = 1:2
             # return height
-            sqrt(area/2) * px2cm() * adjust
+            sqrt(area/2) * px2cm(adjust = adjust)
         },
         lines = {
             # output unit is mm
             # suppose the unit of loon is in px
             # size/(cm2px()/10 * ggplot2::.pt)
             # suppose the unit of loon is in mm
-            size * adjust
+            size
         }
     )
 }
 
-pt2px <- function() 4/3
-px2pt <- function() 3/4
-cm2px <- function() {
+pt2px <- function(adjust = 1) 4/3 * adjust
+px2pt <- function(adjust = 1) 3/4 * adjust
+cm2px <- function(adjust = 1) {
     grid::convertUnit(grid::unit(1, "cm"), "pt",
-                      valueOnly = TRUE) * pt2px()
+                      valueOnly = TRUE) * pt2px(adjust = adjust)
 }
-px2cm <- function() {
+px2cm <- function(adjust = 1) {
     grid::convertUnit(grid::unit(1, "pt"), "cm",
-                      valueOnly = TRUE) * px2pt()
+                      valueOnly = TRUE) * px2pt(adjust = adjust)
 }
