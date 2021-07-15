@@ -166,10 +166,6 @@ facet_grid_layout <- function(plots,
         for(j in seq(nrowsLabel)) {
             for(i in seq(ncolsLabel)) {
                 id <- (j - 1) * ncolsLabel + i
-                # plotid <- get_plot_id(layout_orders[id],
-                #                       plot_names,
-                #                       sep = sep)
-                # plot_id <- c(plot_id, plotid)
                 new_names <- c(new_names, paste0("x", j, "y", i))
                 tkgrid(plots[[id]],
                        row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels

@@ -4,7 +4,7 @@
 \alias{l_colorName}
 \title{Get Color Names from the Hex Code}
 \usage{
-l_colorName(color, error = TRUE)
+l_colorName(color, error = TRUE, precise = FALSE)
 }
 \arguments{
 \item{color}{A vector of 12 digit (tcl) or 6 (8 with transparency) digit
@@ -12,6 +12,12 @@ color hex code, e.g. "#FFFF00000000", "#FF0000"}
 
 \item{error}{Suppose the input is not a valid color, if \code{TRUE},
 an error will be returned; else the input vector will be returned.}
+
+\item{precise}{Logical; When \code{precise = FALSE},
+the name of the nearest built-in colour is returned.
+When \code{precise = TRUE}, the name is returned
+only if the minimum Euclidean distance is zero;
+otherwise the hex code of the colour is returned. See details.}
 }
 \value{
 A vector of built-in color names
@@ -19,9 +25,42 @@ A vector of built-in color names
 \description{
 Return the built-in color names by the given hex code.
 }
+\details{
+Function \code{\link{colors}} returns the built-in color names
+which \code{R} knows about. To convert a hex code to a real color name,
+we first convert these built-in colours and the hex code to RGB (red/green/blue) values
+(e.g., "black" --> [0, 0, 0]). Then, using this RGB vector value,
+the closest (Euclidean distance) built-in colour is determined.
+
+Matching is "precise" whenever the minimum distance is zero;
+otherwise it is "approximate",
+locating the nearest \code{R} colour.
+}
 \examples{
 l_colorName(c("#FFFF00000000", "#FF00FF", "blue"))
 
+if(require(grid)) {
+# redGradient is a matrix of 20 different colors
+redGradient <- matrix(hcl(0, 80, seq(49, 68, 1)),
+                      nrow=4, ncol=5, byrow = TRUE)
+# a color plate
+grid::grid.newpage()
+grid::grid.raster(redGradient,
+                  interpolate = FALSE)
+
+# a "rough matching";
+r <- l_colorName(redGradient)
+# the color name of each row is identical...
+r
+grid::grid.newpage()
+# very different from the first plate
+grid::grid.raster(r, interpolate = FALSE)
+
+# a "precise matching";
+p <- l_colorName(redGradient, precise = TRUE)
+# no built-in color names can be precisely matched...
+p
+}
 \dontrun{
 # an error will be returned
 l_colorName(c("foo", "bar", "red"))
