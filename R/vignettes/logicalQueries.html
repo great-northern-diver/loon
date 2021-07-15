@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="R.W. Oldford" />
+
+<meta name="date" content="2021-07-06" />
+
+<title>Logical queries</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Logical queries</h1>
+<h4 class="author">R.W. Oldford</h4>
+<h4 class="date">2021-07-06</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#the-cars-of-the-1974-motor-trends-magazine">The cars of the 1974 Motor Trends magazine</a></li>
+<li><a href="#some-interactive-plots">Some interactive plots</a></li>
+<li><a href="#interactive-logical-operations">Interactive logical operations</a></li>
+<li><a href="#missing-data-and-linking-keys">Missing data and linking keys</a>
+<ul>
+<li><a href="#loons-linking-model">loon’s linking model</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>One of the principal strengths of linked plots is the ease with which one can form complex logical queries on the data.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(loon)</span></code></pre></div>
+<div id="the-cars-of-the-1974-motor-trends-magazine" class="section level2">
+<h2>The cars of the 1974 Motor Trends magazine</h2>
+<p>Begin with a classic data set in <code>R</code> – <code>mtcars</code>.<br />
+For the sake of illustration, some enrichment of the variables and their values will be made:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars, <span class="at">package =</span> <span class="st">&quot;datasets&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Germany&quot;</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;Italy&quot;</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;USA&quot;</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;UK&quot;</span>, <span class="st">&quot;USA&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;italy&quot;</span>, <span class="st">&quot;Sweden&quot;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>continent <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>,  </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;North America&quot;</span>, </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, <span class="st">&quot;North America&quot;</span>, </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;North America&quot;</span>, </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Europe&quot;</span> )</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>company <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Mazda&quot;</span>, <span class="st">&quot;Mazda&quot;</span>, <span class="st">&quot;Nissan&quot;</span>, <span class="st">&quot;AMC&quot;</span>, <span class="st">&quot;AMC&quot;</span>, <span class="st">&quot;Chrysler&quot;</span>, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Chrysler&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;Mercedes&quot;</span>, <span class="st">&quot;GM&quot;</span>, <span class="st">&quot;Ford&quot;</span>, </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Chrysler&quot;</span>, <span class="st">&quot;Fiat&quot;</span>, <span class="st">&quot;Honda&quot;</span>, <span class="st">&quot;Toyota&quot;</span>, <span class="st">&quot;Toyota&quot;</span>, <span class="st">&quot;Chrysler&quot;</span>, </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;AMC&quot;</span>, <span class="st">&quot;GM&quot;</span>, <span class="st">&quot;GM&quot;</span>, <span class="st">&quot;Fiat&quot;</span>, <span class="st">&quot;Porsche&quot;</span>, <span class="st">&quot;Lotus&quot;</span>, <span class="st">&quot;Ford&quot;</span>, </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Ferrari&quot;</span>, <span class="st">&quot;Maserati&quot;</span>, <span class="st">&quot;Volvo&quot;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>Engine <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;V-shaped&quot;</span>, <span class="st">&quot;Straight&quot;</span>)[mtcars<span class="sc">$</span>vs <span class="sc">+</span><span class="dv">1</span>], </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;V-shaped&quot;</span>, <span class="st">&quot;Straight&quot;</span>))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>Transmission <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;automatic&quot;</span>, <span class="st">&quot;manual&quot;</span>)[mtcars<span class="sc">$</span>am <span class="sc">+</span><span class="dv">1</span>], </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;automatic&quot;</span>, <span class="st">&quot;manual&quot;</span>))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>vs <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># These are redundant now</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># </span></span></code></pre></div>
+<p>For this illustration, it will be convenient to separate categorical from continuous data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>varTypes <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">names</span>(mtcars), </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">sapply</span>(mtcars, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                             <span class="cf">if</span>(<span class="fu">is.factor</span>(x)<span class="sc">|</span><span class="fu">is.character</span>(x)){ </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                  } <span class="cf">else</span> {<span class="st">&quot;numeric&quot;</span>} } ))</span></code></pre></div>
+<p><code>varTypes</code> is a list with two named components: <code>categorical</code> and <code>numeric</code>.</p>
+</div>
+<div id="some-interactive-plots" class="section level2">
+<h2>Some interactive plots</h2>
+<p>To explore the data, several interactive plots will likely have been constructed. Typically, these will have been constructed one at a time and assigned to the same linking group (perhaps via the inspector).</p>
+<p>Below, histograms/barplots are constructed for each categorical variable and assigned to that variable name now prefixed by <code>h_</code> for “histogram”.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (varName <span class="cf">in</span> varTypes<span class="sc">$</span>categorical) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assign</span>(<span class="fu">paste0</span>(<span class="st">&quot;h_&quot;</span>, varName),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">l_hist</span>(mtcars[ , varName], <span class="at">showFactors =</span> <span class="cn">TRUE</span>,  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">xlabel =</span> varName, <span class="at">title =</span> varName, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linkingGroup =</span> <span class="st">&quot;Motor Trend&quot;</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>These are not evaluated in this vignette. Note that all are in the same <code>linkingGroup</code>.</p>
+<p>Other linked plots might exist as well – for example, a scatterplot of <code>gear</code> (the number of forward gears) versus <code>disp</code> (the engine displacement in cubic inches).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">with</span>(mtcars, <span class="fu">l_plot</span>(disp, cyl, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">xlabel =</span> <span class="st">&quot;engine displacement&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;number of cylinders&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">title =</span> <span class="st">&quot;1974 Motor Trend cars&quot;</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">linkingGroup =</span> <span class="st">&quot;Motor Trend&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">size =</span> <span class="dv">10</span>, <span class="at">showScales =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">itemLabel =</span> <span class="fu">rownames</span>(mtcars), <span class="at">showItemLabels =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                         ))</span></code></pre></div>
+<p>Note that - each car’s name appears as the <code>itemLabel</code> for that point in the plot (to be revealed as a “tooltip” style pop up), and that - the plot <code>p</code> is in the same linking group as the histograms.</p>
+<p>Through a combination of selection, inversion, deactivation, and reactivation, logical queries may be made interactively on the data.</p>
+<p>For simplicity, the basic logical operators are illustrated below using only the histograms. More generally, these apply to any interactive <code>loon</code> graphic.</p>
+</div>
+<div id="interactive-logical-operations" class="section level2">
+<h2>Interactive logical operations</h2>
+<p>Five logical conditions/operations illustrated here are the basic ones:</p>
+<ol style="list-style-type: decimal">
+<li><code>A</code> is <code>TRUE</code></li>
+<li>Negation: (NOT <code>A</code>) is <code>TRUE</code></li>
+<li>Inclusive OR: (<code>A</code> OR <code>B</code>) is <code>TRUE</code> (one or the other or both),</li>
+<li>Conjunction: (<code>A</code> AND <code>B</code>) are both <code>TRUE</code></li>
+<li>Exclusive OR: (<code>A</code> XOR <code>B</code>) meaning (<code>A</code> is <code>TRUE</code>) or (<code>B</code> is <code>TRUE</code>) but (<code>A</code> AND <code>B</code>) is FALSE</li>
+</ol>
+<p>Each of these corresponds to a sequence of actions on the plots and/or inspector. Whatever is highlighted in the end corresponds to the result.</p>
+<p>Again, for simplicity all operations are illustrated by interacting with values of categorical variates in the various histograms. Any of the logical elements could also have been that satisfying numerical constraints by undertaking the corresponding actions on a scatterplot (or histogram of continuous values).</p>
+<p>Each logical operator is illustrated in turn:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>A</code> (<span class="math inline">\(= A\)</span>)</p>
+<p><em>on the plot</em> select <code>A</code>,</p>
+<ul>
+<li><p>e.g., click on <code>&quot;manual&quot;</code> bar from the <code>Transmission</code> histogram</p></li>
+<li><p>highlighted <span class="math inline">\(\iff\)</span> <code>Transmission == &quot;manual&quot;</code> is <code>TRUE</code></p></li>
+</ul></li>
+<li><p><strong>NOT</strong> <code>A</code> (<span class="math inline">\(= \overline{A}~~\)</span> or <span class="math inline">\(~~\neg A\)</span>)</p>
+<p><em>on a plot</em> select <code>A</code>,</p>
+<p><em>from the inspector</em> click <code>invert</code></p>
+<ul>
+<li><p>e.g., click on <code>&quot;North America&quot;</code> bar from the <code>continent</code> histogram,</p>
+<p>then invert</p></li>
+<li><p>highlighted <span class="math inline">\(\iff\)</span> <code>continent == &quot;North America&quot;</code> is <code>FALSE</code></p></li>
+<li><p>all that is highlighted is <strong>not</strong> <code>&quot;North America&quot;</code>, namely <code>&quot;Asia&quot;</code> or <code>&quot;Europe&quot;</code></p></li>
+</ul></li>
+<li><p><code>A</code> <strong>OR</strong> <code>B</code> (<span class="math inline">\(= A \cup B~~\)</span> or <span class="math inline">\(~~A \lor B\)</span>),</p>
+<p><em>on a plot</em> select <code>A</code>,</p>
+<p><em>on the same (or a different but linked) plot</em> <code>&lt;SHIFT&gt;</code>- select <code>B</code></p>
+<ul>
+<li><p>e.g., click on <code>&quot;manual&quot;</code> bar from <code>Transmission</code> histogram,</p>
+<p>then while holding down the <code>&lt;SHIFT&gt;</code> key,</p>
+<p>click on the <code>Mercedes</code> bar in the <code>company</code> histogram</p></li>
+<li><p>highlighted <span class="math inline">\(\iff\)</span> <code>Transmission == &quot;manual&quot;</code> is <code>TRUE</code> <strong>OR</strong> <code>company = &quot;Mercedes&quot;</code> is <code>TRUE</code> (or both)</p></li>
+</ul></li>
+<li><p><code>A</code> <strong>AND</strong> <code>B</code> (<span class="math inline">\(= A \cap B\)</span> or <span class="math inline">\(A \land B\)</span>)</p>
+<p>lots of solutions, here is one that always works</p>
+<p><em>on a plot</em> select <code>A</code>,</p>
+<p><em>from the inspector</em>, <code>invert</code> then <code>deactivate</code> (only <code>A</code> remains),</p>
+<p><em>from a plot of the remaining</em> select <code>B</code>,</p>
+<p><em>from the inspector</em> <code>reactivate</code> all</p>
+<ul>
+<li><p>elements are highlighted <span class="math inline">\(\iff A \cap B\)</span></p></li>
+<li><p>e.g. try highlighting all European cars with manual transmissions.</p></li>
+</ul></li>
+<li><p><code>A</code> <strong>XOR</strong> <code>B</code> (<span class="math inline">\(= (A \cup B) \cap (\overline{A \cap B})\)</span> or <span class="math inline">\((A \lor B) \land \neg({A \land B})\)</span>)</p>
+<p><em>following steps in 4</em>, select <code>A</code> <strong>AND</strong> <code>B</code>,</p>
+<p><em>from the inspector</em> <code>invert</code> then <code>deactivate</code> (only <span class="math inline">\(\neg({A \land B})\)</span> remains)</p>
+<p><em>following steps in 3</em>, select <code>A</code> <strong>OR</strong> <code>B</code>,</p>
+<p><em>from the inspector</em> <code>reactivate</code> (only <code>A</code> <strong>XOR</strong> <code>B</code> is highlighted)</p></li>
+</ol>
+<p>Other logical conditions (including numerical ones such as <code>disp &gt; 300</code> on the scatterplot <code>p</code>) are constructed as a combination of the above (as in exclusive or).</p>
+<p>These can be quite complex and it may help, after some number of steps, to mark intermediary results by colour (or also glyph in scatterplots).</p>
+<p><strong>Note</strong> that because of possibly missing data, not all linked plots may share the same set of observations.</p>
+</div>
+<div id="missing-data-and-linking-keys" class="section level2">
+<h2>Missing data and linking keys</h2>
+<p>The <code>mtcars</code> data is an example of a complete data set. Had there been missing values, then these would not appear in loon plots that require them.</p>
+<p>For example, suppose <code>data</code> has four variables <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code>, and</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="cn">NA</span>), <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">B =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="cn">NA</span>), <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">C =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;firebrick&quot;</span>, <span class="st">&quot;steelblue&quot;</span>, <span class="cn">NA</span>), <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">D =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="cn">NA</span>), <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>p_test <span class="ot">&lt;-</span> <span class="fu">l_plot</span>(<span class="at">x =</span> data<span class="sc">$</span>A, <span class="at">y =</span> data<span class="sc">$</span>B, <span class="at">color =</span> data<span class="sc">$</span>C, <span class="at">linkingGroup =</span> <span class="st">&quot;test missing&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>h_test <span class="ot">&lt;-</span> <span class="fu">l_hist</span>(<span class="at">x =</span> data<span class="sc">$</span>D, <span class="at">color =</span> data<span class="sc">$</span>C, <span class="at">linkingGroup =</span> <span class="st">&quot;test missing&quot;</span>)</span></code></pre></div>
+<p>Then</p>
+<ul>
+<li><p>wherever an <code>NA</code> appears in any of <code>A</code>, <code>B</code>, or <code>C</code>, that point will be missing from <code>p_test</code></p>
+<p>Note that it is generally <em>not a good idea</em> to use <code>C</code> for any simple display characteristic like <code>color</code> if indeed <code>C</code> has missing values since this will remove non-missing <code>x</code> and <code>y</code> values from the plot. Not all values of <code>x</code> and <code>y</code> would then be accessible from the plot for logical queries,</p></li>
+<li><p>wherever an <code>NA</code> appears in either of <code>C</code> or <code>D</code>, that point will be missing from <code>h_test</code></p></li>
+</ul>
+<p>Using logical operations on the original <code>data</code> to change plot properties (e.g. select values) can be challenging when data values are missing in the plot (since what is missing depends on what was missing at the time of its construction).</p>
+<p>For example,</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_test[<span class="st">&quot;selected&quot;</span>] <span class="ot">&lt;-</span> (data<span class="sc">$</span>A <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><strong>may not work</strong>!</p>
+<ul>
+<li><p>The logical operation on the data (<code>data$A &gt; 0</code>) will typically be longer than the corresponding x value <code>p_test[&quot;x&quot;]</code> in the plot and so will not work.</p></li>
+<li><p>Even if the logical vector is of the right length (and contains no <code>NA</code>s itself), the values may not correctly match the data points.</p></li>
+</ul>
+<p>There are <strong>two general approaches</strong> to logical queries when <code>data</code> contains <code>NA</code>s.</p>
+<ol style="list-style-type: decimal">
+<li><p>Using <strong>complete data</strong></p>
+<p>If, like <code>mtcars</code>, the data being used contains no <code>NA</code>s then conducting logical queries on the plot will be identical to conducting them on the data.</p>
+<p>If the data is not complete (contains one or more <code>NA</code>), it can be made complete by removing all observations (rows) that contain an <code>NA</code>. E.g. replacing <code>data</code> by <code>c_data &lt;- na.omit(data)</code>.</p>
+<ul>
+<li><p>any logic on <code>c_data</code> will match that on plots made from <code>c_data</code>.</p></li>
+<li><p>depending on the amount and pattern of missing data, <em>this could critically reduce the amount of data in the analysis</em>.</p></li>
+</ul></li>
+<li><p>Using <strong>the information in the loon plots</strong>. Of course, this is the <strong>recommended</strong> approach when data is missing.</p>
+<p>Logical queries can then be made</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><strong>directly on the plots</strong>, either</p>
+<ul>
+<li>interactively as described in the previous sections, or,</li>
+<li>programmatically as in <code>p_test[&quot;x&quot;] &gt; 0</code> in place of <code>data$A &gt; 0</code>.</li>
+</ul>
+<p>or</p></li>
+<li><p><strong>directly on the data and applied to the plots</strong></p>
+<p>To help manage this, the <code>linkingKey</code> <em>of each plot</em> can be used.</p>
+<ul>
+<li><p>the default value for each plot is a character vector with entries</p>
+<p>from <code>&quot;0&quot;</code> to <code>&quot;n-1&quot;</code> where <code>n =</code>nrow(data)`.</p>
+<p>These are easily turned into the row numbers for the original data.</p>
+<p>E.g. in <code>p_test</code> the row numbers of <code>data</code> that correspond to the points is</p>
+<p><code>1 + as.numeric(p_test[&quot;linkingKey&quot;])</code></p>
+<p>Logical values for the rows of <code>data</code> can then select points in <code>p</code> as follows</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>LogVal <span class="ot">&lt;-</span> data<span class="sc">$</span>A <span class="sc">&gt;</span> data<span class="sc">$</span>B</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p[<span class="st">&quot;selected&quot;</span>] <span class="ot">&lt;-</span> logVal[<span class="dv">1</span> <span class="sc">+</span> <span class="fu">as.numeric</span>(p_test[<span class="st">&quot;linkingKey&quot;</span>])]</span></code></pre></div>
+<p>Similarly for <code>h_test</code>. E.g., compare <code>p_test[&quot;linkingKey&quot;]</code> and <code>h_test[&quot;linkingKey]&quot;</code>.</p></li>
+</ul></li>
+</ol>
+<ul>
+<li><p><strong>Note</strong>: the user can always provide their own character vector <code>linkingKey</code> for their plots.</p>
+<ul>
+<li>E.g., <code>linkingKey = rownames(data)</code></li>
+</ul>
+<p>If so, then more care may be needed to use these to identify rows in a logical vector.</p></li>
+</ul></li>
+</ol>
+<div id="loons-linking-model" class="section level3">
+<h3>loon’s linking model</h3>
+<p>Loon’s linking model has the following three parts</p>
+<ul>
+<li>a <code>linkingGroup</code> which identifies which plots are linked</li>
+<li>a <code>linkingKey</code>, a character vector where each element is a key uniquely identifying a single observation in the plot (no two observations in the same plot can have the same value in the linking key), and</li>
+<li>the <em>linked display states</em> each plot has declared (e.g. see <code>l_getlinkedStates()</code>).</li>
+</ul>
+<p>Observations in different plots (in the same linking group) are linked (in that their linked states change together) if and only if they have the same linking key.</p>
+<p>Points appearing in different plots (in the same <code>linkingGroup</code>) which matched on the value of their <code>linkingKey</code> will share the same value for their linked states.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
