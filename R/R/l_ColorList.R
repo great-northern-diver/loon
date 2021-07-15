@@ -185,8 +185,24 @@ as_hex6color <- function(color) {
 #' color hex code, e.g. "#FFFF00000000", "#FF0000"
 #' @param error Suppose the input is not a valid color, if \code{TRUE},
 #' an error will be returned; else the input vector will be returned.
+#' @param precise Logical; When \code{precise = FALSE},
+#' the name of the nearest built-in colour is returned.
+#' When \code{precise = TRUE}, the name is returned
+#' only if the minimum Euclidean distance is zero;
+#' otherwise the hex code of the colour is returned. See details.
+#'
 #' @return A vector of built-in color names
 #' @export
+#'
+#' @details Function \code{\link{colors}} returns the built-in color names
+#' which \code{R} knows about. To convert a hex code to a real color name,
+#' we first convert these built-in colours and the hex code to RGB (red/green/blue) values
+#' (e.g., "black" --> [0, 0, 0]). Then, using this RGB vector value,
+#' the closest (Euclidean distance) built-in colour is determined.
+#'
+#' Matching is "precise" whenever the minimum distance is zero;
+#' otherwise it is "approximate",
+#' locating the nearest \code{R} colour.
 #'
 #' @seealso \code{\link{l_hexcolor}}, \code{\link{hex12tohex6}},
 #' \code{\link{as_hex6color}}
@@ -194,6 +210,28 @@ as_hex6color <- function(color) {
 #' @examples
 #' l_colorName(c("#FFFF00000000", "#FF00FF", "blue"))
 #'
+#' if(require(grid)) {
+#' # redGradient is a matrix of 20 different colors
+#' redGradient <- matrix(hcl(0, 80, seq(49, 68, 1)),
+#'                       nrow=4, ncol=5, byrow = TRUE)
+#' # a color plate
+#' grid::grid.newpage()
+#' grid::grid.raster(redGradient,
+#'                   interpolate = FALSE)
+#'
+#' # a "rough matching";
+#' r <- l_colorName(redGradient)
+#' # the color name of each row is identical...
+#' r
+#' grid::grid.newpage()
+#' # very different from the first plate
+#' grid::grid.raster(r, interpolate = FALSE)
+#'
+#' # a "precise matching";
+#' p <- l_colorName(redGradient, precise = TRUE)
+#' # no built-in color names can be precisely matched...
+#' p
+#' }
 #' \dontrun{
 #' # an error will be returned
 #' l_colorName(c("foo", "bar", "red"))
@@ -201,9 +239,9 @@ as_hex6color <- function(color) {
 #' # c("foo", "bar", "red") will be returned
 #' l_colorName(c("foo", "bar", "#FFFF00000000"), error = FALSE)
 #' }
-l_colorName <- function(color, error = TRUE) {
+l_colorName <- function(color, error = TRUE, precise = FALSE) {
 
-    color.id <- function(x, error = TRUE, env = environment()) {
+    color.id <- function(x, error = TRUE, precise = FALSE, env = environment()) {
 
         invalid.color <- c()
 
@@ -219,7 +257,14 @@ l_colorName <- function(color, error = TRUE) {
                                      c2 <- grDevices::col2rgb(color)
                                      coltab <- grDevices::col2rgb(colors())
                                      cdist <- apply(coltab, 2, function(z) sum((z - c2)^2))
-                                     colors()[which(cdist == min(cdist))][1]
+                                     if(precise) {
+                                         if(min(cdist) == 0)
+                                             colors()[which(cdist == min(cdist))][1]
+                                         else
+                                             color
+                                     } else {
+                                         colors()[which(cdist == min(cdist))][1]
+                                     }
                                  },
                                  error = function(e) {
 
@@ -244,7 +289,7 @@ l_colorName <- function(color, error = TRUE) {
 
     # the input colors are 6/12 digits hex code
     uniColor <- unique(color)
-    colorName <- color.id(uniColor, error = error)
+    colorName <- color.id(uniColor, error = error, precise = precise)
     len <- length(colorName)
 
     for(i in seq(len)) {
