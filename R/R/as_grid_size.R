@@ -86,7 +86,7 @@ as_grid_size <- function(size,
             # suppose the unit of loon is in px
             # size/(cm2px()/10 * ggplot2::.pt)
             # suppose the unit of loon is in mm
-            size
+            size * px2pt(adjust = adjust)
         }
     )
 }
