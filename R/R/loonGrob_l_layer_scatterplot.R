@@ -54,7 +54,9 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  y = s_a$y,
                                  pch = pch,
                                  gp = gpar(col = s_a$color,
-                                           fontsize = as_grid_size(s_a$size, "points"))
+                                           fontsize = as_grid_size(s_a$size,
+                                                                   "points",
+                                                                   pch = pch))
             )
         } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
             # No NAs and ALL points with borders
@@ -64,7 +66,8 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  pch = pch,
                                  gp = gpar(fill = s_a$color,
                                            col = l_getOption("foreground"),
-                                           fontsize = as_grid_size(s_a$size, "points"))
+                                           fontsize = as_grid_size(s_a$size, "points",
+                                                                   pch = pch))
             )
         } else {
             # possibly some NAs (means some points are text, polygons, images, etc.)
@@ -128,9 +131,10 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
     glyph <- glyph_info$glyph
 
     if (glyph %in% l_primitiveGlyphs()) {
-        fontsize <- as_grid_size(glyph_info$size, "points")
-        col <- glyph_info$color
         pch <- glyph_to_pch(glyph)
+        col <- glyph_info$color
+        fontsize <- as_grid_size(glyph_info$size, "points",
+                                 pch = pch)
         # is there a fill colour?
         filled <- (pch %in% 21:24)
         if (filled) {
@@ -287,12 +291,15 @@ loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
 
     showArea <- gh['showArea']
 
+    pch <- if (showArea) 21 else 19
+
     gTree(
         children =  gList(
             pointsGrob(x = glyph_info$x, y = glyph_info$y,
                        gp = gpar(col = glyph_info$color,
-                                 fontsize = as_grid_size(glyph_info$size, "points")),
-                       pch = if (showArea) 21 else 19,
+                                 fontsize = as_grid_size(glyph_info$size, "points",
+                                                         pch = pch)),
+                       pch = pch,
                        name = "point"),
             linesGrob(x = rep(glyph_info$x, 2),
                       y = unit(c(gh['ymin'][glyph_info$index],

@@ -1,3 +1,17 @@
+#' @title Turn a \code{loon} size to a \code{grid} size
+#' @description The size of \code{loon} is determined by pixel (px), while, in
+#' \code{grid} graphics, the size is determined by pointsize (pt)
+#' @param size input \code{loon} size
+#' @param type glyph type; one of "points", "texts", "images",
+#' "radial", "parallel", "polygon", "lines".
+#' @param adjust a pixel (px) at 96\code{DPI} (dots per inch) is equal to 0.75 point.
+#' However, for different machines, the \code{DPI} is slightly different.
+#' Argument \code{adjust} is used to twist the size. IT IS A HACK and should be removed
+#' in the later version.
+#' @param ... some arguments used to specify the size, e.g. \code{pch} for "points",
+#' \code{ratio} for "image" and \code{p} for "parallel".
+#'
+#' @export
 as_grid_size <- function(size,
                          type = c("points", "texts", "images",
                                   "radial", "parallel", "polygon",
@@ -31,27 +45,56 @@ as_grid_size <- function(size,
     switch(
         type,
         points = {
+            pch <- list(...)$pch
+            if(is.null(pch)) pch <- 19
             ## Non-primitive Glyph
             ## size < 1 --> 8 (area in pixel)
             ## size >= 1 --> 12 * size (area in pixel)
             area <- ifelse(size < 1, 8, 12 * size)
-            # pixel(unit)
-            diameter.px <- sqrt(area/pi) * 2
-            # pixel(unit) to pt(unit)
-            diameter.px * px2pt(adjust = adjust)
+            len <- length(area)
+
+            if(length(pch) != len) {
+                pch <- rep_len(pch, len)
+            } else NULL
+
+            side.px <- vapply(seq(len),
+                   function(i) {
+                       p <- pch[i]
+                       a <- area[i]
+                       if(p %in% c(19, 1, 21)) {
+                           # circle diameter
+                           sqrt(a/pi) * 2
+                       } else if(p %in% c(15, 0, 22)) {
+                           # square side
+                           sqrt(a)
+                       } else if(p %in% c(17, 2, 24)) {
+                           # triangle side
+                           sqrt(a * 4/sqrt(3))
+                       } else if(p %in% c(18, 5, 23)) {
+                           # diamond side
+                           sqrt(a)
+                       } else {
+                           # default
+                           # circle diameter
+                           sqrt(a/pi) * 2
+                       }
+                   }, numeric(1L))
+
+            side.px * px2pt(adjust = adjust)
         },
         texts = {
             ## Text Glyph
             ## size < 1 --> 2 (area in pixel)
             ## size >= 1 --> 2 + size (area in pixel)
-            area <- ifelse(size < 1, 2, 2 + size)
+            s <- ifelse(size < 1, 2, 2 + size)
             # pixel(unit) to pt(unit)
-            area * px2pt(adjust = adjust)
+            s * px2pt(adjust = adjust)
         },
         images = {
             args <- list(...)
             # ratio = height/width
             ratio <- args$ratio
+            if(is.null(ratio)) ratio <- 1
             ## Image Glyph
             ## size < 1 --> 20 (area in pixel)
             ## size >= 1 --> 600 * size (area in pixel)
@@ -76,6 +119,7 @@ as_grid_size <- function(size,
             args <- list(...)
             # ratio = height/width
             p <- args$p
+            if(is.null(p)) p <- 5
             area <- ifelse(size < 1, 9 * (p - 1), 64 * (p - 1) * size)
             # height:width = 1:2
             # return height
@@ -94,10 +138,12 @@ as_grid_size <- function(size,
 pt2px <- function(adjust = 1) 4/3 * adjust
 px2pt <- function(adjust = 1) 3/4 * adjust
 cm2px <- function(adjust = 1) {
-    grid::convertUnit(grid::unit(1, "cm"), "pt",
-                      valueOnly = TRUE) * pt2px(adjust = adjust)
+    # grid::convertUnit(grid::unit(1, "cm"), "pt",
+    #                   valueOnly = TRUE)
+    28.45276 * pt2px(adjust = adjust)
 }
 px2cm <- function(adjust = 1) {
-    grid::convertUnit(grid::unit(1, "pt"), "cm",
-                      valueOnly = TRUE) * px2pt(adjust = adjust)
+    # grid::convertUnit(grid::unit(1, "pt"), "cm",
+    #                   valueOnly = TRUE)
+    0.03514598 * px2pt(adjust = adjust)
 }

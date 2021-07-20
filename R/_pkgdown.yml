@@ -136,6 +136,7 @@ reference:
     - l_createCompoundGrob
     - l_get_arrangeGrobArgs
     - loonGrob_layoutType
+    - as_grid_size
   - subtitle: Exporting via tcl
     desc: Alternative export to pdf, etc. via tcl and "CTRL-p"
     contents:
