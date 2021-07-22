@@ -680,7 +680,7 @@ loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
   y <- states$y[active]
 
   if(length(x)!=0  && length(y) !=0 ){
-    size  <- as_grid_size(states$size[active], "points")
+    size  <- as_grid_size(states$size[active], "points", pch = 19)
     color <- states$color[active]
 
     pointsGrob(
@@ -689,7 +689,7 @@ loonGrob.l_layer_points <- function(target, name = NULL, gp = NULL, vp = NULL) {
         gpar(col = color,
              fontsize = size)
       } else gp,
-      pch = 16,
+      pch = 19,
       name = if(is.null(name)) {
         label <- l_layer_getLabel(widget, target)
         paste0("l_layer_points: ", label, " ", names(label))
