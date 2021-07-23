@@ -47,31 +47,28 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
         )
 
         pch <- glyph_to_pch(s_a$glyph)
-        if (!any(is.na(pch)) && !any(pch %in% 21:24)) {
-            # No NAs and no points with borders
-            points <- pointsGrob(name = "points: primitive glyphs without borders",
+
+        if (!any(is.na(pch))) {
+
+            color <- s_a$color
+            fill <- rep(NA, length(color))
+
+            pointsWithBorders <- pch %in% 21:24
+            fill[pointsWithBorders] <- color[pointsWithBorders]
+            color[pointsWithBorders] <- loon::l_getOption("foreground")
+
+            points <- pointsGrob(name = "points: primitive glyphs",
                                  x = s_a$x,
                                  y = s_a$y,
                                  pch = pch,
-                                 gp = gpar(col = s_a$color,
-                                           fontsize = as_grid_size(s_a$size,
-                                                                   "points",
-                                                                   pch = pch))
-            )
-        } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
-            # No NAs and ALL points with borders
-            points <- pointsGrob(name = "points: primitive glyphs with borders",
-                                 x = s_a$x,
-                                 y = s_a$y,
-                                 pch = pch,
-                                 gp = gpar(fill = s_a$color,
-                                           col = l_getOption("foreground"),
+                                 gp = gpar(fill = fill,
+                                           col = color,
                                            fontsize = as_grid_size(s_a$size, "points",
                                                                    pch = pch))
             )
+
         } else {
             # possibly some NAs (means some points are text, polygons, images, etc.)
-            # and/or a mix of regular and closed points.
             scaleInfo <- get_glyph_scale_info(widget)
             names_scaleInfo <- names(scaleInfo)
 
@@ -564,3 +561,27 @@ get_glyph_scale_info <- function(widget){
     names(scaleInfo) <- paste(name, unique_glyph)
     scaleInfo
 }
+
+# if (!any(is.na(pch)) && !any(pch %in% 21:24)) {
+#     # No NAs and no points with borders
+#     points <- pointsGrob(name = "points: primitive glyphs without borders",
+#                          x = s_a$x,
+#                          y = s_a$y,
+#                          pch = pch,
+#                          gp = gpar(col = s_a$color,
+#                                    fontsize = as_grid_size(s_a$size,
+#                                                            "points",
+#                                                            pch = pch))
+#     )
+# } else if (!any(is.na(pch)) && all(pch %in% 21:24)) {
+#     # No NAs and ALL points with borders
+#     points <- pointsGrob(name = "points: primitive glyphs with borders",
+#                          x = s_a$x,
+#                          y = s_a$y,
+#                          pch = pch,
+#                          gp = gpar(fill = s_a$color,
+#                                    col = l_getOption("foreground"),
+#                                    fontsize = as_grid_size(s_a$size, "points",
+#                                                            pch = pch))
+#     )
+# } else {...}
