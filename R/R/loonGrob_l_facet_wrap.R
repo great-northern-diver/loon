@@ -129,7 +129,8 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
 
     args <- list(
         grobs = grobs,
-        layout_matrix = locations$layout_matrix
+        layout_matrix = locations$layout_matrix,
+        name = "plots"
     )
 
     # pack xlabel, title
