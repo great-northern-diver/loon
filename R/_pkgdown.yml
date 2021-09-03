@@ -21,6 +21,8 @@ navbar:
         href: articles/minorities.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
+      - text: loonGrob
+        href: articles/loonGrob.html
     - text: Videos
       menu:
       - text: the (not so) humble (interactive) histogram
