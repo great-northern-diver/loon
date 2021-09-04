@@ -111,7 +111,13 @@ oo::class create loon::classes::ScalesGuidesVisual {
 
 	# number of preferred labels
 	set m_x [expr {int($density/100.0*$plot_width)}]
+	if {$m_x <= 4} {
+	   set m_x 5
+	}
 	set m_y [expr {int($density/100.0*$plot_height)}]
+	if {$m_y <= 3} {
+	   set m_y 4
+	}
 
 	if {$swap} {
 	    set xfrom $panY
@@ -193,7 +199,7 @@ oo::class create loon::classes::ScalesGuidesVisual {
 	    set ypos [expr {$y_label_offset - ($ytick - $yfrom)*$y_mul}]
 	    set oddOrEven [expr $i % 2]
 
-	    if {$oddOrEven == 1} {
+	    if {$oddOrEven != 1} {
 	       set idet [$canvas create line 0 0 $tick_length 0 -width 1\
 		     -fill $scale_color\
 		     -tag [list loon $visualid yscale tick]]
