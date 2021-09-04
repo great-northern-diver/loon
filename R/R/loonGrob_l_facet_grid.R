@@ -55,7 +55,8 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                            lg$name <- as.character(w)
                            lg
                        }),
-        layout_matrix = locations$layout_matrix
+        layout_matrix = locations$layout_matrix,
+        name = "plots"
     )
 
     # find the number of a string that right after the letter "extent"
