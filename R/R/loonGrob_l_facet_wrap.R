@@ -121,12 +121,15 @@ l_get_arrangeGrobArgs.l_facet_wrap <- function(target) {
                                        c(rep("null", spanAdj), rep("cm", lenTexts)))
                     )
                 }
+
                 index <- (i - 1) * ncol + j
+
                 args$name <- if(index == 1) {
                     "plot"
                 } else {
                     paste0("plot", index - 1) # start from 0
                 }
+
                 grobs[[index]] <- do.call(gridExtra::arrangeGrob, args)
             }
         }
