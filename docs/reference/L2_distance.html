@@ -118,6 +118,9 @@ the columns of a matrix." />
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
     </li>
+    <li>
+      <a href="../articles/loonGrob.html">loonGrob</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -142,7 +145,7 @@ the columns of a matrix." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -216,7 +219,7 @@ the University of Amsterdam, Netherlands.</p>
 <span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>800</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
 <span class='fu'>L2_distance</span><span class='op'>(</span><span class='va'>A</span><span class='op'>[</span>,<span class='fl'>1</span>, drop <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>]</span>, <span class='va'>B</span><span class='op'>[</span>,<span class='fl'>1</span>, drop <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;          [,1]
-#&gt; [1,] 5.027811</div><div class='input'><span class='va'>d_AB</span> <span class='op'>&lt;-</span> <span class='fu'>L2_distance</span><span class='op'>(</span><span class='va'>A</span>,<span class='va'>B</span><span class='op'>)</span>
+#&gt; [1,] 6.139374</div><div class='input'><span class='va'>d_AB</span> <span class='op'>&lt;-</span> <span class='fu'>L2_distance</span><span class='op'>(</span><span class='va'>A</span>,<span class='va'>B</span><span class='op'>)</span>
 <span class='va'>d_BB</span> <span class='op'>&lt;-</span> <span class='fu'>L2_distance</span><span class='op'>(</span><span class='va'>B</span>,<span class='va'>B</span>, df <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='co'># force diagonal to be zero</span>
 </div></pre>
   </div>
