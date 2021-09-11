@@ -13,16 +13,16 @@ navbar:
       menu:
       - text: Introduction
         href: articles/introduction.html
-      - text: Saving loon plots
-        href: articles/savingLoonPlots.html
       - text: Logical queries in interactive graphics
         href: articles/logicalQueries.html
+      - text: Publishing loon plots
+        href: articles/publishingLoonPlots.html
+      - text: Saving loon plots
+        href: articles/savingLoonPlots.html
       - text: Analysis example
-        href: articles/minorities.html
+        href: articles/analysisVisibleMinorities.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
-      - text: loonGrob
-        href: articles/loonGrob.html
     - text: Videos
       menu:
       - text: the (not so) humble (interactive) histogram

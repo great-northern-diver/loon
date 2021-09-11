@@ -1,5 +1,6 @@
 # loon 1.3.8
 
+* Add a new vignette "Publishing loon plots"
 * Export some useful helper functions:
 
     - `glyph_to_pch`: turn a loon point glyph to an R `graphics` plotting "character".

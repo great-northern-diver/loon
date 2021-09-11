@@ -311,8 +311,7 @@ Loon's linking model has the following three parts
 - a `linkingKey`, a character vector where each element is a key uniquely identifying a single observation in the plot (no two observations in the same plot can have the same value in the linking key), and
 - the *linked display states* each plot has declared (e.g. see `l_getlinkedStates()`).
    
-Observations in different plots (in the same linking group) are linked (in that their linked states change together) if and only if they have the same linking key.  
+Observations in different plots (in the same linking group) are linked (in that their linked states change together) if and only if they have the same linking key.
   
 Points appearing in different plots (in the same `linkingGroup`) which matched on the value of their `linkingKey` will share the same value for their linked states.
    
-  
