@@ -19,8 +19,6 @@ navbar:
         href: articles/publishingLoonPlots.html
       - text: Saving loon plots
         href: articles/savingLoonPlots.html
-      - text: Analysis example
-        href: articles/analysisVisibleMinorities.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
     - text: Videos
