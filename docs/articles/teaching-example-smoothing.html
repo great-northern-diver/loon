@@ -116,7 +116,7 @@
       <h1 data-toc-skip>Smoothers and Bone Mineral Density</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-09-10</h4>
+            <h4 class="date">2021-09-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/teaching-example-smoothing.Rmd"><code>vignettes/teaching-example-smoothing.Rmd</code></a></small>
       <div class="hidden name"><code>teaching-example-smoothing.Rmd</code></div>
@@ -229,20 +229,28 @@
 <div id="adding-a-dynamically-changing-smooth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adding-a-dynamically-changing-smooth" class="anchor"></a>Adding a (dynamically changing) smooth</h2>
-<p>To summarize the relationship, a smooth curve could be added to any scatterplot. Here, we will add a smoothing spline fitted to bone mineral density as a function of time (i.e. to the data of <code>p</code>).</p>
+<p>To summarize the relationship, first add a straight line fitted by <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> using the function <code><a href="../reference/l_layer_smooth.html">l_layer_smooth()</a></code> and the method <code>"lm"</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/l_layer_smooth.html">l_layer_smooth</a></span><span class="op">(</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"lm"</span>, 
+               label <span class="op">=</span> <span class="st">"straight line fit"</span>,
+               linecolor <span class="op">=</span> <span class="st">"firebrick"</span>,
+               linedash <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,
+               linewidth <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<p>The same function could also be used to add a smooth (default <code>method = "loess"</code>). Instead, we will add a smoothing spline from the <code>splines</code> package and use it to fit bone mineral density as a function of time (i.e. to the data of <code>p</code>).</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span>
 <span class="co"># Fit a smoothing spline</span>
 <span class="va">fitsmooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html">smooth.spline</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, df<span class="op">=</span><span class="fl">5</span><span class="op">)</span>
 <span class="va">xOrder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_layer_line.html">l_layer_line</a></span><span class="op">(</span><span class="va">p</span>,
-                       x<span class="op">=</span><span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span>,
-                       y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fitsmooth</span>,x<span class="op">=</span><span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
-                       label<span class="op">=</span><span class="st">"smooth fit"</span>, linewidth<span class="op">=</span><span class="fl">4</span>,
+                       x <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span>,
+                       y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fitsmooth</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
+                       label <span class="op">=</span> <span class="st">"smooth fit"</span>, 
+                       linewidth <span class="op">=</span> <span class="fl">4</span>,
                        color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
-<p>The smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
+<p>Unlike the straight line fit, the smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
 <p>Of course this is the aggregate behaviour, over both sexes. It might be interesting to see how this changes for males and for females. We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate. To that end we introduce a <strong>dynamic update</strong> to the smooth.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co">## Define the update function</span>
 <span class="va">updateSmooth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">myPlot</span>, <span class="va">minpts</span>, <span class="va">df</span>, <span class="va">color</span><span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="op">{</span>
@@ -294,7 +302,7 @@
 <span class="op">}</span></code></pre></div>
 <p>Now, we would like to have this update called whenever any interesting change in state occurs. There are numerous such possible states (see <code><a href="https://rdrr.io/r/base/names.html">names(p)</a></code>, <code><a href="https://rdrr.io/r/base/names.html">names(l_info_states(p))</a></code>, or <code><a href="../reference/l_help.html">l_help("learn_R_bind")</a></code> ). Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of <code>p</code> contained in its <code>selected</code> state. This means that the function is called if any point in <code>p</code> is selected or deselected.</p>
 <p>Note also that the smooth is based on the <strong>temporary</strong> <code>x</code> and <code>y</code> values. Points in a <strong>scatterplot may be moved</strong> by selecting them with the control button depressed (as well as shift for multiple selection). Alternatively, <strong>selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered</strong> by selecting the corresponding <code>move</code> button from the <code>Modify</code> panel of the inspector. All points can be returned to their original position by clicking the recover button</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Here we "bind" the anonymous to the named state changes of p</span>
 <span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"selected"</span><span class="op">)</span>,
              <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu">updateSmooth</span><span class="op">(</span><span class="va">p</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">}</span>
@@ -310,7 +318,7 @@
 <p>Linear smoothers can be thought of as the connected predicted values of locally fitted linear models having weights which are maximal at the point <span class="math inline">\(x\)</span> where the prediction is being made and which drop off to zero for <span class="math inline">\(x\)</span> values far away from it.</p>
 <p>To illustrate this we add a straight line to the scatterplot that is fitted to the data via weighted least squares using Gaussian weights. For any collection of <span class="math inline">\(x\)</span> values, the prediction will be made at their median.</p>
 <p>The Gaussian weight function will be centred at the median:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">GaussWt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># Get an estimated standard deviation</span>
   <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>
@@ -320,7 +328,7 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">xloc</span>, sd<span class="op">=</span><span class="va">h</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Use these weights to fit a line to the data.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Fit a local line using some Gaussian weights.</span>
 <span class="co"># Prediction will be at the median of x, fit by</span>
 <span class="co">### weights that decrease with x's</span>
@@ -334,10 +342,10 @@
                         linewidth<span class="op">=</span><span class="fl">4</span>,
                         color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
 <p>Clicking on the <code>Layers</code> tab in the inspector shows the scatterplot, the axis, the smooth fit, and the Gaussian weight straight line. Select the last of these and render it invisible by clicking on that button, or, by programmatically by executing the following.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/l_layer_hide.html">l_layer_hide</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">smooth</span><span class="op">)</span></code></pre></div>
 <p>Now make the fitted line update to fit only the selected points.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">updateLocalLine</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">myPlot</span>, <span class="va">minpts</span>, <span class="va">df</span>, <span class="va">volor</span><span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="op">{</span>
   <span class="co">## Get the values for x and y from the plot</span>
   <span class="co">## For x</span>
@@ -385,7 +393,7 @@
   <span class="fu">tcl</span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"idletasks"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>And now bind this update function to change in <code>p</code> of either the <code>select</code> or the <code>active</code> states.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Here we "bind" the anonymous to the named state changes of p</span>
 <span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"active"</span>,<span class="st">"selected"</span><span class="op">)</span>,
              <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu">updateLocalLine</span><span class="op">(</span><span class="va">p</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">}</span>

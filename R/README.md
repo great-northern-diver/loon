@@ -156,7 +156,7 @@ l_facet(p, by = levels,
 
 ## On the name
 
-The software is named after a large aquatic bird known as the [**common loon**](https://en.wikipedia.org/wiki/Common_loon) in Canada and the United States, or the **great northern diver** in the United Kingdom.  (Hence the name of the github organization: [https://github.com/great-northern-diver](https://github.com/great-northern-diver)) 
+The software is named after a large aquatic bird known as the **common loon** (*Gavia immer*) in Canada and the United States, or the **great northern diver** in the United Kingdom.  (Hence the name of the github organization: [https://github.com/great-northern-diver](https://github.com/great-northern-diver)) 
 
 The loon is a visual predator, diving deep beneath the surface, there chasing its prey with speed and remarkable maneuvrability. Once apprehended, the prey
 are either swallowed immediately or, when large, at least brought to the surface to be dealt with there. 

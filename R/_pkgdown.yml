@@ -123,8 +123,6 @@ reference:
     contents:
     - starts_with("l_plot")
 
-
-
   - title:  Snapshots of loon plots
     desc:  Loon -> Grid
     contents:
