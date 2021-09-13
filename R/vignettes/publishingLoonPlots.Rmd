@@ -25,7 +25,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       out.width = "60%", 
                       tidy.opts = list(width.cutoff = 65),
                       tidy = FALSE)
-library(loon.data)
 library(loon)
 library(grid)
 library(gridExtra)
@@ -83,6 +82,7 @@ These returned values always reflect the current states of `p`. For example, sup
 # `p` is a loon widget
 plot(p)
 ```
+
 which produced and printed the plot `p` (as it presently appears) by first translating the `loon` plot into a `grid` graphics object (or `grob`).
 This can be used at any time, including in an RMarkdown document (as it is here).
 
@@ -93,9 +93,7 @@ For those interested in a deeper understanding of the `grid` plots, read on.
 
 ---
 
-The `plot()` function is simply a wrapper function around the workhorse function `loonGrob()` which does the translatation from current display of the `loon` plot to a `grid` object (or `grob`) capturing the features of the `loon` display.  The resulting `grob` is drawn using  `grid.draw()` from the `grid` package.
-
-As with any `grob`, these can be manipulated as `grid` data structures --  perhaps arranging several of them into a compound display using `grid.arrange()` (from the `gridExtra` package), or adding them to an existing `grob` created some other way, or simply editing them to change their look using `grid` functions. 
+**Note:** The `plot()` function is simply a wrapper function around the workhorse function `loonGrob()` which does the translatation from current display of the `loon` plot to a `grid` object (or `grob`) capturing the features of the `loon` display.  The resulting `grob` is drawn using  `grid.draw()` from the `grid` package.
 
 ---
 
@@ -115,20 +113,51 @@ Alternatively, `loonGrob()` can be called directly, as in
 ```{r loonGrob}
 g0 <- loonGrob(p)
 ```
-The data structure returned is of
-```{r class}
-class(g0)
-```
-This `gTree` object is a tree data structure in `grid` and contains the many `grob`s  needed to draw the plot on demand. 
-Numerous functions exist within the `grid` package for validating, drawing, and modifying `grid` graphical objects like this `gTree` and many of its elements.
-
-For example, the function `grid.draw()` will draw the plot called.
+This returns a `grid` graphics object or `grob`.
+It can be drawn at any time using `grid.draw()` from the `grid` package.
 ```{r draw graphics}
 library(grid)
 grid.newpage()
 grid.draw(g0)
 ```
 
+## multiple plots
+As with any `grob`, the output of `loonGrob()`ccan be manipulated as can `grid` data structure --  perhaps arranging several of these into a compound display using `grid.arrange()` (from the `gridExtra` package).
+
+For example, there might be several stages of the interactive plot that ow
+might be captured.  These might be constructed programmatically as
+```{r, eval = TRUE}
+oldColor <- p["color"]
+set.seed(3141)
+selection <- sample(c(TRUE, FALSE), 
+                    size = length(oldColor), 
+                    replace = TRUE)
+p["color"]  <- selection
+gtrans <- loonGrob(p)
+p["active"] <- selection
+gauto <- loonGrob(p)
+p["active"] <- !selection
+gmanual <- loonGrob(p)
+p["active"] <- TRUE
+p["color"] <- oldColor
+```
+and then drawn in a single display
+```{r, eval=TRUE}
+library(gridExtra)
+grid.newpage()
+grid.arrange(g0, gtrans, gauto, gmanual, 
+             nrow = 2)
+```
+
+The arrangement itself could have been positioned within another arrrangement.
+
+## the data structure returned by `loonGrob()`
+The returned data structure has
+```{r class}
+class(g0)
+```
+This `gTree` object is a tree data structure in `grid` and contains the many `grob`s  needed to draw the plot on demand. 
+Numerous functions exist within the `grid` package for validating, drawing, and modifying `grid` graphical objects like this `gTree` and many of its elements.
 
 The tree structure of `g0` is easily seen using `grid.ls()` to list the contents:
 ```{r grob data structure}
@@ -191,7 +220,7 @@ Having `xlabelGrob` in hand, we can use it to create another copy of it with cha
 For example,  a more meaningful `x` axis "label" name can be assigned:
 ```{r editGrob}
 newGrob = editGrob(xlabelGrob, 
-                   label = "Miles/(US) gallon")
+                   label = "Miles per (US) gallon")
 ```
 
 The `newGrob` is now a `textGrob` 
@@ -218,9 +247,9 @@ grid.draw(g0)
 ```
  
 In the same way, other features of the "x label" could have been changed as well as the `grob`s at other paths of the `gTree` returned by `loonGrob()`.
-
-## e.g.: changing features of the points
-A more common place reason to edit would be to change something on the `grid` plot to add features not available in `loon`.  
+ 
+## adding an alpha channel to the points
+A more common place reason to edit would be to add features to the `grid` plot that are available in `loon`.  
 
 For example, transparency is (presently) missing from `tcltk` colours (on which `loon` is based) -- the `tcltk`  system  presently uses 12 digit hexadecimal colour to represent three channels (one for each of the RGB colours) and no fourth channel indicating alpha transparency. 
 In contrast,  transparency is accommodated in `grid` graphics so that one might choose to set the `alpha` values after the transformation.
@@ -249,121 +278,117 @@ grid.draw(g0)
 
 After modification, the points are now transparent and the size has been made larger.
 
-## what if...
+## helper functions from `loon`
 
-In using `loon`, the captured `loon` plot had certain features missing that one would now like to see in the static plot?
+Three `loon` helper functions simplify the some editing of the `gTree` produced by loon in the special case when some `grobs` on the `gTree` are incompletely specified.
 
-For example, what if ...
+The three helper functions are
 
-### labels were invisible?
+- `l_instantiateGrob()` which instatiates a complete `grob` using the information available on the incomplete description of the `grob`;
+- `l_setGrobPlotView()` which resets the margins of the `grid` plot to those of a `loon` plot when all `labels` and `scales` are shown (or to margin sizes specified in arguments); and
+- `l_updateGrob()` which behaves much like `editGrob()` except that it can work with incomplete `grob` descriptions and is called by `l_instantiateGrob()`.
 
-Suppose the labels (i.e., "xlabel" and "ylabel") of `p` had been turned off at the time that `loonGrob()` was called.
-That is,
+See `help("loonGrobInstantiation")` for more.
+
+Common cases where these functions might be used are when pieces of the plot have been rendered invisible.
+
+### e.g. missing title
+
+The plot `p` was not given a title and no title appears when `g0` is drawn.  Nevertheless, the `gTree` of `g0` does appear to have some title information as indicated by the path "title: textGrob arguments".  This is an indication that `loonGrob()` did transfer some title information from `p` to `g0` but that it is incomplete in some way.
+
+If we access the grob at that path, we have
 ```{r}
-p['showLabels'] <- FALSE
-g1 <- loonGrob(p)
+titleGrob <- getGrob(g0, "title: textGrob arguments")
+titleGrob$label
+```
+which has an empty label string and, looking at its class:
+```{r}
+class(titleGrob)
+```
+appears **not** to be a `text` `grob`.  Instead, it is an incomplete description, `gDesc`, of the `grob`.
+```{r}
+g1 <- l_instantiateGrob(g0, "title: textGrob arguments",
+                        label = "1974 Motor Trend cars data",
+                        gp = gpar(col = "blue",
+                                  fontsize = 8))
 grid.newpage()
 grid.draw(g1)
 ```
+Note that the fontsize was chosen to be small so that it fit in the space available.
 
-The `gTree` `g1` now has a different path at `x label`.
+There was too little room for a standard title because the margins of the `loon` plot `p` were smaller with no title.
+An alternative to making the font small is to return the `loon` (or alternatively some user specified) margins to the plot using `l_setGrobPlotView()`:
 ```{r}
-grid.ls(g1)
-```
-
-Trying to retrieve the "x label" as before no longer works.  As the `grid` listing shows, the correct path is now "x label: textGrob arguments".  This is an indication that the label is not visible in the `loon` plot and that, yet,  information on the `loon`  label is still present in the `gTree`.  The arguments necessary to construct the `loon` plot on the (at least in terms of the ) was present (though not visible) in the `loon` plot.
-
-```{r}
-xlabelGrob <- getGrob(g1, "x label: textGrob arguments")
-xlabelGrob
-```
-From the class of `xlabelGrob`
-```{r}
-class(xlabelGrob)
-```
-one gets a hint that while this `grob` is incomplete (no `text` class), it remains a description (`gDesc`) containing the arguments needed to complete it.
-
-This description can be turned into an actual `textGrob` using some helper functions written in `loon`. 
-First instantiate the `textGrob` for the `x label` and assign it to `g2`
-```{r}
-g2 <- l_instantiateGrob(g1, "x label: textGrob arguments")
-```
-Then reset the plot margins to make room for the labels (and title):
-```{r}
+g2 <- l_instantiateGrob(g0, "title: textGrob arguments",
+                        label = "1974 Motor Trend cars data",
+                        gp = gpar(col = "red"))
 g2 <- l_setGrobPlotView(g2)
-```
-And plot the result:
-```{r}
 grid.newpage()
 grid.draw(g2)
 ```
+which displays the title in the default fontsize (from translating `p`).  The extra room for the title would also admit larger font sizes.
 
-Extra arguments to `l_instantiateGrob()` are passed on to the `grobFun` (in this case `textGrob()`).  For example, we could choose to place the x label in a different location:
+### e.g. missing labels
+Oftentimes all labels (i.e., "xlabel",  "ylabel", and "title") of `p` will have been turned off when `loonGrob()` was called:
 ```{r}
-# reset the x label's position and font size
-g3 <- l_instantiateGrob(g1, "x label: textGrob arguments",
-                       x = unit(35, "native"),
-                       y = unit(-1.5, "lines"),
-                       gp = gpar(fontsize = 15, 
-                                 fontface = "italic",
-                                 col = "blue"))
-g3 <- l_setGrobPlotView(g3)
+p['showLabels'] <- FALSE
+g3 <- loonGrob(p)
 grid.newpage()
 grid.draw(g3)
 ```
+and we would like to turn these labels on in the static plot.
 
-Now `getGrob()` seems to have returned `NULL` instead of a copy of a `textGrob`. The problem is that the path is not "x label" but "x label: textGrob arguments".
-
+The `gTree` `g3` now has a different path at each label.
 ```{r}
-xlabelGrob <- getGrob(g1, "x label: textGrob arguments")
-xlabelGrob
-class(xlabelGrob)
-names(xlabelGrob)
-```
-Even though they do not appear, they may still be set because a placeholder `grob` has been created for them.  This is indicated by the `textGrob arguments` phrase appearing next to each label when the structure is listed.
-
-Hidden elements of the `loon` plot are stored into `grob` placeholders (with arguments that cause no display). In general, these will appear with the `grob` name `xxxx` appended by `arguments` -- in the present case as ": textGrob arguments".
-
-These placeholder `grob`s can be extracted:
-```{r}
-xlabelGrob <- getGrob(g1, "x label: textGrob arguments")
-xlabelGrob
-ylabelGrob <- getGrob(g1, "y label: textGrob arguments")
-ylabelGrob
+grid.ls(g3)
 ```
 
-Note that the default labels automatically constructed in `loon` are still there,
+Knowing the paths of the missing labels, the two helper functions (together with the desired`textGrob()` arguments) will construct the desired plot:
 ```{r}
-xlabelGrob$label
-ylabelGrob$label
-```
-they are just not visible in the plot.
+g4 <-l_instantiateGrob(g3, 
+                       "title: textGrob arguments",
+                       x = unit(8, "native"),
+                       just = "left",
+                       label = "Motor Trend Magazine 1974")
 
-```{r}
-newXLabelGrob <- editGrob(
-  xlabelGrob, 
-  gp = gpar(
-    col = l_getOption("foreground"),
-    alpha = 1.0, # turn color transparent
-    fontsize = 20 # give a larger point size
-  )
-)
-# update loon points grob
-g1 <- setGrob(
-  gTree = g1,
-  gPath = "x label: textGrob arguments",
-  newGrob = newXLabelGrob
-)
+g4 <-l_instantiateGrob(g4, 
+                       "x label: textGrob arguments",
+                       label = "Miles per US gallon",
+                       x = unit(35, "native"),
+                       y = unit(-1.5, "lines"),
+                       just = "right",
+                       gp = gpar(fontsize = 15, 
+                                 fontface = "italic",
+                                 col = "blue"))
+
+g4 <-l_instantiateGrob(g4, 
+                       "y label: textGrob arguments",
+                       label = "Horse power",
+                       rot = 45,
+                       x = unit(7, "native"),
+                       y = unit(275, "native"),
+                       just = "right",
+                       gp = gpar(fontsize = 15, 
+                                 fontface = "italic",
+                                 col = "blue"))
+
+g4 <- l_setGrobPlotView(g4)
 grid.newpage()
-grid.draw(g1)
+grid.draw(g4)
 ```
 
+Extra arguments to `l_instantiateGrob()` are passed on to the `grobFun` (in this case `textGrob()`). 
 
+### `l_updateGrob()`
 
+This function is called by `l_instantiateGrob()` to perform the same role as `editGrob()`, but operating on incomplete `grob`s that are only `gDesc`s.
 
-### Points are invisible?
+The function `l_updateGrob()` could also be used the same as `editGrob()` on a complete `grob` (e.g. having classes `text`, `grob`, and `gDesc`).
 
-Unfortunately, if points are invisible, their coordinates and aesthetics attributes
+## What if ...
+### some points are invisible?
+
+Unfortunately, if some points are invisible, their coordinates and aesthetics attributes
 would be missing in the `loonGrob`. Technically speaking, it is possible to include these invisible points inside the `loonGrob`, however, what stops us doing so is that the data structure would have to be changed -- a `pointsGrob` would have to be replaced by a `gTree` with several children `pointsGrob`s
 to preserve display order and distinguish visible from invisible point. 
 
@@ -371,29 +396,29 @@ This solution seems overly complicated and so was not implemented.
 Better to simply make the changes interactively on the `loon` plot and then translate it again to a new `grid` data structure.  
 
 
-### Points are not primitive glyphs?
+### some points are not primitive glyphs?
 
-  `loon` provides non-primitive glyphs, e.g. text glyph, image glyph, polygon glyph and etc. Once a non-primitive glyph is drawn, the `grob` label beneath **scatterplot** would be **points: mixed glyph**. 
+`loon` provides non-primitive glyphs, e.g. text glyphs, image glyphs, polygon glyphs, et cetera.  Once a non-primitive glyph is drawn, the `grob` label beneath **scatterplot** would be **points: mixed glyph**. 
 
-    ```{r}
-    # add text glyph
-    carNames <- l_glyph_add_text(p, text = rownames(mtcars))
-    p['glyph'] <- carNames
-    # loonGrob
-    g2 <- loonGrob(p)
-    getGrob(g2, "points: mixed glyphs")
-    ```
+```{r}
+# add text glyph
+carNames <- l_glyph_add_text(p, text = rownames(mtcars))
+p['glyph'] <- carNames
+# loonGrob
+g2 <- loonGrob(p)
+getGrob(g2, "points: mixed glyphs")
+```
 
-  It returns a `gTree` object and each child is a `textGrob`.
+It returns a `gTree` object and each child is a `textGrob`.
 ```{r} 
 grid.newpage()
 grid.draw(g2)
 ```
 
 
-# Plots using other packages
+# Other packages
 
-## `ggplot`s
+## `ggplot`s from `loon.ggplot`
 
 Elegant print graphics are also provided through the popular `ggplot2` package built on top of `grid` graphics.
 Users familiar with `ggplot2` and its *grammar of graphics* might be interested in the `loon` companion package `loon.ggplot` which extends the grammar to a *grammar of interactive graphics*.
@@ -404,7 +429,7 @@ Details can be found [here](https://github.com/great-northern-diver/loon.ggplot)
 
 This is probably the simplest solution to have a static plot which can subsequently edited programmatically (via the grammar of `ggplot2`).  Any changes to the `ggplot` could also then ve turned into an interactive `loon` plot.
 
-## `shiny` applications
+## `shiny` applications from `loon.shiny`
 
 In the interest of supporting reproducible research, analysts will sometimes want to share interactive (and linked) plots in their curated analysis.  A `shiny` app is the way to shared this interaction. 
 
