@@ -4,8 +4,8 @@ pkgdown_sha: ~
 articles:
   introduction: introduction.html
   logicalQueries: logicalQueries.html
-  minorities: minorities.html
-  SavingLoonPlots: SavingLoonPlots.html
+  publishingLoonPlots: publishingLoonPlots.html
+  savingLoonPlots: savingLoonPlots.html
   teaching-example-smoothing: teaching-example-smoothing.html
-last_built: 2021-07-20T17:36Z
+last_built: 2021-09-13T16:49Z
 

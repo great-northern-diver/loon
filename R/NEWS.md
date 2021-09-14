@@ -1,5 +1,11 @@
 # loon 1.3.8
 
+* Removed the vignette "Example analysis" on the minority data to make room for a new vignette "Publishing loon plots"
+
+* New helper functions for changing grobs produced by loonGrob()
+
+  - `l_instantiateGrob`, `l_setGrobPlotView`, and `l_updateGrob`
+  
 * Export some useful helper functions:
 
     - `glyph_to_pch`: turn a loon point glyph to an R `graphics` plotting "character".

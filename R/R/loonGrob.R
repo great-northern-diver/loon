@@ -401,7 +401,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
           ),
           # Axes
           gTree(children = gList(condGrob(test =  showScales,
-                                          grobFun = .xaxisGrob,
+                                          grobFun = xaxisGrob,
                                           name = "x axis",
                                           at = xaxis.major,
                                           gp = gpar(fontfamily = scalesFont$family,
@@ -409,7 +409,7 @@ cartesian2dGrob <- function(widget, interiorPlotGrob = NULL, name = NULL, gp = N
                                                     fontface = scalesFont$face
                                           )),
                                  condGrob(test =  showScales,
-                                          grobFun = .yaxisGrob,
+                                          grobFun = yaxisGrob,
                                           name = "y axis",
                                           at = yaxis.major,
                                           gp = gpar(fontfamily = scalesFont$family,

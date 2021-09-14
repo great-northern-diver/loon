@@ -13,16 +13,14 @@ navbar:
       menu:
       - text: Introduction
         href: articles/introduction.html
-      - text: Saving loon plots
-        href: articles/savingLoonPlots.html
       - text: Logical queries in interactive graphics
         href: articles/logicalQueries.html
-      - text: Analysis example
-        href: articles/minorities.html
+      - text: Publishing loon plots
+        href: articles/publishingLoonPlots.html
+      - text: Saving loon plots
+        href: articles/savingLoonPlots.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
-      - text: loonGrob
-        href: articles/loonGrob.html
     - text: Videos
       menu:
       - text: the (not so) humble (interactive) histogram
@@ -125,8 +123,6 @@ reference:
     contents:
     - starts_with("l_plot")
 
-
-
   - title:  Snapshots of loon plots
     desc:  Loon -> Grid
     contents:
@@ -138,6 +134,7 @@ reference:
     - l_createCompoundGrob
     - l_get_arrangeGrobArgs
     - loonGrob_layoutType
+    - loonGrobInstantiation
     - as_grid_size
   - subtitle: Exporting via tcl
     desc: Alternative export to pdf, etc. via tcl and "CTRL-p"

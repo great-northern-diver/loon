@@ -102,13 +102,13 @@
       <a href="../articles/introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
-    </li>
-    <li>
       <a href="../articles/logicalQueries.html">Logical queries in interactive graphics</a>
     </li>
     <li>
-      <a href="../articles/minorities.html">Analysis example</a>
+      <a href="../articles/publishingLoonPlots.html">Publishing loon plots</a>
+    </li>
+    <li>
+      <a href="../articles/savingLoonPlots.html">Saving loon plots</a>
     </li>
     <li>
       <a href="../articles/teaching-example-smoothing.html">Teaching example</a>
@@ -137,7 +137,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -600,6 +600,12 @@ all arguments to `gridExtra::arrangeGrob()` will be used.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="loonGrobInstantiation.html">l_updateGrob()</a></code> <code><a href="loonGrobInstantiation.html">l_instantiateGrob()</a></code> <code><a href="loonGrobInstantiation.html">l_setGrobPlotView()</a></code> </p>
+        </td>
+        <td><p>Instantiate a Grob</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="as_grid_size.html">as_grid_size()</a></code> </p>
         </td>
         <td><p>Turn a <code>loon</code> size to a <code>grid</code> size</p></td>
@@ -1056,15 +1062,15 @@ in that compound plot.</p></td>
       <tr>
         
         <td>
-          <p><code><a href="l_glyph_add.default.html">l_glyph_add(<i>&lt;default&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Default method for adding non-primitive glyphs</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_glyph_add.html">l_glyph_add()</a></code> </p>
         </td>
         <td><p>Add non-primitive glyphs to a scatterplot or graph display</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_glyph_add.default.html">l_glyph_add(<i>&lt;default&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Default method for adding non-primitive glyphs</p></td>
       </tr><tr>
         
         <td>
@@ -1160,12 +1166,6 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_imageviewer.html">l_imageviewer()</a></code> </p>
-        </td>
-        <td><p>Display Tcl Images in a Simple Image Viewer</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_image_import_array.html">l_image_import_array()</a></code> </p>
         </td>
         <td><p>Import Greyscale Images as Tcl images from an Array</p></td>
@@ -1175,6 +1175,12 @@ in that compound plot.</p></td>
           <p><code><a href="l_image_import_files.html">l_image_import_files()</a></code> </p>
         </td>
         <td><p>Import Image Files as Tk Image Objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_imageviewer.html">l_imageviewer()</a></code> </p>
+        </td>
+        <td><p>Display Tcl Images in a Simple Image Viewer</p></td>
       </tr>
     </tbody><tbody>
       
@@ -1764,6 +1770,12 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="l_graphswitch_add.html">l_graphswitch_add()</a></code> </p>
+        </td>
+        <td><p>Add a graph to a graphswitch widget</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_graphswitch_add.default.html">l_graphswitch_add(<i>&lt;default&gt;</i>)</a></code> </p>
         </td>
         <td><p>Add a graph that is defined by node names and a from-to edges list</p></td>
@@ -1779,12 +1791,6 @@ in that compound plot.</p></td>
           <p><code><a href="l_graphswitch_add.loongraph.html">l_graphswitch_add(<i>&lt;loongraph&gt;</i>)</a></code> </p>
         </td>
         <td><p>Add a graph to the graphswitch widget using a loongraph object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_graphswitch_add.html">l_graphswitch_add()</a></code> </p>
-        </td>
-        <td><p>Add a graph to a graphswitch widget</p></td>
       </tr><tr>
         
         <td>
@@ -1953,6 +1959,13 @@ in that compound plot.</p></td>
       <tr>
         
         <td>
+          <p><code><a href="l_ng_ranges.html">l_ng_ranges()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a
+  slider</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="l_ng_ranges.default.html">l_ng_ranges(<i>&lt;default&gt;</i>)</a></code> </p>
         </td>
         <td><p>Select 2d spaces with variable associated measures using a slider</p></td>
@@ -1965,17 +1978,17 @@ in that compound plot.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_ng_ranges.html">l_ng_ranges()</a></code> </p>
-        </td>
-        <td><p>2d navigation graph setup with with dynamic node fitering using a
-  slider</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_ng_ranges.scagnostics.html">l_ng_ranges(<i>&lt;scagnostics&gt;</i>)</a></code> </p>
         </td>
         <td><p>2d Navigation Graph Setup with dynamic node fitering based on
   scagnostic measures and using a slider</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_ng_plots.html">l_ng_plots()</a></code> </p>
+        </td>
+        <td><p>2d navigation graph setup with with dynamic node fitering using a
+  scatterplot matrix</p></td>
       </tr><tr>
         
         <td>
@@ -1989,13 +2002,6 @@ in that compound plot.</p></td>
           <p><code><a href="l_ng_plots.measures.html">l_ng_plots(<i>&lt;measures&gt;</i>)</a></code> </p>
         </td>
         <td><p>2d Navigation Graph Setup with dynamic node fitering using a
-  scatterplot matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="l_ng_plots.html">l_ng_plots()</a></code> </p>
-        </td>
-        <td><p>2d navigation graph setup with with dynamic node fitering using a
   scatterplot matrix</p></td>
       </tr><tr>
         
@@ -2254,15 +2260,15 @@ color representations</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="l_setColorList_baseR.html">l_setColorList_baseR()</a></code> </p>
-        </td>
-        <td><p>Set loon's color mapping list to the colors from base R</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="l_setColorList_ColorBrewer.html">l_setColorList_ColorBrewer()</a></code> </p>
         </td>
         <td><p>Set loon's color mapping list to the colors from ColorBrewer</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="l_setColorList_baseR.html">l_setColorList_baseR()</a></code> </p>
+        </td>
+        <td><p>Set loon's color mapping list to the colors from base R</p></td>
       </tr><tr>
         
         <td>
