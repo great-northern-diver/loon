@@ -15,10 +15,10 @@ navbar:
         href: articles/introduction.html
       - text: Logical queries in interactive graphics
         href: articles/logicalQueries.html
-      - text: Publishing loon plots
-        href: articles/publishingLoonPlots.html
       - text: Saving loon plots
         href: articles/savingLoonPlots.html
+      - text: Loon plots and grid graphics
+        href: articles/loonPlotsAndGridGraphics.html
       - text: Teaching example
         href: articles/teaching-example-smoothing.html
     - text: Videos

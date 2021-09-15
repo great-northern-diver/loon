@@ -2,7 +2,9 @@
 title: "Smoothers and Bone Mineral Density"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Smoothers and Bone Mineral Density}
   %\VignetteEngine{knitr::rmarkdown}
@@ -173,7 +175,16 @@ It becomes easy to see that each subject (`idnum`) appears one, two, or three ti
 
 ## Adding a (dynamically changing) smooth
 
-To summarize the relationship, a smooth curve could be added to any scatterplot.  Here, we will add a smoothing spline fitted to bone mineral density as a function of time (i.e. to the data of `p`).
+To summarize the relationship, first add a straight line fitted by `lm()` using the function `l_layer_smooth()` and the method `"lm"`.  
+```{r l_layer_smooth, eval=FALSE}
+l_layer_smooth(p, method = "lm", 
+               label = "straight line fit",
+               linecolor = "firebrick",
+               linedash = c(4,4),
+               linewidth = 4)
+```
+
+The same function could also be used to add a smooth (default `method = "loess"`).  Instead, we will add a smoothing spline from the `splines` package and use it to fit bone mineral density as a function of time (i.e. to the data of `p`).
 
 ```{r smooth, eval=FALSE}
 library(splines)
@@ -181,13 +192,14 @@ library(splines)
 fitsmooth <- smooth.spline(x, y, df=5)
 xOrder <- order(x)
 smooth <- l_layer_line(p,
-                       x=x[xOrder],
-                       y=predict(fitsmooth,x=x[xOrder])$y,
-                       label="smooth fit", linewidth=4,
+                       x = x[xOrder],
+                       y = predict(fitsmooth, x = x[xOrder])$y,
+                       label = "smooth fit", 
+                       linewidth = 4,
                        color = "blue")
 ```
 
-The smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.
+Unlike the straight line fit, the smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.
 
 Of course this is the aggregate behaviour, over both sexes.  It might be interesting to see how this changes for males and for females.  We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate.  To that end we introduce a **dynamic update** to the smooth.
 
