@@ -2,7 +2,9 @@
 title: "Smoothers and Bone Mineral Density"
 author: "R.W. Oldford"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Smoothers and Bone Mineral Density}
   %\VignetteEngine{knitr::rmarkdown}

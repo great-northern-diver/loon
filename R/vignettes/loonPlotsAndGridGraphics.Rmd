@@ -1,12 +1,12 @@
 ---
-title: "Publishing loon plots"
+title: "Loon plots and grid graphics"
 author: "R. Wayne Oldford and Zehao Xu"
 date: "`r Sys.Date()`"
 output: 
   html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Publishing loon plots}
+  %\VignetteIndexEntry{Loon plots and grid graphics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{grid}

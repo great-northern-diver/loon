@@ -2,7 +2,9 @@
 title: "Saving loon plots"
 author: "R.W. Oldford"
 date: "20/04/2020"
-output: rmarkdown::html_vignette
+output: 
+  html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Saving loon plots}
   %\VignetteEngine{knitr::rmarkdown}
