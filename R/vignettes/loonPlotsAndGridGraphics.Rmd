@@ -29,7 +29,7 @@ library(loon)
 library(grid)
 library(gridExtra)
 
-imageDirectory <- file.path(".", "images", "publishingLoonPlots")
+imageDirectory <- file.path(".", "images", "loonPlotsAndGridGraphics")
 ```
 
 ---
