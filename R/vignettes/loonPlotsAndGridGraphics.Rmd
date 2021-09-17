@@ -1,7 +1,7 @@
 ---
 title: "Loon plots and grid graphics"
 author: "R. Wayne Oldford and Zehao Xu"
-date: "`r Sys.Date()`"
+date: "September 17, 2021"
 output: 
   html_vignette:
     toc: true
@@ -61,7 +61,7 @@ Here `loon` plots are transformed into `grid` graphics plots to provide, as clos
 
 Begin with a classic data set in R – `mtcars` which contains 32 automobiles and 11 (numeric) variables.
 
-```{r loon plot}
+```{r loon plot, eval = FALSE}
 library(loon)
 p <- with(mtcars, l_plot(mpg, hp, 
                          size = 8,
@@ -69,20 +69,32 @@ p <- with(mtcars, l_plot(mpg, hp,
 ```
 
 Here, `p` is a `loon` widget. The aesthetics attributes can be accessed either by function `l_cget()` or a simple `[`, as in
-```{r query}
+```{r query, eval = FALSE}
 # x coordinates
 p['x']
+```
+```
+## [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3
+## [14] 15.2 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3
+## [27] 26.0 30.4 15.8 19.7 15.0 21.4
+```
+```{r , eval = FALSE}
 # point size
 p['size']
+```
+```
+## [1] 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
 ```
 
 These returned values always reflect the current states of `p`. For example, suppose the size of points is modified to *6* by direct manipulations on the plot, call `p['size']`, a length 32 vector of *6* is returned. With this handy "querying tool", all essential elements of a loon widget can be accessed to construct a selfsame `grid` graphics, as in
 
-```{r plot}
+```{r plot, eval = FALSE}
 # `p` is a loon widget
 plot(p)
 ```
-
+```{r, fig.align="center", echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotp.png"))
+```
 which produced and printed the plot `p` (as it presently appears) by first translating the `loon` plot into a `grid` graphics object (or `grob`).
 This can be used at any time, including in an RMarkdown document (as it is here).
 
@@ -110,15 +122,19 @@ g0 <- plot(p, draw = FALSE)
 Either way, a `grid` data structure is created and assigned to the variable `g0`.
 
 Alternatively, `loonGrob()` can be called directly, as in
-```{r loonGrob}
+```{r loonGrob, eval = FALSE}
 g0 <- loonGrob(p)
 ```
 This returns a `grid` graphics object or `grob`.
 It can be drawn at any time using `grid.draw()` from the `grid` package.
-```{r draw graphics}
+```{r draw graphics, eval = FALSE}
 library(grid)
 grid.newpage()
 grid.draw(g0)
+```
+
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg0.png"))
 ```
 
 ## multiple plots
@@ -126,7 +142,7 @@ As with any `grob`, the output of `loonGrob()`ccan be manipulated as can `grid` 
 
 For example, there might be several stages of the interactive plot that ow
 might be captured.  These might be constructed programmatically as
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 oldColor <- p["color"]
 set.seed(3141)
 selection <- sample(c(TRUE, FALSE), 
@@ -142,27 +158,73 @@ p["active"] <- TRUE
 p["color"] <- oldColor
 ```
 and then drawn in a single display
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 library(gridExtra)
 grid.newpage()
-grid.arrange(g0, gtrans, gauto, gmanual, 
-             nrow = 2)
+grid.arrange(g0, gtrans, gauto, gmanual, nrow = 2)
 ```
 
+```{r,  echo=FALSE, out.width = "80%"}
+knitr::include_graphics(file.path(imageDirectory, "gridArrange.png"))
+```
 The arrangement itself could have been positioned within another arrrangement.
 
 ## the data structure returned by `loonGrob()`
 The returned data structure has
-```{r class}
+```{r class, eval = FALSE}
 class(g0)
 ```
+```
+## [1] "gTree" "grob"  "gDesc"
+```
+
 This `gTree` object is a tree data structure in `grid` and contains the many `grob`s  needed to draw the plot on demand. 
 Numerous functions exist within the `grid` package for validating, drawing, and modifying `grid` graphical objects like this `gTree` and many of its elements.
 
 The tree structure of `g0` is easily seen using `grid.ls()` to list the contents:
-```{r grob data structure}
+```{r grob data structure, eval = FALSE}
 grid.ls(g0)
 ```
+```
+## GRID.gTree.2
+##   l_plot
+##     bounding box
+##     loon plot
+##       guides
+##         guides background
+##         guidelines: xaxis (major), x = 15
+##         guidelines: xaxis (major), x = 25
+##         guidelines: xaxis (major), x = 35
+##         guidelines: xaxis (minor), x = 10
+##         guidelines: xaxis (minor), x = 20
+##         guidelines: xaxis (minor), x = 30
+##         guidelines: yaxis (major), y = 100
+##         guidelines: yaxis (major), y = 200
+##         guidelines: yaxis (major), y = 300
+##         guidelines: yaxis (minor), y = 50
+##         guidelines: yaxis (minor), y = 150
+##         guidelines: yaxis (minor), y = 250
+##         guidelines: yaxis (minor), y = 350
+##       labels
+##         x label
+##         y label
+##         title: textGrob arguments
+##       axes
+##         x axis
+##           major
+##           ticks
+##           labels
+##         y axis
+##           major
+##           ticks
+##           labels
+##       clipping region
+##       l_plot_layers
+##         scatterplot
+##           points: primitive glyphs
+##       boundary rectangle
+```
+
 The levels are indicated by indenting.  
 
 The following figure renders the tree structure more generally:
@@ -190,16 +252,34 @@ Each of these are now illustrated in turn.
 ### `getGrob()`
 
 Knowing the path is "x label" in the `gTree` `g0`, the `grob` is extracted using `getGrob()`.  For example,
-```{r getGrob}
+```{r getGrob, eval = FALSE}
 # retrieve xlabel grob
 xlabelGrob <- getGrob(g0, "x label")
 xlabelGrob
+```
+```
+## text[x label] 
+```
+```{r, eval = FALSE}
 class(xlabelGrob)
 ```
+```
+## [1] "text"  "grob"  "gDesc"
+```
 which itself has structure:
-```{r}
+```{r, eval = FALSE}
 names(xlabelGrob)
+```
+```
+##  [1] "label"         "x"             "y"             "just"         
+##  [5] "hjust"         "vjust"         "rot"           "check.overlap"
+##  [9] "name"          "gp"            "vp"  
+```
+```{r, eval = FALSE}
 xlabelGrob$label
+```
+```
+## [1] "mpg"
 ```
 
 **Note** that `xlabelGrob` is a **copy** of the `grob` found at the "x label" path in `g0`.
@@ -207,10 +287,20 @@ xlabelGrob$label
 Similarly `grob`s at other paths (e.g., "y label") could be extracted and copied.
 
 **Note** also that some elements of the `gTree` appearing in the listing `grid.ls(g0)` are actually parts of a `grob` and not the path itself. For example, consider the x-axis elements:
-```{r}
+```{r, eval = FALSE}
 xAxisGrob <- getGrob(g0, "x axis")
 names(xAxisGrob)
+```
+```
+## [1] "major"  "ticks"  "labels"
+```
+```{r, eval = FALSE}
 names(xAxisGrob$children)
+```
+```
+## [1] "at"            "label"         "main"          "edits"        
+## [5] "name"          "gp"            "vp"            "children"     
+## [9] "childrenOrder"
 ```
 
 ### `editGrob()`
@@ -218,34 +308,43 @@ names(xAxisGrob$children)
 Having `xlabelGrob` in hand, we can use it to create another copy of it with changed features using `editGrob()`.
 
 For example,  a more meaningful `x` axis "label" name can be assigned:
-```{r editGrob}
+```{r editGrob, eval = FALSE}
 newGrob = editGrob(xlabelGrob, 
                    label = "Miles per (US) gallon")
 ```
 
 The `newGrob` is now a `textGrob` 
-```{r editGrob return}
+```{r editGrob return, eval = FALSE}
 class(newGrob)
 ```
+```
+## [1] "text"  "grob"  "gDesc"
+```
 with the more informative label:
-```{r more meaningful label}
+```{r more meaningful label, eval = FALSE}
 newGrob$label
+```
+```
+## [1] "Miles per (US) gallon"
 ```
 
 ### `setGrob()`
 To complete the change to `g0`, the old "x label" needs to be replaced by `newGrob`:
-```{r modify grob}
+```{r modify grob, eval = FALSE}
 g0 <- setGrob(gTree = g0, 
               gPath = "x label",
               newGrob = newGrob)
 ```
 
 Now "xlabel" has been changed to "Miles/(US) gallon" within the `grid` plot `g0`.
-```{r redraw}
+```{r redraw, eval = FALSE}
 grid.newpage()
 grid.draw(g0)
 ```
  
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg0Xlabel.png"))
+```
 In the same way, other features of the "x label" could have been changed as well as the `grob`s at other paths of the `gTree` returned by `loonGrob()`.
  
 ## adding an alpha channel to the points
@@ -255,7 +354,7 @@ For example, transparency is (presently) missing from `tcltk` colours (on which 
 In contrast,  transparency is accommodated in `grid` graphics so that one might choose to set the `alpha` values after the transformation.
 
 The points in the plot can be made transparent  using `setGrob()`, `editGrob()`, and `getGrob()`, given the path to the points `grob`, namely "points: primitive glyphs".
-```{r alpha}
+```{r alpha, eval = FALSE}
 pathGrob <- "points: primitive glyphs"
 newLoonPointsGrob <- 
   editGrob(
@@ -276,6 +375,9 @@ grid.newpage()
 grid.draw(g0)
 ```
 
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg0Alpha.png"))
+```
 After modification, the points are now transparent and the size has been made larger.
 
 ## helper functions from `loon`
@@ -297,16 +399,22 @@ Common cases where these functions might be used are when pieces of the plot hav
 The plot `p` was not given a title and no title appears when `g0` is drawn.  Nevertheless, the `gTree` of `g0` does appear to have some title information as indicated by the path "title: textGrob arguments".  This is an indication that `loonGrob()` did transfer some title information from `p` to `g0` but that it is incomplete in some way.
 
 If we access the grob at that path, we have
-```{r}
+```{r, eval = FALSE}
 titleGrob <- getGrob(g0, "title: textGrob arguments")
 titleGrob$label
 ```
+```
+## [1] ""
+```
 which has an empty label string and, looking at its class:
-```{r}
+```{r, eval = FALSE}
 class(titleGrob)
 ```
+```
+## [1] "grob"  "gDesc"
+```
 appears **not** to be a `text` `grob`.  Instead, it is an incomplete description, `gDesc`, of the `grob`.
-```{r}
+```{r, eval = FALSE}
 g1 <- l_instantiateGrob(g0, "title: textGrob arguments",
                         label = "1974 Motor Trend cars data",
                         gp = gpar(col = "blue",
@@ -314,11 +422,15 @@ g1 <- l_instantiateGrob(g0, "title: textGrob arguments",
 grid.newpage()
 grid.draw(g1)
 ```
+
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg1.png"))
+```
 Note that the fontsize was chosen to be small so that it fit in the space available.
 
 There was too little room for a standard title because the margins of the `loon` plot `p` were smaller with no title.
 An alternative to making the font small is to return the `loon` (or alternatively some user specified) margins to the plot using `l_setGrobPlotView()`:
-```{r}
+```{r, eval = FALSE}
 g2 <- l_instantiateGrob(g0, "title: textGrob arguments",
                         label = "1974 Motor Trend cars data",
                         gp = gpar(col = "red"))
@@ -326,25 +438,70 @@ g2 <- l_setGrobPlotView(g2)
 grid.newpage()
 grid.draw(g2)
 ```
+
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg2.png"))
+```
 which displays the title in the default fontsize (from translating `p`).  The extra room for the title would also admit larger font sizes.
 
 ### e.g. missing labels
 Oftentimes all labels (i.e., "xlabel",  "ylabel", and "title") of `p` will have been turned off when `loonGrob()` was called:
-```{r}
+```{r, eval = FALSE}
 p['showLabels'] <- FALSE
 g3 <- loonGrob(p)
 grid.newpage()
 grid.draw(g3)
 ```
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg3.png"))
+```
 and we would like to turn these labels on in the static plot.
 
 The `gTree` `g3` now has a different path at each label.
-```{r}
+```{r, eval = FALSE}
 grid.ls(g3)
 ```
-
+```
+## GRID.gTree.5
+##   l_plot
+##     bounding box
+##     loon plot
+##       guides
+##         guides background
+##         guidelines: xaxis (major), x = 15
+##         guidelines: xaxis (major), x = 25
+##         guidelines: xaxis (major), x = 35
+##         guidelines: xaxis (minor), x = 10
+##         guidelines: xaxis (minor), x = 20
+##         guidelines: xaxis (minor), x = 30
+##         guidelines: yaxis (major), y = 100
+##         guidelines: yaxis (major), y = 200
+##         guidelines: yaxis (major), y = 300
+##         guidelines: yaxis (minor), y = 50
+##         guidelines: yaxis (minor), y = 150
+##         guidelines: yaxis (minor), y = 250
+##         guidelines: yaxis (minor), y = 350
+##       labels
+##         x label: textGrob arguments
+##         y label: textGrob arguments
+##         title: textGrob arguments
+##       axes
+##         x axis
+##           major
+##           ticks
+##           labels
+##         y axis
+##           major
+##           ticks
+##           labels
+##       clipping region
+##       l_plot_layers
+##         scatterplot
+##           points: primitive glyphs
+##       boundary rectangle
+```
 Knowing the paths of the missing labels, the two helper functions (together with the desired`textGrob()` arguments) will construct the desired plot:
-```{r}
+```{r, eval = FALSE}
 g4 <-l_instantiateGrob(g3, 
                        "title: textGrob arguments",
                        x = unit(8, "native"),
@@ -377,6 +534,9 @@ grid.newpage()
 grid.draw(g4)
 ```
 
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg4.png"))
+```
 Extra arguments to `l_instantiateGrob()` are passed on to the `grobFun` (in this case `textGrob()`). 
 
 ### `l_updateGrob()`
@@ -400,7 +560,7 @@ Better to simply make the changes interactively on the `loon` plot and then tran
 
 `loon` provides non-primitive glyphs, e.g. text glyphs, image glyphs, polygon glyphs, et cetera.  Once a non-primitive glyph is drawn, the `grob` label beneath **scatterplot** would be **points: mixed glyph**. 
 
-```{r}
+```{r, eval = FALSE}
 # add text glyph
 carNames <- l_glyph_add_text(p, text = rownames(mtcars))
 p['glyph'] <- carNames
@@ -410,11 +570,14 @@ getGrob(g2, "points: mixed glyphs")
 ```
 
 It returns a `gTree` object and each child is a `textGrob`.
-```{r} 
+```{r, eval = FALSE} 
 grid.newpage()
 grid.draw(g2)
 ```
 
+```{r,  echo=FALSE}
+knitr::include_graphics(file.path(imageDirectory, "loonPlotg2Text.png"))
+```
 
 # Other packages
 
