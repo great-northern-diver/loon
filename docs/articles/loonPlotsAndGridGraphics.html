@@ -116,7 +116,7 @@
       <h1 data-toc-skip>Loon plots and grid graphics</h1>
                         <h4 class="author">R. Wayne Oldford and Zehao Xu</h4>
             
-            <h4 class="date">2021-09-15</h4>
+            <h4 class="date">September 17, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/loonPlotsAndGridGraphics.Rmd"><code>vignettes/loonPlotsAndGridGraphics.Rmd</code></a></small>
       <div class="hidden name"><code>loonPlotsAndGridGraphics.Rmd</code></div>
@@ -153,19 +153,18 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># x coordinates</span>
 <span class="va">p</span><span class="op">[</span><span class="st">'x'</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
-## [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
-## [31] 15.0 21.4</code></pre>
+<pre><code>## [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3
+## [14] 15.2 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3
+## [27] 26.0 30.4 15.8 19.7 15.0 21.4</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># point size</span>
 <span class="va">p</span><span class="op">[</span><span class="st">'size'</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8</code></pre>
+<pre><code>## [1] 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8</code></pre>
 <p>These returned values always reflect the current states of <code>p</code>. For example, suppose the size of points is modified to <em>6</em> by direct manipulations on the plot, call <code>p['size']</code>, a length 32 vector of <em>6</em> is returned. With this handy “querying tool”, all essential elements of a loon widget can be accessed to construct a selfsame <code>grid</code> graphics, as in</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># `p` is a loon widget</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/plot-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>which produced and printed the plot <code>p</code> (as it presently appears) by first translating the <code>loon</code> plot into a <code>grid</code> graphics object (or <code>grob</code>). This can be used at any time, including in an RMarkdown document (as it is here).</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotp.png" width="60%" style="display: block; margin: auto;"> which produced and printed the plot <code>p</code> (as it presently appears) by first translating the <code>loon</code> plot into a <code>grid</code> graphics object (or <code>grob</code>). This can be used at any time, including in an RMarkdown document (as it is here).</p>
 <p>For most users, no more need be done. This vignette could end here.<br>
 These users might also be interested in turning <code>loon</code> plots into <code>ggplot</code>s (and vice versa); if so, some information on this is provided towards the end of this vignette in the <code>ggplot</code>s section.</p>
 <p>For those interested in a deeper understanding of the <code>grid</code> plots, read on.</p>
@@ -190,7 +189,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/draw%20graphics-1.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg0.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 <div id="multiple-plots" class="section level2">
 <h2 class="hasAnchor">
@@ -215,10 +214,8 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">g0</span>, <span class="va">gtrans</span>, <span class="va">gauto</span>, <span class="va">gmanual</span>, 
-             nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-2-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>The arrangement itself could have been positioned within another arrrangement.</p>
+<span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">g0</span>, <span class="va">gtrans</span>, <span class="va">gauto</span>, <span class="va">gmanual</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><img src="images/loonPlotsAndGridGraphics/gridArrange.png" width="80%" style="display: block; margin: auto;"> The arrangement itself could have been positioned within another arrrangement.</p>
 </div>
 <div id="the-data-structure-returned-by-loongrob" class="section level2">
 <h2 class="hasAnchor">
@@ -296,7 +293,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <code class="sourceCode R"><span class="co"># retrieve xlabel grob</span>
 <span class="va">xlabelGrob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.get.html">getGrob</a></span><span class="op">(</span><span class="va">g0</span>, <span class="st">"x label"</span><span class="op">)</span>
 <span class="va">xlabelGrob</span></code></pre></div>
-<pre><code>## text[x label]</code></pre>
+<pre><code>## text[x label] </code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">xlabelGrob</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "text"  "grob"  "gDesc"</code></pre>
@@ -305,7 +302,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">xlabelGrob</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "label"         "x"             "y"             "just"         
 ##  [5] "hjust"         "vjust"         "rot"           "check.overlap"
-##  [9] "name"          "gp"            "vp"</code></pre>
+##  [9] "name"          "gp"            "vp"  </code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">xlabelGrob</span><span class="op">$</span><span class="va">label</span></code></pre></div>
 <pre><code>## [1] "mpg"</code></pre>
@@ -315,12 +312,12 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">xAxisGrob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.get.html">getGrob</a></span><span class="op">(</span><span class="va">g0</span>, <span class="st">"x axis"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">xAxisGrob</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "major"  "ticks"  "labels"</code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">xAxisGrob</span><span class="op">$</span><span class="va">children</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "at"            "label"         "main"          "edits"        
 ## [5] "name"          "gp"            "vp"            "children"     
 ## [9] "childrenOrder"</code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">xAxisGrob</span><span class="op">$</span><span class="va">children</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "major"  "ticks"  "labels"</code></pre>
 </div>
 <div id="editgrob" class="section level3">
 <h3 class="hasAnchor">
@@ -353,8 +350,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/redraw-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>In the same way, other features of the “x label” could have been changed as well as the <code>grob</code>s at other paths of the <code>gTree</code> returned by <code><a href="../reference/loonGrob.html">loonGrob()</a></code>.</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg0Xlabel.png" width="60%" style="display: block; margin: auto;"> In the same way, other features of the “x label” could have been changed as well as the <code>grob</code>s at other paths of the <code>gTree</code> returned by <code><a href="../reference/loonGrob.html">loonGrob()</a></code>.</p>
 </div>
 </div>
 <div id="adding-an-alpha-channel-to-the-points" class="section level2">
@@ -382,8 +378,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/alpha-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>After modification, the points are now transparent and the size has been made larger.</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg0Alpha.png" width="60%" style="display: block; margin: auto;"> After modification, the points are now transparent and the size has been made larger.</p>
 </div>
 <div id="helper-functions-from-loon" class="section level2">
 <h2 class="hasAnchor">
@@ -422,7 +417,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
                                   fontsize <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;"> Note that the fontsize was chosen to be small so that it fit in the space available.</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg1.png" width="60%" style="display: block; margin: auto;"> Note that the fontsize was chosen to be small so that it fit in the space available.</p>
 <p>There was too little room for a standard title because the margins of the <code>loon</code> plot <code>p</code> were smaller with no title. An alternative to making the font small is to return the <code>loon</code> (or alternatively some user specified) margins to the plot using <code><a href="../reference/loonGrobInstantiation.html">l_setGrobPlotView()</a></code>:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrobInstantiation.html">l_instantiateGrob</a></span><span class="op">(</span><span class="va">g0</span>, <span class="st">"title: textGrob arguments"</span>,
@@ -431,7 +426,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrobInstantiation.html">l_setGrobPlotView</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-8-1.png" width="60%" style="display: block; margin: auto;"> which displays the title in the default fontsize (from translating <code>p</code>). The extra room for the title would also admit larger font sizes.</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg2.png" width="60%" style="display: block; margin: auto;"> which displays the title in the default fontsize (from translating <code>p</code>). The extra room for the title would also admit larger font sizes.</p>
 </div>
 <div id="e-g--missing-labels" class="section level3">
 <h3 class="hasAnchor">
@@ -442,11 +437,11 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrob.html">loonGrob</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-9-1.png" width="60%" style="display: block; margin: auto;"> and we would like to turn these labels on in the static plot.</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg3.png" width="60%" style="display: block; margin: auto;"> and we would like to turn these labels on in the static plot.</p>
 <p>The <code>gTree</code> <code>g3</code> now has a different path at each label.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grid/grid.ls.html">grid.ls</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></code></pre></div>
-<pre><code>## GRID.gTree.6
+<pre><code>## GRID.gTree.5
 ##   l_plot
 ##     bounding box
 ##     loon plot
@@ -515,8 +510,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="va">g4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrobInstantiation.html">l_setGrobPlotView</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;"></p>
-<p>Extra arguments to <code><a href="../reference/loonGrobInstantiation.html">l_instantiateGrob()</a></code> are passed on to the <code>grobFun</code> (in this case <code><a href="https://rdrr.io/r/grid/grid.text.html">textGrob()</a></code>).</p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg4.png" width="60%" style="display: block; margin: auto;"> Extra arguments to <code><a href="../reference/loonGrobInstantiation.html">l_instantiateGrob()</a></code> are passed on to the <code>grobFun</code> (in this case <code><a href="https://rdrr.io/r/grid/grid.text.html">textGrob()</a></code>).</p>
 </div>
 <div id="l_updategrob" class="section level3">
 <h3 class="hasAnchor">
@@ -546,12 +540,11 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="co"># loonGrob</span>
 <span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loonGrob.html">loonGrob</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.get.html">getGrob</a></span><span class="op">(</span><span class="va">g2</span>, <span class="st">"points: mixed glyphs"</span><span class="op">)</span></code></pre></div>
-<pre><code>## gTree[points: mixed glyphs]</code></pre>
 <p>It returns a <code>gTree</code> object and each child is a <code>textGrob</code>.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></code></pre></div>
-<p><img src="loonPlotsAndGridGraphics_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;"></p>
+<p><img src="images/loonPlotsAndGridGraphics/loonPlotg2Text.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 </div>
