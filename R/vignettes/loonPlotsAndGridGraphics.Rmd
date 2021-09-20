@@ -230,7 +230,7 @@ The levels are indicated by indenting.
 
 The following figure renders the tree structure more generally:
 ```{r hierarchy, out.width= "80%", fig.align="center", echo=FALSE}
-knitr::include_graphics(file.path(imageDirectory, "loonGrobHierarchy.png"))
+knitr::include_graphics(file.path(imageDirectory, "loonGrobNestedDataTree.png"))
 ```
 Node labels give the `loonGrob` names with the tree hierarchy following solid lines from left to right.
 Grey values indicate the same for other types of `loon` plots (separate with braces) and identify potential options peculiar to each `loon` plot.
