@@ -30,6 +30,7 @@ library(grid)
 library(gridExtra)
 
 imageDirectory <- file.path(".", "images", "loonPlotsAndGridGraphics")
+# dataDirectory <- file.path(".", "data", "loonPlotsAndGridGraphics")
 ```
 
 ---
