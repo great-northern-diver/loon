@@ -600,4 +600,4 @@ In the interest of supporting reproducible research, analysts will sometimes wan
 The `loon` companion package `loon.shiny` makes it possible to do just that by incorporating interactive `loon` style plots into a `shiny` app.  Then the viewer may interactively explore the data under analysis inside an `hyml` browser.  The interaction will not be as open ended as using `loon` in `R` but will be peculiar to the data in the app and to the features selected y the author.
 
 The `loon.shiny` transformation relies on the `loon` to `grid` functionality described above.
-Details can be found [here](https://great-northern-diver.github.io/loon.shiny).
+Details can be found [here](https://great-northern-diver.github.io/loon.shiny/).
