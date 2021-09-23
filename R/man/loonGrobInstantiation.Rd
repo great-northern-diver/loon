@@ -55,6 +55,7 @@ grid.newpage()
 # label "loon" is shown
 grid.draw(textDesc)
 
+if(interactive()) {
 # a loon plot with hidden labels
 p <- l_plot(iris, showLabels = FALSE)
 lg <- loonGrob(p)
@@ -92,6 +93,8 @@ lg <- l_instantiateGrob(lg, "y label: textGrob arguments",
                         x = unit(-6.5, "lines"))
 grid.newpage()
 grid.draw(lg)
+}
+
 }
 \seealso{
 \code{\link{loonGrob}}
