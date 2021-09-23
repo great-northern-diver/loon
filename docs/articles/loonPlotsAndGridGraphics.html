@@ -110,7 +110,7 @@
 
       
 
-      </header><script src="loonPlotsAndGridGraphics_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="loonPlotsAndGridGraphics_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Loon plots and grid graphics</h1>
@@ -267,7 +267,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 ##           points: primitive glyphs
 ##       boundary rectangle</code></pre>
 <p>The levels are indicated by indenting.</p>
-<p>The following figure renders the tree structure more generally: <img src="images/loonPlotsAndGridGraphics/loonGrobHierarchy.PNG" width="80%" style="display: block; margin: auto;"> Node labels give the <code>loonGrob</code> names with the tree hierarchy following solid lines from left to right. Grey values indicate the same for other types of <code>loon</code> plots (separate with braces) and identify potential options peculiar to each <code>loon</code> plot.</p>
+<p>The following figure renders the tree structure more generally: <img src="images/loonPlotsAndGridGraphics/loonGrobNestedDataTree.png" width="80%" style="display: block; margin: auto;"> Node labels give the <code>loonGrob</code> names with the tree hierarchy following solid lines from left to right. Grey values indicate the same for other types of <code>loon</code> plots (separate with braces) and identify potential options peculiar to each <code>loon</code> plot.</p>
 <p>For example, the root node “l_plot” contains a “bounding box” and a “loon plot”, each loon plot has “guides”, “labels”, “axes”, “clipping region”, “boundary rectangle” and “l_xxxx_layers” (according to the type of loon plot), and the loon plot <code>p</code> has “l_plot_layers” consisting of a “scatterplot” and possibly other layers like lines and so on.</p>
 </div>
 <div id="changing-a-grid-object-get-edit-set" class="section level2">
@@ -557,7 +557,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 </h2>
 <p>Elegant print graphics are also provided through the popular <code>ggplot2</code> package built on top of <code>grid</code> graphics. Users familiar with <code>ggplot2</code> and its <em>grammar of graphics</em> might be interested in the <code>loon</code> companion package <code>loon.ggplot</code> which extends the grammar to a <em>grammar of interactive graphics</em>.</p>
 <p>There any <code>loon</code> plot can be captured as a <code>ggplot</code> by simply calling <code>loon.ggplot()</code> on it. The <em>same</em> function will also create an interactive <code>loon</code> plot if called on an existing <code>ggplot</code>.</p>
-<p>Details can be found <a href="https://github.com/great-northern-diver/loon.ggplot">here</a>.</p>
+<p>Details can be found <a href="https://great-northern-diver.github.io/loon.ggplot/">here</a>.</p>
 <p>This is probably the simplest solution to have a static plot which can subsequently edited programmatically (via the grammar of <code>ggplot2</code>). Any changes to the <code>ggplot</code> could also then ve turned into an interactive <code>loon</code> plot.</p>
 </div>
 <div id="shiny-applications-from-loon-shiny" class="section level2">
@@ -566,7 +566,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 </h2>
 <p>In the interest of supporting reproducible research, analysts will sometimes want to share interactive (and linked) plots in their curated analysis. A <code>shiny</code> app is the way to shared this interaction.</p>
 <p>The <code>loon</code> companion package <code>loon.shiny</code> makes it possible to do just that by incorporating interactive <code>loon</code> style plots into a <code>shiny</code> app. Then the viewer may interactively explore the data under analysis inside an <code>hyml</code> browser. The interaction will not be as open ended as using <code>loon</code> in <code>R</code> but will be peculiar to the data in the app and to the features selected y the author.</p>
-<p>The <code>loon.shiny</code> transformation relies on the <code>loon</code> to <code>grid</code> functionality described above. Details can be found <a href="https://github.com/great-northern-diver/loon.shiny">here</a>.</p>
+<p>The <code>loon.shiny</code> transformation relies on the <code>loon</code> to <code>grid</code> functionality described above. Details can be found <a href="https://great-northern-diver.github.io/loon.shiny">here</a>.</p>
 </div>
 </div>
   </div>
