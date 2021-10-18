@@ -96,7 +96,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/great-northern-diver/loon">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -110,13 +110,13 @@
 
       
 
-      </header><script src="teaching-example-smoothing_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="teaching-example-smoothing_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Smoothers and Bone Mineral Density</h1>
                         <h4 class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-09-23</h4>
+            <h4 class="date">2021-10-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/teaching-example-smoothing.Rmd"><code>vignettes/teaching-example-smoothing.Rmd</code></a></small>
       <div class="hidden name"><code>teaching-example-smoothing.Rmd</code></div>
@@ -251,7 +251,8 @@
 <p>Unlike the straight line fit, the smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
 <p>Of course this is the aggregate behaviour, over both sexes. It might be interesting to see how this changes for males and for females. We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate. To that end we introduce a <strong>dynamic update</strong> to the smooth.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Define the update function</span>
+<code class="sourceCode R">
+<span class="co">## Define the update function</span>
 <span class="va">updateSmooth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">myPlot</span>, <span class="va">minpts</span>, <span class="va">df</span>, <span class="va">color</span><span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="op">{</span>
   <span class="co">## Get the values for x and y from the plot</span>
   <span class="co">##</span>
