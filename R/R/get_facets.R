@@ -4,6 +4,7 @@ get_facets <- function(widget, ...) {
 
 get_facets.loon <- function(widget, by, on,
                             parent = NULL,
+                            layout = "grid",
                             linkingGroup, inheritLayers = TRUE, separate = FALSE,
                             bySubstitute, ...) {
 
@@ -39,6 +40,7 @@ get_facets.loon <- function(widget, by, on,
 
     splited <- splitFun(widget = widget,
                         data = data,
+                        layout = layout,
                         by = by,
                         on = on,
                         column_names = column_names,
@@ -202,7 +204,8 @@ get_facets.loon <- function(widget, by, on,
     )
 }
 
-get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
+get_facets.l_serialaxes <- function(widget, by, parent = NULL,
+                                    layout = "grid", linkingGroup,
                                     inheritLayers = TRUE, separate = FALSE,
                                     bySubstitute) {
 
@@ -241,6 +244,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     # TODO by is a formula
     splited <- splitFun(widget = widget,
                         data = data,
+                        layout = layout,
                         by = by,
                         column_names = column_names,
                         bySubstitute = bySubstitute)
@@ -327,7 +331,7 @@ get_facets.l_serialaxes <- function(widget, by, parent = NULL, linkingGroup,
     )
 }
 
-splitFun <- function(widget, data, by, on,
+splitFun <- function(widget, data, layout = "grid", by, on,
                      column_names = NULL,
                      bySubstitute, sep = "*",
                      N = nrow(data)) {
@@ -352,9 +356,11 @@ splitFun <- function(widget, data, by, on,
                                      as.character(levels(factor(b)))),
                           byNames)
 
+    if(layout == "grid") lex.order <- FALSE else lex.order <- TRUE
     split_data <- split(data,
                         f = as.list(byDataFrame),
                         drop = FALSE,
+                        lex.order = lex.order,
                         sep = sep)
 
     list(
