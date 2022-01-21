@@ -226,7 +226,8 @@ facet_grid_layout <- function(plots,
                        col
                    } else {
                        if(grepl("color", name)) {
-                           l_colorName(col, error = FALSE)
+                           l_colorName(col, error = FALSE,
+                                       precise = TRUE)
                        } else {
                            col
                        }
@@ -301,7 +302,8 @@ facet_grid_layout <- function(plots,
                            ifelse(
                                grepl("color", name),
                                {
-                                   l_colorName(label, error = FALSE)
+                                   l_colorName(label, error = FALSE,
+                                               precise = TRUE)
                                },
                                {
                                    label
@@ -603,7 +605,8 @@ facet_wrap_layout <- function(plots,
 
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
                                        }, {
                                            l
                                        })
@@ -646,7 +649,8 @@ facet_wrap_layout <- function(plots,
 
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
                                        }, {
                                            l
                                        })
@@ -705,7 +709,8 @@ facet_wrap_layout <- function(plots,
                                } else {
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
 
                                        }, {
                                            l
@@ -749,7 +754,8 @@ facet_wrap_layout <- function(plots,
 
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
                                        }, {
                                            l
                                        })
@@ -905,7 +911,8 @@ facet_separate_layout <- function(plots,
                          function(name) {
 
                              subtitle <- l_colorName(strsplit(name, split = split)[[1]],
-                                                     error = FALSE)
+                                                     error = FALSE,
+                                                     precise = TRUE)
                              paste(c(title, subtitle), collapse = "\n")
                          }, character(1))
     }
