@@ -60,9 +60,11 @@ loonFacets.default <- function(type,
                           byNames)
 
     # split nDimArgs by "byDataFrame"
+    if(layout == "grid") lex.order <- FALSE else lex.order <- TRUE
     splitNDimArgs <- split(nDimArgs,
                            f = as.list(byDataFrame),
                            drop = FALSE,
+                           lex.order = lex.order,
                            sep = "*")
     len <- length(splitNDimArgs)
     if(len == 1) {
@@ -420,9 +422,12 @@ loonFacets.l_serialaxes <- function(type,
     subtitles <- setNames(lapply(byDataFrame, function(b) as.character(levels(factor(b)))), byNames)
 
     # split data by "byDataFrame"
+    if(layout == "grid") lex.order <- FALSE else lex.order <- TRUE
     splitNDimArgs <- split(nDimArgs,
                            f = as.list(byDataFrame),
-                           drop = FALSE, sep = "*")
+                           drop = FALSE,
+                           lex.order = lex.order,
+                           sep = "*")
     len <- length(splitNDimArgs)
 
     if(len == 1) {
@@ -671,7 +676,10 @@ by2Data <- function(by, on, bySubstitute,
             tryCatch(
                 model.frame(by),
                 error = function(e) {
-                    model.frame(by, data = args)
+                    on <- as.data.frame(args)
+                    vars <- all.vars(by)
+                    colnames <- colnames(on)
+                    on[vars[vars %in% colnames]]
                 }
             )
 
@@ -680,10 +688,12 @@ by2Data <- function(by, on, bySubstitute,
 
             tryCatch(
                 expr = {
-                    model.frame(by, data = on)
+                    vars <- all.vars(by)
+                    colnames <- colnames(on)
+                    on[vars[vars %in% colnames]]
                 },
                 error = function(e) {
-                    on[, all.vars(by)]
+                    model.frame(by, data = on)
                 }
             )
 
