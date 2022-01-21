@@ -59,14 +59,14 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
         name = "plots"
     )
 
-    # find the number of a string that right after the letter "extent"
-    pat <- "^.*extent.*?([0-9]+)"
+    # find the number of a string that right after the letter "extend"
+    pat <- "^.*extend.*?([0-9]+)"
 
-    expendCol <- as.numeric(gsub(pat, "\\1", tkColumnlabelPathNames))
-    lenCol <- length(unique(expendCol))
+    extendCol <- as.numeric(gsub(pat, "\\1", tkColumnlabelPathNames))
+    lenCol <- length(unique(extendCol))
 
-    expendRow <- as.numeric(gsub(pat, "\\1", tkRowlabelPathNames))
-    lenRow <- length(unique(expendRow))
+    extendRow <- as.numeric(gsub(pat, "\\1", tkRowlabelPathNames))
+    lenRow <- length(unique(extendRow))
 
     lenColRow <- max(c(lenCol, lenRow))
     spanAdj <- round(span /sqrt(lenColRow))
@@ -80,18 +80,18 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
     if(length(tkColumnlabelPathNames) > 0) {
 
         # reorder the path names
-        tkColumnlabelPathNames <- tkColumnlabelPathNames[order(expendCol,
+        tkColumnlabelPathNames <- tkColumnlabelPathNames[order(extendCol,
                                                                decreasing = labelLocation[1L] == "top")]
 
-        expendCol <- sort(expendCol, decreasing = labelLocation[1L] == "top")
-        uniExtent <- unique(expendCol)
+        extendCol <- sort(extendCol, decreasing = labelLocation[1L] == "top")
+        uniextend <- unique(extendCol)
 
         columnLabelMatrix <- matrix(NA, nrow = lenCol, ncol = ncol * spanAdj)
 
         for(i in seq(lenCol)) {
 
-            extent <- uniExtent[i]
-            columnPathNames <- tkColumnlabelPathNames[expendCol == extent]
+            extend <- uniextend[i]
+            columnPathNames <- tkColumnlabelPathNames[extendCol == extend]
 
             for(j in seq(length(columnPathNames))) {
 
@@ -99,7 +99,7 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                 # its index
                 k <- k + 1L
 
-                columnLabelMatrix[i, (seq(extent * spanAdj) + (j - 1) * extent * spanAdj)] <- rep(k, extent * spanAdj)
+                columnLabelMatrix[i, (seq(extend * spanAdj) + (j - 1) * extend * spanAdj)] <- rep(k, extend * spanAdj)
 
                 label <- paste0(as.character(tkcget(columnPathName, "-text")), collapse = " ")
 
@@ -135,18 +135,18 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
         rot <- ifelse(labelLocation[2L] == "left", 90, -90)
 
         # reorder the path names
-        tkRowlabelPathNames <- tkRowlabelPathNames[order(expendRow,
+        tkRowlabelPathNames <- tkRowlabelPathNames[order(extendRow,
                                                          decreasing = labelLocation[2L] == "left")]
 
-        expendRow <- sort(expendRow, decreasing = labelLocation[2L] == "left")
-        uniExtent <- unique(expendRow)
+        extendRow <- sort(extendRow, decreasing = labelLocation[2L] == "left")
+        uniextend <- unique(extendRow)
 
         rowLabelMatrix <- matrix(NA, ncol = lenRow, nrow = nrow(outputLayoutMatrix))
 
         for(i in seq(lenRow)) {
 
-            extent <- uniExtent[i]
-            rowPathNames <- tkRowlabelPathNames[expendRow == extent]
+            extend <- uniextend[i]
+            rowPathNames <- tkRowlabelPathNames[extendRow == extend]
 
             for(j in seq(length(rowPathNames))) {
 
@@ -154,7 +154,7 @@ l_get_arrangeGrobArgs.l_facet_grid <- function(target) {
                 # its index
                 k <- k + 1L
 
-                rowLabelMatrix[(seq(extent * spanAdj) + (j - 1) * extent * spanAdj) + columnAdj, i] <- rep(k, extent * spanAdj)
+                rowLabelMatrix[(seq(extend * spanAdj) + (j - 1) * extend * spanAdj) + columnAdj, i] <- rep(k, extend * spanAdj)
 
                 label <- paste0(as.character(tkcget(rowPathName, "-text")), collapse = "")
 
