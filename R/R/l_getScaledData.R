@@ -38,8 +38,8 @@ l_getScaledData <- function(data,
         colNames <- colnames(data)
         leftNames <- setdiff(colNames, sequence)
 
-        leftData <- data[, leftNames]
-        scaledData <- data[, sequence]
+        leftData <- data[leftNames]
+        scaledData <- data[sequence]
 
         d <- get_scaledData(data = scaledData,
                             sequence = sequence,
@@ -88,7 +88,7 @@ get_scaledData <- function(data,
             warning("unknown variable names in sequence")
             sequence <- intersect(sequence, col_name)
         }
-        data <-  data[, sequence]
+        data <-  data[sequence]
     }
 
     scaling <- match.arg(scaling)
