@@ -1,3 +1,11 @@
+# loon 1.3.9
+
+Some minor changes in facets:
+
+  - in facet_wrap, as the number of facet variables increase, the layout pattern is not consistent (e.g., one variable: the layout is by row; more than one variables: the layout is by column).
+  
+  - fix typos: "extent" --> "extend"
+
 # loon 1.3.8
 
 * Removed the vignette "Example analysis" on the minority data to make room for a new vignette "Publishing loon plots"
