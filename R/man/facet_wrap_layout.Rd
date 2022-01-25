@@ -15,7 +15,7 @@ facet_wrap_layout(
   nrow = NULL,
   ncol = NULL,
   labelLocation = "top",
-  byrow = FALSE,
+  byrow = TRUE,
   swapAxes = FALSE,
   labelBackground = l_getOption("facetLabelBackground"),
   labelForeground = l_getOption("foreground"),

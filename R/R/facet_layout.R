@@ -85,14 +85,14 @@ facet_grid_layout <- function(plots,
 
         if(length(by) == 2) {
 
-            colsLabel <- subtitles[all.vars(by[[2]])]
+            colsLabel <- Filter(Negate(is.null), subtitles[all.vars(by[[2]])])
             rowsLabel <- list()
 
         } else {
             # vars before tilde
-            rowsLabel <- subtitles[all.vars(by[[2]])]
+            rowsLabel <- Filter(Negate(is.null), subtitles[all.vars(by[[2]])])
             # vars after tilde
-            colsLabel <- subtitles[all.vars(by[[3]])]
+            colsLabel <- Filter(Negate(is.null), subtitles[all.vars(by[[3]])])
         }
 
     } else {
@@ -176,17 +176,11 @@ facet_grid_layout <- function(plots,
 
             }
         }
-
-
     } else {
 
         for(i in seq(ncolsLabel)) {
             for(j in seq(nrowsLabel)) {
                 id <- (i - 1) * nrowsLabel + j
-                # plotid <- get_plot_id(layout_orders[id],
-                #                       plot_names,
-                #                       sep = sep)
-                # plot_id <- c(plot_id, plotid)
                 new_names <- c(new_names, paste0("x", j, "y", i))
                 tkgrid(plots[[id]],
                        row = (j - 1) * span + row_start_pos + title_pos, # leave space for labels
@@ -224,15 +218,16 @@ facet_grid_layout <- function(plots,
                        rep(fluid_colsLabel[[fluid_colsLabel_name]], prod(lengths(colsLabel[1:(j - 1)])))
                    }
                    fluid_colsLabel[fluid_colsLabel_name] <<- NULL
-                   extent <- prod(lengths(fluid_colsLabel))
-                   columnspan <- extent * span
+                   extend <- prod(lengths(fluid_colsLabel))
+                   columnspan <- extend * span
 
                    name <- column_names[j]
                    label <- if(is.null(name)) {
                        col
                    } else {
                        if(grepl("color", name)) {
-                           l_colorName(col, error = FALSE)
+                           l_colorName(col, error = FALSE,
+                                       precise = TRUE)
                        } else {
                            col
                        }
@@ -244,7 +239,7 @@ facet_grid_layout <- function(plots,
                        tkcolname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,
                                                                                   paste0('columnlabel-', columnLabelLocation, '-',
-                                                                                         'x', j, 'y', i, 'extent', extent))),
+                                                                                         'x', j, 'y', i, 'extend', extend))),
                                                             text = text,
                                                             bg = labelBackground,
                                                             fg = labelForeground,
@@ -296,8 +291,8 @@ facet_grid_layout <- function(plots,
 
                    name <- row_names[i]
 
-                   extent <- prod(lengths(fluid_rowsLabel))
-                   rowspan <- extent * span
+                   extend <- prod(lengths(fluid_rowsLabel))
+                   rowspan <- extend * span
                    for(j in seq(length(row))) {
                        # row index
                        label <- row[j]
@@ -307,7 +302,8 @@ facet_grid_layout <- function(plots,
                            ifelse(
                                grepl("color", name),
                                {
-                                   l_colorName(label, error = FALSE)
+                                   l_colorName(label, error = FALSE,
+                                               precise = TRUE)
                                },
                                {
                                    label
@@ -316,7 +312,7 @@ facet_grid_layout <- function(plots,
                        tkrowname <- as.character(tcltk::tcl('label',
                                                             as.character(l_subwin(parent,
                                                                                   paste0('rowlabel-', rowLabelLocation, '-',
-                                                                                         'x', j, 'y', i, 'extent', extent))),
+                                                                                         'x', j, 'y', i, 'extend', extend))),
                                                             text = paste(paste0(" ", strsplit(text, "")[[1]], " "), collapse = "\n"),
                                                             bg = labelBackground,
                                                             fg = labelForeground,
@@ -325,14 +321,14 @@ facet_grid_layout <- function(plots,
                        if(rowLabelLocation == "right")
                            tkgrid(tkrowname,
                                   row = (j - 1) * rowspan + row_start_pos + title_pos,
-                                  column= -(i - 1) + ncolsLabel * span + len_colsLabel + ylabel_pos,
+                                  column= -(i - len_rowsLabel) + ncolsLabel * span + len_colsLabel + ylabel_pos,
                                   rowspan = rowspan,
                                   columnspan = 1,
                                   sticky="nesw")
                        else
                            tkgrid(tkrowname,
                                   row = (j - 1) * rowspan + row_start_pos + title_pos,
-                                  column= (i - 1)+ ylabel_pos,
+                                  column= (i - 1) + ylabel_pos,
                                   rowspan = rowspan,
                                   columnspan = 1,
                                   sticky="nesw")
@@ -475,7 +471,7 @@ facet_wrap_layout <- function(plots,
                               nrow = NULL,
                               ncol = NULL,
                               labelLocation = "top",
-                              byrow = FALSE,
+                              byrow = TRUE,
                               swapAxes = FALSE,
                               labelBackground = l_getOption("facetLabelBackground"),
                               labelForeground = l_getOption("foreground"),
@@ -500,8 +496,13 @@ facet_wrap_layout <- function(plots,
 
     if (is.null(nrow) && is.null(ncol)) {
         nm <- grDevices::n2mfrow(N)
-        nrow <- nm[2]
-        ncol <- nm[1]
+        if (byrow) {
+            nrow <- nm[2]
+            ncol <- nm[1]
+        } else {
+            nrow <- nm[1]
+            ncol <- nm[2]
+        }
     }
 
     # ** respect to the number of columns **
@@ -570,109 +571,6 @@ facet_wrap_layout <- function(plots,
     split <- paste0("[", sep, "]")
     if(byrow) {
 
-        for(j in seq(ncol)) {
-            for(i in seq(nrow)) {
-
-                plotid <- (j - 1) * nrow + i
-                if(plotid > N) break()
-
-                new_names <- c(new_names, paste0("x", i, "y", j))
-
-                label <- strsplit(plot_names[plotid], split = split)[[1]]
-                stopifnot(length(label) == label_span)
-
-                if(labelLocation == "top") {
-                    # pack plots
-                    tkgrid(plots[[plotid]],
-                           row = (i - 1) * span + label_span + title_pos,
-                           column = (j - 1) * plots_span + ylabel_pos,
-                           rowspan = plots_span,
-                           columnspan = plots_span,
-                           sticky="nesw")
-                    # pack labels
-                    lapply(seq(length(label)),
-                           function(k) {
-                               l <- label[k]
-                               name <- by[k]
-
-                               text <- if(is.null(name)) {
-                                   l
-                               } else {
-                                   ifelse(
-                                       grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
-
-                                       }, {
-                                           l
-                                       })
-                               }
-
-                               tklabel <- as.character(tcltk::tcl('label',
-                                                                  as.character(l_subwin(parent,
-                                                                                        paste0('label-top-', 'x', i, 'y', j, 'p', k))),
-                                                                  text = text,
-                                                                  bg = labelBackground,
-                                                                  fg = labelForeground,
-                                                                  borderwidth = labelBorderwidth,
-                                                                  relief = labelRelief))
-                               tkgrid(tklabel,
-                                      row = (i - 1) * span + (k - 1) + title_pos,
-                                      column = (j - 1) * plots_span + ylabel_pos,
-                                      rowspan = 1,
-                                      columnspan = plots_span,
-                                      sticky="nesw")
-
-                           })
-                } else if(labelLocation == "bottom") {
-
-                    # pack plots
-                    tkgrid(plots[[plotid]],
-                           row = (i - 1) * span + title_pos,
-                           column = (j - 1) * plots_span + ylabel_pos,
-                           rowspan = plots_span,
-                           columnspan = plots_span,
-                           sticky="nesw")
-                    # pack labels
-                    lapply(seq(length(label)),
-                           function(k) {
-                               l <- label[k]
-                               name <- by[k]
-
-                               text <- if(is.null(name)) {
-                                   l
-                               } else {
-
-                                   ifelse(
-                                       grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
-                                       }, {
-                                           l
-                                       })
-                               }
-
-                               tklabel <- as.character(tcltk::tcl('label',
-                                                                  as.character(l_subwin(parent,
-                                                                                        paste0('label-bottom-', 'x', i, 'y', j, 'p', k))),
-                                                                  text = text,
-                                                                  bg = labelBackground,
-                                                                  fg = labelForeground,
-                                                                  borderwidth = labelBorderwidth,
-                                                                  relief = labelRelief))
-                               tkgrid(tklabel,
-                                      row = (i - 1) * span + plots_span + k - 1 + title_pos,
-                                      column = (j - 1) * plots_span + ylabel_pos,
-                                      rowspan = 1,
-                                      columnspan = plots_span,
-                                      sticky="nesw")
-
-                           })
-
-                } else stop("Unknown 'labelLocation'. It can only be one of 'top' or 'bottom'.")
-            }
-        }
-
-    } else {
-
         for(i in seq(nrow)) {
             for(j in seq(ncol)) {
 
@@ -707,7 +605,8 @@ facet_wrap_layout <- function(plots,
 
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
                                        }, {
                                            l
                                        })
@@ -750,7 +649,8 @@ facet_wrap_layout <- function(plots,
 
                                    ifelse(
                                        grepl("color", name), {
-                                           l_colorName(l, error = FALSE)
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
                                        }, {
                                            l
                                        })
@@ -777,6 +677,110 @@ facet_wrap_layout <- function(plots,
             }
         }
 
+    } else {
+
+        for(j in seq(ncol)) {
+            for(i in seq(nrow)) {
+
+                plotid <- (j - 1) * nrow + i
+                if(plotid > N) break()
+
+                new_names <- c(new_names, paste0("x", i, "y", j))
+
+                label <- strsplit(plot_names[plotid], split = split)[[1]]
+                stopifnot(length(label) == label_span)
+
+                if(labelLocation == "top") {
+                    # pack plots
+                    tkgrid(plots[[plotid]],
+                           row = (i - 1) * span + label_span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
+                           rowspan = plots_span,
+                           columnspan = plots_span,
+                           sticky="nesw")
+                    # pack labels
+                    lapply(seq(length(label)),
+                           function(k) {
+                               l <- label[k]
+                               name <- by[k]
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
+
+                                       }, {
+                                           l
+                                       })
+                               }
+
+                               tklabel <- as.character(tcltk::tcl('label',
+                                                                  as.character(l_subwin(parent,
+                                                                                        paste0('label-top-', 'x', i, 'y', j, 'p', k))),
+                                                                  text = text,
+                                                                  bg = labelBackground,
+                                                                  fg = labelForeground,
+                                                                  borderwidth = labelBorderwidth,
+                                                                  relief = labelRelief))
+                               tkgrid(tklabel,
+                                      row = (i - 1) * span + (k - 1) + title_pos,
+                                      column = (j - 1) * plots_span + ylabel_pos,
+                                      rowspan = 1,
+                                      columnspan = plots_span,
+                                      sticky="nesw")
+
+                           })
+                } else if(labelLocation == "bottom") {
+
+                    # pack plots
+                    tkgrid(plots[[plotid]],
+                           row = (i - 1) * span + title_pos,
+                           column = (j - 1) * plots_span + ylabel_pos,
+                           rowspan = plots_span,
+                           columnspan = plots_span,
+                           sticky="nesw")
+                    # pack labels
+                    lapply(seq(length(label)),
+                           function(k) {
+                               l <- label[k]
+                               name <- by[k]
+
+                               text <- if(is.null(name)) {
+                                   l
+                               } else {
+
+                                   ifelse(
+                                       grepl("color", name), {
+                                           l_colorName(l, error = FALSE,
+                                                       precise = TRUE)
+                                       }, {
+                                           l
+                                       })
+                               }
+
+                               tklabel <- as.character(tcltk::tcl('label',
+                                                                  as.character(l_subwin(parent,
+                                                                                        paste0('label-bottom-', 'x', i, 'y', j, 'p', k))),
+                                                                  text = text,
+                                                                  bg = labelBackground,
+                                                                  fg = labelForeground,
+                                                                  borderwidth = labelBorderwidth,
+                                                                  relief = labelRelief))
+                               tkgrid(tklabel,
+                                      row = (i - 1) * span + plots_span + k - 1 + title_pos,
+                                      column = (j - 1) * plots_span + ylabel_pos,
+                                      rowspan = 1,
+                                      columnspan = plots_span,
+                                      sticky="nesw")
+
+                           })
+
+                } else stop("Unknown 'labelLocation'. It can only be one of 'top' or 'bottom'.")
+            }
+        }
     }
 
     # pack title
@@ -907,7 +911,8 @@ facet_separate_layout <- function(plots,
                          function(name) {
 
                              subtitle <- l_colorName(strsplit(name, split = split)[[1]],
-                                                     error = FALSE)
+                                                     error = FALSE,
+                                                     precise = TRUE)
                              paste(c(title, subtitle), collapse = "\n")
                          }, character(1))
     }

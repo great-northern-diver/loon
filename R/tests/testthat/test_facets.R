@@ -457,9 +457,9 @@ test_that("test formula by", {
     glyph <- c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle")
 
     p <- l_plot(x = 1:6, y = 1:6,
-                glyph = c("ocircle", "ccircle", "ocircle", "ccircle", "ocircle", "ccircle"),
-                size = c(rep(50, 2), rep(25, 2), rep(50, 2)),
-                color = c(rep("red", 3), rep("green", 3)),
+                glyph = glyph,
+                size = size,
+                color = color,
                 by = size ~ color + glyph)
 
     # loonGrob
@@ -494,7 +494,7 @@ test_that("test formula by", {
     expect_equal(f[[1]]['size'], 25)
     # expect_equal(f[[1]]['color'], l_hexcolor("green")) # green
 
-    expect_equal(f[[2]]['size'], 25)
+    expect_equal(f[[2]]['size'], c(50, 50))
     # expect_equal(f[[2]]['color'], l_hexcolor("red")) # red
 
     f <- l_facet(p, by = color ~ size)
