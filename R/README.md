@@ -14,8 +14,8 @@ Some sense of the use of loon can be had from the articles, especially the intro
 
 ## Web Documentation
 
-In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](https://great-northern-diver.github.io/loon/l_help/).
-
+In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](https://great-northern-diver.github.io/loon/).
+ß
 Once in R, these are accessible from loon as
 ```r
 # Combined TCL and R documentation (a learning document)

@@ -98,7 +98,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/great-northern-diver/loon" class="external-link">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -140,9 +140,9 @@
 <hr>
 <p>Other packages within the <code>diveR</code> package suite are the <code>loon.ggplot</code> package and the <code>loon.shiny</code> package. These can be used to create elegant <code>ggplot2</code> plots from <code>loon</code> plots (and incorporate into into <code>RMArkdown</code> documents) and to incorporate interactive <code>loon</code> plots for a curated exploratory analysis within in a <code>shiny</code> app.</p>
 <hr>
-<div class="section level1">
-<h1 id="producing-static-grid-plots">Producing static <code>grid</code> plots<a class="anchor" aria-label="anchor" href="#producing-static-grid-plots"></a>
-</h1>
+<div class="section level2">
+<h2 id="producing-static-grid-plots">Producing static <code>grid</code> plots<a class="anchor" aria-label="anchor" href="#producing-static-grid-plots"></a>
+</h2>
 <p>The <code>grid</code> graphics package is one of the fundamental graphics systems in <code>R</code>. It provides a low-level, general purpose graphics system for producing a wide variety of plots. Many well-known graphical systems, e.g. <code>lattice</code> and <code>ggplot2</code>, use <code>grid</code> to draw plots.</p>
 <p>Here <code>loon</code> plots are transformed into <code>grid</code> graphics plots to provide, as close to possible, a <em>wysiwyg</em> snapshot of the interactive plot. Being <code>grid</code> graphics plots, these in turn can be edited using various <code>grid</code> functions.</p>
 <p>Begin with a classic data set in R – <code>mtcars</code> which contains 32 automobiles and 11 (numeric) variables.</p>
@@ -173,10 +173,10 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <hr>
 <p><strong>Note:</strong> The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function is simply a wrapper function around the workhorse function <code><a href="../reference/loonGrob.html">loonGrob()</a></code> which does the translatation from current display of the <code>loon</code> plot to a <code>grid</code> object (or <code>grob</code>) capturing the features of the <code>loon</code> display. The resulting <code>grob</code> is drawn using <code><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw()</a></code> from the <code>grid</code> package.</p>
 <hr>
-<div class="section level2">
-<h2 id="loongrob-loon-grid-object">
+<div class="section level3">
+<h3 id="loongrob-loon-grid-object">
 <code>loonGrob()</code>: <code>loon</code> –&gt; <code>grid</code> object<a class="anchor" aria-label="anchor" href="#loongrob-loon-grid-object"></a>
-</h2>
+</h3>
 <p>The <code>grid</code> graphic plot is saved by assigning it to a variable when it is created. Either drawing it at the same time (as a side-effect)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
@@ -194,9 +194,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
 <p><img src="images/loonPlotsAndGridGraphics/loonPlotg0.png" width="60%" style="display: block; margin: auto;"></p>
 </div>
-<div class="section level2">
-<h2 id="multiple-plots">multiple plots<a class="anchor" aria-label="anchor" href="#multiple-plots"></a>
-</h2>
+<div class="section level3">
+<h3 id="multiple-plots">multiple plots<a class="anchor" aria-label="anchor" href="#multiple-plots"></a>
+</h3>
 <p>As with any <code>grob</code>, the output of <code><a href="../reference/loonGrob.html">loonGrob()</a></code>ccan be manipulated as can <code>grid</code> data structure – perhaps arranging several of these into a compound display using <code><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange()</a></code> (from the <code>gridExtra</code> package).</p>
 <p>For example, there might be several stages of the interactive plot that ow might be captured. These might be constructed programmatically as</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -220,9 +220,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">g0</span>, <span class="va">gtrans</span>, <span class="va">gauto</span>, <span class="va">gmanual</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="images/loonPlotsAndGridGraphics/gridArrange.png" width="80%" style="display: block; margin: auto;"> The arrangement itself could have been positioned within another arrrangement.</p>
 </div>
-<div class="section level2">
-<h2 id="the-data-structure-returned-by-loongrob">the data structure returned by <code>loonGrob()</code><a class="anchor" aria-label="anchor" href="#the-data-structure-returned-by-loongrob"></a>
-</h2>
+<div class="section level3">
+<h3 id="the-data-structure-returned-by-loongrob">the data structure returned by <code>loonGrob()</code><a class="anchor" aria-label="anchor" href="#the-data-structure-returned-by-loongrob"></a>
+</h3>
 <p>The returned data structure has</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
@@ -272,9 +272,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <p>The following figure renders the tree structure more generally: <img src="images/loonPlotsAndGridGraphics/loonGrobNestedDataTree.png" width="80%" style="display: block; margin: auto;"> Node labels give the <code>loonGrob</code> names with the tree hierarchy following solid lines from left to right. Grey values indicate the same for other types of <code>loon</code> plots (separate with braces) and identify potential options peculiar to each <code>loon</code> plot.</p>
 <p>For example, the root node “l_plot” contains a “bounding box” and a “loon plot”, each loon plot has “guides”, “labels”, “axes”, “clipping region”, “boundary rectangle” and “l_xxxx_layers” (according to the type of loon plot), and the loon plot <code>p</code> has “l_plot_layers” consisting of a “scatterplot” and possibly other layers like lines and so on.</p>
 </div>
-<div class="section level2">
-<h2 id="changing-a-grid-object-get-edit-set">changing a <code>grid</code> object: get, edit, set<a class="anchor" aria-label="anchor" href="#changing-a-grid-object-get-edit-set"></a>
-</h2>
+<div class="section level3">
+<h3 id="changing-a-grid-object-get-edit-set">changing a <code>grid</code> object: get, edit, set<a class="anchor" aria-label="anchor" href="#changing-a-grid-object-get-edit-set"></a>
+</h3>
 <p>Knowing the labels, one can retrieve, edit, or even replace any fine details of the static plot. For example, consider the “xlabel” and “ylabel” of the <code>gTree</code>. Each label (as it appears above in the list of the <code>gTree</code>) provides a path to the corresponding <code>grob</code>.</p>
 <p>Changes to an existing <code>grid</code> plot are made in three steps:</p>
 <ol style="list-style-type: decimal">
@@ -286,10 +286,10 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <code><a href="https://rdrr.io/r/grid/grid.set.html" class="external-link">setGrob()</a></code> to set the newly produced <code>grob</code> into the appropriate place in the plot.</li>
 </ol>
 <p>Each of these are now illustrated in turn.</p>
-<div class="section level3">
-<h3 id="getgrob">
+<div class="section level4">
+<h4 id="getgrob">
 <code>getGrob()</code><a class="anchor" aria-label="anchor" href="#getgrob"></a>
-</h3>
+</h4>
 <p>Knowing the path is “x label” in the <code>gTree</code> <code>g0</code>, the <code>grob</code> is extracted using <code><a href="https://rdrr.io/r/grid/grid.get.html" class="external-link">getGrob()</a></code>. For example,</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># retrieve xlabel grob</span>
@@ -321,10 +321,10 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="co">## [5] "name"          "gp"            "vp"            "children"     </span>
 <span class="co">## [9] "childrenOrder"</span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="editgrob">
+<div class="section level4">
+<h4 id="editgrob">
 <code>editGrob()</code><a class="anchor" aria-label="anchor" href="#editgrob"></a>
-</h3>
+</h4>
 <p>Having <code>xlabelGrob</code> in hand, we can use it to create another copy of it with changed features using <code><a href="https://rdrr.io/r/grid/grid.edit.html" class="external-link">editGrob()</a></code>.</p>
 <p>For example, a more meaningful <code>x</code> axis “label” name can be assigned:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
@@ -339,10 +339,10 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <code class="sourceCode R"><span class="va">newGrob</span><span class="op">$</span><span class="va">label</span></code></pre></div>
 <pre><code><span class="co">## [1] "Miles per (US) gallon"</span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="setgrob">
+<div class="section level4">
+<h4 id="setgrob">
 <code>setGrob()</code><a class="anchor" aria-label="anchor" href="#setgrob"></a>
-</h3>
+</h4>
 <p>To complete the change to <code>g0</code>, the old “x label” needs to be replaced by <code>newGrob</code>:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.set.html" class="external-link">setGrob</a></span><span class="op">(</span>gTree <span class="op">=</span> <span class="va">g0</span>, 
@@ -355,9 +355,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <p><img src="images/loonPlotsAndGridGraphics/loonPlotg0Xlabel.png" width="60%" style="display: block; margin: auto;"> In the same way, other features of the “x label” could have been changed as well as the <code>grob</code>s at other paths of the <code>gTree</code> returned by <code><a href="../reference/loonGrob.html">loonGrob()</a></code>.</p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="adding-an-alpha-channel-to-the-points">adding an alpha channel to the points<a class="anchor" aria-label="anchor" href="#adding-an-alpha-channel-to-the-points"></a>
-</h2>
+<div class="section level3">
+<h3 id="adding-an-alpha-channel-to-the-points">adding an alpha channel to the points<a class="anchor" aria-label="anchor" href="#adding-an-alpha-channel-to-the-points"></a>
+</h3>
 <p>A more common place reason to edit would be to add features to the <code>grid</code> plot that are available in <code>loon</code>.</p>
 <p>For example, transparency is (presently) missing from <code>tcltk</code> colours (on which <code>loon</code> is based) – the <code>tcltk</code> system presently uses 12 digit hexadecimal colour to represent three channels (one for each of the RGB colours) and no fourth channel indicating alpha transparency. In contrast, transparency is accommodated in <code>grid</code> graphics so that one might choose to set the <code>alpha</code> values after the transformation.</p>
 <p>The points in the plot can be made transparent using <code><a href="https://rdrr.io/r/grid/grid.set.html" class="external-link">setGrob()</a></code>, <code><a href="https://rdrr.io/r/grid/grid.edit.html" class="external-link">editGrob()</a></code>, and <code><a href="https://rdrr.io/r/grid/grid.get.html" class="external-link">getGrob()</a></code>, given the path to the points <code>grob</code>, namely “points: primitive glyphs”.</p>
@@ -382,9 +382,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">g0</span><span class="op">)</span></code></pre></div>
 <p><img src="images/loonPlotsAndGridGraphics/loonPlotg0Alpha.png" width="60%" style="display: block; margin: auto;"> After modification, the points are now transparent and the size has been made larger.</p>
 </div>
-<div class="section level2">
-<h2 id="helper-functions-from-loon">helper functions from <code>loon</code><a class="anchor" aria-label="anchor" href="#helper-functions-from-loon"></a>
-</h2>
+<div class="section level3">
+<h3 id="helper-functions-from-loon">helper functions from <code>loon</code><a class="anchor" aria-label="anchor" href="#helper-functions-from-loon"></a>
+</h3>
 <p>Three <code>loon</code> helper functions simplify the some editing of the <code>gTree</code> produced by loon in the special case when some <code>grobs</code> on the <code>gTree</code> are incompletely specified.</p>
 <p>The three helper functions are</p>
 <ul>
@@ -397,9 +397,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 </ul>
 <p>See <code><a href="../reference/loonGrobInstantiation.html">help("loonGrobInstantiation")</a></code> for more.</p>
 <p>Common cases where these functions might be used are when pieces of the plot have been rendered invisible.</p>
-<div class="section level3">
-<h3 id="e-g--missing-title">e.g. missing title<a class="anchor" aria-label="anchor" href="#e-g--missing-title"></a>
-</h3>
+<div class="section level4">
+<h4 id="e-g--missing-title">e.g. missing title<a class="anchor" aria-label="anchor" href="#e-g--missing-title"></a>
+</h4>
 <p>The plot <code>p</code> was not given a title and no title appears when <code>g0</code> is drawn. Nevertheless, the <code>gTree</code> of <code>g0</code> does appear to have some title information as indicated by the path “title: textGrob arguments”. This is an indication that <code><a href="../reference/loonGrob.html">loonGrob()</a></code> did transfer some title information from <code>p</code> to <code>g0</code> but that it is incomplete in some way.</p>
 <p>If we access the grob at that path, we have</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
@@ -429,9 +429,9 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></code></pre></div>
 <p><img src="images/loonPlotsAndGridGraphics/loonPlotg2.png" width="60%" style="display: block; margin: auto;"> which displays the title in the default fontsize (from translating <code>p</code>). The extra room for the title would also admit larger font sizes.</p>
 </div>
-<div class="section level3">
-<h3 id="e-g--missing-labels">e.g. missing labels<a class="anchor" aria-label="anchor" href="#e-g--missing-labels"></a>
-</h3>
+<div class="section level4">
+<h4 id="e-g--missing-labels">e.g. missing labels<a class="anchor" aria-label="anchor" href="#e-g--missing-labels"></a>
+</h4>
 <p>Oftentimes all labels (i.e., “xlabel”, “ylabel”, and “title”) of <code>p</code> will have been turned off when <code><a href="../reference/loonGrob.html">loonGrob()</a></code> was called:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span><span class="op">[</span><span class="st">'showLabels'</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
@@ -513,26 +513,26 @@ These users might also be interested in turning <code>loon</code> plots into <co
 <span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span></code></pre></div>
 <p><img src="images/loonPlotsAndGridGraphics/loonPlotg4.png" width="60%" style="display: block; margin: auto;"> Extra arguments to <code><a href="../reference/loonGrobInstantiation.html">l_instantiateGrob()</a></code> are passed on to the <code>grobFun</code> (in this case <code><a href="https://rdrr.io/r/grid/grid.text.html" class="external-link">textGrob()</a></code>).</p>
 </div>
-<div class="section level3">
-<h3 id="l_updategrob">
+<div class="section level4">
+<h4 id="l_updategrob">
 <code>l_updateGrob()</code><a class="anchor" aria-label="anchor" href="#l_updategrob"></a>
-</h3>
+</h4>
 <p>This function is called by <code><a href="../reference/loonGrobInstantiation.html">l_instantiateGrob()</a></code> to perform the same role as <code><a href="https://rdrr.io/r/grid/grid.edit.html" class="external-link">editGrob()</a></code>, but operating on incomplete <code>grob</code>s that are only <code>gDesc</code>s.</p>
 <p>The function <code><a href="../reference/loonGrobInstantiation.html">l_updateGrob()</a></code> could also be used the same as <code><a href="https://rdrr.io/r/grid/grid.edit.html" class="external-link">editGrob()</a></code> on a complete <code>grob</code> (e.g. having classes <code>text</code>, <code>grob</code>, and <code>gDesc</code>).</p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="what-if">What if …<a class="anchor" aria-label="anchor" href="#what-if"></a>
-</h2>
 <div class="section level3">
-<h3 id="some-points-are-invisible">some points are invisible?<a class="anchor" aria-label="anchor" href="#some-points-are-invisible"></a>
+<h3 id="what-if">What if …<a class="anchor" aria-label="anchor" href="#what-if"></a>
 </h3>
+<div class="section level4">
+<h4 id="some-points-are-invisible">some points are invisible?<a class="anchor" aria-label="anchor" href="#some-points-are-invisible"></a>
+</h4>
 <p>Unfortunately, if some points are invisible, their coordinates and aesthetics attributes would be missing in the <code>loonGrob</code>. Technically speaking, it is possible to include these invisible points inside the <code>loonGrob</code>, however, what stops us doing so is that the data structure would have to be changed – a <code>pointsGrob</code> would have to be replaced by a <code>gTree</code> with several children <code>pointsGrob</code>s to preserve display order and distinguish visible from invisible point.</p>
 <p>This solution seems overly complicated and so was not implemented. Better to simply make the changes interactively on the <code>loon</code> plot and then translate it again to a new <code>grid</code> data structure.</p>
 </div>
-<div class="section level3">
-<h3 id="some-points-are-not-primitive-glyphs">some points are not primitive glyphs?<a class="anchor" aria-label="anchor" href="#some-points-are-not-primitive-glyphs"></a>
-</h3>
+<div class="section level4">
+<h4 id="some-points-are-not-primitive-glyphs">some points are not primitive glyphs?<a class="anchor" aria-label="anchor" href="#some-points-are-not-primitive-glyphs"></a>
+</h4>
 <p><code>loon</code> provides non-primitive glyphs, e.g. text glyphs, image glyphs, polygon glyphs, et cetera. Once a non-primitive glyph is drawn, the <code>grob</code> label beneath <strong>scatterplot</strong> would be <strong>points: mixed glyph</strong>.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># add text glyph</span>
@@ -549,22 +549,22 @@ These users might also be interested in turning <code>loon</code> plots into <co
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="other-packages">Other packages<a class="anchor" aria-label="anchor" href="#other-packages"></a>
-</h1>
 <div class="section level2">
-<h2 id="ggplots-from-loon-ggplot">
-<code>ggplot</code>s from <code>loon.ggplot</code><a class="anchor" aria-label="anchor" href="#ggplots-from-loon-ggplot"></a>
+<h2 id="other-packages">Other packages<a class="anchor" aria-label="anchor" href="#other-packages"></a>
 </h2>
+<div class="section level3">
+<h3 id="ggplots-from-loon-ggplot">
+<code>ggplot</code>s from <code>loon.ggplot</code><a class="anchor" aria-label="anchor" href="#ggplots-from-loon-ggplot"></a>
+</h3>
 <p>Elegant print graphics are also provided through the popular <code>ggplot2</code> package built on top of <code>grid</code> graphics. Users familiar with <code>ggplot2</code> and its <em>grammar of graphics</em> might be interested in the <code>loon</code> companion package <code>loon.ggplot</code> which extends the grammar to a <em>grammar of interactive graphics</em>.</p>
 <p>There any <code>loon</code> plot can be captured as a <code>ggplot</code> by simply calling <code>loon.ggplot()</code> on it. The <em>same</em> function will also create an interactive <code>loon</code> plot if called on an existing <code>ggplot</code>.</p>
 <p>Details can be found <a href="https://great-northern-diver.github.io/loon.ggplot/" class="external-link">here</a>.</p>
 <p>This is probably the simplest solution to have a static plot which can subsequently edited programmatically (via the grammar of <code>ggplot2</code>). Any changes to the <code>ggplot</code> could also then ve turned into an interactive <code>loon</code> plot.</p>
 </div>
-<div class="section level2">
-<h2 id="shiny-applications-from-loon-shiny">
+<div class="section level3">
+<h3 id="shiny-applications-from-loon-shiny">
 <code>shiny</code> applications from <code>loon.shiny</code><a class="anchor" aria-label="anchor" href="#shiny-applications-from-loon-shiny"></a>
-</h2>
+</h3>
 <p>In the interest of supporting reproducible research, analysts will sometimes want to share interactive (and linked) plots in their curated analysis. A <code>shiny</code> app is the way to shared this interaction.</p>
 <p>The <code>loon</code> companion package <code>loon.shiny</code> makes it possible to do just that by incorporating interactive <code>loon</code> style plots into a <code>shiny</code> app. Then the viewer may interactively explore the data under analysis inside an <code>hyml</code> browser. The interaction will not be as open ended as using <code>loon</code> in <code>R</code> but will be peculiar to the data in the app and to the features selected y the author.</p>
 <p>The <code>loon.shiny</code> transformation relies on the <code>loon</code> to <code>grid</code> functionality described above. Details can be found <a href="https://great-northern-diver.github.io/loon.shiny/" class="external-link">here</a>.</p>
@@ -589,7 +589,7 @@ These users might also be interested in turning <code>loon</code> plots into <co
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

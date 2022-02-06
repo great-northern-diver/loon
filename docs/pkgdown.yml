@@ -1,11 +1,11 @@
-pandoc: '2.12'
-pkgdown: 2.0.1
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   introduction: introduction.html
   logicalQueries: logicalQueries.html
   loonPlotsAndGridGraphics: loonPlotsAndGridGraphics.html
-  SavingLoonPlots: SavingLoonPlots.html
+  savingLoonPlots: savingLoonPlots.html
   teaching-example-smoothing: teaching-example-smoothing.html
-last_built: 2022-01-21T20:32Z
+last_built: 2022-02-06T21:12Z
 
