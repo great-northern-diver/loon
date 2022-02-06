@@ -16,7 +16,7 @@
     <loc>/articles/loonPlotsAndGridGraphics.html</loc>
   </url>
   <url>
-    <loc>/articles/SavingLoonPlots.html</loc>
+    <loc>/articles/savingLoonPlots.html</loc>
   </url>
   <url>
     <loc>/articles/teaching-example-smoothing.html</loc>
@@ -28,7 +28,115 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/l_help/UI.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/commands.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/gallery.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/index.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/install.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Python_tkinter.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_bind.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_graph.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_hist.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_inspectors.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_pairs.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_plot.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_display_serialaxes.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_intro.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_layer.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_layout.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_linking.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_states.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_R_tcltk.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_Tk.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_bind.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_graph.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_hist.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_inspectors.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_pairs.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_plot.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_display_serialaxes.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_intro.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_layer.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_layout.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_linking.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/learn_Tcl_states.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/linkingActiveTcl.html</loc>
+  </url>
+  <url>
+    <loc>/l_help/videos.html</loc>
+  </url>
+  <url>
     <loc>/news/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/L2_distance.html</loc>
+  </url>
+  <url>
+    <loc>/reference/UsAndThem.html</loc>
   </url>
   <url>
     <loc>/reference/as.graph.html</loc>
@@ -97,31 +205,7 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/L2_distance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linegraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linegraph.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrobInstantiation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrob_layoutType.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loon_palette.html</loc>
+    <loc>/reference/l_Rlist2nestedTclList.html</loc>
   </url>
   <url>
     <loc>/reference/l_after_idle.html</loc>
@@ -250,10 +334,10 @@
     <loc>/reference/l_cget.html</loc>
   </url>
   <url>
-    <loc>/reference/l_colorName.html</loc>
+    <loc>/reference/l_colRemoveAlpha.html</loc>
   </url>
   <url>
-    <loc>/reference/l_colRemoveAlpha.html</loc>
+    <loc>/reference/l_colorName.html</loc>
   </url>
   <url>
     <loc>/reference/l_compoundPaths.html</loc>
@@ -349,21 +433,6 @@
     <loc>/reference/l_get_arrangeGrobArgs.html</loc>
   </url>
   <url>
-    <loc>/reference/l_glyphs_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_image.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_pointrange.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_text.html</loc>
-  </url>
-  <url>
     <loc>/reference/l_glyph_add.default.html</loc>
   </url>
   <url>
@@ -400,7 +469,31 @@
     <loc>/reference/l_glyph_relabel.html</loc>
   </url>
   <url>
+    <loc>/reference/l_glyphs_inspector.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_glyphs_inspector_image.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_glyphs_inspector_pointrange.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_glyphs_inspector_serialaxes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_glyphs_inspector_text.html</loc>
+  </url>
+  <url>
     <loc>/reference/l_graph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_graph_inspector.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_graph_inspector_analysis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_graph_inspector_navigators.html</loc>
   </url>
   <url>
     <loc>/reference/l_graphswitch.html</loc>
@@ -442,15 +535,6 @@
     <loc>/reference/l_graphswitch_set.html</loc>
   </url>
   <url>
-    <loc>/reference/l_graph_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph_inspector_analysis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph_inspector_navigators.html</loc>
-  </url>
-  <url>
     <loc>/reference/l_help.html</loc>
   </url>
   <url>
@@ -466,13 +550,13 @@
     <loc>/reference/l_hist_inspector_analysis.html</loc>
   </url>
   <url>
-    <loc>/reference/l_imageviewer.html</loc>
-  </url>
-  <url>
     <loc>/reference/l_image_import_array.html</loc>
   </url>
   <url>
     <loc>/reference/l_image_import_files.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_imageviewer.html</loc>
   </url>
   <url>
     <loc>/reference/l_info_states.html</loc>
@@ -481,19 +565,10 @@
     <loc>/reference/l_isLoonWidget.html</loc>
   </url>
   <url>
-    <loc>/reference/l_layer.density.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.html</loc>
-  </url>
-  <url>
     <loc>/reference/l_layer.Line.html</loc>
   </url>
   <url>
     <loc>/reference/l_layer.Lines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.map.html</loc>
   </url>
   <url>
     <loc>/reference/l_layer.Polygon.html</loc>
@@ -520,7 +595,13 @@
     <loc>/reference/l_layer.SpatialPolygonsDataFrame.html</loc>
   </url>
   <url>
-    <loc>/reference/l_layers_inspector.html</loc>
+    <loc>/reference/l_layer.density.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_layer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/l_layer.map.html</loc>
   </url>
   <url>
     <loc>/reference/l_layer_bbox.html</loc>
@@ -631,6 +712,9 @@
     <loc>/reference/l_layer_texts.html</loc>
   </url>
   <url>
+    <loc>/reference/l_layers_inspector.html</loc>
+  </url>
+  <url>
     <loc>/reference/l_loonWidgets.html</loc>
   </url>
   <url>
@@ -661,6 +745,9 @@
     <loc>/reference/l_move_vdist.html</loc>
   </url>
   <url>
+    <loc>/reference/l_nDimStateNames.html</loc>
+  </url>
+  <url>
     <loc>/reference/l_navgraph.html</loc>
   </url>
   <url>
@@ -689,9 +776,6 @@
   </url>
   <url>
     <loc>/reference/l_navigator_walk_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_nDimStateNames.html</loc>
   </url>
   <url>
     <loc>/reference/l_nestedTclList2Rlist.html</loc>
@@ -754,9 +838,6 @@
     <loc>/reference/l_resize.html</loc>
   </url>
   <url>
-    <loc>/reference/l_Rlist2nestedTclList.html</loc>
-  </url>
-  <url>
     <loc>/reference/l_saveStates.html</loc>
   </url>
   <url>
@@ -790,10 +871,10 @@
     <loc>/reference/l_setColorList.html</loc>
   </url>
   <url>
-    <loc>/reference/l_setColorList_baseR.html</loc>
+    <loc>/reference/l_setColorList_ColorBrewer.html</loc>
   </url>
   <url>
-    <loc>/reference/l_setColorList_ColorBrewer.html</loc>
+    <loc>/reference/l_setColorList_baseR.html</loc>
   </url>
   <url>
     <loc>/reference/l_setColorList_ggplot2.html</loc>
@@ -829,10 +910,10 @@
     <loc>/reference/l_throwErrorIfNotLoonWidget.html</loc>
   </url>
   <url>
-    <loc>/reference/l_toplevel.html</loc>
+    <loc>/reference/l_toR.html</loc>
   </url>
   <url>
-    <loc>/reference/l_toR.html</loc>
+    <loc>/reference/l_toplevel.html</loc>
   </url>
   <url>
     <loc>/reference/l_userOptionDefault.html</loc>
@@ -851,6 +932,30 @@
   </url>
   <url>
     <loc>/reference/l_zoom.html</loc>
+  </url>
+  <url>
+    <loc>/reference/linegraph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/linegraph.loongraph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loon.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loonGrob.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loonGrobInstantiation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loonGrob_layoutType.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loon_palette.html</loc>
+  </url>
+  <url>
+    <loc>/reference/loongraph.html</loc>
   </url>
   <url>
     <loc>/reference/measures1d.html</loc>
@@ -899,8 +1004,5 @@
   </url>
   <url>
     <loc>/reference/tkcolors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/UsAndThem.html</loc>
   </url>
 </urlset>
