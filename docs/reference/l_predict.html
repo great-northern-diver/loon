@@ -167,13 +167,13 @@ two more columns, <code>lower</code> (lower interval) and <code>upper</code> (up
 <span class="r-in"><span class="va">pre</span> <span class="op">&lt;-</span> <span class="fu">l_predict</span><span class="op">(</span><span class="va">model1</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
 <span class="r-in">                 interval <span class="op">=</span> <span class="st">"conf"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pre</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              x           y      lower     upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1.762661874 -0.80428057 -2.1710082 0.5624470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.890485823 -0.48261191 -1.4367454 0.4715216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.526574815 -0.34839730 -1.1586147 0.4618201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.009667446 -0.15062493 -0.8128610 0.5116111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.312889586 -0.03879308 -0.6694678 0.5918816</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.788294934  0.13654193 -0.5369622 0.8100461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            x          y      lower     upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.6138587  0.4164934 -0.3971807 1.2301674</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.4670041  0.3606264 -0.3779005 1.0991534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.4140653  0.3404872 -0.3721833 1.0531578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.2918479  0.2939929 -0.3620803 0.9500660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.5086141 -0.0105217 -0.4994710 0.4784276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.5240910 -0.0164095 -0.5070975 0.4742785</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">cars</span>, <span class="fu"><a href="l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">speed</span>, <span class="va">dist</span><span class="op">)</span><span class="op">)</span></span>
