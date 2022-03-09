@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -82,10 +84,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://youtu.be/JFJcg855HcQ">the (not so) humble (interactive) histogram</a>
+      <a href="https://youtu.be/JFJcg855HcQ" class="external-link">the (not so) humble (interactive) histogram</a>
     </li>
     <li>
-      <a href="https://youtu.be/mMJllGOuDLY">3D interactive scatterplots</a>
+      <a href="https://youtu.be/mMJllGOuDLY" class="external-link">3D interactive scatterplots</a>
     </li>
   </ul>
 </li>
@@ -95,7 +97,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/great-northern-diver/loon">
+  <a href="https://github.com/great-northern-diver/loon" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -110,45 +112,45 @@
 
       
 
-      </header><script src="teaching-example-smoothing_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Smoothers and Bone Mineral Density</h1>
-                        <h4 class="author">R.W. Oldford</h4>
+                        <h4 data-toc-skip class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-09-23</h4>
+            <h4 data-toc-skip class="date">2022-02-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/teaching-example-smoothing.Rmd"><code>vignettes/teaching-example-smoothing.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/HEAD/vignettes/teaching-example-smoothing.Rmd" class="external-link"><code>vignettes/teaching-example-smoothing.Rmd</code></a></small>
       <div class="hidden name"><code>teaching-example-smoothing.Rmd</code></div>
 
     </div>
 
     
     
-<div id="illustrates" class="section level3">
-<h3 class="hasAnchor">
-<a href="#illustrates" class="anchor"></a>Illustrates:</h3>
+<div class="section level3">
+<h3 id="illustrates">Illustrates:<a class="anchor" aria-label="anchor" href="#illustrates"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://great-northern-diver.github.io/loon/">loon</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://great-northern-diver.github.io/loon/" class="external-link">loon</a></span><span class="op">)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>linked scatterplots</li>
 <li>panning and zooming</li>
 <li>creating new interactions through bindings</li>
 </ol>
 </div>
-<div id="the-data-bone-mineral-density" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-data-bone-mineral-density" class="anchor"></a>The data: Bone mineral density</h2>
+<div class="section level2">
+<h2 id="the-data-bone-mineral-density">The data: Bone mineral density<a class="anchor" aria-label="anchor" href="#the-data-bone-mineral-density"></a>
+</h2>
 <p>The data consists of measurements of spinal bone mineral density. Several such measurements were taken from 261 North American adolescents over a few years. The entire dataset is called <code>bone</code> and can be found in the <code>R</code> package <code>loon.data</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">bone</span>, package <span class="op">=</span> <span class="st">"loon.data"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">bone</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">bone</span>, package <span class="op">=</span> <span class="st">"loon.data"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bone</span><span class="op">)</span></code></pre></div>
 <p>As can be seen, there are five variates. The <code>idnum</code> uniquely identifies each of the 261 adolescents (N.B. these are not numbered 1 to 261), <code>sex</code> identifies their sex, and <code>ethnic</code> their “ethnicity/race”. The response variate of interest is <code>rspnbmd</code> which is a relative measure of spinal bone mineral density determined as the ratio of the difference in bone mineral density as measured on two consecutive visits divided by their average. Similarly, the explanatory variate <code>age</code> is the average of the adolescent’s age in years on those two visits.</p>
 <p>In this vignette we investigate the fit of smoothing splines to this data.</p>
 </div>
-<div id="the-scatterplot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-scatterplot" class="anchor"></a>The scatterplot</h2>
+<div class="section level2">
+<h2 id="the-scatterplot">The scatterplot<a class="anchor" aria-label="anchor" href="#the-scatterplot"></a>
+</h2>
 <p>To begin, execute the following code:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># The plot</span>
@@ -159,7 +161,7 @@
             color<span class="op">=</span><span class="st">"darkgrey"</span>,
             xlabel<span class="op">=</span><span class="st">"age"</span>, ylabel<span class="op">=</span><span class="st">"rspnbmd"</span>,
             showGuides <span class="op">=</span> <span class="cn">TRUE</span>, showScales <span class="op">=</span> <span class="cn">TRUE</span>,
-            itemLabel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"IDnum = "</span>, <span class="va">bone</span><span class="op">$</span><span class="va">idnum</span>, <span class="st">"\n"</span>, 
+            itemLabel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"IDnum = "</span>, <span class="va">bone</span><span class="op">$</span><span class="va">idnum</span>, <span class="st">"\n"</span>, 
                                <span class="va">bone</span><span class="op">$</span><span class="va">sex</span>, <span class="st">"\n"</span>, 
                                <span class="st">"Age: "</span>, <span class="va">bone</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>,
             showItemLabels <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -169,10 +171,10 @@
 <p>The plot is interactive. Hovering the mouse over a point in the plot, for example, will pop up the <code>itemLabel</code> for that point. Scrolling on mouse wheel (or equivalent) over the plot <strong>zooms</strong> in (or out) on the plot; note that the zoom is centred at the mouse position. For <strong>horizontal zooming</strong> only, hold the “control” key down while scrolling; for <strong>vertical zooming</strong> only hold the “alt” (or <code>cmd</code> on a Mac) key while scrolling.</p>
 <p>Zoom in anywhere on the plot. Notice that the <strong>inspector</strong> displays a miniature version of the whole plot as its <strong>World View</strong> at the top of its display. The plot is bounded in the World View by a grey rectangle and the region of the plot that is displayed is shown as a brighter region bounded by a black rectangle. This bright display region can be grabbed by clicking (and holding depressed) the left (or primary) mouse button. Moving the mouse around while keeping the left button depressed moves the bright region in the inspector which in turn cause the display in the plot to update accordingly. In this way, the inspector World View can be used to <strong>pan</strong> the entire display. Alternatively, <strong>panning</strong> may also be effected by right (or secondary) button clicking on the interior of the plot, holding that mouse button down and moving the mouse. In the inspector the region moves with the mouse, in the plot the background does.</p>
 <p>Panning and zooming can occur either on the inspector plot or on the plot itself. In either case, the panning or zooming is constrained to the horizontal when the control key is held at the same time and to the vertical when the <code>alt</code> or <code>cmd</code> key is held.</p>
-<p>To get the displayed scatterplot back to its original scale, in the inspector click on <code>scale to: plot</code>. Alternatively the same effect can be hand programmatically as <code><a href="../reference/l_scaleto_plot.html">l_scaleto_plot(p)</a></code>. (To scale to all layers in the plot use <code><a href="../reference/l_scaleto_world.html">l_scaleto_world(p)</a></code>.)</p>
+<p>To get the displayed scatterplot back to its original scale, in the inspector click on <code>scale to: plot</code>. Alternatively the same effect can be hand programmatically as <code>l_scaleto_plot(p)</code>. (To scale to all layers in the plot use <code>l_scaleto_world(p)</code>.)</p>
 <p>See <code><a href="../reference/l_plot.html">help(l_plot)</a></code> for more details and examples.</p>
-<p>In the inspector window, immediately below the World View there are several <strong>tabs</strong>, the first of which is the <strong>Analysis tab</strong>. The first subsection of the analysis tab contains plot attributes. The values here were determined when the plot <code>p</code> was created according to the values of the arguments given to <code><a href="../reference/l_plot.html">l_plot(...)</a></code>. These can be changed in the inspector by toggling the check boxes.</p>
-<p>The complete set of arguments that could have been used at the time of creation can be had by querying the plot <code>p</code> as <code><a href="https://rdrr.io/r/base/names.html">names(l_info_states)</a></code>. The values can also be accessed and changed programmatically for example as in</p>
+<p>In the inspector window, immediately below the World View there are several <strong>tabs</strong>, the first of which is the <strong>Analysis tab</strong>. The first subsection of the analysis tab contains plot attributes. The values here were determined when the plot <code>p</code> was created according to the values of the arguments given to <code>l_plot(...)</code>. These can be changed in the inspector by toggling the check boxes.</p>
+<p>The complete set of arguments that could have been used at the time of creation can be had by querying the plot <code>p</code> as <code>names(l_info_states)</code>. The values can also be accessed and changed programmatically for example as in</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span><span class="op">[</span><span class="st">"showItemLabels"</span><span class="op">]</span>
 <span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span>
@@ -181,18 +183,18 @@
 <p>The vertical variate, <code>rspnbmd</code>, measured the <em>change</em> in spinal bone mineral density. Anything above zero indicates an increase, anything below a decrease; the magnitude is the rate of change in density. It might be of interest, then, to add a horizontal line to the plot at zero. This is accomplished by <strong>layering a line</strong> on the plot <code>p</code> as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">axis</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_layer_line.html">l_layer_line</a></span><span class="op">(</span><span class="va">p</span>,
-                     x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html">extendrange</a></span><span class="op">(</span><span class="va">x</span>, f<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,
+                     x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html" class="external-link">extendrange</a></span><span class="op">(</span><span class="va">x</span>, f<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,
                      label<span class="op">=</span><span class="st">"axis"</span>, linewidth<span class="op">=</span><span class="fl">2</span>,
                      color <span class="op">=</span> <span class="st">"black"</span>,
-                     dash<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span>,
+                     dash<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span>,
                      index<span class="op">=</span><span class="st">"end"</span><span class="op">)</span>   <span class="co"># last argument places axis behind other layers</span></code></pre></div>
 <p>This “axis” can be turned on and off via the inspector or programmatically. On the inspector, click on the <strong>Layers</strong> tab. The layers appear in a list ordered from top to bottom in the inspector in the order in which they are displayed in the plot. The <code>axis</code> appears below the Scatterplot and hence is displayed behind the points.</p>
 <p>Selecting the axis, the up and down buttons at the bottom of the list allow the axis to be placed above or below the Scatterplot. The axis (or Scatterplot) can be moved up or down in the display. Either can be made (temporarily) invisible by clicking on the icon showing a cartoon eye with a stroke through it and made visible again by clicking on the cartoon eye. Try it.</p>
 <p>The axis (or any other layer, e.g. the Scatterplot), could be removed entirely with the minus sign. Don’t do this right now; click on the “Analysis” tab instead.</p>
 </div>
-<div id="histogram" class="section level2">
-<h2 class="hasAnchor">
-<a href="#histogram" class="anchor"></a>Histogram</h2>
+<div class="section level2">
+<h2 id="histogram">Histogram<a class="anchor" aria-label="anchor" href="#histogram"></a>
+</h2>
 <p>A histogram can be constructed in the same way as for <em>numeric</em> values. Now, because <code>sex</code> is a <code>factor</code>, the result is essentially a simple bar plot with a layer labelling the bars by the corresponding <code>sex</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_hist.html">l_hist</a></span><span class="op">(</span><span class="va">bone</span><span class="op">$</span><span class="va">sex</span>, 
@@ -204,14 +206,14 @@
 <p>The histogram and the scatterplot both have the same <code>linkingGroup</code> “Bone density” and the inspector shows that the 2 plots are <strong>linked</strong>. Selecting the left most bar of the histogram highlights all of the females in both plots. Switching back and forth between the two bars while observing the scatterplot shows that the pattern for males seems to be shifted slightly to the right of those for the females.</p>
 <p>Similarly, selecting any point in the scatterplot causes a corresponding slice of the bar in which it appears in the histogram to be highlighted.</p>
 <p><strong>Multiple selections</strong> can made by holding the <strong>shift key</strong> while selecting. Alternatively, clicking on the background, holding the mouse button down while <strong>sweeping</strong> out a rectangle will highlight all data objects which intersect with the rectangle.</p>
-<p>Once selected, the display of the points can be <strong>modified</strong> by clicking on any of the colour patches to change their colour, or the glyph symbols to change the shape of points, the <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> and <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> signs to change size, and the <code>deactivate</code> (and <code>reactivate</code>) to remove the points from (or return them to) the display.</p>
+<p>Once selected, the display of the points can be <strong>modified</strong> by clicking on any of the colour patches to change their colour, or the glyph symbols to change the shape of points, the <code>-</code> and <code>+</code> signs to change size, and the <code>deactivate</code> (and <code>reactivate</code>) to remove the points from (or return them to) the display.</p>
 <p>Try selecting the points in the scatterplot and making various modifications. Note that because the displays are linked the changes are effected (where sensible) in both displays. Note that once the points have been coloured it is also possible to select points by colour from the inspector.</p>
 <p>Note that with <strong>shift sweeping</strong> (sweeping while the shift key pressed), multiple selections can be made. Couple this with <code>dynamic</code> selection that <code>deselect</code>s or <code>invert</code>s and very complex patterns of selected points can be constructed.</p>
-<p>To return the displays to their original configuration, from the inspector reactivate all of the points, then select <code>all</code> from the <code>Select</code> part of the <code>Analysis</code> panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> will pop up a colour picker) To return to the original colour execute <code>p["color"] &lt;- "darkgrey"</code>.</p>
+<p>To return the displays to their original configuration, from the inspector reactivate all of the points, then select <code>all</code> from the <code>Select</code> part of the <code>Analysis</code> panel, then select the filled circle glyph shape, and a single colour from those available (selecting the colour <code>+</code> will pop up a colour picker) To return to the original colour execute <code>p["color"] &lt;- "darkgrey"</code>.</p>
 </div>
-<div id="panning-and-brushing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#panning-and-brushing" class="anchor"></a>Panning and brushing</h2>
+<div class="section level2">
+<h2 id="panning-and-brushing">Panning and brushing<a class="anchor" aria-label="anchor" href="#panning-and-brushing"></a>
+</h2>
 <p>A second scatterplot could display other variates. For example, plotting the age versus the patient ID number gives:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">bone</span><span class="op">$</span><span class="va">idnum</span>, <span class="va">bone</span><span class="op">$</span><span class="va">age</span>,
@@ -226,62 +228,63 @@
 <p><strong>Zooming</strong> and <strong>panning</strong> in <code>p2</code> also reveals some interesting structure. Horizontally zoom on <code>p2</code> until each <code>idnum</code> is well separated. Then horizontally pan across the <code>idnum</code>s (most easily done from the inspector World View).</p>
 <p>It becomes easy to see that each subject (<code>idnum</code>) appears one, two, or three times. Because each value is the <em>change</em> in bone density (and so must be calculated on the basis of two visits) this means that each person had two, three, or four visits. Checking the <code>scales</code> and <code>guides</code> boxes of the plot panel in the inspector and panning reveals also that for every <code>idnum</code>, the difference in <code>age</code> are is at most 2 and does not appear to span more than 3 years. Together, this suggests that the data may have been collected in a single time period of about 3 years. Moreover, the bulk of those <code>idnums</code> which have three entries occur early in the order of <code>idnum</code>, possibly meaning early in the recruitment.</p>
 </div>
-<div id="adding-a-dynamically-changing-smooth" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-a-dynamically-changing-smooth" class="anchor"></a>Adding a (dynamically changing) smooth</h2>
-<p>To summarize the relationship, first add a straight line fitted by <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> using the function <code><a href="../reference/l_layer_smooth.html">l_layer_smooth()</a></code> and the method <code>"lm"</code>.</p>
+<div class="section level2">
+<h2 id="adding-a-dynamically-changing-smooth">Adding a (dynamically changing) smooth<a class="anchor" aria-label="anchor" href="#adding-a-dynamically-changing-smooth"></a>
+</h2>
+<p>To summarize the relationship, first add a straight line fitted by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> using the function <code><a href="../reference/l_layer_smooth.html">l_layer_smooth()</a></code> and the method <code>"lm"</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/l_layer_smooth.html">l_layer_smooth</a></span><span class="op">(</span><span class="va">p</span>, method <span class="op">=</span> <span class="st">"lm"</span>, 
                label <span class="op">=</span> <span class="st">"straight line fit"</span>,
                linecolor <span class="op">=</span> <span class="st">"firebrick"</span>,
-               linedash <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,
+               linedash <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>,
                linewidth <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>The same function could also be used to add a smooth (default <code>method = "loess"</code>). Instead, we will add a smoothing spline from the <code>splines</code> package and use it to fit bone mineral density as a function of time (i.e. to the data of <code>p</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">splines</span><span class="op">)</span>
 <span class="co"># Fit a smoothing spline</span>
-<span class="va">fitsmooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html">smooth.spline</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, df<span class="op">=</span><span class="fl">5</span><span class="op">)</span>
-<span class="va">xOrder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="va">fitsmooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html" class="external-link">smooth.spline</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, df<span class="op">=</span><span class="fl">5</span><span class="op">)</span>
+<span class="va">xOrder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="va">smooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_layer_line.html">l_layer_line</a></span><span class="op">(</span><span class="va">p</span>,
                        x <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span>,
-                       y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fitsmooth</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
+                       y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fitsmooth</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="va">xOrder</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
                        label <span class="op">=</span> <span class="st">"smooth fit"</span>, 
                        linewidth <span class="op">=</span> <span class="fl">4</span>,
                        color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
 <p>Unlike the straight line fit, the smooth shows that the change in spinal bone mineral density rises up to about 12 years of age and then declines thereafter ultimately hitting zero.</p>
 <p>Of course this is the aggregate behaviour, over both sexes. It might be interesting to see how this changes for males and for females. We could do this by adding a smooth for each sex but there may be other subgroups of the data that we would like to investigate. To that end we introduce a <strong>dynamic update</strong> to the smooth.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Define the update function</span>
+<code class="sourceCode R">
+<span class="co">## Define the update function</span>
 <span class="va">updateSmooth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">myPlot</span>, <span class="va">minpts</span>, <span class="va">df</span>, <span class="va">color</span><span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="op">{</span>
   <span class="co">## Get the values for x and y from the plot</span>
   <span class="co">##</span>
   <span class="co">## For x</span>
   <span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">}</span>
   
   <span class="co">## For y</span>
   <span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"yTemp"</span><span class="op">]</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ynew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"y"</span><span class="op">]</span><span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ynew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"y"</span><span class="op">]</span><span class="op">}</span>
   
   <span class="co">## Now **only** use the active selected points to construct the smooth</span>
   <span class="va">sel</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"active"</span><span class="op">]</span>
   <span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">xnew</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>
   <span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">ynew</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>
-  <span class="va">Nsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sel</span><span class="op">)</span>
+  <span class="va">Nsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sel</span><span class="op">)</span>
   
-  <span class="kw">if</span> <span class="op">(</span><span class="va">Nsel</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">Nsel</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
     <span class="co">## Find the range of the selected x values</span>
-    <span class="va">xrng</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html">extendrange</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span>
-    <span class="va">xvals.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>,
-                      to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>, 
+    <span class="va">xrng</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html" class="external-link">extendrange</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span>
+    <span class="va">xvals.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>,
+                      to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>, 
                       length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
     
     <span class="co">## Redo our smooth **only** if we have enough points</span>
     <span class="kw">if</span> <span class="op">(</span><span class="op">(</span><span class="va">Nsel</span> <span class="op">&gt;</span> <span class="va">minpts</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">minpts</span> <span class="op">&gt;</span> <span class="op">(</span><span class="va">df</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-      <span class="va">fit.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html">smooth.spline</a></span><span class="op">(</span><span class="va">xnew</span>, <span class="va">ynew</span>, df<span class="op">=</span><span class="va">df</span><span class="op">)</span>
-      <span class="va">ypred.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit.temp</span>,x<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>
+      <span class="va">fit.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html" class="external-link">smooth.spline</a></span><span class="op">(</span><span class="va">xnew</span>, <span class="va">ynew</span>, df<span class="op">=</span><span class="va">df</span><span class="op">)</span>
+      <span class="va">ypred.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit.temp</span>,x<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>
       <span class="co">## update the smooth</span>
-      <span class="kw">if</span> <span class="op">(</span><span class="va">smooth</span> <span class="op">%in%</span> <span class="fu"><a href="../reference/l_layer_ids.html">l_layer_ids</a></span><span class="op">(</span><span class="va">myPlot</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">smooth</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="../reference/l_layer_ids.html">l_layer_ids</a></span><span class="op">(</span><span class="va">myPlot</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
         <span class="co">## reconfigure the smooth with new data</span>
         <span class="fu"><a href="../reference/l_configure.html">l_configure</a></span><span class="op">(</span><span class="va">smooth</span>, x<span class="op">=</span><span class="va">xvals.temp</span>, y<span class="op">=</span><span class="va">ypred.temp</span><span class="op">)</span>
       <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
@@ -297,34 +300,34 @@
     <span class="op">}</span>
   <span class="op">}</span>
   <span class="co">## Update the tcl language's event handler</span>
-  <span class="fu">tcl</span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"idletasks"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/tcltk/TkCommands.html" class="external-link">tcl</a></span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"idletasks"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>Now, we would like to have this update called whenever any interesting change in state occurs. There are numerous such possible states (see <code><a href="https://rdrr.io/r/base/names.html">names(p)</a></code>, <code><a href="https://rdrr.io/r/base/names.html">names(l_info_states(p))</a></code>, or <code><a href="../reference/l_help.html">l_help("learn_R_bind")</a></code> ). Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of <code>p</code> contained in its <code>selected</code> state. This means that the function is called if any point in <code>p</code> is selected or deselected.</p>
+<p>Now, we would like to have this update called whenever any interesting change in state occurs. There are numerous such possible states (see <code>names(p)</code>, <code>names(l_info_states(p))</code>, or <code>l_help("learn_R_bind")</code> ). Here we bind an anonymous function of no arguments to be called whenever there is any change in the values of <code>p</code> contained in its <code>selected</code> state. This means that the function is called if any point in <code>p</code> is selected or deselected.</p>
 <p>Note also that the smooth is based on the <strong>temporary</strong> <code>x</code> and <code>y</code> values. Points in a <strong>scatterplot may be moved</strong> by selecting them with the control button depressed (as well as shift for multiple selection). Alternatively, <strong>selected points may be pushed together, distributed vertically or horizontally, arranged on a grid, or jittered</strong> by selecting the corresponding <code>move</code> button from the <code>Modify</code> panel of the inspector. All points can be returned to their original position by clicking the recover button</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Here we "bind" the anonymous to the named state changes of p</span>
-<span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"selected"</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"selected"</span><span class="op">)</span>,
              <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu">updateSmooth</span><span class="op">(</span><span class="va">p</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">}</span>
 <span class="op">)</span></code></pre></div>
 <p>Now go to the histogram and select first the female bar, then the make bar, and watch how the smoothing spline adapts to the sex. Clearly, females have greater changes in spinal bone mineral density at a younger age than do males. No doubt this is a consequence of the different ages at which girls and boys sexually mature.</p>
 <p>Brushing any set of points, from any of the linked plots will now cause the smooth function to automatically recalculate and redisplay. In this way one might pursue, for example how the smooth changes over subsets of <code>idnum</code> values.</p>
 <p>Note that the points must be both active and selected. We could, for example, focus on how the smooth changes <em>only for any subset of females</em> by first deactivating all males and then brushing the subset of the females.</p>
-<p>Note that the states that are bound can be seen as <code><a href="../reference/l_bind_state_ids.html">l_bind_state_ids(p)</a></code> and deleted using <code><a href="../reference/l_bind_state_delete.html">l_bind_state_delete(p, "stateBinding0")</a></code>.</p>
+<p>Note that the states that are bound can be seen as <code>l_bind_state_ids(p)</code> and deleted using <code>l_bind_state_delete(p, "stateBinding0")</code>.</p>
 </div>
-<div id="a-smooth-as-a-running-linear-fit" class="section level2">
-<h2 class="hasAnchor">
-<a href="#a-smooth-as-a-running-linear-fit" class="anchor"></a>A smooth as a running linear fit</h2>
+<div class="section level2">
+<h2 id="a-smooth-as-a-running-linear-fit">A smooth as a running linear fit<a class="anchor" aria-label="anchor" href="#a-smooth-as-a-running-linear-fit"></a>
+</h2>
 <p>Linear smoothers can be thought of as the connected predicted values of locally fitted linear models having weights which are maximal at the point <span class="math inline">\(x\)</span> where the prediction is being made and which drop off to zero for <span class="math inline">\(x\)</span> values far away from it.</p>
 <p>To illustrate this we add a straight line to the scatterplot that is fitted to the data via weighted least squares using Gaussian weights. For any collection of <span class="math inline">\(x\)</span> values, the prediction will be made at their median.</p>
 <p>The Gaussian weight function will be centred at the median:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">GaussWt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># Get an estimated standard deviation</span>
-  <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>
+  <span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span>
   <span class="co"># Centre at median</span>
-  <span class="va">xloc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="va">xloc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
   <span class="co"># Gaussian density</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">xloc</span>, sd<span class="op">=</span><span class="va">h</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">xloc</span>, sd<span class="op">=</span><span class="va">h</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Use these weights to fit a line to the data.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -332,11 +335,11 @@
 <span class="co"># Prediction will be at the median of x, fit by</span>
 <span class="co">### weights that decrease with x's</span>
 <span class="co"># distance from the median.</span>
-<span class="va">fitwls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, weights<span class="op">=</span><span class="fu">GaussWt</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="va">fitwls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, weights<span class="op">=</span><span class="fu">GaussWt</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
 <span class="va">linewls</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/l_layer_line.html">l_layer_line</a></span><span class="op">(</span><span class="va">p</span>, 
                         x<span class="op">=</span><span class="va">x</span>,
-                        y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fitwls</span>,
-                                  newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,
+                        y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fitwls</span>,
+                                  newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,
                         label<span class="op">=</span><span class="st">"Fitted line"</span>,
                         linewidth<span class="op">=</span><span class="fl">4</span>,
                         color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
@@ -349,36 +352,36 @@
   <span class="co">## Get the values for x and y from the plot</span>
   <span class="co">## For x</span>
   <span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">}</span>
   
   <span class="co">## For y</span>
   <span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"yTemp"</span><span class="op">]</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ynew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"y"</span><span class="op">]</span><span class="op">}</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ynew</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span><span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"y"</span><span class="op">]</span><span class="op">}</span>
 
   <span class="co">## Now **only** use the active selected points to construct the smooth</span>
   <span class="va">sel</span> <span class="op">&lt;-</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">myPlot</span><span class="op">[</span><span class="st">"active"</span><span class="op">]</span>
   <span class="va">xnew</span> <span class="op">&lt;-</span> <span class="va">xnew</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>
   <span class="va">ynew</span> <span class="op">&lt;-</span> <span class="va">ynew</span><span class="op">[</span><span class="va">sel</span><span class="op">]</span>
-  <span class="va">Nsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sel</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">Nsel</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">xrng</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html">extendrange</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span>
-    <span class="va">xvals.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>,
-                      to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>, 
+  <span class="va">Nsel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sel</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">Nsel</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">xrng</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/extendrange.html" class="external-link">extendrange</a></span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span>
+    <span class="va">xvals.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>,
+                      to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">xrng</span><span class="op">)</span>, 
                       length.out<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
     <span class="co">## Redo line if more than two points.</span>
     <span class="kw">if</span> <span class="op">(</span><span class="va">Nsel</span><span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">fit.wls</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">ynew</span> <span class="op">~</span> <span class="va">xnew</span>, weights<span class="op">=</span><span class="fu">GaussWt</span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span>
-      <span class="va">ywls.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fit.wls</span>,
-                           newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>xnew<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">fit.wls</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">ynew</span> <span class="op">~</span> <span class="va">xnew</span>, weights<span class="op">=</span><span class="fu">GaussWt</span><span class="op">(</span><span class="va">xnew</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">ywls.temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit.wls</span>,
+                           newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>xnew<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span><span class="op">)</span>
       <span class="co">## update the fit</span>
-      <span class="kw">if</span> <span class="op">(</span><span class="va">linewls</span> <span class="op">%in%</span> <span class="fu"><a href="../reference/l_layer_ids.html">l_layer_ids</a></span><span class="op">(</span><span class="va">myPlot</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="kw">if</span> <span class="op">(</span><span class="va">linewls</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="../reference/l_layer_ids.html">l_layer_ids</a></span><span class="op">(</span><span class="va">myPlot</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
         <span class="fu"><a href="../reference/l_configure.html">l_configure</a></span><span class="op">(</span><span class="va">linewls</span>, x<span class="op">=</span><span class="va">xvals.temp</span>, y<span class="op">=</span><span class="va">ywls.temp</span><span class="op">)</span>
       <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
         <span class="co">## If it's been deleted, we recreate it (in the global environment).</span>
         <span class="va">linewls</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="../reference/l_layer_line.html">l_layer_line</a></span><span class="op">(</span><span class="va">myPlot</span>,
                                  x<span class="op">=</span><span class="va">xvals.temp</span>,
-                                 y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fitwls</span>,
-                                           newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span>
+                                 y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fitwls</span>,
+                                           newdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xvals.temp</span><span class="op">)</span>
                                  <span class="op">)</span>,
                                  label<span class="op">=</span><span class="st">"GaussWt at median line"</span>, 
                                  linewidth<span class="op">=</span><span class="fl">4</span>,
@@ -389,12 +392,12 @@
   
   <span class="op">}</span>
   <span class="co">## Update the tcl language's event handler</span>
-  <span class="fu">tcl</span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"idletasks"</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/tcltk/TkCommands.html" class="external-link">tcl</a></span><span class="op">(</span><span class="st">"update"</span>, <span class="st">"idletasks"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>And now bind this update function to change in <code>p</code> of either the <code>select</code> or the <code>active</code> states.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Here we "bind" the anonymous to the named state changes of p</span>
-<span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"active"</span>,<span class="st">"selected"</span><span class="op">)</span>,
+<span class="fu"><a href="../reference/l_bind_state.html">l_bind_state</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"active"</span>,<span class="st">"selected"</span><span class="op">)</span>,
              <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span><span class="fu">updateLocalLine</span><span class="op">(</span><span class="va">p</span>, <span class="fl">10</span>, <span class="fl">5</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">}</span>
 <span class="op">)</span></code></pre></div>
 <p>Selecting the male or female sex in the histograms will show the weighted least squares line for that sex. Brushing a tall thin vertical brush on <code>p2</code> will show how the fitted line changes (or not) as the similar <code>idnum</code>s change. But most interestingly, and the object of this lesson, is to brush <code>p2</code> with a short very wide brush so that the <code>age</code> can be kept roughly constant. As <code>age</code> increases or decreases, the line segment changes its fit: both in height and in slope. The smooth seen earlier is essentially the connected midpoints of these line segments.</p>
@@ -412,11 +415,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Adrian Waddell, R. Wayne Oldford.</p>
+  <p></p>
+<p>Developed by Adrian Waddell, R. Wayne Oldford.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -424,6 +429,8 @@
 
   
 
+
+  
 
   </body>
 </html>

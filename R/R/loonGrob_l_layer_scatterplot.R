@@ -52,10 +52,17 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
 
             color <- s_a$color
             fill <- rep(NA, length(color))
+            size <- s_a$size
 
             pointsWithBorders <- pch %in% 21:24
             fill[pointsWithBorders] <- color[pointsWithBorders]
             color[pointsWithBorders] <- loon::l_getOption("foreground")
+
+            # deal with repeat aesthetic attributes
+            if(len_unique(pch) == 1) pch <- pch[1L]
+            if(len_unique(fill) == 1) fill <- fill[1L]
+            if(len_unique(color) == 1) color <- color[1L]
+            if(len_unique(size) == 1L) size <- size[1L]
 
             points <- pointsGrob(name = "points: primitive glyphs",
                                  x = s_a$x,
@@ -63,7 +70,7 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
                                  pch = pch,
                                  gp = gpar(fill = fill,
                                            col = color,
-                                           fontsize = as_grid_size(s_a$size, "points",
+                                           fontsize = as_grid_size(size, "points",
                                                                    pch = pch))
             )
 
@@ -560,6 +567,10 @@ get_glyph_scale_info <- function(widget){
     })
     names(scaleInfo) <- paste(name, unique_glyph)
     scaleInfo
+}
+
+len_unique <- function(x, incomparables = FALSE, ...) {
+    length(unique(x, incomparables, ...))
 }
 
 # if (!any(is.na(pch)) && !any(pch %in% 21:24)) {

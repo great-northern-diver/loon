@@ -117,7 +117,7 @@ as.loongraph <- function(graph) {
 #'   for the graph objects in the RBGL and Rgraphviz R packages. For more
 #'   information on packages that are useful to work with graphs see the
 #'   \emph{gRaphical Models in R} CRAN Task View at
-#'   \url{https://CRAN.R-project.org/view=gR}.
+#'   \url{https://cran.r-project.org/web/views/}.
 #'
 #' @param loongraph object of class loongraph
 #'

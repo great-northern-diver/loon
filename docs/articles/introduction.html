@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">loon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -82,10 +84,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://youtu.be/JFJcg855HcQ">the (not so) humble (interactive) histogram</a>
+      <a href="https://youtu.be/JFJcg855HcQ" class="external-link">the (not so) humble (interactive) histogram</a>
     </li>
     <li>
-      <a href="https://youtu.be/mMJllGOuDLY">3D interactive scatterplots</a>
+      <a href="https://youtu.be/mMJllGOuDLY" class="external-link">3D interactive scatterplots</a>
     </li>
   </ul>
 </li>
@@ -95,7 +97,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/great-northern-diver/loon">
+  <a href="https://github.com/great-northern-diver/loon" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -110,15 +112,15 @@
 
       
 
-      </header><script src="introduction_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to loon</h1>
-                        <h4 class="author">R.W. Oldford</h4>
+                        <h4 data-toc-skip class="author">R.W. Oldford</h4>
             
-            <h4 class="date">2021-09-23</h4>
+            <h4 data-toc-skip class="date">2022-02-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/master/vignettes/introduction.Rmd"><code>vignettes/introduction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/great-northern-diver/loon/blob/HEAD/vignettes/introduction.Rmd" class="external-link"><code>vignettes/introduction.Rmd</code></a></small>
       <div class="hidden name"><code>introduction.Rmd</code></div>
 
     </div>
@@ -129,23 +131,24 @@
 <p>“Exposure, the effective laying open of the data to display the unanticipated, is to us a major portion of data analysis.” … John Tukey and Martin Wilk (1966)</p>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://great-northern-diver.github.io/loon/">loon</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://great-northern-diver.github.io/loon/" class="external-link">loon</a></span><span class="op">)</span></code></pre></div>
 <p>Because loon is an interactive visualization system, this introduction is meant as a “hands on” tutorial. Not all interactions are from the command line (programmatic). Suggestions for interactions will also be given and questions that draw attention to the outcome of interactions.</p>
 <p>After completing the tutorial, there are numerous other examples of using loon which can be explored. These include</p>
 <ul>
 <li>many of the common arguments to <code><a href="../reference/l_plot.html">l_plot()</a></code> are described in the help topic <code><a href="../reference/l_plot_arguments.html">?l_plot_arguments</a></code>
 </li>
-<li>the <code>R</code> <code><a href="https://great-northern-diver.github.io/loon/reference">help(package = "loon")</a></code> pages for <code>loon</code>, or alternatively online via as <code><a href="../reference/l_web.html">l_web()</a></code>
+<li>the <code>R</code> <code><a href="https://great-northern-diver.github.io/loon/reference" class="external-link">help(package = "loon")</a></code> pages for <code>loon</code>, or alternatively online via as <code><a href="../reference/l_web.html">l_web()</a></code>
 </li>
 <li>other vignettes,</li>
-<li>demos on particular topics given by <code><a href="https://rdrr.io/r/utils/demo.html">demo(package = "loon")</a></code>. These are especially useful because the source code for creating them appears in the console, and</li>
+<li>demos on particular topics given by <code>demo(package = "loon")</code>. These are especially useful because the source code for creating them appears in the console, and</li>
 <li>the loon website appearing from <code><a href="../reference/l_help.html">l_help()</a></code> or <code>R</code> manual only as <code><a href="../reference/l_web.html">l_web()</a></code>.</li>
 </ul>
 <p>Here, we will walk through some of the <strong>basic</strong> functionality.</p>
 <hr>
-<div id="l_plot-the-basic-loon-plot" class="section level1">
-<h1 class="hasAnchor">
-<a href="#l_plot-the-basic-loon-plot" class="anchor"></a><code>l_plot()</code> the basic <code>loon</code> plot</h1>
+<div class="section level2">
+<h2 id="l_plot-the-basic-loon-plot">
+<code>l_plot()</code> the basic <code>loon</code> plot<a class="anchor" aria-label="anchor" href="#l_plot-the-basic-loon-plot"></a>
+</h2>
 <p>Begin with a simple scatterplot of the <code>quakes</code> data from <code>R</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, 
@@ -163,15 +166,15 @@
 <p><img src="images/intro/inspectorQuakesOriginal.png" width="30%" style="display: block; margin: auto;"></p>
 <p>For the moment we’ll focus mainly on the scatterplot.</p>
 <hr>
-<div id="direct-manipulation-on-the-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#direct-manipulation-on-the-plot" class="anchor"></a>Direct manipulation on the plot</h2>
+<div class="section level3">
+<h3 id="direct-manipulation-on-the-plot">Direct manipulation on the plot<a class="anchor" aria-label="anchor" href="#direct-manipulation-on-the-plot"></a>
+</h3>
 <p>The loon scatterplot is highly interactive and can be <strong>directly manipulated</strong> using the mouse. Several interactions are immediately available.</p>
 <p>In what follows, images of a two button mouse (left is primary, right secondary) with a scroll wheel will be used to indicate the interaction. The colour red indicates selection, arrows and double images suggest movement, and any modifier keys are shown in the body of the mouse.</p>
 <hr>
-<div id="panning" class="section level3">
-<h3 class="hasAnchor">
-<a href="#panning" class="anchor"></a>Panning</h3>
+<div class="section level4">
+<h4 id="panning">Panning<a class="anchor" aria-label="anchor" href="#panning"></a>
+</h4>
 <p>To pan the plot, select the plot interior with the right (or secondary) mouse button and move the mouse (with the button still down). The direction of panning can be constrained by holding down the named modifier keys while panning.</p>
 <p><img src="images/intro/panning.png" width="40%" style="display: block; margin: auto;"></p>
 <p>Try it. Select anywhere on the scatterplot and move it</p>
@@ -185,9 +188,9 @@
 <p>How does the larger scatterplot change?</p>
 <hr>
 </div>
-<div id="zooming" class="section level3">
-<h3 class="hasAnchor">
-<a href="#zooming" class="anchor"></a>Zooming</h3>
+<div class="section level4">
+<h4 id="zooming">Zooming<a class="anchor" aria-label="anchor" href="#zooming"></a>
+</h4>
 <p>Another way to dynamically focus on different parts of the plot is by zooming, using <strong>scrolling</strong>:</p>
 <p><img src="images/intro/zooming.png" width="40%" style="display: block; margin: auto;"></p>
 <p>To try it, note that there is a small cluster of 16 points towards the top left of the scatterplot.</p>
@@ -204,9 +207,9 @@
 </ul>
 <hr>
 </div>
-<div id="selecting" class="section level3">
-<h3 class="hasAnchor">
-<a href="#selecting" class="anchor"></a>Selecting</h3>
+<div class="section level4">
+<h4 id="selecting">Selecting<a class="anchor" aria-label="anchor" href="#selecting"></a>
+</h4>
 <p>There are two ways to directly select points on the scatterplot using the mouse: either by selection (one at a time or multiple selections) or by “sweep selection” as shown below:</p>
 <p><img src="images/intro/selecting.png" width="40%" style="display: block; margin: auto;"></p>
 <p>To try this out, on the scatterplot (which should contain only 16 points)</p>
@@ -243,9 +246,9 @@
 <hr>
 </div>
 </div>
-<div id="the-inspector-interacting-with-the-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-inspector-interacting-with-the-plot" class="anchor"></a>The inspector – interacting with the plot</h2>
+<div class="section level3">
+<h3 id="the-inspector-interacting-with-the-plot">The inspector – interacting with the plot<a class="anchor" aria-label="anchor" href="#the-inspector-interacting-with-the-plot"></a>
+</h3>
 <p>By the above experimentation, you will have already discovered how the inspector is used to change the loon plot.</p>
 <p>For example, try checking the “guides” box on the inspector to place a background grid of guide lines on the loon plot. Unchecking removes the guide lines.</p>
 <p>The loon inspector consists of several component pieces.</p>
@@ -271,12 +274,12 @@
 <p><strong>Check</strong>: You should have a scatterplot of open circles with three clusters of points in red, blue, and orange</p>
 <hr>
 </div>
-<div id="more-on-direct-manipulation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-on-direct-manipulation" class="anchor"></a>More on direct manipulation</h2>
-<div id="on-brushing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#on-brushing" class="anchor"></a>on brushing</h3>
+<div class="section level3">
+<h3 id="more-on-direct-manipulation">More on direct manipulation<a class="anchor" aria-label="anchor" href="#more-on-direct-manipulation"></a>
+</h3>
+<div class="section level4">
+<h4 id="on-brushing">on brushing<a class="anchor" aria-label="anchor" href="#on-brushing"></a>
+</h4>
 <p>You should have a scatterplot of open circles with three clusters of points in red, blue, and orange.</p>
 <p>Use the functionality of the loon inspector to (in order)</p>
 <ol style="list-style-type: decimal">
@@ -299,9 +302,9 @@
 <p><strong>Question</strong>: What is going on? When might this functionality be useful?</p>
 <hr>
 </div>
-<div id="on-selection" class="section level3">
-<h3 class="hasAnchor">
-<a href="#on-selection" class="anchor"></a>on selection</h3>
+<div class="section level4">
+<h4 id="on-selection">on selection<a class="anchor" aria-label="anchor" href="#on-selection"></a>
+</h4>
 <p>When done, turn the selection back to the defaults:</p>
 <p><img src="images/intro/inspectorSelectDefaults.png" width="40%" style="display: block; margin: auto auto auto 0;"></p>
 <p>That is,</p>
@@ -320,9 +323,9 @@
 <p><strong>Exercise</strong>: Try out different combinations of the above selections.</p>
 <hr>
 </div>
-<div id="moving-points" class="section level3">
-<h3 class="hasAnchor">
-<a href="#moving-points" class="anchor"></a>moving points</h3>
+<div class="section level4">
+<h4 id="moving-points">moving points<a class="anchor" aria-label="anchor" href="#moving-points"></a>
+</h4>
 <p>For a variety of reasons, we sometimes want to (temporarily) move points in a scatterplot.</p>
 <p>From the inspector:</p>
 <ol style="list-style-type: decimal">
@@ -346,18 +349,18 @@
 </ol>
 <hr>
 </div>
-<div id="adding-colours-to-the-inspector" class="section level3">
-<h3 class="hasAnchor">
-<a href="#adding-colours-to-the-inspector" class="anchor"></a>adding colours to the inspector</h3>
+<div class="section level4">
+<h4 id="adding-colours-to-the-inspector">adding colours to the inspector<a class="anchor" aria-label="anchor" href="#adding-colours-to-the-inspector"></a>
+</h4>
 <p><img src="images/intro/inspectorQuakesPlus10Cols.png" width="30%" style="display: block; margin: auto;"></p>
-<p>More colours can be added directly by clicking on the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> or the <code>+5</code> in the colour modification section of the inspector.</p>
+<p>More colours can be added directly by clicking on the <code>+</code> or the <code>+5</code> in the colour modification section of the inspector.</p>
 <ul>
 <li>clicking <code>+5</code> twice adds 10 new colours</li>
 <li>these colours will persist with the inspector for every loon scatterplot the inspector palette of colours</li>
 </ul>
 <p>The loon system <strong>default</strong> list of colours get be found programmatically:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_getColorList.html">l_getColorList</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_getColorList.html">l_getColorList</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "gray60"    "#A6CEE3"   "pink"      "#B2DF8A"   "#FDBF6F"   "#FFFF99"</code></p>
 <p>Note:</p>
 <ul>
@@ -366,17 +369,17 @@
 <li>
 <p><code>R</code> has a similar set of base colours that is default for all its graphics devices:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "black"   "#DF536B" "#61D04F" "#2297E6" "#28E2E5" "#CD0BBC"</code></p>
 </li>
 <li><p>like the <code>R</code> palette, the loon inspector palette persists.</p></li>
 </ul>
 <hr>
 </div>
-<div id="changing-the-inspector-palette-of-colours" class="section level3">
-<h3 class="hasAnchor">
-<a href="#changing-the-inspector-palette-of-colours" class="anchor"></a>changing the inspector palette of colours</h3>
-<p>At the <strong>beginning of a loon session</strong> (that is, immediately after executing <code><a href="https://great-northern-diver.github.io/loon/">library(loon)</a></code>) you might choose to change the default palette for the inspector to something that suits your tastes/problem.</p>
+<div class="section level4">
+<h4 id="changing-the-inspector-palette-of-colours">changing the inspector palette of colours<a class="anchor" aria-label="anchor" href="#changing-the-inspector-palette-of-colours"></a>
+</h4>
+<p>At the <strong>beginning of a loon session</strong> (that is, immediately after executing <code><a href="https://great-northern-diver.github.io/loon/" class="external-link">library(loon)</a></code>) you might choose to change the default palette for the inspector to something that suits your tastes/problem.</p>
 <p><strong>Note</strong>: There may be unintended side effects to changing the inspector colours after a plot (and hence the inspector) has been created so this should be avoided.</p>
 <p>A variety of functions exist to change an inspector’s palette of colours:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -385,7 +388,7 @@
 <span class="fu"><a href="../reference/l_setColorList_hcl.html">l_setColorList_hcl</a></span><span class="op">(</span>luminance <span class="op">=</span> <span class="fl">80</span><span class="op">)</span>  <span class="co"># set of hcl colours</span>
 <span class="fu"><a href="../reference/l_setColorList_ggplot2.html">l_setColorList_ggplot2</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># ggplot2's palette </span>
 <span class="fu"><a href="../reference/l_setColorList_loon.html">l_setColorList_loon</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># default loon palette</span>
-<span class="fu"><a href="../reference/l_setColorList.html">l_setColorList</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># any set of colours without alpha</span></code></pre></div>
+<span class="fu"><a href="../reference/l_setColorList.html">l_setColorList</a></span><span class="op">(</span><span class="fu"><a href="../reference/l_colRemoveAlpha.html">l_colRemoveAlpha</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># any set of colours without alpha</span></code></pre></div>
 <p>To change the palette</p>
 <ul>
 <li>execute one of these functions</li>
@@ -395,12 +398,12 @@
 <hr>
 </div>
 </div>
-<div id="programmatic-manipulation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#programmatic-manipulation" class="anchor"></a>Programmatic manipulation</h2>
-<div id="accessing-the-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#accessing-the-plot" class="anchor"></a>accessing the plot</h3>
+<div class="section level3">
+<h3 id="programmatic-manipulation">Programmatic manipulation<a class="anchor" aria-label="anchor" href="#programmatic-manipulation"></a>
+</h3>
+<div class="section level4">
+<h4 id="accessing-the-plot">accessing the plot<a class="anchor" aria-label="anchor" href="#accessing-the-plot"></a>
+</h4>
 <p>The plot itself is a (tcl) data structure and can be assigned to an <code>R</code> variable.</p>
 <p>Either at construction (the preferable way):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -416,9 +419,9 @@
 <p>Do this and assign your plot to <code>p</code>. You might have to look at the window to get the string if you have created more than one <code><a href="../reference/l_plot.html">l_plot()</a></code>.</p>
 <hr>
 </div>
-<div id="printing-the-plot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#printing-the-plot" class="anchor"></a>printing the plot</h3>
+<div class="section level4">
+<h4 id="printing-the-plot">printing the plot<a class="anchor" aria-label="anchor" href="#printing-the-plot"></a>
+</h4>
 <p>Were we to now print <code>p</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span> </code></pre></div>
@@ -427,20 +430,20 @@
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"l_plot"</span> <span class="st">"loon"</span> </span></code></pre></div>
 <p>we get the string name of the plot, but with a class attribute. This is the <strong>value</strong> of <code>p</code> and provides us access to a very rich data structure, but one whose values reside in <code>tcl</code>.</p>
 <p>For example, we can access this value and, like plots from <code>lattice</code> or <code>ggplot2</code> produce a <code>grid</code> data structure that can then be displayed as a <code>grid</code> graphic in <code>R</code>.</p>
-<p>The simplest way to achieve this is to use the generic <code>R</code> function <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code></p>
+<p>The simplest way to achieve this is to use the generic <code>R</code> function <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <p>Note that this will always reflect the <em>current state of the loon plot</em>. In this way, you can get snapshots of the loon plot after any interaction.</p>
 <p><strong>Exercise</strong>: Try this. Change <code>p</code> by direct manipulation in <code>loon</code> and repeat.</p>
 <p>This allows the visual representation of a <code>loon</code> plot to be displayed at any time.</p>
 <hr>
 </div>
-<div id="getting-plot-contents" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-plot-contents" class="anchor"></a>getting plot contents</h3>
+<div class="section level4">
+<h4 id="getting-plot-contents">getting plot contents<a class="anchor" aria-label="anchor" href="#getting-plot-contents"></a>
+</h4>
 <p>There are <code>names</code> associated with a loon plot indicating its contents or <strong>states</strong>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><code>[1] "glyph"            "itemLabel"        "showItemLabels"   "linkingGroup"     "linkingKey"       "zoomX"</code></p>
 <p>These features of <code>p</code> can be directly accessed the <code>[]</code> function.</p>
 <p>For example,</p>
@@ -450,14 +453,14 @@
 <p>A more meaningful example might be identify groups with the colours of the points.<br>
 This could be done simply as follows</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
 <span class="va">group1</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span> <span class="op">==</span> <span class="va">unique_cols</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="co"># Number in group 1 (e.g. as you might have -- here from saved colours)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">group1</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">group1</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">425</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Data on first few quakes in group 1.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">group1</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">group1</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>      lat   long depth mag stations</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="sc">-</span><span class="fl">20.42</span> <span class="fl">181.62</span>   <span class="dv">562</span> <span class="fl">4.8</span>       <span class="dv">41</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="sc">-</span><span class="fl">20.62</span> <span class="fl">181.03</span>   <span class="dv">650</span> <span class="fl">4.2</span>       <span class="dv">15</span></span>
@@ -469,47 +472,47 @@ This could be done simply as follows</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">getGroups</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">loonplot</span><span class="op">)</span><span class="op">{</span>
     <span class="co"># make sure it is an "l_plot"</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">is</span><span class="op">(</span><span class="va">loonplot</span>, <span class="st">"l_plot"</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"loonplot must be an l_plot"</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/methods/is.html" class="external-link">is</a></span><span class="op">(</span><span class="va">loonplot</span>, <span class="st">"l_plot"</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"loonplot must be an l_plot"</span><span class="op">)</span>
     
     <span class="co"># use color to identify groups</span>
-    <span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">loonplot</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">unique_cols</span>,
+    <span class="va">unique_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">loonplot</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">unique_cols</span>,
            FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">col</span><span class="op">)</span><span class="op">{</span><span class="va">loonplot</span><span class="op">[</span><span class="st">'color'</span><span class="op">]</span> <span class="op">==</span> <span class="va">col</span><span class="op">}</span>
            <span class="op">)</span>
 <span class="op">}</span>
 
-<span class="va">myGroups</span> <span class="op">&lt;-</span> <span class="fu">getGroups</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>    <span class="co"># returns groups identified by unique colour in p</span>
-<span class="va">nGroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span> <span class="co"># number of groups</span>
+<span class="va">myGroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/getGroups.html" class="external-link">getGroups</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>    <span class="co"># returns groups identified by unique colour in p</span>
+<span class="va">nGroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span> <span class="co"># number of groups</span>
 <span class="va">group1</span> <span class="op">&lt;-</span> <span class="va">myGroups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>     <span class="co"># each group is an element of the list myGroups</span></code></pre></div>
 <p>Similarly, other point symbol characteristics (e.g. <code>size</code>, <code>glyph</code>) might be used to define groups. This is particularly handy when these are first determined interactively.</p>
 <hr>
 </div>
-<div id="setting-plot-contents" class="section level3">
-<h3 class="hasAnchor">
-<a href="#setting-plot-contents" class="anchor"></a>setting plot contents</h3>
+<div class="section level4">
+<h4 id="setting-plot-contents">setting plot contents<a class="anchor" aria-label="anchor" href="#setting-plot-contents"></a>
+</h4>
 <p>In addition to accessing the state values of a loon plot using <code>[]</code>, its values may also be set using <code>[]</code>. For example, try these:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
 
-<span class="va">p</span><span class="op">[</span><span class="st">"size"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">p</span><span class="op">[</span><span class="st">"size"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span>  <span class="op">{</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span>  <span class="op">{</span>
     <span class="va">p</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">myGroups</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="va">p</span><span class="op">[</span><span class="st">"selected"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span>
 
 <span class="co"># something a little more involved for up to 6 groups</span>
-<span class="va">myCols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="st">"purple"</span>, 
+<span class="va">myCols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="st">"purple"</span>, 
             <span class="st">"orange"</span>, <span class="st">"grey10"</span>, <span class="st">"grey80"</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">myGroups</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">p</span><span class="op">[</span><span class="st">"color"</span><span class="op">]</span><span class="op">[</span><span class="va">myGroups</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">myCols</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>
 <span class="op">}</span>
 
 <span class="co"># something crazy</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">p</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, max <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>
+  <span class="va">p</span><span class="op">[</span><span class="st">"xTemp"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span><span class="op">)</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, max <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># putting locations and size back</span>
@@ -518,19 +521,19 @@ This could be done simply as follows</p>
 <hr>
 </div>
 </div>
-<div id="adding-layers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-layers" class="anchor"></a>Adding layers</h2>
+<div class="section level3">
+<h3 id="adding-layers">Adding layers<a class="anchor" aria-label="anchor" href="#adding-layers"></a>
+</h3>
 <p><code>loon</code> plots are actually a little richer still. The scatterplot is only one possible layer in a plot. It could have many more, each layer having different geometric objects.</p>
 <hr>
-<div id="example-adding-maps" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example-adding-maps" class="anchor"></a>Example: adding maps</h3>
+<div class="section level4">
+<h4 id="example-adding-maps">Example: adding maps<a class="anchor" aria-label="anchor" href="#example-adding-maps"></a>
+</h4>
 <p>For example, we can add a map to the current loon plot <code>p</code>.</p>
 <p>First get the relevant map:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>
-<span class="va">NZFijiMap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>
+<span class="va">NZFijiMap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world2"</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>It is added as a “layer” to the loon plot</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">l_layer</span>(p, NZFijiMap, </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> <span class="st">"New Zealand and Fiji"</span>,</span>
@@ -545,32 +548,31 @@ This could be done simply as follows</p>
 <p>Now play with the scaling buttons in the loon inspector.</p>
 <hr>
 </div>
-<div id="effect-of-scaling-choices" class="section level3">
-<h3 class="hasAnchor">
-<a href="#effect-of-scaling-choices" class="anchor"></a>Effect of scaling choices</h3>
+<div class="section level4">
+<h4 id="effect-of-scaling-choices">Effect of scaling choices<a class="anchor" aria-label="anchor" href="#effect-of-scaling-choices"></a>
+</h4>
 <p>Adding the map allows us to see the effect of all three plot scaling choices available in the inspector.</p>
 <p>The effect is best seen on the world view:</p>
 <p><img src="images/intro/quakesWorldViewScaling.png" width="90%" style="display: block; margin: auto;"></p>
 <p>Note that the plot in the world view matches that of the actual plot. Also the aspect ratio changes with the scaling.</p>
 <hr>
 </div>
-<div id="the-layers-tab" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-layers-tab" class="anchor"></a>the “Layers” tab</h3>
+<div class="section level4">
+<h4 id="the-layers-tab">the “Layers” tab<a class="anchor" aria-label="anchor" href="#the-layers-tab"></a>
+</h4>
 <p>The map is added as a layer, which can be seen by selecting the “Layers” tab in the inspector:</p>
 <p><img src="images/intro/quakesLayersInspector.png" width="70%" style="display: block; margin: auto;"></p>
 <p>This allows a lot of interaction with the layers - for example changing their display order, making some of them invisible, grouping layers, and so on.</p>
 <hr>
 </div>
 </div>
-<div id="syntax-loons-l_plot-is-like-base-graphics-plot" class="section level2">
-<h2 class="hasAnchor">
-<a href="#syntax-loons-l_plot-is-like-base-graphics-plot" class="anchor"></a>Syntax: loon’s <code>l_plot()</code> is like base graphics <code>plot()</code>
-</h2>
-<p><code>loon</code>’s <code><a href="../reference/l_plot.html">l_plot()</a></code> syntax <strong>intentionally resembles</strong> that of <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> from the base <code>graphics</code> package:</p>
+<div class="section level3">
+<h3 id="syntax-loons-l_plot-is-like-base-graphics-plot">Syntax: loon’s <code>l_plot()</code> is like base graphics <code>plot()</code><a class="anchor" aria-label="anchor" href="#syntax-loons-l_plot-is-like-base-graphics-plot"></a>
+</h3>
+<p><code>loon</code>’s <code><a href="../reference/l_plot.html">l_plot()</a></code> syntax <strong>intentionally resembles</strong> that of <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> from the base <code>graphics</code> package:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Base graphics</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">long</span>, y <span class="op">=</span> <span class="va">quakes</span><span class="op">$</span><span class="va">lat</span>, 
      xlab <span class="op">=</span> <span class="st">"longitude"</span>, ylab <span class="op">=</span> <span class="st">"latitude"</span>,
      main <span class="op">=</span> <span class="st">"Tonga trench earthquakes"</span><span class="op">)</span>
 
@@ -584,7 +586,7 @@ This could be done simply as follows</p>
 <li>displays <strong>look different</strong>
 </li>
 <li>
-<code><a href="../reference/l_plot.html">l_plot()</a></code> <strong>returns a data structure</strong>; <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> does not
+<code><a href="../reference/l_plot.html">l_plot()</a></code> <strong>returns a data structure</strong>; <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> does not
 <ul>
 <li>a rich data structure with many states</li>
 <li>can be transformed to a grob</li>
@@ -597,13 +599,14 @@ This could be done simply as follows</p>
 </ul>
 </li>
 </ul>
-<p>In loon, the function <code><a href="../reference/plot.loon.html">plot.loon()</a></code> is a <strong>method</strong> of the base <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> generic function that turns the loon plot (as the first argument of <code><a href="../reference/plot.loon.html">plot.loon()</a></code>) into a grid object and plots it on the current <code>R</code> graphics device.</p>
+<p>In loon, the function <code><a href="../reference/plot.loon.html">plot.loon()</a></code> is a <strong>method</strong> of the base <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> generic function that turns the loon plot (as the first argument of <code><a href="../reference/plot.loon.html">plot.loon()</a></code>) into a grid object and plots it on the current <code>R</code> graphics device.</p>
 <hr>
 </div>
 </div>
-<div id="l_hist-the-loon-histogram" class="section level1">
-<h1 class="hasAnchor">
-<a href="#l_hist-the-loon-histogram" class="anchor"></a><code>l_hist()</code> the <code>loon</code> histogram</h1>
+<div class="section level2">
+<h2 id="l_hist-the-loon-histogram">
+<code>l_hist()</code> the <code>loon</code> histogram<a class="anchor" aria-label="anchor" href="#l_hist-the-loon-histogram"></a>
+</h2>
 <p>As seen earlier, the <code>quakes</code> data has some other variates in addition to the latitude and longitude of the quakes.</p>
 <p>Before starting, make sure that you have the four groups coloured in the loon plot <code>p</code> as described earlier. If you don’t, then colour them again now.</p>
 <p>Let’s consider a histogram of the <code>depth</code> of each earthquake.</p>
@@ -628,14 +631,14 @@ This could be done simply as follows</p>
 </ul>
 <hr>
 </div>
-<div id="linking" class="section level1">
-<h1 class="hasAnchor">
-<a href="#linking" class="anchor"></a>Linking</h1>
-<p>Now that we have both a scatterplot and a histogram, we can explore one of the most important features of an interactive data visualization system like loon.</p>
-<div id="linkinggroup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linkinggroup" class="anchor"></a><code>linkingGroup</code>
+<div class="section level2">
+<h2 id="linking">Linking<a class="anchor" aria-label="anchor" href="#linking"></a>
 </h2>
+<p>Now that we have both a scatterplot and a histogram, we can explore one of the most important features of an interactive data visualization system like loon.</p>
+<div class="section level3">
+<h3 id="linkinggroup">
+<code>linkingGroup</code><a class="anchor" aria-label="anchor" href="#linkinggroup"></a>
+</h3>
 <p>The principal feature of loon plots which effect the linking of displays is the setting of a common <code>linkingGroup</code>.</p>
 <ul>
 <li><p>On the histogram inspector, where it says linking group, select the text “none” and replace it with “quakes”</p></li>
@@ -662,8 +665,8 @@ This could be done simply as follows</p>
 <li>
 <p>could also set colours programmatically on the histogram. Here we colour the histogram bars so that those earthquakes that are deepest are darkest.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blues5</span> <span class="op">&lt;-</span> <span class="va">blues9</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span> <span class="co"># select 5 from light blue to dark</span>
-<span class="va">h</span><span class="op">[</span><span class="st">"color"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">blues5</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">$</span><span class="va">depth</span>, breaks<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span> <span class="co"># assign colours by depth</span>
+<code class="sourceCode R"><span class="va">blues5</span> <span class="op">&lt;-</span> <span class="va">blues9</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span><span class="op">]</span> <span class="co"># select 5 from light blue to dark</span>
+<span class="va">h</span><span class="op">[</span><span class="st">"color"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">blues5</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">$</span><span class="va">depth</span>, breaks<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span> <span class="co"># assign colours by depth</span>
 <span class="va">p</span><span class="op">[</span><span class="st">"glyph"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"ccircle"</span>
 <span class="va">p</span><span class="op">[</span><span class="st">"showGuides"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span>
 <span class="co"># plot(p) # will print the plot</span></code></pre></div>
@@ -671,9 +674,9 @@ This could be done simply as follows</p>
 </ul>
 <hr>
 </div>
-<div id="linking-many-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linking-many-plots" class="anchor"></a>linking many plots</h2>
+<div class="section level3">
+<h3 id="linking-many-plots">linking many plots<a class="anchor" aria-label="anchor" href="#linking-many-plots"></a>
+</h3>
 <p>Arbitrarily many plots may be created and linked in loon.</p>
 <p>Consider, for example, adding two more histograms to the same <code>linkingGroup</code>. Note that the linking is done at creation and that the synchronization is by default a “pull”.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -701,32 +704,31 @@ This could be done simply as follows</p>
 <p>Brushing any one of these plots will cause the other plots to highlight in response.</p>
 <p>Note that selection effectively shows the relations in one plot <strong>conditional</strong> upon the values actively being selected (e.g. brushed) in another.</p>
 </div>
-<div id="linkingkey" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linkingkey" class="anchor"></a><code>linkingKey</code>
-</h2>
+<div class="section level3">
+<h3 id="linkingkey">
+<code>linkingKey</code><a class="anchor" aria-label="anchor" href="#linkingkey"></a>
+</h3>
 <p>Observations in a <code>loon</code> plot are uniquely identified (for the purpose of linking) by their <code>linkingKey</code>. Pardon the pun but this is the key to linking in <code>loon</code>.</p>
 <p>For the most part, the default linking is all that you ever need do.<br>
 Trouble may arise, however, if you want to link two different plots that were created with different data frames whose rows do not match row for row. For example, one <code>data.frame</code> might be a re-ordering of the rows of the other. Or, it might be a subset of the rows of the other.</p>
 <p>In either case, to have linking work properly the <code>linkingKey</code> of the plots associated with the two data frames need to be managed.</p>
 <p>For example,</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">new_order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">some_quakes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">new_order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">some_quakes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">quakes_linkingKey</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="st">"linkingKey"</span><span class="op">]</span>
-<span class="va">p_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">new_order</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
+<span class="va">p_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">new_order</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
     linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">new_order</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="va">p_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">some_quakes</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
+<span class="va">p_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">quakes</span><span class="op">[</span><span class="va">some_quakes</span>, <span class="op">]</span>, <span class="fu"><a href="../reference/l_plot.html">l_plot</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span>, title <span class="op">=</span> <span class="st">"quakes reordered"</span>,
     linkingGroup <span class="op">=</span> <span class="st">"quakes"</span>, linkingKey <span class="op">=</span> <span class="va">quakes_linkingKey</span><span class="op">[</span><span class="va">some_quakes</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The new plots <code>p_new</code> and <code>p_subset</code> will link correctly with all the rest.</p>
 <p>Rather than the default values, the <code>linkingKey</code> can be any vector of unique strings used in any newly created plot as above. Of course, not using the default linking keys from <code>loon</code> may require a little more care in management from the user.</p>
 <hr>
 </div>
 </div>
-<div id="three-dimensional-plots---l_plot3d" class="section level1">
-<h1 class="hasAnchor">
-<a href="#three-dimensional-plots---l_plot3d" class="anchor"></a>Three dimensional plots - <code>l_plot3D</code>
-</h1>
+<div class="section level2">
+<h2 id="three-dimensional-plots---l_plot3d">Three dimensional plots - <code>l_plot3D</code><a class="anchor" aria-label="anchor" href="#three-dimensional-plots---l_plot3d"></a>
+</h2>
 <p>Given that the <code>quakes</code> data has three spatial dimensions (<code>long</code>, <code>lat</code>, and <code>depth</code>), it would be natural to view this in a three dimensional scatterplot.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># First, scale the data</span>
@@ -743,118 +745,118 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <p><strong>NOTE</strong> Many methods exist for visualizing higher dimensional data in <code>loon</code>. For e.g. see <code><a href="../reference/l_navgraph.html">help("l_navgraph")</a></code>, <code><a href="../reference/l_pairs.html">help("l_pairs")</a></code>, or <code><a href="../reference/l_serialaxes.html">help("l_serialaxes")</a></code>. See also the online manual <code><a href="../reference/l_web.html">l_web()</a></code>.</p>
 <hr>
 </div>
-<div id="extras" class="section level1">
-<h1 class="hasAnchor">
-<a href="#extras" class="anchor"></a>Extras</h1>
+<div class="section level2">
+<h2 id="extras">Extras<a class="anchor" aria-label="anchor" href="#extras"></a>
+</h2>
 <p>Miscellaneous other topics on and sources of working and programming with <code>loon</code>.</p>
 <hr>
-<div id="more-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-examples" class="anchor"></a>More examples</h2>
+<div class="section level3">
+<h3 id="more-examples">More examples<a class="anchor" aria-label="anchor" href="#more-examples"></a>
+</h3>
 <p>Being able to get and set the plot contents means that it is possible to capture different plot states as <code>grobs</code>. There are a variety of ways to see how you might put <code>loon</code> to use.</p>
 <p>There are of course many smaller examples available through the <code>loon</code>’s <code>R</code> documentation available via</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>and more complex examples and more general discussion via <code>loon</code>’s online web documentation</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/l_web.html">l_web</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># or more generally via the online loon (with complex examples)</span>
 <span class="fu"><a href="../reference/l_help.html">l_help</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <hr>
-<div id="other-vignettes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#other-vignettes" class="anchor"></a>Other vignettes</h3>
+<div class="section level4">
+<h4 id="other-vignettes">Other vignettes<a class="anchor" aria-label="anchor" href="#other-vignettes"></a>
+</h4>
 <p>Other vignettes have been developed to cover a range of topics. These currently include:</p>
 <ul>
 <li>
 <p>An example exploratory analysis: “Visible minorities in Canadian cities” available via</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"minorities"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"minorities"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>This illustrates a variety of <code>loon</code> features including map layers, parallel coordinate axes, and radial axes glyphs in the context of an exploratory analysis of the distribution of visible minorities in 33 Canadian cities.</p>
 </li>
 <li>
 <p>New interactive graphics in <code>loon</code> in a teaching example: “Smoothers and Bone Mineral Density” available via</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"teaching-example-smoothing"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"teaching-example-smoothing"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 <p>This illustrates how to create new interactions in <code>loon</code> through more general bindings. This is done by developing a teaching tool for explaining how smoothing works. The example data set is <code>bone</code> from the <code>loon.data</code> package.</p>
 </li>
 <li>
 <p>Some suggestions on integrating <code>loon</code> plots into an Rmarkdown document: “Loon in RMarkdown” via</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"Rmarkdown"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"Rmarkdown"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span></code></pre></div>
 </li>
 </ul>
 <hr>
 </div>
-<div id="loon-demos" class="section level3">
-<h3 class="hasAnchor">
-<a href="#loon-demos" class="anchor"></a>loon demos</h3>
+<div class="section level4">
+<h4 id="loon-demos">loon demos<a class="anchor" aria-label="anchor" href="#loon-demos"></a>
+</h4>
 <p>There are numerous demos in loon whose source code might be examined for more examples of using <code>loon</code>. To see them all</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># list all demos</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># list all demos</span></code></pre></div>
 <p>The range is quite broad. For example,</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### teaching demos</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_regression"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># lots using the Old Faithful geyser</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_regression_influential"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># change points change the regression fit</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_regression"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># lots using the Old Faithful geyser</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_regression_influential"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># change points change the regression fit</span>
 
 <span class="co">### gapminder</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co">#  basic demo</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_slider"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># year selected on a slider</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># world map and linked with a scatterplot</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co">#  basic demo</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_slider"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># year selected on a slider</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># world map and linked with a scatterplot</span>
 
 <span class="co">### the spatial package sp</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_polygons_sp"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># layer polygons with class sp </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_polygons_sp"</span>, package <span class="op">=</span> <span class="st">"loon"</span><span class="op">)</span>  <span class="co"># layer polygons with class sp </span>
 
 <span class="co">### layering and custom layouts</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_layers"</span><span class="op">)</span>  <span class="co"># demonstrate layer types   </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_layout"</span><span class="op">)</span>  <span class="co"># custom layout widgets      </span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_widgets"</span><span class="op">)</span>  <span class="co"># inspector and plot in one window</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_layers"</span><span class="op">)</span>  <span class="co"># demonstrate layer types   </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_layout"</span><span class="op">)</span>  <span class="co"># custom layout widgets      </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_widgets"</span><span class="op">)</span>  <span class="co"># inspector and plot in one window</span>
 
 <span class="co">### novel brushing and linking</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_knn"</span><span class="op">)</span>  <span class="co"># brushing by k nearest points in some subspace</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span><span class="op">)</span>  <span class="co"># many to one linking </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_knn"</span><span class="op">)</span>  <span class="co"># brushing by k nearest points in some subspace</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_us_and_them_choropleth"</span><span class="op">)</span>  <span class="co"># many to one linking </span>
 
 <span class="co">### high dimensional data and dimensionality reduction</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_ng_images_frey_LLE"</span><span class="op">)</span>  <span class="co"># navigation graphs, image data, LLE</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"l_ng_dimred"</span><span class="op">)</span>  <span class="co"># comparing dimension reduction methods</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_ng_images_frey_LLE"</span><span class="op">)</span>  <span class="co"># navigation graphs, image data, LLE</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"l_ng_dimred"</span><span class="op">)</span>  <span class="co"># comparing dimension reduction methods</span></code></pre></div>
 <p>The code that appears in the console after the demo can be examined and reused to create your own loony <code>loon</code> code.</p>
 <hr>
 </div>
 </div>
-<div id="extensions-to-loon-via-other-packages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extensions-to-loon-via-other-packages" class="anchor"></a>Extensions to loon via other packages</h2>
-<div id="zenplots" class="section level3">
-<h3 class="hasAnchor">
-<a href="#zenplots" class="anchor"></a><code>zenplots</code>
+<div class="section level3">
+<h3 id="extensions-to-loon-via-other-packages">Extensions to loon via other packages<a class="anchor" aria-label="anchor" href="#extensions-to-loon-via-other-packages"></a>
 </h3>
+<div class="section level4">
+<h4 id="zenplots">
+<code>zenplots</code><a class="anchor" aria-label="anchor" href="#zenplots"></a>
+</h4>
 <p>This package is available on CRAN.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"zenplots"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"intro"</span>, package <span class="op">=</span> <span class="st">"zenplots"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"zenplots"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"intro"</span>, package <span class="op">=</span> <span class="st">"zenplots"</span><span class="op">)</span></code></pre></div>
 <p>Provides a means for compact layout of alternating 1d (e.g. histograms) and 2d (e.g. scatterplots) plots. In will layout base <code>graphics</code> plots, <code>grid</code> graphics plots, and <code>loon</code> plots.</p>
 <p>It is similar to <code>pairs</code> plots but allows many many more plots to be displayed. From the introductory vignette:</p>
 <blockquote>
-<p>"A zenplot can show the same information as a pairs plot but with two important display differences.</p>
-<p>First, the matrix organization of the pairs layout is replaced by the “zig-zag” layout of zenplot. Second, the number of plots produced is about half that of a pairs plot allowing each plot in a zenplot to be given more visual space."</p>
+<p>“A zenplot can show the same information as a pairs plot but with two important display differences.</p>
+<p>First, the matrix organization of the pairs layout is replaced by the “zig-zag” layout of zenplot. Second, the number of plots produced is about half that of a pairs plot allowing each plot in a zenplot to be given more visual space.”</p>
 </blockquote>
 </div>
-<div id="specialty-loon-extensions---loon-specialty-packages" class="section level3">
-<h3 class="hasAnchor">
-<a href="#specialty-loon-extensions---loon-specialty-packages" class="anchor"></a>Specialty <code>loon</code> extensions - <code>loon.&lt;specialty&gt;</code> packages</h3>
+<div class="section level4">
+<h4 id="specialty-loon-extensions---loon-specialty-packages">Specialty <code>loon</code> extensions - <code>loon.&lt;specialty&gt;</code> packages<a class="anchor" aria-label="anchor" href="#specialty-loon-extensions---loon-specialty-packages"></a>
+</h4>
 <p>There are/will be other packages available which build on <code>loon</code>. Those developed by us are typically prefixed with <code>loon</code> (e.g. <code>loon.ggplot</code>)</p>
 <p>These will typically be on CRAN when ready, but development versions are accessible from our <strong>great northern diver</strong> <code>github</code> repositories. For example,</p>
 <ul>
-<li><a href="https://github.com/great-northern-diver">https://github.com/great-northern-diver</a></li>
+<li><a href="https://github.com/great-northern-diver" class="external-link">https://github.com/great-northern-diver</a></li>
 </ul>
 <p>There you can see related packages as well as what is coming up.</p>
 <hr>
 </div>
 </div>
-<div id="more-on-grid-graphics-and-loon" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-on-grid-graphics-and-loon" class="anchor"></a>More on grid graphics and loon</h2>
+<div class="section level3">
+<h3 id="more-on-grid-graphics-and-loon">More on grid graphics and loon<a class="anchor" aria-label="anchor" href="#more-on-grid-graphics-and-loon"></a>
+</h3>
 <p>Graphics in the <code>grid</code> package are built up from graphical objects or <code>grobs</code>.</p>
 <p>In <code>loon</code>, the functions <code><a href="../reference/grid.loon.html">grid.loon()</a></code> and <code><a href="../reference/loonGrob.html">loonGrob()</a></code> construct <code>grobs</code> from loon plots which can then be used as any other <code>grob</code> in <code>grid</code></p>
 <p>For example, when transformed to <code>grid</code>, the loon plot <code>p</code> structure becomes a <code>gTree</code> in <code>grid</code>.</p>
@@ -865,14 +867,14 @@ Trouble may arise, however, if you want to link two different plots that were cr
 <code class="sourceCode R"><span class="va">gTree</span><span class="op">[</span><span class="va">GRID.gTree.33</span><span class="op">]</span> </code></pre></div>
 <p>This simply produces the grid data structure corresponding to the current state of the loon plot <code>p</code>, as can be seen from listing its contents:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/grid/grid.ls.html">grid.ls</a></span><span class="op">(</span><span class="va">gp</span><span class="op">)</span>  <span class="co"># lists the contents of the grob</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.ls.html" class="external-link">grid.ls</a></span><span class="op">(</span><span class="va">gp</span><span class="op">)</span>  <span class="co"># lists the contents of the grob</span></code></pre></div>
 <p>The grob <code>gp</code> could now be used with all the functionality of the <code>grid</code> package.</p>
 <p>Note that all of the elements of a loon plot appear in the grob, either explicitly or, if they were not drawn in the loon plot, as an empty <code>grob</code> containing the relevant arguments to drawing them.</p>
 <p>Another function in loon to help that is the <code><a href="../reference/grid.loon.html">grid.loon()</a></code> function</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/grid.loon.html">grid.loon</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <p>will display <code>p</code> as a <code>grid</code> graphic … and all that entails.</p>
 </div>
@@ -890,11 +892,13 @@ Trouble may arise, however, if you want to link two different plots that were cr
 
 
       <footer><div class="copyright">
-  <p>Developed by Adrian Waddell, R. Wayne Oldford.</p>
+  <p></p>
+<p>Developed by Adrian Waddell, R. Wayne Oldford.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -902,6 +906,8 @@ Trouble may arise, however, if you want to link two different plots that were cr
 
   
 
+
+  
 
   </body>
 </html>
