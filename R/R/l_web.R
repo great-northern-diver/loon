@@ -41,7 +41,8 @@
 l_web <- function(page = "index",
                   directory = c("home", "reference", "articles"),
                   package = c("loon", "loon.data", "loon.ggplot",
-                              "loon.tourr", "ggmulti", "zenplots", "diveR"),
+                              "loon.tourr", "ggmulti", "zenplots",
+                              "loon.shiny", "diveR"),
                   site = "https://great-northern-diver.github.io",
                   ...) {
     pkg = match.arg(package)

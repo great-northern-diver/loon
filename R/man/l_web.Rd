@@ -8,7 +8,7 @@ l_web(
   page = "index",
   directory = c("home", "reference", "articles"),
   package = c("loon", "loon.data", "loon.ggplot", "loon.tourr", "ggmulti", "zenplots",
-    "diveR"),
+    "loon.shiny", "diveR"),
   site = "https://great-northern-diver.github.io",
   ...
 )
