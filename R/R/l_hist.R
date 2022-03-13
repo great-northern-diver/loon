@@ -308,9 +308,28 @@ l_hist.default <-  function(x,
 }
 
 #' @rdname l_hist
-#' @param showFactors whether to draw the factor names
+#' @param showFactors whether to show the factor levels as factor labels layered on the plot.
+#'        If \code{FALSE}, the factor labels are hidden and can be turned on
+#'        from the "layers" tab on the inspector.
+#' @param factorLabelAngle is the angle of rotation (in degrees) for the factor labels.
+#' If not specified, an angle of 0 is chosen if there are fewer than 10 labels; labels are
+#' rotated 90 degrees if there are 10 or more. This can also be a numeric vector of length
+#' equal to the number of factor levels in \code{x}.
+#' @param factorLabelSize is the font size for the factor labels (default 12).
+#' @param factorLabelColor is the colour to be used for the factor labels.
+#' (default is \code{l_getOption("foreground")}). Can be a vector of length
+#' equal to that of the number of factor levels in \code{x}.
+#' @param factorLabelY either a single number (default 0), or a numeric vector of length
+#' equal to that of the number of factor levels, determining the
+#' y coordinate(s) for the factor labels.
 #' @export
-l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
+l_hist.factor <-  function(x,
+                           showFactors = length(unique(x)) < 25L,
+                           factorLabelAngle,
+                           factorLabelSize = 12,
+                           factorLabelColor = l_getOption("foreground"),
+                           factorLabelY = 0,
+                           ...) {
 
     if(missing(x))
         return(
@@ -323,10 +342,36 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
         dotArgs$xlabel <-  gsub("\"", "", deparse(substitute(x)))
     }
 
+    if (!is.null(dotArgs$yshows)) {
+        if(dotArgs$yshows == "density"){
+            dotArgs$yshows <- "frequency"
+            warning("For character or factor data, `yshows` cannot be `density`.",
+                    "Switched `yshows` to ", dotArgs$yshows)
+        }
+    }
+
     x <- as.factor(x)
 
     levelNames <- levels(x)
     nlevels <- length(levelNames)
+    if(missing(factorLabelAngle)){
+        if(nlevels >= 10) {
+            factorLabelAngle <- 90
+        } else {
+            factorLabelAngle <- 0
+        }
+    }
+    if(!is.numeric(factorLabelY) | (length(factorLabelY) == 0)) {
+        warning("factorLabelY must be numeric; using default -1")
+        factorLabelY <- rep(-1, nlevels)
+    } else {
+        if(length(factorLabelY) != nlevels) {
+            factorLabelY <- rep(factorLabelY,
+                                length.out = nlevels)
+            }
+        }
+
+
     x <-  unclass(x)  # Get the level numbers as numeric values
     dotArgs$x <- x
 
@@ -342,7 +387,7 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
         uni_x <- unique(x)
         binwidth <- if(length(uni_x) == 1) {
             # This is a single bin histogram
-            # the binwidth can be set as any non-negtive value
+            # the bin width can be set as any non-negative value
             0.1
         } else {
             min(diff(sort(uni_x)))
@@ -354,11 +399,11 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
     hist <- do.call(l_hist.default, dotArgs)
 
     # Add level names to plot
-    ## Adjust text coords
+    ## Adjust text coordinates
     ## The reason to do so is to make sure that
-    ## `labels` always lay down the corresponding bins no matter how origin shifts
+    ## `labels` always lay down the corresponding bins
+    ##  no matter how origin shifts
 
-    if(!showFactors) return(hist)
 
     if(inherits(hist, "l_compound")) {
 
@@ -372,10 +417,16 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
 
                    text_adjust <- text_adjust - 0.5
 
-                   l_layer_texts(h, x = seq(nlevels) + text_adjust, y = rep(-1, nlevels),
-                                 text = levelNames, label = "Factor levels",
-                                 angle = 0,
-                                 size = 12, color = l_getOption("foreground"))
+                   text_layer <- l_layer_texts(h,
+                                               x = seq(nlevels) + text_adjust,
+                                               y = factorLabelY,
+                                               text = levelNames,
+                                               label = "Factor levels",
+                                               angle = factorLabelAngle,
+                                               size = factorLabelSize,
+                                               color = factorLabelColor)
+
+                   if(!showFactors) l_layer_hide(h, text_layer)
                })
 
     } else {
@@ -387,25 +438,67 @@ l_hist.factor <-  function(x, showFactors = length(unique(x)) < 25L, ...) {
 
         text_adjust <- text_adjust - 0.5
 
-        l_layer_texts(hist, x = seq(nlevels) + text_adjust, y = rep(-1, nlevels),
-                      text = levelNames, label = "Factor levels",
-                      angle = 0,
-                      size = 12, color = l_getOption("foreground"))
+        text_layer <- l_layer_texts(hist,
+                                    x = seq(nlevels) + text_adjust,
+                                    y = factorLabelY,
+                                    text = levelNames,
+                                    label = "Factor levels",
+                                    angle = factorLabelAngle,
+                                    size = factorLabelSize,
+                                    color = factorLabelColor)
+
+        if(!showFactors) l_layer_hide(hist, text_layer)
     }
 
     hist
 }
 
 #' @rdname l_hist
+#' @param showFactors whether to show the factor labels (unique strings in \code{x})
+#'        as a layer on the plot.
+#'        If \code{FALSE}, the factor labels are  hidden and can be turned on
+#'        from the "layers" tab on the inspector.
+#' @param factorLabelAngle is the angle of rotation (in degrees) for the factor labels.
+#' If not specified, an angle of 0 is chosen if there are fewer than 10 labels; labels are
+#' rotated 90 degrees if there are 10 or more.  This can also be a numeric vector of length
+#' equal to the number of factor labels.
+#' @param factorLabelSize is the font size for the factor labels (default 12).
+#' @param factorLabelColor is the colour to be used for the factor labels.
+#' (default is \code{l_getOption("foreground")}). Can also be a vector
+#' equal to that of the number of factor labels.
+#' @param factorLabelY either a single number, or a numeric vector of length
+#' equal to the number of factor labels, determining the
+#' y coordinate(s) for the factor labels.
 #' @export
-l_hist.character <- function(x, showFactors = length(unique(x)) < 25L, ...) {
+l_hist.character <- function(x,
+                             showFactors = length(unique(x)) < 25L,
+                             factorLabelAngle,
+                             factorLabelSize = 12,
+                             factorLabelColor = l_getOption("foreground"),
+                             factorLabelY = 0,
+                             ...) {
 
     if(missing(x))
         return(
             l_hist.default(x, ...)
         )
 
-    l_hist.factor(x, showFactors = showFactors, ...)
+    nlevels <- length(unique(x))
+    if(missing(factorLabelAngle)){
+        if(nlevels >= 10) {
+            factorLabelAngle <- 90
+        } else {
+            factorLabelAngle <- 0
+        }
+    }
+
+    l_hist.factor(x,
+                  showFactors = showFactors,
+                  factorLabelAngle = factorLabelAngle,
+                  factorLabelSize = factorLabelSize,
+                  factorLabelColor = factorLabelColor,
+                  factorLabelY = factorLabelY,
+                  ...)
 }
 
 #' @rdname l_hist

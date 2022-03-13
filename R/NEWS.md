@@ -1,8 +1,17 @@
-# loon 1.3.9.9000
+# loon 1.4.0
 
 Beginning changes before the next release on CRAN
 
-* Added "loon.shiny" to l_web() now that it appears as part of diveR package
+* Added `"loon.shiny"` to `l_web()` now that it appears as part of diveR package
+
+* Added arguments to `l_hist()` for character vectors and factors.
+
+  - Now factors ALWAYS created and placed in a layer. 
+  - Factor layer is simply hidden if `showFactors = FALSE`
+  - More flexibility given to user in terms of factor text size, 
+    angle of rotation, and colour
+  - Changed default y positions to 0 so that labels do not disappear with
+    switch to `yshows = "density"`.
 
 # loon 1.3.9
 
