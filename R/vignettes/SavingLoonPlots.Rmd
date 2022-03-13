@@ -1,7 +1,7 @@
 ---
 title: "Saving loon plots"
 author: "R.W. Oldford"
-date: "20/04/2020"
+date: "April 20, 2020"
 output: 
   html_vignette:
     toc: true

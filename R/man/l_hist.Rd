@@ -36,9 +36,25 @@ l_hist(x, ...)
   ...
 )
 
-\method{l_hist}{factor}(x, showFactors = length(unique(x)) < 25L, ...)
+\method{l_hist}{factor}(
+  x,
+  showFactors = length(unique(x)) < 25L,
+  factorLabelAngle,
+  factorLabelSize = 12,
+  factorLabelColor = l_getOption("foreground"),
+  factorLabelY = 0,
+  ...
+)
 
-\method{l_hist}{character}(x, showFactors = length(unique(x)) < 25L, ...)
+\method{l_hist}{character}(
+  x,
+  showFactors = length(unique(x)) < 25L,
+  factorLabelAngle,
+  factorLabelSize = 12,
+  factorLabelColor = l_getOption("foreground"),
+  factorLabelY = 0,
+  ...
+)
 
 \method{l_hist}{data.frame}(x, ...)
 
@@ -140,7 +156,25 @@ specified (i.e. not \code{NULL}) then the plot widget needs to be placed using
 some geometry manager like \code{\link{tkpack}} or \code{\link{tkplace}} in
 order to be displayed. See the examples below.}
 
-\item{showFactors}{whether to draw the factor names}
+\item{showFactors}{whether to show the factor labels (unique strings in \code{x})
+as a layer on the plot.
+If \code{FALSE}, the factor labels are  hidden and can be turned on
+from the "layers" tab on the inspector.}
+
+\item{factorLabelAngle}{is the angle of rotation (in degrees) for the factor labels.
+If not specified, an angle of 0 is chosen if there are fewer than 10 labels; labels are
+rotated 90 degrees if there are 10 or more.  This can also be a numeric vector of length
+equal to the number of factor labels.}
+
+\item{factorLabelSize}{is the font size for the factor labels (default 12).}
+
+\item{factorLabelColor}{is the colour to be used for the factor labels.
+(default is \code{l_getOption("foreground")}). Can also be a vector
+equal to that of the number of factor labels.}
+
+\item{factorLabelY}{either a single number, or a numeric vector of length
+equal to the number of factor labels, determining the
+y coordinate(s) for the factor labels.}
 }
 \value{
 if the argument \code{by} is not set, a \code{loon} widget will be returned;

@@ -37,7 +37,7 @@ l_layer_texts(
 \item{angle}{text rotation}
 
 \item{anchor}{specifies how the information in a text is to be displayed in the widget.
-Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center).
+Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center").
 For example, "nw" means display the information such that its top-left corner is at the
 top-left corner of the widget.}
 

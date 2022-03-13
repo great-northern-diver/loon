@@ -192,10 +192,26 @@ that can be linked with loon's other displays.</p>
 <span class='op'>)</span>
 
 <span class='co'># S3 method for factor</span>
-<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>25L</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>l_hist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>25L</span>,
+  <span class='va'>factorLabelAngle</span>,
+  factorLabelSize <span class='op'>=</span> <span class='fl'>12</span>,
+  factorLabelColor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
+  factorLabelY <span class='op'>=</span> <span class='fl'>0</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>25L</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>l_hist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  showFactors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>&lt;</span> <span class='fl'>25L</span>,
+  <span class='va'>factorLabelAngle</span>,
+  factorLabelSize <span class='op'>=</span> <span class='fl'>12</span>,
+  factorLabelColor <span class='op'>=</span> <span class='fu'><a href='l_getOption.html'>l_getOption</a></span><span class='op'>(</span><span class='st'>"foreground"</span><span class='op'>)</span>,
+  factorLabelY <span class='op'>=</span> <span class='fl'>0</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>l_hist</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
@@ -341,7 +357,33 @@ order to be displayed. See the examples below.</p></td>
     </tr>
     <tr>
       <th>showFactors</th>
-      <td><p>whether to draw the factor names</p></td>
+      <td><p>whether to show the factor labels (unique strings in <code>x</code>)
+as a layer on the plot.
+If <code>FALSE</code>, the factor labels are  hidden and can be turned on
+from the "layers" tab on the inspector.</p></td>
+    </tr>
+    <tr>
+      <th>factorLabelAngle</th>
+      <td><p>is the angle of rotation (in degrees) for the factor labels.
+If not specified, an angle of 0 is chosen if there are fewer than 10 labels; labels are
+rotated 90 degrees if there are 10 or more.  This can also be a numeric vector of length
+equal to the number of factor labels.</p></td>
+    </tr>
+    <tr>
+      <th>factorLabelSize</th>
+      <td><p>is the font size for the factor labels (default 12).</p></td>
+    </tr>
+    <tr>
+      <th>factorLabelColor</th>
+      <td><p>is the colour to be used for the factor labels.
+(default is <code><a href='l_getOption.html'>l_getOption("foreground")</a></code>). Can also be a vector
+equal to that of the number of factor labels.</p></td>
+    </tr>
+    <tr>
+      <th>factorLabelY</th>
+      <td><p>either a single number, or a numeric vector of length
+equal to the number of factor labels, determining the
+y coordinate(s) for the factor labels.</p></td>
     </tr>
     </table>
 

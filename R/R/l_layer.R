@@ -876,7 +876,7 @@ l_layer_text <- function(widget, x, y, text, color="gray60", size=6, angle=0,
 #' @param size font size
 #' @param angle text rotation
 #' @param anchor specifies how the information in a text is to be displayed in the widget.
-#' Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center).
+#' Must be one of the values c("n", "ne", "e", "se", "s", "sw", "w", "nw", "center").
 #' For example, "nw" means display the information such that its top-left corner is at the
 #' top-left corner of the widget.
 #' @param justify when there are multiple lines of text displayed in a widget,
