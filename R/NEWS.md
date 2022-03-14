@@ -1,6 +1,6 @@
 # loon 1.4.0
 
-Beginning changes before the next release on CRAN
+Minor changes and additions
 
 * Added `"loon.shiny"` to `l_web()` now that it appears as part of diveR package
 
