@@ -1,7 +1,7 @@
 loon_attach <- function(libname, pkgname) {
     startMsg <- paste0("loon Version ",
                          utils::packageDescription(pkg = pkgname,
-                                                   field = "Version"),".",
+                                                   fields = "Version"),".",
                          "\n",
                 "To learn more about loon, see l_web()."
     )
