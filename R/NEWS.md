@@ -1,3 +1,11 @@
+# loon 1.4.1
+
+Address a minor issue:
+
+* Issue: Despite setting the `connectedScales` parameter as "none", every loon plot continued to share identical scales.
+
+* Cause: This was due to the `connectedScales` parameter not being passed into the function, leading to a failure in the logical check.
+
 # loon 1.4.0
 
 Minor changes and additions
