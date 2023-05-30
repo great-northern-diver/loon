@@ -1,7 +1,7 @@
 Package: loon
 Type: Package
 Title: Interactive Statistical Data Visualization
-Version: 1.4.0
+Version: 1.4.1
 Date: 2022-03-12
 Authors@R: c(person(given = "Adrian", family = "Waddell", 
                     email = "adrian@waddell.ch", 
@@ -55,5 +55,5 @@ Suggests:
 BugReports: https://github.com/great-northern-diver/loon/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
