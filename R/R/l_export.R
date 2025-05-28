@@ -49,9 +49,7 @@ l_export <- function(widget, filename, width, height) {
     fname
 }
 
-#' @title Return a list of the available image formats when exporting a loon
-#'   plot
-#'
+#' @title Return a list of the available image formats when exporting a loon plot
 #'
 #' @description The supported image formats are dependent on the system
 #'   environment. Plots can always be exported to the Postscript format.

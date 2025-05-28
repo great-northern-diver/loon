@@ -10,11 +10,30 @@ l_linkingWarning <- function(widget, sync = "pull", args, modifiedLinkedStates =
                 " will not be set, since they are pulled from the existing linked plots.",
                 call. = FALSE)
 }
-
+#
+#
+# Note that the following documentation is a quick attempt gleaned from a quick reading of the
+# default code following it.
+#
+#
+#' @title A helper function to determine which, if any, linked variables in a plot are now deprecated.
+#'
+#' @description Checks which linkable states are linked, whether their input state is the default one, valid,
+#' and equal to the plot current states.  It is not intended for the general user.
+#' @param widget the loon widget or a list of loon widgets
+#' @param args named list of state values for linkable state variables named in the list.
+#' @param modifiedLinkedStates vector of variable names having modified link states/
+#' @param l_className class of the loon widget
+#'
+#' @return a named vector, or list of vectors, of logicals indicating whether these linkable states need be deprecated or not.
+#' @export
+#' @keywords internal
 l_getDeprecatedLinkedVar <- function(widget, args, modifiedLinkedStates = character(0L), l_className = NULL) {
     UseMethod("l_getDeprecatedLinkedVar", widget)
 }
 
+#' @export
+#' @keywords internal
 l_getDeprecatedLinkedVar.default <- function(widget, args, modifiedLinkedStates = character(0L), l_className = NULL) {
 
     if(is.null(l_className)) l_className <- class(widget)[1L]
@@ -70,6 +89,8 @@ l_getDeprecatedLinkedVar.default <- function(widget, args, modifiedLinkedStates 
 }
 
 
+#' @export
+#' @keywords internal
 l_getDeprecatedLinkedVar.list <- function(widget, args, modifiedLinkedStates = character(0L), l_className = NULL) {
 
     deprecatedLinkedVars <- lapply(widget,

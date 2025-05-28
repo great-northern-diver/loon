@@ -2,8 +2,8 @@
 % Please edit documentation in R/loon-package.R
 \docType{package}
 \name{loon}
-\alias{loon}
 \alias{loon-package}
+\alias{loon}
 \title{loon: A Toolkit for Interactive Data Visualization and Exploration}
 \description{
 Loon is a toolkit for highly interactive data visualization. Interactions

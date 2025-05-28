@@ -206,35 +206,55 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
 
 ## Helper Functions
 
-# Create a list of polygons or lines
-#
-# library(sp)
-# library(rworldmap)
-# world <- getMap(resolution = "coarse")
-# class(world)
-# isS4(world)
-# xy <- spAsList(world)
-#
-# names(xy)
-# # because tree has same depth for every leaf unlist is ok
-# uxy <- spunlist(xy)
-# unlist(xy, recursive=FALSE)
-#
-# names(uxy)
-#
-# # but here, unlist would be wrong
-# a <- list(list(x=1:2, y=1:2), list(list(x=1:3, y=1:3), list(x=1:4, y=1:4)))
-# spunlist(a)
-# unlist(a, recursive=FALSE)
+#' @title Create a list of polygons or lines from a spatial data object from the \code{sp} package.
+#'
+#' @description
+#' \code{spAsList} is a helper function that should rarely be called directly by the user.
+#' It is an \code{S3} generic function which takes the spatial data object and returns its
+#' components (polygons, lines, et cetera) in a list. Each element could itself be a list.
+#' Different \code{S3} methods are implemented for various spatial data types.
+#'
+#' @param x An \code{sp} spatial data object.
+#'
+#' @return A list of the relevant components of the spatial data object.
+#'
+#' @seealso \code{\link{spunlist}}
+#'
+#' @export
+#' @keywords internal
+#'
+#' @examples
+#'
+#' library(sp)
+#' library(rworldmap)
+#' world <- getMap(resolution = "coarse")
+#' class(world)
+#' isS4(world)
+#' xy <- spAsList(world)
+#'
+#' names(xy)
+#' # because tree has same depth for every leaf unlist is ok
+#' # This is not true otherwise.
+#' uxy <- spunlist(xy)
+#' unlist(xy, recursive=FALSE)
+#' names(uxy)
+#'
+#' # here, unlist would be wrong.
+#'
 spAsList <- function(x) {
     UseMethod("spAsList")
 }
 
+
+#' @export
+#' @keywords internal
 spAsList.default <- function(x) {
     stop("x is not of class SpatialPolygonsDataFrame,
          SpatialPolygons, Polygons, or Polygon")
 }
 
+#' @export
+#' @keywords internal
 spAsList.SpatialPolygonsDataFrame <- function(x) {
     o <- lapply(x@polygons[x@plotOrder], function(m) {
         spAsList(m)
@@ -248,24 +268,33 @@ spAsList.SpatialPolygonsDataFrame <- function(x) {
     o
 }
 
+#' @export
+#' @keywords internal
 spAsList.SpatialPolygons <- function(x) {
     lapply(x@polygons[x@plotOrder], function(m) {
         spAsList(m)
     })
 }
 
+#' @export
+#' @keywords internal
 spAsList.Polygons <- function(x) {
     lapply(x@Polygons[x@plotOrder], function(m) {
         spAsList(m)
     })
 }
 
+#' @export
+#' @keywords internal
 spAsList.Polygon <- function(x) {
     list(x=x@coords[,1], y=x@coords[,2], isHole=x@hole)
 }
 
 
 ## Lines
+##
+#' @export
+#' @keywords internal
 spAsList.SpatialLinesDataFrame <- function(x) {
     o <- lapply(x@lines, function(m) {
         spAsList(m)
@@ -279,24 +308,60 @@ spAsList.SpatialLinesDataFrame <- function(x) {
     o
 }
 
+
+#' @export
+#' @keywords internal
 spAsList.SpatialLines <- function(x) {
     lapply(x@Lines, function(m) {
         spAsList(m)
     })
 }
 
+#' @export
+#' @keywords internal
 spAsList.Lines <- function(x) {
     lapply(x@Lines, function(m) {
         spAsList(m)
     })
 }
 
+#' @export
+#' @keywords internal
 spAsList.Line <- function(x) {
     list(x=x@coords[,1], y=x@coords[,2])
 }
 
 
-# Create a flat list of polygon specifications
+#' @title Create a flat list of polygon specifications
+#' from the list of \code{sp} components returned by \code{spAsList}
+#'
+#' @description
+#' \code{spunlist} is a simple helper function taking the output
+#' from \code{spAsList}. It is a helper function that should
+#' rarely be called directly by the user.
+#' It is not the same as the base \code{unlist}.
+#'
+#' @param x An \code{list} spatial data object.
+#'
+#' @return An appropriately flattened list of the relevant components of the spatial data object.
+#'
+#' @seealso \code{\link{spAsList}}
+#'
+#' @export
+#' @keywords internal
+#'
+#' @examples
+#'
+#' a <- list(list(x=1:2, y=1:2),
+#'           list(list(x=1:3, y=1:3),
+#'                list(x=1:4, y=1:4)))
+#' spunlist(a)
+#'
+#' # Compare to
+#' unlist(a, recursive=TRUE)
+#' # or to
+#' unlist(a, recursive=FALSE)
+#'
 spunlist <- function(x) {
     isLeaf <- function(x) {
         length(x) <= 3 && !is.null(names(x)) && all(names(x)[1:2] == c('x','y'))

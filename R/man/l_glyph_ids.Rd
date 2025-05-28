@@ -16,13 +16,13 @@ List all the non-primitive glyph ids attached to display.
 \code{\link{l_glyph_add}}
 
 Other glyph functions: 
+\code{\link{l_glyph_add}()},
 \code{\link{l_glyph_add.default}()},
 \code{\link{l_glyph_add_image}()},
 \code{\link{l_glyph_add_pointrange}()},
 \code{\link{l_glyph_add_polygon}()},
 \code{\link{l_glyph_add_serialaxes}()},
 \code{\link{l_glyph_add_text}()},
-\code{\link{l_glyph_add}()},
 \code{\link{l_glyph_delete}()},
 \code{\link{l_glyph_getLabel}()},
 \code{\link{l_glyph_getType}()},

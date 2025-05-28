@@ -33,7 +33,7 @@ l_bind <- function(widget, ...) {
 #'
 #' @template param_widget
 #' @param event event patterns as defined for Tk canvas widget
-#'   \url{https://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.
+#'   \url{https://www.tcl-lang.org/man/tcl8.6/TkCmd/bind.htm#M5}.
 #' @template param_callback
 #'
 #' @details
@@ -268,7 +268,7 @@ l_bind_state_reorder <- function(target, ids) {
 #' @param tags item tags as as explained in
 #'   \code{l_help("learn_R_bind.html#item-bindings")}
 #' @param event event patterns as defined for Tk canvas widget
-#'   \url{https://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.
+#'   \url{https://www.tcl-lang.org/man/tcl8.6/TkCmd/bind.htm#M5}.
 #' @template param_callback
 #'
 #' @details

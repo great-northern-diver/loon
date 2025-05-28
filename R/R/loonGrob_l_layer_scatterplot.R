@@ -121,16 +121,36 @@ loonGrob.l_layer_scatterplot <- function(target, name = NULL, gp = NULL, vp = NU
           gp = gp, vp = vp
     )
 }
-
+#' @title Create a grob glyph from a loon widget
+#'
+#' @description
+#' A generic function used by \code{loonGrob} specialized for particular loon widgets.
+#' Used to construct the various point symbol types of the plot.
+#' Different \code{S3} methods are implemented for various loon point glyphs.
+#'
+#' @param widget the loon widget.
+#' @param x argument used to dispatch the method -- an empty structure of class equal to that
+#'          returned by \code{l_glyph_getType}.
+#' @param glyph_info a named list of pertinent components of the glyph including
+#' its x and y locations in the plot as well as other information relevant to the
+#' particular glyph.
+#'
+#' @return A grob for that glyph.
+#'
+#' @seealso \code{\link{loonGrob}}
+#'
+#' @export
 loonGlyphGrob <- function(widget, x, glyph_info) {
     UseMethod("loonGlyphGrob", x)
 }
 
+#' @export
 loonGlyphGrob.default <- function(widget, x, glyph_info) {
     grob()
 }
 
 
+#' @export
 loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
     glyph <- glyph_info$glyph
 
@@ -193,6 +213,8 @@ loonGlyphGrob.primitive_glyph <- function(widget, x, glyph_info) {
 #' g2 <- removeGrob(gr, "image_border", global=TRUE)
 #' grid.newpage(); grid.draw(g2)
 #' }
+
+#' @export
 loonGlyphGrob.image <-  function(widget, x, glyph_info) {
 
     gh <- l_create_handle(c(widget, glyph_info$glyph))
@@ -276,6 +298,7 @@ tcl_img_2_r_raster <- function(img) {
 }
 
 
+#' @export
 loonGlyphGrob.text <-  function(widget, x, glyph_info) {
 
     gh <- l_create_handle(c(widget, glyph_info$glyph))
@@ -289,6 +312,7 @@ loonGlyphGrob.text <-  function(widget, x, glyph_info) {
     )
 }
 
+#' @export
 loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
 
     gh <- l_create_handle(c(widget, glyph_info$glyph))
@@ -318,6 +342,7 @@ loonGlyphGrob.pointrange <-  function(widget, x, glyph_info) {
 
 }
 
+#' @export
 loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
 
     gh <- l_create_handle(c(widget, glyph_info$glyph))
@@ -359,6 +384,7 @@ loonGlyphGrob.polygon <-  function(widget, x, glyph_info) {
 
 
 
+#' @export
 loonGlyphGrob.serialaxes <-  function(widget, x, glyph_info) {
 
     gh <- l_create_handle(c(widget, glyph_info$glyph))

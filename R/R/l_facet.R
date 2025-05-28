@@ -456,6 +456,7 @@ l_getPlots.l_facet <- function(target){
 }
 
 
+#' @export
 loonGrob_layoutType.l_facet <- function(target) "locations"
 
 l_byArgs <- function() {

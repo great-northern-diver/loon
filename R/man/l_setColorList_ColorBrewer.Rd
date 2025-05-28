@@ -5,8 +5,7 @@
 \title{Set loon's color mapping list to the colors from ColorBrewer}
 \usage{
 l_setColorList_ColorBrewer(
-  palette = c("Set1", "Set2", "Set3", "Pastel1", "Pastel2", "Paired", "Dark2",
-    "Accent")
+  palette = c("Set1", "Set2", "Set3", "Pastel1", "Pastel2", "Paired", "Dark2", "Accent")
 )
 }
 \arguments{

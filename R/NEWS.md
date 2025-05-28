@@ -1,6 +1,17 @@
+# loon 1.4.2
+
+Addresses minor documentation issues:
+
+* Added system requirement of Tcl/Tk = 8.6  
+  (current version packaged in R is 8.6.x)
+
+* Added some documentation for a few (internal) functions that are now exported.
+
+
+
 # loon 1.4.1
 
-Address a minor issue:
+Addresses a minor issue:
 
 * Issue: Despite setting the `connectedScales` parameter as "none", every loon plot continued to share identical scales.
 

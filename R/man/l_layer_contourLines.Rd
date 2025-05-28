@@ -20,24 +20,23 @@ l_layer_contourLines(
 \arguments{
 \item{widget}{widget path as a string or as an object handle}
 
-\item{x}{locations of grid lines at which the values in \code{z} are
-    measured.  These must be in ascending order.  By default, equally
-    spaced values from 0 to 1 are used.  If \code{x} is a \code{list},
-    its components \code{x$x} and \code{x$y} are used for \code{x}
-    and \code{y}, respectively. If the list has component \code{z} this
-    is used for \code{z}.}
+\item{x, y}{As described in \code{grDevices::contourLines}:
+locations of grid lines at which the values in z are measured.
+These must be in ascending order.
+By default, equally spaced values from 0 to 1 are used.
+If \code{x} is a list, its components \code{x$x} and \code{x$y} are
+used for \code{x} and \code{y}, respectively.
+If the list has component \code{z} this is used for \code{z}.}
 
-\item{y}{see description for the \code{x} argument}
+\item{z}{As described in \code{grDevices::contourLines}: a matrix
+containing the values to be plotted (\code{NA}s are allowed).
+Note that \code{x} can be used instead of \code{z} for convenience.}
 
-\item{z}{a matrix containing the values to be plotted (\code{NA}s are
-    allowed).  Note that \code{x} can be used instead of \code{z} for
-    convenience.}
+\item{nlevels}{As described in \code{grDevices::contourLines}: number of
+contour levels desired iff \code{levels} is not supplied.}
 
-\item{nlevels}{number of contour levels desired \bold{iff}
-    \code{levels} is not supplied.}
-
-\item{levels}{numeric vector of levels at which to draw contour
-    lines.}
+\item{levels}{As described in \code{grDevices::contourLines}: numeric vector
+of levels at which to draw contour lines.}
 
 \item{asSingleLayer}{if \code{TRUE} a lines layer is used for the line,
 otherwise if \code{FALSE} a group with nested line layers for each line is

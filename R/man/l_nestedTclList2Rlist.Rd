@@ -4,9 +4,12 @@
 \alias{l_nestedTclList2Rlist}
 \title{Convert a Nested Tcl List to an R List}
 \usage{
-l_nestedTclList2Rlist(tclobj, transform = function(x) {
-    as.numeric(x)
-})
+l_nestedTclList2Rlist(
+  tclobj,
+  transform = function(x) {
+     as.numeric(x)
+ }
+)
 }
 \arguments{
 \item{tclobj}{a tcl object as returned by \code{\link[tcltk:TkCommands]{tcl}} or

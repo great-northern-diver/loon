@@ -22,8 +22,6 @@ A n-d transition graph has k-d nodes and all edges that connect
 }
 \details{
 For more information run: \code{l_help("learn_R_display_graph.html.html#graph-utilities")}
-
-
 }
 \examples{
 g <- ndtransitiongraph(nodes=c('A:B', 'A:F', 'B:C', 'B:F'), n=3, separator=':')

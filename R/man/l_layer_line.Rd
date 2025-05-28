@@ -32,7 +32,7 @@ structure.}
 \item{linewidth}{linewidth of outline}
 
 \item{dash}{dash pattern of line, see
-\url{https://www.tcl.tk/man/tcl8.6/TkCmd/canvas.htm#M26}}
+\url{https://www.tcl-lang.org/man/tcl8.6/TkCmd/canvas.htm#M26}}
 
 \item{label}{label used in the layers inspector}
 

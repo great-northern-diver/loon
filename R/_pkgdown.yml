@@ -1,3 +1,7 @@
+url: https://great-northern-diver.github.io/loon/
+template:
+  bootstrap: 5
+
 home:
   strip_header: true
 
@@ -34,6 +38,7 @@ navbar:
   right:
     - icon: fa-github fa-lg
       href: https://github.com/great-northern-diver/loon
+      aria-label: "GitHub repository for loon"
 
 development:
   mode: release
@@ -133,6 +138,7 @@ reference:
     - condGrob
     - l_createCompoundGrob
     - l_get_arrangeGrobArgs
+    - loonGlyphGrob
     - loonGrob_layoutType
     - loonGrobInstantiation
     - as_grid_size

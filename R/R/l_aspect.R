@@ -1,6 +1,5 @@
 #' @title Query the aspect ratio of a plot
 #'
-#'
 #' @template description_aspect_ratio
 #'
 #' @template param_widget
