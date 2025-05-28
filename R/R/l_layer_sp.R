@@ -225,6 +225,7 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
 #'
 #' @examples
 #'
+#' \dontrun{
 #' library(sp)
 #' library(rworldmap)
 #' world <- getMap(resolution = "coarse")
@@ -240,6 +241,7 @@ l_layer.SpatialPoints <- function(widget, x, asMainLayer=FALSE, ...) {
 #' names(uxy)
 #'
 #' # here, unlist would be wrong.
+#' }
 #'
 spAsList <- function(x) {
     UseMethod("spAsList")
