@@ -20,6 +20,7 @@ Different \code{S3} methods are implemented for various spatial data types.
 }
 \examples{
 
+\dontrun{
 library(sp)
 library(rworldmap)
 world <- getMap(resolution = "coarse")
@@ -35,6 +36,7 @@ unlist(xy, recursive=FALSE)
 names(uxy)
 
 # here, unlist would be wrong.
+}
 
 }
 \seealso{
