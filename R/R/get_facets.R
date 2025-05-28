@@ -1,7 +1,30 @@
+#' @title Creates a loon plot for each facet from an existing loon plot.
+#'
+#' @description
+#' A generic function used by \code{l_facet} when facetting an existing loon plot.
+#'
+#' @param widget the loon widget
+#' @param ...  other arguments to the function used to create
+#' the loon plot for each facet.  Depending on the plot being facetted, these
+#' include the arguments \code{by},  \code{on}, \code{parent},  \code{layout},
+#' \code{inheritLayers}, \code{separate}, and \code{bySubstitute}.
+#' See \code{\link{l_facet}} for details on these parameters.
+#' Other loon plot constructor parameters can be passed as well this way.
+#'
+#' @return A list containing the named components \code{plots}, \code{subtitles},
+#' \code{child = child}, and \code{new.toplevel} containing the facets as plots
+#' and other relevant information to construct the facetted plot.
+#'
+#' @seealso \code{\link{l_facet}}
+#'
+#' @export
+#' @keywords internal
 get_facets <- function(widget, ...) {
     UseMethod("get_facets")
 }
 
+#' @export
+#' @keywords internal
 get_facets.loon <- function(widget, by, on,
                             parent = NULL,
                             layout = "grid",
@@ -204,10 +227,12 @@ get_facets.loon <- function(widget, by, on,
     )
 }
 
+#' @export
+#' @keywords internal
 get_facets.l_serialaxes <- function(widget, by, parent = NULL,
                                     layout = "grid", linkingGroup,
                                     inheritLayers = TRUE, separate = FALSE,
-                                    bySubstitute) {
+                                    bySubstitute, ...) {
 
     nDimStates <- setdiff(l_nDimStateNames(widget), "data")
     states <- names(l_info_states(widget))

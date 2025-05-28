@@ -1,6 +1,5 @@
 # loon
 
-[![Build Status](https://travis-ci.org/great-northern-diver/loon.svg?branch=master)](https://travis-ci.org/great-northern-diver/loon) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
 [![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/loon?color=blue)](https://cran.r-project.org/package=loon) 
 [![](https://cranlogs.r-pkg.org/badges/loon)](https://cran.r-project.org/package=loon)
 
@@ -11,12 +10,11 @@ To get more on either system, go look at the `README` in the corresponding direc
 
 We also have two documentation websites
 
-* `Tcl` and `R` documentation [here](http://great-northern-diver.github.io/loon/l_help)
-* `R` only manual style documentation [here](http://great-northern-diver.github.io/loon/)
+* `Tcl` and `R` documentation [here](https://great-northern-diver.github.io/loon/l_help)
+* `R` only manual style documentation [here](https://great-northern-diver.github.io/loon/)
 
 
-`loon` is joint work of [Adrian Waddell](http://adrian.waddell.ch) and
-[R.W. Oldford](http://math.uwaterloo.ca/~rwoldfor/).
+`loon` is joint work of the [Great Northern Diver](https://github.com/great-northern-diver) team.
 
 
 ## On the name

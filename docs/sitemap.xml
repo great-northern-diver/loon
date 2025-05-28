@@ -1,1008 +1,344 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/introduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/logicalQueries.html</loc>
-  </url>
-  <url>
-    <loc>/articles/loonPlotsAndGridGraphics.html</loc>
-  </url>
-  <url>
-    <loc>/articles/savingLoonPlots.html</loc>
-  </url>
-  <url>
-    <loc>/articles/teaching-example-smoothing.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/UI.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/commands.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/gallery.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/index.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/install.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Python_tkinter.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_bind.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_graph.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_hist.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_inspectors.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_pairs.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_plot.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_display_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_intro.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_layer.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_layout.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_linking.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_states.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_R_tcltk.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_Tk.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_bind.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_graph.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_hist.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_inspectors.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_pairs.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_plot.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_display_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_intro.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_layer.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_layout.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_linking.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/learn_Tcl_states.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/linkingActiveTcl.html</loc>
-  </url>
-  <url>
-    <loc>/l_help/videos.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/L2_distance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/UsAndThem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as.graph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_grid_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_hex6color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/char2num.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>/reference/color_loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/complement.html</loc>
-  </url>
-  <url>
-    <loc>/reference/complement.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/completegraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/condGrob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/facet_grid_layout.html</loc>
-  </url>
-  <url>
-    <loc>/reference/facet_separate_layout.html</loc>
-  </url>
-  <url>
-    <loc>/reference/facet_wrap_layout.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_display_color.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_font_info_from_tk.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_layer_states.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_model_display_order.html</loc>
-  </url>
-  <url>
-    <loc>/reference/glyph_to_pch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/graphreduce.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grid.loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hex12tohex6.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_Rlist2nestedTclList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_after_idle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_aspect-set.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_aspect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_basePaths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_binCut.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_canvas.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_canvas_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_canvas_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_canvas_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_canvas_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_context.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_context_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_context_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_context_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_context_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_glyph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_glyph_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_glyph_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_glyph_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_glyph_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_item.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_item_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_item_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_item_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_item_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_layer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_layer_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_layer_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_layer_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_layer_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_navigator.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_navigator_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_navigator_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_navigator_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_navigator_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_state.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_state_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_state_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_state_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_bind_state_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_breaks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_cget.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_colRemoveAlpha.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_colorName.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_compoundPaths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_configure.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_add_context2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_add_geodesic2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_add_slicing2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_getLabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_context_relabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_copyStates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_createCompoundGrob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_create_handle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_currentindex.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_currenttags.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_export.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_export_valid_formats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_facet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getBinData.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getBinIds.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getColorList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getFromPath.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getGraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getLinkedStates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getLocations.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getOption.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getOptionNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getPlots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getSavedStates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_getScaledData.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_get_arrangeGrobArgs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add.default.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add_image.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add_pointrange.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add_polygon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_add_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_getLabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_getType.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyph_relabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_image.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_pointrange.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_glyphs_inspector_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph_inspector_analysis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graph_inspector_navigators.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_add.default.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_add.graph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_add.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_add.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_get.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_getLabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_move.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_relabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_reorder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_graphswitch_set.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_help.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_hexcolor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_hist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_hist_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_hist_inspector_analysis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_image_import_array.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_image_import_files.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_imageviewer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_info_states.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_isLoonWidget.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.Line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.Lines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.Polygon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.Polygons.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialLines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialLinesDataFrame.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialPoints.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialPointsDataFrame.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialPolygons.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.SpatialPolygonsDataFrame.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.density.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer.map.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_bbox.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_contourLines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_demote.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_expunge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_getChildren.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_getLabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_getParent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_getType.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_group.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_groupVisibility.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_heatImage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_hide.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_isVisible.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_layerVisibility.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_lines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_lower.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_move.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_oval.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_points.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_polygon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_polygons.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_printTree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_promote.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_raise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_rasterImage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_rectangle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_rectangles.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_relabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_show.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_smooth.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layer_texts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_layers_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_loonWidgets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_loon_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_make_glyphs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_halign.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_hdist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_jitter.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_reset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_valign.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_move_vdist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_nDimStateNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navgraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_add.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_delete.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_getLabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_getPath.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_ids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_relabel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_walk_backward.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_walk_forward.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_navigator_walk_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_nestedTclList2Rlist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_plots.default.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_plots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_plots.measures.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_plots.scagnostics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_ranges.default.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_ranges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_ranges.measures.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_ng_ranges.scagnostics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_pairs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot3D.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot_arguments.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot_inspector_analysis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_plot_ts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_predict.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_primitiveGlyphs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_redraw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_resize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_saveStates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scale3D.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scaleto_active.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scaleto_layer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scaleto_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scaleto_selected.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_scaleto_world.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_serialaxes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_serialaxes_inspector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setAspect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList_ColorBrewer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList_baseR.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList_ggplot2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList_hcl.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setColorList_loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setLinkedStates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setOption.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_setTitleFont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_size-set.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_state_names.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_subwin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_throwErrorIfNotLoonWidget.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_toR.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_toplevel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_userOptionDefault.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_userOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_web.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_widget.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_worldview.html</loc>
-  </url>
-  <url>
-    <loc>/reference/l_zoom.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linegraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linegraph.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrobInstantiation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loonGrob_layoutType.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loon_palette.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/measures1d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/measures2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/minority.html</loc>
-  </url>
-  <url>
-    <loc>/reference/names.loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ndtransitiongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/olive.html</loc>
-  </url>
-  <url>
-    <loc>/reference/oliveAcids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/oliveLocations.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.loon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.loongraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.l_layer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.measures1d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.measures2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scagnostics2d.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tcl_img_2_r_raster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tkcolors.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://great-northern-diver.github.io/loon/404.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/introduction.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/logicalQueries.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/loonPlotsAndGridGraphics.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/savingLoonPlots.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/articles/teaching-example-smoothing.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/authors.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/UI.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/commands.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/gallery.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/install.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Python_tkinter.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_bind.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_graph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_hist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_inspectors.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_pairs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_plot.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_display_serialaxes.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_intro.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_layout.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_linking.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_states.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_R_tcltk.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_Tk.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_bind.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_graph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_hist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_inspectors.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_pairs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_plot.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_display_serialaxes.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_intro.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_layout.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_linking.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/learn_Tcl_states.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/linkingActiveTcl.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/l_help/videos.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/news/index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/L2_distance.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/UsAndThem.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/as.graph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/as.loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/as_grid_size.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/as_hex6color.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/char2num.data.frame.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/color_loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/complement.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/complement.loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/completegraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/condGrob.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/facet_grid_layout.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/facet_separate_layout.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/facet_wrap_layout.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/get_display_color.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/get_facets.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/get_font_info_from_tk.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/get_layer_states.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/get_model_display_order.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/glyph_to_pch.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/graphreduce.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/grid.loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/hex12tohex6.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_Rlist2nestedTclList.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_after_idle.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_aspect-set.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_aspect.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_basePaths.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_binCut.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_canvas.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_canvas_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_canvas_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_canvas_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_canvas_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_context.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_context_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_context_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_context_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_context_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_glyph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_glyph_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_glyph_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_glyph_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_glyph_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_item.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_item_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_item_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_item_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_item_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_layer_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_layer_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_layer_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_layer_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_navigator.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_navigator_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_navigator_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_navigator_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_navigator_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_state.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_state_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_state_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_state_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_bind_state_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_breaks.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_cget.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_colRemoveAlpha.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_colorName.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_compoundPaths.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_configure.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_add_context2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_add_geodesic2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_add_slicing2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_getLabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_context_relabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_copyStates.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_createCompoundGrob.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_create_handle.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_currentindex.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_currenttags.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_data.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_export.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_export_valid_formats.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_facet.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getBinData.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getBinIds.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getColorList.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getDeprecatedLinkedVar.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getFromPath.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getGraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getLinkedStates.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getLocations.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getOption.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getOptionNames.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getPlots.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getSavedStates.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_getScaledData.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_get_arrangeGrobArgs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add.default.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add_image.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add_pointrange.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add_polygon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add_serialaxes.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_add_text.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_getLabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_getType.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyph_relabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyphs_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyphs_inspector_image.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyphs_inspector_pointrange.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyphs_inspector_serialaxes.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_glyphs_inspector_text.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graph_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graph_inspector_analysis.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graph_inspector_navigators.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_add.default.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_add.graph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_add.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_add.loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_get.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_getLabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_move.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_relabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_reorder.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_graphswitch_set.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_help.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_hexcolor.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_hist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_hist_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_hist_inspector_analysis.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_image_import_array.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_image_import_files.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_imageviewer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_info_states.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_isLoonWidget.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.Line.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.Lines.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.Polygon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.Polygons.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialLines.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialLinesDataFrame.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialPoints.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialPointsDataFrame.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialPolygons.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.SpatialPolygonsDataFrame.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.density.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer.map.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_bbox.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_contourLines.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_demote.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_expunge.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_getChildren.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_getLabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_getParent.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_getType.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_group.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_groupVisibility.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_heatImage.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_hide.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_index.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_isVisible.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_layerVisibility.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_line.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_lines.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_lower.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_move.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_oval.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_points.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_polygon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_polygons.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_printTree.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_promote.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_raise.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_rasterImage.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_rectangle.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_rectangles.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_relabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_show.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_smooth.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_text.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layer_texts.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_layers_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_loonWidgets.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_loon_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_make_glyphs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_grid.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_halign.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_hdist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_jitter.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_reset.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_valign.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_move_vdist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_nDimStateNames.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navgraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_add.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_delete.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_getLabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_getPath.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_ids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_relabel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_walk_backward.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_walk_forward.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_navigator_walk_path.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_nestedTclList2Rlist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_plots.default.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_plots.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_plots.measures.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_plots.scagnostics.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_ranges.default.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_ranges.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_ranges.measures.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_ng_ranges.scagnostics.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_pairs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot3D.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot_arguments.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot_inspector_analysis.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_plot_ts.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_predict.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_primitiveGlyphs.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_redraw.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_resize.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_saveStates.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scale3D.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scaleto_active.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scaleto_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scaleto_plot.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scaleto_selected.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_scaleto_world.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_serialaxes.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_serialaxes_inspector.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setAspect.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList_ColorBrewer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList_baseR.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList_ggplot2.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList_hcl.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setColorList_loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setLinkedStates.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setOption.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_setTitleFont.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_size-set.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_size.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_state_names.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_subwin.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_throwErrorIfNotLoonWidget.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_toR.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_toplevel.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_userOptionDefault.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_userOptions.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_web.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_widget.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_worldview.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/l_zoom.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/linegraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/linegraph.loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loonFacets.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loonGlyphGrob.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loonGrob.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loonGrobInstantiation.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loonGrob_layoutType.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loon_palette.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/measures1d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/measures2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/minority.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/names.loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/ndtransitiongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/olive.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/oliveAcids.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/oliveLocations.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/plot.loon.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/plot.loongraph.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/print.l_layer.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/print.measures1d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/print.measures2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/scagnostics2d.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/spAsList.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/spunlist.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/tcl_img_2_r_raster.html</loc></url>
+<url><loc>https://great-northern-diver.github.io/loon/reference/tkcolors.html</loc></url>
 </urlset>
+

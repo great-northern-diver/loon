@@ -10,7 +10,7 @@ l_bind_canvas(widget, event, callback)
 \item{widget}{widget path as a string or as an object handle}
 
 \item{event}{event patterns as defined for Tk canvas widget
-\url{https://www.tcl.tk/man/tcl8.6/TkCmd/bind.htm#M5}.}
+\url{https://www.tcl-lang.org/man/tcl8.6/TkCmd/bind.htm#M5}.}
 
 \item{callback}{callback function is an R function which is called by the Tcl
 interpreter if the event of interest happens. Note that in loon the 

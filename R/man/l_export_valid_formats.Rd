@@ -2,8 +2,7 @@
 % Please edit documentation in R/l_export.R
 \name{l_export_valid_formats}
 \alias{l_export_valid_formats}
-\title{Return a list of the available image formats when exporting a loon
-  plot}
+\title{Return a list of the available image formats when exporting a loon plot}
 \usage{
 l_export_valid_formats()
 }

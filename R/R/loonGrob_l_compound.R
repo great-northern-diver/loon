@@ -92,10 +92,13 @@ loonGrob_layoutType <- function(target) {
     UseMethod("loonGrob_layoutType", target)
 }
 
+
+#' @export
 loonGrob_layoutType.default <- function(target) {
     stop("loonGrob_layoutType.default has no valid inheritance; not an l_compound plot")
 }
 
+#' @export
 loonGrob_layoutType.l_compound <- function(target){
     "locations"
 }

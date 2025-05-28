@@ -503,7 +503,6 @@ graphreduce <- function(graph, separator) {
 #' @templateVar page learn_R_display_graph.html
 #' @templateVar section graph-utilities
 #' @template see_l_help
-#' @details
 #'
 #'
 #' @template return_loongraph

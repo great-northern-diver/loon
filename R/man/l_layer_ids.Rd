@@ -18,8 +18,6 @@ Every layer within a display has a unique id. This function
   returns a list of all the layer ids for a widget.
 }
 \details{
-
-
 For more information run: \code{l_help("learn_R_layer.html#add-move-delete-layers")}
 }
 \examples{

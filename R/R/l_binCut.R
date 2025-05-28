@@ -20,7 +20,7 @@
 #' for arbitrary vector \code{labels} a vector of bins labelled in order of \code{labels} will be returned.
 #' Inactive cases appear in no bin and so are assigned the value of \code{active} when given.
 #' The default \code{active} value also depends on \code{labels}:  when \code{labels = NULL}, the default \code{active} is \code{"(-Inf, Inf)"};
-#' when 'code{labels = FALSE}, the default \code{active} is  \code{-1}; and when \code{labels} is a vector of length equal
+#' when \code{labels = FALSE}, the default \code{active} is  \code{-1}; and when \code{labels} is a vector of length equal
 #' to the number of bins, the default \code{active} is \code{NA}.
 #' The value of \code{active} denotes the bin name for the inactive cases.
 #'

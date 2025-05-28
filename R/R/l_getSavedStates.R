@@ -130,7 +130,7 @@
 l_getSavedStates <- function(file = stop("missing name of file"), ...) {
     # ... are other arguments passed on to saveRDS()
     result <- readRDS(file = file, ...)
-    if (class(result) != "l_savedStates") {
+    if (!is(result, "l_savedStates")) {
         warning("value returned is not of type \"l_savedStates\" ")
         }
     result
