@@ -3,53 +3,52 @@
 #
 #     library(testthat)
 library(loon)
-library(loon.data)
 library(grid)
 context("test_loonGrob")
 
 test_that("plot layers have correct grid structure", {
-    p <- with(olive,
-              l_plot(x=linoleic, y=oleic,
-                     color=Region, title="Olive Data"))
+    p <- with(iris,
+              l_plot(x=Sepal.Length, y=Petal.Length,
+                     color=Species, title="Iris Data"))
     ## Layer a Group
     l.g <- l_layer_group(p, label="Drawings", parent="root", index="end")
 
     l.pts <- l_layer_points(p,
-                            x=c(200, 450, 1800),
-                            y=c(6000, 8000, 7000),
-                            color=c("green", "orange", "lightblue"),
+                            x=c(4, 6, 6),
+                            y=c(1, 2, 6),
+                            color=c("green", "orange", "black"),
                             parent=l.g)
 
     l_scaleto_layer(p, l.pts)
 
     l_scaleto_world(p)
 
-    l_configure(l.pts, color="thistle", size=30)
+    l_configure(l.pts, color="blue")
 
     l_configure(l.pts,
-                x=seq(from=200,to=1600, length.out=20),
-                y=seq(from=6000,to=8000, length.out=20),
+                x=seq(from=4,to=8, length.out=20),
+                y=seq(from=1,to=7, length.out=20),
                 color="steelblue", size=20:39)
 
     l_layer_relabel(p, l.pts, "Different Sizes")
     l_layer_move(p, l.pts, parent="root")
 
     ## Polygon
-    i <- with(olive, chull(linoleic, oleic))
-    x.hull <- olive$linoleic[i]
-    y.hull <- olive$oleic[i]
+    i <- with(iris, chull(Sepal.Length, Petal.Length))
+    x.hull <- iris$Sepal.Length[i]
+    y.hull <- iris$Petal.Length[i]
     l_layer_polygon(p, x.hull, y.hull, color="thistle",
                     linecolor="black", linewidth=4, parent=l.g)
     ## Rectangle
-    l_layer_rectangle(p, x=c(1100, 1300), y=c(7600, 8300), linewidth=2)
+    l_layer_rectangle(p, x=c(5, 6), y=c(4, 6), linewidth=2)
 
     ## Oval
-    l_layer_oval(p, x=c(1500, 1750), y=c(7900, 8100),
+    l_layer_oval(p, x=c(5, 6), y=c(4, 7),
                  color="", linecolor="orange", linewidth=4)
 
     ## Line
-    x <- with(olive, linoleic[Region=="North"])
-    y <- with(olive, oleic[Region=="North"])
+    x <- with(iris, Sepal.Length[Species=="setosa"])
+    y <- with(iris, Petal.Length[Species=="setosa"])
 
     fit <- lm(y~x)
     ##summary(fit)
@@ -62,7 +61,7 @@ test_that("plot layers have correct grid structure", {
                             y=c(yp[,2],rev(yp[,3])),
                             color="lightgreen",
                             linecolor= "darkgreen", linewidth=2,
-                            label="predition interval west liguria")
+                            label="prediction interval west liguria")
 
     l.fit <- l_layer_line(p, x=xr, y=yp[,1],
                           color="darkgreen", linewidth=8,
