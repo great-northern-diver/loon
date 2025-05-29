@@ -9,7 +9,7 @@ vignette: >
   %\VignetteIndexEntry{Introduction to loon}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{maps, grid}
+  %\VignetteDepends{grid}
 ---
 
 ```{r setup, include=FALSE}
@@ -730,10 +730,15 @@ First get the relevant map:
 
 
 ```{r gettingAMap, eval = FALSE}
-library(maps)
-NZFijiMap <- map("world2", 
+if (requireNamespace("maps", quietly = TRUE)) {
+  NZFijiMap <- map("world2", 
                  regions=c("New Zealand", "Fiji"),
                  plot=FALSE)
+} else {
+  message("Please install maps to run this example.")
+}
+
+
 ```
 
 

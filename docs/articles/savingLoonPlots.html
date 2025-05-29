@@ -233,12 +233,16 @@ what the current device is.</p>
 <p>One such device is <code><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png()</a></code> which allows R plots to be
 drawn as a <code>png</code> graphic. It would work like this</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># turn the png graphics device on with name of the file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"myplot_via_R.png"</span>, width <span class="op">=</span> <span class="fl">600</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co"># Draw the static plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span><span class="co"># Turn the device off/close the file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"png"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># turn the png graphics device on with name of the file</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"myplot_via_R.png"</span>, width <span class="op">=</span> <span class="fl">600</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
+<span>  <span class="co"># Draw the static plot</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span>  <span class="co"># Turn the device off/close the file</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Please install png to run this example."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="including-saved-graphics-in-your-report">Including saved graphics in your report<a class="anchor" aria-label="anchor" href="#including-saved-graphics-in-your-report"></a>

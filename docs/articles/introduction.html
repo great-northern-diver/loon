@@ -604,8 +604,12 @@ more, each layer having different geometric objects.</p>
 <code>p</code>.</p>
 <p>First get the relevant map:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps" class="external-link">maps</a></span><span class="op">)</span></span>
-<span><span class="va">NZFijiMap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world2"</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"maps"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">NZFijiMap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html" class="external-link">map</a></span><span class="op">(</span><span class="st">"world2"</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New Zealand"</span>, <span class="st">"Fiji"</span><span class="op">)</span>,</span>
+<span>        plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Please install maps to run this example."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>It is added as a “layer” to the loon plot</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">l_layer</span>(p, NZFijiMap, </span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>        <span class="at">label =</span> <span class="st">"New Zealand and Fiji"</span>,</span>
