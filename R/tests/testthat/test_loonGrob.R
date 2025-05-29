@@ -3,6 +3,7 @@
 #
 #     library(testthat)
 library(loon)
+library(loon.data)
 library(grid)
 context("test_loonGrob")
 
