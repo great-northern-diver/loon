@@ -9,7 +9,7 @@ vignette: >
   %\VignetteIndexEntry{Saving loon plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{grid, gridExtra, png}
+  %\VignetteDepends{grid, gridExtra}
   \usepackage[utf8]{inputenc}
 geometry: margin=.75in
 urlcolor: blue
@@ -170,12 +170,16 @@ One such device is `png()` which allows R plots to be drawn as a `png` graphic.
 It would work like this
 
 ```{r png device, eval = FALSE}
-# turn the png graphics device on with name of the file
-png(file = "myplot_via_R.png", width = 600, height = 500)
-# Draw the static plot
-plot(p)
-# Turn the device off/close the file
-dev.off()
+if (requireNamespace("png", quietly = TRUE)) {
+  # turn the png graphics device on with name of the file
+  png(file = "myplot_via_R.png", width = 600, height = 500)
+  # Draw the static plot
+  plot(p)
+  # Turn the device off/close the file
+  dev.off()
+} else {
+  message("Please install png to run this example.")
+}
 ```
 
 ### Including saved graphics in your report
