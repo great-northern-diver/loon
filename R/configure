@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# ------------------------------------------------------------------
+# configure  —  Check that Tcl and Tk are version 8.6 ≤ X < 9.0
+# ------------------------------------------------------------------
+
+set -e
+
+echo "Checking for Tcl/Tk version ≥ 8.6 and < 9.0..."
+
+# ------------------------------------------------------------------
+# Helper: compare two “dotted” version strings.
+#
+# version_ge A B  returns true (exit code 0) if A ≥ B lexicographically
+#                  (using sort -V logic), false otherwise.
+# ------------------------------------------------------------------
+version_ge() {
+  [ "$1" = "$2" ] && return 0
+  lower=$(printf '%s\n' "$1" "$2" | sort -V | head -n1)
+  [ "$lower" = "$2" ]
+}
+
+# ------------------------------------------------------------------
+# 1. Locate a Tcl interpreter (tclsh).  Fail if not found.
+# ------------------------------------------------------------------
+TCLSH=$(command -v tclsh || true)
+if [ -z "$TCLSH" ]; then
+  echo "ERROR: could not find 'tclsh' in PATH." 1>&2
+  exit 1
+fi
+
+# ------------------------------------------------------------------
+# 2. Query the Tcl version
+# ------------------------------------------------------------------
+TCL_VERSION=$("$TCLSH" <<EOF
+puts [info tclversion]
+EOF
+)
+
+# Trim whitespace/newlines
+TCL_VERSION=$(printf '%s\n' "$TCL_VERSION" | tr -d '[:space:]')
+
+echo "  Detected Tcl version: $TCL_VERSION"
+
+# ------------------------------------------------------------------
+# 3. Enforce 8.6 ≤ Tcl version < 9.0
+# ------------------------------------------------------------------
+
+# Case A: tcl < 8.6  → ERROR
+if ! version_ge "$TCL_VERSION" "8.6"; then
+  echo "ERROR: Tcl version $TCL_VERSION found, but ≥ 8.6 is required." 1>&2
+  exit 1
+fi
+
+# Case B: tcl ≥ 9.0 → ERROR
+if version_ge "$TCL_VERSION" "9.0"; then
+  echo "ERROR: Tcl version $TCL_VERSION found, but < 9.0 is required." 1>&2
+  exit 1
+fi
+
+echo "  Tcl version $TCL_VERSION is acceptable."
+
+# ------------------------------------------------------------------
+# 4. Query the Tk version (optional, if your package uses the Tk GUI)
+# ------------------------------------------------------------------
+#    We try loading Tk via the same tclsh.  If tk isn’t present,
+#    issue a warning (you can decide whether to treat missing Tk as error).
+# ------------------------------------------------------------------
+
+TK_VERSION=$("$TCLSH" <<EOF
+package require Tk
+puts [package present Tk]
+EOF
+) 2>/dev/null || TK_VERSION=""
+
+TK_VERSION=$(printf '%s\n' "$TK_VERSION" | tr -d '[:space:]')
+
+if [ -z "$TK_VERSION" ]; then
+  echo "WARNING: Could not detect a 'Tk' package from tclsh."
+  echo "         If 'loon' needs Tk at runtime, make sure Tk ≥ 8.6 < 9.0 is installed."
+else
+  echo "  Detected Tk version: $TK_VERSION"
+
+  # Case A: tk < 8.6  → ERROR
+  if ! version_ge "$TK_VERSION" "8.6"; then
+    echo "ERROR: Tk version $TK_VERSION found, but ≥ 8.6 is required." 1>&2
+    exit 1
+  fi
+
+  # Case B: tk ≥ 9.0 → ERROR
+  if version_ge "$TK_VERSION" "9.0"; then
+    echo "ERROR: Tk version $TK_VERSION found, but >= 8.6 and < 9.0 is required." 1>&2
+    exit 1
+  fi
+
+  echo "  Tk version $TK_VERSION is acceptable."
+fi
+
+exit 0
+
