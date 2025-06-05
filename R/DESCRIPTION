@@ -1,8 +1,8 @@
 Package: loon
 Type: Package
 Title: Interactive Statistical Data Visualization
-Version: 1.4.2
-Date: 2025-05-26
+Version: 1.4.3
+Date: 2025-06-05
 Authors@R: c(person(given = "Adrian", family = "Waddell", 
                     email = "adrian@waddell.ch", 
                     role = c("aut")),
@@ -19,7 +19,7 @@ Authors@R: c(person(given = "Adrian", family = "Waddell",
 URL: https://great-northern-diver.github.io/loon/
 Description: An extendable toolkit for interactive data visualization and exploration.
 License: GPL-2
-SystemRequirements: Tcl/Tk = 8.6
+SystemRequirements: Tcl/Tk (>= 8.6, < 9.0)
 Depends:
     R (>= 3.5.0),
     methods,
