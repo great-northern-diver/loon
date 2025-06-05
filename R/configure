@@ -1,0 +1,73 @@
+#!/bin/sh
+
+echo "=== Checking Tcl/Tk version (≥ 8.6 and < 9.0) ==="
+
+USE_SOURCE=""
+TCLSH=""
+
+# -----------------------------------------------------------------------------
+# 1) Try to detect Tcl/Tk version from R itself (if built with tcltk)
+# -----------------------------------------------------------------------------
+R_TCL_VERSION=$(Rscript -e 'if (capabilities("tcltk")) cat(tcltk::tclVersion())' 2>/dev/null)
+
+if [ $? -eq 0 ] && [ -n "$R_TCL_VERSION" ]; then
+  MAJOR=$(echo "$R_TCL_VERSION" | cut -d. -f1)
+  MINOR=$(echo "$R_TCL_VERSION" | cut -d. -f2)
+  echo "→ R reports Tcl version $R_TCL_VERSION"
+
+  if [ "$MAJOR" -eq 8 ] && [ "$MINOR" -ge 6 ]; then
+    echo "✔ R Tcl version $R_TCL_VERSION is acceptable (≥ 8.6 < 9.0)."
+    USE_SOURCE="r"
+  elif [ "$MAJOR" -ge 9 ]; then
+    echo "✘ R Tcl version $R_TCL_VERSION is ≥ 9.0; not acceptable."
+    exit 1
+  else
+    echo "✘ R Tcl version $R_TCL_VERSION is < 8.6; not acceptable."
+    # Fall through to system check
+  fi
+else
+  echo "→ Could not detect Tcl/Tk via Rscript; falling back to system tclsh"
+fi
+
+# -----------------------------------------------------------------------------
+# 2) Fall back to known tclsh paths
+# -----------------------------------------------------------------------------
+if [ -z "$USE_SOURCE" ]; then
+  for candidate in \
+      "$(command -v tclsh8 2>/dev/null)" \
+      "$(command -v tclsh 2>/dev/null)" \
+      /usr/local/opt/tcl-tk@8/bin/tclsh \
+      /opt/homebrew/opt/tcl-tk@8/bin/tclsh \
+      /usr/local/bin/tclsh \
+      /opt/homebrew/bin/tclsh; do
+
+    if [ -x "$candidate" ]; then
+      VERSION=$("$candidate" <<< 'puts [info tclversion]' 2>/dev/null)
+      if [ $? -eq 0 ]; then
+        MAJOR=$(echo "$VERSION" | cut -d. -f1)
+        MINOR=$(echo "$VERSION" | cut -d. -f2)
+
+        echo "  → Found Tcl version $VERSION (from $candidate)"
+
+        if [ "$MAJOR" -eq 8 ] && [ "$MINOR" -ge 6 ]; then
+          TCLSH="$candidate"
+          USE_SOURCE="system"
+          echo "  ✔ Tcl version $VERSION is acceptable (≥ 8.6 < 9.0)."
+          break
+        elif [ "$MAJOR" -lt 8 ] || [ "$MAJOR" -eq 8 -a "$MINOR" -lt 6 ]; then
+          echo "  ✘ Tcl version $VERSION is < 8.6; not acceptable."
+        else
+          echo "  ✘ Tcl version $VERSION is ≥ 9.0; not acceptable."
+        fi
+      fi
+    fi
+  done
+
+  if [ -z "$TCLSH" ]; then
+    echo "ERROR: Could not find Tcl ≥ 8.6 and < 9.0 in R or system paths." 1>&2
+    exit 1
+  fi
+fi
+
+exit 0
+

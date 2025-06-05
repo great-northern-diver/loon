@@ -20,7 +20,17 @@
         ##      }
         ##")
     }
+    version <- as.character(tcltk::tclVersion())
+    major <- as.integer(strsplit(version, "\\.")[[1]][1])
+    minor <- as.integer(strsplit(version, "\\.")[[1]][2])
 
+    if (!(major == 8 && minor >= 6)) {
+        stop(sprintf("Tcl version 8.6 required; found %s", version), call. = FALSE)
+    }
+
+    if (major >= 9) {
+        stop(sprintf("Tcl version < 9.0 required; found %s; Tcl version >= 9.0 coming", version), call. = FALSE)
+    }
 
 
     ## Load Tcl package
