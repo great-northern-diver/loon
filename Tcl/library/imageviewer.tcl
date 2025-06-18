@@ -1,5 +1,5 @@
 
-namespace eval loon {
+namespace eval ::loon {
 
     namespace export imageviewer
     
@@ -83,9 +83,7 @@ namespace eval loon {
     
 }
 
-namespace eval loon::imageviewer {
-   
-    variable State
+namespace eval ::loon::imageviewer {
 
     proc displayImage {viewer nr} {
 	variable State

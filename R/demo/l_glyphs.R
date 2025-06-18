@@ -13,7 +13,7 @@ if(requireNamespace("PairViz", quietly = TRUE)) {
 
         ## Images
 
-        if (loon:::.withTclImg) {
+        #if (loon:::.withTclImg) {
 
             readline("press the return key to continue: next are image glyphs")
 
@@ -32,7 +32,7 @@ if(requireNamespace("PairViz", quietly = TRUE)) {
             l_configure(c(p,gi), images=areaimages[1])
             ## or also just
             ## l_configure(gi, images=areaimages[1])
-        }
+       # }
 
 
         ## Serialaxes

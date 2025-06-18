@@ -3,12 +3,10 @@ loon_attach <- function(libname, pkgname) {
                          utils::packageDescription(pkg = pkgname,
                                                    fields = "Version"),".",
                          "\n",
-                "To learn more about loon, see l_web()."
+                "To learn more about loon, see \n l_web() if internet browser capable, or, \n help(package = 'loon') otherwise."
     )
-    #startMsg <- "To learn more about loon, see l_web()."
     packageStartupMessage(startMsg, appendLF = TRUE)
 
-    #packageStartupMessage("To learn more about loon, see l_web().", appendLF = TRUE)
     invisible()
 }
 

@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::ImageGlyph {
+::oo::class create ::loon::classes::ImageGlyph {
     
     superclass ::loon::classes::Glyph
 

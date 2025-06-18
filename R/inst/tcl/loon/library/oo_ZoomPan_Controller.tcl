@@ -12,7 +12,7 @@
 	set mouse_y 0
 	
 	set zoomOutFactor [expr {1/1.1}]
-	set zoomInFactor 1.1
+	set zoomInFactor "1.1"
 	
 	set ns [info object namespace $view]
 	set map [set [uplevel #0 [list ${ns}::my varname map]]]

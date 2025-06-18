@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::Ladder {
+::oo::class create ::loon::classes::Ladder {
 
     superclass ::loon::classes::Inspector2
 

@@ -154,7 +154,7 @@
 		set dy [expr {$cy - $y}]
 		
 		if {[expr {abs($dx) < 0.0001}]} {
-		    set dx 0.0001
+		    set dx "0.0001"
 		}
 		
 		set atan [expr {atan(double(abs($dy))/abs($dx))}]

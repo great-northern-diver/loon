@@ -1,7 +1,7 @@
 
 ::oo::class create loon::classes::ItemBindings {   
 
-    superclass loon::classes::Bindings
+superclass ::loon::classes::Bindings
     
     variable canvas tagorid doCatch map
     
@@ -108,3 +108,4 @@
 	}
     }
 }
+

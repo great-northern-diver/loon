@@ -1,4 +1,4 @@
-oo::class create loon::classes::HistogramInspectorAnalysis {
+::oo::class create ::loon::classes::HistogramInspectorAnalysis {
 
     superclass ::loon::classes::Inspector2
     

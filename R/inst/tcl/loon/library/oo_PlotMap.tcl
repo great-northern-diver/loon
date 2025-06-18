@@ -1,6 +1,6 @@
 
-oo::class create loon::classes::PlotMap {
+::oo::class create ::loon::classes::PlotMap {
     
-    superclass loon::classes::Map
+    superclass ::loon::classes::Map
        
 }

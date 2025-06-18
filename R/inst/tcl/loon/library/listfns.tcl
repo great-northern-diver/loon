@@ -592,7 +592,7 @@ namespace eval loon::listfns {
         if {[llength $v1] ne [llength $v1]} {
             error "v1 needs to have same dimension as v2"
         }
-        set out 0.0
+        set out "0.0"
         foreach x $v1 y $v2 {
             set out [expr {$out + $x*$y}]
         }
@@ -647,7 +647,7 @@ namespace eval loon::listfns {
 
       set k [llength $vec]
       set indices [::loon::listfns::lseq 1 $k]
-      set pi 3.141592653
+      set pi "3.1415926535897931"
       set ts [::loon::listfns::lseq2  -$pi $pi $n]
 
       set fourier {}
@@ -659,16 +659,23 @@ namespace eval loon::listfns {
         foreach i $indices {
 
           if {$i == 1} {
-            set at [expr 1/[tcl::mathfunc::sqrt 2]]
+            #set at [expr 1/[tcl::mathfunc::sqrt 2]]
+            set at [expr {1.0 / sqrt(2)}]
+
           } else {
-            set floor  [expr [tcl::mathfunc::floor [expr $i / 2] ] - 1]
-            set coef [tcl::mathfunc::pow 2 $floor]
+            #set floor  [expr [tcl::mathfunc::floor [expr $i / 2] ] - 1]
+            set floor  [expr {floor($i / 2) - 1}]
+
+            #set coef [tcl::mathfunc::pow 2 $floor]
+            set coef [expr {pow(2, $floor)}]
             if {[expr $i % 2]} {
                # cos
-               set at [tcl::mathfunc::cos [expr $coef * $t]]
+               #set at [tcl::mathfunc::cos [expr $coef * $t]]
+               set at [expr {cos($coef * $t)}]
             } else {
                # sin
-               set at [tcl::mathfunc::sin [expr $coef * $t]]
+               #set at [tcl::mathfunc::sin [expr $coef * $t]]
+               set at [expr {sin($coef * $t)}]
             }
 
           }
@@ -747,7 +754,9 @@ namespace eval loon::listfns {
     for {set i 0} {$i < $n} {incr i} {
       set x [lindex $vec [expr $i * 2]]
       set y [lindex $vec [expr $i * 2 + 1]]
-      lappend newvec [tcl::mathfunc::sqrt [expr $x**2 + $y**2]]
+      #lappend newvec [tcl::mathfunc::sqrt [expr {pow($x, 2) + pow($y, 2)}]]
+      lappend newvec [expr {sqrt(pow($x, 2) + pow($y, 2))}]
+
     }
 
     return $newvec

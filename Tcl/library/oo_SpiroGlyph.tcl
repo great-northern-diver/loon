@@ -1,4 +1,4 @@
-oo::class create loon::classes::SpiroGlyph {
+::oo::class create ::loon::classes::SpiroGlyph {
     
     superclass  ::loon::classes::Glyph
 

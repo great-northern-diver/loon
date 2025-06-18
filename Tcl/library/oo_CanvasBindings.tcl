@@ -1,6 +1,6 @@
-::oo::class create loon::classes::CanvasBindings {   
+::oo::class create ::loon::classes::CanvasBindings {   
 
-    superclass loon::classes::Bindings
+superclass ::loon::classes::Bindings
     
     variable canvas doCatch map
     
@@ -91,3 +91,4 @@
 	}
     }
 }
+

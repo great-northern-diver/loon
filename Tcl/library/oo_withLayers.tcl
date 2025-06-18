@@ -752,11 +752,11 @@
 	set seeYdir [expr {[lindex $bbox 3] - [lindex $bbox 1]}]
 
 	if {$seeXdir < 0.00001} {
-	    set seeXdir 0.00001
+	    set seeXdir "0.00001"
 	    lset bbox 0 [expr {[lindex $bbox 0] - 0.000005 }]
 	}
 	if {$seeYdir < 0.00001} {
-	    set seeYdir 0.00001
+	    set seeYdir "0.00001"
 	    lset bbox 1 [expr {[lindex $bbox 1] - 0.000005 }]
 	}
 

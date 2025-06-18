@@ -1,4 +1,4 @@
-oo::class create loon::classes::PolygonGlyph {
+oo::class create ::loon::classes::PolygonGlyph {
 
     superclass  ::loon::classes::Glyph
 

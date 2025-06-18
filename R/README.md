@@ -2,6 +2,7 @@
 ## loon  <img src="man/figures/logo.png" align="right" width="120" />
 
 [![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/loon?color=blue)](https://cran.r-project.org/package=loon) 
+[![Monthly downloads](https://cranlogs.r-pkg.org/badges/loon)](https://cran.r-project.org/package=loon)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/loon)](https://cran.r-project.org/package=loon)
 
 loon is an extendible interactive data visualization system designed for exploratory visualization.
@@ -14,7 +15,7 @@ Some sense of the use of loon can be had from the articles, especially the intro
 ## Web Documentation
 
 In addition to the `R` package documentation we also have both `TCL` and `R` documentation [here](https://great-northern-diver.github.io/loon/).
-ß
+
 Once in R, these are accessible from loon as
 ```r
 # Combined TCL and R documentation (a learning document)

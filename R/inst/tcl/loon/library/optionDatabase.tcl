@@ -25,7 +25,7 @@ namespace eval loon {
     variable cos30
     variable sin30
     variable sqrt3
-    set pi 3.1415926535897931
+    set pi "3.1415926535897931"
     set cos30 [expr {cos($pi/6)}]
     set sin30 [expr {sin($pi/6)}]
     set sqrt3 [expr {sqrt(3.0)}]
@@ -126,7 +126,7 @@ namespace eval loon {
 
 
     ## Mouse Meta mapping
-    if {$tcl_platform(os) eq "Linux"} {
+    if {$::tcl_platform(os) eq "Linux"} {
 	# on my machine Option is always pressed if NumLock is on
 	set Options(metaKeys) {Command Shift Control Alt}
     } else {
@@ -134,7 +134,7 @@ namespace eval loon {
     }
 
     set Options(metaMulSel) Shift
-    if {$tcl_platform(os) eq "Darwin"} {
+    if {$::tcl_platform(os) eq "Darwin"} {
 	set Options(metaTempMove) Control
     } else {
 	set Options(metaTempMove) Control

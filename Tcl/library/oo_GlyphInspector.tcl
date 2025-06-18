@@ -1,6 +1,6 @@
 
 ## abstract class to use by particular glyph type inspectors
-oo::class create loon::classes::GlyphInspector {
+::oo::class create ::loon::classes::GlyphInspector {
     
     superclass ::loon::classes::Inspector2
 

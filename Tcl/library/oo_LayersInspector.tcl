@@ -1,4 +1,4 @@
-oo::class create loon::classes::LayersInspector {
+::oo::class create ::loon::classes::LayersInspector {
 
     superclass ::loon::classes::Inspector2
 

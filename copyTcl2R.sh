@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ -d "R/inst" ]; then
-    echo "Delete inst folder"
-    rm -R R/inst
+if [ -d "R/inst/tcl" ]; then
+    echo "Delete inst/tcl folder"
+    rm -R R/inst/tcl
 fi
 
 mkdir -p R/inst/tcl/loon

@@ -185,21 +185,23 @@ namespace eval loon {
     }
 
 
-
-    foreach cmd {serialaxes_glyph_inspector\
-		     pointrange_glyph_inspector\
-		     text_glyph_inspector\
-		     image_glyph_inspector\
-		     navigators_inspector\
-		     spiro_glyph_inspector\
-		     polygon_glyph_inspector} {
-
-	set class [join [lmap str [split $cmd "_"] {string toupper $str 0}] ""]
-
-	eval [list proc $cmd "{args}"\
-		  "return \[WidgetFactory $class [string tolower $class 0] {*}\$args\]"]
-
+    proc ::loon::define_dynamic_glyph_procs {} {
+    foreach cmd {
+        serialaxes_glyph_inspector
+        pointrange_glyph_inspector
+        text_glyph_inspector
+        image_glyph_inspector
+        navigators_inspector
+        spiro_glyph_inspector
+        polygon_glyph_inspector
+    } {
+        set class [join [lmap str [split $cmd "_"] {string toupper $str 0}] ""]
+        proc ::loon::$cmd {args} "return \[WidgetFactory $class [string tolower $class 0] {*}\$args\]"
     }
+}
+
+::loon::define_dynamic_glyph_procs
+
 
 
 

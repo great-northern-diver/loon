@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::GlyphVisual {
+::oo::class create ::loon::classes::GlyphVisual {
     
     superclass ::loon::classes::fancyInfo
 

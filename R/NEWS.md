@@ -1,3 +1,28 @@
+# loon 1.4.3
+
+* now works in Tcl 8.6 and Tcl 9.0.1
+
+* changes are *many* to the base loon tcl code.  Mostly 
+
+  - to be more careful about namespaces, Tcl 9 is stricter
+  
+  - to be more careful with math function changes in Tcl 9
+  
+  - bugs in image_scale.tcl fixed; imageviewer code cleaned up
+  
+* in R code, changes to
+
+  - onLoad.R file to remove checking based on .withTclImg
+    All dependent packages should remove any reference to loon:::.withTclImg
+    
+  - l_image_import_files() now checks if tcl library tk image extension (Img) 
+    is available at run time to parse legitimate image file types 
+    
+  - l_export() tries to be clearer in documentation about the limitations; 
+    l_export_valid_formats() tries to not rely on .withTclImg
+
+  
+
 # loon 1.4.2
 
 Addresses minor documentation issues:

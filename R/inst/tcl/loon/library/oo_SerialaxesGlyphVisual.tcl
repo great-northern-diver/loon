@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::SerialaxesGlyphVisual {
+::oo::class create ::loon::classes::SerialaxesGlyphVisual {
 
     superclass  ::loon::classes::GlyphVisual
 
@@ -258,7 +258,8 @@ oo::class create loon::classes::SerialaxesGlyphVisual {
 	        set newIds {}
 
 	        foreach index [::loon::listfns::lseq2 0 [expr [llength $ids] - 1] [expr $p + 1]] {
-	             lappend newIds [lindex $ids [tcl::mathfunc::round $index]]
+	             #lappend newIds [lindex $ids [tcl::mathfunc::round $index]]
+	             lappend newIds [lindex $ids [expr {round($index)}]]
 	        }
 
 		    ## if enclosing is shown draw axes out to enclosing

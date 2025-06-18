@@ -1,5 +1,5 @@
 
-namespace eval loon::hcl {
+namespace eval ::loon::hcl {
 
 #    namespace export hcl2rgb
     ## Converted from hcl2rgb in R source: colors.c

@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::MinMaxScale {
+::oo::class create ::loon::classes::MinMaxScale {
 
     superclass ::loon::classes::Inspector2
     
@@ -15,7 +15,7 @@ oo::class create loon::classes::MinMaxScale {
 	
 	set current_slider ""
 	set n_pix_per_res 1
-	set n_pix_per_res2 0.5
+	set n_pix_per_res2 "0.5"
 	
 	set b_w 25
 	set b_e 25

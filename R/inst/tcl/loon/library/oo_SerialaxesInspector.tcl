@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::SerialaxesInspector {
+::oo::class create ::loon::classes::SerialaxesInspector {
 
     superclass ::loon::classes::Inspector2
 

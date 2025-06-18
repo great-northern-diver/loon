@@ -1,8 +1,8 @@
 
 
-oo::class create loon::classes::LayerBindings {
+::oo::class create ::loon::classes::LayerBindings {
     
-    superclass loon::classes::Bindings
+superclass ::loon::classes::Bindings
     
     variable doCatch
     
@@ -55,3 +55,4 @@ oo::class create loon::classes::LayerBindings {
 	
     }
 }
+

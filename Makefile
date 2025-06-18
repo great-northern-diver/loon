@@ -44,7 +44,7 @@ rbuild:
 	R CMD build R --no-build-vignettes
 
 rinst:
-	$(RINSTCMD) loon_1.3.2.tar.gz
+	$(RINSTCMD) loon_1.4.3.tar.gz
 
 website:
 	rsync -av --delete R/vignettes/images/ ./docs/articles/images && \

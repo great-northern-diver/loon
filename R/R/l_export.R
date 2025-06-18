@@ -1,27 +1,23 @@
 #' @title Export a loon plot as an image
 #'
-#' @description The supported image formats are dependent on the system
-#'   environment. Plots can always be exported to the PostScript format.
-#'   Exporting displays as \code{.pdf}s is only possible when the command line tool
-#'   \code{epstopdf} is installed. Finally, exporting to either \code{png}, \code{jpg},
-#'   \code{bmp}, \code{tiff} or \code{gif} requires the Img Tcl extension.
-#'   When choosing one of the formats that
-#'   depend on the Img extension, it is possible to export any Tk widget as an
-#'   image including inspectors.
+#' @description
+#' The supported image formats depend on your system and Tcl/Tk configuration.
+#' Export to PostScript (`.ps`, `.eps`) always works. Export to PDF (`.pdf`) works if
+#' the command-line tool `epstopdf` is installed. Export to bitmap formats such as
+#' `.png`, `.jpg`, `.bmp`, `.tiff`, or `.gif` may work if supported by your Tcl/Tk
+#' environment — this often, but not always, requires the Img Tcl extension.
+#'
+#' If a selected format fails, use `.ps` or consider capturing a screenshot.
 #'
 #' @template param_widget
 #' @param filename path of output file
 #' @param width image width in pixels
 #' @param height image height in pixels
 #'
-#' @details Note that the \code{CTRL-P} key combination opens a dialog to export
-#'   the graphic.
+#' @details
+#' Pressing `Ctrl-P` in a loon plot window also opens an interactive export dialog.
 #'
-#'   The native export format is to \code{ps} as this is what the Tk canvas
-#'   offers. If the the \code{l_export} fails with other formats then please
-#'   resort to a screen capture method for the moment.
-#'
-#' @return path to the exported file
+#' @return The file path of the exported image.
 #'
 #' @seealso \code{\link{l_export_valid_formats}}, \code{\link{plot.loon}}
 #'
@@ -62,20 +58,46 @@ l_export <- function(widget, filename, width, height) {
 #' @return a vector with the image formats available for exporting a loon plot.
 #'
 #' @export
+# l_export_valid_formats <- function() {
+#     valid_extensions <- c("ps", "eps")
+#
+#     if (Sys.which('epstopdf') != "") {
+#         valid_extensions <- c(valid_extensions, "pdf")
+#     }
+#
+#     if (.withTclImg) {
+#         valid_extensions <- c(valid_extensions,
+#                               'jpg','jpeg','png','bmp','tiff','gif')
+#     }
+#     valid_extensions
+# }
 l_export_valid_formats <- function() {
     valid_extensions <- c("ps", "eps")
 
-    if (Sys.which('epstopdf') != "") {
+    if (Sys.which("epstopdf") != "") {
         valid_extensions <- c(valid_extensions, "pdf")
     }
 
-    if (.withTclImg) {
-        valid_extensions <- c(valid_extensions,
-                              'jpg','jpeg','png','bmp','tiff','gif')
-    }
-    valid_extensions
-}
+    # Try a minimal export to test image capability
+    tmpfile <- tempfile(fileext = ".png")
+    success <- FALSE
+    try({
+        canvas <- tktoplevel()
+        tkwm.withdraw(canvas)
+        canvas_id <- canvas$ID
+        tcl("update", "idletasks")
+        result <- tcl("::loon::export", canvas_id, tmpfile, 10, 10)
+        unlink(tmpfile)
+        tkdestroy(canvas)
+        success <- TRUE
+    }, silent = TRUE)
 
+    if (success) {
+        valid_extensions <- c(valid_extensions, "png", "jpg", "jpeg", "bmp", "tiff", "gif")
+    }
+
+    return(valid_extensions)
+}
 
 
 filetypes <- list(

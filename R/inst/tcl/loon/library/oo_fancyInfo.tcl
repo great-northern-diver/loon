@@ -1,27 +1,27 @@
 
 
-oo::class create ::loon::classes::fancyInfo {
-   
+::oo::class create ::loon::classes::fancyInfo {
+
     ## the constructor and destructor also work as method chain sink
     constructor {args} {
 
     }
-    
+
     destructor {
     }
 
     method SetSubstitutions {subst} {
-	
+
     }
 
     method AddSubstitutions {subst} {
-	
+
     }
 
     method setModel {args} {}
 
     method init {} {}
-    
+
     method info {args} {
 
 	if {[llength $args] eq 0} {
@@ -44,12 +44,12 @@ oo::class create ::loon::classes::fancyInfo {
 			set sdim [dict get $stateInfo $state dim]
 		    } else {
 			set sdim -1
-		    }		    
+		    }
 		    return $sdim
 		}
 		stateType {
 		    set state $args
-		    my variable managedStates stateInfo		    
+		    my variable managedStates stateInfo
 		    if {[dict exists $managedStates $state]} {
 			set stype [dict get $managedStates $state type]
 		    } elseif {[dict exists $stateInfo $state]} {
@@ -59,7 +59,7 @@ oo::class create ::loon::classes::fancyInfo {
 		    }
 		    return $stype
 		}
-		states - 
+		states -
 		state {
 		    my InfoStates {*}$args
 		}
@@ -72,11 +72,11 @@ oo::class create ::loon::classes::fancyInfo {
 		}
 	    }
 	}
-	
+
     }
 
     method InfoStates {args} {
-	
+
 	my variable configurableOptions
 
 	switch -- [llength $args] {
@@ -88,19 +88,19 @@ oo::class create ::loon::classes::fancyInfo {
 		set args {*}$args
 	    }
 	}
-	
+
 	foreach state $args {
 	    if {$state ni $configurableOptions} {
 		error "\"$state\" is not a valid state."
 	    }
 	}
-	
+
 	## return all information about a state
 	my variable managedStates stateDescriptions stateInfo
-	
+
 	set out [dict create]
 	foreach state $args {
-	    
+
 	    if {[dict exists $managedStates $state]} {
 		set stype [dict get $managedStates $state type]
 		set sdim [dict get $managedStates $state dim]
@@ -112,15 +112,15 @@ oo::class create ::loon::classes::fancyInfo {
 	    } else {
 		set stype ?
 		set sdim -1
-		set sdefault ? 
+		set sdefault ?
 	    }
-	    
+
 	    if {[dict exists $stateDescriptions $state]} {
 		set sdescription [dict get $stateDescriptions $state]
 	    } else {
 		set sdescription ?
 	    }
-	    
+
 	    dict set out $state\
 		[dict create\
 		     type $stype\
@@ -132,16 +132,16 @@ oo::class create ::loon::classes::fancyInfo {
 	#    set state [lindex [dict keys $out] 0]
 	#    set out [dict get $out $state]
 	#}
-	
+
 	return $out
     }
-    
+
     method InfoDebug {args} {
-	
+
 	puts "Object of class [info object class [self]]"
-	
+
 	set variables $args
-	
+
 	set maxLength 0
 	foreach var $variables {
 	    set ns [string length $var]
@@ -149,9 +149,9 @@ oo::class create ::loon::classes::fancyInfo {
 		set maxLength $ns
 	    }
 	}
-	
+
 	incr maxLength 2
-	
+
 	foreach var $variables {
 	    my variable $var
 
@@ -159,26 +159,26 @@ oo::class create ::loon::classes::fancyInfo {
 		puts [format "%${maxLength}s: -- array" $var]
 		my Parray [array get $var] [expr {$maxLength+2} ]
 	    } elseif {[info object isa object [set $var]]} {
-		puts [format "%${maxLength}s: %s" $var [set $var]]		
-	
+		puts [format "%${maxLength}s: %s" $var [set $var]]
+
 #		if {[info object isa\
 #			 typeof [set $var]\
 #			 ::loon::classes::labelledObjectsTree]} {
 #		    [set $var] printTree root [string repeat " " $maxLength]
 #		    puts [format "%${maxLength}s  ---" ""]
-#		} 
-		
+#		}
+
 	    } else {
 		puts [format "%${maxLength}s: %s" $var [set $var]]
 	    }
 	}
-    } 
+    }
 
-    
+
     method Parray {flatArray {nindent 0}} {
 
 	array set arr $flatArray
-	
+
 	set maxLength 0
 	foreach var [array names arr] {
 	    set ns [string length $var]
@@ -186,15 +186,15 @@ oo::class create ::loon::classes::fancyInfo {
 		set maxLength $ns
 	    }
 	}
-	
+
 	if {$maxLength > $nindent} {
 	    set nindent $maxLength
 	}
-	
+
 	foreach var [array names arr] {
 	    puts [format "%${nindent}s - %s" "$var" $arr($var)]
 	}
-	
+
     }
-    
+
 }

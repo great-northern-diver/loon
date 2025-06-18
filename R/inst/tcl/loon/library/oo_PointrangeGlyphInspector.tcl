@@ -1,4 +1,4 @@
-oo::class create loon::classes::PointrangeGlyphInspector {
+::oo::class create ::loon::classes::PointrangeGlyphInspector {
 
     superclass ::loon::classes::GlyphInspector
     

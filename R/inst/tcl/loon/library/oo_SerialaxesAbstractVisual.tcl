@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::SerialaxesAbstractVisual {
+::oo::class create ::loon::classes::SerialaxesAbstractVisual {
 
     superclass ::loon::classes::Visual
 

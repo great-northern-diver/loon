@@ -13,10 +13,10 @@ set fp [open "pkgIndex.tcl" w+]
 #    puts \"Img package is missing. Can not load png and jpeg images.\"
 #\}"
 
-puts  $fp "package ifneeded loon 1.2.3 \""
-puts  $fp "   package provide loon 1.2.3 "
-puts  $fp "   package require Tcl 8.6 "
-puts  $fp "   package require Tk 8.6 "
+puts  $fp "package ifneeded loon 1.4.3 \""
+puts  $fp "   package provide loon 1.4.3"
+puts  $fp "   package require Tcl "
+puts  $fp "   package require Tk "
 ## Objects need to be loaded according to inheritance
 
 set oofiles [list\
@@ -185,7 +185,7 @@ oo_Plot3DInspector.tcl
 ]
 
 ## Environment Variables
-puts $fp "   \[list set ::env(LOON_VERSION) 1.1.0\]"
+puts $fp "   \[list set ::env(LOON_VERSION) 1.4.3\]"
 puts $fp "   \[list set ::env(LOON_LIBRARY) \[file dirname \[info script\]\]\]"
 
 ## Init File

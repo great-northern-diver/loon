@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::SerialaxesGlyphInspector {
+::oo::class create ::loon::classes::SerialaxesGlyphInspector {
 
     superclass ::loon::classes::GlyphInspector
 
