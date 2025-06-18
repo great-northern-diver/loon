@@ -1,4 +1,4 @@
-oo::class create loon::classes::PlotInspectorNodesAnalysis {
+::oo::class create ::loon::classes::PlotInspectorNodesAnalysis {
     
     superclass ::loon::classes::Inspector2
     

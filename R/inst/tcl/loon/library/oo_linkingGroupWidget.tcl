@@ -1,26 +1,26 @@
 
 
 namespace eval loon {
-    
+
     proc linkingGroupWidget {path args} {
 	set o [::loon::classes::linkinGroupWidget new $path]
-	
+
 	if {[llength $args] > 0} {
 	    $o configure {*}$args
 	}
-	
+
 	uplevel #0 rename $path $path.fr
 	uplevel #0 rename $o $path
-	
+
 	return $path
     }
-    
+
 }
 
-::oo::class create loon::classes::linkinGroupWidget {
+::oo::class create ::loon::classes::linkinGroupWidget {
 
     superclass ::loon::classes::Configurable
-    
+
     variable path activewidget activewidgetns textvariable combobox
 
     constructor {Path} {
@@ -31,46 +31,46 @@ namespace eval loon {
 	set textvariable "none"
 	set activewidgetns ""
 	next
-	
+
 	my New_state linkingGroup string 1 none
 	lappend configurableOptions activewidget
-	
+
 	my Make
-	
+
 	lappend ::loon::lgwidgets [self namespace]
-	
+
 	bind $path <Destroy> "[self namespace]::my destroy"
 
 	my SetStateDescription linkingGroup\
 	    "linking group to display"
-	
+
     }
-    
+
     destructor {
 	set i [lsearch -exact $::loon::lgwidgets [self namespace]]
 	if {$i ne "-1"} {
 	    set ::loon::lgwidgets [lreplace $::loon::lgwidgets $i $i]
-	}       
+	}
     }
-    
+
     method Make {} {
-	
+
 	frame $path -class LoonLinkingGroupWidget
-	
+
 	set combobox [::ttk::combobox ${path}.combobox\
 			  -textvariable [my varname textvariable]\
 			  -values {A B C}]
 	pack $combobox -fill x -expand TRUE
-	
+
 	bind $combobox <<ComboboxSelected>> "[self namespace]::my ChangeLinkingGroup select"
 
 	foreach ev {<Return> <KP_Enter>} {
 	    bind $combobox $ev  "[self namespace]::my ChangeLinkingGroup enter"
 	}
 	$combobox configure -postcommand "[self namespace]::my ShowLinkingGroups"
-	
+
     }
-    
+
     method ShowLinkingGroups {} {
 	if {$activewidget eq ""} {
 	    set groups ""
@@ -78,10 +78,10 @@ namespace eval loon {
 	    set groups [::loon::getLinkingGroups\
 			    $activewidgetns TRUE [set ${activewidgetns}::n]]
 	}
-	
+
 	$combobox configure -values $groups
     }
-    
+
     method ChangeLinkingGroup {how} {
 	set lg [$combobox get]
 	set lg [regsub "\\s\\s\\\[\\d+ linked\\\]$" $lg ""]
@@ -92,7 +92,7 @@ namespace eval loon {
 	    bell
 	    return
 	}
-	
+
 	if {$activewidget ne ""} {
 	    if {[::loon::hasGroupLinkedMembers $lg $activewidgetns]} {
 		set sync [string tolower\
@@ -116,13 +116,13 @@ namespace eval loon {
 	    } else {
 		#puts "don't ask sync"
 		uplevel #0 [list $activewidget configure -linkingGroup $lg]
-	    } 
+	    }
 	}
     }
-    
-    
+
+
      method HookAfterStatesSet {} {
-	my variable changedStates 
+	my variable changedStates
 	if {"activewidget" in $changedStates} {
 	    if {$activewidget eq ""} {
 		set textvariable "none"
@@ -133,19 +133,19 @@ namespace eval loon {
 
 	next
     }
-    
-    
+
+
      method EvalConfigure {} {
 	my variable confDict
-	
-	next 
-	
+
+	next
+
 	if {[dict get $confDict has_activewidget]} {
 	    set arg_widget [dict get $confDict arg_activewidget]
 	    if {$arg_widget ne ""} {
-		
+
 		set w $arg_widget
-		
+
 		if {![info object isa typeof $w\
 			  "::loon::classes::Linkable"]} {
 		    error "$arg_widget is not Linkable"
@@ -158,10 +158,10 @@ namespace eval loon {
 	    dict set confDict new_activewidgetns $ns
 	}
      }
-    
-    
-       
-    
 
-    
+
+
+
+
+
 }

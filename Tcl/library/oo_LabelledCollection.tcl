@@ -1,7 +1,7 @@
 
-oo::class create loon::classes::LabelledCollection {
+::oo::class create ::loon::classes::LabelledCollection {
 
-    superclass loon::classes::fancyInfo
+superclass ::loon::classes::fancyInfo
     
     variable userBindings systemBindings type objects idPrefix nextIdNr
 
@@ -131,3 +131,4 @@ oo::class create loon::classes::LabelledCollection {
     }
     
 }
+

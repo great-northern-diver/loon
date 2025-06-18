@@ -1,7 +1,7 @@
 
-oo::class create loon::classes::CollectionBindings {
+::oo::class create ::loon::classes::CollectionBindings {
     
-    superclass loon::classes::Bindings
+    superclass ::loon::classes::Bindings
     
     variable doCatch type typeSubst
 

@@ -1,10 +1,10 @@
 
-oo::class create loon::classes::Bindings {
+::oo::class create ::loon::classes::Bindings {
 
     variable idPrefix nextIdNr Events Code Order\
 	substitutions
 
-    superclass loon::classes::fancyInfo
+superclass ::loon::classes::fancyInfo
 
     constructor {IDPrefix} {
 	set idPrefix $IDPrefix
@@ -115,3 +115,4 @@ oo::class create loon::classes::Bindings {
     
 
 }
+

@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::Plot3DInspector {
+::oo::class create ::loon::classes::Plot3DInspector {
     
     superclass ::loon::classes::PlotInspector
 

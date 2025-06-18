@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::Map {
+::oo::class create ::loon::classes::Map {
     
     superclass ::loon::classes::fancyInfo
     
@@ -208,7 +208,7 @@ oo::class create loon::classes::Map {
     }
     
     method rotate3DUpdate {dx dy} {
-        set pi 3.1415926535897931
+        set pi "3.1415926535897931"
         set fraction 360
         if {$swap} {
             set newRotate3DX [expr {- $dx * $pi / $fraction}]

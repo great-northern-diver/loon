@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::ConditionalScale {
+::oo::class create ::loon::classes::ConditionalScale {
 
     superclass ::loon::classes::Inspector2
     

@@ -15,7 +15,7 @@
         set yColor blue
         set zColor green
         
-        set axisScaleFactor 1.0
+        set axisScaleFactor "1.0"
         
         set xCoords [list 0 0 0]
         set yCoords [list 0 0 0]

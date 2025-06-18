@@ -1,8 +1,8 @@
 
 
-::oo::class create loon::classes::StateBindings {   
+::oo::class create ::loon::classes::StateBindings {   
 
-    superclass loon::classes::Bindings
+    superclass ::loon::classes::Bindings
     
     variable doCatch inConfigurationVar hasInConfigurationVar
 

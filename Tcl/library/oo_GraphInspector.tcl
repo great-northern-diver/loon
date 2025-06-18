@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::GraphInspector {
+oo::class create ::loon::classes::GraphInspector {
     
     superclass ::loon::classes::Inspector2
 

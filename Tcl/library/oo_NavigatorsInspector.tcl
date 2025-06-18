@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::NavigatorsInspector {
+::oo::class create ::loon::classes::NavigatorsInspector {
 
     superclass ::loon::classes::Inspector2
 

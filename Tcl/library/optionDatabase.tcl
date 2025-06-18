@@ -25,7 +25,7 @@ namespace eval loon {
     variable cos30
     variable sin30
     variable sqrt3
-    set pi 3.1415926535897931
+    set pi "3.1415926535897931"
     set cos30 [expr {cos($pi/6)}]
     set sin30 [expr {sin($pi/6)}]
     set sqrt3 [expr {sqrt(3.0)}]

@@ -1,6 +1,6 @@
 
 
-oo::class create loon::classes::withCanvasAndItemBindings {
+::oo::class create ::loon::classes::withCanvasAndItemBindings {
     
     superclass ::loon::classes::Bindable
     

@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::ScalesGuidesVisual {
+oo::class create ::loon::classes::ScalesGuidesVisual {
 
     superclass ::loon::classes::Visual
 

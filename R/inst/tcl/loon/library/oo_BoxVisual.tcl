@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::BoxVisual {
+oo::class create ::loon::classes::BoxVisual {
     
     superclass ::loon::classes::Visual
 

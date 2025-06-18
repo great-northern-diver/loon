@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::Worldview_View {
+::oo::class create ::loon::classes::Worldview_View {
 
     superclass ::loon::classes::Layered_View
  

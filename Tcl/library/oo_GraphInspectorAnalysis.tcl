@@ -1,7 +1,7 @@
 
-oo::class create loon::classes::GraphInspectorAnalysis {
+::oo::class create ::loon::classes::GraphInspectorAnalysis {
 
-    superclass loon::classes::PlotInspectorAnalysis
+    superclass ::loon::classes::PlotInspectorAnalysis
 
     variable orbitVar
 

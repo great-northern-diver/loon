@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::WorldviewMap {
+::oo::class create ::loon::classes::WorldviewMap {
 
     superclass ::loon::classes::Map
     

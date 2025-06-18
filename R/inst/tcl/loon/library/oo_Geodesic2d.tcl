@@ -9,7 +9,7 @@ oo::class create ::loon::classes::Geodesic2d {
     
     constructor {Graph Navigator} {
 	
-	set pi 3.1415926535897931
+	set pi "3.1415926535897931"
 	
 	next $Graph $Navigator
 

@@ -1,6 +1,6 @@
 ::oo::class create ::loon::classes::Widget {
     
-    superclass loon::classes::fancyInfo
+superclass ::loon::classes::fancyInfo
 
     
     variable widgetpath widgetview
@@ -79,3 +79,4 @@
 	$widgetview redraw
     }
 }
+

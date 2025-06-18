@@ -1,6 +1,6 @@
 
 
-oo::class create loon::classes::PolygonGlyphInspector {
+::oo::class create ::loon::classes::PolygonGlyphInspector {
 
     superclass ::loon::classes::GlyphInspector
     

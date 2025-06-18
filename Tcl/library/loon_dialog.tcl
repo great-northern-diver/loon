@@ -32,6 +32,8 @@ namespace eval loon {
     #
     # \param -parent on top of which the dialog should be centered
     
+    
+    namespace eval ::loon::Priv {}
     variable Priv
 
     proc loon_dialog {args} {
@@ -100,12 +102,12 @@ namespace eval loon {
 	}
 
 	
-	set loon::Priv(button) ""
+	set Priv(button) ""
 	set i 0
 	foreach option $options {
 	    button $tt\.choice.$i -text $option
 	    pack $tt\.choice.$i -side left -padx 10
-	    $tt\.choice.$i configure -command "set loon::Priv(button) $option"
+	    $tt\.choice.$i configure -command "set ::loon::Priv(button) $option"
 	    incr i
 	}
 

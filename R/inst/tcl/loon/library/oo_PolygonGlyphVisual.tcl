@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::PolygonGlyphVisual {
+::oo::class create ::loon::classes::PolygonGlyphVisual {
 
     superclass  ::loon::classes::GlyphVisual
 

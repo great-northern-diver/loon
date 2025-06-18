@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::Graphswitch {
+::oo::class create ::loon::classes::Graphswitch {
 
     superclass ::loon::classes::Inspector2
     

@@ -1,4 +1,4 @@
-oo::class create loon::classes::SerialaxesGlyph {
+oo::class create ::loon::classes::SerialaxesGlyph {
     
     superclass  ::loon::classes::Serialaxes\
 	::loon::classes::Glyph

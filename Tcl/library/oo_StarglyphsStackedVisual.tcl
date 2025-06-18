@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::StarglyphsStackedVisual {
+::oo::class create ::loon::classes::StarglyphsStackedVisual {
 
     superclass ::loon::classes::SerialaxesAbstractVisual
 
@@ -11,7 +11,7 @@ oo::class create loon::classes::StarglyphsStackedVisual {
 	set angles {}
 	set xdirs {}
 	set ydirs {}
-	set pi 3.1415926535897931
+	set pi "3.1415926535897931"
 
 	next {*}$args
 

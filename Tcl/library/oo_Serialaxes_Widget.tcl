@@ -1,4 +1,4 @@
-oo::class create loon::classes::Serialaxes_Widget {
+::oo::class create ::loon::classes::Serialaxes_Widget {
 
     superclass ::loon::classes::Plot_Widget\
 	::loon::classes::Serialaxes_Model

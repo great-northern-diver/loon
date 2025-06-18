@@ -86,14 +86,14 @@ proc WidgetFactory {type postfix args} {
 		
 		set deltaX [::loon::listfns::drange [$path cget -x]]
 		if {$deltaX eq 0 || $deltaX eq 0.0} {
-		    set deltaX 0.0005
+		    set deltaX "0.0005"
 		}
 		set toAppend [list -deltaX $deltaX]
 	    }
 	    if {"-deltaY" ni $args && "-y" in $args} {
 		set deltaY [::loon::listfns::drange [$path cget -y]]
 		if {$deltaY eq 0 || $deltaY eq 0.0} {
-		    set deltaY 0.0005
+		    set deltaY "0.0005"
 		}
 		lappend toAppend -deltaY $deltaY
 	    }

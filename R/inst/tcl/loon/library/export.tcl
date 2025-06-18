@@ -100,6 +100,7 @@ namespace eval loon {
 	return $filename
     }
     
+    variable filetypes
     set filetypes {
 	{{Portable Network Graphics} {.png}}
 	{{JPEG} {.jpg} }

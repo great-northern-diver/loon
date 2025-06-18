@@ -1,6 +1,6 @@
-oo::class create loon::classes::ParallelCoordinatesVisual {
+::oo::class create ::loon::classes::ParallelCoordinatesVisual {
 
-    superclass ::::loon::classes::SerialaxesAbstractVisual
+    superclass ::loon::classes::SerialaxesAbstractVisual
 
 
     method redraw {} {
@@ -235,7 +235,7 @@ oo::class create loon::classes::ParallelCoordinatesVisual {
 	if {$showAxesLabels} {
 
         if {$andrews} {
-          set pi 3.1415926535897931
+          set pi "3.1415926535897931"
           set ts [::loon::listfns::lseq2  -$pi $pi $p]
 	      set labels [::loon::listfns::round2 $ts]
 

@@ -1,5 +1,5 @@
 
-oo::class create loon::classes::PointrangeGlyphVisual {
+oo::class create ::loon::classes::PointrangeGlyphVisual {
     
     superclass  ::loon::classes::GlyphVisual
     

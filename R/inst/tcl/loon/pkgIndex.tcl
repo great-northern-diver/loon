@@ -1,8 +1,8 @@
 package ifneeded loon 1.4.3 "
    package provide loon 1.4.3
-   package require Tcl 
-   package require Tk 
-   [list set ::env(LOON_VERSION) 1.1.0]
+   package require Tcl
+   package require Tk
+   [list set ::env(LOON_VERSION) 1.4.3]
    [list set ::env(LOON_LIBRARY) [file dirname [info script]]]
    [list source [file join $dir library/init.tcl]]
    [list source [file join $dir library/listfns.tcl]]
